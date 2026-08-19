@@ -128,6 +128,28 @@ body{background:#f6f8fc}
 /* v20: no demo/history-derived content for anonymous users */
 #route.route-empty .route-data-only{display:none!important}
 
+
+.antagning-link-btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.lotsen-walkthrough{border-style:dashed}
+.guide-overlay{
+  position:fixed;inset:0;z-index:2000;background:rgba(15,23,42,.45);
+  display:flex;align-items:flex-end;justify-content:center;padding:16px
+}
+.guide-card{
+  width:min(560px,100%);background:#fff;border-radius:20px;padding:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.24)
+}
+.guide-progress{font-size:12px;font-weight:800;color:#667085;text-transform:uppercase;letter-spacing:.06em}
+.guide-card h3{margin:8px 0 8px;font-size:22px}
+.guide-card p{margin:0;color:#667085;line-height:1.5}
+.guide-focus{
+  width:54px;height:54px;border:4px solid #265ee8;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;
+  color:#265ee8;margin:18px auto;background:#eef3ff;
+  box-shadow:0 0 0 8px rgba(38,94,232,.12)
+}
+.guide-actions{display:flex;justify-content:space-between;gap:10px;margin-top:14px}
+
 </style>
 </head>
 <body>
@@ -185,8 +207,12 @@ body{background:#f6f8fc}
   <div class="card import-guide" id="importBox" style="display:none;margin-bottom:16px">
     <strong>Hämta meriter från Antagning.se</strong>
     <div class="muted small" style="margin-top:5px">På telefon gör du så här:</div>
-    <ol class="small">
-      <li>Logga in på <strong>Antagning.se</strong>.</li>
+    
+<div class="import-action">
+  <a class="primary antagning-link-btn" href="https://www.antagning.se/" target="_blank" rel="noopener">Öppna Antagning.se</a>
+</div>
+<ol class="small">
+      <li>Öppna <a href="https://www.antagning.se/" target="_blank" rel="noopener"><strong>Antagning.se</strong></a> och logga in.</li>
       <li>Öppna <strong>Mina sidor → Mina meriter → Universitet och högskola</strong>.</li>
       <li>Tryck på webbläsarens <strong>Dela</strong>-knapp och välj <strong>Skriv ut</strong>.</li>
       <li>Öppna/förstora förhandsvisningen så att den blir en PDF.</li>
@@ -198,7 +224,30 @@ body{background:#f6f8fc}
       <button class="primary" onclick="document.getElementById('fakeFile').click()">Välj PDF från Antagning.se</button>
       <input id="fakeFile" type="file" accept="application/pdf" style="display:none" onchange="importPdf(this)">
     </div>
-    <div class="small muted" style="margin-top:10px">Utan inloggning sparas dina meriter bara tillfälligt och rensas när sessionen avslutas. Med inloggning kan de sparas till din profil.</div><div id="importStatus" class="small muted" style="margin-top:12px"></div>
+    <div class="small muted" style="margin-top:10px">Utan inloggning sparas dina meriter bara tillfälligt och rensas när sessionen avslutas. Med inloggning kan de sparas till din profil.</div>
+<div class="card lotsen-walkthrough" style="margin-top:14px">
+  <div class="row">
+    <div>
+      <strong>Guidad hjälp på telefon</strong>
+      <div class="small muted" style="margin-top:4px">Lotsen visar steg för steg vad du ska trycka på medan du hämtar meritfilen.</div>
+    </div>
+    <button class="ghost" type="button" onclick="startMeritGuide()">Visa guide</button>
+  </div>
+</div>
+
+<div id="meritGuide" class="guide-overlay" style="display:none">
+  <div class="guide-card">
+    <div class="guide-progress" id="guideProgress">Steg 1 av 6</div>
+    <h3 id="guideTitle">Öppna Antagning.se</h3>
+    <p id="guideText">Tryck på knappen nedan för att öppna Antagning.se och logga in.</p>
+    <div class="guide-focus" id="guideFocus">1</div>
+    <div class="guide-actions">
+      <button class="ghost" type="button" onclick="closeMeritGuide()">Stäng</button>
+      <button class="primary" type="button" id="guideNext" onclick="nextMeritGuide()">Nästa</button>
+    </div>
+  </div>
+</div>
+<div id="importStatus" class="small muted" style="margin-top:12px"></div>
     <div id="importPreview" style="margin-top:12px"></div>
   </div>
 
@@ -621,6 +670,31 @@ routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`
 })();
 </script>
 
-<!-- Lotsen v20 -->
+
+
+<script>
+const meritGuideSteps = [
+  {title:'Öppna Antagning.se', text:'Tryck på “Öppna Antagning.se” och logga in.', focus:'1'},
+  {title:'Gå till Mina sidor', text:'På Antagning.se öppnar du Mina sidor.', focus:'2'},
+  {title:'Öppna Mina meriter', text:'Välj Mina meriter och sedan Universitet och högskola.', focus:'3'},
+  {title:'Dela sidan', text:'Tryck på webbläsarens Dela-knapp och välj Skriv ut.', focus:'4'},
+  {title:'Skapa PDF', text:'Öppna eller förstora förhandsvisningen så att den blir en PDF och välj Dela → Spara i Filer.', focus:'5'},
+  {title:'Tillbaka till Lotsen', text:'Gå tillbaka till Lotsen och välj PDF-filen under Hämta meriter.', focus:'6'}
+];
+let meritGuideIndex = 0;
+function renderMeritGuide(){
+  const s=meritGuideSteps[meritGuideIndex];
+  document.getElementById('guideProgress').textContent=`Steg ${meritGuideIndex+1} av ${meritGuideSteps.length}`;
+  document.getElementById('guideTitle').textContent=s.title;
+  document.getElementById('guideText').textContent=s.text;
+  document.getElementById('guideFocus').textContent=s.focus;
+  document.getElementById('guideNext').textContent=meritGuideIndex===meritGuideSteps.length-1?'Klar':'Nästa';
+}
+function startMeritGuide(){ meritGuideIndex=0; document.getElementById('meritGuide').style.display='flex'; renderMeritGuide(); }
+function nextMeritGuide(){ if(meritGuideIndex>=meritGuideSteps.length-1){closeMeritGuide();return;} meritGuideIndex++; renderMeritGuide(); }
+function closeMeritGuide(){ document.getElementById('meritGuide').style.display='none'; }
+</script>
+
+<!-- Lotsen v21 -->
 </body>
 </html>
