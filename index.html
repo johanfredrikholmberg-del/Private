@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lotsen – Digital studievägledare</title>
+<style>
+:root{--bg:#f6f8fc;--card:#fff;--text:#142033;--muted:#667085;--line:#e6eaf0;--accent:#265ee8;--accent2:#edf3ff;--good:#147a55;--warn:#a86200;--bad:#b42318;--ink:#101828}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+button,input,select{font:inherit}.app{display:grid;grid-template-columns:255px 1fr;min-height:100vh}.sidebar{background:var(--ink);color:#fff;padding:27px 18px;position:sticky;top:0;height:100vh}.brand{font-weight:850;font-size:22px;margin:0 10px 26px}.brand span{color:#78a8ff}.nav button{width:100%;text-align:left;padding:12px 14px;border:0;border-radius:11px;background:transparent;color:#cad3e1;font-size:14px;margin:3px 0;cursor:pointer}.nav button.active,.nav button:hover{background:#1d2939;color:#fff}.sidebar-note{position:absolute;bottom:24px;left:18px;right:18px;font-size:12px;color:#98a2b3;line-height:1.5}.main{padding:34px;max-width:1200px;width:100%}.screen{display:none}.screen.active{display:block}.top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:24px}.top h1{font-size:30px;margin:0}.top p{margin:6px 0 0;color:var(--muted)}.pill{padding:7px 10px;border-radius:999px;background:var(--accent2);color:#1d4ed8;font-size:12px;font-weight:800}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:20px;box-shadow:0 2px 8px rgba(16,24,40,.04)}.span12{grid-column:span 12}.span8{grid-column:span 8}.span7{grid-column:span 7}.span6{grid-column:span 6}.span5{grid-column:span 5}.span4{grid-column:span 4}.span3{grid-column:span 3}.muted{color:var(--muted)}.small{font-size:13px}.kicker{text-transform:uppercase;letter-spacing:.08em;font-size:11px;font-weight:850;color:#667085}.metric{font-size:30px;font-weight:850;margin-top:5px}.row{display:flex;align-items:center;justify-content:space-between;gap:15px}.progress{height:10px;background:#edf1f7;border-radius:999px;overflow:hidden;margin:10px 0}.progress i{display:block;height:100%;background:var(--accent);border-radius:999px}.badge{display:inline-flex;padding:6px 9px;border-radius:999px;font-size:12px;font-weight:800}.good{background:#e8f6ef;color:var(--good)}.warn{background:#fff3db;color:var(--warn)}.bad{background:#feeceb;color:var(--bad)}button.primary{border:0;background:var(--accent);color:white;padding:11px 15px;border-radius:10px;font-weight:800;cursor:pointer}.ghost{border:1px solid var(--line);background:#fff;padding:10px 13px;border-radius:10px;font-weight:750;cursor:pointer}.option-card{cursor:pointer;transition:.18s ease;border:1.5px solid var(--line)}.option-card:hover,.option-card.selected{border-color:#88aaf8;box-shadow:0 0 0 4px #edf3ff}.option-icon{width:45px;height:45px;border-radius:13px;background:var(--accent2);display:grid;place-items:center;font-size:22px;margin-bottom:14px}.hero{padding:30px}.hero h2{font-size:32px;margin:8px 0 12px;max-width:740px;line-height:1.18}.hero p{font-size:16px;max-width:730px;line-height:1.6}.goal-search{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:18px}.goal-search input,.form input,.form select{width:100%;border:1px solid #d4dbe7;border-radius:10px;padding:11px 12px;background:#fff}.goal-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;cursor:pointer;font-size:13px}.degree{padding:16px 0;border-bottom:1px solid var(--line)}.degree:last-child{border-bottom:0}.degree h3{margin:0 0 3px}.requirements{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:13px}.req{border:1px solid var(--line);border-radius:12px;padding:11px;background:#fbfcfe}.req strong{display:block;font-size:13px}.req span{font-size:12px;color:var(--muted)}.course-head,.course{display:grid;grid-template-columns:2.2fr .7fr 1fr 1.2fr auto;gap:10px;align-items:center}.course{padding:12px 0;border-bottom:1px solid var(--line)}.course-head{padding:0 0 10px}.form{display:grid;grid-template-columns:2.2fr .7fr 1fr 1.2fr auto;gap:10px;margin-top:14px}.notice{background:#fff8e8;border:1px solid #f1d38a;padding:14px 16px;border-radius:12px;color:#7a5200;line-height:1.5}.info{background:#f0f6ff;border:1px solid #cfe0ff;padding:14px 16px;border-radius:12px;color:#29467a;line-height:1.5}.route-step{display:grid;grid-template-columns:35px 1fr;gap:12px;margin:18px 0}.route-n{width:35px;height:35px;border-radius:50%;background:var(--accent2);color:var(--accent);display:grid;place-items:center;font-weight:850}.course-card{border:1px solid var(--line);border-radius:14px;padding:15px;margin-top:10px}.compare table{width:100%;border-collapse:collapse}.compare th,.compare td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}.tabs{display:flex;gap:7px;margin:0 0 18px}.tabs button{border:1px solid var(--line);background:white;border-radius:999px;padding:8px 12px;cursor:pointer}.tabs button.active{background:var(--ink);color:white;border-color:var(--ink)}.confidence{display:flex;gap:8px;align-items:center}.dot{width:9px;height:9px;border-radius:50%;background:var(--good)}.dot.warnDot{background:#e6a23c}.mobile-nav{display:none}.empty{padding:24px;text-align:center;color:var(--muted)}.source{font-size:12px;color:var(--muted);margin-top:8px}.source a{color:#335eea;text-decoration:none}.uni-select{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}.uni-select button{border:1px solid var(--line);background:#fff;padding:8px 11px;border-radius:999px;cursor:pointer}.uni-select button.active{background:var(--ink);color:#fff;border-color:var(--ink)}.course-meta{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.mini{font-size:11px;border:1px solid var(--line);padding:4px 7px;border-radius:999px;background:#fbfcfe}.verified{font-size:11px;color:var(--good);font-weight:800}.authbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.authbar input{border:1px solid #d4dbe7;border-radius:10px;padding:9px 10px;min-width:210px}.sync{font-size:12px;color:var(--muted)}
+
+.feedback-box{margin-top:18px;border-top:1px solid var(--line);padding-top:18px}.feedback-actions{display:flex;gap:9px;flex-wrap:wrap;margin:10px 0}.feedback-actions button.selected{box-shadow:0 0 0 3px #dbe7ff;border-color:#6f94ee}.feedback-box textarea{width:100%;min-height:90px;border:1px solid #d4dbe7;border-radius:10px;padding:11px 12px;font:inherit;resize:vertical}.privacy-mini{font-size:12px;color:var(--muted);line-height:1.5;margin-top:10px}
+@media(max-width:850px){.app{grid-template-columns:1fr}.sidebar{display:none}.main{padding:20px}.mobile-nav{display:flex;gap:8px;overflow:auto;margin-bottom:18px}.mobile-nav button{white-space:nowrap}.span8,.span7,.span6,.span5,.span4,.span3{grid-column:span 12}.requirements{grid-template-columns:1fr 1fr}.form,.course,.course-head{grid-template-columns:1fr}.course-head{display:none}.top{align-items:flex-start}.top h1{font-size:25px}.hero h2{font-size:27px}.goal-search{grid-template-columns:1fr}}
+
+/* Lotsen v11 */
+header{background:#fff!important;border-bottom:1px solid #e5e7eb!important;box-shadow:0 3px 14px rgba(15,23,42,.08)!important}
+nav,.nav{font-weight:750!important}
+nav a,nav button,.nav a,.nav button{opacity:1!important;color:#172033!important}
+.lotsen-features{margin-top:18px!important}
+.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.feature{display:flex;gap:12px;padding:14px;border:1px solid #e5e7eb;border-radius:16px;background:#fff}
+.feature span{font-size:22px}.feature small{display:block;margin-top:4px;color:#667085;line-height:1.35}
+.course-card,.course{border:1px solid #e5e7eb!important;border-radius:15px!important;padding:14px!important;margin:10px 0!important;background:#fff!important}
+@media(max-width:700px){
+ header{position:sticky!important;top:0!important;z-index:50!important}
+ nav,.nav{overflow-x:auto!important;white-space:nowrap!important;gap:6px!important;padding-bottom:3px!important}
+ nav a,nav button,.nav a,.nav button{font-size:14px!important;padding:10px 9px!important}
+ .feature-grid{grid-template-columns:1fr}
+ h1{font-size:34px!important}
+}
+
+
+/* Lotsen v14 */
+html,body{margin:0!important;padding:0!important;max-width:100%;overflow-x:hidden}
+body{background:#f6f8fc}
+.app{display:block!important;min-height:100vh}
+.sidebar{display:none!important}
+.main{max-width:1120px!important;margin:0 auto!important;padding:28px 20px 48px!important}
+.mobile-nav{display:none!important}
+
+.lotsen-header{
+  position:sticky;top:0;z-index:999;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(14px);border-bottom:1px solid #e6eaf0;
+  box-shadow:0 2px 12px rgba(16,24,40,.05)
+}
+.lotsen-header-inner{max-width:1120px;margin:0 auto;padding:12px 20px 10px}
+.lotsen-brandrow{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.lotsen-brand{font-size:23px;font-weight:900;letter-spacing:-.03em;color:#142033}
+.lotsen-brand small{display:block;font-size:11px;letter-spacing:0;color:#667085;font-weight:700;margin-top:2px}
+.lotsen-topnav{display:flex;gap:7px;overflow-x:auto;padding-top:10px;scrollbar-width:none}
+.lotsen-topnav::-webkit-scrollbar{display:none}
+.lotsen-topnav button{
+  border:0;background:transparent;color:#667085;font-weight:800;
+  padding:10px 12px;border-radius:10px;white-space:nowrap;cursor:pointer
+}
+.lotsen-topnav button.active{background:#142033;color:#fff}
+.lotsen-login{font-size:13px!important;padding:9px 11px!important}
+
+.home-hero{padding:20px 0 8px}
+.home-hero h1{font-size:42px;line-height:1.05;letter-spacing:-.045em;margin:5px 0 12px;max-width:690px}
+.home-hero p{font-size:17px;line-height:1.55;color:#667085;max-width:700px;margin:0}
+.home-cta{
+  display:flex;align-items:center;justify-content:center;width:100%;max-width:520px;
+  margin:22px 0 8px;padding:18px 22px;border:0;border-radius:16px;
+  background:#265ee8;color:#fff;font-size:20px;font-weight:900;cursor:pointer;
+  box-shadow:0 10px 26px rgba(38,94,232,.22)
+}
+.home-cta-sub{font-size:12px;color:#667085;margin-bottom:24px}
+.home-features{margin-top:22px}
+.home-features h2{font-size:24px;margin:0 0 12px}
+.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.feature{display:flex;gap:12px;padding:15px;border:1px solid #e6eaf0;border-radius:15px;background:#fff}
+.feature span{font-size:23px}.feature strong{font-size:15px}.feature small{display:block;margin-top:4px;color:#667085;line-height:1.4}
+
+.home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.home-stat{background:#fff;border:1px solid #e6eaf0;border-radius:14px;padding:14px}
+.home-stat .metric{font-size:23px}
+.home-stat .kicker{font-size:10px}
+
+.study-summary{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+.study-chip{background:#fff;border:1px solid #e6eaf0;border-radius:999px;padding:8px 11px;font-size:13px;font-weight:800}
+.study-list{display:grid;gap:10px}
+.study-item{background:#fff;border:1px solid #e6eaf0;border-radius:14px;padding:15px}
+.study-item-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.study-item h3{font-size:16px;margin:0}
+.study-inst{font-size:12px;color:#667085;margin-top:3px}
+.study-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}
+.study-meta div{background:#f8fafc;border-radius:10px;padding:8px}
+.study-meta strong{display:block;font-size:11px;color:#667085;margin-bottom:2px}
+.study-meta span{font-size:13px;font-weight:750}
+.study-remove{border:0;background:transparent;color:#b42318;font-size:12px;font-weight:750;cursor:pointer}
+
+.import-guide ol{margin:10px 0 0;padding-left:20px;line-height:1.7}
+.import-guide .important{margin-top:12px;padding:10px 12px;background:#fff8e8;border:1px solid #f1d38a;border-radius:10px;color:#7a5200}
+.import-action{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+
+.alt-paths-note{margin-bottom:14px}
+.degree-score{font-size:18px;font-weight:900}
+.degree-score.full{color:#147a55}
+.degree-subline{font-size:12px;color:#667085;margin-top:3px}
+
+@media(max-width:700px){
+  .lotsen-header-inner{padding:10px 14px 8px}
+  .lotsen-brand{font-size:21px}
+  .lotsen-topnav{margin:0 -3px;padding-top:8px}
+  .lotsen-topnav button{font-size:13px;padding:9px 10px}
+  .main{padding:20px 14px 40px!important}
+  .home-hero{padding-top:10px}
+  .home-hero h1{font-size:34px}
+  .home-hero p{font-size:15px}
+  .home-cta{max-width:none;font-size:19px;margin-top:18px}
+  .feature-grid{grid-template-columns:1fr}
+  .home-stats{grid-template-columns:1fr}
+  .study-meta{grid-template-columns:1fr 1fr}
+  .top{flex-direction:column;align-items:stretch!important}
+  .top .primary{width:100%}
+}
+
+</style>
+</head>
+<body>
+<header class="lotsen-header">
+  <div class="lotsen-header-inner">
+    <div class="lotsen-brandrow">
+      <div class="lotsen-brand">Lotsen<small>Digital studievägledare</small></div>
+      <button class="ghost lotsen-login" onclick="openAuth()" id="authBtnTop">Logga in</button>
+    </div>
+    <nav class="lotsen-topnav nav" aria-label="Huvudmeny">
+      <button class="active" data-screen="start">Hem</button>
+      <button data-screen="studies">Studier</button>
+      <button data-screen="degrees">Möjligheter</button>
+      <button data-screen="route">Min väg</button>
+      <button data-screen="compare">Jämför</button>
+    </nav>
+  </div>
+</header>
+<main class="main">
+
+<section id="start" class="screen active">
+  <div class="home-hero">
+    <span class="pill">Beta</span>
+    <h1>Se vart dina studier kan ta dig.</h1>
+    <p>Lotsen samlar dina tidigare universitetsstudier, hittar examina du är nära och visar vad som kan vara nästa smarta steg.</p>
+    <button class="home-cta" onclick="go('studies');setTimeout(showImport,80)">Hämta mina meriter</button>
+    <div class="home-cta-sub">Importera från Antagning.se · tar cirka 2 minuter</div>
+  </div>
+
+  <section class="home-features">
+    <h2>Det här kan du göra i Lotsen</h2>
+    <div class="feature-grid">
+      <div class="feature"><span>🎓</span><div><strong>Hitta examina</strong><small>Se vilka examina dina tidigare studier kan räcka till.</small></div></div>
+      <div class="feature"><span>🧭</span><div><strong>Upptäck alternativa vägar</strong><small>Hitta examina du kanske inte visste att du var nära.</small></div></div>
+      <div class="feature"><span>⚡</span><div><strong>Se vad som saknas</strong><small>Få kvarvarande högskolepoäng och nästa steg tydligt visade.</small></div></div>
+      <div class="feature"><span>📚</span><div><strong>Samla dina studier</strong><small>Kurser, poäng och lärosäten på ett ställe.</small></div></div>
+    </div>
+  </section>
+
+  <div class="home-stats">
+    <div class="home-stat"><div class="kicker">Importerade meriter</div><div class="metric" id="totalHp">0 hp</div><div class="muted" id="courseCount">0 kurser</div></div>
+    <div class="home-stat"><div class="kicker">Bästa match</div><div class="metric" id="bestPct">–</div><div class="muted" id="bestName">Hämta meriter för att se</div></div>
+    <div class="home-stat"><div class="kicker">Kortaste väg</div><div class="metric" id="shortest">–</div><div class="muted">preliminär bedömning</div></div>
+  </div>
+</section>
+
+
+
+<section id="studies" class="screen">
+  <div class="top">
+    <div><h1>Mina studier</h1><p>Kurser och högskolepoäng från dina lärosäten.</p></div>
+    <button class="primary" onclick="showImport()">Hämta meriter</button>
+  </div>
+
+  <div class="card import-guide" id="importBox" style="display:none;margin-bottom:16px">
+    <strong>Hämta meriter från Antagning.se</strong>
+    <div class="muted small" style="margin-top:5px">På telefon gör du så här:</div>
+    <ol class="small">
+      <li>Logga in på <strong>Antagning.se</strong>.</li>
+      <li>Öppna <strong>Mina sidor → Mina meriter → Universitet och högskola</strong>.</li>
+      <li>Tryck på webbläsarens <strong>Dela</strong>-knapp och välj <strong>Skriv ut</strong>.</li>
+      <li>Öppna/förstora förhandsvisningen så att den blir en PDF.</li>
+      <li>Tryck <strong>Dela → Spara i Filer</strong>.</li>
+      <li>Gå tillbaka till Lotsen och välj filen nedan.</li>
+    </ol>
+    <div class="important small"><strong>Viktigt:</strong> spara sidan <em>Universitet och högskola</em>, inte huvudsidan <em>Mina meriter</em>.</div>
+    <div class="import-action">
+      <button class="primary" onclick="document.getElementById('fakeFile').click()">Välj PDF från Antagning.se</button>
+      <input id="fakeFile" type="file" accept="application/pdf" style="display:none" onchange="importPdf(this)">
+    </div>
+    <div id="importStatus" class="small muted" style="margin-top:12px"></div>
+    <div id="importPreview" style="margin-top:12px"></div>
+  </div>
+
+  <div class="study-summary">
+    <span class="study-chip" id="studyTotalChip">0 hp</span>
+    <span class="study-chip" id="studyCourseChip">0 kurser</span>
+    <span class="study-chip" id="studyUniChip">0 lärosäten</span>
+  </div>
+
+  <div id="courses" class="study-list"></div>
+
+  <div class="card" style="margin-top:16px">
+    <strong>Lägg till en kurs manuellt</strong>
+    <div class="form">
+      <input id="courseName" placeholder="Kursnamn">
+      <input id="courseHp" type="number" placeholder="hp">
+      <select id="courseLevel"><option>Grundnivå</option><option>Avancerad nivå</option></select>
+      <input id="courseSubject" placeholder="Huvudområde">
+      <button class="primary" onclick="addCourse()">Lägg till</button>
+    </div>
+  </div>
+</section>
+
+
+<section id="degrees" class="screen">
+  <div class="top"><div><h1>Mina möjligheter</h1><p>Examina som ser närmast ut utifrån dina meriter.</p></div></div>
+  <div class="card alt-paths-note"><strong>Lotsen letar även efter alternativa examina</strong><div class="small muted" style="margin-top:5px">Även om du redan har läst ett helt program kan andra examina vara möjliga med en relativt liten komplettering.</div></div><div class="tabs"><button class="active" onclick="setDegreeFilter('all',this)">Alla</button><button onclick="setDegreeFilter('high',this)">Närmast</button><button onclick="setDegreeFilter('candidate',this)">Kandidat</button></div>
+  <div id="degreeResults"></div>
+  <div class="notice" style="margin-top:18px"><strong>Viktigt:</strong> “Match” betyder att kursdata ser ut att passa mot en regel. Det är inte ett besked från ett universitet om tillgodoräknande och inte ett examensbeslut.</div>
+</section>
+
+<section id="route" class="screen">
+  <div class="top"><div><h1>Min väg</h1><p id="routeSub">Utgår från din bästa examensmatchning.</p></div><select id="routeGoal" style="max-width:330px" onchange="renderRoute()"></select></div>
+  <div class="card" style="margin-bottom:18px"><div class="row"><div><strong>Välj lärosäte för jämförelsen</strong><div class="small muted">Lokala examensregler och kursutbud kan skilja sig.</div></div><span class="verified">Datakoll 19 aug 2026</span></div><div class="uni-select" id="uniSelect"></div></div>
+  <div class="grid">
+    <div class="card span7" id="routeMain"></div>
+    <div class="card span5"><div class="kicker">Kurser att leta efter</div><h3 id="courseSuggestTitle">Komplettering</h3><div id="courseSuggestions"></div><button class="primary" style="margin-top:12px" onclick="renderCourseCatalog(true)">Visa fler kursförslag</button></div>
+  </div>
+</section>
+
+<section id="compare" class="screen compare">
+  <div class="top"><div><h1>Jämför vägar</h1><p>Jämför möjliga examensvägar utifrån dina meriter.</p></div></div>
+  <div class="card"><table><thead><tr><th></th><th id="c1name">Idrottsvetenskap</th><th id="c2name">Företagsekonomi</th></tr></thead><tbody id="compareBody"></tbody></table></div>
+</section>
+</main></div>
+<div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(16,24,40,.45);z-index:20;padding:20px;overflow:auto" onclick="if(event.target===this)closeAuth()"><div class="card" style="max-width:520px;margin:6vh auto"><div class="row"><div><div class="kicker">Konto</div><h2 style="margin:5px 0">Logga in till Lotsen</h2></div><button class="ghost" onclick="closeAuth()">Stäng</button></div><p class="muted small">Välj BankID eller e-post och lösenord. Dina kurser kan sedan sparas till din personliga profil.</p><div class="tabs" style="margin-top:16px"><button id="tabBankid" class="active" onclick="setAuthMethod('bankid')">BankID</button><button id="tabPassword" onclick="setAuthMethod('password')">E-post & lösenord</button></div><div id="bankidPane"><div class="info"><strong>Logga in med BankID</strong><div class="small" style="margin-top:6px">I produktionsversionen startas BankID via appens backend. Certifikat och BankID-hemligheter ligger aldrig i webbläsaren.</div></div><button class="primary" style="width:100%;margin-top:12px;padding:13px" onclick="startBankID()">Logga in med BankID</button><div id="bankidFlow" style="display:none;margin-top:14px;text-align:center"><div id="bankidQr" style="width:178px;height:178px;margin:0 auto 12px;border:10px solid #fff;box-shadow:0 0 0 1px #d4dbe7;display:grid;place-items:center;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 50%/30px 30px"><div style="background:#fff;padding:8px;font-weight:900;font-size:12px">BANKID<br>TEST</div></div><strong id="bankidStatus">Startar BankID…</strong><div class="small muted" id="bankidHint" style="margin-top:7px">Testflöde i prototypen. Ingen riktig identifiering sker ännu.</div><button id="bankidDemoApprove" class="ghost" style="margin-top:12px" onclick="approveBankIDDemo()">Simulera godkänt test-BankID</button></div><div class="notice small" style="margin-top:14px">BankID-knappen är en fungerande UI-prototyp. Riktig identifiering kräver BankID-avtal, FP-certifikat och serverintegration mot BankID RP-API.</div></div><div id="passwordPane" style="display:none"><div style="display:grid;gap:10px"><input id="authEmail" placeholder="E-post" type="email" autocomplete="email" style="border:1px solid #d4dbe7;border-radius:10px;padding:11px"><input id="authPassword" placeholder="Lösenord (minst 6 tecken)" type="password" autocomplete="current-password" style="border:1px solid #d4dbe7;border-radius:10px;padding:11px"><div class="row"><button class="primary" onclick="signIn()">Logga in</button><button class="ghost" onclick="signUp()">Skapa konto</button></div></div></div><div id="authMessage" class="small muted" style="margin-top:12px"></div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module">
+import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
+window.pdfjsLib = pdfjsLib;
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs";
+</script>
+<script>
+let mode='merits',degreeFilter='all';
+const DEMO_COURSES=[
+ {name:'Idrottsvetenskapliga och hälsovetenskapliga kurser',hp:165,level:'Grundnivå',subject:'Idrottsvetenskap',thesis:true,institution:'Göteborgs universitet',verified:false},
+ {name:'Mätmetoder 2 – Rörelse, styrka, kroppssammansättning och fysisk kapacitet',hp:7.5,level:'Avancerad nivå',subject:'Idrottsvetenskap',thesis:false,institution:'Göteborgs universitet',verified:false},
+ {name:'Idrottsmedicin inom hälsa och prestation',hp:7.5,level:'Avancerad nivå',subject:'Idrottsvetenskap',thesis:false,institution:'Göteborgs universitet',verified:false},
+ {name:'Interventionsstrategier i hälsa och prestation',hp:15,level:'Avancerad nivå',subject:'Idrottsvetenskap',thesis:false,institution:'Göteborgs universitet',verified:false},
+ {name:'Företagsekonomi GR (A), Marknadsföring',hp:7.5,level:'Grundnivå',subject:'Företagsekonomi',thesis:false,institution:'Mittuniversitetet',progression:'A/G1N',verified:true},
+ {name:'Företagsekonomi GR (A), Organisation och ledarskap',hp:7.5,level:'Grundnivå',subject:'Företagsekonomi',thesis:false,institution:'Mittuniversitetet',progression:'A/G1N',verified:true}
+];
+let courses=JSON.parse(localStorage.getItem('examensmatch_courses')||'null')||DEMO_COURSES.map(x=>({...x}));
+let currentUser=null,sb=null;
+const SUPABASE_URL='YOUR_SUPABASE_URL';
+const SUPABASE_PUBLISHABLE_KEY='YOUR_SUPABASE_PUBLISHABLE_KEY';
+function backendConfigured(){return !SUPABASE_URL.startsWith('YOUR_')&&!SUPABASE_PUBLISHABLE_KEY.startsWith('YOUR_')&&window.supabase}
+function initBackend(){if(!backendConfigured())return;sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);sb.auth.getSession().then(({data})=>{currentUser=data.session?.user||null;updateAuthUI();if(currentUser)loadCloudProfile()});sb.auth.onAuthStateChange((_e,session)=>{currentUser=session?.user||null;updateAuthUI();if(currentUser)loadCloudProfile()})}
+function saveLocal(){localStorage.setItem('examensmatch_courses',JSON.stringify(courses));localStorage.setItem('examensmatch_university',selectedUniversity)}
+async function saveProfile(){saveLocal();if(!sb||!currentUser)return;const {error}=await sb.from('study_profiles').upsert({user_id:currentUser.id,courses,selected_university:selectedUniversity,updated_at:new Date().toISOString()},{onConflict:'user_id'});if(error)console.warn(error);else updateAuthUI('Synkad nyss')}
+async function loadCloudProfile(){if(!sb||!currentUser)return;const {data,error}=await sb.from('study_profiles').select('courses,selected_university').eq('user_id',currentUser.id).maybeSingle();if(error){console.warn(error);return}if(data){courses=Array.isArray(data.courses)?data.courses:courses;selectedUniversity=data.selected_university||selectedUniversity;saveLocal();renderUniversities();renderCourses()}else await saveProfile()}
+let authMethod='bankid';
+function setAuthMethod(method){authMethod=method;bankidPane.style.display=method==='bankid'?'block':'none';passwordPane.style.display=method==='password'?'block':'none';tabBankid.classList.toggle('active',method==='bankid');tabPassword.classList.toggle('active',method==='password');authMessage.textContent=method==='password'&&!backendConfigured()?'E-postinloggning kräver att Supabase-nycklarna konfigureras.':''}
+function openAuth(){authModal.style.display='block';setAuthMethod('bankid')}
+function closeAuth(){authModal.style.display='none';bankidFlow.style.display='none'}
+async function signUp(){if(!backendConfigured()){authMessage.textContent='Supabase är inte konfigurerat ännu. Följ README-filen i ZIP-paketet.';return}const {error}=await sb.auth.signUp({email:authEmail.value.trim(),password:authPassword.value});authMessage.textContent=error?error.message:'Konto skapat. Kontrollera e-posten om bekräftelse krävs.'}
+async function signIn(){if(!backendConfigured()){authMessage.textContent='Supabase är inte konfigurerat ännu. Följ README-filen i ZIP-paketet.';return}const {error}=await sb.auth.signInWithPassword({email:authEmail.value.trim(),password:authPassword.value});authMessage.textContent=error?error.message:'Inloggad.';if(!error)closeAuth()}
+async function startBankID(){bankidFlow.style.display='block';bankidStatus.textContent='Väntar på BankID';bankidHint.textContent='Testflöde: i skarp version hämtas QR/autostart-token från /api/bankid/auth och status kontrolleras via /api/bankid/collect.';authMessage.textContent=''}
+function approveBankIDDemo(){currentUser={id:'bankid-demo-user',email:null,user_metadata:{display_name:'BankID-användare'},auth_provider:'bankid'};bankidStatus.textContent='Identifiering godkänd';bankidHint.textContent='Demoidentitet skapad lokalt. Ingen riktig BankID-kontroll har utförts.';setTimeout(()=>{closeAuth();updateAuthUI('Inloggad med BankID · demo')},350)}
+async function signOut(){if(sb&&currentUser?.auth_provider!=='bankid')await sb.auth.signOut();currentUser=null;updateAuthUI()}
+function updateAuthUI(msg){if(currentUser){const label=currentUser.auth_provider==='bankid'?'BankID':(currentUser.email||'konto');authState.textContent=msg||('Inloggad med '+label);authBtn.style.display='none';signOutBtn.style.display='inline-block'}else{authState.textContent=backendConfigured()?'Inte inloggad · lokal lagring aktiv':'Sparas lokalt på denna enhet';authBtn.style.display='inline-block';signOutBtn.style.display='none'}}
+const universities=[
+ {id:'gu',name:'Göteborgs universitet',city:'Göteborg'},
+ {id:'lu',name:'Lunds universitet',city:'Lund'},
+ {id:'lnu',name:'Linnéuniversitetet',city:'Växjö/Kalmar + distans'},
+ {id:'miun',name:'Mittuniversitetet',city:'Sundsvall/Östersund + distans'}
+];
+let selectedUniversity=localStorage.getItem('examensmatch_university')||'gu';
+const courseCatalog=[
+ {uni:'gu',subject:'Företagsekonomi',name:'Företagsekonomi 1',code:'FEA10',hp:30,level:'Grundnivå',term:'HT 2026',pace:'100%',form:'Campus',status:'Ansökan stängd',url:'https://www.gu.se/studera/hitta-utbildning/foretagsekonomi-1-fea10'},
+ {uni:'gu',subject:'Företagsekonomi',name:'Företagsekonomi 2',code:'FEB20',hp:30,level:'Grundnivå',term:'HT 2026',pace:'100%',form:'Campus',status:'Ansökan stängd',url:'https://www.gu.se/studera/hitta-utbildning/foretagsekonomi-2-feb20'},
+ {uni:'gu',subject:'Företagsekonomi',name:'Marknadsföring, kandidattermin',code:'FEC10',hp:30,level:'Grundnivå',term:'HT 2026',pace:'100%',form:'Campus',status:'Ansökan stängd',url:'https://www.gu.se/studera/hitta-utbildning/marknadsforing-kandidattermin-fec10',thesisPossible:true},
+ {uni:'lu',subject:'Företagsekonomi',name:'Företagsekonomi: Grundkurs',code:'FEKA10',hp:30,level:'Grundnivå',term:'VT 2027',pace:'100%',form:'Campus',status:'Kommande',url:'https://www.lu.se/studera/foretagsekonomi-grundkurs-FEKA10'},
+ {uni:'lu',subject:'Företagsekonomi',name:'Företagsekonomi fortsättningskurs 31–60 hp',code:'PFE01',hp:30,level:'Grundnivå',term:'HT 2026',pace:'100%',form:'Campus',status:'Öppen för sen anmälan',url:'https://www.lu.se/studera/foretagsekonomi-fortsattningskurs-31-60-hp-kurspaket-PFE01'},
+ {uni:'lu',subject:'Företagsekonomi',name:'Kandidatkurs och examensarbete i finansiering',code:'PFE07',hp:30,level:'Grundnivå',term:'Nästa tillfälle ej öppet',pace:'100%',form:'Campus',status:'Ej sökbar nu',url:'https://www.lu.se/studera/kandidatkurs-och-examensarbete-i-finansiering-kurspaket-PFE07',thesisPossible:true},
+ {uni:'lnu',subject:'Företagsekonomi',name:'Företagsekonomi I – marknadsföring',code:'',hp:7.5,level:'Grundnivå',term:'HT 2026',pace:'50%',form:'Distans',status:'Anmäl dig',url:'https://www.lnu.se/kurs/foretagsekonomi-i-marknadsforing/vaxjo-distans-deltid-ht/'},
+ {uni:'lnu',subject:'Företagsekonomi',name:'Företagsekonomi III – marknadsföring, examensarbete',code:'',hp:15,level:'Grundnivå',term:'HT 2026',pace:'50%',form:'Distans',status:'Listad HT 2026',url:'https://www.lnu.se/utbildning/kompetensutveckling/utveckla-dig-sjalv/ledarskap-och-ekonomi/',thesisPossible:true},
+ {uni:'lnu',subject:'Idrottsvetenskap',name:'Specialidrott och metod',code:'',hp:30,level:'Grundnivå',term:'HT 2026',pace:'50%',form:'Distans',status:'HT 2026',url:'https://www.lnu.se/kurs/specialidrott-och-metod/distans-deltid-ht/'},
+ {uni:'lnu',subject:'Idrottsvetenskap',name:'Specialidrott och vetenskaplig teori och metod',code:'1IV564',hp:7.5,level:'Grundnivå',term:'HT 2026',pace:'50%',form:'Distans',status:'Anmäl dig',url:'https://www.lnu.se/kurs/specialidrott-och-vetenskaplig-teori-och-metod/distans-deltid-ht/'},
+ {uni:'lnu',subject:'Idrottsvetenskap',name:'Idrott mellan tradition och förändring',code:'',hp:7.5,level:'Avancerad nivå',term:'HT 2026',pace:'50%',form:'Distans',status:'HT 2026',url:'https://www.lnu.se/kurs/idrott-mellan-tradition-och-forandring/distans-deltid-ht/'},
+ {uni:'miun',subject:'Företagsekonomi',name:'Företagsekonomi GR (A), Ekonomistyrning',code:'',hp:7.5,level:'Grundnivå',term:'Kontrollera tillfälle',pace:'Deltid möjlig',form:'Distans förekommer',status:'Kurs verifierad',url:'https://www.miun.se/utbildning/kurser/foretagsekonomi/'},
+ {uni:'miun',subject:'Företagsekonomi',name:'Företagsekonomi GR (A), Externredovisning',code:'',hp:7.5,level:'Grundnivå',term:'Kontrollera tillfälle',pace:'Deltid möjlig',form:'Distans förekommer',status:'Kurs verifierad',url:'https://www.miun.se/utbildning/kurser/foretagsekonomi/'},
+ {uni:'miun',subject:'Företagsekonomi',name:'Företagsekonomi GR (B), Finansiering',code:'',hp:7.5,level:'Grundnivå',term:'Kontrollera tillfälle',pace:'Deltid möjlig',form:'Distans förekommer',status:'Kurs verifierad',url:'https://www.miun.se/utbildning/kurser/foretagsekonomi/'},
+ {uni:'miun',subject:'Företagsekonomi',name:'Företagsekonomi GR (B), Metod',code:'',hp:7.5,level:'Grundnivå',term:'Kontrollera tillfälle',pace:'Varierar',form:'Kontrollera',status:'Kurs verifierad',url:'https://www.miun.se/utbildning/kurser/foretagsekonomi/'}
+];
+const localRules={
+ gu:{sport:'GU: Kandidat kräver 180 hp, minst 90 hp med successiv fördjupning i huvudområdet och minst 15 hp självständigt arbete. Särskilda huvudområdeskrav kan tillkomma.',business:'GU: 180 hp, minst 90 hp i huvudområdet med successiv fördjupning och minst 15 hp självständigt arbete; särskilda krav behöver kontrolleras.'},
+ lu:{sport:'LU: Generell kandidatexamen är 180 hp och huvudområdet behöver normalt omfatta minst 90 hp inklusive examensarbete. Kontrollera att idrottsvetenskap är fastställt huvudområde för aktuell examen.',business:'LU: För kandidat i företagsekonomi krävs 90 hp i företagsekonomi med progression, inklusive 15 hp kandidatkurs och 15 hp examensarbete enligt institutionens upplägg.'},
+ lnu:{sport:'LNU: Lokal examensordning och huvudområdets specifika krav behöver kontrolleras.',business:'LNU: Filosofie kandidat i företagsekonomi: 90 hp företagsekonomi från samtliga fördjupningsnivåer inklusive minst 15 hp examensarbete, plus 90 hp valfria kurser varav minst 30 hp i andra ämnen.'},
+ miun:{sport:'MIUN: Bedömningen är preliminär tills huvudområdets lokala examenskrav har kontrollerats.',business:'MIUN: Dina 15 hp A-kurser är direkt identifierade från MIUN. Kursutbudet innehåller A- och B-kurser i företagsekonomi; exakt examensstruktur och C-nivå verifieras innan slutlig rekommendation.'}
+};
+const degrees=[
+ {id:'sport',name:'Kandidatexamen i idrottsvetenskap',short:'Kandidat i idrottsvetenskap',kind:'candidate',total:180,subject:'Idrottsvetenskap',subjectReq:90,thesisReq:15,local:true},
+ {id:'business',name:'Kandidatexamen i företagsekonomi',short:'Kandidat i företagsekonomi',kind:'candidate',total:180,subject:'Företagsekonomi',subjectReq:90,thesisReq:15,local:true},
+ {id:'general',name:'Högskoleexamen inom huvudområde',short:'Högskoleexamen',kind:'other',total:120,subject:null,subjectReq:60,thesisReq:0,local:true},
+ {id:'master',name:'Magisterexamen',short:'Magisterexamen',kind:'other',total:60,subject:null,subjectReq:30,thesisReq:15,advanced:true,local:true}
+];
+function subjectHp(sub){return courses.filter(c=>!sub||c.subject.toLowerCase()===sub.toLowerCase()).reduce((s,c)=>s+Number(c.hp),0)}
+function totalHp(){return courses.reduce((s,c)=>s+Number(c.hp),0)}
+function advancedHp(){return courses.filter(c=>c.level==='Avancerad nivå').reduce((s,c)=>s+Number(c.hp),0)}
+function hasThesis(sub){return courses.some(c=>c.thesis&&(!sub||c.subject===sub))}
+function calc(d){
+ let total=d.advanced?advancedHp():totalHp(); let subj=d.subject?subjectHp(d.subject):Math.max(...[...new Set(courses.map(c=>c.subject))].map(subjectHp),0); let thesis=d.subject?hasThesis(d.subject):courses.some(c=>c.thesis);
+ if(d.advanced){total=advancedHp(); subj=Math.min(total,Math.max(...[...new Set(courses.filter(c=>c.level==='Avancerad nivå').map(c=>c.subject))].map(s=>courses.filter(c=>c.level==='Avancerad nivå'&&c.subject===s).reduce((a,b)=>a+b.hp,0)),0));}
+ const totalRatio=Math.min(total/d.total,1),subjectRatio=Math.min(subj/d.subjectReq,1),thesisRatio=d.thesisReq?Number(thesis):1;
+ const pct=Math.round((totalRatio*.45+subjectRatio*.4+thesisRatio*.15)*100);
+ const missingTotal=Math.max(0,d.total-total),missingSubject=Math.max(0,d.subjectReq-subj),missingThesis=d.thesisReq&&!thesis?d.thesisReq:0;
+ const remaining=Math.max(missingTotal,missingSubject,missingThesis);
+ let confidenceScore=45;
+ if(d.subject&&courses.some(c=>c.subject===d.subject)) confidenceScore+=20;
+ if(total>=d.total) confidenceScore+=10;
+ if(d.thesisReq&&thesis) confidenceScore+=15;
+ if(d.id==='business'&&subj>=15) confidenceScore+=8;
+ confidenceScore=Math.min(95,confidenceScore);
+ const confidence=confidenceScore>=80?'Hög':confidenceScore>=60?'Medel':'Låg';
+ return {pct,total,subj,thesis,missingTotal,missingSubject,missingThesis,remaining,confidence,confidenceScore};
+}
+function loadReferenceProfile(){courses=DEMO_COURSES.map(x=>({...x}));saveProfile();renderCourses();go('degrees')}
+function renderCourses(){
+ saveLocal();
+ let el=document.getElementById('courses'); if(!el)return; el.innerHTML='';
+ courses.forEach((c,i)=>{
+   const code=c.code||'–', grade=c.grade||'–', date=c.date||'–', inst=c.institution||'Lärosäte ej angivet';
+   el.innerHTML+=`<div class="study-item">
+     <div class="study-item-top"><div><h3>${escapeHtml(c.name)}</h3><div class="study-inst">${escapeHtml(inst)}</div></div><button class="study-remove" onclick="removeCourse(${i})">Ta bort</button></div>
+     <div class="study-meta">
+       <div><strong>Kurskod</strong><span>${escapeHtml(code)}</span></div>
+       <div><strong>Poäng</strong><span>${fmtHp(Number(c.hp||0))} hp</span></div>
+       <div><strong>Betyg</strong><span>${escapeHtml(grade)}</span></div>
+       <div><strong>Datum</strong><span>${escapeHtml(date)}</span></div>
+     </div>
+   </div>`;
+ });
+ const total=totalHp(), unis=new Set(courses.map(c=>c.institution).filter(Boolean)).size;
+ document.getElementById('totalHp').textContent=fmtHp(total)+' hp';
+ document.getElementById('courseCount').textContent=courses.length+' kurser';
+ document.getElementById('studyTotalChip').textContent=fmtHp(total)+' hp';
+ document.getElementById('studyCourseChip').textContent=courses.length+' kurser';
+ document.getElementById('studyUniChip').textContent=unis+' lärosäten';
+ refreshAll();
+}
+function addCourse(){let n=courseName.value.trim(),hp=Number(courseHp.value),level=courseLevel.value,subject=courseSubject.value.trim()||n;if(!n||!hp)return;courses.push({name:n,hp,level,subject,thesis:false});saveProfile();courseName.value='';courseHp.value='';courseSubject.value='';renderCourses()}
+function removeCourse(i){courses.splice(i,1);saveProfile();renderCourses()}
+function showImport(){importBox.style.display=importBox.style.display==='none'?'block':'none'}
+let importedCandidates=[];
+async function importPdf(inp){
+ const files=[...(inp.files||[])]; if(!files.length)return;
+ importStatus.textContent='Läser Antagning.se-meriter…'; importPreview.innerHTML=''; importedCandidates=[];
+ try{
+   if(!window.pdfjsLib) throw new Error('PDF-läsaren kunde inte laddas. Kontrollera internetanslutningen.');
+   for(const file of files){
+     const data=new Uint8Array(await file.arrayBuffer()); const pdf=await window.pdfjsLib.getDocument({data}).promise; let lines=[];
+     for(let p=1;p<=pdf.numPages;p++){
+       const page=await pdf.getPage(p), content=await page.getTextContent();
+       const rows=new Map();
+       for(const it of content.items){
+         const y=Math.round((it.transform?.[5]||0)*2)/2, x=it.transform?.[4]||0;
+         if(!rows.has(y)) rows.set(y,[]); rows.get(y).push({x,s:it.str});
+       }
+       [...rows.entries()].sort((a,b)=>b[0]-a[0]).forEach(([,items])=>{
+         const line=items.sort((a,b)=>a.x-b.x).map(z=>z.s).join(' ').replace(/\s+/g,' ').trim();
+         if(line) lines.push(line);
+       });
+     }
+     const parsed=parseAntagningLines(lines);
+     if(!parsed.isAntagning) throw new Error('Fel PDF vald. Gå till Antagning.se → Mina meriter → Universitet och högskola och spara just den sidan som PDF.');
+     importedCandidates.push(...parsed.courses.map(c=>({...c,sourceFile:file.name})));
+     window.lastAntagningExpected=parsed.expectedTotal;
+   }
+   markDuplicates();
+   if(!importedCandidates.length){importStatus.textContent='PDF:en lästes, men inga avklarade kursblock kunde identifieras.';return}
+   const importedHp=importedCandidates.reduce((s,c)=>s+Number(c.hp||0),0);
+   const expected=window.lastAntagningExpected;
+   const check=Number.isFinite(expected) ? (Math.abs(importedHp-expected)<0.01 ? `✓ Summan stämmer: ${fmtHp(importedHp)} hp.` : `⚠ Importen ger ${fmtHp(importedHp)} hp men Antagning.se visar ${fmtHp(expected)} hp. Granska innan import.`) : `Hittade ${fmtHp(importedHp)} hp.`;
+   importStatus.textContent=`Hittade ${importedCandidates.length} avklarade kurser. ${check}`;
+   renderImportPreview();
+ }catch(e){importStatus.textContent='Kunde inte läsa PDF: '+e.message;}
+}
+function fmtHp(n){return Number(n).toLocaleString('sv-SE',{maximumFractionDigits:1})}
+function normCourse(s){return String(s).toLowerCase().replace(/[^a-zåäö0-9]/g,'')}
+function markDuplicates(){const existing=new Set(courses.map(c=>(c.code||normCourse(c.name))+'|'+Number(c.hp)));const seen=new Set();for(const c of importedCandidates){const k=(c.code||normCourse(c.name))+'|'+Number(c.hp);c.duplicate=existing.has(k)||seen.has(k);if(c.duplicate)c.selected=false;seen.add(k)}}
+function parseAntagningLines(rawLines){
+ const lines=rawLines.map(x=>String(x).replace(/\s+/g,' ').trim()).filter(Boolean);
+ const joined=lines.join(' ');
+ const isAntagning=/Antagning\.se/i.test(joined)&&/Universitet och högskola/i.test(joined);
+ const tm=joined.match(/Högskolepoäng totalt:\s*([0-9]+(?:[,.][0-9]+)?)/i);
+ const expectedTotal=tm?parseFloat(tm[1].replace(',','.')):NaN;
+ let institution='Okänt lärosäte', out=[];
+ const isInstitution=l=>l.length<90 && !/^(Universitet\/Högskola|Ger högskolepoäng|Högskolepoäng|Tillbaka)/i.test(l) && /(universitet|högskol|University)/i.test(l);
+ const val=(l,key)=>l.toLowerCase().startsWith(key.toLowerCase()+' ')?l.slice(key.length).trim():null;
+ for(let i=0;i<lines.length;i++){
+   const l=lines[i]; if(isInstitution(l)) institution=l;
+   if(!/^Kurs\s+/i.test(l)||/^Kurskod/i.test(l)) continue;
+   let name=l.replace(/^Kurs\s+/i,'').trim(), j=i+1;
+   while(j<lines.length&&!/^Kurskod\s+/i.test(lines[j])&&j<i+6){if(!/antagning\.se|^Sida \d+/i.test(lines[j])) name+=' '+lines[j];j++}
+   if(j>=lines.length||!/^Kurskod\s+/i.test(lines[j])) continue;
+   const code=lines[j].replace(/^Kurskod\s+/i,'').trim(); let hp=null,grade='',date='',gives=''; let k=j+1;
+   for(;k<Math.min(lines.length,j+10);k++){
+     let v;if((v=val(lines[k],'Poäng'))!==null&&hp===null)hp=parseFloat(v.replace(',','.'));
+     else if((v=val(lines[k],'Betyg'))!==null&&!grade)grade=v;
+     else if((v=val(lines[k],'Datum'))!==null&&!date)date=v;
+     else if((v=val(lines[k],'Ger högskolepoäng'))!==null){gives=v;k++;break}
+   }
+   if(!hp||gives!=='Ja') continue;
+   let componentHp=0, componentCompleted=false, q=k;
+   while(q<lines.length&&!/^Kurs\s+/i.test(lines[q])&&!/^Totalt lärosäte/i.test(lines[q])){
+     if(/^Ingående del\s+/i.test(lines[q])){
+       let chp=null,cgrade='',cdate='';
+       for(let z=q+1;z<Math.min(lines.length,q+9)&&!/^Ingående del\s+/i.test(lines[z])&&!/^Kurs\s+/i.test(lines[z]);z++){
+         let v;if((v=val(lines[z],'Poäng'))!==null&&chp===null)chp=parseFloat(v.replace(',','.'));
+         else if((v=val(lines[z],'Betyg'))!==null&&!cgrade)cgrade=v;
+         else if((v=val(lines[z],'Datum'))!==null&&!cdate)cdate=v;
+       }
+       if(chp&&cgrade&&cgrade!=='-'&&cdate&&cdate!=='-'){componentHp+=chp;componentCompleted=true}
+     }
+     q++;
+   }
+   const completed=(grade&&grade!=='-'&&date&&date!=='-') || (componentCompleted&&componentHp+0.001>=hp);
+   if(!completed) continue;
+   out.push({name:name.replace(/\s+/g,' ').trim(),code,hp,grade,date,institution,level:'Grundnivå',subject:guessSubject(name),thesis:/examensarbete|självständigt arbete|degree project|thesis/i.test(name),selected:true});
+   i=j;
+ }
+ return {isAntagning,expectedTotal,courses:out};
+}
+function guessSubject(name){const n=name.toLowerCase();if(/idrott|sport|exercise|physical activity/.test(n))return'Idrottsvetenskap';if(/företagsekonomi|business|marketing|redovis|accounting|organisation|management|finance/.test(n))return'Företagsekonomi';if(/psykolog/.test(n))return'Psykologi';if(/juridik|law/.test(n))return'Juridik';if(/informatik|computer|programmer|data science/.test(n))return'Informatik';return'Behöver granskas'}
+function renderImportPreview(){importPreview.innerHTML=`<div class="course-head"><strong>Kurs</strong><strong>hp</strong><strong>Nivå</strong><strong>Huvudområde</strong><strong></strong></div>`+importedCandidates.map((c,i)=>`<div class="course"><div><strong>${escapeHtml(c.name)}</strong><div class="small muted">${escapeHtml(c.institution||'Okänt lärosäte')} · ${escapeHtml(c.code||'')} ${c.grade?'· '+escapeHtml(c.grade)+' ':''}· ${c.thesis?'Möjligt examensarbete · ':''}${c.duplicate?'Möjlig dubblett · ':''}${c.subject==='Behöver granskas'?'Osäker ämnesklassning':''}</div></div><div>${c.hp}</div><div><select onchange="importedCandidates[${i}].level=this.value"><option ${c.level==='Grundnivå'?'selected':''}>Grundnivå</option><option ${c.level==='Avancerad nivå'?'selected':''}>Avancerad nivå</option></select></div><div><input value="${escapeHtml(c.subject)}" onchange="importedCandidates[${i}].subject=this.value"></div><label class="small"><input type="checkbox" ${c.selected?'checked':''} onchange="importedCandidates[${i}].selected=this.checked"> Importera</label></div>`).join('')+`<div class="row" style="margin-top:14px"><span class="small muted">Inget läggs till förrän du godkänner listan.</span><button class="primary" onclick="confirmImport()">Lägg till valda kurser</button></div>`}
+function confirmImport(){const chosen=importedCandidates.filter(c=>c.selected&&!c.duplicate).map(({selected,duplicate,sourceFile,...c})=>c);courses.push(...chosen);saveProfile();importStatus.textContent=`${chosen.length} kurser importerades och slogs ihop med din gemensamma meritprofil.`;importPreview.innerHTML='';renderCourses()}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function renderDegrees(){
+ const host=document.getElementById('degreeResults');host.innerHTML='';
+ let arr=degrees.map(d=>({d,r:calc(d)})).sort((a,b)=>b.r.pct-a.r.pct);
+ if(degreeFilter==='high')arr=arr.filter(x=>x.r.pct>=70);
+ if(degreeFilter==='candidate')arr=arr.filter(x=>x.d.kind==='candidate');
+ if(!arr.length){host.innerHTML='<div class="card empty">Inga matchningar i filtret.</div>';return}
+ arr.forEach(({d,r})=>{
+   const score=Math.min(100,r.pct), badge=score===100?'good':score>=55?'warn':'bad';
+   host.innerHTML+=`<div class="card" style="margin-bottom:14px">
+     <div class="row"><div><h3 style="margin:0">${d.name}</h3><div class="degree-subline">${d.total} hp · preliminär bedömning</div></div>
+     <span class="badge ${badge} degree-score ${score===100?'full':''}">${score}%</span></div>
+     <div class="progress"><i style="width:${score}%"></i></div>
+     <div class="requirements">
+       <div class="req"><strong>Totalpoäng</strong><span>${Math.min(r.total,d.total)} / ${d.total} hp</span></div>
+       <div class="req"><strong>Huvudområde</strong><span>${Math.min(r.subj,d.subjectReq)} / ${d.subjectReq} hp</span></div>
+       <div class="req"><strong>Examensarbete</strong><span>${d.thesisReq?(r.thesis?'Ser uppfyllt ut':'Behöver verifieras'):'Ej krav'}</span></div>
+       <div class="req"><strong>Kvar</strong><span>${r.remaining?r.remaining+' hp':'0 hp'}</span></div>
+     </div>
+     <div class="row" style="margin-top:14px"><div class="small muted">${score===100?'Kraven ser preliminärt uppfyllda ut.':'Se vad som återstår på din väg.'}</div>
+     <button class="ghost" onclick="routeGoal.value='${d.id}';go('route');renderRoute()">Visa väg</button></div>
+   </div>`;
+ });
+}
+function setDegreeFilter(f,b){degreeFilter=f;document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderDegrees()}
+function renderGoals(){goalChips.innerHTML=degrees.map(d=>`<button class="chip" onclick="chooseGoal('${d.id}')">${d.short}</button>`).join('')}
+function filterGoals(){let q=goalSearch.value.toLowerCase();goalChips.innerHTML=degrees.filter(d=>d.name.toLowerCase().includes(q)).map(d=>`<button class="chip" onclick="chooseGoal('${d.id}')">${d.short}</button>`).join('')||'<span class="muted small">Ingen träff i betans databas.</span>'}
+function chooseGoal(id){routeGoal.value=id;go('route');renderRoute()}
+function selectMode(m,el){mode=m;document.querySelectorAll('.option-card').forEach(x=>x.classList.remove('selected'));el.classList.add('selected')}
+function renderUniversities(){const host=document.getElementById('uniSelect');if(!host)return;host.innerHTML=universities.map(u=>`<button class="${u.id===selectedUniversity?'active':''}" onclick="selectedUniversity='${u.id}';saveProfile();renderUniversities();renderRoute()">${u.name}</button>`).join('')}
+function renderCourseCatalog(showAll=false){let d=degrees.find(x=>x.id===routeGoal.value)||degrees[0],r=calc(d),sub=d.subject||'';let items=courseCatalog.filter(c=>c.uni===selectedUniversity&&(sub?c.subject===sub:true));if(!items.length){courseSuggestions.innerHTML='<div class="notice">Inga verifierade exempelkurser i prototypens lilla kurslager för den här kombinationen ännu.</div>';return;}if(!showAll)items=items.slice(0,3);courseSuggestions.innerHTML=items.map(c=>`<div class="course-card"><div class="row"><strong>${c.name}</strong><span class="badge ${/Öppen|Anmäl dig/.test(c.status)?'good':'warn'}">${c.status}</span></div><div class="course-meta"><span class="mini">${c.hp} hp</span><span class="mini">${c.level}</span><span class="mini">${c.term}</span><span class="mini">${c.pace}</span><span class="mini">${c.form}</span></div><div class="small muted">${c.code?c.code+' · ':''}${c.thesisPossible?'Kan innehålla/omfatta examensarbete – verifiera kursplan.':'Matchas på ämne och nivå; behörighet och progression måste kontrolleras.'}</div><div class="source"><a href="${c.url}" target="_blank" rel="noopener">Öppna hos universitetet ↗</a></div></div>`).join('');}
+function renderRoute(){let d=degrees.find(x=>x.id===routeGoal.value)||degrees[0],r=calc(d),u=universities.find(x=>x.id===selectedUniversity);routeSub.textContent='Mål: '+d.name+' · '+u.name;let steps=[];if(r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">1</div><div><strong>Komplettera huvudområdet med cirka ${r.missingSubject} hp</strong><div class="muted small">Kurserna behöver ligga inom rätt huvudområde och rätt progression.</div></div></div>`);if(r.missingThesis)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Verifiera eller läs självständigt arbete, cirka ${r.missingThesis} hp</strong><div class="muted small">Examensarbetet måste passa lärosätets examenskrav.</div></div></div>`);if(r.missingTotal>r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Komplettera ytterligare ${r.missingTotal-r.missingSubject} hp</strong><div class="muted small">Kan i vissa examina vara valfria kurser, beroende på lokala krav.</div></div></div>`);steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Begär formell prövning / ansök om examen</strong><div class="muted small">Appens analys ersätter inte lärosätets beslut.</div></div></div>`);let rule=(localRules[selectedUniversity]||{})[d.id]||'Lokal examensordning och huvudområdeskrav behöver verifieras.';routeMain.innerHTML=`<div class="kicker">Preliminär väg · ${u.name}</div><h2 style="margin:6px 0">${d.name}</h2><div class="row"><span class="badge ${r.pct>=85?'good':r.pct>=55?'warn':'bad'}">${Math.min(100,r.pct)}%</span><strong>${r.remaining? r.remaining+' hp uppskattat kvar':'Poängkrav ser uppfyllt ut'}</strong></div><div class="small muted" style="margin-top:8px">Bedömd säkerhet: <strong>${r.confidence} (${r.confidenceScore}%)</strong>. Appen vågar rekommendera vägen före formell prövning, men markerar osäkerheter.</div><div class="info" style="margin-top:14px"><strong>Lokal regelkontroll:</strong> ${rule}</div>${steps.join('')}<div class="feedback-box"><strong>Verkar resultatet rimligt?</strong><div class="feedback-actions"><button class="ghost" id="fbYes" onclick="setFeedback('rimligt')">👍 Rimligt</button><button class="ghost" id="fbNo" onclick="setFeedback('fel')">👎 Verkar fel</button></div><textarea id="fbText" placeholder="Vad stämmer eller verkar fel? Frivilligt."></textarea><div class="row" style="margin-top:9px"><span class="small muted" id="fbState"></span><button class="primary" onclick="saveFeedback()">Spara feedback</button></div><div class="privacy-mini">Feedback sparas lokalt på enheten i denna beta. Du kan använda dela-knappen efteråt för att skicka den till personen som bett dig testa.</div></div>`;courseSuggestTitle.textContent=r.missingSubject?`Verifierade kursförslag i ${d.subject||'huvudområdet'}`:'Kurser att kontrollera mot progression';renderCourseCatalog(false)}
+function renderCompare(){let a=degrees[0],b=degrees[1],ra=calc(a),rb=calc(b);c1name.textContent=a.short;c2name.textContent=b.short;compareBody.innerHTML=`<tr><td><strong>Bedömd matchning</strong></td><td><span class="badge ${ra.pct>=85?'good':'warn'}">${ra.pct}%</span></td><td><span class="badge ${rb.pct>=85?'good':'warn'}">${rb.pct}%</span></td></tr><tr><td><strong>Huvudområde</strong></td><td>${ra.subj}/${a.subjectReq} hp</td><td>${rb.subj}/${b.subjectReq} hp</td></tr><tr><td><strong>Preliminärt kvar</strong></td><td>${ra.remaining?ra.remaining+' hp':'Kontroll'}</td><td>${rb.remaining?rb.remaining+' hp':'Kontroll'}</td></tr><tr><td><strong>Största osäkerhet</strong></td><td>Progression och lokala regler</td><td>Progression och examensarbete</td></tr>`}
+
+let currentFeedbackRating='';
+function setFeedback(v){currentFeedbackRating=v;document.getElementById('fbYes')?.classList.toggle('selected',v==='rimligt');document.getElementById('fbNo')?.classList.toggle('selected',v==='fel');}
+function saveFeedback(){const text=document.getElementById('fbText')?.value||'';if(!currentFeedbackRating&&!text.trim()){const st=document.getElementById('fbState');if(st)st.textContent='Välj Rimligt/Fel eller skriv en kommentar.';return;}const item={rating:currentFeedbackRating||'kommentar',text,goal:routeGoal.value,university:selectedUniversity,createdAt:new Date().toISOString()};const all=JSON.parse(localStorage.getItem('examensmatch_beta_feedback')||'[]');all.push(item);localStorage.setItem('examensmatch_beta_feedback',JSON.stringify(all));const st=document.getElementById('fbState');if(st)st.textContent='Feedback sparad ✓';const shareText=`Lotsen – ${item.rating}\nMål: ${routeGoal.options[routeGoal.selectedIndex]?.text||item.goal}\nLärosäte: ${universities.find(u=>u.id===selectedUniversity)?.name||selectedUniversity}\nKommentar: ${text||'-'}`;if(navigator.share){setTimeout(()=>navigator.share({title:'Lotsen – feedback',text:shareText}).catch(()=>{}),150)}else if(navigator.clipboard){navigator.clipboard.writeText(shareText).catch(()=>{});}}
+function refreshAll(){
+ renderDegrees();
+ let ranked=degrees.map(d=>({d,r:calc(d)})).sort((a,b)=>b.r.pct-a.r.pct);
+ const best=ranked[0];
+ if(document.getElementById('bestPct')) bestPct.textContent=courses.length?Math.min(100,best.r.pct)+' %':'–';
+ if(document.getElementById('bestName')) bestName.textContent=courses.length?best.d.short:'Hämta meriter för att se';
+ let rem=ranked.filter(x=>x.r.remaining>0).sort((a,b)=>a.r.remaining-b.r.remaining)[0];
+ if(document.getElementById('shortest')) shortest.textContent=courses.length?(rem?rem.r.remaining+' hp':'0 hp'):'–';
+ renderRoute();renderCompare();
+}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='route')renderRoute();window.scrollTo(0,0)}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
+routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`).join('');initBackend();updateAuthUI();renderUniversities();renderGoals();renderCourses();
+</script>
+<!-- Lotsen v14 -->
+</body>
+</html>
