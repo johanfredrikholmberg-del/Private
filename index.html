@@ -116,6 +116,14 @@ body{background:#f6f8fc}
   .top .primary{width:100%}
 }
 
+
+/* Lotsen v16 – tydligare aktiv meny */
+.lotsen-topnav button.active{
+  background:#e9efff!important;
+  color:#265ee8!important;
+  box-shadow:inset 0 0 0 1px #cddaff!important;
+}
+
 </style>
 </head>
 <body>
@@ -140,7 +148,7 @@ body{background:#f6f8fc}
   <div class="home-hero">
     <span class="pill">Beta</span>
     <h1>Se vart dina studier kan ta dig.</h1>
-    <p>Lotsen samlar dina tidigare universitetsstudier, hittar examina du är nära och visar vad som kan vara nästa smarta steg.</p>
+    
     <button class="home-cta" onclick="go('studies');setTimeout(showImport,80)">Hämta mina meriter</button>
     <div class="home-cta-sub">Importera från Antagning.se · tar cirka 2 minuter</div>
   </div>
@@ -186,7 +194,7 @@ body{background:#f6f8fc}
       <button class="primary" onclick="document.getElementById('fakeFile').click()">Välj PDF från Antagning.se</button>
       <input id="fakeFile" type="file" accept="application/pdf" style="display:none" onchange="importPdf(this)">
     </div>
-    <div id="importStatus" class="small muted" style="margin-top:12px"></div>
+    <div class="small muted" style="margin-top:10px">Utan inloggning sparas dina meriter bara tillfälligt och rensas när sessionen avslutas. Med inloggning kan de sparas till din profil.</div><div id="importStatus" class="small muted" style="margin-top:12px"></div>
     <div id="importPreview" style="margin-top:12px"></div>
   </div>
 
@@ -250,13 +258,13 @@ const DEMO_COURSES=[
  {name:'Företagsekonomi GR (A), Marknadsföring',hp:7.5,level:'Grundnivå',subject:'Företagsekonomi',thesis:false,institution:'Mittuniversitetet',progression:'A/G1N',verified:true},
  {name:'Företagsekonomi GR (A), Organisation och ledarskap',hp:7.5,level:'Grundnivå',subject:'Företagsekonomi',thesis:false,institution:'Mittuniversitetet',progression:'A/G1N',verified:true}
 ];
-let courses=JSON.parse(localStorage.getItem('examensmatch_courses')||'null')||DEMO_COURSES.map(x=>({...x}));
+let courses=JSON.parse(sessionStorage.getItem('examensmatch_courses')||'null')||DEMO_COURSES.map(x=>({...x}));
 let currentUser=null,sb=null;
 const SUPABASE_URL='YOUR_SUPABASE_URL';
 const SUPABASE_PUBLISHABLE_KEY='YOUR_SUPABASE_PUBLISHABLE_KEY';
 function backendConfigured(){return !SUPABASE_URL.startsWith('YOUR_')&&!SUPABASE_PUBLISHABLE_KEY.startsWith('YOUR_')&&window.supabase}
 function initBackend(){if(!backendConfigured())return;sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);sb.auth.getSession().then(({data})=>{currentUser=data.session?.user||null;updateAuthUI();if(currentUser)loadCloudProfile()});sb.auth.onAuthStateChange((_e,session)=>{currentUser=session?.user||null;updateAuthUI();if(currentUser)loadCloudProfile()})}
-function saveLocal(){localStorage.setItem('examensmatch_courses',JSON.stringify(courses));localStorage.setItem('examensmatch_university',selectedUniversity)}
+function saveLocal(){sessionStorage.setItem('examensmatch_courses',JSON.stringify(courses));sessionStorage.setItem('examensmatch_university',selectedUniversity)}
 async function saveProfile(){saveLocal();if(!sb||!currentUser)return;const {error}=await sb.from('study_profiles').upsert({user_id:currentUser.id,courses,selected_university:selectedUniversity,updated_at:new Date().toISOString()},{onConflict:'user_id'});if(error)console.warn(error);else updateAuthUI('Synkad nyss')}
 async function loadCloudProfile(){if(!sb||!currentUser)return;const {data,error}=await sb.from('study_profiles').select('courses,selected_university').eq('user_id',currentUser.id).maybeSingle();if(error){console.warn(error);return}if(data){courses=Array.isArray(data.courses)?data.courses:courses;selectedUniversity=data.selected_university||selectedUniversity;saveLocal();renderUniversities();renderCourses()}else await saveProfile()}
 let authMethod='bankid';
@@ -275,7 +283,7 @@ const universities=[
  {id:'lnu',name:'Linnéuniversitetet',city:'Växjö/Kalmar + distans'},
  {id:'miun',name:'Mittuniversitetet',city:'Sundsvall/Östersund + distans'}
 ];
-let selectedUniversity=localStorage.getItem('examensmatch_university')||'gu';
+let selectedUniversity=sessionStorage.getItem('examensmatch_university')||'gu';
 const courseCatalog=[
  {uni:'gu',subject:'Företagsekonomi',name:'Företagsekonomi 1',code:'FEA10',hp:30,level:'Grundnivå',term:'HT 2026',pace:'100%',form:'Campus',status:'Ansökan stängd',url:'https://www.gu.se/studera/hitta-utbildning/foretagsekonomi-1-fea10'},
  {uni:'gu',subject:'Företagsekonomi',name:'Företagsekonomi 2',code:'FEB20',hp:30,level:'Grundnivå',term:'HT 2026',pace:'100%',form:'Campus',status:'Ansökan stängd',url:'https://www.gu.se/studera/hitta-utbildning/foretagsekonomi-2-feb20'},
@@ -471,7 +479,7 @@ function renderCompare(){let a=degrees[0],b=degrees[1],ra=calc(a),rb=calc(b);c1n
 
 let currentFeedbackRating='';
 function setFeedback(v){currentFeedbackRating=v;document.getElementById('fbYes')?.classList.toggle('selected',v==='rimligt');document.getElementById('fbNo')?.classList.toggle('selected',v==='fel');}
-function saveFeedback(){const text=document.getElementById('fbText')?.value||'';if(!currentFeedbackRating&&!text.trim()){const st=document.getElementById('fbState');if(st)st.textContent='Välj Rimligt/Fel eller skriv en kommentar.';return;}const item={rating:currentFeedbackRating||'kommentar',text,goal:routeGoal.value,university:selectedUniversity,createdAt:new Date().toISOString()};const all=JSON.parse(localStorage.getItem('examensmatch_beta_feedback')||'[]');all.push(item);localStorage.setItem('examensmatch_beta_feedback',JSON.stringify(all));const st=document.getElementById('fbState');if(st)st.textContent='Feedback sparad ✓';const shareText=`Lotsen – ${item.rating}\nMål: ${routeGoal.options[routeGoal.selectedIndex]?.text||item.goal}\nLärosäte: ${universities.find(u=>u.id===selectedUniversity)?.name||selectedUniversity}\nKommentar: ${text||'-'}`;if(navigator.share){setTimeout(()=>navigator.share({title:'Lotsen – feedback',text:shareText}).catch(()=>{}),150)}else if(navigator.clipboard){navigator.clipboard.writeText(shareText).catch(()=>{});}}
+function saveFeedback(){const text=document.getElementById('fbText')?.value||'';if(!currentFeedbackRating&&!text.trim()){const st=document.getElementById('fbState');if(st)st.textContent='Välj Rimligt/Fel eller skriv en kommentar.';return;}const item={rating:currentFeedbackRating||'kommentar',text,goal:routeGoal.value,university:selectedUniversity,createdAt:new Date().toISOString()};const all=JSON.parse(sessionStorage.getItem('examensmatch_beta_feedback')||'[]');all.push(item);sessionStorage.setItem('examensmatch_beta_feedback',JSON.stringify(all));const st=document.getElementById('fbState');if(st)st.textContent='Feedback sparad ✓';const shareText=`Lotsen – ${item.rating}\nMål: ${routeGoal.options[routeGoal.selectedIndex]?.text||item.goal}\nLärosäte: ${universities.find(u=>u.id===selectedUniversity)?.name||selectedUniversity}\nKommentar: ${text||'-'}`;if(navigator.share){setTimeout(()=>navigator.share({title:'Lotsen – feedback',text:shareText}).catch(()=>{}),150)}else if(navigator.clipboard){navigator.clipboard.writeText(shareText).catch(()=>{});}}
 function refreshAll(){
  renderDegrees();
  let ranked=degrees.map(d=>({d,r:calc(d)})).sort((a,b)=>b.r.pct-a.r.pct);
@@ -486,6 +494,21 @@ function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remo
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
 routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`).join('');initBackend();updateAuthUI();renderUniversities();renderGoals();renderCourses();
 </script>
-<!-- Lotsen v14 -->
+<!-- Lotsen v16 -->
+
+<script>
+(function(){
+  try{
+    // Anonymous use is session-only. Clear stale browser-persistent Lotsen/Examensmatch test data.
+    const staleKeys = [];
+    for(let i=0;i<localStorage.length;i++){
+      const k = localStorage.key(i) || '';
+      if(/examensmatch|lotsen|course|merit|study/i.test(k)) staleKeys.push(k);
+    }
+    staleKeys.forEach(k=>localStorage.removeItem(k));
+  }catch(e){}
+})();
+</script>
+
 </body>
 </html>
