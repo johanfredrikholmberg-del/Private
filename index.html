@@ -124,6 +124,10 @@ body{background:#f6f8fc}
   box-shadow:inset 0 0 0 1px #cddaff!important;
 }
 
+
+/* v20: no demo/history-derived content for anonymous users */
+#route.route-empty .route-data-only{display:none!important}
+
 </style>
 </head>
 <body>
@@ -237,7 +241,7 @@ body{background:#f6f8fc}
 
 <section id="compare" class="screen compare">
   <div class="top"><div><h1>Jämför vägar</h1><p>Jämför möjliga examensvägar utifrån dina meriter.</p></div></div>
-  <div class="card"><table><thead><tr><th></th><th id="c1name">Idrottsvetenskap</th><th id="c2name">Företagsekonomi</th></tr></thead><tbody id="compareBody"></tbody></table></div>
+  <div id="compareResults"></div>
 </section>
 </main></div>
 <div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(16,24,40,.45);z-index:20;padding:20px;overflow:auto" onclick="if(event.target===this)closeAuth()"><div class="card" style="max-width:520px;margin:6vh auto"><div class="row"><div><div class="kicker">Konto</div><h2 style="margin:5px 0">Logga in till Lotsen</h2></div><button class="ghost" onclick="closeAuth()">Stäng</button></div><p class="muted small">Välj BankID eller e-post och lösenord. Dina kurser kan sedan sparas till din personliga profil.</p><div class="tabs" style="margin-top:16px"><button id="tabBankid" class="active" onclick="setAuthMethod('bankid')">BankID</button><button id="tabPassword" onclick="setAuthMethod('password')">E-post & lösenord</button></div><div id="bankidPane"><div class="info"><strong>Logga in med BankID</strong><div class="small" style="margin-top:6px">I produktionsversionen startas BankID via appens backend. Certifikat och BankID-hemligheter ligger aldrig i webbläsaren.</div></div><button class="primary" style="width:100%;margin-top:12px;padding:13px" onclick="startBankID()">Logga in med BankID</button><div id="bankidFlow" style="display:none;margin-top:14px;text-align:center"><div id="bankidQr" style="width:178px;height:178px;margin:0 auto 12px;border:10px solid #fff;box-shadow:0 0 0 1px #d4dbe7;display:grid;place-items:center;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 50%/30px 30px"><div style="background:#fff;padding:8px;font-weight:900;font-size:12px">BANKID<br>TEST</div></div><strong id="bankidStatus">Startar BankID…</strong><div class="small muted" id="bankidHint" style="margin-top:7px">Testflöde i prototypen. Ingen riktig identifiering sker ännu.</div><button id="bankidDemoApprove" class="ghost" style="margin-top:12px" onclick="approveBankIDDemo()">Simulera godkänt test-BankID</button></div><div class="notice small" style="margin-top:14px">BankID-knappen är en fungerande UI-prototyp. Riktig identifiering kräver BankID-avtal, FP-certifikat och serverintegration mot BankID RP-API.</div></div><div id="passwordPane" style="display:none"><div style="display:grid;gap:10px"><input id="authEmail" placeholder="E-post" type="email" autocomplete="email" style="border:1px solid #d4dbe7;border-radius:10px;padding:11px"><input id="authPassword" placeholder="Lösenord (minst 6 tecken)" type="password" autocomplete="current-password" style="border:1px solid #d4dbe7;border-radius:10px;padding:11px"><div class="row"><button class="primary" onclick="signIn()">Logga in</button><button class="ghost" onclick="signUp()">Skapa konto</button></div></div></div><div id="authMessage" class="small muted" style="margin-top:12px"></div></div></div>
@@ -258,7 +262,7 @@ const DEMO_COURSES=[
  {name:'Företagsekonomi GR (A), Marknadsföring',hp:7.5,level:'Grundnivå',subject:'Företagsekonomi',thesis:false,institution:'Mittuniversitetet',progression:'A/G1N',verified:true},
  {name:'Företagsekonomi GR (A), Organisation och ledarskap',hp:7.5,level:'Grundnivå',subject:'Företagsekonomi',thesis:false,institution:'Mittuniversitetet',progression:'A/G1N',verified:true}
 ];
-let courses=JSON.parse(sessionStorage.getItem('examensmatch_courses')||'null')||DEMO_COURSES.map(x=>({...x}));
+let courses=JSON.parse(sessionStorage.getItem('examensmatch_courses')||'[]');
 let currentUser=null,sb=null;
 const SUPABASE_URL='YOUR_SUPABASE_URL';
 const SUPABASE_PUBLISHABLE_KEY='YOUR_SUPABASE_PUBLISHABLE_KEY';
@@ -479,17 +483,44 @@ function selectMode(m,el){mode=m;document.querySelectorAll('.option-card').forEa
 function renderUniversities(){const host=document.getElementById('uniSelect');if(!host)return;host.innerHTML=universities.map(u=>`<button class="${u.id===selectedUniversity?'active':''}" onclick="selectedUniversity='${u.id}';saveProfile();renderUniversities();renderRoute()">${u.name}</button>`).join('')}
 function renderCourseCatalog(showAll=false){let d=degrees.find(x=>x.id===routeGoal.value)||degrees[0],r=calc(d),sub=d.subject||'';let items=courseCatalog.filter(c=>c.uni===selectedUniversity&&(sub?c.subject===sub:true));if(!items.length){courseSuggestions.innerHTML='<div class="notice">Inga verifierade exempelkurser i prototypens lilla kurslager för den här kombinationen ännu.</div>';return;}if(!showAll)items=items.slice(0,3);courseSuggestions.innerHTML=items.map(c=>`<div class="course-card"><div class="row"><strong>${c.name}</strong><span class="badge ${/Öppen|Anmäl dig/.test(c.status)?'good':'warn'}">${c.status}</span></div><div class="course-meta"><span class="mini">${c.hp} hp</span><span class="mini">${c.level}</span><span class="mini">${c.term}</span><span class="mini">${c.pace}</span><span class="mini">${c.form}</span></div><div class="small muted">${c.code?c.code+' · ':''}${c.thesisPossible?'Kan innehålla/omfatta examensarbete – verifiera kursplan.':'Matchas på ämne och nivå; behörighet och progression måste kontrolleras.'}</div><div class="source"><a href="${c.url}" target="_blank" rel="noopener">Öppna hos universitetet ↗</a></div></div>`).join('');}
 function renderRoute(){
+ const screen=document.getElementById('route');
+ let empty=document.getElementById('routeEmptyState');
  if(!courses.length){
-   const box=document.getElementById('routeBox');
-   if(box) box.innerHTML='<div class="card empty"><strong>Ingen väg vald ännu</strong><div class="small muted" style="margin-top:5px">Hämta dina meriter så kan Lotsen visa vad som saknas till en examen.</div></div>';
+   if(screen) screen.classList.add('route-empty');
+   if(screen){
+     Array.from(screen.children).forEach(el=>{
+       if(!el.matches('h1,.lead,.nav,.lotsen-topnav') && el.id!=='routeEmptyState') el.style.display='none';
+     });
+     if(!empty){
+       empty=document.createElement('div');
+       empty.id='routeEmptyState';
+       empty.className='card empty';
+       empty.innerHTML='<strong>Ingen väg ännu</strong><div class="small muted" style="margin-top:5px">Hämta dina meriter först. Därefter visar Lotsen din bästa examensväg och vad som eventuellt saknas.</div>';
+       screen.appendChild(empty);
+     }
+     empty.style.display='';
+   }
    return;
- }let d=degrees.find(x=>x.id===routeGoal.value)||degrees[0],r=calc(d),u=universities.find(x=>x.id===selectedUniversity);routeSub.textContent='Mål: '+d.name+' · '+u.name;let steps=[];if(r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">1</div><div><strong>Komplettera huvudområdet med cirka ${r.missingSubject} hp</strong><div class="muted small">Kurserna behöver ligga inom rätt huvudområde och rätt progression.</div></div></div>`);if(r.missingThesis)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Verifiera eller läs självständigt arbete, cirka ${r.missingThesis} hp</strong><div class="muted small">Examensarbetet måste passa lärosätets examenskrav.</div></div></div>`);if(r.missingTotal>r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Komplettera ytterligare ${r.missingTotal-r.missingSubject} hp</strong><div class="muted small">Kan i vissa examina vara valfria kurser, beroende på lokala krav.</div></div></div>`);steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Begär formell prövning / ansök om examen</strong><div class="muted small">Appens analys ersätter inte lärosätets beslut.</div></div></div>`);let rule=(localRules[selectedUniversity]||{})[d.id]||'Lokal examensordning och huvudområdeskrav behöver verifieras.';routeMain.innerHTML=`<div class="kicker">Preliminär väg · ${u.name}</div><h2 style="margin:6px 0">${d.name}</h2><div class="row"><span class="badge ${r.pct>=85?'good':r.pct>=55?'warn':'bad'}">${Math.min(100,r.pct)}%</span><strong>${r.remaining? r.remaining+' hp uppskattat kvar':'Poängkrav ser uppfyllt ut'}</strong></div><div class="small muted" style="margin-top:8px">Bedömd säkerhet: <strong>${r.confidence} (${r.confidenceScore}%)</strong>. Appen vågar rekommendera vägen före formell prövning, men markerar osäkerheter.</div><div class="info" style="margin-top:14px"><strong>Lokal regelkontroll:</strong> ${rule}</div>${steps.join('')}<div class="feedback-box"><strong>Verkar resultatet rimligt?</strong><div class="feedback-actions"><button class="ghost" id="fbYes" onclick="setFeedback('rimligt')">👍 Rimligt</button><button class="ghost" id="fbNo" onclick="setFeedback('fel')">👎 Verkar fel</button></div><textarea id="fbText" placeholder="Vad stämmer eller verkar fel? Frivilligt."></textarea><div class="row" style="margin-top:9px"><span class="small muted" id="fbState"></span><button class="primary" onclick="saveFeedback()">Spara feedback</button></div><div class="privacy-mini">Feedback sparas lokalt på enheten i denna beta. Du kan använda dela-knappen efteråt för att skicka den till personen som bett dig testa.</div></div>`;courseSuggestTitle.textContent=r.missingSubject?`Verifierade kursförslag i ${d.subject||'huvudområdet'}`:'Kurser att kontrollera mot progression';renderCourseCatalog(false)}
+ }
+ if(screen){
+   screen.classList.remove('route-empty');
+   Array.from(screen.children).forEach(el=>{ if(el.id!=='routeEmptyState') el.style.display=''; });
+ }
+ if(empty) empty.style.display='none';let d=degrees.find(x=>x.id===routeGoal.value)||degrees[0],r=calc(d),u=universities.find(x=>x.id===selectedUniversity);routeSub.textContent='Mål: '+d.name+' · '+u.name;let steps=[];if(r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">1</div><div><strong>Komplettera huvudområdet med cirka ${r.missingSubject} hp</strong><div class="muted small">Kurserna behöver ligga inom rätt huvudområde och rätt progression.</div></div></div>`);if(r.missingThesis)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Verifiera eller läs självständigt arbete, cirka ${r.missingThesis} hp</strong><div class="muted small">Examensarbetet måste passa lärosätets examenskrav.</div></div></div>`);if(r.missingTotal>r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Komplettera ytterligare ${r.missingTotal-r.missingSubject} hp</strong><div class="muted small">Kan i vissa examina vara valfria kurser, beroende på lokala krav.</div></div></div>`);steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Begär formell prövning / ansök om examen</strong><div class="muted small">Appens analys ersätter inte lärosätets beslut.</div></div></div>`);let rule=(localRules[selectedUniversity]||{})[d.id]||'Lokal examensordning och huvudområdeskrav behöver verifieras.';routeMain.innerHTML=`<div class="kicker">Preliminär väg · ${u.name}</div><h2 style="margin:6px 0">${d.name}</h2><div class="row"><span class="badge ${r.pct>=85?'good':r.pct>=55?'warn':'bad'}">${Math.min(100,r.pct)}%</span><strong>${r.remaining? r.remaining+' hp uppskattat kvar':'Poängkrav ser uppfyllt ut'}</strong></div><div class="small muted" style="margin-top:8px">Bedömd säkerhet: <strong>${r.confidence} (${r.confidenceScore}%)</strong>. Appen vågar rekommendera vägen före formell prövning, men markerar osäkerheter.</div><div class="info" style="margin-top:14px"><strong>Lokal regelkontroll:</strong> ${rule}</div>${steps.join('')}<div class="feedback-box"><strong>Verkar resultatet rimligt?</strong><div class="feedback-actions"><button class="ghost" id="fbYes" onclick="setFeedback('rimligt')">👍 Rimligt</button><button class="ghost" id="fbNo" onclick="setFeedback('fel')">👎 Verkar fel</button></div><textarea id="fbText" placeholder="Vad stämmer eller verkar fel? Frivilligt."></textarea><div class="row" style="margin-top:9px"><span class="small muted" id="fbState"></span><button class="primary" onclick="saveFeedback()">Spara feedback</button></div><div class="privacy-mini">Feedback sparas lokalt på enheten i denna beta. Du kan använda dela-knappen efteråt för att skicka den till personen som bett dig testa.</div></div>`;courseSuggestTitle.textContent=r.missingSubject?`Verifierade kursförslag i ${d.subject||'huvudområdet'}`:'Kurser att kontrollera mot progression';renderCourseCatalog(false)}
 function renderCompare(){
+ const target=document.getElementById('compareResults');
+ if(!target)return;
  if(!courses.length){
-   const target=document.getElementById('compareResults') || document.getElementById('compareBox');
-   if(target) target.innerHTML='<div class="card empty"><strong>Inget att jämföra ännu</strong><div class="small muted" style="margin-top:5px">Hämta dina meriter så kan Lotsen jämföra möjliga examensvägar och lärosäten.</div></div>';
+   target.innerHTML='<div class="card empty"><strong>Inget att jämföra ännu</strong><div class="small muted" style="margin-top:5px">Hämta dina meriter så kan Lotsen jämföra möjliga examensvägar.</div></div>';
    return;
- }let a=degrees[0],b=degrees[1],ra=calc(a),rb=calc(b);c1name.textContent=a.short;c2name.textContent=b.short;compareBody.innerHTML=`<tr><td><strong>Bedömd matchning</strong></td><td><span class="badge ${ra.pct>=85?'good':'warn'}">${ra.pct}%</span></td><td><span class="badge ${rb.pct>=85?'good':'warn'}">${rb.pct}%</span></td></tr><tr><td><strong>Huvudområde</strong></td><td>${ra.subj}/${a.subjectReq} hp</td><td>${rb.subj}/${b.subjectReq} hp</td></tr><tr><td><strong>Preliminärt kvar</strong></td><td>${ra.remaining?ra.remaining+' hp':'Kontroll'}</td><td>${rb.remaining?rb.remaining+' hp':'Kontroll'}</td></tr><tr><td><strong>Största osäkerhet</strong></td><td>Progression och lokala regler</td><td>Progression och examensarbete</td></tr>`}
+ }
+ let a=degrees[0],b=degrees[1],ra=calc(a),rb=calc(b);
+ target.innerHTML=`<div class="card"><table><thead><tr><th></th><th>${a.short}</th><th>${b.short}</th></tr></thead><tbody>
+ <tr><td><strong>Bedömd matchning</strong></td><td><span class="badge ${ra.pct>=85?'good':'warn'}">${ra.pct}%</span></td><td><span class="badge ${rb.pct>=85?'good':'warn'}">${rb.pct}%</span></td></tr>
+ <tr><td><strong>Huvudområde</strong></td><td>${ra.subj}/${a.subjectReq} hp</td><td>${rb.subj}/${b.subjectReq} hp</td></tr>
+ <tr><td><strong>Preliminärt kvar</strong></td><td>${ra.remaining?ra.remaining+' hp':'Kontroll'}</td><td>${rb.remaining?rb.remaining+' hp':'Kontroll'}</td></tr>
+ </tbody></table></div>`;
+}
 
 let currentFeedbackRating='';
 function setFeedback(v){currentFeedbackRating=v;document.getElementById('fbYes')?.classList.toggle('selected',v==='rimligt');document.getElementById('fbNo')?.classList.toggle('selected',v==='fel');}
@@ -508,9 +539,9 @@ function go(id){
  if(id==='compare' && !courses.length){
    setTimeout(()=>{try{renderCompare()}catch(e){}},0);
  }
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='route')renderRoute();window.scrollTo(0,0)}
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='route')renderRoute();if(id==='compare')renderCompare();window.scrollTo(0,0)}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
-routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`).join('');initBackend();updateAuthUI();renderUniversities();renderGoals();renderCourses();
+routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`).join('');initBackend();updateAuthUI();renderUniversities();renderGoals();renderCourses();renderDegrees();renderRoute();renderCompare();
 </script>
 
 
@@ -541,7 +572,7 @@ routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`
 
       // Remove all anonymous study/derived state from both storage types.
       const explicit = [
-        'courses','degreeFilter','routeGoal','compareSelection','selectedDegree',
+        'courses','examensmatch_courses','examensmatch_university','degreeFilter','routeGoal','compareSelection','selectedDegree',
         'selectedRoute','selectedCompare','compareGoal','lotsen_route',
         'lotsen_opportunities','lotsen_compare'
       ];
@@ -590,6 +621,6 @@ routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`
 })();
 </script>
 
-<!-- Lotsen v19 -->
+<!-- Lotsen v20 -->
 </body>
 </html>
