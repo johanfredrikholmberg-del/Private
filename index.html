@@ -24,7 +24,7 @@ button,input,select{font:inherit}.app{display:grid;grid-template-columns:255px 1
     <button data-screen="route">Snabbaste vägen</button>
     <button data-screen="compare">Jämför utbildningar</button>
   </div>
-  <div class="sidebar-note">Beta · Vägledning före formell examensprövning. PDF-filer analyseras lokalt i webbläsaren i denna testversion.</div>
+  <div class="sidebar-note">Beta · Vägledning före formell examensprövning. Antagning.se-PDF analyseras lokalt i webbläsaren i denna testversion.</div>
 </aside>
 <main class="main">
 <div class="mobile-nav nav"><button class="active" data-screen="start">Start</button><button data-screen="studies">Studier</button><button data-screen="degrees">Matchning</button><button data-screen="route">Väg</button><button data-screen="compare">Jämför</button></div>
@@ -32,8 +32,8 @@ button,input,select{font:inherit}.app{display:grid;grid-template-columns:255px 1
 <section id="start" class="screen active">
   <div class="top"><div><span class="pill">Beta</span><h1 style="margin-top:10px">Vilken examen kan jag få snabbast?</h1><p>Slå ihop meriter från flera lärosäten och rangordna examensvägar efter vad som faktiskt saknas.</p></div><div class="authbar"><span id="authState" class="sync">Sparas lokalt på denna enhet</span><button class="ghost" onclick="openAuth()" id="authBtn">Logga in</button><button class="ghost" onclick="signOut()" id="signOutBtn" style="display:none">Logga ut</button></div></div>
   <div class="grid">
-    <div class="card span12 info"><strong>Testa Examensmatch Beta</strong><div class="small" style="margin-top:6px">Ladda upp ett eller flera Ladok-resultatintyg. Betan försöker slå ihop dina meriter och visa vilka examina du verkar vara närmast. <strong>PDF-filerna lämnar inte webbläsaren i denna testversion.</strong> Resultatet är vägledning och ersätter inte lärosätets examensprövning.</div></div>
-    <div class="card span12" id="betaIntro"><div class="row" style="align-items:flex-start"><div><div class="kicker">3 minuter</div><h2 style="margin:6px 0 8px">Så testar du</h2><div class="small muted" style="line-height:1.7">1. Ladda upp ditt Ladok-resultatintyg under <strong>Mina studier</strong>.<br>2. Kontrollera att kurserna ser rimliga ut.<br>3. Öppna <strong>Examensmatchning</strong> och <strong>Snabbaste vägen</strong>.<br>4. Berätta om resultatet känns rimligt.</div></div><button class="primary" onclick="go('studies')">Starta testet</button></div></div>
+    <div class="card span12 info"><strong>Testa Examensmatch Beta</strong><div class="small" style="margin-top:6px">Importera sidan <strong>Mina meriter → Universitet och högskola</strong> från Antagning.se som PDF. Betan läser kursblocken och kontrollerar dem mot Antagning.se:s totalsumma. <strong>PDF-filen lämnar inte webbläsaren i denna testversion.</strong> Resultatet är vägledning och ersätter inte lärosätets examensprövning.</div></div>
+    <div class="card span12" id="betaIntro"><div class="row" style="align-items:flex-start"><div><div class="kicker">3 minuter</div><h2 style="margin:6px 0 8px">Så testar du</h2><div class="small muted" style="line-height:1.7">1. Öppna <strong>Antagning.se → Mina meriter → Universitet och högskola</strong> och spara sidan som PDF.<br>2. Ladda upp PDF:en under <strong>Mina studier</strong>.<br>3. Kontrollera totalsumman och kurslistan.<br>4. Öppna <strong>Examensmatchning</strong> och <strong>Snabbaste vägen</strong>.</div></div><button class="primary" onclick="go('studies')">Starta testet</button></div></div>
     <div class="card span6 option-card selected" onclick="selectMode('merits',this)"><div class="option-icon">🎓</div><h2>Vad kan jag få för examen?</h2><p class="muted">Lägg in det du redan har läst och se vilka examina du är närmast.</p><button class="primary" onclick="go('studies');event.stopPropagation()">Lägg in mina studier</button></div>
     <div class="card span6 option-card" onclick="selectMode('goal',this)"><div class="option-icon">🎯</div><h2>Jag vet vilken examen jag vill ha</h2><p class="muted">Välj ett mål och se vilka av dina tidigare kurser som kan passa in.</p><button class="primary" onclick="document.getElementById('goalBox').scrollIntoView({behavior:'smooth'});event.stopPropagation()">Välj examensmål</button></div>
     <div class="card span12 hero" id="goalBox"><div class="kicker">Sök examensmål</div><h2>Hitta den kortaste vägen från det du redan har läst.</h2><p class="muted">I MVP:n finns ett urval av generella examina. Senare kan databasen utökas med lokala examensordningar och utbildningsplaner från varje lärosäte.</p><div class="goal-search"><input id="goalSearch" placeholder="Ex. idrottsvetenskap, företagsekonomi, kandidat..." oninput="filterGoals()"><button class="primary" onclick="filterGoals()">Sök</button></div><div class="goal-chips" id="goalChips"></div></div>
@@ -47,7 +47,7 @@ button,input,select{font:inherit}.app{display:grid;grid-template-columns:255px 1
   <div class="top"><div><h1>Mina studier</h1><p>Ju bättre kursdata, desto bättre matchning.</p></div><button class="primary" onclick="showImport()">Importera resultatintyg</button></div>
   <div class="grid">
     <div class="card span12" id="importBox" style="display:none">
-      <div class="row"><div><strong>Importera Ladok-resultatintyg</strong><div class="muted small">Du kan välja flera Ladok-intyg från olika lärosäten samtidigt. PDF-filerna läses lokalt, lärosäte identifieras och dubbletter flaggas före import.</div></div><button class="ghost" onclick="document.getElementById('fakeFile').click()">Välj PDF-filer</button><input id="fakeFile" type="file" accept="application/pdf" multiple style="display:none" onchange="importPdf(this)"></div>
+      <div class="row"><div><strong>Importera från Antagning.se</strong><div class="muted small">Spara <strong>Mina meriter → Universitet och högskola</strong> som PDF. Importern läser bara kursblock, ignorerar ingående delar som separata kurser och kontrollerar resultatet mot Antagning.se:s totalsumma.</div></div><button class="ghost" onclick="document.getElementById('fakeFile').click()">Välj Antagning.se-PDF</button><input id="fakeFile" type="file" accept="application/pdf" style="display:none" onchange="importPdf(this)"></div>
       <div id="importStatus" class="small muted" style="margin-top:12px"></div>
       <div id="importPreview" style="margin-top:12px"></div>
     </div>
@@ -178,34 +178,85 @@ function showImport(){importBox.style.display=importBox.style.display==='none'?'
 let importedCandidates=[];
 async function importPdf(inp){
  const files=[...(inp.files||[])]; if(!files.length)return;
- importStatus.textContent='Läser '+files.length+' Ladok-intyg…'; importPreview.innerHTML=''; importedCandidates=[];
+ importStatus.textContent='Läser Antagning.se-meriter…'; importPreview.innerHTML=''; importedCandidates=[];
  try{
    if(!window.pdfjsLib) throw new Error('PDF-läsaren kunde inte laddas. Kontrollera internetanslutningen.');
    for(const file of files){
-     const data=new Uint8Array(await file.arrayBuffer()); const pdf=await window.pdfjsLib.getDocument({data}).promise; let text='';
-     for(let p=1;p<=pdf.numPages;p++){const page=await pdf.getPage(p);const content=await page.getTextContent();text+='\n'+content.items.map(x=>x.str).join(' ')}
-     const institution=guessInstitution(text); const found=parseTranscriptText(text).map(c=>({...c,institution,sourceFile:file.name})); importedCandidates.push(...found);
+     const data=new Uint8Array(await file.arrayBuffer()); const pdf=await window.pdfjsLib.getDocument({data}).promise; let lines=[];
+     for(let p=1;p<=pdf.numPages;p++){
+       const page=await pdf.getPage(p), content=await page.getTextContent();
+       const rows=new Map();
+       for(const it of content.items){
+         const y=Math.round((it.transform?.[5]||0)*2)/2, x=it.transform?.[4]||0;
+         if(!rows.has(y)) rows.set(y,[]); rows.get(y).push({x,s:it.str});
+       }
+       [...rows.entries()].sort((a,b)=>b[0]-a[0]).forEach(([,items])=>{
+         const line=items.sort((a,b)=>a.x-b.x).map(z=>z.s).join(' ').replace(/\s+/g,' ').trim();
+         if(line) lines.push(line);
+       });
+     }
+     const parsed=parseAntagningLines(lines);
+     if(!parsed.isAntagning) throw new Error('PDF:en ser inte ut att vara sidan “Universitet och högskola” från Antagning.se.');
+     importedCandidates.push(...parsed.courses.map(c=>({...c,sourceFile:file.name})));
+     window.lastAntagningExpected=parsed.expectedTotal;
    }
    markDuplicates();
-   if(!importedCandidates.length){importStatus.textContent='Intygen lästes, men inga säkra kursrader hittades.';return}
-   const unis=[...new Set(importedCandidates.map(c=>c.institution))]; importStatus.textContent=`Hittade ${importedCandidates.length} möjliga kurser från ${unis.join(', ')}. Granska innan import.`; renderImportPreview();
+   if(!importedCandidates.length){importStatus.textContent='PDF:en lästes, men inga avklarade kursblock kunde identifieras.';return}
+   const importedHp=importedCandidates.reduce((s,c)=>s+Number(c.hp||0),0);
+   const expected=window.lastAntagningExpected;
+   const check=Number.isFinite(expected) ? (Math.abs(importedHp-expected)<0.01 ? `✓ Summan stämmer: ${fmtHp(importedHp)} hp.` : `⚠ Importen ger ${fmtHp(importedHp)} hp men Antagning.se visar ${fmtHp(expected)} hp. Granska innan import.`) : `Hittade ${fmtHp(importedHp)} hp.`;
+   importStatus.textContent=`Hittade ${importedCandidates.length} avklarade kurser. ${check}`;
+   renderImportPreview();
  }catch(e){importStatus.textContent='Kunde inte läsa PDF: '+e.message;}
 }
-function guessInstitution(text){if(/Mittuniversitetet/i.test(text))return'Mittuniversitetet';if(/Göteborgs universitet/i.test(text))return'Göteborgs universitet';if(/Lunds universitet/i.test(text))return'Lunds universitet';if(/Linnéuniversitetet/i.test(text))return'Linnéuniversitetet';return'Okänt lärosäte'}
+function fmtHp(n){return Number(n).toLocaleString('sv-SE',{maximumFractionDigits:1})}
 function normCourse(s){return String(s).toLowerCase().replace(/[^a-zåäö0-9]/g,'')}
-function markDuplicates(){const existing=new Set(courses.map(c=>normCourse(c.name)+'|'+Number(c.hp)));const seen=new Set();for(const c of importedCandidates){const k=normCourse(c.name)+'|'+Number(c.hp);c.duplicate=existing.has(k)||seen.has(k);if(c.duplicate)c.selected=false;seen.add(k)}}
-function parseTranscriptText(text){
- const clean=text.replace(/\s+/g,' ').trim();
- const patterns=[
-   /([A-ZÅÄÖ][A-Za-zÅÄÖåäö0-9,:;()\-\/ ]{3,90}?)\s+(\d{1,2}(?:[\.,]\d)?)\s*(?:hp|högskolepoäng)/gi,
-   /([A-ZÅÄÖ][A-Za-zÅÄÖåäö0-9,:;()\-\/ ]{3,90}?)\s+(\d{1,2}(?:[\.,]\d)?)\s*(?:credits)/gi
- ];
- const out=[]; const seen=new Set();
- for(const re of patterns){let m;while((m=re.exec(clean))){let name=m[1].trim().replace(/^(Resultat|Kurs|Course)\s*/i,'');let hp=parseFloat(m[2].replace(',','.'));if(!name||!hp||hp>60)continue;let key=name.toLowerCase()+'|'+hp;if(seen.has(key))continue;seen.add(key);out.push({name,hp,level:/avancerad|second cycle/i.test(name)?'Avancerad nivå':'Grundnivå',subject:guessSubject(name),thesis:/examensarbete|självständigt arbete|degree project|thesis/i.test(name),selected:true})}}
- return out.slice(0,80);
+function markDuplicates(){const existing=new Set(courses.map(c=>(c.code||normCourse(c.name))+'|'+Number(c.hp)));const seen=new Set();for(const c of importedCandidates){const k=(c.code||normCourse(c.name))+'|'+Number(c.hp);c.duplicate=existing.has(k)||seen.has(k);if(c.duplicate)c.selected=false;seen.add(k)}}
+function parseAntagningLines(rawLines){
+ const lines=rawLines.map(x=>String(x).replace(/\s+/g,' ').trim()).filter(Boolean);
+ const joined=lines.join(' ');
+ const isAntagning=/Antagning\.se/i.test(joined)&&/Universitet och högskola/i.test(joined);
+ const tm=joined.match(/Högskolepoäng totalt:\s*([0-9]+(?:[,.][0-9]+)?)/i);
+ const expectedTotal=tm?parseFloat(tm[1].replace(',','.')):NaN;
+ let institution='Okänt lärosäte', out=[];
+ const isInstitution=l=>l.length<90 && !/^(Universitet\/Högskola|Ger högskolepoäng|Högskolepoäng|Tillbaka)/i.test(l) && /(universitet|högskol|University)/i.test(l);
+ const val=(l,key)=>l.toLowerCase().startsWith(key.toLowerCase()+' ')?l.slice(key.length).trim():null;
+ for(let i=0;i<lines.length;i++){
+   const l=lines[i]; if(isInstitution(l)) institution=l;
+   if(!/^Kurs\s+/i.test(l)||/^Kurskod/i.test(l)) continue;
+   let name=l.replace(/^Kurs\s+/i,'').trim(), j=i+1;
+   while(j<lines.length&&!/^Kurskod\s+/i.test(lines[j])&&j<i+6){if(!/antagning\.se|^Sida \d+/i.test(lines[j])) name+=' '+lines[j];j++}
+   if(j>=lines.length||!/^Kurskod\s+/i.test(lines[j])) continue;
+   const code=lines[j].replace(/^Kurskod\s+/i,'').trim(); let hp=null,grade='',date='',gives=''; let k=j+1;
+   for(;k<Math.min(lines.length,j+10);k++){
+     let v;if((v=val(lines[k],'Poäng'))!==null&&hp===null)hp=parseFloat(v.replace(',','.'));
+     else if((v=val(lines[k],'Betyg'))!==null&&!grade)grade=v;
+     else if((v=val(lines[k],'Datum'))!==null&&!date)date=v;
+     else if((v=val(lines[k],'Ger högskolepoäng'))!==null){gives=v;k++;break}
+   }
+   if(!hp||gives!=='Ja') continue;
+   let componentHp=0, componentCompleted=false, q=k;
+   while(q<lines.length&&!/^Kurs\s+/i.test(lines[q])&&!/^Totalt lärosäte/i.test(lines[q])){
+     if(/^Ingående del\s+/i.test(lines[q])){
+       let chp=null,cgrade='',cdate='';
+       for(let z=q+1;z<Math.min(lines.length,q+9)&&!/^Ingående del\s+/i.test(lines[z])&&!/^Kurs\s+/i.test(lines[z]);z++){
+         let v;if((v=val(lines[z],'Poäng'))!==null&&chp===null)chp=parseFloat(v.replace(',','.'));
+         else if((v=val(lines[z],'Betyg'))!==null&&!cgrade)cgrade=v;
+         else if((v=val(lines[z],'Datum'))!==null&&!cdate)cdate=v;
+       }
+       if(chp&&cgrade&&cgrade!=='-'&&cdate&&cdate!=='-'){componentHp+=chp;componentCompleted=true}
+     }
+     q++;
+   }
+   const completed=(grade&&grade!=='-'&&date&&date!=='-') || (componentCompleted&&componentHp+0.001>=hp);
+   if(!completed) continue;
+   out.push({name:name.replace(/\s+/g,' ').trim(),code,hp,grade,date,institution,level:'Grundnivå',subject:guessSubject(name),thesis:/examensarbete|självständigt arbete|degree project|thesis/i.test(name),selected:true});
+   i=j;
+ }
+ return {isAntagning,expectedTotal,courses:out};
 }
 function guessSubject(name){const n=name.toLowerCase();if(/idrott|sport|exercise|physical activity/.test(n))return'Idrottsvetenskap';if(/företagsekonomi|business|marketing|redovis|accounting|organisation|management|finance/.test(n))return'Företagsekonomi';if(/psykolog/.test(n))return'Psykologi';if(/juridik|law/.test(n))return'Juridik';if(/informatik|computer|programmer|data science/.test(n))return'Informatik';return'Behöver granskas'}
-function renderImportPreview(){importPreview.innerHTML=`<div class="course-head"><strong>Kurs</strong><strong>hp</strong><strong>Nivå</strong><strong>Huvudområde</strong><strong></strong></div>`+importedCandidates.map((c,i)=>`<div class="course"><div><strong>${escapeHtml(c.name)}</strong><div class="small muted">${escapeHtml(c.institution||'Okänt lärosäte')} · ${c.thesis?'Möjligt examensarbete · ':''}${c.duplicate?'Möjlig dubblett · ':''}${c.subject==='Behöver granskas'?'Osäker ämnesklassning':''}</div></div><div>${c.hp}</div><div><select onchange="importedCandidates[${i}].level=this.value"><option ${c.level==='Grundnivå'?'selected':''}>Grundnivå</option><option ${c.level==='Avancerad nivå'?'selected':''}>Avancerad nivå</option></select></div><div><input value="${escapeHtml(c.subject)}" onchange="importedCandidates[${i}].subject=this.value"></div><label class="small"><input type="checkbox" ${c.selected?'checked':''} onchange="importedCandidates[${i}].selected=this.checked"> Importera</label></div>`).join('')+`<div class="row" style="margin-top:14px"><span class="small muted">Inget läggs till förrän du godkänner listan.</span><button class="primary" onclick="confirmImport()">Lägg till valda kurser</button></div>`}
+function renderImportPreview(){importPreview.innerHTML=`<div class="course-head"><strong>Kurs</strong><strong>hp</strong><strong>Nivå</strong><strong>Huvudområde</strong><strong></strong></div>`+importedCandidates.map((c,i)=>`<div class="course"><div><strong>${escapeHtml(c.name)}</strong><div class="small muted">${escapeHtml(c.institution||'Okänt lärosäte')} · ${escapeHtml(c.code||'')} ${c.grade?'· '+escapeHtml(c.grade)+' ':''}· ${c.thesis?'Möjligt examensarbete · ':''}${c.duplicate?'Möjlig dubblett · ':''}${c.subject==='Behöver granskas'?'Osäker ämnesklassning':''}</div></div><div>${c.hp}</div><div><select onchange="importedCandidates[${i}].level=this.value"><option ${c.level==='Grundnivå'?'selected':''}>Grundnivå</option><option ${c.level==='Avancerad nivå'?'selected':''}>Avancerad nivå</option></select></div><div><input value="${escapeHtml(c.subject)}" onchange="importedCandidates[${i}].subject=this.value"></div><label class="small"><input type="checkbox" ${c.selected?'checked':''} onchange="importedCandidates[${i}].selected=this.checked"> Importera</label></div>`).join('')+`<div class="row" style="margin-top:14px"><span class="small muted">Inget läggs till förrän du godkänner listan.</span><button class="primary" onclick="confirmImport()">Lägg till valda kurser</button></div>`}
 function confirmImport(){const chosen=importedCandidates.filter(c=>c.selected&&!c.duplicate).map(({selected,duplicate,sourceFile,...c})=>c);courses.push(...chosen);saveProfile();importStatus.textContent=`${chosen.length} kurser importerades och slogs ihop med din gemensamma meritprofil.`;importPreview.innerHTML='';renderCourses()}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function renderDegrees(){const host=document.getElementById('degreeResults');host.innerHTML='';let arr=degrees.map(d=>({d,r:calc(d)})).sort((a,b)=>b.r.pct-a.r.pct);if(degreeFilter==='high')arr=arr.filter(x=>x.r.pct>=70);if(degreeFilter==='candidate')arr=arr.filter(x=>x.d.kind==='candidate');if(!arr.length){host.innerHTML='<div class="card empty">Inga matchningar i filtret.</div>';return}arr.forEach(({d,r})=>{let badge=r.pct>=85?'good':r.pct>=55?'warn':'bad',label=r.pct>=85?'Mycket nära':r.pct>=55?'Delvis match':'Lång väg';host.innerHTML+=`<div class="card" style="margin-bottom:14px"><div class="row"><div><h3 style="margin:0">${d.name}</h3><div class="small muted">${d.total} hp · preliminärt beslutsstöd</div></div><span class="badge ${badge}">${label} · ${r.pct}%</span></div><div class="progress"><i style="width:${r.pct}%"></i></div><div class="requirements"><div class="req"><strong>Totalpoäng</strong><span>${Math.min(r.total,d.total)} / ${d.total} hp</span></div><div class="req"><strong>Huvudområde</strong><span>${Math.min(r.subj,d.subjectReq)} / ${d.subjectReq} hp</span></div><div class="req"><strong>Examensarbete</strong><span>${d.thesisReq?(r.thesis?'Ser uppfyllt ut':'Behöver verifieras'):'Ej krav i MVP'}</span></div><div class="req"><strong>Säkerhet</strong><span>${r.confidence} · ${r.confidenceScore}%</span></div></div><div class="row" style="margin-top:14px"><div class="small"><strong>Rimlig bedömning – kvar:</strong> ${r.remaining? r.remaining+' hp':'formell kontroll'}${d.id==='business'?' · Dina 15 hp FEK räknas mot huvudområdet; övriga tidigare hp kan fylla bredddelen.':''}</div><button class="ghost" onclick="routeGoal.value='${d.id}';go('route');renderRoute()">Visa väg</button></div></div>`});}
