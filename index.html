@@ -446,6 +446,10 @@ function confirmImport(){const chosen=importedCandidates.filter(c=>c.selected&&!
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function renderDegrees(){
  const host=document.getElementById('degreeResults');host.innerHTML='';
+ if(!courses.length){
+   host.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong><div class="small muted" style="margin-top:5px">När dina studier är importerade visar Lotsen vilka möjligheter du har.</div></div>';
+   return;
+ }
  let arr=degrees.map(d=>({d,r:calc(d)})).sort((a,b)=>b.r.pct-a.r.pct);
  if(degreeFilter==='high')arr=arr.filter(x=>x.r.pct>=70);
  if(degreeFilter==='candidate')arr=arr.filter(x=>x.d.kind==='candidate');
@@ -474,8 +478,21 @@ function chooseGoal(id){routeGoal.value=id;go('route');renderRoute()}
 function selectMode(m,el){mode=m;document.querySelectorAll('.option-card').forEach(x=>x.classList.remove('selected'));el.classList.add('selected')}
 function renderUniversities(){const host=document.getElementById('uniSelect');if(!host)return;host.innerHTML=universities.map(u=>`<button class="${u.id===selectedUniversity?'active':''}" onclick="selectedUniversity='${u.id}';saveProfile();renderUniversities();renderRoute()">${u.name}</button>`).join('')}
 function renderCourseCatalog(showAll=false){let d=degrees.find(x=>x.id===routeGoal.value)||degrees[0],r=calc(d),sub=d.subject||'';let items=courseCatalog.filter(c=>c.uni===selectedUniversity&&(sub?c.subject===sub:true));if(!items.length){courseSuggestions.innerHTML='<div class="notice">Inga verifierade exempelkurser i prototypens lilla kurslager för den här kombinationen ännu.</div>';return;}if(!showAll)items=items.slice(0,3);courseSuggestions.innerHTML=items.map(c=>`<div class="course-card"><div class="row"><strong>${c.name}</strong><span class="badge ${/Öppen|Anmäl dig/.test(c.status)?'good':'warn'}">${c.status}</span></div><div class="course-meta"><span class="mini">${c.hp} hp</span><span class="mini">${c.level}</span><span class="mini">${c.term}</span><span class="mini">${c.pace}</span><span class="mini">${c.form}</span></div><div class="small muted">${c.code?c.code+' · ':''}${c.thesisPossible?'Kan innehålla/omfatta examensarbete – verifiera kursplan.':'Matchas på ämne och nivå; behörighet och progression måste kontrolleras.'}</div><div class="source"><a href="${c.url}" target="_blank" rel="noopener">Öppna hos universitetet ↗</a></div></div>`).join('');}
-function renderRoute(){let d=degrees.find(x=>x.id===routeGoal.value)||degrees[0],r=calc(d),u=universities.find(x=>x.id===selectedUniversity);routeSub.textContent='Mål: '+d.name+' · '+u.name;let steps=[];if(r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">1</div><div><strong>Komplettera huvudområdet med cirka ${r.missingSubject} hp</strong><div class="muted small">Kurserna behöver ligga inom rätt huvudområde och rätt progression.</div></div></div>`);if(r.missingThesis)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Verifiera eller läs självständigt arbete, cirka ${r.missingThesis} hp</strong><div class="muted small">Examensarbetet måste passa lärosätets examenskrav.</div></div></div>`);if(r.missingTotal>r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Komplettera ytterligare ${r.missingTotal-r.missingSubject} hp</strong><div class="muted small">Kan i vissa examina vara valfria kurser, beroende på lokala krav.</div></div></div>`);steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Begär formell prövning / ansök om examen</strong><div class="muted small">Appens analys ersätter inte lärosätets beslut.</div></div></div>`);let rule=(localRules[selectedUniversity]||{})[d.id]||'Lokal examensordning och huvudområdeskrav behöver verifieras.';routeMain.innerHTML=`<div class="kicker">Preliminär väg · ${u.name}</div><h2 style="margin:6px 0">${d.name}</h2><div class="row"><span class="badge ${r.pct>=85?'good':r.pct>=55?'warn':'bad'}">${Math.min(100,r.pct)}%</span><strong>${r.remaining? r.remaining+' hp uppskattat kvar':'Poängkrav ser uppfyllt ut'}</strong></div><div class="small muted" style="margin-top:8px">Bedömd säkerhet: <strong>${r.confidence} (${r.confidenceScore}%)</strong>. Appen vågar rekommendera vägen före formell prövning, men markerar osäkerheter.</div><div class="info" style="margin-top:14px"><strong>Lokal regelkontroll:</strong> ${rule}</div>${steps.join('')}<div class="feedback-box"><strong>Verkar resultatet rimligt?</strong><div class="feedback-actions"><button class="ghost" id="fbYes" onclick="setFeedback('rimligt')">👍 Rimligt</button><button class="ghost" id="fbNo" onclick="setFeedback('fel')">👎 Verkar fel</button></div><textarea id="fbText" placeholder="Vad stämmer eller verkar fel? Frivilligt."></textarea><div class="row" style="margin-top:9px"><span class="small muted" id="fbState"></span><button class="primary" onclick="saveFeedback()">Spara feedback</button></div><div class="privacy-mini">Feedback sparas lokalt på enheten i denna beta. Du kan använda dela-knappen efteråt för att skicka den till personen som bett dig testa.</div></div>`;courseSuggestTitle.textContent=r.missingSubject?`Verifierade kursförslag i ${d.subject||'huvudområdet'}`:'Kurser att kontrollera mot progression';renderCourseCatalog(false)}
-function renderCompare(){let a=degrees[0],b=degrees[1],ra=calc(a),rb=calc(b);c1name.textContent=a.short;c2name.textContent=b.short;compareBody.innerHTML=`<tr><td><strong>Bedömd matchning</strong></td><td><span class="badge ${ra.pct>=85?'good':'warn'}">${ra.pct}%</span></td><td><span class="badge ${rb.pct>=85?'good':'warn'}">${rb.pct}%</span></td></tr><tr><td><strong>Huvudområde</strong></td><td>${ra.subj}/${a.subjectReq} hp</td><td>${rb.subj}/${b.subjectReq} hp</td></tr><tr><td><strong>Preliminärt kvar</strong></td><td>${ra.remaining?ra.remaining+' hp':'Kontroll'}</td><td>${rb.remaining?rb.remaining+' hp':'Kontroll'}</td></tr><tr><td><strong>Största osäkerhet</strong></td><td>Progression och lokala regler</td><td>Progression och examensarbete</td></tr>`}
+function renderRoute(){
+ if(!courses.length){
+   const box=document.getElementById('routeBox');
+   if(box) box.innerHTML='<div class="card empty"><strong>Ingen väg vald ännu</strong><div class="small muted" style="margin-top:5px">Hämta dina meriter så kan Lotsen visa vad som saknas till en examen.</div></div>';
+   return;
+ }let d=degrees.find(x=>x.id===routeGoal.value)||degrees[0],r=calc(d),u=universities.find(x=>x.id===selectedUniversity);routeSub.textContent='Mål: '+d.name+' · '+u.name;let steps=[];if(r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">1</div><div><strong>Komplettera huvudområdet med cirka ${r.missingSubject} hp</strong><div class="muted small">Kurserna behöver ligga inom rätt huvudområde och rätt progression.</div></div></div>`);if(r.missingThesis)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Verifiera eller läs självständigt arbete, cirka ${r.missingThesis} hp</strong><div class="muted small">Examensarbetet måste passa lärosätets examenskrav.</div></div></div>`);if(r.missingTotal>r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Komplettera ytterligare ${r.missingTotal-r.missingSubject} hp</strong><div class="muted small">Kan i vissa examina vara valfria kurser, beroende på lokala krav.</div></div></div>`);steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Begär formell prövning / ansök om examen</strong><div class="muted small">Appens analys ersätter inte lärosätets beslut.</div></div></div>`);let rule=(localRules[selectedUniversity]||{})[d.id]||'Lokal examensordning och huvudområdeskrav behöver verifieras.';routeMain.innerHTML=`<div class="kicker">Preliminär väg · ${u.name}</div><h2 style="margin:6px 0">${d.name}</h2><div class="row"><span class="badge ${r.pct>=85?'good':r.pct>=55?'warn':'bad'}">${Math.min(100,r.pct)}%</span><strong>${r.remaining? r.remaining+' hp uppskattat kvar':'Poängkrav ser uppfyllt ut'}</strong></div><div class="small muted" style="margin-top:8px">Bedömd säkerhet: <strong>${r.confidence} (${r.confidenceScore}%)</strong>. Appen vågar rekommendera vägen före formell prövning, men markerar osäkerheter.</div><div class="info" style="margin-top:14px"><strong>Lokal regelkontroll:</strong> ${rule}</div>${steps.join('')}<div class="feedback-box"><strong>Verkar resultatet rimligt?</strong><div class="feedback-actions"><button class="ghost" id="fbYes" onclick="setFeedback('rimligt')">👍 Rimligt</button><button class="ghost" id="fbNo" onclick="setFeedback('fel')">👎 Verkar fel</button></div><textarea id="fbText" placeholder="Vad stämmer eller verkar fel? Frivilligt."></textarea><div class="row" style="margin-top:9px"><span class="small muted" id="fbState"></span><button class="primary" onclick="saveFeedback()">Spara feedback</button></div><div class="privacy-mini">Feedback sparas lokalt på enheten i denna beta. Du kan använda dela-knappen efteråt för att skicka den till personen som bett dig testa.</div></div>`;courseSuggestTitle.textContent=r.missingSubject?`Verifierade kursförslag i ${d.subject||'huvudområdet'}`:'Kurser att kontrollera mot progression';renderCourseCatalog(false)}
+function renderCompare(){
+ if(!courses.length){
+   const host=document.getElementById('compareResults') || document.getElementById('compareBox') || document.getElementById('compare');
+   if(host){
+     const target = host.id==='compare' ? host.querySelector('.compare-results, #compareResults, #compareBox') : host;
+     if(target) target.innerHTML='<div class="card empty"><strong>Inget att jämföra ännu</strong><div class="small muted" style="margin-top:5px">Hämta dina meriter så kan Lotsen jämföra möjliga examensvägar och lärosäten.</div></div>';
+   }
+   return;
+ }let a=degrees[0],b=degrees[1],ra=calc(a),rb=calc(b);c1name.textContent=a.short;c2name.textContent=b.short;compareBody.innerHTML=`<tr><td><strong>Bedömd matchning</strong></td><td><span class="badge ${ra.pct>=85?'good':'warn'}">${ra.pct}%</span></td><td><span class="badge ${rb.pct>=85?'good':'warn'}">${rb.pct}%</span></td></tr><tr><td><strong>Huvudområde</strong></td><td>${ra.subj}/${a.subjectReq} hp</td><td>${rb.subj}/${b.subjectReq} hp</td></tr><tr><td><strong>Preliminärt kvar</strong></td><td>${ra.remaining?ra.remaining+' hp':'Kontroll'}</td><td>${rb.remaining?rb.remaining+' hp':'Kontroll'}</td></tr><tr><td><strong>Största osäkerhet</strong></td><td>Progression och lokala regler</td><td>Progression och examensarbete</td></tr>`}
 
 let currentFeedbackRating='';
 function setFeedback(v){currentFeedbackRating=v;document.getElementById('fbYes')?.classList.toggle('selected',v==='rimligt');document.getElementById('fbNo')?.classList.toggle('selected',v==='fel');}
@@ -490,11 +507,15 @@ function refreshAll(){
  if(document.getElementById('shortest')) shortest.textContent=courses.length?(rem?rem.r.remaining+' hp':'0 hp'):'–';
  renderRoute();renderCompare();
 }
-function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='route')renderRoute();window.scrollTo(0,0)}
+function go(id){
+ if(id==='compare' && !courses.length){
+   setTimeout(()=>{try{renderCompare()}catch(e){}},0);
+ }
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='route')renderRoute();window.scrollTo(0,0)}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
 routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`).join('');initBackend();updateAuthUI();renderUniversities();renderGoals();renderCourses();
 </script>
-<!-- Lotsen v16 -->
+<!-- Lotsen v18 -->
 
 <script>
 (function(){
@@ -507,6 +528,24 @@ routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`
     }
     staleKeys.forEach(k=>localStorage.removeItem(k));
   }catch(e){}
+})();
+</script>
+
+
+<script>
+(function(){
+  function resetAnonymousDerivedState(){
+    try{
+      const loggedIn = (typeof currentUser !== 'undefined' && !!currentUser);
+      if(loggedIn) return;
+      // No persisted choices/history for Opportunities / My route when anonymous.
+      ['degreeFilter','routeGoal','compareSelection','selectedDegree','selectedRoute','selectedCompare','compareGoal','lotsen_route','lotsen_opportunities','lotsen_compare']
+        .forEach(k=>{ sessionStorage.removeItem(k); localStorage.removeItem(k); });
+      const goal=document.getElementById('routeGoal');
+      if(goal) goal.selectedIndex=0;
+    }catch(e){}
+  }
+  window.addEventListener('load', resetAnonymousDerivedState);
 })();
 </script>
 
