@@ -268,6 +268,14 @@ body{background:#f6f8fc}
 .compare-simple{overflow-x:auto;background:#fff;border:1px solid #e4e7ec;border-radius:16px;padding:12px}.compare-head,.compare-row,.compare-actions{display:grid;grid-template-columns:110px repeat(5,minmax(130px,1fr));gap:8px;align-items:center;min-width:800px}.compare-head{padding:8px 0 12px}.compare-head strong{font-size:12px;line-height:1.25}.compare-row{border-top:1px solid #f0f2f5;padding:11px 0;font-size:12px}.compare-row>span:first-child{color:#667085;font-weight:700}.compare-actions{border-top:1px solid #f0f2f5;padding-top:12px}.compare-actions .ghost{font-size:11px}
 @media(max-width:700px){.detail-hero h1{font-size:24px}.detail-block{padding:14px}.degree-simple-bottom{align-items:center}.compare-simple{margin:0 -2px}}
 
+
+.crumbs{display:flex;gap:7px;align-items:center;font-size:12px;color:#667085;margin-bottom:16px}.crumbs button{border:0;background:transparent;padding:0;color:#315bc7;font-weight:800;cursor:pointer}
+.verify-chip{display:inline-block;margin-top:7px;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:850}.verify-chip.verified{background:#e8f5ee;color:#267858}.verify-chip.unverified{background:#f2f4f7;color:#667085}
+.tiny-help{font-size:11px;color:#667085;margin:-5px 0 10px}
+.compare-picker{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.compare-picker label{font-size:11px;font-weight:800;color:#667085}.compare-picker select{display:block;width:100%;margin-top:5px}
+.compare-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.compare-choice{padding:15px}.compare-choice-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.compare-choice-head h3{margin:0;font-size:17px;line-height:1.2}.compare-choice-head small{color:#667085}.compare-key{margin:12px 0;padding:9px 10px;background:#f8fafc;border-radius:9px}.compare-mini-section{border-top:1px solid #eef0f3;padding:10px 0;font-size:12px}.compare-mini-section>b{display:block;margin-bottom:5px}.compare-mini-section>span{color:#667085}.compare-mini-section ul{margin:5px 0 0;padding-left:18px;color:#475467}
+@media(max-width:700px){.compare-picker,.compare-two{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -376,12 +384,12 @@ body{background:#f6f8fc}
     <button onclick="setDegreeFilter('advanced',this)">Magister & master</button>
   </div>
   <div id="degreeResults"></div>
-  <div class="simple-disclaimer">Preliminär bedömning. Lärosätet fattar det slutliga beslutet.</div>
+  <div class="simple-disclaimer">Preliminärt – lärosätet beslutar slutligt.</div>
 </section>
 
 
 <section id="degreeDetail" class="screen">
-  <button class="back-link" onclick="go('degrees')">← Tillbaka till möjligheter</button>
+  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><strong>Min väg</strong></div>
   <div id="degreeDetailContent"></div>
 </section>
 
@@ -407,7 +415,11 @@ body{background:#f6f8fc}
 </section>
 
 <section id="compare" class="screen compare">
-  <div class="top"><div><h1>Jämför</h1><p>Se skillnaden mellan dina bästa examensvägar.</p></div></div>
+  <div class="top"><div><h1>Jämför</h1><p>Välj två examina och jämför vägen dit.</p></div></div>
+  <div class="compare-picker">
+    <label>Examen 1<select id="compareA" onchange="renderCompareSelection()"></select></label>
+    <label>Examen 2<select id="compareB" onchange="renderCompareSelection()"></select></label>
+  </div>
   <div id="compareResults"></div>
 </section>
 </main></div>
@@ -721,14 +733,10 @@ function guessSubject(name,code='',institution=''){
  return 'Behöver granskas';
 }
 function renderImportPreview(){importPreview.innerHTML=`<div class="course-head"><strong>Kurs</strong><strong>hp</strong><strong>Nivå</strong><strong>Huvudområde</strong><strong></strong></div>`+importedCandidates.map((c,i)=>`<div class="course"><div><strong>${escapeHtml(c.name)}</strong><div class="small muted">${escapeHtml(c.institution||'Okänt lärosäte')} · ${escapeHtml(c.code||'')} ${c.grade?'· '+escapeHtml(c.grade)+' ':''}· ${c.thesis?'Möjligt examensarbete · ':''}${c.duplicate?'Möjlig dubblett · ':''}${c.subject==='Behöver granskas'?'Osäker ämnesklassning':''}</div></div><div>${c.hp}</div><div><select onchange="importedCandidates[${i}].level=this.value"><option ${c.level==='Grundnivå'?'selected':''}>Grundnivå</option><option ${c.level==='Avancerad nivå'?'selected':''}>Avancerad nivå</option></select></div><div><input value="${escapeHtml(c.subject)}" onchange="importedCandidates[${i}].subject=this.value"></div><label class="small"><input type="checkbox" ${c.selected?'checked':''} onchange="importedCandidates[${i}].selected=this.checked"> Importera</label></div>`).join('')+`<div class="row" style="margin-top:14px"><span class="small muted">Inget läggs till förrän du godkänner listan.</span><button class="primary" onclick="confirmImport()">Lägg till valda kurser</button></div>`}
-function confirmImport(){const chosen=importedCandidates.filter(c=>c.selected&&!c.duplicate).map(({selected,duplicate,sourceFile,...c})=>c);courses.push(...chosen);saveProfile();importStatus.textContent=`${chosen.length} kurser importerades och slogs ihop med din gemensamma meritprofil.`;importPreview.innerHTML='';renderCourses()}
+function confirmImport(){const chosen=importedCandidates.filter(c=>c.selected&&!c.duplicate).map(({selected,duplicate,sourceFile,...c})=>c);courses.push(...chosen);saveProfile();importStatus.textContent=`${chosen.length} kurser importerades.`;importPreview.innerHTML='';renderCourses();renderDegrees();go('degrees');window.scrollTo(0,0)})=>c);courses.push(...chosen);saveProfile();importStatus.textContent=`${chosen.length} kurser importerades och slogs ihop med din gemensamma meritprofil.`;importPreview.innerHTML='';renderCourses()}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 
-function goToOpportunitiesAfterImport(){
- go('opportunities');
- renderDegrees();
- window.scrollTo({top:0,behavior:'smooth'});
-}
+
 
 
 
@@ -819,35 +827,37 @@ function renderDegreeDetail(key){
  const host=document.getElementById('degreeDetailContent');if(!host)return;
  const o=opportunityByKey(key||sessionStorage.getItem('lotsen_detail_key'));
  if(!o){host.innerHTML='<div class="card empty">Kunde inte hitta examensvägen.</div>';return}
- const use=coursesForDegree(o), missing=missingForOpportunity(o), unis=universityOptionsForOpportunity(o), progs=programOptionsForOpportunity(o);
+ const use=coursesForDegree(o), missing=missingForOpportunity(o), unis=universityOptionsForOpportunity(o);
  const usedSubject=use.subject.reduce((s,c)=>s+Number(c.hp||0),0);
  const usedOther=Math.min(90,use.others.reduce((s,c)=>s+Number(c.hp||0),0));
+ const verified=unis.some(x=>x.d?.verified)||o.source==='specific';
+ const status=verified?'Verifierad':'Ej verifierad';
+
  host.innerHTML=`
    <div class="detail-hero">
-     <div><div class="eyebrow">${o.source==='advanced'?o.degreeType:'EXAMENSVÄG'}</div><h1>${escapeHtml(o.name)}</h1></div>
+     <div><h1>${escapeHtml(o.name)}</h1><div class="verify-chip ${verified?'verified':'unverified'}">${status}</div></div>
      <span class="badge ${o.score>=100?'good':o.score>=55?'warn':'bad'} detail-score">${o.score}%</span>
    </div>
-   <div class="detail-summary">${o.remaining?`Cirka <strong>${fmtHp(o.remaining)} hp kvar</strong>`:'<strong>Poängkraven ser preliminärt uppfyllda ut</strong>'}</div>
+   <div class="detail-summary">${o.remaining?`Cirka <strong>${fmtHp(o.remaining)} hp kvar</strong>`:'<strong>Ser preliminärt klar ut</strong>'}</div>
 
    <section class="detail-block">
-     <h2>Det du redan kan använda</h2>
-     ${use.subject.length?`<div class="used-group"><strong>${escapeHtml(o.subject)}</strong><span>${fmtHp(usedSubject)} hp</span></div>
-       <div class="simple-course-list">${use.subject.slice(0,8).map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div>`:'<div class="muted small">Inga tydliga kurser i huvudområdet hittades.</div>'}
-     ${o.source!=='advanced'&&usedOther?`<div class="used-group secondary"><strong>Övriga kurser som kan ingå</strong><span>upp till ${fmtHp(usedOther)} hp</span></div>`:''}
+     <h2>Kan tillgodoräknas</h2>
+     <div class="tiny-help">Preliminär bedömning av dina tidigare kurser.</div>
+     ${use.subject.length?`<div class="simple-course-list">${use.subject.slice(0,8).map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div>`:'<div class="muted small">Ingen tydlig kursmatchning hittad.</div>'}
+     ${usedOther?`<div class="used-group secondary"><strong>Övriga kurser som kan ingå</strong><span>upp till ${fmtHp(usedOther)} hp</span></div>`:''}
    </section>
 
    <section class="detail-block">
      <h2>Kvar att läsa</h2>
-     ${missing.length?`<div class="missing-list">${missing.map(m=>`<div><span class="missing-check">○</span><strong>${escapeHtml(m.label)}</strong></div>`).join('')}</div>`:'<div class="ready-box">Inget tydligt poängkrav saknas.</div>'}
+     <div class="tiny-help">Det här är luckorna Lotsen ser just nu.</div>
+     ${missing.length?`<div class="missing-list">${missing.map(m=>`<div><span class="missing-check">○</span><strong>${escapeHtml(m.label)}</strong></div>`).join('')}</div>`:'<div class="ready-box">Ingen tydlig komplettering hittad.</div>'}
    </section>
 
-   ${o.source!=='advanced'?`<section class="detail-block">
-     <h2>Var kan jag ta examen?</h2>
-     <div class="muted small">Exakta regler kan skilja mellan lärosäten.</div>
+   <section class="detail-block">
+     <h2>Nästa steg</h2>
+     <div class="tiny-help">Välj lärosäte först när du vill kontrollera exakt regelverk och kursutbud.</div>
      <div class="uni-path-list">${unis.length?unis.map(x=>`<div class="uni-path"><div><strong>${escapeHtml(x.d.university)}</strong><small>${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'Ser möjlig ut'}</small></div><span>›</span></div>`).join(''):'<div class="muted small">Fler lärosäten läggs till löpande.</div>'}</div>
-   </section>`:''}
-
-   ${progs.length?`<details class="detail-block compact-details"><summary>Program som kan vara en väg</summary><div>${progs.map(x=>`<div class="uni-path"><div><strong>${escapeHtml(x.p.name)}</strong><small>${escapeHtml(x.p.university)} · cirka ${fmtHp(x.remaining)} hp kvar</small></div></div>`).join('')}</div></details>`:''}
+   </section>
  `;
 }
 
@@ -990,7 +1000,7 @@ function renderRoute(){
    return;
  }
  const d=degrees.find(x=>('specific:'+x.id)===selectedId)||degrees[0],r=calc(d);
- routeSub.textContent='Mål: '+d.name+' · '+u.name;let steps=[];if(r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">1</div><div><strong>Komplettera huvudområdet med cirka ${r.missingSubject} hp</strong><div class="muted small">Kurserna behöver ligga inom rätt huvudområde och rätt progression.</div></div></div>`);if(r.missingThesis)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Verifiera eller läs självständigt arbete, cirka ${r.missingThesis} hp</strong><div class="muted small">Examensarbetet måste passa lärosätets examenskrav.</div></div></div>`);if(r.missingTotal>r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Komplettera ytterligare ${r.missingTotal-r.missingSubject} hp</strong><div class="muted small">Kan i vissa examina vara valfria kurser, beroende på lokala krav.</div></div></div>`);steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Begär formell prövning / ansök om examen</strong><div class="muted small">Appens analys ersätter inte lärosätets beslut.</div></div></div>`);let rule=(localRules[selectedUniversity]||{})[d.id]||'Lokal examensordning och huvudområdeskrav behöver verifieras.';routeMain.innerHTML=`<div class="kicker">Din väg · ${u.name}</div><h2 style="margin:6px 0">${d.name}</h2><div class="row"><span class="badge ${r.pct>=85?'good':r.pct>=55?'warn':'bad'}">${Math.min(100,r.pct)}%</span><strong>${r.remaining? r.remaining+' hp uppskattat kvar':'Poängkrav ser uppfyllt ut'}</strong></div><div class="small muted" style="margin-top:8px">Säkerhet: <strong>${r.confidence} (${r.confidenceScore}%)</strong>. Kontrollera detaljerna med lärosätet innan du ansöker.</div><div class="info" style="margin-top:14px"><strong>Lokal regelkontroll:</strong> ${rule}</div>${steps.join('')}<div class="feedback-box"><strong>Verkar resultatet rimligt?</strong><div class="feedback-actions"><button class="ghost" id="fbYes" onclick="setFeedback('rimligt')">👍 Rimligt</button><button class="ghost" id="fbNo" onclick="setFeedback('fel')">👎 Verkar fel</button></div><textarea id="fbText" placeholder="Vad stämmer eller verkar fel? Frivilligt."></textarea><div class="row" style="margin-top:9px"><span class="small muted" id="fbState"></span><button class="primary" onclick="saveFeedback()">Spara feedback</button></div><div class="privacy-mini">Feedback sparas lokalt på enheten i denna beta. Du kan använda dela-knappen efteråt för att skicka den till personen som bett dig testa.</div></div>`;courseSuggestTitle.textContent=r.missingSubject?`Verifierade kursförslag i ${d.subject||'huvudområdet'}`:'Kurser att kontrollera mot progression';renderCourseCatalog(false)}
+ routeSub.textContent='Mål: '+d.name+' · '+u.name;let steps=[];if(r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">1</div><div><strong>Komplettera huvudområdet med cirka ${r.missingSubject} hp</strong><div class="muted small">Kurserna behöver ligga inom rätt huvudområde och rätt progression.</div></div></div>`);if(r.missingThesis)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Verifiera eller läs självständigt arbete, cirka ${r.missingThesis} hp</strong><div class="muted small">Examensarbetet måste passa lärosätets examenskrav.</div></div></div>`);if(r.missingTotal>r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Komplettera ytterligare ${r.missingTotal-r.missingSubject} hp</strong><div class="muted small">Kan i vissa examina vara valfria kurser, beroende på lokala krav.</div></div></div>`);steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Begär formell prövning / ansök om examen</strong><div class="muted small">Appens analys ersätter inte lärosätets beslut.</div></div></div>`);let rule=(localRules[selectedUniversity]||{})[d.id]||'Lokal examensordning och huvudområdeskrav behöver verifieras.';routeMain.innerHTML=`<div class="kicker">Din väg · ${u.name}</div><h2 style="margin:6px 0">${d.name}</h2><div class="row"><span class="badge ${r.pct>=85?'good':r.pct>=55?'warn':'bad'}">${Math.min(100,r.pct)}%</span><strong>${r.remaining? r.remaining+' hp uppskattat kvar':'Poängkrav ser uppfyllt ut'}</strong></div><div class="small muted" style="margin-top:8px">Säkerhet: <strong>${r.confidence} (${r.confidenceScore}%)</strong>. Kontrollera detaljerna med lärosätet innan du ansöker.</div>${steps.join('')}`;courseSuggestTitle.textContent=r.missingSubject?`Verifierade kursförslag i ${d.subject||'huvudområdet'}`:'Kurser att kontrollera mot progression';renderCourseCatalog(false)}
 
 function getMatches(){
  return degrees.map(d=>{
@@ -1634,17 +1644,41 @@ function selectDegreeAndGo(id){
   setTimeout(()=>{const s=document.getElementById('degreeSelect');if(s){s.value=id;s.dispatchEvent(new Event('change'))}},30);
 }
 
+function populateCompareSelects(){
+ const opts=allDegreeOpportunities();
+ const a=document.getElementById('compareA'),b=document.getElementById('compareB');
+ if(!a||!b)return;
+ const oldA=a.value,oldB=b.value;
+ const options=opts.map(x=>`<option value="${escapeHtml(x.key)}">${escapeHtml(x.name)}</option>`).join('');
+ a.innerHTML=options;b.innerHTML=options;
+ if(oldA&&opts.some(x=>x.key===oldA))a.value=oldA;
+ if(oldB&&opts.some(x=>x.key===oldB))b.value=oldB;
+ if(!a.value&&opts[0])a.value=opts[0].key;
+ if((!b.value||b.value===a.value)&&opts[1])b.value=opts[1].key;
+}
 function renderCompare(){
  const host=document.getElementById('compareResults');if(!host)return;
  if(!courses.length){host.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong></div>';return}
- const rows=allDegreeOpportunities().slice(0,5);
- if(!rows.length){host.innerHTML='<div class="card empty">Inga vägar att jämföra.</div>';return}
- host.innerHTML=`<div class="compare-simple">
-   <div class="compare-head"><span></span>${rows.map(x=>`<strong>${escapeHtml(x.name.replace('Kandidatexamen i ','Kandidat '))}</strong>`).join('')}</div>
-   <div class="compare-row"><span>Matchning</span>${rows.map(x=>`<b>${x.score}%</b>`).join('')}</div>
-   <div class="compare-row"><span>HP kvar</span>${rows.map(x=>`<b>${fmtHp(x.remaining)}</b>`).join('')}</div>
-   <div class="compare-row"><span>Nivå</span>${rows.map(x=>`<span>${x.source==='advanced'?x.degreeType:'Kandidat'}</span>`).join('')}</div>
-   <div class="compare-actions"><span></span>${rows.map(x=>`<button class="ghost" onclick="openDegreeDetails('${escapeHtml(x.key)}')">Visa väg</button>`).join('')}</div>
+ populateCompareSelects();
+ renderCompareSelection();
+}
+function renderCompareSelection(){
+ const host=document.getElementById('compareResults');if(!host)return;
+ const a=opportunityByKey(document.getElementById('compareA')?.value);
+ const b=opportunityByKey(document.getElementById('compareB')?.value);
+ if(!a||!b){host.innerHTML='<div class="card empty">Välj två examina.</div>';return}
+ const items=[a,b];
+ host.innerHTML=`<div class="compare-two">
+   ${items.map(o=>{
+     const use=coursesForDegree(o), missing=missingForOpportunity(o);
+     return `<article class="card compare-choice">
+       <div class="compare-choice-head"><div><h3>${escapeHtml(o.name)}</h3><small>${o.source==='advanced'?'Avancerad nivå':'Grundnivå'}</small></div><span class="badge ${o.score>=100?'good':o.score>=55?'warn':'bad'}">${o.score}%</span></div>
+       <div class="compare-key"><strong>${o.remaining?fmtHp(o.remaining)+' hp kvar':'Ser klar ut'}</strong></div>
+       <div class="compare-mini-section"><b>Kan tillgodoräknas</b><span>${fmtHp(use.subject.reduce((s,c)=>s+Number(c.hp||0),0))} hp i ${escapeHtml(o.subject||'huvudområdet')}</span></div>
+       <div class="compare-mini-section"><b>Kvarstående kurser</b>${missing.length?`<ul>${missing.slice(0,4).map(m=>`<li>${escapeHtml(m.label)}</li>`).join('')}</ul>`:'<span>Ingen tydlig komplettering</span>'}</div>
+       <button class="ghost" onclick="openDegreeDetails('${escapeHtml(o.key)}')">Visa min väg</button>
+     </article>`;
+   }).join('')}
  </div>`;
 }
 
@@ -1874,6 +1908,10 @@ document.addEventListener('click',async(e)=>{
 
 
 
-<!-- Lotsen v66 -->
+
+
+
+
+<!-- Lotsen v68 -->
 </body>
 </html>
