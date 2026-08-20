@@ -224,7 +224,7 @@ body{background:#f6f8fc}
       <button class="primary" onclick="document.getElementById('fakeFile').click()">Välj PDF från Antagning.se</button>
       <input id="fakeFile" type="file" accept="application/pdf" style="display:none" onchange="importPdf(this)">
     </div>
-    <div class="small muted" style="margin-top:10px">Utan inloggning sparas dina meriter bara tillfälligt och rensas när sessionen avslutas. Med inloggning kan de sparas till din profil.</div>
+    <div class="small muted" style="margin-top:10px">Utan inloggning sparas dina meriter tillfälligt i den här webbläsarsessionen och ligger kvar när du laddar om sidan. De rensas när sessionen avslutas. Med inloggning kan de senare sparas till din profil.</div>
 <div class="card lotsen-walkthrough" style="margin-top:14px">
   <div class="row">
     <div>
@@ -612,63 +612,7 @@ routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`
 
 
 
-<script>
-(function(){
-  function lotsenAnonymousReset(){
-    try{
-      const loggedIn = (typeof currentUser !== 'undefined' && !!currentUser);
-      if(loggedIn) return;
 
-      // Remove all anonymous study/derived state from both storage types.
-      const explicit = [
-        'courses','examensmatch_courses','examensmatch_university','degreeFilter','routeGoal','compareSelection','selectedDegree',
-        'selectedRoute','selectedCompare','compareGoal','lotsen_route',
-        'lotsen_opportunities','lotsen_compare'
-      ];
-      explicit.forEach(k=>{ try{sessionStorage.removeItem(k)}catch(e){}; try{localStorage.removeItem(k)}catch(e){}; });
-
-      // Remove any stale Lotsen/Examensmatch keys from prior builds.
-      [sessionStorage, localStorage].forEach(store=>{
-        try{
-          const keys=[];
-          for(let i=0;i<store.length;i++){
-            const k=store.key(i)||'';
-            if(/examensmatch|lotsen|merit|course|degree|route|compare/i.test(k)) keys.push(k);
-          }
-          keys.forEach(k=>store.removeItem(k));
-        }catch(e){}
-      });
-
-      // Force in-memory courses empty for anonymous fresh app.
-      if(typeof courses !== 'undefined' && Array.isArray(courses)) courses.splice(0,courses.length);
-
-      // Reset visible opportunity/route/compare areas.
-      const deg=document.getElementById('degreeResults');
-      if(deg) deg.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong><div class="small muted" style="margin-top:5px">När dina studier är importerade visar Lotsen vilka möjligheter du har.</div></div>';
-
-      const route=document.getElementById('routeBox');
-      if(route) route.innerHTML='<div class="card empty"><strong>Ingen väg vald ännu</strong><div class="small muted" style="margin-top:5px">Hämta dina meriter så kan Lotsen visa vad som saknas till en examen.</div></div>';
-
-      const cmp=document.getElementById('compareResults') || document.getElementById('compareBox');
-      if(cmp) cmp.innerHTML='<div class="card empty"><strong>Inget att jämföra ännu</strong><div class="small muted" style="margin-top:5px">Hämta dina meriter så kan Lotsen jämföra möjliga examensvägar och lärosäten.</div></div>';
-
-      const goal=document.getElementById('routeGoal');
-      if(goal) goal.selectedIndex=0;
-
-      const hp=document.getElementById('totalHp'); if(hp) hp.textContent='0 hp';
-      const cc=document.getElementById('courseCount'); if(cc) cc.textContent='0 kurser';
-      const bp=document.getElementById('bestPct'); if(bp) bp.textContent='–';
-      const bn=document.getElementById('bestName'); if(bn) bn.textContent='Hämta meriter för att se';
-      const sh=document.getElementById('shortest'); if(sh) sh.textContent='–';
-    }catch(e){}
-  }
-
-  window.lotsenAnonymousReset = lotsenAnonymousReset;
-  document.addEventListener('DOMContentLoaded', lotsenAnonymousReset);
-  window.addEventListener('load', lotsenAnonymousReset);
-  setTimeout(lotsenAnonymousReset, 50);
-})();
-</script>
 
 
 
@@ -695,6 +639,38 @@ function nextMeritGuide(){ if(meritGuideIndex>=meritGuideSteps.length-1){closeMe
 function closeMeritGuide(){ document.getElementById('meritGuide').style.display='none'; }
 </script>
 
-<!-- Lotsen v21 -->
+
+
+<script>
+(function(){
+  function lotsenSessionRestore(){
+    try{
+      const loggedIn = (typeof currentUser !== 'undefined' && !!currentUser);
+      if(!loggedIn){
+        const stale=[];
+        for(let i=0;i<localStorage.length;i++){
+          const k=localStorage.key(i)||'';
+          if(/examensmatch|lotsen|merit|course|degree|route|compare/i.test(k)) stale.push(k);
+        }
+        stale.forEach(k=>localStorage.removeItem(k));
+      }
+      try{
+        const saved=sessionStorage.getItem('examensmatch_courses');
+        if(saved && typeof courses!=='undefined' && Array.isArray(courses)){
+          const parsed=JSON.parse(saved);
+          if(Array.isArray(parsed)) courses.splice(0,courses.length,...parsed);
+        }
+      }catch(e){}
+      try{ if(typeof renderCourses==='function') renderCourses(); }catch(e){}
+      try{ if(typeof renderDegrees==='function') renderDegrees(); }catch(e){}
+      try{ if(typeof renderRoute==='function') renderRoute(); }catch(e){}
+      try{ if(typeof renderCompare==='function') renderCompare(); }catch(e){}
+    }catch(e){}
+  }
+  window.addEventListener('load', lotsenSessionRestore);
+})();
+</script>
+
+<!-- Lotsen v22 -->
 </body>
 </html>
