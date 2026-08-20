@@ -932,15 +932,7 @@ function groupedDegreeOpportunities(){
    .filter(x=>!/(ospecificerad|generell examen|inom huvudområde)/i.test(x.name))
    .sort((a,b)=>b.score-a.score || a.remaining-b.remaining);
 }
-function openDegreeDetails(subjectOrId){
- try{sessionStorage.setItem('lotsen_selected_degree_subject',subjectOrId)}catch(e){}
- populateRouteGoal();
- const opts=routeOptions(), needle=String(subjectOrId||'').toLowerCase();
- const hit=opts.find(o=>o.label.toLowerCase().includes(needle));
- if(hit&&routeGoal)routeGoal.value=hit.id;
- go('route');renderRoute();
- setTimeout(()=>window.scrollTo({top:0,behavior:'smooth'}),50);
-}
+
 
 function renderDegrees(){
  const host=document.getElementById('degreeResults');host.innerHTML='';
@@ -1729,7 +1721,7 @@ function go(id){
  if(id==='compare' && !courses.length){
    setTimeout(()=>{try{renderCompare()}catch(e){}},0);
  }
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='route')renderRoute();if(id==='compare')renderCompare();if(id==='programs')renderPrograms();if(id==='degreeDetail')renderDegreeDetail();window.scrollTo(0,0)}
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='route'){const k=sessionStorage.getItem('lotsen_detail_key');if(k){id='degreeDetail';document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('degreeDetail').classList.add('active');renderDegreeDetail(k)}else renderRoute();}if(id==='compare')renderCompare();if(id==='programs')renderPrograms();if(id==='degreeDetail')renderDegreeDetail();window.scrollTo(0,0)}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
 populateRouteGoal();initBackend();updateAuthUI();renderUniversities();renderGoals();renderCourses();renderDegrees();renderRoute();renderCompare();renderPrograms();
 </script>
@@ -1946,6 +1938,8 @@ document.addEventListener('click',async(e)=>{
 
 
 
-<!-- Lotsen v70 -->
+
+
+<!-- Lotsen v71 -->
 </body>
 </html>
