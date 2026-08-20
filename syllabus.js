@@ -30,62 +30,32 @@ async function fetchText(url){
   if(!r.ok)throw new Error(`HTTP ${r.status}`);
   return await r.text();
 }
-function termToDate(term=''){
-  const t=String(term).toUpperCase();
-  const m=t.match(/(HT|VT)\s*(\d{4})/);
-  if(!m)return null;
-  return m[1]==='HT'?`${m[2]}-09-01`:`${m[2]}-01-15`;
-}
 function parseLevel(text){
   const m=text.match(/(G1N|G1F|G1E|G2F|G2E|A1N|A1F|A1E|A2E)/i);
   if(m)return m[1].toUpperCase();
-  const n=text.match(/Utbildningsnivå:\s*([^.;]+)/i);
-  return n?clean(n[1]):'';
+  return '';
 }
 async function resolveUmea({code,term}){
   const url=`https://www.umu.se/utbildning/kurs-och-utbildningsplan/${encodeURIComponent(code.toLowerCase())}/`;
   const html=await fetchText(url), text=htmlText(html);
-  if(!new RegExp(`Kurskod:\\s*${code}`,'i').test(text))throw new Error('Kurskod hittades inte hos Umeå universitet');
-  const date=termToDate(term);
-  // The page itself contains version history. For the first backend version we return the
-  // course page plus the visible version information; later versions can follow the exact historical link.
-  const version=(text.match(/Denna kursplan gäller:\s*([^()]+?)(?:Visa|Kursplan för|Kurskod:)/i)||[])[1]||term||'';
   return {
-    provider:'Umeå universitet',
-    code,
-    version:clean(version),
-    url,
+    provider:'Umeå universitet', code, version:term||'', url,
     level:parseLevel(text),
     content:section(text,['Innehåll','Kursens innehåll'],['Mål','Förväntade studieresultat','Examination','Undervisning','Behörighetskrav']),
     learningGoals:goalsFromText(text)
   };
 }
-async function resolveGu({code,term,name}){
-  // GU's public search page is JS-driven, but query URLs are stable and official.
-  // We first fetch the search endpoint; if a syllabus link is server-rendered we follow it.
+async function resolveGu({code,term}){
   const search=`https://www.gu.se/studera/hitta-utbildning/hitta-kursplan-och-litteraturlista?q=${encodeURIComponent(code)}`;
   const html=await fetchText(search);
   const links=[...html.matchAll(/href=["'](\/syllabus\/[^"'?#]+)["']/gi)].map(m=>m[1]);
   if(!links.length){
-    return {
-      provider:'Göteborgs universitet',
-      code,
-      version:term||'',
-      url:search,
-      level:'',
-      content:'',
-      learningGoals:[],
-      unresolved:true,
-      reason:'GU:s publika söksida laddar resultaten med JavaScript. Kurskoden är identifierad men direkt kursplanslänk kunde inte hämtas server-side ännu.'
-    };
+    return {provider:'Göteborgs universitet',code,version:term||'',url:search,level:'',content:'',learningGoals:[],unresolved:true};
   }
   const url='https://www.gu.se'+links[0];
   const sh=await fetchText(url), text=htmlText(sh);
   return {
-    provider:'Göteborgs universitet',
-    code,
-    version:clean((text.match(/Gäller från termin\s*([^#]+?)(?:Beslutsfattare|Betygsskala)/i)||[])[1]||term||''),
-    url,
+    provider:'Göteborgs universitet',code,version:term||'',url,
     level:parseLevel(text),
     content:section(text,['Innehåll','Kursens innehåll'],['Mål','Lärandemål','Former för undervisning','Examinationsformer','Betyg']),
     learningGoals:goalsFromText(text)
