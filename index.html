@@ -241,6 +241,17 @@ body{background:#f6f8fc}
 .degree-simple-card{padding-bottom:16px}
 .degree-simple-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px}
 
+
+.simple-status{font-size:13px;font-weight:800;color:#475467}
+.degree-simple-card h3{font-size:21px;line-height:1.18}
+.more-details{font-size:12px;color:#667085}
+
+.simple-details{cursor:default}
+.simple-details summary{cursor:pointer;font-weight:800;color:#315bc7}
+.simple-details .details-body{margin-top:8px}
+#programs .top p,#route .top p{max-width:520px}
+#programs .program-note{font-size:10px;line-height:1.35;color:#667085}
+
 </style>
 </head>
 <body>
@@ -343,7 +354,7 @@ body{background:#f6f8fc}
 
 
 <section id="degrees" class="screen">
-  <div class="top"><div><h1>Mina möjligheter</h1><p>Examina du verkar vara närmast utifrån dina meriter.</p></div></div>
+  <div class="top"><div><h1>Mina möjligheter</h1><p>Här är de examina som ligger närmast.</p></div></div>
   <div class="card alt-paths-note"><strong>Lotsen letar även efter alternativa examina</strong><div class="small muted" style="margin-top:5px">Även om du redan har läst ett helt program kan andra examina vara möjliga med en relativt liten komplettering.</div></div><div class="tabs"><button class="active" onclick="setDegreeFilter('all',this)">Alla</button><button onclick="setDegreeFilter('high',this)">Närmast</button><button onclick="setDegreeFilter('candidate',this)">Kandidat</button></div>
   <div id="degreeResults"></div>
   <div class="notice" style="margin-top:18px"><strong>Viktigt:</strong> “Match” betyder att kursdata ser ut att passa mot en regel. Det är inte ett besked från ett universitet om tillgodoräknande och inte ett examensbeslut.</div>
@@ -354,20 +365,20 @@ body{background:#f6f8fc}
   <div class="card" style="margin-bottom:18px"><div class="row"><div><strong>Välj lärosäte för jämförelsen</strong><div class="small muted">Lokala examensregler och kursutbud kan skilja sig.</div></div><span class="verified">Datakoll 19 aug 2026</span></div><div class="uni-select" id="uniSelect"></div></div>
   <div class="grid">
     <div class="card span7" id="routeMain"></div>
-    <div class="card span5"><div class="kicker">Kurser att leta efter</div><h3 id="courseSuggestTitle">Komplettering</h3><div id="courseSuggestions"></div><button class="primary" style="margin-top:12px" onclick="renderCourseCatalog(true)">Visa fler kursförslag</button></div>
+    <div class="card span5"><div class="kicker">Kurser att leta efter</div><h3 id="courseSuggestTitle">Det här kan saknas</h3><div id="courseSuggestions"></div><button class="primary" style="margin-top:12px" onclick="renderCourseCatalog(true)">Visa fler kursförslag</button></div>
   </div>
 </section>
 
 
 <section id="programs" class="screen">
-  <div class="top"><div><h1>Program och egen examen</h1><p>Se de fem starkaste programvägarna och om dina fristående kurser redan ligger nära en generell examen.</p></div></div>
+  <div class="top"><div><h1>Fler vägar</h1><p>Andra sätt att nå en examen.</p></div></div>
   <div id="flexibleDegreeArea">
-    <h2 class="subhead">Bygg egen examen</h2>
+    <h2 class="subhead">Fristående examen</h2>
     <p class="small muted">Lotsen visar nu också vilka delar som verkar saknas. Examensarbete kan samtidigt uppfylla krav på fördjupningsnivå, så posterna ska inte alltid summeras.</p>
     <div id="flexibleDegreeMatches"></div>
   </div>
-  <div class="program-meta"><div class="db-count" id="programDbCount"></div><details class="match-info"><summary>Hur matchas kurser?</summary><p>Lotsen skiljer på kurser som kan ingå som valfria poäng och kurser som kan ersätta en specifik programkurs. Kursplan och lärandemål vägs in när de finns. Bedömningen är preliminär.</p></details></div>
-  <div class="tg-status" id="tgStatus"><strong>Tillgodoräknande:</strong> När Lotsen har både den gamla och den nya kursplanen jämförs lärandemål och innehåll direkt. <span id="syllabusCoverage"></span><button class="mini-fetch" id="fetchSyllabiBtn" type="button">Hämta kursplaner</button><span class="fetch-result" id="fetchSyllabiResult"></span></div><div id="programMatches"></div>
+  <div class="program-meta"><div class="db-count" id="programDbCount"></div><details class="match-info"><summary>Hur räknar Lotsen?</summary><p>Lotsen skiljer på kurser som kan ingå som valfria poäng och kurser som kan ersätta en specifik programkurs. Kursplan och lärandemål vägs in när de finns. Bedömningen är preliminär.</p></details></div>
+  <details class="tg-status simple-details" id="tgStatus"><summary><strong>Hur säkra är matchningarna?</strong></summary><div class="details-body"><strong>Tidigare kurser:</strong> Lotsen jämför dina kurser med det som krävs. <span id="syllabusCoverage"></span><button class="mini-fetch" id="fetchSyllabiBtn" type="button">Kontrollera kurser</button><span class="fetch-result" id="fetchSyllabiResult"></span></div></details><div id="programMatches"></div>
 </section>
 
 <section id="compare" class="screen compare">
@@ -738,8 +749,12 @@ function groupedDegreeOpportunities(){
 }
 function openDegreeDetails(subjectOrId){
  try{sessionStorage.setItem('lotsen_selected_degree_subject',subjectOrId)}catch(e){}
- go('programs');
- setTimeout(()=>{window.scrollTo({top:0,behavior:'smooth'});},50);
+ populateRouteGoal();
+ const opts=routeOptions(), needle=String(subjectOrId||'').toLowerCase();
+ const hit=opts.find(o=>o.label.toLowerCase().includes(needle));
+ if(hit&&routeGoal)routeGoal.value=hit.id;
+ go('route');renderRoute();
+ setTimeout(()=>window.scrollTo({top:0,behavior:'smooth'}),50);
 }
 
 function renderDegrees(){
@@ -765,7 +780,7 @@ function renderDegrees(){
      <div class="row">
        <div>
          <h3 style="margin:0">${escapeHtml(x.name)}</h3>
-         <div class="degree-subline">Preliminär bedömning</div>
+         
        </div>
        <span class="badge ${badge} degree-score ${x.score===100?'full':''}">${x.score}%</span>
      </div>
@@ -839,15 +854,15 @@ function renderRoute(){
    const x=(typeof flexibleDegreeCandidates==='function'?flexibleDegreeCandidates():[]).find(v=>v.d.id===profileId&&v.major===major);
    if(!x){routeMain.innerHTML='<div class="notice">Kunde inte hitta examensvägen.</div>';return;}
    routeSub.textContent='Mål: '+(x.degreeTitle?.title||x.d.name)+' · '+x.d.university;
-   const steps=(x.missing||[]).map((m,i)=>`<div class="route-step"><div class="route-n">${i+1}</div><div><strong>${escapeHtml(m.label)}</strong><div class="muted small">Kontrollera kursnivå och lokala examenskrav innan du söker examen.</div></div></div>`);
-   steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Ansök om examen hos ${escapeHtml(x.d.university)}</strong><div class="muted small">Lotsens analys är preliminär och ersätter inte lärosätets prövning.</div></div></div>`);
-   routeMain.innerHTML=`<div class="kicker">Preliminär väg · ${escapeHtml(x.d.university)}</div><h2 style="margin:6px 0">${escapeHtml(x.degreeTitle?.title||x.d.name)}</h2><div class="row"><span class="badge ${x.remaining===0?'good':'warn'}">${x.remaining===0?'100%':Math.max(0,Math.round(100*(1-x.remaining/Math.max(1,x.d.hp))))+'%'}</span><strong>${x.remaining===0?'Poängkrav ser uppfyllt ut':fmtHp(x.remaining)+' hp preliminärt kvar'}</strong></div><div style="margin-top:14px">${steps.join('')}</div>`;
-   courseSuggestTitle.textContent='Komplettering';
+   const steps=(x.missing||[]).map((m,i)=>`<div class="route-step"><div class="route-n">${i+1}</div><div><strong>${escapeHtml(m.label)}</strong><div class="muted small">Behöver verifieras av lärosätet.</div></div></div>`);
+   steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Ansök hos ${escapeHtml(x.d.university)}</strong><div class="muted small">Lärosätet fattar det slutliga beslutet.</div></div></div>`);
+   routeMain.innerHTML=`<div class="kicker">Din väg · ${escapeHtml(x.d.university)}</div><h2 style="margin:6px 0">${escapeHtml(x.degreeTitle?.title||x.d.name)}</h2><div class="row"><span class="badge ${x.remaining===0?'good':'warn'}">${x.remaining===0?'100%':Math.max(0,Math.round(100*(1-x.remaining/Math.max(1,x.d.hp))))+'%'}</span><strong>${x.remaining===0?'Poängkrav ser uppfyllt ut':fmtHp(x.remaining)+' hp kvar'}</strong></div><div style="margin-top:14px">${steps.join('')}</div>`;
+   courseSuggestTitle.textContent='Det här kan saknas';
    courseSuggestions.innerHTML=x.missing?.length?x.missing.map(m=>`<div class="course-card"><strong>${escapeHtml(m.label)}</strong><div class="small muted">Lotsen söker efter kurser som kan fylla denna lucka.</div></div>`).join(''):'<div class="notice">Ingen tydlig komplettering hittad. Kontrollera examensansökan hos lärosätet.</div>';
    return;
  }
  const d=degrees.find(x=>('specific:'+x.id)===selectedId)||degrees[0],r=calc(d);
- routeSub.textContent='Mål: '+d.name+' · '+u.name;let steps=[];if(r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">1</div><div><strong>Komplettera huvudområdet med cirka ${r.missingSubject} hp</strong><div class="muted small">Kurserna behöver ligga inom rätt huvudområde och rätt progression.</div></div></div>`);if(r.missingThesis)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Verifiera eller läs självständigt arbete, cirka ${r.missingThesis} hp</strong><div class="muted small">Examensarbetet måste passa lärosätets examenskrav.</div></div></div>`);if(r.missingTotal>r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Komplettera ytterligare ${r.missingTotal-r.missingSubject} hp</strong><div class="muted small">Kan i vissa examina vara valfria kurser, beroende på lokala krav.</div></div></div>`);steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Begär formell prövning / ansök om examen</strong><div class="muted small">Appens analys ersätter inte lärosätets beslut.</div></div></div>`);let rule=(localRules[selectedUniversity]||{})[d.id]||'Lokal examensordning och huvudområdeskrav behöver verifieras.';routeMain.innerHTML=`<div class="kicker">Preliminär väg · ${u.name}</div><h2 style="margin:6px 0">${d.name}</h2><div class="row"><span class="badge ${r.pct>=85?'good':r.pct>=55?'warn':'bad'}">${Math.min(100,r.pct)}%</span><strong>${r.remaining? r.remaining+' hp uppskattat kvar':'Poängkrav ser uppfyllt ut'}</strong></div><div class="small muted" style="margin-top:8px">Bedömd säkerhet: <strong>${r.confidence} (${r.confidenceScore}%)</strong>. Appen vågar rekommendera vägen före formell prövning, men markerar osäkerheter.</div><div class="info" style="margin-top:14px"><strong>Lokal regelkontroll:</strong> ${rule}</div>${steps.join('')}<div class="feedback-box"><strong>Verkar resultatet rimligt?</strong><div class="feedback-actions"><button class="ghost" id="fbYes" onclick="setFeedback('rimligt')">👍 Rimligt</button><button class="ghost" id="fbNo" onclick="setFeedback('fel')">👎 Verkar fel</button></div><textarea id="fbText" placeholder="Vad stämmer eller verkar fel? Frivilligt."></textarea><div class="row" style="margin-top:9px"><span class="small muted" id="fbState"></span><button class="primary" onclick="saveFeedback()">Spara feedback</button></div><div class="privacy-mini">Feedback sparas lokalt på enheten i denna beta. Du kan använda dela-knappen efteråt för att skicka den till personen som bett dig testa.</div></div>`;courseSuggestTitle.textContent=r.missingSubject?`Verifierade kursförslag i ${d.subject||'huvudområdet'}`:'Kurser att kontrollera mot progression';renderCourseCatalog(false)}
+ routeSub.textContent='Mål: '+d.name+' · '+u.name;let steps=[];if(r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">1</div><div><strong>Komplettera huvudområdet med cirka ${r.missingSubject} hp</strong><div class="muted small">Kurserna behöver ligga inom rätt huvudområde och rätt progression.</div></div></div>`);if(r.missingThesis)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Verifiera eller läs självständigt arbete, cirka ${r.missingThesis} hp</strong><div class="muted small">Examensarbetet måste passa lärosätets examenskrav.</div></div></div>`);if(r.missingTotal>r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Komplettera ytterligare ${r.missingTotal-r.missingSubject} hp</strong><div class="muted small">Kan i vissa examina vara valfria kurser, beroende på lokala krav.</div></div></div>`);steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Begär formell prövning / ansök om examen</strong><div class="muted small">Appens analys ersätter inte lärosätets beslut.</div></div></div>`);let rule=(localRules[selectedUniversity]||{})[d.id]||'Lokal examensordning och huvudområdeskrav behöver verifieras.';routeMain.innerHTML=`<div class="kicker">Din väg · ${u.name}</div><h2 style="margin:6px 0">${d.name}</h2><div class="row"><span class="badge ${r.pct>=85?'good':r.pct>=55?'warn':'bad'}">${Math.min(100,r.pct)}%</span><strong>${r.remaining? r.remaining+' hp uppskattat kvar':'Poängkrav ser uppfyllt ut'}</strong></div><div class="small muted" style="margin-top:8px">Säkerhet: <strong>${r.confidence} (${r.confidenceScore}%)</strong>. Kontrollera detaljerna med lärosätet innan du ansöker.</div><div class="info" style="margin-top:14px"><strong>Lokal regelkontroll:</strong> ${rule}</div>${steps.join('')}<div class="feedback-box"><strong>Verkar resultatet rimligt?</strong><div class="feedback-actions"><button class="ghost" id="fbYes" onclick="setFeedback('rimligt')">👍 Rimligt</button><button class="ghost" id="fbNo" onclick="setFeedback('fel')">👎 Verkar fel</button></div><textarea id="fbText" placeholder="Vad stämmer eller verkar fel? Frivilligt."></textarea><div class="row" style="margin-top:9px"><span class="small muted" id="fbState"></span><button class="primary" onclick="saveFeedback()">Spara feedback</button></div><div class="privacy-mini">Feedback sparas lokalt på enheten i denna beta. Du kan använda dela-knappen efteråt för att skicka den till personen som bett dig testa.</div></div>`;courseSuggestTitle.textContent=r.missingSubject?`Verifierade kursförslag i ${d.subject||'huvudområdet'}`:'Kurser att kontrollera mot progression';renderCourseCatalog(false)}
 
 function getMatches(){
  return degrees.map(d=>{
@@ -1517,7 +1532,7 @@ function renderCompare(){
       <div class="compare-progress"><span style="width:${Math.min(100,pct)}%"></span></div>
       <div class="compare-stats">
         <div><span>Huvudområde</span><strong>${fmtHp(subjectHave)} / ${fmtHp(subjectNeed)} hp</strong></div>
-        <div><span>Preliminärt kvar</span><strong>${remain<=0?'Kontroll':fmtHp(remain)+' hp'}</strong></div>
+        <div><span>kvar</span><strong>${remain<=0?'Kontroll':fmtHp(remain)+' hp'}</strong></div>
       </div>
       <div class="rule-status"><strong>${escapeHtml(d.ruleStatus||'Preliminär regel')}</strong>${d.ruleNote?' · '+escapeHtml(d.ruleNote):''}</div>
       <button class="secondary compare-path-btn" onclick="selectDegreeAndGo('${escapeHtml(d.id)}')">Visa väg</button>
@@ -1660,7 +1675,7 @@ document.addEventListener('click',async(e)=>{
  const btn=e.target, out=document.getElementById('fetchSyllabiResult');
  btn.disabled=true;btn.textContent='Hämtar…';if(out)out.textContent='';
  const r=await resolveImportedSyllabi();
- btn.disabled=false;btn.textContent='Hämta kursplaner';
+ btn.disabled=false;btn.textContent='Kontrollera kurser';
  if(out)out.textContent=r.attempted?`${r.resolved} av ${r.attempted} kursplaner hämtades automatiskt.`:'Inga kurser har tillräckliga uppgifter ännu.';
  renderPrograms();
 });
@@ -1745,6 +1760,10 @@ document.addEventListener('click',async(e)=>{
 
 
 
-<!-- Lotsen v63 -->
+
+
+
+
+<!-- Lotsen v65 -->
 </body>
 </html>
