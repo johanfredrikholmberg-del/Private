@@ -857,19 +857,26 @@ function confirmImport(){
   }
 
   courses.push(...chosen);
-
   try{sessionStorage.setItem('examensmatch_courses',JSON.stringify(courses))}catch(e){}
 
   importStatus.textContent=`${chosen.length} kurser importerades.`;
   importPreview.innerHTML='';
 
-  // Visa resultatet direkt. Kursplanskontroll får aldrig blockera importen.
-  renderCourses();
-  renderDegrees();
-  go('degrees');
+  // Gå alltid till Möjligheter först.
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('degrees')?.classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen==='degrees'));
   window.scrollTo(0,0);
 
-  // Försök förbättra kursnivåer i bakgrunden när det går.
+  // Rendera därefter. Ett fel i en avancerad regel får inte hindra sidan från att visas.
+  try{renderCourses()}catch(e){console.error(e)}
+  try{renderDegrees()}catch(e){
+    console.error(e);
+    const host=document.getElementById('degreeResults');
+    if(host)host.innerHTML='<div class="card empty"><strong>Meriterna är importerade</strong><div class="small muted">Ladda om sidan om resultaten inte visas direkt.</div></div>';
+  }
+
+  // Bakgrundskontroll av kursnivåer.
   setTimeout(async()=>{
     try{
       enrichCourseSyllabusStatus();
@@ -880,19 +887,13 @@ function confirmImport(){
           const level=detectCourseLevel(r.data.level)||String(r.data.level||'');
           if(level){c.level=level;changed=true}
         }
-        if(r.ok && r.data?.learningGoals?.length){
-          c.learningGoals=r.data.learningGoals;
-          c.content=r.data.content||c.content||'';
-          changed=true;
-        }
       }
       if(changed){
         try{sessionStorage.setItem('examensmatch_courses',JSON.stringify(courses))}catch(e){}
-        renderCourses();
-        renderDegrees();
+        try{renderDegrees()}catch(e){}
       }
     }catch(e){}
-  },50);
+  },100);
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 
@@ -925,12 +926,39 @@ function advancedDegreeOpportunities(){
    {key:'master:'+major,name:`Masterexamen i ${major.toLowerCase()}`,subject:major,score:Math.round(Math.min(100,adv/120*100)),remaining:Math.max(0,120-adv),source:'advanced',degreeType:'Master',total:120}
  ];
 }
+
+function safeDegreeOpportunities(){
+  try{
+    const rows=allDegreeOpportunities();
+    if(Array.isArray(rows)&&rows.length)return rows;
+  }catch(e){console.error('Lotsen opportunities',e)}
+
+  // Fallback: always show the core degree catalogue from the imported merits.
+  try{
+    return degrees.map(d=>{
+      const r=calc(d);
+      return {
+        key:'fallback:'+d.id,
+        name:d.name,
+        subject:d.subject||'',
+        score:Math.min(100,Number(r.pct||0)),
+        remaining:Number(r.remaining||0),
+        source:'specific',
+        routeId:d.id
+      };
+    }).sort((a,b)=>b.score-a.score||a.remaining-b.remaining);
+  }catch(e){
+    console.error('Lotsen fallback opportunities',e);
+    return [];
+  }
+}
+
 function allDegreeOpportunities(){
  return [...groupedDegreeOpportunities(),...advancedDegreeOpportunities()]
    .sort((a,b)=>b.score-a.score||a.remaining-b.remaining);
 }
 function opportunityByKey(key){
- return allDegreeOpportunities().find(x=>x.key===key);
+ return safeDegreeOpportunities().find(x=>x.key===key);
 }
 function coursesForDegree(o){
  const selected=courses.filter(c=>c.selected!==false);
@@ -1130,12 +1158,12 @@ function renderDegrees(){
  if(!courses.length){
    host.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong><div class="small muted" style="margin-top:5px">Då visar Lotsen vilka examina du är närmast.</div></div>';return;
  }
- let arr=allDegreeOpportunities();
+ let arr=safeDegreeOpportunities();
  if(degreeFilter==='candidate')arr=arr.filter(x=>x.source!=='advanced');
  if(degreeFilter==='advanced')arr=arr.filter(x=>x.source==='advanced');
  arr=arr.slice(0,7);
  if(!arr.length){
-   host.innerHTML=degreeFilter==='advanced'?'<div class="card empty"><strong>Ingen magister- eller masterväg hittad ännu</strong><div class="small muted">En kandidatexamen behöver först kunna verifieras.</div></div>':'<div class="card empty">Inga matchningar hittades.</div>';return;
+   host.innerHTML=degreeFilter==='advanced'?'<div class="card empty"><strong>Ingen magister- eller masterväg hittad ännu</strong><div class="small muted">En kandidatexamen behöver först kunna verifieras.</div></div>':'<div class="card empty"><strong>Meriterna är importerade</strong><div class="small muted">Lotsen kunde inte räkna fram examensvägarna ännu. Prova Alla igen.</div></div>';return;
  }
  host.innerHTML=arr.map(x=>`<div class="card degree-simple-card">
    <div class="row"><div><h3>${escapeHtml(x.name)}</h3><div class="degree-type-label">${x.source==='advanced'?'Fortsättning efter kandidat':'Grundnivå'}</div></div><span class="badge ${x.score>=100?'good':x.score>=55?'warn':'bad'} degree-score">${x.score}%</span></div>
@@ -1858,7 +1886,7 @@ function selectDegreeAndGo(id){
 }
 
 function populateCompareSelects(){
- const opts=allDegreeOpportunities();
+ const opts=safeDegreeOpportunities();
  const a=document.getElementById('compareA'),b=document.getElementById('compareB');
  if(!a||!b)return;
  const oldA=a.value,oldB=b.value;
@@ -2171,6 +2199,8 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v82 -->
+
+
+<!-- Lotsen v83 -->
 </body>
 </html>
