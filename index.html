@@ -155,6 +155,81 @@ body{background:#f6f8fc}
 .import-error{color:#b42318;font-weight:850}
 
 .recommended{font-style:normal;font-size:10px;background:#dff7ea;color:#147a55;border-radius:999px;padding:3px 6px;margin-left:5px;vertical-align:2px}
+
+.compare-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.compare-card{position:relative;background:#fff;border:1px solid #e2e7ef;border-radius:20px;padding:20px;box-shadow:0 6px 22px rgba(20,32,51,.04);min-width:0}
+.compare-rank{position:absolute;right:14px;top:14px;width:26px;height:26px;border-radius:50%;background:#f1f4f9;color:#667085;display:grid;place-items:center;font-size:12px;font-weight:900}
+.compare-card-head{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;padding-right:28px}
+.compare-card-head h3{margin:4px 0 0;font-size:20px;line-height:1.18}
+.eyebrow{font-size:11px;letter-spacing:.08em;color:#667085;font-weight:850}
+.match-pill{flex:0 0 auto;border-radius:999px;padding:7px 10px;font-weight:900}.match-pill.good{background:#e8f5ee;color:#267858}.match-pill.mid{background:#fff3d8;color:#a56611}.match-pill.low{background:#f3f4f6;color:#667085}
+.compare-progress{height:7px;background:#edf1f6;border-radius:999px;overflow:hidden;margin:18px 0}.compare-progress span{display:block;height:100%;background:#3563e9;border-radius:999px}
+.compare-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}.compare-stats div{background:#f8fafc;border-radius:12px;padding:11px}.compare-stats span{display:block;font-size:11px;color:#667085;margin-bottom:4px}.compare-stats strong{font-size:14px}
+.compare-path-btn{width:100%;margin-top:14px}
+@media(max-width:760px){.compare-cards{grid-template-columns:1fr}.compare-card{padding:18px}.compare-card-head h3{font-size:19px}}
+
+
+.rule-status{margin-top:12px;font-size:12px;line-height:1.4;color:#667085}
+.rule-status strong{color:#344054}
+
+
+.program-list{display:grid;gap:14px}.program-card{padding:18px}.program-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.program-top h3{margin:4px 0 0;font-size:19px}.program-hp{white-space:nowrap;font-weight:900;color:#344054}.program-summary{margin:14px 0;font-size:13px;color:#667085}.program-summary strong{color:#142033}.high-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#35a574;margin-right:5px}.sep{margin:0 5px}.program-card details{border-top:1px solid #edf0f4;padding-top:12px}.program-card summary{cursor:pointer;font-weight:850;color:#265ee8}.course-match-list{margin-top:10px;display:grid;gap:8px}.course-match{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #f0f2f5}.course-match small{display:block;color:#667085;margin-top:2px}.chance{font-size:10px;font-weight:900;padding:4px 7px;border-radius:999px}.chance.hög{background:#e8f5ee;color:#267858}.chance.möjlig{background:#fff3d8;color:#a56611}.chance.låg{background:#f3f4f6;color:#667085}.program-note{font-size:11px;color:#667085;margin-top:12px}
+
+
+.verified-mini{display:inline-block;margin-left:5px;padding:2px 6px;border-radius:999px;background:#e8f5ee;color:#267858;font-size:9px;letter-spacing:0}
+
+
+.eligibility-warn{font-size:11px;color:#9a6700;background:#fff7e6;border-radius:10px;padding:8px 10px;margin:-4px 0 12px}
+
+
+.db-count{display:inline-block;margin:0 0 12px;padding:5px 9px;border-radius:999px;background:#f2f5fa;color:#667085;font-size:11px;font-weight:800}
+
+
+.professional-note{font-size:11px;color:#475467;background:#f2f5fa;border-radius:10px;padding:8px 10px;margin:-4px 0 12px}
+
+
+.remaining-line{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:-4px 0 12px;padding:9px 10px;background:#f8fafc;border-radius:10px;font-size:12px}
+.remaining-line strong{color:#142033}.remaining-line span{color:#667085;font-size:10px}
+
+
+.plan-mini{display:inline-block;margin-left:4px;padding:2px 6px;border-radius:999px;background:#eef4ff;color:#315bc7;font-size:9px;letter-spacing:0}
+.program-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}.program-meta .db-count{margin:0}
+.match-info{font-size:11px;color:#667085}.match-info summary{cursor:pointer;font-weight:800}.match-info p{max-width:430px;margin:7px 0 0;line-height:1.4}
+
+
+.match-why{margin-top:3px!important;font-size:10px!important;color:#98a2b3!important}
+
+
+.match-types{display:flex;gap:8px;flex-wrap:wrap}
+.match-types span{background:#f8fafc;border-radius:9px;padding:7px 9px}
+.match-types strong{color:#142033}
+
+
+#flexibleDegreeArea{margin:0 0 24px}.subhead{font-size:18px;margin:0 0 4px}
+#flexibleDegreeMatches{display:grid;gap:10px;margin-top:10px}
+.flex-degree-card{padding:16px}.flex-degree-stats{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.flex-degree-stats span{background:#f8fafc;border-radius:9px;padding:7px 9px;font-size:12px;color:#667085}
+.flex-degree-stats strong{color:#142033}
+
+
+.degree-checks{display:flex;gap:6px;flex-wrap:wrap;margin:-3px 0 10px}.degree-checks span{font-size:10px;background:#fff7e6;color:#8a5b10;padding:4px 7px;border-radius:999px}
+
+
+.degree-title-note{font-size:10px;line-height:1.35;color:#8a5b10;background:#fff7e6;padding:7px 9px;border-radius:9px;margin:0 0 9px}
+.multi-degree-hint{font-size:12px;font-weight:800;color:#344054;margin:2px 0 10px}
+
+
+.missing-box{margin:10px 0;padding:10px 11px;border:1px solid #e4e7ec;border-radius:11px;background:#fff}
+.missing-box>strong{font-size:11px;color:#344054}.missing-box ul{margin:6px 0 0;padding-left:18px;font-size:11px;color:#475467;line-height:1.55}
+.ready-degree{display:block;margin-top:6px;font-size:11px;color:#027a48}
+
+
+.tg-status{font-size:11px;line-height:1.45;color:#475467;background:#f8fafc;border:1px solid #e4e7ec;border-radius:11px;padding:10px 11px;margin:0 0 12px}
+
+
+.mini-fetch{display:inline-block;margin-left:8px;border:0;border-radius:8px;padding:5px 8px;font-size:10px;font-weight:800;cursor:pointer;background:#e9efff;color:#315bc7}
+.mini-fetch:disabled{opacity:.55}.fetch-result{display:inline-block;margin-left:7px;font-size:10px;color:#667085}
+
 </style>
 </head>
 <body>
@@ -169,7 +244,7 @@ body{background:#f6f8fc}
       <button data-screen="studies">Studier</button>
       <button data-screen="degrees">Möjligheter</button>
       <button data-screen="route">Min väg</button>
-      <button data-screen="compare">Jämför</button>
+      <button data-screen="programs">Program</button><button data-screen="compare">Jämför</button>
     </nav>
   </div>
 </header>
@@ -272,8 +347,20 @@ body{background:#f6f8fc}
   </div>
 </section>
 
+
+<section id="programs" class="screen">
+  <div class="top"><div><h1>Program och egen examen</h1><p>Se de fem starkaste programvägarna och om dina fristående kurser redan ligger nära en generell examen.</p></div></div>
+  <div id="flexibleDegreeArea">
+    <h2 class="subhead">Bygg egen examen</h2>
+    <p class="small muted">Lotsen visar nu också vilka delar som verkar saknas. Examensarbete kan samtidigt uppfylla krav på fördjupningsnivå, så posterna ska inte alltid summeras.</p>
+    <div id="flexibleDegreeMatches"></div>
+  </div>
+  <div class="program-meta"><div class="db-count" id="programDbCount"></div><details class="match-info"><summary>Hur matchas kurser?</summary><p>Lotsen skiljer på kurser som kan ingå som valfria poäng och kurser som kan ersätta en specifik programkurs. Kursplan och lärandemål vägs in när de finns. Bedömningen är preliminär.</p></details></div>
+  <div class="tg-status" id="tgStatus"><strong>Tillgodoräknande:</strong> När Lotsen har både den gamla och den nya kursplanen jämförs lärandemål och innehåll direkt. <span id="syllabusCoverage"></span><button class="mini-fetch" id="fetchSyllabiBtn" type="button">Hämta kursplaner</button><span class="fetch-result" id="fetchSyllabiResult"></span></div><div id="programMatches"></div>
+</section>
+
 <section id="compare" class="screen compare">
-  <div class="top"><div><h1>Jämför vägar</h1><p>Jämför möjliga examensvägar utifrån dina meriter.</p></div></div>
+  <div class="top"><div><h1>Jämför vägar</h1><p>Jämför dina tre närmaste examensvägar. Matchningen är preliminär tills lärosätets lokala examensregler är verifierade.</p></div></div>
   <div id="compareResults"></div>
 </section>
 </main></div>
@@ -345,8 +432,12 @@ const localRules={
  miun:{sport:'MIUN: Bedömningen är preliminär tills huvudområdets lokala examenskrav har kontrollerats.',business:'MIUN: Dina 15 hp A-kurser är direkt identifierade från MIUN. Kursutbudet innehåller A- och B-kurser i företagsekonomi; exakt examensstruktur och C-nivå verifieras innan slutlig rekommendation.'}
 };
 const degrees=[
- {id:'sport',name:'Kandidatexamen i idrottsvetenskap',short:'Kandidat i idrottsvetenskap',kind:'candidate',total:180,subject:'Idrottsvetenskap',subjectReq:90,thesisReq:15,local:true},
- {id:'business',name:'Kandidatexamen i företagsekonomi',short:'Kandidat i företagsekonomi',kind:'candidate',total:180,subject:'Företagsekonomi',subjectReq:90,thesisReq:15,local:true},
+ {id:'sport',name:'Kandidatexamen i idrottsvetenskap',short:'Kandidat i idrottsvetenskap',kind:'candidate',total:180,subject:'Idrottsvetenskap',subjectReq:90,thesisReq:15,local:true,ruleStatus:'Lokal kontroll krävs'},
+ {id:'business',name:'Kandidatexamen i företagsekonomi',short:'Kandidat i företagsekonomi',kind:'candidate',total:180,subject:'Företagsekonomi',subjectReq:90,thesisReq:15,local:true,ruleStatus:'Verifierad grundregel',ruleNote:'GU: 180 hp, 90 hp företagsekonomi inklusive 15 hp kandidatuppsats för ekonomie kandidat med huvudområdet företagsekonomi.'},
+ {id:'psychology',name:'Filosofie kandidatexamen i psykologi',short:'Kandidat i psykologi',kind:'candidate',total:180,subject:'Psykologi',subjectReq:90,thesisReq:15,local:true,ruleStatus:'Verifierad GU-regel',ruleNote:'GU: 90 hp psykologi med successiv fördjupning. Där ingår 15 hp metod och 15 hp självständigt arbete.'},
+ {id:'workscience',name:'Filosofie kandidatexamen i arbetsvetenskap',short:'Kandidat i arbetsvetenskap',kind:'candidate',total:180,subject:'Arbetsvetenskap',subjectReq:90,thesisReq:15,local:true,ruleStatus:'Verifierat huvudområde',ruleNote:'GU har examensarbete för kandidat inom huvudområdet arbetsvetenskap. Exakt kurskombination behöver kontrolleras.'},
+ {id:'publichealth',name:'Kandidatexamen i folkhälsovetenskap',short:'Kandidat i folkhälsovetenskap',kind:'candidate',total:180,subject:'Folkhälsovetenskap',subjectReq:90,thesisReq:15,local:false,ruleStatus:'Kontroll krävs'},
+ {id:'pedagogy',name:'Kandidatexamen i pedagogik',short:'Kandidat i pedagogik',kind:'candidate',total:180,subject:'Pedagogik',subjectReq:90,thesisReq:15,local:false,ruleStatus:'Kontroll krävs'}
 ];
 function subjectHp(sub){return courses.filter(c=>!sub||c.subject.toLowerCase()===sub.toLowerCase()).reduce((s,c)=>s+Number(c.hp),0)}
 function totalHp(){return courses.reduce((s,c)=>s+Number(c.hp),0)}
@@ -567,10 +658,17 @@ function parseAntagningLines(rawLines){
 function guessSubject(name,code='',institution=''){
  const n=String(name||'').toLowerCase();
  const c=String(code||'').toUpperCase().replace(/\s+/g,'');
+ if(/folkhälso|epidemiologi|public health/.test(n)) return 'Folkhälsovetenskap';
+ if(/psykolog|psycholog/.test(n)) return 'Psykologi';
+ if(/sociolog|sociology/.test(n)) return 'Sociologi';
+ if(/nationalekonomi|mikroekonomi|makroekonomi|economics/.test(n)) return 'Nationalekonomi';
+ if(/statistik|statistics/.test(n)) return 'Statistik';
+ if(/arbetsvetenskap|work science|arbetsliv/.test(n)) return 'Arbetsvetenskap';
+ if(/pedagog|didaktik|education/.test(n)) return 'Pedagogik';
+ if(/ledarskap|leadership|organisation och ledarskap/.test(n)) return 'Ledarskap';
+ if(/företagsekonomi|business|marketing|marknadsför|redovis|accounting|management|finance|finansiering/.test(n) || /^FÖ/.test(c)) return 'Företagsekonomi';
  if(/^(IIG|IKG|IKA|IDG)/.test(c)) return 'Idrottsvetenskap';
- if(/idrott|sport|träningslära|fysisk aktivitet|idrottsmedicin|hälsopromotion|hälsokommunikation|folkhälso|epidemiologi|coaching|rörelse|fysisk kapacitet/.test(n)) return 'Idrottsvetenskap';
- if(/företagsekonomi|business|marketing|marknadsför|redovis|accounting|organisation|management|finance|finansiering/.test(n)) return 'Företagsekonomi';
- if(/psykolog/.test(n)) return 'Psykologi';
+ if(/idrott|sport|träningslära|fysisk aktivitet|idrottsmedicin|hälsopromotion|hälsokommunikation|coaching|rörelse|fysisk kapacitet/.test(n)) return 'Idrottsvetenskap';
  if(/juridik|law/.test(n)) return 'Juridik';
  if(/informatik|computer|programmer|data science/.test(n)) return 'Informatik';
  return 'Behöver granskas';
@@ -611,7 +709,7 @@ function filterGoals(){let q=goalSearch.value.toLowerCase();goalChips.innerHTML=
 function chooseGoal(id){routeGoal.value=id;go('route');renderRoute()}
 function selectMode(m,el){mode=m;document.querySelectorAll('.option-card').forEach(x=>x.classList.remove('selected'));el.classList.add('selected')}
 function renderUniversities(){const host=document.getElementById('uniSelect');if(!host)return;host.innerHTML=universities.map(u=>`<button class="${u.id===selectedUniversity?'active':''}" onclick="selectedUniversity='${u.id}';saveProfile();renderUniversities();renderRoute()">${u.name}</button>`).join('')}
-function renderCourseCatalog(showAll=false){let d=degrees.find(x=>x.id===routeGoal.value)||degrees[0],r=calc(d),sub=d.subject||'';let items=courseCatalog.filter(c=>c.uni===selectedUniversity&&(sub?c.subject===sub:true));if(!items.length){courseSuggestions.innerHTML='<div class="notice">Inga verifierade exempelkurser i prototypens lilla kurslager för den här kombinationen ännu.</div>';return;}if(!showAll)items=items.slice(0,3);courseSuggestions.innerHTML=items.map(c=>`<div class="course-card"><div class="row"><strong>${c.name}</strong><span class="badge ${/Öppen|Anmäl dig/.test(c.status)?'good':'warn'}">${c.status}</span></div><div class="course-meta"><span class="mini">${c.hp} hp</span><span class="mini">${c.level}</span><span class="mini">${c.term}</span><span class="mini">${c.pace}</span><span class="mini">${c.form}</span></div><div class="small muted">${c.code?c.code+' · ':''}${c.thesisPossible?'Kan innehålla/omfatta examensarbete – verifiera kursplan.':'Matchas på ämne och nivå; behörighet och progression måste kontrolleras.'}</div><div class="source"><a href="${c.url}" target="_blank" rel="noopener">Öppna hos universitetet ↗</a></div></div>`).join('');}
+function renderCourseCatalog(showAll=false){let d=degrees.find(x=>x.id===routeGoal.value)||degrees[0],r=calc(d),sub=d.subject||'';let items=courseCatalog.filter(c=>c.uni===selectedUniversity&&(sub?c.subject===sub:true));if(!items.length){courseSuggestions.innerHTML='<div class="notice">Inga verifierade exempelkurser i prototypens lilla kurslager för den här kombinationen ännu.</div>';return;}if(!showAll)items=items.slice(0,5);courseSuggestions.innerHTML=items.map(c=>`<div class="course-card"><div class="row"><strong>${c.name}</strong><span class="badge ${/Öppen|Anmäl dig/.test(c.status)?'good':'warn'}">${c.status}</span></div><div class="course-meta"><span class="mini">${c.hp} hp</span><span class="mini">${c.level}</span><span class="mini">${c.term}</span><span class="mini">${c.pace}</span><span class="mini">${c.form}</span></div><div class="small muted">${c.code?c.code+' · ':''}${c.thesisPossible?'Kan innehålla/omfatta examensarbete – verifiera kursplan.':'Matchas på ämne och nivå; behörighet och progression måste kontrolleras.'}</div><div class="source"><a href="${c.url}" target="_blank" rel="noopener">Öppna hos universitetet ↗</a></div></div>`).join('');}
 function renderRoute(){
  const screen=document.getElementById('route');
  let empty=document.getElementById('routeEmptyState');
@@ -637,19 +735,681 @@ function renderRoute(){
    Array.from(screen.children).forEach(el=>{ if(el.id!=='routeEmptyState') el.style.display=''; });
  }
  if(empty) empty.style.display='none';let d=degrees.find(x=>x.id===routeGoal.value)||degrees[0],r=calc(d),u=universities.find(x=>x.id===selectedUniversity);routeSub.textContent='Mål: '+d.name+' · '+u.name;let steps=[];if(r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">1</div><div><strong>Komplettera huvudområdet med cirka ${r.missingSubject} hp</strong><div class="muted small">Kurserna behöver ligga inom rätt huvudområde och rätt progression.</div></div></div>`);if(r.missingThesis)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Verifiera eller läs självständigt arbete, cirka ${r.missingThesis} hp</strong><div class="muted small">Examensarbetet måste passa lärosätets examenskrav.</div></div></div>`);if(r.missingTotal>r.missingSubject)steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Komplettera ytterligare ${r.missingTotal-r.missingSubject} hp</strong><div class="muted small">Kan i vissa examina vara valfria kurser, beroende på lokala krav.</div></div></div>`);steps.push(`<div class="route-step"><div class="route-n">${steps.length+1}</div><div><strong>Begär formell prövning / ansök om examen</strong><div class="muted small">Appens analys ersätter inte lärosätets beslut.</div></div></div>`);let rule=(localRules[selectedUniversity]||{})[d.id]||'Lokal examensordning och huvudområdeskrav behöver verifieras.';routeMain.innerHTML=`<div class="kicker">Preliminär väg · ${u.name}</div><h2 style="margin:6px 0">${d.name}</h2><div class="row"><span class="badge ${r.pct>=85?'good':r.pct>=55?'warn':'bad'}">${Math.min(100,r.pct)}%</span><strong>${r.remaining? r.remaining+' hp uppskattat kvar':'Poängkrav ser uppfyllt ut'}</strong></div><div class="small muted" style="margin-top:8px">Bedömd säkerhet: <strong>${r.confidence} (${r.confidenceScore}%)</strong>. Appen vågar rekommendera vägen före formell prövning, men markerar osäkerheter.</div><div class="info" style="margin-top:14px"><strong>Lokal regelkontroll:</strong> ${rule}</div>${steps.join('')}<div class="feedback-box"><strong>Verkar resultatet rimligt?</strong><div class="feedback-actions"><button class="ghost" id="fbYes" onclick="setFeedback('rimligt')">👍 Rimligt</button><button class="ghost" id="fbNo" onclick="setFeedback('fel')">👎 Verkar fel</button></div><textarea id="fbText" placeholder="Vad stämmer eller verkar fel? Frivilligt."></textarea><div class="row" style="margin-top:9px"><span class="small muted" id="fbState"></span><button class="primary" onclick="saveFeedback()">Spara feedback</button></div><div class="privacy-mini">Feedback sparas lokalt på enheten i denna beta. Du kan använda dela-knappen efteråt för att skicka den till personen som bett dig testa.</div></div>`;courseSuggestTitle.textContent=r.missingSubject?`Verifierade kursförslag i ${d.subject||'huvudområdet'}`:'Kurser att kontrollera mot progression';renderCourseCatalog(false)}
-function renderCompare(){
- const target=document.getElementById('compareResults');
- if(!target)return;
- if(!courses.length){
-   target.innerHTML='<div class="card empty"><strong>Inget att jämföra ännu</strong><div class="small muted" style="margin-top:5px">Hämta dina meriter så kan Lotsen jämföra möjliga examensvägar.</div></div>';
-   return;
+
+function getMatches(){
+ return degrees.map(d=>{
+   const r=calc(d);
+   return {degree:d,pct:r.pct,subjectHp:r.subj,remaining:r.remaining,result:r};
+ }).sort((a,b)=>b.pct-a.pct || a.remaining-b.remaining);
+}
+
+const programCatalog=[
+ {id:'gu-ekon',name:'Ekonomie kandidatprogrammet',university:'Göteborgs universitet',hp:180,verified:true,restriction:'Vissa programkurser har programspecifika lärandemål och kan inte alltid tillgodoräknas.',
+  courses:[
+   {name:'Företagsekonomi – grundblock',hp:30,subject:'Företagsekonomi',keywords:['företagsekonomi','marknadsför','organisation','ledarskap','redovis','ekonomistyrning']},
+   {name:'Nationalekonomi – grundblock',hp:30,subject:'Nationalekonomi',keywords:['nationalekonomi','mikroekonomi','makroekonomi','finansiell ekonomi','internationell ekonomi']},
+   {name:'Statistik',hp:15,subject:'Statistik',keywords:['statistik']},
+   {name:'Juridik/handelsrätt',hp:15,subject:'Juridik',keywords:['juridik','handelsrätt']},
+   {name:'Fördjupning och kandidatuppsats',hp:60,subject:'Företagsekonomi',keywords:['strategi','finansiering','styrning','kandidatuppsats','examensarbete']},
+   {name:'Valfria kurser',hp:30,elective:true}
+  ]},
+ {id:'hh-ekon',name:'Ekonomie kandidatexamen – företagsekonomi',university:'Högskolan i Halmstad',hp:180,verified:true,
+  courses:[
+   {name:'Företagsekonomi',hp:60,subject:'Företagsekonomi',keywords:['företagsekonomi','redovis','marknadsför','organisation','finansiering']},
+   {name:'Fördjupning i företagsekonomi',hp:30,subject:'Företagsekonomi',keywords:['fördjupning','strategi','redovis','finansiering','examensarbete','kandidatuppsats']},
+   {name:'Nationalekonomi',hp:15,subject:'Nationalekonomi',keywords:['nationalekonomi']},
+   {name:'Ekonomiskt ämne',hp:15,keywords:['företagsekonomi','nationalekonomi']},
+   {name:'Ekonomisk anknytning',hp:30,keywords:['informatik','juridik','statistik','projektledning','ekonomi']},
+   {name:'Övriga kurser',hp:30,elective:true}
+  ]},
+ {id:'lnu-red',name:'Ekonomprogrammet – redovisning/ekonomistyrning',university:'Linnéuniversitetet',hp:180,verified:true,
+  courses:[
+   {name:'Företagsekonomi',hp:60,subject:'Företagsekonomi',keywords:['företagsekonomi','redovis','ekonomistyrning','organisation','marknadsför']},
+   {name:'Redovisning/ekonomistyrning – fördjupning',hp:30,subject:'Företagsekonomi',keywords:['redovisning','ekonomistyrning','revision','styrning']},
+   {name:'Ekonomiska stödområden',hp:30,keywords:['nationalekonomi','statistik','juridik','informatik']},
+   {name:'Examensarbete/fördjupning',hp:30,subject:'Företagsekonomi',keywords:['examensarbete','kandidatuppsats','metod']},
+   {name:'Övriga/valfria studier',hp:30,elective:true}
+  ]},
+ {id:'gu-psyk',name:'Kandidatspår i psykologi',university:'Göteborgs universitet',hp:180,verified:true,
+  courses:[
+   {name:'Psykologi, grund och fortsättning',hp:60,subject:'Psykologi',keywords:['psykologi']},
+   {name:'Forskningsmetod',hp:15,subject:'Psykologi',keywords:['metod','forskningsmetod','statistik']},
+   {name:'Kandidatuppsats',hp:15,subject:'Psykologi',keywords:['kandidatuppsats','examensarbete']},
+   {name:'Övriga/valfria studier',hp:90,elective:true}
+  ]},
+ {id:'miun-mag-ent',name:'Magister – entreprenörskap och företagsutveckling',university:'Mittuniversitetet',hp:60,verified:true,advanced:true,
+  eligibility:{degree:true,subject:'Företagsekonomi',subjectHp:90},
+  courses:[
+   {name:'Entreprenörskap',hp:15,subject:'Företagsekonomi',keywords:['entreprenörskap']},
+   {name:'Företagsutveckling',hp:15,subject:'Företagsekonomi',keywords:['företagsutveckling']},
+   {name:'Samhällsvetenskaplig metod',hp:15,keywords:['metod']},
+   {name:'Magisteruppsats',hp:15,subject:'Företagsekonomi',keywords:['magisteruppsats','examensarbete']}
+  ]}
+,
+
+ {id:'umu-ekon',name:'Ekonomie kandidatprogrammet',university:'Umeå universitet',hp:180,verified:true,
+  courses:[
+   {name:'Företagsekonomi',hp:30,subject:'Företagsekonomi',keywords:['företagsekonomi','marknadsför','organisation','redovis']},
+   {name:'Nationalekonomi',hp:30,subject:'Nationalekonomi',keywords:['nationalekonomi','mikroekonomi','makroekonomi']},
+   {name:'Statistik',hp:20,subject:'Statistik',keywords:['statistik']},
+   {name:'Juridik',hp:10,subject:'Juridik',keywords:['juridik','rättsvetenskap']},
+   {name:'Fördjupning i huvudområdet',hp:60,subject:'Företagsekonomi',keywords:['företagsekonomi','metod','kandidatuppsats','examensarbete']},
+   {name:'Valfria kurser',hp:30,elective:true}
+  ]},
+ {id:'oru-ekon',name:'Ekonomie kandidatexamen – företagsekonomi',university:'Örebro universitet',hp:180,verified:true,
+  courses:[
+   {name:'Företagsekonomi – huvudområde',hp:90,subject:'Företagsekonomi',keywords:['företagsekonomi','examensarbete','kandidatuppsats']},
+   {name:'Nationalekonomi',hp:30,subject:'Nationalekonomi',keywords:['nationalekonomi']},
+   {name:'Övriga kurser',hp:60,elective:true}
+  ]},
+ {id:'kau-fek',name:'Kandidatspår i företagsekonomi',university:'Karlstads universitet',hp:180,verified:true,
+  courses:[
+   {name:'Företagsekonomi – grund och fortsättning',hp:60,subject:'Företagsekonomi',keywords:['företagsekonomi','business']},
+   {name:'Business Research Methods',hp:7.5,subject:'Företagsekonomi',keywords:['research methods','metod']},
+   {name:'Kandidatuppsats',hp:15,subject:'Företagsekonomi',keywords:['kandidatuppsats','examensarbete']},
+   {name:'Fördjupning i företagsekonomi',hp:7.5,subject:'Företagsekonomi',keywords:['företagsekonomi']},
+   {name:'Övriga/valfria kurser',hp:90,elective:true}
+  ]},
+
+,
+
+ {id:'gu-tranar',name:'Tränarprogrammet',university:'Göteborgs universitet',hp:180,verified:true,
+  courses:[
+   {name:'Idrottsvetenskap och tränarskap',hp:60,subject:'Idrottsvetenskap',keywords:['idrott','tränarskap','coaching','träning','prestation'],goals:['träningsplanering','coaching','prestation','analys','ledarskap']},
+   {name:'Idrottsvetenskaplig metod',hp:15,subject:'Idrottsvetenskap',keywords:['metod','idrottsvetenskaplig metod']},
+   {name:'Träning, analys och prestation',hp:30,subject:'Idrottsvetenskap',keywords:['träning','analys','prestation','testmetodik','fysisk kapacitet']},
+   {name:'Praktik och tillämpning',hp:45,keywords:['praktik','tillämpad','coaching','ledarskap']},
+   {name:'Kandidatuppsats',hp:15,subject:'Idrottsvetenskap',keywords:['kandidatuppsats','examensarbete']},
+   {name:'Övrigt',hp:15,elective:true}
+  ]},
+ {id:'gu-halsopromo',name:'Hälsopromotion – idrottsvetenskap',university:'Göteborgs universitet',hp:180,verified:true,
+  courses:[
+   {name:'Idrottsvetenskap och fysisk aktivitet',hp:60,subject:'Idrottsvetenskap',keywords:['idrott','fysisk aktivitet','hälsa','hälsopromotion']},
+   {name:'Hälsopromotion',hp:30,subject:'Idrottsvetenskap',keywords:['hälsopromotion','hälsokommunikation','hälsofrämjande']},
+   {name:'Metod och vetenskapligt arbete',hp:15,subject:'Idrottsvetenskap',keywords:['metod','vetenskaplig']},
+   {name:'Kandidatuppsats',hp:15,subject:'Idrottsvetenskap',keywords:['kandidatuppsats','examensarbete']},
+   {name:'Övriga/valfria studier',hp:60,elective:true}
+  ]},
+ {id:'hh-psyk-idrott',name:'Psykologi – idrott, motion och hälsa',university:'Högskolan i Halmstad',hp:180,verified:true,
+  courses:[
+   {name:'Psykologi',hp:90,subject:'Psykologi',keywords:['psykologi','socialpsykologi','hälsopsykologi','personlighetspsykologi']},
+   {name:'Idrott, motion och hälsa',hp:30,keywords:['idrott','motion','hälsa','prestation','motivation']},
+   {name:'Metod och examensarbete',hp:30,subject:'Psykologi',keywords:['metod','examensarbete','kandidatuppsats']},
+   {name:'Övriga studier',hp:30,elective:true}
+  ]},
+ {id:'hh-traning-mag',name:'Magister – träningens biomedicin',university:'Högskolan i Halmstad',hp:60,verified:true,advanced:true,
+  eligibility:{degree:true,subjects:['Idrottsvetenskap','Biomedicin','Fysioterapi'],thesis:15},
+  courses:[
+   {name:'Träning, hälsa och prestation',hp:30,keywords:['träning','hälsa','prestation','idrottsmedicin']},
+   {name:'Vetenskaplig metod/fördjupning',hp:15,keywords:['metod','vetenskaplig']},
+   {name:'Självständigt arbete',hp:15,keywords:['examensarbete','uppsats']}
+  ]}
+
+,
+
+ {id:'miun-idrott',name:'Idrottsvetenskapligt program',university:'Mittuniversitetet',hp:180,verified:true,sourceLevel:'course',sourceVersion:'HT2026',
+  courses:[
+   {name:'Anatomi och fysiologi',hp:15,subject:'Idrottsvetenskap',keywords:['anatomi','fysiologi'],goals:['anatomi','fysiologi']},
+   {name:'Introduktion till idrottsvetenskap',hp:7.5,subject:'Idrottsvetenskap',keywords:['idrottsvetenskap','introduktion']},
+   {name:'Fysisk aktivitet och hälsa',hp:7.5,subject:'Idrottsvetenskap',keywords:['fysisk aktivitet','hälsa'],goals:['fysisk aktivitet','hälsa']},
+   {name:'Idrottsfysiologi och grundläggande träningslära',hp:15,subject:'Idrottsvetenskap',keywords:['idrottsfysiologi','träningslära','träning'],goals:['fysiologi','träningsplanering']},
+   {name:'Kinesiologi – rörelselära',hp:7.5,subject:'Idrottsvetenskap',keywords:['kinesiologi','rörelselära','rörelse']},
+   {name:'Idrottspsykologi – grundläggande processer',hp:7.5,keywords:['idrottspsykologi','psykologi']},
+   {name:'Idrottspsykologi – socialpsykologiska perspektiv',hp:7.5,keywords:['idrottspsykologi','socialpsykologi']},
+   {name:'Testmetodik och evidensbaserad träningslära',hp:15,subject:'Idrottsvetenskap',keywords:['testmetodik','träningslära'],goals:['testmetodik','testmetoder','träningsplanering','evidensbaserad träning']},
+   {name:'Vetenskaplig teori och metod I',hp:7.5,subject:'Idrottsvetenskap',keywords:['vetenskaplig teori','metod']},
+   {name:'Tillämpad idrottspsykologi',hp:15,keywords:['tillämpad idrottspsykologi','psykologi']},
+   {name:'Ledarskap och lärande inom idrotten',hp:15,subject:'Idrottsvetenskap',keywords:['ledarskap','lärande','idrott']},
+   {name:'Nutrition med inriktning idrott och prestation',hp:7.5,subject:'Idrottsvetenskap',keywords:['nutrition','prestation']},
+   {name:'Praktiskt ledarskap',hp:7.5,subject:'Idrottsvetenskap',keywords:['praktiskt ledarskap','ledarskap']},
+   {name:'Prestationsutveckling',hp:7.5,subject:'Idrottsvetenskap',keywords:['prestationsutveckling','prestation']},
+   {name:'Träningslära i praktiken',hp:7.5,subject:'Idrottsvetenskap',keywords:['träningslära','träning'],goals:['kapacitet','utvecklingsbehov','prestationsmål','hälsomål','kritisk granskning']},
+   {name:'Examensarbete',hp:15,subject:'Idrottsvetenskap',keywords:['examensarbete','kandidatuppsats'],goals:['vetenskapligt arbete','kritisk granskning']},
+   {name:'Verksamhetsförlagd utbildning',hp:7.5,keywords:['verksamhetsförlagd','praktik']},
+   {name:'Vetenskaplig teori och metod II',hp:7.5,subject:'Idrottsvetenskap',keywords:['vetenskaplig teori','metod']}
+  ]},
+ {id:'miun-beteende',name:'Beteendevetenskapligt program',university:'Mittuniversitetet',hp:180,verified:true,
+  courses:[
+   {name:'Beteendevetenskaplig grund',hp:60,keywords:['psykologi','sociologi','pedagogik','beteende']},
+   {name:'Humanvetenskap och arbetsliv',hp:30,keywords:['humanvetenskap','arbetsliv','organisation','ledarskap']},
+   {name:'Metod och vetenskapligt arbete',hp:30,keywords:['metod','statistik','vetenskaplig']},
+   {name:'Fördjupning och examensarbete',hp:30,keywords:['fördjupning','examensarbete','kandidatuppsats']},
+   {name:'Övriga/valfria studier',hp:30,elective:true}
+  ]},
+ {id:'oru-personal',name:'Personalvetarprogrammet',university:'Örebro universitet',hp:180,verified:true,
+  courses:[
+   {name:'Sociologi – organisation och arbetsliv',hp:60,keywords:['sociologi','organisation','arbetsliv']},
+   {name:'Personalarbete I',hp:22.5,keywords:['personalarbete','personalekonomi','psykologi','organisation']},
+   {name:'Pedagogiska perspektiv på arbetslivet',hp:7.5,subject:'Pedagogik',keywords:['pedagogik','arbetsliv']},
+   {name:'Arbetsrätt för personalvetare',hp:22.5,subject:'Juridik',keywords:['arbetsrätt','juridik']},
+   {name:'Genus, mångfald och organisation',hp:7.5,keywords:['genus','mångfald','organisation']},
+   {name:'Sociologi – kandidatkurs och självständigt arbete',hp:30,keywords:['sociologi','kandidatuppsats','examensarbete']},
+   {name:'Profil/praktik/valfri termin',hp:30,elective:true}
+  ]}
+
+,
+
+ {id:'gu-personal',name:'Personalvetarprogrammet',university:'Göteborgs universitet',hp:180,verified:true,sourceLevel:'course',
+  courses:[
+   {name:'Samhälle, arbete och organisation',hp:15,keywords:['samhälle','arbete','organisation'],goals:['arbete','organisation','samhälle']},
+   {name:'Grupper i arbetslivet',hp:7.5,keywords:['grupper','arbetsliv','grupprocesser'],goals:['grupper','arbetsliv']},
+   {name:'Individer i arbetslivet',hp:7.5,keywords:['individer','arbetsliv','psykologi'],goals:['individ','arbetsliv','psykologi']},
+   {name:'Lärande och kompetensutveckling',hp:15,subject:'Pedagogik',keywords:['lärande','kompetensutveckling','pedagogik'],goals:['lärande','kompetensutveckling']},
+   {name:'Företags- och personalekonomi',hp:15,subject:'Företagsekonomi',keywords:['företagsekonomi','personalekonomi'],goals:['ekonomi','personalekonomi']},
+   {name:'Juridik, särskilt arbetsrätt',hp:15,subject:'Juridik',keywords:['juridik','arbetsrätt'],goals:['arbetsrätt','juridik']},
+   {name:'Arbetsmiljörätt',hp:7.5,subject:'Juridik',keywords:['arbetsmiljörätt','arbetsmiljö'],goals:['arbetsmiljö','rätt']},
+   {name:'Arbetsmiljöarbete',hp:7.5,keywords:['arbetsmiljöarbete','arbetsmiljö'],goals:['arbetsmiljö']},
+   {name:'Rekrytering och omställning',hp:15,keywords:['rekrytering','omställning'],goals:['rekrytering','omställning']},
+   {name:'Vetenskapsteori och metod',hp:15,keywords:['vetenskapsteori','metod','statistik'],goals:['vetenskaplig metod','analys']},
+   {name:'Personalarbetets innehåll och metoder',hp:15,keywords:['personalarbete','praktik','hr'],goals:['personalarbete','metoder']},
+   {name:'Kommunikation och konflikt',hp:7.5,keywords:['kommunikation','konflikt'],goals:['kommunikation','konflikt']},
+   {name:'Ledarskap och medarbetarskap',hp:7.5,keywords:['ledarskap','medarbetarskap'],goals:['ledarskap','medarbetarskap']},
+   {name:'Förändringsarbete',hp:7.5,keywords:['förändringsarbete','förändring'],goals:['förändring']},
+   {name:'Globalisering och organisering',hp:7.5,keywords:['globalisering','organisering','organisation'],goals:['globalisering','organisering']},
+   {name:'Examensarbete i personalvetenskap',hp:15,keywords:['examensarbete','kandidatuppsats','personalvetenskap'],goals:['självständigt arbete','vetenskaplig metod']}
+  ]},
+ {id:'gu-kost-led',name:'Kost- och ledarskapsprogrammet',university:'Göteborgs universitet',hp:180,verified:true,
+  courses:[
+   {name:'Kost, måltid och hälsa',hp:60,keywords:['kost','nutrition','måltid','livsmedel','hälsa'],goals:['måltider','hälsa','livsmedel','hållbarhet']},
+   {name:'Ledarskap och organisation',hp:30,keywords:['ledarskap','organisation','management'],goals:['ledarskap','organisation','verksamhet']},
+   {name:'Ekonomi och verksamhetsstyrning',hp:15,subject:'Företagsekonomi',keywords:['ekonomi','styrning'],goals:['ekonomi','verksamhetsstyrning']},
+   {name:'Metod och examensarbete',hp:30,keywords:['metod','examensarbete','kandidatuppsats']},
+   {name:'Övriga/valfria studier',hp:45,elective:true}
+  ]},
+ {id:'gu-ped',name:'Pedagogik, kandidatprogram',university:'Göteborgs universitet',hp:180,verified:true,sourceLevel:'programme',sourceVersion:'HT2026',
+  courses:[
+   {name:'Pedagogik – grund och fortsättning',hp:60,subject:'Pedagogik',keywords:['pedagogik','lärande','utbildning'],goals:['lärande','utveckling','socialisering','utbildning']},
+   {name:'Pedagogisk fördjupning',hp:45,subject:'Pedagogik',keywords:['pedagogik','ledarskap','lärande'],goals:['pedagogik','analys','lärande']},
+   {name:'Metod och examensarbete',hp:45,subject:'Pedagogik',keywords:['metod','examensarbete','kandidatuppsats'],goals:['vetenskaplig metod','självständigt arbete']},
+   {name:'Valfri termin/praktik/utbyte',hp:30,elective:true}
+  ]},
+ {id:'gu-fritid-idrott',name:'Grundlärarprogrammet – fritidshem, idrott och hälsa',university:'Göteborgs universitet',hp:180,verified:true,professional:true,
+  courses:[
+   {name:'Fritidspedagogiskt område',hp:60,keywords:['fritidspedagogik','barn','lek','lärande']},
+   {name:'Idrott och hälsa',hp:30,subject:'Idrottsvetenskap',keywords:['idrott','hälsa','rörelse','fysisk aktivitet']},
+   {name:'Utbildningsvetenskaplig kärna',hp:60,subject:'Pedagogik',keywords:['pedagogik','didaktik','utbildning']},
+   {name:'Verksamhetsförlagd utbildning',hp:30,keywords:['vfu','praktik','verksamhetsförlagd']}
+  ]}
+
+,
+
+ {id:'hh-halsoped',name:'Hälsopedagogiskt program',university:'Högskolan i Halmstad',hp:180,verified:true,
+  courses:[
+   {name:'Hälsopedagogik och hälsofrämjande arbete',hp:60,keywords:['hälsopedagog','hälsopromotion','hälsofrämjande','hälsa'],goals:['hälsofrämjande','pedagogik','förändringsarbete','hälsa']},
+   {name:'Pedagogik och ledarskap',hp:30,subject:'Pedagogik',keywords:['pedagogik','ledarskap','lärande'],goals:['pedagogik','ledarskap','lärande']},
+   {name:'Beteende och förändringsarbete',hp:30,keywords:['beteende','förändring','motivation','psykologi'],goals:['beteende','motivation','förändring']},
+   {name:'Metod och examensarbete',hp:30,keywords:['metod','examensarbete','kandidatuppsats']},
+   {name:'Övriga/valfria studier',hp:30,elective:true}
+  ]},
+ {id:'miun-ekon',name:'Ekonomprogram',university:'Mittuniversitetet',hp:180,verified:true,
+  courses:[
+   {name:'Företagsekonomi',hp:60,subject:'Företagsekonomi',keywords:['företagsekonomi','marknadsför','redovis','organisation','finansiering']},
+   {name:'Fördjupning – marknadsföring/affärsutveckling eller redovisning/finansiering',hp:30,subject:'Företagsekonomi',keywords:['marknadsföring','affärsutveckling','redovisning','finansiering']},
+   {name:'Ekonomiska stödområden',hp:30,keywords:['nationalekonomi','statistik','juridik']},
+   {name:'Metod och examensarbete',hp:30,subject:'Företagsekonomi',keywords:['metod','examensarbete','kandidatuppsats']},
+   {name:'Övriga/valfria studier',hp:30,elective:true}
+  ]},
+ {id:'gu-hallbar',name:'Hållbar utveckling, samhällsförändring och klimatomställning',university:'Göteborgs universitet',hp:180,verified:true,
+  courses:[
+   {name:'Hållbar utveckling och samhällsförändring',hp:60,keywords:['hållbar','samhälle','klimat','omställning']},
+   {name:'Samhällsvetenskapliga perspektiv',hp:30,keywords:['samhällsvetenskap','organisation','ekonomi','politik']},
+   {name:'Metod, praktik och fältstudier',hp:45,keywords:['metod','praktik','fältstudier']},
+   {name:'Examensarbete/fördjupning',hp:15,keywords:['examensarbete','kandidatuppsats']},
+   {name:'Övriga/valfria studier',hp:30,elective:true}
+  ]},
+ {id:'gu-arbetsterapeut',name:'Arbetsterapeutprogrammet',university:'Göteborgs universitet',hp:180,verified:true,professional:true,
+  courses:[
+   {name:'Arbetsterapi och aktivitet',hp:75,keywords:['arbetsterapi','aktivitet','rehabilitering']},
+   {name:'Hälsa, kropp och beteende',hp:30,keywords:['hälsa','anatomi','fysiologi','psykologi']},
+   {name:'Vetenskaplig metod och examensarbete',hp:30,keywords:['metod','examensarbete']},
+   {name:'Verksamhetsförlagd utbildning och profession',hp:45,keywords:['praktik','verksamhetsförlagd','profession']}
+  ]},
+ {id:'gu-fysioterapeut',name:'Fysioterapeutprogrammet',university:'Göteborgs universitet',hp:180,verified:true,professional:true,
+  courses:[
+   {name:'Fysioterapi, rörelse och funktion',hp:75,keywords:['fysioterapi','rörelse','funktion','träning']},
+   {name:'Anatomi, fysiologi och hälsa',hp:30,keywords:['anatomi','fysiologi','hälsa','idrottsmedicin']},
+   {name:'Vetenskaplig metod och examensarbete',hp:30,keywords:['metod','examensarbete']},
+   {name:'Verksamhetsförlagd utbildning',hp:45,keywords:['praktik','verksamhetsförlagd']}
+  ]},
+ {id:'gu-sjukskot',name:'Sjuksköterskeprogrammet',university:'Göteborgs universitet',hp:180,verified:true,professional:true,
+  courses:[
+   {name:'Omvårdnad',hp:75,keywords:['omvårdnad','vård','hälsa']},
+   {name:'Medicinsk vetenskap',hp:30,keywords:['anatomi','fysiologi','medicin','farmakologi']},
+   {name:'Metod och examensarbete',hp:30,keywords:['metod','examensarbete']},
+   {name:'Verksamhetsförlagd utbildning',hp:45,keywords:['praktik','verksamhetsförlagd']}
+  ]}
+
+,
+
+ {id:'gu-arbetsvetar',name:'Arbetsvetarprogrammet',university:'Göteborgs universitet',hp:180,verified:true,
+  courses:[
+   {name:'Arbetsvetenskap – arbete, organisation och arbetsmarknad',hp:60,subject:'Arbetsvetenskap',keywords:['arbete','organisation','arbetsmarknad','arbetsliv'],goals:['arbete','arbetsorganisation','arbetsmarknad']},
+   {name:'Analys och utvärdering',hp:30,subject:'Arbetsvetenskap',keywords:['analys','utvärdering','utredning','metod'],goals:['analys','utvärdering','utredningsmetodik']},
+   {name:'Fördjupning i arbetsvetenskap',hp:30,subject:'Arbetsvetenskap',keywords:['arbetsvetenskap','arbetsliv','organisation']},
+   {name:'Examensarbete',hp:15,subject:'Arbetsvetenskap',keywords:['examensarbete','kandidatuppsats'],goals:['självständigt arbete','analys']},
+   {name:'Övriga/valfria studier',hp:45,elective:true}
+  ]}
+
+,
+
+ {id:'gu-offentlig',name:'Kandidatprogrammet i offentlig förvaltning',university:'Göteborgs universitet',hp:180,verified:true,sourceLevel:'programme',
+  courses:[
+   {name:'Offentlig förvaltning och organisation',hp:45,keywords:['offentlig förvaltning','organisation','styrning','ledning'],goals:['förvaltning','organisation','styrning']},
+   {name:'Företagsekonomi och ekonomistyrning',hp:22.5,subject:'Företagsekonomi',keywords:['företagsekonomi','ekonomistyrning','redovisning'],goals:['ekonomistyrning','organisation']},
+   {name:'Nationalekonomi och samhällsekonomi',hp:15,subject:'Nationalekonomi',keywords:['nationalekonomi','samhällsekonomi'],goals:['ekonomi','resursfördelning']},
+   {name:'Juridik och offentlig rätt',hp:15,subject:'Juridik',keywords:['juridik','offentlig rätt','förvaltningsrätt'],goals:['rätt','förvaltning']},
+   {name:'Statsvetenskap och samhällsanalys',hp:22.5,keywords:['statsvetenskap','politik','samhällsanalys'],goals:['politik','samhälle','analys']},
+   {name:'Metod, utvärdering och analys',hp:30,keywords:['metod','utvärdering','analys','statistik'],goals:['metod','utvärdering','analys']},
+   {name:'Examensarbete och fördjupning',hp:15,keywords:['examensarbete','kandidatuppsats'],goals:['självständigt arbete','analys']},
+   {name:'Övrigt/valbart',hp:15,elective:true}
+  ]}
+
+,
+
+ {id:'umu-personal',name:'Personalvetarprogrammet',university:'Umeå universitet',hp:180,verified:true,sourceLevel:'course',sourceVersion:'HT2026',
+  eligibility:{workExperienceMonths:12},
+  courses:[
+   {name:'HRM, organisation och arbetsliv',hp:15,keywords:['hrm','organisation','arbetsliv'],goals:['organisation','arbetsliv','vetenskapligt arbete']},
+   {name:'Social- och gruppsykologi',hp:7.5,subject:'Psykologi',keywords:['socialpsykologi','gruppsykologi','psykologi']},
+   {name:'Pedagogik',hp:7.5,subject:'Pedagogik',keywords:['pedagogik','lärande']},
+   {name:'Sociologi',hp:7.5,subject:'Sociologi',keywords:['sociologi','arbetsliv']},
+   {name:'Sociala kategorier och diskriminering i arbetslivet',hp:7.5,keywords:['diskriminering','arbetsliv','mångfald']},
+   {name:'Arbetsrätt för personalvetare',hp:15,subject:'Juridik',keywords:['arbetsrätt','juridik']},
+   {name:'Företagsekonomi',hp:15,subject:'Företagsekonomi',keywords:['företagsekonomi','redovisning','ekonomistyrning']},
+   {name:'Organisatoriskt ledarskapande',hp:7.5,keywords:['ledarskap','organisation']},
+   {name:'Organisationsförändring',hp:7.5,keywords:['organisationsförändring','förändring']},
+   {name:'HRM – innehåll och metoder',hp:30,keywords:['hrm','personalarbete','verksamhetsutveckling'],goals:['personalarbete','samtalsmetodik','verksamhetsutveckling']},
+   {name:'HRM i praktiken',hp:15,keywords:['hrm','praktik','personalarbete']},
+   {name:'Samhällsvetenskaplig metod och vetenskapsteori',hp:15,keywords:['metod','kvalitativ','kvantitativ','vetenskapsteori'],goals:['kvalitativ analys','kvantitativ analys','forskningsplanering']},
+   {name:'Examensarbete i pedagogik eller sociologi',hp:15,keywords:['examensarbete','kandidatuppsats'],goals:['självständigt arbete','personal','arbetsliv']},
+   {name:'Strategisk HRM',hp:15,keywords:['strategisk hrm','hrm','strategi']}
+  ]},
+ {id:'kau-personal',name:'Personal och arbetsliv',university:'Karlstads universitet',hp:180,verified:true,sourceLevel:'programme',
+  courses:[
+   {name:'Arbetsvetenskap – individ, organisation och arbetsliv',hp:60,subject:'Arbetsvetenskap',keywords:['arbetsvetenskap','organisation','arbetsliv'],goals:['individ','organisation','arbetsliv']},
+   {name:'Strategiskt personalarbete och HR',hp:30,keywords:['personal','hr','strategi','organisation']},
+   {name:'Metod och analys',hp:30,keywords:['metod','analys','vetenskaplig']},
+   {name:'Fördjupning i arbetsvetenskap',hp:30,subject:'Arbetsvetenskap',keywords:['arbetsvetenskap','fördjupning']},
+   {name:'Examensarbete',hp:15,subject:'Arbetsvetenskap',keywords:['examensarbete','kandidatuppsats'],goals:['självständigt arbete']},
+   {name:'Övrigt/valbart',hp:15,elective:true}
+  ]},
+ {id:'lnu-personal',name:'Personal och arbetsliv',university:'Linnéuniversitetet',hp:180,verified:true,sourceLevel:'programme',sourceVersion:'HT2026',
+  courses:[
+   {name:'Organisation, ledarskap och HR-arbete',hp:60,keywords:['organisation','ledarskap','hr','personalarbete'],goals:['organisation','ledarskap','utveckling']},
+   {name:'Arbetsliv och samhälle',hp:30,keywords:['arbetsliv','samhälle','förändring']},
+   {name:'Metod och analys',hp:30,keywords:['metod','analys','vetenskaplig']},
+   {name:'Fördjupning inom personal och arbetsliv',hp:30,keywords:['personal','arbetsliv','organisation']},
+   {name:'Examensarbete',hp:15,keywords:['examensarbete','kandidatuppsats'],goals:['självständigt arbete']},
+   {name:'Övrigt/valbart',hp:15,elective:true}
+  ]},
+ {id:'mdu-personal',name:'Personalvetarprogrammet',university:'Mälardalens universitet',hp:180,verified:true,sourceLevel:'programme',sourceVersion:'HT2026',
+  courses:[
+   {name:'Organisation och personalarbete',hp:60,keywords:['organisation','personal','hr']},
+   {name:'Arbetsliv, hållbarhet och förändring',hp:30,keywords:['arbetsliv','hållbarhet','förändring']},
+   {name:'Metod och analys',hp:30,keywords:['metod','analys','vetenskaplig']},
+   {name:'Fördjupning inom personalområdet',hp:30,keywords:['personal','organisation','hr']},
+   {name:'Examensarbete',hp:15,keywords:['examensarbete','kandidatuppsats'],goals:['självständigt arbete']},
+   {name:'Övrigt/valbart',hp:15,elective:true}
+  ]}
+
+,
+
+ {id:'lnu-coaching',name:'Coaching och Sport Management',university:'Linnéuniversitetet',hp:180,verified:true,sourceLevel:'programme',sourceVersion:'HT2026',
+  courses:[
+   {name:'Ledning och organisering inom idrott',hp:30,keywords:['ledning','organisering','idrott'],goals:['ledning','organisation','idrott']},
+   {name:'Idrottscoaching och träningslära',hp:30,subject:'Idrottsvetenskap',keywords:['coaching','träningslära','idrott'],goals:['coaching','träning','prestation']},
+   {name:'Hälsoarbete',hp:15,keywords:['hälsa','hälsoarbete','fysisk aktivitet'],goals:['hälsa','hälsofrämjande']},
+   {name:'Marknadsföring och entreprenörskap',hp:22.5,subject:'Företagsekonomi',keywords:['marknadsföring','entreprenörskap'],goals:['marknadsföring','entreprenörskap']},
+   {name:'Ekonomistyrning och juridik',hp:22.5,keywords:['ekonomistyrning','juridik'],goals:['ekonomi','juridik']},
+   {name:'Metod och examensarbete',hp:30,keywords:['metod','examensarbete','kandidatuppsats'],goals:['vetenskaplig metod','självständigt arbete']},
+   {name:'Övriga/valfria studier',hp:30,elective:true}
+  ]},
+ {id:'lnu-idrott-halsa',name:'Fysisk aktivitet, hälsa och friluftsliv',university:'Linnéuniversitetet',hp:180,verified:true,sourceLevel:'programme',
+  courses:[
+   {name:'Idrottsvetenskap och fysisk aktivitet',hp:60,subject:'Idrottsvetenskap',keywords:['idrottsvetenskap','fysisk aktivitet','träning'],goals:['fysisk aktivitet','hälsa']},
+   {name:'Hälsa och hälsofrämjande arbete',hp:30,keywords:['hälsa','hälsofrämjande','livsstil'],goals:['hälsa','hälsofrämjande']},
+   {name:'Friluftsliv',hp:30,keywords:['friluftsliv','natur','aktivitet'],goals:['friluftsliv','aktivitet']},
+   {name:'Metod och examensarbete',hp:30,subject:'Idrottsvetenskap',keywords:['metod','examensarbete','kandidatuppsats'],goals:['vetenskaplig metod','självständigt arbete']},
+   {name:'Övriga/valfria studier',hp:30,elective:true}
+  ]},
+ {id:'gu-kpu90',name:'Kompletterande pedagogisk utbildning',university:'Göteborgs universitet',hp:90,verified:true,sourceLevel:'programme',professional:true,
+  eligibility:{priorSubjectStudies:true,thesis:15},
+  courses:[
+   {name:'Utbildningsvetenskaplig kärna',hp:60,subject:'Pedagogik',keywords:['didaktik','pedagogik','lärande','ledarskap','forskningsmetodik'],goals:['didaktik','lärande','sociala relationer','ledarskap','utvärdering']},
+   {name:'Verksamhetsförlagd utbildning',hp:30,keywords:['vfu','verksamhetsförlagd','praktik']}
+  ]}
+
+];
+
+
+const syllabusResolvers={
+ 'Göteborgs universitet':{
+   mode:'search',
+   note:'Kurskod och termin används för att välja den kursplan som gällde när kursen lästes.',
+   buildQuery:(c)=>`${c.code||c.courseCode||''} ${c.term||c.completedTerm||''} kursplan Göteborgs universitet`
+ },
+ 'Umeå universitet':{
+   mode:'versioned',
+   note:'Umeås kursplanssidor har versionshistorik. Kurskod + kursdatum kan därför kopplas mot rätt version.',
+   buildQuery:(c)=>`${c.code||c.courseCode||''} kursplan Umeå universitet`
  }
- let a=degrees[0],b=degrees[1],ra=calc(a),rb=calc(b);
- target.innerHTML=`<div class="card"><table><thead><tr><th></th><th>${a.short}</th><th>${b.short}</th></tr></thead><tbody>
- <tr><td><strong>Bedömd matchning</strong></td><td><span class="badge ${ra.pct>=85?'good':'warn'}">${ra.pct}%</span></td><td><span class="badge ${rb.pct>=85?'good':'warn'}">${rb.pct}%</span></td></tr>
- <tr><td><strong>Huvudområde</strong></td><td>${ra.subj}/${a.subjectReq} hp</td><td>${rb.subj}/${b.subjectReq} hp</td></tr>
- <tr><td><strong>Preliminärt kvar</strong></td><td>${ra.remaining?ra.remaining+' hp':'Kontroll'}</td><td>${rb.remaining?rb.remaining+' hp':'Kontroll'}</td></tr>
- </tbody></table></div>`;
+};
+function courseIdentity(c){
+ return {
+   code:String(c.code||c.courseCode||'').trim(),
+   university:String(c.university||c.institution||c.school||'').trim(),
+   term:String(c.term||c.completedTerm||c.period||'').trim(),
+   name:String(c.name||'').trim()
+ };
+}
+
+const SYLLABUS_API='/api/syllabus';
+async function fetchHistoricalSyllabus(c){
+ const id=courseIdentity(c), status=historicalSyllabusStatus(c);
+ if(!status.ready)return {ok:false,status,error:status.label};
+ const qs=new URLSearchParams({code:id.code,university:id.university,term:id.term,name:id.name});
+ try{
+   const res=await fetch(`${SYLLABUS_API}?${qs.toString()}`,{headers:{'Accept':'application/json'}});
+   if(!res.ok)throw new Error(`HTTP ${res.status}`);
+   const data=await res.json();
+   if(!data||!data.learningGoals?.length)return {ok:false,status,error:'Kursplan hittades men lärandemål saknas'};
+   return {ok:true,status,data};
+ }catch(err){
+   return {ok:false,status,error:'Automatisk hämtning är inte ansluten ännu',technical:String(err?.message||err)};
+ }
+}
+async function resolveImportedSyllabi(){
+ enrichCourseSyllabusStatus();
+ const candidates=courses.filter(c=>c.syllabusLookup?.ready&&!c.learningGoals?.length);
+ if(!candidates.length)return {attempted:0,resolved:0};
+ let resolved=0;
+ for(const c of candidates){
+   const r=await fetchHistoricalSyllabus(c);
+   c.syllabusFetch=r;
+   if(r.ok){
+     c.learningGoals=r.data.learningGoals||[];
+     c.content=r.data.content||'';
+     c.level=c.level||r.data.level||'';
+     c.syllabusUrl=r.data.url||'';
+     c.syllabusVersion=r.data.version||c.term||'';
+     resolved++;
+   }
+ }
+ try{localStorage.setItem('lotsen_courses',JSON.stringify(courses))}catch(e){}
+ return {attempted:candidates.length,resolved};
+}
+
+function historicalSyllabusStatus(c){
+ const id=courseIdentity(c), r=syllabusResolvers[id.university];
+ if(!id.code) return {state:'missing-code',label:'Kurskod saknas',ready:false};
+ if(!id.university) return {state:'missing-university',label:'Lärosäte saknas',ready:false};
+ if(!r) return {state:'unsupported',label:'Historisk kursplan behöver sökas manuellt',ready:false};
+ if(!id.term) return {state:'missing-term',label:'Termin saknas för versionsval',ready:false};
+ return {state:'resolvable',label:'Historisk kursplan kan identifieras',ready:true,query:r.buildQuery(c),note:r.note};
+}
+function enrichCourseSyllabusStatus(){
+ courses.forEach(c=>{c.syllabusLookup=historicalSyllabusStatus(c)});
+}
+
+function normalizedWords(v){
+ return String(v||'').toLowerCase().replace(/[^\p{L}\p{N}\s]/gu,' ').split(/\s+/).filter(w=>w.length>3);
+}
+function overlapScore(a,b){
+ const A=new Set(normalizedWords(a)), B=new Set(normalizedWords(b));
+ if(!A.size||!B.size)return 0;
+ let hit=0; A.forEach(w=>{if(B.has(w))hit++});
+ return Math.round(100*hit/Math.max(1,Math.min(A.size,B.size)));
+}
+function syllabusEvidence(pc,c){
+ const oldGoals=(c.learningGoals||c.goals||[]).join(' ');
+ const newGoals=(pc.learningGoals||pc.goals||[]).join(' ');
+ const oldContent=[c.content,c.description,c.name,c.subject].filter(Boolean).join(' ');
+ const newContent=[pc.content,pc.description,pc.name,pc.subject,(pc.keywords||[]).join(' ')].filter(Boolean).join(' ');
+ const goals=overlapScore(oldGoals,newGoals);
+ const content=overlapScore(oldContent,newContent);
+ const hasOld=Boolean(oldGoals||c.content||c.description);
+ const hasNew=Boolean(newGoals||pc.content||pc.description||pc.goals?.length);
+ return {goals,content,hasOld,hasNew,complete:hasOld&&hasNew};
+}
+
+function courseSimilarity(pc,c){
+ const text=(String(c.name||'')+' '+String(c.subject||'')).toLowerCase();
+ let subject=0,content=0,credits=0,type=0,syllabus=0;
+ if(pc.subject && c.subject===pc.subject)subject=35;
+ let hits=0;
+ (pc.keywords||[]).forEach(k=>{if(text.includes(String(k).toLowerCase()))hits++});
+ if((pc.keywords||[]).length)content=Math.min(22,Math.round(22*hits/Math.max(1,Math.min(3,pc.keywords.length))));
+ const ev=syllabusEvidence(pc,c);
+ if(ev.complete){
+   syllabus=Math.round(ev.goals*.22+ev.content*.13);
+ } else if(ev.hasNew){
+   let goalHits=0;
+   (pc.goals||[]).forEach(g=>{const words=normalizedWords(g);if(words.some(w=>text.includes(w)))goalHits++});
+   if(pc.goals?.length)content=Math.min(30,content+Math.min(12,goalHits*4));
+ }
+ if(pc.hp){
+   const delta=Math.abs(Number(c.hp||0)-Number(pc.hp||0));
+   credits=delta<=0.1?10:delta<=2.5?7:delta<=7.5?3:0;
+ }
+ const targetThesis=/examensarbete|kandidatuppsats|självständigt arbete/i.test(pc.name);
+ if(targetThesis && c.thesis)type=8;
+ return {score:Math.min(100,subject+content+credits+type+syllabus),parts:{subject,content,credits,type,syllabus},syllabusEvidence:ev};
+}
+
+const flexibleDegreeCatalog=[
+ {id:'flex-gu',name:'Kandidatexamen',university:'Göteborgs universitet',degreePrefix:'Filosofie',hp:180,major:null,majorHp:90,thesisHp:15,candidateLevelHp:30,verified:true,sourceLevel:'degree',
+  majors:['Pedagogik','Psykologi','Idrottsvetenskap','Arbetsvetenskap','Företagsekonomi'],
+  note:'90 hp i huvudområde med fördjupning och minst 15 hp självständigt arbete.'},
+ {id:'flex-umu',name:'Kandidatexamen',university:'Umeå universitet',degreePrefix:'Filosofie',hp:180,major:null,majorHp:90,thesisHp:15,candidateLevelHp:30,verified:true,sourceLevel:'degree',
+  majors:['Pedagogik','Psykologi','Företagsekonomi','Nationalekonomi','Statistik','Statsvetenskap','Sociologi'],
+  note:'90 hp i huvudområdet; minst 30 hp på kandidatexamensnivå inklusive minst 15 hp examensarbete.'},
+ {id:'flex-lnu',name:'Kandidatexamen',university:'Linnéuniversitetet',degreePrefix:'Filosofie',hp:180,major:null,majorHp:90,thesisHp:15,outsideMajorMinHp:30,verified:true,sourceLevel:'degree',
+  majors:['Pedagogik','Psykologi','Idrottsvetenskap','Företagsekonomi','Nationalekonomi','Sociologi'],
+  note:'90 hp i huvudområdet inklusive minst 15 hp självständigt arbete; minst 30 hp utanför huvudområdet.'}
+,
+
+ {id:'flex-oru',name:'Kandidatexamen',university:'Örebro universitet',degreePrefix:'Filosofie',hp:180,major:null,majorHp:90,thesisHp:15,candidateLevelHp:30,verified:true,sourceLevel:'degree',
+  majors:['Sociologi','Pedagogik','Psykologi','Företagsekonomi','Nationalekonomi','Statsvetenskap'],
+  note:'180 hp totalt; minst 90 hp med successiv fördjupning i huvudområdet och minst 15 hp självständigt arbete på G2E-nivå.'},
+ {id:'flex-kau',name:'Kandidatexamen',university:'Karlstads universitet',degreePrefix:'Filosofie',hp:180,major:null,majorHp:90,thesisHp:15,verified:true,sourceLevel:'degree',
+  majors:['Arbetsvetenskap','Pedagogiskt arbete','Psykologi','Företagsekonomi','Nationalekonomi','Sociologi'],
+  note:'180 hp totalt; minst 90 hp i huvudområdet inklusive minst 15 hp självständigt examensarbete.'},
+ {id:'flex-mdu',name:'Kandidatexamen',university:'Mälardalens universitet',degreePrefix:'Filosofie',hp:180,major:null,majorHp:90,thesisHp:15,verified:true,sourceLevel:'degree',
+  majors:['Arbetsvetenskap','Datavetenskap','Företagsekonomi','Nationalekonomi'],
+  note:'Lotsen testar endast huvudområden där MDU:s aktuella huvudområdeslista anger att kandidatexamen kan utfärdas.'}
+
+];
+function inferBestMajor(){
+ const sums={};
+ courses.filter(c=>c.selected!==false).forEach(c=>{const s=c.subject||guessSubject(c.name||'');if(!s||s==='Övrigt')return;sums[s]=(sums[s]||0)+Number(c.hp||0)});
+ return Object.entries(sums).sort((a,b)=>b[1]-a[1])[0]||[null,0];
+}
+
+function degreeTitleFor(d,major){
+ let prefix=d.degreePrefix||'Filosofie';
+ let caveat='';
+ if(d.id==='flex-gu'){
+   if(major==='Offentlig förvaltning'){prefix='Politices'}
+   if(['Företagsekonomi','Nationalekonomi'].includes(major)){
+     caveat='Ekonomie kan vara möjligt om särskilda kombinationskrav är uppfyllda; annars filosofie.';
+   }
+ }
+ return {title:`${prefix} kandidatexamen med huvudområdet ${major}`,caveat};
+}
+
+function estimateFlexibleDegree(d,major){
+ const selected=courses.filter(c=>c.selected!==false);
+ const majorCourses=selected.filter(c=>(c.subject||guessSubject(c.name||''))===major);
+ const rawMajor=majorCourses.reduce((s,c)=>s+Number(c.hp||0),0), majorHp=Math.min(d.majorHp,rawMajor);
+ const thesisHp=Math.min(d.thesisHp,majorCourses.filter(c=>c.thesis||/examensarbete|kandidatuppsats|självständigt arbete/i.test(c.name||'')).reduce((s,c)=>s+Number(c.hp||0),0));
+ const levelKnown=majorCourses.some(c=>c.level);
+ const g2Hp=majorCourses.filter(c=>/^G2/i.test(String(c.level||''))).reduce((s,c)=>s+Number(c.hp||0),0);
+ const totalHp=Math.min(d.hp,selected.reduce((s,c)=>s+Number(c.hp||0),0));
+ const outsideRaw=Math.max(0,totalHp-rawMajor);
+ const freeHp=Math.min(d.hp-d.majorHp,outsideRaw);
+ const majorMissing=Math.max(0,d.majorHp-majorHp), thesisMissing=Math.max(0,d.thesisHp-thesisHp);
+ const outsideMissing=Math.max(0,(d.outsideMajorMinHp||0)-outsideRaw);
+ const levelMissing=d.candidateLevelHp&&levelKnown?Math.max(0,d.candidateLevelHp-g2Hp):0;
+ const remaining=Math.max(0,d.hp-majorHp-freeHp);
+ let progressionStatus='Fördjupningsnivå behöver verifieras';
+ if(levelKnown && d.candidateLevelHp) progressionStatus=levelMissing?`${fmtHp(levelMissing)} hp fördjupningsnivå saknas`:'Fördjupningsnivå ser uppfylld ut';
+ else if(levelKnown) progressionStatus='Kursnivåer finns i underlaget';
+ const score=majorHp*1.35+freeHp*.55-majorMissing*.45-thesisMissing*2-outsideMissing-levelMissing*.8;
+ const missing=[];
+ if(majorMissing>0) missing.push({type:'major',hp:majorMissing,label:`${fmtHp(majorMissing)} hp i ${major}`});
+ if(levelMissing>0) missing.push({type:'progression',hp:levelMissing,label:`${fmtHp(levelMissing)} hp på fördjupningsnivå i ${major}`});
+ if(thesisMissing>0) missing.push({type:'thesis',hp:thesisMissing,label:`${fmtHp(thesisMissing)} hp examensarbete i ${major}`});
+ if(outsideMissing>0) missing.push({type:'outside',hp:outsideMissing,label:`${fmtHp(outsideMissing)} hp utanför huvudområdet`});
+ const generalMissing=Math.max(0,remaining-Math.max(majorMissing,outsideMissing));
+ if(generalMissing>0) missing.push({type:'total',hp:generalMissing,label:`${fmtHp(generalMissing)} hp övriga kurser`});
+ const degreeTitle=degreeTitleFor(d,major);
+ return {d,major,majorHp,freeHp,remaining,majorMissing,thesisMissing,outsideMissing,levelMissing,levelKnown,progressionStatus,score,degreeTitle,missing};
+}
+function flexibleDegreeCandidates(){
+ const [bestMajor]=inferBestMajor();
+ const present=[...new Set(courses.filter(c=>c.selected!==false).map(c=>c.subject||guessSubject(c.name||'')).filter(s=>s&&s!=='Övrigt'))];
+ const rows=[];
+ flexibleDegreeCatalog.forEach(d=>{
+   const majors=(d.majors||present).filter(x=>present.includes(x));
+   (majors.length?majors:(bestMajor?[bestMajor]:[])).forEach(major=>rows.push(estimateFlexibleDegree(d,major)));
+ });
+ return rows;
+}
+function renderFlexibleDegrees(){
+ const host=document.getElementById('flexibleDegreeMatches');if(!host)return;
+ if(!courses.length){host.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong><div class="small muted">Då kan Lotsen kontrollera fristående kandidatvägar.</div></div>';return}
+ const allRows=flexibleDegreeCandidates().filter(x=>x.major).sort((a,b)=>b.score-a.score); const rows=allRows.slice(0,8);
+ const near=allRows.filter(x=>x.remaining<=30).length; host.innerHTML=(near>1?`<div class="multi-degree-hint">${near} examensvägar ligger inom cirka 30 hp.</div>`:'')+rows.map(x=>`<article class="card flex-degree-card"><div class="program-top"><div><div class="eyebrow">${escapeHtml(x.d.university)} <span class="verified-mini">Examensregel</span></div><h3>${escapeHtml(x.degreeTitle.title)}</h3></div><span class="program-hp">${fmtHp(x.d.hp)} hp</span></div><div class="flex-degree-stats"><span><strong>${fmtHp(x.majorHp)}/${fmtHp(x.d.majorHp)} hp</strong> ${escapeHtml(x.major)}</span><span><strong>${fmtHp(x.freeHp)}/${fmtHp(x.d.hp-x.d.majorHp)} hp</strong> övriga kurser</span></div><div class="remaining-line"><strong>≈ ${fmtHp(x.remaining)} hp kvar</strong><span>${x.thesisMissing?fmtHp(x.thesisMissing)+' hp examensarbete saknas':'Examensarbete hittat'}</span></div><div class="degree-checks"><span>${escapeHtml(x.progressionStatus)}</span>${x.outsideMissing?`<span>${fmtHp(x.outsideMissing)} hp utanför huvudområdet saknas</span>`:''}</div><div class="missing-box"><strong>Det här saknas</strong>${x.missing.length?`<ul>${x.missing.map(m=>`<li>${escapeHtml(m.label)}</li>`).join('')}</ul>`:'<span class="ready-degree">Grundkraven ser uppfyllda ut – kontrollera examensansökan hos lärosätet.</span>'}</div>${x.degreeTitle.caveat?`<div class="degree-title-note">${escapeHtml(x.degreeTitle.caveat)}</div>`:''}<div class="program-note">${escapeHtml(x.d.note)}</div></article>`).join('');
+}
+
+function programEligibility(p){
+ if(!p.eligibility)return {ok:true,note:''};
+ let ok=true, notes=[];
+ if(p.eligibility?.workExperienceMonths){ok=false;notes.push(`${p.eligibility.workExperienceMonths} mån arbetslivserfarenhet behöver verifieras`)};
+ if(p.eligibility?.priorSubjectStudies){ok=false;notes.push('tidigare ämnesstudier för lärarbehörighet behöver verifieras')};
+ if(p.eligibility.degree){
+   let issued=[];
+   try{issued=JSON.parse(sessionStorage.getItem('lotsen_issued_degrees')||'[]')}catch(e){}
+   if(!issued.length){ok=false;notes.push('kandidatexamen behöver verifieras')}
+ }
+ if(p.eligibility.subject){
+   const hp=courses.filter(c=>c.selected!==false&&c.subject===p.eligibility.subject).reduce((s,c)=>s+Number(c.hp||0),0);
+   if(hp<(p.eligibility.subjectHp||0)){ok=false;notes.push(`${fmtHp((p.eligibility.subjectHp||0)-hp)} hp ${p.eligibility.subject} saknas för behörighet`)}
+ }
+ if(p.eligibility.subjects){
+   const accepted=p.eligibility.subjects;
+   const hp=courses.filter(c=>c.selected!==false&&accepted.includes(c.subject)).reduce((s,c)=>s+Number(c.hp||0),0);
+   if(hp<90){ok=false;notes.push('relevant kandidatexamen behöver verifieras')}
+ }
+ if(p.eligibility.thesis){
+   const thesisHp=courses.filter(c=>c.selected!==false&&c.thesis).reduce((s,c)=>s+Number(c.hp||0),0);
+   if(thesisHp<p.eligibility.thesis){ok=false;notes.push(`${fmtHp(p.eligibility.thesis)} hp självständigt arbete krävs`)}
+ }
+ return {ok,note:notes.join(' · ')};
+}
+function estimateProgram(p){
+ const available=courses.filter(c=>c.selected!==false).map((c,i)=>({...c,_i:i}));
+ const used=new Set(), parts=[];
+ for(const pc of p.courses.filter(x=>!x.elective)){
+   const ranked=available.filter(c=>!used.has(c._i)).map(c=>{const sim=courseSimilarity(pc,c);return {c,score:sim.score,parts:sim.parts,syllabusEvidence:sim.syllabusEvidence}}).sort((a,b)=>b.score-a.score);
+   let need=pc.hp, matched=0, bestNames=[], bestScore=0, evidence=[];
+   for(const hit of ranked){
+     if(hit.score<35 || need<=0)break;
+     const take=Math.min(need,Number(hit.c.hp||0));
+     if(take<=0)continue;
+     matched+=take;need-=take;used.add(hit.c._i);bestNames.push(hit.c.name);bestScore=Math.max(bestScore,hit.score);evidence.push({name:hit.c.name,score:hit.score,parts:hit.parts,hp:take,syllabusEvidence:hit.syllabusEvidence,syllabusLookup:hit.c.syllabusLookup});
+   }
+   const level=matched>=pc.hp*.75 && bestScore>=60?'Hög':matched>0?'Möjlig':'Låg';
+   const bestEvidence=evidence[0]; const hasTwoSyllabi=Boolean(bestEvidence?.syllabusEvidence?.complete); const matchType=(bestScore>=78&&hasTwoSyllabi)||(bestScore>=88)?'replace':matched>0?'review':'none';
+   parts.push({pc,hp:matched,level,matchType,reason:bestNames.length?bestNames.slice(0,2).join(' + '):'Ingen tydlig motsvarighet hittad',evidence});
+ }
+ for(const pc of p.courses.filter(x=>x.elective)){
+   const free=available.filter(c=>!used.has(c._i));
+   const hp=Math.min(pc.hp,free.reduce((s,c)=>s+Number(c.hp||0),0));
+   parts.push({pc,hp,level:hp?'Möjlig':'Låg',matchType:hp?'degree':'none',reason:hp?'Kan sannolikt användas som valfria poäng i examen':'Inga återstående kurser',evidence:[]});
+ }
+ const replaceHp=parts.filter(x=>x.matchType==='replace').reduce((s,x)=>s+x.hp,0);
+ const degreeHp=parts.filter(x=>x.matchType==='degree').reduce((s,x)=>s+x.hp,0);
+ const reviewHp=parts.filter(x=>x.matchType==='review').reduce((s,x)=>s+x.hp,0);
+ const likely=replaceHp;
+ const possible=degreeHp+reviewHp;
+ const eligibility=programEligibility(p);
+ return {p,parts,likely,possible,replaceHp,degreeHp,reviewHp,remaining:Math.max(0,p.hp-replaceHp-degreeHp-reviewHp),eligibility};
+}
+function renderPrograms(){
+ enrichCourseSyllabusStatus();
+ renderFlexibleDegrees();
+ const host=document.getElementById('programMatches');if(!host)return;
+ const count=document.getElementById('programDbCount');if(count)count.textContent=programCatalog.length+' program jämförs';
+ const cov=document.getElementById('syllabusCoverage');
+ if(cov&&courses.length){const ready=courses.filter(c=>c.syllabusLookup?.ready).length;cov.textContent=`${ready} av ${courses.length} importerade kurser har tillräckliga uppgifter för automatisk historisk kursplanssökning.`}
+ if(!courses.length){host.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong><div class="small muted">Därefter kan Lotsen uppskatta vilka programkurser som kan överlappa.</div></div>';return}
+ const ranked=programCatalog.map(p=>{
+   const x=estimateProgram(p);
+   const covered=x.likely+x.possible*.45;
+   const goalBlocks=x.p.courses.filter(c=>c.goals?.length).length;
+   const goalCoverage=x.p.courses.length?goalBlocks/x.p.courses.length:0;
+   const sourceBoost=x.p.sourceLevel==='course'?20:x.p.sourceLevel==='programme'?12:5;
+   x.matchConfidence=Math.round(Math.min(95,40+(x.p.verified?18:0)+sourceBoost+goalCoverage*17));
+   const confidence=(x.p.verified?12:0)+(x.p.sourceLevel==='course'?8:x.p.sourceLevel==='programme'?3:0);
+   const eligibility=x.eligibility.ok?25:-35;
+   const professionalPenalty=x.p.professional?-12:0;
+   const advancedBonus=x.p.advanced&&x.eligibility.ok?8:0;
+   x.rankScore=covered+confidence+eligibility+professionalPenalty+advancedBonus-(x.remaining*.18);
+   return x;
+ }).sort((a,b)=>b.rankScore-a.rankScore || a.remaining-b.remaining).slice(0,5);
+ host.innerHTML='<div class="program-list">'+ranked.map((x,i)=>`<article class="card program-card">
+   <div class="program-top"><div><div class="eyebrow">${escapeHtml(x.p.university)} ${x.p.verified?'<span class="verified-mini">Verifierad struktur</span>':''} ${x.p.sourceLevel==='course'?'<span class="plan-mini">Kursstruktur</span>':x.p.sourceLevel==='programme'?'<span class="plan-mini">Utbildningsplan</span>':''} ${x.p.courses.some(c=>c.goals?.length)?'<span class="plan-mini">Lärandemål</span>':''}</div><h3>${escapeHtml(x.p.name)}</h3></div><span class="program-hp">${fmtHp(x.p.hp)} hp</span></div>
+   <div class="program-summary match-types"><span><strong>${fmtHp(x.replaceHp||0)} hp</strong> kan ersätta kurs</span><span><strong>${fmtHp(x.degreeHp||0)} hp</strong> kan ingå i examen</span>${x.reviewHp?`<span><strong>${fmtHp(x.reviewHp)} hp</strong> behöver granskas</span>`:''}</div>
+   <div class="remaining-line"><strong>≈ ${fmtHp(x.remaining)} hp kvar</strong><span>${(x.matchConfidence||45)>=80?'Starkt':(x.matchConfidence||45)>=65?'Bra':'Preliminärt'} underlag · ${x.matchConfidence||45}%</span></div>
+   ${x.eligibility.ok?'':'<div class="eligibility-warn">Behörighet: '+escapeHtml(x.eligibility.note)+'</div>'}${x.p.restriction?'<div class="professional-note">'+escapeHtml(x.p.restriction)+'</div>':''}${x.p.professional?'<div class="professional-note">Yrkesprogram · tidigare kurser kan kräva individuell prövning.</div>':''}
+   <details><summary>Se kurs för kurs</summary><div class="course-match-list">${x.parts.map(y=>`<div class="course-match"><span class="chance ${y.level.toLowerCase()}">${y.matchType==='replace'?'Ersätter':y.matchType==='degree'?'I examen':y.matchType==='review'?'Granska':'Låg'}</span><div><strong>${escapeHtml(y.pc.name)}</strong><small>${escapeHtml(y.reason)}</small>${y.evidence?.[0]?`<small class="match-why">Match ${y.evidence[0].score}% · ämne ${y.evidence[0].parts.subject} · innehåll ${y.evidence[0].parts.content} · kursplan ${y.evidence[0].parts.syllabus||0} · hp ${y.evidence[0].parts.credits}${y.evidence[0].syllabusEvidence?.complete?' · båda kursplanerna jämförda':` · ${escapeHtml(y.evidence[0].syllabusLookup?.label||'äldre kursplan saknas')}`}</small>`:''}</div><b>${fmtHp(y.hp)} hp</b></div>`).join('')}</div></details>
+   <div class="program-note">Preliminär uppskattning · lärosätet beslutar om tillgodoräknande.</div>
+ </article>`).join('')+'</div>';
+}
+
+function isGenericDegree(d){
+  const t=String(d?.title||'').toLowerCase();
+  return !t || /inom huvudområde|generell examen|ospecificerad/.test(t);
+}
+function selectDegreeAndGo(id){
+  try{sessionStorage.setItem('lotsen_selected_degree',id)}catch(e){}
+  go('path');
+  setTimeout(()=>{const s=document.getElementById('degreeSelect');if(s){s.value=id;s.dispatchEvent(new Event('change'))}},30);
+}
+
+function renderCompare(){
+  const box=document.getElementById('compareBox');
+  if(!box)return;
+  if(!hasImportedCourses()){
+    box.innerHTML='<div class="card empty-state"><strong>Inga examensvägar att jämföra ännu</strong><div class="muted small">Hämta dina meriter först så visar Lotsen dina närmaste examensvägar.</div></div>';
+    return;
+  }
+  const rows=getMatches().filter(x=>!isGenericDegree(x.degree)).slice(0,5);
+  if(!rows.length){
+    box.innerHTML='<div class="card empty-state"><strong>Inga jämförbara examensvägar hittades</strong></div>';
+    return;
+  }
+  box.innerHTML='<div class="compare-cards">'+rows.map((x,i)=>{
+    const d=x.degree, pct=Math.round(x.pct||0);
+    const subjectHave=Math.round((x.subjectHp||0)*10)/10;
+    const subjectNeed=d.subjectHp||90;
+    const remain=Math.max(0,Math.round((x.remaining||0)*10)/10);
+    return `<article class="compare-card">
+      <div class="compare-rank">${i+1}</div>
+      <div class="compare-card-head">
+        <div><div class="eyebrow">EXAMENSVÄG ${i+1}</div><h3>${escapeHtml(d.name)}</h3></div>
+        <span class="match-pill ${pct>=100?'good':pct>=70?'mid':'low'}">${pct}%</span>
+      </div>
+      <div class="compare-progress"><span style="width:${Math.min(100,pct)}%"></span></div>
+      <div class="compare-stats">
+        <div><span>Huvudområde</span><strong>${fmtHp(subjectHave)} / ${fmtHp(subjectNeed)} hp</strong></div>
+        <div><span>Preliminärt kvar</span><strong>${remain<=0?'Kontroll':fmtHp(remain)+' hp'}</strong></div>
+      </div>
+      <div class="rule-status"><strong>${escapeHtml(d.ruleStatus||'Preliminär regel')}</strong>${d.ruleNote?' · '+escapeHtml(d.ruleNote):''}</div>
+      <button class="secondary compare-path-btn" onclick="selectDegreeAndGo('${escapeHtml(d.id)}')">Visa väg</button>
+    </article>`;
+  }).join('')+'</div>';
 }
 
 let currentFeedbackRating='';
@@ -669,9 +1429,9 @@ function go(id){
  if(id==='compare' && !courses.length){
    setTimeout(()=>{try{renderCompare()}catch(e){}},0);
  }
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='route')renderRoute();if(id==='compare')renderCompare();window.scrollTo(0,0)}
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='route')renderRoute();if(id==='compare')renderCompare();if(id==='programs')renderPrograms();window.scrollTo(0,0)}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
-routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`).join('');initBackend();updateAuthUI();renderUniversities();renderGoals();renderCourses();renderDegrees();renderRoute();renderCompare();
+routeGoal.innerHTML=degrees.map(d=>`<option value="${d.id}">${d.short}</option>`).join('');initBackend();updateAuthUI();renderUniversities();renderGoals();renderCourses();renderDegrees();renderRoute();renderCompare();renderPrograms();
 </script>
 
 
@@ -781,7 +1541,18 @@ function closeMeritGuide(){ document.getElementById('meritGuide').style.display=
 </script>
 
 
-<script>function setImportMethod(m){const l=m==="ladok";document.getElementById("antagningGuide").style.display=l?"none":"block";document.getElementById("ladokGuide").style.display=l?"block":"none";document.getElementById("choiceAntagning").classList.toggle("active",!l);document.getElementById("choiceLadok").classList.toggle("active",l);if(l)setTimeout(()=>document.getElementById("ladokGuide").scrollIntoView({behavior:"smooth",block:"nearest"}),50);}</script>
+<script>function setImportMethod(m){const l=m==="ladok";document.getElementById("antagningGuide").style.display=l?"none":"block";document.getElementById("ladokGuide").style.display=l?"block":"none";document.getElementById("choiceAntagning").classList.toggle("active",!l);document.getElementById("choiceLadok").classList.toggle("active",l);if(l)setTimeout(()=>document.getElementById("ladokGuide").scrollIntoView({behavior:"smooth",block:"nearest"}),50);}
+document.addEventListener('click',async(e)=>{
+ if(e.target?.id!=='fetchSyllabiBtn')return;
+ const btn=e.target, out=document.getElementById('fetchSyllabiResult');
+ btn.disabled=true;btn.textContent='Hämtar…';if(out)out.textContent='';
+ const r=await resolveImportedSyllabi();
+ btn.disabled=false;btn.textContent='Hämta kursplaner';
+ if(out)out.textContent=r.attempted?`${r.resolved} av ${r.attempted} kursplaner hämtades automatiskt.`:'Inga kurser har tillräckliga uppgifter ännu.';
+ renderPrograms();
+});
+
+</script>
 
 
 
@@ -795,6 +1566,62 @@ function closeMeritGuide(){ document.getElementById('meritGuide').style.display=
 
 
 
-<!-- Lotsen v30 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Lotsen v58 -->
 </body>
 </html>
