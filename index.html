@@ -230,6 +230,9 @@ body{background:#f6f8fc}
 .mini-fetch{display:inline-block;margin-left:8px;border:0;border-radius:8px;padding:5px 8px;font-size:10px;font-weight:800;cursor:pointer;background:#e9efff;color:#315bc7}
 .mini-fetch:disabled{opacity:.55}.fetch-result{display:inline-block;margin-left:7px;font-size:10px;color:#667085}
 
+
+.degree-university{font-size:12px;color:#667085;font-weight:700;margin-top:4px}
+
 </style>
 </head>
 <body>
@@ -679,27 +682,94 @@ function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':
 function renderDegrees(){
  const host=document.getElementById('degreeResults');host.innerHTML='';
  if(!courses.length){
-   host.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong><div class="small muted" style="margin-top:5px">När dina studier är importerade visar Lotsen vilka möjligheter du har.</div></div>';
+   host.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong><div class="small muted" style="margin-top:5px">När dina studier är importerade visar Lotsen vilka examina du är närmast.</div></div>';
    return;
  }
- let arr=degrees.map(d=>({d,r:calc(d)})).sort((a,b)=>b.r.pct-a.r.pct);
- if(degreeFilter==='high')arr=arr.filter(x=>x.r.pct>=70);
- if(degreeFilter==='candidate')arr=arr.filter(x=>x.d.kind==='candidate');
+
+ // 1) Specific degree rules already in the catalogue.
+ const specific=degrees.map(d=>{
+   const r=calc(d);
+   return {
+     key:'specific:'+d.id,
+     name:d.name,
+     university:d.university||'',
+     kind:d.kind||'candidate',
+     total:d.total,
+     subject:d.subject,
+     subjectReq:d.subjectReq,
+     subjectHp:Math.min(r.subj,d.subjectReq),
+     thesisReq:d.thesisReq||0,
+     thesisOk:!d.thesisReq||!!r.thesis,
+     remaining:Number(r.remaining||0),
+     score:Math.min(100,Number(r.pct||0)),
+     routeId:d.id,
+     source:'specific'
+   };
+ });
+
+ // 2) University-specific "build your own degree" rules.
+ const flexible=(typeof flexibleDegreeCandidates==='function'?flexibleDegreeCandidates():[]).map(x=>{
+   const effectiveRemaining=Math.max(
+     Number(x.remaining||0),
+     Number(x.majorMissing||0),
+     Number(x.thesisMissing||0),
+     Number(x.outsideMissing||0),
+     Number(x.levelMissing||0)
+   );
+   const score=Math.max(0,Math.min(100,Math.round(100*(1-effectiveRemaining/Math.max(1,x.d.hp||180)))));
+   return {
+     key:'flex:'+x.d.id+':'+x.major,
+     name:x.degreeTitle?.title||`${x.d.name} med huvudområdet ${x.major}`,
+     university:x.d.university||'',
+     kind:'candidate',
+     total:x.d.hp||180,
+     subject:x.major,
+     subjectReq:x.d.majorHp||90,
+     subjectHp:x.majorHp||0,
+     thesisReq:x.d.thesisHp||15,
+     thesisOk:!x.thesisMissing,
+     remaining:effectiveRemaining,
+     score,
+     source:'flex',
+     flex:x
+   };
+ });
+
+ // Remove generic duplicates and keep the strongest version of essentially the same route.
+ const seen=new Set();
+ let arr=[...specific,...flexible]
+   .filter(x=>x.name&&!/inom huvudområde|ospecificerad|generell examen/i.test(x.name))
+   .sort((a,b)=>b.score-a.score || a.remaining-b.remaining)
+   .filter(x=>{
+      const n=(x.subject+'|'+x.university+'|'+x.name.replace(/filosofie |kandidatexamen|kandidat i/gi,'')).toLowerCase().replace(/\s+/g,' ');
+      if(seen.has(n))return false;seen.add(n);return true;
+   });
+
+ if(degreeFilter==='high')arr=arr.filter(x=>x.score>=70);
+ if(degreeFilter==='candidate')arr=arr.filter(x=>x.kind==='candidate');
+ arr=arr.slice(0,5);
+
  if(!arr.length){host.innerHTML='<div class="card empty">Inga matchningar i filtret.</div>';return}
- arr.forEach(({d,r})=>{
-   const score=Math.min(100,r.pct), badge=score===100?'good':score>=55?'warn':'bad';
+
+ arr.forEach(x=>{
+   const badge=x.score===100?'good':x.score>=55?'warn':'bad';
+   const university=x.university?`<div class="degree-university">${escapeHtml(x.university)}</div>`:'';
+   const thesisText=x.thesisReq?(x.thesisOk?'Ser uppfyllt ut':'Behöver verifieras'):'Ej krav';
+   const routeAction=x.source==='specific'
+      ? `routeGoal.value='${x.routeId}';go('route');renderRoute()`
+      : `go('programs')`;
    host.innerHTML+=`<div class="card" style="margin-bottom:14px">
-     <div class="row"><div><h3 style="margin:0">${d.name}</h3><div class="degree-subline">${d.total} hp · preliminär bedömning</div></div>
-     <span class="badge ${badge} degree-score ${score===100?'full':''}">${score}%</span></div>
-     <div class="progress"><i style="width:${score}%"></i></div>
+     <div class="row"><div><h3 style="margin:0">${escapeHtml(x.name)}</h3>${university}<div class="degree-subline">${x.total} hp · preliminär bedömning</div></div>
+     <span class="badge ${badge} degree-score ${x.score===100?'full':''}">${x.score}%</span></div>
+     <div class="progress"><i style="width:${x.score}%"></i></div>
      <div class="requirements">
-       <div class="req"><strong>Totalpoäng</strong><span>${Math.min(r.total,d.total)} / ${d.total} hp</span></div>
-       <div class="req"><strong>Huvudområde</strong><span>${Math.min(r.subj,d.subjectReq)} / ${d.subjectReq} hp</span></div>
-       <div class="req"><strong>Examensarbete</strong><span>${d.thesisReq?(r.thesis?'Ser uppfyllt ut':'Behöver verifieras'):'Ej krav'}</span></div>
-       <div class="req"><strong>Kvar</strong><span>${r.remaining?r.remaining+' hp':'0 hp'}</span></div>
+       <div class="req"><strong>Totalpoäng</strong><span>${Math.min(courses.reduce((s,c)=>s+Number(c.hp||0),0),x.total)} / ${x.total} hp</span></div>
+       <div class="req"><strong>Huvudområde</strong><span>${fmtHp(x.subjectHp)} / ${fmtHp(x.subjectReq)} hp</span></div>
+       <div class="req"><strong>Examensarbete</strong><span>${thesisText}</span></div>
+       <div class="req"><strong>Kvar</strong><span>${x.remaining?fmtHp(x.remaining)+' hp':'0 hp'}</span></div>
      </div>
-     <div class="row" style="margin-top:14px"><div class="small muted">${score===100?'Kraven ser preliminärt uppfyllda ut.':'Se vad som återstår på din väg.'}</div>
-     <button class="ghost" onclick="routeGoal.value='${d.id}';go('route');renderRoute()">Visa väg</button></div>
+     <div class="row" style="margin-top:14px"><div class="small muted">${x.score===100?'Kraven ser preliminärt uppfyllda ut.':'Se vad som återstår och vilka alternativ som finns.'}</div>
+     <button class="ghost" onclick="${routeAction}">Visa väg</button></div>
    </div>`;
  });
 }
@@ -1622,6 +1692,8 @@ document.addEventListener('click',async(e)=>{
 
 
 
-<!-- Lotsen v58 -->
+
+
+<!-- Lotsen v59 -->
 </body>
 </html>
