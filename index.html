@@ -589,6 +589,35 @@ function detectPdfSource(lines){
   if(/Antagning\.se/i.test(text) && /Universitet och högskola/i.test(text)) return 'antagning';
   return 'unknown';
 }
+
+function cleanLadokCourseName(name){
+  let s=String(name||'').replace(/\s+/g,' ').trim();
+
+  // Stop at known Ladok header/footer markers if PDF extraction has merged them
+  // into the same line as the course name.
+  const markers=[
+    'Nationellt resultatintyg',
+    'Utskriftsdatum',
+    'Personnummer',
+    'Kontrollkod',
+    'Kontrollera intyget',
+    'Verifierbart'
+  ];
+  for(const marker of markers){
+    const i=s.toLowerCase().indexOf(marker.toLowerCase());
+    if(i>0) s=s.slice(0,i).trim();
+  }
+
+  // Remove Swedish personal identity number and nearby name text if it leaked in.
+  s=s.replace(/\s+[A-ZÅÄÖ][A-Za-zÅÄÖåäö\- ]{2,50}\s+\d{8}-\d{4}.*$/,'').trim();
+  s=s.replace(/\s+\d{8}-\d{4}.*$/,'').trim();
+
+  // Remove isolated print-date fragments that sometimes follow the header.
+  s=s.replace(/\s+\d{4}-\d{2}-\d{2}\s*$/,'').trim();
+
+  return s;
+}
+
 function parseLadokLines(rawLines){
   const lines=rawLines.map(x=>String(x).replace(/\s+/g,' ').trim()).filter(Boolean);
   const text=lines.join(' ');
@@ -599,7 +628,14 @@ function parseLadokLines(rawLines){
     return l.length<100 && /(universitet|högskol)/i.test(l);
   };
   const rowRe=/^([A-ZÅÄÖ0-9][A-ZÅÄÖ0-9.\-]{2,15})\s+(.+?)\s+(\d+(?:[,.]\d+)?)\s*hp\s+([A-ZÅÄÖ0-9+\-]+)\s+(\d{4}-\d{2}-\d{2})(?:\s+\d+)?$/i;
-  const ignoreContinuation=l=>/^(Summering|Totalt|varav tillgodoräknat|Övrig tillgodoräknad|Noter och information|Kontrollera intyget|Verifierbart tom|Kontrollkod|Sida \d|Kod Benämning|Kod$|Benämning$|Omfattning$|Betyg$|Datum$|Not$|Nationellt resultatintyg|Utskriftsdatum|Personnummer|Namn$|Utfärdade bevis|Titel|Huvudområde:)/i.test(l);
+  const ignoreContinuation=l=>{
+    const s=String(l||'').trim();
+    if(/^(Summering|Totalt|varav tillgodoräknat|Övrig tillgodoräknad|Noter och information|Kontrollera intyget|Verifierbart tom|Kontrollkod|Sida \d|Kod Benämning|Kod$|Benämning$|Omfattning$|Betyg$|Datum$|Not$|Utfärdade bevis|Titel|Huvudområde:)/i.test(s)) return true;
+    // Sidhuvud/sidfot från Ladok kan hamna mitt i en kursrad när PDF-texten bryts.
+    if(/Nationellt resultatintyg|Utskriftsdatum|Personnummer/i.test(s)) return true;
+    if(/\b\d{8}-\d{4}\b/.test(s)) return true;
+    return false;
+  };
 
   for(let i=0;i<lines.length;i++){
     const l=lines[i];
@@ -619,7 +655,7 @@ function parseLadokLines(rawLines){
 
     const m=l.match(rowRe);
     if(m){
-      const code=m[1], name=m[2].trim(), hp=parseFloat(m[3].replace(',','.')), grade=m[4], date=m[5];
+      const code=m[1], name=cleanLadokCourseName(m[2]), hp=parseFloat(m[3].replace(',','.')), grade=m[4], date=m[5];
       out.push({
         name,code,hp,grade,date,institution,
         level:'Grundnivå',
@@ -634,12 +670,12 @@ function parseLadokLines(rawLines){
     if(out.length && !ignoreContinuation(l) && !/\d+(?:[,.]\d+)?\s*hp/i.test(l) && !/^\d{4}-\d{2}-\d{2}$/.test(l)){
       const prev=out[out.length-1];
       if(prev.institution===institution && l.length<100) {
-        prev.name=(prev.name+' '+l).replace(/\s+/g,' ').trim();
+        prev.name=cleanLadokCourseName(prev.name+' '+l);
         prev.subject=guessSubject(prev.name,prev.code,prev.institution);
       }
     }
   }
-  const total=out.reduce((s,c)=>s+Number(c.hp||0),0);
+  out=out.map(c=>({...c,name:cleanLadokCourseName(c.name)})).filter(c=>c.name); const total=out.reduce((s,c)=>s+Number(c.hp||0),0);
   return {isLadok,courses:out,expectedTotal:total,issuedDegrees};
 }
 async function importPdf(inp, chosenSource='auto'){
@@ -756,7 +792,29 @@ function renderImportPreview(){
      <div class="small muted">${escapeHtml(c.institution||'Okänt lärosäte')} · ${escapeHtml(c.code||'')} · ${escapeHtml(c.level||'Grundnivå')} · ${fmtHp(c.hp)} hp${c.duplicate?' · Möjlig dubblett':''}</div>
    </div>
    <label class="import-check"><input type="checkbox" ${c.selected?'checked':''} onchange="importedCandidates[${i}].selected=this.checked"> Importera</label>
- </div>`).join('')+`<div class="import-confirm"><button class="primary" onclick="confirmImport()">Importera valda kurser</button></div>`;
+ </div>`).join('')+`<div class="import-confirm"><button class="primary" id="confirmImportBtn" type="button">Importera valda kurser</button></div>`;
+}
+function confirmImport(){
+  const chosen=importedCandidates
+    .filter(c=>c.selected&&!c.duplicate)
+    .map(({selected,duplicate,sourceFile,...c})=>c);
+
+  if(!chosen.length){
+    importStatus.textContent='Välj minst en kurs att importera.';
+    return;
+  }
+
+  courses.push(...chosen);
+
+  // Behåll meriterna under den aktuella sessionen, utan extra "Spara"-steg.
+  try{sessionStorage.setItem('examensmatch_courses',JSON.stringify(courses))}catch(e){}
+
+  importStatus.textContent=`${chosen.length} kurser importerades.`;
+  importPreview.innerHTML='';
+  renderCourses();
+  renderDegrees();
+  go('degrees');
+  window.scrollTo(0,0);
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 
@@ -1844,6 +1902,14 @@ document.addEventListener('click',async(e)=>{
  renderPrograms();
 });
 
+
+document.addEventListener('click',e=>{
+  const btn=e.target.closest?.('#confirmImportBtn');
+  if(!btn)return;
+  e.preventDefault();
+  confirmImport();
+});
+
 </script>
 
 
@@ -1940,6 +2006,14 @@ document.addEventListener('click',async(e)=>{
 
 
 
-<!-- Lotsen v71 -->
+
+
+
+
+
+
+
+
+<!-- Lotsen v75 -->
 </body>
 </html>
