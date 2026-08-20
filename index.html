@@ -213,7 +213,7 @@ body{background:#f6f8fc}
 <strong>Hämta dina meriter</strong><div class="muted small" style="margin-top:5px">Välj det alternativ som passar dig.</div>
 <div class="import-choice-grid">
 <button class="import-choice" id="choiceAntagning" onclick="setImportMethod('antagning')"><b>Antagning.se</b><span>Alternativ importväg</span></button>
-<button class="import-choice active" id="choiceLadok" onclick="setImportMethod('ladok')"><b>Ladok <em class="recommended">Rekommenderat</em></b><span>Nationellt resultatintyg med dina godkända studier</span></button>
+<button class="import-choice active" id="choiceLadok" onclick="setImportMethod('ladok')"><b>Ladok <em class="recommended">Rekommenderat</em></b><span>Nationellt resultatintyg med alla dina godkända Ladok-studier</span></button>
 </div>
 <div id="antagningGuide" style="display:none">
 <a class="primary antagning-link-btn" href="https://www.antagning.se/" target="_blank" rel="noopener">Öppna Antagning.se</a>
@@ -396,38 +396,127 @@ function addCourse(){let n=courseName.value.trim(),hp=Number(courseHp.value),lev
 function removeCourse(i){courses.splice(i,1);saveProfile();renderCourses()}
 function showImport(){importBox.style.display=importBox.style.display==='none'?'block':'none'}
 let importedCandidates=[];
-async function importPdf(inp){
- const files=[...(inp.files||[])]; if(!files.length)return;
- importStatus.textContent='Läser Antagning.se-meriter…'; importPreview.innerHTML=''; importedCandidates=[];
- try{
-   if(!window.pdfjsLib) throw new Error('PDF-läsaren kunde inte laddas. Kontrollera internetanslutningen.');
-   for(const file of files){
-     const data=new Uint8Array(await file.arrayBuffer()); const pdf=await window.pdfjsLib.getDocument({data}).promise; let lines=[];
-     for(let p=1;p<=pdf.numPages;p++){
-       const page=await pdf.getPage(p), content=await page.getTextContent();
-       const rows=new Map();
-       for(const it of content.items){
-         const y=Math.round((it.transform?.[5]||0)*2)/2, x=it.transform?.[4]||0;
-         if(!rows.has(y)) rows.set(y,[]); rows.get(y).push({x,s:it.str});
-       }
-       [...rows.entries()].sort((a,b)=>b[0]-a[0]).forEach(([,items])=>{
-         const line=items.sort((a,b)=>a.x-b.x).map(z=>z.s).join(' ').replace(/\s+/g,' ').trim();
-         if(line) lines.push(line);
-       });
-     }
-     const parsed=parseAntagningLines(lines);
-     if(!parsed.isAntagning) throw new Error('Fel PDF vald. Gå till Antagning.se → Mina meriter → Universitet och högskola och spara just den sidan som PDF.');
-     importedCandidates.push(...parsed.courses.map(c=>({...c,sourceFile:file.name})));
-     window.lastAntagningExpected=parsed.expectedTotal;
-   }
-   markDuplicates();
-   if(!importedCandidates.length){importStatus.textContent='PDF:en lästes, men inga avklarade kursblock kunde identifieras.';return}
-   const importedHp=importedCandidates.reduce((s,c)=>s+Number(c.hp||0),0);
-   const expected=window.lastAntagningExpected;
-   const check=Number.isFinite(expected) ? (Math.abs(importedHp-expected)<0.01 ? `✓ Summan stämmer: ${fmtHp(importedHp)} hp.` : `⚠ Importen ger ${fmtHp(importedHp)} hp men Antagning.se visar ${fmtHp(expected)} hp. Granska innan import.`) : `Hittade ${fmtHp(importedHp)} hp.`;
-   importStatus.textContent=`Hittade ${importedCandidates.length} avklarade kurser. ${check}`;
-   renderImportPreview();
- }catch(e){importStatus.textContent='Kunde inte läsa PDF: '+e.message;}
+async function readPdfLines(file){
+  if(!window.pdfjsLib) throw new Error('PDF-läsaren kunde inte laddas. Kontrollera internetanslutningen.');
+  const data=new Uint8Array(await file.arrayBuffer());
+  const pdf=await window.pdfjsLib.getDocument({data}).promise;
+  let lines=[];
+  for(let p=1;p<=pdf.numPages;p++){
+    const page=await pdf.getPage(p), content=await page.getTextContent();
+    const rows=new Map();
+    for(const it of content.items){
+      const y=Math.round((it.transform?.[5]||0)*2)/2, x=it.transform?.[4]||0;
+      if(!rows.has(y)) rows.set(y,[]);
+      rows.get(y).push({x,s:it.str});
+    }
+    [...rows.entries()].sort((a,b)=>b[0]-a[0]).forEach(([,items])=>{
+      const line=items.sort((a,b)=>a.x-b.x).map(z=>z.s).join(' ').replace(/\s+/g,' ').trim();
+      if(line) lines.push(line);
+    });
+  }
+  return lines;
+}
+function detectPdfSource(lines){
+  const text=lines.join(' ');
+  if(/Nationellt resultatintyg/i.test(text) && /Avslutade kurser/i.test(text)) return 'ladok';
+  if(/Antagning\.se/i.test(text) && /Universitet och högskola/i.test(text)) return 'antagning';
+  return 'unknown';
+}
+function parseLadokLines(rawLines){
+  const lines=rawLines.map(x=>String(x).replace(/\s+/g,' ').trim()).filter(Boolean);
+  const text=lines.join(' ');
+  const isLadok=/Nationellt resultatintyg/i.test(text)&&/Avslutade kurser/i.test(text);
+  let institution='Okänt lärosäte', inCourses=false, out=[], issuedDegrees=[];
+  const instLine=l=>{
+    if(/Resultatintyg över högre utbildning|svenska universitet|Ladok/i.test(l)) return false;
+    return l.length<100 && /(universitet|högskol)/i.test(l);
+  };
+  const rowRe=/^([A-ZÅÄÖ0-9][A-ZÅÄÖ0-9.\-]{2,15})\s+(.+?)\s+(\d+(?:[,.]\d+)?)\s*hp\s+([A-ZÅÄÖ0-9+\-]+)\s+(\d{4}-\d{2}-\d{2})(?:\s+\d+)?$/i;
+  const ignoreContinuation=l=>/^(Summering|Totalt|varav tillgodoräknat|Övrig tillgodoräknad|Noter och information|Kontrollera intyget|Verifierbart tom|Kontrollkod|Sida \d|Kod Benämning|Kod$|Benämning$|Omfattning$|Betyg$|Datum$|Not$|Nationellt resultatintyg|Utskriftsdatum|Personnummer|Namn$|Utfärdade bevis|Titel|Huvudområde:)/i.test(l);
+
+  for(let i=0;i<lines.length;i++){
+    const l=lines[i];
+    if(instLine(l)) institution=l;
+    if(/^Filosofie kandidatexamen,\s*180 hp/i.test(l)){
+      let subject='';
+      for(let j=i+1;j<Math.min(i+4,lines.length);j++){
+        const m=lines[j].match(/^Huvudområde:\s*(.+)$/i);
+        if(m){subject=m[1].trim();break}
+      }
+      issuedDegrees.push({type:'candidate',subject,institution});
+    }
+    if(/^Avslutade kurser$/i.test(l)){inCourses=true;continue}
+    if(/^Summering$/i.test(l)){inCourses=false;continue}
+    if(!inCourses) continue;
+    if(/^Kod Benämning/i.test(l)) continue;
+
+    const m=l.match(rowRe);
+    if(m){
+      const code=m[1], name=m[2].trim(), hp=parseFloat(m[3].replace(',','.')), grade=m[4], date=m[5];
+      out.push({
+        name,code,hp,grade,date,institution,
+        level:'Grundnivå',
+        subject:guessSubject(name,code,institution),
+        thesis:/examensarbete|självständigt arbete|kandidatuppsats|kandidatprojekt|degree project|thesis/i.test(name),
+        selected:true
+      });
+      continue;
+    }
+
+    // Ladok may wrap a long course title onto the next visual line.
+    if(out.length && !ignoreContinuation(l) && !/\d+(?:[,.]\d+)?\s*hp/i.test(l) && !/^\d{4}-\d{2}-\d{2}$/.test(l)){
+      const prev=out[out.length-1];
+      if(prev.institution===institution && l.length<100) {
+        prev.name=(prev.name+' '+l).replace(/\s+/g,' ').trim();
+        prev.subject=guessSubject(prev.name,prev.code,prev.institution);
+      }
+    }
+  }
+  const total=out.reduce((s,c)=>s+Number(c.hp||0),0);
+  return {isLadok,courses:out,expectedTotal:total,issuedDegrees};
+}
+async function importPdf(inp, chosenSource='auto'){
+  const files=[...(inp.files||[])]; if(!files.length)return;
+  importedCandidates=[]; importPreview.innerHTML='';
+  try{
+    let detectedSources=[], expectedTotals=[], issued=[];
+    for(const file of files){
+      const lines=await readPdfLines(file);
+      const detected=detectPdfSource(lines);
+      const source=chosenSource==='auto'?detected:chosenSource;
+      detectedSources.push(detected);
+
+      let parsed;
+      if(source==='ladok' || detected==='ladok') parsed=parseLadokLines(lines);
+      else if(source==='antagning' || detected==='antagning') parsed=parseAntagningLines(lines);
+      else throw new Error('Lotsen känner inte igen dokumentet som ett nationellt Ladok-resultatintyg eller Antagning.se-meriter.');
+
+      if(source==='ladok' && !parsed.isLadok) throw new Error('Det här ser inte ut som ett nationellt resultatintyg från Ladok.');
+      if(source==='antagning' && !parsed.isAntagning) throw new Error('Fel Antagning.se-PDF. Spara sidan Mina meriter → Universitet och högskola.');
+
+      importedCandidates.push(...parsed.courses.map(c=>({...c,sourceFile:file.name})));
+      if(Number.isFinite(parsed.expectedTotal)) expectedTotals.push(parsed.expectedTotal);
+      if(parsed.issuedDegrees) issued.push(...parsed.issuedDegrees);
+    }
+    markDuplicates();
+    if(!importedCandidates.length){
+      importStatus.textContent='PDF:en kunde läsas, men Lotsen hittade inga avslutade kurser.';
+      return;
+    }
+    const importedHp=importedCandidates.reduce((s,c)=>s+Number(c.hp||0),0);
+    const expected=expectedTotals.reduce((s,n)=>s+n,0);
+    const sourceLabel=detectedSources.includes('ladok')?'Ladok':'Antagning.se';
+    const check=expectedTotals.length && Math.abs(importedHp-expected)<0.01
+      ? `✓ ${fmtHp(importedHp)} hp hittades.`
+      : `${fmtHp(importedHp)} hp hittades.`;
+    importStatus.innerHTML=`<span class="import-ok">✓ ${sourceLabel} identifierat</span> · ${importedCandidates.length} kurser · ${check}`;
+    if(issued.length){
+      try{sessionStorage.setItem('lotsen_issued_degrees',JSON.stringify(issued));}catch(e){}
+    }
+    renderImportPreview();
+  }catch(e){
+    importStatus.innerHTML='<span class="import-error">Kunde inte importera dokumentet.</span> '+escapeHtml(e.message);
+  }
 }
 function fmtHp(n){return Number(n).toLocaleString('sv-SE',{maximumFractionDigits:1})}
 function normCourse(s){return String(s).toLowerCase().replace(/[^a-zåäö0-9]/g,'')}
@@ -695,43 +784,6 @@ function closeMeritGuide(){ document.getElementById('meritGuide').style.display=
 <script>function setImportMethod(m){const l=m==="ladok";document.getElementById("antagningGuide").style.display=l?"none":"block";document.getElementById("ladokGuide").style.display=l?"block":"none";document.getElementById("choiceAntagning").classList.toggle("active",!l);document.getElementById("choiceLadok").classList.toggle("active",l);if(l)setTimeout(()=>document.getElementById("ladokGuide").scrollIntoView({behavior:"smooth",block:"nearest"}),50);}</script>
 
 
-<script>
-let lotsenImportSource='auto';
-
-function detectMeritSourceFromName(file){
-  const n=String(file?.name||'').toLowerCase();
-  if(n.includes('ladok') || n.includes('resultatintyg') || n.includes('nationellt')) return 'ladok';
-  if(n.includes('antagning') || n.includes('universitet och högskola') || n.includes('meriter')) return 'antagning';
-  return 'unknown';
-}
-
-async function importPdf(input, chosenSource='auto'){
-  const file=input && input.files && input.files[0];
-  if(!file)return;
-  const detected=detectMeritSourceFromName(file);
-  lotsenImportSource = chosenSource!=='auto' ? chosenSource : detected;
-
-  const status=document.getElementById('importStatus');
-  if(status){
-    const label=lotsenImportSource==='ladok'?'Ladok-resultatintyg':
-      lotsenImportSource==='antagning'?'Antagning.se-meriter':'meritfil';
-    status.innerHTML='<strong>Importerar '+label+'…</strong><br>Lotsen läser kursnamn, högskolepoäng, kurskod, betyg och lärosäte.';
-  }
-
-  try{
-    await importPdfCore(input);
-    if(status && courses && courses.length){
-      const label=lotsenImportSource==='ladok'?'Ladok':'Antagning.se';
-      status.innerHTML='<span class="import-ok">✓ '+label+' identifierat</span> · '+courses.length+' kurser importerade. Kontrollera gärna kurslistan nedan.';
-    }
-  }catch(e){
-    if(status){
-      status.innerHTML='<span class="import-error">Importen kunde inte läsas säkert.</span> Kontrollera att du laddat upp en PDF med dina universitets-/högskolemeriter.';
-    }
-    throw e;
-  }
-}
-</script>
 
 
 
@@ -740,6 +792,9 @@ async function importPdf(input, chosenSource='auto'){
 
 
 
-<!-- Lotsen v29 -->
+
+
+
+<!-- Lotsen v30 -->
 </body>
 </html>
