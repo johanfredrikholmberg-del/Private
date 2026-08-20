@@ -316,6 +316,10 @@ body{background:#f6f8fc}
 .import-choice-grid{grid-template-columns:repeat(3,1fr)!important}
 .manual-import-form{margin-top:16px}
 @media(max-width:640px){.import-choice-grid{grid-template-columns:1fr!important}}
+
+#confirmImportBtn:disabled{opacity:.6}
+#confirmImportBtn.importing{pointer-events:none}
+
 </style>
 </head>
 <body>
@@ -604,6 +608,14 @@ function detectPdfSource(lines){
 }
 
 
+
+function ladokDateToTerm(date){
+  const m=String(date||'').match(/^(\d{4})-(\d{2})-\d{2}$/);
+  if(!m)return '';
+  const month=Number(m[2]);
+  return `${month>=7?'HT':'VT'}${m[1]}`;
+}
+
 function detectCourseLevel(text){
   const s=String(text||'').toLowerCase();
   if(/avancerad nivå|advanced level|\b(a1n|a1f|a1e|a2e)\b/i.test(s)) return 'Avancerad nivå';
@@ -678,7 +690,7 @@ function parseLadokLines(rawLines){
     if(m){
       const code=m[1], name=cleanLadokCourseName(m[2]), hp=parseFloat(m[3].replace(',','.')), grade=m[4], date=m[5];
       out.push({
-        name,code,hp,grade,date,institution,
+        name,code,hp,grade,date,term:ladokDateToTerm(date),institution,
         level:detectCourseLevel(l)||detectCourseLevel(name),
         subject:guessSubject(name,code,institution),
         thesis:/examensarbete|självständigt arbete|kandidatuppsats|kandidatprojekt|degree project|thesis/i.test(name),
@@ -724,6 +736,7 @@ async function importPdf(inp, chosenSource='auto'){
       if(parsed.issuedDegrees) issued.push(...parsed.issuedDegrees);
     }
     markDuplicates();
+
     if(!importedCandidates.length){
       importStatus.textContent='PDF:en kunde läsas, men Lotsen hittade inga avslutade kurser.';
       return;
@@ -817,7 +830,7 @@ function renderImportPreview(){
      <summary class="import-results-summary">
        <div>
          <strong>${importedCandidates.length} kurser hittades</strong>
-         <div class="small muted">${fmtHp(totalHp)} hp · ${institutions.length} ${institutions.length===1?'lärosäte':'lärosäten'}</div>
+         <div class="small muted">${fmtHp(totalHp)} hp · ${institutions.length} ${institutions.length===1?'lärosäte':'lärosäten'}${importedCandidates.some(c=>!c.level)?' · vissa nivåer behöver verifieras':''}</div>
        </div>
        <span class="detail-arrow">›</span>
      </summary>
@@ -833,7 +846,7 @@ function renderImportPreview(){
    </details>
    <div class="import-confirm"><button class="primary" id="confirmImportBtn" type="button">Importera valda kurser</button></div>`;
 }
-async function confirmImport(){
+function confirmImport(){
   const chosen=importedCandidates
     .filter(c=>c.selected&&!c.duplicate)
     .map(({selected,duplicate,sourceFile,...c})=>c);
@@ -845,28 +858,41 @@ async function confirmImport(){
 
   courses.push(...chosen);
 
-  // Försök verifiera nivå via historisk kursplan när uppgifterna räcker.
-  try{
-    enrichCourseSyllabusStatus();
-    const unknown=courses.filter(c=>!c.level&&c.syllabusLookup?.ready);
-    for(const c of unknown){
-      const r=await fetchHistoricalSyllabus(c);
-      if(r.ok && r.data?.level) c.level=r.data.level;
-      if(r.ok && r.data?.learningGoals?.length){
-        c.learningGoals=r.data.learningGoals;
-        c.content=r.data.content||c.content||'';
-      }
-    }
-  }catch(e){}
-
   try{sessionStorage.setItem('examensmatch_courses',JSON.stringify(courses))}catch(e){}
 
   importStatus.textContent=`${chosen.length} kurser importerades.`;
   importPreview.innerHTML='';
+
+  // Visa resultatet direkt. Kursplanskontroll får aldrig blockera importen.
   renderCourses();
   renderDegrees();
   go('degrees');
   window.scrollTo(0,0);
+
+  // Försök förbättra kursnivåer i bakgrunden när det går.
+  setTimeout(async()=>{
+    try{
+      enrichCourseSyllabusStatus();
+      let changed=false;
+      for(const c of courses.filter(c=>!c.level&&c.syllabusLookup?.ready)){
+        const r=await fetchHistoricalSyllabus(c);
+        if(r.ok && r.data?.level){
+          const level=detectCourseLevel(r.data.level)||String(r.data.level||'');
+          if(level){c.level=level;changed=true}
+        }
+        if(r.ok && r.data?.learningGoals?.length){
+          c.learningGoals=r.data.learningGoals;
+          c.content=r.data.content||c.content||'';
+          changed=true;
+        }
+      }
+      if(changed){
+        try{sessionStorage.setItem('examensmatch_courses',JSON.stringify(courses))}catch(e){}
+        renderCourses();
+        renderDegrees();
+      }
+    }catch(e){}
+  },50);
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 
@@ -2141,6 +2167,10 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v80 -->
+
+
+
+
+<!-- Lotsen v82 -->
 </body>
 </html>
