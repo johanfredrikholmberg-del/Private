@@ -276,6 +276,23 @@ body{background:#f6f8fc}
 .compare-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.compare-choice{padding:15px}.compare-choice-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.compare-choice-head h3{margin:0;font-size:17px;line-height:1.2}.compare-choice-head small{color:#667085}.compare-key{margin:12px 0;padding:9px 10px;background:#f8fafc;border-radius:9px}.compare-mini-section{border-top:1px solid #eef0f3;padding:10px 0;font-size:12px}.compare-mini-section>b{display:block;margin-bottom:5px}.compare-mini-section>span{color:#667085}.compare-mini-section ul{margin:5px 0 0;padding-left:18px;color:#475467}
 @media(max-width:700px){.compare-picker,.compare-two{grid-template-columns:1fr}}
 
+
+.import-compact{display:block!important;padding:14px 15px!important;margin-bottom:9px!important}
+.import-main>strong{display:block;font-size:16px;line-height:1.25;margin-bottom:5px}
+.import-main .small{line-height:1.35}
+.import-check{display:flex;align-items:center;gap:7px;margin-top:11px;font-size:13px;font-weight:700}
+.import-check input{width:20px;height:20px}
+.import-confirm{position:sticky;bottom:10px;z-index:3;padding:10px 0;background:linear-gradient(transparent,rgba(246,248,252,.98) 25%)}
+.import-confirm .primary{width:100%}
+.credit-details summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer}
+.credit-details summary::-webkit-details-marker{display:none}
+.credit-details summary h2{margin:0 0 3px}
+.credit-details summary .tiny-help{margin:0}
+.detail-arrow{font-size:26px;color:#315bc7;transition:transform .15s}
+.credit-details[open] .detail-arrow{transform:rotate(90deg)}
+.credit-content{padding-top:12px;margin-top:11px;border-top:1px solid #eef0f3}
+.credit-note{margin-top:10px!important}
+
 </style>
 </head>
 <body>
@@ -395,7 +412,7 @@ body{background:#f6f8fc}
 
 <section id="route" class="screen">
   <div class="top"><div><h1>Min väg</h1><p id="routeSub">Utgår från din bästa examensmatchning.</p></div><select id="routeGoal" style="max-width:330px" onchange="renderRoute()"></select></div>
-  <div class="card" style="margin-bottom:18px"><div class="row"><div><strong>Välj lärosäte för jämförelsen</strong><div class="small muted">Lokala examensregler och kursutbud kan skilja sig.</div></div><span class="verified">Datakoll 19 aug 2026</span></div><div class="uni-select" id="uniSelect"></div></div>
+  <div id="uniSelect" style="display:none"></div>
   <div class="grid">
     <div class="card span7" id="routeMain"></div>
     <div class="card span5"><div class="kicker">Kurser att leta efter</div><h3 id="courseSuggestTitle">Det här kan saknas</h3><div id="courseSuggestions"></div><button class="primary" style="margin-top:12px" onclick="renderCourseCatalog(true)">Visa fler kursförslag</button></div>
@@ -732,19 +749,14 @@ function guessSubject(name,code='',institution=''){
  if(/informatik|computer|programmer|data science/.test(n)) return 'Informatik';
  return 'Behöver granskas';
 }
-function renderImportPreview(){importPreview.innerHTML=`<div class="course-head"><strong>Kurs</strong><strong>hp</strong><strong>Nivå</strong><strong>Huvudområde</strong><strong></strong></div>`+importedCandidates.map((c,i)=>`<div class="course"><div><strong>${escapeHtml(c.name)}</strong><div class="small muted">${escapeHtml(c.institution||'Okänt lärosäte')} · ${escapeHtml(c.code||'')} ${c.grade?'· '+escapeHtml(c.grade)+' ':''}· ${c.thesis?'Möjligt examensarbete · ':''}${c.duplicate?'Möjlig dubblett · ':''}${c.subject==='Behöver granskas'?'Osäker ämnesklassning':''}</div></div><div>${c.hp}</div><div><select onchange="importedCandidates[${i}].level=this.value"><option ${c.level==='Grundnivå'?'selected':''}>Grundnivå</option><option ${c.level==='Avancerad nivå'?'selected':''}>Avancerad nivå</option></select></div><div><input value="${escapeHtml(c.subject)}" onchange="importedCandidates[${i}].subject=this.value"></div><label class="small"><input type="checkbox" ${c.selected?'checked':''} onchange="importedCandidates[${i}].selected=this.checked"> Importera</label></div>`).join('')+`<div class="row" style="margin-top:14px"><span class="small muted">Inget läggs till förrän du godkänner listan.</span><button class="primary" onclick="confirmImport()">Lägg till valda kurser</button></div>`}
-function confirmImport(){
-  const chosen=importedCandidates
-    .filter(c=>c.selected&&!c.duplicate)
-    .map(({selected,duplicate,sourceFile,...c})=>c);
-  courses.push(...chosen);
-  saveProfile();
-  importStatus.textContent=`${chosen.length} kurser importerades.`;
-  importPreview.innerHTML='';
-  renderCourses();
-  renderDegrees();
-  go('degrees');
-  window.scrollTo(0,0);
+function renderImportPreview(){
+ importPreview.innerHTML=importedCandidates.map((c,i)=>`<div class="course import-compact">
+   <div class="import-main">
+     <strong>${escapeHtml(c.name)}</strong>
+     <div class="small muted">${escapeHtml(c.institution||'Okänt lärosäte')} · ${escapeHtml(c.code||'')} · ${escapeHtml(c.level||'Grundnivå')} · ${fmtHp(c.hp)} hp${c.duplicate?' · Möjlig dubblett':''}</div>
+   </div>
+   <label class="import-check"><input type="checkbox" ${c.selected?'checked':''} onchange="importedCandidates[${i}].selected=this.checked"> Importera</label>
+ </div>`).join('')+`<div class="import-confirm"><button class="primary" onclick="confirmImport()">Importera valda kurser</button></div>`;
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 
@@ -842,6 +854,7 @@ function renderDegreeDetail(key){
  const use=coursesForDegree(o), missing=missingForOpportunity(o), unis=universityOptionsForOpportunity(o);
  const usedSubject=use.subject.reduce((s,c)=>s+Number(c.hp||0),0);
  const usedOther=Math.min(90,use.others.reduce((s,c)=>s+Number(c.hp||0),0));
+ const transferableHp=usedSubject+usedOther;
  const verified=unis.some(x=>x.d?.verified)||o.source==='specific';
  const status=verified?'Verifierad':'Ej verifierad';
 
@@ -852,12 +865,17 @@ function renderDegreeDetail(key){
    </div>
    <div class="detail-summary">${o.remaining?`Cirka <strong>${fmtHp(o.remaining)} hp kvar</strong>`:'<strong>Ser preliminärt klar ut</strong>'}</div>
 
-   <section class="detail-block">
-     <h2>Kan tillgodoräknas</h2>
-     <div class="tiny-help">Preliminär bedömning av dina tidigare kurser.</div>
-     ${use.subject.length?`<div class="simple-course-list">${use.subject.slice(0,8).map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div>`:'<div class="muted small">Ingen tydlig kursmatchning hittad.</div>'}
-     ${usedOther?`<div class="used-group secondary"><strong>Övriga kurser som kan ingå</strong><span>upp till ${fmtHp(usedOther)} hp</span></div>`:''}
-   </section>
+   <details class="detail-block credit-details">
+     <summary>
+       <div><h2>Kan tillgodoräknas</h2><span class="tiny-help">${fmtHp(transferableHp)} hp preliminärt</span></div>
+       <span class="detail-arrow">›</span>
+     </summary>
+     <div class="credit-content">
+       ${use.subject.length?`<div class="simple-course-list">${use.subject.map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div>`:'<div class="muted small">Ingen tydlig kursmatchning hittad.</div>'}
+       ${usedOther?`<div class="used-group secondary"><strong>Övriga kurser som kan ingå</strong><span>upp till ${fmtHp(usedOther)} hp</span></div>`:''}
+       <div class="tiny-help credit-note">Preliminärt – lärosätet beslutar slutligt.</div>
+     </div>
+   </details>
 
    <section class="detail-block">
      <h2>Kvar att läsa</h2>
@@ -1926,6 +1944,8 @@ document.addEventListener('click',async(e)=>{
 
 
 
-<!-- Lotsen v69 -->
+
+
+<!-- Lotsen v70 -->
 </body>
 </html>
