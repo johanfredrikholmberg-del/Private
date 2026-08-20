@@ -733,7 +733,19 @@ function guessSubject(name,code='',institution=''){
  return 'Behöver granskas';
 }
 function renderImportPreview(){importPreview.innerHTML=`<div class="course-head"><strong>Kurs</strong><strong>hp</strong><strong>Nivå</strong><strong>Huvudområde</strong><strong></strong></div>`+importedCandidates.map((c,i)=>`<div class="course"><div><strong>${escapeHtml(c.name)}</strong><div class="small muted">${escapeHtml(c.institution||'Okänt lärosäte')} · ${escapeHtml(c.code||'')} ${c.grade?'· '+escapeHtml(c.grade)+' ':''}· ${c.thesis?'Möjligt examensarbete · ':''}${c.duplicate?'Möjlig dubblett · ':''}${c.subject==='Behöver granskas'?'Osäker ämnesklassning':''}</div></div><div>${c.hp}</div><div><select onchange="importedCandidates[${i}].level=this.value"><option ${c.level==='Grundnivå'?'selected':''}>Grundnivå</option><option ${c.level==='Avancerad nivå'?'selected':''}>Avancerad nivå</option></select></div><div><input value="${escapeHtml(c.subject)}" onchange="importedCandidates[${i}].subject=this.value"></div><label class="small"><input type="checkbox" ${c.selected?'checked':''} onchange="importedCandidates[${i}].selected=this.checked"> Importera</label></div>`).join('')+`<div class="row" style="margin-top:14px"><span class="small muted">Inget läggs till förrän du godkänner listan.</span><button class="primary" onclick="confirmImport()">Lägg till valda kurser</button></div>`}
-function confirmImport(){const chosen=importedCandidates.filter(c=>c.selected&&!c.duplicate).map(({selected,duplicate,sourceFile,...c})=>c);courses.push(...chosen);saveProfile();importStatus.textContent=`${chosen.length} kurser importerades.`;importPreview.innerHTML='';renderCourses();renderDegrees();go('degrees');window.scrollTo(0,0)})=>c);courses.push(...chosen);saveProfile();importStatus.textContent=`${chosen.length} kurser importerades och slogs ihop med din gemensamma meritprofil.`;importPreview.innerHTML='';renderCourses()}
+function confirmImport(){
+  const chosen=importedCandidates
+    .filter(c=>c.selected&&!c.duplicate)
+    .map(({selected,duplicate,sourceFile,...c})=>c);
+  courses.push(...chosen);
+  saveProfile();
+  importStatus.textContent=`${chosen.length} kurser importerades.`;
+  importPreview.innerHTML='';
+  renderCourses();
+  renderDegrees();
+  go('degrees');
+  window.scrollTo(0,0);
+}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 
 
@@ -1912,6 +1924,8 @@ document.addEventListener('click',async(e)=>{
 
 
 
-<!-- Lotsen v68 -->
+
+
+<!-- Lotsen v69 -->
 </body>
 </html>
