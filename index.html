@@ -293,6 +293,29 @@ body{background:#f6f8fc}
 .credit-content{padding-top:12px;margin-top:11px;border-top:1px solid #eef0f3}
 .credit-note{margin-top:10px!important}
 
+
+.uni-path-btn{width:100%;border:0;background:transparent;text-align:left;font:inherit;cursor:pointer}
+.uni-path-btn:active{background:#f8fafc}
+
+
+.credit-group-title{font-size:12px;font-weight:850;color:#344054;margin:2px 0 7px}
+.secondary-title{margin-top:16px;padding-top:12px;border-top:1px solid #eef0f3}
+.secondary-courses{max-height:320px;overflow:auto;padding-right:2px}
+.credit-limit{margin-top:8px!important}
+
+
+.import-results{border:1px solid #e2e6ee;border-radius:18px;background:#fff;overflow:hidden;margin-top:12px}
+.import-results-summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;cursor:pointer}
+.import-results-summary::-webkit-details-marker{display:none}
+.import-results-summary>div>strong{font-size:18px}
+.import-results-summary .small{margin-top:4px}
+.import-results[open] .detail-arrow{transform:rotate(90deg)}
+.import-results-list{padding:0 10px 10px;border-top:1px solid #eef0f3}
+
+
+.import-choice-grid{grid-template-columns:repeat(3,1fr)!important}
+.manual-import-form{margin-top:16px}
+@media(max-width:640px){.import-choice-grid{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -351,7 +374,16 @@ body{background:#f6f8fc}
 <div class="import-choice-grid">
 <button class="import-choice" id="choiceAntagning" onclick="setImportMethod('antagning')"><b>Antagning.se</b><span>Alternativ importväg</span></button>
 <button class="import-choice active" id="choiceLadok" onclick="setImportMethod('ladok')"><b>Ladok <em class="recommended">Rekommenderat</em></b><span>Nationellt resultatintyg med alla dina godkända Ladok-studier</span></button>
+<button class="import-choice" id="choiceManual" onclick="setImportMethod('manual')"><b>Lägg till manuellt</b><span>Fyll i en kurs själv</span></button>
 </div>
+<div id="manualGuide" style="display:none">
+<div class="form manual-import-form">
+<input id="courseName" placeholder="Kursnamn">
+<input id="courseHp" type="number" placeholder="hp">
+<select id="courseLevel"><option>Grundnivå</option><option>Avancerad nivå</option></select>
+<input id="courseSubject" placeholder="Huvudområde">
+<button class="primary" onclick="addCourse()">Lägg till kurs</button>
+</div></div>
 <div id="antagningGuide" style="display:none">
 <a class="primary antagning-link-btn" href="https://www.antagning.se/" target="_blank" rel="noopener">Öppna Antagning.se</a>
 <ol class="small"><li>Logga in på Antagning.se.</li><li>Öppna <b>Mina sidor → Mina meriter → Universitet och högskola</b>.</li><li>Tryck <b>Dela → Skriv ut</b>.</li><li>Öppna förhandsvisningen som PDF.</li><li>Välj <b>Dela → Spara i Filer</b>.</li><li>Gå tillbaka till Lotsen och ladda upp PDF:en.</li></ol>
@@ -379,17 +411,6 @@ body{background:#f6f8fc}
   </div>
 
   <div id="courses" class="study-list"></div>
-
-  <div class="card" style="margin-top:16px">
-    <strong>Lägg till en kurs manuellt</strong>
-    <div class="form">
-      <input id="courseName" placeholder="Kursnamn">
-      <input id="courseHp" type="number" placeholder="hp">
-      <select id="courseLevel"><option>Grundnivå</option><option>Avancerad nivå</option></select>
-      <input id="courseSubject" placeholder="Huvudområde">
-      <button class="primary" onclick="addCourse()">Lägg till</button>
-    </div>
-  </div>
 </section>
 
 
@@ -431,6 +452,11 @@ body{background:#f6f8fc}
   <details class="tg-status simple-details" id="tgStatus"><summary><strong>Hur säkra är matchningarna?</strong></summary><div class="details-body"><strong>Tidigare kurser:</strong> Lotsen jämför dina kurser med det som krävs. <span id="syllabusCoverage"></span><button class="mini-fetch" id="fetchSyllabiBtn" type="button">Kontrollera kurser</button><span class="fetch-result" id="fetchSyllabiResult"></span></div></details><div id="programMatches"></div>
 </section>
 
+
+<section id="universityDetail" class="screen">
+  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><button onclick="go('degreeDetail')">Min väg</button><span>›</span><strong>Lärosäte</strong></div>
+  <div id="universityDetailContent"></div>
+</section>
 <section id="compare" class="screen compare">
   <div class="top"><div><h1>Jämför</h1><p>Välj två examina och jämför vägen dit.</p></div></div>
   <div class="compare-picker">
@@ -517,23 +543,10 @@ const degrees=[
 ];
 function subjectHp(sub){return courses.filter(c=>!sub||c.subject.toLowerCase()===sub.toLowerCase()).reduce((s,c)=>s+Number(c.hp),0)}
 function totalHp(){return courses.reduce((s,c)=>s+Number(c.hp),0)}
-function advancedHp(){return courses.filter(c=>c.level==='Avancerad nivå').reduce((s,c)=>s+Number(c.hp),0)}
-function hasThesis(sub){return courses.some(c=>c.thesis&&(!sub||c.subject===sub))}
-function calc(d){
- let total=d.advanced?advancedHp():totalHp(); let subj=d.subject?subjectHp(d.subject):Math.max(...[...new Set(courses.map(c=>c.subject))].map(subjectHp),0); let thesis=d.subject?hasThesis(d.subject):courses.some(c=>c.thesis);
- if(d.advanced){total=advancedHp(); subj=Math.min(total,Math.max(...[...new Set(courses.filter(c=>c.level==='Avancerad nivå').map(c=>c.subject))].map(s=>courses.filter(c=>c.level==='Avancerad nivå'&&c.subject===s).reduce((a,b)=>a+b.hp,0)),0));}
- const totalRatio=Math.min(total/d.total,1),subjectRatio=Math.min(subj/d.subjectReq,1),thesisRatio=d.thesisReq?Number(thesis):1;
- const fulfilled=total>=d.total&&subj>=d.subjectReq&&(!d.thesisReq||thesis); const pct=fulfilled?100:Math.round((totalRatio*.45+subjectRatio*.4+thesisRatio*.15)*100);
- const missingTotal=Math.max(0,d.total-total),missingSubject=Math.max(0,d.subjectReq-subj),missingThesis=d.thesisReq&&!thesis?d.thesisReq:0;
- const remaining=Math.max(missingTotal,missingSubject,missingThesis);
- let confidenceScore=45;
- if(d.subject&&courses.some(c=>c.subject===d.subject)) confidenceScore+=20;
- if(total>=d.total) confidenceScore+=10;
- if(d.thesisReq&&thesis) confidenceScore+=15;
- if(d.id==='business'&&subj>=15) confidenceScore+=8;
- confidenceScore=Math.min(95,confidenceScore);
- const confidence=confidenceScore>=80?'Hög':confidenceScore>=60?'Medel':'Låg';
- return {pct,total,subj,thesis,missingTotal,missingSubject,missingThesis,remaining,confidence,confidenceScore};
+function advancedHp(){
+  return courses
+    .filter(c=>c.selected!==false && (/Avancerad nivå/i.test(String(c.level||'')) || /^A[12]/i.test(String(c.level||''))))
+    .reduce((s,c)=>s+Number(c.hp||0),0);
 }
 function loadReferenceProfile(){courses=DEMO_COURSES.map(x=>({...x}));saveProfile();renderCourses();go('degrees')}
 function renderCourses(){
@@ -588,6 +601,14 @@ function detectPdfSource(lines){
   if(/Nationellt resultatintyg/i.test(text) && /Avslutade kurser/i.test(text)) return 'ladok';
   if(/Antagning\.se/i.test(text) && /Universitet och högskola/i.test(text)) return 'antagning';
   return 'unknown';
+}
+
+
+function detectCourseLevel(text){
+  const s=String(text||'').toLowerCase();
+  if(/avancerad nivå|advanced level|\b(a1n|a1f|a1e|a2e)\b/i.test(s)) return 'Avancerad nivå';
+  if(/grundnivå|first cycle|\b(g1n|g1f|g1e|g2f|g2e)\b/i.test(s)) return 'Grundnivå';
+  return '';
 }
 
 function cleanLadokCourseName(name){
@@ -658,7 +679,7 @@ function parseLadokLines(rawLines){
       const code=m[1], name=cleanLadokCourseName(m[2]), hp=parseFloat(m[3].replace(',','.')), grade=m[4], date=m[5];
       out.push({
         name,code,hp,grade,date,institution,
-        level:'Grundnivå',
+        level:detectCourseLevel(l)||detectCourseLevel(name),
         subject:guessSubject(name,code,institution),
         thesis:/examensarbete|självständigt arbete|kandidatuppsats|kandidatprojekt|degree project|thesis/i.test(name),
         selected:true
@@ -671,6 +692,7 @@ function parseLadokLines(rawLines){
       const prev=out[out.length-1];
       if(prev.institution===institution && l.length<100) {
         prev.name=cleanLadokCourseName(prev.name+' '+l);
+        if(!prev.level) prev.level=detectCourseLevel(l);
         prev.subject=guessSubject(prev.name,prev.code,prev.institution);
       }
     }
@@ -786,15 +808,32 @@ function guessSubject(name,code='',institution=''){
  return 'Behöver granskas';
 }
 function renderImportPreview(){
- importPreview.innerHTML=importedCandidates.map((c,i)=>`<div class="course import-compact">
-   <div class="import-main">
-     <strong>${escapeHtml(c.name)}</strong>
-     <div class="small muted">${escapeHtml(c.institution||'Okänt lärosäte')} · ${escapeHtml(c.code||'')} · ${escapeHtml(c.level||'Grundnivå')} · ${fmtHp(c.hp)} hp${c.duplicate?' · Möjlig dubblett':''}</div>
-   </div>
-   <label class="import-check"><input type="checkbox" ${c.selected?'checked':''} onchange="importedCandidates[${i}].selected=this.checked"> Importera</label>
- </div>`).join('')+`<div class="import-confirm"><button class="primary" id="confirmImportBtn" type="button">Importera valda kurser</button></div>`;
+ const selected=importedCandidates.filter(c=>c.selected&&!c.duplicate);
+ const totalHp=importedCandidates.reduce((s,c)=>s+Number(c.hp||0),0);
+ const institutions=[...new Set(importedCandidates.map(c=>c.institution).filter(Boolean))];
+
+ importPreview.innerHTML=`
+   <details class="import-results">
+     <summary class="import-results-summary">
+       <div>
+         <strong>${importedCandidates.length} kurser hittades</strong>
+         <div class="small muted">${fmtHp(totalHp)} hp · ${institutions.length} ${institutions.length===1?'lärosäte':'lärosäten'}</div>
+       </div>
+       <span class="detail-arrow">›</span>
+     </summary>
+     <div class="import-results-list">
+       ${importedCandidates.map((c,i)=>`<div class="course import-compact">
+         <div class="import-main">
+           <strong>${escapeHtml(c.name)}</strong>
+           <div class="small muted">${escapeHtml(c.institution||'Okänt lärosäte')} · ${escapeHtml(c.code||'')} · ${escapeHtml(c.level||'Nivå ej verifierad')} · ${fmtHp(c.hp)} hp${c.duplicate?' · Möjlig dubblett':''}</div>
+         </div>
+         <label class="import-check"><input type="checkbox" ${c.selected?'checked':''} onchange="importedCandidates[${i}].selected=this.checked"> Importera</label>
+       </div>`).join('')}
+     </div>
+   </details>
+   <div class="import-confirm"><button class="primary" id="confirmImportBtn" type="button">Importera valda kurser</button></div>`;
 }
-function confirmImport(){
+async function confirmImport(){
   const chosen=importedCandidates
     .filter(c=>c.selected&&!c.duplicate)
     .map(({selected,duplicate,sourceFile,...c})=>c);
@@ -806,7 +845,20 @@ function confirmImport(){
 
   courses.push(...chosen);
 
-  // Behåll meriterna under den aktuella sessionen, utan extra "Spara"-steg.
+  // Försök verifiera nivå via historisk kursplan när uppgifterna räcker.
+  try{
+    enrichCourseSyllabusStatus();
+    const unknown=courses.filter(c=>!c.level&&c.syllabusLookup?.ready);
+    for(const c of unknown){
+      const r=await fetchHistoricalSyllabus(c);
+      if(r.ok && r.data?.level) c.level=r.data.level;
+      if(r.ok && r.data?.learningGoals?.length){
+        c.learningGoals=r.data.learningGoals;
+        c.content=r.data.content||c.content||'';
+      }
+    }
+  }catch(e){}
+
   try{sessionStorage.setItem('examensmatch_courses',JSON.stringify(courses))}catch(e){}
 
   importStatus.textContent=`${chosen.length} kurser importerades.`;
@@ -905,13 +957,57 @@ function openDegreeDetails(key){
  renderDegreeDetail(key);
  go('degreeDetail');
 }
+
+function openUniversityPath(profileId,major){
+  try{
+    sessionStorage.setItem('lotsen_uni_profile',profileId);
+    sessionStorage.setItem('lotsen_uni_major',major);
+  }catch(e){}
+  renderUniversityDetail(profileId,major);
+  go('universityDetail');
+}
+function renderUniversityDetail(profileId,major){
+  const host=document.getElementById('universityDetailContent'); if(!host)return;
+  const rows=(typeof flexibleDegreeCandidates==='function'?flexibleDegreeCandidates():[])
+    .filter(x=>x.d.id===profileId && x.major===major);
+  const x=rows[0];
+  if(!x){
+    host.innerHTML='<div class="card empty">Kunde inte hitta lärosätesvägen.</div>';
+    return;
+  }
+  const verified=!!x.d.verified;
+  host.innerHTML=`
+    <div class="detail-hero">
+      <div>
+        <div class="eyebrow">${escapeHtml(x.d.university)}</div>
+        <h1>${escapeHtml(x.degreeTitle?.title||x.d.name)}</h1>
+        <div class="verify-chip ${verified?'verified':'unverified'}">${verified?'Verifierad':'Ej verifierad'}</div>
+      </div>
+      <span class="badge ${x.remaining===0?'good':x.remaining<=30?'warn':'bad'}">${x.remaining===0?'100%':Math.max(0,Math.round(100*(1-x.remaining/Math.max(1,x.d.hp))))+'%'}</span>
+    </div>
+
+    <div class="detail-summary">${x.remaining?`Cirka <strong>${fmtHp(x.remaining)} hp kvar</strong>`:'<strong>Ser preliminärt klar ut</strong>'}</div>
+
+    <section class="detail-block">
+      <h2>Kvar att läsa</h2>
+      ${x.missing?.length?`<div class="missing-list">${x.missing.map(m=>`<div><span class="missing-check">○</span><strong>${escapeHtml(m.label)}</strong></div>`).join('')}</div>`:'<div class="ready-box">Ingen tydlig komplettering hittad.</div>'}
+    </section>
+
+    <section class="detail-block">
+      <h2>Om vägen</h2>
+      <div class="tiny-help">${escapeHtml(x.d.note||'Lokala examenskrav kan skilja sig mellan lärosäten.')}</div>
+    </section>
+  `;
+}
+
 function renderDegreeDetail(key){
  const host=document.getElementById('degreeDetailContent');if(!host)return;
  const o=opportunityByKey(key||sessionStorage.getItem('lotsen_detail_key'));
  if(!o){host.innerHTML='<div class="card empty">Kunde inte hitta examensvägen.</div>';return}
  const use=coursesForDegree(o), missing=missingForOpportunity(o), unis=universityOptionsForOpportunity(o);
  const usedSubject=use.subject.reduce((s,c)=>s+Number(c.hp||0),0);
- const usedOther=Math.min(90,use.others.reduce((s,c)=>s+Number(c.hp||0),0));
+ const usedOtherRaw=use.others.reduce((s,c)=>s+Number(c.hp||0),0);
+ const usedOther=Math.min(90,usedOtherRaw);
  const transferableHp=usedSubject+usedOther;
  const verified=unis.some(x=>x.d?.verified)||o.source==='specific';
  const status=verified?'Verifierad':'Ej verifierad';
@@ -929,8 +1025,19 @@ function renderDegreeDetail(key){
        <span class="detail-arrow">›</span>
      </summary>
      <div class="credit-content">
-       ${use.subject.length?`<div class="simple-course-list">${use.subject.map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div>`:'<div class="muted small">Ingen tydlig kursmatchning hittad.</div>'}
-       ${usedOther?`<div class="used-group secondary"><strong>Övriga kurser som kan ingå</strong><span>upp till ${fmtHp(usedOther)} hp</span></div>`:''}
+       ${use.subject.length?`
+         <div class="credit-group-title">${escapeHtml(o.subject||'Huvudområdet')}</div>
+         <div class="simple-course-list">
+           ${use.subject.map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}
+         </div>`:'<div class="muted small">Ingen tydlig kursmatchning i huvudområdet hittad.</div>'}
+
+       ${use.others.length?`
+         <div class="credit-group-title secondary-title">Övriga kurser som potentiellt kan ingå</div>
+         <div class="simple-course-list secondary-courses">
+           ${use.others.map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}
+         </div>
+         <div class="tiny-help credit-limit">Upp till ${fmtHp(usedOther)} hp kan räknas in här enligt Lotsens preliminära bedömning.</div>`:''}
+
        <div class="tiny-help credit-note">Preliminärt – lärosätet beslutar slutligt.</div>
      </div>
    </details>
@@ -944,7 +1051,7 @@ function renderDegreeDetail(key){
    <section class="detail-block">
      <h2>Nästa steg</h2>
      <div class="tiny-help">Välj lärosäte först när du vill kontrollera exakt regelverk och kursutbud.</div>
-     <div class="uni-path-list">${unis.length?unis.map(x=>`<div class="uni-path"><div><strong>${escapeHtml(x.d.university)}</strong><small>${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'Ser möjlig ut'}</small></div><span>›</span></div>`).join(''):'<div class="muted small">Fler lärosäten läggs till löpande.</div>'}</div>
+     <div class="uni-path-list">${unis.length?unis.map(x=>`<button class="uni-path uni-path-btn" type="button" onclick="openUniversityPath('${escapeHtml(x.d.id)}','${escapeHtml(x.major)}')"><div><strong>${escapeHtml(x.d.university)}</strong><small>${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'Ser möjlig ut'}</small></div><span>›</span></button>`).join(''):'<div class="muted small">Fler lärosäten läggs till löpande.</div>'}</div>
    </section>
  `;
 }
@@ -1779,7 +1886,7 @@ function go(id){
  if(id==='compare' && !courses.length){
    setTimeout(()=>{try{renderCompare()}catch(e){}},0);
  }
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='route'){const k=sessionStorage.getItem('lotsen_detail_key');if(k){id='degreeDetail';document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('degreeDetail').classList.add('active');renderDegreeDetail(k)}else renderRoute();}if(id==='compare')renderCompare();if(id==='programs')renderPrograms();if(id==='degreeDetail')renderDegreeDetail();window.scrollTo(0,0)}
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='route'){const k=sessionStorage.getItem('lotsen_detail_key');if(k){id='degreeDetail';document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('degreeDetail').classList.add('active');renderDegreeDetail(k)}else renderRoute();}if(id==='compare')renderCompare();if(id==='programs')renderPrograms();if(id==='degreeDetail')renderDegreeDetail();if(id==='universityDetail')renderUniversityDetail(sessionStorage.getItem('lotsen_uni_profile'),sessionStorage.getItem('lotsen_uni_major'));window.scrollTo(0,0)}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
 populateRouteGoal();initBackend();updateAuthUI();renderUniversities();renderGoals();renderCourses();renderDegrees();renderRoute();renderCompare();renderPrograms();
 </script>
@@ -1891,7 +1998,17 @@ function closeMeritGuide(){ document.getElementById('meritGuide').style.display=
 </script>
 
 
-<script>function setImportMethod(m){const l=m==="ladok";document.getElementById("antagningGuide").style.display=l?"none":"block";document.getElementById("ladokGuide").style.display=l?"block":"none";document.getElementById("choiceAntagning").classList.toggle("active",!l);document.getElementById("choiceLadok").classList.toggle("active",l);if(l)setTimeout(()=>document.getElementById("ladokGuide").scrollIntoView({behavior:"smooth",block:"nearest"}),50);}
+<script>function setImportMethod(m){
+ const isL=m==="ladok",isA=m==="antagning",isM=m==="manual";
+ document.getElementById("antagningGuide").style.display=isA?"block":"none";
+ document.getElementById("ladokGuide").style.display=isL?"block":"none";
+ document.getElementById("manualGuide").style.display=isM?"block":"none";
+ document.getElementById("choiceAntagning").classList.toggle("active",isA);
+ document.getElementById("choiceLadok").classList.toggle("active",isL);
+ document.getElementById("choiceManual").classList.toggle("active",isM);
+ const target=isL?"ladokGuide":isA?"antagningGuide":"manualGuide";
+ setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"nearest"}),50);
+}
 document.addEventListener('click',async(e)=>{
  if(e.target?.id!=='fetchSyllabiBtn')return;
  const btn=e.target, out=document.getElementById('fetchSyllabiResult');
@@ -2014,6 +2131,16 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v75 -->
+
+
+
+
+
+
+
+
+
+
+<!-- Lotsen v80 -->
 </body>
 </html>
