@@ -794,6 +794,29 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
  .home-result-card strong{font-size:24px}
 }
 
+
+/* v120 — approved modern icon set */
+.bottom-icon svg,.home-welcome-icon svg,.home-result-icon svg,.home-action-icon svg{
+  width:24px;height:24px;display:block;fill:none;stroke:currentColor;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round
+}
+.bottom-icon svg{width:25px;height:25px}
+.lotsen-bottomnav button,
+.lotsen-bottomnav .more-nav-btn{color:var(--lotsen-teal)!important}
+.lotsen-bottomnav button.active{
+  color:var(--lotsen-teal)!important;
+  background:rgba(255,255,255,.9)!important;
+  box-shadow:0 5px 16px rgba(13,41,49,.10)!important
+}
+.lotsen-bottomnav b{color:inherit!important}
+.home-welcome-icon{color:var(--lotsen-teal)!important}
+.home-welcome-icon svg{width:30px;height:30px}
+.home-result-icon svg,.home-action-icon svg{width:23px;height:23px}
+.home-action-icon,.home-action-icon.teal,.home-action-icon.orange{
+  color:var(--lotsen-teal)!important;
+  background:#e8f1eb!important
+}
+
 </style>
 </head>
 <body>
@@ -808,7 +831,7 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 
 <section id="start" class="screen active">
   <section class="home-welcome-card">
-    <div class="home-welcome-icon">⌁</div>
+    <div class="home-welcome-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 13 5-7 5 5-5 7z"/><path d="m4 16 5-7 2 2-5 7z"/></svg></div>
     <div class="home-welcome-copy">
       <h1>Välkommen!</h1>
       <p>Importera dina meriter för att se vilka examensmöjligheter du har.</p>
@@ -819,17 +842,17 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
   <section class="home-result-area">
     <div class="home-result-grid">
       <button class="home-result-card" type="button" onclick="go('degrees')">
-        <span class="home-result-icon blue">▣</span>
+        <span class="home-result-icon blue" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 10 9-5 9 5-9 5z"/><path d="M7 12.5V17c3 2 7 2 10 0v-4.5"/><path d="M21 10v5"/></svg></span>
         <div><strong id="homeDegreeCount">–</strong><b>Möjliga examina</b><small>Inom kandidat, magister och master</small></div>
       </button>
       <button class="home-result-card" type="button" onclick="go('degrees')">
-        <span class="home-result-icon green">◔</span>
+        <span class="home-result-icon green" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span>
         <div><strong id="shortest">–</strong><b>Kortaste väg</b><small>Till närmaste examen</small></div>
       </button>
     </div>
 
     <button class="home-credit-card" type="button" onclick="go('studies')">
-      <span class="home-result-icon gold">☆</span>
+      <span class="home-result-icon gold" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.2l5.9-.9z"/></svg></span>
       <div><b>Du har <span id="totalHp">0 hp</span> som kan användas</b><small id="courseCount">0 kurser importerade</small></div>
       <span class="home-chevron">›</span>
     </button>
@@ -839,9 +862,9 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
   <section class="home-fast">
     <h2>Snabbaste vägen</h2>
     <div class="home-action-list">
-      <button type="button" onclick="openMyPathFromNav()"><span class="home-action-icon">⌘</span><div><b>Rekommenderad plan</b><small>Förslag på kurser i rätt ordning</small></div><i>›</i></button>
-      <button type="button" onclick="go('compare')"><span class="home-action-icon teal">▤</span><div><b>Jämför lärosäten</b><small>Se var du kommer snabbast fram</small></div><i>›</i></button>
-      <button type="button" onclick="openProgramMatcher()"><span class="home-action-icon orange">▥</span><div><b>Programmatchning</b><small>Se hur dina meriter matchar program</small></div><i>›</i></button>
+      <button type="button" onclick="openMyPathFromNav()"><span class="home-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6h5m4 0h5M10 6v4m4-4v4M5 18h5m4 0h5M10 14v4m4-4v4M10 10h4M7 14h10"/></svg></span><div><b>Rekommenderad plan</b><small>Förslag på kurser i rätt ordning</small></div><i>›</i></button>
+      <button type="button" onclick="go('compare')"><span class="home-action-icon teal" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h16M6 10v8m4-8v8m4-8v8m4-8v8M3 20h18M5 8l7-4 7 4z"/></svg></span><div><b>Jämför lärosäten</b><small>Se var du kommer snabbast fram</small></div><i>›</i></button>
+      <button type="button" onclick="openProgramMatcher()"><span class="home-action-icon orange" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="m16 8 4-4M17 4h3v3"/></svg></span><div><b>Programmatchning</b><small>Se hur dina meriter matchar program</small></div><i>›</i></button>
     </div>
   </section>
 </section>
@@ -941,10 +964,26 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 </main></div>
 
 <nav class="lotsen-bottomnav nav" aria-label="Huvudmeny">
-  <button class="active" data-screen="start" type="button"><span class="bottom-icon">⌂</span><b>Hem</b></button>
-  <button data-screen="studies" type="button"><span class="bottom-icon">▤</span><b>Studier</b></button>
-  <button data-screen="degrees" type="button"><span class="bottom-icon">◇</span><b>Möjligheter</b></button>
-  <button type="button" class="more-nav-btn" onclick="toggleMoreMenu(true)"><span class="bottom-icon dots">•••</span><b>Mer</b></button>
+  <button class="active" data-screen="start" type="button">
+    <span class="bottom-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+    </span><b>Hem</b>
+  </button>
+  <button data-screen="studies" type="button">
+    <span class="bottom-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M6 3.5h10.5A1.5 1.5 0 0 1 18 5v14.5a1 1 0 0 1-1 1H6.5A1.5 1.5 0 0 1 5 19V5a1.5 1.5 0 0 1 1-1.5Z"/><path d="M8 7h7M8 11h7M8 15h5"/></svg>
+    </span><b>Studier</b>
+  </button>
+  <button data-screen="degrees" type="button">
+    <span class="bottom-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M4 5h6M14 5h6M7 5v5m0 0h10m0 0V5M7 10v5m10-5v5M4 19h6m4 0h6M7 15v4m10-4v4"/></svg>
+    </span><b>Möjligheter</b>
+  </button>
+  <button type="button" class="more-nav-btn" onclick="toggleMoreMenu(true)">
+    <span class="bottom-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg>
+    </span><b>Mer</b>
+  </button>
 </nav>
 
 <div class="more-menu-backdrop" id="moreMenu" onclick="if(event.target===this)toggleMoreMenu(false)">
@@ -3429,6 +3468,8 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v119 -->
+
+
+<!-- Lotsen v120 -->
 </body>
 </html>
