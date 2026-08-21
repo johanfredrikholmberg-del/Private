@@ -1043,6 +1043,96 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
   #degreeResults .degree-simple-card h3{font-size:19px!important}
 }
 
+
+/* v124 — reliable tappable Min väg cards */
+.mypath-choice,.mypath-distance,.mypath-uni-list button{
+  position:relative;z-index:2;touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(21,88,79,.10);
+}
+.mypath-choice:active,.mypath-distance:active,.mypath-uni-list button:active{transform:scale(.985)}
+.mypath-selected-summary{
+  display:grid;grid-template-columns:1fr auto;align-items:center;
+  gap:2px 10px;margin:-3px 0 15px;padding:11px 12px;border-radius:14px;background:#edf6f2
+}
+.mypath-selected-summary>span{grid-column:1;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#6e8f86}
+.mypath-selected-summary>strong{grid-column:1;font-size:15px;color:var(--lotsen-teal)}
+.mypath-selected-summary>button{
+  grid-column:2;grid-row:1/3;border:0;background:#fff;color:var(--lotsen-teal);
+  border-radius:999px;padding:7px 10px;font-size:10px;font-weight:800
+}
+
+
+/* v125 — Möjligheter = upptäck, Min väg = planera */
+.opportunities-head{margin-bottom:20px!important}
+.nearest-opportunities{margin-bottom:24px}
+.section-title-row{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:0 0 10px}
+.section-title-row h2{margin:2px 0 0;font-size:23px;letter-spacing:-.035em}
+.section-title-row>small{color:var(--lotsen-muted);font-size:10px}
+.opportunity-discovery-list{display:grid;gap:11px}
+.opportunity-discovery-card{
+  padding:17px;border-radius:22px;background:rgba(255,255,255,.94);
+  border:1px solid rgba(13,41,49,.075);box-shadow:0 7px 20px rgba(13,41,49,.05)
+}
+.opportunity-discovery-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.opportunity-discovery-head h3{margin:2px 0 3px;font-size:20px;letter-spacing:-.035em;color:#17282d}
+.opportunity-discovery-head small{font-size:11px;color:var(--lotsen-muted)}
+.opportunity-kicker{
+  display:inline-block;margin-bottom:4px;font-size:9px;font-weight:850;
+  text-transform:uppercase;letter-spacing:.07em;color:var(--lotsen-teal)
+}
+.opportunity-status{
+  flex:0 0 auto;padding:7px 10px;border-radius:999px;background:#f1f4f2;
+  color:#4d625d;font-size:11px;font-weight:850;white-space:nowrap
+}
+.opportunity-status.ready{background:#e5f3e9;color:#247047}
+.opportunity-status.near{background:#fff3dc;color:#a96a08}
+.opportunity-meta{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 11px}
+.opportunity-meta span{
+  padding:5px 8px;border-radius:999px;background:#f3f5f4;color:#66736f;
+  font-size:9.5px;font-weight:750
+}
+.opportunity-meta .distance-available{background:#e9f4ef;color:#236558}
+.opportunity-choose{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  min-height:43px;padding:9px 12px;border-radius:14px;border:1px solid rgba(21,88,79,.14);
+  background:#fff;color:var(--lotsen-teal);font-size:12px;font-weight:850;text-align:left
+}
+.opportunity-choose span,.advanced-discovery-card button span{font-size:20px;font-weight:500}
+.after-candidate{
+  margin-top:8px;padding:17px;border-radius:22px;
+  background:#edf5f1;border:1px solid rgba(21,88,79,.09)
+}
+.after-candidate-intro{display:flex;gap:11px;align-items:flex-start}
+.after-candidate-icon{
+  flex:0 0 auto;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;
+  background:#fff;color:var(--lotsen-teal);font-size:18px;font-weight:900
+}
+.after-candidate h2{margin:0 0 3px;font-size:20px;letter-spacing:-.03em}
+.after-candidate p{margin:0;color:var(--lotsen-muted);font-size:11.5px;line-height:1.4}
+.advanced-discovery-list{display:grid;gap:8px;margin-top:13px}
+.advanced-discovery-card{
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;
+  padding:13px;border-radius:16px;background:rgba(255,255,255,.84);border:1px solid rgba(21,88,79,.08)
+}
+.advanced-discovery-card>div>span{font-size:9px;font-weight:850;text-transform:uppercase;color:#628278;letter-spacing:.05em}
+.advanced-discovery-card h3{margin:2px 0;font-size:15px}
+.advanced-discovery-card small{display:block;color:var(--lotsen-muted);font-size:9.5px}
+.advanced-discovery-card button{
+  display:flex;align-items:center;gap:6px;border:0;background:transparent;color:var(--lotsen-teal);
+  font-size:10.5px;font-weight:850;white-space:nowrap;padding:8px
+}
+.muted-after{background:#f5f6f4}
+.muted-after .after-candidate-icon{background:#fff}
+#degrees .tabs{display:none!important}
+#degreeResults .degree-simple-card{display:none!important}
+@media(max-width:420px){
+ .section-title-row h2{font-size:21px}
+ .opportunity-discovery-card{padding:15px}
+ .opportunity-discovery-head h3{font-size:18px}
+ .advanced-discovery-card{grid-template-columns:1fr}
+ .advanced-discovery-card button{justify-content:space-between;padding:7px 0 0}
+}
+
 </style>
 </head>
 <body>
@@ -1148,16 +1238,15 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 
 
 <section id="degrees" class="screen">
-  <div class="top"><div><h1>Möjligheter</h1><p>Hitta examen eller program utifrån det du redan har läst.</p></div></div>
-  <div class="tabs">
-    <button class="active" onclick="setDegreeFilter('all',this)">Alla</button>
-    <button onclick="setDegreeFilter('candidate',this)">Kandidat</button>
-    <button onclick="setDegreeFilter('advanced',this)">Magister & master</button>
+  <div class="top opportunities-head">
+    <div>
+      <h1>Möjligheter</h1>
+      <p>Utifrån dina tidigare studier har Lotsen hittat de här vägarna.</p>
+    </div>
   </div>
   <div id="degreeResults"></div>
   <div class="degrees-disclaimer"><span>i</span><p>Preliminärt – lärosätet beslutar slutligt.</p></div>
 </section>
-
 
 
 <section id="programMatch" class="screen">
@@ -2576,36 +2665,129 @@ function groupedDegreeOpportunities(){
 }
 
 
+
+function opportunityUniversityCount(o){
+ try{return universityOptionsForOpportunity(o).length}catch(e){return 0}
+}
+function opportunityHasDistance(o){
+ try{
+   if(o.source==='advanced'){
+     return allDistanceCourses().some(c=>c.verified===true&&c.distance===true&&String(c.subject||'')===String(o.subject||''));
+   }
+   const ids=new Set(myPathDistanceProfiles(o.subject).map(x=>x.id));
+   return ids.size>0;
+ }catch(e){return false}
+}
+function opportunityStatus(o){
+ if(!Number(o.remaining||0))return {label:'Klar',kind:'ready'};
+ const hp=Number(o.remaining||0);
+ return {label:`${fmtHp(hp)} hp kvar`,kind:hp<=30?'near':'normal'};
+}
+function chooseOpportunityForMyPath(key){
+ const o=opportunityByKey(key);
+ if(!o)return;
+ if(o.source==='advanced'){
+   try{sessionStorage.setItem('lotsen_detail_key',o.key)}catch(e){}
+   renderDegreeDetail(o.key);
+   go('degreeDetail');
+   return;
+ }
+ myPathSubject=o.subject||'';
+ myPathMode='';
+ try{
+   sessionStorage.setItem('lotsen_mypath_subject',myPathSubject);
+   sessionStorage.removeItem('lotsen_mypath_mode');
+ }catch(e){}
+ go('myPath');
+ renderMyPath();
+ requestAnimationFrame(()=>{
+   document.getElementById('mypath-place')?.scrollIntoView({behavior:'smooth',block:'start'});
+ });
+}
+
 function renderDegrees(){
- const host=document.getElementById('degreeResults');host.innerHTML='';
+ const host=document.getElementById('degreeResults');
+ if(!host)return;
+ host.innerHTML='';
+
  if(!courses.length){
    host.innerHTML=`<section class="degrees-empty-card">
      <div class="degrees-empty-icon" aria-hidden="true">
        <svg viewBox="0 0 24 24"><path d="m3 10 9-5 9 5-9 5z"/><path d="M7 12.5V17c3 2 7 2 10 0v-4.5"/><path d="M21 10v5"/></svg>
      </div>
      <h2>Hämta dina meriter först</h2>
-     <p>Då visar Lotsen vilka examina du är närmast.</p>
+     <p>Då visar Lotsen vilka vägar som ligger närmast utifrån det du redan har läst.</p>
      <button class="primary degrees-import-btn" onclick="go('studies');setTimeout(showImport,80)">Hämta meriter</button>
-   </section>`;return;
+   </section>`;
+   return;
  }
- let arr=safeDegreeOpportunities();
- if(degreeFilter==='candidate')arr=arr.filter(x=>x.source!=='advanced');
- if(degreeFilter==='advanced')arr=arr.filter(x=>x.source==='advanced');
- arr=arr.slice(0,7);
- if(degreeFilter==='advanced' && arr.length){
-   const note=document.createElement('div');
-   note.className='advanced-opportunity-note';
-   note.innerHTML='<strong>Nästa nivå</strong><span>Visas när din kandidat är klar eller nära att bli klar. Behörigheten till varje utbildning kontrolleras i nästa steg.</span>';
-   host.appendChild(note);
- }
- if(!arr.length){
-   host.innerHTML=degreeFilter==='advanced'?'<div class="card empty"><strong>Ingen masterväg hittad ännu</strong><div class="small muted">Lotsen visar master och magister när en kandidat är klar eller ungefär högst 30 hp återstår.</div></div>':'<div class="card empty"><strong>Meriterna är importerade</strong><div class="small muted">Lotsen kunde inte räkna fram examensvägarna ännu. Prova Alla igen.</div></div>';return;
- }
- host.innerHTML+=arr.map(x=>`<div class="card degree-simple-card">
-   <div class="row"><div><h3>${escapeHtml(x.name)}</h3><div class="degree-type-label">${x.source==='advanced'?(x.candidateReady?'Kandidat klar · nästa nivå':x.candidateNear?`${fmtHp(x.candidateRemaining)} hp till kandidat · planera nästa steg`:'Fortsättning efter kandidat'):'Grundnivå'}</div></div><span class="badge ${x.source==='advanced'?(x.candidateReady?'good':'warn'):(x.score>=100?'good':x.score>=55?'warn':'bad')} degree-score">${x.source==='advanced'?(x.candidateReady?'Redo':x.candidateNear?'Snart':'–'):x.score+'%'}</span></div>
-   <div class="progress"><i style="width:${Math.min(100,x.score)}%"></i></div>
-   <div class="degree-simple-bottom"><strong>${x.source==='advanced'?(x.degreeType==='Magister'?'60 hp examen':'120 hp examen'):(x.remaining?fmtHp(x.remaining)+' hp kvar':'Ser klar ut')}</strong><button class="ghost compact-more" onclick="openDegreeDetails('${escapeHtml(x.key)}')">Visa vägen</button></div>
- </div>`).join('');
+
+ const all=safeDegreeOpportunities();
+ const candidate=all.filter(x=>x.source!=='advanced').slice(0,5);
+ const advanced=all.filter(x=>x.source==='advanced').slice(0,4);
+
+ const candidateHtml=candidate.length?candidate.map((x,i)=>{
+   const st=opportunityStatus(x);
+   const unis=opportunityUniversityCount(x);
+   const distance=opportunityHasDistance(x);
+   return `<article class="opportunity-discovery-card">
+     <div class="opportunity-discovery-head">
+       <div>
+         ${i===0?'<span class="opportunity-kicker">Närmast för dig</span>':''}
+         <h3>${escapeHtml(x.subject||x.name)}</h3>
+         <small>Kandidatexamen</small>
+       </div>
+       <span class="opportunity-status ${st.kind}">${escapeHtml(st.label)}</span>
+     </div>
+     <div class="opportunity-meta">
+       ${unis?`<span>${unis} ${unis===1?'lärosäte':'lärosäten'}</span>`:''}
+       ${distance?'<span class="distance-available">Distans finns</span>':''}
+     </div>
+     <button class="opportunity-choose" type="button" onclick="chooseOpportunityForMyPath('${escapeHtml(x.key)}')">Välj denna väg <span>›</span></button>
+   </article>`;
+ }).join(''):'<div class="card empty">Ingen tydlig kandidatväg hittades ännu.</div>';
+
+ const advancedHtml=advanced.length?`
+   <section class="after-candidate">
+     <div class="after-candidate-intro">
+       <span class="after-candidate-icon">↗</span>
+       <div>
+         <h2>Efter kandidaten</h2>
+         <p>Du har en kandidat eller är nära en. Här är möjliga nästa steg.</p>
+       </div>
+     </div>
+     <div class="advanced-discovery-list">
+       ${advanced.map(x=>{
+         const ready=x.candidateReady;
+         const near=x.candidateNear;
+         return `<article class="advanced-discovery-card">
+           <div>
+             <span>${escapeHtml(x.degreeType||'Master')}</span>
+             <h3>${escapeHtml(x.subject||x.name)}</h3>
+             <small>${ready?'Kandidat klar':near?`${fmtHp(x.candidateRemaining||0)} hp kvar till kandidat`:'Behörighet behöver granskas'} · ${x.degreeType==='Magister'?'60 hp':'120 hp'} utbildning</small>
+           </div>
+           <button type="button" onclick="chooseOpportunityForMyPath('${escapeHtml(x.key)}')">Välj som min väg <span>›</span></button>
+         </article>`;
+       }).join('')}
+     </div>
+   </section>`:`
+   <section class="after-candidate muted-after">
+     <div class="after-candidate-intro">
+       <span class="after-candidate-icon">↗</span>
+       <div><h2>Efter kandidaten</h2><p>När du har en kandidat eller är nära en visar Lotsen möjliga magister- och mastervägar här.</p></div>
+     </div>
+   </section>`;
+
+ host.innerHTML=`
+   <section class="nearest-opportunities">
+     <div class="section-title-row">
+       <div><span class="eyebrow">UPPTÄCK</span><h2>Närmast examen</h2></div>
+       <small>${candidate.length} vägar hittade</small>
+     </div>
+     <div class="opportunity-discovery-list">${candidateHtml}</div>
+   </section>
+   ${advancedHtml}
+ `;
 }
 function setDegreeFilter(f,b){degreeFilter=f;document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderDegrees()}
 
@@ -3174,12 +3356,18 @@ function myPathOpportunity(subject){
 }
 
 function chooseMyPathSubject(subject){
+ if(!subject)return;
  myPathSubject=subject;
  myPathMode='';
  sessionStorage.setItem('lotsen_mypath_subject',subject);
  sessionStorage.removeItem('lotsen_mypath_mode');
  renderMyPath();
- setTimeout(()=>document.getElementById('mypath-place')?.scrollIntoView({behavior:'smooth',block:'start'}),50);
+ requestAnimationFrame(()=>{
+   const el=document.getElementById('mypath-place');
+   if(!el)return;
+   const y=el.getBoundingClientRect().top+window.scrollY-18;
+   window.scrollTo({top:y,behavior:'smooth'});
+ });
 }
 
 function chooseMyPathMode(mode){
@@ -3235,7 +3423,7 @@ function renderMyPath(){
      <div class="mypath-choice-grid">
        ${subjects.map(s=>{
          const op=myPathOpportunity(s);
-         return `<button class="mypath-choice ${subject===s?'selected':''}" onclick="chooseMyPathSubject('${escapeHtml(s)}')">
+         return `<button type="button" class="mypath-choice ${subject===s?'selected':''}" data-mypath-subject="${escapeHtml(s)}">
            <div>
              <strong>${escapeHtml(s)}</strong>
              <small>${op?(op.remaining?fmtHp(op.remaining)+' hp preliminärt kvar':'Ser nära eller klar ut'):'Visa möjlig väg'}</small>
@@ -3248,12 +3436,16 @@ function renderMyPath(){
 
    ${subject?`
    <section class="mypath-step" id="mypath-place">
+     <div class="mypath-selected-summary">
+       <span>Vald väg</span><strong>${escapeHtml(subject)}</strong>
+       <button type="button" data-mypath-change>Ändra</button>
+     </div>
      <div class="mypath-step-label">
        <span>2</span>
        <div><b>Välj lärosäte</b><small>Var vill du läsa?</small></div>
      </div>
 
-     <button class="mypath-distance ${myPathMode==='distance'?'selected':''}" onclick="chooseMyPathMode('distance')">
+     <button type="button" class="mypath-distance ${myPathMode==='distance'?'selected':''}" data-mypath-mode="distance">
        <div class="mypath-distance-icon">⌁</div>
        <div>
          <strong>På distans</strong>
@@ -3265,7 +3457,7 @@ function renderMyPath(){
      ${myPathMode==='distance'?`
        <div class="mypath-uni-list distance-list">
          ${distanceUnis.length?distanceUnis.map(x=>`
-           <button onclick="openMyPathUniversity('${escapeHtml(x.d.id)}','${escapeHtml(subject)}')">
+           <button type="button" data-mypath-uni="${escapeHtml(x.d.id)}" data-mypath-subject-open="${escapeHtml(subject)}">
              <div>
                <strong>${escapeHtml(x.d.university)}</strong>
                <small>Distans · ${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'ser möjlig ut'}</small>
@@ -3279,7 +3471,7 @@ function renderMyPath(){
 
      <div class="mypath-uni-list">
        ${allUnis.length?allUnis.map((x,i)=>`
-         <button onclick="openMyPathUniversity('${escapeHtml(x.d.id)}','${escapeHtml(subject)}')">
+         <button type="button" data-mypath-uni="${escapeHtml(x.d.id)}" data-mypath-subject-open="${escapeHtml(subject)}">
            <div>
              <strong>${escapeHtml(x.d.university)}</strong>
              <small>${i===0?'Snabbast för dig · ':''}${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'ser möjlig ut'}${distanceIds.has(x.d.id)?' · distans finns':''}</small>
@@ -3296,6 +3488,38 @@ function renderMyPath(){
        <span>När du väljer lärosäte ser du exakt vad som kan räknas in, vad du har kvar och upplägget för just det lärosätet.</span>
      </div>`:''}
  `;
+
+ // Bind interactions after rendering. This avoids fragile inline onclick strings
+ // and makes the whole card reliably tappable in Safari/iPhone.
+ host.querySelectorAll('[data-mypath-subject]').forEach(btn=>{
+   btn.addEventListener('click',()=>{
+     const value=btn.getAttribute('data-mypath-subject')||'';
+     chooseMyPathSubject(value);
+   });
+ });
+ host.querySelectorAll('[data-mypath-change]').forEach(btn=>{
+   btn.addEventListener('click',()=>{
+     myPathSubject='';
+     myPathMode='';
+     sessionStorage.removeItem('lotsen_mypath_subject');
+     sessionStorage.removeItem('lotsen_mypath_mode');
+     renderMyPath();
+     window.scrollTo({top:0,behavior:'smooth'});
+   });
+ });
+ host.querySelectorAll('[data-mypath-mode]').forEach(btn=>{
+   btn.addEventListener('click',()=>{
+     chooseMyPathMode(btn.getAttribute('data-mypath-mode')||'');
+   });
+ });
+ host.querySelectorAll('[data-mypath-uni]').forEach(btn=>{
+   btn.addEventListener('click',()=>{
+     openMyPathUniversity(
+       btn.getAttribute('data-mypath-uni')||'',
+       btn.getAttribute('data-mypath-subject-open')||myPathSubject
+     );
+   });
+ });
 }
 
 function openMyPathFromNav(){
@@ -3868,6 +4092,10 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v123 CONSOLIDATED -->
+
+
+
+
+<!-- Lotsen v125 DISCOVERY -->
 </body>
 </html>
