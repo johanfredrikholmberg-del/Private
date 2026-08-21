@@ -405,6 +405,9 @@ body{background:#f6f8fc}
 .nav-with-sub>.nav-subrow>.nav-sub:hover,.nav-with-sub>.nav-subrow>.nav-sub.active{color:#2864d7!important}
 @media(max-width:640px){.nav-with-sub>.nav-subrow>.nav-sub{font-size:8.8px!important;padding-left:4px!important;padding-right:4px!important}}
 
+
+.program-search-row,.uni-path-btn,.nav-sub{touch-action:manipulation;-webkit-tap-highlight-color:rgba(40,100,215,.12);position:relative;z-index:1}
+.program-search-row{min-height:62px}.uni-path-btn{min-height:62px}
 </style>
 </head>
 <body>
@@ -1436,7 +1439,6 @@ function openUniversityPath(profileId,major){
     sessionStorage.setItem('lotsen_uni_profile',profileId);
     sessionStorage.setItem('lotsen_uni_major',major);
   }catch(e){}
-  renderUniversityDetail(profileId,major);
   go('universityDetail');
 }
 
@@ -1554,6 +1556,8 @@ function renderDistancePath(o){
 
 function renderUniversityDetail(profileId,major){
   const host=document.getElementById('universityDetailContent'); if(!host)return;
+  const detailKey=sessionStorage.getItem('lotsen_detail_key');
+  const o=safeDegreeOpportunities().find(x=>x.key===detailKey) || {kind:'candidate',subject:major};
   const rows=(typeof flexibleDegreeCandidates==='function'?flexibleDegreeCandidates():[])
     .filter(x=>x.d.id===profileId && x.major===major);
   const x=rows[0];
@@ -2325,6 +2329,7 @@ function selectProgramForMatch(id){
   if(!p)return;
   try{sessionStorage.setItem('lotsen_selected_program',id)}catch(e){}
   renderProgramMatch(p);
+  requestAnimationFrame(()=>document.getElementById('programMatchResult')?.scrollIntoView({behavior:'smooth',block:'start'}));
 }
 function renderProgramMatch(p){
   const host=document.getElementById('programMatchResult');if(!host)return;
@@ -2506,7 +2511,7 @@ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));do
     (isMyPath && ['degreeDetail','universityDetail'].includes(id))
   );
 });if(id==='degrees')renderDegrees();if(id==='compare')renderCompare();if(id==='degreeDetail')renderDegreeDetail();if(id==='programMatch'){renderProgramSearch();const pid=sessionStorage.getItem('lotsen_selected_program');if(pid){const p=programCatalog.find(x=>x.id===pid);if(p)renderProgramMatch(p)}}if(id==='universityDetail')renderUniversityDetail(sessionStorage.getItem('lotsen_uni_profile'),sessionStorage.getItem('lotsen_uni_major'));window.scrollTo(0,0)}
-document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
+document.querySelectorAll('.nav button[data-screen]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
 initBackend();updateAuthUI();renderUniversities();renderCourses();renderDegrees();renderCompare();
 </script>
 
@@ -2821,6 +2826,8 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v102 -->
+
+
+<!-- Lotsen v103 -->
 </body>
 </html>
