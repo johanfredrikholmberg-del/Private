@@ -730,6 +730,70 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
   .home-purpose span{font-size:9px;padding-inline:2px}
 }
 
+
+/* v119 — reference-inspired Home */
+#start{padding-top:6px}
+.home-welcome-card{
+  display:grid;grid-template-columns:64px 1fr;gap:14px;
+  padding:20px;border:1px solid rgba(13,41,49,.08);border-radius:24px;
+  background:rgba(255,253,248,.94);box-shadow:0 8px 22px rgba(13,41,49,.07);
+  margin-bottom:28px
+}
+.home-welcome-icon{
+  width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#e8f1eb;color:#15584f;font-size:31px;font-weight:900
+}
+.home-welcome-copy h1{font-size:21px;margin:2px 0 5px;letter-spacing:-.025em}
+.home-welcome-copy p{font-size:14px;line-height:1.5;margin:0;color:#69757d}
+.home-welcome-card .home-cta{grid-column:1/-1;max-width:none;margin:2px 0 0;padding:15px 18px;font-size:17px;border-radius:15px!important}
+.home-result-area{display:grid;gap:12px;margin-bottom:24px}
+.home-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.home-result-card,.home-credit-card{
+  border:1px solid rgba(13,41,49,.09);background:rgba(255,255,255,.92);
+  box-shadow:0 6px 18px rgba(13,41,49,.045);cursor:pointer;color:var(--lotsen-ink)
+}
+.home-result-card{
+  min-height:134px;border-radius:21px;padding:16px;text-align:left;
+  display:flex;gap:11px;align-items:flex-start
+}
+.home-result-card strong{display:block;font-size:27px;line-height:1;color:#123e55;margin:4px 0 6px}
+.home-result-card:nth-child(2) strong{color:#24724f}
+.home-result-card b{display:block;font-size:13px;margin-bottom:5px}
+.home-result-card small,.home-credit-card small{display:block;color:#69757d;font-size:10.5px;line-height:1.4}
+.home-result-icon{
+  flex:0 0 auto;width:43px;height:43px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-style:normal;font-weight:800
+}
+.home-result-icon.blue{background:#edf2fb;color:#24568f}
+.home-result-icon.green{background:#eaf4e9;color:#2a7b4d}
+.home-result-icon.gold{background:#fff5dc;color:#e5a519}
+.home-credit-card{
+  width:100%;border-radius:20px;padding:14px 16px;display:grid;grid-template-columns:43px 1fr auto;
+  align-items:center;gap:12px;text-align:left
+}
+.home-credit-card b{display:block;font-size:13px;margin-bottom:3px}
+.home-chevron{font-size:25px;color:#7b848a}
+.home-fast h2{font-size:18px;margin:0 0 10px;letter-spacing:-.02em}
+.home-action-list{overflow:hidden;border:1px solid rgba(13,41,49,.09);border-radius:22px;background:rgba(255,255,255,.92);box-shadow:0 6px 18px rgba(13,41,49,.045)}
+.home-action-list button{
+  width:100%;display:grid;grid-template-columns:46px 1fr auto;gap:12px;align-items:center;
+  border:0;border-top:1px solid rgba(13,41,49,.08);background:transparent;padding:14px 16px;text-align:left;color:var(--lotsen-ink);cursor:pointer
+}
+.home-action-list button:first-child{border-top:0}
+.home-action-list b{display:block;font-size:13.5px;margin-bottom:3px}
+.home-action-list small{display:block;color:#69757d;font-size:10.5px}
+.home-action-list i{font-style:normal;font-size:24px;color:#7b848a}
+.home-action-icon{width:43px;height:43px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#edf2fb;color:#24568f;font-size:19px;font-weight:800}
+.home-action-icon.teal{background:#e9f5f3;color:#15584f}
+.home-action-icon.orange{background:#fff0e3;color:#d9771b}
+@media(max-width:420px){
+ .home-welcome-card{grid-template-columns:56px 1fr;padding:16px}
+ .home-welcome-icon{width:52px;height:52px}
+ .home-result-card{padding:13px;gap:8px}
+ .home-result-icon{width:39px;height:39px}
+ .home-result-card strong{font-size:24px}
+}
+
 </style>
 </head>
 <body>
@@ -743,34 +807,44 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 <main class="main">
 
 <section id="start" class="screen active">
-  <div class="home-hero">
-    <span class="pill">Beta</span>
-    <h1>Se vart dina studier kan ta dig.</h1>
-    
+  <section class="home-welcome-card">
+    <div class="home-welcome-icon">⌁</div>
+    <div class="home-welcome-copy">
+      <h1>Välkommen!</h1>
+      <p>Importera dina meriter för att se vilka examensmöjligheter du har.</p>
+    </div>
     <button class="home-cta" onclick="go('studies');setTimeout(showImport,80)">Hämta meriter</button>
-    <div class="home-purpose" aria-label="Vad Lotsen hjälper dig med">
-      <span>Upptäck</span><span>Matcha</span><span>Planera</span><span>Jämför</span>
-    </div>
-    <div class="home-cta-sub">Tar ca 2 minuter</div>
-  </div>
-
-  <section class="home-features">
-    <h2>Det här kan du göra i Lotsen</h2>
-    <div class="feature-grid">
-      <div class="feature"><span>🎓</span><div><strong>Hitta examina</strong><small>Se vilka examina dina tidigare studier kan räcka till.</small></div></div>
-      <div class="feature"><span>🧭</span><div><strong>Upptäck alternativa vägar</strong><small>Hitta examina du kanske inte visste att du var nära.</small></div></div>
-      <div class="feature"><span>⚡</span><div><strong>Se vad som saknas</strong><small>Få kvarvarande högskolepoäng och nästa steg tydligt visade.</small></div></div>
-      <div class="feature"><span>📚</span><div><strong>Samla dina studier</strong><small>Kurser, poäng och lärosäten på ett ställe.</small></div></div>
-    </div>
   </section>
 
-  <div class="home-stats">
-    <div class="home-stat"><div class="kicker">Importerade meriter</div><div class="metric" id="totalHp">0 hp</div><div class="muted" id="courseCount">0 kurser</div></div>
-    <div class="home-stat"><div class="kicker">Bästa match</div><div class="metric" id="bestPct">–</div><div class="muted" id="bestName">Hämta meriter för att se</div></div>
-    <div class="home-stat"><div class="kicker">Kortaste väg</div><div class="metric" id="shortest">–</div><div class="muted">preliminär bedömning</div></div>
-  </div>
-</section>
+  <section class="home-result-area">
+    <div class="home-result-grid">
+      <button class="home-result-card" type="button" onclick="go('degrees')">
+        <span class="home-result-icon blue">▣</span>
+        <div><strong id="homeDegreeCount">–</strong><b>Möjliga examina</b><small>Inom kandidat, magister och master</small></div>
+      </button>
+      <button class="home-result-card" type="button" onclick="go('degrees')">
+        <span class="home-result-icon green">◔</span>
+        <div><strong id="shortest">–</strong><b>Kortaste väg</b><small>Till närmaste examen</small></div>
+      </button>
+    </div>
 
+    <button class="home-credit-card" type="button" onclick="go('studies')">
+      <span class="home-result-icon gold">☆</span>
+      <div><b>Du har <span id="totalHp">0 hp</span> som kan användas</b><small id="courseCount">0 kurser importerade</small></div>
+      <span class="home-chevron">›</span>
+    </button>
+    <span id="bestPct" hidden>–</span><span id="bestName" hidden></span>
+  </section>
+
+  <section class="home-fast">
+    <h2>Snabbaste vägen</h2>
+    <div class="home-action-list">
+      <button type="button" onclick="openMyPathFromNav()"><span class="home-action-icon">⌘</span><div><b>Rekommenderad plan</b><small>Förslag på kurser i rätt ordning</small></div><i>›</i></button>
+      <button type="button" onclick="go('compare')"><span class="home-action-icon teal">▤</span><div><b>Jämför lärosäten</b><small>Se var du kommer snabbast fram</small></div><i>›</i></button>
+      <button type="button" onclick="openProgramMatcher()"><span class="home-action-icon orange">▥</span><div><b>Programmatchning</b><small>Se hur dina meriter matchar program</small></div><i>›</i></button>
+    </div>
+  </section>
+</section>
 
 
 <section id="studies" class="screen">
@@ -3353,6 +3427,8 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v118 -->
+
+
+<!-- Lotsen v119 -->
 </body>
 </html>
