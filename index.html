@@ -873,6 +873,176 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
   .mypath-hint b{display:block;margin-bottom:3px}
 }
 
+
+/* v123 — consolidated approved Möjligheter design */
+#degrees{
+  background:transparent!important;
+}
+#degrees .top{
+  margin-bottom:20px!important;
+}
+#degrees .top h1{
+  margin:0 0 7px!important;
+  font-size:46px!important;
+  line-height:1!important;
+  letter-spacing:-.045em!important;
+  color:var(--lotsen-ink)!important;
+}
+#degrees .top p{
+  margin:0!important;
+  max-width:620px!important;
+  font-size:17px!important;
+  line-height:1.45!important;
+  color:var(--lotsen-muted)!important;
+}
+#degrees .tabs{
+  display:flex!important;
+  gap:10px!important;
+  align-items:center!important;
+  margin:0 0 20px!important;
+  padding:0!important;
+  overflow-x:auto!important;
+  scrollbar-width:none!important;
+}
+#degrees .tabs::-webkit-scrollbar{display:none}
+#degrees .tabs button{
+  flex:0 0 auto!important;
+  min-height:48px!important;
+  padding:11px 21px!important;
+  border-radius:999px!important;
+  border:1px solid rgba(21,88,79,.16)!important;
+  background:rgba(255,255,255,.92)!important;
+  color:var(--lotsen-teal)!important;
+  box-shadow:0 3px 10px rgba(13,41,49,.035)!important;
+  font-size:15px!important;
+  font-weight:750!important;
+}
+#degrees .tabs button.active{
+  background:linear-gradient(135deg,#1b665c,#2e8275)!important;
+  color:#fff!important;
+  border-color:transparent!important;
+  box-shadow:0 8px 20px rgba(21,88,79,.16)!important;
+}
+#degreeResults{
+  display:grid!important;
+  gap:14px!important;
+}
+#degreeResults .degree-simple-card{
+  margin:0!important;
+  padding:19px 19px 17px!important;
+  border-radius:23px!important;
+  border:1px solid rgba(13,41,49,.075)!important;
+  background:rgba(255,255,255,.94)!important;
+  box-shadow:0 8px 24px rgba(13,41,49,.055)!important;
+}
+#degreeResults .degree-simple-card .row{
+  align-items:flex-start!important;
+  gap:14px!important;
+}
+#degreeResults .degree-simple-card h3{
+  margin:0 0 5px!important;
+  font-size:21px!important;
+  line-height:1.18!important;
+  letter-spacing:-.035em!important;
+  color:#17282d!important;
+}
+#degreeResults .degree-type-label{
+  color:#7b858b!important;
+  font-size:12.5px!important;
+}
+#degreeResults .degree-score{
+  flex:0 0 auto!important;
+  border:0!important;
+  border-radius:999px!important;
+  padding:8px 11px!important;
+  font-size:18px!important;
+  line-height:1!important;
+  font-weight:900!important;
+}
+#degreeResults .badge.good{background:#e7f3eb!important;color:#28734d!important}
+#degreeResults .badge.warn{background:#fff4df!important;color:#b87508!important}
+#degreeResults .badge.bad{background:#f8ece9!important;color:#a34c3b!important}
+#degreeResults .progress{
+  height:7px!important;
+  border-radius:999px!important;
+  overflow:hidden!important;
+  margin:14px 0 0!important;
+  background:#e8e9e8!important;
+}
+#degreeResults .progress i{
+  display:block!important;
+  height:100%!important;
+  border-radius:inherit!important;
+  background:linear-gradient(90deg,#0d5d50,#1d7466)!important;
+}
+#degreeResults .degree-simple-bottom{
+  margin-top:14px!important;
+  align-items:center!important;
+}
+#degreeResults .degree-simple-bottom>strong{
+  font-size:16px!important;
+  color:#17282d!important;
+}
+#degreeResults .compact-more{
+  border:1px solid rgba(21,88,79,.14)!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  color:var(--lotsen-teal)!important;
+  padding:10px 14px!important;
+  font-weight:800!important;
+  box-shadow:none!important;
+}
+.advanced-opportunity-note{
+  border:1px solid rgba(21,88,79,.10)!important;
+  border-radius:18px!important;
+  background:#edf6f2!important;
+}
+.degrees-empty-card{
+  text-align:center;
+  padding:30px 22px 26px;
+  border-radius:24px;
+  border:1px solid rgba(13,41,49,.075);
+  background:rgba(255,255,255,.94);
+  box-shadow:0 8px 24px rgba(13,41,49,.055);
+}
+.degrees-empty-icon{
+  width:70px;height:70px;margin:0 auto 15px;
+  display:grid;place-items:center;border-radius:50%;
+  background:#e8f1eb;color:var(--lotsen-teal);
+}
+.degrees-empty-icon svg{
+  width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.degrees-empty-card h2{
+  margin:0 0 7px;font-size:21px;letter-spacing:-.025em;color:var(--lotsen-teal);
+}
+.degrees-empty-card p{
+  margin:0 auto 18px;max-width:390px;color:var(--lotsen-muted);font-size:13.5px;line-height:1.45;
+}
+.degrees-import-btn{
+  width:min(430px,100%)!important;
+  min-height:51px!important;
+  font-size:16px!important;
+}
+.degrees-disclaimer{
+  display:flex;align-items:center;gap:10px;margin:16px 0 0;
+  color:var(--lotsen-muted);font-size:11.5px;
+}
+.degrees-disclaimer>span{
+  display:grid;place-items:center;width:25px;height:25px;border-radius:50%;
+  background:#e8f1eb;color:var(--lotsen-teal);font-weight:900;font-family:Georgia,serif;
+}
+.degrees-disclaimer p{margin:0}
+@media(max-width:640px){
+  #degrees .top h1{font-size:39px!important}
+  #degrees .top p{font-size:15px!important}
+  #degrees .tabs{gap:8px!important}
+  #degrees .tabs button{min-height:44px!important;padding:10px 16px!important;font-size:14px!important}
+  #degreeResults .degree-simple-card{padding:16px!important}
+  #degreeResults .degree-simple-card h3{font-size:19px!important}
+}
+
 </style>
 </head>
 <body>
@@ -985,7 +1155,7 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
     <button onclick="setDegreeFilter('advanced',this)">Magister & master</button>
   </div>
   <div id="degreeResults"></div>
-  <div class="simple-disclaimer">Preliminärt – lärosätet beslutar slutligt.</div>
+  <div class="degrees-disclaimer"><span>i</span><p>Preliminärt – lärosätet beslutar slutligt.</p></div>
 </section>
 
 
@@ -1044,7 +1214,11 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
   </button>
   <button data-screen="degrees" type="button">
     <span class="bottom-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24"><path d="M4 5h6M14 5h6M7 5v5m0 0h10m0 0V5M7 10v5m10-5v5M4 19h6m4 0h6M7 15v4m10-4v4"/></svg>
+      <svg viewBox="0 0 24 24">
+        <path d="M11.5 3v18"/>
+        <path d="M11.5 5H5l-2 2.5L5 10h6.5"/>
+        <path d="M12.5 12H19l2 2.5L19 17h-6.5"/>
+      </svg>
     </span><b>Möjligheter</b>
   </button>
   <button type="button" class="more-nav-btn" onclick="toggleMoreMenu(true)">
@@ -2405,7 +2579,14 @@ function groupedDegreeOpportunities(){
 function renderDegrees(){
  const host=document.getElementById('degreeResults');host.innerHTML='';
  if(!courses.length){
-   host.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong><div class="small muted" style="margin-top:5px">Då visar Lotsen vilka examina du är närmast.</div></div>';return;
+   host.innerHTML=`<section class="degrees-empty-card">
+     <div class="degrees-empty-icon" aria-hidden="true">
+       <svg viewBox="0 0 24 24"><path d="m3 10 9-5 9 5-9 5z"/><path d="M7 12.5V17c3 2 7 2 10 0v-4.5"/><path d="M21 10v5"/></svg>
+     </div>
+     <h2>Hämta dina meriter först</h2>
+     <p>Då visar Lotsen vilka examina du är närmast.</p>
+     <button class="primary degrees-import-btn" onclick="go('studies');setTimeout(showImport,80)">Hämta meriter</button>
+   </section>`;return;
  }
  let arr=safeDegreeOpportunities();
  if(degreeFilter==='candidate')arr=arr.filter(x=>x.source!=='advanced');
@@ -3685,6 +3866,8 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v122 -->
+
+
+<!-- Lotsen v123 CONSOLIDATED -->
 </body>
 </html>
