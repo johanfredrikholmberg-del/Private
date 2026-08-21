@@ -1133,6 +1133,24 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
  .advanced-discovery-card button{justify-content:space-between;padding:7px 0 0}
 }
 
+
+/* v126 refinements */
+.section-title-row>div>.eyebrow:empty{display:none!important}
+.section-title-row h2{margin-top:0!important}
+
+
+/* v127 — robust Min väg transition */
+.mypath-error{
+  margin-top:14px;padding:18px;border-radius:20px;background:#fff;
+  border:1px solid rgba(13,41,49,.10);box-shadow:0 7px 20px rgba(13,41,49,.05)
+}
+.mypath-error strong{display:block;font-size:16px;color:var(--lotsen-ink)}
+.mypath-error span{display:block;margin:4px 0 12px;color:var(--lotsen-muted);font-size:11px}
+.mypath-error button{
+  border:0;border-radius:13px;background:#e8f1eb;color:var(--lotsen-teal);
+  padding:10px 12px;font-weight:800
+}
+
 </style>
 </head>
 <body>
@@ -1176,9 +1194,8 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
   </section>
 
   <section class="home-fast">
-    <h2>Snabbaste vägen</h2>
+    
     <div class="home-action-list">
-      <button type="button" onclick="openMyPathFromNav()"><span class="home-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6h5m4 0h5M10 6v4m4-4v4M5 18h5m4 0h5M10 14v4m4-4v4M10 10h4M7 14h10"/></svg></span><div><b>Rekommenderad plan</b><small>Förslag på kurser i rätt ordning</small></div><i>›</i></button>
       <button type="button" onclick="go('compare')"><span class="home-action-icon teal" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h16M6 10v8m4-8v8m4-8v8m4-8v8M3 20h18M5 8l7-4 7 4z"/></svg></span><div><b>Jämför lärosäten</b><small>Se var du kommer snabbast fram</small></div><i>›</i></button>
       <button type="button" onclick="openProgramMatcher()"><span class="home-action-icon orange" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="m16 8 4-4M17 4h3v3"/></svg></span><div><b>Programmatchning</b><small>Se hur dina meriter matchar program</small></div><i>›</i></button>
     </div>
@@ -1321,10 +1338,9 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
   <section class="more-menu-sheet" aria-label="Mer">
     <div class="more-menu-handle"></div>
     <div class="more-menu-head"><div><span class="eyebrow">Lotsen</span><h2>Mer</h2></div><button type="button" onclick="toggleMoreMenu(false)">Stäng</button></div>
-    <button class="more-menu-item" type="button" onclick="toggleMoreMenu(false);openMyPathFromNav()"><span>🧭</span><div><strong>Min väg</strong><small>Se din valda examensväg</small></div><b>›</b></button>
     <button class="more-menu-item" type="button" onclick="toggleMoreMenu(false);openProgramMatcher()"><span>🎓</span><div><strong>Program</strong><small>Matcha dina kurser mot ett program</small></div><b>›</b></button>
     <button class="more-menu-item" type="button" onclick="toggleMoreMenu(false);go('compare')"><span>⇄</span><div><strong>Jämför</strong><small>Jämför examensvägar sida vid sida</small></div><b>›</b></button>
-    <div class="more-menu-future"><strong>Mer kan läggas till här senare</strong><small>Exempelvis sparade planer, export och inställningar.</small></div>
+    <div class="more-menu-future"><strong>Mer kan läggas till här senare</strong><small>Exempelvis export, inställningar och fler verktyg.</small></div>
   </section>
 </div>
 
@@ -2688,21 +2704,27 @@ function chooseOpportunityForMyPath(key){
  if(!o)return;
  if(o.source==='advanced'){
    try{sessionStorage.setItem('lotsen_detail_key',o.key)}catch(e){}
-   renderDegreeDetail(o.key);
    go('degreeDetail');
+   renderDegreeDetail(o.key);
    return;
  }
- myPathSubject=o.subject||'';
+ const subject=String(o.subject||'').trim();
+ if(!subject)return;
+ myPathSubject=subject;
  myPathMode='';
  try{
-   sessionStorage.setItem('lotsen_mypath_subject',myPathSubject);
+   sessionStorage.setItem('lotsen_mypath_subject',subject);
    sessionStorage.removeItem('lotsen_mypath_mode');
  }catch(e){}
  go('myPath');
- renderMyPath();
- requestAnimationFrame(()=>{
-   document.getElementById('mypath-place')?.scrollIntoView({behavior:'smooth',block:'start'});
- });
+ setTimeout(()=>{
+   renderMyPath();
+   const el=document.getElementById('mypath-place');
+   if(el){
+     const y=el.getBoundingClientRect().top+window.scrollY-14;
+     window.scrollTo({top:y,behavior:'smooth'});
+   }
+ },40);
 }
 
 function renderDegrees(){
@@ -2743,7 +2765,7 @@ function renderDegrees(){
        ${unis?`<span>${unis} ${unis===1?'lärosäte':'lärosäten'}</span>`:''}
        ${distance?'<span class="distance-available">Distans finns</span>':''}
      </div>
-     <button class="opportunity-choose" type="button" onclick="chooseOpportunityForMyPath('${escapeHtml(x.key)}')">Välj denna väg <span>›</span></button>
+     <button class="opportunity-choose" type="button" onclick="chooseOpportunityForMyPath('${escapeHtml(x.key)}')">Visa väg <span>›</span></button>
    </article>`;
  }).join(''):'<div class="card empty">Ingen tydlig kandidatväg hittades ännu.</div>';
 
@@ -2781,7 +2803,7 @@ function renderDegrees(){
  host.innerHTML=`
    <section class="nearest-opportunities">
      <div class="section-title-row">
-       <div><span class="eyebrow">UPPTÄCK</span><h2>Närmast examen</h2></div>
+       <div><h2>Närmast examen</h2></div>
        <small>${candidate.length} vägar hittade</small>
      </div>
      <div class="opportunity-discovery-list">${candidateHtml}</div>
@@ -3395,131 +3417,149 @@ function renderMyPath(){
  const host=document.getElementById('myPathFlow');
  if(!host)return;
 
- if(!courses.length){
-   host.innerHTML=`
-     <section class="mypath-empty">
-       <div class="mypath-empty-icon">🎓</div>
-       <h2>Hämta dina meriter först</h2>
-       <p>Då kan Lotsen visa vilka vägar som passar dig och vad du redan kan räkna in.</p>
-       <button class="primary" onclick="go('studies');setTimeout(showImport,80)">Hämta meriter</button>
-     </section>`;
-   return;
- }
+ try{
+   if(!courses.length){
+     host.innerHTML=`
+       <section class="mypath-empty">
+         <div class="mypath-empty-icon">🎓</div>
+         <h2>Hämta dina meriter först</h2>
+         <p>Då kan Lotsen visa vilka vägar som passar dig och vad du redan kan räkna in.</p>
+         <button class="primary" onclick="go('studies');setTimeout(showImport,80)">Hämta meriter</button>
+       </section>`;
+     return;
+   }
 
- const subjects=myPathSubjects();
- const subject=myPathSubject&&subjects.includes(myPathSubject)?myPathSubject:'';
- const o=subject?myPathOpportunity(subject):null;
- const allUnis=o?universityOptionsForOpportunity(o):[];
- const distanceProfiles=subject?myPathDistanceProfiles(subject):[];
- const distanceIds=new Set(distanceProfiles.map(x=>x.id));
- const distanceUnis=allUnis.filter(x=>distanceIds.has(x.d.id));
+   const subjects=myPathSubjects();
+   const subject=(myPathSubject&&subjects.includes(myPathSubject))?myPathSubject:'';
 
- host.innerHTML=`
-   <section class="mypath-step active-step">
-     <div class="mypath-step-label">
-       <span>1</span>
-       <div><b>Välj väg</b><small>Vad vill du ta examen i?</small></div>
-     </div>
-     <div class="mypath-choice-grid">
-       ${subjects.map(s=>{
-         const op=myPathOpportunity(s);
-         return `<button type="button" class="mypath-choice ${subject===s?'selected':''}" data-mypath-subject="${escapeHtml(s)}">
+   // If the user arrived from Möjligheter with a selected subject, go straight to step 2.
+   if(subject){
+     const o=myPathOpportunity(subject);
+     let allUnis=[];
+     let distanceUnis=[];
+     try{
+       allUnis=o?universityOptionsForOpportunity(o):[];
+     }catch(e){console.warn('Min väg universitet',e);allUnis=[]}
+
+     try{
+       const distanceProfiles=myPathDistanceProfiles(subject);
+       const distanceIds=new Set(distanceProfiles.map(x=>x.id));
+       distanceUnis=allUnis.filter(x=>distanceIds.has(x.d.id));
+     }catch(e){console.warn('Min väg distans',e);distanceUnis=[]}
+
+     host.innerHTML=`
+       <section class="mypath-step" id="mypath-place">
+         <div class="mypath-selected-summary">
+           <span>Vald väg</span>
+           <strong>${escapeHtml(subject)}</strong>
+           <button type="button" data-mypath-change>Ändra</button>
+         </div>
+
+         <div class="mypath-step-label">
+           <span>2</span>
+           <div><b>Välj lärosäte</b><small>Var vill du läsa?</small></div>
+         </div>
+
+         <button type="button" class="mypath-distance ${myPathMode==='distance'?'selected':''}" data-mypath-mode="distance">
+           <div class="mypath-distance-icon">⌁</div>
            <div>
-             <strong>${escapeHtml(s)}</strong>
-             <small>${op?(op.remaining?fmtHp(op.remaining)+' hp preliminärt kvar':'Ser nära eller klar ut'):'Visa möjlig väg'}</small>
+             <strong>På distans</strong>
+             <small>${distanceUnis.length?distanceUnis.length+' lärosäten med distansalternativ':'Visa distansalternativ'}</small>
            </div>
            <span>›</span>
-         </button>`;
-       }).join('')}
-     </div>
-   </section>
+         </button>
 
-   ${subject?`
-   <section class="mypath-step" id="mypath-place">
-     <div class="mypath-selected-summary">
-       <span>Vald väg</span><strong>${escapeHtml(subject)}</strong>
-       <button type="button" data-mypath-change>Ändra</button>
-     </div>
-     <div class="mypath-step-label">
-       <span>2</span>
-       <div><b>Välj lärosäte</b><small>Var vill du läsa?</small></div>
-     </div>
+         ${myPathMode==='distance'?`
+           <div class="mypath-uni-list distance-list">
+             ${distanceUnis.length?distanceUnis.map(x=>`
+               <button type="button" data-mypath-uni="${escapeHtml(x.d.id)}" data-mypath-subject-open="${escapeHtml(subject)}">
+                 <div>
+                   <strong>${escapeHtml(x.d.university)}</strong>
+                   <small>Distans · ${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'ser möjlig ut'}</small>
+                 </div>
+                 <span>›</span>
+               </button>`).join(''):
+               '<div class="mypath-note">Ingen komplett verifierad distansväg finns i kurslagret ännu.</div>'}
+           </div>`:''}
 
-     <button type="button" class="mypath-distance ${myPathMode==='distance'?'selected':''}" data-mypath-mode="distance">
-       <div class="mypath-distance-icon">⌁</div>
-       <div>
-         <strong>På distans</strong>
-         <small>${distanceUnis.length?distanceUnis.length+' lärosäten med distansalternativ':'Visa verifierade distansalternativ'}</small>
+         <div class="mypath-divider"><span>eller välj lärosäte</span></div>
+
+         <div class="mypath-uni-list">
+           ${allUnis.length?allUnis.map((x,i)=>`
+             <button type="button" data-mypath-uni="${escapeHtml(x.d.id)}" data-mypath-subject-open="${escapeHtml(subject)}">
+               <div>
+                 <strong>${escapeHtml(x.d.university)}</strong>
+                 <small>${i===0?'Snabbast för dig · ':''}${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'ser möjlig ut'}</small>
+               </div>
+               <span>›</span>
+             </button>`).join(''):
+             `<div class="mypath-note">
+               <strong>Inga lärosäten kunde visas automatiskt.</strong>
+               <span>Välj en annan väg eller kontrollera att examensregler finns inlagda för ${escapeHtml(subject)}.</span>
+             </div>`}
+         </div>
+       </section>
+
+       <div class="mypath-hint">
+         <b>Nästa steg</b>
+         <span>När du väljer lärosäte ser du vad som kan räknas in, vad du har kvar och upplägget där.</span>
        </div>
-       <span>›</span>
-     </button>
+     `;
+   }else{
+     host.innerHTML=`
+       <section class="mypath-step active-step">
+         <div class="mypath-step-label">
+           <span>1</span>
+           <div><b>Välj väg</b><small>Vad vill du ta examen i?</small></div>
+         </div>
+         <div class="mypath-choice-grid">
+           ${subjects.map(s=>{
+             const op=myPathOpportunity(s);
+             return `<button type="button" class="mypath-choice" data-mypath-subject="${escapeHtml(s)}">
+               <div>
+                 <strong>${escapeHtml(s)}</strong>
+                 <small>${op?(op.remaining?fmtHp(op.remaining)+' hp preliminärt kvar':'Ser nära eller klar ut'):'Visa möjlig väg'}</small>
+               </div>
+               <span>›</span>
+             </button>`;
+           }).join('')}
+         </div>
+       </section>`;
+   }
 
-     ${myPathMode==='distance'?`
-       <div class="mypath-uni-list distance-list">
-         ${distanceUnis.length?distanceUnis.map(x=>`
-           <button type="button" data-mypath-uni="${escapeHtml(x.d.id)}" data-mypath-subject-open="${escapeHtml(subject)}">
-             <div>
-               <strong>${escapeHtml(x.d.university)}</strong>
-               <small>Distans · ${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'ser möjlig ut'}</small>
-             </div>
-             <span>›</span>
-           </button>`).join(''):
-           '<div class="mypath-note">Ingen verifierad komplett distansväg finns i kurslagret ännu. Lotsen visar bara lärosäten där distanskurser faktiskt finns registrerade.</div>'}
-       </div>`:''}
-
-     <div class="mypath-divider"><span>eller välj lärosäte</span></div>
-
-     <div class="mypath-uni-list">
-       ${allUnis.length?allUnis.map((x,i)=>`
-         <button type="button" data-mypath-uni="${escapeHtml(x.d.id)}" data-mypath-subject-open="${escapeHtml(subject)}">
-           <div>
-             <strong>${escapeHtml(x.d.university)}</strong>
-             <small>${i===0?'Snabbast för dig · ':''}${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'ser möjlig ut'}${distanceIds.has(x.d.id)?' · distans finns':''}</small>
-           </div>
-           <span>›</span>
-         </button>`).join(''):
-         '<div class="mypath-note">Inget lärosäte med verifierad regel finns i databasen ännu.</div>'}
-     </div>
-   </section>`:''}
-
-   ${subject?`
-     <div class="mypath-hint">
-       <b>Nästa steg</b>
-       <span>När du väljer lärosäte ser du exakt vad som kan räknas in, vad du har kvar och upplägget för just det lärosätet.</span>
-     </div>`:''}
- `;
-
- // Bind interactions after rendering. This avoids fragile inline onclick strings
- // and makes the whole card reliably tappable in Safari/iPhone.
- host.querySelectorAll('[data-mypath-subject]').forEach(btn=>{
-   btn.addEventListener('click',()=>{
-     const value=btn.getAttribute('data-mypath-subject')||'';
-     chooseMyPathSubject(value);
+   host.querySelectorAll('[data-mypath-subject]').forEach(btn=>{
+     btn.addEventListener('click',()=>chooseMyPathSubject(btn.getAttribute('data-mypath-subject')||''));
    });
- });
- host.querySelectorAll('[data-mypath-change]').forEach(btn=>{
-   btn.addEventListener('click',()=>{
-     myPathSubject='';
-     myPathMode='';
-     sessionStorage.removeItem('lotsen_mypath_subject');
-     sessionStorage.removeItem('lotsen_mypath_mode');
-     renderMyPath();
-     window.scrollTo({top:0,behavior:'smooth'});
+   host.querySelectorAll('[data-mypath-change]').forEach(btn=>{
+     btn.addEventListener('click',()=>{
+       myPathSubject='';
+       myPathMode='';
+       sessionStorage.removeItem('lotsen_mypath_subject');
+       sessionStorage.removeItem('lotsen_mypath_mode');
+       renderMyPath();
+       window.scrollTo({top:0,behavior:'smooth'});
+     });
    });
- });
- host.querySelectorAll('[data-mypath-mode]').forEach(btn=>{
-   btn.addEventListener('click',()=>{
-     chooseMyPathMode(btn.getAttribute('data-mypath-mode')||'');
+   host.querySelectorAll('[data-mypath-mode]').forEach(btn=>{
+     btn.addEventListener('click',()=>chooseMyPathMode(btn.getAttribute('data-mypath-mode')||''));
    });
- });
- host.querySelectorAll('[data-mypath-uni]').forEach(btn=>{
-   btn.addEventListener('click',()=>{
-     openMyPathUniversity(
-       btn.getAttribute('data-mypath-uni')||'',
-       btn.getAttribute('data-mypath-subject-open')||myPathSubject
-     );
+   host.querySelectorAll('[data-mypath-uni]').forEach(btn=>{
+     btn.addEventListener('click',()=>{
+       openMyPathUniversity(
+         btn.getAttribute('data-mypath-uni')||'',
+         btn.getAttribute('data-mypath-subject-open')||myPathSubject
+       );
+     });
    });
- });
+ }catch(e){
+   console.error('renderMyPath',e);
+   host.innerHTML=`
+     <section class="mypath-error">
+       <strong>Kunde inte visa nästa steg</strong>
+       <span>Prova att välja vägen igen.</span>
+       <button type="button" onclick="myPathSubject='';myPathMode='';sessionStorage.removeItem('lotsen_mypath_subject');renderMyPath()">Välj väg igen</button>
+     </section>`;
+ }
 }
 
 function openMyPathFromNav(){
@@ -4096,6 +4136,14 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v125 DISCOVERY -->
+
+
+
+
+
+
+
+
+<!-- Lotsen v129 -->
 </body>
 </html>
