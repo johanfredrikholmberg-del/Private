@@ -320,6 +320,91 @@ body{background:#f6f8fc}
 #confirmImportBtn:disabled{opacity:.6}
 #confirmImportBtn.importing{pointer-events:none}
 
+
+.course-role-tag{display:inline-block;margin-left:7px;padding:3px 7px;border-radius:999px;font-size:11px;font-weight:800;vertical-align:2px;background:#eef2f7;color:#526071}
+.course-role-tag.main-role{background:#eaf6ef;color:#28704b}
+.course-role-tag.elective-role{background:#f3f4f6;color:#667085}
+.course-role-note{display:block;margin-top:3px;font-size:11px;line-height:1.25;color:#7a8496;font-weight:500}
+.secondary-courses>div{align-items:flex-start}
+.credit-note{margin-top:14px}
+
+
+.local-rule-block{padding-top:20px}
+.rule-row{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid #e9edf3;align-items:flex-start}
+.rule-row span{font-weight:700}.rule-row span small{display:block;font-weight:500;color:#7a8496;font-size:11px;margin-top:3px}
+.rule-row b{white-space:nowrap}
+.elective-local{margin-top:14px}.elective-local summary{cursor:pointer;font-weight:750;color:#2864d7;padding:8px 0}
+.local-rule-note{margin-top:14px}
+
+
+.specific-rule-note{margin-top:14px;padding:12px 14px;background:#f7f9fc;border-radius:14px;font-size:12px;color:#5f6b7d}
+.specific-rule-note strong{display:block;color:#243047;margin-bottom:6px}.specific-rule-note span{display:block;margin:3px 0}
+
+
+.advanced-rule-flags{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}
+.advanced-rule-flags span{font-size:10.5px;font-weight:750;padding:4px 7px;border-radius:999px;background:#f1f4f8;color:#5c6878}
+
+
+.admission-note{margin-top:10px;padding:11px 13px;border:1px solid #e6eaf0;border-radius:13px;font-size:11.5px;color:#667085}
+.admission-note strong{display:block;color:#344054;margin-bottom:4px}.admission-note span{display:block;line-height:1.35}
+
+
+.study-path-switch{display:flex;gap:6px;margin:14px 0 8px;padding:4px;background:#f1f4f8;border-radius:13px}
+.path-mode{flex:1;border:0;background:transparent;padding:9px 10px;border-radius:10px;font-weight:750;color:#667085;cursor:pointer}
+.path-mode.active{background:#fff;color:#1f2937;box-shadow:0 1px 3px rgba(16,24,40,.08)}
+.distance-path-box{margin:10px 0 16px;padding:16px;border:1px solid #e5e9f0;border-radius:16px;background:#fbfcfe}
+.distance-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.distance-head strong{display:block}.distance-head span{display:block;font-size:11px;color:#7a8496;margin-top:3px}
+.distance-status{font-size:10px!important;font-weight:800!important;padding:4px 7px;border-radius:999px;background:#eef2f7;color:#667085!important;white-space:nowrap}
+.distance-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.distance-stats div{padding:10px;background:#fff;border-radius:12px;border:1px solid #edf0f4}
+.distance-stats b{display:block;font-size:18px}.distance-stats span{font-size:10.5px;color:#7a8496}
+.distance-missing{margin:12px 0}.distance-missing>strong{display:block;margin-bottom:6px}
+.distance-missing>div{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #edf0f4;font-size:12px}
+.distance-options{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.distance-options span{font-size:10.5px;padding:5px 8px;border-radius:999px;background:#f1f4f8;color:#667085}
+.distance-warning{margin-top:10px;line-height:1.4}
+
+
+.distance-status.distance-ok{background:#eaf6ef!important;color:#28704b!important}
+.distance-need{display:block!important;padding:10px 0!important}
+.distance-need-title{display:flex;justify-content:space-between;gap:12px;margin-bottom:7px}
+.distance-course-card{display:grid;grid-template-columns:1fr auto;gap:5px 10px;padding:10px 11px;margin:6px 0;background:#fff;border:1px solid #e7ebf0;border-radius:12px}
+.distance-course-card>div:first-child span{display:block;font-size:10.5px;color:#7a8496;margin-top:2px}
+.distance-course-meta{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:5px}
+.distance-course-meta span{font-size:10px;padding:3px 6px;background:#f1f4f8;border-radius:999px;color:#667085}
+.distance-course-card a{grid-column:1/-1;font-size:11px;font-weight:750;color:#2864d7;text-decoration:none}
+.no-distance-match{padding:7px 9px;background:#f7f8fa;border-radius:9px}
+
+
+.distance-source-note{margin:10px 0;padding:11px 12px;border:1px solid #e7ebf0;border-radius:12px;background:#fff}
+.distance-source-note strong{display:block;font-size:11.5px;color:#344054;margin-bottom:3px}
+.distance-source-note span{display:block;font-size:10.5px;line-height:1.4;color:#7a8496}
+
+
+.program-entry-card{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 15px;margin:12px 0 16px;border:1px solid #e5e9f0;border-radius:16px;background:#fff}
+.program-entry-card strong{display:block;font-size:14px}.program-entry-card span{display:block;font-size:11px;color:#7a8496;margin-top:3px}
+.program-search-card{padding:15px}.program-search-card label{display:block;font-size:11px;font-weight:800;color:#667085;margin-bottom:6px}.program-search-card input{width:100%}
+.program-search-results{margin-top:10px;display:grid;gap:5px}.program-search-row{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;border:0;background:#fff;border-top:1px solid #eef0f3;padding:11px 2px;text-align:left;cursor:pointer}.program-search-row:first-child{border-top:0}.program-search-row strong{display:block}.program-search-row div span{display:block;font-size:10.5px;color:#7a8496;margin-top:3px}.program-empty{padding:10px 0}
+.program-result-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:18px 0 8px}.program-result-head h2{margin:4px 0 0;font-size:24px}.program-result-intro{margin-bottom:14px}
+.program-credit-block summary{list-style:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer}.program-credit-block summary::-webkit-details-marker{display:none}.program-credit-block summary h3{margin:0}.program-credit-block summary div>span{display:block;font-size:11px;color:#7a8496;margin-top:3px}
+.program-credit-list{margin-top:12px;border-top:1px solid #eef0f3}.program-credit-item{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #eef0f3}.program-credit-item strong{display:inline}.program-match-label{display:inline-block;margin-left:6px;padding:3px 6px;border-radius:999px;background:#f1f4f8;color:#667085;font-size:10px;font-weight:750}.program-credit-item small{display:block;margin-top:4px;color:#7a8496;font-size:10.5px;line-height:1.35}.program-credit-item>b{white-space:nowrap}
+.missing-list small{display:block;color:#7a8496;font-size:10.5px;margin-top:3px}
+@media(max-width:640px){.program-entry-card{align-items:flex-start}.program-entry-card .ghost{white-space:nowrap}.program-result-head h2{font-size:21px}}
+
+
+.nav-with-sub{display:flex;flex-direction:column;align-items:center;position:relative}
+.nav-with-sub>.nav-sub{font-size:9.5px!important;line-height:1!important;padding:2px 7px 5px!important;margin-top:-3px!important;min-height:0!important;font-weight:650!important;color:#7a8496!important;background:transparent!important;border:0!important}
+.nav-with-sub>.nav-sub:hover,.nav-with-sub>.nav-sub.active{color:#2864d7!important}
+.nav-with-sub>button[data-screen="degrees"].active+.nav-sub{color:#667085}
+@media(max-width:640px){.nav-with-sub>.nav-sub{font-size:9px!important;padding-bottom:4px!important}}
+
+
+.nav-subrow{display:flex;align-items:center;justify-content:center;gap:2px;margin-top:-3px}
+.nav-with-sub>.nav-subrow>.nav-sub{font-size:9.5px!important;line-height:1!important;padding:2px 5px 5px!important;min-height:0!important;font-weight:650!important;color:#7a8496!important;background:transparent!important;border:0!important}
+.nav-with-sub>.nav-subrow>.nav-sub:hover,.nav-with-sub>.nav-subrow>.nav-sub.active{color:#2864d7!important}
+@media(max-width:640px){.nav-with-sub>.nav-subrow>.nav-sub{font-size:8.8px!important;padding-left:4px!important;padding-right:4px!important}}
+
 </style>
 </head>
 <body>
@@ -332,7 +417,13 @@ body{background:#f6f8fc}
     <nav class="lotsen-topnav nav" aria-label="Huvudmeny">
       <button class="active" data-screen="start">Hem</button>
       <button data-screen="studies">Studier</button>
-      <button data-screen="degrees">Möjligheter</button>
+      <div class="nav-with-sub">
+        <button data-screen="degrees">Möjligheter</button>
+        <div class="nav-subrow">
+          <button class="nav-sub nav-sub-path" type="button" onclick="openMyPathFromNav()">Min väg</button>
+          <button class="nav-sub nav-sub-program" type="button" onclick="openProgramMatcher()">Program</button>
+        </div>
+      </div>
       <button data-screen="compare">Jämför</button>
     </nav>
   </div>
@@ -425,10 +516,26 @@ body{background:#f6f8fc}
     <button onclick="setDegreeFilter('candidate',this)">Kandidat</button>
     <button onclick="setDegreeFilter('advanced',this)">Magister & master</button>
   </div>
-  <div id="degreeResults"></div>
+  <div class="program-entry-card">
+  <div><strong>Vill du gå ett visst program?</strong><span>Se vilka av dina tidigare kurser som kan passa in.</span></div>
+  <button class="ghost" type="button" onclick="openProgramMatcher()">Välj program</button>
+</div>
+<div id="degreeResults"></div>
   <div class="simple-disclaimer">Preliminärt – lärosätet beslutar slutligt.</div>
 </section>
 
+
+
+<section id="programMatch" class="screen">
+  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><strong>Program</strong></div>
+  <div class="top"><div><h1>Matcha mot ett program</h1><p>Välj program så visar Lotsen vilka tidigare kurser som kan passa in.</p></div></div>
+  <div class="card program-search-card">
+    <label for="programSearchInput">Sök program</label>
+    <input id="programSearchInput" type="search" placeholder="T.ex. Ekonomie kandidatprogrammet" oninput="renderProgramSearch()">
+    <div id="programSearchResults" class="program-search-results"></div>
+  </div>
+  <div id="programMatchResult"></div>
+</section>
 
 <section id="degreeDetail" class="screen">
   <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><strong>Min väg</strong></div>
@@ -516,7 +623,7 @@ const localRules={
 };
 const degrees=[
  {id:'sport',name:'Kandidatexamen i idrottsvetenskap',short:'Kandidat i idrottsvetenskap',kind:'candidate',total:180,subject:'Idrottsvetenskap',subjectReq:90,thesisReq:15,local:true,ruleStatus:'Lokal kontroll krävs'},
- {id:'business',name:'Kandidatexamen i företagsekonomi',short:'Kandidat i företagsekonomi',kind:'candidate',total:180,subject:'Företagsekonomi',subjectReq:90,thesisReq:15,local:true,ruleStatus:'Verifierad grundregel',ruleNote:'GU: 180 hp, 90 hp företagsekonomi inklusive 15 hp kandidatuppsats för ekonomie kandidat med huvudområdet företagsekonomi.'},
+ {id:'business',name:'Kandidatexamen i företagsekonomi',short:'Kandidat i företagsekonomi',kind:'candidate',total:180,subject:'Företagsekonomi',subjectReq:90,thesisReq:15,local:true,ruleStatus:'Verifierad huvudregel',ruleNote:'90 hp i huvudområdet företagsekonomi inklusive examensarbete krävs som huvudregel. Övriga examenskrav och utrymmet för valfria kurser beror på examen och lärosäte.'},
  {id:'psychology',name:'Filosofie kandidatexamen i psykologi',short:'Kandidat i psykologi',kind:'candidate',total:180,subject:'Psykologi',subjectReq:90,thesisReq:15,local:true,ruleStatus:'Verifierad GU-regel',ruleNote:'GU: 90 hp psykologi med successiv fördjupning. Där ingår 15 hp metod och 15 hp självständigt arbete.'},
  {id:'workscience',name:'Filosofie kandidatexamen i arbetsvetenskap',short:'Kandidat i arbetsvetenskap',kind:'candidate',total:180,subject:'Arbetsvetenskap',subjectReq:90,thesisReq:15,local:true,ruleStatus:'Verifierat huvudområde',ruleNote:'GU har examensarbete för kandidat inom huvudområdet arbetsvetenskap. Exakt kurskombination behöver kontrolleras.'},
  {id:'publichealth',name:'Kandidatexamen i folkhälsovetenskap',short:'Kandidat i folkhälsovetenskap',kind:'candidate',total:180,subject:'Folkhälsovetenskap',subjectReq:90,thesisReq:15,local:false,ruleStatus:'Kontroll krävs'},
@@ -991,6 +1098,287 @@ function allDegreeOpportunities(){
 function opportunityByKey(key){
  return safeDegreeOpportunities().find(x=>x.key===key);
 }
+
+function localDegreeRule(profileId,major,degreeKind='candidate'){
+ const id=String(profileId||'').toLowerCase();
+ const m=String(major||'').trim();
+ const ml=m.toLowerCase();
+ const kind=String(degreeKind||'candidate').toLowerCase();
+ const is=(...xs)=>xs.some(x=>id.includes(x));
+
+ // Candidate: university-level generic structures.
+ // Subject-specific course sequences are shown only when explicitly encoded.
+ if(kind==='candidate'){
+   if(is('gu')){
+     if(ml==='företagsekonomi') return {verified:true,label:'Ekonomie kandidat',total:180,mainSubject:90,thesis:15,
+       requiredOther:[{label:'Nationalekonomi',hp:30,subjects:['Nationalekonomi']},{label:'Statistik',hp:15,subjects:['Statistik']}],
+       electiveHp:45,note:'Verifierad lokal ekonomie-struktur. För andra filosofie kandidat-huvudområden vid GU gäller normalt 90 hp med successiv fördjupning i huvudområdet inklusive minst 15 hp examensarbete samt 90 hp övriga kurser, om inte huvudområdet har särskilda krav.'};
+     if(ml==='psykologi') return {verified:true,label:'Filosofie kandidat',total:180,mainSubject:90,thesis:15,
+       requiredOther:[],electiveHp:90,specificMainCourses:['Psykologi: Grundkurs 30 hp','Psykologi: Fortsättningskurs 30 hp','Psykologi: Forskningsmetod och kandidatuppsats 30 hp'],
+       note:'Verifierad ämnesspecifik GU-struktur för psykologi: 90 hp obligatorisk psykologi och 90 hp valfria kurser.'};
+     return {verified:true,label:'Filosofie kandidat',total:180,mainSubject:90,thesis:15,requiredOther:[],electiveHp:90,
+       note:'Verifierad generell GU-struktur: minst 90 hp med successiv fördjupning i huvudområdet inklusive minst 15 hp självständigt arbete. Särskilda huvudområdeskrav kan tillkomma.'};
+   }
+   if(is('umu','ume')) return {verified:true,label:'Filosofie kandidat',total:180,mainSubject:90,thesis:15,requiredOther:[],electiveHp:90,
+     note:'Verifierad generell Umeå-struktur: 180 hp, varav minst 90 hp med successiv fördjupning i ett fastställt huvudområde inklusive självständigt arbete. Ämnesspecifika lokala examensbeskrivningar kan precisera kraven.'};
+   if(is('lnu','linne')) return {verified:true,label:'Filosofie kandidat',total:180,mainSubject:90,thesis:15,requiredOther:[],electiveHp:90,outsideMainMin:30,
+     note:'Verifierad generell LNU-struktur: 90 hp med successiv fördjupning i huvudområdet inklusive kandidatuppsats; övriga 90 hp kan vara valfria och minst 30 hp ska ligga utanför huvudområdet.'};
+   if(is('miun','mitt')) return {verified:true,label:'Filosofie kandidat',total:180,mainSubject:90,thesis:15,mainAdvancedHp:30,requiredOther:[{label:'Annat ämne',hp:30,subjects:[]}],electiveHp:60,
+     note:'Verifierad generell Mittuniversitetet-struktur: 90 hp huvudområde, minst 30 hp på fördjupningsnivå C inklusive 15 hp examensarbete, minst 30 hp i annat ämne och 60 hp valfria kurser.'};
+   if(is('mdu','mälardal','malardal')) return {verified:true,label:'Kandidatexamen',total:180,mainSubject:90,thesis:15,mainG2Hp:30,maxAdvancedHp:15,requiredOther:[],electiveHp:90,
+     note:'Verifierad MDU-struktur: 180 hp, minst 90 hp med successiv fördjupning i huvudområdet och minst 15 hp examensarbete. För flera kandidatbenämningar krävs minst 30 hp på G2; högst 15 hp avancerad nivå får ingå.'};
+   if(is('oru','örebro','orebro')) return {verified:true,label:'Filosofie kandidat',total:180,mainSubject:90,thesis:15,requiredOther:[],electiveHp:90,
+     note:'Verifierad generell kandidatstruktur: 180 hp, minst 90 hp med successiv fördjupning i huvudområdet och minst 15 hp självständigt arbete. Huvudområdesspecifika krav kan tillkomma.'};
+   if(is('kau','karlstad')) return {verified:true,label:'Filosofie kandidat',total:180,mainSubject:90,thesis:15,requiredOther:[],electiveHp:90,
+     note:'Verifierad generell kandidatstruktur: 180 hp, minst 90 hp i huvudområdet med successiv fördjupning inklusive minst 15 hp självständigt examensarbete. Huvudområdesspecifika krav kan tillkomma.'};
+   if(is('lu','lund')) return {verified:true,label:'Kandidatexamen',total:180,mainSubject:90,thesis:15,requiredOther:[],electiveHp:90,outsideMainMin:30,
+     note:'Verifierad generell Lund-struktur: 180 hp, minst 90 hp i huvudområdet inklusive minst 15 hp examensarbete; lokala fakultets- och huvudområdeskrav kan precisera övriga kurser.'};
+   if(is('su','stockholm')) return {verified:true,label:'Filosofie kandidat',total:180,mainSubject:90,thesis:15,requiredOther:[],electiveHp:90,
+     note:'Verifierad generell kandidatgrund: 180 hp, minst 90 hp i huvudområdet med successiv fördjupning inklusive examensarbete. Ämnesspecifika lokala krav ska kontrolleras innan slutlig rekommendation.'};
+ }
+
+ // Economics (nationalekonomi) – verified subject-specific routes.
+ if(kind==='candidate' && ml==='nationalekonomi' && is('gu')) return {
+   verified:true,label:'Ekonomie kandidat i nationalekonomi',total:180,mainSubject:90,thesis:15,
+   requiredOther:[
+     {label:'Företagsekonomi',hp:30,subjects:['Företagsekonomi']},
+     {label:'Statistik',hp:15,subjects:['Statistik']}
+   ],
+   electiveHp:45,subjectSpecificRequired:false,
+   note:'Verifierad GU-väg via fristående kurser: 90 hp nationalekonomi inklusive examensarbete, 30 hp företagsekonomi, 15 hp statistik och 45 hp valfria kurser.'
+ };
+ if(kind==='master' && ml==='nationalekonomi' && is('gu')) return {
+   verified:true,label:'Master i nationalekonomi',total:120,mainSubject:90,thesis:30,advancedOnly:true,
+   requiredOther:[],electiveHp:30,subjectSpecificRequired:false,
+   specificMainCourses:[
+     'Matematik 7,5 hp','Avancerad mikroteori 7,5 hp','Ekonometri 7,5 hp',
+     'Avancerad makroekonomisk teori 7,5 hp','Nationalekonomisk forskningsprocess 7,5 hp',
+     'Tillämpad ekonometri 7,5 hp','Examensarbete i nationalekonomi 30 hp'
+   ],
+   electiveEconomicsMin:15,
+   note:'Verifierad GU-programstruktur: 120 hp totalt. Minst 90 hp måste vara inom nationalekonomi. Programmet innehåller 45 hp obligatoriska kurser, 45 hp valbara kurser och 30 hp masteruppsats; minst 15 hp av de valbara kurserna måste vara nationalekonomi eller finans.'
+ };
+ if(kind==='master' && ml==='nationalekonomi' && is('lu','lund')) return {
+   verified:true,label:'Filosofie/ekonomie master i nationalekonomi',total:120,mainSubject:105,thesis:30,advancedOnly:true,
+   requiredOther:[],electiveHp:15,subjectSpecificRequired:false,
+   specificMainCourses:[
+     'Avancerad mikroekonomisk analys 7,5 hp','Avancerad ekonometri 7,5 hp',
+     'Avancerad makroekonomisk analys 7,5 hp','Examensarbete – magisternivå 15 hp',
+     'Examensarbete – masternivå 15 hp'
+   ],
+   allAdvanced:true,programmeOnly:true,
+   note:'Verifierad Lund-regel: masterexamen kan endast erhållas via masterprogrammet. Alla 120 hp ska vara på avancerad nivå och minst 105 hp ska vara nationalekonomi. Kurser utanför huvudområdet måste godkännas av institutionen.'
+ };
+ if(kind==='master' && ml==='nationalekonomi' && is('umu','ume')) return {
+   verified:true,label:'Ekonomie master i nationalekonomi',total:120,mainSubject:60,thesis:30,advancedOnly:true,
+   requiredOther:[],electiveHp:60,subjectSpecificRequired:true,
+   admissionNote:'Behörighet: examen om minst 180 hp, minst 75 hp nationalekonomi samt 15 hp statistik, ekonometri, matematik eller motsvarande.',
+   note:'Verifierad Umeå-väg till ekonomie master med nationalekonomi som huvudområde. Exakt kurskombination följer masterprogrammets utbildningsplan och lokala examensbeskrivning.'
+ };
+
+ // More verified Economics routes.
+ if(kind==='master' && ml==='nationalekonomi' && is('lnu','linne')) return {
+  verified:true,label:'Master i nationalekonomi',total:120,mainSubject:60,thesis:30,advancedOnly:true,
+  requiredOther:[],electiveHp:60,subjectSpecificRequired:true,
+  admissionNote:'Behörighet till LNU:s masterprogram: kandidatexamen, minst 90 hp nationalekonomi samt minst 15 hp statistik eller motsvarande tidsserie-/regressionsanalys.',
+  note:'Verifierad LNU-väg: Nationalekonomi, masterprogram, 120 hp. Exakt examensfördelning matchas mot programmets aktuella utbildningsplan.'
+ };
+ if((kind==='magister'||kind==='master') && ml==='nationalekonomi' && is('kau','karlstad')) return {
+  verified:true,
+  label:kind==='magister'?'Ekonomie/filosofie/politices magister i nationalekonomi':'Ekonomie/filosofie/politices master i nationalekonomi',
+  total:kind==='magister'?60:120,mainSubject:kind==='magister'?30:60,thesis:kind==='magister'?15:30,
+  advancedOnly:true,requiredOther:[],electiveHp:kind==='magister'?30:60,subjectSpecificRequired:false,
+  admissionNote:'Programbehörighet: kandidatexamen om minst 180 hp, varav minst 90 hp med successiv fördjupning inom nationalekonomi.',
+  note:'Verifierad Karlstad-väg via Masterprogram i tillämpad nationalekonomi och avancerade analysmetoder. Programmet har möjlig utgång mot magister och leder beroende på tidigare kandidat till ekonomie, filosofie eller politices examen med nationalekonomi som huvudområde.'
+ };
+ if(kind==='magister' && ml==='nationalekonomi' && is('miun','mitt')) return {
+  verified:true,label:'Ekonomie magister i nationalekonomi',total:60,mainSubject:30,thesis:15,advancedOnly:true,
+  requiredOther:[{label:'Företagsekonomi',hp:30,subjects:['Företagsekonomi']}],electiveHp:0,
+  otherAdvancedMin:15,subjectSpecificRequired:false,
+  note:'Verifierad Mittuniversitetet-regel: minst 30 hp nationalekonomi på avancerad nivå inklusive 15 hp självständigt arbete samt 30 hp företagsekonomi som andraämne, varav minst 15 hp på avancerad nivå.'
+ };
+ if(kind==='master' && ml==='nationalekonomi' && is('su','stockholm')) return {
+  verified:true,label:'Master i nationalekonomi',total:120,mainSubject:60,thesis:30,advancedOnly:true,
+  requiredOther:[],electiveHp:60,subjectSpecificRequired:false,
+  specificMainCourses:['Matematik för ekonomisk och statistisk analys 7,5 hp','Statistik för ekonomer 7,5 hp','Mikroekonomi 7,5 hp','Ekonometri 1 7,5 hp','Makroekonomi 7,5 hp','Metodikseminarium 7,5 hp','Masteruppsats 30 hp'],
+  electiveEconomicsMin:30,programmeOnly:true,
+  note:'Verifierad Stockholms universitets programstruktur: 120 hp. För masterexamen i nationalekonomi ska minst 30 hp av de valbara kurserna vara nationalekonomi på avancerad nivå; ekonometri räknas som nationalekonomi. Masteruppsatsen omfattar 30 hp.'
+ };
+
+ // Sociology – verified subject-specific routes.
+ if((kind==='magister'||kind==='master') && ml==='sociologi' && is('umu','ume')) return {
+  verified:true,label:kind==='magister'?'Filosofie magister i sociologi':'Filosofie master i sociologi',
+  total:kind==='magister'?60:120,mainSubject:kind==='magister'?30:60,thesis:kind==='magister'?15:30,
+  advancedOnly:true,requiredOther:[],electiveHp:kind==='magister'?30:60,subjectSpecificRequired:false,
+  admissionNote:'Behörighet: examen om minst 180 hp samt 90 hp sociologi inklusive självständigt arbete på kandidatnivå.',
+  note:'Verifierad Umeå-väg via Masterprogrammet i sociologi. Programmet kan leda till både filosofie magister- och masterexamen med sociologi som huvudområde.'
+ };
+ if((kind==='magister'||kind==='master') && ml==='sociologi' && is('kau','karlstad')) return {
+  verified:true,label:kind==='magister'?'Filosofie magister i sociologi':'Filosofie master i sociologi',
+  total:kind==='magister'?60:120,mainSubject:kind==='magister'?30:60,thesis:kind==='magister'?15:30,
+  advancedOnly:true,requiredOther:[],electiveHp:kind==='magister'?30:60,subjectSpecificRequired:false,
+  specificMainCourses:kind==='magister'
+   ?['Sociologiska teorier 7,5 hp','Metodologi och metod 7,5 hp','Glokala relationer 7,5 hp','Motstånd och social förändring 7,5 hp','Finansialisering 7,5 hp','Miljösociologi 7,5 hp','Examensarbete 15 hp']
+   :['Sociologiska teorier 7,5 hp','Metodologi och metod 7,5 hp','Glokala relationer 7,5 hp','Motstånd och social förändring 7,5 hp','Finansialisering 7,5 hp','Miljösociologi 7,5 hp','Sociologiska teorier II 7,5 hp','Fördjupad dataanalys 7,5 hp','Valfri termin 30 hp','Examensarbete 30 hp'],
+  admissionNote:'Magisteruppsatsen kräver Sociologi I–III 90 hp inklusive 15 hp examensarbete samt 15 hp sociologi på avancerad nivå inklusive metodologi/metod eller motsvarande.',
+  note:'Verifierad ämnesspecifik studiegång från Karlstads utbildningsplan.'
+ };
+ if(kind==='magister' && ml==='sociologi' && is('oru','örebro','orebro')) return {
+  verified:true,label:'Filosofie magister i sociologi',total:60,mainSubject:30,thesis:15,advancedOnly:true,
+  requiredOther:[],electiveHp:30,subjectSpecificRequired:true,specialisations:['Offentlig planering för hållbar utveckling'],
+  note:'Verifierad Örebro-väg: Magisterprogrammet i offentlig planering för hållbar utveckling kan leda till magisterexamen med sociologi som huvudområde.'
+ };
+ // Sports science.
+ if(kind==='master' && ml==='idrottsvetenskap' && is('lnu','linne')) return {
+  verified:true,label:'Filosofie master i idrottsvetenskap',total:120,mainSubject:60,thesis:30,advancedOnly:true,
+  requiredOther:[],electiveHp:60,subjectSpecificRequired:false,
+  admissionNote:'Tidigare studier prövas mot programmets kursplaner vid tillgodoräknande.',
+  note:'Verifierad LNU-väg: fullföljt masterprogram i idrottsvetenskap kan leda till filosofie masterexamen med idrottsvetenskap som huvudområde.'
+ };
+
+ // Psychology – verified subject-specific advanced routes.
+ if(kind==='magister' && ml==='psykologi' && is('umu','ume')) return {
+   verified:true,label:'Filosofie magister i psykologi – hälsopsykologi',total:60,mainSubject:30,thesis:15,advancedOnly:true,
+   requiredOther:[],electiveHp:30,subjectSpecificRequired:false,
+   specialisations:['Hälsopsykologi'],
+   admissionNote:'Programbehörighet: examen på grundnivå om minst 180 hp samt 90 hp inom hälso- eller beteendevetenskapliga ämnen.',
+   note:'Verifierad Umeå-väg: 60 hp magisterprogram på avancerad nivå som kan leda till filosofie magisterexamen med huvudområdet psykologi och inriktning hälsopsykologi.'
+ };
+ if(kind==='master' && ml==='psykologi' && is('umu','ume')) return {
+   verified:true,label:'Filosofie master i psykologi',total:120,mainSubject:60,thesis:30,advancedOnly:true,
+   requiredOther:[],electiveHp:60,subjectSpecificRequired:true,
+   admissionNote:'Umeås masteruppsats kräver totalt 150 hp psykologi: 90 hp på grundnivå och 60 hp på avancerad nivå, inklusive minst 15 hp forskningsmetodik och en magisteruppsats om minst 15 hp eller motsvarande.',
+   note:'Verifierad ämnesväg via Umeås avancerade psykologiutbud. Exakt komplett masterkombination ska fortfarande matchas mot den lokala examensbeskrivningen.'
+ };
+
+ // Verified subject-specific advanced routes.
+ // These override generic advanced rules when a sufficiently clear local route is known.
+ if(kind==='magister' && ml==='företagsekonomi'){
+   if(is('miun','mitt')) return {
+     verified:true,label:'Ekonomie magister',total:60,mainSubject:30,thesis:15,advancedOnly:true,
+     requiredOther:[{label:'Nationalekonomi',hp:30,subjects:['Nationalekonomi']}],electiveHp:0,
+     otherAdvancedMin:15,subjectSpecificRequired:false,
+     note:'Verifierad Mittuniversitetet-struktur: minst 30 hp företagsekonomi på avancerad nivå inklusive 15 hp självständigt arbete samt 30 hp nationalekonomi som andraämne, varav minst 15 hp på avancerad nivå.'
+   };
+   if(is('umu','ume')) return {
+     verified:true,label:'Ekonomie magister i företagsekonomi',total:60,mainSubject:30,thesis:15,advancedOnly:true,
+     requiredOther:[],electiveHp:30,subjectSpecificRequired:true,
+     specialisations:['Management','Marknadsföring','Redovisning','Finansiering'],
+     note:'Verifierad examensväg vid Umeå: ekonomie magister kan utfärdas i företagsekonomi inom flera inriktningar. Den exakta kurskombinationen följer vald inriktning och lokal examensbeskrivning.'
+   };
+ }
+ if(kind==='master' && ml==='företagsekonomi'){
+   if(is('umu','ume')) return {
+     verified:true,label:'Ekonomie master i företagsekonomi',total:120,mainSubject:60,thesis:30,advancedOnly:true,
+     requiredOther:[],electiveHp:60,subjectSpecificRequired:true,
+     specialisations:['Management','Marknadsföring','Redovisning','Finansiering'],
+     admissionNote:'Umeås managementväg kräver kandidatexamen samt 75 hp företagsekonomi, inklusive A+B 60 hp med ämnesbredd och C 15 hp.',
+     note:'Verifierad Umeå-väg: ekonomie master utfärdas med företagsekonomi som huvudområde inom flera inriktningar. Exakt kursstruktur och behörighet beror på vald inriktning.'
+   };
+   if(is('lnu','linne')) return {
+     verified:true,label:'Master/magisterväg i företagsekonomi',total:120,mainSubject:60,thesis:30,advancedOnly:true,
+     requiredOther:[],electiveHp:60,subjectSpecificRequired:true,
+     admissionNote:'LNU:s magisteruppsats i företagsekonomi kräver 90 hp företagsekonomi på grundnivå samt 15 hp företagsekonomi på avancerad nivå.',
+     note:'Verifierad ämnesrätt och kursplansväg vid Linnéuniversitetet. Exakt masterkombination ska matchas mot aktuell lokal examensbeskrivning och kursutbud.'
+   };
+ }
+ 
+
+ // Advanced level. These are degree-structure rules, not a promise that every
+ // imported course is accepted in a particular main field.
+ const genericAdvanced=(label,total,mainSubject,thesis,note,extra={})=>Object.assign({
+   verified:true,label,total,mainSubject,thesis,requiredOther:[],
+   electiveHp:Math.max(0,total-mainSubject),advancedOnly:true
+ },extra,{note,electiveHp:extra.electiveHp!=null?extra.electiveHp:Math.max(0,total-mainSubject)});
+
+ if(kind==='magister'){
+   if(is('gu')) return genericAdvanced('Magisterexamen',60,30,15,
+     'Verifierad GU-grundregel: 60 hp, minst 30 hp fördjupning i huvudområdet inklusive minst 15 hp självständigt arbete. Högst 15 hp från grundnivå får ingå och poäng från den behörighetsgivande kandidaten får inte återanvändas.',
+     {maxBasicHp:15,noReuseBachelor:true});
+   if(is('umu','ume')) return genericAdvanced('Magisterexamen',60,30,15,
+     'Verifierad examensstruktur på avancerad nivå: 60 hp med minst 30 hp fördjupning i huvudområdet inklusive minst 15 hp självständigt arbete. Den lokala examensbeskrivningen för valt huvudområde kan ställa ytterligare krav.',
+     {subjectSpecificRequired:true});
+   if(is('lnu','linne')) return genericAdvanced('Magisterexamen',60,30,15,
+     'Verifierad generell magisterstruktur: 60 hp, minst 30 hp i huvudområdet inklusive minst 15 hp självständigt arbete. Huvudområdets lokala examensbeskrivning kan precisera progression och kursval.',
+     {subjectSpecificRequired:true});
+   if(is('oru','örebro','orebro')) return genericAdvanced('Magisterexamen',60,30,15,
+     'Verifierad Örebro-regel: minst 30 hp huvudområde inklusive 15 hp självständigt arbete; minst 45 av 60 hp ska vara på avancerad nivå.',
+     {subjectSpecificRequired:true,minAdvancedHp:45});
+   if(is('kau','karlstad')) return genericAdvanced('Magisterexamen',60,30,15,
+     'Verifierad generell magisterstruktur: 60 hp, minst 30 hp fördjupning i huvudområdet inklusive minst 15 hp examensarbete. Ämnesspecifika krav kan tillkomma.',
+     {subjectSpecificRequired:true});
+   if(is('miun','mitt')) return genericAdvanced('Magisterexamen',60,30,15,
+     'Verifierad generell magisterstruktur: 60 hp med fördjupning inom huvudområdet och självständigt arbete. Exakt lokal examensbeskrivning för huvudområdet ska kontrolleras.',
+     {subjectSpecificRequired:true});
+   if(is('mdu','mälardal','malardal')) return genericAdvanced('Magisterexamen',60,30,15,
+     'Verifierad generell magisterstruktur: 60 hp, minst 30 hp inom huvudområdet inklusive minst 15 hp självständigt arbete. Lokala huvudområdeskrav kan precisera nivån.',
+     {subjectSpecificRequired:true});
+   if(is('lu','lund')) return genericAdvanced('Magisterexamen',60,30,15,
+     'Verifierad generell magisterstruktur: 60 hp, minst 30 hp fördjupning inom huvudområdet inklusive minst 15 hp examensarbete. Fakultets- och huvudområdeskrav kan tillkomma.',
+     {subjectSpecificRequired:true});
+   if(is('su','stockholm')) return genericAdvanced('Magisterexamen',60,30,15,
+     'Verifierad generell magistergrund: 60 hp, minst 30 hp inom huvudområdet inklusive minst 15 hp examensarbete. Ämnesspecifik lokal examensbeskrivning behöver också uppfyllas.',
+     {subjectSpecificRequired:true});
+ }
+ if(kind==='master'){
+   if(is('gu') && ml==='psykologi') return genericAdvanced('Filosofie master i psykologi',120,90,30,
+     'Verifierad GU-struktur: minst 90 hp psykologi på avancerad nivå. Av dessa ska minst 30 hp vara metodkurser och 30 hp självständigt examensarbete. Därutöver kan 30 hp valfria kurser på grund- eller avancerad nivå ingå.',
+     {electiveHp:30,methodHp:30,subjectSpecificRequired:false,
+      admissionNote:'GU:s masteruppsats kräver minst 60 hp psykologi på avancerad nivå, där 30 hp ska vara statistisk analys/metod och kvalitativa forskningsmetoder eller motsvarande.'});
+   if(is('gu')) return genericAdvanced('Masterexamen',120,60,30,
+     'Verifierad GU-grundregel: 120 hp, minst 60 hp fördjupning i huvudområdet inklusive minst 30 hp självständigt arbete. Högst 30 hp från grundnivå får ingå och poäng från den behörighetsgivande kandidaten får inte återanvändas.',
+     {maxBasicHp:30,noReuseBachelor:true});
+   if(is('umu','ume')) return genericAdvanced('Masterexamen',120,60,30,
+     'Verifierad generell masterstruktur: 120 hp, minst 60 hp fördjupning i huvudområdet inklusive minst 30 hp självständigt arbete. Umeås lokala examensbeskrivning för valt huvudområde kan ställa ytterligare krav.',
+     {subjectSpecificRequired:true});
+   if(is('lnu','linne')) return genericAdvanced('Masterexamen',120,60,30,
+     'Verifierad generell masterstruktur: 120 hp, minst 60 hp i huvudområdet inklusive minst 30 hp självständigt arbete. Huvudområdets lokala examensbeskrivning kan precisera progression och kursval.',
+     {subjectSpecificRequired:true});
+   if(is('oru','örebro','orebro')) return genericAdvanced('Masterexamen',120,60,30,
+     'Verifierad Örebro-regel: minst 60 hp huvudområde inklusive 30 hp självständigt arbete; minst 90 av 120 hp ska vara på avancerad nivå.',
+     {subjectSpecificRequired:true,minAdvancedHp:90});
+   if(is('kau','karlstad')) return genericAdvanced('Masterexamen',120,60,30,
+     'Verifierad generell masterstruktur: 120 hp, minst 60 hp fördjupning i huvudområdet inklusive minst 30 hp examensarbete. Ämnesspecifika krav kan tillkomma.',
+     {subjectSpecificRequired:true});
+   if(is('miun','mitt')) return genericAdvanced('Masterexamen',120,60,30,
+     'Verifierad generell masterstruktur: 120 hp med fördjupning inom huvudområdet och minst 30 hp självständigt arbete. Exakt lokal examensbeskrivning för huvudområdet ska kontrolleras.',
+     {subjectSpecificRequired:true});
+   if(is('mdu','mälardal','malardal')) return genericAdvanced('Masterexamen',120,60,30,
+     'Verifierad generell masterstruktur: 120 hp, minst 60 hp inom huvudområdet inklusive minst 30 hp självständigt arbete. Lokala huvudområdeskrav kan precisera nivån.',
+     {subjectSpecificRequired:true});
+   if(is('lu','lund')) return genericAdvanced('Masterexamen',120,60,30,
+     'Verifierad generell masterstruktur: 120 hp, minst 60 hp fördjupning inom huvudområdet inklusive minst 30 hp examensarbete. Fakultets- och huvudområdeskrav kan tillkomma.',
+     {subjectSpecificRequired:true});
+   if(is('su','stockholm')) return genericAdvanced('Masterexamen',120,60,30,
+     'Verifierad generell mastergrund: 120 hp, minst 60 hp inom huvudområdet inklusive minst 30 hp examensarbete. Ämnesspecifik lokal examensbeskrivning behöver också uppfyllas.',
+     {subjectSpecificRequired:true});
+ }
+ return null;
+}
+function hpForSubjects(subjects){
+ const set=(subjects||[]).map(x=>String(x).toLowerCase());
+ return courses.filter(c=>c.selected!==false && set.includes(String(c.subject||guessSubject(c.name||'')).toLowerCase()))
+   .reduce((s,c)=>s+Number(c.hp||0),0);
+}
+function localRuleBreakdown(rule,major){
+ if(!rule)return null;
+ const selected=courses.filter(c=>c.selected!==false);
+ const main=selected.filter(c=>String(c.subject||guessSubject(c.name||'')).toLowerCase()===String(major||'').toLowerCase());
+ const mainHp=Math.min(rule.mainSubject,main.reduce((s,c)=>s+Number(c.hp||0),0));
+ const req=(rule.requiredOther||[]).map(r=>({...r,have:Math.min(r.hp,hpForSubjects(r.subjects))}));
+ const used=new Set(main);
+ selected.forEach(c=>{
+   if(req.some(r=>(r.subjects||[]).map(x=>x.toLowerCase()).includes(String(c.subject||guessSubject(c.name||'')).toLowerCase()))) used.add(c);
+ });
+ const electiveCourses=selected.filter(c=>!used.has(c));
+ const electiveAvailable=electiveCourses.reduce((s,c)=>s+Number(c.hp||0),0);
+ const electiveUsed=Math.min(rule.electiveHp,electiveAvailable);
+ const missingMain=Math.max(0,rule.mainSubject-mainHp);
+ const missingReq=req.reduce((s,r)=>s+Math.max(0,r.hp-r.have),0);
+ const missingElective=Math.max(0,rule.electiveHp-electiveUsed);
+ return {main,mainHp,req,electiveCourses,electiveUsed,missingMain,missingReq,missingElective};
+}
+
 function coursesForDegree(o){
  const selected=courses.filter(c=>c.selected!==false);
  const subject=selected.filter(c=>(c.subject||guessSubject(c.name||''))===o.subject);
@@ -1051,6 +1439,119 @@ function openUniversityPath(profileId,major){
   renderUniversityDetail(profileId,major);
   go('universityDetail');
 }
+
+
+const DISTANCE_API='/api/distance-courses';
+let LIVE_DISTANCE_COURSES=[];
+let distanceApiState={loaded:false,loading:false,error:false,updated:null};
+
+async function loadDistanceCourses(o){
+ if(distanceApiState.loading)return;
+ distanceApiState.loading=true; distanceApiState.error=false;
+ try{
+   const q=new URLSearchParams({
+     subject:String(o?.subject||''),
+     kind:String(o?.kind||'candidate')
+   });
+   const r=await fetch(`${DISTANCE_API}?${q.toString()}`,{headers:{'Accept':'application/json'}});
+   if(!r.ok)throw new Error('distance api '+r.status);
+   const data=await r.json();
+   LIVE_DISTANCE_COURSES=Array.isArray(data?.courses)?data.courses:[];
+   distanceApiState.loaded=true;
+   distanceApiState.updated=data?.updated||null;
+ }catch(e){
+   console.warn('Lotsen distance API',e);
+   distanceApiState.error=true;
+ }finally{
+   distanceApiState.loading=false;
+   try{renderDistancePath(o)}catch(e){}
+ }
+}
+function allDistanceCourses(){
+ return [...LIVE_DISTANCE_COURSES,...DISTANCE_COURSE_INDEX];
+}
+
+const DISTANCE_COURSE_INDEX=[
+ // Only current offerings that have been explicitly verified as distance are stored here.
+ // Campus offerings are deliberately excluded even when the subject itself is available.
+ // The index is designed to be extended from a server/API without changing the matching UI.
+];
+
+function normalizeStudyPace(v){
+ const n=Number(v||0); return [25,50,75,100].includes(n)?n:null;
+}
+function distanceCourseMatchesNeed(course,need){
+ const subject=String(course.subject||'').toLowerCase();
+ const label=String(need.label||'').toLowerCase();
+ return !need.subject || subject===String(need.subject).toLowerCase() || label.includes(subject);
+}
+function verifiedDistanceCoursesForNeed(need){
+ return allDistanceCourses().filter(c=>
+   c.verified===true &&
+   c.distance===true &&
+   c.currentOffering===true &&
+   distanceCourseMatchesNeed(c,need) &&
+   Number(c.hp||0)>0
+ );
+}
+function distancePlanForOpportunity(o){
+ const missing=missingForOpportunity(o)||[];
+ const hp=Number(o?.remaining||0);
+ const needs=missing.map(m=>{
+   const matches=verifiedDistanceCoursesForNeed(m);
+   return {...m,matches};
+ });
+ const covered=needs.filter(n=>n.matches.length>0).reduce((s,n)=>s+Number(n.hp||0),0);
+ return {
+   hp,needs,covered,
+   fullyVerified:hp===0 || (needs.length>0 && needs.every(n=>n.matches.length>0)),
+   semesters100:hp?Math.ceil((hp/30)*2)/2:0,
+   semesters50:hp?Math.ceil((hp/15)*2)/2:0
+ };
+}
+function distanceCourseCard(c){
+ const meeting=c.noPhysicalMeetings===true?'Inga fysiska träffar':c.noPhysicalMeetings===false?'Distans med träffar':'Träffar ej verifierade';
+ const pace=normalizeStudyPace(c.pace);
+ return `<div class="distance-course-card">
+   <div><strong>${escapeHtml(c.name)}</strong><span>${escapeHtml(c.university||'')}</span></div>
+   <b>${fmtHp(c.hp)} hp</b>
+   <div class="distance-course-meta">
+     <span>${pace?pace+' %':'Studietakt ej verifierad'}</span>
+     <span>${escapeHtml(meeting)}</span>
+     ${c.term?`<span>${escapeHtml(c.term)}</span>`:''}
+   </div>
+   ${c.url?`<a href="${escapeHtml(c.url)}" target="_blank" rel="noopener">Visa utbildningen</a>`:''}
+ </div>`;
+}
+function renderDistancePath(o){
+ const box=document.getElementById('distancePathBox');
+ if(!box)return;
+ const d=distancePlanForOpportunity(o);
+ box.innerHTML=`
+   <div class="distance-head">
+     <div><strong>Distansväg</strong><span>${d.hp?`${fmtHp(d.hp)} hp kvar enligt examensmatchningen`:'Inga tydliga poäng saknas'}</span></div>
+     <span class="distance-status ${d.fullyVerified?'distance-ok':''}">${distanceApiState.loading?'Söker aktuella kurser…':d.fullyVerified?'Distansväg verifierad':distanceApiState.error?'Kunde inte hämta':'Saknar kursdata'}</span>
+   </div>
+   ${d.hp?`<div class="distance-stats">
+      <div><b>${d.semesters100}</b><span>terminer vid 100 %*</span></div>
+      <div><b>${d.semesters50}</b><span>terminer vid 50 %*</span></div>
+   </div>`:''}
+   ${d.needs.length?`<div class="distance-missing">
+      <strong>Kvar att hitta/läsa på distans</strong>
+      ${d.needs.map(n=>`<div class="distance-need">
+        <div class="distance-need-title"><span>${escapeHtml(n.label)}</span><b>${fmtHp(n.hp||0)} hp</b></div>
+        ${n.matches.length?n.matches.map(distanceCourseCard).join(''):'<div class="tiny-help no-distance-match">Ingen aktuell distanskurs verifierad för denna del ännu.</div>'}
+      </div>`).join('')}
+   </div>`:''}
+   <div class="distance-options">
+      <span>Helt på distans</span><span>Distans med träffar</span><span>25 / 50 / 75 / 100 %</span>
+   </div>
+   ${d.needs.length && !d.fullyVerified?`<div class="distance-source-note"><strong>Aktuellt kursutbud behöver verifieras.</strong><span>Lotsen visar inte campuskurser som distansalternativ. Exempelvis är Göteborgs universitets nuvarande fristående företagsekonomikurser dagtid på 100 % och deras publicerade höstkurser är campus, så de läggs inte in som distansförslag.</span></div>`:''}
+   <div class="tiny-help distance-warning"><strong>${d.fullyVerified?'Verifierad mot kursdata.':'Planeringsläge.'}</strong> Lotsen kallar bara en distansväg verifierad när varje återstående del har en aktuell verifierad distanskurs. Distans kan fortfarande innebära fysiska träffar om kursen anger det.</div>
+   ${d.hp?'<div class="tiny-help">*Tidsuppskattningen utgår från 30 hp per termin på heltid och tar inte hänsyn till schema- eller förkunskapskrockar.</div>':''}
+ `;
+}
+
 function renderUniversityDetail(profileId,major){
   const host=document.getElementById('universityDetailContent'); if(!host)return;
   const rows=(typeof flexibleDegreeCandidates==='function'?flexibleDegreeCandidates():[])
@@ -1060,7 +1561,11 @@ function renderUniversityDetail(profileId,major){
     host.innerHTML='<div class="card empty">Kunde inte hitta lärosätesvägen.</div>';
     return;
   }
-  const verified=!!x.d.verified;
+  const degreeKind=(String(o?.kind||'candidate').toLowerCase().includes('master')?'master':String(o?.kind||'candidate').toLowerCase().includes('magister')?'magister':'candidate');
+  const rule=localDegreeRule(profileId,major,degreeKind);
+  const breakdown=localRuleBreakdown(rule,major);
+  const verified=!!rule?.verified || !!x.d.verified;
+  const exactRemaining=breakdown ? Math.max(0,breakdown.missingMain+breakdown.missingReq+breakdown.missingElective) : x.remaining;
   host.innerHTML=`
     <div class="detail-hero">
       <div>
@@ -1068,14 +1573,41 @@ function renderUniversityDetail(profileId,major){
         <h1>${escapeHtml(x.degreeTitle?.title||x.d.name)}</h1>
         <div class="verify-chip ${verified?'verified':'unverified'}">${verified?'Verifierad':'Ej verifierad'}</div>
       </div>
-      <span class="badge ${x.remaining===0?'good':x.remaining<=30?'warn':'bad'}">${x.remaining===0?'100%':Math.max(0,Math.round(100*(1-x.remaining/Math.max(1,x.d.hp))))+'%'}</span>
+      <span class="badge ${exactRemaining===0?'good':exactRemaining<=30?'warn':'bad'}">${exactRemaining===0?'100%':Math.max(0,Math.round(100*(1-exactRemaining/Math.max(1,x.d.hp))))+'%'}</span>
     </div>
 
-    <div class="detail-summary">${x.remaining?`Cirka <strong>${fmtHp(x.remaining)} hp kvar</strong>`:'<strong>Ser preliminärt klar ut</strong>'}</div>
+    <div class="detail-summary">${exactRemaining?`Cirka <strong>${fmtHp(exactRemaining)} hp kvar</strong>`:'<strong>Ser preliminärt klar ut</strong>'}</div>
+
+    ${breakdown?`
+    <section class="detail-block local-rule-block">
+      <h2>Så räknas examen här</h2>
+      <div class="rule-row"><span>${escapeHtml(major)} <small>Huvudområde</small></span><b>${fmtHp(breakdown.mainHp)} / ${fmtHp(rule.mainSubject)} hp</b></div>
+      ${(breakdown.req||[]).map(r=>`<div class="rule-row"><span>${escapeHtml(r.label)} <small>Obligatorisk del</small></span><b>${fmtHp(r.have)} / ${fmtHp(r.hp)} hp</b></div>`).join('')}
+      <div class="rule-row"><span>Övriga kurser <small>Valfria</small></span><b>${fmtHp(breakdown.electiveUsed)} / ${fmtHp(rule.electiveHp)} hp</b></div>
+      ${rule.specificMainCourses?.length?`<div class="specific-rule-note"><strong>Verifierad studiegång i huvudområdet</strong>${rule.specificMainCourses.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div>`:''}
+      ${rule.methodHp?`<div class="rule-row"><span>Metodkurser <small>Inom huvudområdet</small></span><b>minst ${fmtHp(rule.methodHp)} hp</b></div>`:''}
+      ${rule.specialisations?.length?`<div class="specific-rule-note"><strong>Verifierade inriktningar</strong><span>${rule.specialisations.map(escapeHtml).join(' · ')}</span></div>`:''}
+      ${rule.admissionNote?`<div class="admission-note"><strong>Behörighet till vägen</strong><span>${escapeHtml(rule.admissionNote)}</span></div>`:''}
+      ${breakdown.electiveCourses.length?`<details class="elective-local"><summary>Visa möjliga valfria kurser</summary><div class="simple-course-list">${breakdown.electiveCourses.map(c=>`<div><span>${escapeHtml(c.name)}<small class="course-role-note">Möjlig valfri kurs – slutlig bedömning görs av lärosätet</small></span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div></details>`:''}
+      ${rule.advancedOnly?`<div class="advanced-rule-flags">
+        <span>Avancerad nivå</span>
+        ${rule.maxBasicHp!=null?`<span>Max ${fmtHp(rule.maxBasicHp)} hp grundnivå</span>`:''}${rule.minAdvancedHp!=null?`<span>Minst ${fmtHp(rule.minAdvancedHp)} hp avancerad nivå</span>`:''}${rule.allAdvanced?'<span>Alla kurser avancerad nivå</span>':''}${rule.programmeOnly?'<span>Endast via programmet</span>':''}${rule.electiveEconomicsMin!=null?`<span>Minst ${fmtHp(rule.electiveEconomicsMin)} hp valbart NEK/finans</span>`:''}
+        ${rule.noReuseBachelor?'<span>Ej återanvända kandidatpoäng</span>':''}
+        ${rule.subjectSpecificRequired?'<span>Ämnesregel måste kontrolleras</span>':''}
+      </div>`:''}
+      <div class="tiny-help local-rule-note">${escapeHtml(rule.note)}</div>
+    </section>`:''}
 
     <section class="detail-block">
       <h2>Kvar att läsa</h2>
-      ${x.missing?.length?`<div class="missing-list">${x.missing.map(m=>`<div><span class="missing-check">○</span><strong>${escapeHtml(m.label)}</strong></div>`).join('')}</div>`:'<div class="ready-box">Ingen tydlig komplettering hittad.</div>'}
+      ${breakdown?`
+        <div class="missing-list">
+          ${breakdown.missingMain?`<div><span class="missing-check">○</span><strong>${fmtHp(breakdown.missingMain)} hp i ${escapeHtml(major)}</strong></div>`:''}
+          ${(breakdown.req||[]).filter(r=>r.have<r.hp).map(r=>`<div><span class="missing-check">○</span><strong>${fmtHp(r.hp-r.have)} hp ${escapeHtml(r.label)}</strong></div>`).join('')}
+          ${breakdown.missingElective?`<div><span class="missing-check">○</span><strong>${fmtHp(breakdown.missingElective)} hp valfria kurser</strong></div>`:''}
+          ${exactRemaining===0?'<div class="ready-box">Ingen tydlig komplettering hittad.</div>':''}
+        </div>`:
+        (x.missing?.length?`<div class="missing-list">${x.missing.map(m=>`<div><span class="missing-check">○</span><strong>${escapeHtml(m.label)}</strong></div>`).join('')}</div>`:'<div class="ready-box">Ingen tydlig komplettering hittad.</div>')}
     </section>
 
     <section class="detail-block">
@@ -1092,8 +1624,11 @@ function renderDegreeDetail(key){
  const use=coursesForDegree(o), missing=missingForOpportunity(o), unis=universityOptionsForOpportunity(o);
  const usedSubject=use.subject.reduce((s,c)=>s+Number(c.hp||0),0);
  const usedOtherRaw=use.others.reduce((s,c)=>s+Number(c.hp||0),0);
- const usedOther=Math.min(90,usedOtherRaw);
- const transferableHp=usedSubject+usedOther;
+ // Outside-subject courses may fill elective space, but never count toward the 90 hp main subject.
+ // The exact elective allowance depends on degree type/university and is therefore only potential here.
+ const genericElectiveCap=o.source==='advanced'?0:90;
+ const usedOther=Math.min(genericElectiveCap,usedOtherRaw);
+ const potentiallyIncludedHp=usedSubject+usedOther;
  const verified=unis.some(x=>x.d?.verified)||o.source==='specific';
  const status=verified?'Verifierad':'Ej verifierad';
 
@@ -1103,27 +1638,32 @@ function renderDegreeDetail(key){
      <span class="badge ${o.score>=100?'good':o.score>=55?'warn':'bad'} detail-score">${o.score}%</span>
    </div>
    <div class="detail-summary">${o.remaining?`Cirka <strong>${fmtHp(o.remaining)} hp kvar</strong>`:'<strong>Ser preliminärt klar ut</strong>'}</div>
+   <div class="study-path-switch" role="group" aria-label="Studieväg">
+     <button class="path-mode active" data-path-mode="fastest">Snabbaste vägen</button>
+     <button class="path-mode" data-path-mode="distance">På distans</button>
+   </div>
+   <div id="distancePathBox" class="distance-path-box" hidden></div>
 
    <details class="detail-block credit-details">
      <summary>
-       <div><h2>Kan tillgodoräknas</h2><span class="tiny-help">${fmtHp(transferableHp)} hp preliminärt</span></div>
+       <div><h2>Kurser som kan ingå</h2><span class="tiny-help">${fmtHp(potentiallyIncludedHp)} hp identifierat</span></div>
        <span class="detail-arrow">›</span>
      </summary>
      <div class="credit-content">
        ${use.subject.length?`
-         <div class="credit-group-title">${escapeHtml(o.subject||'Huvudområdet')}</div>
+         <div class="credit-group-title">${escapeHtml(o.subject||'Huvudområdet')} <span class="course-role-tag main-role">Huvudområde</span></div>
          <div class="simple-course-list">
-           ${use.subject.map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}
+           ${use.subject.map(c=>`<div><span>${escapeHtml(c.name)}<small class="course-role-note">Kan räknas mot huvudområdet, preliminärt</small></span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}
          </div>`:'<div class="muted small">Ingen tydlig kursmatchning i huvudområdet hittad.</div>'}
 
        ${use.others.length?`
-         <div class="credit-group-title secondary-title">Övriga kurser som potentiellt kan ingå</div>
+         <div class="credit-group-title secondary-title">Övriga kurser <span class="course-role-tag elective-role">Möjligt valfria</span></div>
          <div class="simple-course-list secondary-courses">
-           ${use.others.map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}
+           ${use.others.map(c=>`<div><span>${escapeHtml(c.name)}<small class="course-role-note">Kan eventuellt ingå som valfri/övrig kurs</small></span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}
          </div>
-         <div class="tiny-help credit-limit">Upp till ${fmtHp(usedOther)} hp kan räknas in här enligt Lotsens preliminära bedömning.</div>`:''}
+         <div class="tiny-help credit-limit">De här kurserna räknas inte som ${escapeHtml(o.subject||'huvudområdet')} bara för att de kan ingå i examen. Hur många valfria poäng som får användas beror på examen och lärosäte.</div>`:''}
 
-       <div class="tiny-help credit-note">Preliminärt – lärosätet beslutar slutligt.</div>
+       <div class="tiny-help credit-note"><strong>Preliminärt.</strong> Lotsen skiljer nu på huvudområde och möjliga valfria kurser. Lärosätet avgör slutligt vilka kurser som får ingå.</div>
      </div>
    </details>
 
@@ -1754,6 +2294,88 @@ function renderFlexibleDegrees(){
  const near=allRows.filter(x=>x.remaining<=30).length; host.innerHTML=(near>1?`<div class="multi-degree-hint">${near} examensvägar ligger inom cirka 30 hp.</div>`:'')+rows.map(x=>`<article class="card flex-degree-card"><div class="program-top"><div><div class="eyebrow">${escapeHtml(x.d.university)} <span class="verified-mini">Examensregel</span></div><h3>${escapeHtml(x.degreeTitle.title)}</h3></div><span class="program-hp">${fmtHp(x.d.hp)} hp</span></div><div class="flex-degree-stats"><span><strong>${fmtHp(x.majorHp)}/${fmtHp(x.d.majorHp)} hp</strong> ${escapeHtml(x.major)}</span><span><strong>${fmtHp(x.freeHp)}/${fmtHp(x.d.hp-x.d.majorHp)} hp</strong> övriga kurser</span></div><div class="remaining-line"><strong>≈ ${fmtHp(x.remaining)} hp kvar</strong><span>${x.thesisMissing?fmtHp(x.thesisMissing)+' hp examensarbete saknas':'Examensarbete hittat'}</span></div><div class="degree-checks"><span>${escapeHtml(x.progressionStatus)}</span>${x.outsideMissing?`<span>${fmtHp(x.outsideMissing)} hp utanför huvudområdet saknas</span>`:''}</div><div class="missing-box"><strong>Det här saknas</strong>${x.missing.length?`<ul>${x.missing.map(m=>`<li>${escapeHtml(m.label)}</li>`).join('')}</ul>`:'<span class="ready-degree">Grundkraven ser uppfyllda ut – kontrollera examensansökan hos lärosätet.</span>'}</div>${x.degreeTitle.caveat?`<div class="degree-title-note">${escapeHtml(x.degreeTitle.caveat)}</div>`:''}<div class="program-note">${escapeHtml(x.d.note)}</div></article>`).join('');
 }
 
+
+
+function openMyPathFromNav(){
+ const key=sessionStorage.getItem('lotsen_detail_key');
+ const o=safeDegreeOpportunities().find(x=>x.key===key);
+ if(o)go('degreeDetail');
+ else go('degrees');
+}
+
+function openProgramMatcher(){
+  go('programMatch');
+  renderProgramSearch();
+}
+function renderProgramSearch(){
+  const host=document.getElementById('programSearchResults');
+  if(!host)return;
+  const q=String(document.getElementById('programSearchInput')?.value||'').trim().toLowerCase();
+  let rows=programCatalog.filter(p=>{
+    if(!q)return true;
+    return `${p.name} ${p.university}`.toLowerCase().includes(q);
+  }).slice(0,20);
+  host.innerHTML=rows.length?rows.map(p=>`
+    <button class="program-search-row" type="button" onclick="selectProgramForMatch('${escapeHtml(p.id)}')">
+      <div><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.university)}</span></div><span>›</span>
+    </button>`).join(''):'<div class="muted small program-empty">Inget program hittades i databasen.</div>';
+}
+function selectProgramForMatch(id){
+  const p=programCatalog.find(x=>x.id===id);
+  if(!p)return;
+  try{sessionStorage.setItem('lotsen_selected_program',id)}catch(e){}
+  renderProgramMatch(p);
+}
+function renderProgramMatch(p){
+  const host=document.getElementById('programMatchResult');if(!host)return;
+  if(!courses.length){
+    host.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong><div class="small muted">Därefter kan Lotsen jämföra dem med programmet.</div></div>';
+    return;
+  }
+  const r=estimateProgram(p);
+  const accepted=r.parts.filter(x=>x.matchType==='replace');
+  const review=r.parts.filter(x=>x.matchType==='review'||x.matchType==='degree');
+  const missing=r.parts.filter(x=>x.matchType==='none'||x.hp<Number(x.pc.hp||0));
+  const potentiallyUsed=Math.min(p.hp,Number(r.replaceHp||0)+Number(r.degreeHp||0)+Number(r.reviewHp||0));
+
+  host.innerHTML=`
+    <div class="program-result-head">
+      <div><div class="eyebrow">${escapeHtml(p.university)}</div><h2>${escapeHtml(p.name)}</h2></div>
+      <span class="badge ${potentiallyUsed>=p.hp*.7?'good':potentiallyUsed>=p.hp*.35?'warn':'bad'}">${fmtHp(potentiallyUsed)} hp</span>
+    </div>
+    <div class="tiny-help program-result-intro">Preliminär matchning. Tillgodoräknande beslutas alltid av lärosätet efter individuell prövning.</div>
+
+    <details class="detail-block program-credit-block" open>
+      <summary><div><h3>Kurser som kan passa in</h3><span>${fmtHp(potentiallyUsed)} hp potentiellt</span></div><span class="detail-arrow">›</span></summary>
+      <div class="program-credit-list">
+        ${accepted.map(x=>programPartHtml(x,'Stark matchning')).join('')}
+        ${review.map(x=>programPartHtml(x,x.matchType==='degree'?'Kan passa som valfri del':'Behöver granskas')).join('')}
+        ${!accepted.length&&!review.length?'<div class="muted small">Ingen tydlig matchning hittad ännu.</div>':''}
+      </div>
+    </details>
+
+    <section class="detail-block">
+      <h3>Kvar i programmet</h3>
+      <div class="tiny-help">Delar där Lotsen inte hittar en tillräckligt tydlig motsvarighet.</div>
+      <div class="missing-list">
+        ${missing.length?missing.map(x=>`<div><span class="missing-check">○</span><div><strong>${escapeHtml(x.pc.name)}</strong><small>${fmtHp(Math.max(0,Number(x.pc.hp||0)-Number(x.hp||0)))} hp kvar</small></div></div>`).join(''):'<div class="ready-box">Ingen tydlig programdel saknas i den preliminära matchningen.</div>'}
+      </div>
+    </section>
+
+    ${!r.eligibility.ok?`<section class="detail-block"><h3>Behörighet</h3><div class="tiny-help">${escapeHtml(r.eligibility.note)}</div></section>`:''}
+  `;
+}
+function programPartHtml(x,label){
+  const evidence=x.evidence||[];
+  const names=evidence.length?evidence.map(e=>e.name).slice(0,3):[];
+  return `<div class="program-credit-item">
+    <div><strong>${escapeHtml(x.pc.name)}</strong><span class="program-match-label">${escapeHtml(label)}</span>
+      ${names.length?`<small>${names.map(escapeHtml).join(' + ')}</small>`:`<small>${escapeHtml(x.reason||'')}</small>`}
+    </div>
+    <b>${fmtHp(x.hp)} hp</b>
+  </div>`;
+}
+
 function programEligibility(p){
  if(!p.eligibility)return {ok:true,note:''};
  let ok=true, notes=[];
@@ -1872,7 +2494,18 @@ function go(id){
  if(id==='compare' && !courses.length){
    setTimeout(()=>{try{renderCompare()}catch(e){}},0);
  }
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='degrees')renderDegrees();if(id==='compare')renderCompare();if(id==='degreeDetail')renderDegreeDetail();if(id==='universityDetail')renderUniversityDetail(sessionStorage.getItem('lotsen_uni_profile'),sessionStorage.getItem('lotsen_uni_major'));window.scrollTo(0,0)}
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>{
+  const isOpportunities=b.dataset.screen==='degrees';
+  const isProgram=b.classList.contains('nav-sub-program');
+  const isMyPath=b.classList.contains('nav-sub-path');
+  const inOpportunities=['degrees','degreeDetail','universityDetail','programMatch'].includes(id);
+  b.classList.toggle('active',
+    b.dataset.screen===id ||
+    (isOpportunities && inOpportunities) ||
+    (isProgram && id==='programMatch') ||
+    (isMyPath && ['degreeDetail','universityDetail'].includes(id))
+  );
+});if(id==='degrees')renderDegrees();if(id==='compare')renderCompare();if(id==='degreeDetail')renderDegreeDetail();if(id==='programMatch'){renderProgramSearch();const pid=sessionStorage.getItem('lotsen_selected_program');if(pid){const p=programCatalog.find(x=>x.id===pid);if(p)renderProgramMatch(p)}}if(id==='universityDetail')renderUniversityDetail(sessionStorage.getItem('lotsen_uni_profile'),sessionStorage.getItem('lotsen_uni_major'));window.scrollTo(0,0)}
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
 initBackend();updateAuthUI();renderUniversities();renderCourses();renderDegrees();renderCompare();
 </script>
@@ -2013,6 +2646,25 @@ document.addEventListener('click',e=>{
   confirmImport();
 });
 
+
+document.addEventListener('click',e=>{
+ const b=e.target.closest('.path-mode');
+ if(!b)return;
+ document.querySelectorAll('.path-mode').forEach(x=>x.classList.toggle('active',x===b));
+ const box=document.getElementById('distancePathBox');
+ if(!box)return;
+ const mode=b.dataset.pathMode;
+ box.hidden=mode!=='distance';
+ if(mode==='distance'){
+   const key=sessionStorage.getItem('lotsen_detail_key');
+   const o=safeDegreeOpportunities().find(x=>x.key===key);
+   if(o){
+     renderDistancePath(o);
+     if(!distanceApiState.loaded && !distanceApiState.loading)loadDistanceCourses(o);
+   }
+ }
+});
+
 </script>
 
 
@@ -2137,6 +2789,38 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v85 CLEAN -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Lotsen v102 -->
 </body>
 </html>
