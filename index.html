@@ -607,6 +607,129 @@ body{background:#f6f8fc}
 .plan-help{margin-top:10px}
 @media(max-width:640px){.recommended-plan{padding:13px}.recommended-plan-head h3{font-size:18px}}
 
+
+.distance-universities{margin:12px 0;padding:12px;border:1px solid #e5e9f0;border-radius:14px;background:#fff}
+.distance-uni-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:4px}
+.distance-uni-head strong{font-size:12px}.distance-uni-head span{font-size:9.5px;color:#7a8496}
+.distance-uni-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:9px 0;border-top:1px solid #edf0f4}
+.distance-uni-row strong{display:block;font-size:11.5px}.distance-uni-row small{display:block;font-size:9.5px;color:#7a8496;margin-top:2px}
+.distance-uni-row>span{font-size:9.5px;font-weight:750;color:#667085;white-space:nowrap}
+
+
+/* v117 fixed mobile navigation */
+.lotsen-header{position:relative!important;top:auto!important;box-shadow:none!important;background:#fff!important}
+.lotsen-header-inner{padding-bottom:10px!important}
+.lotsen-brandrow{justify-content:flex-start!important}
+.lotsen-topnav,.lotsen-subnav,.lotsen-login{display:none!important}
+.main{padding-bottom:118px!important}
+.lotsen-bottomnav{
+ position:fixed;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);
+ z-index:1200;width:min(720px,calc(100% - 24px));display:grid!important;grid-template-columns:repeat(4,1fr);
+ gap:2px;padding:7px;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);
+ border:1px solid rgba(217,222,231,.9);border-radius:24px;box-shadow:0 12px 38px rgba(16,24,40,.18);
+ overflow:visible!important;white-space:normal!important
+}
+.lotsen-bottomnav button{
+ border:0!important;background:transparent!important;color:#667085!important;border-radius:18px!important;
+ min-width:0;padding:8px 3px 7px!important;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:3px;font-size:10px!important;font-weight:750!important;cursor:pointer
+}
+.lotsen-bottomnav button.active{background:#eef3ff!important;color:#265ee8!important;box-shadow:none!important}
+.lotsen-bottomnav .more-nav-btn{color:#667085!important}
+.bottom-icon{height:22px;display:flex;align-items:center;justify-content:center;font-size:23px;line-height:1;font-weight:500}
+.bottom-icon.dots{font-size:17px;letter-spacing:2px}
+.lotsen-bottomnav b{font-size:10px;font-weight:800}
+.more-menu-backdrop{display:none;position:fixed;inset:0;z-index:1300;background:rgba(16,24,40,.32);padding:18px;align-items:flex-end;justify-content:center}
+.more-menu-backdrop.open{display:flex}
+.more-menu-sheet{width:min(680px,100%);background:#fff;border-radius:24px;padding:8px 16px calc(16px + env(safe-area-inset-bottom));box-shadow:0 18px 50px rgba(16,24,40,.24)}
+.more-menu-handle{width:42px;height:4px;border-radius:99px;background:#d7dce5;margin:2px auto 10px}
+.more-menu-head{display:flex;align-items:center;justify-content:space-between;padding:4px 2px 8px}
+.more-menu-head h2{font-size:25px;margin:1px 0 0}.more-menu-head button{border:0;background:#f2f4f7;border-radius:999px;padding:8px 11px;font-weight:750;color:#475467}
+.more-menu-item{width:100%;display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:center;text-align:left;border:0;border-top:1px solid #edf0f4;background:#fff;padding:14px 2px;color:#1d2939}
+.more-menu-item>span{font-size:20px}.more-menu-item strong{display:block;font-size:14px}.more-menu-item small{display:block;margin-top:2px;color:#7a8496;font-size:10.5px}.more-menu-item>b{font-size:22px;color:#98a2b3}
+.more-menu-future{border-top:1px solid #edf0f4;margin-top:2px;padding:13px 2px 4px;color:#667085}.more-menu-future strong{display:block;font-size:11px}.more-menu-future small{display:block;font-size:9.5px;margin-top:2px}
+body.more-menu-open{overflow:hidden}
+@media(min-width:760px){
+ .lotsen-bottomnav{bottom:16px}
+}
+
+
+/* v118 — Lotsen visual system */
+:root{
+  --lotsen-ink:#0d2931;
+  --lotsen-muted:#69757d;
+  --lotsen-teal:#15584f;
+  --lotsen-teal-2:#2f7d73;
+  --lotsen-blue:#24568f;
+  --lotsen-orange:#d9771b;
+  --lotsen-bg:#f7f5ef;
+  --lotsen-card:rgba(255,255,255,.92);
+  --lotsen-line:rgba(13,41,49,.10);
+}
+html,body{background:var(--lotsen-bg)!important;color:var(--lotsen-ink)!important}
+body{
+  background:
+    radial-gradient(circle at 92% 12%,rgba(221,235,226,.65),transparent 24rem),
+    radial-gradient(circle at 8% 88%,rgba(220,233,242,.55),transparent 25rem),
+    var(--lotsen-bg)!important;
+}
+.lotsen-header{background:rgba(247,245,239,.82)!important;backdrop-filter:blur(16px)}
+.lotsen-brand{color:var(--lotsen-ink)!important}
+.lotsen-brand small,.muted,.tiny-help{color:var(--lotsen-muted)!important}
+.card,.detail-block,.home-card,.opportunity-card,.study-card,.program-card,.uni-card{
+  background:var(--lotsen-card)!important;
+  border-color:var(--lotsen-line)!important;
+  border-radius:22px!important;
+  box-shadow:0 8px 24px rgba(13,41,49,.055)!important;
+}
+button.primary,.home-cta{
+  background:linear-gradient(135deg,#174f48,#1f665b)!important;
+  color:#fff!important;border:0!important;border-radius:16px!important;
+  box-shadow:0 8px 18px rgba(21,88,79,.16)!important
+}
+button.secondary,.chip,.pill,.filter-chip{
+  border-radius:999px!important
+}
+a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
+.badge.verified,.verified{background:#e7f3eb!important;color:#28734d!important}
+.lotsen-bottomnav{
+  background:rgba(247,245,239,.74)!important;
+  border-color:rgba(255,255,255,.75)!important;
+  backdrop-filter:blur(24px) saturate(1.15)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(1.15)!important;
+  border-radius:30px!important;
+  box-shadow:0 14px 38px rgba(13,41,49,.16)!important
+}
+.lotsen-bottomnav button{
+  border-radius:22px!important;
+  padding:9px 4px 8px!important;
+  transition:transform .16s ease,background .16s ease
+}
+.lotsen-bottomnav button:active{transform:scale(.97)}
+.lotsen-bottomnav button.active{
+  background:rgba(255,255,255,.88)!important;
+  color:var(--lotsen-teal)!important;
+  box-shadow:0 5px 16px rgba(13,41,49,.10)!important
+}
+.lotsen-bottomnav .more-nav-btn{color:var(--lotsen-ink)!important}
+.more-menu-sheet{background:#fbfaf6!important;border-radius:28px!important}
+.more-menu-item{background:transparent!important;color:var(--lotsen-ink)!important}
+.home-purpose{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:7px;
+  margin-top:14px
+}
+.home-purpose span{
+  display:flex;align-items:center;justify-content:center;
+  min-height:34px;padding:7px 4px;
+  border:1px solid rgba(21,88,79,.12);
+  border-radius:999px;background:rgba(232,241,235,.72);
+  color:var(--lotsen-teal);font-size:10px;font-weight:800;letter-spacing:.01em
+}
+@media(max-width:380px){
+  .home-purpose{gap:5px}
+  .home-purpose span{font-size:9px;padding-inline:2px}
+}
+
 </style>
 </head>
 <body>
@@ -614,18 +737,7 @@ body{background:#f6f8fc}
   <div class="lotsen-header-inner">
     <div class="lotsen-brandrow">
       <div class="lotsen-brand">Lotsen<small>Digital studievägledare</small></div>
-      <button class="ghost lotsen-login" onclick="openAuth()" id="authBtnTop">Logga in</button>
     </div>
-    <nav class="lotsen-topnav nav" aria-label="Huvudmeny">
-      <button class="active" data-screen="start">Hem</button>
-      <button data-screen="studies">Mina studier</button>
-      <button data-screen="degrees" class="nav-opportunities">Möjligheter</button>
-      <button data-screen="compare">Jämför</button>
-    </nav>
-    <nav class="lotsen-subnav" aria-label="Möjligheter">
-      <button class="nav-sub nav-sub-path" type="button" onclick="openMyPathFromNav()">Min väg</button>
-      <button class="nav-sub nav-sub-program" type="button" onclick="openProgramMatcher()">Program</button>
-    </nav>
   </div>
 </header>
 <main class="main">
@@ -636,6 +748,9 @@ body{background:#f6f8fc}
     <h1>Se vart dina studier kan ta dig.</h1>
     
     <button class="home-cta" onclick="go('studies');setTimeout(showImport,80)">Hämta meriter</button>
+    <div class="home-purpose" aria-label="Vad Lotsen hjälper dig med">
+      <span>Upptäck</span><span>Matcha</span><span>Planera</span><span>Jämför</span>
+    </div>
     <div class="home-cta-sub">Tar ca 2 minuter</div>
   </div>
 
@@ -750,7 +865,24 @@ body{background:#f6f8fc}
   <div id="compareResults"></div>
 </section>
 </main></div>
-<div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(16,24,40,.45);z-index:20;padding:20px;overflow:auto" onclick="if(event.target===this)closeAuth()"><div class="card" style="max-width:520px;margin:6vh auto"><div class="row"><div><div class="kicker">Konto</div><h2 style="margin:5px 0">Logga in till Lotsen</h2></div><button class="ghost" onclick="closeAuth()">Stäng</button></div><p class="muted small">Välj BankID eller e-post och lösenord. Dina kurser kan sedan sparas till din personliga profil.</p><div class="tabs" style="margin-top:16px"><button id="tabBankid" class="active" onclick="setAuthMethod('bankid')">BankID</button><button id="tabPassword" onclick="setAuthMethod('password')">E-post & lösenord</button></div><div id="bankidPane"><div class="info"><strong>Logga in med BankID</strong><div class="small" style="margin-top:6px">I produktionsversionen startas BankID via appens backend. Certifikat och BankID-hemligheter ligger aldrig i webbläsaren.</div></div><button class="primary" style="width:100%;margin-top:12px;padding:13px" onclick="startBankID()">Logga in med BankID</button><div id="bankidFlow" style="display:none;margin-top:14px;text-align:center"><div id="bankidQr" style="width:178px;height:178px;margin:0 auto 12px;border:10px solid #fff;box-shadow:0 0 0 1px #d4dbe7;display:grid;place-items:center;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 50%/30px 30px"><div style="background:#fff;padding:8px;font-weight:900;font-size:12px">BANKID<br>TEST</div></div><strong id="bankidStatus">Startar BankID…</strong><div class="small muted" id="bankidHint" style="margin-top:7px">Testflöde i prototypen. Ingen riktig identifiering sker ännu.</div><button id="bankidDemoApprove" class="ghost" style="margin-top:12px" onclick="approveBankIDDemo()">Simulera godkänt test-BankID</button></div><div class="notice small" style="margin-top:14px">BankID-knappen är en fungerande UI-prototyp. Riktig identifiering kräver BankID-avtal, FP-certifikat och serverintegration mot BankID RP-API.</div></div><div id="passwordPane" style="display:none"><div style="display:grid;gap:10px"><input id="authEmail" placeholder="E-post" type="email" autocomplete="email" style="border:1px solid #d4dbe7;border-radius:10px;padding:11px"><input id="authPassword" placeholder="Lösenord (minst 6 tecken)" type="password" autocomplete="current-password" style="border:1px solid #d4dbe7;border-radius:10px;padding:11px"><div class="row"><button class="primary" onclick="signIn()">Logga in</button><button class="ghost" onclick="signUp()">Skapa konto</button></div></div></div><div id="authMessage" class="small muted" style="margin-top:12px"></div></div></div>
+
+<nav class="lotsen-bottomnav nav" aria-label="Huvudmeny">
+  <button class="active" data-screen="start" type="button"><span class="bottom-icon">⌂</span><b>Hem</b></button>
+  <button data-screen="studies" type="button"><span class="bottom-icon">▤</span><b>Studier</b></button>
+  <button data-screen="degrees" type="button"><span class="bottom-icon">◇</span><b>Möjligheter</b></button>
+  <button type="button" class="more-nav-btn" onclick="toggleMoreMenu(true)"><span class="bottom-icon dots">•••</span><b>Mer</b></button>
+</nav>
+
+<div class="more-menu-backdrop" id="moreMenu" onclick="if(event.target===this)toggleMoreMenu(false)">
+  <section class="more-menu-sheet" aria-label="Mer">
+    <div class="more-menu-handle"></div>
+    <div class="more-menu-head"><div><span class="eyebrow">Lotsen</span><h2>Mer</h2></div><button type="button" onclick="toggleMoreMenu(false)">Stäng</button></div>
+    <button class="more-menu-item" type="button" onclick="toggleMoreMenu(false);openMyPathFromNav()"><span>🧭</span><div><strong>Min väg</strong><small>Se din valda examensväg</small></div><b>›</b></button>
+    <button class="more-menu-item" type="button" onclick="toggleMoreMenu(false);openProgramMatcher()"><span>🎓</span><div><strong>Program</strong><small>Matcha dina kurser mot ett program</small></div><b>›</b></button>
+    <button class="more-menu-item" type="button" onclick="toggleMoreMenu(false);go('compare')"><span>⇄</span><div><strong>Jämför</strong><small>Jämför examensvägar sida vid sida</small></div><b>›</b></button>
+    <div class="more-menu-future"><strong>Mer kan läggas till här senare</strong><small>Exempelvis sparade planer, export och inställningar.</small></div>
+  </section>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script type="module">
@@ -1721,10 +1853,15 @@ function missingForOpportunity(o){
  return rows;
 }
 function universityOptionsForOpportunity(o){
- if(o.source==='advanced') return [];
- return flexibleDegreeCandidates().filter(x=>x.major===o.subject)
-   .sort((a,b)=>a.remaining-b.remaining)
-   .slice(0,5);
+ if(o.source==='advanced'){
+   const kind=String(o.degreeType||'').toLowerCase()==='magister'?'magister':'master';
+   return flexibleDegreeCatalog.map(d=>{
+     const rule=localDegreeRule(d.id,o.subject,kind);
+     if(!rule)return null;
+     return {d,major:o.subject,remaining:Number(o.remaining||rule.total||0),advanced:true,rule,verified:Boolean(rule.verified),degreeTitle:{title:rule.label||`${o.degreeType}examen i ${o.subject}`}};
+   }).filter(Boolean).sort((a,b)=>(Number(b.verified)-Number(a.verified))||a.remaining-b.remaining).slice(0,8);
+ }
+ return flexibleDegreeCandidates().filter(x=>x.major===o.subject).sort((a,b)=>a.remaining-b.remaining).slice(0,8);
 }
 function openDegreeDetails(key){
  try{sessionStorage.setItem('lotsen_detail_key',key)}catch(e){}
@@ -1823,10 +1960,22 @@ function distanceCourseCard(c){
    ${c.url?`<a href="${escapeHtml(c.url)}" target="_blank" rel="noopener">Visa utbildningen</a>`:''}
  </div>`;
 }
+function distanceUniversityOptions(d){
+ const map=new Map();
+ d.needs.forEach(n=>n.matches.forEach(c=>{
+   const name=String(c.university||'').trim();if(!name)return;
+   if(!map.has(name))map.set(name,{name,courses:[],hp:0,noPhysicalMeetings:true});
+   const row=map.get(name);
+   if(!row.courses.some(x=>x.name===c.name)){row.courses.push(c);row.hp+=Number(c.hp||0)}
+   if(c.noPhysicalMeetings!==true)row.noPhysicalMeetings=false;
+ }));
+ return [...map.values()].sort((a,b)=>b.hp-a.hp||a.name.localeCompare(b.name,'sv'));
+}
 function renderDistancePath(o){
  const box=document.getElementById('distancePathBox');
  if(!box)return;
  const d=distancePlanForOpportunity(o);
+ const distanceUnis=distanceUniversityOptions(d);
  box.innerHTML=`
    <div class="distance-head">
      <div><strong>Distansväg</strong><span>${d.hp?`${fmtHp(d.hp)} hp kvar enligt examensmatchningen`:'Inga tydliga poäng saknas'}</span></div>
@@ -1843,6 +1992,10 @@ function renderDistancePath(o){
         ${n.matches.length?n.matches.map(distanceCourseCard).join(''):'<div class="tiny-help no-distance-match">Ingen aktuell distanskurs verifierad för denna del ännu.</div>'}
       </div>`).join('')}
    </div>`:''}
+   <div class="distance-universities">
+     <div class="distance-uni-head"><strong>Lärosäten på distans</strong><span>${distanceUnis.length?distanceUnis.length+' hittade':'Saknar verifierade alternativ'}</span></div>
+     ${distanceUnis.length?distanceUnis.map(u=>`<div class="distance-uni-row"><div><strong>${escapeHtml(u.name)}</strong><small>${u.noPhysicalMeetings?'Helt på distans':'Distans · träffar kan förekomma'} · ${fmtHp(u.hp)} hp hittat</small></div><span>${u.courses.length} ${u.courses.length===1?'kurs':'kurser'}</span></div>`).join(''):'<div class="tiny-help no-distance-match">När aktuella distanskurser verifieras visas lärosätena här automatiskt. Campuskurser visas inte som distansalternativ.</div>'}
+   </div>
    <div class="distance-options">
       <span>Helt på distans</span><span>Distans med träffar</span><span>25 / 50 / 75 / 100 %</span>
    </div>
@@ -1856,18 +2009,19 @@ function renderUniversityDetail(profileId,major){
   const host=document.getElementById('universityDetailContent'); if(!host)return;
   const detailKey=sessionStorage.getItem('lotsen_detail_key');
   const o=safeDegreeOpportunities().find(x=>x.key===detailKey) || {kind:'candidate',subject:major};
-  const rows=(typeof flexibleDegreeCandidates==='function'?flexibleDegreeCandidates():[])
-    .filter(x=>x.d.id===profileId && x.major===major);
-  const x=rows[0];
-  if(!x){
-    host.innerHTML='<div class="card empty">Kunde inte hitta lärosätesvägen.</div>';
-    return;
-  }
-  const degreeKind=(String(o?.kind||'candidate').toLowerCase().includes('master')?'master':String(o?.kind||'candidate').toLowerCase().includes('magister')?'magister':'candidate');
+  const isAdvanced=o?.source==='advanced';
+  const degreeKind=isAdvanced?(String(o?.degreeType||'master').toLowerCase()==='magister'?'magister':'master'):(String(o?.kind||'candidate').toLowerCase().includes('master')?'master':String(o?.kind||'candidate').toLowerCase().includes('magister')?'magister':'candidate');
   const rule=localDegreeRule(profileId,major,degreeKind);
-  const breakdown=localRuleBreakdown(rule,major);
+  const rows=(typeof flexibleDegreeCandidates==='function'?flexibleDegreeCandidates():[]).filter(x=>x.d.id===profileId && x.major===major);
+  let x=rows[0];
+  if(isAdvanced && rule){
+    const d=flexibleDegreeCatalog.find(y=>y.id===profileId)||{id:profileId,university:'Lärosäte',hp:rule.total||o.total||120,verified:rule.verified};
+    x={d,major,remaining:Number(o.remaining||rule.total||0),degreeTitle:{title:rule.label||o.name},missing:[]};
+  }
+  if(!x){host.innerHTML='<div class="card empty">Kunde inte hitta lärosätesvägen.</div>';return;}
+  const breakdown=isAdvanced?null:localRuleBreakdown(rule,major);
   const verified=!!rule?.verified || !!x.d.verified;
-  const exactRemaining=breakdown ? Math.max(0,breakdown.missingMain+breakdown.missingReq+breakdown.missingElective) : x.remaining;
+  const exactRemaining=isAdvanced?Number(o.remaining||rule?.total||x.remaining||0):(breakdown ? Math.max(0,breakdown.missingMain+breakdown.missingReq+breakdown.missingElective) : x.remaining);
   host.innerHTML=`
     <div class="detail-hero">
       <div>
@@ -1880,6 +2034,17 @@ function renderUniversityDetail(profileId,major){
 
     <div class="detail-summary">${exactRemaining?`Cirka <strong>${fmtHp(exactRemaining)} hp kvar</strong>`:'<strong>Ser preliminärt klar ut</strong>'}</div>
 
+    ${isAdvanced&&rule?`
+    <section class="detail-block local-rule-block">
+      <h2>Examenskrav här</h2>
+      <div class="rule-row"><span>${escapeHtml(major)} <small>Huvudområde</small></span><b>minst ${fmtHp(rule.mainSubject||0)} hp</b></div>
+      <div class="rule-row"><span>Examensarbete <small>Avancerad nivå</small></span><b>minst ${fmtHp(rule.thesis||0)} hp</b></div>
+      ${rule.minAdvancedHp!=null?`<div class="rule-row"><span>Avancerad nivå <small>Minimikrav</small></span><b>${fmtHp(rule.minAdvancedHp)} hp</b></div>`:''}
+      ${rule.maxBasicHp!=null?`<div class="rule-row"><span>Grundnivå <small>Maximalt</small></span><b>${fmtHp(rule.maxBasicHp)} hp</b></div>`:''}
+      ${rule.specialisations?.length?`<div class="specific-rule-note"><strong>Inriktningar</strong><span>${rule.specialisations.map(escapeHtml).join(' · ')}</span></div>`:''}
+      ${rule.admissionNote?`<div class="admission-note"><strong>Behörighet</strong><span>${escapeHtml(rule.admissionNote)}</span></div>`:''}
+      <div class="tiny-help local-rule-note">${escapeHtml(rule.note||'')}</div>
+    </section>`:''}
     ${breakdown?`
     <section class="detail-block local-rule-block">
       <h2>Så räknas examen här</h2>
@@ -2008,7 +2173,7 @@ function renderDegreeDetail(key){
    <section class="detail-block">
      <h2>Välj lärosäte</h2>
      <div class="tiny-help">Se exakta krav och kursväg.</div>
-     <div class="uni-path-list">${unis.length?unis.map(x=>`<button class="uni-path uni-path-btn" type="button" onclick="openUniversityPath('${escapeHtml(x.d.id)}','${escapeHtml(x.major)}')"><div><strong>${escapeHtml(x.d.university)}</strong><small>${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'Ser möjlig ut'}</small></div><span>›</span></button>`).join(''):'<div class="muted small">Fler lärosäten läggs till löpande.</div>'}</div>
+     <div class="uni-path-list">${unis.length?unis.map(x=>`<button class="uni-path uni-path-btn" type="button" onclick="openUniversityPath('${escapeHtml(x.d.id)}','${escapeHtml(x.major)}')"><div><strong>${escapeHtml(x.d.university)}</strong><small>${x.advanced?(x.verified?'Verifierad examensregel · ':'Preliminär · '):''}${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'Ser möjlig ut'}</small></div><span>›</span></button>`).join(''):'<div class="muted small">Inget lärosäte med matchande regel finns i databasen ännu.</div>'}</div>
    </section>
  `;
 }
@@ -2836,31 +3001,25 @@ function refreshAll(){
  if(document.getElementById('shortest')) shortest.textContent=courses.length?(rem?rem.r.remaining+' hp':'0 hp'):'–';
  renderCompare();
 }
+
+function toggleMoreMenu(open){
+ const el=document.getElementById('moreMenu');
+ if(!el)return;
+ el.classList.toggle('open',!!open);
+ document.body.classList.toggle('more-menu-open',!!open);
+}
+
 function go(id){
  if(id==='compare' && !courses.length){
    setTimeout(()=>{try{renderCompare()}catch(e){}},0);
  }
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>{
+document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button[data-screen]').forEach(b=>{
   const inOpportunities=['degrees','degreeDetail','universityDetail','programMatch'].includes(id);
-  b.classList.toggle('active',
-    b.dataset.screen===id ||
-    (b.dataset.screen==='degrees' && inOpportunities)
-  );
+  b.classList.toggle('active',b.dataset.screen===id || (b.dataset.screen==='degrees' && inOpportunities));
 });
-document.querySelectorAll('.lotsen-subnav .nav-sub').forEach(b=>{
-  const isProgram=b.classList.contains('nav-sub-program');
-  const isMyPath=b.classList.contains('nav-sub-path');
-  b.classList.toggle('active',
-    (isProgram && id==='programMatch') ||
-    (isMyPath && ['degreeDetail','universityDetail'].includes(id))
-  );
-});
-document.querySelector('.lotsen-subnav')?.classList.toggle(
-  'context-active',
-  ['degrees','degreeDetail','universityDetail','programMatch'].includes(id)
-);if(id==='degrees')renderDegrees();if(id==='compare')renderCompare();if(id==='degreeDetail')renderDegreeDetail();if(id==='programMatch'){renderProgramSearch();const pid=sessionStorage.getItem('lotsen_selected_program');if(pid){const p=programCatalog.find(x=>x.id===pid);if(p)renderProgramMatch(p)}}if(id==='universityDetail')renderUniversityDetail(sessionStorage.getItem('lotsen_uni_profile'),sessionStorage.getItem('lotsen_uni_major'));window.scrollTo(0,0)}
+if(id==='degrees')renderDegrees();if(id==='compare')renderCompare();if(id==='degreeDetail')renderDegreeDetail();if(id==='programMatch'){renderProgramSearch();const pid=sessionStorage.getItem('lotsen_selected_program');if(pid){const p=programCatalog.find(x=>x.id===pid);if(p)renderProgramMatch(p)}}if(id==='universityDetail')renderUniversityDetail(sessionStorage.getItem('lotsen_uni_profile'),sessionStorage.getItem('lotsen_uni_major'));window.scrollTo(0,0)}
 document.querySelectorAll('.nav button[data-screen]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
-initBackend();updateAuthUI();renderUniversities();renderCourses();renderDegrees();renderCompare();
+initBackend();renderUniversities();renderCourses();renderDegrees();renderCompare();
 </script>
 
 
@@ -3188,6 +3347,12 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v115 -->
+
+
+
+
+
+
+<!-- Lotsen v118 -->
 </body>
 </html>
