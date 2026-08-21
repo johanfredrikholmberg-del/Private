@@ -818,13 +818,60 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 }
 
 
-/* v121 — Min väg: choose subject → university/distance → exact plan */
-.mypath-head{margin-bottom:18px}.mypath-head .eyebrow{color:var(--lotsen-teal);font-weight:850;font-size:10px;letter-spacing:.08em}.mypath-head h1{margin:5px 0 7px;font-size:34px;letter-spacing:-.045em}.mypath-head p{max-width:560px;color:var(--lotsen-muted);line-height:1.45}
-.mypath-step{background:rgba(255,255,255,.92);border:1px solid var(--lotsen-line);border-radius:24px;padding:18px;margin:0 0 14px;box-shadow:0 8px 24px rgba(13,41,49,.055)}
-.mypath-step-label{display:flex;align-items:center;gap:11px;margin-bottom:14px}.mypath-step-label>span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e8f1eb;color:var(--lotsen-teal);font-size:12px;font-weight:900}.mypath-step-label b{display:block;font-size:18px}.mypath-step-label small{display:block;color:var(--lotsen-muted);font-size:11px;margin-top:2px}
-.mypath-choice-grid,.mypath-uni-list{display:grid;gap:9px}.mypath-choice,.mypath-uni-list button,.mypath-distance{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;border:1px solid rgba(13,41,49,.10);background:#fff;color:var(--lotsen-ink);border-radius:17px;padding:14px 15px;cursor:pointer}.mypath-choice.selected,.mypath-distance.selected{background:#edf6f2;border-color:#9bc5b8;box-shadow:inset 0 0 0 1px #9bc5b8}.mypath-choice strong,.mypath-uni-list strong,.mypath-distance strong{display:block;font-size:14px}.mypath-choice small,.mypath-uni-list small,.mypath-distance small{display:block;color:var(--lotsen-muted);font-size:10.5px;margin-top:3px}.mypath-choice>span,.mypath-uni-list button>span,.mypath-distance>span{font-size:24px;color:#7d898c}
-.mypath-distance{justify-content:flex-start;margin-bottom:10px}.mypath-distance>span{margin-left:auto}.mypath-distance-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#e8f1eb;color:var(--lotsen-teal);font-size:20px;font-weight:900}.distance-list{margin:0 0 12px;padding:9px;border-radius:17px;background:#f5f8f5}.mypath-divider{display:flex;align-items:center;gap:10px;color:#8a9398;font-size:9.5px;margin:13px 0}.mypath-divider:before,.mypath-divider:after{content:'';height:1px;background:#e5e9e7;flex:1}.mypath-hint{display:flex;gap:10px;padding:13px 15px;border-radius:16px;background:#eaf4ef;color:#285c50;font-size:11px;line-height:1.4}.mypath-hint b{white-space:nowrap}.mypath-empty{text-align:center;background:#fff;border:1px solid var(--lotsen-line);border-radius:24px;padding:30px 20px;box-shadow:0 8px 24px rgba(13,41,49,.055)}.mypath-empty-icon{width:62px;height:62px;border-radius:50%;background:#e8f1eb;display:grid;place-items:center;margin:0 auto 12px;font-size:27px}.mypath-empty h2{margin:0 0 6px}.mypath-empty p{color:var(--lotsen-muted);max-width:430px;margin:0 auto 16px;line-height:1.45}.mypath-note{padding:13px;color:var(--lotsen-muted);font-size:11px;line-height:1.45}
-@media(max-width:420px){.mypath-head h1{font-size:31px}.mypath-step{padding:15px}.mypath-hint{display:block}.mypath-hint b{display:block;margin-bottom:3px}}
+/* v122 — Min väg flow, layered on approved v120 */
+.mypath-head{margin-bottom:18px}
+.mypath-head .eyebrow{color:var(--lotsen-teal);font-weight:850;font-size:10px;letter-spacing:.08em}
+.mypath-head h1{margin:5px 0 7px;font-size:34px;letter-spacing:-.045em}
+.mypath-head p{max-width:560px;color:var(--lotsen-muted);line-height:1.45}
+.mypath-step{
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--lotsen-line);
+  border-radius:24px;padding:18px;margin:0 0 14px;
+  box-shadow:0 8px 24px rgba(13,41,49,.055)
+}
+.mypath-step-label{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.mypath-step-label>span{
+  display:grid;place-items:center;width:30px;height:30px;border-radius:50%;
+  background:#e8f1eb;color:var(--lotsen-teal);font-size:12px;font-weight:900
+}
+.mypath-step-label b{display:block;font-size:18px}
+.mypath-step-label small{display:block;color:var(--lotsen-muted);font-size:11px;margin-top:2px}
+.mypath-choice-grid,.mypath-uni-list{display:grid;gap:9px}
+.mypath-choice,.mypath-uni-list button,.mypath-distance{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;
+  border:1px solid rgba(13,41,49,.10);background:#fff;color:var(--lotsen-ink);
+  border-radius:17px;padding:14px 15px;cursor:pointer
+}
+.mypath-choice.selected,.mypath-distance.selected{
+  background:#edf6f2;border-color:#9bc5b8;box-shadow:inset 0 0 0 1px #9bc5b8
+}
+.mypath-choice strong,.mypath-uni-list strong,.mypath-distance strong{display:block;font-size:14px}
+.mypath-choice small,.mypath-uni-list small,.mypath-distance small{
+  display:block;color:var(--lotsen-muted);font-size:10.5px;margin-top:3px
+}
+.mypath-choice>span,.mypath-uni-list button>span,.mypath-distance>span{font-size:24px;color:#7d898c}
+.mypath-distance{justify-content:flex-start;margin-bottom:10px}
+.mypath-distance>span{margin-left:auto}
+.mypath-distance-icon{
+  display:grid;place-items:center;width:40px;height:40px;border-radius:50%;
+  background:#e8f1eb;color:var(--lotsen-teal);font-size:20px;font-weight:900
+}
+.distance-list{margin:0 0 12px;padding:9px;border-radius:17px;background:#f5f8f5}
+.mypath-divider{display:flex;align-items:center;gap:10px;color:#8a9398;font-size:9.5px;margin:13px 0}
+.mypath-divider:before,.mypath-divider:after{content:'';height:1px;background:#e5e9e7;flex:1}
+.mypath-hint{display:flex;gap:10px;padding:13px 15px;border-radius:16px;background:#eaf4ef;color:#285c50;font-size:11px;line-height:1.4}
+.mypath-hint b{white-space:nowrap}
+.mypath-empty{text-align:center;background:#fff;border:1px solid var(--lotsen-line);border-radius:24px;padding:30px 20px;box-shadow:0 8px 24px rgba(13,41,49,.055)}
+.mypath-empty-icon{width:62px;height:62px;border-radius:50%;background:#e8f1eb;display:grid;place-items:center;margin:0 auto 12px;font-size:27px}
+.mypath-empty h2{margin:0 0 6px}
+.mypath-empty p{color:var(--lotsen-muted);max-width:430px;margin:0 auto 16px;line-height:1.45}
+.mypath-note{padding:13px;color:var(--lotsen-muted);font-size:11px;line-height:1.45}
+@media(max-width:420px){
+  .mypath-head h1{font-size:31px}
+  .mypath-step{padding:15px}
+  .mypath-hint{display:block}
+  .mypath-hint b{display:block;margin-bottom:3px}
+}
 
 </style>
 </head>
@@ -954,8 +1001,15 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
   <div id="programMatchResult"></div>
 </section>
 
+
 <section id="myPath" class="screen">
-  <div class="top mypath-head"><div><div class="eyebrow">MIN VÄG</div><h1>Vad vill du ta examen i?</h1><p>Välj inriktning och sedan var du vill läsa. Lotsen anpassar vägen efter ditt val.</p></div></div>
+  <div class="top mypath-head">
+    <div>
+      <div class="eyebrow">MIN VÄG</div>
+      <h1>Vad vill du ta examen i?</h1>
+      <p>Välj inriktning och sedan var du vill läsa. Lotsen anpassar vägen efter ditt val.</p>
+    </div>
+  </div>
   <div id="myPathFlow"></div>
 </section>
 
@@ -2919,30 +2973,70 @@ function flexibleDegreeCandidates(){
 
 let myPathSubject=sessionStorage.getItem('lotsen_mypath_subject')||'';
 let myPathMode=sessionStorage.getItem('lotsen_mypath_mode')||'';
+
 function myPathSubjects(){
  const preferred=['Företagsekonomi','Psykologi','Idrottsvetenskap'];
- const available=[...new Set(safeDegreeOpportunities().filter(x=>x.source!=='advanced').map(x=>x.subject).filter(Boolean))];
- return [...preferred,...available.filter(x=>!preferred.includes(x))].filter((x,i,a)=>a.indexOf(x)===i);
+ const available=[...new Set(
+   safeDegreeOpportunities()
+     .filter(x=>x.source!=='advanced')
+     .map(x=>x.subject)
+     .filter(Boolean)
+ )];
+ return [...preferred,...available.filter(x=>!preferred.includes(x))]
+   .filter((x,i,a)=>a.indexOf(x)===i);
 }
+
 function myPathOpportunity(subject){
- return safeDegreeOpportunities().filter(x=>x.source!=='advanced'&&x.subject===subject).sort((a,b)=>(b.score||0)-(a.score||0)||(a.remaining||999)-(b.remaining||999))[0];
+ return safeDegreeOpportunities()
+   .filter(x=>x.source!=='advanced'&&x.subject===subject)
+   .sort((a,b)=>(b.score||0)-(a.score||0)||(a.remaining||999)-(b.remaining||999))[0];
 }
+
 function chooseMyPathSubject(subject){
- myPathSubject=subject;myPathMode='';sessionStorage.setItem('lotsen_mypath_subject',subject);sessionStorage.removeItem('lotsen_mypath_mode');renderMyPath();
+ myPathSubject=subject;
+ myPathMode='';
+ sessionStorage.setItem('lotsen_mypath_subject',subject);
+ sessionStorage.removeItem('lotsen_mypath_mode');
+ renderMyPath();
  setTimeout(()=>document.getElementById('mypath-place')?.scrollIntoView({behavior:'smooth',block:'start'}),50);
 }
-function chooseMyPathMode(mode){myPathMode=mode;sessionStorage.setItem('lotsen_mypath_mode',mode);renderMyPath();}
+
+function chooseMyPathMode(mode){
+ myPathMode=mode;
+ sessionStorage.setItem('lotsen_mypath_mode',mode);
+ renderMyPath();
+}
+
 function myPathDistanceProfiles(subject){
- const ids=[...new Set(courseCatalog.filter(c=>c.subject===subject&&/distans/i.test(String(c.form||''))).map(c=>c.uni))];
+ const ids=[...new Set(
+   courseCatalog
+     .filter(c=>c.subject===subject&&/distans/i.test(String(c.form||'')))
+     .map(c=>c.uni)
+ )];
  return flexibleDegreeCatalog.filter(d=>ids.includes(d.id)&&localDegreeRule(d.id,subject,'candidate'));
 }
+
 function openMyPathUniversity(profileId,subject){
- const o=myPathOpportunity(subject);if(o)sessionStorage.setItem('lotsen_detail_key',o.key);
+ const o=myPathOpportunity(subject);
+ if(o)sessionStorage.setItem('lotsen_detail_key',o.key);
  openUniversityPath(profileId,subject);
 }
+
 function renderMyPath(){
- const host=document.getElementById('myPathFlow');if(!host)return;
- if(!courses.length){host.innerHTML=`<section class="mypath-empty"><div class="mypath-empty-icon">🎓</div><h2>Hämta dina meriter först</h2><p>Då kan Lotsen visa vilka vägar som passar dig och vad du redan kan räkna in.</p><button class="primary" onclick="go('studies');setTimeout(showImport,80)">Hämta meriter</button></section>`;return;}
+ const host=document.getElementById('myPathFlow');
+ if(!host)return;
+
+ if(!courses.length){
+   host.innerHTML=`
+     <section class="mypath-empty">
+       <div class="mypath-empty-icon">🎓</div>
+       <h2>Hämta dina meriter först</h2>
+       <p>Då kan Lotsen visa vilka vägar som passar dig och vad du redan kan räkna in.</p>
+       <button class="primary" onclick="go('studies');setTimeout(showImport,80)">Hämta meriter</button>
+     </section>`;
+   return;
+ }
+
  const subjects=myPathSubjects();
  const subject=myPathSubject&&subjects.includes(myPathSubject)?myPathSubject:'';
  const o=subject?myPathOpportunity(subject):null;
@@ -2950,18 +3044,79 @@ function renderMyPath(){
  const distanceProfiles=subject?myPathDistanceProfiles(subject):[];
  const distanceIds=new Set(distanceProfiles.map(x=>x.id));
  const distanceUnis=allUnis.filter(x=>distanceIds.has(x.d.id));
+
  host.innerHTML=`
- <section class="mypath-step active-step"><div class="mypath-step-label"><span>1</span><div><b>Välj väg</b><small>Vad vill du ta examen i?</small></div></div>
-   <div class="mypath-choice-grid">${subjects.map(s=>{const op=myPathOpportunity(s);return `<button class="mypath-choice ${subject===s?'selected':''}" onclick="chooseMyPathSubject('${escapeHtml(s)}')"><div><strong>${escapeHtml(s)}</strong><small>${op?(op.remaining?fmtHp(op.remaining)+' hp preliminärt kvar':'Ser nära eller klar ut'):'Visa möjlig väg'}</small></div><span>›</span></button>`}).join('')}</div>
- </section>
- ${subject?`<section class="mypath-step" id="mypath-place"><div class="mypath-step-label"><span>2</span><div><b>Välj lärosäte</b><small>Var vill du läsa?</small></div></div>
-   <button class="mypath-distance ${myPathMode==='distance'?'selected':''}" onclick="chooseMyPathMode('distance')"><div class="mypath-distance-icon">⌁</div><div><strong>På distans</strong><small>${distanceUnis.length?distanceUnis.length+' lärosäten med distansalternativ':'Visa verifierade distansalternativ'}</small></div><span>›</span></button>
-   ${myPathMode==='distance'?`<div class="mypath-uni-list distance-list">${distanceUnis.length?distanceUnis.map(x=>`<button onclick="openMyPathUniversity('${escapeHtml(x.d.id)}','${escapeHtml(subject)}')"><div><strong>${escapeHtml(x.d.university)}</strong><small>Distans · ${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'ser möjlig ut'}</small></div><span>›</span></button>`).join(''):'<div class="mypath-note">Ingen verifierad komplett distansväg finns i kurslagret ännu. Lotsen visar bara lärosäten där distanskurser faktiskt finns registrerade.</div>'}</div>`:''}
-   <div class="mypath-divider"><span>eller välj lärosäte</span></div>
-   <div class="mypath-uni-list">${allUnis.length?allUnis.map((x,i)=>`<button onclick="openMyPathUniversity('${escapeHtml(x.d.id)}','${escapeHtml(subject)}')"><div><strong>${escapeHtml(x.d.university)}</strong><small>${i===0?'Snabbast för dig · ':''}${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'ser möjlig ut'}${distanceIds.has(x.d.id)?' · distans finns':''}</small></div><span>›</span></button>`).join(''):'<div class="mypath-note">Inget lärosäte med verifierad regel finns i databasen ännu.</div>'}</div>
- </section>`:''}
- ${subject?`<div class="mypath-hint"><b>Nästa steg</b><span>När du väljer lärosäte ser du exakt vad som kan räknas in, vad du har kvar och upplägget för just det lärosätet.</span></div>`:''}`;
+   <section class="mypath-step active-step">
+     <div class="mypath-step-label">
+       <span>1</span>
+       <div><b>Välj väg</b><small>Vad vill du ta examen i?</small></div>
+     </div>
+     <div class="mypath-choice-grid">
+       ${subjects.map(s=>{
+         const op=myPathOpportunity(s);
+         return `<button class="mypath-choice ${subject===s?'selected':''}" onclick="chooseMyPathSubject('${escapeHtml(s)}')">
+           <div>
+             <strong>${escapeHtml(s)}</strong>
+             <small>${op?(op.remaining?fmtHp(op.remaining)+' hp preliminärt kvar':'Ser nära eller klar ut'):'Visa möjlig väg'}</small>
+           </div>
+           <span>›</span>
+         </button>`;
+       }).join('')}
+     </div>
+   </section>
+
+   ${subject?`
+   <section class="mypath-step" id="mypath-place">
+     <div class="mypath-step-label">
+       <span>2</span>
+       <div><b>Välj lärosäte</b><small>Var vill du läsa?</small></div>
+     </div>
+
+     <button class="mypath-distance ${myPathMode==='distance'?'selected':''}" onclick="chooseMyPathMode('distance')">
+       <div class="mypath-distance-icon">⌁</div>
+       <div>
+         <strong>På distans</strong>
+         <small>${distanceUnis.length?distanceUnis.length+' lärosäten med distansalternativ':'Visa verifierade distansalternativ'}</small>
+       </div>
+       <span>›</span>
+     </button>
+
+     ${myPathMode==='distance'?`
+       <div class="mypath-uni-list distance-list">
+         ${distanceUnis.length?distanceUnis.map(x=>`
+           <button onclick="openMyPathUniversity('${escapeHtml(x.d.id)}','${escapeHtml(subject)}')">
+             <div>
+               <strong>${escapeHtml(x.d.university)}</strong>
+               <small>Distans · ${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'ser möjlig ut'}</small>
+             </div>
+             <span>›</span>
+           </button>`).join(''):
+           '<div class="mypath-note">Ingen verifierad komplett distansväg finns i kurslagret ännu. Lotsen visar bara lärosäten där distanskurser faktiskt finns registrerade.</div>'}
+       </div>`:''}
+
+     <div class="mypath-divider"><span>eller välj lärosäte</span></div>
+
+     <div class="mypath-uni-list">
+       ${allUnis.length?allUnis.map((x,i)=>`
+         <button onclick="openMyPathUniversity('${escapeHtml(x.d.id)}','${escapeHtml(subject)}')">
+           <div>
+             <strong>${escapeHtml(x.d.university)}</strong>
+             <small>${i===0?'Snabbast för dig · ':''}${x.remaining?fmtHp(x.remaining)+' hp preliminärt kvar':'ser möjlig ut'}${distanceIds.has(x.d.id)?' · distans finns':''}</small>
+           </div>
+           <span>›</span>
+         </button>`).join(''):
+         '<div class="mypath-note">Inget lärosäte med verifierad regel finns i databasen ännu.</div>'}
+     </div>
+   </section>`:''}
+
+   ${subject?`
+     <div class="mypath-hint">
+       <b>Nästa steg</b>
+       <span>När du väljer lärosäte ser du exakt vad som kan räknas in, vad du har kvar och upplägget för just det lärosätet.</span>
+     </div>`:''}
+ `;
 }
+
 function openMyPathFromNav(){
  go('myPath');
  renderMyPath();
@@ -3530,6 +3685,6 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v121 -->
+<!-- Lotsen v122 -->
 </body>
 </html>
