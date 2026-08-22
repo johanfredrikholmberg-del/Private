@@ -2057,6 +2057,40 @@ function advancedDegreeOpportunities(){
  return rows;
 }
 
+
+function bestCandidateUniversityResult(subject){
+ try{
+   const rows=flexibleDegreeCandidates()
+     .filter(x=>String(x.major||'').toLowerCase()===String(subject||'').toLowerCase())
+     .sort((a,b)=>{
+       const av=Number(Boolean(a.d?.verified));
+       const bv=Number(Boolean(b.d?.verified));
+       return (bv-av)||Number(a.remaining||999)-Number(b.remaining||999);
+     });
+   return rows[0]||null;
+ }catch(e){
+   return null;
+ }
+}
+function canonicalCandidateProgress(subject,fallback){
+ const best=bestCandidateUniversityResult(subject);
+ if(best){
+   const remaining=Number(best.remaining||0);
+   return {
+     remaining,
+     score:Math.max(0,Math.min(100,Math.round(100*(180-remaining)/180))),
+     university:best.d?.university||'',
+     profileId:best.d?.id||''
+   };
+ }
+ return {
+   remaining:Number(fallback?.remaining||0),
+   score:Number(fallback?.score||0),
+   university:'',
+   profileId:''
+ };
+}
+
 function safeDegreeOpportunities(){
   const rows=[];
 
@@ -2064,14 +2098,17 @@ function safeDegreeOpportunities(){
   try{
     degrees.forEach(d=>{
       const r=calc(d);
+      const canonical=canonicalCandidateProgress(d.subject||'',{score:Number(r.pct||0),remaining:Number(r.remaining||0)});
       rows.push({
         key:(d.subject||d.name).toLowerCase(),
         name:d.name,
         subject:d.subject||'',
-        score:Number(r.pct||0),
-        remaining:Number(r.remaining||0),
+        score:canonical.score,
+        remaining:canonical.remaining,
         source:'specific',
-        routeId:d.id
+        routeId:d.id,
+        canonicalUniversity:canonical.university,
+        canonicalProfileId:canonical.profileId
       });
     });
   }catch(e){console.error('Lotsen core opportunities',e)}
@@ -2084,9 +2121,11 @@ function safeDegreeOpportunities(){
           key:String(x.major||x.degreeTitle?.title||x.d?.name||'').toLowerCase(),
           name:`Kandidatexamen i ${x.major}`,
           subject:x.major||'',
-          score:Math.max(0,Math.min(100,Number(x.score||0))),
+          score:Math.max(0,Math.min(100,Math.round(100*(180-Number(x.remaining||0))/180))),
           remaining:Number(x.remaining||0),
-          source:'flex'
+          source:'flex',
+          canonicalUniversity:x.d?.university||'',
+          canonicalProfileId:x.d?.id||''
         });
       });
     }
@@ -2102,7 +2141,13 @@ function safeDegreeOpportunities(){
       ? `advanced:${String(r.degreeType||'').toLowerCase()}:${subject}`
       : `candidate:${subject}`;
     const prev=best.get(key);
-    if(!prev || r.score>prev.score || (r.score===prev.score&&r.remaining<prev.remaining))best.set(key,r);
+    if(!prev){
+      best.set(key,r);
+    }else if(r.source==='flex' && prev.source!=='flex'){
+      best.set(key,r);
+    }else if(r.source===prev.source && (r.remaining<prev.remaining || (r.remaining===prev.remaining&&r.score>prev.score))){
+      best.set(key,r);
+    }
   }
   return [...best.values()].sort((a,b)=>{
     // Within advanced results, prioritize a verified/near candidate path before progress already made on the master.
@@ -2639,7 +2684,7 @@ function renderUniversityDetail(profileId,major){
     <div class="detail-hero">
       <div>
         <div class="eyebrow">${escapeHtml(x.d.university)}</div>
-        <h1>${escapeHtml(x.degreeTitle?.title||x.d.name)}</h1>
+        <h1>${escapeHtml(myPathSubject||'')}</h1>
         <div class="verify-chip ${verified?'verified':'unverified'}">${verified?'Verifierad':'Ej verifierad'}</div>
       </div>
       <span class="badge ${exactRemaining===0?'good':exactRemaining<=30?'warn':'bad'}">${exactRemaining===0?'100%':Math.max(0,Math.round(100*(1-exactRemaining/Math.max(1,x.d.hp))))+'%'}</span>
@@ -3644,6 +3689,10 @@ function renderMyPath(){
      let distanceUnis=[];
      try{
        allUnis=o?universityOptionsForOpportunity(o):[];
+       const preferredProfile=sessionStorage.getItem('lotsen_preferred_profile')||'';
+       if(preferredProfile){
+         allUnis.sort((a,b)=>Number(b.d?.id===preferredProfile)-Number(a.d?.id===preferredProfile));
+       }
      }catch(e){console.warn('Min väg universitet',e);allUnis=[]}
 
      try{
@@ -4369,6 +4418,10 @@ window.LotsenDegreeHistory = {
 
 
 
-<!-- Lotsen v136 BROADER LEVEL RESOLVER -->
+
+
+
+
+<!-- Lotsen v138 CONCISE UNIVERSITY ROUTE TITLE -->
 </body>
 </html>
