@@ -2934,13 +2934,6 @@ function renderUniversityDetail(profileId,major){
           <div><strong>${escapeHtml(r.label)}</strong><small>Obligatoriskt</small></div>
           <b>${r.have<r.hp?`${fmtHp(r.hp-r.have)} hp kvar`:'Klar'}</b>
         </div>
-        <details class="status-course-details">
-          <summary>${r.have<r.hp?'Visa vad som saknas':'Visa detaljer'}</summary>
-          <div class="status-course-body">
-            <div class="status-course-empty">${r.have<r.hp?`${fmtHp(r.hp-r.have)} hp återstår i ${escapeHtml(r.label)}.`:`${fmtHp(r.have)} hp uppfyller kravet.`}</div>
-            ${r.have<r.hp?`<div class="needed-course-suggestion"><span>→</span><div><strong>${escapeHtml(r.label)}</strong><small>Läs ${fmtHp(r.hp-r.have)} hp som uppfyller kravet vid ${escapeHtml(x.d.university)}.</small></div></div>`:''}
-          </div>
-        </details>
       </div>`).join('')}
       <div class="path-status-row-wrap">
         <div class="path-status-row">
@@ -2948,15 +2941,6 @@ function renderUniversityDetail(profileId,major){
           <div><strong>Valfria kurser</strong><small>${fmtHp(breakdown.electiveUsed)} / ${fmtHp(rule.electiveHp)} hp</small></div>
           <b>${breakdown.missingElective?`${fmtHp(breakdown.missingElective)} hp kvar`:'Klar'}</b>
         </div>
-        <details class="status-course-details">
-          <summary>${breakdown.missingElective?'Visa kurser som kan användas':'Visa kurser som räknas in'}</summary>
-          <div class="status-course-body">
-            ${breakdown.electiveCourses.length?`<div class="simple-course-list">${breakdown.electiveCourses.map(c=>`<div><span>✓ ${escapeHtml(c.name)}<small class="course-audit-reason">${escapeHtml(c._decision?.reused ? c._decision.reason : 'Valfri kurs')}</small></span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div>`:
-            `<div class="status-course-empty">${breakdown.missingElective?'Inga säkra valfria kursmatchningar hittades ännu.':'Den valfria delen är uppfylld.'}</div>`}
-            ${breakdown.reviewCourses?.length?`<details class="course-audit-group review"><summary>? ${breakdown.reviewCourses.length} kurser behöver kontrolleras</summary><div class="simple-course-list">${breakdown.reviewCourses.map(c=>`<div><span>${escapeHtml(c.name)}<small class="course-audit-reason">${escapeHtml(c._decision?.reason||'Kontroll krävs')}</small></span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div></details>`:''}
-            ${breakdown.excludedCourses?.length?`<details class="course-audit-group excluded"><summary>× ${breakdown.excludedCourses.length} kurser räknas inte in</summary><div class="simple-course-list">${breakdown.excludedCourses.map(c=>`<div><span>${escapeHtml(c.name)}<small class="course-audit-reason">${escapeHtml(c._decision?.reason||'Räknas inte in')}</small></span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div></details>`:''}
-          </div>
-        </details>
       </div>
 
       ${exactRemaining>0?`<div class="path-next-box"><span>→</span><div><small>Nästa steg</small><strong>${fmtHp(exactRemaining)} hp kvar totalt</strong></div></div>`:
