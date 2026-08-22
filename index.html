@@ -1167,6 +1167,13 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 .status-course-details>summary::-webkit-details-marker{display:none}.status-course-details>summary:after{content:'⌄';margin-left:7px;font-size:14px}.status-course-details[open]>summary:after{content:'⌃'}
 .status-course-body{padding:10px 2px 2px}.status-course-empty{font-size:13px;color:#68737c;line-height:1.45}.status-course-reference{display:grid;gap:6px;margin-top:8px}.status-course-reference span{font-size:13px;color:#4f5b64}
 
+
+.course-audit-reason{display:block;margin-top:2px;font-size:10px;color:#7a8490;font-weight:500}
+.course-audit-group{margin-top:10px;border-top:1px solid #e9edf0;padding-top:8px}
+.course-audit-group>summary{cursor:pointer;list-style:none;font-size:12px;font-weight:800;color:#6c7480;padding:5px 0}
+.course-audit-group>summary::-webkit-details-marker{display:none}
+.course-audit-group.review>summary{color:#9a6806}.course-audit-group.excluded>summary{color:#9b4b42}
+
 </style>
 </head>
 <body>
@@ -1426,18 +1433,123 @@ function thesisReuseStatus(c,targetSubject){
   return {locked:false,reason:''};
 }
 
+
+function isAdvancedCourse(c){
+ return /Avancerad nivå/i.test(String(c?.level||'')) ||
+   /^(A1N|A1F|A1E|A2E|AX)$/i.test(String(c?.level||'').trim()) ||
+   /^(A1N|A1F|A1E|A2E|AX)$/i.test(String(c?.progression||'').trim());
+}
+function isBasicCourse(c){
+ return /Grundnivå/i.test(String(c?.level||'')) ||
+   /^(G1N|G1F|G1E|G2F|G2E|GX)$/i.test(String(c?.level||'').trim()) ||
+   /^(G1N|G1F|G1E|G2F|G2E|GX)$/i.test(String(c?.progression||'').trim());
+}
+
+function courseDegreeHistory(c){
+ const raw=c?.degreeHistory ?? c?.usedInDegrees ?? c?.degrees ?? c?.previousDegrees ?? [];
+ if(Array.isArray(raw)) return raw;
+ if(typeof raw==='string') return raw.split(/[;,|]/).map(x=>x.trim()).filter(Boolean);
+ return [];
+}
+function courseUsedInPriorDegree(c){
+ return courseDegreeHistory(c).length>0 || c?.usedInDegree===true || c?.includedInPreviousDegree===true;
+}
+function degreeLevelFromText(v){
+ const s=String(v||'').toLowerCase();
+ if(/master/.test(s)) return 'master';
+ if(/magister/.test(s)) return 'magister';
+ if(/kandidat|bachelor/.test(s)) return 'candidate';
+ return '';
+}
+function targetDegreeLevel(){
+ const explicit=String(window.__lotsenTargetDegreeLevel||'').toLowerCase();
+ if(explicit) return explicit;
+ const txt=[
+   document.querySelector('[data-degree-level]')?.getAttribute('data-degree-level'),
+   document.querySelector('[data-degree-type]')?.getAttribute('data-degree-type'),
+   document.body?.dataset?.degreeLevel
+ ].filter(Boolean).join(' ');
+ return degreeLevelFromText(txt);
+}
+function priorDegreeReuseDecision(c,targetSubject){
+ if(!courseUsedInPriorDegree(c)) return null;
+ const targetLevel=targetDegreeLevel();
+ const history=courseDegreeHistory(c);
+ const historyText=history.join(', ') || 'tidigare examen';
+
+ // Courses in the qualifying bachelor's degree must not silently be counted again
+ // toward a magister/master. If provenance is incomplete, keep them out of the
+ // automatic total until the institution-specific rule is known.
+ if(targetLevel==='magister' || targetLevel==='master'){
+   return {
+     status:'review',
+     hp:0,
+     reason:`Ingår i ${historyText} – räknas inte automatiskt mot ${targetLevel}`
+   };
+ }
+
+ // For a new bachelor's degree, prior use alone is not an automatic exclusion.
+ // Keep it countable, but surface the provenance only in details.
+ return {
+   status:'count',
+   hp:Number(c?.hp||0),
+   reason:`Ingår även i ${historyText} – återanvändning kontrolleras mot lärosätets regler`,
+   reused:true
+ };
+}
+function candidateCourseDecision(c,targetSubject){
+ const hp=Number(c?.hp||0);
+ const subject=courseSubject(c);
+ const target=String(targetSubject||'').trim();
+ const reuse=thesisReuseStatus(c,target);
+ const priorDegree=priorDegreeReuseDecision(c,target);
+
+ if(reuse.locked){
+   return {status:'excluded',hp:0,reason:reuse.reason||'Kan inte räknas igen'};
+ }
+ if(priorDegree && (targetDegreeLevel()==='magister' || targetDegreeLevel()==='master')){
+   return priorDegree;
+ }
+ if(isAdvancedCourse(c)){
+   return {status:'review',hp:0,reason:'Avancerad nivå – kontrollera med lärosätet'};
+ }
+ if(isThesisCourse(c) && subject && target && subject.toLowerCase()!==target.toLowerCase()){
+   return {status:'review',hp:0,reason:`Examensarbete i ${subject} – kontroll krävs som valfri kurs`};
+ }
+ if(!isBasicCourse(c)){
+   return {status:'review',hp:0,reason:'Kursnivån är inte verifierad'};
+ }
+ if(priorDegree && priorDegree.status==='count'){
+   return priorDegree;
+ }
+ return {
+   status:'count',
+   hp,
+   reason: subject && target && subject.toLowerCase()===target.toLowerCase()
+     ? `Kan räknas i huvudområdet ${target}`
+     : 'Kan preliminärt räknas som valfri kurs'
+ };
+}
+function candidateCourseAudit(targetSubject){
+ const rows=courses.filter(c=>c.selected!==false).map(c=>({...c,_decision:candidateCourseDecision(c,targetSubject)}));
+ return {
+   count:rows.filter(c=>c._decision.status==='count'),
+   reused:rows.filter(c=>c._decision.status==='count' && c._decision.reused),
+   review:rows.filter(c=>c._decision.status==='review'),
+   excluded:rows.filter(c=>c._decision.status==='excluded')
+ };
+}
+
 function calc(d){
   const raw=courses.filter(c=>c.selected!==false);
   const norm=s=>String(s||'').trim().toLowerCase();
+  const audit=candidateCourseAudit(d.subject);
+  const active=audit.count;
 
-  const active=raw.filter(c=>!thesisReuseStatus(c,d.subject).locked);
   const total=active.reduce((s,c)=>s+Number(c.hp||0),0);
-
   const subjectCourses=active.filter(c=>norm(courseSubject(c))===norm(d.subject));
   const subjectTotal=subjectCourses.reduce((s,c)=>s+Number(c.hp||0),0);
-  const thesisHp=subjectCourses
-    .filter(isThesisCourse)
-    .reduce((s,c)=>s+Number(c.hp||0),0);
+  const thesisHp=subjectCourses.filter(isThesisCourse).reduce((s,c)=>s+Number(c.hp||0),0);
 
   const totalReq=Number(d.total||180);
   const subjectReq=Number(d.subjectReq||90);
@@ -1446,7 +1558,6 @@ function calc(d){
   const totalMissing=Math.max(0,totalReq-total);
   const subjectMissing=Math.max(0,subjectReq-subjectTotal);
   const thesisMissing=Math.max(0,thesisReq-thesisHp);
-
   const remaining=Math.max(totalMissing,subjectMissing,thesisMissing);
   const pct=Math.max(0,Math.min(100,Math.round(100*(totalReq-remaining)/Math.max(1,totalReq))));
 
@@ -1455,7 +1566,10 @@ function calc(d){
     subjectHp:subjectTotal,subjectReq,subjectMissing,
     thesisHp,thesisReq,thesisMissing,
     totalMissing,
-    excludedThesisHp:raw.filter(c=>thesisReuseStatus(c,d.subject).locked).reduce((s,c)=>s+Number(c.hp||0),0)
+    reviewHp:audit.review.reduce((s,c)=>s+Number(c.hp||0),0),
+    excludedHp:audit.excluded.reduce((s,c)=>s+Number(c.hp||0),0),
+    reviewCourses:audit.review,
+    excludedCourses:audit.excluded
   };
 }
 
@@ -1535,9 +1649,9 @@ function ladokDateToTerm(date){
 }
 
 function detectCourseLevel(text){
-  const s=String(text||'').toLowerCase();
-  if(/avancerad nivå|advanced level|second cycle|\b(a1n|a1f|a1e|a2e|ax)\b/i.test(s)) return 'Avancerad nivå';
-  if(/grundnivå|first cycle|\b(g1n|g1f|g1e|g2f|g2e|gx)\b/i.test(s)) return 'Grundnivå';
+  const s=String(text||'').replace(/\u00ad/g,'').toLowerCase();
+  if(/avancerad\s*nivå|advanced\s*level|second\s*cycle|\b(a1n|a1f|a1e|a2e|ax)\b/i.test(s)) return 'Avancerad nivå';
+  if(/grund\s*nivå|grundnivå|first\s*cycle|\b(g1n|g1f|g1e|g2f|g2e|gx)\b/i.test(s)) return 'Grundnivå';
   return '';
 }
 
@@ -1569,6 +1683,32 @@ function cleanLadokCourseName(name){
   return s;
 }
 
+
+function detectIssuedDegreeLine(line){
+ const s=String(line||'').replace(/\s+/g,' ').trim();
+ const tests=[
+   {type:'master',re:/\bmasterexamen\b/i,hp:120},
+   {type:'magister',re:/\bmagisterexamen\b/i,hp:60},
+   {type:'candidate',re:/\bkandidatexamen\b/i,hp:180}
+ ];
+ for(const t of tests){
+   if(t.re.test(s)){
+     const hpMatch=s.match(/(\d+(?:[,.]\d+)?)\s*hp\b/i);
+     const hp=hpMatch?parseFloat(hpMatch[1].replace(',','.')):t.hp;
+     return {type:t.type,hp,title:s};
+   }
+ }
+ return null;
+}
+function extractDegreeSubject(lines,index){
+ for(let j=index+1;j<Math.min(index+8,lines.length);j++){
+   const line=String(lines[j]||'').trim();
+   const m=line.match(/^Huvudområde:\s*(.+)$/i);
+   if(m)return m[1].trim();
+   if(/^(Avslutade kurser|Summering|Utfärdade bevis|Kod Benämning)/i.test(line))break;
+ }
+ return '';
+}
 function parseLadokLines(rawLines){
   const lines=rawLines.map(x=>String(x).replace(/\s+/g,' ').trim()).filter(Boolean);
   const text=lines.join(' ');
@@ -1591,13 +1731,13 @@ function parseLadokLines(rawLines){
   for(let i=0;i<lines.length;i++){
     const l=lines[i];
     if(instLine(l)) institution=l;
-    if(/^(?:Filosofie|Ekonomie|Politices|Teknologie|Naturvetenskaplig|Samhällsvetenskaplig)?\s*kandidatexamen(?:[^,]*)?,?\s*180\s*hp/i.test(l) || /^Kandidatexamen(?:[^,]*)?,?\s*180\s*hp/i.test(l)){
-      let subject='';
-      for(let j=i+1;j<Math.min(i+6,lines.length);j++){
-        const mm=lines[j].match(/^Huvudområde:\s*(.+)$/i);
-        if(mm){subject=mm[1].trim();break}
+    const degreeLine=detectIssuedDegreeLine(l);
+    if(degreeLine){
+      const subject=extractDegreeSubject(lines,i);
+      const key=[degreeLine.type,subject,institution,degreeLine.title].join('|').toLowerCase();
+      if(!issuedDegrees.some(x=>x._key===key)){
+        issuedDegrees.push({...degreeLine,subject,institution,_key:key,verified:true,source:'Ladok'});
       }
-      issuedDegrees.push({type:'candidate',subject,institution,title:l});
     }
     if(/^Avslutade kurser$/i.test(l)){inCourses=true;continue}
     if(/^Summering$/i.test(l)){inCourses=false;continue}
@@ -1610,6 +1750,8 @@ function parseLadokLines(rawLines){
       out.push({
         name,code,hp,grade,date,term:ladokDateToTerm(date),institution,
         level:detectCourseLevel(l)||detectCourseLevel(name),
+        levelSource:(detectCourseLevel(l)||detectCourseLevel(name))?'Intyg':'',
+        levelVerified:Boolean(detectCourseLevel(l)||detectCourseLevel(name)),
         subject:guessSubject(name,code,institution),
         thesis:/examensarbete|självständigt arbete|kandidatuppsats|kandidatprojekt|degree project|thesis/i.test(name),
         selected:true
@@ -1628,7 +1770,7 @@ function parseLadokLines(rawLines){
     }
   }
   out=out.map(c=>({...c,name:cleanLadokCourseName(c.name)})).filter(c=>c.name); const total=out.reduce((s,c)=>s+Number(c.hp||0),0);
-  return {isLadok,courses:out,expectedTotal:total,issuedDegrees};
+  return {isLadok,courses:out,expectedTotal:total,issuedDegrees:issuedDegrees.map(({_key,...d})=>d)};
 }
 async function importPdf(inp, chosenSource='auto'){
   const files=[...(inp.files||[])]; if(!files.length)return;
@@ -1665,7 +1807,7 @@ async function importPdf(inp, chosenSource='auto'){
     const check=expectedTotals.length && Math.abs(importedHp-expected)<0.01
       ? `✓ ${fmtHp(importedHp)} hp hittades.`
       : `${fmtHp(importedHp)} hp hittades.`;
-    importStatus.innerHTML=`<span class="import-ok">✓ ${sourceLabel} identifierat</span> · ${importedCandidates.length} kurser · ${check}`;
+    importStatus.innerHTML=`<span class="import-ok">✓ ${sourceLabel} identifierat</span> · ${importedCandidates.length} kurser · ${check}${issued.length?` · ${issued.length} examen${issued.length===1?'':'ina'} hittad${issued.length===1?'':'e'}`:''}`;
     if(issued.length){
       try{sessionStorage.setItem('lotsen_issued_degrees',JSON.stringify(issued));}catch(e){}
     }
@@ -1715,7 +1857,18 @@ function parseAntagningLines(rawLines){
    }
    const completed=(grade&&grade!=='-'&&date&&date!=='-') || (componentCompleted&&componentHp+0.001>=hp);
    if(!completed) continue;
-   out.push({name:name.replace(/\s+/g,' ').trim(),code,hp,grade,date,institution,level:'Grundnivå',subject:guessSubject(name,code,institution),thesis:/examensarbete|självständigt arbete|kandidatuppsats|kandidatprojekt|degree project|thesis/i.test(name),selected:true});
+   const nearby=lines.slice(Math.max(0,i),Math.min(lines.length,q+2)).join(' ');
+   out.push({
+     name:name.replace(/\s+/g,' ').trim(),code,hp,grade,date,
+     term:ladokDateToTerm(date),
+     institution,
+     level:detectCourseLevel(nearby),
+     levelSource:detectCourseLevel(nearby)?'Intyg':'',
+     levelVerified:Boolean(detectCourseLevel(nearby)),
+     subject:guessSubject(name,code,institution),
+     thesis:/examensarbete|självständigt arbete|kandidatuppsats|kandidatprojekt|degree project|thesis/i.test(name),
+     selected:true
+   });
    i=j;
  }
  return {isAntagning,expectedTotal,courses:out};
@@ -1748,7 +1901,7 @@ function renderImportPreview(){
      <summary class="import-results-summary">
        <div>
          <strong>${importedCandidates.length} kurser hittades</strong>
-         <div class="small muted">${fmtHp(totalHp)} hp · ${institutions.length} ${institutions.length===1?'lärosäte':'lärosäten'}${importedCandidates.some(c=>!c.level)?' · vissa nivåer behöver verifieras':''}</div>
+         <div class="small muted">${fmtHp(totalHp)} hp · ${institutions.length} ${institutions.length===1?'lärosäte':'lärosäten'}${importedCandidates.some(c=>!c.level)?' · nivåkontroll pågår i bakgrunden':''}</div>
        </div>
        <span class="detail-arrow">›</span>
      </summary>
@@ -1794,25 +1947,8 @@ function confirmImport(){
     if(host)host.innerHTML='<div class="card empty"><strong>Meriterna är importerade</strong><div class="small muted">Ladda om sidan om resultaten inte visas direkt.</div></div>';
   }
 
-  // Bakgrundskontroll av kursnivåer.
-  setTimeout(async()=>{
-    try{
-      enrichCourseSyllabusStatus();
-      let changed=false;
-      for(const c of courses.filter(c=>!c.level&&c.syllabusLookup?.ready)){
-        const r=await fetchHistoricalSyllabus(c);
-        if(r.ok && r.data?.level){
-          const level=detectCourseLevel(r.data.level)||String(r.data.level||'');
-          if(level){c.level=level;changed=true}
-        }
-      }
-      if(changed){
-        try{sessionStorage.setItem('examensmatch_courses',JSON.stringify(courses))}catch(e){}
-        try{renderCourses()}catch(e){}
-        try{renderDegrees()}catch(e){}
-      }
-    }catch(e){}
-  },100);
+  // Kurskod + lärosäte + termin används i bakgrunden för att verifiera nivå.
+  setTimeout(()=>{resolveMissingCourseLevelsInBackground().catch(()=>{})},100);
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 
@@ -2246,21 +2382,36 @@ function hpForSubjects(subjects){
 }
 function localRuleBreakdown(rule,major){
  if(!rule)return null;
- const selected=courses.filter(c=>c.selected!==false);
- const main=selected.filter(c=>String(c.subject||guessSubject(c.name||'')).toLowerCase()===String(major||'').toLowerCase());
+ const audit=candidateCourseAudit(major);
+ const selected=audit.count;
+ const norm=s=>String(s||'').trim().toLowerCase();
+
+ const main=selected.filter(c=>norm(c.subject||guessSubject(c.name||''))===norm(major));
  const mainHp=Math.min(rule.mainSubject,main.reduce((s,c)=>s+Number(c.hp||0),0));
- const req=(rule.requiredOther||[]).map(r=>({...r,have:Math.min(r.hp,hpForSubjects(r.subjects))}));
- const used=new Set(main);
- selected.forEach(c=>{
-   if(req.some(r=>(r.subjects||[]).map(x=>x.toLowerCase()).includes(String(c.subject||guessSubject(c.name||'')).toLowerCase()))) used.add(c);
+
+ const req=(rule.requiredOther||[]).map(r=>{
+   const set=(r.subjects||[]).map(x=>norm(x));
+   const matching=selected.filter(c=>set.includes(norm(c.subject||guessSubject(c.name||''))));
+   return {...r,have:Math.min(r.hp,matching.reduce((s,c)=>s+Number(c.hp||0),0)),courses:matching};
  });
+
+ const used=new Set(main);
+ req.forEach(r=>(r.courses||[]).forEach(c=>used.add(c)));
+
  const electiveCourses=selected.filter(c=>!used.has(c));
  const electiveAvailable=electiveCourses.reduce((s,c)=>s+Number(c.hp||0),0);
  const electiveUsed=Math.min(rule.electiveHp,electiveAvailable);
+
  const missingMain=Math.max(0,rule.mainSubject-mainHp);
  const missingReq=req.reduce((s,r)=>s+Math.max(0,r.hp-r.have),0);
  const missingElective=Math.max(0,rule.electiveHp-electiveUsed);
- return {main,mainHp,req,electiveCourses,electiveUsed,missingMain,missingReq,missingElective};
+
+ return {
+   main,mainHp,req,electiveCourses,electiveUsed,
+   missingMain,missingReq,missingElective,
+   reviewCourses:audit.review,
+   excludedCourses:audit.excluded
+ };
 }
 
 function coursesForDegree(o){
@@ -2522,6 +2673,7 @@ function renderUniversityDetail(profileId,major){
             ${breakdown.missingMain?`<div class="status-course-empty">Du behöver komplettera med ${fmtHp(breakdown.missingMain)} hp i ${escapeHtml(major)}.</div>`:
               `<div class="status-course-empty">Dina matchade kurser i ${escapeHtml(major)} uppfyller denna del.</div>`}
             ${rule.specificMainCourses?.length?`<div class="status-course-reference">${rule.specificMainCourses.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div>`:''}
+            ${breakdown.reviewCourses?.filter(c=>courseSubject(c)===major).length?`<details class="course-audit-group review"><summary>? Kurser i ${escapeHtml(major)} som behöver kontrolleras</summary><div class="simple-course-list">${breakdown.reviewCourses.filter(c=>courseSubject(c)===major).map(c=>`<div><span>${escapeHtml(c.name)}<small class="course-audit-reason">${escapeHtml(c._decision?.reason||'Kontroll krävs')}</small></span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div></details>`:''}
           </div>
         </details>
       </div>
@@ -2545,8 +2697,10 @@ function renderUniversityDetail(profileId,major){
         <details class="status-course-details">
           <summary>${breakdown.missingElective?'Visa kurser som kan användas':'Visa kurser som räknas in'}</summary>
           <div class="status-course-body">
-            ${breakdown.electiveCourses.length?`<div class="simple-course-list">${breakdown.electiveCourses.map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div>`:
-            `<div class="status-course-empty">${breakdown.missingElective?'Inga tydliga valfria kursmatchningar hittades ännu.':'Den valfria delen är uppfylld.'}</div>`}
+            ${breakdown.electiveCourses.length?`<div class="simple-course-list">${breakdown.electiveCourses.map(c=>`<div><span>✓ ${escapeHtml(c.name)}<small class="course-audit-reason">${escapeHtml(c._decision?.reused ? c._decision.reason : 'Valfri kurs')}</small></span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div>`:
+            `<div class="status-course-empty">${breakdown.missingElective?'Inga säkra valfria kursmatchningar hittades ännu.':'Den valfria delen är uppfylld.'}</div>`}
+            ${breakdown.reviewCourses?.length?`<details class="course-audit-group review"><summary>? ${breakdown.reviewCourses.length} kurser behöver kontrolleras</summary><div class="simple-course-list">${breakdown.reviewCourses.map(c=>`<div><span>${escapeHtml(c.name)}<small class="course-audit-reason">${escapeHtml(c._decision?.reason||'Kontroll krävs')}</small></span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div></details>`:''}
+            ${breakdown.excludedCourses?.length?`<details class="course-audit-group excluded"><summary>× ${breakdown.excludedCourses.length} kurser räknas inte in</summary><div class="simple-course-list">${breakdown.excludedCourses.map(c=>`<div><span>${escapeHtml(c.name)}<small class="course-audit-reason">${escapeHtml(c._decision?.reason||'Räknas inte in')}</small></span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div></details>`:''}
           </div>
         </details>
       </div>
@@ -3176,17 +3330,17 @@ const programCatalog=[
 
 
 const syllabusResolvers={
- 'Göteborgs universitet':{
-   mode:'search',
-   note:'Kurskod och termin används för att välja den kursplan som gällde när kursen lästes.',
-   buildQuery:(c)=>`${c.code||c.courseCode||''} ${c.term||c.completedTerm||''} kursplan Göteborgs universitet`
- },
- 'Umeå universitet':{
-   mode:'versioned',
-   note:'Umeås kursplanssidor har versionshistorik. Kurskod + kursdatum kan därför kopplas mot rätt version.',
-   buildQuery:(c)=>`${c.code||c.courseCode||''} kursplan Umeå universitet`
- }
+ 'Göteborgs universitet':{aliases:['göteborgs universitet','gothenburg university'],note:'Kurskod används för att hitta kursplan och utbildningsnivå.'},
+ 'Umeå universitet':{aliases:['umeå universitet','umea university'],note:'Kurskod används för att hitta kursplan och utbildningsnivå.'},
+ 'Mittuniversitetet':{aliases:['mittuniversitetet','mid sweden university'],note:'Kurskod kopplas direkt mot Mittuniversitetets kursplan.'},
+ 'Karlstads universitet':{aliases:['karlstads universitet','karlstad university'],note:'Kurskod kopplas mot Karlstads universitets kurssida.'},
+ 'Linnéuniversitetet':{aliases:['linnéuniversitetet','linneuniversitetet','linnaeus university'],note:'Kurskod används för att verifiera utbildningsnivå.'},
+ 'Högskolan i Halmstad':{aliases:['högskolan i halmstad','halmstad university'],note:'Kurskod används för att söka kursplan och utbildningsnivå.'}
 };
+function syllabusResolverForUniversity(university){
+ const u=String(university||'').trim().toLowerCase();
+ return Object.entries(syllabusResolvers).find(([,r])=>(r.aliases||[]).some(a=>u.includes(a)))||null;
+}
 function courseIdentity(c){
  return {
    code:String(c.code||c.courseCode||'').trim(),
@@ -3236,16 +3390,48 @@ async function resolveImportedSyllabi(){
 }
 
 function historicalSyllabusStatus(c){
- const id=courseIdentity(c), r=syllabusResolvers[id.university];
+ const id=courseIdentity(c), hit=syllabusResolverForUniversity(id.university);
  if(!id.code) return {state:'missing-code',label:'Kurskod saknas',ready:false};
  if(!id.university) return {state:'missing-university',label:'Lärosäte saknas',ready:false};
- if(!r) return {state:'unsupported',label:'Historisk kursplan behöver sökas manuellt',ready:false};
- if(!id.term) return {state:'missing-term',label:'Termin saknas för versionsval',ready:false};
- return {state:'resolvable',label:'Historisk kursplan kan identifieras',ready:true,query:r.buildQuery(c),note:r.note};
+ if(!hit) return {state:'unsupported',label:'Kursnivå behöver verifieras manuellt',ready:false};
+ const [provider,r]=hit;
+ return {state:'resolvable',label:'Kursnivå kan verifieras',ready:true,provider,note:r.note};
 }
 function enrichCourseSyllabusStatus(){
  courses.forEach(c=>{c.syllabusLookup=historicalSyllabusStatus(c)});
 }
+
+async function resolveMissingCourseLevelsInBackground(){
+ enrichCourseSyllabusStatus();
+ const pending=courses.filter(c=>!c.level && c.syllabusLookup?.ready);
+ if(!pending.length)return {attempted:0,resolved:0};
+ let resolved=0;
+ for(const c of pending){
+   try{
+     const r=await fetchHistoricalSyllabus(c);
+     c.syllabusFetch=r;
+     if(r.ok && r.data?.level){
+       const rawLevel=String(r.data.level||'');
+       const level=detectCourseLevel(rawLevel)||rawLevel;
+       if(level){
+         c.level=level;
+         c.progression=String(r.data.progression||r.data.levelCode||c.progression||'');
+         c.levelSource=r.data.provider||'Kursplan';
+         c.levelVerified=true;
+         c.syllabusUrl=r.data.url||c.syllabusUrl||'';
+         resolved++;
+       }
+     }
+   }catch(e){}
+ }
+ if(resolved){
+   try{sessionStorage.setItem('examensmatch_courses',JSON.stringify(courses))}catch(e){}
+   try{renderCourses()}catch(e){}
+   try{renderDegrees()}catch(e){}
+ }
+ return {attempted:pending.length,resolved};
+}
+
 
 function normalizedWords(v){
  return String(v||'').toLowerCase().replace(/[^\p{L}\p{N}\s]/gu,' ').split(/\s+/).filter(w=>w.length>3);
@@ -3809,7 +3995,7 @@ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));do
 });
 if(id==='degrees')renderDegrees();if(id==='myPath')renderMyPath();if(id==='compare')renderCompare();if(id==='degreeDetail')renderDegreeDetail();if(id==='programMatch'){renderProgramSearch();const pid=sessionStorage.getItem('lotsen_selected_program');if(pid){const p=programCatalog.find(x=>x.id===pid);if(p)renderProgramMatch(p)}}if(id==='universityDetail')renderUniversityDetail(sessionStorage.getItem('lotsen_uni_profile'),sessionStorage.getItem('lotsen_uni_major'));window.scrollTo(0,0)}
 document.querySelectorAll('.nav button[data-screen]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
-renderUniversities();renderCourses();renderDegrees();renderCompare();
+renderUniversities();renderCourses();renderDegrees();renderCompare();setTimeout(()=>{resolveMissingCourseLevelsInBackground().catch(()=>{})},250);
 </script>
 
 
@@ -3954,6 +4140,15 @@ document.addEventListener('click',e=>{
  }
 });
 
+
+// Degree-history provenance is intentionally background-only.
+// Future parsers can populate degreeHistory/usedInDegree without changing the UI.
+window.LotsenDegreeHistory = {
+ courseDegreeHistory,
+ courseUsedInPriorDegree,
+ priorDegreeReuseDecision
+};
+
 </script>
 
 
@@ -4166,6 +4361,14 @@ document.addEventListener('click',e=>{
 
 
 
-<!-- Lotsen v132 STATUS COURSE BUTTONS -->
+
+
+
+
+
+
+
+
+<!-- Lotsen v136 BROADER LEVEL RESOLVER -->
 </body>
 </html>
