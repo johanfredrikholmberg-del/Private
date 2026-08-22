@@ -1174,6 +1174,17 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 .course-audit-group>summary::-webkit-details-marker{display:none}
 .course-audit-group.review>summary{color:#9a6806}.course-audit-group.excluded>summary{color:#9b4b42}
 
+
+.suggested-course-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.suggested-course-head h2{margin:0 0 2px!important}.suggested-course-head p{margin:0;color:var(--lotsen-muted);font-size:11px}
+.suggested-course-head>span{padding:5px 8px;border-radius:999px;background:#e8f1eb;color:var(--lotsen-teal);font-size:9px;font-weight:850}
+.suggested-course-list{display:grid}.suggested-course-row{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid #e9edf0}
+.suggested-step{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#edf5f1;color:var(--lotsen-teal);font-size:11px;font-weight:900}
+.suggested-course-row strong{display:block;font-size:14px}.suggested-course-row small{display:block;margin-top:2px;color:var(--lotsen-muted);font-size:9.5px}.suggested-course-row>b{white-space:nowrap;font-size:13px}
+.distance-suggestion-btn{width:100%;display:flex;justify-content:space-between;align-items:center;margin-top:13px;padding:12px 13px;border:1px solid rgba(21,88,79,.14);border-radius:14px;background:#fff;color:var(--lotsen-teal);font-weight:850}
+.distance-inline-state{margin-top:10px;padding:11px;border-radius:12px;background:#f3f6f4;color:var(--lotsen-muted);font-size:11px}
+.distance-inline-list{display:grid;gap:9px;margin-top:10px}
+
 </style>
 </head>
 <body>
@@ -2629,6 +2640,19 @@ function distanceUniversityOptions(d){
  }));
  return [...map.values()].sort((a,b)=>b.hp-a.hp||a.name.localeCompare(b.name,'sv'));
 }
+
+async function openDistanceSuggestionsFromUniversity(subject){
+ const box=document.getElementById('universityDistanceSuggestions');
+ if(!box)return;
+ box.innerHTML='<div class="distance-inline-state">Söker aktuella distanskurser…</div>';
+ await loadDistanceCourses({subject,kind:'candidate'});
+ const rows=allDistanceCourses().filter(c=>c.verified===true&&c.distance===true&&c.currentOffering===true&&String(c.subject||'')===String(subject||''));
+ if(!rows.length){
+   box.innerHTML='<div class="distance-inline-state">Inga verifierade aktuella distanskurser hittades just nu.</div>';
+   return;
+ }
+ box.innerHTML=`<div class="distance-inline-list">${rows.slice(0,8).map(distanceCourseCard).join('')}</div>`;
+}
 function renderDistancePath(o){
  const box=document.getElementById('distancePathBox');
  if(!box)return;
@@ -2663,6 +2687,48 @@ function renderDistancePath(o){
  `;
 }
 
+
+function suggestedCourseBlocks(rule,breakdown,major){
+ if(!rule||!breakdown)return [];
+ const rows=[];
+ const add=(name,hp,type='Kursblock',note='')=>{
+   hp=Number(hp||0); if(hp<=0)return;
+   rows.push({name,hp,type,note});
+ };
+ if(breakdown.missingMain>0){
+   if(rule.specificMainCourses?.length){
+     // Show the verified subject sequence as guidance, capped to remaining major credits.
+     let left=breakdown.missingMain;
+     for(const name of rule.specificMainCourses){
+       if(left<=0)break;
+       const m=String(name).match(/(\d+(?:[,.]\d+)?)\s*hp/i);
+       const hp=Math.min(left,m?Number(m[1].replace(',','.')):30);
+       add(name,hp,/uppsats|examensarbete/i.test(name)?'Examensarbete':'Huvudområde','Verifierad studiegång');
+       left-=hp;
+     }
+   }else{
+     const thesisNeed=Math.min(Number(rule.thesis||15),breakdown.missingMain);
+     const other=Math.max(0,breakdown.missingMain-thesisNeed);
+     if(other>0)add(`${major} – ämneskurser`,other,'Huvudområde','Välj kurser med rätt progression för lärosätet');
+     if(thesisNeed>0)add(`Examensarbete i ${major}`,thesisNeed,'Examensarbete','Ska ligga i huvudområdet');
+   }
+ }
+ (breakdown.req||[]).forEach(r=>{
+   const missing=Math.max(0,Number(r.hp||0)-Number(r.have||0));
+   if(missing)add(r.label,missing,'Obligatoriskt','Krav i den valda examensvägen');
+ });
+ if(breakdown.missingElective>0)add('Valfria kurser',breakdown.missingElective,'Valfritt','Kan fyllas med godkända kurser som lärosätet accepterar');
+ return rows;
+}
+function courseBlockListHtml(rows){
+ if(!rows.length)return '<div class="ready-box">Inga tydliga kompletteringar hittades.</div>';
+ return `<div class="suggested-course-list">${rows.map((r,i)=>`
+   <div class="suggested-course-row">
+     <span class="suggested-step">${i+1}</span>
+     <div><strong>${escapeHtml(r.name)}</strong><small>${escapeHtml(r.type)}${r.note?' · '+escapeHtml(r.note):''}</small></div>
+     <b>${fmtHp(r.hp)} hp</b>
+   </div>`).join('')}</div>`;
+}
 function renderUniversityDetail(profileId,major){
   const host=document.getElementById('universityDetailContent'); if(!host)return;
   const detailKey=sessionStorage.getItem('lotsen_detail_key');
@@ -2754,6 +2820,12 @@ function renderUniversityDetail(profileId,major){
       `<div class="path-next-box done"><span>✓</span><div><small>Status</small><strong>Ser preliminärt klar ut</strong></div></div>`}
 
       ${rule.note?`<details class="path-details"><summary>Om examenskraven</summary><div class="tiny-help local-rule-note">${escapeHtml(rule.note)}</div></details>`:''}
+    </section>
+    <section class="detail-block suggested-course-block">
+      <div class="suggested-course-head"><div><h2>Förslag att läsa</h2><p>Utifrån kraven för ${escapeHtml(x.d.university)}.</p></div><span>Plan</span></div>
+      ${courseBlockListHtml(suggestedCourseBlocks(rule,breakdown,major))}
+      <button type="button" class="distance-suggestion-btn" onclick="openDistanceSuggestionsFromUniversity('${escapeHtml(major)}')">Visa distanskurser <span>›</span></button>
+      <div id="universityDistanceSuggestions"></div>
     </section>`:`
     <section class="detail-block">
       <h2>Kvar</h2>
@@ -2900,6 +2972,23 @@ function groupedDegreeOpportunities(){
 
 
 
+
+function opportunityUniversityRange(o){
+ try{
+   const rows=universityOptionsForOpportunity(o).filter(x=>Number.isFinite(Number(x.remaining)));
+   if(!rows.length)return null;
+   const vals=rows.map(x=>Number(x.remaining)).sort((a,b)=>a-b);
+   return {min:vals[0],max:vals[vals.length-1],same:vals[0]===vals[vals.length-1]};
+ }catch(e){return null}
+}
+function opportunityRemainingLabel(o){
+ const r=opportunityUniversityRange(o);
+ if(r){
+   if(r.same)return r.min?`${fmtHp(r.min)} hp kvar`:'Klar';
+   return `från ${fmtHp(r.min)} hp kvar`;
+ }
+ return Number(o.remaining||0)?`${fmtHp(o.remaining)} hp kvar`:'Klar';
+}
 function opportunityUniversityCount(o){
  try{return universityOptionsForOpportunity(o).length}catch(e){return 0}
 }
@@ -2913,9 +3002,10 @@ function opportunityHasDistance(o){
  }catch(e){return false}
 }
 function opportunityStatus(o){
- if(!Number(o.remaining||0))return {label:'Klar',kind:'ready'};
- const hp=Number(o.remaining||0);
- return {label:`${fmtHp(hp)} hp kvar`,kind:hp<=30?'near':'normal'};
+ const r=opportunityUniversityRange(o);
+ const hp=r?Number(r.min||0):Number(o.remaining||0);
+ if(!hp)return {label:'Klar',kind:'ready'};
+ return {label:opportunityRemainingLabel(o),kind:hp<=30?'near':'normal'};
 }
 function chooseOpportunityForMyPath(key){
  const o=opportunityByKey(key);
@@ -3565,12 +3655,13 @@ function degreeTitleFor(d,major){
 }
 
 function estimateFlexibleDegree(d,major){
- const selected=courses.filter(c=>c.selected!==false);
+ const audit=candidateCourseAudit(major);
+ const selected=audit.count;
  const majorCourses=selected.filter(c=>(c.subject||guessSubject(c.name||''))===major);
  const rawMajor=majorCourses.reduce((s,c)=>s+Number(c.hp||0),0), majorHp=Math.min(d.majorHp,rawMajor);
  const thesisHp=Math.min(d.thesisHp,majorCourses.filter(c=>c.thesis||/examensarbete|kandidatuppsats|självständigt arbete/i.test(c.name||'')).reduce((s,c)=>s+Number(c.hp||0),0));
  const levelKnown=majorCourses.some(c=>c.level);
- const g2Hp=majorCourses.filter(c=>/^G2/i.test(String(c.level||''))).reduce((s,c)=>s+Number(c.hp||0),0);
+ const g2Hp=majorCourses.filter(c=>/^G2/i.test(String(c.progression||c.level||''))).reduce((s,c)=>s+Number(c.hp||0),0);
  const totalHp=Math.min(d.hp,selected.reduce((s,c)=>s+Number(c.hp||0),0));
  const outsideRaw=Math.max(0,totalHp-rawMajor);
  const freeHp=Math.min(d.hp-d.majorHp,outsideRaw);
@@ -3583,14 +3674,14 @@ function estimateFlexibleDegree(d,major){
  else if(levelKnown) progressionStatus='Kursnivåer finns i underlaget';
  const score=majorHp*1.35+freeHp*.55-majorMissing*.45-thesisMissing*2-outsideMissing-levelMissing*.8;
  const missing=[];
- if(majorMissing>0) missing.push({type:'major',hp:majorMissing,label:`${fmtHp(majorMissing)} hp i ${major}`});
- if(levelMissing>0) missing.push({type:'progression',hp:levelMissing,label:`${fmtHp(levelMissing)} hp på fördjupningsnivå i ${major}`});
- if(thesisMissing>0) missing.push({type:'thesis',hp:thesisMissing,label:`${fmtHp(thesisMissing)} hp examensarbete i ${major}`});
+ if(majorMissing>0) missing.push({type:'major',hp:majorMissing,label:`${fmtHp(majorMissing)} hp i ${major}`,subject:major});
+ if(levelMissing>0) missing.push({type:'progression',hp:levelMissing,label:`${fmtHp(levelMissing)} hp på fördjupningsnivå i ${major}`,subject:major});
+ if(thesisMissing>0) missing.push({type:'thesis',hp:thesisMissing,label:`${fmtHp(thesisMissing)} hp examensarbete i ${major}`,subject:major});
  if(outsideMissing>0) missing.push({type:'outside',hp:outsideMissing,label:`${fmtHp(outsideMissing)} hp utanför huvudområdet`});
  const generalMissing=Math.max(0,remaining-Math.max(majorMissing,outsideMissing));
  if(generalMissing>0) missing.push({type:'total',hp:generalMissing,label:`${fmtHp(generalMissing)} hp övriga kurser`});
  const degreeTitle=degreeTitleFor(d,major);
- return {d,major,majorHp,freeHp,remaining,majorMissing,thesisMissing,outsideMissing,levelMissing,levelKnown,progressionStatus,score,degreeTitle,missing};
+ return {d,major,majorHp,freeHp,remaining,majorMissing,thesisMissing,outsideMissing,levelMissing,levelKnown,progressionStatus,score,degreeTitle,missing,reviewCourses:audit.review,excludedCourses:audit.excluded};
 }
 function flexibleDegreeCandidates(){
  const [bestMajor]=inferBestMajor();
@@ -3646,14 +3737,14 @@ function chooseMyPathMode(mode){
  myPathMode=mode;
  sessionStorage.setItem('lotsen_mypath_mode',mode);
  renderMyPath();
+ if(mode==='distance'&&myPathSubject){
+   loadDistanceCourses({subject:myPathSubject,kind:'candidate'}).then(()=>renderMyPath()).catch(()=>{});
+ }
 }
 
 function myPathDistanceProfiles(subject){
- const ids=[...new Set(
-   courseCatalog
-     .filter(c=>c.subject===subject&&/distans/i.test(String(c.form||'')))
-     .map(c=>c.uni)
- )];
+ // Availability is loaded from the live distance endpoint; never depend on a missing local catalogue.
+ const ids=[...new Set(allDistanceCourses().filter(c=>c.subject===subject&&c.distance===true).map(c=>c.profileId||c.uni).filter(Boolean))];
  return flexibleDegreeCatalog.filter(d=>ids.includes(d.id)&&localDegreeRule(d.id,subject,'candidate'));
 }
 
@@ -3718,7 +3809,7 @@ function renderMyPath(){
            <div class="mypath-distance-icon">⌁</div>
            <div>
              <strong>På distans</strong>
-             <small>${distanceUnis.length?distanceUnis.length+' lärosäten med distansalternativ':'Visa distansalternativ'}</small>
+             <small>${distanceUnis.length?distanceUnis.length+' lärosäten med verifierade distansalternativ':'Sök aktuella distanskurser'}</small>
            </div>
            <span>›</span>
          </button>
@@ -3733,7 +3824,7 @@ function renderMyPath(){
                  </div>
                  <span>›</span>
                </button>`).join(''):
-               '<div class="mypath-note">Ingen komplett verifierad distansväg finns i kurslagret ännu.</div>'}
+               '<div class="mypath-note">Inga verifierade aktuella distanskurser hittades just nu.</div>'}
            </div>`:''}
 
          <div class="mypath-divider"><span>eller välj lärosäte</span></div>
@@ -4422,6 +4513,8 @@ window.LotsenDegreeHistory = {
 
 
 
-<!-- Lotsen v138 CONCISE UNIVERSITY ROUTE TITLE -->
+
+
+<!-- Lotsen v139 CONSISTENT UNIVERSITY RANGE + COURSE SUGGESTIONS -->
 </body>
 </html>
