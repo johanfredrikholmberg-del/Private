@@ -2926,15 +2926,7 @@ function renderUniversityDetail(profileId,major){
           <div><strong>${escapeHtml(major)}</strong><small>Huvudområde</small></div>
           <b>${breakdown.missingMain?`${fmtHp(breakdown.missingMain)} hp kvar`:'Klar'}</b>
         </div>
-        <details class="status-course-details">
-          <summary>${breakdown.missingMain?'Visa kurser du behöver':'Visa kurser som räknas in'}</summary>
-          <div class="status-course-body">
-            ${breakdown.missingMain?`<div class="status-course-empty">Du behöver komplettera med ${fmtHp(breakdown.missingMain)} hp i ${escapeHtml(major)}.</div>`:
-              `<div class="status-course-empty">Dina matchade kurser i ${escapeHtml(major)} uppfyller denna del.</div>`}
-            ${rule.specificMainCourses?.length?`<div class="status-course-reference">${rule.specificMainCourses.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div>`:''}
-            ${breakdown.reviewCourses?.filter(c=>courseSubject(c)===major).length?`<details class="course-audit-group review"><summary>? Kurser i ${escapeHtml(major)} som behöver kontrolleras</summary><div class="simple-course-list">${breakdown.reviewCourses.filter(c=>courseSubject(c)===major).map(c=>`<div><span>${escapeHtml(c.name)}<small class="course-audit-reason">${escapeHtml(c._decision?.reason||'Kontroll krävs')}</small></span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div></details>`:''}
-          </div>
-        </details>
+        
       </div>
       ${(breakdown.req||[]).map(r=>`<div class="path-status-row-wrap">
         <div class="path-status-row">
@@ -4726,6 +4718,10 @@ window.LotsenDegreeHistory = {
 
 
 
-<!-- Studielots v146 VISIBLE VERIFIED PLAN CTA -->
+
+
+
+
+<!-- Studielots v148 PLAN OWNS COURSE DETAILS -->
 </body>
 </html>
