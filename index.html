@@ -1285,6 +1285,13 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 .analysis-overlay{position:fixed;inset:0;z-index:3000;display:grid;place-items:center;padding:18px;background:rgba(13,41,49,.18);backdrop-filter:blur(10px);opacity:0;transition:opacity .18s ease}.analysis-overlay.show{opacity:1}.analysis-loader-card{width:min(420px,100%);padding:22px;border-radius:26px;background:#fbfaf6;box-shadow:0 24px 70px rgba(13,41,49,.22);transform:translateY(8px);transition:transform .2s ease}.analysis-overlay.show .analysis-loader-card{transform:none}.analysis-loader-head{display:flex;gap:11px;align-items:center}.analysis-orbit{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#e5f1ec;color:var(--lotsen-teal);font-size:18px;animation:analysisPulse 1s ease-in-out infinite}.analysis-loader-head small{display:block;color:var(--lotsen-teal);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.07em}.analysis-loader-head h2{margin:2px 0 0;font-size:20px}.analysis-big-number{display:flex;align-items:baseline;gap:7px;margin:19px 0 12px}.analysis-big-number strong{font-size:34px;letter-spacing:-.05em}.analysis-big-number span{font-size:11px;color:var(--lotsen-muted)}.analysis-steps{border-top:1px solid rgba(13,41,49,.09)}.analysis-steps>div{display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(13,41,49,.07);opacity:.35;transform:translateY(3px);transition:.22s ease}.analysis-steps>div.done{opacity:1;transform:none}.analysis-steps i{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#e5f1ec;color:var(--lotsen-teal);font-size:9px;font-style:normal;font-weight:900}.analysis-steps span{font-size:11px;color:#52605f}.analysis-steps b{font-size:10.5px;white-space:nowrap}.analysis-finish{margin-top:14px;padding:10px 12px;border-radius:13px;background:#e5f1ec;color:var(--lotsen-teal);font-size:12px;font-weight:900;text-align:center;opacity:0;transform:scale(.97);transition:.2s ease}.analysis-finish.show{opacity:1;transform:none}@keyframes analysisPulse{50%{transform:scale(1.08)}}
 
 </style>
+
+<style>
+/* v157 — direct study-plan flow + application links */
+.suggested-application{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px}
+.suggested-application a{font-size:10.5px;font-weight:850;text-decoration:none;color:#15584f!important}
+.application-open-badge{display:inline-flex!important;align-items:center;padding:4px 7px!important;border-radius:999px!important;background:#e7f3eb!important;color:#28734d!important;font-size:9.5px!important;font-weight:850!important}
+</style>
 </head>
 <body>
 <header class="lotsen-header">
@@ -1423,11 +1430,11 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 </section>
 
 <section id="degreeDetail" class="screen">
-  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><strong>Min väg</strong></div>
+  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><strong>Studieplan</strong></div>
   <div id="degreeDetailContent"></div>
 </section>
 <section id="universityDetail" class="screen">
-  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><button onclick="go('degreeDetail')">Min väg</button><span>›</span><strong>Lärosäte</strong></div>
+  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><button onclick="go('degreeDetail')">Studieplan</button><span>›</span><strong>Lärosäte</strong></div>
   <div id="universityDetailContent"></div>
 </section>
 <section id="compare" class="screen compare">
@@ -3053,14 +3060,31 @@ function suggestedCourseBlocks(rule,breakdown,major){
  if(breakdown.missingElective>0)add('Valfria kurser',breakdown.missingElective,'Valfritt','Kan fyllas med godkända kurser som lärosätet accepterar');
  return rows;
 }
+function suggestedOfferingForRow(r){
+ const uni=String(sessionStorage.getItem('lotsen_selected_university_name')||'').trim().toLowerCase();
+ const major=String(sessionStorage.getItem('lotsen_uni_major')||'').trim().toLowerCase();
+ const words=String(r.name||'').toLowerCase();
+ const pool=allDistanceCourses().filter(c=>{
+   if(c.verified!==true)return false;
+   if(uni && String(c.university||'').trim().toLowerCase()!==uni)return false;
+   const cs=String(c.subject||'').toLowerCase();
+   const cn=String(c.name||'').toLowerCase();
+   return (major && cs===major) || (cs && words.includes(cs)) || (/examensarbete|uppsats/.test(words)&&/examensarbete|uppsats/.test(cn));
+ });
+ return pool.sort((a,b)=>Number(courseApplicationOpen(b))-Number(courseApplicationOpen(a)))[0]||null;
+}
 function courseBlockListHtml(rows){
  if(!rows.length)return '<div class="ready-box">Inga tydliga kompletteringar hittades.</div>';
- return `<div class="suggested-course-list">${rows.map((r,i)=>`
-   <div class="suggested-course-row">
+ return `<div class="suggested-course-list">${rows.map((r,i)=>{
+   const c=suggestedOfferingForRow(r);
+   return `<div class="suggested-course-row">
      <span class="suggested-step">${i+1}</span>
-     <div><strong>${escapeHtml(r.name)}</strong><small>${escapeHtml(r.type)}${r.note?' · '+escapeHtml(r.note):''}</small></div>
-     <b>${fmtHp(r.hp)} hp</b>
-   </div>`).join('')}</div>`;
+     <div><strong>${escapeHtml(c?.name||r.name)}</strong><small>${escapeHtml(r.type)}${r.note?' · '+escapeHtml(r.note):''}</small>
+       ${c?`<div class="suggested-application">${courseApplicationBadge(c)}${c.url?`<a href="${escapeHtml(c.url)}" target="_blank" rel="noopener">${courseApplicationOpen(c)?'Sök på Antagning.se':'Visa på Antagning.se'} ↗</a>`:''}</div>`:''}
+     </div>
+     <b>${fmtHp(c?.hp||r.hp)} hp</b>
+   </div>`;
+ }).join('')}</div>`;
 }
 function renderUniversityDetail(profileId,major){
   const host=document.getElementById('universityDetailContent'); if(!host)return;
@@ -3080,6 +3104,7 @@ function renderUniversityDetail(profileId,major){
   if(!x){host.innerHTML='<div class="card empty">Kunde inte hitta lärosätesvägen.</div>';return;}
   const breakdown=isAdvanced?null:localRuleBreakdown(rule,major);
   const verified=!!rule?.verified || !!x.d.verified;
+  try{sessionStorage.setItem('lotsen_selected_university_name',String(x.d.university||''))}catch(e){}
   const exactRemaining=isAdvanced?Number(advancedBreakdown?.remaining||0):(breakdown ? Math.max(0,breakdown.missingMain+breakdown.missingReq+breakdown.missingElective) : x.remaining);
   host.innerHTML=`
     <div class="detail-hero">
@@ -3173,16 +3198,6 @@ function renderUniversityDetail(profileId,major){
 }
 
 function renderDegreeDetail(key){
- const directCandidate=opportunityByKey(key);
- if(directCandidate && directCandidate.source!=='advanced'){
-   const subject=String(directCandidate.subject||'').trim();
-   if(subject){
-     myPathSubject=subject;myPathMode='';
-     try{sessionStorage.setItem('lotsen_mypath_subject',subject);sessionStorage.removeItem('lotsen_mypath_mode')}catch(e){}
-     go('myPath');renderMyPath();return;
-   }
- }
-
  const host=document.getElementById('degreeDetailContent');if(!host)return;
  const o=opportunityByKey(key||sessionStorage.getItem('lotsen_detail_key'));
  if(!o){host.innerHTML='<div class="card empty">Kunde inte hitta examensvägen.</div>';return}
@@ -3374,23 +3389,9 @@ function chooseOpportunityForMyPath(key){
    renderDegreeDetail(o.key);
    return;
  }
- const subject=String(o.subject||'').trim();
- if(!subject)return;
- myPathSubject=subject;
- myPathMode='';
- try{
-   sessionStorage.setItem('lotsen_mypath_subject',subject);
-   sessionStorage.removeItem('lotsen_mypath_mode');
- }catch(e){}
- go('myPath');
- setTimeout(()=>{
-   renderMyPath();
-   const el=document.getElementById('mypath-place');
-   if(el){
-     const y=el.getBoundingClientRect().top+window.scrollY-14;
-     window.scrollTo({top:y,behavior:'smooth'});
-   }
- },40);
+ try{sessionStorage.setItem('lotsen_detail_key',o.key)}catch(e){}
+ go('degreeDetail');
+ renderDegreeDetail(o.key);
 }
 
 
