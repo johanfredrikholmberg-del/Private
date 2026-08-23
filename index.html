@@ -1219,121 +1219,6 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
   background:#e9eeeb;color:#7b8581;cursor:not-allowed;opacity:1
 }
 
-
-/* v149: distans är en egen väg */
-.mypath-distance-plan{margin:10px 0 16px;padding:15px;border:1px solid rgba(21,88,79,.12);border-radius:18px;background:rgba(255,255,255,.86)}
-.mypath-distance-plan-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.mypath-distance-plan-head span{display:block;color:var(--lotsen-teal);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
-.mypath-distance-plan-head h3{margin:2px 0 0;font-size:18px}
-.mypath-distance-plan-head>b{white-space:nowrap;font-size:13px;color:var(--lotsen-teal);padding:6px 8px;border-radius:999px;background:#edf5f1}
-.mypath-distance-intro{margin:9px 0 12px;color:var(--lotsen-muted);font-size:10.5px;line-height:1.4}
-.mypath-distance-needs{display:grid}.mypath-distance-need{padding:12px 0;border-top:1px solid #edf0ee}.mypath-distance-need:first-child{border-top:0}
-.mypath-distance-need-head{display:grid;grid-template-columns:27px 1fr auto;gap:9px;align-items:center}
-.mypath-distance-step{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#eaf3ef;color:var(--lotsen-teal);font-size:10px;font-weight:900}
-.mypath-distance-need-head strong{display:block;font-size:12.5px}.mypath-distance-need-head small{display:block;margin-top:2px;color:var(--lotsen-muted);font-size:9.5px}.mypath-distance-need-head>b{white-space:nowrap;font-size:11.5px}
-.mypath-distance-matches{margin:8px 0 0 36px;display:grid;gap:7px}
-.mypath-distance-foot{margin-top:10px;padding:9px 10px;border-radius:11px;background:#f3f5f4;color:#7a8581;font-size:10px}.mypath-distance-foot.has-results{background:#eaf6ef;color:#28704b}
-
-
-/* v150: future application period state */
-.future-distance-box{display:grid;grid-template-columns:34px 1fr;gap:10px;margin:12px 0;padding:12px;border-radius:14px;background:#f4f7f5;border:1px solid rgba(21,88,79,.10)}
-.future-distance-icon{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#e7f1ed;color:var(--lotsen-teal);font-size:17px;font-weight:900}
-.future-distance-box span{display:block;color:var(--lotsen-teal);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}
-.future-distance-box strong{display:block;margin-top:2px;font-size:12px}
-.future-distance-box p{margin:5px 0 0;color:var(--lotsen-muted);font-size:10.5px;line-height:1.4}
-.future-distance-box small{display:block;margin-top:7px;color:#7c8783;font-size:9.5px;line-height:1.35}
-
-
-/* v151: show courses regardless of application window; mark open applications */
-.application-open-badge{
-  display:inline-flex!important;
-  width:max-content;
-  margin-top:5px!important;
-  padding:4px 7px!important;
-  border-radius:999px!important;
-  background:#e5f5e9!important;
-  color:#217346!important;
-  font-size:9px!important;
-  line-height:1!important;
-  font-weight:900!important;
-  letter-spacing:0!important;
-  text-transform:none!important;
-}
-
-
-/* v152: skip redundant exam summary page */
-.view-opportunity-summary[data-redundant="true"]{display:none!important}
-
-
-/* v155: tydlig nivåväljare under Möjligheter */
-.opportunity-level-switch{position:sticky;top:8px;z-index:8;display:grid;grid-template-columns:1fr 1.45fr .72fr;gap:4px;margin:0 0 18px;padding:4px;border-radius:14px;background:#eef1ef;border:1px solid rgba(30,53,49,.08)}
-.opportunity-level-switch button{border:0;background:transparent;border-radius:10px;padding:10px 7px;color:#66716d;font-size:10.5px;font-weight:850;white-space:nowrap}
-.opportunity-level-switch button.active{background:#fff;color:var(--lotsen-teal);box-shadow:0 1px 5px rgba(22,48,42,.08)}
-.advanced-opportunities-wrap{display:grid;gap:22px}
-.advanced-level-section{display:grid;gap:10px}
-.advanced-level-title{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
-.advanced-level-title span{display:block;color:var(--lotsen-teal);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
-.advanced-level-title h2{margin:2px 0 0;font-size:18px}
-.advanced-level-title>small{color:var(--lotsen-muted);font-size:9.5px}
-.compact-advanced-card .advanced-card-main{margin-bottom:10px}
-.compact-advanced-card .advanced-card-main>div>span{font-size:9px}
-.compact-advanced-card .advanced-card-main>div>small{margin-top:4px}
-@media(max-width:390px){.opportunity-level-switch{grid-template-columns:1fr 1.35fr .65fr}.opportunity-level-switch button{font-size:9.5px;padding:9px 5px}}
-
-
-/* v156: visible analysis engine while building study plan */
-.analysis-overlay{position:fixed;inset:0;z-index:3000;display:grid;place-items:center;padding:18px;background:rgba(13,41,49,.18);backdrop-filter:blur(10px);opacity:0;transition:opacity .18s ease}.analysis-overlay.show{opacity:1}.analysis-loader-card{width:min(420px,100%);padding:22px;border-radius:26px;background:#fbfaf6;box-shadow:0 24px 70px rgba(13,41,49,.22);transform:translateY(8px);transition:transform .2s ease}.analysis-overlay.show .analysis-loader-card{transform:none}.analysis-loader-head{display:flex;gap:11px;align-items:center}.analysis-orbit{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#e5f1ec;color:var(--lotsen-teal);font-size:18px;animation:analysisPulse 1s ease-in-out infinite}.analysis-loader-head small{display:block;color:var(--lotsen-teal);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.07em}.analysis-loader-head h2{margin:2px 0 0;font-size:20px}.analysis-big-number{display:flex;align-items:baseline;gap:7px;margin:19px 0 12px}.analysis-big-number strong{font-size:34px;letter-spacing:-.05em}.analysis-big-number span{font-size:11px;color:var(--lotsen-muted)}.analysis-steps{border-top:1px solid rgba(13,41,49,.09)}.analysis-steps>div{display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(13,41,49,.07);opacity:.35;transform:translateY(3px);transition:.22s ease}.analysis-steps>div.done{opacity:1;transform:none}.analysis-steps i{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#e5f1ec;color:var(--lotsen-teal);font-size:9px;font-style:normal;font-weight:900}.analysis-steps span{font-size:11px;color:#52605f}.analysis-steps b{font-size:10.5px;white-space:nowrap}.analysis-finish{margin-top:14px;padding:10px 12px;border-radius:13px;background:#e5f1ec;color:var(--lotsen-teal);font-size:12px;font-weight:900;text-align:center;opacity:0;transform:scale(.97);transition:.2s ease}.analysis-finish.show{opacity:1;transform:none}@keyframes analysisPulse{50%{transform:scale(1.08)}}
-
-
-/* v159: antagningsverktyg under Mer */
-.admission-tool-screen{max-width:760px;margin:0 auto}
-.admission-score-card,.admission-search-card{margin-bottom:14px;padding:16px;border:1px solid var(--lotsen-line);border-radius:22px;background:rgba(255,255,255,.92);box-shadow:0 8px 24px rgba(13,41,49,.05)}
-.admission-score-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-end}.admission-score-head span{display:block;color:var(--lotsen-muted);font-size:10px;font-weight:800}.admission-score-head strong{display:block;margin-top:2px;font-size:34px;letter-spacing:-.04em}.admission-score-max{white-space:nowrap;padding-bottom:5px}
-.admission-score-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.admission-score-actions button{flex:1;min-width:135px}.admission-manual{margin-top:12px;padding-top:12px;border-top:1px solid #edf0ee}.admission-manual label,.admission-search-grid label{display:block;color:var(--lotsen-muted);font-size:10px;font-weight:800}.admission-manual input,.admission-search-grid input,.higher-score-grid input{width:100%;margin-top:5px;padding:11px 12px;border:1px solid #dfe5e1;border-radius:12px;background:#fff;color:var(--lotsen-ink)}
-.admission-import-status{margin-top:10px;padding:9px 10px;border-radius:11px;background:#f4f6f5;color:#6f7a76;font-size:10px;line-height:1.4}.admission-score-card>small{display:block;margin-top:9px;color:#8a9390;font-size:9px;line-height:1.4}
-.higher-score-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.higher-score-grid label>span{display:block;color:var(--lotsen-muted);font-size:10px;font-weight:850}.higher-score-grid label>div{display:flex;align-items:center;gap:6px}.higher-score-grid label b{white-space:nowrap;color:#78827f;font-size:10px}
-.admission-section-head span{color:var(--lotsen-teal);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.admission-section-head h2{margin:2px 0 12px;font-size:19px}.admission-search-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.admission-results{display:grid;gap:9px;margin-top:13px}.admission-empty,.admission-loading{padding:14px;border-radius:14px;background:#f6f7f6;color:var(--lotsen-muted);font-size:10.5px;line-height:1.45}.admission-empty strong{display:block;color:var(--lotsen-ink);margin-bottom:3px}.admission-empty span{display:block}
-.admission-filter-row{display:flex;gap:5px;margin-top:10px}.admission-filter-row button{border:0;border-radius:999px;padding:7px 10px;background:#f0f2f1;color:#74807b;font-size:9.5px;font-weight:850}.admission-filter-row button.active{background:#e5f1eb;color:var(--lotsen-teal)}
-.admission-history-card{padding:13px;border:1px solid #e8ece9;border-radius:16px;background:#fff}.admission-history-top{display:flex;justify-content:space-between;gap:10px}.admission-history-top>div:first-child>span{color:var(--lotsen-teal);font-size:9px;font-weight:850}.admission-history-top h3{margin:2px 0;font-size:14px}.admission-history-top small{color:var(--lotsen-muted);font-size:9.5px}.admission-cutoff{text-align:right}.admission-cutoff strong{display:block;font-size:21px}.admission-cutoff span{font-size:9px;color:var(--lotsen-muted)}.admission-chance{display:inline-flex;margin-top:9px;padding:5px 7px;border-radius:999px;font-size:9px;font-weight:900}.admission-chance.above{background:#e5f5e9;color:#217346}.admission-chance.below{background:#fff1e5;color:#a45b17}.admission-history-meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.admission-history-meta span{padding:4px 6px;border-radius:999px;background:#f2f4f3;color:#707b77;font-size:8.5px}
-@media(max-width:560px){.admission-search-grid,.higher-score-grid{grid-template-columns:1fr}.admission-score-actions button{width:100%}}
-
-
-/* v161 – tydligare antagningsresultat */
-.admission-result-summary{margin:0 0 14px;padding:15px;border-radius:19px;background:linear-gradient(180deg,#edf5f1,#fff);border:1px solid rgba(21,88,79,.13)}
-.admission-result-summary-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.admission-result-summary-head span{display:block;color:var(--lotsen-teal);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}
-.admission-result-summary-head h3{margin:2px 0 0;font-size:16px}
-.admission-result-summary-head>strong{font-size:25px;letter-spacing:-.04em;color:var(--lotsen-teal)}
-.admission-result-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
-.admission-result-metrics>div{min-width:0;padding:10px;border-radius:12px;background:rgba(255,255,255,.78)}
-.admission-result-metrics span{display:block;color:var(--lotsen-muted);font-size:8.5px}
-.admission-result-metrics b{display:block;margin-top:2px;font-size:13px}
-.admission-result-metrics small{display:block;margin-top:3px;color:#7b8581;font-size:8.5px}
-.admission-result-metrics .admission-chance{display:inline-flex;margin-top:5px}
-.admission-result-note{margin-top:10px;color:#586761;font-size:9.5px;line-height:1.4}
-.admission-history-list{display:grid;gap:9px}
-.admission-history-card{transition:border-color .15s ease;background:#fff}
-.admission-history-card.above{border-color:rgba(41,116,73,.18)}
-.admission-history-card.below{border-color:rgba(174,107,31,.16)}
-.admission-history-comparison{display:flex;justify-content:space-between;align-items:center;gap:9px;margin-top:10px;padding-top:9px;border-top:1px solid #edf0ee}
-.admission-history-comparison>div span{display:block;color:var(--lotsen-muted);font-size:8.5px}
-.admission-history-comparison>div strong{display:block;margin-top:1px;font-size:12px}
-.admission-chance{width:max-content;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:900}
-.admission-chance.above{background:#e5f5e9;color:#217346}
-.admission-chance.below{background:#fff1df;color:#9a5f15}
-.latest-history{background:#edf5f1!important;color:var(--lotsen-teal)!important;font-weight:850!important}
-@media(max-width:540px){
- .admission-result-metrics{grid-template-columns:1fr 1fr}
- .admission-result-metrics>div:last-child{grid-column:1/-1}
-}
-
-</style>
-
-<style>
-/* v157 — direct study-plan flow + application links */
-.suggested-application{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px}
-.suggested-application a{font-size:10.5px;font-weight:850;text-decoration:none;color:#15584f!important}
-.application-open-badge{display:inline-flex!important;align-items:center;padding:4px 7px!important;border-radius:999px!important;background:#e7f3eb!important;color:#28734d!important;font-size:9.5px!important;font-weight:850!important}
 </style>
 </head>
 <body>
@@ -1473,67 +1358,13 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 </section>
 
 <section id="degreeDetail" class="screen">
-  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><strong>Välj lärosäte</strong></div>
+  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><strong>Min väg</strong></div>
   <div id="degreeDetailContent"></div>
 </section>
 <section id="universityDetail" class="screen">
-  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><button onclick="go('degreeDetail')">Studieplan</button><span>›</span><strong>Lärosäte</strong></div>
+  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><button onclick="go('degreeDetail')">Min väg</button><span>›</span><strong>Lärosäte</strong></div>
   <div id="universityDetailContent"></div>
 </section>
-
-<section id="gymnasiumAdmission" class="screen admission-tool-screen">
-  <div class="crumbs"><button onclick="toggleMoreMenu(true)">Mer</button><span>›</span><strong>Gymnasieantagning</strong></div>
-  <div class="top"><div><div class="eyebrow">ANTAGNING</div><h1>Gymnasiet</h1><p>Lägg in dina grundskolebetyg och jämför ditt meritvärde med tidigare antagningsgränser.</p></div></div>
-  <section class="admission-score-card">
-    <div class="admission-score-head"><div><span>Mitt meritvärde</span><strong id="gymMeritValue">–</strong></div><span class="admission-score-max">max 320 / 340*</span></div>
-    <div class="admission-score-actions">
-      <button class="primary" type="button" onclick="document.getElementById('gymGradeFile').click()">Hämta betyg</button>
-      <input id="gymGradeFile" type="file" accept="application/pdf,text/plain,image/*" hidden onchange="importAdmissionGrades(this,'gymnasium')">
-      <button class="ghost" type="button" onclick="toggleAdmissionManual('gym')">Fyll i själv</button>
-    </div>
-    <div id="gymManualBox" class="admission-manual" hidden>
-      <label>Meritvärde<input id="gymManualMerit" type="number" min="0" max="340" step="0.5" placeholder="T.ex. 275" oninput="setGymManualMerit(this.value)"></label>
-    </div>
-    <div id="gymGradeStatus" class="admission-import-status">Ladda upp PDF för automatisk avläsning, eller fyll i meritvärdet själv.</div>
-    <small>* 16 ämnen ger normalt max 320. Moderna språk som språkval kan ge ett 17:e betyg och max 340.</small>
-  </section>
-
-  <section class="admission-search-card">
-    <div class="admission-section-head"><div><span>Historik</span><h2>Sök skola och program</h2></div></div>
-    <div class="admission-search-grid">
-      <label>Ort eller skola<input id="gymAdmissionSchool" type="search" placeholder="T.ex. Göteborg eller Hvitfeldtska" oninput="scheduleAdmissionSearch('gymnasium')"></label>
-      <label>Program<input id="gymAdmissionProgram" type="search" placeholder="T.ex. Ekonomiprogrammet" oninput="scheduleAdmissionSearch('gymnasium')"></label>
-    </div>
-    <div id="gymAdmissionResults" class="admission-results"><div class="admission-empty">Sök efter en skola och ett program för att se tidigare års antagningspoäng.</div></div>
-  </section>
-</section>
-
-<section id="higherAdmission" class="screen admission-tool-screen">
-  <div class="crumbs"><button onclick="toggleMoreMenu(true)">Mer</button><span>›</span><strong>Högskoleantagning</strong></div>
-  <div class="top"><div><div class="eyebrow">ANTAGNING</div><h1>Högskola & universitet</h1><p>Jämför dina meriter med tidigare antagningsgränser för utbildningar och lärosäten.</p></div></div>
-  <section class="admission-score-card">
-    <div class="higher-score-grid">
-      <label><span>Gymnasiebetyg</span><div><input id="higherMeritValue" type="number" min="0" max="22.5" step="0.01" placeholder="T.ex. 18,75" oninput="saveAdmissionProfile()"><b>/ 22,5</b></div></label>
-      <label><span>Högskoleprov</span><div><input id="higherHpValue" type="number" min="0" max="2" step="0.05" placeholder="T.ex. 1,25" oninput="saveAdmissionProfile()"><b>/ 2,00</b></div></label>
-    </div>
-    <div class="admission-score-actions">
-      <button class="ghost" type="button" onclick="document.getElementById('higherGradeFile').click()">Hämta gymnasiebetyg</button>
-      <input id="higherGradeFile" type="file" accept="application/pdf,text/plain,image/*" hidden onchange="importAdmissionGrades(this,'higher')">
-    </div>
-    <div id="higherGradeStatus" class="admission-import-status">Ladda upp PDF för att läsa meritvärdet automatiskt. Högskoleprov fyller du i separat.</div>
-  </section>
-
-  <section class="admission-search-card">
-    <div class="admission-section-head"><div><span>Historik</span><h2>Sök utbildning</h2></div></div>
-    <div class="admission-search-grid">
-      <label>Lärosäte<input id="higherAdmissionUniversity" type="search" placeholder="T.ex. Göteborgs universitet" oninput="scheduleAdmissionSearch('higher')"></label>
-      <label>Program eller kurs<input id="higherAdmissionProgram" type="search" placeholder="T.ex. Psykologprogrammet" oninput="scheduleAdmissionSearch('higher')"></label>
-    </div>
-    <div class="admission-filter-row"><button type="button" class="active" data-higher-group="BI" onclick="setHigherAdmissionGroup('BI',this)">BI</button><button type="button" data-higher-group="BII" onclick="setHigherAdmissionGroup('BII',this)">BII</button><button type="button" data-higher-group="HP" onclick="setHigherAdmissionGroup('HP',this)">HP</button></div>
-    <div id="higherAdmissionResults" class="admission-results"><div class="admission-empty">Sök efter en utbildning för att se tidigare års antagningspoäng.</div></div>
-  </section>
-</section>
-
 <section id="compare" class="screen compare">
   <div class="top"><div><h1>Jämför</h1><p>Välj två examina och jämför vägen dit.</p></div></div>
   <div class="compare-picker">
@@ -1577,9 +1408,7 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
     <div class="more-menu-head"><div><span class="eyebrow">Lotsen</span><h2>Mer</h2></div><button type="button" onclick="toggleMoreMenu(false)">Stäng</button></div>
     <button class="more-menu-item" type="button" onclick="toggleMoreMenu(false);openProgramMatcher()"><span>🎓</span><div><strong>Program</strong><small>Matcha dina kurser mot ett program</small></div><b>›</b></button>
     <button class="more-menu-item" type="button" onclick="toggleMoreMenu(false);go('compare')"><span>⇄</span><div><strong>Jämför</strong><small>Jämför examensvägar sida vid sida</small></div><b>›</b></button>
-    <button class="more-menu-item" type="button" onclick="toggleMoreMenu(false);go('gymnasiumAdmission')"><span>🏫</span><div><strong>Gymnasieantagning</strong><small>Betyg och tidigare antagningspoäng</small></div><b>›</b></button>
-    <button class="more-menu-item" type="button" onclick="toggleMoreMenu(false);go('higherAdmission')"><span>📈</span><div><strong>Högskoleantagning</strong><small>Jämför betyg och HP med tidigare år</small></div><b>›</b></button>
-    <div class="more-menu-future"><strong>Fler verktyg kommer senare</strong><small>Studielots samlar fler delar av studieplaneringen på samma ställe.</small></div>
+    <div class="more-menu-future"><strong>Mer kan läggas till här senare</strong><small>Exempelvis export, inställningar och fler verktyg.</small></div>
   </section>
 </div>
 <script type="module">
@@ -2315,10 +2144,8 @@ function advancedUniversityOptions(subject,degreeType){
 }
 function advancedOpportunitySummary(o){
  const opts=advancedUniversityOptions(o.subject,o.degreeType);
- let preferred='';
- try{preferred=sessionStorage.getItem('lotsen_preferred_profile')||''}catch(e){}
- const best=(preferred&&opts.find(x=>x.d?.id===preferred))||opts[0]||null;
- if(!best)return {remaining:Number(o.remaining||0),missing:[],university:'',profileId:''};
+ const best=opts[0]||null;
+ if(!best)return {remaining:Number(o.remaining||0),missing:missingForOpportunity(o),university:'',profileId:''};
  return {remaining:Number(best.remaining||0),missing:best.breakdown.missing||[],university:best.d.university||'',profileId:best.d.id||''};
 }
 
@@ -2782,53 +2609,38 @@ function coursesForDegree(o){
  return {subject,others,lockedThesis};
 }
 function missingForOpportunity(o){
- if(!o)return [];
  if(o.source==='advanced'){
    const s=advancedOpportunitySummary(o);
    return (s.missing||[]).map(x=>({label:x.label,hp:Number(x.hp||0),type:x.type,subject:x.subject}));
  }
+ const specific=degrees.find(d=>d.subject===o.subject);
+ if(specific){
+   const r=calc(specific), out=[];
+   const subjectMissing=Number(r.subjectMissing ?? r.missingSubject ?? 0);
+   const thesisMissing=Number(r.thesisMissing ?? r.missingThesis ?? 0);
+   const totalMissing=Number(r.totalMissing ?? r.missingTotal ?? o.remaining ?? 0);
 
- // Candidate paths: use the same university rule as the canonical "hp kvar" value.
- const path=canonicalPathResult(o);
- const opts=universityOptionsForOpportunity(o);
- const chosen=(path.profileId&&opts.find(x=>x.d?.id===path.profileId))||opts[0];
- if(chosen?.breakdown){
-   const b=chosen.breakdown;
-   const rows=[];
-   if(Number(b.missingMain||0)>0){
-     rows.push({label:`${o.subject} – huvudområde`,hp:Number(b.missingMain||0),type:'main',subject:o.subject});
-   }
-   (b.req||[]).forEach(r=>{
-     const missing=Math.max(0,Number(r.hp||0)-Number(r.have||0));
-     if(missing>0)rows.push({label:r.label,hp:missing,type:'required',subject:(r.subjects||[])[0]||''});
-   });
-   if(Number(b.missingElective||0)>0){
-     rows.push({label:'Övriga/valfria kurser',hp:Number(b.missingElective||0),type:'elective'});
-   }
+   if(subjectMissing>0)out.push({label:`${fmtHp(subjectMissing)} hp i ${o.subject}`,hp:subjectMissing});
+   if(thesisMissing>0)out.push({label:`${fmtHp(thesisMissing)} hp examensarbete i ${o.subject}`,hp:thesisMissing});
 
-   // Enforce the same total remaining value everywhere.
-   const target=Number(path.remaining||0);
-   const sum=rows.reduce((s,x)=>s+Number(x.hp||0),0);
-   if(target>sum){
-     rows.push({label:'Övriga poäng till examen',hp:target-sum,type:'elective'});
-   }else if(target<sum && rows.length){
-     // Defensive normalization: trim only the generic/elective tail if duplicated constraints overlap.
-     let over=sum-target;
-     for(let i=rows.length-1;i>=0&&over>0;i--){
-       if(rows[i].type==='elective'){
-         const take=Math.min(over,rows[i].hp);
-         rows[i].hp-=take; over-=take;
-       }
-     }
-     return rows.filter(x=>x.hp>0);
+   // If total credits still remain after subject/thesis gaps, show them as other credits.
+   const accounted=Math.max(subjectMissing,thesisMissing);
+   const otherMissing=Math.max(0,totalMissing-accounted);
+   if(otherMissing>0)out.push({label:`${fmtHp(otherMissing)} hp övriga/valfria kurser`,hp:otherMissing});
+
+   // Defensive fallback: never say "nothing missing" when the opportunity itself says credits remain.
+   if(!out.length && Number(o.remaining||0)>0){
+     out.push({label:`${fmtHp(o.remaining)} hp återstår`,hp:Number(o.remaining||0),generic:true});
    }
-   return rows;
+   return out;
  }
-
- const remaining=Number(path.remaining||0);
- return remaining>0?[{label:'Återstår till examen',hp:remaining,generic:true}]:[];
+ const flex=flexibleDegreeCandidates().filter(x=>x.major===o.subject).sort((a,b)=>a.remaining-b.remaining)[0];
+ const rows=flex?.missing?.map(x=>({label:x.label,hp:Number(x.hp||0)}))||[];
+ if(!rows.length && Number(o.remaining||0)>0){
+   rows.push({label:`${fmtHp(o.remaining)} hp återstår`,hp:Number(o.remaining||0),generic:true});
+ }
+ return rows;
 }
-
 function universityOptionsForOpportunity(o){
  if(o.source==='advanced'){
    return advancedUniversityOptions(o.subject,o.degreeType).slice(0,8);
@@ -2842,93 +2654,18 @@ function universityOptionsForOpportunity(o){
    return {d,major:o.subject,remaining,breakdown,rule,verified:Boolean(rule.verified||d.verified),degreeTitle:degreeTitleFor(d,o.subject)};
  }).filter(Boolean).sort((a,b)=>(Number(b.verified)-Number(a.verified))||a.remaining-b.remaining||String(a.d.university||'').localeCompare(String(b.d.university||''),'sv')).slice(0,8);
 }
-function canonicalPathResult(o,profileId=''){
- if(!o)return {remaining:0,score:0,profileId:'',university:''};
- if(o.source==='advanced'){
-   const opts=advancedUniversityOptions(o.subject,o.degreeType);
-   const chosen=(profileId&&opts.find(x=>x.d?.id===profileId))||opts[0];
-   if(chosen){
-     const total=Number(o.total||(o.degreeType==='Magister'?60:120));
-     const remaining=Number(chosen.remaining||0);
-     return {remaining,score:Math.max(0,Math.min(100,Math.round(100*(total-remaining)/Math.max(1,total)))),profileId:chosen.d?.id||'',university:chosen.d?.university||''};
-   }
-   return {remaining:Number(o.remaining||0),score:Number(o.score||0),profileId:'',university:''};
- }
- const opts=universityOptionsForOpportunity(o);
- let preferred=profileId;
- if(!preferred){
-   try{preferred=sessionStorage.getItem('lotsen_preferred_profile')||''}catch(e){}
- }
- const chosen=(preferred&&opts.find(x=>x.d?.id===preferred))||opts[0];
- if(chosen){
-   const remaining=Number(chosen.remaining||0);
-   return {remaining,score:Math.max(0,Math.min(100,Math.round(100*(180-remaining)/180))),profileId:chosen.d?.id||'',university:chosen.d?.university||''};
- }
- return {remaining:Number(o.remaining||0),score:Number(o.score||0),profileId:o.canonicalProfileId||'',university:o.canonicalUniversity||''};
-}
-function canonicalRemaining(o,profileId=''){return canonicalPathResult(o,profileId).remaining}
-
-function degreeTotalHp(o){
- if(o?.source==='advanced')return Number(o.total||(String(o?.degreeType||'').toLowerCase()==='magister'?60:120));
- return 180;
-}
-function pathNumbers(o,profileId=''){
- const p=canonicalPathResult(o,profileId);
- return {total:degreeTotalHp(o),remaining:Number(p.remaining||0),score:Number(p.score||0),profileId:p.profileId||'',university:p.university||''};
-}
-
 function openDegreeDetails(key){
  try{sessionStorage.setItem('lotsen_detail_key',key)}catch(e){}
  renderDegreeDetail(key);
  go('degreeDetail');
 }
 
-function studyPlanAnalysisMetrics(profileId,major){
-  const detailKey=sessionStorage.getItem('lotsen_detail_key');
-  const o=safeDegreeOpportunities().find(x=>x.key===detailKey)||{kind:'candidate',subject:major};
-  const isAdvanced=o?.source==='advanced';
-  const degreeKind=isAdvanced?(String(o?.degreeType||'master').toLowerCase()==='magister'?'magister':'master'):'candidate';
-  const rule=localDegreeRule(profileId,major,degreeKind);
-  let remaining=Number(o?.remaining||0), total=Number(rule?.total||o?.total||(isAdvanced?120:180));
-  try{
-    if(isAdvanced&&rule) remaining=Number(advancedRuleBreakdown(rule,major)?.remaining||0);
-    else if(rule){const b=localRuleBreakdown(rule,major); if(b)remaining=Math.max(0,Number(b.missingMain||0)+Number(b.missingReq||0)+Number(b.missingElective||0));}
-  }catch(e){}
-  const analyzed=courses.length;
-  const prior=courses.filter(c=>courseUsedInPriorDegree(c)).length;
-  const advanced=courses.filter(c=>isAdvancedCourse(c)).length;
-  const counted=Math.max(0,total-remaining);
-  const university=(flexibleDegreeCatalog.find(x=>x.id===profileId)||{}).university||'lärosätets';
-  return {analyzed,prior,advanced,counted,remaining,total,university};
-}
-function showStudyPlanAnalysis(profileId,major,done){
-  const m=studyPlanAnalysisMetrics(profileId,major);
-  document.getElementById('studyPlanAnalysisOverlay')?.remove();
-  const el=document.createElement('div');el.id='studyPlanAnalysisOverlay';el.className='analysis-overlay';
-  el.innerHTML=`<div class="analysis-loader-card">
-    <div class="analysis-loader-head"><span class="analysis-orbit">✦</span><div><small>Studielots analyserar</small><h2>Tar fram din studieplan</h2></div></div>
-    <div class="analysis-big-number"><strong>${m.analyzed}</strong><span>kurser analyseras</span></div>
-    <div class="analysis-steps">
-      <div data-step="1"><i>✓</i><span>Matchar kurser mot ${escapeHtml(m.university)}</span><b>${fmtHp(m.counted)} hp</b></div>
-      <div data-step="2"><i>✓</i><span>Kontrollerar tidigare examen</span><b>${m.prior} ${m.prior===1?'kurs':'kurser'}</b></div>
-      <div data-step="3"><i>✓</i><span>Identifierar avancerad nivå</span><b>${m.advanced} ${m.advanced===1?'kurs':'kurser'}</b></div>
-      <div data-step="4"><i>✓</i><span>Räknar återstående väg</span><b>${fmtHp(m.remaining)} hp kvar</b></div>
-    </div>
-    <div class="analysis-finish">Studieplan klar <b>✓</b></div>
-  </div>`;
-  document.body.appendChild(el);
-  requestAnimationFrame(()=>el.classList.add('show'));
-  [1,2,3,4].forEach((n,i)=>setTimeout(()=>el.querySelector(`[data-step="${n}"]`)?.classList.add('done'),260+i*250));
-  setTimeout(()=>el.querySelector('.analysis-finish')?.classList.add('show'),1280);
-  setTimeout(()=>{el.classList.remove('show');setTimeout(()=>{el.remove();done()},180)},1580);
-}
 function openUniversityPath(profileId,major){
   try{
     sessionStorage.setItem('lotsen_uni_profile',profileId);
     sessionStorage.setItem('lotsen_uni_major',major);
-    sessionStorage.setItem('lotsen_preferred_profile',profileId||'');
   }catch(e){}
-  showStudyPlanAnalysis(profileId,major,()=>go('universityDetail'));
+  go('universityDetail');
 }
 
 
@@ -2956,7 +2693,6 @@ async function loadDistanceCourses(o){
  }finally{
    distanceApiState.loading=false;
    try{renderDistancePath(o)}catch(e){}
-   try{if(myPathMode==='distance')renderMyPath()}catch(e){}
  }
 }
 function allDistanceCourses(){
@@ -2981,13 +2717,14 @@ function verifiedDistanceCoursesForNeed(need){
  return allDistanceCourses().filter(c=>
    c.verified===true &&
    c.distance===true &&
+   c.currentOffering===true &&
    distanceCourseMatchesNeed(c,need) &&
    Number(c.hp||0)>0
  );
 }
 function distancePlanForOpportunity(o){
  const missing=missingForOpportunity(o)||[];
- const hp=Number(canonicalRemaining(o)||0);
+ const hp=Number(o?.remaining||0);
  const needs=missing.map(m=>{
    const matches=verifiedDistanceCoursesForNeed(m);
    return {...m,matches};
@@ -3000,27 +2737,11 @@ function distancePlanForOpportunity(o){
    semesters50:hp?Math.ceil((hp/15)*2)/2:0
  };
 }
-
-function courseApplicationOpen(c){
- if(c?.applicationOpen===true)return true;
- if(c?.applicationOpen===false)return false;
- const status=String(c?.applicationStatus||c?.status||'').trim().toLowerCase();
- if(/ansökan öppen|öppen för anmälan|open for application|application open/.test(status))return true;
- if(/stängd|closed|ej öppen/.test(status))return false;
- const now=Date.now();
- const opens=c?.applicationOpensAt?Date.parse(c.applicationOpensAt):NaN;
- const closes=c?.applicationClosesAt?Date.parse(c.applicationClosesAt):NaN;
- if(Number.isFinite(opens)&&Number.isFinite(closes))return now>=opens&&now<=closes;
- return false;
-}
-function courseApplicationBadge(c){
- return courseApplicationOpen(c)?'<span class="application-open-badge">Ansökan öppen</span>':'';
-}
 function distanceCourseCard(c){
  const meeting=c.noPhysicalMeetings===true?'Inga fysiska träffar':c.noPhysicalMeetings===false?'Distans med träffar':'Träffar ej verifierade';
  const pace=normalizeStudyPace(c.pace);
  return `<div class="distance-course-card">
-   <div><strong>${escapeHtml(c.name)}</strong><span>${escapeHtml(c.university||'')}</span>${courseApplicationBadge(c)}</div>
+   <div><strong>${escapeHtml(c.name)}</strong><span>${escapeHtml(c.university||'')}</span></div>
    <b>${fmtHp(c.hp)} hp</b>
    <div class="distance-course-meta">
      <span>${pace?pace+' %':'Studietakt ej verifierad'}</span>
@@ -3047,50 +2768,12 @@ async function openDistanceSuggestionsFromUniversity(subject){
  if(!box)return;
  box.innerHTML='<div class="distance-inline-state">Söker aktuella distanskurser…</div>';
  await loadDistanceCourses({subject,kind:'candidate'});
- const rows=allDistanceCourses().filter(c=>c.verified===true&&c.distance===true&&String(c.subject||'')===String(subject||''));
+ const rows=allDistanceCourses().filter(c=>c.verified===true&&c.distance===true&&c.currentOffering===true&&String(c.subject||'')===String(subject||''));
  if(!rows.length){
-   box.innerHTML='<div class="distance-inline-state">Inga verifierade distanskurser finns inlagda ännu.</div>';
+   box.innerHTML='<div class="distance-inline-state">Inga verifierade aktuella distanskurser hittades just nu.</div>';
    return;
  }
  box.innerHTML=`<div class="distance-inline-list">${rows.slice(0,8).map(distanceCourseCard).join('')}</div>`;
-}
-
-function myPathDistancePlanHtml(o){
- const d=distancePlanForOpportunity(o);
- const needs=d.needs||[];
- const verifiedCount=needs.reduce((s,n)=>s+(n.matches?.length||0),0);
- return `<section class="mypath-distance-plan">
-   <div class="mypath-distance-plan-head">
-     <div><span>Distans</span><h3>Förslag att läsa</h3></div>
-     <b>${d.hp?`${fmtHp(d.hp)} hp kvar`:'Ser klar ut'}</b>
-   </div>
-   <p class="mypath-distance-intro">Här ser du vilka delar som behöver täckas. När aktuella distanskurser är verifierade visas de direkt under respektive del.</p>
-   ${needs.length?`<div class="mypath-distance-needs">
-     ${needs.map((n,i)=>`<div class="mypath-distance-need">
-       <div class="mypath-distance-need-head">
-         <span class="mypath-distance-step">${i+1}</span>
-         <div><strong>${escapeHtml(n.label)}</strong><small>${n.matches?.length?'Verifierade distansalternativ hittade':'Kurs behöver hittas på distans'}</small></div>
-         <b>${fmtHp(n.hp||0)} hp</b>
-       </div>
-       ${n.matches?.length?`<div class="mypath-distance-matches">${n.matches.slice(0,4).map(distanceCourseCard).join('')}</div>`:''}
-     </div>`).join('')}
-   </div>`:'<div class="ready-box">Inga tydliga kompletteringar hittades.</div>'}
-   ${!distanceApiState.loading && !verifiedCount ? `
-   <div class="future-distance-box">
-     <div class="future-distance-icon">↗</div>
-     <div>
-       <span>Kommande ansökningsperiod</span>
-       <strong>Distansvägen kan fortfarande vara möjlig</strong>
-       <p>Inga aktuella verifierade kurser är publicerade i Studielots just nu. Kurser som finns visas även när ansökan är stängd. När en kurs går att söka markeras den med “Ansökan öppen”.</p>
-       <small>Studielots visar bara kurser som är verifierade som distans. Ansökningsstatus visas separat.</small>
-     </div>
-   </div>` : ''}
-   <div class="mypath-distance-foot ${verifiedCount?'has-results':''}">
-     ${distanceApiState.loading?'Söker aktuella distanskurser…':
-       verifiedCount?`${verifiedCount} verifierade kursförslag hittade.`:
-       distanceApiState.error?'Kunde inte hämta aktuella distanskurser just nu.':'Inga verifierade distanskurser finns inlagda ännu.'}
-   </div>
- </section>`;
 }
 function renderDistancePath(o){
  const box=document.getElementById('distancePathBox');
@@ -3159,31 +2842,14 @@ function suggestedCourseBlocks(rule,breakdown,major){
  if(breakdown.missingElective>0)add('Valfria kurser',breakdown.missingElective,'Valfritt','Kan fyllas med godkända kurser som lärosätet accepterar');
  return rows;
 }
-function suggestedOfferingForRow(r){
- const uni=String(sessionStorage.getItem('lotsen_selected_university_name')||'').trim().toLowerCase();
- const major=String(sessionStorage.getItem('lotsen_uni_major')||'').trim().toLowerCase();
- const words=String(r.name||'').toLowerCase();
- const pool=allDistanceCourses().filter(c=>{
-   if(c.verified!==true)return false;
-   if(uni && String(c.university||'').trim().toLowerCase()!==uni)return false;
-   const cs=String(c.subject||'').toLowerCase();
-   const cn=String(c.name||'').toLowerCase();
-   return (major && cs===major) || (cs && words.includes(cs)) || (/examensarbete|uppsats/.test(words)&&/examensarbete|uppsats/.test(cn));
- });
- return pool.sort((a,b)=>Number(courseApplicationOpen(b))-Number(courseApplicationOpen(a)))[0]||null;
-}
 function courseBlockListHtml(rows){
  if(!rows.length)return '<div class="ready-box">Inga tydliga kompletteringar hittades.</div>';
- return `<div class="suggested-course-list">${rows.map((r,i)=>{
-   const c=suggestedOfferingForRow(r);
-   return `<div class="suggested-course-row">
+ return `<div class="suggested-course-list">${rows.map((r,i)=>`
+   <div class="suggested-course-row">
      <span class="suggested-step">${i+1}</span>
-     <div><strong>${escapeHtml(c?.name||r.name)}</strong><small>${escapeHtml(r.type)}${r.note?' · '+escapeHtml(r.note):''}</small>
-       ${c?`<div class="suggested-application">${courseApplicationBadge(c)}${c.url?`<a href="${escapeHtml(c.url)}" target="_blank" rel="noopener">${courseApplicationOpen(c)?'Sök på Antagning.se':'Visa på Antagning.se'} ↗</a>`:''}</div>`:''}
-     </div>
-     <b>${fmtHp(c?.hp||r.hp)} hp</b>
-   </div>`;
- }).join('')}</div>`;
+     <div><strong>${escapeHtml(r.name)}</strong><small>${escapeHtml(r.type)}${r.note?' · '+escapeHtml(r.note):''}</small></div>
+     <b>${fmtHp(r.hp)} hp</b>
+   </div>`).join('')}</div>`;
 }
 function renderUniversityDetail(profileId,major){
   const host=document.getElementById('universityDetailContent'); if(!host)return;
@@ -3203,7 +2869,6 @@ function renderUniversityDetail(profileId,major){
   if(!x){host.innerHTML='<div class="card empty">Kunde inte hitta lärosätesvägen.</div>';return;}
   const breakdown=isAdvanced?null:localRuleBreakdown(rule,major);
   const verified=!!rule?.verified || !!x.d.verified;
-  try{sessionStorage.setItem('lotsen_selected_university_name',String(x.d.university||''))}catch(e){}
   const exactRemaining=isAdvanced?Number(advancedBreakdown?.remaining||0):(breakdown ? Math.max(0,breakdown.missingMain+breakdown.missingReq+breakdown.missingElective) : x.remaining);
   host.innerHTML=`
     <div class="detail-hero">
@@ -3287,7 +2952,8 @@ function renderUniversityDetail(profileId,major){
     <section class="detail-block suggested-course-block">
       <div class="suggested-course-head"><div><h2>Förslag att läsa</h2><p>Utifrån kraven för ${escapeHtml(x.d.university)}.</p></div><span>Plan</span></div>
       ${courseBlockListHtml(suggestedCourseBlocks(rule,breakdown,major))}
-
+      <button type="button" class="distance-suggestion-btn" onclick="openDistanceSuggestionsFromUniversity('${escapeHtml(major)}')">Visa distanskurser <span>›</span></button>
+      <div id="universityDistanceSuggestions"></div>
     </section>`:`
     <section class="detail-block">
       <h2>Kvar</h2>
@@ -3300,37 +2966,103 @@ function renderDegreeDetail(key){
  const host=document.getElementById('degreeDetailContent');if(!host)return;
  const o=opportunityByKey(key||sessionStorage.getItem('lotsen_detail_key'));
  if(!o){host.innerHTML='<div class="card empty">Kunde inte hitta examensvägen.</div>';return}
- const unis=universityOptionsForOpportunity(o);
- const subject=o.subject||o.name||'Examen';
- let distanceAvailable=false;
- try{distanceAvailable=opportunityHasDistance(o)}catch(e){}
+ const use=coursesForDegree(o), missing=missingForOpportunity(o), unis=universityOptionsForOpportunity(o);
+ const usedSubject=use.subject.reduce((s,c)=>s+Number(c.hp||0),0);
+ const usedOtherRaw=use.others.reduce((s,c)=>s+Number(c.hp||0),0);
+ // Outside-subject courses may fill elective space, but never count toward the 90 hp main subject.
+ // The exact elective allowance depends on degree type/university and is therefore only potential here.
+ const genericElectiveCap=o.source==='advanced'?0:90;
+ const usedOther=Math.min(genericElectiveCap,usedOtherRaw);
+ const verified=unis.some(x=>x.d?.verified)||o.source==='specific';
+ const status=verified?'Verifierad':'Ej verifierad';
+ const roleTag=(label,kind='neutral')=>`<span class="reason-tag reason-${kind}">${escapeHtml(label)}</span>`;
+ const degreeTotal=Number(o.total||180);
+ const includedForProgress=Math.max(0,Math.min(degreeTotal,degreeTotal-Number(o.remaining||0)));
+ const potentiallyIncludedHp=includedForProgress;
+ const progressPct=Math.max(0,Math.min(100,Math.round(includedForProgress/Math.max(1,degreeTotal)*100)));
+ const estimatedTerms=Number(o.remaining||0)>0?Math.ceil((Number(o.remaining||0)/30)*2)/2:0;
+
  host.innerHTML=`
-   <div class="detail-hero university-picker-hero">
-     <div>
-       <div class="eyebrow">Vald examen</div>
-       <h1>${escapeHtml(subject)}</h1>
-       <p class="tiny-help">Välj var du vill läsa innan Studielots räknar ut vad som kan tillgodoräknas och vad du har kvar.</p>
-     </div>
+   <div class="detail-hero">
+     <div><h1>${escapeHtml(o.name)}</h1><div class="verify-chip ${verified?'verified':'unverified'}">${status}</div></div>
+     <span class="badge ${o.score>=100?'good':o.score>=55?'warn':'bad'} detail-score">${o.score}%</span>
    </div>
-   <section class="detail-block university-first-card">
-     <h2>Välj lärosäte</h2>
-     <div class="tiny-help">Examenskrav och tillgodoräknande kan skilja sig mellan lärosäten. Därför visas inga exakta hp förrän du har valt.</div>
-     <div class="uni-path-list">
-       ${unis.length?unis.map(x=>`<button class="uni-path uni-path-btn" type="button" onclick="openUniversityPath('${escapeHtml(x.d.id)}','${escapeHtml(x.major)}')"><div><strong>${escapeHtml(x.d.university)}</strong><small>${x.verified?'Verifierad examensregel':'Preliminär examensregel'}</small></div><span>›</span></button>`).join(''):'<div class="muted small">Inget lärosäte med matchande regel finns i databasen ännu.</div>'}
+   <div class="degree-overview">
+     <div class="degree-overview-numbers">
+       <div><strong>${fmtHp(potentiallyIncludedHp)} hp</strong><span>kan passa in</span></div>
+       <div><strong>${fmtHp(Number(o.remaining||0))} hp</strong><span>kvar</span></div>
+       <div><strong>${estimatedTerms?`ca ${estimatedTerms}`:'0'}</strong><span>${estimatedTerms===1?'termin':'terminer'}*</span></div>
      </div>
+     <div class="degree-progress-head"><span>${fmtHp(includedForProgress)} / ${fmtHp(degreeTotal)} hp</span><b>${progressPct}%</b></div>
+     <div class="degree-progressbar" aria-label="${progressPct}% av examen"><i style="width:${progressPct}%"></i></div>
+     ${estimatedTerms?'<div class="tiny-help degree-time-note">*Vid 30 hp per termin. Faktisk tid beror på kursutbud och behörighet.</div>':''}
+   </div>
+   ${o.source==='advanced'?`<div class="advanced-reuse-warning"><strong>Viktigt om tidigare examen</strong><span>Kurser som redan ingår i den behörighetsgivande kandidaten kan vara spärrade från att räknas igen i magister/master. Lotsen räknar därför avancerade vägar som preliminära tills lärosätets regel är kontrollerad.</span></div>`:''}
+   <div class="study-path-switch" role="group" aria-label="Studieväg">
+     <button class="path-mode active" data-path-mode="fastest">Snabbaste vägen</button>
+     <button class="path-mode" data-path-mode="distance">På distans</button>
+   </div>
+   <div id="distancePathBox" class="distance-path-box" hidden></div>
+
+   <details class="detail-block credit-details">
+     <summary>
+       <div><h2>Kan räknas in</h2><span class="tiny-help">${use.subject.length+use.others.length} kurser · ${fmtHp(potentiallyIncludedHp)} hp</span></div>
+       <span class="detail-arrow">›</span>
+     </summary>
+     <div class="credit-content">
+       ${use.subject.length?`
+         <div class="credit-group-title">${escapeHtml(o.subject||'Huvudområdet')} <span class="course-role-tag main-role">Huvudområde</span></div>
+         <div class="simple-course-list">
+           ${use.subject.map(c=>`<div><span>${escapeHtml(c.name)} ${roleTag('Huvudområde','main')} ${roleTag(o.source==='specific'?'Verifierad':'Trolig',o.source==='specific'?'verified':'likely')}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}
+         </div>`:'<div class="muted small">Ingen tydlig kursmatchning i huvudområdet hittad.</div>'}
+
+       ${use.others.length?`
+         <div class="credit-group-title secondary-title">Övriga kurser <span class="course-role-tag elective-role">Möjligt valfria</span></div>
+         <div class="simple-course-list secondary-courses">
+           ${use.others.map(c=>`<div><span>${escapeHtml(c.name)} ${roleTag('Valfri','elective')} ${roleTag('Behöver granskas','review')}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}
+         </div>
+         <div class="tiny-help credit-limit">De här kurserna räknas inte som ${escapeHtml(o.subject||'huvudområdet')} bara för att de kan ingå i examen. Hur många valfria poäng som får användas beror på examen och lärosäte.</div>`:''}
+
+       ${use.lockedThesis?.length?`
+         <div class="thesis-reuse-note">
+           <strong>Räknas inte en gång till</strong>
+           ${use.lockedThesis.map(c=>`<span>${escapeHtml(c.name)} · ${fmtHp(c.hp)} hp ${roleTag('Redan använd','locked')}<small>${escapeHtml(thesisReuseStatus(c,o.subject).reason)}</small></span>`).join('')}
+         </div>`:''}
+       <div class="tiny-help credit-note"><strong>Preliminärt.</strong> Lotsen skiljer på huvudområde, möjliga valfria kurser och examensarbete. Lärosätet avgör slutligt vilka kurser som får ingå.</div>
+     </div>
+   </details>
+
+   <section class="detail-block remaining-primary ${o.source==='advanced'?'advanced-remaining-primary':''}">
+     <div class="remaining-heading"><h2>${o.source==='advanced'?'Det här saknas':'Kvar'}</h2><strong>${fmtHp(Number(o.remaining||0))} hp</strong></div>
+     ${missing.length?`
+       <div class="tiny-help">${missing.some(m=>m.generic)?'Välj lärosäte nedan för att se vilka kurser som kan behövas.':'Det här är luckorna Lotsen ser just nu.'}</div>
+       <div class="missing-list">${missing.map(m=>{
+         const txt=String(m.label||'').toLowerCase();
+         const tag=txt.includes('examensarbete')||txt.includes('självständigt')?'Examensarbete':
+                   txt.includes('valfri')||txt.includes('övriga')?'Valfritt':
+                   txt.includes(String(o.subject||'').toLowerCase())?'Huvudområde':
+                   'Krav';
+         const kind=tag==='Examensarbete'?'thesis':tag==='Valfritt'?'elective':tag==='Huvudområde'?'main':'neutral';
+         return `<div><span class="missing-check">○</span><strong>${escapeHtml(m.label)}</strong>${roleTag(tag,kind)}</div>`;
+       }).join('')}</div>`
+       :`<div class="ready-box">Ingen tydlig komplettering hittad.</div>`}
    </section>
-   <section class="detail-block university-first-card">
-     <h2>På distans</h2>
-     <div class="tiny-help">Se en plan byggd av distansalternativ. Exakta tillgodoräknanden verifieras mot det lärosäte som ger kursen eller examen.</div>
-     ${distanceAvailable?`<button class="uni-path uni-path-btn" type="button" onclick="openDistancePathFromOpportunity('${escapeHtml(o.key)}')"><div><strong>Visa distansalternativ</strong><small>Kurser och kommande möjligheter</small></div><span>›</span></button>`:'<div class="muted small">Inga tydliga distansalternativ finns i databasen ännu.</div>'}
-   </section>`;
-}
-function openDistancePathFromOpportunity(key){
- const o=opportunityByKey(key); if(!o)return;
- try{sessionStorage.setItem('lotsen_detail_key',o.key);sessionStorage.setItem('lotsen_mypath_subject',o.subject||'');sessionStorage.setItem('lotsen_mypath_mode','distance')}catch(e){}
- const host=document.getElementById('degreeDetailContent');
- if(host)host.innerHTML=`<div class="detail-hero"><div><div class="eyebrow">På distans</div><h1>${escapeHtml(o.subject||o.name)}</h1></div></div>${myPathDistancePlanHtml(o)}<button class="secondary" type="button" onclick="renderDegreeDetail('${escapeHtml(o.key)}')">‹ Välj annat lärosäte</button>`;
- window.scrollTo(0,0);
+
+   ${o.source!=='advanced'&&unis.length?`
+   <section class="detail-block best-path-preview">
+     <div class="best-path-head">
+       <div><small>Rekommenderad start</small><h2>${escapeHtml(unis[0].d.university)}</h2></div>
+       <b>${fmtHp(unis[0].remaining)} hp kvar</b>
+     </div>
+     <p>Det här är samma beräkning som visas under Möjligheter.</p>
+     <button type="button" class="primary best-path-btn" onclick="openUniversityPath('${escapeHtml(unis[0].d.id)}','${escapeHtml(o.subject)}')">Se kursförslag <span>›</span></button>
+   </section>`:''}
+   <section class="detail-block">
+     <h2>Välj lärosäte</h2>
+     <div class="tiny-help">Se exakta krav och kursväg.</div>
+     <div class="uni-path-list">${unis.length?unis.map(x=>`<button class="uni-path uni-path-btn" type="button" onclick="openUniversityPath('${escapeHtml(x.d.id)}','${escapeHtml(x.major)}')"><div><strong>${escapeHtml(x.d.university)}</strong><small>${x.advanced?(x.verified?'Verifierad examensregel · ':'Preliminär · '):''}${x.remaining?fmtHp(x.remaining)+' hp kvar':'Ser möjlig ut'}</small></div><span>›</span></button>`).join(''):'<div class="muted small">Inget lärosäte med matchande regel finns i databasen ännu.</div>'}</div>
+   </section>
+ `;
 }
 
 function groupedDegreeOpportunities(){
@@ -3392,8 +3124,7 @@ function opportunityRemainingLabel(o){
    if(r.same)return r.min?`${fmtHp(r.min)} hp kvar`:'Klar';
    return `från ${fmtHp(r.min)} hp kvar`;
  }
- const hp=Number(canonicalRemaining(o)||0);
- return hp?`${fmtHp(hp)} hp kvar`:'Klar';
+ return Number(o.remaining||0)?`${fmtHp(o.remaining)} hp kvar`:'Klar';
 }
 function opportunityUniversityCount(o){
  try{return universityOptionsForOpportunity(o).length}catch(e){return 0}
@@ -3409,7 +3140,7 @@ function opportunityHasDistance(o){
 }
 function opportunityStatus(o){
  const r=opportunityUniversityRange(o);
- const hp=r?Number(r.min||0):Number(canonicalRemaining(o)||0);
+ const hp=r?Number(r.min||0):Number(o.remaining||0);
  if(!hp)return {label:'Klar',kind:'ready'};
  return {label:opportunityRemainingLabel(o),kind:hp<=30?'near':'normal'};
 }
@@ -3422,9 +3153,23 @@ function chooseOpportunityForMyPath(key){
    renderDegreeDetail(o.key);
    return;
  }
- try{sessionStorage.setItem('lotsen_detail_key',o.key)}catch(e){}
- go('degreeDetail');
- renderDegreeDetail(o.key);
+ const subject=String(o.subject||'').trim();
+ if(!subject)return;
+ myPathSubject=subject;
+ myPathMode='';
+ try{
+   sessionStorage.setItem('lotsen_mypath_subject',subject);
+   sessionStorage.removeItem('lotsen_mypath_mode');
+ }catch(e){}
+ go('myPath');
+ setTimeout(()=>{
+   renderMyPath();
+   const el=document.getElementById('mypath-place');
+   if(el){
+     const y=el.getBoundingClientRect().top+window.scrollY-14;
+     window.scrollTo({top:y,behavior:'smooth'});
+   }
+ },40);
 }
 
 
@@ -3454,29 +3199,6 @@ function openVerifiedPlan(id){
  host.classList.add('open');host.innerHTML=`<div class="verified-plan-sheet"><button class="verified-plan-close" onclick="closeVerifiedPlan()">×</button><span>Verifierad studieplan</span><h2>${escapeHtml(p.subject)}</h2><p>${escapeHtml(p.university)}</p><div class="verified-plan-verified">✓ ${escapeHtml(p.verificationLabel||'Verifierad av lärosätet')}</div><div class="verified-plan-course-list">${(p.courses||[]).map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div><div class="verified-plan-price"><span>Färdig verifierad studieplan</span></div><button class="primary" disabled>Betalning kopplas in senare</button></div>`;
 }
 function closeVerifiedPlan(){const x=document.getElementById('verifiedPlanModal');if(x){x.classList.remove('open');x.innerHTML='';}}
-function getOpportunityLevel(){
- try{return sessionStorage.getItem('lotsen_opportunity_level')||'candidate'}catch(e){return 'candidate'}
-}
-function setOpportunityLevel(level){
- try{sessionStorage.setItem('lotsen_opportunity_level',level)}catch(e){}
- renderDegrees();
-}
-function advancedOpportunityCard(x){
- const ready=x.candidateReady;
- const near=x.candidateNear;
- const hp=canonicalRemaining(x);
- return `<article class="advanced-discovery-card advanced-path-card compact-advanced-card">
-   <div class="advanced-card-main">
-     <div>
-       <span>${escapeHtml(x.degreeType||'Master')} · ${String(x.degreeType||'').toLowerCase()==='magister'?'60':'120'} hp</span>
-       <h3>${escapeHtml(x.subject||x.name)}</h3>
-       <small>${ready?'Kandidat klar':near?`${fmtHp(x.candidateRemaining||0)} hp kvar till kandidat`:'Behörighet behöver kontrolleras'}</small>
-     </div>
-     <b class="advanced-remaining">${hp?`${fmtHp(hp)} hp kvar`:'Ser klar ut'}</b>
-   </div>
-   <button type="button" onclick="chooseOpportunityForMyPath('${escapeHtml(x.key)}')">Visa väg <span>›</span></button>
- </article>`;
-}
 function renderDegrees(){
  const adSlot=document.getElementById('opportunitiesAdSlot');if(adSlot)adSlot.innerHTML=bannerAdHtml('opportunities-inline');
  const host=document.getElementById('degreeResults');
@@ -3496,49 +3218,79 @@ function renderDegrees(){
  }
 
  const all=safeDegreeOpportunities();
- const candidate=all.filter(x=>x.source!=='advanced');
- const advanced=all.filter(x=>x.source==='advanced');
- const magister=advanced.filter(x=>String(x.degreeType||'').toLowerCase()==='magister');
- const master=advanced.filter(x=>String(x.degreeType||'').toLowerCase()==='master');
- const level=getOpportunityLevel();
+ const candidate=all.filter(x=>x.source!=='advanced').slice(0,5);
+ const advanced=all.filter(x=>x.source==='advanced').slice(0,4);
 
- const candidateHtml=candidate.slice(0,8).map((x,i)=>{
-   const st=opportunityStatus(x),unis=opportunityUniversityCount(x),distance=opportunityHasDistance(x);
+ const candidateHtml=candidate.length?candidate.map((x,i)=>{
+   const st=opportunityStatus(x);
+   const unis=opportunityUniversityCount(x);
+   const distance=opportunityHasDistance(x);
    return `<article class="opportunity-discovery-card">
      <div class="opportunity-discovery-head">
-       <div>${i===0?'<span class="opportunity-kicker">Närmast för dig</span>':''}<h3>${escapeHtml(x.subject||x.name)}</h3><small>Kandidatexamen · 180 hp</small></div>
+       <div>
+         ${i===0?'<span class="opportunity-kicker">Närmast för dig</span>':''}
+         <h3>${escapeHtml(x.subject||x.name)}</h3>
+         <small>Kandidatexamen</small>
+       </div>
        <span class="opportunity-status ${st.kind}">${escapeHtml(st.label)}</span>
      </div>
-     <div class="opportunity-meta">${unis?`<span>${unis} ${unis===1?'lärosäte':'lärosäten'}</span>`:''}${distance?'<span class="distance-available">Distans finns</span>':''}</div>
+     <div class="opportunity-meta">
+       ${unis?`<span>${unis} ${unis===1?'lärosäte':'lärosäten'}</span>`:''}
+       ${distance?'<span class="distance-available">Distans finns</span>':''}
+     </div>
      <button class="opportunity-choose" type="button" onclick="chooseOpportunityForMyPath('${escapeHtml(x.key)}')">Visa väg <span>›</span></button>
    </article>`;
- }).join('');
+ }).join(''):'<div class="card empty">Ingen tydlig kandidatväg hittades ännu.</div>';
 
- const advancedSections=`
-   <section class="advanced-level-section">
-     <div class="advanced-level-title"><div><span>60 hp</span><h2>Magister</h2></div><small>${magister.length} möjligheter</small></div>
-     <div class="advanced-discovery-list">${magister.length?magister.slice(0,8).map(advancedOpportunityCard).join(''):'<div class="mypath-note">Ingen tydlig magisterväg hittades ännu.</div>'}</div>
-   </section>
-   <section class="advanced-level-section">
-     <div class="advanced-level-title"><div><span>120 hp</span><h2>Master</h2></div><small>${master.length} möjligheter</small></div>
-     <div class="advanced-discovery-list">${master.length?master.slice(0,8).map(advancedOpportunityCard).join(''):'<div class="mypath-note">Ingen tydlig masterväg hittades ännu.</div>'}</div>
+ const advancedHtml=advanced.length?`
+   <section class="after-candidate">
+     <div class="after-candidate-intro">
+       <span class="after-candidate-icon">↗</span>
+       <div>
+         <h2>Efter kandidaten</h2>
+         <p>Du har en kandidat eller är nära en. Här är möjliga nästa steg.</p>
+       </div>
+     </div>
+     <div class="advanced-discovery-list">
+       ${advanced.map(x=>{
+         const ready=x.candidateReady;
+         const near=x.candidateNear;
+         const missing=(x.advancedMissing||[]).slice(0,3);
+         return `<article class="advanced-discovery-card advanced-path-card">
+           <div class="advanced-card-main">
+             <div>
+               <span>${escapeHtml(x.degreeType||'Master')}</span>
+               <h3>${escapeHtml(x.subject||x.name)}</h3>
+               <small>${ready?'Kandidat klar':near?`${fmtHp(x.candidateRemaining||0)} hp kvar till kandidat`:'Behörighet behöver granskas'}</small>
+             </div>
+             <b class="advanced-remaining">${x.remaining?`${fmtHp(x.remaining)} hp kvar`:'Ser klar ut'}</b>
+           </div>
+           ${missing.length?`<div class="advanced-missing-preview">
+             ${missing.map(m=>`<div><span>○</span><p>${escapeHtml(m.label)}</p></div>`).join('')}
+           </div>`:`<div class="advanced-ready-preview">✓ Inga tydliga kompletteringar hittades</div>`}
+           <button type="button" onclick="chooseOpportunityForMyPath('${escapeHtml(x.key)}')">Visa väg <span>›</span></button>
+         </article>`;
+       }).join('')}
+     </div>
+   </section>`:`
+   <section class="after-candidate muted-after">
+     <div class="after-candidate-intro">
+       <span class="after-candidate-icon">↗</span>
+       <div><h2>Efter kandidaten</h2><p>När du har en kandidat eller är nära en visar Lotsen möjliga magister- och mastervägar här.</p></div>
+     </div>
    </section>`;
 
  host.innerHTML=`
-   <div class="opportunity-level-switch" role="tablist" aria-label="Examensnivå">
-     <button type="button" class="${level==='candidate'?'active':''}" onclick="setOpportunityLevel('candidate')">Kandidat</button>
-     <button type="button" class="${level==='advanced'?'active':''}" onclick="setOpportunityLevel('advanced')">Magister & master</button>
-     <button type="button" class="${level==='all'?'active':''}" onclick="setOpportunityLevel('all')">Alla</button>
-   </div>
-   ${level==='candidate'||level==='all'?`
-     <section class="nearest-opportunities">
-       <div class="section-title-row"><div><h2>Kandidat</h2></div><small>${candidate.length} vägar hittade</small></div>
-       <div class="opportunity-discovery-list">${candidateHtml||'<div class="card empty">Ingen tydlig kandidatväg hittades ännu.</div>'}</div>
-     </section>`:''}
-   ${level==='advanced'||level==='all'?`<div class="advanced-opportunities-wrap">${advancedSections}</div>`:''}
+   <section class="nearest-opportunities">
+     <div class="section-title-row">
+       <div><h2>Närmast examen</h2></div>
+       <small>${candidate.length} vägar hittade</small>
+     </div>
+     <div class="opportunity-discovery-list">${candidateHtml}</div>
+   </section>
+   ${advancedHtml}
  `;
 }
-
 function setDegreeFilter(f,b){degreeFilter=f;document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderDegrees()}
 
 
@@ -4170,10 +3922,7 @@ function myPathDistanceProfiles(subject){
 
 function openMyPathUniversity(profileId,subject){
  const o=myPathOpportunity(subject);
- try{
-   if(o)sessionStorage.setItem('lotsen_detail_key',o.key);
-   sessionStorage.setItem('lotsen_preferred_profile',profileId||'');
- }catch(e){}
+ if(o)sessionStorage.setItem('lotsen_detail_key',o.key);
  openUniversityPath(profileId,subject);
 }
 
@@ -4232,16 +3981,25 @@ function renderMyPath(){
            <div class="mypath-distance-icon">⌁</div>
            <div>
              <strong>På distans</strong>
-             <small>${myPathMode==='distance'?'Distansplan visas nedan':'Visa kursförslag för distans'}</small>
+             <small>${distanceUnis.length?distanceUnis.length+' lärosäten med verifierade distansalternativ':'Sök aktuella distanskurser'}</small>
            </div>
-           <span>${myPathMode==='distance'?'⌃':'›'}</span>
+           <span>›</span>
          </button>
 
          ${myPathMode==='distance'?`
-           ${o?myPathDistancePlanHtml(o):'<div class="mypath-note">Kunde inte skapa distansplanen.</div>'}
-         `:''}
+           <div class="mypath-uni-list distance-list">
+             ${distanceUnis.length?distanceUnis.map(x=>`
+               <button type="button" data-mypath-uni="${escapeHtml(x.d.id)}" data-mypath-subject-open="${escapeHtml(subject)}">
+                 <div>
+                   <strong>${escapeHtml(x.d.university)}</strong>
+                   <small>Distans · ${x.remaining?fmtHp(x.remaining)+' hp kvar':'ser möjlig ut'}</small>
+                 </div>
+                 <span>›</span>
+               </button>`).join(''):
+               '<div class="mypath-note">Inga verifierade aktuella distanskurser hittades just nu.</div>'}
+           </div>`:''}
 
-         <div class="mypath-divider"><span>eller välj ett specifikt lärosäte</span></div>
+         <div class="mypath-divider"><span>eller välj lärosäte</span></div>
 
          <div class="mypath-uni-list">
            ${allUnis.length?allUnis.map((x,i)=>`
@@ -4277,7 +4035,7 @@ function renderMyPath(){
              return `<button type="button" class="mypath-choice" data-mypath-subject="${escapeHtml(s)}">
                <div>
                  <strong>${escapeHtml(s)}</strong>
-                 <small>${op?(canonicalRemaining(op)?fmtHp(canonicalRemaining(op))+' hp kvar':'Ser nära eller klar ut'):'Visa möjlig väg'}</small>
+                 <small>${op?(op.remaining?fmtHp(op.remaining)+' hp kvar':'Ser nära eller klar ut'):'Visa möjlig väg'}</small>
                </div>
                <span>›</span>
              </button>`;
@@ -4512,7 +4270,7 @@ function renderCompareSelection(){
      const use=coursesForDegree(o), missing=missingForOpportunity(o);
      return `<article class="card compare-choice">
        <div class="compare-choice-head"><div><h3>${escapeHtml(o.name)}</h3><small>${o.source==='advanced'?'Avancerad nivå':'Grundnivå'}</small></div><span class="badge ${o.score>=100?'good':o.score>=55?'warn':'bad'}">${o.score}%</span></div>
-       <div class="compare-key"><strong>${canonicalRemaining(o)?fmtHp(canonicalRemaining(o))+' hp kvar':'Ser klar ut'}</strong></div>
+       <div class="compare-key"><strong>${o.remaining?fmtHp(o.remaining)+' hp kvar':'Ser klar ut'}</strong></div>
        <div class="compare-mini-section"><b>Kan potentiellt ingå</b><span>${fmtHp(use.subject.reduce((s,c)=>s+Number(c.hp||0),0))} hp i ${escapeHtml(o.subject||'huvudområdet')}</span></div>
        <div class="compare-mini-section"><b>Kvarstående kurser</b>${missing.length?`<ul>${missing.slice(0,4).map(m=>`<li>${escapeHtml(m.label)}</li>`).join('')}</ul>`:'<span>Ingen tydlig komplettering</span>'}</div>
        <button class="ghost" onclick="openDegreeDetails('${escapeHtml(o.key)}')">Visa min väg</button>
@@ -4539,188 +4297,6 @@ function toggleMoreMenu(open){
  document.body.classList.toggle('more-menu-open',!!open);
 }
 
-
-const admissionProfile={
- gymMerit:Number(sessionStorage.getItem('studielots_gym_merit')||0)||null,
- higherMerit:Number(sessionStorage.getItem('studielots_higher_merit')||0)||null,
- hp:Number(sessionStorage.getItem('studielots_hp_score')||0)||null,
- higherGroup:sessionStorage.getItem('studielots_higher_group')||'BI'
-};
-let admissionSearchTimer=null;
-
-function saveAdmissionProfile(){
- const merit=Number(document.getElementById('higherMeritValue')?.value||0)||null;
- const hp=Number(document.getElementById('higherHpValue')?.value||0)||null;
- admissionProfile.higherMerit=merit;admissionProfile.hp=hp;
- try{
-  if(merit!=null)sessionStorage.setItem('studielots_higher_merit',String(merit));else sessionStorage.removeItem('studielots_higher_merit');
-  if(hp!=null)sessionStorage.setItem('studielots_hp_score',String(hp));else sessionStorage.removeItem('studielots_hp_score');
- }catch(e){}
- scheduleAdmissionSearch('higher');
-}
-function restoreAdmissionProfile(){
- const g=document.getElementById('gymMeritValue');if(g)g.textContent=admissionProfile.gymMerit!=null?String(admissionProfile.gymMerit).replace('.',','):'–';
- const gm=document.getElementById('gymManualMerit');if(gm&&admissionProfile.gymMerit!=null)gm.value=admissionProfile.gymMerit;
- const hm=document.getElementById('higherMeritValue');if(hm&&admissionProfile.higherMerit!=null)hm.value=admissionProfile.higherMerit;
- const hp=document.getElementById('higherHpValue');if(hp&&admissionProfile.hp!=null)hp.value=admissionProfile.hp;
- document.querySelectorAll('[data-higher-group]').forEach(b=>b.classList.toggle('active',b.dataset.higherGroup===admissionProfile.higherGroup));
-}
-function toggleAdmissionManual(kind){const el=document.getElementById(kind==='gym'?'gymManualBox':'');if(el)el.hidden=!el.hidden}
-function setGymManualMerit(v){
- const n=Number(v);admissionProfile.gymMerit=Number.isFinite(n)&&n>=0?n:null;
- try{if(admissionProfile.gymMerit!=null)sessionStorage.setItem('studielots_gym_merit',String(admissionProfile.gymMerit));else sessionStorage.removeItem('studielots_gym_merit')}catch(e){}
- restoreAdmissionProfile();scheduleAdmissionSearch('gymnasium');
-}
-function setHigherAdmissionGroup(group,btn){admissionProfile.higherGroup=group;try{sessionStorage.setItem('studielots_higher_group',group)}catch(e){};document.querySelectorAll('[data-higher-group]').forEach(b=>b.classList.toggle('active',b===btn));scheduleAdmissionSearch('higher')}
-
-async function admissionFileText(file){
- if(!file)return '';
- if(/^image\//i.test(file.type||''))throw new Error('image-needs-ocr');
- if(file.type==='application/pdf'||/\.pdf$/i.test(file.name||'')){
-  if(!window.pdfjsLib)return '';
-  const buf=await file.arrayBuffer(),pdf=await window.pdfjsLib.getDocument({data:buf}).promise;let text='';
-  for(let i=1;i<=pdf.numPages;i++){const page=await pdf.getPage(i),c=await page.getTextContent();text+=' '+c.items.map(x=>x.str).join(' ')}
-  return text;
- }
- return await file.text();
-}
-function gradeValue(letter){return ({A:20,B:17.5,C:15,D:12.5,E:10,F:0})[String(letter||'').toUpperCase()]}
-function inferGrundskolaMerit(text){
- const t=String(text||'').replace(/\s+/g,' '),grades=[];
- const re=/(?:^|\s)(A|B|C|D|E|F)(?=\s|$|,|;)/g;let m;
- while((m=re.exec(t))&&grades.length<30)grades.push(m[1]);
- if(grades.length<8)return null;
- const vals=grades.map(gradeValue).filter(Number.isFinite).sort((a,b)=>b-a);
- const take=Math.min(vals.length,17);return Math.round(vals.slice(0,take).reduce((s,x)=>s+x,0)*10)/10;
-}
-function inferHigherMerit(text){
- const t=String(text||'');
- const patterns=[/meritv(?:ä|a)rde\s*[:\-]?\s*(\d{1,2}[,.]\d{1,2})/i,/j(?:ä|a)mf(?:ö|o)relsetal\s*[:\-]?\s*(\d{1,2}[,.]\d{1,2})/i];
- for(const p of patterns){const m=t.match(p);if(m){const n=Number(m[1].replace(',','.'));if(n>=0&&n<=22.5)return n}}
- return null;
-}
-async function importAdmissionGrades(input,kind){
- const file=input?.files?.[0];if(!file)return;
- const status=document.getElementById(kind==='gymnasium'?'gymGradeStatus':'higherGradeStatus');if(status)status.textContent='Läser betygen…';
- try{
-  const text=await admissionFileText(file);
-  if(kind==='gymnasium'){
-   const merit=inferGrundskolaMerit(text);
-   if(merit!=null){admissionProfile.gymMerit=merit;sessionStorage.setItem('studielots_gym_merit',String(merit));if(status)status.innerHTML=`<strong>${file.name}</strong> · preliminärt meritvärde ${String(merit).replace('.',',')}`}
-   else if(status)status.innerHTML=`<strong>${file.name}</strong> uppladdad. Meritvärdet kunde inte räknas säkert – fyll i det manuellt.`;
-  }else{
-   const merit=inferHigherMerit(text);
-   if(merit!=null){admissionProfile.higherMerit=merit;sessionStorage.setItem('studielots_higher_merit',String(merit));if(status)status.innerHTML=`<strong>${file.name}</strong> · meritvärde ${String(merit).replace('.',',')} hittades.`}
-   else if(status)status.innerHTML=`<strong>${file.name}</strong> uppladdad. Fyll i ditt meritvärde ovan om det inte framgår i dokumentet.`;
-  }
-  restoreAdmissionProfile();scheduleAdmissionSearch(kind);
- }catch(e){console.warn('admission import',e);if(status)status.textContent=e?.message==='image-needs-ocr'?'Bild uppladdad. Bildavläsning kopplas in senare – använd PDF eller fyll i värdet manuellt.':'Kunde inte läsa dokumentet. Fyll i värdet manuellt.'}
- input.value='';
-}
-function scheduleAdmissionSearch(kind){clearTimeout(admissionSearchTimer);admissionSearchTimer=setTimeout(()=>searchAdmissionHistory(kind),250)}
-
-function admissionComparison(score,cutoff){
- if(score==null||cutoff==null||!Number.isFinite(Number(cutoff)))return null;
- const diff=Math.round((Number(score)-Number(cutoff))*100)/100;
- return {diff,above:diff>=0};
-}
-function admissionComparisonLabel(score,cutoff){
- const c=admissionComparison(score,cutoff);
- if(!c)return '';
- const val=String(Math.abs(c.diff)).replace('.',',');
- return c.above
-   ? `<span class="admission-chance above">+${val} över</span>`
-   : `<span class="admission-chance below">−${val} under</span>`;
-}
-function admissionScoreLabel(kind){
- if(kind==='gymnasium')return 'Ditt meritvärde';
- return admissionProfile.higherGroup==='HP'?'Ditt högskoleprov':`Ditt meritvärde · ${admissionProfile.higherGroup}`;
-}
-function admissionScoreValue(kind){
- return kind==='gymnasium'
-   ? admissionProfile.gymMerit
-   : (admissionProfile.higherGroup==='HP'?admissionProfile.hp:admissionProfile.higherMerit);
-}
-function admissionHistorySummary(kind,rows,score){
- const valid=(rows||[]).filter(r=>Number.isFinite(Number(r.cutoff)));
- if(!valid.length)return '';
- const cutoffs=valid.map(r=>Number(r.cutoff));
- const latest=valid[0];
- const comparisons=score==null?[]:valid.map(r=>admissionComparison(score,Number(r.cutoff))).filter(Boolean);
- const aboveCount=comparisons.filter(x=>x.above).length;
- const min=Math.min(...cutoffs),max=Math.max(...cutoffs);
- const latestCmp=score==null?null:admissionComparison(score,Number(latest.cutoff));
- return `<section class="admission-result-summary">
-   <div class="admission-result-summary-head">
-     <div><span>Din jämförelse</span><h3>${escapeHtml(admissionScoreLabel(kind))}</h3></div>
-     <strong>${score==null?'–':String(score).replace('.',',')}</strong>
-   </div>
-   <div class="admission-result-metrics">
-     <div><span>Senaste gräns</span><b>${String(latest.cutoff).replace('.',',')}</b>${latestCmp?admissionComparisonLabel(score,Number(latest.cutoff)):''}</div>
-     <div><span>Historiskt spann</span><b>${String(min).replace('.',',')}–${String(max).replace('.',',')}</b><small>${valid.length} ${valid.length===1?'period':'perioder'}</small></div>
-     <div><span>Du hade legat över</span><b>${score==null?'–':`${aboveCount} av ${comparisons.length}`}</b><small>${score==null?'Lägg in dina meriter för jämförelse':'historiska gränser'}</small></div>
-   </div>
-   <div class="admission-result-note">${score==null
-     ? 'Lägg in ditt meritvärde eller högskoleprovsresultat för att se hur du hade legat till.'
-     : latestCmp?.above
-       ? 'Ditt resultat ligger över den senaste historiska gränsen i den här jämförelsen.'
-       : 'Ditt resultat ligger under den senaste historiska gränsen i den här jämförelsen.'}
-   </div>
- </section>`;
-}
-function renderAdmissionRows(kind,rows){
- const host=document.getElementById(kind==='gymnasium'?'gymAdmissionResults':'higherAdmissionResults');if(!host)return;
- if(!rows.length){
-   host.innerHTML='<div class="admission-empty"><strong>Ingen historik hittades ännu.</strong><span>När antagningsdatan är ansluten visas tidigare års gränser här. Funktionen är byggd för att fyllas på utan att gränssnittet behöver göras om.</span></div>';
-   return;
- }
- const score=admissionScoreValue(kind);
- const sorted=[...rows].sort((a,b)=>{
-   const ya=String(a.year||a.term||''),yb=String(b.year||b.term||'');
-   return yb.localeCompare(ya,'sv',{numeric:true});
- });
- const summary=admissionHistorySummary(kind,sorted,score);
- const cards=sorted.map((r,i)=>{
-   const cutoff=Number(r.cutoff);
-   const cmp=admissionComparison(score,cutoff);
-   const status=cmp?(cmp.above?'above':'below'):'neutral';
-   return `<article class="admission-history-card ${status}">
-     <div class="admission-history-top">
-       <div>
-         <span>${escapeHtml(r.year||r.term||'')}</span>
-         <h3>${escapeHtml(r.name||r.program||'')}</h3>
-         <small>${escapeHtml(r.school||r.university||'')}</small>
-       </div>
-       <div class="admission-cutoff"><strong>${String(r.cutoff??'–').replace('.',',')}</strong><span>Antagningsgräns</span></div>
-     </div>
-     <div class="admission-history-comparison">
-       ${score!=null?`<div><span>${escapeHtml(admissionScoreLabel(kind))}</span><strong>${String(score).replace('.',',')}</strong></div>`:''}
-       ${admissionComparisonLabel(score,cutoff)}
-     </div>
-     <div class="admission-history-meta">
-       ${r.group?`<span>${escapeHtml(r.group)}</span>`:''}
-       ${r.term?`<span>${escapeHtml(r.term)}</span>`:''}
-       ${r.source?`<span>${escapeHtml(r.source)}</span>`:''}
-       ${i===0?'<span class="latest-history">Senaste</span>':''}
-     </div>
-   </article>`;
- }).join('');
- host.innerHTML=summary+`<div class="admission-history-list">${cards}</div>`;
-}
-
-async function searchAdmissionHistory(kind){
- const host=document.getElementById(kind==='gymnasium'?'gymAdmissionResults':'higherAdmissionResults');if(!host)return;
- const a=String(document.getElementById(kind==='gymnasium'?'gymAdmissionSchool':'higherAdmissionUniversity')?.value||'').trim();
- const b=String(document.getElementById(kind==='gymnasium'?'gymAdmissionProgram':'higherAdmissionProgram')?.value||'').trim();
- if(!a&&!b){host.innerHTML='<div class="admission-empty">Sök efter en utbildning för att se tidigare års antagningspoäng.</div>';return}
- host.innerHTML='<div class="admission-loading">Söker tidigare antagningspoäng…</div>';
- try{
-  const endpoint=kind==='gymnasium'?'/api/gymnasium-admissions':'/api/higher-admissions';
-  const q=new URLSearchParams({q:[a,b].filter(Boolean).join(' ')});if(kind==='higher')q.set('group',admissionProfile.higherGroup);
-  const res=await fetch(`${endpoint}?${q.toString()}`,{headers:{Accept:'application/json'}});if(!res.ok)throw new Error(String(res.status));
-  const data=await res.json();renderAdmissionRows(kind,Array.isArray(data?.results)?data.results:[]);
- }catch(e){renderAdmissionRows(kind,[])}
-}
 function go(id){
  if(id==='compare' && !courses.length){
    setTimeout(()=>{try{renderCompare()}catch(e){}},0);
@@ -4729,7 +4305,7 @@ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));do
   const inOpportunities=['degrees','degreeDetail','universityDetail','programMatch'].includes(id);
   b.classList.toggle('active',b.dataset.screen===id || (b.dataset.screen==='degrees' && inOpportunities));
 });
-if(id==='myPath'){id='degreeDetail';document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}if(id==='degrees')renderDegrees();if(id==='compare')renderCompare();if(id==='degreeDetail')renderDegreeDetail();if(id==='programMatch'){renderProgramSearch();const pid=sessionStorage.getItem('lotsen_selected_program');if(pid){const p=programCatalog.find(x=>x.id===pid);if(p)renderProgramMatch(p)}}if(id==='universityDetail')renderUniversityDetail(sessionStorage.getItem('lotsen_uni_profile'),sessionStorage.getItem('lotsen_uni_major'));if(id==='gymnasiumAdmission'||id==='higherAdmission'){restoreAdmissionProfile();}window.scrollTo(0,0)}
+if(id==='degrees')renderDegrees();if(id==='myPath')renderMyPath();if(id==='compare')renderCompare();if(id==='degreeDetail')renderDegreeDetail();if(id==='programMatch'){renderProgramSearch();const pid=sessionStorage.getItem('lotsen_selected_program');if(pid){const p=programCatalog.find(x=>x.id===pid);if(p)renderProgramMatch(p)}}if(id==='universityDetail')renderUniversityDetail(sessionStorage.getItem('lotsen_uni_profile'),sessionStorage.getItem('lotsen_uni_major'));window.scrollTo(0,0)}
 document.querySelectorAll('.nav button[data-screen]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.screen)));
 renderUniversities();renderCourses();renderDegrees();renderCompare();setTimeout(()=>{resolveMissingCourseLevelsInBackground().catch(()=>{})},250);
 </script>
@@ -4839,17 +4415,6 @@ function closeMeritGuide(){ document.getElementById('meritGuide').style.display=
  const target=isL?"ladokGuide":isA?"antagningGuide":"manualGuide";
  setTimeout(()=>document.getElementById(target)?.scrollIntoView({behavior:"smooth",block:"nearest"}),50);
 }
-
-function openOpportunityDirectly(o){
- if(!o)return;
- try{
-   selectedOpportunity=o;
-   selectedOpportunityId=o.id||o.key||o.subject||selectedOpportunityId;
- }catch(e){}
- try{ myPathMode='fastest'; }catch(e){}
- try{ showView('mypath'); return; }catch(e){}
- try{ renderMyPath(); }catch(e){}
-}
 document.addEventListener('click',async(e)=>{
  if(e.target?.id!=='fetchSyllabiBtn')return;
  const btn=e.target, out=document.getElementById('fetchSyllabiResult');
@@ -4896,26 +4461,6 @@ window.LotsenDegreeHistory = {
  priorDegreeReuseDecision
 };
 
-
-function debugPathConsistency(subject){
- const o=myPathOpportunity(subject);
- if(!o)return null;
- const c=canonicalPathResult(o);
- const result={subject,remaining:c.remaining,score:c.score,university:c.university,profileId:c.profileId};
- console.info('Studielots canonical path',result);
- return result;
-}
-
-function auditRemainingValues(){
- try{
-   const rows=safeDegreeOpportunities().map(o=>{
-     const p=pathNumbers(o);
-     return {exam:o.subject||o.name,type:o.source==='advanced'?(o.degreeType||'advanced'):'candidate',totalHp:p.total,remainingHp:p.remaining,university:p.university};
-   });
-   console.table(rows);
-   return rows;
- }catch(e){console.warn('Studielots hp audit',e);return []}
-}
 </script>
 
 
@@ -5161,28 +4706,6 @@ function auditRemainingValues(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Studielots v161 ADMISSION RESULT VIEW -->
+<!-- Studielots v148 PLAN OWNS COURSE DETAILS -->
 </body>
 </html>
