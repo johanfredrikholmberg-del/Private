@@ -1264,6 +1264,26 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 /* v152: skip redundant exam summary page */
 .view-opportunity-summary[data-redundant="true"]{display:none!important}
 
+
+/* v155: tydlig nivåväljare under Möjligheter */
+.opportunity-level-switch{position:sticky;top:8px;z-index:8;display:grid;grid-template-columns:1fr 1.45fr .72fr;gap:4px;margin:0 0 18px;padding:4px;border-radius:14px;background:#eef1ef;border:1px solid rgba(30,53,49,.08)}
+.opportunity-level-switch button{border:0;background:transparent;border-radius:10px;padding:10px 7px;color:#66716d;font-size:10.5px;font-weight:850;white-space:nowrap}
+.opportunity-level-switch button.active{background:#fff;color:var(--lotsen-teal);box-shadow:0 1px 5px rgba(22,48,42,.08)}
+.advanced-opportunities-wrap{display:grid;gap:22px}
+.advanced-level-section{display:grid;gap:10px}
+.advanced-level-title{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.advanced-level-title span{display:block;color:var(--lotsen-teal);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+.advanced-level-title h2{margin:2px 0 0;font-size:18px}
+.advanced-level-title>small{color:var(--lotsen-muted);font-size:9.5px}
+.compact-advanced-card .advanced-card-main{margin-bottom:10px}
+.compact-advanced-card .advanced-card-main>div>span{font-size:9px}
+.compact-advanced-card .advanced-card-main>div>small{margin-top:4px}
+@media(max-width:390px){.opportunity-level-switch{grid-template-columns:1fr 1.35fr .65fr}.opportunity-level-switch button{font-size:9.5px;padding:9px 5px}}
+
+
+/* v156: visible analysis engine while building study plan */
+.analysis-overlay{position:fixed;inset:0;z-index:3000;display:grid;place-items:center;padding:18px;background:rgba(13,41,49,.18);backdrop-filter:blur(10px);opacity:0;transition:opacity .18s ease}.analysis-overlay.show{opacity:1}.analysis-loader-card{width:min(420px,100%);padding:22px;border-radius:26px;background:#fbfaf6;box-shadow:0 24px 70px rgba(13,41,49,.22);transform:translateY(8px);transition:transform .2s ease}.analysis-overlay.show .analysis-loader-card{transform:none}.analysis-loader-head{display:flex;gap:11px;align-items:center}.analysis-orbit{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#e5f1ec;color:var(--lotsen-teal);font-size:18px;animation:analysisPulse 1s ease-in-out infinite}.analysis-loader-head small{display:block;color:var(--lotsen-teal);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.07em}.analysis-loader-head h2{margin:2px 0 0;font-size:20px}.analysis-big-number{display:flex;align-items:baseline;gap:7px;margin:19px 0 12px}.analysis-big-number strong{font-size:34px;letter-spacing:-.05em}.analysis-big-number span{font-size:11px;color:var(--lotsen-muted)}.analysis-steps{border-top:1px solid rgba(13,41,49,.09)}.analysis-steps>div{display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(13,41,49,.07);opacity:.35;transform:translateY(3px);transition:.22s ease}.analysis-steps>div.done{opacity:1;transform:none}.analysis-steps i{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#e5f1ec;color:var(--lotsen-teal);font-size:9px;font-style:normal;font-weight:900}.analysis-steps span{font-size:11px;color:#52605f}.analysis-steps b{font-size:10.5px;white-space:nowrap}.analysis-finish{margin-top:14px;padding:10px 12px;border-radius:13px;background:#e5f1ec;color:var(--lotsen-teal);font-size:12px;font-weight:900;text-align:center;opacity:0;transform:scale(.97);transition:.2s ease}.analysis-finish.show{opacity:1;transform:none}@keyframes analysisPulse{50%{transform:scale(1.08)}}
+
 </style>
 </head>
 <body>
@@ -2189,8 +2209,10 @@ function advancedUniversityOptions(subject,degreeType){
 }
 function advancedOpportunitySummary(o){
  const opts=advancedUniversityOptions(o.subject,o.degreeType);
- const best=opts[0]||null;
- if(!best)return {remaining:Number(o.remaining||0),missing:missingForOpportunity(o),university:'',profileId:''};
+ let preferred='';
+ try{preferred=sessionStorage.getItem('lotsen_preferred_profile')||''}catch(e){}
+ const best=(preferred&&opts.find(x=>x.d?.id===preferred))||opts[0]||null;
+ if(!best)return {remaining:Number(o.remaining||0),missing:[],university:'',profileId:''};
  return {remaining:Number(best.remaining||0),missing:best.breakdown.missing||[],university:best.d.university||'',profileId:best.d.id||''};
 }
 
@@ -2654,38 +2676,53 @@ function coursesForDegree(o){
  return {subject,others,lockedThesis};
 }
 function missingForOpportunity(o){
+ if(!o)return [];
  if(o.source==='advanced'){
    const s=advancedOpportunitySummary(o);
    return (s.missing||[]).map(x=>({label:x.label,hp:Number(x.hp||0),type:x.type,subject:x.subject}));
  }
- const specific=degrees.find(d=>d.subject===o.subject);
- if(specific){
-   const r=calc(specific), out=[];
-   const subjectMissing=Number(r.subjectMissing ?? r.missingSubject ?? 0);
-   const thesisMissing=Number(r.thesisMissing ?? r.missingThesis ?? 0);
-   const totalMissing=Number(r.totalMissing ?? r.missingTotal ?? o.remaining ?? 0);
 
-   if(subjectMissing>0)out.push({label:`${fmtHp(subjectMissing)} hp i ${o.subject}`,hp:subjectMissing});
-   if(thesisMissing>0)out.push({label:`${fmtHp(thesisMissing)} hp examensarbete i ${o.subject}`,hp:thesisMissing});
-
-   // If total credits still remain after subject/thesis gaps, show them as other credits.
-   const accounted=Math.max(subjectMissing,thesisMissing);
-   const otherMissing=Math.max(0,totalMissing-accounted);
-   if(otherMissing>0)out.push({label:`${fmtHp(otherMissing)} hp övriga/valfria kurser`,hp:otherMissing});
-
-   // Defensive fallback: never say "nothing missing" when the opportunity itself says credits remain.
-   if(!out.length && Number(o.remaining||0)>0){
-     out.push({label:`${fmtHp(o.remaining)} hp återstår`,hp:Number(o.remaining||0),generic:true});
+ // Candidate paths: use the same university rule as the canonical "hp kvar" value.
+ const path=canonicalPathResult(o);
+ const opts=universityOptionsForOpportunity(o);
+ const chosen=(path.profileId&&opts.find(x=>x.d?.id===path.profileId))||opts[0];
+ if(chosen?.breakdown){
+   const b=chosen.breakdown;
+   const rows=[];
+   if(Number(b.missingMain||0)>0){
+     rows.push({label:`${o.subject} – huvudområde`,hp:Number(b.missingMain||0),type:'main',subject:o.subject});
    }
-   return out;
+   (b.req||[]).forEach(r=>{
+     const missing=Math.max(0,Number(r.hp||0)-Number(r.have||0));
+     if(missing>0)rows.push({label:r.label,hp:missing,type:'required',subject:(r.subjects||[])[0]||''});
+   });
+   if(Number(b.missingElective||0)>0){
+     rows.push({label:'Övriga/valfria kurser',hp:Number(b.missingElective||0),type:'elective'});
+   }
+
+   // Enforce the same total remaining value everywhere.
+   const target=Number(path.remaining||0);
+   const sum=rows.reduce((s,x)=>s+Number(x.hp||0),0);
+   if(target>sum){
+     rows.push({label:'Övriga poäng till examen',hp:target-sum,type:'elective'});
+   }else if(target<sum && rows.length){
+     // Defensive normalization: trim only the generic/elective tail if duplicated constraints overlap.
+     let over=sum-target;
+     for(let i=rows.length-1;i>=0&&over>0;i--){
+       if(rows[i].type==='elective'){
+         const take=Math.min(over,rows[i].hp);
+         rows[i].hp-=take; over-=take;
+       }
+     }
+     return rows.filter(x=>x.hp>0);
+   }
+   return rows;
  }
- const flex=flexibleDegreeCandidates().filter(x=>x.major===o.subject).sort((a,b)=>a.remaining-b.remaining)[0];
- const rows=flex?.missing?.map(x=>({label:x.label,hp:Number(x.hp||0)}))||[];
- if(!rows.length && Number(o.remaining||0)>0){
-   rows.push({label:`${fmtHp(o.remaining)} hp återstår`,hp:Number(o.remaining||0),generic:true});
- }
- return rows;
+
+ const remaining=Number(path.remaining||0);
+ return remaining>0?[{label:'Återstår till examen',hp:remaining,generic:true}]:[];
 }
+
 function universityOptionsForOpportunity(o){
  if(o.source==='advanced'){
    return advancedUniversityOptions(o.subject,o.degreeType).slice(0,8);
@@ -2699,18 +2736,93 @@ function universityOptionsForOpportunity(o){
    return {d,major:o.subject,remaining,breakdown,rule,verified:Boolean(rule.verified||d.verified),degreeTitle:degreeTitleFor(d,o.subject)};
  }).filter(Boolean).sort((a,b)=>(Number(b.verified)-Number(a.verified))||a.remaining-b.remaining||String(a.d.university||'').localeCompare(String(b.d.university||''),'sv')).slice(0,8);
 }
+function canonicalPathResult(o,profileId=''){
+ if(!o)return {remaining:0,score:0,profileId:'',university:''};
+ if(o.source==='advanced'){
+   const opts=advancedUniversityOptions(o.subject,o.degreeType);
+   const chosen=(profileId&&opts.find(x=>x.d?.id===profileId))||opts[0];
+   if(chosen){
+     const total=Number(o.total||(o.degreeType==='Magister'?60:120));
+     const remaining=Number(chosen.remaining||0);
+     return {remaining,score:Math.max(0,Math.min(100,Math.round(100*(total-remaining)/Math.max(1,total)))),profileId:chosen.d?.id||'',university:chosen.d?.university||''};
+   }
+   return {remaining:Number(o.remaining||0),score:Number(o.score||0),profileId:'',university:''};
+ }
+ const opts=universityOptionsForOpportunity(o);
+ let preferred=profileId;
+ if(!preferred){
+   try{preferred=sessionStorage.getItem('lotsen_preferred_profile')||''}catch(e){}
+ }
+ const chosen=(preferred&&opts.find(x=>x.d?.id===preferred))||opts[0];
+ if(chosen){
+   const remaining=Number(chosen.remaining||0);
+   return {remaining,score:Math.max(0,Math.min(100,Math.round(100*(180-remaining)/180))),profileId:chosen.d?.id||'',university:chosen.d?.university||''};
+ }
+ return {remaining:Number(o.remaining||0),score:Number(o.score||0),profileId:o.canonicalProfileId||'',university:o.canonicalUniversity||''};
+}
+function canonicalRemaining(o,profileId=''){return canonicalPathResult(o,profileId).remaining}
+
+function degreeTotalHp(o){
+ if(o?.source==='advanced')return Number(o.total||(String(o?.degreeType||'').toLowerCase()==='magister'?60:120));
+ return 180;
+}
+function pathNumbers(o,profileId=''){
+ const p=canonicalPathResult(o,profileId);
+ return {total:degreeTotalHp(o),remaining:Number(p.remaining||0),score:Number(p.score||0),profileId:p.profileId||'',university:p.university||''};
+}
+
 function openDegreeDetails(key){
  try{sessionStorage.setItem('lotsen_detail_key',key)}catch(e){}
  renderDegreeDetail(key);
  go('degreeDetail');
 }
 
+function studyPlanAnalysisMetrics(profileId,major){
+  const detailKey=sessionStorage.getItem('lotsen_detail_key');
+  const o=safeDegreeOpportunities().find(x=>x.key===detailKey)||{kind:'candidate',subject:major};
+  const isAdvanced=o?.source==='advanced';
+  const degreeKind=isAdvanced?(String(o?.degreeType||'master').toLowerCase()==='magister'?'magister':'master'):'candidate';
+  const rule=localDegreeRule(profileId,major,degreeKind);
+  let remaining=Number(o?.remaining||0), total=Number(rule?.total||o?.total||(isAdvanced?120:180));
+  try{
+    if(isAdvanced&&rule) remaining=Number(advancedRuleBreakdown(rule,major)?.remaining||0);
+    else if(rule){const b=localRuleBreakdown(rule,major); if(b)remaining=Math.max(0,Number(b.missingMain||0)+Number(b.missingReq||0)+Number(b.missingElective||0));}
+  }catch(e){}
+  const analyzed=courses.length;
+  const prior=courses.filter(c=>courseUsedInPriorDegree(c)).length;
+  const advanced=courses.filter(c=>isAdvancedCourse(c)).length;
+  const counted=Math.max(0,total-remaining);
+  const university=(flexibleDegreeCatalog.find(x=>x.id===profileId)||{}).university||'lärosätets';
+  return {analyzed,prior,advanced,counted,remaining,total,university};
+}
+function showStudyPlanAnalysis(profileId,major,done){
+  const m=studyPlanAnalysisMetrics(profileId,major);
+  document.getElementById('studyPlanAnalysisOverlay')?.remove();
+  const el=document.createElement('div');el.id='studyPlanAnalysisOverlay';el.className='analysis-overlay';
+  el.innerHTML=`<div class="analysis-loader-card">
+    <div class="analysis-loader-head"><span class="analysis-orbit">✦</span><div><small>Studielots analyserar</small><h2>Tar fram din studieplan</h2></div></div>
+    <div class="analysis-big-number"><strong>${m.analyzed}</strong><span>kurser analyseras</span></div>
+    <div class="analysis-steps">
+      <div data-step="1"><i>✓</i><span>Matchar kurser mot ${escapeHtml(m.university)}</span><b>${fmtHp(m.counted)} hp</b></div>
+      <div data-step="2"><i>✓</i><span>Kontrollerar tidigare examen</span><b>${m.prior} ${m.prior===1?'kurs':'kurser'}</b></div>
+      <div data-step="3"><i>✓</i><span>Identifierar avancerad nivå</span><b>${m.advanced} ${m.advanced===1?'kurs':'kurser'}</b></div>
+      <div data-step="4"><i>✓</i><span>Räknar återstående väg</span><b>${fmtHp(m.remaining)} hp kvar</b></div>
+    </div>
+    <div class="analysis-finish">Studieplan klar <b>✓</b></div>
+  </div>`;
+  document.body.appendChild(el);
+  requestAnimationFrame(()=>el.classList.add('show'));
+  [1,2,3,4].forEach((n,i)=>setTimeout(()=>el.querySelector(`[data-step="${n}"]`)?.classList.add('done'),260+i*250));
+  setTimeout(()=>el.querySelector('.analysis-finish')?.classList.add('show'),1280);
+  setTimeout(()=>{el.classList.remove('show');setTimeout(()=>{el.remove();done()},180)},1580);
+}
 function openUniversityPath(profileId,major){
   try{
     sessionStorage.setItem('lotsen_uni_profile',profileId);
     sessionStorage.setItem('lotsen_uni_major',major);
+    sessionStorage.setItem('lotsen_preferred_profile',profileId||'');
   }catch(e){}
-  go('universityDetail');
+  showStudyPlanAnalysis(profileId,major,()=>go('universityDetail'));
 }
 
 
@@ -2769,7 +2881,7 @@ function verifiedDistanceCoursesForNeed(need){
 }
 function distancePlanForOpportunity(o){
  const missing=missingForOpportunity(o)||[];
- const hp=Number(o?.remaining||0);
+ const hp=Number(canonicalRemaining(o)||0);
  const needs=missing.map(m=>{
    const matches=verifiedDistanceCoursesForNeed(m);
    return {...m,matches};
@@ -3061,6 +3173,16 @@ function renderUniversityDetail(profileId,major){
 }
 
 function renderDegreeDetail(key){
+ const directCandidate=opportunityByKey(key);
+ if(directCandidate && directCandidate.source!=='advanced'){
+   const subject=String(directCandidate.subject||'').trim();
+   if(subject){
+     myPathSubject=subject;myPathMode='';
+     try{sessionStorage.setItem('lotsen_mypath_subject',subject);sessionStorage.removeItem('lotsen_mypath_mode')}catch(e){}
+     go('myPath');renderMyPath();return;
+   }
+ }
+
  const host=document.getElementById('degreeDetailContent');if(!host)return;
  const o=opportunityByKey(key||sessionStorage.getItem('lotsen_detail_key'));
  if(!o){host.innerHTML='<div class="card empty">Kunde inte hitta examensvägen.</div>';return}
@@ -3078,7 +3200,7 @@ function renderDegreeDetail(key){
  const includedForProgress=Math.max(0,Math.min(degreeTotal,degreeTotal-Number(o.remaining||0)));
  const potentiallyIncludedHp=includedForProgress;
  const progressPct=Math.max(0,Math.min(100,Math.round(includedForProgress/Math.max(1,degreeTotal)*100)));
- const estimatedTerms=Number(o.remaining||0)>0?Math.ceil((Number(o.remaining||0)/30)*2)/2:0;
+ const estimatedTerms=Number(canonicalRemaining(o)||0)>0?Math.ceil((Number(o.remaining||0)/30)*2)/2:0;
 
  host.innerHTML=`
    <div class="detail-hero">
@@ -3222,7 +3344,8 @@ function opportunityRemainingLabel(o){
    if(r.same)return r.min?`${fmtHp(r.min)} hp kvar`:'Klar';
    return `från ${fmtHp(r.min)} hp kvar`;
  }
- return Number(o.remaining||0)?`${fmtHp(o.remaining)} hp kvar`:'Klar';
+ const hp=Number(canonicalRemaining(o)||0);
+ return hp?`${fmtHp(hp)} hp kvar`:'Klar';
 }
 function opportunityUniversityCount(o){
  try{return universityOptionsForOpportunity(o).length}catch(e){return 0}
@@ -3238,7 +3361,7 @@ function opportunityHasDistance(o){
 }
 function opportunityStatus(o){
  const r=opportunityUniversityRange(o);
- const hp=r?Number(r.min||0):Number(o.remaining||0);
+ const hp=r?Number(r.min||0):Number(canonicalRemaining(o)||0);
  if(!hp)return {label:'Klar',kind:'ready'};
  return {label:opportunityRemainingLabel(o),kind:hp<=30?'near':'normal'};
 }
@@ -3297,6 +3420,29 @@ function openVerifiedPlan(id){
  host.classList.add('open');host.innerHTML=`<div class="verified-plan-sheet"><button class="verified-plan-close" onclick="closeVerifiedPlan()">×</button><span>Verifierad studieplan</span><h2>${escapeHtml(p.subject)}</h2><p>${escapeHtml(p.university)}</p><div class="verified-plan-verified">✓ ${escapeHtml(p.verificationLabel||'Verifierad av lärosätet')}</div><div class="verified-plan-course-list">${(p.courses||[]).map(c=>`<div><span>${escapeHtml(c.name)}</span><b>${fmtHp(c.hp)} hp</b></div>`).join('')}</div><div class="verified-plan-price"><span>Färdig verifierad studieplan</span></div><button class="primary" disabled>Betalning kopplas in senare</button></div>`;
 }
 function closeVerifiedPlan(){const x=document.getElementById('verifiedPlanModal');if(x){x.classList.remove('open');x.innerHTML='';}}
+function getOpportunityLevel(){
+ try{return sessionStorage.getItem('lotsen_opportunity_level')||'candidate'}catch(e){return 'candidate'}
+}
+function setOpportunityLevel(level){
+ try{sessionStorage.setItem('lotsen_opportunity_level',level)}catch(e){}
+ renderDegrees();
+}
+function advancedOpportunityCard(x){
+ const ready=x.candidateReady;
+ const near=x.candidateNear;
+ const hp=canonicalRemaining(x);
+ return `<article class="advanced-discovery-card advanced-path-card compact-advanced-card">
+   <div class="advanced-card-main">
+     <div>
+       <span>${escapeHtml(x.degreeType||'Master')} · ${String(x.degreeType||'').toLowerCase()==='magister'?'60':'120'} hp</span>
+       <h3>${escapeHtml(x.subject||x.name)}</h3>
+       <small>${ready?'Kandidat klar':near?`${fmtHp(x.candidateRemaining||0)} hp kvar till kandidat`:'Behörighet behöver kontrolleras'}</small>
+     </div>
+     <b class="advanced-remaining">${hp?`${fmtHp(hp)} hp kvar`:'Ser klar ut'}</b>
+   </div>
+   <button type="button" onclick="chooseOpportunityForMyPath('${escapeHtml(x.key)}')">Visa väg <span>›</span></button>
+ </article>`;
+}
 function renderDegrees(){
  const adSlot=document.getElementById('opportunitiesAdSlot');if(adSlot)adSlot.innerHTML=bannerAdHtml('opportunities-inline');
  const host=document.getElementById('degreeResults');
@@ -3316,79 +3462,49 @@ function renderDegrees(){
  }
 
  const all=safeDegreeOpportunities();
- const candidate=all.filter(x=>x.source!=='advanced').slice(0,5);
- const advanced=all.filter(x=>x.source==='advanced').slice(0,4);
+ const candidate=all.filter(x=>x.source!=='advanced');
+ const advanced=all.filter(x=>x.source==='advanced');
+ const magister=advanced.filter(x=>String(x.degreeType||'').toLowerCase()==='magister');
+ const master=advanced.filter(x=>String(x.degreeType||'').toLowerCase()==='master');
+ const level=getOpportunityLevel();
 
- const candidateHtml=candidate.length?candidate.map((x,i)=>{
-   const st=opportunityStatus(x);
-   const unis=opportunityUniversityCount(x);
-   const distance=opportunityHasDistance(x);
+ const candidateHtml=candidate.slice(0,8).map((x,i)=>{
+   const st=opportunityStatus(x),unis=opportunityUniversityCount(x),distance=opportunityHasDistance(x);
    return `<article class="opportunity-discovery-card">
      <div class="opportunity-discovery-head">
-       <div>
-         ${i===0?'<span class="opportunity-kicker">Närmast för dig</span>':''}
-         <h3>${escapeHtml(x.subject||x.name)}</h3>
-         <small>Kandidatexamen</small>
-       </div>
+       <div>${i===0?'<span class="opportunity-kicker">Närmast för dig</span>':''}<h3>${escapeHtml(x.subject||x.name)}</h3><small>Kandidatexamen · 180 hp</small></div>
        <span class="opportunity-status ${st.kind}">${escapeHtml(st.label)}</span>
      </div>
-     <div class="opportunity-meta">
-       ${unis?`<span>${unis} ${unis===1?'lärosäte':'lärosäten'}</span>`:''}
-       ${distance?'<span class="distance-available">Distans finns</span>':''}
-     </div>
+     <div class="opportunity-meta">${unis?`<span>${unis} ${unis===1?'lärosäte':'lärosäten'}</span>`:''}${distance?'<span class="distance-available">Distans finns</span>':''}</div>
      <button class="opportunity-choose" type="button" onclick="chooseOpportunityForMyPath('${escapeHtml(x.key)}')">Visa väg <span>›</span></button>
    </article>`;
- }).join(''):'<div class="card empty">Ingen tydlig kandidatväg hittades ännu.</div>';
+ }).join('');
 
- const advancedHtml=advanced.length?`
-   <section class="after-candidate">
-     <div class="after-candidate-intro">
-       <span class="after-candidate-icon">↗</span>
-       <div>
-         <h2>Efter kandidaten</h2>
-         <p>Du har en kandidat eller är nära en. Här är möjliga nästa steg.</p>
-       </div>
-     </div>
-     <div class="advanced-discovery-list">
-       ${advanced.map(x=>{
-         const ready=x.candidateReady;
-         const near=x.candidateNear;
-         const missing=(x.advancedMissing||[]).slice(0,3);
-         return `<article class="advanced-discovery-card advanced-path-card">
-           <div class="advanced-card-main">
-             <div>
-               <span>${escapeHtml(x.degreeType||'Master')}</span>
-               <h3>${escapeHtml(x.subject||x.name)}</h3>
-               <small>${ready?'Kandidat klar':near?`${fmtHp(x.candidateRemaining||0)} hp kvar till kandidat`:'Behörighet behöver granskas'}</small>
-             </div>
-             <b class="advanced-remaining">${x.remaining?`${fmtHp(x.remaining)} hp kvar`:'Ser klar ut'}</b>
-           </div>
-           ${missing.length?`<div class="advanced-missing-preview">
-             ${missing.map(m=>`<div><span>○</span><p>${escapeHtml(m.label)}</p></div>`).join('')}
-           </div>`:`<div class="advanced-ready-preview">✓ Inga tydliga kompletteringar hittades</div>`}
-           <button type="button" onclick="chooseOpportunityForMyPath('${escapeHtml(x.key)}')">Visa väg <span>›</span></button>
-         </article>`;
-       }).join('')}
-     </div>
-   </section>`:`
-   <section class="after-candidate muted-after">
-     <div class="after-candidate-intro">
-       <span class="after-candidate-icon">↗</span>
-       <div><h2>Efter kandidaten</h2><p>När du har en kandidat eller är nära en visar Lotsen möjliga magister- och mastervägar här.</p></div>
-     </div>
+ const advancedSections=`
+   <section class="advanced-level-section">
+     <div class="advanced-level-title"><div><span>60 hp</span><h2>Magister</h2></div><small>${magister.length} möjligheter</small></div>
+     <div class="advanced-discovery-list">${magister.length?magister.slice(0,8).map(advancedOpportunityCard).join(''):'<div class="mypath-note">Ingen tydlig magisterväg hittades ännu.</div>'}</div>
+   </section>
+   <section class="advanced-level-section">
+     <div class="advanced-level-title"><div><span>120 hp</span><h2>Master</h2></div><small>${master.length} möjligheter</small></div>
+     <div class="advanced-discovery-list">${master.length?master.slice(0,8).map(advancedOpportunityCard).join(''):'<div class="mypath-note">Ingen tydlig masterväg hittades ännu.</div>'}</div>
    </section>`;
 
  host.innerHTML=`
-   <section class="nearest-opportunities">
-     <div class="section-title-row">
-       <div><h2>Närmast examen</h2></div>
-       <small>${candidate.length} vägar hittade</small>
-     </div>
-     <div class="opportunity-discovery-list">${candidateHtml}</div>
-   </section>
-   ${advancedHtml}
+   <div class="opportunity-level-switch" role="tablist" aria-label="Examensnivå">
+     <button type="button" class="${level==='candidate'?'active':''}" onclick="setOpportunityLevel('candidate')">Kandidat</button>
+     <button type="button" class="${level==='advanced'?'active':''}" onclick="setOpportunityLevel('advanced')">Magister & master</button>
+     <button type="button" class="${level==='all'?'active':''}" onclick="setOpportunityLevel('all')">Alla</button>
+   </div>
+   ${level==='candidate'||level==='all'?`
+     <section class="nearest-opportunities">
+       <div class="section-title-row"><div><h2>Kandidat</h2></div><small>${candidate.length} vägar hittade</small></div>
+       <div class="opportunity-discovery-list">${candidateHtml||'<div class="card empty">Ingen tydlig kandidatväg hittades ännu.</div>'}</div>
+     </section>`:''}
+   ${level==='advanced'||level==='all'?`<div class="advanced-opportunities-wrap">${advancedSections}</div>`:''}
  `;
 }
+
 function setDegreeFilter(f,b){degreeFilter=f;document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderDegrees()}
 
 
@@ -4020,7 +4136,10 @@ function myPathDistanceProfiles(subject){
 
 function openMyPathUniversity(profileId,subject){
  const o=myPathOpportunity(subject);
- if(o)sessionStorage.setItem('lotsen_detail_key',o.key);
+ try{
+   if(o)sessionStorage.setItem('lotsen_detail_key',o.key);
+   sessionStorage.setItem('lotsen_preferred_profile',profileId||'');
+ }catch(e){}
  openUniversityPath(profileId,subject);
 }
 
@@ -4124,7 +4243,7 @@ function renderMyPath(){
              return `<button type="button" class="mypath-choice" data-mypath-subject="${escapeHtml(s)}">
                <div>
                  <strong>${escapeHtml(s)}</strong>
-                 <small>${op?(op.remaining?fmtHp(op.remaining)+' hp kvar':'Ser nära eller klar ut'):'Visa möjlig väg'}</small>
+                 <small>${op?(canonicalRemaining(op)?fmtHp(canonicalRemaining(op))+' hp kvar':'Ser nära eller klar ut'):'Visa möjlig väg'}</small>
                </div>
                <span>›</span>
              </button>`;
@@ -4359,7 +4478,7 @@ function renderCompareSelection(){
      const use=coursesForDegree(o), missing=missingForOpportunity(o);
      return `<article class="card compare-choice">
        <div class="compare-choice-head"><div><h3>${escapeHtml(o.name)}</h3><small>${o.source==='advanced'?'Avancerad nivå':'Grundnivå'}</small></div><span class="badge ${o.score>=100?'good':o.score>=55?'warn':'bad'}">${o.score}%</span></div>
-       <div class="compare-key"><strong>${o.remaining?fmtHp(o.remaining)+' hp kvar':'Ser klar ut'}</strong></div>
+       <div class="compare-key"><strong>${canonicalRemaining(o)?fmtHp(canonicalRemaining(o))+' hp kvar':'Ser klar ut'}</strong></div>
        <div class="compare-mini-section"><b>Kan potentiellt ingå</b><span>${fmtHp(use.subject.reduce((s,c)=>s+Number(c.hp||0),0))} hp i ${escapeHtml(o.subject||'huvudområdet')}</span></div>
        <div class="compare-mini-section"><b>Kvarstående kurser</b>${missing.length?`<ul>${missing.slice(0,4).map(m=>`<li>${escapeHtml(m.label)}</li>`).join('')}</ul>`:'<span>Ingen tydlig komplettering</span>'}</div>
        <button class="ghost" onclick="openDegreeDetails('${escapeHtml(o.key)}')">Visa min väg</button>
@@ -4561,6 +4680,26 @@ window.LotsenDegreeHistory = {
  priorDegreeReuseDecision
 };
 
+
+function debugPathConsistency(subject){
+ const o=myPathOpportunity(subject);
+ if(!o)return null;
+ const c=canonicalPathResult(o);
+ const result={subject,remaining:c.remaining,score:c.score,university:c.university,profileId:c.profileId};
+ console.info('Studielots canonical path',result);
+ return result;
+}
+
+function auditRemainingValues(){
+ try{
+   const rows=safeDegreeOpportunities().map(o=>{
+     const p=pathNumbers(o);
+     return {exam:o.subject||o.name,type:o.source==='advanced'?(o.degreeType||'advanced'):'candidate',totalHp:p.total,remainingHp:p.remaining,university:p.university};
+   });
+   console.table(rows);
+   return rows;
+ }catch(e){console.warn('Studielots hp audit',e);return []}
+}
 </script>
 
 
@@ -4814,6 +4953,14 @@ window.LotsenDegreeHistory = {
 
 
 
-<!-- Studielots v152 SKIP REDUNDANT SUMMARY -->
+
+
+
+
+
+
+
+
+<!-- Studielots v156 ANALYSIS LOADER -->
 </body>
 </html>
