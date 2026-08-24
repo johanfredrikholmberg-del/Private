@@ -1451,6 +1451,19 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 .course-provider-note.suggestion-empty strong{color:#102f35}
 .course-provider-note.suggestion-empty span{font-size:.92rem;line-height:1.4;color:#6f7883}
 </style>
+
+<style>
+.remaining-compact{padding:0!important;overflow:hidden}
+.remaining-details>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;cursor:pointer}
+.remaining-details>summary::-webkit-details-marker{display:none}
+.remaining-details>summary span{display:flex;flex-direction:column;gap:2px}
+.remaining-details>summary small{font-size:.9rem;font-weight:700;color:#6f7883}
+.remaining-details>summary strong{font-size:1.65rem;line-height:1.1;color:#102f35}
+.remaining-details>summary>b{font-size:.9rem;color:#176b5c;white-space:nowrap}
+.remaining-details>summary>b i{font-style:normal;font-size:1.3rem}
+.remaining-detail-body{padding:0 18px 18px}
+.remaining-detail-meta{font-size:.9rem;color:#7a8490;margin:0 4px 8px}
+</style>
 </head>
 <body>
 <header class="lotsen-header">
@@ -18804,7 +18817,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
     <div class="detail-hero"><div><div class="uni-detail-brand">${universityLogoHtml(path.provider,'lg')}<div><div class="eyebrow">${escapeHtml(path.provider)} · motor v2.1</div><h1>${escapeHtml(path.programName)}</h1></div></div><div class="verify-chip verified">Verifierad källa · v2.1</div></div><span class="badge ${safeComplete?'good':path.remaining<=30?'warn':'bad'}">${safeComplete?'100%':Math.max(0,Math.min(99,Number(path.score||0)))+'%'}</span></div>
     <div class="detail-summary"><strong>${fmtHp(counted)} hp kan räknas</strong> · <strong>${fmtHp(path.remaining)} hp kvar/olöst</strong></div>
     <section class="detail-block credited-compact"><details class="credited-details"><summary><span><small>Tillgodoräknat</small><strong>${fmtHp(counted)} hp</strong></span><b>Visa vilka kurser <i>›</i></b></summary><div class="credited-detail-body">${credited.length?`<div class="suggested-course-list">${credited.map(x=>`<div class="suggested-course-row"><div><strong>${escapeHtml(x.name)}</strong><small>${x.kind==='course'?'→ '+escapeHtml(x.target):escapeHtml(x.target)}</small></div><b>${fmtHp(x.hp)} hp</b></div>`).join('')}</div>`:`<div class="credit-explanation"><strong>${fmtHp(counted)} hp kan räknas enligt examensreglerna.</strong><p>Poängen är ännu inte kopplade till enskilda ersättningskurser. De används mot huvudområde, valbara poäng eller andra examenskrav.</p></div>`}</div></details></section>
-    <section class="detail-block compact-remaining-block"><div class="remaining-summary-head"><div><h2>Kvar</h2><p>${miss.length?`${miss.length} krav återstår`:'Inga krav återstår'}</p></div>${miss.length?`<strong>${fmtHp(Math.max(0,Number(path.remaining||0)))} hp</strong>`:''}</div>${miss.length?`<div class="suggested-course-list compact">${miss.slice(0,3).map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+1}</span><div><strong>${escapeHtml(m.label)}</strong></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div>${miss.length>3?`<details class="path-details compact-more"><summary>Visa alla ${miss.length} krav</summary><div class="suggested-course-list">${miss.slice(3).map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+4}</span><div><strong>${escapeHtml(m.label)}</strong></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div></details>`:''}`:'<div class="ready-box">Inga verifierade krav återstår.</div>'}</section>
+    <section class="detail-block remaining-compact"><details class="remaining-details"><summary><span><small>Kvar</small><strong>${fmtHp(Math.max(0,Number(path.remaining||0)))} hp</strong></span><b>Visa vilka krav <i>›</i></b></summary><div class="remaining-detail-body">${miss.length?`<div class="remaining-detail-meta">${miss.length} krav återstår</div><div class="suggested-course-list">${miss.map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+1}</span><div><strong>${escapeHtml(m.label)}</strong></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div>`:'<div class="ready-box">Inga verifierade krav återstår.</div>'}</div></details></section>
     <section class="detail-block suggested-course-block"><div class="suggested-course-head"><div><h2>Förslag att läsa</h2><p>Kurser som kan täcka kraven ovan.</p></div></div>${v21SuggestionSection(path)}</section>`;
  }
  const previousRenderUniversityDetail=renderUniversityDetail;
@@ -18983,6 +18996,87 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 .program-search-selected #programSearchResults{display:none}
 .program-result-visible{animation:v379in .16s ease-out}
 @keyframes v379in{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:none}}
+</style>
+
+<script>
+// v381 — Study Planner: time-ordered plan + faster verified alternatives.
+(function(){
+ function plannerCourseOrder(c){
+   const year=Number(c?.year||c?.studyYear||99);
+   const termRaw=String(c?.term||c?.semester||'').toLowerCase();
+   const term=/ht|autumn|höst/.test(termRaw)?1:/vt|spring|vår/.test(termRaw)?2:9;
+   const periodRaw=String(c?.period||'');
+   const pm=periodRaw.match(/(\d+)/); const period=pm?Number(pm[1]):9;
+   const thesis=c?.thesis?1:0;
+   return [thesis?99:year,term,period,String(c?.name||'')];
+ }
+ function comparePlannerCourse(a,b){
+   const A=plannerCourseOrder(a),B=plannerCourseOrder(b);
+   for(let i=0;i<A.length;i++){if(A[i]<B[i])return -1;if(A[i]>B[i])return 1} return 0;
+ }
+ function courseOfferingLabel(c){
+   const bits=[];
+   if(c?.year&&Number(c.year)<90)bits.push('År '+c.year);
+   if(c?.term||c?.semester)bits.push(String(c.term||c.semester).toUpperCase());
+   if(c?.period)bits.push(String(c.period).toUpperCase());
+   return bits.join(' · ');
+ }
+ function verifiedAlternativeFor(course,path){
+   const all=(path?.program?.courses||[]).filter(c=>c&&c!==course&&Number(c.hp||0)>0);
+   const subj=String(course?.subject||'').toLowerCase();
+   const level=String(course?.level||'').toLowerCase();
+   const targetHp=Number(course?.hp||0);
+   const candidates=all.filter(c=>{
+     if(c.required===true)return false;
+     if(targetHp&&Number(c.hp||0)<Math.min(targetHp,7.5))return false;
+     const sameSubject=subj&&String(c.subject||'').toLowerCase()===subj;
+     const sameLevel=!level||!c.level||String(c.level).toLowerCase()===level;
+     return sameSubject&&sameLevel;
+   }).sort((a,b)=>{
+     const ao=courseApplicationOpen(a)?0:1,bo=courseApplicationOpen(b)?0:1;
+     if(ao!==bo)return ao-bo;
+     return comparePlannerCourse(a,b);
+   });
+   return candidates[0]||null;
+ }
+ function studyPlannerSection(path){
+   if(path?.program?.safeMode===true||path?.program?.canCalculateCompletion===false)return '';
+   const missing=(path.requiredMissing||[]).filter(c=>Number(c.hp||0)>0).slice().sort(comparePlannerCourse);
+   if(!missing.length)return '';
+   let semester=1,hp=0;
+   const groups=[[]];
+   for(const c of missing){
+     const chp=Number(c.hp||0);
+     if(hp>0&&hp+chp>30){semester++;hp=0;groups.push([])}
+     groups[groups.length-1].push(c); hp+=chp;
+   }
+   const cards=groups.map((g,gi)=>`<div class="planner-term"><div class="planner-term-head"><strong>Studieperiod ${gi+1}</strong><span>${fmtHp(g.reduce((s,c)=>s+Number(c.hp||0),0))} hp</span></div>${g.map(c=>{
+     const alt=verifiedAlternativeFor(c,path), offering=courseOfferingLabel(c);
+     return `<div class="planner-row"><div><strong>${escapeHtml(c.name||'Kurs')}</strong><small>${[c.code,offering].filter(Boolean).map(escapeHtml).join(' · ')}</small></div><b>${fmtHp(c.hp||0)} hp</b></div>${alt?`<div class="planner-alt"><span>Snabbare alternativ att kontrollera</span><strong>${escapeHtml(alt.name||'Alternativ kurs')} · ${fmtHp(alt.hp||0)} hp</strong><small>${courseApplicationOpen(alt)?'Ansökan öppen · ':''}Kan passa samma ämnes-/nivåkrav. Bekräfta tillgodoräknande med lärosätet.</small><a href="${escapeHtml(antagningCourseUrl(alt))}" target="_blank" rel="noopener">Visa på Antagning.se ↗</a></div>`:''}`;
+   }).join('')}</div>`).join('');
+   return `<section class="detail-block study-planner-block"><div class="suggested-course-head"><div><h2>Studieplan i ordning</h2><p>Föreslagen ordning för kortaste realistiska väg. Upp till 30 hp per studieperiod.</p></div><span class="planner-beta">NY</span></div>${cards}<div class="planner-note">Ordningen bygger på programår, termin/läsperiod och progression när sådan data finns. Alternativa kurser visas bara som möjliga genvägar och behöver bekräftas om de inte är uttryckligen verifierade som ersättningskurser.</div></section>`;
+ }
+ window.studyPlannerSection=studyPlannerSection;
+
+ const oldRender=renderV21Detail;
+ renderV21Detail=function(path,o){
+   oldRender(path,o);
+   const host=document.getElementById('universityDetailContent');
+   if(!host)return;
+   const suggestion=host.querySelector('.suggested-course-block');
+   const html=studyPlannerSection(path);
+   if(suggestion&&html)suggestion.insertAdjacentHTML('beforebegin',html);
+ };
+ window.renderV21Detail=renderV21Detail;
+})();
+</script>
+<style>
+.study-planner-block{margin-top:18px}.planner-beta{font-size:.72rem;font-weight:800;background:#e9f5ef;color:#176b5c;border-radius:999px;padding:6px 9px}
+.planner-term{border-top:1px solid #e7ebed;padding:14px 0}.planner-term:first-of-type{border-top:0}
+.planner-term-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;color:#176b5c}
+.planner-row{display:flex;justify-content:space-between;gap:14px;padding:10px 0}.planner-row>div{display:flex;flex-direction:column;gap:2px}.planner-row small{color:#7a8490}.planner-row>b{white-space:nowrap}
+.planner-alt{margin:0 0 10px 0;padding:11px 13px;border-radius:14px;background:#f4f8f6;display:flex;flex-direction:column;gap:3px}.planner-alt>span{font-size:.72rem;font-weight:800;color:#176b5c;text-transform:uppercase;letter-spacing:.04em}.planner-alt small{color:#6f7883;line-height:1.35}.planner-alt a{font-weight:800;color:#176b5c;text-decoration:none;margin-top:3px}
+.planner-note{font-size:.8rem;line-height:1.4;color:#7a8490;margin-top:10px}
 </style>
 </body>
 </html>
