@@ -1422,7 +1422,30 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 <style>
 .home-fastest-card{width:100%;border:0;background:#fff;border-radius:24px;padding:18px 20px;margin:18px 0 0;display:flex;align-items:center;justify-content:space-between;text-align:left;box-shadow:0 10px 28px rgba(22,55,48,.06);color:inherit}
 .home-fastest-copy{display:flex;flex-direction:column;gap:3px;min-width:0}.home-fastest-copy small{font-size:.72rem;font-weight:800;letter-spacing:.08em;color:#176b5c}.home-fastest-copy b{font-size:1.12rem;line-height:1.25;color:#102f35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.home-fastest-copy span{font-size:.9rem;color:#6f7782}.home-fastest-card .home-chevron{font-size:2rem;color:#176b5c;margin-left:14px}
-</style></head>
+</style>
+<style>
+.compact-remaining-block{padding-bottom:14px}
+.remaining-summary-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:10px}
+.remaining-summary-head h2{margin:0 0 2px}
+.remaining-summary-head p{margin:0;color:#77808a;font-size:.9rem}
+.remaining-summary-head>strong{font-size:1.05rem;color:#176b5c;white-space:nowrap}
+.suggested-course-list.compact .suggested-course-row{padding-top:12px;padding-bottom:12px}
+.compact-more{margin-top:8px}
+.compact-more>summary{font-weight:800;color:#176b5c;cursor:pointer}
+</style>
+
+<style>
+.credited-compact{padding:0!important;overflow:hidden}
+.credited-details>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;cursor:pointer}
+.credited-details>summary::-webkit-details-marker{display:none}
+.credited-details>summary span{display:flex;flex-direction:column;gap:2px}
+.credited-details>summary small{font-size:.9rem;font-weight:700;color:#6f7883}
+.credited-details>summary strong{font-size:1.65rem;line-height:1.1;color:#102f35}
+.credited-details>summary>b{font-size:.9rem;color:#176b5c;white-space:nowrap}.credited-details>summary>b i{font-style:normal;font-size:1.3rem}
+.credited-detail-body{padding:0 18px 18px}
+.credit-explanation{padding:14px 4px 4px;color:#68727e}.credit-explanation strong{color:#102f35}.credit-explanation p{margin:5px 0 0;font-size:.9rem;line-height:1.4}
+</style>
+</head>
 <body>
 <header class="lotsen-header">
   <div class="lotsen-header-inner">
@@ -18724,7 +18747,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 
  function v21CourseCard(c,path){
    const url=typeof antagningCourseUrl==='function'?antagningCourseUrl(c):'https://www.antagning.se/se/search?period=HT_2026&freeText='+encodeURIComponent(c.code||c.name||'');
-   return `<article class="chalmers-suggestion compact"><div class="chalmers-suggestion-top"><div>${c.code?`<div class="eyebrow">${escapeHtml(c.code)}</div>`:''}<h3>${escapeHtml(c.name||'Kurs')}</h3></div><b>${fmtHp(c.hp||0)} hp</b></div><div class="chalmers-suggestion-reason">${c.thesis?'Examensarbete som saknas':c.required?'Obligatorisk kurs som saknas':'Kurs som kan passa i vald väg'}</div><div class="chalmers-application">${typeof courseApplicationBadge==='function'?courseApplicationBadge(c):''}<a href="${escapeHtml(url)}" target="_blank" rel="noopener">Visa på Antagning.se ↗</a></div><details class="course-more"><summary>Detaljer</summary><div class="course-more-body"><div>${escapeHtml(path.programName)}${path.programCode?' · '+escapeHtml(path.programCode):''}</div>${path.program?.sourceUrl?`<a href="${escapeHtml(path.program.sourceUrl)}" target="_blank" rel="noopener">Programplan ↗</a>`:''}</div></details></article>`;
+   return `<article class="chalmers-suggestion compact"><div class="chalmers-suggestion-top"><div>${c.code?`<div class="eyebrow">${escapeHtml(c.code)}</div>`:''}<h3>${escapeHtml(c.name||'Kurs')}</h3></div><b>${fmtHp(c.hp||0)} hp</b></div><div class="chalmers-suggestion-reason">${c.thesis?'Examensarbete som saknas':c.required?'Obligatorisk kurs som saknas':'Kurs som kan passa i vald väg'}</div><div class="chalmers-application">${typeof courseApplicationBadge==='function'?courseApplicationBadge(c):''}<a href="${escapeHtml(url)}" target="_blank" rel="noopener">Visa på Antagning.se ↗</a></div></article>`;
  }
  function v21SuggestionSection(path){
    const missing=(path.requiredMissing||[]).filter(c=>Number(c.hp||0)>0);
@@ -18741,17 +18764,42 @@ console.info('Studielots v371: programme search relevance and deduplication inst
    }
    return '<div class="ready-box">Inga verifierade kompletteringar återstår i den kartlagda strukturen.</div>';
  }
+
+ function v21CreditedRows(path){
+   const rows=[], seen=new Set();
+   for(const x of (path.used||[])){
+     const hp=Number(x.countedHp||0); if(hp<=0)continue;
+     const name=x.userCourse?.name||'Tidigare kurs';
+     const target=x.programCourse?.name||'programkrav';
+     const key='course|'+name+'|'+target+'|'+hp; if(seen.has(key))continue; seen.add(key);
+     rows.push({kind:'course',name,target,hp});
+   }
+   // Rule-level credits are legitimate credits in the degree even when they do not replace one named course.
+   for(const r of (path.rules||[])){
+     const target=Math.max(0,Number(r.hp||r.target||0));
+     const have=Math.max(0,Math.min(target,Number(r.have||0)));
+     if(have<=0)continue;
+     const label=r.label||r.subject||
+       (r.type==='elective_min_hp'?'Valbara/fria kurser':
+       r.type==='choice_subject_min_hp'?'Ämnesblock':
+       r.type==='subject_min_hp'?'Huvudområde':
+       r.type==='advanced_min_hp'?'Avancerad nivå':
+       r.type==='thesis_total_hp'||r.type==='thesis_required'?'Självständigt arbete':'Examenskrav');
+     const key='rule|'+label+'|'+have; if(seen.has(key))continue; seen.add(key);
+     rows.push({kind:'rule',name:label,target:'Kan användas i examen',hp:have});
+   }
+   return rows;
+ }
  function renderV21Detail(path,o){
    const host=document.getElementById('universityDetailContent');if(!host)return;
-   const used=path.used||[], miss=missingForOpportunity(o); const total=degreeHpFor(o); const counted=Math.max(0,total-Number(path.remaining||0));
+   const used=path.used||[], credited=v21CreditedRows(path), miss=missingForOpportunity(o); const total=degreeHpFor(o); const counted=Math.max(0,total-Number(path.remaining||0));
    const safeComplete=path.complete&&Number(path.remaining||0)===0&&Number(path.unresolvedStructureHp||0)===0;
    host.innerHTML=`
     <div class="detail-hero"><div><div class="uni-detail-brand">${universityLogoHtml(path.provider,'lg')}<div><div class="eyebrow">${escapeHtml(path.provider)} · motor v2.1</div><h1>${escapeHtml(path.programName)}</h1></div></div><div class="verify-chip verified">Verifierad källa · v2.1</div></div><span class="badge ${safeComplete?'good':path.remaining<=30?'warn':'bad'}">${safeComplete?'100%':Math.max(0,Math.min(99,Number(path.score||0)))+'%'}</span></div>
     <div class="detail-summary"><strong>${fmtHp(counted)} hp kan räknas</strong> · <strong>${fmtHp(path.remaining)} hp kvar/olöst</strong></div>
-    <section class="detail-block"><h2>Tillgodoräknat</h2>${used.length?`<div class="suggested-course-list">${used.slice(0,6).map(x=>`<div class="suggested-course-row"><div><strong>${escapeHtml(x.userCourse?.name||'Din kurs')}</strong><small>→ ${escapeHtml(x.programCourse?.name||'programkrav')}</small></div><b>${fmtHp(x.countedHp||0)} hp</b></div>`).join('')}</div>${used.length>6?`<details class="path-details"><summary>Visa ${used.length-6} fler matchningar</summary><div class="suggested-course-list">${used.slice(6).map(x=>`<div class="suggested-course-row"><div><strong>${escapeHtml(x.userCourse?.name||'Din kurs')}</strong><small>→ ${escapeHtml(x.programCourse?.name||'programkrav')}</small></div><b>${fmtHp(x.countedHp||0)} hp</b></div>`).join('')}</div></details>`:''}`:'<div class="card empty">Ingen kurs är ännu tillräckligt starkt matchad mot den valda programstrukturen.</div>'}</section>
-    <section class="detail-block"><h2>Kvar</h2>${miss.length?`<div class="suggested-course-list">${miss.slice(0,8).map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+1}</span><div><strong>${escapeHtml(m.label)}</strong><small>${m.type==='coverage'?'Ej detaljkartlagt ännu':'Samma v2.1-resultat som hp-siffran ovan'}</small></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div>`:'<div class="ready-box">Inga verifierade krav återstår.</div>'}</section>
-    <section class="detail-block suggested-course-block"><div class="suggested-course-head"><div><h2>Förslag att läsa</h2><p>Endast från ${escapeHtml(path.provider)} och den valda vägen.</p></div><span>v2.1</span></div>${v21SuggestionSection(path)}</section>
-    <div class="course-provider-note"><strong>En källa genom hela flödet:</strong> tillgodoräknat, hp kvar och kursförslag ovan kommer från samma valda programstruktur. Kurser från andra program blandas inte in.</div>`;
+    <section class="detail-block credited-compact"><details class="credited-details"><summary><span><small>Tillgodoräknat</small><strong>${fmtHp(counted)} hp</strong></span><b>Visa vilka kurser <i>›</i></b></summary><div class="credited-detail-body">${credited.length?`<div class="suggested-course-list">${credited.map(x=>`<div class="suggested-course-row"><div><strong>${escapeHtml(x.name)}</strong><small>${x.kind==='course'?'→ '+escapeHtml(x.target):escapeHtml(x.target)}</small></div><b>${fmtHp(x.hp)} hp</b></div>`).join('')}</div>`:`<div class="credit-explanation"><strong>${fmtHp(counted)} hp kan räknas enligt examensreglerna.</strong><p>Poängen är ännu inte kopplade till enskilda ersättningskurser. De används mot huvudområde, valbara poäng eller andra examenskrav.</p></div>`}</div></details></section>
+    <section class="detail-block compact-remaining-block"><div class="remaining-summary-head"><div><h2>Kvar</h2><p>${miss.length?`${miss.length} krav återstår`:'Inga krav återstår'}</p></div>${miss.length?`<strong>${fmtHp(miss.reduce((s,m)=>s+Number(m.hp||0),0))} hp</strong>`:''}</div>${miss.length?`<div class="suggested-course-list compact">${miss.slice(0,3).map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+1}</span><div><strong>${escapeHtml(m.label)}</strong></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div>${miss.length>3?`<details class="path-details compact-more"><summary>Visa alla ${miss.length} krav</summary><div class="suggested-course-list">${miss.slice(3).map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+4}</span><div><strong>${escapeHtml(m.label)}</strong></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div></details>`:''}`:'<div class="ready-box">Inga verifierade krav återstår.</div>'}</section>
+    <section class="detail-block suggested-course-block"><div class="suggested-course-head"><div><h2>Förslag att läsa</h2><p>Kurser som kan täcka kraven ovan.</p></div></div>${v21SuggestionSection(path)}</section>`;
  }
  const previousRenderUniversityDetail=renderUniversityDetail;
  renderUniversityDetail=function(profileId,major){
@@ -18777,5 +18825,68 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 })();
 </script>
 
+
+<script>
+// v376 — robust clickable programme search rows.
+(function(){
+  window.openProgramSearchResult=function(id){
+    const p=(Array.isArray(programCatalog)?programCatalog:[]).find(x=>String(x.id)===String(id));
+    if(!p)return;
+    try{sessionStorage.setItem('lotsen_selected_program',String(id))}catch(e){}
+    const input=document.getElementById('programSearchInput');
+    const results=document.getElementById('programSearchResults');
+    if(input) input.value=p.name||'';
+    if(results) results.innerHTML='';
+    renderProgramMatch(p);
+    requestAnimationFrame(()=>{
+      const result=document.getElementById('programMatchResult');
+      if(result) result.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  };
+
+  const previousRenderProgramSearch=renderProgramSearch;
+  renderProgramSearch=function(){
+    const host=document.getElementById('programSearchResults');
+    if(!host)return;
+    const raw=String(document.getElementById('programSearchInput')?.value||'').trim();
+    const q=v371Norm(raw);
+    let rows=(Array.isArray(programCatalog)?programCatalog:[])
+      .filter(p=>V2_ACTIVE_UNIVERSITY_KEYS.has(String(p?.university||'').trim().toLocaleLowerCase('sv-SE')));
+    rows=v371UniquePrograms(rows);
+    if(q){
+      rows=rows.map(p=>({p,score:v371SearchScore(p,q)}))
+        .filter(x=>x.score>0)
+        .sort((a,b)=>b.score-a.score || String(a.p.name).localeCompare(String(b.p.name),'sv'))
+        .map(x=>x.p);
+    }else{
+      rows.sort((a,b)=>String(a.name).localeCompare(String(b.name),'sv'));
+    }
+    rows=rows.slice(0,12);
+    host.innerHTML=rows.length?rows.map(p=>{
+      const meta=[p.officialCode||p.code||'',Number(p.hp||0)?`${Number(p.hp)} hp`:'',p.level||''].filter(Boolean).join(' · ');
+      const id=encodeURIComponent(String(p.id||''));
+      return `<button class="program-search-row program-search-row-clickable" type="button" data-program-id="${escapeHtml(id)}" aria-label="Öppna ${escapeHtml(p.name)}">
+        <div class="uni-name-with-logo">${universityLogoHtml(p.university,'sm')}<div><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.university)}${meta?` · ${escapeHtml(meta)}`:''}</span></div></div><span class="program-row-arrow">›</span>
+      </button>`;
+    }).join(''):'<div class="muted small program-empty">Inget program hittades bland Chalmers, GU och Lund.</div>';
+
+    host.querySelectorAll('.program-search-row-clickable').forEach(row=>{
+      const activate=()=>{
+        const id=decodeURIComponent(row.dataset.programId||'');
+        if(id) openProgramSearchResult(id);
+      };
+      row.addEventListener('click',activate);
+      row.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}
+      });
+    });
+  };
+})();
+</script>
+<style>
+.program-search-row-clickable{cursor:pointer;touch-action:manipulation;position:relative;z-index:1}
+.program-search-row-clickable:active{transform:scale(.995)}
+.program-row-arrow{pointer-events:none}
+</style>
 </body>
 </html>
