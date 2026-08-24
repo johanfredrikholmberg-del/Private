@@ -1497,14 +1497,15 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
       </button>
     </div>
 
-    <button class="home-fastest-card" id="homeFastestCard" type="button" onclick="openHomeFastest()" style="display:none">
-      <div class="home-fastest-copy">
-        <small>SNABBAST FÖR DIG</small>
-        <b id="homeFastestName">–</b>
-        <span id="homeFastestMeta">–</span>
-      </div>
-      <span class="home-chevron">›</span>
-    </button>
+    <section class="home-fastest-stack" id="homeFastestStack" style="display:none">
+      <div class="home-fastest-stack-title">SNABBAST FÖR DIG</div>
+      <button class="home-fastest-row" id="homeFastestCandidate" type="button" onclick="openHomeFastestLevel('candidate')" style="display:none">
+        <div><small>GRUNDNIVÅ</small><b id="homeFastestCandidateName">–</b><span id="homeFastestCandidateMeta">–</span></div><i>›</i>
+      </button>
+      <button class="home-fastest-row" id="homeFastestAdvanced" type="button" onclick="openHomeFastestLevel('advanced')" style="display:none">
+        <div><small>AVANCERAD NIVÅ</small><b id="homeFastestAdvancedName">–</b><span id="homeFastestAdvancedMeta">–</span></div><i>›</i>
+      </button>
+    </section>
 
     <button class="home-credit-card" type="button" onclick="go('studies')">
       <span class="home-result-icon gold" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.2l5.9-.9z"/></svg></span>
@@ -2303,22 +2304,35 @@ function confirmImport(){
   importStatus.textContent=`${chosen.length} kurser importerades.`;
   importPreview.innerHTML='';
 
-  // Gå alltid till Möjligheter först.
+  // Efter import stannar användaren på Hem.
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('degrees')?.classList.add('active');
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen==='degrees'));
+  document.getElementById('start')?.classList.add('active');
+  document.querySelectorAll('.nav button[data-screen]').forEach(b=>b.classList.toggle('active',b.dataset.screen==='start'));
+  document.querySelectorAll('.lotsen-bottomnav button[data-screen]').forEach(b=>b.classList.toggle('active',b.dataset.screen==='start'));
   window.scrollTo(0,0);
 
-  // Rendera därefter. Ett fel i en avancerad regel får inte hindra sidan från att visas.
+  // Uppdatera alla vyer i bakgrunden, men lämna användaren på Hem.
   try{renderCourses()}catch(e){console.error(e)}
-  try{renderDegrees()}catch(e){
+  try{refreshAll()}catch(e){
     console.error(e);
-    const host=document.getElementById('degreeResults');
-    if(host)host.innerHTML='<div class="card empty"><strong>Meriterna är importerade</strong><div class="small muted">Ladda om sidan om resultaten inte visas direkt.</div></div>';
+    try{renderDegrees()}catch(_){}
   }
 
+  // Kör en extra renderpass när DOM och sessionsdata hunnit uppdateras.
+  requestAnimationFrame(()=>{
+    try{refreshAll()}catch(e){console.error('Hem refresh efter import',e)}
+  });
+  setTimeout(()=>{
+    try{refreshAll()}catch(e){console.error('Hem refresh efter import 2',e)}
+  },60);
+
   // Kurskod + lärosäte + termin används i bakgrunden för att verifiera nivå.
-  setTimeout(()=>{resolveMissingCourseLevelsInBackground().catch(()=>{})},100);
+  setTimeout(async()=>{
+    try{
+      await resolveMissingCourseLevelsInBackground();
+    }catch(e){}
+    try{refreshAll()}catch(e){console.error('Hem refresh efter nivåanalys',e)}
+  },100);
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 
@@ -13085,26 +13099,53 @@ function renderCompareSelection(){
  </div>`;
 }
 
-let homeFastestKey=null;
-function homeFastestOpportunity(){
+let homeFastestKeys={candidate:null,advanced:null};
+function homeFastestByLevel(level){
  try{
-   const opts=safeDegreeOpportunities().filter(o=>Number.isFinite(Number(canonicalRemaining(o))));
-   if(!opts.length)return null;
-   return opts.slice().sort((a,b)=>Number(canonicalRemaining(a))-Number(canonicalRemaining(b)) || Number(b.score||0)-Number(a.score||0))[0]||null;
+   const rows=safeDegreeOpportunities()
+     .filter(o=>Number.isFinite(Number(o.remaining)))
+     .filter(o=>level==='candidate'?o.source!=='advanced':o.source==='advanced');
+   if(!rows.length)return null;
+   return rows.slice().sort((a,b)=>{
+     const ar=Math.max(0,Number(a.remaining||0)),br=Math.max(0,Number(b.remaining||0));
+     if(ar!==br)return ar-br;
+     return Number(b.score||0)-Number(a.score||0) ||
+       String(a.subject||a.name||'').localeCompare(String(b.subject||b.name||''),'sv');
+   })[0]||null;
  }catch(e){return null}
 }
 function renderHomeFastest(){
- const card=document.getElementById('homeFastestCard'); if(!card)return;
- if(!courses.length){card.style.display='none';homeFastestKey=null;return}
- const o=homeFastestOpportunity(); if(!o){card.style.display='none';homeFastestKey=null;return}
- homeFastestKey=o.key;
- const rem=Math.max(0,Number(canonicalRemaining(o)||0));
- const total=Number(o.totalHp||o.hp||180), used=Math.max(0,total-rem);
- document.getElementById('homeFastestName').textContent=o.name||o.subject||'Närmaste examen';
- document.getElementById('homeFastestMeta').textContent=(used?fmtHp(used)+' hp kan räknas · ':'')+(rem?fmtHp(rem)+' hp kvar':'Ser klar ut');
- card.style.display='flex';
+ const stack=document.getElementById('homeFastestStack');
+ if(!stack)return;
+ if(!courses.length){
+   stack.style.display='none';
+   homeFastestKeys={candidate:null,advanced:null};
+   return;
+ }
+ const levels=[
+   ['candidate','homeFastestCandidate','homeFastestCandidateName','homeFastestCandidateMeta'],
+   ['advanced','homeFastestAdvanced','homeFastestAdvancedName','homeFastestAdvancedMeta']
+ ];
+ let any=false;
+ levels.forEach(([level,rowId,nameId,metaId])=>{
+   const row=document.getElementById(rowId),o=homeFastestByLevel(level);
+   if(!row)return;
+   if(!o){row.style.display='none';homeFastestKeys[level]=null;return}
+   any=true;homeFastestKeys[level]=o.key;
+   const rem=Math.max(0,Number(o.remaining||0));
+   const total=level==='candidate'?180:(String(o.degreeType||'').toLowerCase()==='magister'?60:120);
+   const used=Math.max(0,Math.min(total,total-rem));
+   document.getElementById(nameId).textContent=o.name||o.subject||'Närmaste examen';
+   document.getElementById(metaId).textContent=(used?fmtHp(used)+' hp kan räknas · ':'')+(rem?fmtHp(rem)+' hp kvar':'Ser klar ut');
+   row.style.display='flex';
+ });
+ stack.style.display=any?'block':'none';
 }
-function openHomeFastest(){ if(homeFastestKey){openDegreeDetails(homeFastestKey);return} go('degrees'); }
+function openHomeFastestLevel(level){
+ const key=homeFastestKeys[level];
+ if(key){openDegreeDetails(key);return}
+ go('degrees');
+}
 
 function refreshAll(){
  renderDegrees();
@@ -19429,5 +19470,97 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   .fastest-path-card button{grid-column:2;justify-self:start;padding:4px 0 0}
 }
 </style>
+
+<script>
+// v385-safe — robust programme-search activation on top of the stable v384 base.
+(function(){
+  window.openProgramSearchResultSafe=function(id){
+    const p=(Array.isArray(programCatalog)?programCatalog:[]).find(x=>String(x.id)===String(id));
+    if(!p)return;
+    try{sessionStorage.setItem('lotsen_selected_program',String(id))}catch(e){}
+    const input=document.getElementById('programSearchInput');
+    const host=document.getElementById('programSearchResults');
+    if(input)input.value=p.name||'';
+    if(host)host.innerHTML='';
+    renderProgramMatch(p);
+    requestAnimationFrame(()=>document.getElementById('programMatchResult')?.scrollIntoView({behavior:'smooth',block:'start'}));
+  };
+
+  const baseRender=renderProgramSearch;
+  renderProgramSearch=function(){
+    baseRender();
+    const host=document.getElementById('programSearchResults');
+    if(!host)return;
+    host.querySelectorAll('.program-search-row').forEach(row=>{
+      const raw=row.getAttribute('onclick')||'';
+      const m=raw.match(/selectProgramForMatch\\('([^']+)'\\)/);
+      if(m){
+        row.dataset.programId=m[1];
+        row.removeAttribute('onclick');
+      }
+    });
+  };
+
+  document.addEventListener('click',function(e){
+    const row=e.target.closest?.('#programSearchResults .program-search-row');
+    if(!row)return;
+    e.preventDefault();
+    e.stopPropagation();
+    const id=row.dataset.programId||'';
+    if(id)openProgramSearchResultSafe(id);
+  },true);
+
+  document.addEventListener('touchend',function(e){
+    const row=e.target.closest?.('#programSearchResults .program-search-row');
+    if(!row)return;
+    const id=row.dataset.programId||'';
+    if(!id)return;
+    e.preventDefault();
+    openProgramSearchResultSafe(id);
+  },{capture:true,passive:false});
+})();
+</script>
+<style>
+.home-fastest-stack{margin:18px 0 0;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 10px 28px rgba(22,55,48,.06)}
+.home-fastest-stack-title{padding:16px 20px 8px;font-size:.72rem;font-weight:850;letter-spacing:.08em;color:#176b5c}
+.home-fastest-row{width:100%;border:0;border-top:1px solid #edf0ef;background:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:left;color:inherit;cursor:pointer}
+.home-fastest-row:first-of-type{border-top:0}
+.home-fastest-row>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.home-fastest-row small{font-size:.7rem;font-weight:800;color:#7a8490}
+.home-fastest-row b{font-size:1.08rem;line-height:1.25;color:#102f35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.home-fastest-row span{font-size:.9rem;color:#6f7782}
+.home-fastest-row i{font-style:normal;font-size:1.8rem;color:#176b5c}
+#programSearchResults .program-search-row{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(21,88,79,.13)}
+</style>
+
+<script>
+// v386-from-v384 — Home is always hydrated immediately after import and when reopened.
+(function(){
+  function hydrateHomeNow(){
+    try{refreshAll()}catch(e){console.warn('hydrateHomeNow',e)}
+  }
+
+  const oldGo=go;
+  go=function(id){
+    oldGo(id);
+    if(id==='start'){
+      requestAnimationFrame(hydrateHomeNow);
+      setTimeout(hydrateHomeNow,40);
+    }
+  };
+  window.go=go;
+
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden && document.getElementById('start')?.classList.contains('active')){
+      hydrateHomeNow();
+    }
+  });
+
+  window.__studielotsV386FromV384={
+    version:'v386-from-v384',
+    homeHydration:'immediate-post-import'
+  };
+})();
+</script>
 </body>
 </html>
