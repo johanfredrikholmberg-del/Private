@@ -1464,6 +1464,11 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 .remaining-detail-body{padding:0 18px 18px}
 .remaining-detail-meta{font-size:.9rem;color:#7a8490;margin:0 4px 8px}
 </style>
+
+<style>
+.planner-alt.distance-fast-alt{background:#f1f6fb;border:1px solid rgba(41,98,154,.13)}
+.planner-alt.distance-fast-alt>span{color:#2f6296}
+</style>
 </head>
 <body>
 <header class="lotsen-header">
@@ -19562,5 +19567,206 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   };
 })();
 </script>
+
+<script>
+// v387 — Faster Degree Engine 2.0
+// Finds real alternative courses across the same university's verified v2 catalogue.
+(function(){
+  const normFast=v=>String(v||'').trim().toLocaleLowerCase('sv-SE');
+  const thesisLike=c=>Boolean(c?.thesis)||/(examensarbete|kandidatuppsats|magisteruppsats|masteruppsats|självständigt arbete)/i.test(String(c?.name||''));
+  const levelBand=c=>{
+    const s=String(c?.level||c?.progression||'').toLowerCase();
+    if(/avancerad|a1n|a1f|a2e|a2f/.test(s))return 'advanced';
+    if(/grund|g1n|g1f|g2f|g2e/.test(s))return 'basic';
+    return '';
+  };
+  const offeringRank=c=>{
+    const year=Number(c?.year||c?.studyYear||99);
+    const term=String(c?.term||c?.semester||'').toLowerCase();
+    const termRank=/ht|autumn|höst/.test(term)?1:/vt|spring|vår/.test(term)?2:8;
+    const pm=String(c?.period||'').match(/(\d+)/);
+    const period=pm?Number(pm[1]):8;
+    return year*100+termRank*10+period;
+  };
+  const explicitEquivalent=(alt,target)=>{
+    const targetCode=normFast(target?.code), targetName=normFast(target?.name);
+    const vals=[
+      ...(Array.isArray(alt?.equivalentTo)?alt.equivalentTo:[alt?.equivalentTo]),
+      ...(Array.isArray(alt?.equivalents)?alt.equivalents:[alt?.equivalents]),
+      ...(Array.isArray(alt?.replaces)?alt.replaces:[alt?.replaces])
+    ].filter(Boolean).map(normFast);
+    return vals.some(v=>v===targetCode||v===targetName);
+  };
+
+  function sameUniversityCoursePool(path){
+    const uni=String(path?.provider||path?.program?.university||'');
+    if(!uni)return [];
+    let programs=[];
+    try{
+      programs=(typeof normalizedProgramCatalog==='function'?normalizedProgramCatalog():programCatalog||[])
+        .filter(p=>p&&p.university===uni&&p.engine==='v2'&&!p.catalogOnly)
+        .filter(p=>!p.academicYear||p.academicYear==='2026/2027');
+    }catch(e){return []}
+
+    const seen=new Map();
+    programs.forEach(p=>(p.courses||[]).forEach(c=>{
+      if(!c||Number(c.hp||0)<=0)return;
+      const key=normFast(c.code)||`${normFast(c.name)}|${Number(c.hp||0)}`;
+      const row={...c,_sourceProgram:p.name||'',_sourceProgramCode:p.code||'',_sourceUrl:p.sourceUrl||''};
+      const prev=seen.get(key);
+      if(!prev||Number(Boolean(row.verified))>Number(Boolean(prev.verified)))seen.set(key,row);
+    }));
+    return [...seen.values()];
+  }
+
+  function fasterAlternativeCandidates(target,path){
+    const pool=sameUniversityCoursePool(path);
+    const targetSubj=normFast(target?.subject);
+    const targetBand=levelBand(target);
+    const targetHp=Number(target?.hp||0);
+    const targetRank=offeringRank(target);
+    const targetOpen=typeof courseApplicationOpen==='function'?courseApplicationOpen(target):false;
+    const targetThesis=thesisLike(target);
+
+    return pool.map(c=>{
+      if((c.code&&target?.code&&normFast(c.code)===normFast(target.code)) || normFast(c.name)===normFast(target?.name))return null;
+      if(targetThesis!==thesisLike(c))return null;
+
+      const subj=normFast(c.subject);
+      const subjectExact=Boolean(targetSubj&&subj===targetSubj);
+      if(!subjectExact)return null;
+
+      const band=levelBand(c);
+      const levelCompatible=!targetBand||!band||band===targetBand;
+      if(!levelCompatible)return null;
+
+      const hp=Number(c.hp||0);
+      if(targetHp&&hp<Math.min(targetHp,7.5))return null;
+
+      const open=typeof courseApplicationOpen==='function'?courseApplicationOpen(c):false;
+      const rank=offeringRank(c);
+      const explicit=explicitEquivalent(c,target);
+
+      // A candidate must have a concrete speed advantage, or an explicit equivalence.
+      const earlier=rank<targetRank;
+      const opensSooner=open&&!targetOpen;
+      if(!explicit&&!earlier&&!opensSooner)return null;
+
+      let score=0;
+      if(explicit)score+=1000;
+      if(subjectExact)score+=180;
+      if(targetBand&&band===targetBand)score+=100;
+      if(targetHp&&Math.abs(hp-targetHp)<0.01)score+=70;
+      if(open)score+=100;
+      if(earlier)score+=Math.max(10,Math.min(80,targetRank-rank));
+      if(c.distance===true)score+=75;
+      if(c.noPhysicalMeetings===true)score+=20;
+      if(c.verified===true)score+=30;
+
+      const distanceReason=c.distance===true
+        ? (c.noPhysicalMeetings===true?'Distans utan fysiska träffar':'Distans')
+        : '';
+
+      return {
+        course:c,
+        score,
+        verifiedEquivalent:explicit,
+        earlier,
+        opensSooner,
+        distance:Boolean(c.distance===true),
+        noPhysicalMeetings:Boolean(c.noPhysicalMeetings===true),
+        reason:explicit?'Verifierad motsvarighet':
+          c.distance===true&&opensSooner&&earlier?`${distanceReason}, ges tidigare och går att söka nu`:
+          c.distance===true&&opensSooner?`${distanceReason} och går att söka nu`:
+          c.distance===true&&earlier?`${distanceReason} och ges tidigare`:
+          c.distance===true?distanceReason:
+          opensSooner&&earlier?'Ges tidigare och går att söka nu':
+          opensSooner?'Går att söka nu':
+          earlier?'Ges tidigare i studieordningen':'Möjligt alternativ'
+      };
+    }).filter(Boolean).sort((a,b)=>b.score-a.score);
+  }
+  window.fasterAlternativeCandidates=fasterAlternativeCandidates;
+
+  function bestFasterAlternative(target,path){
+    return fasterAlternativeCandidates(target,path)[0]||null;
+  }
+  window.bestFasterAlternative=bestFasterAlternative;
+
+  function fastOfferingLabel(c){
+    const bits=[];
+    if(c?.year&&Number(c.year)<90)bits.push('År '+c.year);
+    if(c?.term||c?.semester)bits.push(String(c.term||c.semester).toUpperCase());
+    if(c?.period)bits.push(String(c.period).toUpperCase());
+    if(c?.distance===true)bits.push('Distans');
+    return bits.join(' · ');
+  }
+
+  // Replace Study Planner output with a version powered by the broader same-university course pool.
+  window.studyPlannerSection=function(path){
+    if(path?.program?.safeMode===true||path?.program?.canCalculateCompletion===false)return '';
+    const missing=(path.requiredMissing||[]).filter(c=>Number(c.hp||0)>0).slice().sort((a,b)=>offeringRank(a)-offeringRank(b));
+    if(!missing.length)return '';
+
+    const groups=[[]]; let hp=0;
+    missing.forEach(c=>{
+      const chp=Number(c.hp||0);
+      if(hp>0&&hp+chp>30){groups.push([]);hp=0}
+      groups[groups.length-1].push(c); hp+=chp;
+    });
+
+    let fasterCount=0, verifiedCount=0;
+    const cards=groups.map((g,gi)=>`<div class="planner-term">
+      <div class="planner-term-head"><strong>Studieperiod ${gi+1}</strong><span>${fmtHp(g.reduce((s,c)=>s+Number(c.hp||0),0))} hp</span></div>
+      ${g.map(c=>{
+        const hit=bestFasterAlternative(c,path);
+        if(hit){fasterCount++;if(hit.verifiedEquivalent)verifiedCount++}
+        const alt=hit?.course;
+        return `<div class="planner-row"><div><strong>${escapeHtml(c.name||'Kurs')}</strong><small>${[c.code,fastOfferingLabel(c)].filter(Boolean).map(escapeHtml).join(' · ')}</small></div><b>${fmtHp(c.hp||0)} hp</b></div>
+        ${alt?`<div class="planner-alt ${hit.verifiedEquivalent?'verified-fast-alt':''} ${hit.distance?'distance-fast-alt':''}">
+          <span>${hit.verifiedEquivalent?(hit.distance?'Verifierat distansalternativ':'Verifierat snabbare alternativ'):(hit.distance?'Möjligt distansalternativ':'Möjligt snabbare alternativ')}</span>
+          <strong>${escapeHtml(alt.name||'Alternativ kurs')} · ${fmtHp(alt.hp||0)} hp</strong>
+          <small>${escapeHtml(hit.reason)}${fastOfferingLabel(alt)?' · '+escapeHtml(fastOfferingLabel(alt)):''}${courseApplicationOpen(alt)?' · Ansökan öppen':''}</small>
+          <small>${hit.verifiedEquivalent?'Kan användas som verifierad motsvarighet i den kartlagda strukturen.':'Samma ämne och kompatibel nivå i verifierad v2-data. Tillgodoräknandet behöver bekräftas innan Studielots räknar in kursen som säker.'}</small>
+          <a href="${escapeHtml(antagningCourseUrl(alt))}" target="_blank" rel="noopener">Visa på Antagning.se ↗</a>
+        </div>`:''}`;
+      }).join('')}
+    </div>`).join('');
+
+    return `<section class="detail-block study-planner-block faster-degree-engine">
+      <div class="suggested-course-head"><div><h2>Snabbaste studieplanen</h2><p>Studielots söker även efter riktiga alternativa kurser vid ${escapeHtml(path.provider||'lärosätet')}.</p></div><span class="planner-beta">OPTIMERAD</span></div>
+      ${fasterCount?`<div class="fast-engine-summary"><strong>⚡ ${fasterCount} ${fasterCount===1?'möjlig genväg hittad':'möjliga genvägar hittade'}</strong><span>${verifiedCount?`${verifiedCount} verifierad${verifiedCount===1?'':'e'} · `:''}Alternativ rankas efter ämne, nivå, hp, distansmöjlighet och när de kan läsas.</span></div>`:''}
+      ${cards}
+      <div class="planner-note">Studielots räknar inte ett möjligt alternativ som tillgodoräknat förrän motsvarigheten är verifierad. På så sätt kan motorn visa snabbare vägar utan att ge falska examensbesked.</div>
+    </section>`;
+  };
+
+  // Rebind detail renderer so newly opened study plans use the upgraded planner.
+  const v387PriorRender=renderV21Detail;
+  renderV21Detail=function(path,o){
+    v387PriorRender(path,o);
+    const host=document.getElementById('universityDetailContent');
+    if(!host)return;
+    // Earlier planner may already have rendered. Replace it with the v387 output.
+    const old=host.querySelector('.study-planner-block');
+    const html=studyPlannerSection(path);
+    if(old&&html)old.outerHTML=html;
+  };
+  window.renderV21Detail=renderV21Detail;
+
+  window.__studielotsV387={
+    version:'v387',
+    fasterDegreeEngine:'same-university-v2-course-pool',
+    rules:['same university','same subject','compatible level','real course only','speed advantage required']
+  };
+})();
+</script>
+
+<style>
+.fast-engine-summary{display:flex;flex-direction:column;gap:3px;margin:10px 0 14px;padding:12px 14px;border-radius:15px;background:#eef7f3}
+.fast-engine-summary strong{color:#176b5c}.fast-engine-summary span{font-size:.84rem;color:#66736e}
+.planner-alt.verified-fast-alt{background:#eaf7ef;border:1px solid rgba(27,123,78,.15)}
+.planner-alt.verified-fast-alt>span{color:#167044}
+</style>
 </body>
 </html>
