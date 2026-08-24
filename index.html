@@ -1445,6 +1445,12 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 .credited-detail-body{padding:0 18px 18px}
 .credit-explanation{padding:14px 4px 4px;color:#68727e}.credit-explanation strong{color:#102f35}.credit-explanation p{margin:5px 0 0;font-size:.9rem;line-height:1.4}
 </style>
+
+<style>
+.course-provider-note.suggestion-empty{display:flex;flex-direction:column;gap:5px}
+.course-provider-note.suggestion-empty strong{color:#102f35}
+.course-provider-note.suggestion-empty span{font-size:.92rem;line-height:1.4;color:#6f7883}
+</style>
 </head>
 <body>
 <header class="lotsen-header">
@@ -18760,7 +18766,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
      return `<div class="chalmers-suggestion-list">${first.map(c=>v21CourseCard(c,path)).join('')}</div>${rest.length?`<details class="path-details"><summary>Visa ${rest.length} fler kurser</summary><div class="chalmers-suggestion-list">${rest.map(c=>v21CourseCard(c,path)).join('')}</div></details>`:''}`;
    }
    if(ruleMissing.length){
-     return `<div class="suggested-course-list">${ruleMissing.map((r,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+1}</span><div><strong>${escapeHtml(r.label||'Krav')}</strong><small>Verifierat examens-/programkrav</small></div><b>${fmtHp(r.missing)} hp</b></div>`).join('')}</div><div class="course-provider-note"><strong>Ingen exakt kurslista är kopplad till detta krav ännu.</strong> Studielots visar därför kravet utan att hitta på en kurs.</div>`;
+     return `<div class="course-provider-note suggestion-empty"><strong>Inga verifierade kursförslag ännu.</strong><span>Kraven visas under Kvar. Studielots föreslår bara riktiga kurser när en verifierad kurslista finns för den valda vägen.</span></div>`;
    }
    return '<div class="ready-box">Inga verifierade kompletteringar återstår i den kartlagda strukturen.</div>';
  }
@@ -18798,7 +18804,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
     <div class="detail-hero"><div><div class="uni-detail-brand">${universityLogoHtml(path.provider,'lg')}<div><div class="eyebrow">${escapeHtml(path.provider)} · motor v2.1</div><h1>${escapeHtml(path.programName)}</h1></div></div><div class="verify-chip verified">Verifierad källa · v2.1</div></div><span class="badge ${safeComplete?'good':path.remaining<=30?'warn':'bad'}">${safeComplete?'100%':Math.max(0,Math.min(99,Number(path.score||0)))+'%'}</span></div>
     <div class="detail-summary"><strong>${fmtHp(counted)} hp kan räknas</strong> · <strong>${fmtHp(path.remaining)} hp kvar/olöst</strong></div>
     <section class="detail-block credited-compact"><details class="credited-details"><summary><span><small>Tillgodoräknat</small><strong>${fmtHp(counted)} hp</strong></span><b>Visa vilka kurser <i>›</i></b></summary><div class="credited-detail-body">${credited.length?`<div class="suggested-course-list">${credited.map(x=>`<div class="suggested-course-row"><div><strong>${escapeHtml(x.name)}</strong><small>${x.kind==='course'?'→ '+escapeHtml(x.target):escapeHtml(x.target)}</small></div><b>${fmtHp(x.hp)} hp</b></div>`).join('')}</div>`:`<div class="credit-explanation"><strong>${fmtHp(counted)} hp kan räknas enligt examensreglerna.</strong><p>Poängen är ännu inte kopplade till enskilda ersättningskurser. De används mot huvudområde, valbara poäng eller andra examenskrav.</p></div>`}</div></details></section>
-    <section class="detail-block compact-remaining-block"><div class="remaining-summary-head"><div><h2>Kvar</h2><p>${miss.length?`${miss.length} krav återstår`:'Inga krav återstår'}</p></div>${miss.length?`<strong>${fmtHp(miss.reduce((s,m)=>s+Number(m.hp||0),0))} hp</strong>`:''}</div>${miss.length?`<div class="suggested-course-list compact">${miss.slice(0,3).map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+1}</span><div><strong>${escapeHtml(m.label)}</strong></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div>${miss.length>3?`<details class="path-details compact-more"><summary>Visa alla ${miss.length} krav</summary><div class="suggested-course-list">${miss.slice(3).map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+4}</span><div><strong>${escapeHtml(m.label)}</strong></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div></details>`:''}`:'<div class="ready-box">Inga verifierade krav återstår.</div>'}</section>
+    <section class="detail-block compact-remaining-block"><div class="remaining-summary-head"><div><h2>Kvar</h2><p>${miss.length?`${miss.length} krav återstår`:'Inga krav återstår'}</p></div>${miss.length?`<strong>${fmtHp(Math.max(0,Number(path.remaining||0)))} hp</strong>`:''}</div>${miss.length?`<div class="suggested-course-list compact">${miss.slice(0,3).map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+1}</span><div><strong>${escapeHtml(m.label)}</strong></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div>${miss.length>3?`<details class="path-details compact-more"><summary>Visa alla ${miss.length} krav</summary><div class="suggested-course-list">${miss.slice(3).map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+4}</span><div><strong>${escapeHtml(m.label)}</strong></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div></details>`:''}`:'<div class="ready-box">Inga verifierade krav återstår.</div>'}</section>
     <section class="detail-block suggested-course-block"><div class="suggested-course-head"><div><h2>Förslag att läsa</h2><p>Kurser som kan täcka kraven ovan.</p></div></div>${v21SuggestionSection(path)}</section>`;
  }
  const previousRenderUniversityDetail=renderUniversityDetail;
@@ -18887,6 +18893,96 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 .program-search-row-clickable{cursor:pointer;touch-action:manipulation;position:relative;z-index:1}
 .program-search-row-clickable:active{transform:scale(.995)}
 .program-row-arrow{pointer-events:none}
+</style>
+
+<script>
+// v379 — native tappable programme links + delegated activation for iOS Safari.
+(function(){
+  function v379ActivateProgram(id){
+    const p=(Array.isArray(programCatalog)?programCatalog:[]).find(x=>String(x.id)===String(id));
+    if(!p)return false;
+    try{sessionStorage.setItem('lotsen_selected_program',String(id))}catch(e){}
+    const input=document.getElementById('programSearchInput');
+    const results=document.getElementById('programSearchResults');
+    const searchCard=document.querySelector('#programMatch .program-search-card');
+    if(input) input.value=p.name||'';
+    if(results) results.innerHTML='';
+    if(searchCard) searchCard.classList.add('program-search-selected');
+    renderProgramMatch(p);
+    requestAnimationFrame(()=>{
+      const result=document.getElementById('programMatchResult');
+      if(result){
+        result.classList.add('program-result-visible');
+        result.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+    return false;
+  }
+  window.v379ActivateProgram=v379ActivateProgram;
+
+  renderProgramSearch=function(){
+    const host=document.getElementById('programSearchResults');
+    if(!host)return;
+    const raw=String(document.getElementById('programSearchInput')?.value||'').trim();
+    const q=v371Norm(raw);
+    let rows=(Array.isArray(programCatalog)?programCatalog:[])
+      .filter(p=>V2_ACTIVE_UNIVERSITY_KEYS.has(String(p?.university||'').trim().toLocaleLowerCase('sv-SE')));
+    rows=v371UniquePrograms(rows);
+    if(q){
+      rows=rows.map(p=>({p,score:v371SearchScore(p,q)}))
+        .filter(x=>x.score>0)
+        .sort((a,b)=>b.score-a.score || String(a.p.name).localeCompare(String(b.p.name),'sv'))
+        .map(x=>x.p);
+    }else{
+      rows.sort((a,b)=>String(a.name).localeCompare(String(b.name),'sv'));
+    }
+    rows=rows.slice(0,12);
+    host.innerHTML=rows.length?rows.map(p=>{
+      const meta=[p.officialCode||p.code||'',Number(p.hp||0)?`${Number(p.hp)} hp`:'',p.level||''].filter(Boolean).join(' · ');
+      const id=encodeURIComponent(String(p.id||''));
+      return `<a class="program-search-row program-search-link" href="#program-${id}" data-program-id="${escapeHtml(id)}">
+        <div class="uni-name-with-logo">${universityLogoHtml(p.university,'sm')}<div><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.university)}${meta?` · ${escapeHtml(meta)}`:''}</span></div></div><span class="program-row-arrow">›</span>
+      </a>`;
+    }).join(''):'<div class="muted small program-empty">Inget program hittades bland Chalmers, GU och Lund.</div>';
+  };
+
+  function delegatedProgramTap(e){
+    const link=e.target.closest?.('#programSearchResults .program-search-link');
+    if(!link)return;
+    e.preventDefault();
+    e.stopPropagation();
+    const id=decodeURIComponent(link.dataset.programId||'');
+    if(id)v379ActivateProgram(id);
+  }
+  document.addEventListener('click',delegatedProgramTap,true);
+  document.addEventListener('pointerup',function(e){
+    if(e.pointerType!=='touch')return;
+    const link=e.target.closest?.('#programSearchResults .program-search-link');
+    if(!link)return;
+    e.preventDefault();
+    const id=decodeURIComponent(link.dataset.programId||'');
+    if(id)v379ActivateProgram(id);
+  },true);
+
+  const input=document.getElementById('programSearchInput');
+  if(input){
+    input.addEventListener('input',()=>{
+      document.querySelector('#programMatch .program-search-card')?.classList.remove('program-search-selected');
+    });
+  }
+})();
+</script>
+<style>
+#programSearchResults .program-search-link{
+  display:flex!important;align-items:center;justify-content:space-between;gap:12px;
+  width:100%;box-sizing:border-box;text-decoration:none!important;color:inherit!important;
+  -webkit-tap-highlight-color:rgba(21,88,79,.13);touch-action:manipulation;
+  min-height:72px;position:relative;z-index:5;
+}
+#programSearchResults .program-search-link:active{background:#f2f7f5!important}
+.program-search-selected #programSearchResults{display:none}
+.program-result-visible{animation:v379in .16s ease-out}
+@keyframes v379in{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:none}}
 </style>
 </body>
 </html>
