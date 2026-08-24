@@ -2303,15 +2303,19 @@ function confirmImport(){
   importStatus.textContent=`${chosen.length} kurser importerades.`;
   importPreview.innerHTML='';
 
-  // Efter import stannar användaren på Hem.
+  // Gå alltid till Möjligheter först.
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('start')?.classList.add('active');
-  document.querySelectorAll('.nav button[data-screen]').forEach(b=>b.classList.toggle('active',b.dataset.screen==='start'));
+  document.getElementById('degrees')?.classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen==='degrees'));
   window.scrollTo(0,0);
 
-  // Uppdatera allt medan Hem ligger kvar.
+  // Rendera därefter. Ett fel i en avancerad regel får inte hindra sidan från att visas.
   try{renderCourses()}catch(e){console.error(e)}
-  try{refreshAll()}catch(e){console.error(e)}
+  try{renderDegrees()}catch(e){
+    console.error(e);
+    const host=document.getElementById('degreeResults');
+    if(host)host.innerHTML='<div class="card empty"><strong>Meriterna är importerade</strong><div class="small muted">Ladda om sidan om resultaten inte visas direkt.</div></div>';
+  }
 
   // Kurskod + lärosäte + termin används i bakgrunden för att verifiera nivå.
   setTimeout(()=>{resolveMissingCourseLevelsInBackground().catch(()=>{})},100);
@@ -19425,61 +19429,5 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   .fastest-path-card button{grid-column:2;justify-self:start;padding:4px 0 0}
 }
 </style>
-
-<script>
-// v386 hotfix — stable home card, isolated from app boot.
-(function(){
-  function stableHomeOpportunity(){
-    try{
-      const rows=(typeof safeDegreeOpportunities==='function'?safeDegreeOpportunities():[])
-        .filter(o=>Number.isFinite(Number(o?.remaining)));
-      if(!rows.length)return null;
-      return rows.slice().sort((a,b)=>{
-        const ar=Math.max(0,Number(a.remaining||0));
-        const br=Math.max(0,Number(b.remaining||0));
-        if(ar!==br)return ar-br;
-        const al=a.source==='advanced'?1:0;
-        const bl=b.source==='advanced'?1:0;
-        if(al!==bl)return al-bl;
-        return Number(b.score||0)-Number(a.score||0) ||
-          String(a.subject||a.name||'').localeCompare(String(b.subject||b.name||''),'sv');
-      })[0]||null;
-    }catch(e){console.warn('v386 stable home',e);return null}
-  }
-
-  window.renderHomeFastest=function(){
-    const card=document.getElementById('homeFastestCard');
-    if(!card)return;
-    if(!Array.isArray(courses)||!courses.length){card.style.display='none';homeFastestKey=null;return}
-    const o=stableHomeOpportunity();
-    if(!o){card.style.display='none';homeFastestKey=null;return}
-    homeFastestKey=o.key;
-    const rem=Math.max(0,Number(o.remaining||0));
-    const total=o.source==='advanced'
-      ? (String(o.degreeType||'').toLowerCase()==='magister'?60:120)
-      : 180;
-    const used=Math.max(0,Math.min(total,total-rem));
-    const name=document.getElementById('homeFastestName');
-    const meta=document.getElementById('homeFastestMeta');
-    if(name)name.textContent=o.name||o.subject||'Närmaste examen';
-    if(meta)meta.textContent=(used?fmtHp(used)+' hp kan räknas · ':'')+(rem?fmtHp(rem)+' hp kvar':'Ser klar ut');
-    card.style.display='flex';
-  };
-
-  // Update only the shortest tile from the same stable list.
-  const priorRefresh=refreshAll;
-  refreshAll=function(){
-    priorRefresh();
-    try{
-      const o=stableHomeOpportunity();
-      const el=document.getElementById('shortest');
-      if(el&&Array.isArray(courses)&&courses.length)el.textContent=o?fmtHp(Math.max(0,Number(o.remaining||0)))+' hp':'–';
-      renderHomeFastest();
-    }catch(e){console.warn('v386 refresh',e)}
-  };
-  window.refreshAll=refreshAll;
-  window.__studielotsV386={version:'v386',hotfix:true,importLanding:'home',stableHome:true};
-})();
-</script>
 </body>
 </html>
