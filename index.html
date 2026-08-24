@@ -2303,18 +2303,18 @@ function confirmImport(){
   importStatus.textContent=`${chosen.length} kurser importerades.`;
   importPreview.innerHTML='';
 
-  // Gå alltid till Möjligheter först.
+  // Stanna på Hem efter import och uppdatera startsidans resultat direkt.
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('degrees')?.classList.add('active');
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen==='degrees'));
+  document.getElementById('start')?.classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen==='start'));
+  document.querySelectorAll('.lotsen-bottomnav button[data-screen]').forEach(b=>b.classList.toggle('active',b.dataset.screen==='start'));
   window.scrollTo(0,0);
 
-  // Rendera därefter. Ett fel i en avancerad regel får inte hindra sidan från att visas.
+  // Rendera alla resultat i bakgrunden så Hem, Möjligheter och Studier redan är synkade.
   try{renderCourses()}catch(e){console.error(e)}
-  try{renderDegrees()}catch(e){
+  try{refreshAll()}catch(e){
     console.error(e);
-    const host=document.getElementById('degreeResults');
-    if(host)host.innerHTML='<div class="card empty"><strong>Meriterna är importerade</strong><div class="small muted">Ladda om sidan om resultaten inte visas direkt.</div></div>';
+    try{renderDegrees()}catch(_){}
   }
 
   // Kurskod + lärosäte + termin används i bakgrunden för att verifiera nivå.
@@ -13088,9 +13088,19 @@ function renderCompareSelection(){
 let homeFastestKey=null;
 function homeFastestOpportunity(){
  try{
-   const opts=safeDegreeOpportunities().filter(o=>Number.isFinite(Number(canonicalRemaining(o))));
+   const opts=safeDegreeOpportunities()
+     .filter(o=>Number.isFinite(Number(o.remaining)))
+     .filter(o=>o.source!=='advanced' || o.engine==='v2.1');
    if(!opts.length)return null;
-   return opts.slice().sort((a,b)=>Number(canonicalRemaining(a))-Number(canonicalRemaining(b)) || Number(b.score||0)-Number(a.score||0))[0]||null;
+   return opts.slice().sort((a,b)=>{
+     const ar=Math.max(0,Number(a.remaining||0)), br=Math.max(0,Number(b.remaining||0));
+     if(ar!==br)return ar-br;
+     // If two routes are equally short, show the lower degree level first.
+     const al=a.source==='advanced'?1:0, bl=b.source==='advanced'?1:0;
+     if(al!==bl)return al-bl;
+     return Number(b.score||0)-Number(a.score||0) ||
+       String(a.subject||a.name||'').localeCompare(String(b.subject||b.name||''),'sv');
+   })[0]||null;
  }catch(e){return null}
 }
 function renderHomeFastest(){
@@ -13098,8 +13108,9 @@ function renderHomeFastest(){
  if(!courses.length){card.style.display='none';homeFastestKey=null;return}
  const o=homeFastestOpportunity(); if(!o){card.style.display='none';homeFastestKey=null;return}
  homeFastestKey=o.key;
- const rem=Math.max(0,Number(canonicalRemaining(o)||0));
- const total=Number(o.totalHp||o.hp||180), used=Math.max(0,total-rem);
+ const rem=Math.max(0,Number(o.remaining||0));
+ const total=typeof degreeTotalHp==='function'?degreeTotalHp(o):(o.source==='advanced'?(String(o.degreeType||'').toLowerCase()==='magister'?60:120):180);
+ const used=Math.max(0,Math.min(total,total-rem));
  document.getElementById('homeFastestName').textContent=o.name||o.subject||'Närmaste examen';
  document.getElementById('homeFastestMeta').textContent=(used?fmtHp(used)+' hp kan räknas · ':'')+(rem?fmtHp(rem)+' hp kvar':'Ser klar ut');
  card.style.display='flex';
@@ -13112,8 +13123,12 @@ function refreshAll(){
  const best=ranked[0];
  if(document.getElementById('bestPct')) bestPct.textContent=courses.length?Math.min(100,best.r.pct)+' %':'–';
  if(document.getElementById('bestName')) bestName.textContent=courses.length?best.d.short:'Hämta meriter för att se';
- let rem=ranked.filter(x=>x.r.remaining>0).sort((a,b)=>a.r.remaining-b.r.remaining)[0];
- if(document.getElementById('shortest')) shortest.textContent=courses.length?(rem?rem.r.remaining+' hp':'0 hp'):'–';
+ let stableShortest=null;
+ try{
+   const opps=safeDegreeOpportunities().filter(o=>Number.isFinite(Number(o.remaining)));
+   stableShortest=opps.slice().sort((a,b)=>Number(a.remaining||0)-Number(b.remaining||0) || Number(a.source==='advanced')-Number(b.source==='advanced'))[0]||null;
+ }catch(e){}
+ if(document.getElementById('shortest')) shortest.textContent=courses.length?(stableShortest?fmtHp(Math.max(0,Number(stableShortest.remaining||0)))+' hp':'–'):'–';
  renderHomeFastest();
  renderCompare();
 }
@@ -19429,5 +19444,25 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   .fastest-path-card button{grid-column:2;justify-self:start;padding:4px 0 0}
 }
 </style>
+
+<script>
+// v385 — one stable home result after import/reload.
+(function(){
+  const oldResolve=window.resolveMissingCourseLevelsInBackground;
+  if(typeof oldResolve==='function'){
+    window.resolveMissingCourseLevelsInBackground=async function(){
+      const result=await oldResolve.apply(this,arguments);
+      try{refreshAll()}catch(e){}
+      return result;
+    };
+  }
+  window.__studielotsV385={
+    version:'v385',
+    homeFastest:'v2.1-stable',
+    importLanding:'home',
+    tieBreak:'candidate-before-advanced'
+  };
+})();
+</script>
 </body>
 </html>
