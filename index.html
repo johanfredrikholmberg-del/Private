@@ -1589,7 +1589,7 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 
 <section id="programMatch" class="screen">
   <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><strong>Program</strong></div>
-  <div class="top"><div><h1>Program</h1><div class="chalmers-coverage-note"><strong>Chalmers 2026/27 byggs ut</strong><span id="chalmersCoverageText">Programdata kopplas nu till Matchningsmotor 2.0. Endast verifierade kursrader används som säkra träffar.</span></div><p>Se vilka tidigare studier som kan passa in.</p></div></div>
+  <div class="top"><div><h1>Program</h1><p>Se vilka tidigare studier som kan passa in.</p></div></div>
   <div class="card program-search-card">
     <label for="programSearchInput">Sök program</label>
     <input id="programSearchInput" type="search" placeholder="T.ex. Ekonomie kandidatprogrammet" oninput="renderProgramSearch()">
@@ -19077,6 +19077,357 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 .planner-row{display:flex;justify-content:space-between;gap:14px;padding:10px 0}.planner-row>div{display:flex;flex-direction:column;gap:2px}.planner-row small{color:#7a8490}.planner-row>b{white-space:nowrap}
 .planner-alt{margin:0 0 10px 0;padding:11px 13px;border-radius:14px;background:#f4f8f6;display:flex;flex-direction:column;gap:3px}.planner-alt>span{font-size:.72rem;font-weight:800;color:#176b5c;text-transform:uppercase;letter-spacing:.04em}.planner-alt small{color:#6f7883;line-height:1.35}.planner-alt a{font-weight:800;color:#176b5c;text-decoration:none;margin-top:3px}
 .planner-note{font-size:.8rem;line-height:1.4;color:#7a8490;margin-top:10px}
+</style>
+
+<script>
+// v382 — Program search result uses the same v2 engine for credits and remaining requirements.
+(function(){
+ const legacyRenderProgramMatch=renderProgramMatch;
+
+ function programV2MissingRows(result,p){
+   const rows=[],seen=new Set();
+   const add=(label,hp,type)=>{
+     hp=Math.max(0,Number(hp||0)); if(!hp)return;
+     const key=String(label)+'|'+type; if(seen.has(key))return; seen.add(key);
+     rows.push({label,hp,type});
+   };
+   (result.requiredMissing||[]).forEach(c=>add(c.name||c.code||'Obligatorisk kurs',c.hp,c.thesis?'thesis':'required'));
+   (result.rules||[]).forEach(r=>{if(Number(r.missing||0)>0)add(r.label||r.subject||'Examens-/programkrav',r.missing,r.type||'rule')});
+   if(Number(result.unresolvedStructureHp||0)>0)add('Programstruktur ännu inte komplett kartlagd',result.unresolvedStructureHp,'coverage');
+   return rows;
+ }
+
+ function programV2CreditedRows(result){
+   if(typeof v21CreditedRows==='function')return v21CreditedRows({used:result.used||[],rules:result.rules||[]});
+   return (result.used||[]).map(x=>({
+     kind:'course',name:x.userCourse?.name||'Tidigare kurs',
+     target:x.programCourse?.name||'Programkrav',hp:Number(x.countedHp||0)
+   })).filter(x=>x.hp>0);
+ }
+
+ renderProgramMatch=function(p){
+   const host=document.getElementById('programMatchResult');if(!host)return;
+   if(!courses.length){
+     host.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong><div class="small muted">Därefter kan Studielots jämföra dem med programmet.</div></div>';
+     return;
+   }
+   const active=typeof V2_ACTIVE_UNIVERSITY_KEYS!=='undefined' && V2_ACTIVE_UNIVERSITY_KEYS.has(String(p?.university||'').trim().toLocaleLowerCase('sv-SE'));
+   if(!p||p.engine!=='v2'||!active||typeof evaluateUniversityProgramV2!=='function')return legacyRenderProgramMatch(p);
+
+   let result=null;
+   try{result=evaluateUniversityProgramV2(p)}catch(e){console.error('v382 program evaluation',e)}
+   if(!result)return legacyRenderProgramMatch(p);
+
+   const remaining=Math.max(0,Number(result.remaining||0));
+   const counted=Math.max(0,Math.min(Number(p.hp||0),Number(p.hp||0)-remaining));
+   const credited=programV2CreditedRows(result);
+   const missing=programV2MissingRows(result,p);
+   const safeComplete=result.complete&&remaining===0&&Number(result.unresolvedStructureHp||0)===0;
+
+   const creditedHtml=credited.length
+     ? `<div class="suggested-course-list">${credited.map(x=>`<div class="suggested-course-row"><div><strong>${escapeHtml(x.name)}</strong><small>${x.kind==='course'?'→ '+escapeHtml(x.target):escapeHtml(x.target||'Kan användas i programmet')}</small></div><b>${fmtHp(x.hp)} hp</b></div>`).join('')}</div>`
+     : `<div class="credit-explanation"><strong>${fmtHp(counted)} hp kan räknas.</strong><p>Poängen kommer från programmets verifierade regler, men är ännu inte kopplade till enskilda ersättningskurser.</p></div>`;
+
+   const missingHtml=missing.length
+     ? `<div class="remaining-detail-meta">${missing.length} krav återstår</div><div class="suggested-course-list">${missing.map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+1}</span><div><strong>${escapeHtml(m.label)}</strong></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div>`
+     : '<div class="ready-box">Inga verifierade krav återstår.</div>';
+
+   const path={
+     engine:'v2.1',provider:p.university,program:p,programName:p.name,programCode:p.code||'',
+     remaining,score:Number(result.score||0),complete:Boolean(result.complete),
+     used:result.used||[],requiredMissing:result.requiredMissing||[],rules:result.rules||[],
+     mappedHp:Number(result.mappedHp||0),verifiedStructureHp:Number(result.verifiedStructureHp||0),
+     unresolvedStructureHp:Number(result.unresolvedStructureHp||0),knownMissing:Number(result.knownMissing||0),v2:result
+   };
+
+   host.innerHTML=`
+     <div class="program-result-head program-v2-result-head">
+       <div class="uni-name-with-logo">${universityLogoHtml(p.university,'md')}<div>
+         <div class="eyebrow">${escapeHtml(p.university)}${p.code?` · ${escapeHtml(p.code)}`:''}</div>
+         <h2>${escapeHtml(p.name)}</h2>
+       </div></div>
+       <span class="badge ${safeComplete?'good':remaining<=30?'warn':'bad'}">${safeComplete?'100%':fmtHp(remaining)+' hp kvar'}</span>
+     </div>
+     <div class="detail-summary program-v2-summary"><strong>${fmtHp(counted)} hp kan räknas</strong> · <strong>${fmtHp(remaining)} hp kvar</strong></div>
+
+     <section class="detail-block credited-compact">
+       <details class="credited-details">
+         <summary><span><small>Tillgodoräknat</small><strong>${fmtHp(counted)} hp</strong></span><b>Visa vilka kurser <i>›</i></b></summary>
+         <div class="credited-detail-body">${creditedHtml}</div>
+       </details>
+     </section>
+
+     <section class="detail-block remaining-compact">
+       <details class="remaining-details">
+         <summary><span><small>Kvar</small><strong>${fmtHp(remaining)} hp</strong></span><b>Visa vilka krav <i>›</i></b></summary>
+         <div class="remaining-detail-body">${missingHtml}</div>
+       </details>
+     </section>
+
+     ${typeof studyPlannerSection==='function'?studyPlannerSection(path):''}
+     <section class="detail-block suggested-course-block">
+       <div class="suggested-course-head"><div><h2>Förslag att läsa</h2><p>Riktiga kurser från den valda programstrukturen.</p></div></div>
+       ${typeof v21SuggestionSection==='function'?v21SuggestionSection(path):''}
+     </section>
+     ${p.sourceUrl?`<a class="program-source-link program-v2-source" href="${escapeHtml(p.sourceUrl)}" target="_blank" rel="noopener">Öppna officiell programplan ↗</a>`:''}
+   `;
+ };
+ window.renderProgramMatch=renderProgramMatch;
+})();
+</script>
+<style>
+.program-v2-result-head{margin-top:22px}
+.program-v2-summary{margin-bottom:16px}
+.program-v2-source{display:inline-block;margin:2px 0 24px}
+</style>
+
+<script>
+// v383 — Advanced opportunities are generated exclusively from canonical v2.1 paths.
+// Removes the legacy calc()/advancedUniversityOptions split that could make cards appear/disappear.
+(function(){
+ const V383_UNIS=[
+   {id:'v21:chalmers',name:'Chalmers tekniska högskola'},
+   {id:'v21:gu',name:'Göteborgs universitet'},
+   {id:'v21:lund',name:'Lunds universitet'}
+ ];
+ const norm383=v=>String(v||'').trim().toLocaleLowerCase('sv-SE');
+
+ function v383CandidateSubjects(){
+   const set=new Set();
+   try{(degrees||[]).filter(d=>d.kind==='candidate').forEach(d=>{if(d.subject)set.add(d.subject)})}catch(e){}
+   try{
+     const issued=issuedBachelorInfo();
+     if(issued?.subject)set.add(String(issued.subject).trim());
+   }catch(e){}
+   return [...set].filter(Boolean);
+ }
+
+ function v383CandidateStatus(subject){
+   let issued=false;
+   try{
+     const x=issuedBachelorInfo();
+     issued=Boolean(x && (!x.subject || norm383(x.subject)===norm383(subject)));
+   }catch(e){}
+   if(issued)return {ready:true,near:true,remaining:0,score:100,source:'issued_degree'};
+
+   let paths=[];
+   const dummy={subject,source:'specific',degreeType:'candidate',total:180};
+   for(const u of V383_UNIS){
+     try{
+       const p=v21PathFor(u.name,subject,dummy);
+       if(p)paths.push(p);
+     }catch(e){}
+   }
+   if(!paths.length)return {ready:false,near:false,remaining:180,score:0,source:'v2.1'};
+   paths.sort((a,b)=>Number(a.remaining||999)-Number(b.remaining||999)||Number(b.score||0)-Number(a.score||0));
+   const best=paths[0],remaining=Math.max(0,Number(best.remaining||0));
+   return {
+     ready:remaining===0 && best.complete===true,
+     near:remaining<=30,
+     remaining,
+     score:Math.max(0,Math.min(100,Math.round(100*(180-remaining)/180))),
+     source:'v2.1',
+     university:best.provider
+   };
+ }
+
+ candidateReadiness=function(){
+   return v383CandidateSubjects().map(subject=>{
+     const s=v383CandidateStatus(subject);
+     return {subject,name:`Kandidatexamen i ${subject}`,score:s.score,remaining:s.remaining,subjectMissing:0,
+       ready:s.ready,near:s.near,engine:'v2.1',canonicalUniversity:s.university||'',readinessSource:s.source};
+   }).filter(x=>x.ready||x.near)
+     .sort((a,b)=>Number(b.ready)-Number(a.ready)||Number(b.score)-Number(a.score)||Number(a.remaining)-Number(b.remaining));
+ };
+ window.candidateReadiness=candidateReadiness;
+
+ advancedDegreeOpportunities=function(){
+   const readiness=candidateReadiness();
+   if(!readiness.length)return [];
+   const rows=[];
+   readiness.slice(0,6).forEach(c=>{
+     ['Magister','Master'].forEach(degreeType=>{
+       const total=degreeType==='Magister'?60:120;
+       const dummy={subject:c.subject,source:'advanced',degreeType,total};
+       const paths=[];
+       for(const u of V383_UNIS){
+         try{
+           const p=v21PathFor(u.name,c.subject,dummy);
+           if(p)paths.push(p);
+         }catch(e){}
+       }
+       if(!paths.length)return;
+       paths.sort((a,b)=>Number(a.remaining||999)-Number(b.remaining||999)||Number(b.score||0)-Number(a.score||0));
+       const best=paths[0],remaining=Math.max(0,Number(best.remaining||0));
+       rows.push({
+         key:`${degreeType.toLowerCase()}:${c.subject}`,
+         name:`${degreeType}examen i ${String(c.subject).toLowerCase()}`,
+         subject:c.subject,
+         score:Math.max(0,Math.min(100,Math.round(100*(total-remaining)/Math.max(1,total)))),
+         remaining,
+         source:'advanced',degreeType,total,
+         candidateReady:c.ready,candidateNear:c.near&&!c.ready,
+         candidateRemaining:c.remaining,candidateScore:c.score,
+         eligibilityLabel:c.ready?'Kandidat klar':'Nära kandidat',
+         advancedMissing:typeof missingForOpportunity==='function'?[]:[],
+         canonicalUniversity:best.provider||'',
+         canonicalProfileId:best.profileId||'',
+         engine:'v2.1',canonicalPath:best
+       });
+     });
+   });
+   return rows.sort((a,b)=>Number(b.candidateReady)-Number(a.candidateReady)||Number(b.candidateScore)-Number(a.candidateScore)||Number(a.remaining)-Number(b.remaining));
+ };
+ window.advancedDegreeOpportunities=advancedDegreeOpportunities;
+
+ // Avoid stale pre-v383 opportunity cards after background analysis.
+ const oldRefreshAll=refreshAll;
+ refreshAll=function(){
+   oldRefreshAll();
+   if(document.getElementById('degrees')?.classList.contains('active'))renderDegrees();
+ };
+ window.refreshAll=refreshAll;
+
+ window.__studielotsV383={
+   version:'v383',
+   advancedSource:'v2.1-only',
+   legacyCandidateReadiness:false,
+   activeUniversities:V383_UNIS.map(x=>x.name)
+ };
+ console.info('Studielots v383: advanced opportunities now use v2.1 only');
+})();
+</script>
+
+<script>
+// v384 — surface "Snabbaste väg till examen" in Opportunities and Study Plan.
+(function(){
+ function v384PlannerMeta(path){
+   if(!path||path.program?.safeMode===true||path.program?.canCalculateCompletion===false)return null;
+   const missing=(path.requiredMissing||[]).filter(c=>Number(c.hp||0)>0);
+   if(!missing.length)return null;
+
+   const timed=missing.filter(c=>c.year||c.term||c.semester||c.period);
+   if(!timed.length)return null;
+
+   const remaining=Math.max(0,Number(path.remaining||0));
+   const periods=Math.max(1,Math.ceil(remaining/30));
+
+   // Count only plausible alternatives inside the same verified programme structure.
+   let alternatives=0;
+   for(const course of missing){
+     const subj=String(course?.subject||'').toLowerCase();
+     const level=String(course?.level||'').toLowerCase();
+     const hp=Number(course?.hp||0);
+     const alt=(path.program?.courses||[]).find(c=>{
+       if(!c||c===course||c.required===true)return false;
+       if(hp&&Number(c.hp||0)<Math.min(hp,7.5))return false;
+       const sameSubject=subj&&String(c.subject||'').toLowerCase()===subj;
+       const sameLevel=!level||!c.level||String(c.level).toLowerCase()===level;
+       return sameSubject&&sameLevel;
+     });
+     if(alt)alternatives++;
+   }
+
+   return {
+     periods,
+     alternatives,
+     remaining,
+     timedCount:timed.length,
+     totalMissing:missing.length,
+     strongTiming:timed.length===missing.length
+   };
+ }
+ window.v384PlannerMeta=v384PlannerMeta;
+
+ function fastestPathCard(path){
+   const meta=v384PlannerMeta(path);
+   if(!meta)return '';
+   return `<section class="fastest-path-card">
+     <div class="fastest-path-icon" aria-hidden="true">⚡</div>
+     <div class="fastest-path-copy">
+       <small>SNABBASTE VÄG TILL EXAMEN</small>
+       <strong>Ca ${meta.periods} ${meta.periods===1?'studieperiod':'studieperioder'}</strong>
+       <span>${fmtHp(meta.remaining)} hp kvar${meta.alternatives?` · ${meta.alternatives} ${meta.alternatives===1?'möjligt snabbare alternativ':'möjliga snabbare alternativ'}`:''}</span>
+       <em>${meta.strongTiming?'Bygger på den kartlagda programordningen.':'Preliminär ordning – all terminsdata är inte komplett ännu.'}</em>
+     </div>
+     <button type="button" onclick="document.querySelector('.study-planner-block')?.scrollIntoView({behavior:'smooth',block:'start'})">Visa planen ›</button>
+   </section>`;
+ }
+ window.fastestPathCard=fastestPathCard;
+
+ const oldRenderV21Detail=renderV21Detail;
+ renderV21Detail=function(path,o){
+   oldRenderV21Detail(path,o);
+   const host=document.getElementById('universityDetailContent');
+   if(!host)return;
+   const html=fastestPathCard(path);
+   if(!html)return;
+   const credited=host.querySelector('.credited-compact');
+   if(credited&&!host.querySelector('.fastest-path-card'))credited.insertAdjacentHTML('beforebegin',html);
+ };
+ window.renderV21Detail=renderV21Detail;
+
+ // Add a small discovery badge on opportunity cards when a canonical v2.1 path has usable timing data.
+ function opportunityFastestBadge(o){
+   try{
+     const opts=universityOptionsForOpportunity(o);
+     for(const x of opts){
+       const path=x?.v2||x?.v21||x?.canonicalPath;
+       if(path&&v384PlannerMeta(path))return '<span class="fastest-discovery-badge">⚡ Snabbaste väg</span>';
+     }
+   }catch(e){}
+   return '';
+ }
+ window.opportunityFastestBadge=opportunityFastestBadge;
+
+ const oldAdvancedOpportunityCard=window.advancedOpportunityCard||advancedOpportunityCard;
+ advancedOpportunityCard=function(o){
+   let html=oldAdvancedOpportunityCard(o);
+   const badge=opportunityFastestBadge(o);
+   if(badge){
+     html=html.replace(/(<small>Kandidat (?:klar|nära kandidat)<\/small>)/i,`$1${badge}`);
+     if(!html.includes('fastest-discovery-badge'))html=html.replace('</article>',badge+'</article>');
+   }
+   return html;
+ };
+ window.advancedOpportunityCard=advancedOpportunityCard;
+
+ const oldRenderDegrees384=renderDegrees;
+ renderDegrees=function(){
+   oldRenderDegrees384();
+   const cards=[...document.querySelectorAll('#degrees .opportunity-discovery-card')];
+   const opts=safeDegreeOpportunities().filter(x=>x.source!=='advanced').slice(0,8);
+   cards.forEach((card,i)=>{
+     const o=opts[i]; if(!o||card.querySelector('.fastest-discovery-badge'))return;
+     const badge=opportunityFastestBadge(o);
+     if(badge){
+       const meta=card.querySelector('.opportunity-meta');
+       if(meta)meta.insertAdjacentHTML('beforeend',badge);
+     }
+   });
+ };
+ window.renderDegrees=renderDegrees;
+})();
+</script>
+
+<style>
+.fastest-path-card{
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;
+  margin:16px 0;padding:18px 20px;border-radius:24px;background:#fff;
+  border:1px solid rgba(23,107,92,.13);box-shadow:0 10px 28px rgba(16,47,53,.06)
+}
+.fastest-path-icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:#eef7f3;font-size:1.35rem}
+.fastest-path-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+.fastest-path-copy small{font-size:.7rem;font-weight:850;letter-spacing:.07em;color:#176b5c}
+.fastest-path-copy strong{font-size:1.18rem;color:#102f35}
+.fastest-path-copy span{font-size:.9rem;color:#5f6874}
+.fastest-path-copy em{font-style:normal;font-size:.78rem;color:#88909a}
+.fastest-path-card button{border:0;background:transparent;color:#176b5c;font-weight:850;white-space:nowrap;padding:10px 0;cursor:pointer}
+.fastest-discovery-badge{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:5px 8px;background:#eef7f3;color:#176b5c;font-size:.72rem;font-weight:850}
+@media(max-width:560px){
+  .fastest-path-card{grid-template-columns:auto minmax(0,1fr);padding:16px}
+  .fastest-path-card button{grid-column:2;justify-self:start;padding:4px 0 0}
+}
 </style>
 </body>
 </html>
