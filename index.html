@@ -18373,5 +18373,109 @@ window.lundV365Audit=lundV365Audit;try{window.__studielotsLundV365Audit=lundV365
 window.__studielotsUniversityCoverage=window.__studielotsUniversityCoverage||{};window.__studielotsUniversityCoverage['Lunds universitet']={academicYear:'2026/2027',inventoryComplete:true,engine:'v2',version:'v365',safeMatching:true};
 console.info('Studielots v365: Lund HT2026 university-wide inventory complete');
 </script>
+
+<script>
+/* v366 — v2-only university gate + stable hp source of truth */
+const V2_ACTIVE_UNIVERSITIES=Object.freeze([
+  'Chalmers tekniska högskola',
+  'Göteborgs universitet',
+  'Lunds universitet'
+]);
+const V2_ACTIVE_UNIVERSITY_KEYS=new Set(V2_ACTIVE_UNIVERSITIES.map(x=>String(x).trim().toLocaleLowerCase('sv-SE')));
+function v366UniversityName(x){return String(x?.d?.university||x?.university||'').trim();}
+function v366UniversityAllowed(x){return V2_ACTIVE_UNIVERSITY_KEYS.has(v366UniversityName(x).toLocaleLowerCase('sv-SE'));}
+function v366FilterUniversityOptions(rows){return (Array.isArray(rows)?rows:[]).filter(v366UniversityAllowed);}
+window.V2_ACTIVE_UNIVERSITIES=V2_ACTIVE_UNIVERSITIES;
+
+// Final gate: no university outside the three reviewed v2 institutions can reach UI path selectors.
+const _v366AdvancedUniversityOptions=advancedUniversityOptions;
+advancedUniversityOptions=function(subject,degreeType){
+  return v366FilterUniversityOptions(_v366AdvancedUniversityOptions(subject,degreeType));
+};
+const _v366UniversityOptionsForOpportunity=universityOptionsForOpportunity;
+universityOptionsForOpportunity=function(o){
+  return v366FilterUniversityOptions(_v366UniversityOptionsForOpportunity(o));
+};
+
+// One deterministic source of truth for hp. No session/preferred university may silently
+// change the opportunity-card number. A specific university changes the number only when
+// that university is explicitly selected and its profileId is passed in.
+canonicalPathResult=function(o,profileId=''){
+  if(!o)return {remaining:0,score:0,profileId:'',university:''};
+  const opts=v366FilterUniversityOptions(universityOptionsForOpportunity(o));
+  let chosen=null;
+  if(profileId)chosen=opts.find(x=>String(x?.d?.id||'')===String(profileId))||null;
+  if(!chosen)chosen=opts[0]||null;
+  const total=degreeTotalHp(o);
+  if(chosen){
+    const remaining=Math.max(0,Number(chosen.remaining||0));
+    return {
+      remaining,
+      score:Math.max(0,Math.min(100,Math.round(100*(total-remaining)/Math.max(1,total)))),
+      profileId:chosen.d?.id||'',
+      university:chosen.d?.university||''
+    };
+  }
+  const remaining=Math.max(0,Number(o.remaining??total));
+  return {remaining,score:Math.max(0,Math.min(100,Math.round(100*(total-remaining)/Math.max(1,total)))),profileId:'',university:''};
+};
+canonicalRemaining=function(o,profileId=''){return canonicalPathResult(o,profileId).remaining;};
+
+// Opportunity cards now show the exact same canonical value used when opening "Visa väg".
+opportunityRemainingLabel=function(o){
+  const hp=Number(canonicalRemaining(o)||0);
+  return hp?`${fmtHp(hp)} hp kvar`:'Klar';
+};
+opportunityUniversityCount=function(o){
+  try{return v366FilterUniversityOptions(universityOptionsForOpportunity(o)).length}catch(e){return 0}
+};
+opportunityUniversityRange=function(o){
+  try{
+    const rows=v366FilterUniversityOptions(universityOptionsForOpportunity(o)).filter(x=>Number.isFinite(Number(x.remaining)));
+    if(!rows.length)return null;
+    const vals=rows.map(x=>Number(x.remaining)).sort((a,b)=>a-b);
+    return {min:vals[0],max:vals[vals.length-1],same:vals[0]===vals[vals.length-1]};
+  }catch(e){return null}
+};
+
+// The Programme search used programCatalog directly, so gate it separately as well.
+renderProgramSearch=function(){
+  const host=document.getElementById('programSearchResults');
+  if(!host)return;
+  const q=String(document.getElementById('programSearchInput')?.value||'').trim().toLowerCase();
+  let rows=programCatalog.filter(p=>V2_ACTIVE_UNIVERSITY_KEYS.has(String(p?.university||'').trim().toLocaleLowerCase('sv-SE'))).filter(p=>{
+    if(!q)return true;
+    return `${p.name} ${p.university}`.toLowerCase().includes(q);
+  }).slice(0,20);
+  host.innerHTML=rows.length?rows.map(p=>`
+    <button class="program-search-row" type="button" onclick="selectProgramForMatch('${escapeHtml(p.id)}')">
+      <div class="uni-name-with-logo">${universityLogoHtml(p.university,'sm')}<div><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.university)}</span></div></div><span>›</span>
+    </button>`).join(''):'<div class="muted small program-empty">Inget program hittades bland de lärosäten som är klara i motor v2.</div>';
+};
+const _v366SelectProgramForMatch=selectProgramForMatch;
+selectProgramForMatch=function(id){
+  const p=programCatalog.find(x=>x.id===id);
+  if(!p||!V2_ACTIVE_UNIVERSITY_KEYS.has(String(p.university||'').trim().toLocaleLowerCase('sv-SE')))return;
+  return _v366SelectProgramForMatch(id);
+};
+
+// Clean stale selections from an older build so an old university cannot reappear after deploy.
+try{
+  const oldProfile=sessionStorage.getItem('lotsen_preferred_profile')||'';
+  if(oldProfile){
+    const d=(typeof flexibleDegreeCatalog!=='undefined'?flexibleDegreeCatalog:[]).find(x=>String(x.id)===String(oldProfile));
+    if(d&&!V2_ACTIVE_UNIVERSITY_KEYS.has(String(d.university||'').trim().toLocaleLowerCase('sv-SE')))sessionStorage.removeItem('lotsen_preferred_profile');
+  }
+  const oldProgram=sessionStorage.getItem('lotsen_selected_program')||'';
+  if(oldProgram){
+    const p=(typeof programCatalog!=='undefined'?programCatalog:[]).find(x=>String(x.id)===String(oldProgram));
+    if(p&&!V2_ACTIVE_UNIVERSITY_KEYS.has(String(p.university||'').trim().toLocaleLowerCase('sv-SE')))sessionStorage.removeItem('lotsen_selected_program');
+  }
+}catch(e){}
+
+window.__studielotsV366={version:'v366',engine:'v2',activeUniversities:[...V2_ACTIVE_UNIVERSITIES],v2OnlyUi:true,stableHpSource:true};
+console.info('Studielots v366: v2-only university gate + stable hp source installed');
+</script>
+
 </body>
 </html>
