@@ -29191,5 +29191,142 @@ console.info('Studielots v371: programme search relevance and deduplication inst
  console.info('Studielots v489: application state separated from distance-route eligibility');
 })();
 </script>
+
+<script>
+/* v490 — Distans API wiring fix: never hide route before /api/distance-courses has been queried */
+(function(){
+  const oldRenderDegreeDetail=window.renderDegreeDetail;
+  const oldOpenDistance=window.openDistancePathFromOpportunity;
+
+  function opportunityForKey(key){
+    try{return opportunityByKey(key||sessionStorage.getItem('lotsen_detail_key'));}catch(e){return null;}
+  }
+
+  // Replace the premature static availability gate.
+  // A degree can have a distance route even when the local bootstrap index is empty.
+  window.opportunityHasDistance=function(o){
+    if(!o)return false;
+    if(distanceApiState?.loaded){
+      try{
+        const d=distancePlanForOpportunity(o);
+        if((d?.needs||[]).some(n=>(n.matches||[]).length))return true;
+      }catch(e){}
+    }
+    // Unknown is NOT the same as unavailable. Keep the route discoverable.
+    return true;
+  };
+
+  function distancePickerHtml(o){
+    const subject=String(o?.subject||o?.name||'');
+    const loading=distanceApiState?.loading;
+    const loaded=distanceApiState?.loaded;
+    const error=distanceApiState?.error;
+    let found=0;
+    try{
+      const d=distancePlanForOpportunity(o);
+      found=(d?.needs||[]).reduce((s,n)=>s+(n.matches?.length||0),0);
+    }catch(e){}
+
+    const status=loading?'Söker distanskurser…':
+      found?`${found} kursförslag hittade`:
+      error?'Kunde inte uppdatera kursutbudet – visa plan ändå':
+      loaded?'Visa distansplan och kommande alternativ':
+      'Sök distanskurser och bygg en plan';
+
+    return `<button class="uni-path uni-path-btn" type="button"
+      onclick="openDistancePathFromOpportunity('${escapeHtml(o.key)}')">
+      <div><strong>Visa distansalternativ</strong><small>${escapeHtml(status)}</small></div><span>›</span>
+    </button>`;
+  }
+
+  // Re-render picker with an always-accessible Distans route, then query the API in background.
+  window.renderDegreeDetail=function(key){
+    if(typeof oldRenderDegreeDetail==='function')oldRenderDegreeDetail(key);
+    const o=opportunityForKey(key);
+    if(!o)return;
+
+    const sections=[...document.querySelectorAll('#degreeDetailContent .detail-block')];
+    const distanceSection=sections.find(s=>(s.querySelector('h2')?.textContent||'').trim()==='På distans');
+    if(distanceSection){
+      const oldEmpty=[...distanceSection.querySelectorAll('.muted,.small')].find(el=>
+        /Inga tydliga distansalternativ finns i databasen ännu/i.test(el.textContent||''));
+      if(oldEmpty)oldEmpty.outerHTML=distancePickerHtml(o);
+      else{
+        const btn=distanceSection.querySelector('.uni-path-btn');
+        if(btn){
+          const small=btn.querySelector('small');
+          if(small){
+            const tmp=document.createElement('div');tmp.innerHTML=distancePickerHtml(o);
+            const replacement=tmp.firstElementChild;
+            btn.replaceWith(replacement);
+          }
+        }
+      }
+    }
+
+    // Critical fix: the API must be queried from the university picker itself,
+    // not only after a static local course has already made Distans visible.
+    if(!distanceApiState.loaded && !distanceApiState.loading){
+      loadDistanceCourses({subject:o.subject||o.name||'',kind:o.degreeType||o.kind||'candidate'})
+        .then(()=>{ try{window.renderDegreeDetail(o.key);}catch(e){} })
+        .catch(()=>{});
+    }
+  };
+
+  // Opening Distans also forces a fresh API-backed plan if needed.
+  window.openDistancePathFromOpportunity=function(key){
+    const o=opportunityForKey(key);
+    if(!o)return;
+    if(typeof oldOpenDistance==='function')oldOpenDistance(key);
+
+    if(!distanceApiState.loaded && !distanceApiState.loading){
+      loadDistanceCourses({subject:o.subject||o.name||'',kind:o.degreeType||o.kind||'candidate'})
+        .then(()=>{
+          const host=document.getElementById('degreeDetailContent');
+          if(host)host.innerHTML=`<div class="detail-hero"><div><div class="eyebrow">På distans</div><h1>${escapeHtml(o.subject||o.name)}</h1></div></div>${myPathDistancePlanHtml(o)}<button class="secondary" type="button" onclick="renderDegreeDetail('${escapeHtml(o.key)}')">‹ Välj annat lärosäte</button>`;
+        }).catch(()=>{});
+    }
+  };
+
+  // Make API results persistent in the same candidate source used by Motor 2.0.
+  const oldLoad=window.loadDistanceCourses;
+  window.loadDistanceCourses=async function(o){
+    await oldLoad(o);
+    if(Array.isArray(LIVE_DISTANCE_COURSES)){
+      window.__studielotsDistanceCourseSuggestionPool=window.__studielotsDistanceCourseSuggestionPool||[];
+      const seen=new Set(window.__studielotsDistanceCourseSuggestionPool.map(c=>
+        String(c.code||c.id||c.name||'')+'|'+String(c.university||'')));
+      LIVE_DISTANCE_COURSES.forEach(c=>{
+        const id=String(c.code||c.id||c.name||'')+'|'+String(c.university||'');
+        if(id&&!seen.has(id)){
+          window.__studielotsDistanceCourseSuggestionPool.push({
+            ...c,
+            verified:c.verified!==false,
+            distance:true,
+            applicationState:typeof window.__studielotsCourseApplicationState==='function'
+              ? window.__studielotsCourseApplicationState(c):undefined
+          });
+          seen.add(id);
+        }
+      });
+    }
+  };
+
+  // Repair an already-open picker after this patch loads.
+  try{
+    const key=sessionStorage.getItem('lotsen_detail_key');
+    if(key && document.getElementById('degreeDetailContent'))setTimeout(()=>window.renderDegreeDetail(key),30);
+  }catch(e){}
+
+  window.__studielotsDistanceAPIQA={
+    version:'v490',
+    endpoint:'/api/distance-courses',
+    queryBeforeAvailabilityDecision:true,
+    unknownDoesNotMeanUnavailable:true,
+    apiResultsMergedIntoMotor2Pool:true
+  };
+  console.info('Studielots v490: Distans API wired before availability gate');
+})();
+</script>
 </body>
 </html>
