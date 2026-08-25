@@ -29862,5 +29862,1087 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   console.info('Studielots v493: ordered degree suggestions + faster alternatives enabled');
 })();
 </script>
+
+<script>
+/* v494 — fix duplicate alternatives + reject past "faster" courses */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+
+  // Current date is runtime-local; a course already finished/started in the past
+  // must never be sold as a "faster" future route.
+  function nowDate(){
+    const d=new Date();
+    d.setHours(0,0,0,0);
+    return d;
+  }
+
+  function parseDateLike(v){
+    if(!v) return null;
+    if(v instanceof Date && !isNaN(v)) return v;
+
+    const s=String(v).trim();
+
+    // ISO yyyy-mm-dd
+    const iso=s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if(iso) return new Date(Number(iso[1]),Number(iso[2])-1,Number(iso[3]));
+
+    // Swedish term notation HT2026 / VT2027
+    const term=s.match(/\b(HT|VT)\s*[- ]?(\d{4})\b/i);
+    if(term){
+      const year=Number(term[2]);
+      return new Date(year, term[1].toUpperCase()==='HT'?7:0, 1); // Aug 1 / Jan 1
+    }
+
+    return null;
+  }
+
+  function offeringDate(c){
+    return (
+      parseDateLike(c?.startDate) ||
+      parseDateLike(c?.nextOffering) ||
+      parseDateLike(c?.term) ||
+      parseDateLike(c?.studyPeriod)
+    );
+  }
+
+  function requirementDate(req){
+    return (
+      parseDateLike(req?.startDate) ||
+      parseDateLike(req?.term) ||
+      parseDateLike(req?.studyPeriod)
+    );
+  }
+
+  window.__studielotsIsFutureUsableOffering=function(c){
+    if(!c) return false;
+
+    // Explicit flags from live/API data win.
+    if(c.ended===true || c.offeringPast===true) return false;
+    if(c.applicationState?.state==='past') return false;
+
+    const d=offeringDate(c);
+    if(!d){
+      // Unknown future date may still be a valid alternative, but it cannot be
+      // claimed as "snabbare" until timing is known.
+      return c.startDateUnknown!==false && c.offeredEarlier===true && c.futureOfferingConfirmed===true;
+    }
+
+    return d >= nowDate();
+  };
+
+  window.__studielotsIsActuallyFaster=function(required,candidate){
+    if(!required || !candidate) return false;
+    if(!window.__studielotsIsFutureUsableOffering(candidate)) return false;
+
+    const cd=offeringDate(candidate);
+    const rd=requirementDate(required);
+
+    // If both dates are known, the alternative must start before the ordinary course.
+    if(cd && rd) return cd < rd;
+
+    // No ordinary-course date: only accept an explicit verified "earlier" flag
+    // when the candidate itself is confirmed future.
+    return candidate.offeredEarlier===true && window.__studielotsIsFutureUsableOffering(candidate);
+  };
+
+  // Strong global identity so the same course cannot be allocated twice
+  // even if one copy comes from programme data and another from the API pool.
+  function courseIdentity(c){
+    const university=norm(c?.university||c?.provider||'');
+    const code=norm(c?.code||c?.courseCode||'');
+    if(code) return university+'|'+code;
+
+    // Fallback to normalized name + hp, intentionally ignoring source programme.
+    return university+'|'+norm(c?.name)+'|'+String(Number(c?.hp)||0);
+  }
+
+  // Replace the course-plan allocator with one that owns ONE shared used-set
+  // across the entire plan and only permits truly future faster alternatives.
+  window.__studielotsBuildProgrammePlanWithAcceleration=function(programme,requiredCourses){
+    const usedAlternatives=new Set();
+    const usedPriorMerits=new Set();
+
+    const pool=typeof window.__studielotsBuildCrossProviderReplacementPool==='function'
+      ? window.__studielotsBuildCrossProviderReplacementPool(programme)
+      : [];
+
+    return arr(requiredCourses).map(required=>{
+      const ranked=arr(pool).map(c=>{
+        const match=typeof window.__studielotsScoreCourseMatch==='function'
+          ? window.__studielotsScoreCourseMatch(required,c,{
+              subject:required.subject,
+              level:required.level
+            })
+          : {eligible:false,score:0,status:'weak',reasons:[]};
+
+        const remote=c.distance===true &&
+          c.mandatoryMeetings!==true &&
+          c.noPhysicalMeetings!==false;
+
+        const actuallyFaster=window.__studielotsIsActuallyFaster(required,c);
+
+        return {
+          course:c,
+          ...match,
+          remote,
+          actuallyFaster,
+          id:courseIdentity(c),
+          priorId:String(c.sourceMeritId||'')
+        };
+      })
+      .filter(x=>
+        x.eligible &&
+        x.actuallyFaster &&
+        !usedAlternatives.has(x.id) &&
+        (!x.priorId || !usedPriorMerits.has(x.priorId))
+      )
+      .sort((a,b)=>{
+        const statusRank={verified:3,strong:2,possible:1,weak:0};
+        const sd=(statusRank[b.status]||0)-(statusRank[a.status]||0);
+        if(sd) return sd;
+        if(a.remote!==b.remote) return a.remote?-1:1;
+        return (b.score||0)-(a.score||0);
+      });
+
+      const pick=ranked[0]||null;
+
+      if(pick){
+        usedAlternatives.add(pick.id);
+        if(pick.priorId) usedPriorMerits.add(pick.priorId);
+
+        return {
+          required,
+          alternative:pick.course,
+          match:pick,
+          accelerated:true,
+          crossUniversity:!!(
+            pick.course.university &&
+            programme?.university &&
+            pick.course.university!==programme.university
+          ),
+          disclaimer:pick.status==='verified'
+            ? 'Motsvarigheten är verifierad i StudieLots.'
+            : 'Tillgodoräknandet behöver bekräftas av universitetet som utfärdar examen.'
+        };
+      }
+
+      return {
+        required,
+        alternative:null,
+        match:null,
+        accelerated:false
+      };
+    });
+  };
+
+  // Old v484/v493 planner also reused candidates because it invoked the allocator
+  // requirement-by-requirement. Point it at the new whole-plan allocator.
+  window.__studielotsBuildCoursePlanWithAlternatives=function(requiredCourses,candidateCourses){
+    const pseudoProgramme={
+      university:'',
+      name:'Studieplan',
+      alternativeCourses:arr(candidateCourses)
+    };
+
+    // Temporarily include the passed candidate list as the exact pool for this plan.
+    const oldPool=window.__studielotsBuildCrossProviderReplacementPool;
+    window.__studielotsBuildCrossProviderReplacementPool=function(){
+      return arr(candidateCourses);
+    };
+
+    let result;
+    try{
+      result=window.__studielotsBuildProgrammePlanWithAcceleration(
+        pseudoProgramme,
+        requiredCourses
+      );
+    }finally{
+      window.__studielotsBuildCrossProviderReplacementPool=oldPool;
+    }
+    return result;
+  };
+
+  // A visible "Möjligt snabbare alternativ" is only valid when the engine
+  // has marked the item accelerated. This prevents stale legacy cards.
+  function removeStaleDuplicateCards(){
+    const cards=[...document.querySelectorAll('div')].filter(el=>{
+      const t=(el.innerText||'').trim();
+      return t.startsWith('MÖJLIGT SNABBARE ALTERNATIV') &&
+        ![...el.children].some(ch=>(ch.innerText||'').trim().startsWith('MÖJLIGT SNABBARE ALTERNATIV'));
+    });
+
+    const seen=new Set();
+    cards.forEach(card=>{
+      const lines=(card.innerText||'').split('\n').map(x=>x.trim()).filter(Boolean);
+      const courseLine=lines.find(x=>/\d+(?:[,.]\d+)?\s*hp/i.test(x) && !/MÖJLIGT/i.test(x));
+      if(!courseLine) return;
+
+      const key=norm(courseLine);
+      if(seen.has(key)){
+        card.style.display='none';
+      }else{
+        seen.add(key);
+      }
+
+      // Legacy "År 1" without an actual future offering date is not enough
+      // to claim that this is now a faster alternative.
+      const onlyStudyOrder=lines.some(x=>/^År\s*\d+/i.test(x)) &&
+        !lines.some(x=>/\b(HT|VT)\s*20\d{2}\b/i.test(x));
+      if(onlyStudyOrder){
+        card.style.display='none';
+      }
+    });
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',removeStaleDuplicateCards);
+  }else{
+    removeStaleDuplicateCards();
+  }
+  try{
+    new MutationObserver(()=>requestAnimationFrame(removeStaleDuplicateCards))
+      .observe(document.body,{childList:true,subtree:true});
+  }catch(e){}
+
+  window.__studielotsMotor2QA={
+    ...(window.__studielotsMotor2QA||{}),
+    version:'v494',
+    noDuplicateAlternativePerPlan:true,
+    pastCoursesCannotBeFaster:true,
+    programmeOrderAloneCannotClaimFaster:true,
+    futureOfferingRequired:true
+  };
+
+  console.info('Studielots v494: duplicate and past faster alternatives blocked');
+})();
+</script>
+
+<script>
+/* v495 — remove duplicate "Förslag att läsa" section from Program view only */
+(function(){
+  function isProgramView(){
+    const activeProgram =
+      document.querySelector('[data-view="program"].active, #programView.active, .program-view.active') ||
+      document.querySelector('.bottom-nav [aria-current="page"], .bottom-menu .active, nav .active');
+    if(activeProgram){
+      const t=(activeProgram.textContent||'').toLowerCase();
+      if(t.includes('program')) return true;
+    }
+
+    const body=(document.body.innerText||'').toLowerCase();
+    return body.includes('program') &&
+      (
+        body.includes('period 1') ||
+        body.includes('period 2') ||
+        body.includes('studieperiod 1') ||
+        body.includes('kandidatuppsats') ||
+        body.includes('möjligt snabbare alternativ')
+      );
+  }
+
+  function isOpportunitiesView(){
+    const activeOpp =
+      document.querySelector('[data-view="opportunities"].active, #opportunitiesView.active, .opportunities-view.active') ||
+      document.querySelector('.bottom-nav [aria-current="page"], .bottom-menu .active, nav .active');
+    if(activeOpp){
+      const t=(activeOpp.textContent||'').toLowerCase();
+      if(t.includes('möjligheter')) return true;
+    }
+    const body=(document.body.innerText||'').toLowerCase();
+    return body.includes('fristående väg') || body.includes('vald examen');
+  }
+
+  function removeProgramSuggestionSection(){
+    // Never remove this section from Möjligheter/Distans.
+    if(!isProgramView() || isOpportunitiesView()) return;
+
+    const candidates=[...document.querySelectorAll('section,div')].filter(el=>{
+      const t=(el.innerText||'').trim();
+      return t.startsWith('Förslag att läsa') &&
+        ![...el.children].some(ch=>(ch.innerText||'').trim().startsWith('Förslag att läsa'));
+    });
+
+    candidates.forEach(section=>{
+      section.style.display='none';
+      section.setAttribute('data-hidden-program-suggestions','v495');
+    });
+  }
+
+  function restoreOutsideProgram(){
+    if(isProgramView() && !isOpportunitiesView()) return;
+    document.querySelectorAll('[data-hidden-program-suggestions="v495"]').forEach(section=>{
+      section.style.display='';
+      section.removeAttribute('data-hidden-program-suggestions');
+    });
+  }
+
+  function sync(){
+    restoreOutsideProgram();
+    removeProgramSuggestionSection();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',sync);
+  }else{
+    sync();
+  }
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(sync))
+      .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','aria-current']});
+  }catch(e){}
+
+  ['studielots:programme-detail-ready','studielots:results-updated']
+    .forEach(evt=>window.addEventListener(evt,()=>setTimeout(sync,30)));
+
+  window.__studielotsProgramUI={
+    ...(window.__studielotsProgramUI||{}),
+    version:'v495',
+    duplicateSuggestionSectionRemoved:true,
+    opportunitiesSuggestionsPreserved:true,
+    distanceSuggestionsPreserved:true
+  };
+
+  console.info('Studielots v495: Program duplicate "Förslag att läsa" removed');
+})();
+</script>
+
+<script>
+/* v496 — LTU/safe-mode programme course suggestions: use verified catalogue/API candidates without inventing equivalence */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+
+  function courseId(c){
+    return norm(c?.university||c?.provider)+'|'+norm(c?.code||c?.courseCode||c?.name)+'|'+String(Number(c?.hp)||0);
+  }
+
+  function programmeSubject(p){
+    return norm(p?.subject||p?.track||p?.name)
+      .replace(/kandidatprogram|kandidatexamen|kandidat|programmet|program/g,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+
+  function candidatePool(programme){
+    const subject=programmeSubject(programme);
+    const provider=programme?.university||programme?.provider||'';
+    const pools=[
+      ...arr(window.programCatalog).flatMap(p=>arr(p?.courses).map(c=>({...c,university:c.university||p.university,sourceProgramme:p.name}))),
+      ...arr(window.__studielotsVerifiedDistanceCourses),
+      ...arr(window.__studielotsDistanceCourseSuggestionPool),
+      ...(Array.isArray(window.LIVE_DISTANCE_COURSES)?window.LIVE_DISTANCE_COURSES:[])
+    ];
+
+    const seen=new Set();
+    return pools.filter(c=>{
+      if(!c?.name || Number(c.hp)<=0) return false;
+      const id=courseId(c);
+      if(seen.has(id)) return false;
+      seen.add(id);
+
+      const cs=norm(c.subject||c.name);
+      const sameProvider=!provider || c.university===provider;
+      const sameSubject=subject && (cs.includes(subject)||subject.includes(cs));
+      return sameProvider && sameSubject;
+    });
+  }
+
+  // Safe mode should block exact completion claims, not block useful real-course discovery.
+  window.__studielotsSafeModeProgrammeSuggestions=function(path){
+    const p=path?.program||path;
+    const pool=candidatePool(p);
+    return pool
+      .sort((a,b)=>{
+        const ap=Number(a.period||a.studyPeriod||a.year||999);
+        const bp=Number(b.period||b.studyPeriod||b.year||999);
+        if(ap!==bp) return ap-bp;
+        return String(a.name||'').localeCompare(String(b.name||''),'sv');
+      })
+      .slice(0,12);
+  };
+
+  const previous=window.v21SuggestionSection;
+  window.v21SuggestionSection=v21SuggestionSection=function(path){
+    const p=path?.program||{};
+    if(p.safeMode===true || p.canCalculateCompletion===false){
+      const courses=window.__studielotsSafeModeProgrammeSuggestions(path);
+      if(courses.length){
+        return `
+          <div class="course-provider-note" style="margin-bottom:10px;">
+            <strong>Programstrukturen är inte fullständigt verifierad ännu.</strong>
+            <span>StudieLots visar därför riktiga ${escapeHtml(p.university||path.provider||'lärosätets')}kurser som kan vara relevanta, men räknar dem inte som säkra ersättningar förrän programplanen är verifierad.</span>
+          </div>
+          <div class="chalmers-suggestion-list">
+            ${courses.map(c=>`
+              <div style="padding:13px 0;border-top:1px solid rgba(20,50,55,.1);">
+                <div style="display:flex;justify-content:space-between;gap:10px;font-weight:800;">
+                  <span>${escapeHtml(c.name)}</span>
+                  <span style="white-space:nowrap">${Number(c.hp)||''} hp</span>
+                </div>
+                <div style="font-size:.84em;opacity:.62;margin-top:3px;">
+                  ${escapeHtml(c.university||p.university||'')}${c.distance?' · Distans':''}${c.term?' · '+escapeHtml(String(c.term)):''}
+                </div>
+                <div style="font-size:.8em;color:#19715f;font-weight:700;margin-top:4px;">
+                  Möjlig kurs i vägen · exakt placering/tillgodoräknande verifieras mot programplanen.
+                </div>
+              </div>`).join('')}
+          </div>`;
+      }
+
+      return `<div class="course-provider-note">
+        <strong>Detaljerad kursplan ännu inte verifierad.</strong>
+        <span>Inga verifierade ${escapeHtml(p.university||path.provider||'lärosätets')}kurser i rätt huvudområde finns ännu i kurskatalogen. StudieLots gissar därför inte.</span>
+      </div>`;
+    }
+
+    return typeof previous==='function' ? previous(path) : '';
+  };
+
+  // Program page currently hides "Förslag att läsa" in v495. Re-enable it ONLY
+  // when safe mode would otherwise leave the user with no actionable course list.
+  function revealSafeModeSuggestions(){
+    document.querySelectorAll('[data-hidden-program-suggestions="v495"]').forEach(section=>{
+      const txt=(section.innerText||'');
+      if(/Detaljerad kursplan|Programstrukturen är inte fullständigt verifierad|Möjlig kurs i vägen/i.test(txt)){
+        section.style.display='';
+        section.removeAttribute('data-hidden-program-suggestions');
+        section.setAttribute('data-safe-mode-suggestions','v496');
+      }
+    });
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',revealSafeModeSuggestions);
+  else revealSafeModeSuggestions();
+  try{
+    new MutationObserver(()=>requestAnimationFrame(revealSafeModeSuggestions))
+      .observe(document.body,{childList:true,subtree:true});
+  }catch(e){}
+
+  window.__studielotsMotor2QA={...(window.__studielotsMotor2QA||{}),version:'v496',
+    safeModeCanSuggestRealCourses:true,
+    safeModeDoesNotClaimEquivalence:true,
+    ltuProgrammeSuggestionsEnabled:true};
+
+  console.info('Studielots v496: safe-mode programme suggestions enabled');
+})();
+</script>
+
+<script>
+/* v497 — alternative programme cards: fully clickable + shorter copy */
+(function(){
+  const norm=v=>String(v||'').trim().toLocaleLowerCase('sv-SE');
+
+  // More robust resolver: id first, then code, then exact programme name.
+  window.openAdvancedAlternative401=function(ref){
+    const key=String(ref||'');
+    const p=(programCatalog||[]).find(x=>
+      String(x?.id||'')===key ||
+      String(x?.code||x?.officialCode||'')===key ||
+      String(x?.name||'')===key
+    );
+    if(!p)return;
+
+    try{openProgramMatcher()}catch(e){try{go('programMatch')}catch(_){}}
+    const input=document.getElementById('programSearchInput');
+    if(input)input.value=p.name||'';
+
+    try{
+      renderProgramMatch(p);
+    }catch(e){
+      console.error('v497 alternative programme',e);
+    }
+
+    requestAnimationFrame(()=>{
+      document.getElementById('programMatchResult')
+        ?.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  };
+
+  // Replace alternative-programme renderer with compact, tap-anywhere cards.
+  window.alternativeAdvancedHtml401=function(kind){
+    const rows=typeof window.advancedAlternativePrograms401==='function'
+      ? window.advancedAlternativePrograms401(kind)
+      : [];
+    if(!rows.length)return '';
+
+    const programmeSubjects=p=>{
+      const map=new Map();
+      (p?.courses||[]).forEach(c=>{
+        const s=String(c?.subject||'').trim();
+        if(!s)return;
+        map.set(norm(s),(map.get(norm(s))||0)+Number(c.hp||0));
+      });
+      return map;
+    };
+
+    return `<div class="advanced-alternative-wrap">
+      <div class="advanced-alternative-heading">
+        <strong>Alternativa vägar</strong>
+        <span>Program som kan passa dina meriter</span>
+      </div>
+
+      ${rows.map(({p})=>{
+        const ref=String(p.id||p.code||p.officialCode||p.name||'');
+        const subjects=[...programmeSubjects(p).entries()]
+          .sort((a,b)=>b[1]-a[1])
+          .slice(0,2)
+          .map(x=>x[0]);
+
+        const shortText=subjects.length
+          ? `Relevant inom ${escapeHtml(subjects.join(' / '))}. Behörighet verifieras av universitetet.`
+          : `Relevant utifrån dina meriter. Behörighet verifieras av universitetet.`;
+
+        return `<article
+          class="advanced-alternative-card v497-clickable"
+          role="button"
+          tabindex="0"
+          aria-label="Visa ${escapeHtml(p.name)}"
+          onclick="openAdvancedAlternative401('${escapeHtml(ref)}')"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAdvancedAlternative401('${escapeHtml(ref)}')}">
+
+          <div class="advanced-alt-main">
+            <div>
+              ${universityLogoHtml(p.university,'sm')}
+              <span>
+                <small>ALTERNATIV VÄG</small>
+                <strong>${escapeHtml(p.name)}</strong>
+                <em>${escapeHtml(p.university)} · ${fmtHp(p.hp)} hp${p.distance===true?' · Distans':''}</em>
+              </span>
+            </div>
+            <b aria-hidden="true">›</b>
+          </div>
+
+          <p>${shortText}</p>
+          <div class="v497-open-label">Visa program <span>›</span></div>
+        </article>`;
+      }).join('')}
+    </div>`;
+  };
+
+  // Patch already-rendered cards too, so user does not need a navigation round-trip.
+  function upgradeRenderedCards(){
+    document.querySelectorAll('.advanced-alternative-card').forEach(card=>{
+      if(card.dataset.v497==='1')return;
+
+      const title=card.querySelector('.advanced-alt-main strong')?.textContent?.trim();
+      if(!title)return;
+
+      const p=(programCatalog||[]).find(x=>String(x?.name||'').trim()===title);
+      if(!p)return;
+
+      const ref=String(p.id||p.code||p.officialCode||p.name||'');
+
+      card.classList.add('v497-clickable');
+      card.setAttribute('role','button');
+      card.setAttribute('tabindex','0');
+      card.setAttribute('aria-label','Visa '+title);
+
+      card.addEventListener('click',e=>{
+        if(e.target.closest('a'))return;
+        window.openAdvancedAlternative401(ref);
+      });
+
+      card.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){
+          e.preventDefault();
+          window.openAdvancedAlternative401(ref);
+        }
+      });
+
+      const pEl=card.querySelector('p');
+      if(pEl){
+        const old=pEl.textContent||'';
+        const m=old.match(/inom\s+(.+?)\.\s*Behörigheten/i);
+        pEl.textContent=m
+          ? `Relevant inom ${m[1]}. Behörighet verifieras av universitetet.`
+          : 'Relevant utifrån dina meriter. Behörighet verifieras av universitetet.';
+      }
+
+      const button=card.querySelector('button');
+      if(button){
+        const label=document.createElement('div');
+        label.className='v497-open-label';
+        label.innerHTML='Visa program <span>›</span>';
+        button.replaceWith(label);
+      }
+
+      card.dataset.v497='1';
+    });
+  }
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .advanced-alternative-card.v497-clickable{
+      cursor:pointer;
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .advanced-alternative-card.v497-clickable:active{
+      transform:scale(.992);
+    }
+    .advanced-alternative-card.v497-clickable:focus-visible{
+      outline:3px solid rgba(23,107,92,.25);
+      outline-offset:2px;
+    }
+    .advanced-alternative-card.v497-clickable p{
+      margin:8px 0 9px;
+      font-size:.77rem;
+      line-height:1.35;
+    }
+    .v497-open-label{
+      color:#176b5c;
+      font-weight:850;
+      font-size:.88rem;
+      display:inline-flex;
+      gap:5px;
+      align-items:center;
+    }
+  `;
+  document.head.appendChild(style);
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',upgradeRenderedCards);
+  }else{
+    upgradeRenderedCards();
+  }
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(upgradeRenderedCards))
+      .observe(document.body,{childList:true,subtree:true});
+  }catch(e){}
+
+  window.__studielotsAlternativeProgrammeUI={
+    version:'v497',
+    wholeCardClickable:true,
+    keyboardAccessible:true,
+    compactCopy:true,
+    robustProgrammeResolver:true
+  };
+
+  console.info('Studielots v497: alternative programme cards simplified + clickable');
+})();
+</script>
+
+<script>
+/* v498 — Master Eligibility layer: rank advanced programmes by actual entry requirements */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+
+  function userCourses(){
+    const pools=[
+      ...arr(window.userCourses),
+      ...arr(window.importedCourses),
+      ...arr(window.merits),
+      ...arr(window.ladokCourses)
+    ];
+    const seen=new Set();
+    return pools.filter(c=>{
+      if(!c)return false;
+      const id=norm(c.code||c.id||c.name)+'|'+String(Number(c.hp)||0);
+      if(seen.has(id))return false;
+      seen.add(id); return true;
+    });
+  }
+
+  function subjectHp(courses,subject){
+    const s=norm(subject);
+    return courses.reduce((sum,c)=>{
+      const cs=norm(c.subject||c.mainField||c.name);
+      return sum+((cs.includes(s)||s.includes(cs))?Number(c.hp||0):0);
+    },0);
+  }
+
+  function hasBachelor(courses){
+    const explicit=arr(window.userDegrees).some(d=>
+      /kandidat|bachelor/i.test(String(d.name||d.degree||'')) &&
+      Number(d.hp||180)>=180
+    );
+    const total=courses.reduce((s,c)=>s+Number(c.hp||0),0);
+    return explicit || total>=180;
+  }
+
+  function parseEntryRequirements(p){
+    const r=p.entryRequirements||p.eligibility||p.admissionRequirements||p.prerequisites||{};
+    const text=norm(typeof r==='string'?r:(r.text||p.eligibilityText||''));
+    const out={
+      bachelorRequired: p.level==='advanced'||/master|magister/.test(norm(p.name)),
+      subjectRequirements:[],
+      thesisHp:Number(r.thesisHp||0),
+      englishRequired:/engelska\s*6|english\s*6|english b/.test(text)||r.english===true,
+      verified:!!(p.entryRequirementsVerified||r.verified)
+    };
+
+    arr(r.subjects||r.subjectRequirements).forEach(x=>{
+      if(typeof x==='string')return;
+      out.subjectRequirements.push({subject:x.subject||x.name,hp:Number(x.hp||0)});
+    });
+
+    // conservative text parser: only explicit "N hp i/in SUBJECT" requirements
+    const rx=/(\d+(?:[,.]\d+)?)\s*(?:hp|credits?)\s+(?:i|inom|in)\s+([a-zåäöé \-]+)/gi;
+    let m;
+    const raw=typeof r==='string'?r:(r.text||p.eligibilityText||'');
+    while((m=rx.exec(raw))){
+      const subj=String(m[2]).split(/[,.;]|\s+och\s+|\s+and\s+/i)[0].trim();
+      if(subj && !out.subjectRequirements.some(x=>norm(x.subject)===norm(subj))){
+        out.subjectRequirements.push({subject:subj,hp:Number(m[1].replace(',','.'))});
+      }
+    }
+    return out;
+  }
+
+  window.__studielotsEvaluateAdvancedEligibility=function(p){
+    const courses=userCourses();
+    const req=parseEntryRequirements(p);
+    const checks=[];
+    let missingHp=0, hardFail=false;
+
+    if(req.bachelorRequired){
+      const ok=hasBachelor(courses);
+      checks.push({label:'Examen på grundnivå',ok});
+      if(!ok)hardFail=true;
+    }
+
+    req.subjectRequirements.forEach(x=>{
+      const have=subjectHp(courses,x.subject);
+      const missing=Math.max(0,x.hp-have);
+      missingHp+=missing;
+      checks.push({
+        label:`${x.subject}: ${Math.min(have,x.hp)}/${x.hp} hp`,
+        ok:missing===0,
+        missingHp:missing
+      });
+    });
+
+    if(req.thesisHp){
+      const have=courses.filter(c=>c.thesis||/uppsats|examensarbete/.test(norm(c.name)))
+        .reduce((s,c)=>s+Number(c.hp||0),0);
+      const missing=Math.max(0,req.thesisHp-have);
+      missingHp+=missing;
+      checks.push({label:`Självständigt arbete: ${Math.min(have,req.thesisHp)}/${req.thesisHp} hp`,ok:missing===0,missingHp:missing});
+    }
+
+    if(req.englishRequired){
+      // Do not infer language eligibility from unrelated university courses.
+      const ok=window.userEligibility?.english6===true || window.userEligibility?.englishB===true;
+      checks.push({label:'Engelska 6/B',ok:ok===true,unknown:ok!==true});
+    }
+
+    let status;
+    if(!req.verified) status='unverified';
+    else if(hardFail) status='not-eligible';
+    else if(missingHp===0 && checks.every(x=>x.ok||x.unknown)) status='eligible';
+    else if(missingHp>0 && missingHp<=30) status='near';
+    else status='not-eligible';
+
+    return {status,missingHp,checks,requirements:req};
+  };
+
+  window.__studielotsAdvancedEligibilityLabel=function(e){
+    if(e.status==='eligible') return 'Behörig nu';
+    if(e.status==='near') return `${e.missingHp} hp från behörighet`;
+    if(e.status==='not-eligible') return 'Inte behörig ännu';
+    return 'Behörighet ej verifierad';
+  };
+
+  function isAdvanced(p){
+    return p && (
+      p.level==='advanced' ||
+      /master|magister/.test(norm(p.degreeType||p.name))
+    );
+  }
+
+  // Re-rank advanced alternatives. Verified eligibility always outranks thematic similarity.
+  const oldAlternatives=window.advancedAlternativePrograms401;
+  window.advancedAlternativePrograms401=function(kind){
+    let rows=typeof oldAlternatives==='function'?arr(oldAlternatives(kind)):[];
+    if(!/master|magister|advanced/i.test(String(kind||''))) return rows;
+
+    rows=rows.map(row=>{
+      const p=row.p||row;
+      return {...row,eligibility:window.__studielotsEvaluateAdvancedEligibility(p)};
+    });
+
+    const rank={eligible:0,near:1,unverified:2,'not-eligible':3};
+    return rows.sort((a,b)=>{
+      const ar=rank[a.eligibility.status]??9, br=rank[b.eligibility.status]??9;
+      if(ar!==br)return ar-br;
+      if(a.eligibility.missingHp!==b.eligibility.missingHp)
+        return a.eligibility.missingHp-b.eligibility.missingHp;
+      return 0;
+    });
+  };
+
+  // Add a compact eligibility badge/detail to rendered advanced-program cards.
+  function decorate(){
+    document.querySelectorAll('.advanced-alternative-card').forEach(card=>{
+      const title=card.querySelector('.advanced-alt-main strong')?.textContent?.trim();
+      if(!title)return;
+      const p=(window.programCatalog||[]).find(x=>x.name===title);
+      if(!isAdvanced(p))return;
+
+      const e=window.__studielotsEvaluateAdvancedEligibility(p);
+      let badge=card.querySelector('.v498-eligibility');
+      if(!badge){
+        badge=document.createElement('div');
+        badge.className='v498-eligibility';
+        const main=card.querySelector('.advanced-alt-main');
+        main?.insertAdjacentElement('afterend',badge);
+      }
+
+      badge.innerHTML=`<strong>${window.__studielotsAdvancedEligibilityLabel(e)}</strong>${
+        e.requirements.verified
+          ? `<span>${e.checks.slice(0,3).map(x=>(x.ok?'✓ ':'')+escapeHtml(x.label)).join(' · ')}</span>`
+          : `<span>StudieLots behöver verifiera programmets särskilda behörighetskrav.</span>`
+      }`;
+
+      // Never call an unverified thematic match a good eligibility match.
+      const pEl=card.querySelector('p');
+      if(pEl){
+        pEl.textContent=e.status==='eligible'
+          ? 'Du uppfyller de verifierade behörighetskraven.'
+          : e.status==='near'
+            ? `Nära behörig – ${e.missingHp} hp behöver kompletteras.`
+            : e.status==='not-eligible'
+              ? 'Visas som möjlig framtida väg, men du är inte behörig ännu.'
+              : 'Behörigheten behöver verifieras innan programmet rekommenderas.';
+      }
+      card.dataset.eligibilityV498=e.status;
+    });
+  }
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .v498-eligibility{margin:9px 0 5px;padding:9px 11px;border-radius:12px;background:rgba(22,94,78,.055)}
+    .v498-eligibility strong{display:block;color:#176b5c;font-size:.82rem}
+    .v498-eligibility span{display:block;margin-top:2px;font-size:.73rem;line-height:1.3;opacity:.68}
+    .advanced-alternative-card[data-eligibility-v498="not-eligible"]{opacity:.78}
+  `;
+  document.head.appendChild(style);
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',decorate);else decorate();
+  try{new MutationObserver(()=>requestAnimationFrame(decorate)).observe(document.body,{childList:true,subtree:true});}catch(e){}
+
+  window.__studielotsMotor2QA={...(window.__studielotsMotor2QA||{}),version:'v498',
+    advancedEligibilityLayer:true,
+    verifiedEntryRequirementsRequiredForEligibleClaim:true,
+    advancedAlternativesRankedByEligibility:true,
+    nearEligibilityGapSupported:true};
+
+  console.info('Studielots v498: Master Eligibility layer enabled');
+})();
+</script>
+
+<script>
+/* v499 — Advanced Route Optimizer: eligibility first, then possible credit transfer, then shortest route */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+
+  function advancedProgramme(p){
+    return p && (p.level==='advanced'||/master|magister/.test(norm(p.degreeType||p.name)));
+  }
+
+  function programmeCourses(p){
+    return arr(p?.courses).filter(c=>c?.name && Number(c.hp)>0);
+  }
+
+  function userMerits(){
+    const pool=[
+      ...arr(window.userCourses),...arr(window.importedCourses),
+      ...arr(window.merits),...arr(window.ladokCourses)
+    ];
+    const seen=new Set();
+    return pool.filter(c=>{
+      if(!c)return false;
+      const id=norm(c.code||c.id||c.name)+'|'+String(Number(c.hp)||0);
+      if(seen.has(id))return false;
+      seen.add(id); return true;
+    });
+  }
+
+  function meritId(c){return norm(c.code||c.id||c.name)+'|'+String(Number(c.hp)||0)}
+  function reqId(c){return norm(c.code||c.id||c.name)+'|'+String(Number(c.hp)||0)}
+
+  // Conservative transfer estimate. A merit may only cover one master requirement.
+  window.__studielotsEstimateAdvancedTransfer=function(p){
+    const required=programmeCourses(p);
+    if(!required.length){
+      return {possibleHp:0,matches:[],verifiedStructure:false,reason:'Programstruktur saknas'};
+    }
+
+    const merits=userMerits();
+    const usedMerits=new Set();
+    const matches=[];
+
+    required.forEach(req=>{
+      let best=null;
+      merits.forEach(m=>{
+        const mid=meritId(m);
+        if(usedMerits.has(mid))return;
+
+        let scored=null;
+        if(typeof window.__studielotsScoreCourseMatch==='function'){
+          try{scored=window.__studielotsScoreCourseMatch(req,m,{subject:req.subject,level:req.level});}catch(e){}
+        }
+
+        if(!scored){
+          const rs=norm(req.subject||req.name), ms=norm(m.subject||m.name);
+          const subjectOK=rs && ms && (rs.includes(ms)||ms.includes(rs));
+          const levelOK=!req.level||!m.level||norm(req.level)===norm(m.level);
+          scored={eligible:subjectOK&&levelOK,score:subjectOK?60:0,status:'possible'};
+        }
+
+        if(!scored.eligible)return;
+
+        // Advanced programme credits should not be claimed from obviously lower-level
+        // unrelated material merely because names are similar.
+        const reqAdvanced=/a1|a2|avancer/.test(norm(req.progression||req.level));
+        const meritAdvanced=/a1|a2|avancer/.test(norm(m.progression||m.level));
+        if(reqAdvanced && !meritAdvanced && scored.status!=='verified')return;
+
+        const hp=Math.min(Number(req.hp)||0,Number(m.hp)||0);
+        const candidate={req,merit:m,hp,score:Number(scored.score)||0,status:scored.status||'possible'};
+        if(!best || candidate.score>best.score)best=candidate;
+      });
+
+      if(best){
+        usedMerits.add(meritId(best.merit));
+        matches.push(best);
+      }
+    });
+
+    const possibleHp=matches.reduce((s,x)=>s+x.hp,0);
+    return {
+      possibleHp,
+      matches,
+      verifiedStructure:!!(p.coverage==='complete' && !p.integrityQuarantined && p.canCalculateCompletion!==false)
+    };
+  };
+
+  window.__studielotsAdvancedRoute=function(p){
+    const eligibility=typeof window.__studielotsEvaluateAdvancedEligibility==='function'
+      ? window.__studielotsEvaluateAdvancedEligibility(p)
+      : {status:'unverified',missingHp:0,checks:[]};
+
+    const transfer=window.__studielotsEstimateAdvancedTransfer(p);
+    const totalHp=Number(p.hp)||(/magister/.test(norm(p.name))?60:120);
+
+    // Do not subtract speculative credits when programme structure is not verified.
+    const countableEstimate=transfer.verifiedStructure?transfer.possibleHp:0;
+    const remainingAfterAdmission=Math.max(0,totalHp-countableEstimate);
+
+    // Eligibility completion comes before programme completion.
+    const routeHp=(eligibility.status==='eligible')
+      ? remainingAfterAdmission
+      : (eligibility.status==='near'
+          ? Number(eligibility.missingHp||0)+remainingAfterAdmission
+          : Infinity);
+
+    return {
+      programme:p,
+      eligibility,
+      transfer,
+      totalHp,
+      possibleTransferHp:transfer.possibleHp,
+      remainingAfterAdmission,
+      routeHp,
+      canRank:eligibility.status==='eligible'||eligibility.status==='near'
+    };
+  };
+
+  window.__studielotsRankAdvancedRoutes=function(programmes){
+    const statusRank={eligible:0,near:1,unverified:2,'not-eligible':3};
+    return arr(programmes).filter(advancedProgramme).map(p=>window.__studielotsAdvancedRoute(p))
+      .sort((a,b)=>{
+        const ar=statusRank[a.eligibility.status]??9, br=statusRank[b.eligibility.status]??9;
+        if(ar!==br)return ar-br;
+        if(a.routeHp!==b.routeHp)return a.routeHp-b.routeHp;
+        if(a.remainingAfterAdmission!==b.remainingAfterAdmission)
+          return a.remainingAfterAdmission-b.remainingAfterAdmission;
+        return b.possibleTransferHp-a.possibleTransferHp;
+      });
+  };
+
+  // Feed shortest-route information into the existing advanced alternative list.
+  const oldAdvanced=window.advancedAlternativePrograms401;
+  window.advancedAlternativePrograms401=function(kind){
+    const rows=typeof oldAdvanced==='function'?arr(oldAdvanced(kind)):[];
+    if(!/master|magister|advanced/i.test(String(kind||'')))return rows;
+
+    const routeByName=new Map(
+      window.__studielotsRankAdvancedRoutes(rows.map(r=>r.p||r))
+        .map(r=>[r.programme.name,r])
+    );
+
+    return rows.map(r=>({...r,advancedRoute:routeByName.get((r.p||r)?.name)}))
+      .sort((a,b)=>{
+        const A=a.advancedRoute,B=b.advancedRoute;
+        if(!A&&!B)return 0;if(!A)return 1;if(!B)return -1;
+        const rank={eligible:0,near:1,unverified:2,'not-eligible':3};
+        const d=(rank[A.eligibility.status]??9)-(rank[B.eligibility.status]??9);
+        if(d)return d;
+        return A.routeHp-B.routeHp;
+      });
+  };
+
+  function decorateAdvancedCards(){
+    document.querySelectorAll('.advanced-alternative-card').forEach(card=>{
+      const title=card.querySelector('.advanced-alt-main strong')?.textContent?.trim();
+      if(!title)return;
+      const p=(window.programCatalog||[]).find(x=>x.name===title);
+      if(!advancedProgramme(p))return;
+
+      const route=window.__studielotsAdvancedRoute(p);
+      let box=card.querySelector('.v499-route');
+      if(!box){
+        box=document.createElement('div');
+        box.className='v499-route';
+        const elig=card.querySelector('.v498-eligibility');
+        (elig||card.querySelector('.advanced-alt-main'))?.insertAdjacentElement('afterend',box);
+      }
+
+      const transferText=route.transfer.verifiedStructure
+        ? (route.possibleTransferHp>0
+            ? `${route.possibleTransferHp} hp kan möjligen tillgodoräknas · ca ${route.remainingAfterAdmission} hp kvar`
+            : `${route.totalHp} hp kvar efter antagning`)
+        : (route.possibleTransferHp>0
+            ? `${route.possibleTransferHp} hp möjlig matchning · programstrukturen måste verifieras innan hp dras av`
+            : `Tillgodoräknande kan bedömas när programstrukturen är verifierad`);
+
+      const routeText=route.eligibility.status==='near'
+        ? `Först ${route.eligibility.missingHp} hp till behörighet`
+        : route.eligibility.status==='eligible'
+          ? `Behörig nu`
+          : `Ruttid beräknas först när behörigheten är verifierad`;
+
+      box.innerHTML=`<strong>${escapeHtml(routeText)}</strong><span>${escapeHtml(transferText)}</span>`;
+      card.dataset.routeHpV499=Number.isFinite(route.routeHp)?String(route.routeHp):'unknown';
+    });
+  }
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .v499-route{margin:6px 0 8px;padding:9px 11px;border-radius:12px;background:rgba(22,94,78,.045)}
+    .v499-route strong{display:block;font-size:.78rem;color:#176b5c}
+    .v499-route span{display:block;margin-top:2px;font-size:.73rem;line-height:1.3;opacity:.68}
+  `;
+  document.head.appendChild(style);
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',decorateAdvancedCards);
+  else decorateAdvancedCards();
+  try{new MutationObserver(()=>requestAnimationFrame(decorateAdvancedCards)).observe(document.body,{childList:true,subtree:true});}catch(e){}
+
+  window.__studielotsMotor2QA={...(window.__studielotsMotor2QA||{}),version:'v499',
+    advancedRouteOptimizer:true,
+    eligibilityBeforeTransfer:true,
+    advancedTransferEstimate:true,
+    oneMeritPerRequirement:true,
+    shortestEligibleAdvancedRouteFirst:true,
+    unverifiedProgrammeStructureDoesNotReduceRemainingHp:true};
+
+  console.info('Studielots v499: advanced route optimizer enabled');
+})();
+</script>
 </body>
 </html>
