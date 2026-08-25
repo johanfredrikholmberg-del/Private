@@ -1555,7 +1555,7 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 <strong>Hämta dina meriter</strong><div class="muted small" style="margin-top:5px">Välj det alternativ som passar dig.</div>
 <div class="import-choice-grid">
 <button class="import-choice" id="choiceAntagning" onclick="setImportMethod('antagning')"><b>Antagning.se</b><span>Alternativ importväg</span></button>
-<button class="import-choice active" id="choiceLadok" onclick="setImportMethod('ladok')"><b>Ladok <em class="recommended">Rekommenderat</em></b><span>Nationellt resultatintyg med alla dina godkända Ladok-studier</span></button>
+<button class="import-choice active" id="choiceLadok" onclick="setImportMethod('ladok')"><b>Ladok <em class="recommended">Rekommenderat</em></b><span>Resultatintyg med dina godkända Ladok-studier</span></button>
 <button class="import-choice" id="choiceManual" onclick="setImportMethod('manual')"><b>Lägg till manuellt</b><span>Fyll i en kurs själv</span></button>
 </div>
 <div id="manualGuide" style="display:none">
@@ -1578,8 +1578,8 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 </div>
 <div id="ladokGuide">
 <a class="primary antagning-link-btn" href="https://student.ladok.se/" target="_blank" rel="noopener">Öppna Ladok</a>
-<h3 style="margin:16px 0 5px">Hämta alla dina Ladok-meriter</h3><div class="small muted">Skapa ett nationellt resultatintyg. Det är Lotsens rekommenderade importväg.</div>
-<ol class="small"><li>Öppna <b>Ladok för studenter</b> och logga in.</li><li>Gå till <b>Intyg</b>.</li><li>Välj <b>Nationellt resultatintyg</b>.</li><li>Ta med dina avklarade studier och skapa intyget.</li><li>Ladda ner intyget som <b>PDF</b>.</li><li>Gå tillbaka till Lotsen och ladda upp filen.</li></ol>
+<h3 style="margin:16px 0 5px">Hämta alla dina Ladok-meriter</h3><div class="small muted">Skapa helst ett nationellt resultatintyg. Även resultatintyg med godkända delkurser stöds.</div>
+<ol class="small"><li>Öppna <b>Ladok för studenter</b> och logga in.</li><li>Gå till <b>Intyg</b>.</li><li>Välj <b>Nationellt resultatintyg</b>.</li><li>Ta med dina avklarade studier och skapa intyget.</li><li>Ladda ner intyget som <b>PDF</b>.</li><li>Gå tillbaka till StudieLots och ladda upp filen.</li></ol>
 
 <div class="import-action"><button class="primary" onclick="document.getElementById('ladokFile').click()">Ladda upp Ladok-PDF</button><input id="ladokFile" type="file" accept="application/pdf" hidden onchange="importPdf(this,'ladok')"></div>
 </div>
@@ -2032,7 +2032,7 @@ async function readPdfLines(file){
 }
 function detectPdfSource(lines){
   const text=lines.join(' ');
-  if(/Nationellt resultatintyg/i.test(text) && /Avslutade kurser/i.test(text)) return 'ladok';
+  if((/Nationellt resultatintyg/i.test(text) && /Avslutade kurser/i.test(text)) || (/Resultatintyg/i.test(text) && (/student\.ladok\.se\/verifiera/i.test(text) || /utdrag ur registret för studiedokumentation/i.test(text)))) return 'ladok';
   if(/Antagning\.se/i.test(text) && /Universitet och högskola/i.test(text)) return 'antagning';
   return 'unknown';
 }
@@ -2126,13 +2126,18 @@ function extractDegreeDates(lines,index){
 function parseLadokLines(rawLines){
   const lines=rawLines.map(x=>String(x).replace(/\s+/g,' ').trim()).filter(Boolean);
   const text=lines.join(' ');
-  const isLadok=/Nationellt resultatintyg/i.test(text)&&/Avslutade kurser/i.test(text);
-  let institution='Okänt lärosäte', inCourses=false, out=[], issuedDegrees=[];
+  const isLadok=(/Nationellt resultatintyg/i.test(text)&&/Avslutade kurser/i.test(text)) || (/Resultatintyg/i.test(text) && (/student\.ladok\.se\/verifiera/i.test(text) || /utdrag ur registret för studiedokumentation/i.test(text)));
+  let institution='Okänt lärosäte', inCourses=false, inPartialCourses=false, partialParent='', out=[], issuedDegrees=[];
   const instLine=l=>{
     if(/Resultatintyg över högre utbildning|svenska universitet|Ladok/i.test(l)) return false;
     return l.length<100 && /(universitet|högskol)/i.test(l);
   };
+  // Footer/header institution can appear after the actual course rows in Ladok PDFs.
+  const institutionCandidates=lines.filter(instLine);
+  if(institutionCandidates.length) institution=institutionCandidates[institutionCandidates.length-1];
   const rowRe=/^([A-ZÅÄÖ0-9][A-ZÅÄÖ0-9.\-]{2,15})\s+(.+?)\s+(\d+(?:[,.]\d+)?)\s*hp\s+([A-ZÅÄÖ0-9+\-]+)\s+(\d{4}-\d{2}-\d{2})(?:\s+\d+)?$/i;
+  const partialRowRe=/^(.+?)\s+(\d+(?:[,.]\d+)?)\s*hp\s+([A-ZÅÄÖ0-9+\-]+)\s+(\d{4}-\d{2}-\d{2})(?:\s+\d+)?$/i;
+  const partialParentRe=/^(.+?)\s*\((\d+(?:[,.]\d+)?)\s*hp\)\s*$/i;
   const ignoreContinuation=l=>{
     const s=String(l||'').trim();
     if(/^(Summering|Totalt|varav tillgodoräknat|Övrig tillgodoräknad|Noter och information|Kontrollera intyget|Verifierbart tom|Kontrollkod|Sida \d|Kod Benämning|Kod$|Benämning$|Omfattning$|Betyg$|Datum$|Not$|Utfärdade bevis|Titel|Huvudområde:)/i.test(s)) return true;
@@ -2154,10 +2159,38 @@ function parseLadokLines(rawLines){
         issuedDegrees.push({...degreeLine,...dates,subject,institution,_key:key,verified:true,source:'Ladok'});
       }
     }
-    if(/^Avslutade kurser$/i.test(l)){inCourses=true;continue}
-    if(/^Summering$/i.test(l)){inCourses=false;continue}
-    if(!inCourses) continue;
-    if(/^Kod Benämning/i.test(l)) continue;
+    if(/^Avslutade kurser$/i.test(l)){inCourses=true;inPartialCourses=false;partialParent='';continue}
+    if(/^Delar i ej avslutade kurser$/i.test(l)){inPartialCourses=true;inCourses=false;partialParent='';continue}
+    if(/^Summering$/i.test(l)){inCourses=false;inPartialCourses=false;partialParent='';continue}
+    if(!inCourses && !inPartialCourses) continue;
+    if(/^Kod Benämning/i.test(l) || /^Benämning\s+Omfattning/i.test(l)) continue;
+
+    if(inPartialCourses){
+      const parent=l.match(partialParentRe);
+      if(parent && !/\b(?:G|VG|U|A|B|C|D|E|F)\b/i.test(l)){
+        partialParent=cleanLadokCourseName(parent[1]);
+        continue;
+      }
+      const pm=l.match(partialRowRe);
+      if(pm){
+        const name=cleanLadokCourseName(pm[1]), hp=parseFloat(pm[2].replace(',','.')), grade=pm[3], date=pm[4];
+        // Only completed credit-bearing components count as earned hp.
+        if(hp>0 && !/^(U|F)$/i.test(grade)){
+          const parentSubject=partialParent ? guessSubject(partialParent,'',institution) : '';
+          out.push({
+            name,code:'',hp,grade,date,term:ladokDateToTerm(date),institution,
+            parentCourse:partialParent,partialCourse:true,
+            level:detectCourseLevel(l)||detectCourseLevel(partialParent),
+            levelSource:(detectCourseLevel(l)||detectCourseLevel(partialParent))?'Intyg':'',
+            levelVerified:Boolean(detectCourseLevel(l)||detectCourseLevel(partialParent)),
+            subject:parentSubject||guessSubject(name,'',institution),
+            thesis:/examensarbete|självständigt arbete|kandidatuppsats|kandidatprojekt|degree project|thesis/i.test(name),
+            selected:true
+          });
+        }
+        continue;
+      }
+    }
 
     const m=l.match(rowRe);
     if(m){
@@ -2201,9 +2234,9 @@ async function importPdf(inp, chosenSource='auto'){
       let parsed;
       if(source==='ladok' || detected==='ladok') parsed=parseLadokLines(lines);
       else if(source==='antagning' || detected==='antagning') parsed=parseAntagningLines(lines);
-      else throw new Error('Lotsen känner inte igen dokumentet som ett nationellt Ladok-resultatintyg eller Antagning.se-meriter.');
+      else throw new Error('StudieLots känner inte igen dokumentet som ett Ladok-resultatintyg eller Antagning.se-meriter.');
 
-      if(source==='ladok' && !parsed.isLadok) throw new Error('Det här ser inte ut som ett nationellt resultatintyg från Ladok.');
+      if(source==='ladok' && !parsed.isLadok) throw new Error('Det här ser inte ut som ett resultatintyg från Ladok.');
       if(source==='antagning' && !parsed.isAntagning) throw new Error('Fel Antagning.se-PDF. Spara sidan Mina meriter → Universitet och högskola.');
 
       importedCandidates.push(...parsed.courses.map(c=>({...c,sourceFile:file.name})));
