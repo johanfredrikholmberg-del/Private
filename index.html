@@ -29114,5 +29114,82 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   console.info('Studielots v488: cross-university distance acceleration preserved');
 })();
 </script>
+
+<script>
+/* v489 — application status must never hide a valid distance route */
+(function(){
+ const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+ const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+
+ window.__studielotsCourseApplicationState=function(c){
+   if(c?.applicationOpen===true||c?.searchableNow===true)
+     return {state:'open',label:'Ansökan öppen',searchable:true};
+   if(c?.nextApplicationOpen||c?.applicationOpens)
+     return {state:'upcoming',label:'Inte sökbar just nu',searchable:false,
+       detail:'Ansökan öppnar '+String(c.nextApplicationOpen||c.applicationOpens)};
+   if(c?.nextOffering||c?.term)
+     return {state:'known-offering',label:'Inte sökbar just nu',searchable:false,
+       detail:'Nästa kända kursomgång: '+String(c.nextOffering||c.term)};
+   return {state:'not-published',label:'Inte sökbar just nu',searchable:false,
+     detail:'Nästa kursomgång ej publicerad'};
+ };
+
+ const oldGet=window.__studielotsGetDistanceSuggestionsForDegree;
+ window.__studielotsGetDistanceSuggestionsForDegree=function(ctx={}){
+   const base=typeof oldGet==='function'?arr(oldGet(ctx)):[];
+   const subject=norm(ctx.subject||ctx.degreeName||ctx.title).replace(/^.*i /,'');
+   const pool=[...base,...arr(window.__studielotsVerifiedDistanceCourses),
+     ...arr(window.__studielotsDistanceCourseSuggestionPool)];
+   const seen=new Set();
+   return pool.filter(c=>{
+     const id=String(c.code||c.id||c.name||'')+'|'+String(c.university||'');
+     if(!id||seen.has(id)) return false;
+     const cs=norm(c.subject||c.name);
+     const remote=c.distance===true&&c.mandatoryMeetings!==true&&c.noPhysicalMeetings!==false;
+     const subjectOK=!subject||cs.includes(subject)||subject.includes(cs);
+     if(remote&&subjectOK){seen.add(id);return true;}
+     return false;
+   }).map(c=>({...c,applicationState:window.__studielotsCourseApplicationState(c)}));
+ };
+
+ // In a selected university programme, retain academically valid cross-university
+ // distance alternatives even when the next application round is closed/unpublished.
+ const oldPool=window.__studielotsBuildCrossProviderReplacementPool;
+ window.__studielotsBuildCrossProviderReplacementPool=function(programme){
+   const pool=typeof oldPool==='function'?arr(oldPool(programme)):[];
+   return pool.map(c=>({...c,applicationState:window.__studielotsCourseApplicationState(c)}));
+ };
+
+ window.__studielotsFormatApplicationBadge=function(c){
+   const a=c?.applicationState||window.__studielotsCourseApplicationState(c);
+   return {label:a.label,detail:a.detail||'',searchable:a.searchable,
+     tone:a.state==='open'?'positive':a.state==='upcoming'?'warning':'neutral'};
+ };
+
+ function addStatuses(){
+   document.querySelectorAll('[data-distance-suggestions] > div').forEach(row=>{
+     if(row.dataset.applicationStatusV489==='1') return;
+     const txt=norm(row.innerText);
+     const course=[...arr(window.__studielotsVerifiedDistanceCourses),
+       ...arr(window.__studielotsDistanceCourseSuggestionPool)]
+       .find(c=>c?.name&&txt.includes(norm(c.name)));
+     if(!course) return;
+     const a=window.__studielotsCourseApplicationState(course);
+     const badge=document.createElement('div');
+     badge.style.cssText='font-size:.82em;font-weight:750;margin-top:5px;opacity:.78;';
+     badge.textContent=a.label+(a.detail?' · '+a.detail:'');
+     row.appendChild(badge);
+     row.dataset.applicationStatusV489='1';
+   });
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addStatuses); else addStatuses();
+ try{new MutationObserver(()=>requestAnimationFrame(addStatuses)).observe(document.body,{childList:true,subtree:true});}catch(e){}
+
+ window.__studielotsDistance={...(window.__studielotsDistance||{}),version:'v489',
+   showClosedCourses:true,showUnpublishedNextOffering:true,
+   applicationStateIsNotEligibilityGate:true};
+ console.info('Studielots v489: application state separated from distance-route eligibility');
+})();
+</script>
 </body>
 </html>
