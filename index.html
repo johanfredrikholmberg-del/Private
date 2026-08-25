@@ -19135,7 +19135,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
      if(hp>0&&hp+chp>30){semester++;hp=0;groups.push([])}
      groups[groups.length-1].push(c); hp+=chp;
    }
-   const cards=groups.map((g,gi)=>`<div class="planner-term"><div class="planner-term-head"><strong>Studieperiod ${gi+1}</strong><span>${fmtHp(g.reduce((s,c)=>s+Number(c.hp||0),0))} hp</span></div>${g.map(c=>{
+   const cards=groups.map((g,gi)=>`<div class="planner-term"><div class="planner-term-head"><strong>Period ${gi+1}</strong><span>${fmtHp(g.reduce((s,c)=>s+Number(c.hp||0),0))} hp</span></div>${g.map(c=>{
      const alt=verifiedAlternativeFor(c,path), offering=courseOfferingLabel(c);
      return `<div class="planner-row"><div><strong>${escapeHtml(c.name||'Kurs')}</strong><small>${[c.code,offering].filter(Boolean).map(escapeHtml).join(' · ')}</small></div><b>${fmtHp(c.hp||0)} hp</b></div>${alt?`<div class="planner-alt"><span>Snabbare alternativ att kontrollera</span><strong>${escapeHtml(alt.name||'Alternativ kurs')} · ${fmtHp(alt.hp||0)} hp</strong><small>${courseApplicationOpen(alt)?'Ansökan öppen · ':''}Kan passa samma ämnes-/nivåkrav. Bekräfta tillgodoräknande med lärosätet.</small><a href="${escapeHtml(antagningCourseUrl(alt))}" target="_blank" rel="noopener">Visa på Antagning.se ↗</a></div>`:''}`;
    }).join('')}</div>`).join('');
@@ -19756,7 +19756,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 
     let fasterCount=0, verifiedCount=0;
     const cards=groups.map((g,gi)=>`<div class="planner-term">
-      <div class="planner-term-head"><strong>Studieperiod ${gi+1}</strong><span>${fmtHp(g.reduce((s,c)=>s+Number(c.hp||0),0))} hp</span></div>
+      <div class="planner-term-head"><strong>Period ${gi+1}</strong><span>${fmtHp(g.reduce((s,c)=>s+Number(c.hp||0),0))} hp</span></div>
       ${g.map(c=>{
         const hit=bestFasterAlternative(c,path);
         if(hit){fasterCount++;if(hit.verifiedEquivalent)verifiedCount++}
@@ -19765,18 +19765,18 @@ console.info('Studielots v371: programme search relevance and deduplication inst
         ${alt?`<div class="planner-alt ${hit.verifiedEquivalent?'verified-fast-alt':''} ${hit.distance?'distance-fast-alt':''}">
           <span>${hit.verifiedEquivalent?(hit.distance?'Verifierat distansalternativ':'Verifierat snabbare alternativ'):(hit.distance?'Möjligt distansalternativ':'Möjligt snabbare alternativ')}</span>
           <strong>${escapeHtml(alt.name||'Alternativ kurs')} · ${fmtHp(alt.hp||0)} hp</strong>
-          <small>${escapeHtml(hit.reason)}${fastOfferingLabel(alt)?' · '+escapeHtml(fastOfferingLabel(alt)):''}${courseApplicationOpen(alt)?' · Ansökan öppen':''}</small>
+          <small>${fastOfferingLabel(alt)?escapeHtml(fastOfferingLabel(alt)):''}${courseApplicationOpen(alt)?`${fastOfferingLabel(alt)?' · ':''}Ansökan öppen`:''}</small>
           <small>${hit.verifiedEquivalent?'✓ Verifierat tillgodoräknande':'Tillgodoräknandet behöver bekräftas av universitetet.'}</small>
-          <a href="${escapeHtml(antagningCourseUrl(alt))}" target="_blank" rel="noopener">Visa på Antagning.se ↗</a>
+          <a href="${escapeHtml(antagningCourseUrl(alt))}" target="_blank" rel="noopener">Visa kurs ↗</a>
         </div>`:''}`;
       }).join('')}
     </div>`).join('');
 
     return `<section class="detail-block study-planner-block faster-degree-engine">
-      <div class="suggested-course-head"><div><h2>Snabbaste studieplanen</h2><p>Studielots söker även efter riktiga alternativa kurser vid ${escapeHtml(path.provider||'lärosätet')}.</p></div><span class="planner-beta">OPTIMERAD</span></div>
-      ${fasterCount?`<div class="fast-engine-summary"><strong>⚡ ${fasterCount} ${fasterCount===1?'möjlig genväg hittad':'möjliga genvägar hittade'}</strong><span>${verifiedCount?`${verifiedCount} verifierad${verifiedCount===1?'':'e'} · `:''}Alternativ rankas efter ämne, nivå, hp, distansmöjlighet och när de kan läsas.</span></div>`:''}
+      <div class="suggested-course-head"><div><h2>Snabbaste studieplanen</h2><p>Kurserna är ordnade för en så snabb väg som möjligt.</p></div><span class="planner-beta">OPTIMERAD</span></div>
+      ${fasterCount?`<div class="fast-engine-summary"><strong>⚡ ${fasterCount} ${fasterCount===1?'möjlig genväg hittad':'möjliga genvägar hittade'}</strong><span>${verifiedCount?`${verifiedCount} verifierad${verifiedCount===1?'':'e'}`:'Visar möjliga snabbare alternativ'}</span></div>`:''}
       ${cards}
-      <div class="planner-note">Studielots räknar inte ett möjligt alternativ som tillgodoräknat förrän motsvarigheten är verifierad. På så sätt kan motorn visa snabbare vägar utan att ge falska examensbesked.</div>
+      <div class="planner-note">Möjliga alternativ räknas först när tillgodoräknandet är verifierat.</div>
     </section>`;
   };
 
@@ -20582,6 +20582,14 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 .rule-course-intro-v398{font-size:.9rem;color:#68737c;margin:0 0 10px}
 .rule-course-meta-v398{font-size:.82rem;color:#7a8490;margin:-2px 0 5px}
 .rule-course-confirm-v398{font-size:.75rem;line-height:1.35;color:#89919a;margin-top:7px}
+</style>
+<style>
+/* v399 — compact fastest-study-plan UI */
+.faster-degree-engine .planner-alt small:empty{display:none}
+.faster-degree-engine .planner-alt{padding:12px 14px;margin:8px 0 12px}
+.faster-degree-engine .planner-alt span{font-size:.72rem;letter-spacing:.04em}
+.faster-degree-engine .planner-alt strong{margin-top:2px}
+.faster-degree-engine .planner-note{font-size:.82rem;line-height:1.35}
 </style>
 </body>
 </html>
