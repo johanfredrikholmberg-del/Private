@@ -19908,5 +19908,117 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 <style>
 .issued-degree-note{font-size:.84rem;color:#65706d}
 </style>
+
+<script>
+// v390 — iOS-safe programme search links.
+// Replaces fragile row handlers with native anchors + one delegated activator.
+(function(){
+  function v390OpenProgram(id){
+    const p=(Array.isArray(programCatalog)?programCatalog:[]).find(x=>String(x.id)===String(id));
+    if(!p)return false;
+
+    try{sessionStorage.setItem('lotsen_selected_program',String(id))}catch(e){}
+
+    const input=document.getElementById('programSearchInput');
+    const results=document.getElementById('programSearchResults');
+    if(input){
+      input.value=p.name||'';
+      input.blur();
+    }
+    if(results)results.innerHTML='';
+
+    try{renderProgramMatch(p)}catch(e){
+      console.error('v390 renderProgramMatch',e);
+      return false;
+    }
+
+    requestAnimationFrame(()=>{
+      document.getElementById('programMatchResult')?.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    return false;
+  }
+  window.v390OpenProgram=v390OpenProgram;
+
+  renderProgramSearch=function(){
+    const host=document.getElementById('programSearchResults');
+    if(!host)return;
+
+    const raw=String(document.getElementById('programSearchInput')?.value||'').trim();
+    const q=typeof v371Norm==='function'?v371Norm(raw):raw.toLowerCase();
+
+    let rows=(Array.isArray(programCatalog)?programCatalog:[]);
+    try{
+      rows=rows.filter(p=>V2_ACTIVE_UNIVERSITY_KEYS.has(String(p?.university||'').trim().toLocaleLowerCase('sv-SE')));
+    }catch(e){}
+
+    if(typeof v371UniquePrograms==='function')rows=v371UniquePrograms(rows);
+
+    if(q){
+      if(typeof v371SearchScore==='function'){
+        rows=rows.map(p=>({p,score:v371SearchScore(p,q)}))
+          .filter(x=>x.score>0)
+          .sort((a,b)=>b.score-a.score || String(a.p.name).localeCompare(String(b.p.name),'sv'))
+          .map(x=>x.p);
+      }else{
+        rows=rows.filter(p=>`${p.name||''} ${p.university||''}`.toLowerCase().includes(q));
+      }
+    }else{
+      rows=rows.sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''),'sv'));
+    }
+
+    rows=rows.slice(0,12);
+
+    host.innerHTML=rows.length?rows.map(p=>{
+      const meta=[p.officialCode||p.code||'',Number(p.hp||0)?`${Number(p.hp)} hp`:'',p.level||''].filter(Boolean).join(' · ');
+      const id=encodeURIComponent(String(p.id||''));
+      return `<a href="#program-${id}" class="program-search-row program-search-link-v390" data-program-id="${escapeHtml(id)}">
+        <div class="uni-name-with-logo">${universityLogoHtml(p.university,'sm')}
+          <div><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.university)}${meta?` · ${escapeHtml(meta)}`:''}</span></div>
+        </div>
+        <span class="program-row-arrow">›</span>
+      </a>`;
+    }).join(''):'<div class="muted small program-empty">Inget program hittades bland Chalmers, GU och Lund.</div>';
+  };
+
+  function activateFromEvent(e){
+    const link=e.target.closest?.('#programSearchResults .program-search-link-v390');
+    if(!link)return;
+    e.preventDefault();
+    e.stopPropagation();
+    const id=decodeURIComponent(link.dataset.programId||'');
+    if(id)v390OpenProgram(id);
+  }
+
+  document.addEventListener('click',activateFromEvent,true);
+  document.addEventListener('pointerup',function(e){
+    if(e.pointerType!=='touch')return;
+    activateFromEvent(e);
+  },true);
+})();
+</script>
+
+<style>
+#programSearchResults .program-search-link-v390{
+  display:flex!important;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  width:100%;
+  box-sizing:border-box;
+  min-height:72px;
+  padding:12px 2px;
+  border-top:1px solid #eef0f3;
+  background:#fff;
+  text-decoration:none!important;
+  color:inherit!important;
+  position:relative;
+  z-index:20;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(21,88,79,.14);
+}
+#programSearchResults .program-search-link-v390:first-child{border-top:0}
+#programSearchResults .program-search-link-v390:active{background:#f3f7f5}
+#programSearchResults .program-search-link-v390 *{pointer-events:none}
+</style>
 </body>
 </html>
