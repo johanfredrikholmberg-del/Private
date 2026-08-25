@@ -31252,5 +31252,809 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   console.info('Studielots v501: programme search UX improved');
 })();
 </script>
+
+<script>
+/* v502 — root fix for Study Planner: no year-only shortcuts, no duplicate alternatives */
+(function(){
+  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
+  const thesisLike=c=>Boolean(c?.thesis)||/(examensarbete|kandidatuppsats|magisteruppsats|masteruppsats|självständigt arbete)/i.test(String(c?.name||''));
+  const levelBand=c=>{
+    const s=norm(c?.level||c?.progression);
+    if(/avancerad|a1n|a1f|a2e|a2f/.test(s))return 'advanced';
+    if(/grund|g1n|g1f|g2f|g2e/.test(s))return 'basic';
+    return '';
+  };
+
+  function actualOfferingDate(c){
+    const vals=[c?.startDate,c?.nextOffering,c?.term,c?.semester,c?.studyPeriod];
+    for(const v of vals){
+      if(!v)continue;
+      const s=String(v).trim();
+
+      const iso=s.match(/\b(20\d{2})-(\d{2})-(\d{2})\b/);
+      if(iso)return new Date(Number(iso[1]),Number(iso[2])-1,Number(iso[3]));
+
+      const sw=s.match(/\b(HT|VT)\s*[- ]?(20\d{2})\b/i);
+      if(sw)return new Date(Number(sw[2]),sw[1].toUpperCase()==='HT'?7:0,1);
+    }
+    return null;
+  }
+
+  function today(){
+    const d=new Date();d.setHours(0,0,0,0);return d;
+  }
+
+  function actualFutureOffering(c){
+    if(c?.ended===true||c?.offeringPast===true)return false;
+    const d=actualOfferingDate(c);
+    if(d)return d>=today();
+
+    // Application-open data can establish a live/future course round.
+    if(typeof courseApplicationOpen==='function' && courseApplicationOpen(c)===true)return true;
+
+    // "År 1", "År 2" etc are programme order, NOT calendar availability.
+    return false;
+  }
+
+  function targetFutureDate(target){
+    return actualOfferingDate(target);
+  }
+
+  function sameUniversityCoursePool(path){
+    const uni=String(path?.provider||path?.program?.university||'');
+    if(!uni)return [];
+    let programs=[];
+    try{
+      programs=(typeof normalizedProgramCatalog==='function'?normalizedProgramCatalog():programCatalog||[])
+        .filter(p=>p&&p.university===uni&&p.engine==='v2'&&!p.catalogOnly)
+        .filter(p=>!p.academicYear||p.academicYear==='2026/2027');
+    }catch(e){return []}
+
+    const seen=new Map();
+    programs.forEach(p=>(p.courses||[]).forEach(c=>{
+      if(!c||Number(c.hp||0)<=0)return;
+      const key=norm(c.code)||`${norm(c.name)}|${Number(c.hp||0)}`;
+      const row={...c,_sourceProgram:p.name||'',_sourceProgramCode:p.code||'',_sourceUrl:p.sourceUrl||''};
+      const prev=seen.get(key);
+      if(!prev||Number(Boolean(row.verified))>Number(Boolean(prev.verified)))seen.set(key,row);
+    }));
+    return [...seen.values()];
+  }
+
+  function explicitEquivalent(alt,target){
+    const targetCode=norm(target?.code), targetName=norm(target?.name);
+    const vals=[
+      ...(Array.isArray(alt?.equivalentTo)?alt.equivalentTo:[alt?.equivalentTo]),
+      ...(Array.isArray(alt?.equivalents)?alt.equivalents:[alt?.equivalents]),
+      ...(Array.isArray(alt?.replaces)?alt.replaces:[alt?.replaces])
+    ].filter(Boolean).map(norm);
+    return vals.some(v=>v===targetCode||v===targetName);
+  }
+
+  // Replace legacy candidate logic completely.
+  window.fasterAlternativeCandidates=function(target,path){
+    const pool=sameUniversityCoursePool(path);
+    const targetSubj=norm(target?.subject);
+    const targetBand=levelBand(target);
+    const targetHp=Number(target?.hp||0);
+    const targetThesis=thesisLike(target);
+    const targetDate=targetFutureDate(target);
+
+    return pool.map(c=>{
+      if((c.code&&target?.code&&norm(c.code)===norm(target.code))||norm(c.name)===norm(target?.name))return null;
+      if(targetThesis!==thesisLike(c))return null;
+
+      const subj=norm(c.subject);
+      if(!targetSubj||subj!==targetSubj)return null;
+
+      const band=levelBand(c);
+      if(targetBand&&band&&band!==targetBand)return null;
+
+      const hp=Number(c.hp||0);
+      if(targetHp&&hp<Math.min(targetHp,7.5))return null;
+
+      const explicit=explicitEquivalent(c,target);
+      const candidateDate=actualOfferingDate(c);
+      const future=actualFutureOffering(c);
+      if(!future)return null;
+
+      // Concrete speed advantage only:
+      // - candidate has a dated future offering earlier than target's dated offering, OR
+      // - candidate is currently open while target isn't, OR
+      // - explicit verified equivalence AND a real future offering exists.
+      const targetOpen=typeof courseApplicationOpen==='function'?courseApplicationOpen(target):false;
+      const candOpen=typeof courseApplicationOpen==='function'?courseApplicationOpen(c):false;
+      const datedEarlier=Boolean(candidateDate&&targetDate&&candidateDate<targetDate);
+      const opensSooner=Boolean(candOpen&&!targetOpen);
+      if(!explicit&&!datedEarlier&&!opensSooner)return null;
+
+      let score=0;
+      if(explicit)score+=1000;
+      score+=180; // exact subject
+      if(targetBand&&band===targetBand)score+=100;
+      if(targetHp&&Math.abs(hp-targetHp)<0.01)score+=70;
+      if(candOpen)score+=100;
+      if(datedEarlier)score+=80;
+      if(c.distance===true)score+=75;
+      if(c.noPhysicalMeetings===true)score+=20;
+      if(c.verified===true)score+=30;
+
+      return {
+        course:c,
+        score,
+        verifiedEquivalent:explicit,
+        earlier:datedEarlier,
+        opensSooner,
+        distance:Boolean(c.distance===true),
+        noPhysicalMeetings:Boolean(c.noPhysicalMeetings===true),
+        reason:explicit?'Verifierad motsvarighet':
+          c.distance===true&&datedEarlier?'Distans och tidigare faktisk kursstart':
+          c.distance===true&&opensSooner?'Distans och sökbar tidigare':
+          datedEarlier?'Tidigare faktisk kursstart':
+          opensSooner?'Går att söka tidigare':'Möjligt alternativ'
+      };
+    }).filter(Boolean).sort((a,b)=>b.score-a.score);
+  };
+
+  window.bestFasterAlternative=function(target,path,used){
+    const rows=window.fasterAlternativeCandidates(target,path);
+    return rows.find(hit=>{
+      const c=hit.course;
+      const id=norm(c.code)||`${norm(c.name)}|${Number(c.hp||0)}`;
+      return !used||!used.has(id);
+    })||null;
+  };
+
+  function offeringLabel(c){
+    const bits=[];
+    const d=actualOfferingDate(c);
+    if(c?.term||c?.semester)bits.push(String(c.term||c.semester).toUpperCase());
+    else if(d)bits.push(d.toLocaleDateString('sv-SE',{year:'numeric',month:'short'}));
+    if(c?.distance===true)bits.push('Distans');
+    return bits.join(' · ');
+  }
+
+  // Replace Study Planner itself so one shared used-set spans the WHOLE plan.
+  window.studyPlannerSection=function(path){
+    if(path?.program?.safeMode===true||path?.program?.canCalculateCompletion===false)return '';
+
+    const missing=(path.requiredMissing||[])
+      .filter(c=>Number(c.hp||0)>0)
+      .slice();
+
+    if(!missing.length)return '';
+
+    // Preserve actual programme order, but don't pretend study-year numbers are dates.
+    missing.sort((a,b)=>{
+      const ay=Number(a?.year||a?.studyYear||99), by=Number(b?.year||b?.studyYear||99);
+      if(ay!==by)return ay-by;
+      const ap=Number(String(a?.period||'').match(/\d+/)?.[0]||99);
+      const bp=Number(String(b?.period||'').match(/\d+/)?.[0]||99);
+      return ap-bp;
+    });
+
+    const groups=[[]]; let hp=0;
+    missing.forEach(c=>{
+      const chp=Number(c.hp||0);
+      if(hp>0&&hp+chp>30){groups.push([]);hp=0}
+      groups[groups.length-1].push(c); hp+=chp;
+    });
+
+    const usedAlternatives=new Set();
+    let fasterCount=0, verifiedCount=0;
+
+    const cards=groups.map((g,gi)=>`<div class="planner-term">
+      <div class="planner-term-head"><strong>Period ${gi+1}</strong><span>${fmtHp(g.reduce((s,c)=>s+Number(c.hp||0),0))} hp</span></div>
+      ${g.map(c=>{
+        const hit=window.bestFasterAlternative(c,path,usedAlternatives);
+        const alt=hit?.course;
+
+        if(alt){
+          const id=norm(alt.code)||`${norm(alt.name)}|${Number(alt.hp||0)}`;
+          usedAlternatives.add(id);
+          fasterCount++;
+          if(hit.verifiedEquivalent)verifiedCount++;
+        }
+
+        const ordinaryLabel=[
+          c.code,
+          c.year&&Number(c.year)<90?'År '+c.year:null
+        ].filter(Boolean).map(escapeHtml).join(' · ');
+
+        return `<div class="planner-row"><div><strong>${escapeHtml(c.name||'Kurs')}</strong><small>${ordinaryLabel}</small></div><b>${fmtHp(c.hp||0)} hp</b></div>
+        ${alt?`<div class="planner-alt ${hit.verifiedEquivalent?'verified-fast-alt':''} ${hit.distance?'distance-fast-alt':''}">
+          <span>${hit.verifiedEquivalent?(hit.distance?'Verifierat distansalternativ':'Verifierat snabbare alternativ'):(hit.distance?'Möjligt distansalternativ':'Möjligt snabbare alternativ')}</span>
+          <strong>${escapeHtml(alt.name||'Alternativ kurs')} · ${fmtHp(alt.hp||0)} hp</strong>
+          <small>${escapeHtml(offeringLabel(alt))}${courseApplicationOpen(alt)?`${offeringLabel(alt)?' · ':''}Ansökan öppen`:''}</small>
+          <small>${hit.verifiedEquivalent?'✓ Verifierat tillgodoräknande':'Tillgodoräknandet behöver bekräftas av universitetet.'}</small>
+          <a href="${escapeHtml(antagningCourseUrl(alt))}" target="_blank" rel="noopener">Visa kurs ↗</a>
+        </div>`:''}`;
+      }).join('')}
+    </div>`).join('');
+
+    return `<section class="detail-block study-planner-block faster-degree-engine">
+      <div class="suggested-course-head"><div><h2>Snabbaste studieplanen</h2><p>Alternativ visas bara när en verklig framtida kursomgång kan ge tidsvinst.</p></div><span class="planner-beta">OPTIMERAD</span></div>
+      ${fasterCount?`<div class="fast-engine-summary"><strong>⚡ ${fasterCount} ${fasterCount===1?'möjlig genväg hittad':'möjliga genvägar hittade'}</strong><span>${verifiedCount?`${verifiedCount} verifierad${verifiedCount===1?'':'e'}`:'Kräver verifiering av tillgodoräknande'}</span></div>`:''}
+      ${cards}
+      <div class="planner-note">År 1/År 2 används bara som studieordning, aldrig som bevis på att en kurs går att läsa tidigare idag.</div>
+    </section>`;
+  };
+
+  // Rebind the active detail renderer one final time so v502's planner wins.
+  const prior=window.renderV21Detail;
+  if(typeof prior==='function'){
+    window.renderV21Detail=function(path,o){
+      prior(path,o);
+      const host=document.getElementById('universityDetailContent');
+      if(!host)return;
+      const old=host.querySelector('.study-planner-block');
+      const html=window.studyPlannerSection(path);
+      if(old){
+        if(html)old.outerHTML=html;
+        else old.remove();
+      }
+    };
+  }
+
+  window.__studielotsMotor2QA={
+    ...(window.__studielotsMotor2QA||{}),
+    version:'v502',
+    rootStudyPlannerFixed:true,
+    yearOnlyNeverMeansFaster:true,
+    actualFutureOfferingRequired:true,
+    duplicateAlternativeBlockedAcrossWholePlan:true
+  };
+
+  console.info('Studielots v502: root Study Planner timing + dedupe fixed');
+})();
+</script>
+
+<script>
+/* v503 — Program cleanup: remove duplicate suggestion section + purge legacy year-only alternatives */
+(function(){
+  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
+
+  function programScreenActive(){
+    const screen=document.getElementById('programMatch');
+    if(screen?.classList.contains('active')) return true;
+
+    const activeNav=[...document.querySelectorAll('nav .active,.bottom-nav .active,.bottom-menu .active,[aria-current="page"]')]
+      .find(el=>norm(el.textContent).includes('program'));
+    return !!activeNav;
+  }
+
+  // In Program, the programme structure itself is the study plan.
+  // Any "Förslag att läsa" block is duplicate content and must stay hidden.
+  function hideDuplicateProgrammeSuggestions(){
+    if(!programScreenActive()) return;
+
+    const nodes=[...document.querySelectorAll('section,div')].filter(el=>{
+      const txt=(el.innerText||'').trim();
+      if(!txt.startsWith('Förslag att läsa')) return false;
+      // smallest container that owns the heading
+      return ![...el.children].some(ch=>(ch.innerText||'').trim().startsWith('Förslag att läsa'));
+    });
+
+    nodes.forEach(el=>{
+      el.style.display='none';
+      el.setAttribute('data-program-duplicate-hidden','v503');
+    });
+  }
+
+  function restoreOutsideProgram(){
+    if(programScreenActive()) return;
+    document.querySelectorAll('[data-program-duplicate-hidden="v503"]').forEach(el=>{
+      el.style.display='';
+      el.removeAttribute('data-program-duplicate-hidden');
+    });
+  }
+
+  // Remove legacy planner alternatives that only say "År 1/År 2" and have
+  // no real future term/start date. These are stale cards from the old engine.
+  function purgeLegacyYearOnlyAlternatives(){
+    document.querySelectorAll('.planner-alt').forEach(card=>{
+      const txt=(card.innerText||'').trim();
+      if(!/snabbare alternativ|distansalternativ/i.test(txt)) return;
+
+      const hasYearOnly=/\bÅr\s*[12345]\b/i.test(txt);
+      const hasRealTerm=/\b(HT|VT)\s*20\d{2}\b/i.test(txt);
+      const hasISO=/\b20\d{2}-\d{2}-\d{2}\b/.test(txt);
+      const open=/Ansökan öppen/i.test(txt);
+
+      if(hasYearOnly && !hasRealTerm && !hasISO && !open){
+        card.remove();
+      }
+    });
+
+    // Some legacy cards are not .planner-alt. Catch the exact visual card pattern.
+    const candidates=[...document.querySelectorAll('div')].filter(el=>{
+      const t=(el.innerText||'').trim();
+      return /^MÖJLIGT SNABBARE ALTERNATIV/i.test(t) &&
+        ![...el.children].some(ch=>/^MÖJLIGT SNABBARE ALTERNATIV/i.test((ch.innerText||'').trim()));
+    });
+
+    candidates.forEach(card=>{
+      const t=card.innerText||'';
+      const onlyYear=/\bÅr\s*[12345]\b/i.test(t) &&
+        !/\b(HT|VT)\s*20\d{2}\b/i.test(t) &&
+        !/\b20\d{2}-\d{2}-\d{2}\b/.test(t) &&
+        !/Ansökan öppen/i.test(t);
+
+      if(onlyYear) card.remove();
+    });
+  }
+
+  // Ensure rendering a programme result doesn't reintroduce the duplicate block.
+  const oldRenderProgramMatch=window.renderProgramMatch;
+  if(typeof oldRenderProgramMatch==='function'){
+    window.renderProgramMatch=function(p){
+      const out=oldRenderProgramMatch(p);
+      requestAnimationFrame(()=>{
+        purgeLegacyYearOnlyAlternatives();
+        hideDuplicateProgrammeSuggestions();
+      });
+      return out;
+    };
+  }
+
+  function sync(){
+    restoreOutsideProgram();
+    purgeLegacyYearOnlyAlternatives();
+    hideDuplicateProgrammeSuggestions();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',sync);
+  }else{
+    sync();
+  }
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(sync))
+      .observe(document.body,{
+        childList:true,
+        subtree:true,
+        attributes:true,
+        attributeFilter:['class','aria-current']
+      });
+  }catch(e){}
+
+  window.__studielotsProgramUI={
+    ...(window.__studielotsProgramUI||{}),
+    version:'v503',
+    duplicateSuggestionSectionRemovedAtRoot:true,
+    legacyYearOnlyAlternativesPurged:true
+  };
+
+  console.info('Studielots v503: Program duplicate suggestions + stale year-only alternatives removed');
+})();
+</script>
+
+<script>
+/* v504 — remove "Förslag att läsa" wherever a finished study plan is already shown */
+(function(){
+  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
+
+  function activeScreen(){
+    return document.querySelector('.screen.active')?.id || '';
+  }
+
+  function isProgram(){
+    return activeScreen()==='programMatch' ||
+      [...document.querySelectorAll('nav .active,.bottom-nav .active,.bottom-menu .active,[aria-current="page"]')]
+        .some(el=>norm(el.textContent).includes('program'));
+  }
+
+  function isOpportunityDegreePlan(){
+    // University/detail pages under Möjligheter where a concrete study plan is already rendered.
+    const id=activeScreen();
+    if(id==='universityDetail') return true;
+
+    const body=norm(document.body.innerText);
+    return body.includes('möjligheter') &&
+      (
+        body.includes('kvar i programmet') ||
+        body.includes('snabbaste studieplanen') ||
+        body.includes('föreslagen studieordning') ||
+        body.includes('verifierad programplan') ||
+        body.includes('ordinarie kurs i examensvägen')
+      );
+  }
+
+  function isDistancePlan(){
+    const body=norm(document.body.innerText);
+    return body.includes('på distans') &&
+      (
+        body.includes('kurs behöver hittas på distans') ||
+        body.includes('hittade distanskurser') ||
+        body.includes('distansväg')
+      );
+  }
+
+  function hideSuggestionSections(){
+    const shouldHide=(isProgram() || isOpportunityDegreePlan()) && !isDistancePlan();
+    const nodes=[...document.querySelectorAll('section,div')].filter(el=>{
+      const t=(el.innerText||'').trim();
+      if(!t.startsWith('Förslag att läsa')) return false;
+      return ![...el.children].some(ch=>(ch.innerText||'').trim().startsWith('Förslag att läsa'));
+    });
+
+    nodes.forEach(el=>{
+      if(shouldHide){
+        el.style.display='none';
+        el.setAttribute('data-studyplan-duplicate-hidden','v504');
+      }else if(el.getAttribute('data-studyplan-duplicate-hidden')==='v504'){
+        el.style.display='';
+        el.removeAttribute('data-studyplan-duplicate-hidden');
+      }
+    });
+  }
+
+  // Also remove v500/v493 duplicate helper blocks if they were inserted outside a visible section.
+  function hideStandaloneSuggestionBlocks(){
+    if(!((isProgram() || isOpportunityDegreePlan()) && !isDistancePlan())) return;
+    document.querySelectorAll('[data-studielots-degree-plan]').forEach(el=>{
+      const host=el.closest('section,div');
+      if(host && (host.innerText||'').includes('Förslag att läsa')){
+        host.style.display='none';
+        host.setAttribute('data-studyplan-duplicate-hidden','v504');
+      }
+    });
+  }
+
+  function sync(){
+    hideSuggestionSections();
+    hideStandaloneSuggestionBlocks();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',sync);
+  }else{
+    sync();
+  }
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(sync))
+      .observe(document.body,{
+        childList:true,
+        subtree:true,
+        attributes:true,
+        attributeFilter:['class','aria-current']
+      });
+  }catch(e){}
+
+  window.__studielotsStudyPlanUI={
+    version:'v504',
+    suggestionsRemovedWhenStudyPlanExists:true,
+    program:true,
+    opportunities:true,
+    distancePreserved:true
+  };
+
+  console.info('Studielots v504: duplicate suggestion sections removed when finished study plan exists');
+})();
+</script>
+
+<script>
+/* v505 — compact Distans "Förslag att läsa" */
+(function(){
+  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
+
+  function isDistanceContext(){
+    const body=norm(document.body.innerText);
+    return body.includes('på distans') &&
+      (
+        body.includes('kurs behöver hittas på distans') ||
+        body.includes('hittade distanskurser') ||
+        body.includes('distansväg') ||
+        body.includes('distans')
+      );
+  }
+
+  function compact(){
+    if(!isDistanceContext()) return;
+
+    const sections=[...document.querySelectorAll('section,div')].filter(el=>{
+      const t=(el.innerText||'').trim();
+      return t.startsWith('Förslag att läsa') &&
+        ![...el.children].some(ch=>(ch.innerText||'').trim().startsWith('Förslag att läsa'));
+    });
+
+    sections.forEach(section=>{
+      if(section.dataset.distanceCompactV505==='1') return;
+
+      section.classList.add('distance-suggestions-compact');
+
+      // Shorten intro copy.
+      [...section.querySelectorAll('p,div,span')].forEach(el=>{
+        const t=(el.textContent||'').trim();
+        if(/Här ser du vilka delar som behöver täckas/i.test(t)){
+          el.textContent='Kurser som återstår på distans.';
+        }
+        if(/Kurser som kan täcka kraven ovan/i.test(t)){
+          el.textContent='Kurser som återstår på distans.';
+        }
+      });
+
+      // Compact requirement rows.
+      const rows=[...section.querySelectorAll('div')].filter(el=>{
+        const t=(el.innerText||'').trim();
+        return /Kurs behöver hittas på distans/i.test(t) &&
+          ![...el.children].some(ch=>/Kurs behöver hittas på distans/i.test((ch.innerText||'').trim()));
+      });
+
+      rows.forEach(row=>{
+        row.classList.add('distance-compact-row');
+        [...row.querySelectorAll('*')].forEach(el=>{
+          const t=(el.textContent||'').trim();
+          if(t==='Kurs behöver hittas på distans'){
+            el.textContent='Saknas på distans';
+            el.classList.add('distance-compact-status');
+          }
+        });
+      });
+
+      // Collapse concrete matched course details by default.
+      section.querySelectorAll('[data-distance-suggestions], [data-distance-found-card], .distance-match-detail').forEach(el=>{
+        el.classList.add('distance-compact-details');
+      });
+
+      section.dataset.distanceCompactV505='1';
+    });
+  }
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .distance-suggestions-compact{
+      padding:18px 18px 20px !important;
+    }
+    .distance-suggestions-compact h2,
+    .distance-suggestions-compact h3{
+      margin-bottom:4px !important;
+    }
+    .distance-suggestions-compact p{
+      margin:2px 0 10px !important;
+      font-size:.86rem !important;
+      line-height:1.35 !important;
+    }
+    .distance-compact-row{
+      padding:10px 0 !important;
+      min-height:0 !important;
+    }
+    .distance-compact-row > *{
+      margin-top:0 !important;
+      margin-bottom:0 !important;
+    }
+    .distance-compact-status{
+      font-size:.78rem !important;
+      opacity:.58 !important;
+    }
+    .distance-suggestions-compact [data-studielots-suggestions] > div,
+    .distance-suggestions-compact [data-distance-suggestions] > div{
+      padding:9px 0 !important;
+    }
+    .distance-suggestions-compact .course-provider-note{
+      padding:10px 12px !important;
+      margin:6px 0 8px !important;
+      font-size:.82rem !important;
+      line-height:1.3 !important;
+    }
+    .distance-suggestions-compact .plan-step,
+    .distance-suggestions-compact [style*="width:34px"]{
+      width:28px !important;
+      height:28px !important;
+      min-width:28px !important;
+      font-size:.82rem !important;
+    }
+    .distance-suggestions-compact strong{
+      line-height:1.2 !important;
+    }
+    .distance-suggestions-compact .distance-compact-details{
+      margin-top:6px !important;
+    }
+  `;
+  document.head.appendChild(style);
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',compact);
+  else compact();
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(compact))
+      .observe(document.body,{childList:true,subtree:true});
+  }catch(e){}
+
+  window.__studielotsDistanceUI={
+    ...(window.__studielotsDistanceUI||{}),
+    version:'v505',
+    compactSuggestionSection:true
+  };
+
+  console.info('Studielots v505: compact distance suggestions enabled');
+})();
+</script>
+
+<script>
+/* v506 — iOS programme search scrolling: results get their own touch-scroll area */
+(function(){
+  function install(){
+    const screen=document.getElementById('programMatch');
+    const input=document.getElementById('programSearchInput');
+    const results=document.getElementById('programSearchResults');
+    if(!screen||!input||!results)return;
+
+    screen.classList.add('v506-program-scroll');
+    results.classList.add('v506-program-results-scroll');
+
+    // iOS Safari: a focused search field + long dynamic list can trap the page.
+    // Let vertical swipes on the results scroll the result panel itself.
+    results.style.webkitOverflowScrolling='touch';
+
+    // When the user drags the list, dismiss the keyboard after a small movement,
+    // which restores the full visual viewport without losing the query.
+    let startY=null;
+    results.addEventListener('touchstart',e=>{
+      startY=e.touches?.[0]?.clientY??null;
+    },{passive:true});
+
+    results.addEventListener('touchmove',e=>{
+      const y=e.touches?.[0]?.clientY;
+      if(startY!==null && y!=null && Math.abs(y-startY)>18 && document.activeElement===input){
+        input.blur();
+      }
+    },{passive:true});
+
+    // Make sure opening Program cannot inherit a stale page scroll lock.
+    if(document.body.style.overflow==='hidden') document.body.style.overflow='';
+    if(document.documentElement.style.overflow==='hidden') document.documentElement.style.overflow='';
+  }
+
+  const style=document.createElement('style');
+  style.textContent=`
+    html,body{
+      overflow-x:hidden!important;
+      overflow-y:auto!important;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    #programMatch.v506-program-scroll{
+      overflow:visible!important;
+      min-height:calc(100dvh + 1px);
+      padding-bottom:150px!important;
+      touch-action:pan-y;
+    }
+
+    #programMatch .program-search-card{
+      overflow:visible!important;
+    }
+
+    #programSearchResults.v506-program-results-scroll{
+      max-height:min(52dvh,520px);
+      overflow-y:auto!important;
+      overflow-x:hidden!important;
+      overscroll-behavior-y:contain;
+      -webkit-overflow-scrolling:touch;
+      touch-action:pan-y!important;
+      padding-bottom:8px;
+      scrollbar-width:thin;
+    }
+
+    #programSearchResults .program-search-link,
+    #programSearchResults .program-search-row{
+      touch-action:pan-y!important;
+    }
+
+    @media(max-width:700px){
+      #programSearchResults.v506-program-results-scroll{
+        max-height:44dvh;
+      }
+
+      /* Keep the final result clear of the fixed bottom navigation. */
+      #programSearchResults.v506-program-results-scroll > :last-child{
+        margin-bottom:18px;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',install);
+  else install();
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(install))
+      .observe(document.body,{childList:true,subtree:true});
+  }catch(e){}
+
+  window.__studielotsProgramSearchUI={
+    ...(window.__studielotsProgramSearchUI||{}),
+    version:'v506',
+    iosTouchScrolling:true,
+    resultsScrollable:true,
+    keyboardDismissesOnListDrag:true
+  };
+
+  console.info('Studielots v506: programme search scrolling fixed for mobile/iOS');
+})();
+</script>
+
+<script>
+/* v507 — prevent accidental programme opens while scrolling */
+(function(){
+  const results=document.getElementById('programSearchResults');
+  if(!results)return;
+
+  let touchStartX=0, touchStartY=0, touchMoved=false, touchStartedOnRow=null;
+
+  results.addEventListener('touchstart',e=>{
+    const t=e.touches?.[0];
+    if(!t)return;
+    touchStartX=t.clientX;
+    touchStartY=t.clientY;
+    touchMoved=false;
+    touchStartedOnRow=e.target.closest?.('.program-search-link,.program-search-row')||null;
+  },{passive:true,capture:true});
+
+  results.addEventListener('touchmove',e=>{
+    const t=e.touches?.[0];
+    if(!t)return;
+    if(Math.abs(t.clientY-touchStartY)>8 || Math.abs(t.clientX-touchStartX)>8){
+      touchMoved=true;
+      if(touchStartedOnRow) touchStartedOnRow.dataset.scrollGesture='1';
+    }
+  },{passive:true,capture:true});
+
+  results.addEventListener('touchend',()=>{
+    setTimeout(()=>{
+      if(touchStartedOnRow) delete touchStartedOnRow.dataset.scrollGesture;
+      touchStartedOnRow=null;
+      touchMoved=false;
+    },180);
+  },{passive:true,capture:true});
+
+  // Block click/tap activation generated by iOS after a scroll gesture.
+  results.addEventListener('click',e=>{
+    const row=e.target.closest?.('.program-search-link,.program-search-row');
+    if(!row)return;
+
+    if(touchMoved || row.dataset.scrollGesture==='1'){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      return false;
+    }
+  },true);
+
+  // Older v379 handler listens to pointerup in capture phase.
+  // Suppress it when the finger has moved enough to be a scroll.
+  document.addEventListener('pointerup',e=>{
+    const row=e.target.closest?.('#programSearchResults .program-search-link,#programSearchResults .program-search-row');
+    if(!row)return;
+    if(row.dataset.scrollGesture==='1'){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+    }
+  },true);
+
+  // Use a short deliberate tap for activation instead of any touch release.
+  results.querySelectorAll('.program-search-link,.program-search-row').forEach(row=>{
+    row.style.touchAction='pan-y';
+  });
+
+  try{
+    new MutationObserver(()=>{
+      results.querySelectorAll('.program-search-link,.program-search-row').forEach(row=>{
+        row.style.touchAction='pan-y';
+      });
+    }).observe(results,{childList:true,subtree:true});
+  }catch(e){}
+
+  window.__studielotsProgramSearchUI={
+    ...(window.__studielotsProgramSearchUI||{}),
+    version:'v507',
+    scrollGestureDoesNotOpenProgramme:true,
+    tapThresholdPx:8
+  };
+
+  console.info('Studielots v507: accidental programme opens during scroll blocked');
+})();
+</script>
 </body>
 </html>
