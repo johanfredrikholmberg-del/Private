@@ -2085,6 +2085,22 @@ function extractDegreeSubject(lines,index){
  }
  return '';
 }
+function extractDegreeDates(lines,index){
+ for(let j=index+1;j<Math.min(index+10,lines.length);j++){
+   const line=String(lines[j]||'').trim();
+   const dates=line.match(/\b\d{4}-\d{2}-\d{2}\b/g)||[];
+   if(dates.length>=2)return {completedDate:dates[0],issuedDate:dates[1]};
+   if(dates.length===1){
+     // Ladok can split the two dates over visual lines.
+     for(let k=j+1;k<Math.min(j+3,lines.length);k++){
+       const next=(String(lines[k]||'').match(/\b\d{4}-\d{2}-\d{2}\b/g)||[]);
+       if(next.length)return {completedDate:dates[0],issuedDate:next[0]};
+     }
+   }
+   if(/^Avslutade kurser$/i.test(line))break;
+ }
+ return {completedDate:'',issuedDate:''};
+}
 function parseLadokLines(rawLines){
   const lines=rawLines.map(x=>String(x).replace(/\s+/g,' ').trim()).filter(Boolean);
   const text=lines.join(' ');
@@ -2110,9 +2126,10 @@ function parseLadokLines(rawLines){
     const degreeLine=detectIssuedDegreeLine(l);
     if(degreeLine){
       const subject=extractDegreeSubject(lines,i);
-      const key=[degreeLine.type,subject,institution,degreeLine.title].join('|').toLowerCase();
+      const dates=extractDegreeDates(lines,i);
+      const key=[degreeLine.type,subject,institution,degreeLine.title,dates.completedDate].join('|').toLowerCase();
       if(!issuedDegrees.some(x=>x._key===key)){
-        issuedDegrees.push({...degreeLine,subject,institution,_key:key,verified:true,source:'Ladok'});
+        issuedDegrees.push({...degreeLine,...dates,subject,institution,_key:key,verified:true,source:'Ladok'});
       }
     }
     if(/^Avslutade kurser$/i.test(l)){inCourses=true;continue}
@@ -19767,6 +19784,129 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 .fast-engine-summary strong{color:#176b5c}.fast-engine-summary span{font-size:.84rem;color:#66736e}
 .planner-alt.verified-fast-alt{background:#eaf7ef;border:1px solid rgba(27,123,78,.15)}
 .planner-alt.verified-fast-alt>span{color:#167044}
+</style>
+
+<script>
+// v389 — Issued-degree guard.
+// An already issued degree is read from Ladok and must not be recommended again.
+// Credits likely belonging to the qualifying bachelor's degree are not auto-reused in advanced degrees.
+(function(){
+  const normIssued=v=>String(v||'').trim().toLocaleLowerCase('sv-SE');
+
+  function allIssuedDegrees(){
+    try{
+      const xs=JSON.parse(sessionStorage.getItem('lotsen_issued_degrees')||'[]');
+      return Array.isArray(xs)?xs:[];
+    }catch(e){return []}
+  }
+  window.allIssuedDegrees=allIssuedDegrees;
+
+  function issuedDegreeMatch(type,subject){
+    const t=normIssued(type), s=normIssued(subject);
+    return allIssuedDegrees().find(d=>{
+      const dt=normIssued(d?.type);
+      const ds=normIssued(d?.subject);
+      return dt===t && (!s || ds===s);
+    })||null;
+  }
+  window.issuedDegreeMatch=issuedDegreeMatch;
+
+  function opportunityAlreadyIssued(o){
+    if(!o)return false;
+    if(o.source==='advanced'){
+      const type=normIssued(o.degreeType).includes('magister')?'magister':'master';
+      return Boolean(issuedDegreeMatch(type,o.subject));
+    }
+    return Boolean(issuedDegreeMatch('candidate',o.subject));
+  }
+  window.opportunityAlreadyIssued=opportunityAlreadyIssued;
+
+  // Same candidate degree must not be shown as a new opportunity.
+  const pre389Safe=safeDegreeOpportunities;
+  safeDegreeOpportunities=function(){
+    return pre389Safe().filter(o=>!opportunityAlreadyIssued(o));
+  };
+  window.safeDegreeOpportunities=safeDegreeOpportunities;
+
+  function qualifyingCandidateFor(program){
+    const advanced=/avancerad/i.test(String(program?.level||''))||program?.advanced===true;
+    if(!advanced)return null;
+    const issued=allIssuedDegrees().filter(d=>normIssued(d.type)==='candidate');
+    if(!issued.length)return null;
+
+    // Prefer matching subject when programme data has one, otherwise use the latest issued candidate.
+    const ps=normIssued(program?.subject||program?.track||'');
+    let hit=issued.find(d=>ps && normIssued(d.subject)===ps);
+    if(!hit)hit=issued.slice().sort((a,b)=>String(b.completedDate||'').localeCompare(String(a.completedDate||'')))[0];
+    return hit||null;
+  }
+
+  function courseLikelyUsedInQualifyingDegree(c,degree){
+    if(!degree||!c)return false;
+    const date=String(c.date||c.completedDate||'');
+    const cutoff=String(degree.completedDate||'');
+    const basic=typeof isBasicCourse==='function'?isBasicCourse(c):!/avancerad|a1n|a1f|a2/i.test(String(c.level||c.progression||''));
+    const sameSubject=normIssued(typeof courseSubject==='function'?courseSubject(c):c.subject)===normIssued(degree.subject);
+
+    // Thesis in the issued subject is definitely locked to that candidate.
+    if((typeof isThesisCourse==='function'&&isThesisCourse(c))&&sameSubject)return true;
+
+    // For automatic advanced-degree calculations, be conservative with basic-level
+    // courses completed before the qualifying degree was finished.
+    return Boolean(basic && cutoff && date && date<=cutoff);
+  }
+  window.courseLikelyUsedInQualifyingDegree=courseLikelyUsedInQualifyingDegree;
+
+  // Neutral GU/Lund evaluator: temporarily remove likely qualifying-degree credits.
+  const pre389Evaluate=evaluateUniversityProgramV2;
+  evaluateUniversityProgramV2=function(program){
+    const degree=qualifyingCandidateFor(program);
+    if(!degree)return pre389Evaluate(program);
+
+    const original=courses;
+    try{
+      courses=original.filter(c=>!courseLikelyUsedInQualifyingDegree(c,degree));
+      const r=pre389Evaluate(program);
+      if(r)r.qualifyingDegreeGuard={active:true,degree,excludedCount:original.length-courses.length};
+      return r;
+    }finally{
+      courses=original;
+    }
+  };
+  window.evaluateUniversityProgramV2=evaluateUniversityProgramV2;
+  window.evaluateProgramV2=evaluateUniversityProgramV2;
+
+  // Chalmers matcher uses its own course pool, so guard it as well.
+  const pre389ChalmersMatch=chalmersCourseMatchForProgram;
+  chalmersCourseMatchForProgram=function(program){
+    const degree=qualifyingCandidateFor(program);
+    if(!degree)return pre389ChalmersMatch(program);
+    const original=courses;
+    try{
+      courses=original.filter(c=>!courseLikelyUsedInQualifyingDegree(c,degree));
+      return pre389ChalmersMatch(program);
+    }finally{
+      courses=original;
+    }
+  };
+  window.chalmersCourseMatchForProgram=chalmersCourseMatchForProgram;
+
+  // Home rows now inherit the filtered safeDegreeOpportunities list.
+  try{refreshAll()}catch(e){}
+
+  window.__studielotsV389={
+    version:'v389',
+    issuedDegreeGuard:true,
+    ladokDegreeDates:true,
+    sameDegreeHidden:true,
+    advancedReuseConservative:true
+  };
+  console.info('Studielots v389: issued degrees now block repeat recommendations and automatic reuse');
+})();
+</script>
+
+<style>
+.issued-degree-note{font-size:.84rem;color:#65706d}
 </style>
 </body>
 </html>
