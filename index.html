@@ -20020,5 +20020,117 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 #programSearchResults .program-search-link-v390:active{background:#f3f7f5}
 #programSearchResults .program-search-link-v390 *{pointer-events:none}
 </style>
+
+<script>
+// v391 — isolate programme hits from every legacy click handler.
+(function(){
+  function v391ProgramById(id){
+    return (Array.isArray(programCatalog)?programCatalog:[]).find(x=>String(x.id)===String(id))||null;
+  }
+
+  window.v391OpenProgram=function(id){
+    const p=v391ProgramById(id);
+    const resultHost=document.getElementById('programMatchResult');
+    if(!p){
+      if(resultHost)resultHost.innerHTML='<div class="card empty"><strong>Kunde inte öppna programmet.</strong><div class="small muted">Program-ID saknas i katalogen.</div></div>';
+      return;
+    }
+
+    try{sessionStorage.setItem('lotsen_selected_program',String(id))}catch(e){}
+
+    const input=document.getElementById('programSearchInput');
+    const results=document.getElementById('programSearchResults');
+    if(input){input.value=p.name||'';input.blur();}
+    if(results)results.innerHTML='';
+
+    try{
+      renderProgramMatch(p);
+    }catch(e){
+      console.error('v391 program render error',e);
+      if(resultHost)resultHost.innerHTML=`<div class="card empty"><strong>Kunde inte visa programmatchningen.</strong><div class="small muted">${escapeHtml(e?.message||'Okänt fel')}</div></div>`;
+      return;
+    }
+
+    if(resultHost && !String(resultHost.innerHTML||'').trim()){
+      resultHost.innerHTML='<div class="card empty"><strong>Programmet valdes, men inget resultat skapades.</strong><div class="small muted">Studielots kunde inte skapa programmatchningen för den här posten ännu.</div></div>';
+    }
+
+    requestAnimationFrame(()=>{
+      resultHost?.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  };
+
+  // Important: do NOT use .program-search-row here.
+  // Several old versions registered capture listeners for that class.
+  renderProgramSearch=function(){
+    const host=document.getElementById('programSearchResults');
+    if(!host)return;
+
+    const raw=String(document.getElementById('programSearchInput')?.value||'').trim();
+    const q=typeof v371Norm==='function'?v371Norm(raw):raw.toLocaleLowerCase('sv-SE');
+
+    let rows=(Array.isArray(programCatalog)?programCatalog:[]).slice();
+    try{
+      rows=rows.filter(p=>V2_ACTIVE_UNIVERSITY_KEYS.has(String(p?.university||'').trim().toLocaleLowerCase('sv-SE')));
+    }catch(e){}
+
+    if(typeof v371UniquePrograms==='function')rows=v371UniquePrograms(rows);
+
+    if(q){
+      if(typeof v371SearchScore==='function'){
+        rows=rows.map(p=>({p,score:v371SearchScore(p,q)}))
+          .filter(x=>x.score>0)
+          .sort((a,b)=>b.score-a.score || String(a.p.name||'').localeCompare(String(b.p.name||''),'sv'))
+          .map(x=>x.p);
+      }else{
+        rows=rows.filter(p=>`${p.name||''} ${p.university||''}`.toLocaleLowerCase('sv-SE').includes(q));
+      }
+    }else{
+      rows.sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''),'sv'));
+    }
+
+    rows=rows.slice(0,12);
+
+    host.innerHTML=rows.length?rows.map(p=>{
+      const meta=[p.officialCode||p.code||'',Number(p.hp||0)?`${Number(p.hp)} hp`:'',p.level||''].filter(Boolean).join(' · ');
+      const id=encodeURIComponent(String(p.id||''));
+      return `<button type="button" class="program-hit-v391" data-v391-program="${escapeHtml(id)}">
+        <div class="uni-name-with-logo">${universityLogoHtml(p.university,'sm')}
+          <div><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.university)}${meta?` · ${escapeHtml(meta)}`:''}</span></div>
+        </div>
+        <span aria-hidden="true">›</span>
+      </button>`;
+    }).join(''):'<div class="muted small program-empty">Inget program hittades bland Chalmers, GU och Lund.</div>';
+  };
+
+  function v391Activate(e){
+    const row=e.target.closest?.('#programSearchResults .program-hit-v391');
+    if(!row)return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    const id=decodeURIComponent(row.dataset.v391Program||'');
+    if(id)window.v391OpenProgram(id);
+  }
+
+  // Late capture handler, but on a completely new selector untouched by old code.
+  document.addEventListener('pointerup',v391Activate,true);
+  document.addEventListener('click',v391Activate,true);
+})();
+</script>
+
+<style>
+#programSearchResults .program-hit-v391{
+  appearance:none;-webkit-appearance:none;
+  width:100%;min-height:72px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border:0;border-top:1px solid #eef0f3;background:#fff;
+  padding:12px 2px;text-align:left;color:inherit;
+  font:inherit;cursor:pointer;touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(21,88,79,.14);
+}
+#programSearchResults .program-hit-v391:first-child{border-top:0}
+#programSearchResults .program-hit-v391:active{background:#f3f7f5}
+#programSearchResults .program-hit-v391>span{font-size:1.55rem;color:#176b5c;padding-right:4px}
+</style>
 </body>
 </html>
