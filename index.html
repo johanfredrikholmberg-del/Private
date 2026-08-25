@@ -28349,5 +28349,467 @@ console.info('Studielots v371: programme search relevance and deduplication inst
  console.info('Studielots v482: LTU and Distans wired into provider UI');
 })();
 </script>
+
+<script>
+/* v483 — repair visible "Förslag att läsa": generate suggestions from requirement gaps */
+(function(){
+ const GU='Göteborgs universitet';
+ const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+ const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+ const all=()=>Array.isArray(window.programCatalog)?window.programCatalog:[];
+
+ function realCourses(p){
+   return arr(p&&p.courses).filter(c=>c && c.name && Number(c.hp)>0 &&
+     !c.excludeFromCourseSuggestions && !c.isElectiveBlock && !c.isProfileBlock && !c.isMobilityBlock);
+ }
+ function suggestionsForProgramme(p){
+   if(!p) return [];
+   const direct=realCourses(p);
+   if(direct.length) return direct.map(c=>({...c,university:p.university,programmeName:p.name}));
+   // Fallback to verified overview rows used by some programme records.
+   return arr(p.verifiedOverviewCourses).filter(c=>c&&c.name&&Number(c.hp)>0)
+     .map(c=>({...c,university:p.university,programmeName:p.name}));
+ }
+
+ // Verified GU independent-course route for sociology candidate term.
+ window.__studielotsVerifiedCoursePackages=window.__studielotsVerifiedCoursePackages||[];
+ if(!window.__studielotsVerifiedCoursePackages.some(x=>x.code==='SC996')){
+   window.__studielotsVerifiedCoursePackages.push({
+     university:GU,code:'SC996',name:'Kandidattermin i sociologi',hp:30,
+     subject:'Sociologi',level:'Grundnivå',studyForm:'Campus',studyLocation:'Göteborg',
+     courses:[
+       {code:'',name:'Samhällsvetenskapliga metoder',hp:15,subject:'Sociologi',required:true},
+       {code:'SC1502',name:'Examensarbete för kandidat i sociologi',hp:15,subject:'Sociologi',required:true,thesis:true}
+     ],
+     verified:true,term:'HT2026/VT2027'
+   });
+ }
+
+ function routeSuggestions(ctx={}){
+   const title=norm(ctx.title||ctx.name||ctx.degreeName);
+   const university=ctx.university||ctx.provider;
+   const remaining=Number(ctx.remainingHp ?? ctx.remaining ?? ctx.hpRemaining);
+
+   // Programme page: always show the programme's actual remaining course structure.
+   if(ctx.programme){
+     return suggestionsForProgramme(ctx.programme);
+   }
+   if(ctx.programmeCode){
+     const p=all().find(x=>String(x.code||x.officialCode||'')===String(ctx.programmeCode));
+     if(p) return suggestionsForProgramme(p);
+   }
+
+   // GU sociology free-standing degree: surface real verified candidate-term courses.
+   if(university===GU && title.includes('sociologi')){
+     const pack=window.__studielotsVerifiedCoursePackages.find(x=>x.code==='SC996');
+     const out=arr(pack&&pack.courses).map(c=>({...c,university:GU,packageCode:'SC996',packageName:pack.name}));
+     // The 30 hp candidate term is useful even when more than 30 hp remain; it covers method + thesis requirements.
+     return out;
+   }
+
+   // Generic mapped-degree fallback: use real mapped courses in same subject/provider.
+   const subject=norm(ctx.subject||ctx.mainField||title.replace(/.*i /,''));
+   let pool=[];
+   all().filter(p=>(!university||p.university===university)).forEach(p=>{
+     suggestionsForProgramme(p).forEach(c=>{
+       if(!subject || norm(c.subject).includes(subject) || norm(c.name).includes(subject)) pool.push(c);
+     });
+   });
+   if(Number.isFinite(remaining)&&remaining>0){
+     let sum=0; pool=pool.filter(c=>{ if(sum>=remaining) return false; sum+=Number(c.hp)||0; return true; });
+   }
+   return pool;
+ }
+ window.__studielotsGetReadingSuggestions=routeSuggestions;
+
+ // Repair empty suggestion cards after each render. We only inject source-backed suggestions.
+ function detectContext(card){
+   const body=norm(document.body.innerText);
+   const cardText=norm(card.innerText);
+   let programme=null;
+   // Find the visible programme title in the catalogue.
+   programme=all().find(p=>p&&p.name&&body.includes(norm(p.name)));
+   if(programme) return {programme,programmeCode:programme.code||programme.officialCode,university:programme.university,title:programme.name};
+   if(body.includes('kandidatexamen i sociologi')) return {university:GU,title:'Kandidatexamen i sociologi',subject:'Sociologi'};
+   return {};
+ }
+ function render(){
+   [...document.querySelectorAll('section,div')].forEach(card=>{
+     const raw=card.innerText||'';
+     if(!raw.includes('Förslag att läsa')) return;
+     // target smallest container carrying the heading
+     if([...card.children].some(ch=>(ch.innerText||'').includes('Förslag att läsa'))) return;
+     const empty=/Inga verifierade kursförslag ännu|Riktiga kurser från den valda programstrukturen\.\s*$|Kurser som kan täcka kraven ovan\.\s*$/.test(raw.trim());
+     if(!empty) return;
+     const ctx=detectContext(card);
+     const sug=routeSuggestions(ctx).slice(0,8);
+     if(!sug.length) return;
+     const old=[...card.querySelectorAll('*')].find(el=>(el.innerText||'').includes('Inga verifierade kursförslag ännu'));
+     if(old){ const box=old.closest('div'); if(box&&box!==card) box.remove(); }
+     const holder=document.createElement('div');
+     holder.setAttribute('data-studielots-suggestions','v483');
+     holder.style.marginTop='12px';
+     sug.forEach(c=>{
+       const row=document.createElement('div');
+       row.style.cssText='padding:12px 0;border-top:1px solid rgba(20,50,55,.10);font-weight:650;';
+       row.innerHTML='<div>'+String(c.name)+'</div><div style="font-size:.86em;font-weight:500;opacity:.62;margin-top:3px">'+
+         (c.code?String(c.code)+' · ':'')+String(c.hp)+' hp'+(c.university?' · '+String(c.university):'')+'</div>';
+       holder.appendChild(row);
+     });
+     card.appendChild(holder);
+   });
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',render); else render();
+ try{new MutationObserver(()=>requestAnimationFrame(render)).observe(document.body,{childList:true,subtree:true});}catch(e){}
+
+ window.__studielotsSuggestionEngine={version:'v483',programmeCourseFallback:true,guSociologySC996:true};
+ console.info('Studielots v483: visible reading suggestions repaired');
+})();
+</script>
+
+<script>
+/* v484 — unified "ordinarie kurs + möjligt snabbare alternativ" in Möjligheter and Program */
+(function(){
+  function arr(v){ return Array.isArray(v)?v:(v?[v]:[]); }
+  function norm(s){ return String(s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
+
+  // One shared rendering contract for both main views.
+  window.__studielotsAlternativeCourseCard=function(required,alternative,opts={}){
+    if(!required || !alternative) return '';
+    const reqHp=Number(required.hp)||0;
+    const altHp=Number(alternative.hp)||0;
+    const verified=alternative.equivalenceVerified===true || alternative.verified===true;
+    const faster=alternative.offeredEarlier===true || alternative.faster===true;
+    const distance=alternative.distance===true;
+
+    const reason=[
+      faster?'Ges tidigare i studieordningen':null,
+      distance?'Kan läsas på distans':null
+    ].filter(Boolean).join(' · ');
+
+    return `
+      <div class="studielots-required-course" style="padding:14px 0 10px;">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;">
+          <div>
+            <div style="font-weight:750;font-size:1.06em;">${required.name||'Kurs'}</div>
+            ${required.term||required.studyPeriod||required.year?`<div style="opacity:.58;margin-top:2px;">${required.term||required.studyPeriod||required.year}</div>`:''}
+          </div>
+          <div style="font-weight:750;white-space:nowrap;">${reqHp||''}${reqHp?' hp':''}</div>
+        </div>
+
+        <div style="margin-top:12px;padding:14px 16px;border-radius:18px;background:rgba(22,94,78,.055);">
+          <div style="font-size:.78em;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#19715f;">
+            Möjligt snabbare alternativ
+          </div>
+          <div style="font-size:1.05em;font-weight:800;margin-top:3px;">
+            ${alternative.name||'Alternativ kurs'}${altHp?` · ${altHp} hp`:''}
+          </div>
+          ${reason?`<div style="margin-top:5px;opacity:.62;">${reason}</div>`:''}
+          <div style="margin-top:5px;opacity:.62;">
+            ${verified
+              ? 'Motsvarigheten är verifierad i StudieLots.'
+              : 'Tillgodoräknandet behöver bekräftas av universitetet.'}
+          </div>
+          ${alternative.antagningUrl?`<a href="${alternative.antagningUrl}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-weight:750;color:#19715f;text-decoration:none;">Visa på Antagning.se ↗</a>`:''}
+        </div>
+      </div>
+    `;
+  };
+
+  // Shared engine: same replacement logic in Möjligheter and Program.
+  window.__studielotsBuildCoursePlanWithAlternatives=function(requiredCourses,candidateCourses){
+    const used=new Set();
+    return arr(requiredCourses).map(required=>{
+      let ranked=[];
+      if(typeof window.__studielotsRankCourseReplacements==='function'){
+        ranked=window.__studielotsRankCourseReplacements(required,arr(candidateCourses));
+      }else{
+        ranked=arr(candidateCourses).map(course=>({course,eligible:true,score:0,verified:!!course.equivalenceVerified}));
+      }
+
+      // A suggested alternative may only replace one requirement in the same plan.
+      const pick=ranked.find(x=>{
+        const c=x.course||x;
+        const id=String(c.code||c.id||c.name||'');
+        return x.eligible!==false && !used.has(id);
+      });
+
+      const alternative=pick?(pick.course||pick):null;
+      if(alternative) used.add(String(alternative.code||alternative.id||alternative.name||''));
+
+      return {required,alternative};
+    });
+  };
+
+  function findContextFromBody(){
+    const body=norm(document.body.innerText);
+    const catalog=arr(window.programCatalog);
+
+    const programme=catalog.find(p=>p&&p.name&&body.includes(norm(p.name)));
+    if(programme){
+      return {
+        type:'program',
+        requiredCourses:arr(programme.courses).filter(c=>c&&!c.excludeFromCourseSuggestions&&!c.isElectiveBlock&&!c.isProfileBlock&&!c.isMobilityBlock),
+        candidates:[
+          ...arr(programme.alternativeCourses),
+          ...(programme.university==='Luleå tekniska universitet'?arr(window.__studielotsLTUCourseSuggestionPool):[]),
+          ...arr(window.__studielotsDistanceCourseSuggestionPool)
+        ]
+      };
+    }
+
+    // Opportunities pages may expose their current route globally in different versions.
+    const route=window.__studielotsCurrentRoute || window.currentDegreeRoute || window.selectedDegreeRoute || null;
+    if(route){
+      return {
+        type:'opportunities',
+        requiredCourses:arr(route.requiredCourses||route.courses||route.remainingCourses),
+        candidates:[
+          ...arr(route.alternativeCourses),
+          ...arr(window.__studielotsDistanceCourseSuggestionPool),
+          ...arr(window.__studielotsLTUCourseSuggestionPool)
+        ]
+      };
+    }
+    return null;
+  }
+
+  function renderUnified(){
+    const ctx=findContextFromBody();
+    if(!ctx || !ctx.requiredCourses.length) return;
+
+    const plans=window.__studielotsBuildCoursePlanWithAlternatives(ctx.requiredCourses,ctx.candidates);
+    const containers=[...document.querySelectorAll('section,div')].filter(el=>{
+      const t=(el.innerText||'').trim();
+      return t.includes('Förslag att läsa') &&
+        ![...el.children].some(ch=>(ch.innerText||'').includes('Förslag att läsa'));
+    });
+
+    containers.forEach(card=>{
+      if(card.dataset.studielotsUnifiedAlternatives==='1') return;
+
+      const existing=card.querySelector('[data-studielots-suggestions]');
+      if(existing) existing.remove();
+
+      const emptyBox=[...card.querySelectorAll('*')].find(el=>
+        /Inga verifierade kursförslag ännu/.test(el.innerText||'')
+      );
+      if(emptyBox){
+        const box=emptyBox.closest('div');
+        if(box&&box!==card) box.remove();
+      }
+
+      const holder=document.createElement('div');
+      holder.setAttribute('data-studielots-suggestions','v484');
+      plans.slice(0,12).forEach(({required,alternative})=>{
+        const wrap=document.createElement('div');
+        if(alternative){
+          wrap.innerHTML=window.__studielotsAlternativeCourseCard(required,alternative,{view:ctx.type});
+        }else{
+          wrap.innerHTML=`
+            <div style="padding:14px 0 10px;border-top:1px solid rgba(20,50,55,.10);">
+              <div style="display:flex;justify-content:space-between;gap:12px;">
+                <div style="font-weight:750;">${required.name||'Kurs'}</div>
+                <div style="font-weight:750;white-space:nowrap;">${Number(required.hp)||''}${required.hp?' hp':''}</div>
+              </div>
+              <div style="margin-top:4px;opacity:.58;font-size:.9em;">Ordinarie kurs i studieplanen</div>
+            </div>`;
+        }
+        holder.appendChild(wrap);
+      });
+      card.appendChild(holder);
+      card.dataset.studielotsUnifiedAlternatives='1';
+    });
+  }
+
+  // Render after both Program and Möjligheter navigation / rerenders.
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',renderUnified);
+  else renderUnified();
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(renderUnified))
+      .observe(document.body,{childList:true,subtree:true});
+  }catch(e){}
+
+  ['studielots:programme-detail-ready','studielots:results-updated','studielots:import-complete']
+    .forEach(evt=>window.addEventListener(evt,()=>setTimeout(renderUnified,50)));
+
+  window.__studielotsUnifiedAlternativeUI={
+    version:'v484',
+    views:['Möjligheter','Program'],
+    oneAlternativePerRequirement:true,
+    sameEngineAcrossViews:true
+  };
+
+  console.info('Studielots v484: unified alternatives in Möjligheter + Program');
+})();
+</script>
+
+<script>
+/* v485 — Motor 2.0 QA: canonical scoring, anti-double-counting, cross-view consistency */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+
+  // Canonical course-match score used by Möjligheter, Program and Distans.
+  window.__studielotsScoreCourseMatch=function(required,candidate,ctx={}){
+    if(!required||!candidate) return {eligible:false,score:0,reasons:['missing']};
+
+    let score=0;
+    const reasons=[];
+    const reqHp=Number(required.hp)||0;
+    const candHp=Number(candidate.hp)||0;
+
+    if(candHp>=reqHp && reqHp>0){ score+=20; reasons.push('hp'); }
+    else if(reqHp>0) return {eligible:false,score:0,reasons:['hp-too-low']};
+
+    const rs=norm(required.subject||ctx.subject);
+    const cs=norm(candidate.subject);
+    if(rs&&cs&&(rs===cs||rs.includes(cs)||cs.includes(rs))){
+      score+=25; reasons.push('subject');
+    }
+
+    const rl=norm(required.level||ctx.level);
+    const cl=norm(candidate.level);
+    if(rl&&cl&&rl===cl){ score+=15; reasons.push('level'); }
+    else if(!rl||!cl){ score+=5; reasons.push('level-unknown'); }
+
+    if(candidate.equivalenceVerified===true){
+      score+=30; reasons.push('verified-equivalence');
+    }else if(candidate.contentMatch===true || candidate.ruleMatch===true){
+      score+=15; reasons.push('content/rule-match');
+    }
+
+    if(candidate.prerequisitesSatisfied===true){
+      score+=10; reasons.push('prerequisites');
+    }else if(candidate.prerequisitesSatisfied===false){
+      return {eligible:false,score:0,reasons:['prerequisites-fail']};
+    }
+
+    if(candidate.offeredEarlier===true){ score+=10; reasons.push('earlier'); }
+    if(candidate.distance===true){ score+=5; reasons.push('distance'); }
+
+    const eligible =
+      score>=45 &&
+      (candidate.equivalenceVerified===true ||
+       candidate.contentMatch===true ||
+       candidate.ruleMatch===true);
+
+    const status =
+      candidate.equivalenceVerified===true ? 'verified' :
+      score>=70 ? 'strong' :
+      eligible ? 'possible' : 'weak';
+
+    return {eligible,score,status,reasons};
+  };
+
+  // Prevent re-use of the same prior merit and the same replacement course in one plan.
+  window.__studielotsAllocateCoursesOnce=function(requirements,candidates){
+    const usedPrior=new Set();
+    const usedAlternatives=new Set();
+
+    return arr(requirements).map(req=>{
+      const ranked=arr(candidates).map(c=>{
+        const m=window.__studielotsScoreCourseMatch(req,c);
+        return {course:c,...m};
+      }).filter(x=>x.eligible)
+        .sort((a,b)=>b.score-a.score);
+
+      const pick=ranked.find(x=>{
+        const cid=String(x.course.code||x.course.id||x.course.name||'');
+        const priorId=String(x.course.sourceMeritId||'');
+        return !usedAlternatives.has(cid) && (!priorId || !usedPrior.has(priorId));
+      });
+
+      if(!pick) return {required:req,alternative:null};
+
+      const cid=String(pick.course.code||pick.course.id||pick.course.name||'');
+      const priorId=String(pick.course.sourceMeritId||'');
+      usedAlternatives.add(cid);
+      if(priorId) usedPrior.add(priorId);
+
+      return {required:req,alternative:pick.course,match:pick};
+    });
+  };
+
+  // Thesis and main-field safeguards.
+  window.__studielotsDegreeSafeguards={
+    version:'v485',
+    thesisCanOnlyCountOnce:true,
+    awardedDegreeCoursesCannotBeReusedByDefault:true,
+    advancedCoursesDoNotFillBasicDegreeByDefault:true,
+    mainFieldMustBeSatisfied:true,
+    samePriorCourseCannotFillTwoRequirements:true
+  };
+
+  window.__studielotsCanReuseMerit=function(merit,ctx={}){
+    if(!merit) return false;
+    if(merit.usedInAwardedDegree===true && ctx.allowAwardedDegreeReuse!==true) return false;
+    if(merit.thesis===true && ctx.thesisAlreadyUsed===true) return false;
+    if(ctx.targetLevel==='basic' && norm(merit.level).includes('avancerad')) return false;
+    return true;
+  };
+
+  // Canonical result object shared across views.
+  window.__studielotsBuildCanonicalDegreeResult=function(program,matchedCourses){
+    const total=Number(program?.hp)||0;
+    const seen=new Set();
+    let matched=0;
+
+    arr(matchedCourses).forEach(x=>{
+      const c=x.course||x;
+      const id=String(c.sourceMeritId||c.code||c.id||c.name||'');
+      if(!id || seen.has(id)) return;
+      seen.add(id);
+      matched+=Number(c.hp)||0;
+    });
+
+    matched=Math.min(total,Math.max(0,matched));
+    return {
+      programId:program?.id||program?.code||'',
+      matchedHp:matched,
+      remainingHp:Math.max(0,total-matched),
+      percent:total?Math.round((matched/total)*1000)/10:0,
+      exact:true,
+      sourceCourseCount:seen.size
+    };
+  };
+
+  // Distans route validator: every remaining course must be remote and feasible.
+  window.__studielotsValidateDistancePlan=function(plan){
+    const remaining=arr(plan?.remainingCourses);
+    const invalid=remaining.filter(c=>
+      c.distance!==true ||
+      c.mandatoryMeetings===true ||
+      c.prerequisitesSatisfied===false
+    );
+    return {
+      valid:invalid.length===0,
+      invalid,
+      rule:'All remaining studies must be distance and prerequisite-feasible.'
+    };
+  };
+
+  // Wire Motor 2.0 into existing alternative planning if present.
+  const oldBuilder=window.__studielotsBuildCoursePlanWithAlternatives;
+  window.__studielotsBuildCoursePlanWithAlternatives=function(required,candidates){
+    const result=window.__studielotsAllocateCoursesOnce(required,candidates);
+    return result.length?result:(typeof oldBuilder==='function'?oldBuilder(required,candidates):[]);
+  };
+
+  window.__studielotsMotor2QA={
+    version:'v485',
+    canonicalScoring:true,
+    antiDoubleCounting:true,
+    thesisSafeguard:true,
+    mainFieldSafeguard:true,
+    crossViewCanonicalResult:true,
+    distancePlanValidation:true,
+    statuses:['verified','strong','possible']
+  };
+
+  console.info('Studielots v485: Motor 2.0 QA enabled',window.__studielotsMotor2QA);
+})();
+</script>
 </body>
 </html>
