@@ -20439,5 +20439,149 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 })();
 </script>
 <!-- StudieLots v398: approved visual header integrated -->
+
+<script>
+// v398 — rule-to-course bridge for standalone degree paths.
+// When the canonical path has remaining rule HP but no named requiredMissing courses,
+// suggest real same-university v2 catalogue courses instead of showing an empty state.
+(function(){
+  const norm398=v=>String(v||'').trim().toLocaleLowerCase('sv-SE');
+  const isAdvanced398=c=>/avancerad|a1n|a1f|a2e|a2f/i.test(String(c?.level||c?.progression||''));
+  const isThesis398=c=>Boolean(c?.thesis)||/examensarbete|kandidatuppsats|magisteruppsats|masteruppsats|självständigt arbete/i.test(String(c?.name||''));
+  const professionalPenalty398=c=>/praktik|patient|behandling|verksamhetsförlagd|psykologyrket|profession|konsultation|handledning|juridik och etik/i.test(String(c?.name||''))?1:0;
+
+  function userCourseKeys398(){
+    const set=new Set();
+    try{(courses||[]).filter(c=>c.selected!==false).forEach(c=>{
+      if(c.code)set.add('code:'+norm398(c.code));
+      if(c.name)set.add('name:'+norm398(c.name));
+    })}catch(e){}
+    return set;
+  }
+
+  function ruleCoursePool398(path){
+    const university=String(path?.provider||path?.program?.university||'');
+    const subject=String(path?.subject||path?.program?.subject||path?.program?.track||'');
+    const subjectNorm=norm398(subject);
+    if(!university||!subjectNorm)return [];
+
+    let programs=[];
+    try{
+      programs=(typeof normalizedProgramCatalog==='function'?normalizedProgramCatalog():(programCatalog||[]))
+        .filter(p=>p&&p.university===university&&p.engine==='v2')
+        .filter(p=>!p.academicYear||p.academicYear==='2026/2027');
+    }catch(e){return []}
+
+    const used=userCourseKeys398();
+    const seen=new Map();
+    const candidateLevel=String(path?.kind||'candidate')==='candidate';
+
+    programs.forEach(p=>(p.courses||[]).forEach(c=>{
+      if(!c||Number(c.hp||0)<=0)return;
+      if(norm398(c.subject)!==subjectNorm)return;
+      if(candidateLevel && isAdvanced398(c))return;
+      if(!candidateLevel && !isAdvanced398(c))return;
+      if((c.code&&used.has('code:'+norm398(c.code)))||(c.name&&used.has('name:'+norm398(c.name))))return;
+
+      const key=norm398(c.code)||`${norm398(c.name)}|${Number(c.hp||0)}`;
+      const row={...c,_sourceProgram:p.name||'',_sourceUrl:p.sourceUrl||'',_verifiedProgram:Boolean(p.verified)};
+      const prev=seen.get(key);
+      if(!prev || professionalPenalty398(row)<professionalPenalty398(prev))seen.set(key,row);
+    }));
+
+    return [...seen.values()].sort((a,b)=>{
+      const at=isThesis398(a)?1:0, bt=isThesis398(b)?1:0;
+      if(at!==bt)return at-bt;
+      const ap=professionalPenalty398(a),bp=professionalPenalty398(b);
+      if(ap!==bp)return ap-bp;
+      const ay=Number(a.year||99),by=Number(b.year||99);
+      if(ay!==by)return ay-by;
+      return Number(a.hp||0)-Number(b.hp||0)||String(a.name||'').localeCompare(String(b.name||''),'sv');
+    });
+  }
+  window.ruleCoursePool398=ruleCoursePool398;
+
+  function ruleBasedSuggestions398(path){
+    const ruleMissing=(path?.rules||[]).filter(r=>Number(r.missing||0)>0);
+    if(!ruleMissing.length)return [];
+    const pool=ruleCoursePool398(path);
+    if(!pool.length)return [];
+
+    const subjectNorm=norm398(path?.subject||path?.program?.subject||path?.program?.track||'');
+    const subjectMissing=ruleMissing
+      .filter(r=>['subject_min_hp','choice_subject_min_hp'].includes(String(r.type||'')) && (!r.subject||norm398(r.subject)===subjectNorm))
+      .reduce((m,r)=>Math.max(m,Number(r.missing||0)),0);
+    const thesisMissing=ruleMissing.some(r=>Number(r.missing||0)>0 && /thesis|självständ/i.test(String(r.type||'')+' '+String(r.label||'')));
+
+    const chosen=[];let hp=0;
+    for(const c of pool){
+      if(isThesis398(c))continue;
+      if(subjectMissing>0 && hp>=subjectMissing)break;
+      chosen.push({...c,_reason:'Kan täcka huvudområdeskravet'});hp+=Number(c.hp||0);
+      if(chosen.length>=6)break;
+    }
+    if(thesisMissing){
+      const thesis=pool.find(c=>isThesis398(c));
+      if(thesis&&!chosen.some(x=>norm398(x.name)===norm398(thesis.name)))chosen.push({...thesis,_reason:'Kan täcka kravet på självständigt arbete'});
+    }
+    return chosen.slice(0,7);
+  }
+  window.ruleBasedSuggestions398=ruleBasedSuggestions398;
+
+  function ruleSuggestionCard398(c){
+    const url=typeof antagningCourseUrl==='function'?antagningCourseUrl(c):'https://www.antagning.se/se/search?freeText='+encodeURIComponent(c.code||c.name||'');
+    const meta=[c.code||'',c.level||'',c.year?`År ${c.year}`:''].filter(Boolean).join(' · ');
+    return `<article class="chalmers-suggestion compact rule-course-suggestion-v398">
+      <div class="chalmers-suggestion-top"><div>${c.code?`<div class="eyebrow">${escapeHtml(c.code)}</div>`:''}<h3>${escapeHtml(c.name||'Kurs')}</h3></div><b>${fmtHp(c.hp||0)} hp</b></div>
+      ${meta?`<div class="rule-course-meta-v398">${escapeHtml(meta)}</div>`:''}
+      <div class="chalmers-suggestion-reason">${escapeHtml(c._reason||'Kan passa den valda examensvägen')}</div>
+      <div class="chalmers-application">${typeof courseApplicationBadge==='function'?courseApplicationBadge(c):''}<a href="${escapeHtml(url)}" target="_blank" rel="noopener">Visa på Antagning.se ↗</a></div>
+      <div class="rule-course-confirm-v398">Tillgodoräknandet behöver bekräftas av universitetet.</div>
+    </article>`;
+  }
+
+  function bridgeSuggestions398(path){
+    if((path?.requiredMissing||[]).some(c=>Number(c.hp||0)>0))return '';
+    if(!(path?.rules||[]).some(r=>Number(r.missing||0)>0))return '';
+    const suggestions=ruleBasedSuggestions398(path);
+    if(!suggestions.length)return '';
+    return `<div class="rule-course-intro-v398">Kurser i ${escapeHtml(path.subject||path.program?.subject||'huvudområdet')} som kan hjälpa dig täcka kraven.</div><div class="chalmers-suggestion-list">${suggestions.map(ruleSuggestionCard398).join('')}</div>`;
+  }
+
+  const prevRender398=renderV21Detail;
+  renderV21Detail=function(path,o){
+    prevRender398(path,o);
+    const host=document.getElementById('universityDetailContent');if(!host)return;
+    const block=host.querySelector('.suggested-course-block');if(!block)return;
+    const empty=block.querySelector('.suggestion-empty');
+    const html=bridgeSuggestions398(path);
+    if(empty&&html){
+      empty.outerHTML=html;
+    }
+  };
+  window.renderV21Detail=renderV21Detail;
+
+  // Programme screen uses the same bridge if a v2 result only has rule-level gaps.
+  const prevProgram398=renderProgramMatch;
+  renderProgramMatch=function(p){
+    prevProgram398(p);
+    const host=document.getElementById('programMatchResult');if(!host||!p||p.engine!=='v2')return;
+    const block=host.querySelector('.suggested-course-block');if(!block||!block.querySelector('.suggestion-empty'))return;
+    let r=null;try{r=evaluateUniversityProgramV2(p)}catch(e){}
+    if(!r)return;
+    const path={engine:'v2.1',provider:p.university,program:p,programName:p.name,programCode:p.code||'',subject:p.subject||p.track||'',kind:/avancerad/i.test(String(p.level||''))?'master':'candidate',remaining:Number(r.remaining||0),used:r.used||[],requiredMissing:r.requiredMissing||[],rules:r.rules||[]};
+    const html=bridgeSuggestions398(path);
+    if(html)block.querySelector('.suggestion-empty').outerHTML=html;
+  };
+  window.renderProgramMatch=renderProgramMatch;
+
+  window.__studielotsV398={version:'v398',ruleToCourseBridge:true};
+})();
+</script>
+<style>
+.rule-course-intro-v398{font-size:.9rem;color:#68737c;margin:0 0 10px}
+.rule-course-meta-v398{font-size:.82rem;color:#7a8490;margin:-2px 0 5px}
+.rule-course-confirm-v398{font-size:.75rem;line-height:1.35;color:#89919a;margin-top:7px}
+</style>
 </body>
 </html>
