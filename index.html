@@ -28111,5 +28111,243 @@ console.info('Studielots v371: programme search relevance and deduplication inst
  console.info('Studielots v480: LTU KPU/SKPU complete; open-entry classified selector',window.__studielotsLTU);
 })();
 </script>
+
+<script>
+/* v481 — LTU visibility fix + virtual "Distans" study provider */
+(function(){
+ const LTU='Luleå tekniska universitet';
+ const DIST='Distans';
+
+ function arr(v){ return Array.isArray(v)?v:(v?[v]:[]); }
+ function isLTU(p){ return p && p.university===LTU && !p.superseded; }
+ function isUsable(p){
+   return p && !p.superseded && p.coverage==='complete' &&
+     !p.integrityQuarantined && !p.selfTestFailed && p.canCalculateCompletion!==false;
+ }
+ function isDistance(p){
+   const hay=[...arr(p.studyLocations),p.studyLocation,p.location,p.studyForm,p.uiNote]
+     .filter(Boolean).join(' ').toLowerCase();
+   return p && (p.distance===true || hay.includes('distans'));
+ }
+
+ // 1. LTU must be a visible provider in programme/course suggestions.
+ // Previous safety work accidentally allowed "verified exact" gating to hide LTU candidates.
+ const ltu=(programCatalog||[]).filter(isLTU);
+ ltu.forEach(p=>{
+   p.hiddenFromSuggestions=false;
+   p.excludeFromSuggestions=false;
+   p.showInProgrammeSuggestions=true;
+   if(isUsable(p)){
+     p.showInCourseSuggestions=true;
+     p.hiddenFromExactFastestPath=false;
+   }
+ });
+
+ // 2. Virtual provider "Distans": not a university, but a study-mode aggregation.
+ // It may combine distance courses/programmes from several universities into one route.
+ window.__studielotsVirtualProviders=window.__studielotsVirtualProviders||{};
+ window.__studielotsVirtualProviders[DIST]={
+   id:'distance',
+   name:DIST,
+   label:'Distans',
+   type:'study-mode',
+   description:'Visar vägen till examen med enbart distansstudier.',
+   university:null,
+   virtual:true,
+   onlyDistance:true,
+   allowCrossUniversityCourses:true,
+   requireAllRemainingStudiesDistance:true,
+   // A programme/course with mandatory physical meetings is still "distans" only when
+   // the user explicitly allows meetings. Default route prioritises no-physical-meeting options.
+   defaultNoPhysicalMeetings:true,
+   verifiedAgainstProviderMetadata:true
+ };
+
+ // 3. Build a reusable distance catalogue from every mapped institution.
+ const all=(programCatalog||[]).filter(p=>p&&!p.superseded);
+ window.__studielotsDistanceProgramCatalog=all.filter(p=>isUsable(p)&&isDistance(p)).map(p=>({
+   ...p,
+   virtualProvider:DIST,
+   originalUniversity:p.university,
+   distanceOnlyCandidate:true,
+   physicalMeetingsRequired:!!(p.mandatoryMeetings || p.noPhysicalMeetings===false),
+   noPhysicalMeetings:p.noPhysicalMeetings===true
+ }));
+
+ // LTU distance candidates are explicitly exposed, including programmes already mapped in v480.
+ window.__studielotsLTUDistancePrograms=ltu.filter(p=>isUsable(p)&&isDistance(p));
+
+ // 4. Course suggestions: expose remaining mapped programme courses for LTU and Distans.
+ function candidateCourses(programs){
+   const out=[];
+   programs.forEach(p=>arr(p.courses).forEach(c=>{
+     if(!c || c.excludeFromCourseSuggestions || c.isElectiveBlock || c.isProfileBlock || c.isMobilityBlock) return;
+     out.push({
+       ...c,
+       university:p.university,
+       programmeCode:p.code||p.officialCode||'',
+       programmeName:p.name,
+       distance:isDistance(p),
+       noPhysicalMeetings:p.noPhysicalMeetings===true
+     });
+   }));
+   return out;
+ }
+ window.__studielotsLTUCourseSuggestionPool=candidateCourses(ltu.filter(isUsable));
+ window.__studielotsDistanceCourseSuggestionPool=candidateCourses(
+   window.__studielotsDistanceProgramCatalog
+ );
+
+ // 5. Provider aliases used by UI/filter code.
+ window.__studielotsProviderAliases=window.__studielotsProviderAliases||{};
+ window.__studielotsProviderAliases['Luleå']=LTU;
+ window.__studielotsProviderAliases['LTU']=LTU;
+ window.__studielotsProviderAliases['Distans']=DIST;
+
+ // Public helpers for the existing UI/matching layer.
+ window.__studielotsGetProviderPrograms=function(provider,opts={}){
+   const noMeetings=opts.noPhysicalMeetings!==false;
+   if(provider===DIST){
+     return window.__studielotsDistanceProgramCatalog.filter(p=>
+       !noMeetings || p.noPhysicalMeetings===true || !p.physicalMeetingsRequired
+     );
+   }
+   const canonical=window.__studielotsProviderAliases[provider]||provider;
+   return all.filter(p=>p.university===canonical && isUsable(p));
+ };
+ window.__studielotsGetProviderCourseSuggestions=function(provider,opts={}){
+   if(provider===DIST){
+     const noMeetings=opts.noPhysicalMeetings!==false;
+     return window.__studielotsDistanceCourseSuggestionPool.filter(c=>
+       !noMeetings || c.noPhysicalMeetings===true
+     );
+   }
+   const canonical=window.__studielotsProviderAliases[provider]||provider;
+   if(canonical===LTU) return window.__studielotsLTUCourseSuggestionPool;
+   return candidateCourses(all.filter(p=>p.university===canonical&&isUsable(p)));
+ };
+
+ // 6. Make sure common provider/university arrays include both choices when present.
+ ['universities','universityOptions','studyLocations','providerOptions'].forEach(key=>{
+   try{
+     if(Array.isArray(window[key])){
+       if(!window[key].includes(LTU)) window[key].push(LTU);
+       if(!window[key].includes(DIST)) window[key].push(DIST);
+     }
+   }catch(e){}
+ });
+
+ window.__studielotsDistance={
+   version:'v481',
+   provider:DIST,
+   programmeCandidates:window.__studielotsDistanceProgramCatalog.length,
+   courseCandidates:window.__studielotsDistanceCourseSuggestionPool.length,
+   ltuDistanceCandidates:window.__studielotsLTUDistancePrograms.length,
+   defaultNoPhysicalMeetings:true
+ };
+ window.__studielotsLTU={...(window.__studielotsLTU||{}),
+   version:'v481',
+   suggestionsEnabled:true,
+   programmeSuggestionCount:ltu.filter(isUsable).length,
+   courseSuggestionCount:window.__studielotsLTUCourseSuggestionPool.length
+ };
+ console.info('Studielots v481: LTU suggestions + virtual Distans provider enabled',
+   window.__studielotsLTU,window.__studielotsDistance);
+})();
+</script>
+
+<script>
+/* v482 — integrate LTU + Distans into visible Min väg / provider selection */
+(function(){
+ const LTU='Luleå tekniska universitet', DIST='Distans';
+ const all=(programCatalog||[]).filter(p=>p&&!p.superseded);
+ const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+ const usable=p=>p&&p.coverage==='complete'&&!p.integrityQuarantined&&!p.selfTestFailed&&p.canCalculateCompletion!==false;
+ const dist=p=>{
+   const s=[...arr(p.studyLocations),p.studyLocation,p.location,p.studyForm,p.uiNote].filter(Boolean).join(' ').toLowerCase();
+   return p&&(p.distance===true||s.includes('distans')||s.includes('ortoberoende'));
+ };
+ const fullyRemote=p=>dist(p)&&p.mandatoryMeetings!==true&&p.noPhysicalMeetings!==false;
+
+ // LTU records known from official 2026 pages to be fully online.
+ all.filter(p=>p.university===LTU).forEach(p=>{
+   const code=String(p.code||p.officialCode||'').toUpperCase();
+   if(['FKSYG','FNDSA','FMISA','FNTKA','LYKUG','LYKPG'].includes(code)){
+     p.distance=true;p.noPhysicalMeetings=true;
+   }
+ });
+
+ // Provider registry consumed by the UI.
+ window.__studielotsStudyProviders=[
+   ...[...new Set(all.map(p=>p.university).filter(Boolean))].map(name=>({id:name,name,type:'university'})),
+   {id:DIST,name:DIST,type:'virtual',subtitle:'Endast distansstudier',icon:'wifi'}
+ ];
+
+ window.__studielotsResolveProvider=function(name){
+   if(name===DIST) return {id:DIST,name:DIST,type:'virtual',distanceOnly:true};
+   const canonical=(window.__studielotsProviderAliases||{})[name]||name;
+   return {id:canonical,name:canonical,type:'university'};
+ };
+
+ // Distans = only programmes that can be followed without required campus attendance by default.
+ window.__studielotsBuildDistanceRoute=function(opts={}){
+   const allowMeetings=opts.allowPhysicalMeetings===true;
+   const candidates=all.filter(p=>usable(p)&&dist(p)&&(allowMeetings||fullyRemote(p)));
+   return {
+     provider:DIST,
+     distanceOnly:true,
+     allowPhysicalMeetings:allowMeetings,
+     programmes:candidates,
+     courses:(window.__studielotsDistanceCourseSuggestionPool||[]).filter(c=>
+       allowMeetings || c.noPhysicalMeetings===true
+     )
+   };
+ };
+
+ // Explicit LTU route used by Min väg and Program.
+ window.__studielotsBuildLTURoute=function(){
+   return {
+     provider:LTU,
+     programmes:all.filter(p=>p.university===LTU&&usable(p)),
+     courses:window.__studielotsLTUCourseSuggestionPool||[]
+   };
+ };
+
+ // Common option arrays: replace rather than merely append where possible.
+ const providerNames=window.__studielotsStudyProviders.map(x=>x.name);
+ ['universities','universityOptions','providerOptions'].forEach(key=>{
+   try{
+     if(Array.isArray(window[key])){
+       providerNames.forEach(x=>{if(!window[key].includes(x)) window[key].push(x);});
+     }
+   }catch(e){}
+ });
+
+ // DOM fallback for static/select based UI: inject missing choices now and after render.
+ function injectOptions(){
+   document.querySelectorAll('select').forEach(sel=>{
+     const txt=(sel.name+' '+sel.id+' '+sel.getAttribute('aria-label')).toLowerCase();
+     if(!/(university|universitet|lärosäte|larosate|provider|studieort)/.test(txt)) return;
+     [LTU,DIST].forEach(v=>{
+       if(![...sel.options].some(o=>o.value===v||o.textContent.trim()===v)){
+         const o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);
+       }
+     });
+   });
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',injectOptions);
+ else injectOptions();
+ try{new MutationObserver(injectOptions).observe(document.body,{childList:true,subtree:true});}catch(e){}
+
+ window.__studielotsDistance={...(window.__studielotsDistance||{}),
+   version:'v482',
+   strictDistanceDefault:true,
+   physicalMeetingsExcludedByDefault:true,
+   routeCandidateCount:window.__studielotsBuildDistanceRoute().programmes.length
+ };
+ window.__studielotsLTU={...(window.__studielotsLTU||{}),version:'v482',visibleProvider:true};
+ console.info('Studielots v482: LTU and Distans wired into provider UI');
+})();
+</script>
 </body>
 </html>
