@@ -29328,5 +29328,539 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   console.info('Studielots v490: Distans API wired before availability gate');
 })();
 </script>
+
+<script>
+/* v491 — connect visible distance courses to the "Förslag att läsa" requirements + tidy top distance list */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+
+  function distanceCourses(){
+    const pool=[
+      ...arr(window.__studielotsVerifiedDistanceCourses),
+      ...arr(window.__studielotsDistanceCourseSuggestionPool),
+      ...(Array.isArray(window.LIVE_DISTANCE_COURSES)?window.LIVE_DISTANCE_COURSES:[])
+    ];
+    const seen=new Set();
+    return pool.filter(c=>{
+      if(!c||!c.name) return false;
+      const id=String(c.code||c.id||c.name)+'|'+String(c.university||'');
+      if(seen.has(id)) return false;
+      seen.add(id);
+      return c.distance===true && c.mandatoryMeetings!==true && c.noPhysicalMeetings!==false;
+    });
+  }
+
+  // Requirements shown in distance plans may be generic 30 hp blocks.
+  // Match a real distance course against the block by subject/level and allocate its hp into the gap.
+  window.__studielotsMatchDistanceCoursesToRequirement=function(req,courses){
+    const subject=norm(req.subject||req.name);
+    const level=norm(req.level||'grundnivå');
+    const needHp=Number(req.hp)||0;
+
+    const ranked=arr(courses).map(c=>{
+      const cs=norm(c.subject||c.name);
+      const cl=norm(c.level);
+      let score=0;
+      if(subject && (cs.includes(subject)||subject.includes(cs))) score+=60;
+      if(!cl || !level || cl===level || (level.includes('grund')&&cl.includes('grund'))) score+=20;
+      if(Number(c.hp)>0) score+=10;
+      if(c.verified===true) score+=10;
+      return {course:c,score};
+    }).filter(x=>x.score>=60).sort((a,b)=>b.score-a.score);
+
+    let covered=0;
+    const picked=[];
+    const used=new Set();
+    for(const x of ranked){
+      if(covered>=needHp) break;
+      const id=String(x.course.code||x.course.id||x.course.name)+'|'+String(x.course.university||'');
+      if(used.has(id)) continue;
+      used.add(id);
+      picked.push(x.course);
+      covered+=Number(x.course.hp)||0;
+    }
+    return {courses:picked,coveredHp:Math.min(needHp,covered),remainingHp:Math.max(0,needHp-covered)};
+  };
+
+  // Render the distance plan requirements with concrete matches directly underneath.
+  function enhanceDistancePlan(){
+    const cards=[...document.querySelectorAll('section,div')].filter(el=>{
+      const t=(el.innerText||'');
+      return t.includes('Förslag att läsa') && t.includes('Kurs behöver hittas på distans');
+    });
+
+    const pool=distanceCourses();
+
+    cards.forEach(card=>{
+      if(card.dataset.distanceLinkedV491==='1') return;
+
+      const rows=[...card.querySelectorAll('div')].filter(el=>{
+        const t=(el.innerText||'').trim();
+        return t.includes('Kurs behöver hittas på distans') &&
+          ![...el.children].some(ch=>(ch.innerText||'').includes('Kurs behöver hittas på distans'));
+      });
+
+      rows.forEach(row=>{
+        // Try to infer requirement name + hp from the row.
+        const txt=(row.innerText||'').trim();
+        const hpMatch=txt.match(/(\d+(?:[,.]\d+)?)\s*hp/i);
+        const hp=hpMatch?Number(hpMatch[1].replace(',','.')):0;
+        const name=(txt.split('\n').find(x=>x && !/Kurs behöver hittas|^\d+$|hp/i.test(x))||'').trim();
+        if(!name||!hp) return;
+
+        const subject=name.replace(/:\s*(Grundkurs|Fortsättningskurs|Forskningsmetod.*)$/i,'').trim();
+        const match=window.__studielotsMatchDistanceCoursesToRequirement({name,subject,hp,level:'Grundnivå'},pool);
+        if(!match.courses.length) return;
+
+        const detail=document.createElement('div');
+        detail.style.cssText='margin:10px 0 2px 38px;padding:10px 12px;border-radius:14px;background:rgba(22,94,78,.055);';
+        detail.innerHTML=match.courses.map(c=>{
+          const app=typeof window.__studielotsCourseApplicationState==='function'
+            ? window.__studielotsCourseApplicationState(c):null;
+          return `
+            <div style="padding:8px 0;border-top:1px solid rgba(20,50,55,.08);">
+              <div style="display:flex;justify-content:space-between;gap:10px;font-weight:750;">
+                <span>${c.name}</span><span style="white-space:nowrap">${Number(c.hp)||''} hp</span>
+              </div>
+              <div style="font-size:.84em;opacity:.62;margin-top:3px;">
+                ${c.university||''} · Distans${c.term?' · '+c.term:''}
+              </div>
+              <div style="font-size:.8em;color:#19715f;font-weight:700;margin-top:3px;">
+                Möjlig del av detta krav · tillgodoräknandet behöver bekräftas av examenslärosätet.
+              </div>
+              ${app?`<div style="font-size:.8em;opacity:.62;margin-top:3px;">${app.label}${app.detail?' · '+app.detail:''}</div>`:''}
+            </div>`;
+        }).join('')+
+        (match.remainingHp>0?`<div style="font-size:.82em;opacity:.62;margin-top:6px;">${match.remainingHp} hp återstår att hitta på distans för detta krav.</div>`:'');
+        row.appendChild(detail);
+      });
+
+      card.dataset.distanceLinkedV491='1';
+    });
+  }
+
+  // Tidy the loose top course list into a compact "Hittade distanskurser" card.
+  function tidyTopDistanceCourses(){
+    const headers=[...document.querySelectorAll('h1,h2,h3,div')].filter(el=>
+      (el.innerText||'').trim()==='På distans'
+    );
+    if(!headers.length) return;
+
+    const known=distanceCourses();
+    if(!known.length) return;
+
+    // find visible rows that match known course names
+    const visibleRows=[];
+    known.forEach(c=>{
+      const el=[...document.querySelectorAll('div,section')].find(x=>{
+        const t=(x.innerText||'').trim();
+        return t.includes(c.name) && t.includes(String(c.hp)+' hp') &&
+          ![...x.children].some(ch=>(ch.innerText||'').includes(c.name));
+      });
+      if(el) visibleRows.push({el,c});
+    });
+    if(!visibleRows.length) return;
+
+    const first=visibleRows[0].el;
+    if(document.querySelector('[data-distance-found-card="v491"]')) return;
+
+    const card=document.createElement('section');
+    card.setAttribute('data-distance-found-card','v491');
+    card.style.cssText='margin:18px 26px 12px;padding:18px 20px;border-radius:22px;background:#fff;box-shadow:0 8px 24px rgba(20,40,45,.06);';
+    card.innerHTML=`
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;">
+        <div>
+          <div style="font-size:.78em;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#19715f;">Distans</div>
+          <div style="font-size:1.12em;font-weight:800;margin-top:2px;">Hittade distanskurser</div>
+        </div>
+        <div style="font-weight:800;color:#19715f;">${visibleRows.length} st</div>
+      </div>
+      <div style="font-size:.9em;opacity:.62;margin-top:6px;">Kurser som kan bidra till den valda examensvägen.</div>
+    `;
+
+    visibleRows.forEach(({c})=>{
+      const app=typeof window.__studielotsCourseApplicationState==='function'
+        ? window.__studielotsCourseApplicationState(c):null;
+      const row=document.createElement('div');
+      row.style.cssText='padding:13px 0;border-top:1px solid rgba(20,50,55,.09);margin-top:8px;';
+      row.innerHTML=`
+        <div style="display:flex;justify-content:space-between;gap:10px;font-weight:750;">
+          <span>${c.name}</span><span style="white-space:nowrap">${Number(c.hp)||''} hp</span>
+        </div>
+        <div style="font-size:.84em;opacity:.62;margin-top:3px;">${c.university||''} · Distans${c.term?' · '+c.term:''}</div>
+        ${app?`<div style="font-size:.8em;opacity:.62;margin-top:3px;">${app.label}${app.detail?' · '+app.detail:''}</div>`:''}
+      `;
+      card.appendChild(row);
+    });
+
+    first.parentNode.insertBefore(card,first);
+    visibleRows.forEach(({el})=>{ el.style.display='none'; });
+  }
+
+  function run(){
+    enhanceDistancePlan();
+    tidyTopDistanceCourses();
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
+  try{new MutationObserver(()=>requestAnimationFrame(run)).observe(document.body,{childList:true,subtree:true});}catch(e){}
+
+  window.__studielotsDistance={...(window.__studielotsDistance||{}),version:'v491',
+    requirementsLinkedToRealCourses:true,topDistanceCoursesTidied:true};
+
+  console.info('Studielots v491: distance courses linked into requirements and top list tidied');
+})();
+</script>
+
+<script>
+/* v492 — generic degree-path suggestion fallback from verified same-subject programme courses */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+
+  function realCourses(p){
+    return arr(p?.courses).filter(c=>
+      c && c.name && Number(c.hp)>0 &&
+      !c.excludeFromCourseSuggestions &&
+      !c.isElectiveBlock && !c.isProfileBlock && !c.isMobilityBlock
+    );
+  }
+
+  function sameSubjectProgrammes(path){
+    const subject=norm(path?.program?.subject||path?.subject||path?.track);
+    const university=path?.provider||path?.program?.university||'';
+    if(!subject) return [];
+
+    return arr(window.programCatalog).filter(p=>{
+      if(!p || p.superseded || p.degreePath) return false;
+      if(p.coverage!=='complete' || p.integrityQuarantined || p.selfTestFailed || p.canCalculateCompletion===false) return false;
+      if(university && p.university!==university) return false;
+
+      const ps=norm(p.subject||p.track||p.name);
+      return ps.includes(subject) || subject.includes(ps) ||
+        realCourses(p).some(c=>norm(c.subject).includes(subject)||subject.includes(norm(c.subject)));
+    }).sort((a,b)=>{
+      // Prefer a programme explicitly in the same subject/track.
+      const as=norm(a.subject||a.track), bs=norm(b.subject||b.track);
+      const ae=as===subject?1:0, be=bs===subject?1:0;
+      if(ae!==be) return be-ae;
+      return realCourses(b).length-realCourses(a).length;
+    });
+  }
+
+  function alreadyUsedKeys(path){
+    const used=new Set();
+    arr(path?.used).forEach(x=>{
+      const uc=x?.userCourse||{};
+      const pc=x?.programCourse||{};
+      [uc.code,uc.id,uc.name,pc.code,pc.id,pc.name].filter(Boolean)
+        .forEach(v=>used.add(norm(v)));
+    });
+    return used;
+  }
+
+  function missingRule(path,type){
+    return arr(path?.rules).filter(r=>
+      (Array.isArray(type)?type.includes(r.type):r.type===type) &&
+      Number(r.missing||0)>0
+    );
+  }
+
+  // Generic source-level fallback for free-standing degree paths whose own `courses` array is empty.
+  window.__studielotsDegreePathCourseSuggestions=function(path){
+    if(!path) return [];
+
+    // Named missing courses always win.
+    const named=arr(path.requiredMissing).filter(c=>Number(c.hp||0)>0);
+    if(named.length) return named;
+
+    const programmes=sameSubjectProgrammes(path);
+    if(!programmes.length) return [];
+
+    const pool=[];
+    programmes.forEach(p=>realCourses(p).forEach(c=>pool.push({
+      ...c,
+      university:p.university,
+      sourceProgramme:p.name,
+      sourceProgrammeCode:p.code||p.officialCode||'',
+      suggestionBasis:'verified-same-subject-programme',
+      requiresUniversityConfirmation:true
+    })));
+
+    const used=alreadyUsedKeys(path);
+    const seen=new Set();
+    const candidates=pool.filter(c=>{
+      const key=norm(c.code||c.id||c.name);
+      if(!key || seen.has(key) || used.has(key) || used.has(norm(c.name))) return false;
+      seen.add(key);
+      return true;
+    });
+
+    const subjectMissing=missingRule(path,['subject_min_hp','choice_subject_min_hp'])
+      .reduce((s,r)=>s+Number(r.missing||0),0);
+    const thesisMissing=missingRule(path,['thesis_required','thesis_total_hp'])
+      .reduce((s,r)=>s+Number(r.missing||0),0);
+    const electiveMissing=missingRule(path,['elective_min_hp','free_elective_hp'])
+      .reduce((s,r)=>s+Number(r.missing||0),0);
+    const totalNeed=Math.max(0,Number(path.remaining||0));
+
+    // Prioritise thesis, then same-subject progression, then enough real courses to make the route actionable.
+    const thesis=candidates.filter(c=>c.thesis);
+    const ordinary=candidates.filter(c=>!c.thesis);
+
+    const picked=[];
+    let hp=0;
+    if(thesisMissing>0){
+      for(const c of thesis){
+        if(hp>=thesisMissing) break;
+        picked.push(c); hp+=Number(c.hp)||0;
+      }
+    }
+
+    let subjectCovered=0;
+    for(const c of ordinary){
+      if(subjectCovered>=subjectMissing && picked.reduce((s,x)=>s+(Number(x.hp)||0),0)>=Math.min(totalNeed,90)) break;
+      picked.push(c);
+      subjectCovered+=Number(c.hp)||0;
+    }
+
+    // Keep UI concise; enough courses to show a real route, not a full catalogue dump.
+    return picked.slice(0,8).map(c=>({
+      ...c,
+      suggestionReason:c.thesis
+        ? 'Kan täcka examensarbeteskravet'
+        : 'Verifierad kurs i samma huvudområde',
+      electiveContext:electiveMissing>0
+    }));
+  };
+
+  // Override the v2.1 suggestion renderer so rule-based degree paths no longer stop at an empty message.
+  window.v21SuggestionSection=v21SuggestionSection=function(path){
+    const missing=arr(path?.requiredMissing).filter(c=>Number(c.hp||0)>0);
+    const ruleMissing=arr(path?.rules).filter(r=>Number(r.missing||0)>0);
+
+    if(path?.program?.safeMode===true || path?.program?.canCalculateCompletion===false){
+      return `<div class="course-provider-note"><strong>Detaljerad kursplan ännu inte verifierad.</strong> Studielots gissar därför inte vilka enskilda kurser du ska läsa.</div>`;
+    }
+
+    let suggestions=missing;
+    let fallback=false;
+    if(!suggestions.length && ruleMissing.length){
+      suggestions=window.__studielotsDegreePathCourseSuggestions(path);
+      fallback=suggestions.length>0;
+    }
+
+    if(suggestions.length){
+      const first=suggestions.slice(0,6), rest=suggestions.slice(6);
+      const intro=fallback
+        ? `<div class="course-provider-note" style="margin-bottom:10px;"><strong>Verifierade kursförslag i samma huvudområde.</strong><span>Kurserna kommer från en verifierad programstruktur vid ${escapeHtml(path.provider||path.program?.university||'lärosätet')}. Exakt tillgodoräknande behöver bekräftas av universitetet.</span></div>`
+        : '';
+      return intro+
+        `<div class="chalmers-suggestion-list">${first.map(c=>v21CourseCard(c,path)).join('')}</div>`+
+        (rest.length?`<details class="path-details"><summary>Visa ${rest.length} fler kurser</summary><div class="chalmers-suggestion-list">${rest.map(c=>v21CourseCard(c,path)).join('')}</div></details>`:'');
+    }
+
+    if(ruleMissing.length){
+      return `<div class="course-provider-note suggestion-empty"><strong>Inga verifierade kursförslag ännu.</strong><span>Kraven visas under Kvar. StudieLots hittar ännu ingen verifierad kursstruktur i samma huvudområde för den valda vägen.</span></div>`;
+    }
+
+    return '<div class="ready-box">Inga verifierade kompletteringar återstår i den kartlagda strukturen.</div>';
+  };
+
+  // Re-render currently open v2.1 detail after patch load.
+  try{
+    const key=sessionStorage.getItem('lotsen_detail_key');
+    const profile=sessionStorage.getItem('lotsen_preferred_profile')||'';
+    const o=key&&typeof opportunityByKey==='function'?opportunityByKey(key):null;
+    if(o && profile && typeof renderUniversityDetail==='function'){
+      setTimeout(()=>renderUniversityDetail(profile,o.subject),30);
+    }
+  }catch(e){}
+
+  window.__studielotsMotor2QA={...(window.__studielotsMotor2QA||{}),version:'v492',
+    genericRuleBasedCourseSuggestions:true,
+    sameSubjectProgrammeFallback:true,
+    emptyDegreePathCoursesHandled:true};
+
+  console.info('Studielots v492: generic rule-based degree path suggestions enabled');
+})();
+</script>
+
+<script>
+/* v493 — order free-standing degree suggestions and add faster alternatives like Program */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+
+  function progressionRank(c){
+    const code=norm(c?.progression||c?.level||'');
+    if(code.includes('g1n')) return 10;
+    if(code.includes('g1f')) return 20;
+    if(code.includes('g2f')) return 30;
+    if(code.includes('g2e')) return 40;
+    if(code.includes('a1n')) return 50;
+    if(code.includes('a1f')) return 60;
+    if(code.includes('a2e')) return 70;
+    if(c?.thesis) return 90;
+    return 25;
+  }
+
+  function termRank(c){
+    const v=String(c?.term||c?.studyPeriod||c?.year||'');
+    const m=v.match(/(\d+)/);
+    return m?Number(m[1]):999;
+  }
+
+  // Canonical ordering for free-standing degree suggestions:
+  // known study order -> progression -> thesis last -> stable name.
+  window.__studielotsOrderDegreeSuggestions=function(courses){
+    return arr(courses).slice().sort((a,b)=>{
+      const ta=termRank(a), tb=termRank(b);
+      if(ta!==tb) return ta-tb;
+      const pa=progressionRank(a), pb=progressionRank(b);
+      if(pa!==pb) return pa-pb;
+      if(!!a.thesis!==!!b.thesis) return a.thesis?1:-1;
+      return String(a.name||'').localeCompare(String(b.name||''),'sv');
+    });
+  };
+
+  // Build the same "required + possible faster alternative" structure as Program.
+  window.__studielotsBuildDegreeSuggestionsWithAlternatives=function(path,courses){
+    const ordered=window.__studielotsOrderDegreeSuggestions(courses);
+    const provider=path?.provider||path?.program?.university||'';
+    const pseudoProgramme={
+      university:provider,
+      name:path?.program?.name||path?.name||path?.track||'Examensväg',
+      code:path?.program?.code||path?.key||'degree-path',
+      alternativeCourses:[
+        ...arr(path?.alternativeCourses),
+        ...arr(window.__studielotsDistanceCourseSuggestionPool),
+        ...arr(window.__studielotsVerifiedDistanceCourses)
+      ]
+    };
+
+    if(typeof window.__studielotsBuildProgrammePlanWithAcceleration==='function'){
+      return window.__studielotsBuildProgrammePlanWithAcceleration(pseudoProgramme,ordered);
+    }
+    if(typeof window.__studielotsBuildCoursePlanWithAlternatives==='function'){
+      return window.__studielotsBuildCoursePlanWithAlternatives(
+        ordered,
+        pseudoProgramme.alternativeCourses
+      );
+    }
+    return ordered.map(required=>({required,alternative:null}));
+  };
+
+  function degreeSuggestionHtml(path,courses){
+    const planned=window.__studielotsBuildDegreeSuggestionsWithAlternatives(path,courses);
+    return planned.map((item,i)=>{
+      const req=item.required||item;
+      const alt=item.alternative||null;
+      const reqHp=Number(req.hp)||0;
+      const number=i+1;
+
+      let altHtml='';
+      if(alt){
+        const match=item.match||{};
+        const app=typeof window.__studielotsCourseApplicationState==='function'
+          ? window.__studielotsCourseApplicationState(alt):null;
+        const cross=alt.university && providerName(path) && alt.university!==providerName(path);
+        altHtml=`
+          <div style="margin-top:10px;padding:13px 15px;border-radius:16px;background:rgba(22,94,78,.055);">
+            <div style="font-size:.77em;letter-spacing:.07em;text-transform:uppercase;font-weight:800;color:#19715f;">
+              Möjligt snabbare alternativ
+            </div>
+            <div style="display:flex;justify-content:space-between;gap:10px;margin-top:3px;font-weight:800;">
+              <span>${escapeHtml(alt.name||'Alternativ kurs')}</span>
+              <span style="white-space:nowrap">${Number(alt.hp)||''}${alt.hp?' hp':''}</span>
+            </div>
+            <div style="font-size:.84em;opacity:.65;margin-top:4px;">
+              ${escapeHtml(alt.university||'')}${alt.distance?' · Distans':''}${alt.term?' · '+escapeHtml(String(alt.term)):''}
+            </div>
+            <div style="font-size:.81em;color:#19715f;font-weight:700;margin-top:5px;">
+              ${match.status==='verified'||alt.equivalenceVerified===true
+                ? 'Verifierad möjlig ersättning.'
+                : 'Möjlig ersättning – tillgodoräknandet behöver bekräftas av examenslärosätet.'}
+            </div>
+            ${app?`<div style="font-size:.8em;opacity:.62;margin-top:4px;">${escapeHtml(app.label)}${app.detail?' · '+escapeHtml(app.detail):''}</div>`:''}
+          </div>`;
+      }
+
+      return `
+        <div style="padding:14px 0;border-top:1px solid rgba(20,50,55,.10);">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <div style="width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(22,94,78,.08);font-weight:800;color:#19715f;">${number}</div>
+            <div style="flex:1;">
+              <div style="display:flex;justify-content:space-between;gap:10px;font-weight:800;">
+                <span>${escapeHtml(req.name||'Kurs')}</span>
+                <span style="white-space:nowrap">${reqHp||''}${reqHp?' hp':''}</span>
+              </div>
+              <div style="font-size:.85em;opacity:.6;margin-top:3px;">
+                ${escapeHtml(req.suggestionReason||req.sourceProgramme||'Ordinarie kurs i examensvägen')}
+              </div>
+              ${altHtml}
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function providerName(path){
+    return path?.provider||path?.program?.university||'';
+  }
+
+  // Override v2.1 renderer again: same logic as v492, now ordered + accelerated.
+  window.v21SuggestionSection=v21SuggestionSection=function(path){
+    const missing=arr(path?.requiredMissing).filter(c=>Number(c.hp||0)>0);
+    const ruleMissing=arr(path?.rules).filter(r=>Number(r.missing||0)>0);
+
+    if(path?.program?.safeMode===true || path?.program?.canCalculateCompletion===false){
+      return `<div class="course-provider-note"><strong>Detaljerad kursplan ännu inte verifierad.</strong> Studielots gissar därför inte vilka enskilda kurser du ska läsa.</div>`;
+    }
+
+    let suggestions=missing;
+    let fallback=false;
+    if(!suggestions.length && ruleMissing.length &&
+       typeof window.__studielotsDegreePathCourseSuggestions==='function'){
+      suggestions=window.__studielotsDegreePathCourseSuggestions(path);
+      fallback=suggestions.length>0;
+    }
+
+    if(suggestions.length){
+      const ordered=window.__studielotsOrderDegreeSuggestions(suggestions);
+      const intro=fallback
+        ? `<div class="course-provider-note" style="margin-bottom:10px;"><strong>Verifierade kursförslag i samma huvudområde.</strong><span>Förslagen är ordnade som en möjlig studieväg. När StudieLots hittar en kurs som kan ge en snabbare väg visas den direkt under ordinarie kurs.</span></div>`
+        : `<div class="course-provider-note" style="margin-bottom:10px;"><strong>Föreslagen studieordning.</strong><span>Kurserna visas i rekommenderad ordning. Möjliga snabbare alternativ visas direkt under respektive kurs.</span></div>`;
+
+      return intro+
+        `<div data-studielots-degree-plan="v493">${degreeSuggestionHtml(path,ordered)}</div>`;
+    }
+
+    if(ruleMissing.length){
+      return `<div class="course-provider-note suggestion-empty"><strong>Inga verifierade kursförslag ännu.</strong><span>Kraven visas under Kvar. StudieLots hittar ännu ingen verifierad kursstruktur i samma huvudområde för den valda vägen.</span></div>`;
+    }
+
+    return '<div class="ready-box">Inga verifierade kompletteringar återstår i den kartlagda strukturen.</div>';
+  };
+
+  // Re-render active degree detail if one is open.
+  try{
+    const key=sessionStorage.getItem('lotsen_detail_key');
+    const profile=sessionStorage.getItem('lotsen_preferred_profile')||'';
+    const o=key&&typeof opportunityByKey==='function'?opportunityByKey(key):null;
+    if(o && profile && typeof renderUniversityDetail==='function'){
+      setTimeout(()=>renderUniversityDetail(profile,o.subject),40);
+    }
+  }catch(e){}
+
+  window.__studielotsMotor2QA={...(window.__studielotsMotor2QA||{}),version:'v493',
+    degreeSuggestionsOrdered:true,
+    fasterAlternativesInOpportunities:true,
+    sameLayoutLogicAsProgram:true};
+
+  console.info('Studielots v493: ordered degree suggestions + faster alternatives enabled');
+})();
+</script>
 </body>
 </html>
