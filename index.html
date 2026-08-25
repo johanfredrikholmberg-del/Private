@@ -28811,5 +28811,308 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   console.info('Studielots v485: Motor 2.0 QA enabled',window.__studielotsMotor2QA);
 })();
 </script>
+
+<script>
+/* v486 — fix empty GU Psychology suggestions in Möjligheter at source level */
+(function(){
+ const GU='Göteborgs universitet';
+ const paths=(programCatalog||[]).filter(p=>p&&p.university===GU&&!p.superseded);
+
+ // GU's official recommended independent-course route for a psychology bachelor:
+ // PX1100 30 hp + PX1200 30 hp + PX1500 30 hp, plus 90 hp electives.
+ paths.filter(p=>String(p.code||'').toUpperCase()==='GU-CAND-8BCE92E8C' ||
+                 /Kandidatexamen i Psykologi/i.test(String(p.name||''))).forEach(p=>{
+   p.courses=[
+     {
+       code:'PX1100',
+       name:'Psykologi: Grundkurs',
+       hp:30,
+       subject:'Psykologi',
+       level:'Grundnivå',
+       required:true,
+       verified:true,
+       sourceUrl:'https://www.gu.se/studera/hitta-utbildning/psykologi-grundkurs-px1100',
+       antagningCodeHT2026:'GU-74001',
+       antagningCodeVT2027:'GU-74000'
+     },
+     {
+       code:'PX1200',
+       name:'Psykologi: Fortsättningskurs',
+       hp:30,
+       subject:'Psykologi',
+       level:'Grundnivå',
+       required:true,
+       verified:true,
+       prerequisite:'Minst 20 hp godkänt på PX1100 eller motsvarande',
+       sourceUrl:'https://www.gu.se/studera/hitta-utbildning/psykologi-fortsattningskurs-px1200',
+       antagningCodeHT2026:'GU-74002',
+       antagningCodeVT2027:'GU-74002'
+     },
+     {
+       code:'PX1500',
+       name:'Psykologi: Forskningsmetod och kandidatuppsats',
+       hp:30,
+       subject:'Psykologi',
+       level:'Grundnivå',
+       progression:'G2E',
+       required:true,
+       thesis:true,
+       verified:true,
+       prerequisite:'PX1100 30 hp samt PX1200 med minst 20 hp godkänt, inklusive metod',
+       sourceUrl:'https://www.gu.se/studera/hitta-utbildning/psykologi-forskningsmetod-och-kandidatuppsats-px1500',
+       antagningCodeHT2026:'GU-74005',
+       antagningCodeVT2027:'GU-74004'
+     }
+   ];
+   p.recommendedStudyPathVerified=true;
+   p.recommendedStudyPathHp=90;
+   p.electiveHp=90;
+   p.uiNote='GU:s rekommenderade studiegång: PX1100 + PX1200 + PX1500 = 90 hp psykologi, samt 90 hp valfria kurser.';
+ });
+
+ // Re-render the active opportunity so the existing v2.1 renderer now receives requiredMissing courses.
+ try{
+   if(document.getElementById('universityDetail')?.classList.contains('active')){
+     const key=sessionStorage.getItem('lotsen_current_degree_key')||
+               sessionStorage.getItem('lotsen_selected_degree')||'';
+     if(key && typeof renderDegreeDetail==='function'){
+       setTimeout(()=>renderDegreeDetail(key),30);
+     }
+   }
+ }catch(e){}
+
+ window.__studielotsPsychologySuggestions={
+   version:'v486',
+   university:GU,
+   requiredCourses:['PX1100','PX1200','PX1500'],
+   totalRequiredPsychologyHp:90,
+   electiveHp:90,
+   fixedAtSource:true
+ };
+ console.info('Studielots v486: GU Psychology required-course suggestions installed');
+})();
+</script>
+
+<script>
+/* v487 — Distans suggestions in "Välj lärosäte": subject-based real course pool */
+(function(){
+ const GU='Göteborgs universitet';
+ const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+ const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+
+ // Verified current GU distance courses that can contribute psychology credits at basic level.
+ window.__studielotsVerifiedDistanceCourses=window.__studielotsVerifiedDistanceCourses||[];
+ const add=c=>{
+   if(!window.__studielotsVerifiedDistanceCourses.some(x=>x.code===c.code)) window.__studielotsVerifiedDistanceCourses.push(c);
+ };
+ add({university:GU,code:'PX1170',name:'Rättspsykologi i praktiken',hp:15,subject:'Psykologi',
+      level:'Grundnivå',distance:true,noPhysicalMeetings:true,studyLocation:'Ortsoberoende',
+      term:'VT2027',applicationCode:'GU-74005',verified:true,
+      sourceUrl:'https://www.gu.se/studera/hitta-utbildning/rattspsykologi-i-praktiken-px1170'});
+ add({university:GU,code:'PX1180',name:'Intervju och förhör med barn och ungdomar',hp:15,subject:'Psykologi',
+      level:'Grundnivå',distance:true,noPhysicalMeetings:true,studyLocation:'Ortsoberoende',
+      term:'VT2027',applicationCode:'GU-74006',verified:true,
+      sourceUrl:'https://www.gu.se/studera/hitta-utbildning/intervju-och-forhor-med-barn-och-ungdomar-px1180'});
+
+ // Merge mapped distance courses from all institutions with explicit verified distance courses.
+ window.__studielotsGetDistanceSuggestionsForDegree=function(ctx={}){
+   const subject=norm(ctx.subject||ctx.degreeName||ctx.title).replace(/^.*i /,'');
+   const targetLevel=norm(ctx.level||'grundnivå');
+   const pools=[
+     ...arr(window.__studielotsVerifiedDistanceCourses),
+     ...arr(window.__studielotsDistanceCourseSuggestionPool)
+   ];
+   const seen=new Set();
+   return pools.filter(c=>{
+     const id=String(c.code||c.id||c.name||'');
+     if(!id||seen.has(id)) return false;
+     const cs=norm(c.subject||c.name);
+     const cl=norm(c.level);
+     const subjectOK=!subject || cs.includes(subject) || subject.includes(cs);
+     const levelOK=!targetLevel || !cl || cl===targetLevel ||
+       (targetLevel.includes('grund')&&cl.includes('grund'));
+     const remote=c.distance===true && c.mandatoryMeetings!==true && c.noPhysicalMeetings!==false;
+     if(subjectOK&&levelOK&&remote){seen.add(id);return true;}
+     return false;
+   });
+ };
+
+ function selectedDegreeSubject(){
+   const body=document.body.innerText||'';
+   const m=body.match(/Vald examen\s+([^\n]+)/i);
+   if(m) return m[1].trim();
+   const h=[...document.querySelectorAll('h1,h2')].map(x=>x.textContent.trim())
+     .find(x=>/psykologi|sociologi|företagsekonomi|nationalekonomi|idrottsvetenskap/i.test(x));
+   return h||'';
+ }
+
+ function renderDistanceCard(){
+   const subject=selectedDegreeSubject();
+   if(!subject) return;
+   const suggestions=window.__studielotsGetDistanceSuggestionsForDegree({
+     subject,degreeName:subject,level:'Grundnivå'
+   }).slice(0,6);
+
+   // Locate smallest card containing heading "På distans".
+   const nodes=[...document.querySelectorAll('div,section')].filter(el=>{
+     const t=(el.innerText||'').trim();
+     return t.startsWith('På distans') &&
+       ![...el.children].some(ch=>(ch.innerText||'').trim().startsWith('På distans'));
+   });
+   nodes.forEach(card=>{
+     if(card.dataset.distanceV487==='1') return;
+     const empty=[...card.querySelectorAll('*')].find(el=>
+       /Inga tydliga distansalternativ finns i databasen ännu/.test(el.textContent||''));
+     if(!suggestions.length) return;
+     if(empty) empty.remove();
+
+     const intro=[...card.querySelectorAll('p,div')].find(el=>
+       /Se en plan av distansalternativ/.test(el.textContent||''));
+     const holder=document.createElement('div');
+     holder.style.marginTop='14px';
+     holder.setAttribute('data-distance-suggestions','v487');
+
+     suggestions.forEach(c=>{
+       const row=document.createElement('div');
+       row.style.cssText='padding:13px 0;border-top:1px solid rgba(20,50,55,.10);';
+       row.innerHTML=
+         '<div style="display:flex;justify-content:space-between;gap:10px;font-weight:750;">'+
+         '<span>'+c.name+'</span><span style="white-space:nowrap">'+c.hp+' hp</span></div>'+
+         '<div style="font-size:.88em;opacity:.62;margin-top:4px">'+
+         c.university+' · Distans · '+(c.term||'')+'</div>'+
+         '<div style="font-size:.82em;color:#19715f;font-weight:700;margin-top:4px">Kan bidra till '+subject+' – exakt tillgodoräknande verifieras av examenslärosätet.</div>';
+       holder.appendChild(row);
+     });
+     card.appendChild(holder);
+     card.dataset.distanceV487='1';
+   });
+ }
+
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',renderDistanceCard);
+ else renderDistanceCard();
+ try{new MutationObserver(()=>requestAnimationFrame(renderDistanceCard)).observe(document.body,{childList:true,subtree:true});}catch(e){}
+
+ window.__studielotsDistance={...(window.__studielotsDistance||{}),version:'v487',
+   subjectBasedSuggestions:true,psychologyBasicDistanceCodes:['PX1170','PX1180']};
+ console.info('Studielots v487: distance degree suggestions enabled');
+})();
+</script>
+
+<script>
+/* v488 — preserve cross-university distance acceleration inside a selected programme */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
+
+  // Build replacement candidates from:
+  // 1) programme's own alternatives
+  // 2) same-university alternatives
+  // 3) verified distance courses from ANY university
+  window.__studielotsBuildCrossProviderReplacementPool=function(programme){
+    if(!programme) return [];
+    const own=arr(programme.alternativeCourses);
+    const mappedDistance=arr(window.__studielotsDistanceCourseSuggestionPool);
+    const verifiedDistance=arr(window.__studielotsVerifiedDistanceCourses);
+
+    const sameUniversity=[];
+    arr(window.programCatalog).filter(p=>
+      p && !p.superseded &&
+      p.university===programme.university &&
+      p.coverage==='complete' &&
+      p.canCalculateCompletion!==false
+    ).forEach(p=>{
+      arr(p.courses).forEach(c=>{
+        if(!c || c.excludeFromCourseSuggestions || c.isElectiveBlock || c.isProfileBlock || c.isMobilityBlock) return;
+        sameUniversity.push({...c,university:p.university,programmeName:p.name});
+      });
+    });
+
+    const pool=[...own,...sameUniversity,...mappedDistance,...verifiedDistance];
+    const seen=new Set();
+    return pool.filter(c=>{
+      const id=String(c.code||c.id||c.name||'')+'|'+String(c.university||'');
+      if(!id || seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+  };
+
+  // Cross-provider acceleration is allowed only when it is genuinely faster
+  // and passes Motor 2.0 matching guardrails.
+  window.__studielotsFindFasterDistanceAlternative=function(required,programme,ctx={}){
+    const pool=window.__studielotsBuildCrossProviderReplacementPool(programme);
+    const ranked=pool.map(c=>{
+      const match=typeof window.__studielotsScoreCourseMatch==='function'
+        ? window.__studielotsScoreCourseMatch(required,c,{subject:required.subject,level:required.level})
+        : {eligible:false,score:0,status:'weak',reasons:[]};
+
+      const remote=c.distance===true && c.mandatoryMeetings!==true && c.noPhysicalMeetings!==false;
+      const timingKnown=!!(c.startDate||c.nextOffering||c.term||c.studyPeriod);
+      const faster=c.offeredEarlier===true || c.faster===true;
+
+      return {course:c,...match,remote,timingKnown,faster};
+    }).filter(x=>
+      x.eligible &&
+      x.remote &&
+      x.timingKnown &&
+      x.faster
+    ).sort((a,b)=>{
+      if(a.status!==b.status){
+        const rank={verified:3,strong:2,possible:1,weak:0};
+        return (rank[b.status]||0)-(rank[a.status]||0);
+      }
+      return b.score-a.score;
+    });
+
+    return ranked[0]||null;
+  };
+
+  // Unified plan builder for Program and Möjligheter.
+  window.__studielotsBuildProgrammePlanWithAcceleration=function(programme,requiredCourses){
+    const used=new Set();
+
+    return arr(requiredCourses).map(required=>{
+      const fast=window.__studielotsFindFasterDistanceAlternative(required,programme);
+
+      if(fast){
+        const id=String(fast.course.code||fast.course.id||fast.course.name||'')+'|'+String(fast.course.university||'');
+        if(!used.has(id)){
+          used.add(id);
+          return {
+            required,
+            alternative:fast.course,
+            match:fast,
+            accelerated:true,
+            crossUniversity:fast.course.university && fast.course.university!==programme.university,
+            disclaimer:fast.status==='verified'
+              ? 'Motsvarigheten är verifierad i StudieLots.'
+              : 'Tillgodoräknandet behöver bekräftas av universitetet som utfärdar examen.'
+          };
+        }
+      }
+
+      // Fall back to existing same-view planner.
+      const fallback=typeof window.__studielotsBuildCoursePlanWithAlternatives==='function'
+        ? window.__studielotsBuildCoursePlanWithAlternatives([required],window.__studielotsBuildCrossProviderReplacementPool(programme))[0]
+        : null;
+
+      return fallback || {required,alternative:null,accelerated:false};
+    });
+  };
+
+  window.__studielotsAccelerationRules={
+    version:'v488',
+    allowCrossUniversityDistanceReplacement:true,
+    keepProgrammeUniversityAsDegreeIssuer:true,
+    requireFasterOffering:true,
+    requireRemoteCourse:true,
+    requireMotor2Match:true,
+    universityConfirmationRequiredWhenUnverified:true,
+    sameAlternativeCannotFillTwoRequirements:true
+  };
+
+  console.info('Studielots v488: cross-university distance acceleration preserved');
+})();
+</script>
 </body>
 </html>
