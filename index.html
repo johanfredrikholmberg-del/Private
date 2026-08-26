@@ -1471,7 +1471,14 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
 </style>
 <style>
 .v533-import-privacy{display:flex;gap:10px;align-items:center;margin:13px 0 2px;padding:11px 12px;border:1px solid rgba(23,107,92,.12);border-radius:14px;background:#f3f8f6}.v533-import-privacy>div{flex:1}.v533-import-privacy strong{display:block;font-size:12px;color:#164f46}.v533-import-privacy small{display:block;font-size:10.5px;color:#687b78}.v533-import-privacy button{border:0;background:transparent;color:#176b5c;font-size:10.5px;font-weight:850;text-decoration:underline}.v533-privacy-hero{display:flex;gap:12px;background:#eef7f3;border-radius:18px;padding:16px;margin-bottom:14px}.v533-privacy-hero>b{font-size:22px}.v533-privacy-hero p,.v533-note p,#documentPrivacy .detail-block p{font-size:12px;line-height:1.5;color:#66767a}.v533-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.v533-grid span{padding:9px;border-radius:10px;background:#faf6f5;font-size:11px;color:#785c58}.v533-flow{display:flex;gap:7px;align-items:center;overflow:auto}.v533-flow span{white-space:nowrap;padding:9px;border-radius:10px;background:#f5f8f6;font-size:10.5px}.v533-flow b{color:#8a9996}.v533-note{margin:12px 0 90px;padding:14px;border-radius:14px;background:#f7f7f5}@media(max-width:520px){.v533-grid{grid-template-columns:1fr}.v533-import-privacy{align-items:flex-start;flex-wrap:wrap}}
-</style></head>
+</style>
+<style>
+.v534-plan-cta{margin:18px 0 92px;padding:0 2px}
+.v534-plan-button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 19px;border-radius:18px;font-size:1rem;font-weight:850}
+.v534-plan-button b{font-size:1.35rem;line-height:1}
+.v534-plan-cta small{display:block;margin:8px 8px 0;color:#6f7d7b;font-size:.72rem;line-height:1.4}
+</style>
+</head>
 <body>
 <header class="lotsen-header studielots-visual-header" aria-label="StudieLots – Digital studievägledare">
   <div class="studielots-visual-header-image" role="img" aria-label="StudieLots med båtlots och vägvisare för kandidat, magister och master"></div>
@@ -1629,7 +1636,7 @@ a,.link,.uni-path-btn strong{color:var(--lotsen-teal-2)!important}
   <div id="degreeDetailContent"></div>
 </section>
 <section id="universityDetail" class="screen">
-  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><button onclick="go('degreeDetail')">Studieplan</button><span>›</span><strong>Lärosäte</strong></div>
+  <div class="crumbs"><button onclick="go('degrees')">Möjligheter</button><span>›</span><button onclick="go('degreeDetail')">Examen</button><span>›</span><strong>Lärosäte</strong></div>
   <div id="universityDetailContent"></div>
 </section>
 
@@ -29862,7 +29869,7 @@ console.info('Studielots v366: v2-only university gate + stable hp source instal
 
 \n/* v510 — canonical study plan is now wired directly into Program + Möjligheter */\n(function(){\n  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);\n  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');\n  const hp=v=>Number(v||0);\n\n  function courseIdentity(c){\n    return norm(c?.university||c?.provider)+'|'+(norm(c?.code||c?.courseCode)||norm(c?.name))+'|'+String(hp(c?.hp));\n  }\n\n  function ordinaryLabel(c){\n    const bits=[];\n    if(c?.code) bits.push(String(c.code));\n    if(c?.year && Number(c.year)<90) bits.push('År '+c.year);\n    if(c?.term) bits.push(String(c.term).toUpperCase());\n    return bits.join(' · ');\n  }\n\n  function appState(c){\n    return typeof window.__studielotsCourseApplicationState==='function'\n      ? window.__studielotsCourseApplicationState(c):null;\n  }\n\n  function buildAlternatives(path,required){\n    const used=new Set();\n    return arr(required).map(req=>{\n      let hit=null;\n      if(typeof window.bestFasterAlternative==='function'){\n        try{ hit=window.bestFasterAlternative(req,path,used); }catch(e){}\n      }\n      if(hit?.course){\n        const id=courseIdentity(hit.course);\n        if(used.has(id)) hit=null;\n        else used.add(id);\n      }\n      return {required:req,hit,alternative:hit?.course||null};\n    });\n  }\n\n  window.__studielotsCanonicalStudyPlanHtml=function(path,required,opts={}){\n    const rows=arr(required).filter(c=>hp(c?.hp)>0).slice();\n    if(!rows.length) return '';\n\n    rows.sort((a,b)=>{\n      const ay=Number(a?.year||a?.studyYear||99),by=Number(b?.year||b?.studyYear||99);\n      if(ay!==by)return ay-by;\n      const ap=Number(String(a?.period||'').match(/\\d+/)?.[0]||99);\n      const bp=Number(String(b?.period||'').match(/\\d+/)?.[0]||99);\n      if(ap!==bp)return ap-bp;\n      return String(a?.name||'').localeCompare(String(b?.name||''),'sv');\n    });\n\n    const groups=[];let group=[],groupHp=0;\n    rows.forEach(c=>{\n      const chp=hp(c.hp);\n      if(group.length&&groupHp+chp>30){groups.push(group);group=[];groupHp=0;}\n      group.push(c);groupHp+=chp;\n    });\n    if(group.length)groups.push(group);\n\n    const planned=buildAlternatives(path,groups.flat());\n    const plannedById=new Map(planned.map(x=>[courseIdentity(x.required),x]));\n    let altCount=0;\n\n    const body=groups.map((courses,gi)=>{\n      const periodHp=courses.reduce((s,c)=>s+hp(c.hp),0);\n      return `<div class="v510-period">\n        <div class="v510-period-head"><strong>Period ${gi+1}</strong><span>${fmtHp(periodHp)} hp</span></div>\n        ${courses.map(req=>{\n          const item=plannedById.get(courseIdentity(req))||{};\n          const alt=item.alternative,hit=item.hit;\n          let altHtml='';\n          if(alt){\n            altCount++;\n            const app=appState(alt);\n            const meta=[alt.university||'',alt.term||alt.nextOffering||'',alt.distance?'Distans':'',app?.label||''].filter(Boolean).map(escapeHtml).join(' · ');\n            altHtml=`<div class="v510-alt">\n              <span>${hit?.distance?'Möjligt distansalternativ':'Möjligt snabbare alternativ'}</span>\n              <div><strong>${escapeHtml(alt.name||'Alternativ kurs')}</strong><b>${fmtHp(hp(alt.hp))} hp</b></div>\n              ${meta?`<small>${meta}</small>`:''}\n              ${typeof antagningCourseUrl==='function'?`<a href="${escapeHtml(antagningCourseUrl(alt))}" target="_blank" rel="noopener">Visa kurs ↗</a>`:''}\n            </div>`;\n          }\n          return `<div class="v510-course">\n            <div class="v510-course-main"><div><strong>${escapeHtml(req.name||'Kurs')}</strong>${ordinaryLabel(req)?`<small>${escapeHtml(ordinaryLabel(req))}</small>`:''}</div><b>${fmtHp(hp(req.hp))} hp</b></div>\n            ${altHtml}\n          </div>`;\n        }).join('')}\n      </div>`;\n    }).join('');\n\n    return `<section class="detail-block v510-study-plan" data-canonical-study-plan="v510">\n      <div class="v510-head"><div><h2>Studieplan</h2><p>Kurserna visas i rekommenderad ordning.${altCount?' Snabbare alternativ visas direkt under ordinarie kurs.':''}</p></div>${opts.optimized===false?'':'<span>OPTIMERAD</span>'}</div>\n      ${body}\n      ${altCount?`<div class="v510-note"><i>i</i><span>Alternativa kurser är preliminära tills tillgodoräknandet har bekräftats av universitetet.</span></div>`:''}\n    </section>`;\n  };\n\n  window.__studielotsStudyPlanUI={version:'v510',canonicalRenderer:true,directSourceWiring:true,programAndOpportunitiesSame:true,legacySuggestionRendererRemoved:true};\n  console.info('Studielots v510: Program + Möjligheter use the same source-level study-plan renderer');\n})();\n</script>\n<style>\n.v510-study-plan{padding:0!important;overflow:hidden}\n.v510-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:18px 20px 14px}\n.v510-head h2{margin:0!important;font-size:1.18rem!important}.v510-head p{margin:4px 0 0;font-size:.82rem;line-height:1.35;color:#6f7883}\n.v510-head>span{border-radius:999px;background:#e8f1eb;color:#176b5c;padding:6px 9px;font-size:.72rem;font-weight:850;letter-spacing:.04em}\n.v510-period{border-top:1px solid rgba(13,41,49,.09);padding:13px 20px 5px}.v510-period-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}.v510-period-head strong,.v510-period-head span{color:#2f7d73;font-size:1rem}\n.v510-course{padding:11px 0 10px}.v510-course-main{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.v510-course-main strong{display:block;font-size:1rem;line-height:1.2;color:#102f35}.v510-course-main small{display:block;margin-top:3px;font-size:.80rem;color:#7a8490}.v510-course-main>b{white-space:nowrap;font-size:1rem;color:#102f35}\n.v510-alt{margin:9px 0 2px;padding:11px 13px;border-radius:15px;background:rgba(22,94,78,.055)}.v510-alt>span{display:block;color:#19715f;font-size:.71rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px}.v510-alt>div{display:flex;justify-content:space-between;gap:12px}.v510-alt strong,.v510-alt b{font-size:.93rem;color:#102f35}.v510-alt small{display:block;margin-top:3px;font-size:.76rem;color:#788288}.v510-alt a{display:inline-block;margin-top:6px;font-size:.80rem;font-weight:800;color:#2f7d73!important}\n.v510-note{display:flex;gap:8px;align-items:flex-start;margin:9px 20px 18px;padding:9px 11px;border-radius:11px;background:rgba(13,41,49,.035);color:#6f7883}.v510-note i{font-style:normal;display:grid;place-items:center;width:17px;height:17px;border-radius:50%;background:rgba(22,94,78,.09);color:#19715f;font-size:.68rem;font-weight:850}.v510-note span{font-size:.75rem;line-height:1.35}\n@media(max-width:600px){.v510-head{padding:16px 16px 12px}.v510-period{padding:12px 16px 4px}.v510-note{margin-left:16px;margin-right:16px}}\n</style>\n
 <script>
-/* v511 — navigation: Studieplanerare in main nav, Studier under Mer */
+/* v511 — navigation: Planeraren in main nav, Studier under Mer */
 (function(){
   const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
 
@@ -29916,7 +29923,7 @@ console.info('Studielots v366: v2-only university gate + stable hp source instal
     if(studies){
       studies.innerHTML=`
         <span class="bottom-icon" aria-hidden="true">⌁</span>
-        <b>Studieplanerare</b>`;
+        <b>Planeraren</b>`;
       studies.removeAttribute('onclick');
       studies.onclick=()=>window.openStudyPlanner();
       studies.dataset.navTarget='studyplanner';
@@ -29997,12 +30004,12 @@ console.info('Studielots v366: v2-only university gate + stable hp source instal
 
   window.__studielotsNavigation={
     version:'v511',
-    main:['Hem','Möjligheter','Studieplanerare','Program','Mer'],
+    main:['Hem','Möjligheter','Planeraren','Program','Mer'],
     studiesMovedToMore:true,
     plannerUsesSelectedRoute:true
   };
 
-  console.info('Studielots v511: Studieplanerare in main nav, Studier moved to Mer');
+  console.info('Studielots v511: Planeraren in main nav, Studier moved to Mer');
 })();
 ;
 /* v512 — separate analysis views from the personal Study Planner */
@@ -30257,7 +30264,7 @@ console.info('Studielots v366: v2-only university gate + stable hp source instal
   console.info('Studielots v512: analysis separated from Study Planner');
 })();
 ;
-/* v513 — make Studieplanerare a true dedicated planning view */
+/* v513 — make Planeraren a true dedicated planning view */
 (function(){
   const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
   const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
@@ -30277,10 +30284,10 @@ console.info('Studielots v366: v2-only university gate + stable hp source instal
     screen.id='studyPlanner';
     screen.className='screen';
     screen.innerHTML=`
-      <div class="crumbs"><strong>Studieplanerare</strong></div>
+      <div class="crumbs"><strong>Planeraren</strong></div>
       <div class="top v513-planner-top">
         <div>
-          <div class="eyebrow">STUDIEPLANERARE</div>
+          <div class="eyebrow">PLANERAREN</div>
           <h1>Din studieplan</h1>
           <p>En konkret väg utifrån vad du redan har läst och vad som återstår.</p>
         </div>
@@ -30663,7 +30670,7 @@ console.info('Studielots v366: v2-only university gate + stable hp source instal
   console.info('Studielots v514: direct plan creation added');
 })();
 ;
-/* v515 — real "Snabbaste vägen till examen" inside Studieplaneraren */
+/* v515 — real "Snabbaste vägen till examen" inside Planerarenn */
 (function(){
   const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
   const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
@@ -30763,7 +30770,7 @@ console.info('Studielots v366: v2-only university gate + stable hp source instal
         <div class="v515-head">
           <span>SNABBASTE VÄGEN</span>
           <h2>Bäst utifrån dina meriter</h2>
-          <p>Rangordnat efter hur många hp som återstår. Välj en väg så bygger Studieplaneraren den konkreta planen.</p>
+          <p>Rangordnat efter hur många hp som återstår. Välj en väg så bygger Planerarenn den konkreta planen.</p>
         </div>
         <div class="v515-list"></div>
         <div class="v515-note">Tillgodoräknanden är preliminära tills de har prövats av lärosätet.</div>
@@ -31653,7 +31660,7 @@ console.info('Studielots v366: v2-only university gate + stable hp source instal
   console.info('Studielots v524: import progress overlay enabled');
 })();
 ;
-/* v525 — robust Program/Möjligheter → Studieplanerare handoff */
+/* v525 — robust Program/Möjligheter → Planeraren handoff */
 (function(){
   const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
   const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
@@ -32011,6 +32018,113 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
  };
  window.__studielotsPrivacy={version:'v533',processing:'local-browser',originalPdfStored:false,meritStorage:'sessionStorage',sanitizeCourse};
  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v533',privacyFirstImport:true};
+})();
+</script>
+
+<script>
+/* v534 — Planeraren: robust CTA from Möjligheter + Program */
+(function(){
+  function readOpportunityPayload(){
+    let key='', profile='';
+    try{
+      key=sessionStorage.getItem('lotsen_detail_key')||'';
+      profile=sessionStorage.getItem('lotsen_preferred_profile')||'';
+    }catch(e){}
+    let o=null;
+    try{ if(key && typeof opportunityByKey==='function') o=opportunityByKey(key); }catch(e){}
+    return {
+      source:'opportunity',
+      opportunityKey:key,
+      subject:o?.subject||'',
+      degree:o?.degree||o?.degreeType||'',
+      university:profile||''
+    };
+  }
+
+  function saveAndOpen(payload){
+    try{
+      sessionStorage.setItem('studielots_planner_selection',JSON.stringify(payload||{}));
+    }catch(e){}
+    if(typeof window.openStudyPlanner==='function') window.openStudyPlanner();
+    else if(typeof go==='function') go('studyPlanner');
+  }
+
+  function ensureOpportunityCTA(){
+    if(document.querySelector('.screen.active')?.id!=='universityDetail')return;
+    const host=document.getElementById('universityDetailContent');
+    if(!host || host.querySelector('[data-v534-plan-cta]'))return;
+
+    const wrap=document.createElement('div');
+    wrap.className='v534-plan-cta';
+    wrap.dataset.v534PlanCta='1';
+    wrap.innerHTML=`
+      <button type="button" class="primary v534-plan-button">
+        <span>Skapa plan i Planeraren</span><b aria-hidden="true">›</b>
+      </button>
+      <small>Bygger en personlig studieordning utifrån det som kan räknas och det du har kvar.</small>`;
+    wrap.querySelector('button').addEventListener('click',()=>saveAndOpen(readOpportunityPayload()));
+
+    const cards=[...host.querySelectorAll('.detail-block,.credit-card,.remaining-card')];
+    const anchor=cards[cards.length-1] || host.lastElementChild;
+    if(anchor) anchor.insertAdjacentElement('afterend',wrap);
+    else host.appendChild(wrap);
+  }
+
+  function ensureProgramCTA(){
+    if(document.querySelector('.screen.active')?.id!=='programMatch')return;
+    const host=document.getElementById('programMatchResult');
+    if(!host || host.querySelector('[data-v534-plan-cta]'))return;
+    let id='';
+    try{id=sessionStorage.getItem('lotsen_selected_program')||''}catch(e){}
+    const p=(Array.isArray(window.programCatalog)?window.programCatalog:[]).find(x=>String(x.id)===String(id));
+    if(!p)return;
+    const wrap=document.createElement('div');
+    wrap.className='v534-plan-cta';
+    wrap.dataset.v534PlanCta='1';
+    wrap.innerHTML=`<button type="button" class="primary v534-plan-button"><span>Skapa plan i Planeraren</span><b aria-hidden="true">›</b></button>`;
+    wrap.querySelector('button').addEventListener('click',()=>saveAndOpen({
+      source:'program',programId:p.id||'',programCode:p.code||p.officialCode||'',
+      programName:p.name||'',university:p.university||'',subject:p.subject||p.track||''
+    }));
+    host.appendChild(wrap);
+  }
+
+  function renameNav(){
+    document.querySelectorAll('.lotsen-bottomnav button').forEach(btn=>{
+      const b=btn.querySelector('b');
+      if(b && /studieplanerare/i.test(b.textContent||'')) b.textContent='Planeraren';
+    });
+    document.querySelectorAll('#studyPlanner .crumbs strong').forEach(el=>el.textContent='Planeraren');
+    document.querySelectorAll('#studyPlanner .eyebrow').forEach(el=>{
+      if(/studieplanerare/i.test(el.textContent||'')) el.textContent='PLANERAREN';
+    });
+  }
+
+  function sync(){
+    renameNav();
+    ensureOpportunityCTA();
+    ensureProgramCTA();
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(sync),{once:true});
+  else requestAnimationFrame(sync);
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(sync));
+
+  // Catch late legacy renderers without adding another MutationObserver.
+  ['renderV21Detail','renderProgramMatch'].forEach(name=>{
+    const fn=window[name];
+    if(typeof fn!=='function' || fn.__v534Wrapped)return;
+    const wrapped=function(){
+      const out=fn.apply(this,arguments);
+      requestAnimationFrame(sync);
+      return out;
+    };
+    wrapped.__v534Wrapped=true;
+    window[name]=wrapped;
+    try{ eval(name+'=window[name]'); }catch(e){}
+  });
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v534',plannerName:'Planeraren',plannerCTA:true};
 })();
 </script>
 </body>
