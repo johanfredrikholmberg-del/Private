@@ -32208,5 +32208,406 @@ console.info('Studielots v366: v2-only university gate + stable hp source instal
   console.info('Studielots v523: router-driven lifecycle active');
 })();
 </script>
+
+<script>
+/* v524 — import progress overlay */
+(function(){
+  let overlay=null, timers=[];
+
+  function selectedStats(){
+    let rows=[];
+    try{
+      rows=(Array.isArray(importedCandidates)?importedCandidates:[])
+        .filter(c=>c?.selected&&!c?.duplicate);
+    }catch(e){}
+    const hp=rows.reduce((s,c)=>s+Number(c.hp||0),0);
+    const unis=new Set(rows.map(c=>c.institution||c.university||'').filter(Boolean));
+    return {courses:rows.length,hp,universities:unis.size};
+  }
+
+  function ensureOverlay(){
+    if(overlay)return overlay;
+    overlay=document.createElement('div');
+    overlay.className='v524-import-overlay';
+    overlay.setAttribute('aria-live','polite');
+    overlay.innerHTML=`
+      <div class="v524-import-panel">
+        <div class="v524-spinner"><span></span></div>
+        <div class="v524-kicker">STUDIELOTS</div>
+        <h2>Vi läser in dina studier</h2>
+        <p class="v524-status">Förbereder importen…</p>
+
+        <div class="v524-stats">
+          <div><strong data-v524-courses>0</strong><span>kurser</span></div>
+          <div><strong data-v524-hp>0</strong><span>hp</span></div>
+          <div><strong data-v524-unis>0</strong><span>lärosäten</span></div>
+        </div>
+
+        <div class="v524-progress"><i></i></div>
+        <div class="v524-steps">
+          <span data-step="1">Importerar kurser</span>
+          <span data-step="2">Analyserar meriter</span>
+          <span data-step="3">Uppdaterar möjligheter</span>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+    return overlay;
+  }
+
+  function clearTimers(){
+    timers.forEach(clearTimeout);
+    timers=[];
+  }
+
+  function setStep(step,text,progress){
+    const el=ensureOverlay();
+    el.querySelector('.v524-status').textContent=text;
+    el.querySelector('.v524-progress i').style.width=progress+'%';
+    el.querySelectorAll('.v524-steps span').forEach((s,i)=>{
+      s.classList.toggle('active',i+1===step);
+      s.classList.toggle('done',i+1<step);
+    });
+  }
+
+  function animateNumber(el,to,suffix=''){
+    const start=performance.now(), duration=420;
+    function tick(now){
+      const p=Math.min(1,(now-start)/duration);
+      const val=to*p;
+      el.textContent=(Number.isInteger(to)?Math.round(val):Math.round(val*10)/10)+suffix;
+      if(p<1)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function show(){
+    clearTimers();
+    const stats=selectedStats();
+    const el=ensureOverlay();
+    el.classList.add('open');
+    document.body.classList.add('v524-importing');
+
+    animateNumber(el.querySelector('[data-v524-courses]'),stats.courses);
+    animateNumber(el.querySelector('[data-v524-hp]'),Math.round(stats.hp*10)/10);
+    animateNumber(el.querySelector('[data-v524-unis]'),stats.universities);
+
+    setStep(1,'Importerar valda kurser…',18);
+    timers.push(setTimeout(()=>setStep(2,'Analyserar kurser och tidigare meriter…',52),350));
+    timers.push(setTimeout(()=>setStep(3,'Räknar fram dina möjligheter…',78),750));
+  }
+
+  function finish(){
+    clearTimers();
+    const el=ensureOverlay();
+    setStep(3,'Klart! Dina studier är importerade.',100);
+    el.querySelectorAll('.v524-steps span').forEach(s=>s.classList.add('done'));
+    timers.push(setTimeout(()=>{
+      el.classList.remove('open');
+      document.body.classList.remove('v524-importing');
+    },650));
+  }
+
+  function fail(){
+    clearTimers();
+    const el=ensureOverlay();
+    el.querySelector('.v524-status').textContent='Importen kunde inte slutföras.';
+    el.querySelector('.v524-progress i').style.width='100%';
+    timers.push(setTimeout(()=>{
+      el.classList.remove('open');
+      document.body.classList.remove('v524-importing');
+    },1000));
+  }
+
+  const oldConfirm=window.confirmImport || (typeof confirmImport==='function'?confirmImport:null);
+  if(typeof oldConfirm==='function' && !oldConfirm.__v524){
+    const wrapped=function(...args){
+      const stats=selectedStats();
+      if(!stats.courses){
+        return oldConfirm.apply(this,args);
+      }
+
+      show();
+
+      // Give Safari one frame to paint the loader before the expensive recalculation starts.
+      requestAnimationFrame(()=>{
+        setTimeout(()=>{
+          try{
+            oldConfirm.apply(this,args);
+            // Main import/render work is synchronous. Give the UI a moment to paint final state.
+            requestAnimationFrame(()=>setTimeout(finish,180));
+          }catch(err){
+            console.error('Studielots import',err);
+            fail();
+          }
+        },24);
+      });
+    };
+    wrapped.__v524=true;
+    window.confirmImport=wrapped;
+    try{confirmImport=wrapped}catch(e){}
+  }
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .v524-import-overlay{
+      position:fixed;inset:0;z-index:99999;
+      display:flex;align-items:center;justify-content:center;
+      padding:24px;background:rgba(247,245,239,.94);
+      backdrop-filter:blur(14px);
+      opacity:0;visibility:hidden;transition:opacity .16s ease,visibility .16s;
+    }
+    .v524-import-overlay.open{opacity:1;visibility:visible}
+    body.v524-importing{overflow:hidden!important}
+    .v524-import-panel{
+      width:min(430px,100%);text-align:center;
+      background:#fff;border:1px solid rgba(13,41,49,.09);
+      border-radius:26px;padding:28px 22px 24px;
+      box-shadow:0 24px 70px rgba(13,41,49,.14);
+    }
+    .v524-spinner{
+      width:52px;height:52px;margin:0 auto 14px;border-radius:50%;
+      display:grid;place-items:center;background:rgba(22,94,78,.07);
+    }
+    .v524-spinner span{
+      width:25px;height:25px;border:3px solid rgba(21,88,79,.16);
+      border-top-color:#176b5c;border-radius:50%;
+      animation:v524spin .7s linear infinite;
+    }
+    @keyframes v524spin{to{transform:rotate(360deg)}}
+    .v524-kicker{font-size:.68rem;letter-spacing:.11em;font-weight:900;color:#2f7d73}
+    .v524-import-panel h2{font-size:1.35rem;margin:5px 0 5px;color:#102f35}
+    .v524-status{margin:0;color:#6f7883;font-size:.86rem;min-height:1.3em}
+    .v524-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:20px 0 16px}
+    .v524-stats div{padding:11px 5px;border-radius:14px;background:#f5f8f6}
+    .v524-stats strong{display:block;font-size:1.25rem;color:#176b5c}
+    .v524-stats span{display:block;margin-top:2px;font-size:.69rem;color:#7a8490}
+    .v524-progress{height:7px;background:#e9eeeb;border-radius:999px;overflow:hidden}
+    .v524-progress i{display:block;width:0;height:100%;background:#2f7d73;border-radius:inherit;transition:width .35s ease}
+    .v524-steps{display:flex;justify-content:space-between;gap:5px;margin-top:10px}
+    .v524-steps span{font-size:.64rem;color:#a0a9aa;transition:color .18s}
+    .v524-steps span.active{color:#176b5c;font-weight:850}
+    .v524-steps span.done{color:#56716d}
+    @media(max-width:390px){
+      .v524-import-panel{padding:24px 16px 20px}
+      .v524-steps span{font-size:.59rem}
+    }
+  `;
+  document.head.appendChild(style);
+
+  window.__studielotsImportUI={
+    version:'v524',
+    progressOverlay:true,
+    liveStats:['courses','hp','universities']
+  };
+
+  console.info('Studielots v524: import progress overlay enabled');
+})();
+</script>
+
+<script>
+/* v525 — robust Program/Möjligheter → Studieplanerare handoff */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
+
+  function readSel(){
+    try{return JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){return {}}
+  }
+  function writeSel(sel){
+    try{sessionStorage.setItem('studielots_planner_selection',JSON.stringify(sel||{}))}catch(e){}
+  }
+
+  function catalog(){
+    try{
+      if(typeof normalizedProgramCatalog==='function')return arr(normalizedProgramCatalog());
+    }catch(e){}
+    return arr(window.programCatalog);
+  }
+
+  function resolveProgram(sel){
+    const rows=catalog();
+    if(!rows.length)return null;
+
+    const id=String(sel?.programId||'');
+    const code=norm(sel?.programCode);
+    const name=norm(sel?.programName);
+    const uni=norm(sel?.university);
+
+    return rows.find(p=>id && String(p?.id||'')===id)
+      || rows.find(p=>code && [p?.code,p?.officialCode,p?.applicationCode].some(x=>norm(x)===code))
+      || rows.find(p=>name && norm(p?.name)===name && (!uni||norm(p?.university)===uni))
+      || rows.find(p=>name && norm(p?.name).includes(name) && (!uni||norm(p?.university)===uni))
+      || null;
+  }
+
+  function resolveOpportunity(sel){
+    if(typeof opportunityByKey==='function' && sel?.opportunityKey){
+      try{
+        const o=opportunityByKey(sel.opportunityKey);
+        if(o)return o;
+      }catch(e){}
+    }
+
+    let rows=[];
+    try{
+      const profile=sel?.profileId||sessionStorage.getItem('lotsen_preferred_profile')||'';
+      if(typeof opportunitiesForProfile==='function')rows=arr(opportunitiesForProfile(profile));
+      else if(typeof degreeOpportunities==='function')rows=arr(degreeOpportunities(profile));
+    }catch(e){}
+
+    const subject=norm(sel?.subject);
+    return rows.find(o=>subject && norm(o?.subject||o?.name)===subject)
+      || rows.find(o=>subject && norm(o?.subject||o?.name).includes(subject))
+      || null;
+  }
+
+  function enrichSelection(sel){
+    if(sel?.source==='program'){
+      const p=resolveProgram(sel);
+      if(p){
+        return {
+          ...sel,
+          programId:p.id||sel.programId||'',
+          programCode:p.code||p.officialCode||sel.programCode||'',
+          programName:p.name||sel.programName||'',
+          university:p.university||sel.university||'',
+          subject:p.subject||p.track||sel.subject||''
+        };
+      }
+    }
+
+    if(sel?.source==='opportunity'){
+      const o=resolveOpportunity(sel);
+      if(o){
+        return {
+          ...sel,
+          opportunityKey:o.key||o.id||sel.opportunityKey||'',
+          subject:o.subject||o.name||sel.subject||''
+        };
+      }
+    }
+    return sel||{};
+  }
+
+  // Override selected-program resolver used by v513.
+  window.__studielotsResolvePlannerProgram=resolveProgram;
+  window.__studielotsResolvePlannerOpportunity=resolveOpportunity;
+
+  // Patch the dedicated planner rendering so it resolves from multiple stable fields.
+  const oldOpen=window.openStudyPlanner;
+  window.openStudyPlanner=function(){
+    const sel=enrichSelection(readSel());
+    writeSel(sel);
+
+    if(typeof oldOpen==='function'){
+      const out=oldOpen();
+      requestAnimationFrame(()=>{
+        try{
+          const host=document.getElementById('studyPlannerContent');
+          if(!host)return;
+
+          // Repair stale "could not be found" states immediately.
+          if(sel.source==='program' && /kunde inte hittas/i.test(host.innerText||'')){
+            const p=resolveProgram(sel);
+            if(p && typeof renderPlanner==='function'){
+              writeSel({...sel,programId:p.id||'',programCode:p.code||'',programName:p.name||'',university:p.university||''});
+              renderPlanner();
+            }
+          }
+          if(sel.source==='opportunity' && /kunde inte hittas/i.test(host.innerText||'')){
+            const o=resolveOpportunity(sel);
+            if(o && typeof renderPlanner==='function'){
+              writeSel({...sel,opportunityKey:o.key||o.id||'',subject:o.subject||o.name||sel.subject||''});
+              renderPlanner();
+            }
+          }
+        }catch(e){}
+      });
+      return out;
+    }
+  };
+
+  // Replace planner CTA handlers with one canonical handoff.
+  document.addEventListener('click',e=>{
+    const btn=e.target.closest?.('[data-v512-program-plan] .v512-create-plan,[data-v512-opportunity-plan] .v512-create-plan');
+    if(!btn)return;
+
+    const wrap=btn.closest('[data-v512-program-plan],[data-v512-opportunity-plan]');
+    if(!wrap)return;
+
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    let sel=readSel();
+
+    if(wrap.hasAttribute('data-v512-program-plan')){
+      // Prefer currently selected programme from the actual result view.
+      const currentId=sessionStorage.getItem('lotsen_selected_program')||sel.programId||'';
+      const p=catalog().find(x=>String(x?.id||'')===String(currentId))
+        || resolveProgram(sel);
+
+      if(p){
+        sel={
+          source:'program',
+          programId:p.id||'',
+          programCode:p.code||p.officialCode||'',
+          programName:p.name||'',
+          university:p.university||'',
+          subject:p.subject||p.track||''
+        };
+      }
+    }else{
+      const key=sessionStorage.getItem('lotsen_detail_key')||sel.opportunityKey||'';
+      const profile=sessionStorage.getItem('lotsen_preferred_profile')||sel.profileId||'';
+      let o=null;
+      try{o=typeof opportunityByKey==='function'?opportunityByKey(key):null}catch(e){}
+      if(!o)o=resolveOpportunity({...sel,opportunityKey:key,profileId:profile});
+
+      sel={
+        source:'opportunity',
+        profileId:profile,
+        opportunityKey:o?.key||o?.id||key,
+        subject:o?.subject||o?.name||sel.subject||'',
+        university:sel.university||''
+      };
+    }
+
+    writeSel(enrichSelection(sel));
+    if(typeof window.openStudyPlanner==='function')window.openStudyPlanner();
+  },true);
+
+  // When a programme itself is clicked in search/alternatives, remember stable identity too.
+  document.addEventListener('click',e=>{
+    const row=e.target.closest?.('.program-search-link,.program-search-row,.advanced-alternative-card');
+    if(!row)return;
+    setTimeout(()=>{
+      try{
+        const id=sessionStorage.getItem('lotsen_selected_program')||'';
+        const p=catalog().find(x=>String(x?.id||'')===String(id));
+        if(!p)return;
+        const existing=readSel();
+        writeSel({
+          ...existing,
+          source:'program',
+          programId:p.id||'',
+          programCode:p.code||p.officialCode||'',
+          programName:p.name||'',
+          university:p.university||'',
+          subject:p.subject||p.track||''
+        });
+      }catch(e){}
+    },0);
+  },false);
+
+  window.__studielotsPlannerHandoff={
+    version:'v525',
+    robustProgrammeResolution:true,
+    robustOpportunityResolution:true,
+    stableFields:['id','code','name','university','subject']
+  };
+
+  console.info('Studielots v525: robust planner handoff enabled');
+})();
+</script>
 </body>
 </html>
