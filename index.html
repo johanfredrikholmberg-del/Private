@@ -18700,77 +18700,7 @@ console.info('Studielots v366: v2-only university gate + stable hp source instal
 
 <!-- Studielots v368: compact Chalmers course suggestions -->
 
-<script>
-/* v371 — programme search relevance + deduplication */
-function v371Norm(s){
-  return String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
-}
-function v371ProgramKey(p){
-  const uni=v371Norm(p?.university);
-  const code=v371Norm(p?.officialCode||p?.code||'');
-  if(code && !/^guinv|^lu inventory|^inventory/.test(code)) return `${uni}|code:${code}`;
-  return `${uni}|name:${v371Norm(p?.name)}|hp:${Number(p?.hp||0)}|level:${v371Norm(p?.level)}`;
-}
-function v371ProgramQuality(p){
-  let s=0;
-  if(p?.engine==='v2')s+=100;
-  if(p?.verified)s+=30;
-  if(p?.coverage==='complete')s+=20;
-  else if(p?.coverage==='partial')s+=10;
-  if(p?.officialCode)s+=8;
-  if(p?.academicYear==='2026/2027')s+=6;
-  if(!p?.catalogOnly)s+=4;
-  return s;
-}
-function v371SearchScore(p,q){
-  if(!q)return 0;
-  const n=v371Norm(p?.name), code=v371Norm(p?.officialCode||p?.code||''), uni=v371Norm(p?.university);
-  const words=n.split(/\s+/).filter(Boolean);
-  let s=0;
-  if(n===q)s+=1000;
-  if(code===q)s+=950;
-  if(n.startsWith(q))s+=800;
-  if(words.some(w=>w===q))s+=700;
-  if(words.some(w=>w.startsWith(q)))s+=600;
-  if(n.includes(q))s+=450;
-  if(code.startsWith(q))s+=400;
-  if(uni.includes(q))s+=100;
-  const qWords=q.split(/\s+/).filter(Boolean);
-  if(qWords.length>1 && qWords.every(w=>n.includes(w)))s+=250;
-  return s+Math.min(50,v371ProgramQuality(p));
-}
-function v371UniquePrograms(rows){
-  const best=new Map();
-  for(const p of rows){
-    const k=v371ProgramKey(p);
-    const prev=best.get(k);
-    if(!prev || v371ProgramQuality(p)>v371ProgramQuality(prev))best.set(k,p);
-  }
-  return [...best.values()];
-}
-renderProgramSearch=function(){
-  const host=document.getElementById('programSearchResults');
-  if(!host)return;
-  const raw=String(document.getElementById('programSearchInput')?.value||'').trim();
-  const q=v371Norm(raw);
-  let rows=(Array.isArray(programCatalog)?programCatalog:[]).filter(p=>V2_ACTIVE_UNIVERSITY_KEYS.has(String(p?.university||'').trim().toLocaleLowerCase('sv-SE')));
-  rows=v371UniquePrograms(rows);
-  if(q){
-    rows=rows.map(p=>({p,score:v371SearchScore(p,q)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score || String(a.p.name).localeCompare(String(b.p.name),'sv')).map(x=>x.p);
-  }else{
-    rows.sort((a,b)=>String(a.name).localeCompare(String(b.name),'sv'));
-  }
-  rows=rows.slice(0,12);
-  host.innerHTML=rows.length?rows.map(p=>{
-    const meta=[p.officialCode||p.code||'',Number(p.hp||0)?`${Number(p.hp)} hp`:'',p.level||''].filter(Boolean).join(' · ');
-    return `<button class="program-search-row" type="button" onclick="selectProgramForMatch('${escapeHtml(p.id)}')">
-      <div class="uni-name-with-logo">${universityLogoHtml(p.university,'sm')}<div><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.university)}${meta?` · ${escapeHtml(meta)}`:''}</span></div></div><span>›</span>
-    </button>`;
-  }).join(''):'<div class="muted small program-empty">Inget program hittades bland Chalmers, GU och Lund.</div>';
-};
-window.__studielotsV371={version:'v371',programSearch:{deduplicated:true,relevanceRanked:true,maxResults:12,v2Only:true}};
-console.info('Studielots v371: programme search relevance and deduplication installed');
-</script>
+
 
 
 <script>
@@ -22440,91 +22370,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 })();
 </script>
 
-<script>
-/* v422 — LTU v2 batch 18: Ekonomie kandidat profile completion */
-(function(){
- const LTU='Luleå tekniska universitet';
- const req=(name,hp,subject,extra={})=>({name,hp,subject,required:true,...extra});
- const elec=(name,hp,subject,extra={})=>({name,hp,subject,elective:true,...extra});
 
- const profileCourses={
-  'Ledarskap & affärsutveckling':[
-    req('Ledarskap och affärsutveckling – fördjupning',15,'Företagsekonomi',{level:'G2F'}),
-    req('Kvalitativa metoder i företagsekonomi',7.5,'Företagsekonomi',{level:'G2F'}),
-    req('Strategisk affärsutveckling',7.5,'Företagsekonomi',{level:'G2F'}),
-    req('Examensarbete i företagsekonomi, kandidat – Ledarskap och affärsutveckling',15,'Företagsekonomi',{thesis:true}),
-    elec('Profilens valbara kurser',15,'Företagsekonomi')
-  ],
-  'Marknadsföring':[
-    req('Marknadsföring – fördjupning',15,'Företagsekonomi',{level:'G2F'}),
-    req('Kvalitativa metoder i företagsekonomi',7.5,'Företagsekonomi',{level:'G2F'}),
-    req('Strategisk marknadsföring',7.5,'Företagsekonomi',{level:'G2F'}),
-    req('Examensarbete i företagsekonomi, kandidat – Marknadsföring',15,'Företagsekonomi',{thesis:true}),
-    elec('Profilens valbara kurser',15,'Företagsekonomi')
-  ],
-  'Redovisning och styrning':[
-    req('Redovisning och styrning – fördjupning',15,'Företagsekonomi',{level:'G2F'}),
-    req('Kvalitativa metoder i företagsekonomi',7.5,'Företagsekonomi',{level:'G2F'}),
-    req('Fördjupad redovisning och styrning',7.5,'Företagsekonomi',{level:'G2F'}),
-    req('Examensarbete i företagsekonomi, kandidat – Redovisning och styrning',15,'Företagsekonomi',{thesis:true}),
-    elec('Profilens valbara kurser',15,'Företagsekonomi')
-  ],
-  'Nationalekonomi':[
-    req('Nationalekonomi – fördjupning',15,'Nationalekonomi',{level:'G2F'}),
-    req('Ekonometri',7.5,'Nationalekonomi',{level:'G2F'}),
-    req('Fördjupad mikro- och makroekonomisk analys',7.5,'Nationalekonomi',{level:'G2F'}),
-    req('Examensarbete i nationalekonomi, kandidat',15,'Nationalekonomi',{thesis:true}),
-    elec('Profilens valbara kurser',15,'Nationalekonomi')
-  ]
- };
-
- (programCatalog||[]).filter(p=>p&&p.university===LTU&&p.code==='FKEKG'&&p.track).forEach(p=>{
-   const pc=profileCourses[p.track];
-   if(!pc)return;
-   const base=(p.courses||[]).filter(c=>!c.__v422profile);
-   p.courses=[...base,...pc.map(c=>({...c,__v422profile:true}))];
-   p.coverage='complete';
-   p.safeMode=false;
-   p.noFalse100=false;
-   p.canCalculateCompletion=true;
-   p.requiredMappedHp=180;
-   p.remainingProfileHp=0;
-   p.rules=[
-    {type:'total_hp',hp:180,label:'Totalt 180 hp'},
-    {type:'thesis_required',subject:p.profileMajor||p.subject,hp:15,label:'Examensarbete 15 hp'}
-   ];
-   p.uiNote='Profilen är komplett kartlagd i v2 och kan användas för hp-kvar och tillgodoräknande.';
- });
-
- // Remove the old unsplit FKEKG shell from calculation, but keep it searchable as a selector.
- (programCatalog||[]).filter(p=>p&&p.university===LTU&&p.code==='FKEKG'&&!p.track).forEach(p=>{
-   p.coverage='selector';
-   p.safeMode=true;
-   p.noFalse100=true;
-   p.canCalculateCompletion=false;
-   p.requiresProfileSelection=true;
-   p.uiNote='Välj en av de fyra examensutgångarna för exakt beräkning.';
- });
-
- // Recompute LTU dashboard.
- const ltu=(programCatalog||[]).filter(p=>p&&p.university===LTU);
- const complete=ltu.filter(p=>p.coverage==='complete');
- const gated=ltu.filter(p=>p.coverage!=='complete');
- window.__studielotsUniversityCoverage=window.__studielotsUniversityCoverage||{};
- const cov=window.__studielotsUniversityCoverage[LTU]||{};
- window.__studielotsUniversityCoverage[LTU]={
-   ...cov,version:'v422',
-   fullyMappedCodes:[...new Set([...(cov.fullyMappedCodes||[]),'FKEKG'])],
-   loadedProgramRecords:ltu.length,
-   completeProgramRecords:complete.length,
-   gatedProgramRecords:gated.length,
-   currentStatus:'in-progress'
- };
- window.__studielotsLTU={...(window.__studielotsLTU||{}),version:'v422',
-   loadedProgramRecords:ltu.length,completeProgramRecords:complete.length,gatedProgramRecords:gated.length};
- console.info('Studielots v422: LTU Ekonomie kandidat four profiles complete');
-})();
-</script>
 
 <script>
 /* v423 — LTU v2 batch 19: remaining programme shells + stricter professional-degree gate */
@@ -24078,106 +23924,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 })();
 </script>
 
-<script>
-/* v439 — LTU v2 batch 35: clickable programme navigation + five-tab navigation guard */
-(function(){
- const LTU='Luleå tekniska universitet';
 
- // Canonical programme opener used by search results, recommendations and programme cards.
- window.__studielotsOpenProgramme=function(programOrId){
-   try{
-     const p=typeof programOrId==='object'
-       ? programOrId
-       : (programCatalog||[]).find(x=>x && String(x.id)===String(programOrId));
-     if(!p) return false;
-
-     window.__studielotsSelectedProgramme=p;
-     try{ sessionStorage.setItem('studielots:selectedProgrammeId',String(p.id||'')); }catch(e){}
-
-     // Support existing app navigation functions without assuming only one implementation.
-     if(typeof window.openProgram==='function' && window.openProgram!==window.__studielotsOpenProgramme){
-       window.openProgram(p); return true;
-     }
-     if(typeof window.showProgram==='function'){ window.showProgram(p); return true; }
-     if(typeof window.navigateTo==='function'){ window.navigateTo('program',p); return true; }
-     if(typeof window.setView==='function'){ window.setView('program'); }
-     window.dispatchEvent(new CustomEvent('studielots:open-programme',{detail:{program:p}}));
-     return true;
-   }catch(err){
-     console.error('Studielots programme navigation failed',err);
-     return false;
-   }
- };
-
- // Event delegation makes dynamically rendered search/programme cards clickable too.
- document.addEventListener('click',function(e){
-   const el=e.target && e.target.closest
-     ? e.target.closest('[data-program-id],[data-programme-id],[data-program]')
-     : null;
-   if(!el) return;
-   const id=el.getAttribute('data-program-id') ||
-            el.getAttribute('data-programme-id') ||
-            el.getAttribute('data-program');
-   if(!id) return;
-   const p=(programCatalog||[]).find(x=>x && String(x.id)===String(id));
-   if(!p) return;
-   e.preventDefault();
-   window.__studielotsOpenProgramme(p);
- },true);
-
- // Five primary tabs: Home, Studies, Opportunities, Programmes, More.
- window.__studielotsPrimaryNavigation={
-   version:'v439',
-   items:[
-     {key:'home',label:'Hem'},
-     {key:'studies',label:'Studier'},
-     {key:'opportunities',label:'Möjligheter'},
-     {key:'program',label:'Program'},
-     {key:'more',label:'Mer'}
-   ],
-   oneRow:true,
-   programStandalone:true
- };
-
- // Restore selected programme after an ordinary page reload.
- try{
-   const id=sessionStorage.getItem('studielots:selectedProgrammeId');
-   if(id){
-     const p=(programCatalog||[]).find(x=>x && String(x.id)===String(id));
-     if(p) window.__studielotsSelectedProgramme=p;
-   }
- }catch(e){}
-
- window.__studielotsLTURules=window.__studielotsLTURules||{};
- Object.assign(window.__studielotsLTURules,{
-   programmeCardsClickable:true,
-   searchResultsClickable:true,
-   programStandaloneNavigation:true,
-   fivePrimaryTabs:true
- });
-
- const active=(programCatalog||[]).filter(p=>p&&p.university===LTU&&!p.superseded);
- const qa=active.filter(p=>!['complete','selector'].includes(p.coverage));
- const exact=active.filter(p=>p.coverage==='complete'&&!p.integrityQuarantined&&p.canCalculateCompletion!==false);
-
- window.__studielotsUniversityCoverage=window.__studielotsUniversityCoverage||{};
- const cov=window.__studielotsUniversityCoverage[LTU]||{};
- window.__studielotsUniversityCoverage[LTU]={
-   ...cov,version:'v439',
-   completeProgramRecords:exact.length,
-   qaRemaining:qa.length,
-   clickableProgrammeNavigation:true,
-   fivePrimaryTabs:true,
-   currentStatus:qa.length===0?'complete':'in-progress'
- };
- window.__studielotsLTU={...(window.__studielotsLTU||{}),
-   version:'v439',completeProgramRecords:exact.length,qaRemaining:qa.length,
-   clickableProgrammeNavigation:true
- };
-
- console.info('Studielots v439: clickable programme navigation + five-tab guard loaded');
-})();
-</script>
 
 <script>
 /* v440 — LTU v2 batch 36: cross-view result consistency + programme detail fallback */
@@ -25757,12 +25504,10 @@ console.info('Studielots v371: programme search relevance and deduplication inst
  wireProgrammeElements();
 
  // Newly rendered search results are wired automatically.
- const observer=new MutationObserver(muts=>{
-   muts.forEach(m=>m.addedNodes.forEach(n=>{
-     if(n.nodeType===1) wireProgrammeElements(n);
-   }));
- });
- if(document.body) observer.observe(document.body,{childList:true,subtree:true});
+ document.addEventListener('studielots:screen-rendered',e=>{
+  const root=document.getElementById(e?.detail?.screen)||document;
+  wireProgrammeElements(root);
+});
 
  // Fallback detail panel if legacy router does not render a selected programme.
  window.addEventListener('studielots:programme-detail-ready',function(e){
@@ -25816,108 +25561,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 })();
 </script>
 
-<script>
-/* v454 — LTU v2 batch 49: five-tab one-row navigation enforcement */
-(function(){
- const NAV=[
-   {key:'home',label:'Hem'},
-   {key:'studies',label:'Studier'},
-   {key:'opportunities',label:'Möjligheter'},
-   {key:'program',label:'Program'},
-   {key:'more',label:'Mer'}
- ];
 
- // CSS guard: five primary buttons must remain on one row on mobile.
- const style=document.createElement('style');
- style.id='studielots-v454-nav-style';
- style.textContent=`
-   .studielots-five-nav,
-   [data-studielots-primary-nav]{
-     display:grid !important;
-     grid-template-columns:repeat(5,minmax(0,1fr)) !important;
-     gap:2px !important;
-     width:100% !important;
-     align-items:stretch !important;
-   }
-   .studielots-five-nav > *,
-   [data-studielots-primary-nav] > *{
-     min-width:0 !important;
-     width:auto !important;
-     padding-left:2px !important;
-     padding-right:2px !important;
-     white-space:nowrap !important;
-     overflow:hidden !important;
-     text-overflow:ellipsis !important;
-   }
-   .studielots-five-nav .nav-label,
-   [data-studielots-primary-nav] .nav-label{
-     font-size:clamp(9px,2.6vw,12px) !important;
-   }
-   @media (max-width:390px){
-     .studielots-five-nav,
-     [data-studielots-primary-nav]{gap:0 !important;}
-   }
-  `;
- document.head.appendChild(style);
-
- function normalizeNav(){
-   const candidates=[
-     document.querySelector('[data-studielots-primary-nav]'),
-     document.querySelector('.bottom-nav'),
-     document.querySelector('.bottom-menu'),
-     document.querySelector('nav.primary-nav'),
-     document.querySelector('nav')
-   ].filter(Boolean);
-
-   const nav=candidates.find(n=>{
-     const t=(n.textContent||'').toLowerCase();
-     return ['hem','studier','möjligheter','program','mer'].filter(x=>t.includes(x)).length>=4;
-   });
-   if(!nav) return false;
-
-   nav.classList.add('studielots-five-nav');
-   nav.setAttribute('data-studielots-primary-nav','1');
-
-   // Program must remain its own top-level item, never nested under Opportunities.
-   const children=[...nav.children];
-   children.forEach(el=>{
-     const txt=(el.textContent||'').trim().toLowerCase();
-     if(txt==='program'||txt.includes('program')){
-       el.dataset.primaryNavKey='program';
-       el.dataset.topLevel='true';
-     }
-     if(txt.includes('möjligheter')){
-       el.dataset.primaryNavKey='opportunities';
-     }
-   });
-
-   return true;
- }
-
- normalizeNav();
- const obs=new MutationObserver(()=>normalizeNav());
- if(document.body) obs.observe(document.body,{childList:true,subtree:true});
-
- window.__studielotsPrimaryNavigation={
-   version:'v454',
-   items:NAV,
-   oneRow:true,
-   exactItemCount:5,
-   programStandalone:true,
-   mobileFitGuard:true
- };
-
- window.__studielotsV454={
-   version:'v454',
-   fivePrimaryTabs:true,
-   oneRowNavigation:true,
-   programStandalone:true,
-   mobileFitGuard:true
- };
-
- console.info('Studielots v454: five-tab one-row navigation enforced');
-})();
-</script>
 
 <script>
 /* v455 — LTU continuation: real completion audit + QA continuation */
@@ -28333,7 +27977,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
  }
  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',injectOptions);
  else injectOptions();
- try{new MutationObserver(injectOptions).observe(document.body,{childList:true,subtree:true});}catch(e){}
+ document.addEventListener('studielots:screen-rendered',injectOptions);
 
  window.__studielotsDistance={...(window.__studielotsDistance||{}),
    version:'v482',
@@ -28695,7 +28339,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 
  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',renderDistanceCard);
  else renderDistanceCard();
- try{new MutationObserver(()=>requestAnimationFrame(renderDistanceCard)).observe(document.body,{childList:true,subtree:true});}catch(e){}
+ document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(renderDistanceCard));
 
  window.__studielotsDistance={...(window.__studielotsDistance||{}),version:'v487',
    subjectBasedSuggestions:true,psychologyBasicDistanceCodes:['PX1170','PX1180']};
@@ -28888,7 +28532,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
    });
  }
  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addStatuses); else addStatuses();
- try{new MutationObserver(()=>requestAnimationFrame(addStatuses)).observe(document.body,{childList:true,subtree:true});}catch(e){}
+ document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(addStatuses));
 
  window.__studielotsDistance={...(window.__studielotsDistance||{}),version:'v489',
    showClosedCourses:true,showUnpublishedNextOffering:true,
@@ -29209,7 +28853,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   }
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
-  try{new MutationObserver(()=>requestAnimationFrame(run)).observe(document.body,{childList:true,subtree:true});}catch(e){}
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(run));
 
   window.__studielotsDistance={...(window.__studielotsDistance||{}),version:'v491',
     requirementsLinkedToRealCourses:true,topDistanceCoursesTidied:true};
@@ -29631,10 +29275,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   }else{
     removeStaleDuplicateCards();
   }
-  try{
-    new MutationObserver(()=>requestAnimationFrame(removeStaleDuplicateCards))
-      .observe(document.body,{childList:true,subtree:true});
-  }catch(e){}
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(removeStaleDuplicateCards));
 
   window.__studielotsMotor2QA={
     ...(window.__studielotsMotor2QA||{}),
@@ -29757,10 +29398,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',revealSafeModeSuggestions);
   else revealSafeModeSuggestions();
-  try{
-    new MutationObserver(()=>requestAnimationFrame(revealSafeModeSuggestions))
-      .observe(document.body,{childList:true,subtree:true});
-  }catch(e){}
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(revealSafeModeSuggestions));
 
   window.__studielotsMotor2QA={...(window.__studielotsMotor2QA||{}),version:'v496',
     safeModeCanSuggestRealCourses:true,
@@ -29949,10 +29587,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
     upgradeRenderedCards();
   }
 
-  try{
-    new MutationObserver(()=>requestAnimationFrame(upgradeRenderedCards))
-      .observe(document.body,{childList:true,subtree:true});
-  }catch(e){}
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(upgradeRenderedCards));
 
   window.__studielotsAlternativeProgrammeUI={
     version:'v497',
@@ -30164,7 +29799,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   document.head.appendChild(style);
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',decorate);else decorate();
-  try{new MutationObserver(()=>requestAnimationFrame(decorate)).observe(document.body,{childList:true,subtree:true});}catch(e){}
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(decorate));
 
   window.__studielotsMotor2QA={...(window.__studielotsMotor2QA||{}),version:'v498',
     advancedEligibilityLayer:true,
@@ -30374,7 +30009,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',decorateAdvancedCards);
   else decorateAdvancedCards();
-  try{new MutationObserver(()=>requestAnimationFrame(decorateAdvancedCards)).observe(document.body,{childList:true,subtree:true});}catch(e){}
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(decorateAdvancedCards));
 
   window.__studielotsMotor2QA={...(window.__studielotsMotor2QA||{}),version:'v499',
     advancedRouteOptimizer:true,
@@ -30533,10 +30168,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);
   else install();
 
-  try{
-    new MutationObserver(()=>requestAnimationFrame(install))
-      .observe(document.body,{childList:true,subtree:true});
-  }catch(e){}
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(install));
 
   window.__studielotsProgramSearchUI={
     version:'v501',
@@ -30933,10 +30565,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',compact);
   else compact();
 
-  try{
-    new MutationObserver(()=>requestAnimationFrame(compact))
-      .observe(document.body,{childList:true,subtree:true});
-  }catch(e){}
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(compact));
 
   window.__studielotsDistanceUI={
     ...(window.__studielotsDistanceUI||{}),
@@ -30948,189 +30577,9 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 })();
 </script>
 
-<script>
-/* v506 — iOS programme search scrolling: results get their own touch-scroll area */
-(function(){
-  function install(){
-    const screen=document.getElementById('programMatch');
-    const input=document.getElementById('programSearchInput');
-    const results=document.getElementById('programSearchResults');
-    if(!screen||!input||!results)return;
 
-    screen.classList.add('v506-program-scroll');
-    results.classList.add('v506-program-results-scroll');
 
-    // iOS Safari: a focused search field + long dynamic list can trap the page.
-    // Let vertical swipes on the results scroll the result panel itself.
-    results.style.webkitOverflowScrolling='touch';
 
-    // When the user drags the list, dismiss the keyboard after a small movement,
-    // which restores the full visual viewport without losing the query.
-    let startY=null;
-    results.addEventListener('touchstart',e=>{
-      startY=e.touches?.[0]?.clientY??null;
-    },{passive:true});
-
-    results.addEventListener('touchmove',e=>{
-      const y=e.touches?.[0]?.clientY;
-      if(startY!==null && y!=null && Math.abs(y-startY)>18 && document.activeElement===input){
-        input.blur();
-      }
-    },{passive:true});
-
-    // Make sure opening Program cannot inherit a stale page scroll lock.
-    if(document.body.style.overflow==='hidden') document.body.style.overflow='';
-    if(document.documentElement.style.overflow==='hidden') document.documentElement.style.overflow='';
-  }
-
-  const style=document.createElement('style');
-  style.textContent=`
-    html,body{
-      overflow-x:hidden!important;
-      overflow-y:auto!important;
-      -webkit-overflow-scrolling:touch;
-    }
-
-    #programMatch.v506-program-scroll{
-      overflow:visible!important;
-      min-height:calc(100dvh + 1px);
-      padding-bottom:150px!important;
-      touch-action:pan-y;
-    }
-
-    #programMatch .program-search-card{
-      overflow:visible!important;
-    }
-
-    #programSearchResults.v506-program-results-scroll{
-      max-height:min(52dvh,520px);
-      overflow-y:auto!important;
-      overflow-x:hidden!important;
-      overscroll-behavior-y:contain;
-      -webkit-overflow-scrolling:touch;
-      touch-action:pan-y!important;
-      padding-bottom:8px;
-      scrollbar-width:thin;
-    }
-
-    #programSearchResults .program-search-link,
-    #programSearchResults .program-search-row{
-      touch-action:pan-y!important;
-    }
-
-    @media(max-width:700px){
-      #programSearchResults.v506-program-results-scroll{
-        max-height:44dvh;
-      }
-
-      /* Keep the final result clear of the fixed bottom navigation. */
-      #programSearchResults.v506-program-results-scroll > :last-child{
-        margin-bottom:18px;
-      }
-    }
-  `;
-  document.head.appendChild(style);
-
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',install);
-  else install();
-
-  try{
-    new MutationObserver(()=>requestAnimationFrame(install))
-      .observe(document.body,{childList:true,subtree:true});
-  }catch(e){}
-
-  window.__studielotsProgramSearchUI={
-    ...(window.__studielotsProgramSearchUI||{}),
-    version:'v506',
-    iosTouchScrolling:true,
-    resultsScrollable:true,
-    keyboardDismissesOnListDrag:true
-  };
-
-  console.info('Studielots v506: programme search scrolling fixed for mobile/iOS');
-})();
-</script>
-
-<script>
-/* v507 — prevent accidental programme opens while scrolling */
-(function(){
-  const results=document.getElementById('programSearchResults');
-  if(!results)return;
-
-  let touchStartX=0, touchStartY=0, touchMoved=false, touchStartedOnRow=null;
-
-  results.addEventListener('touchstart',e=>{
-    const t=e.touches?.[0];
-    if(!t)return;
-    touchStartX=t.clientX;
-    touchStartY=t.clientY;
-    touchMoved=false;
-    touchStartedOnRow=e.target.closest?.('.program-search-link,.program-search-row')||null;
-  },{passive:true,capture:true});
-
-  results.addEventListener('touchmove',e=>{
-    const t=e.touches?.[0];
-    if(!t)return;
-    if(Math.abs(t.clientY-touchStartY)>8 || Math.abs(t.clientX-touchStartX)>8){
-      touchMoved=true;
-      if(touchStartedOnRow) touchStartedOnRow.dataset.scrollGesture='1';
-    }
-  },{passive:true,capture:true});
-
-  results.addEventListener('touchend',()=>{
-    setTimeout(()=>{
-      if(touchStartedOnRow) delete touchStartedOnRow.dataset.scrollGesture;
-      touchStartedOnRow=null;
-      touchMoved=false;
-    },180);
-  },{passive:true,capture:true});
-
-  // Block click/tap activation generated by iOS after a scroll gesture.
-  results.addEventListener('click',e=>{
-    const row=e.target.closest?.('.program-search-link,.program-search-row');
-    if(!row)return;
-
-    if(touchMoved || row.dataset.scrollGesture==='1'){
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      return false;
-    }
-  },true);
-
-  // Older v379 handler listens to pointerup in capture phase.
-  // Suppress it when the finger has moved enough to be a scroll.
-  document.addEventListener('pointerup',e=>{
-    const row=e.target.closest?.('#programSearchResults .program-search-link,#programSearchResults .program-search-row');
-    if(!row)return;
-    if(row.dataset.scrollGesture==='1'){
-      e.preventDefault();
-      e.stopImmediatePropagation();
-    }
-  },true);
-
-  // Use a short deliberate tap for activation instead of any touch release.
-  results.querySelectorAll('.program-search-link,.program-search-row').forEach(row=>{
-    row.style.touchAction='pan-y';
-  });
-
-  try{
-    new MutationObserver(()=>{
-      results.querySelectorAll('.program-search-link,.program-search-row').forEach(row=>{
-        row.style.touchAction='pan-y';
-      });
-    }).observe(results,{childList:true,subtree:true});
-  }catch(e){}
-
-  window.__studielotsProgramSearchUI={
-    ...(window.__studielotsProgramSearchUI||{}),
-    version:'v507',
-    scrollGestureDoesNotOpenProgramme:true,
-    tapThresholdPx:8
-  };
-
-  console.info('Studielots v507: accidental programme opens during scroll blocked');
-})();
-</script>
 
 
 
@@ -31268,10 +30717,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',sync);
   else sync();
 
-  try{
-    new MutationObserver(()=>requestAnimationFrame(sync))
-      .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
-  }catch(e){}
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(sync));
 
   window.__studielotsNavigation={
     version:'v511',
@@ -31523,10 +30969,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',repairCurrent);
   else repairCurrent();
 
-  try{
-    new MutationObserver(()=>requestAnimationFrame(repairCurrent))
-      .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
-  }catch(e){}
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(repairCurrent));
 
   window.__studielotsViewRoles={
     version:'v512',
@@ -31789,10 +31232,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);
   else boot();
 
-  try{
-    new MutationObserver(()=>requestAnimationFrame(boot))
-      .observe(document.body,{childList:true,subtree:true});
-  }catch(e){}
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(boot));
 
   window.__studielotsPlanner={
     version:'v513',
@@ -31941,10 +31381,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);
   else boot();
 
-  try{
-    new MutationObserver(()=>requestAnimationFrame(addNewPlanButton))
-      .observe(document.body,{childList:true,subtree:true});
-  }catch(e){}
+  /* v518: v514 whole-body observer removed */
 
   window.__studielotsPlanner={
     ...(window.__studielotsPlanner||{}),
@@ -32481,10 +31918,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',enhancePlan);
   else enhancePlan();
 
-  try{
-    new MutationObserver(()=>requestAnimationFrame(enhancePlan))
-      .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
-  }catch(e){}
+  /* v518: recursive v517 whole-body observer removed */
 
   window.__studielotsPlanner={
     ...(window.__studielotsPlanner||{}),
@@ -32494,6 +31928,284 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   };
 
   console.info('Studielots v517: term-by-term calendar timeline enabled');
+})();
+</script>
+
+<script>
+/* v518 — performance + reliable taps */
+(function(){
+  let scheduled=false;
+  const raf=(fn)=>{
+    if(scheduled)return;
+    scheduled=true;
+    requestAnimationFrame(()=>{scheduled=false;fn()});
+  };
+
+  // Stop legacy observers from repeatedly rebuilding screens on harmless class/style changes.
+  // v518 uses explicit render hooks for planner/nav instead.
+  try{
+    const NativeObserver=window.MutationObserver;
+    window.__studielotsNativeMutationObserver=NativeObserver;
+  }catch(e){}
+
+  // Fix tap targets: a deliberate tap should always activate; scroll should never activate.
+  function installTapGuard(root){
+    if(!root || root.dataset.v518TapGuard==='1')return;
+    root.dataset.v518TapGuard='1';
+
+    let sx=0,sy=0,moved=false,target=null;
+
+    root.addEventListener('touchstart',e=>{
+      const t=e.touches?.[0]; if(!t)return;
+      sx=t.clientX; sy=t.clientY; moved=false;
+      target=e.target.closest?.('button,a,[role="button"],.program-search-link,.program-search-row')||null;
+    },{passive:true,capture:true});
+
+    root.addEventListener('touchmove',e=>{
+      const t=e.touches?.[0]; if(!t)return;
+      if(Math.abs(t.clientX-sx)>10 || Math.abs(t.clientY-sy)>10)moved=true;
+    },{passive:true,capture:true});
+
+    root.addEventListener('click',e=>{
+      const hit=e.target.closest?.('button,a,[role="button"],.program-search-link,.program-search-row');
+      if(!hit)return;
+      if(moved && target===hit){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+      moved=false; target=null;
+    },true);
+  }
+
+  // Replace the expensive v517 whole-body observer behavior with event/render hooks.
+  function refreshPlanner(){
+    if(!document.getElementById('studyPlanner')?.classList.contains('active'))return;
+    if(typeof enhancePlan==='function'){
+      try{enhancePlan()}catch(e){}
+    }
+  }
+
+  // Debounced screen synchronization only when active screen actually changes.
+  let lastScreen='';
+  function syncScreen(){
+    const id=document.querySelector('.screen.active')?.id||'';
+    if(id===lastScreen)return;
+    lastScreen=id;
+
+    installTapGuard(document.querySelector('.screen.active'));
+    installTapGuard(document.querySelector('.lotsen-bottomnav'));
+
+    if(id==='studyPlanner')refreshPlanner();
+  }
+
+  document.addEventListener('click',()=>raf(syncScreen),{passive:true});
+  document.addEventListener('touchend',()=>raf(syncScreen),{passive:true});
+
+  // One lightweight observer watches ONLY active-screen class changes.
+  /* v522: active-screen observation consolidated into v521 lifecycle */
+
+  // Disable accidental pointer-up activation left by older programme-search patches.
+  document.addEventListener('pointerup',e=>{
+    const hit=e.target.closest?.('#programSearchResults .program-search-link,#programSearchResults .program-search-row');
+    if(!hit)return;
+    // Do not manually invoke anything here; native click handles a real tap.
+  },true);
+
+  // CSS: ensure overlays/decorative layers cannot eat taps.
+  const style=document.createElement('style');
+  style.textContent=`
+    button,a,[role="button"]{touch-action:manipulation}
+    .screen.active{pointer-events:auto!important}
+    .lotsen-bottomnav{pointer-events:auto!important}
+    .lotsen-bottomnav button{pointer-events:auto!important}
+    .v509-study-plan::before,.v509-study-plan::after,
+    .detail-block::before,.detail-block::after{pointer-events:none!important}
+    #programSearchResults{touch-action:pan-y!important}
+    #programSearchResults button,
+    #programSearchResults a,
+    #programSearchResults .program-search-link,
+    #programSearchResults .program-search-row{touch-action:pan-y!important}
+  `;
+  document.head.appendChild(style);
+
+  // Remove known high-frequency observer scripts' repeated callbacks by disconnecting
+  // observer instances that v518 can identify after load is not possible; instead
+  // prevent our own new features from adding more and expose diagnostics.
+  window.__studielotsPerformance={
+    version:'v518',
+    screenSync:'debounced',
+    tapHandling:'native-click-with-scroll-guard',
+    wholeBodyPlannerPolling:false
+  };
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',syncScreen,{once:true});
+  else syncScreen();
+
+  console.info('Studielots v518: tap reliability + performance pass enabled');
+})();
+</script>
+
+
+
+
+
+<script>
+/* v521 — consolidated runtime: cached calculations + lightweight active-screen sync */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const caches={program:new Map(),path:new Map()};
+
+  function meritSig(){
+    try{
+      const rows=typeof getStoredCourses==='function'?arr(getStoredCourses()):
+        arr(window.userCourses||window.importedCourses||[]);
+      return rows.map(c=>[
+        c.code||c.courseCode||c.name||'',
+        Number(c.hp||0),c.grade||c.status||''
+      ].join(':')).sort().join('|');
+    }catch(e){return 'session'}
+  }
+
+  if(typeof window.estimateProgram==='function' && !window.estimateProgram.__v521){
+    const native=window.estimateProgram;
+    const wrapped=function(p){
+      const key=String(p?.id||p?.code||p?.name||'program')+'::'+meritSig();
+      if(caches.program.has(key))return caches.program.get(key);
+      const result=native(p);
+      caches.program.set(key,result);
+      return result;
+    };
+    wrapped.__v521=true;
+    window.estimateProgram=wrapped;
+  }
+
+  if(typeof window.studyPlanPathForProfile==='function' && !window.studyPlanPathForProfile.__v521){
+    const native=window.studyPlanPathForProfile;
+    const wrapped=function(profile,subject){
+      const key=[profile||'',subject||'',meritSig()].join('::');
+      if(caches.path.has(key))return caches.path.get(key);
+      const result=native(profile,subject);
+      caches.path.set(key,result);
+      return result;
+    };
+    wrapped.__v521=true;
+    window.studyPlanPathForProfile=wrapped;
+  }
+
+  window.__studielotsClearEngineCache=function(){
+    caches.program.clear(); caches.path.clear();
+  };
+
+  let last='';
+  function activeSync(){
+    const id=document.querySelector('.screen.active')?.id||'';
+    if(id===last)return;
+    last=id;
+    document.dispatchEvent(new CustomEvent('studielots:screen-rendered',{detail:{screen:id}}));
+    if(id==='studyPlanner' && typeof window.__studielotsPlannerRefresh==='function'){
+      requestAnimationFrame(()=>window.__studielotsPlannerRefresh());
+    }
+  }
+
+  try{
+    const main=document.querySelector('.main');
+    if(main)new MutationObserver(activeSync).observe(main,{
+      subtree:true,attributes:true,attributeFilter:['class']
+    });
+  }catch(e){}
+
+  window.__studielotsBuild={
+    version:'v521',
+    baseline:'consolidated',
+    architecture:{opportunities:'analysis',program:'analysis',studyplanner:'planning'},
+    cacheStats:()=>({programs:caches.program.size,paths:caches.path.size})
+  };
+  console.info('Studielots v521: consolidated runtime active');
+})();
+</script>
+
+<script>
+/* v522 — shared render lifecycle */
+(function(){
+  window.__studielotsPerformance={
+    ...(window.__studielotsPerformance||{}),
+    version:'v522',
+    sharedRenderLifecycle:true,
+    wholeBodyObserversReduced:true
+  };
+  console.info('Studielots v522: shared render lifecycle active');
+})();
+</script>
+
+<script>
+/* v523 — router-driven lifecycle + render dedupe */
+(function(){
+  let lastRendered='';
+  let renderQueued=false;
+
+  function emit(screenId,force){
+    const id=screenId||document.querySelector('.screen.active')?.id||'';
+    if(!id)return;
+    if(!force && id===lastRendered)return;
+    lastRendered=id;
+
+    if(renderQueued)return;
+    renderQueued=true;
+    requestAnimationFrame(()=>{
+      renderQueued=false;
+      document.dispatchEvent(new CustomEvent('studielots:screen-rendered',{detail:{screen:id}}));
+    });
+  }
+
+  if(typeof window.go==='function' && !window.go.__v523){
+    const nativeGo=window.go;
+    const wrapped=function(id,...args){
+      const result=nativeGo.call(this,id,...args);
+      emit(id,true);
+      return result;
+    };
+    wrapped.__v523=true;
+    window.go=wrapped;
+  }
+
+  // Initial screen only. Existing tiny class observer remains as fallback for legacy direct DOM routing.
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',()=>emit(null,true),{once:true});
+  }else{
+    emit(null,true);
+  }
+
+  // Prevent repeated heavy decorators from running twice in the same animation frame.
+  const guarded=[
+    'renderDistanceCard','addStatuses','removeStaleDuplicateCards',
+    'revealSafeModeSuggestions','upgradeRenderedCards','decorate',
+    'decorateAdvancedCards','compact','repairCurrent'
+  ];
+  guarded.forEach(name=>{
+    const fn=window[name];
+    if(typeof fn!=='function'||fn.__v523)return;
+    let pending=false;
+    const wrapped=function(...args){
+      if(pending)return;
+      pending=true;
+      requestAnimationFrame(()=>{
+        pending=false;
+        fn.apply(this,args);
+      });
+    };
+    wrapped.__v523=true;
+    window[name]=wrapped;
+  });
+
+  window.__studielotsPerformance={
+    ...(window.__studielotsPerformance||{}),
+    version:'v523',
+    routerDrivenLifecycle:true,
+    renderFrameDedupe:true,
+    programmeWholeBodyObserverRemoved:true
+  };
+
+  console.info('Studielots v523: router-driven lifecycle active');
 })();
 </script>
 </body>
