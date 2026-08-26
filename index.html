@@ -18936,7 +18936,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
     <div class="detail-summary"><strong>${fmtHp(counted)} hp kan räknas</strong> · <strong>${fmtHp(path.remaining)} hp kvar/olöst</strong></div>
     <section class="detail-block credited-compact"><details class="credited-details"><summary><span><small>Tillgodoräknat</small><strong>${fmtHp(counted)} hp</strong></span><b>Visa vilka kurser <i>›</i></b></summary><div class="credited-detail-body">${credited.length?`<div class="suggested-course-list">${credited.map(x=>`<div class="suggested-course-row"><div><strong>${escapeHtml(x.name)}</strong><small>${x.kind==='course'?'→ '+escapeHtml(x.target):escapeHtml(x.target)}</small></div><b>${fmtHp(x.hp)} hp</b></div>`).join('')}</div>`:`<div class="credit-explanation"><strong>${fmtHp(counted)} hp kan räknas enligt examensreglerna.</strong><p>Poängen är ännu inte kopplade till enskilda ersättningskurser. De används mot huvudområde, valbara poäng eller andra examenskrav.</p></div>`}</div></details></section>
     <section class="detail-block remaining-compact"><details class="remaining-details"><summary><span><small>Kvar</small><strong>${fmtHp(Math.max(0,Number(path.remaining||0)))} hp</strong></span><b>Visa vilka krav <i>›</i></b></summary><div class="remaining-detail-body">${miss.length?`<div class="remaining-detail-meta">${miss.length} krav återstår</div><div class="suggested-course-list">${miss.map((m,i)=>`<div class="suggested-course-row"><span class="suggested-step">${i+1}</span><div><strong>${escapeHtml(m.label)}</strong></div><b>${fmtHp(m.hp)} hp</b></div>`).join('')}</div>`:'<div class="ready-box">Inga verifierade krav återstår.</div>'}</div></details></section>
-    <section class="detail-block suggested-course-block"><div class="suggested-course-head"><div><h2>Förslag att läsa</h2><p>Kurser som kan täcka kraven ovan.</p></div></div>${v21SuggestionSection(path)}</section>`;
+    ${typeof window.__studielotsCanonicalStudyPlanHtml==='function'?window.__studielotsCanonicalStudyPlanHtml(path,path.requiredMissing||[],{optimized:true}):''}`;
  }
  const previousRenderUniversityDetail=renderUniversityDetail;
  renderUniversityDetail=function(profileId,major){
@@ -19282,11 +19282,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
        </details>
      </section>
 
-     ${typeof studyPlannerSection==='function'?studyPlannerSection(path):''}
-     <section class="detail-block suggested-course-block">
-       <div class="suggested-course-head"><div><h2>Förslag att läsa</h2><p>Riktiga kurser från den valda programstrukturen.</p></div></div>
-       ${typeof v21SuggestionSection==='function'?v21SuggestionSection(path):''}
-     </section>
+     ${typeof window.__studielotsCanonicalStudyPlanHtml==='function'?window.__studielotsCanonicalStudyPlanHtml(path,path.requiredMissing||[],{optimized:true}):''}
      ${p.sourceUrl?`<a class="program-source-link program-v2-source" href="${escapeHtml(p.sourceUrl)}" target="_blank" rel="noopener">Öppna officiell programplan ↗</a>`:''}
    `;
  };
@@ -28350,122 +28346,7 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 })();
 </script>
 
-<script>
-/* v483 — repair visible "Förslag att läsa": generate suggestions from requirement gaps */
-(function(){
- const GU='Göteborgs universitet';
- const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
- const norm=s=>String(s||'').toLowerCase().replace(/\s+/g,' ').trim();
- const all=()=>Array.isArray(window.programCatalog)?window.programCatalog:[];
 
- function realCourses(p){
-   return arr(p&&p.courses).filter(c=>c && c.name && Number(c.hp)>0 &&
-     !c.excludeFromCourseSuggestions && !c.isElectiveBlock && !c.isProfileBlock && !c.isMobilityBlock);
- }
- function suggestionsForProgramme(p){
-   if(!p) return [];
-   const direct=realCourses(p);
-   if(direct.length) return direct.map(c=>({...c,university:p.university,programmeName:p.name}));
-   // Fallback to verified overview rows used by some programme records.
-   return arr(p.verifiedOverviewCourses).filter(c=>c&&c.name&&Number(c.hp)>0)
-     .map(c=>({...c,university:p.university,programmeName:p.name}));
- }
-
- // Verified GU independent-course route for sociology candidate term.
- window.__studielotsVerifiedCoursePackages=window.__studielotsVerifiedCoursePackages||[];
- if(!window.__studielotsVerifiedCoursePackages.some(x=>x.code==='SC996')){
-   window.__studielotsVerifiedCoursePackages.push({
-     university:GU,code:'SC996',name:'Kandidattermin i sociologi',hp:30,
-     subject:'Sociologi',level:'Grundnivå',studyForm:'Campus',studyLocation:'Göteborg',
-     courses:[
-       {code:'',name:'Samhällsvetenskapliga metoder',hp:15,subject:'Sociologi',required:true},
-       {code:'SC1502',name:'Examensarbete för kandidat i sociologi',hp:15,subject:'Sociologi',required:true,thesis:true}
-     ],
-     verified:true,term:'HT2026/VT2027'
-   });
- }
-
- function routeSuggestions(ctx={}){
-   const title=norm(ctx.title||ctx.name||ctx.degreeName);
-   const university=ctx.university||ctx.provider;
-   const remaining=Number(ctx.remainingHp ?? ctx.remaining ?? ctx.hpRemaining);
-
-   // Programme page: always show the programme's actual remaining course structure.
-   if(ctx.programme){
-     return suggestionsForProgramme(ctx.programme);
-   }
-   if(ctx.programmeCode){
-     const p=all().find(x=>String(x.code||x.officialCode||'')===String(ctx.programmeCode));
-     if(p) return suggestionsForProgramme(p);
-   }
-
-   // GU sociology free-standing degree: surface real verified candidate-term courses.
-   if(university===GU && title.includes('sociologi')){
-     const pack=window.__studielotsVerifiedCoursePackages.find(x=>x.code==='SC996');
-     const out=arr(pack&&pack.courses).map(c=>({...c,university:GU,packageCode:'SC996',packageName:pack.name}));
-     // The 30 hp candidate term is useful even when more than 30 hp remain; it covers method + thesis requirements.
-     return out;
-   }
-
-   // Generic mapped-degree fallback: use real mapped courses in same subject/provider.
-   const subject=norm(ctx.subject||ctx.mainField||title.replace(/.*i /,''));
-   let pool=[];
-   all().filter(p=>(!university||p.university===university)).forEach(p=>{
-     suggestionsForProgramme(p).forEach(c=>{
-       if(!subject || norm(c.subject).includes(subject) || norm(c.name).includes(subject)) pool.push(c);
-     });
-   });
-   if(Number.isFinite(remaining)&&remaining>0){
-     let sum=0; pool=pool.filter(c=>{ if(sum>=remaining) return false; sum+=Number(c.hp)||0; return true; });
-   }
-   return pool;
- }
- window.__studielotsGetReadingSuggestions=routeSuggestions;
-
- // Repair empty suggestion cards after each render. We only inject source-backed suggestions.
- function detectContext(card){
-   const body=norm(document.body.innerText);
-   const cardText=norm(card.innerText);
-   let programme=null;
-   // Find the visible programme title in the catalogue.
-   programme=all().find(p=>p&&p.name&&body.includes(norm(p.name)));
-   if(programme) return {programme,programmeCode:programme.code||programme.officialCode,university:programme.university,title:programme.name};
-   if(body.includes('kandidatexamen i sociologi')) return {university:GU,title:'Kandidatexamen i sociologi',subject:'Sociologi'};
-   return {};
- }
- function render(){
-   [...document.querySelectorAll('section,div')].forEach(card=>{
-     const raw=card.innerText||'';
-     if(!raw.includes('Förslag att läsa')) return;
-     // target smallest container carrying the heading
-     if([...card.children].some(ch=>(ch.innerText||'').includes('Förslag att läsa'))) return;
-     const empty=/Inga verifierade kursförslag ännu|Riktiga kurser från den valda programstrukturen\.\s*$|Kurser som kan täcka kraven ovan\.\s*$/.test(raw.trim());
-     if(!empty) return;
-     const ctx=detectContext(card);
-     const sug=routeSuggestions(ctx).slice(0,8);
-     if(!sug.length) return;
-     const old=[...card.querySelectorAll('*')].find(el=>(el.innerText||'').includes('Inga verifierade kursförslag ännu'));
-     if(old){ const box=old.closest('div'); if(box&&box!==card) box.remove(); }
-     const holder=document.createElement('div');
-     holder.setAttribute('data-studielots-suggestions','v483');
-     holder.style.marginTop='12px';
-     sug.forEach(c=>{
-       const row=document.createElement('div');
-       row.style.cssText='padding:12px 0;border-top:1px solid rgba(20,50,55,.10);font-weight:650;';
-       row.innerHTML='<div>'+String(c.name)+'</div><div style="font-size:.86em;font-weight:500;opacity:.62;margin-top:3px">'+
-         (c.code?String(c.code)+' · ':'')+String(c.hp)+' hp'+(c.university?' · '+String(c.university):'')+'</div>';
-       holder.appendChild(row);
-     });
-     card.appendChild(holder);
-   });
- }
- if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',render); else render();
- try{new MutationObserver(()=>requestAnimationFrame(render)).observe(document.body,{childList:true,subtree:true});}catch(e){}
-
- window.__studielotsSuggestionEngine={version:'v483',programmeCourseFallback:true,guSociologySC996:true};
- console.info('Studielots v483: visible reading suggestions repaired');
-})();
-</script>
 
 
 
@@ -31253,246 +31134,285 @@ console.info('Studielots v371: programme search relevance and deduplication inst
 
 
 
+
+\n<script>\n/* v510 — canonical study plan is now wired directly into Program + Möjligheter */\n(function(){\n  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);\n  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');\n  const hp=v=>Number(v||0);\n\n  function courseIdentity(c){\n    return norm(c?.university||c?.provider)+'|'+(norm(c?.code||c?.courseCode)||norm(c?.name))+'|'+String(hp(c?.hp));\n  }\n\n  function ordinaryLabel(c){\n    const bits=[];\n    if(c?.code) bits.push(String(c.code));\n    if(c?.year && Number(c.year)<90) bits.push('År '+c.year);\n    if(c?.term) bits.push(String(c.term).toUpperCase());\n    return bits.join(' · ');\n  }\n\n  function appState(c){\n    return typeof window.__studielotsCourseApplicationState==='function'\n      ? window.__studielotsCourseApplicationState(c):null;\n  }\n\n  function buildAlternatives(path,required){\n    const used=new Set();\n    return arr(required).map(req=>{\n      let hit=null;\n      if(typeof window.bestFasterAlternative==='function'){\n        try{ hit=window.bestFasterAlternative(req,path,used); }catch(e){}\n      }\n      if(hit?.course){\n        const id=courseIdentity(hit.course);\n        if(used.has(id)) hit=null;\n        else used.add(id);\n      }\n      return {required:req,hit,alternative:hit?.course||null};\n    });\n  }\n\n  window.__studielotsCanonicalStudyPlanHtml=function(path,required,opts={}){\n    const rows=arr(required).filter(c=>hp(c?.hp)>0).slice();\n    if(!rows.length) return '';\n\n    rows.sort((a,b)=>{\n      const ay=Number(a?.year||a?.studyYear||99),by=Number(b?.year||b?.studyYear||99);\n      if(ay!==by)return ay-by;\n      const ap=Number(String(a?.period||'').match(/\\d+/)?.[0]||99);\n      const bp=Number(String(b?.period||'').match(/\\d+/)?.[0]||99);\n      if(ap!==bp)return ap-bp;\n      return String(a?.name||'').localeCompare(String(b?.name||''),'sv');\n    });\n\n    const groups=[];let group=[],groupHp=0;\n    rows.forEach(c=>{\n      const chp=hp(c.hp);\n      if(group.length&&groupHp+chp>30){groups.push(group);group=[];groupHp=0;}\n      group.push(c);groupHp+=chp;\n    });\n    if(group.length)groups.push(group);\n\n    const planned=buildAlternatives(path,groups.flat());\n    const plannedById=new Map(planned.map(x=>[courseIdentity(x.required),x]));\n    let altCount=0;\n\n    const body=groups.map((courses,gi)=>{\n      const periodHp=courses.reduce((s,c)=>s+hp(c.hp),0);\n      return `<div class="v510-period">\n        <div class="v510-period-head"><strong>Period ${gi+1}</strong><span>${fmtHp(periodHp)} hp</span></div>\n        ${courses.map(req=>{\n          const item=plannedById.get(courseIdentity(req))||{};\n          const alt=item.alternative,hit=item.hit;\n          let altHtml='';\n          if(alt){\n            altCount++;\n            const app=appState(alt);\n            const meta=[alt.university||'',alt.term||alt.nextOffering||'',alt.distance?'Distans':'',app?.label||''].filter(Boolean).map(escapeHtml).join(' · ');\n            altHtml=`<div class="v510-alt">\n              <span>${hit?.distance?'Möjligt distansalternativ':'Möjligt snabbare alternativ'}</span>\n              <div><strong>${escapeHtml(alt.name||'Alternativ kurs')}</strong><b>${fmtHp(hp(alt.hp))} hp</b></div>\n              ${meta?`<small>${meta}</small>`:''}\n              ${typeof antagningCourseUrl==='function'?`<a href="${escapeHtml(antagningCourseUrl(alt))}" target="_blank" rel="noopener">Visa kurs ↗</a>`:''}\n            </div>`;\n          }\n          return `<div class="v510-course">\n            <div class="v510-course-main"><div><strong>${escapeHtml(req.name||'Kurs')}</strong>${ordinaryLabel(req)?`<small>${escapeHtml(ordinaryLabel(req))}</small>`:''}</div><b>${fmtHp(hp(req.hp))} hp</b></div>\n            ${altHtml}\n          </div>`;\n        }).join('')}\n      </div>`;\n    }).join('');\n\n    return `<section class="detail-block v510-study-plan" data-canonical-study-plan="v510">\n      <div class="v510-head"><div><h2>Studieplan</h2><p>Kurserna visas i rekommenderad ordning.${altCount?' Snabbare alternativ visas direkt under ordinarie kurs.':''}</p></div>${opts.optimized===false?'':'<span>OPTIMERAD</span>'}</div>\n      ${body}\n      ${altCount?`<div class="v510-note"><i>i</i><span>Alternativa kurser är preliminära tills tillgodoräknandet har bekräftats av universitetet.</span></div>`:''}\n    </section>`;\n  };\n\n  window.__studielotsStudyPlanUI={version:'v510',canonicalRenderer:true,directSourceWiring:true,programAndOpportunitiesSame:true,legacySuggestionRendererRemoved:true};\n  console.info('Studielots v510: Program + Möjligheter use the same source-level study-plan renderer');\n})();\n</script>\n<style>\n.v510-study-plan{padding:0!important;overflow:hidden}\n.v510-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:18px 20px 14px}\n.v510-head h2{margin:0!important;font-size:1.18rem!important}.v510-head p{margin:4px 0 0;font-size:.82rem;line-height:1.35;color:#6f7883}\n.v510-head>span{border-radius:999px;background:#e8f1eb;color:#176b5c;padding:6px 9px;font-size:.72rem;font-weight:850;letter-spacing:.04em}\n.v510-period{border-top:1px solid rgba(13,41,49,.09);padding:13px 20px 5px}.v510-period-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}.v510-period-head strong,.v510-period-head span{color:#2f7d73;font-size:1rem}\n.v510-course{padding:11px 0 10px}.v510-course-main{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.v510-course-main strong{display:block;font-size:1rem;line-height:1.2;color:#102f35}.v510-course-main small{display:block;margin-top:3px;font-size:.80rem;color:#7a8490}.v510-course-main>b{white-space:nowrap;font-size:1rem;color:#102f35}\n.v510-alt{margin:9px 0 2px;padding:11px 13px;border-radius:15px;background:rgba(22,94,78,.055)}.v510-alt>span{display:block;color:#19715f;font-size:.71rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px}.v510-alt>div{display:flex;justify-content:space-between;gap:12px}.v510-alt strong,.v510-alt b{font-size:.93rem;color:#102f35}.v510-alt small{display:block;margin-top:3px;font-size:.76rem;color:#788288}.v510-alt a{display:inline-block;margin-top:6px;font-size:.80rem;font-weight:800;color:#2f7d73!important}\n.v510-note{display:flex;gap:8px;align-items:flex-start;margin:9px 20px 18px;padding:9px 11px;border-radius:11px;background:rgba(13,41,49,.035);color:#6f7883}.v510-note i{font-style:normal;display:grid;place-items:center;width:17px;height:17px;border-radius:50%;background:rgba(22,94,78,.09);color:#19715f;font-size:.68rem;font-weight:850}.v510-note span{font-size:.75rem;line-height:1.35}\n@media(max-width:600px){.v510-head{padding:16px 16px 12px}.v510-period{padding:12px 16px 4px}.v510-note{margin-left:16px;margin-right:16px}}\n</style>\n
 <script>
-/* v509 — one canonical study-plan renderer for Program + Möjligheter */
+/* v511 — navigation: Studieplanerare in main nav, Studier under Mer */
+(function(){
+  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
+
+  function navButtonByLabel(label){
+    return [...document.querySelectorAll('.lotsen-bottomnav button')].find(b=>
+      norm(b.innerText||b.textContent)===norm(label)
+    ) || null;
+  }
+
+  function openStudyPlanner(){
+    try{
+      const key=sessionStorage.getItem('lotsen_detail_key')||'';
+      const profile=sessionStorage.getItem('lotsen_preferred_profile')||'';
+      if(key){
+        const o=typeof opportunityByKey==='function'?opportunityByKey(key):null;
+        if(o && profile && typeof renderUniversityDetail==='function'){
+          go('universityDetail');
+          renderUniversityDetail(profile,o.subject);
+          return;
+        }
+        if(o && typeof renderDegreeDetail==='function'){
+          go('degreeDetail');
+          renderDegreeDetail(key);
+          return;
+        }
+      }
+    }catch(e){}
+
+    if(typeof openMyPathFromNav==='function'){
+      openMyPathFromNav();
+      return;
+    }
+    if(typeof go==='function'){
+      go('myPath');
+      if(typeof renderMyPath==='function') renderMyPath();
+    }
+  }
+  window.openStudyPlanner=openStudyPlanner;
+
+  function rebuildBottomNav(){
+    const nav=document.querySelector('.lotsen-bottomnav');
+    if(!nav || nav.dataset.v511==='1') return;
+
+    const hem=navButtonByLabel('Hem');
+    const studies=navButtonByLabel('Studier');
+    const opp=navButtonByLabel('Möjligheter');
+    const program=navButtonByLabel('Program');
+    const more=navButtonByLabel('Mer');
+    if(!hem||!opp||!program||!more) return;
+
+    if(studies){
+      studies.innerHTML=`
+        <span class="bottom-icon" aria-hidden="true">⌁</span>
+        <b>Studieplanerare</b>`;
+      studies.removeAttribute('onclick');
+      studies.onclick=()=>window.openStudyPlanner();
+      studies.dataset.navTarget='studyplanner';
+      studies.classList.remove('active');
+    }
+
+    [hem,opp,studies,program,more].filter(Boolean).forEach(btn=>nav.appendChild(btn));
+    nav.dataset.v511='1';
+  }
+
+  function addStudiesToMore(){
+    const sheet=document.querySelector('.more-menu-sheet');
+    if(!sheet || sheet.querySelector('[data-v511-studies]')) return;
+
+    const firstItem=sheet.querySelector('.more-menu-item');
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.className='more-menu-item';
+    btn.dataset.v511Studies='1';
+    btn.innerHTML=`
+      <span aria-hidden="true">▤</span>
+      <div><strong>Studier</strong><small>Se och hantera dina importerade meriter</small></div>
+      <b>›</b>`;
+    btn.addEventListener('click',()=>{
+      try{toggleMoreMenu(false)}catch(e){}
+      if(typeof go==='function') go('studies');
+    });
+
+    if(firstItem) firstItem.parentNode.insertBefore(btn,firstItem);
+    else sheet.appendChild(btn);
+  }
+
+  function syncActiveState(){
+    const nav=document.querySelector('.lotsen-bottomnav');
+    if(!nav)return;
+    const planner=nav.querySelector('[data-nav-target="studyplanner"]');
+    if(!planner)return;
+
+    const activeId=document.querySelector('.screen.active')?.id||'';
+    const plannerActive=['myPath','degreeDetail','universityDetail'].includes(activeId);
+
+    [...nav.querySelectorAll('button')].forEach(b=>{
+      if(b===planner){
+        b.classList.toggle('active',plannerActive);
+      }else if(plannerActive && norm(b.innerText)!=='mer'){
+        b.classList.remove('active');
+      }
+    });
+  }
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .lotsen-bottomnav{
+      grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    }
+    .lotsen-bottomnav [data-nav-target="studyplanner"] b{
+      font-size:8.6px!important;
+      letter-spacing:-.02em;
+    }
+    @media(max-width:390px){
+      .lotsen-bottomnav [data-nav-target="studyplanner"] b{
+        font-size:8px!important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  function sync(){
+    rebuildBottomNav();
+    addStudiesToMore();
+    syncActiveState();
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',sync);
+  else sync();
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(sync))
+      .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
+  }catch(e){}
+
+  window.__studielotsNavigation={
+    version:'v511',
+    main:['Hem','Möjligheter','Studieplanerare','Program','Mer'],
+    studiesMovedToMore:true,
+    plannerUsesSelectedRoute:true
+  };
+
+  console.info('Studielots v511: Studieplanerare in main nav, Studier moved to Mer');
+})();
+</script>
+
+<script>
+/* v512 — separate analysis views from the personal Study Planner */
 (function(){
   const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
   const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
 
-  function hp(v){ return Number(v||0); }
+  function activeId(){return document.querySelector('.screen.active')?.id||'';}
 
-  function courseIdentity(c){
-    return norm(c?.university||c?.provider)+'|'+
-      (norm(c?.code||c?.courseCode)||norm(c?.name))+'|'+String(hp(c?.hp));
-  }
-
-  function ordinaryLabel(c){
-    const bits=[];
-    if(c?.code) bits.push(String(c.code));
-    if(c?.year && Number(c.year)<90) bits.push('År '+c.year);
-    if(c?.term) bits.push(String(c.term).toUpperCase());
-    return bits.join(' · ');
-  }
-
-  function applicationState(c){
-    return typeof window.__studielotsCourseApplicationState==='function'
-      ? window.__studielotsCourseApplicationState(c)
-      : null;
-  }
-
-  function fasterPlan(path, required){
-    const used=new Set();
-    return arr(required).map(req=>{
-      let hit=null;
-      if(typeof window.bestFasterAlternative==='function'){
-        try{ hit=window.bestFasterAlternative(req,path,used); }catch(e){}
-      }
-
-      if(hit?.course){
-        const id=courseIdentity(hit.course);
-        if(used.has(id)) hit=null;
-        else used.add(id);
-      }
-
-      return {required:req, hit, alternative:hit?.course||null};
-    });
-  }
-
-  function canonicalStudyPlanHtml(path, required, opts={}){
-    const rows=arr(required).filter(c=>hp(c?.hp)>0);
-    if(!rows.length) return '';
-
-    // Preserve programme/study order first, then stable name.
-    rows.sort((a,b)=>{
-      const ay=Number(a?.year||a?.studyYear||99);
-      const by=Number(b?.year||b?.studyYear||99);
-      if(ay!==by) return ay-by;
-
-      const ap=Number(String(a?.period||'').match(/\d+/)?.[0]||99);
-      const bp=Number(String(b?.period||'').match(/\d+/)?.[0]||99);
-      if(ap!==bp) return ap-bp;
-
-      return String(a?.name||'').localeCompare(String(b?.name||''),'sv');
-    });
-
-    // Keep the same "period" presentation in both entry points.
-    const groups=[];
-    let current=[], currentHp=0;
-    rows.forEach(c=>{
-      const chp=hp(c.hp);
-      if(current.length && currentHp+chp>30){
-        groups.push(current);
-        current=[];
-        currentHp=0;
-      }
-      current.push(c);
-      currentHp+=chp;
-    });
-    if(current.length) groups.push(current);
-
-    const flat=groups.flat();
-    const plan=fasterPlan(path,flat);
-    const byReq=new Map(plan.map(x=>[courseIdentity(x.required),x]));
-
-    let alternativeCount=0;
-
-    const periods=groups.map((group,gi)=>{
-      const periodHp=group.reduce((s,c)=>s+hp(c.hp),0);
-      const courses=group.map(req=>{
-        const item=byReq.get(courseIdentity(req))||{required:req};
-        const alt=item.alternative;
-        const hit=item.hit;
-        const app=alt?applicationState(alt):null;
-
-        let altHtml='';
-        if(alt){
-          alternativeCount++;
-          altHtml=`
-            <div class="v509-alt">
-              <span class="v509-alt-label">${hit?.distance?'Möjligt distansalternativ':'Möjligt snabbare alternativ'}</span>
-              <div class="v509-alt-main">
-                <strong>${escapeHtml(alt.name||'Alternativ kurs')}</strong>
-                <b>${fmtHp(hp(alt.hp))} hp</b>
-              </div>
-              <small>${[
-                alt.university||'',
-                alt.term||alt.nextOffering||'',
-                alt.distance?'Distans':'',
-                app?.label||''
-              ].filter(Boolean).map(escapeHtml).join(' · ')}</small>
-              ${typeof antagningCourseUrl==='function'
-                ? `<a href="${escapeHtml(antagningCourseUrl(alt))}" target="_blank" rel="noopener">Visa kurs ↗</a>`
-                : ''}
-            </div>`;
-        }
-
-        return `
-          <div class="v509-course">
-            <div class="v509-course-main">
-              <div>
-                <strong>${escapeHtml(req.name||'Kurs')}</strong>
-                ${ordinaryLabel(req)?`<small>${escapeHtml(ordinaryLabel(req))}</small>`:''}
-              </div>
-              <b>${fmtHp(hp(req.hp))} hp</b>
-            </div>
-            ${altHtml}
-          </div>`;
-      }).join('');
-
-      return `
-        <div class="v509-period">
-          <div class="v509-period-head">
-            <strong>Period ${gi+1}</strong>
-            <span>${fmtHp(periodHp)} hp</span>
-          </div>
-          ${courses}
-        </div>`;
-    }).join('');
-
-    return `
-      <section class="detail-block v509-study-plan" data-canonical-study-plan="v509">
-        <div class="v509-plan-head">
-          <div>
-            <h2>Studieplan</h2>
-            <p>Kurserna visas i rekommenderad ordning.${alternativeCount?' Snabbare alternativ ligger direkt under ordinarie kurs.':''}</p>
-          </div>
-          ${opts.optimized!==false?'<span>OPTIMERAD</span>':''}
-        </div>
-
-        ${periods}
-
-        ${alternativeCount?`
-          <div class="v509-note">
-            <i>i</i>
-            <span>Alternativa kurser är preliminära tills tillgodoräknandet har bekräftats av universitetet.</span>
-          </div>`:''}
-      </section>`;
-  }
-
-  window.__studielotsCanonicalStudyPlanHtml=canonicalStudyPlanHtml;
-
-  function opportunityRequired(path){
-    if(path?.requiredMissing?.length) return path.requiredMissing;
-    if(path?.program?.courses?.length){
-      const used=new Set(arr(path.used).map(x=>courseIdentity(x.programCourse||x.pc||{})));
-      return arr(path.program.courses).filter(c=>hp(c.hp)>0 && !used.has(courseIdentity(c)));
-    }
-    return [];
-  }
-
-  function programRequired(p){
+  function savePlannerSelection(payload){
     try{
-      if(typeof estimateProgram!=='function') return arr(p?.courses);
-      const r=estimateProgram(p);
-      const rows=[];
-      arr(r?.parts).forEach(x=>{
-        const pc=x.pc||{};
-        const remaining=Math.max(0,hp(pc.hp)-hp(x.hp));
-        if(remaining<=0) return;
-        rows.push({...pc,hp:remaining});
-      });
-      return rows;
-    }catch(e){
-      return arr(p?.courses);
-    }
+      sessionStorage.setItem('studielots_planner_selection',JSON.stringify(payload||{}));
+    }catch(e){}
   }
 
-  function removeOldStudyPlanUI(host){
-    if(!host) return;
+  function readPlannerSelection(){
+    try{return JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){return {}}
+  }
 
-    // These were the competing legacy presentations.
+  window.__studielotsSavePlannerSelection=savePlannerSelection;
+  window.__studielotsReadPlannerSelection=readPlannerSelection;
+
+  function createPlannerButton(label, payload){
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.className='primary v512-create-plan';
+    btn.textContent=label||'Skapa studieplan';
+    btn.addEventListener('click',()=>{
+      savePlannerSelection(payload);
+      if(typeof window.openStudyPlanner==='function'){
+        window.openStudyPlanner();
+      }else if(typeof go==='function'){
+        go('myPath');
+        if(typeof renderMyPath==='function')renderMyPath();
+      }
+    });
+    return btn;
+  }
+
+  function stripPlanFromAnalysisView(host){
+    if(!host)return;
+
     host.querySelectorAll(
-      '.study-planner-block,.recommended-plan,.suggested-course-block,'+
-      '[data-studielots-degree-plan],[data-studielots-suggestions]'
+      '.study-planner-block,.faster-degree-engine,.v509-study-plan,'+
+      '[data-canonical-study-plan],[data-studielots-degree-plan]'
     ).forEach(el=>el.remove());
 
     [...host.querySelectorAll('section,div')].forEach(el=>{
       const t=(el.innerText||'').trim();
       if(
-        t.startsWith('Förslag att läsa') &&
-        ![...el.children].some(ch=>(ch.innerText||'').trim().startsWith('Förslag att läsa'))
+        (
+          t.startsWith('Studieplan') ||
+          t.startsWith('Snabbaste studieplanen') ||
+          t.startsWith('Föreslagen studieordning')
+        ) &&
+        ![...el.children].some(ch=>{
+          const c=(ch.innerText||'').trim();
+          return c.startsWith('Studieplan') ||
+                 c.startsWith('Snabbaste studieplanen') ||
+                 c.startsWith('Föreslagen studieordning');
+        })
       ){
-        // Distans-builder remains its own compact flow.
-        if(!/Saknas på distans|Kurs behöver hittas på distans/i.test(t)) el.remove();
+        el.remove();
       }
     });
   }
 
-  function injectOpportunityPlan(path){
+  function installOpportunityCTA(path){
     const host=document.getElementById('universityDetailContent');
-    if(!host||!path) return;
-    removeOldStudyPlanUI(host);
+    if(!host||!path)return;
+    stripPlanFromAnalysisView(host);
+    if(host.querySelector('[data-v512-opportunity-plan]'))return;
 
-    const required=opportunityRequired(path);
-    const html=canonicalStudyPlanHtml(path,required,{optimized:true});
-    if(!html) return;
+    const payload={
+      source:'opportunity',
+      profileId:path.profileId||sessionStorage.getItem('lotsen_preferred_profile')||'',
+      opportunityKey:sessionStorage.getItem('lotsen_detail_key')||'',
+      subject:path.subject||path.track||path.program?.subject||'',
+      university:path.provider||path.program?.university||'',
+      programId:path.program?.id||'',
+      programCode:path.program?.code||''
+    };
+
+    const wrap=document.createElement('div');
+    wrap.className='v512-plan-cta';
+    wrap.dataset.v512OpportunityPlan='1';
+    const btn=createPlannerButton('Skapa studieplan',payload);
+    wrap.appendChild(btn);
 
     const anchor=host.querySelector('.remaining-primary,.remaining-compact,.detail-summary');
-    if(anchor) anchor.insertAdjacentHTML('afterend',html);
-    else host.insertAdjacentHTML('beforeend',html);
+    if(anchor)anchor.insertAdjacentElement('afterend',wrap);
+    else host.appendChild(wrap);
   }
 
-  function injectProgramPlan(p){
+  function selectedProgramme(){
+    const id=sessionStorage.getItem('lotsen_selected_program')||'';
+    return arr(window.programCatalog).find(p=>String(p.id)===String(id))||null;
+  }
+
+  function installProgramCTA(p){
     const host=document.getElementById('programMatchResult');
-    if(!host||!p) return;
-    removeOldStudyPlanUI(host);
+    if(!host||!p)return;
+    stripPlanFromAnalysisView(host);
+    if(host.querySelector('[data-v512-program-plan]'))return;
 
-    const required=programRequired(p);
-    const path={program:p,provider:p.university,requiredMissing:required};
-    const html=canonicalStudyPlanHtml(path,required,{optimized:true});
-    if(!html) return;
+    const payload={
+      source:'program',
+      programId:p.id||'',
+      programCode:p.code||p.officialCode||'',
+      programName:p.name||'',
+      university:p.university||'',
+      subject:p.subject||p.track||''
+    };
 
-    const head=host.querySelector('.program-result-head');
-    if(head) head.insertAdjacentHTML('afterend',html);
-    else host.insertAdjacentHTML('afterbegin',html);
+    const wrap=document.createElement('div');
+    wrap.className='v512-plan-cta';
+    wrap.dataset.v512ProgramPlan='1';
+    wrap.appendChild(createPlannerButton('Skapa studieplan',payload));
+
+    const anchor=host.querySelector('.program-result-head');
+    if(anchor)anchor.insertAdjacentElement('afterend',wrap);
+    else host.insertAdjacentElement('afterbegin',wrap);
   }
 
-  // Rebind both entry points to the SAME renderer.
+  // Analysis views should only show credit transfer + remaining requirements.
   const priorV21=window.renderV21Detail;
   if(typeof priorV21==='function'){
     window.renderV21Detail=function(path,o){
       const out=priorV21(path,o);
-      requestAnimationFrame(()=>injectOpportunityPlan(path));
+      requestAnimationFrame(()=>installOpportunityCTA(path));
       return out;
     };
   }
@@ -31501,77 +31421,1079 @@ console.info('Studielots v371: programme search relevance and deduplication inst
   if(typeof priorProgram==='function'){
     window.renderProgramMatch=function(p){
       const out=priorProgram(p);
-      requestAnimationFrame(()=>injectProgramPlan(p));
+      requestAnimationFrame(()=>installProgramCTA(p));
       return out;
     };
   }
 
-  // Existing open screens after this deploy.
-  function repairCurrent(){
-    const programHost=document.getElementById('programMatchResult');
-    const selected=sessionStorage.getItem('lotsen_selected_program')||'';
-    if(programHost && selected){
-      const p=arr(window.programCatalog).find(x=>String(x.id)===String(selected));
-      if(p && programHost.innerText.trim()) injectProgramPlan(p);
+  // Study Planner gets the selected route and is the ONLY place where optimization runs.
+  const priorOpenPlanner=window.openStudyPlanner;
+  window.openStudyPlanner=function(){
+    const selection=readPlannerSelection();
+
+    if(selection.source==='program' && selection.programId){
+      try{
+        sessionStorage.setItem('lotsen_selected_program',String(selection.programId));
+        sessionStorage.setItem('lotsen_planner_source','program');
+      }catch(e){}
     }
 
-    // If current detail exposes the selected path globally, repair it too.
-    const path=window.__studielotsCurrentPath || window.currentDegreePath || null;
-    if(path && document.getElementById('universityDetailContent')?.innerText.trim()){
-      injectOpportunityPlan(path);
+    if(selection.source==='opportunity'){
+      try{
+        if(selection.opportunityKey)sessionStorage.setItem('lotsen_detail_key',selection.opportunityKey);
+        if(selection.profileId)sessionStorage.setItem('lotsen_preferred_profile',selection.profileId);
+        sessionStorage.setItem('lotsen_planner_source','opportunity');
+      }catch(e){}
+    }
+
+    if(typeof priorOpenPlanner==='function')return priorOpenPlanner();
+
+    if(typeof openMyPathFromNav==='function')return openMyPathFromNav();
+    if(typeof go==='function'){
+      go('myPath');
+      if(typeof renderMyPath==='function')renderMyPath();
+    }
+  };
+
+  function plannerIntro(){
+    const screen=document.getElementById('myPath');
+    if(!screen)return;
+    const top=screen.querySelector('.top');
+    if(!top||top.querySelector('.v512-planner-intro'))return;
+
+    const selection=readPlannerSelection();
+    if(!selection.source)return;
+
+    const info=document.createElement('div');
+    info.className='v512-planner-intro';
+
+    const title=selection.source==='program'
+      ? (selection.programName||'Valt program')
+      : (selection.subject||'Vald examensväg');
+
+    const meta=[selection.university,selection.programCode].filter(Boolean).join(' · ');
+    info.innerHTML=`<strong>${escapeHtml(title)}</strong>${meta?`<span>${escapeHtml(meta)}</span>`:''}`;
+    top.appendChild(info);
+  }
+
+  function repairCurrent(){
+    const id=activeId();
+    if(id==='universityDetail'){
+      const path=window.__studielotsCurrentPath||window.currentDegreePath||null;
+      if(path)installOpportunityCTA(path);
+    }
+    if(id==='programMatch'){
+      const p=selectedProgramme();
+      if(p)installProgramCTA(p);
+    }
+    if(id==='myPath')plannerIntro();
+  }
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .v512-plan-cta{
+      margin:12px 0 14px;
+    }
+    .v512-create-plan{
+      width:100%;
+      min-height:48px;
+      font-size:.98rem;
+      border-radius:15px!important;
+    }
+    .v512-planner-intro{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(22,94,78,.055);
+    }
+    .v512-planner-intro strong{
+      display:block;
+      color:#102f35;
+      font-size:.92rem;
+    }
+    .v512-planner-intro span{
+      display:block;
+      margin-top:2px;
+      color:#6f7883;
+      font-size:.78rem;
+    }
+  `;
+  document.head.appendChild(style);
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',repairCurrent);
+  else repairCurrent();
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(repairCurrent))
+      .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
+  }catch(e){}
+
+  window.__studielotsViewRoles={
+    version:'v512',
+    opportunities:'analysis',
+    program:'analysis',
+    studyplanner:'planning',
+    analysisShows:['tillgodoräknat','kvar'],
+    planningShows:['ordning','terminer','snabbare alternativ','distansalternativ']
+  };
+
+  console.info('Studielots v512: analysis separated from Study Planner');
+})();
+</script>
+
+<script>
+/* v513 — make Studieplanerare a true dedicated planning view */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
+
+  function selection(){
+    try{return JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){return {}}
+  }
+
+  function ensurePlannerScreen(){
+    let screen=document.getElementById('studyPlanner');
+    if(screen)return screen;
+
+    const main=document.querySelector('.main');
+    if(!main)return null;
+
+    screen=document.createElement('section');
+    screen.id='studyPlanner';
+    screen.className='screen';
+    screen.innerHTML=`
+      <div class="crumbs"><strong>Studieplanerare</strong></div>
+      <div class="top v513-planner-top">
+        <div>
+          <div class="eyebrow">STUDIEPLANERARE</div>
+          <h1>Din studieplan</h1>
+          <p>En konkret väg utifrån vad du redan har läst och vad som återstår.</p>
+        </div>
+      </div>
+      <div id="studyPlannerContent"></div>`;
+    main.appendChild(screen);
+    return screen;
+  }
+
+  function selectedProgram(sel){
+    if(!sel?.programId)return null;
+    return arr(window.programCatalog).find(p=>String(p.id)===String(sel.programId))||null;
+  }
+
+  function selectedOpportunity(sel){
+    if(!sel?.opportunityKey || typeof opportunityByKey!=='function')return null;
+    try{return opportunityByKey(sel.opportunityKey)}catch(e){return null}
+  }
+
+  function programmeRequired(p){
+    try{
+      if(typeof estimateProgram!=='function') return arr(p?.courses);
+      const r=estimateProgram(p);
+      const rows=[];
+      arr(r?.parts).forEach(x=>{
+        const pc=x.pc||{};
+        const remaining=Math.max(0,Number(pc.hp||0)-Number(x.hp||0));
+        if(remaining<=0)return;
+        rows.push({...pc,hp:remaining});
+      });
+      return rows;
+    }catch(e){
+      return arr(p?.courses);
+    }
+  }
+
+  function opportunityPath(sel,o){
+    const profile=sel?.profileId||sessionStorage.getItem('lotsen_preferred_profile')||'';
+    try{
+      if(typeof studyPlanPathForProfile==='function'){
+        const p=studyPlanPathForProfile(profile,o?.subject);
+        if(p)return p;
+      }
+    }catch(e){}
+    try{
+      if(typeof bestV21Path==='function'){
+        const p=bestV21Path(profile,o?.subject);
+        if(p)return p;
+      }
+    }catch(e){}
+    return null;
+  }
+
+  function canonicalPlan(path,required){
+    if(typeof window.__studielotsCanonicalStudyPlanHtml==='function'){
+      return window.__studielotsCanonicalStudyPlanHtml(path,required,{optimized:true});
+    }
+    if(typeof window.studyPlannerSection==='function'){
+      try{return window.studyPlannerSection({...path,requiredMissing:required})||''}catch(e){}
+    }
+    return '';
+  }
+
+  function analysisSummaryProgram(p){
+    try{
+      const r=estimateProgram(p);
+      const used=Math.min(Number(p.hp||0),
+        Number(r.replaceHp||0)+Number(r.degreeHp||0)+Number(r.reviewHp||0));
+      return {used,remaining:Math.max(0,Number(p.hp||0)-used)};
+    }catch(e){
+      return {used:0,remaining:Number(p?.hp||0)};
+    }
+  }
+
+  function renderPlanner(){
+    const host=document.getElementById('studyPlannerContent');
+    if(!host)return;
+
+    const sel=selection();
+    if(!sel.source){
+      host.innerHTML=`
+        <section class="detail-block v513-empty">
+          <h2>Välj först en väg</h2>
+          <p>Gå till Möjligheter eller Program och välj <strong>Skapa studieplan</strong>.</p>
+          <div class="v513-empty-actions">
+            <button class="primary" type="button" onclick="go('degrees')">Möjligheter</button>
+            <button class="ghost" type="button" onclick="openProgramMatcher()">Program</button>
+          </div>
+        </section>`;
+      return;
+    }
+
+    if(sel.source==='program'){
+      const p=selectedProgram(sel);
+      if(!p){
+        host.innerHTML='<div class="detail-block">Det valda programmet kunde inte hittas.</div>';
+        return;
+      }
+
+      const required=programmeRequired(p);
+      const summary=analysisSummaryProgram(p);
+      const path={program:p,provider:p.university,requiredMissing:required};
+      const plan=canonicalPlan(path,required);
+
+      host.innerHTML=`
+        <section class="v513-selected">
+          <div>
+            <span>Valt program</span>
+            <strong>${escapeHtml(p.name||'Program')}</strong>
+            <small>${escapeHtml(p.university||'')}${p.code?' · '+escapeHtml(p.code):''}</small>
+          </div>
+          <button type="button" class="ghost" onclick="openProgramMatcher()">Ändra</button>
+        </section>
+
+        <section class="v513-summary">
+          <div><strong>${fmtHp(summary.used)} hp</strong><span>kan passa in</span></div>
+          <div><strong>${fmtHp(summary.remaining)} hp</strong><span>kvar</span></div>
+        </section>
+
+        ${plan || `<section class="detail-block"><h2>Studieplan byggs</h2><p>StudieLots har ännu inte tillräcklig kursstruktur för att skapa en optimerad plan för detta program.</p></section>`}
+      `;
+      return;
+    }
+
+    if(sel.source==='opportunity'){
+      const o=selectedOpportunity(sel);
+      const path=opportunityPath(sel,o);
+      if(!o){
+        host.innerHTML='<div class="detail-block">Den valda examensvägen kunde inte hittas.</div>';
+        return;
+      }
+
+      const required=arr(path?.requiredMissing);
+      const total=Number(path?.program?.hp||o?.hp||180);
+      const remaining=Number(path?.remaining||required.reduce((s,c)=>s+Number(c.hp||0),0));
+      const used=Math.max(0,total-remaining);
+      const plan=path?canonicalPlan(path,required):'';
+
+      host.innerHTML=`
+        <section class="v513-selected">
+          <div>
+            <span>Vald examensväg</span>
+            <strong>${escapeHtml(o.subject||o.name||'Examen')}</strong>
+            <small>${escapeHtml(sel.university||path?.provider||'')}</small>
+          </div>
+          <button type="button" class="ghost" onclick="go('degrees')">Ändra</button>
+        </section>
+
+        <section class="v513-summary">
+          <div><strong>${fmtHp(used)} hp</strong><span>kan räknas in</span></div>
+          <div><strong>${fmtHp(remaining)} hp</strong><span>kvar</span></div>
+        </section>
+
+        ${plan || `<section class="detail-block"><h2>Studieplan byggs</h2><p>StudieLots har ännu inte tillräcklig kursstruktur för att skapa den optimerade planen.</p></section>`}
+      `;
+      return;
+    }
+  }
+
+  function openDedicatedPlanner(){
+    ensurePlannerScreen();
+    if(typeof go==='function')go('studyPlanner');
+    renderPlanner();
+  }
+  window.openStudyPlanner=openDedicatedPlanner;
+
+  function wireNav(){
+    const nav=document.querySelector('.lotsen-bottomnav');
+    if(!nav)return;
+    const btn=[...nav.querySelectorAll('button')].find(b=>
+      norm(b.innerText).includes('studieplanerare')
+    );
+    if(btn){
+      btn.onclick=()=>openDedicatedPlanner();
+      btn.dataset.navTarget='studyPlanner';
     }
   }
 
   const style=document.createElement('style');
   style.textContent=`
-    .v509-study-plan{padding:0!important;overflow:hidden}
-    .v509-plan-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:18px 20px 14px}
-    .v509-plan-head h2{margin:0!important;font-size:1.18rem!important}
-    .v509-plan-head p{margin:4px 0 0;font-size:.82rem;line-height:1.35;color:#6f7883}
-    .v509-plan-head>span{flex:0 0 auto;border-radius:999px;background:#e8f1eb;color:#176b5c;padding:6px 9px;font-size:.72rem;font-weight:850;letter-spacing:.04em}
+    .v513-selected{
+      display:flex;justify-content:space-between;gap:14px;align-items:center;
+      padding:15px 16px;margin-bottom:10px;border-radius:16px;
+      background:#fff;border:1px solid rgba(13,41,49,.09);
+    }
+    .v513-selected span{display:block;font-size:.72rem;color:#7a8490;text-transform:uppercase;letter-spacing:.06em;font-weight:800}
+    .v513-selected strong{display:block;margin-top:3px;font-size:1.05rem;color:#102f35}
+    .v513-selected small{display:block;margin-top:3px;font-size:.78rem;color:#788288}
+    .v513-selected .ghost{flex:0 0 auto}
 
-    .v509-period{border-top:1px solid rgba(13,41,49,.09);padding:13px 20px 5px}
-    .v509-period-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
-    .v509-period-head strong,.v509-period-head span{color:#2f7d73;font-size:1rem}
+    .v513-summary{
+      display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;
+    }
+    .v513-summary>div{
+      padding:12px 14px;background:rgba(22,94,78,.045);
+      border-radius:14px;
+    }
+    .v513-summary strong{display:block;font-size:1.2rem;color:#176b5c}
+    .v513-summary span{display:block;margin-top:2px;font-size:.76rem;color:#6f7883}
 
-    .v509-course{padding:11px 0 10px}
-    .v509-course-main{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
-    .v509-course-main>div{min-width:0}
-    .v509-course-main strong{display:block;font-size:1rem;line-height:1.2;color:#102f35}
-    .v509-course-main small{display:block;margin-top:3px;font-size:.80rem;color:#7a8490}
-    .v509-course-main>b{flex:0 0 auto;font-size:1rem;color:#102f35}
-
-    .v509-alt{margin:9px 0 2px;padding:11px 13px;border-radius:15px;background:rgba(22,94,78,.055)}
-    .v509-alt-label{display:block;color:#19715f;font-size:.71rem;font-weight:850;letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px}
-    .v509-alt-main{display:flex;justify-content:space-between;gap:12px}
-    .v509-alt-main strong,.v509-alt-main b{font-size:.93rem;line-height:1.2;color:#102f35}
-    .v509-alt small{display:block;margin-top:3px;font-size:.76rem;color:#788288}
-    .v509-alt a{display:inline-block;margin-top:6px;font-size:.80rem;font-weight:800;color:#2f7d73!important}
-
-    .v509-note{display:flex;gap:8px;align-items:flex-start;margin:9px 20px 18px;padding:9px 11px;border-radius:11px;background:rgba(13,41,49,.035);color:#6f7883}
-    .v509-note i{font-style:normal;display:grid;place-items:center;width:17px;height:17px;border-radius:50%;background:rgba(22,94,78,.09);color:#19715f;font-size:.68rem;font-weight:850}
-    .v509-note span{font-size:.75rem;line-height:1.35}
+    .v513-empty p{color:#6f7883;line-height:1.45}
+    .v513-empty-actions{display:flex;gap:8px;margin-top:14px}
+    .v513-empty-actions>*{flex:1}
 
     @media(max-width:600px){
-      .v509-plan-head{padding:16px 16px 12px}
-      .v509-period{padding:12px 16px 4px}
-      .v509-note{margin-left:16px;margin-right:16px}
+      .v513-selected{padding:13px 14px}
+      .v513-summary{gap:7px}
     }
   `;
   document.head.appendChild(style);
 
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',repairCurrent);
-  else repairCurrent();
+  function boot(){
+    ensurePlannerScreen();
+    wireNav();
 
-  window.__studielotsStudyPlanUI={
-    version:'v509',
-    canonicalRenderer:true,
-    sameRendererProgramAndOpportunities:true,
-    legacyPresentationLayersRemoved:true,
-    renderer:'__studielotsCanonicalStudyPlanHtml'
+    if(document.getElementById('studyPlanner')?.classList.contains('active')){
+      renderPlanner();
+    }
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(boot))
+      .observe(document.body,{childList:true,subtree:true});
+  }catch(e){}
+
+  window.__studielotsPlanner={
+    version:'v513',
+    dedicatedScreen:true,
+    selectedRoutePersists:true,
+    programAndOpportunitySupported:true
   };
 
-  console.info('Studielots v509: one canonical study-plan renderer installed');
+  console.info('Studielots v513: dedicated Study Planner screen enabled');
+})();
+</script>
+
+<script>
+/* v514 — Study Planner can create a new plan directly */
+(function(){
+  function screen(){return document.getElementById('studyPlanner')}
+  function content(){return document.getElementById('studyPlannerContent')}
+
+  function clearSelection(){
+    try{sessionStorage.removeItem('studielots_planner_selection')}catch(e){}
+  }
+
+  function chooserHtml(){
+    return `
+      <section class="detail-block v514-create">
+        <div class="v514-create-head">
+          <div>
+            <span>NY STUDIEPLAN</span>
+            <h2>Vad vill du planera?</h2>
+            <p>Välj utgångspunkt. StudieLots använder dina meriter automatiskt.</p>
+          </div>
+        </div>
+
+        <button class="v514-choice" type="button" data-v514-choice="fastest">
+          <i>⚡</i>
+          <div><strong>Snabbaste vägen till examen</strong><small>Jämför möjliga vägar och hitta den kortaste realistiska planen.</small></div>
+          <b>›</b>
+        </button>
+
+        <button class="v514-choice" type="button" data-v514-choice="degree">
+          <i>◎</i>
+          <div><strong>Utifrån en examen</strong><small>Välj examen och lärosäte, sedan bygger vi planen.</small></div>
+          <b>›</b>
+        </button>
+
+        <button class="v514-choice" type="button" data-v514-choice="program">
+          <i>▦</i>
+          <div><strong>Utifrån ett program</strong><small>Sök ett program och planera utifrån möjliga tillgodoräknanden.</small></div>
+          <b>›</b>
+        </button>
+      </section>`;
+  }
+
+  function showChooser(){
+    const host=content();
+    if(!host)return;
+    host.innerHTML=chooserHtml();
+
+    host.querySelector('[data-v514-choice="program"]')?.addEventListener('click',()=>{
+      if(typeof openProgramMatcher==='function')openProgramMatcher();
+    });
+
+    host.querySelector('[data-v514-choice="degree"]')?.addEventListener('click',()=>{
+      if(typeof go==='function')go('degrees');
+    });
+
+    host.querySelector('[data-v514-choice="fastest"]')?.addEventListener('click',()=>{
+      try{
+        sessionStorage.setItem('studielots_planner_mode','fastest');
+      }catch(e){}
+      if(typeof openMyPathFromNav==='function'){
+        openMyPathFromNav();
+      }else if(typeof go==='function'){
+        go('degrees');
+      }
+    });
+  }
+
+  function addNewPlanButton(){
+    const s=screen();
+    if(!s)return;
+    const top=s.querySelector('.v513-planner-top');
+    if(!top||top.querySelector('.v514-new-plan'))return;
+
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.className='primary v514-new-plan';
+    btn.textContent='+ Ny studieplan';
+    btn.addEventListener('click',()=>{
+      clearSelection();
+      showChooser();
+    });
+    top.appendChild(btn);
+  }
+
+  // Empty planner should immediately be useful, not just send users elsewhere.
+  const oldOpen=window.openStudyPlanner;
+  window.openStudyPlanner=function(){
+    if(typeof oldOpen==='function')oldOpen();
+    requestAnimationFrame(()=>{
+      addNewPlanButton();
+      let sel={};
+      try{sel=JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){}
+      if(!sel.source)showChooser();
+    });
+  };
+
+  function boot(){
+    addNewPlanButton();
+    const s=screen();
+    if(!s?.classList.contains('active'))return;
+    let sel={};
+    try{sel=JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){}
+    if(!sel.source)showChooser();
+  }
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .v513-planner-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+    .v514-new-plan{flex:0 0 auto;min-height:40px;padding:0 14px!important;border-radius:13px!important;font-size:.86rem!important}
+    .v514-create{padding:18px!important}
+    .v514-create-head span{font-size:.69rem;font-weight:850;letter-spacing:.08em;color:#2f7d73}
+    .v514-create-head h2{margin:3px 0 3px!important}
+    .v514-create-head p{margin:0 0 13px;color:#6f7883;font-size:.84rem;line-height:1.4}
+    .v514-choice{
+      width:100%;display:flex;align-items:center;gap:11px;text-align:left;
+      border:0;border-top:1px solid rgba(13,41,49,.08);background:transparent;
+      padding:13px 2px;color:#102f35;
+    }
+    .v514-choice i{
+      flex:0 0 34px;width:34px;height:34px;border-radius:11px;
+      display:grid;place-items:center;background:rgba(22,94,78,.065);
+      color:#19715f;font-style:normal;font-size:1rem;
+    }
+    .v514-choice div{flex:1;min-width:0}
+    .v514-choice strong{display:block;font-size:.94rem}
+    .v514-choice small{display:block;margin-top:2px;color:#788288;font-size:.76rem;line-height:1.3}
+    .v514-choice>b{font-size:1.25rem;color:#819092}
+    @media(max-width:600px){
+      .v513-planner-top{display:block}
+      .v514-new-plan{margin-top:10px;width:100%}
+    }
+  `;
+  document.head.appendChild(style);
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(addNewPlanButton))
+      .observe(document.body,{childList:true,subtree:true});
+  }catch(e){}
+
+  window.__studielotsPlanner={
+    ...(window.__studielotsPlanner||{}),
+    version:'v514',
+    directCreation:true,
+    creationModes:['fastest','degree','program']
+  };
+
+  console.info('Studielots v514: direct plan creation added');
+})();
+</script>
+
+<script>
+/* v515 — real "Snabbaste vägen till examen" inside Studieplaneraren */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
+
+  function plannerHost(){return document.getElementById('studyPlannerContent')}
+
+  function opportunities(){
+    try{
+      const profile=sessionStorage.getItem('lotsen_preferred_profile')||'';
+      if(typeof opportunitiesForProfile==='function') return arr(opportunitiesForProfile(profile));
+      if(typeof degreeOpportunities==='function') return arr(degreeOpportunities(profile));
+    }catch(e){}
+    return [];
+  }
+
+  function candidatePath(o){
+    const profile=sessionStorage.getItem('lotsen_preferred_profile')||'';
+    try{
+      if(typeof studyPlanPathForProfile==='function'){
+        const p=studyPlanPathForProfile(profile,o.subject);
+        if(p)return p;
+      }
+    }catch(e){}
+    try{
+      if(typeof bestV21Path==='function'){
+        const p=bestV21Path(profile,o.subject);
+        if(p)return p;
+      }
+    }catch(e){}
+    return null;
+  }
+
+  function remainingHp(o,path){
+    const direct=Number(path?.remaining);
+    if(Number.isFinite(direct)&&direct>=0)return direct;
+    const req=arr(path?.requiredMissing).reduce((s,c)=>s+Number(c.hp||0),0);
+    if(req>0)return req;
+    const pct=Number(o?.percent||o?.match||0);
+    const total=Number(o?.hp||path?.program?.hp||180);
+    return Math.max(0,total-(total*pct/100));
+  }
+
+  function rankFastest(){
+    const rows=[];
+    opportunities().forEach(o=>{
+      const path=candidatePath(o);
+      if(!path)return;
+      const rem=remainingHp(o,path);
+      const missing=arr(path.requiredMissing);
+      const distanceCount=missing.filter(c=>c.distance===true).length;
+      rows.push({
+        o,path,remaining:rem,
+        university:path.provider||path.program?.university||'',
+        subject:o.subject||o.name||path.subject||'Examen',
+        distanceCount,
+        score:rem
+      });
+    });
+    return rows.sort((a,b)=>a.score-b.score).slice(0,5);
+  }
+
+  function saveChoice(row){
+    const payload={
+      source:'opportunity',
+      profileId:sessionStorage.getItem('lotsen_preferred_profile')||'',
+      opportunityKey:row.o.key||row.o.id||'',
+      subject:row.subject,
+      university:row.university,
+      programId:row.path?.program?.id||'',
+      programCode:row.path?.program?.code||''
+    };
+    try{
+      sessionStorage.setItem('studielots_planner_selection',JSON.stringify(payload));
+      sessionStorage.setItem('studielots_planner_mode','fastest');
+      if(payload.opportunityKey)sessionStorage.setItem('lotsen_detail_key',String(payload.opportunityKey));
+    }catch(e){}
+    if(typeof window.openStudyPlanner==='function')window.openStudyPlanner();
+  }
+
+  function showFastest(){
+    const host=plannerHost();
+    if(!host)return;
+    const rows=rankFastest();
+
+    if(!rows.length){
+      host.innerHTML=`
+        <section class="detail-block v515-empty">
+          <h2>Snabbaste vägen</h2>
+          <p>Jag behöver först tillräckligt med importerade meriter och examensdata för att jämföra vägarna.</p>
+          <button class="primary" type="button" onclick="go('studies')">Gå till Studier</button>
+        </section>`;
+      return;
+    }
+
+    host.innerHTML=`
+      <section class="detail-block v515-fastest">
+        <div class="v515-head">
+          <span>SNABBASTE VÄGEN</span>
+          <h2>Bäst utifrån dina meriter</h2>
+          <p>Rangordnat efter hur många hp som återstår. Välj en väg så bygger Studieplaneraren den konkreta planen.</p>
+        </div>
+        <div class="v515-list"></div>
+        <div class="v515-note">Tillgodoräknanden är preliminära tills de har prövats av lärosätet.</div>
+      </section>`;
+
+    const list=host.querySelector('.v515-list');
+    rows.forEach((row,i)=>{
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.className='v515-route';
+      btn.innerHTML=`
+        <span class="v515-rank">${i+1}</span>
+        <div>
+          <strong>${escapeHtml(row.subject)}</strong>
+          <small>${escapeHtml(row.university||'Bästa matchande lärosäte')}</small>
+          <em>${fmtHp(row.remaining)} hp kvar</em>
+        </div>
+        <b>›</b>`;
+      btn.addEventListener('click',()=>saveChoice(row));
+      list.appendChild(btn);
+    });
+  }
+
+  // Replace the v514 fastest button behavior with the real comparison.
+  document.addEventListener('click',e=>{
+    const btn=e.target.closest?.('[data-v514-choice="fastest"]');
+    if(!btn)return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    try{sessionStorage.setItem('studielots_planner_mode','fastest')}catch(err){}
+    showFastest();
+  },true);
+
+  window.__studielotsShowFastestDegreeRoutes=showFastest;
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .v515-head>span{font-size:.69rem;font-weight:850;letter-spacing:.08em;color:#2f7d73}
+    .v515-head h2{margin:3px 0!important}
+    .v515-head p{margin:0 0 12px;color:#6f7883;font-size:.82rem;line-height:1.4}
+    .v515-route{
+      width:100%;display:flex;align-items:center;gap:11px;text-align:left;
+      border:0;border-top:1px solid rgba(13,41,49,.08);background:transparent;padding:12px 0;
+    }
+    .v515-rank{
+      width:30px;height:30px;flex:0 0 30px;border-radius:50%;
+      display:grid;place-items:center;background:rgba(22,94,78,.07);
+      color:#19715f;font-size:.78rem;font-weight:850;
+    }
+    .v515-route>div{flex:1;min-width:0}
+    .v515-route strong{display:block;color:#102f35;font-size:.94rem}
+    .v515-route small{display:block;margin-top:2px;color:#788288;font-size:.76rem}
+    .v515-route em{display:inline-block;margin-top:5px;color:#19715f;font-size:.78rem;font-style:normal;font-weight:800}
+    .v515-route>b{color:#819092;font-size:1.25rem}
+    .v515-note{margin-top:8px;padding-top:9px;border-top:1px solid rgba(13,41,49,.07);font-size:.72rem;color:#7a8490;line-height:1.35}
+    .v515-empty p{color:#6f7883;line-height:1.4}
+  `;
+  document.head.appendChild(style);
+
+  window.__studielotsPlanner={
+    ...(window.__studielotsPlanner||{}),
+    version:'v515',
+    fastestDegreeComparison:true,
+    fastestRankingBasis:'remaining_hp'
+  };
+
+  console.info('Studielots v515: fastest degree route comparison enabled');
+})();
+</script>
+
+<script>
+/* v516 — rank fastest routes by realistic calendar time, not only remaining hp */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
+
+  function parseOffering(c){
+    const vals=[c?.startDate,c?.nextOffering,c?.term,c?.semester,c?.studyPeriod];
+    for(const v of vals){
+      if(!v)continue;
+      const s=String(v).trim();
+      let m=s.match(/\b(20\d{2})-(\d{2})-(\d{2})\b/);
+      if(m)return new Date(+m[1],+m[2]-1,+m[3]);
+      m=s.match(/\b(HT|VT)\s*[- ]?(20\d{2})\b/i);
+      if(m)return new Date(+m[2],m[1].toUpperCase()==='HT'?7:0,1);
+    }
+    return null;
+  }
+
+  function courseMonths(c){
+    const hp=Number(c?.hp||0);
+    const pace=Number(c?.studyPace||c?.pace||c?.rate||100);
+    // 30 hp at 100% = one normal semester ≈ 5 months.
+    return hp>0 ? (hp/30)*5*(100/Math.max(25,pace||100)) : 0;
+  }
+
+  function calendarEstimate(path){
+    const courses=arr(path?.requiredMissing).filter(c=>Number(c?.hp||0)>0);
+    const remaining=courses.reduce((s,c)=>s+Number(c.hp||0),0) || Number(path?.remaining||0);
+    if(!remaining)return {months:0,confidence:'high',startDelay:0,parallelBonus:0};
+
+    const now=new Date();
+    const dated=courses.map(parseOffering).filter(Boolean).sort((a,b)=>a-b);
+    let startDelay=0;
+    if(dated.length){
+      startDelay=Math.max(0,(dated[0]-now)/(1000*60*60*24*30.44));
+    }
+
+    // Base = full-time calendar. Permit realistic compression only when data
+    // supports distance/parallel study; never below the 150% admission ceiling.
+    const baseMonths=(remaining/30)*5;
+    const distanceHp=courses.filter(c=>c.distance===true).reduce((s,c)=>s+Number(c.hp||0),0);
+    const parallelHp=courses.filter(c=>c.parallel===true||c.canRunInParallel===true).reduce((s,c)=>s+Number(c.hp||0),0);
+    const flexibleShare=Math.min(1,(distanceHp+parallelHp)/Math.max(remaining,1));
+
+    // Up to 150% study load when the actual course structure permits it.
+    const effectiveLoad=1+0.5*flexibleShare;
+    let months=baseMonths/effectiveLoad + startDelay;
+
+    // If known offerings force a later final course, calendar cannot finish before it.
+    if(dated.length){
+      const last=dated[dated.length-1];
+      const lastDelay=Math.max(0,(last-now)/(1000*60*60*24*30.44));
+      const lastCourse=courses.find(c=>parseOffering(c)?.getTime()===last.getTime());
+      months=Math.max(months,lastDelay+courseMonths(lastCourse));
+    }
+
+    return {
+      months:Math.max(0,months),
+      confidence:dated.length>=Math.max(1,Math.ceil(courses.length/2))?'high':dated.length?'medium':'low',
+      startDelay,
+      parallelBonus:flexibleShare
+    };
+  }
+
+  function labelMonths(m){
+    if(m<1)return 'Kan vara klar inom en termin';
+    if(m<6)return `ca ${Math.max(1,Math.round(m))} mån`;
+    const terms=Math.max(1,Math.ceil(m/5));
+    return `ca ${terms} ${terms===1?'termin':'terminer'}`;
+  }
+
+  function rerank(){
+    if(typeof window.__studielotsShowFastestDegreeRoutes!=='function')return;
+
+    const original=window.__studielotsShowFastestDegreeRoutes;
+    window.__studielotsShowFastestDegreeRoutes=function(){
+      const host=document.getElementById('studyPlannerContent');
+      if(!host)return original();
+
+      let opps=[];
+      try{
+        const profile=sessionStorage.getItem('lotsen_preferred_profile')||'';
+        if(typeof opportunitiesForProfile==='function')opps=arr(opportunitiesForProfile(profile));
+        else if(typeof degreeOpportunities==='function')opps=arr(degreeOpportunities(profile));
+      }catch(e){}
+
+      const rows=[];
+      opps.forEach(o=>{
+        let path=null;
+        const profile=sessionStorage.getItem('lotsen_preferred_profile')||'';
+        try{
+          if(typeof studyPlanPathForProfile==='function')path=studyPlanPathForProfile(profile,o.subject);
+          if(!path&&typeof bestV21Path==='function')path=bestV21Path(profile,o.subject);
+        }catch(e){}
+        if(!path)return;
+
+        const remaining=Number(path.remaining);
+        const req=arr(path.requiredMissing);
+        const rem=Number.isFinite(remaining)&&remaining>=0
+          ? remaining
+          : req.reduce((s,c)=>s+Number(c.hp||0),0);
+
+        const cal=calendarEstimate({...path,remaining:rem});
+        rows.push({
+          o,path,remaining:rem,cal,
+          subject:o.subject||o.name||path.subject||'Examen',
+          university:path.provider||path.program?.university||''
+        });
+      });
+
+      rows.sort((a,b)=>
+        a.cal.months-b.cal.months ||
+        a.remaining-b.remaining ||
+        String(a.subject).localeCompare(String(b.subject),'sv')
+      );
+
+      if(!rows.length)return original();
+
+      host.innerHTML=`
+        <section class="detail-block v516-fastest">
+          <div class="v515-head">
+            <span>SNABBASTE VÄGEN</span>
+            <h2>Snabbast i faktisk studietid</h2>
+            <p>StudieLots väger nu ihop hp kvar, kända kursstarter, studietakt och möjliga distans-/parallellstudier.</p>
+          </div>
+          <div class="v516-list"></div>
+          <div class="v515-note">
+            Tiden är en prognos. Kursstarter och tillgodoräknanden behöver bekräftas innan planen kan betraktas som definitiv.
+          </div>
+        </section>`;
+
+      const list=host.querySelector('.v516-list');
+      rows.slice(0,5).forEach((row,i)=>{
+        const btn=document.createElement('button');
+        btn.type='button';
+        btn.className='v515-route v516-route';
+        const conf=row.cal.confidence==='high'?'Bra tidsunderlag':row.cal.confidence==='medium'?'Delvis tidsunderlag':'Begränsat tidsunderlag';
+        btn.innerHTML=`
+          <span class="v515-rank">${i+1}</span>
+          <div>
+            <strong>${escapeHtml(row.subject)}</strong>
+            <small>${escapeHtml(row.university||'Bästa matchande lärosäte')}</small>
+            <div class="v516-metrics">
+              <em>${escapeHtml(labelMonths(row.cal.months))}</em>
+              <span>${fmtHp(row.remaining)} hp kvar</span>
+            </div>
+            <small class="v516-confidence">${conf}</small>
+          </div>
+          <b>›</b>`;
+
+        btn.addEventListener('click',()=>{
+          const payload={
+            source:'opportunity',
+            profileId:sessionStorage.getItem('lotsen_preferred_profile')||'',
+            opportunityKey:row.o.key||row.o.id||'',
+            subject:row.subject,
+            university:row.university,
+            programId:row.path?.program?.id||'',
+            programCode:row.path?.program?.code||'',
+            estimatedMonths:Number(row.cal.months.toFixed(1))
+          };
+          try{
+            sessionStorage.setItem('studielots_planner_selection',JSON.stringify(payload));
+            sessionStorage.setItem('studielots_planner_mode','fastest');
+            if(payload.opportunityKey)sessionStorage.setItem('lotsen_detail_key',String(payload.opportunityKey));
+          }catch(e){}
+          if(typeof window.openStudyPlanner==='function')window.openStudyPlanner();
+        });
+
+        list.appendChild(btn);
+      });
+    };
+  }
+
+  rerank();
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .v516-metrics{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:5px}
+    .v516-metrics em{margin:0!important;color:#19715f;font-size:.78rem;font-style:normal;font-weight:850}
+    .v516-metrics span{font-size:.75rem;color:#66767a}
+    .v516-confidence{margin-top:3px!important;font-size:.69rem!important;opacity:.72}
+  `;
+  document.head.appendChild(style);
+
+  window.__studielotsPlanner={
+    ...(window.__studielotsPlanner||{}),
+    version:'v516',
+    fastestRankingBasis:'calendar_time',
+    factors:['remaining_hp','known_offerings','study_pace','distance','parallelism'],
+    maxPlannedLoad:1.5
+  };
+
+  console.info('Studielots v516: fastest routes ranked by realistic calendar time');
+})();
+</script>
+
+<script>
+/* v517 — calendar-aware concrete plan: term buckets + 45 hp cap */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const norm=s=>String(s||'').trim().toLocaleLowerCase('sv-SE');
+
+  function offering(c){
+    const vals=[c?.startDate,c?.nextOffering,c?.term,c?.semester];
+    for(const v of vals){
+      if(!v)continue;
+      const s=String(v);
+      let m=s.match(/\b(HT|VT)\s*[- ]?(20\d{2})\b/i);
+      if(m)return {term:m[1].toUpperCase(),year:+m[2],label:`${m[1].toUpperCase()} ${m[2]}`};
+      m=s.match(/\b(20\d{2})-(\d{2})-\d{2}\b/);
+      if(m){
+        const month=+m[2];
+        const term=month>=7?'HT':'VT';
+        return {term,year:+m[1],label:`${term} ${m[1]}`};
+      }
+    }
+    return null;
+  }
+
+  function nextTerm(t){
+    return t.term==='VT'
+      ? {term:'HT',year:t.year,label:`HT ${t.year}`}
+      : {term:'VT',year:t.year+1,label:`VT ${t.year+1}`};
+  }
+
+  function currentAcademicTerm(){
+    const d=new Date(), y=d.getFullYear(), m=d.getMonth()+1;
+    return m>=7
+      ? {term:'HT',year:y,label:`HT ${y}`}
+      : {term:'VT',year:y,label:`VT ${y}`};
+  }
+
+  function buildCalendar(required){
+    const courses=arr(required).filter(c=>Number(c?.hp||0)>0);
+    const buckets=[];
+    let term=currentAcademicTerm();
+
+    function bucketFor(label){
+      let b=buckets.find(x=>x.label===label);
+      if(!b){b={label,hp:0,courses:[]};buckets.push(b)}
+      return b;
+    }
+
+    courses.forEach(c=>{
+      const fixed=offering(c);
+      let target=fixed||term;
+      let b=bucketFor(target.label);
+
+      // 45 hp is the admission ceiling per autumn/spring term.
+      while(b.hp+Number(c.hp||0)>45){
+        target=nextTerm(target);
+        b=bucketFor(target.label);
+      }
+      b.courses.push(c);
+      b.hp+=Number(c.hp||0);
+
+      if(!fixed && b.hp>=30) term=nextTerm(target);
+    });
+
+    buckets.sort((a,b)=>{
+      const parse=x=>{
+        const [t,y]=x.label.split(' ');
+        return +y*2+(t==='HT'?1:0);
+      };
+      return parse(a)-parse(b);
+    });
+    return buckets;
+  }
+
+  function enhancePlan(){
+    const screen=document.getElementById('studyPlanner');
+    if(!screen?.classList.contains('active'))return;
+
+    let sel={};
+    try{sel=JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){}
+    if(!sel.source)return;
+
+    let required=[];
+    if(sel.source==='program'){
+      const p=arr(window.programCatalog).find(x=>String(x.id)===String(sel.programId));
+      if(p && typeof estimateProgram==='function'){
+        try{
+          const r=estimateProgram(p);
+          required=arr(r.parts).map(x=>{
+            const pc=x.pc||{};
+            return {...pc,hp:Math.max(0,Number(pc.hp||0)-Number(x.hp||0))};
+          }).filter(c=>Number(c.hp)>0);
+        }catch(e){}
+      }
+    }
+
+    if(sel.source==='opportunity'){
+      const profile=sel.profileId||sessionStorage.getItem('lotsen_preferred_profile')||'';
+      let o=null,path=null;
+      try{o=typeof opportunityByKey==='function'?opportunityByKey(sel.opportunityKey):null}catch(e){}
+      try{
+        if(typeof studyPlanPathForProfile==='function')path=studyPlanPathForProfile(profile,o?.subject);
+        if(!path&&typeof bestV21Path==='function')path=bestV21Path(profile,o?.subject);
+      }catch(e){}
+      required=arr(path?.requiredMissing);
+    }
+
+    if(!required.length)return;
+    const calendar=buildCalendar(required);
+
+    const existing=screen.querySelector('.v517-calendar');
+    if(existing)existing.remove();
+
+    const host=document.getElementById('studyPlannerContent');
+    const plan=host?.querySelector('[data-canonical-study-plan],.v509-study-plan,.study-planner-block');
+    if(!host||!plan)return;
+
+    const section=document.createElement('section');
+    section.className='detail-block v517-calendar';
+    section.innerHTML=`
+      <div class="v517-head">
+        <span>PRELIMINÄR TIDSLINJE</span>
+        <h2>Termin för termin</h2>
+        <p>Planen tar hänsyn till kända kursstarter och håller sig inom 45 hp per höst-/vårtermin.</p>
+      </div>
+      ${calendar.map(b=>`
+        <div class="v517-term">
+          <div><strong>${escapeHtml(b.label)}</strong><span>${fmtHp(b.hp)} hp</span></div>
+          ${b.courses.map(c=>`
+            <p><span>${escapeHtml(c.name||'Kurs')}</span><b>${fmtHp(Number(c.hp||0))} hp</b></p>
+          `).join('')}
+        </div>
+      `).join('')}
+    `;
+    plan.insertAdjacentElement('beforebegin',section);
+  }
+
+  const style=document.createElement('style');
+  style.textContent=`
+    .v517-calendar{padding:18px!important}
+    .v517-head>span{font-size:.68rem;font-weight:850;letter-spacing:.08em;color:#2f7d73}
+    .v517-head h2{margin:3px 0!important;font-size:1.12rem!important}
+    .v517-head p{margin:0 0 10px;color:#6f7883;font-size:.79rem;line-height:1.35}
+    .v517-term{padding:10px 0;border-top:1px solid rgba(13,41,49,.08)}
+    .v517-term>div{display:flex;justify-content:space-between;color:#2f7d73}
+    .v517-term>div strong,.v517-term>div span{font-size:.91rem;font-weight:850}
+    .v517-term p{display:flex;justify-content:space-between;gap:12px;margin:7px 0 0;font-size:.82rem}
+    .v517-term p span{color:#243f44}
+    .v517-term p b{flex:0 0 auto;color:#566b6f}
+  `;
+  document.head.appendChild(style);
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',enhancePlan);
+  else enhancePlan();
+
+  try{
+    new MutationObserver(()=>requestAnimationFrame(enhancePlan))
+      .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
+  }catch(e){}
+
+  window.__studielotsPlanner={
+    ...(window.__studielotsPlanner||{}),
+    version:'v517',
+    calendarTimeline:true,
+    termAdmissionCapHp:45
+  };
+
+  console.info('Studielots v517: term-by-term calendar timeline enabled');
 })();
 </script>
 </body>
