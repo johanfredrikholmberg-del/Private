@@ -33408,5 +33408,101 @@ body{
 .v544-alt a{font-weight:850;color:#2d786a;text-decoration:none;font-size:.86rem}
 .v544-disclaimer{margin:18px 0 2px;padding-top:14px;border-top:1px solid rgba(20,55,60,.1);font-size:.75rem;line-height:1.45;color:#6f777f}
 </style>
+
+<style>
+/* v545 — one document scroll; no nested programme/planner scrollers */
+html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important}
+.screen,.screen.active,#studyPlanner,#programScreen,#program,#programList,#studyPlannerContent,
+.program-list,.program-results,.results-list,.detail-content,.content-scroll{
+  height:auto!important;max-height:none!important;overflow:visible!important;
+  touch-action:pan-y!important;-webkit-overflow-scrolling:touch!important;
+}
+body{touch-action:pan-y!important}
+.lotsen-bottomnav{position:fixed!important;z-index:1000!important}
+</style>
+<script>
+/* v545 — planner renderer owns the planner; remove conflicting legacy renderers */
+(function(){
+ const A=v=>Array.isArray(v)?v:(v?[v]:[]), N=v=>Number(String(v??0).replace(',','.'))||0;
+ const F=v=>N(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
+ const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const Q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+ function sel(){try{return JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){return{}}}
+ function prog(){
+   const s=sel(),cat=A(window.programCatalog);
+   if(s.source==='program') return cat.find(x=>String(x.id||'')===String(s.programId||''))||cat.find(x=>s.programCode&&String(x.code||x.officialCode||'')===String(s.programCode))||null;
+   let o=null,p=null;try{o=typeof opportunityByKey==='function'?opportunityByKey(s.opportunityKey):null}catch(e){}
+   const profile=s.profileId||s.university||sessionStorage.getItem('lotsen_preferred_profile')||'';
+   try{p=typeof studyPlanPathForProfile==='function'?studyPlanPathForProfile(profile,o?.subject||s.subject):null}catch(e){}
+   return p?.program||null;
+ }
+ function structure(p){
+   const out=[],seen=new Set(),add=(x,t)=>{
+     if(!x||N(x.hp)<=0)return;
+     const k=Q(x.code||x.name||x.title||x.label)+'|'+N(x.hp)+'|'+(x.term||x.semester||t||'');
+     if(seen.has(k))return;seen.add(k);out.push({...x,_term:Number(x.term||x.semester||t)||null});
+   };
+   A(p?.courses).forEach(x=>add(x));
+   ['verifiedOverviewCourses','courseStructure','programStructure','programmeStructure','requiredCourses'].forEach(k=>{
+     const v=p?.[k]; if(Array.isArray(v))v.forEach(x=>add(x));
+     else if(v&&typeof v==='object')Object.entries(v).forEach(([t,xs])=>A(xs).forEach(x=>add(x,t.match(/\d+/)?.[0])));
+   });
+   return out.sort((a,b)=>(a._term||99)-(b._term||99));
+ }
+ function imported(){
+   try{return A(JSON.parse(sessionStorage.getItem('examensmatch_courses')||'[]'))}catch(e){return[]}
+ }
+ function matches(req,imp,used){
+   const rn=Q(req.name||req.title||req.label),rc=Q(req.code);
+   for(let i=0;i<imp.length;i++){
+     if(used.has(i))continue;
+     const x=imp[i],xn=Q(x.name||x.courseName||x.title),xc=Q(x.code||x.courseCode);
+     /* deliberately conservative: exact code or exact normalized title only */
+     if((rc&&xc&&rc===xc)||(rn&&xn&&rn===xn)){used.add(i);return x}
+   }
+   return null;
+ }
+ function render(){
+   if(document.querySelector('.screen.active')?.id!=='studyPlanner')return;
+   const host=document.getElementById('studyPlannerContent');if(!host)return;
+   const p=prog(), rows=structure(p); if(!p||!rows.length)return;
+   const imp=imported(),used=new Set(),marks=rows.map(r=>matches(r,imp,used));
+   const credited=rows.reduce((s,r,i)=>s+(marks[i]?Math.min(N(r.hp),N(marks[i].hp)||N(r.hp)):0),0);
+   const total=N(p.hp)||rows.reduce((s,r)=>s+N(r.hp),0), remaining=Math.max(0,total-credited);
+
+   let term=null,body='';
+   rows.forEach((r,i)=>{
+     if(r._term!==term){term=r._term;body+=`<div class="v545-term"><strong>Termin ${term||''}</strong></div>`}
+     body+=`<div class="v545-row ${marks[i]?'credit':''}">
+       <div><strong>${E(r.name||r.title||r.label||'Kurs')}</strong><small>${marks[i]?'Kan tillgodoräknas':'Återstår att läsa'}</small></div>
+       <b>${F(r.hp)} hp</b></div>`;
+   });
+   const plan=`<div class="detail-block v545-plan"><div class="v545-planhead"><div class="eyebrow">PLANERAREN</div><h2>Din studieplan</h2></div>${body}
+     <p class="v545-note">Kurser markerade ”Kan tillgodoräknas” är en preliminär bedömning. Universitetet fattar det slutliga beslutet om tillgodoräknande.</p></div>`;
+
+   /* replace every old planner plan/build card, then leave exactly one */
+   host.querySelectorAll('.v537-plan,.v540-plan,.v541-plan,.v544-plan').forEach(x=>x.remove());
+   [...host.querySelectorAll('.detail-block')].filter(x=>/Studieplan byggs|Din studieplan|Din återstående studieplan/i.test(x.innerText||'')).forEach(x=>x.remove());
+   host.insertAdjacentHTML('beforeend',plan);
+
+   const metrics=[...host.querySelectorAll('.planner-stat strong,.stat strong,.metric strong')];
+   if(metrics[0])metrics[0].textContent=`${F(credited)} hp`;
+   if(metrics[1])metrics[1].textContent=`${F(remaining)} hp`;
+ }
+ let pending=false; function queue(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;render()})}
+ document.addEventListener('studielots:screen-rendered',queue);
+ const old=window.openStudyPlanner; window.openStudyPlanner=function(){const r=typeof old==='function'?old.apply(this,arguments):undefined;setTimeout(render,0);return r};
+ if(document.readyState!=='loading')setTimeout(render,0);
+ window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v545',singleDocumentScroll:true,singlePlannerRenderer:true};
+})();
+</script>
+<style>
+.v545-plan{padding-bottom:28px!important}.v545-planhead h2{margin-top:3px}
+.v545-term{margin-top:22px;padding:15px 0 7px;border-top:1px solid rgba(20,55,60,.1);color:#2f786b;font-size:1.05rem}
+.v545-row{display:flex;justify-content:space-between;gap:18px;padding:14px 0}
+.v545-row>div{display:flex;flex-direction:column;gap:4px}.v545-row small{font-size:.76rem;color:#7b838c}.v545-row>b{white-space:nowrap}
+.v545-row.credit{background:#f1f7f4;border-radius:14px;padding:13px 12px;margin:3px -4px}.v545-row.credit small{color:#267565;font-weight:800}
+.v545-note{margin-top:20px;padding-top:15px;border-top:1px solid rgba(20,55,60,.1);font-size:.75rem;line-height:1.45;color:#707980}
+</style>
 </body>
 </html>
