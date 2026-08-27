@@ -1744,11 +1744,6 @@ html,body{
       <svg viewBox="0 0 24 24"><path d="M3 10.8 12 3l9 7.8v9.2a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
     </span><b>Hem</b>
   </button>
-  <button data-screen="studies" type="button">
-    <span class="bottom-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24"><path d="M6 3.5h10.5A1.5 1.5 0 0 1 18 5v14.5a1 1 0 0 1-1 1H6.5A1.5 1.5 0 0 1 5 19V5a1.5 1.5 0 0 1 1-1.5Z"/><path d="M8 7h7M8 11h7M8 15h5"/></svg>
-    </span><b>Studier</b>
-  </button>
   <button data-screen="degrees" type="button">
     <span class="bottom-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24">
@@ -1757,6 +1752,11 @@ html,body{
         <path d="M12.5 12H19l2 2.5L19 17h-6.5"/>
       </svg>
     </span><b>Möjligheter</b>
+  </button>
+  <button data-screen="plannerClean" data-nav-target="plannerClean" type="button" onclick="if(window.openStudyPlanner){window.openStudyPlanner()}else if(window.go){window.go('plannerClean')}">
+    <span class="bottom-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+    </span><b>Planeraren</b>
   </button>
   <button data-screen="programMatch" type="button" onclick="openProgramMatcher()">
     <span class="bottom-icon" aria-hidden="true">
@@ -19946,7 +19946,7 @@ console.info('Studielots v366: v2-only university gate + stable hp source instal
   };
   window.go=go;
 
-  window.__studielotsV394={version:'v394',bottomNav:['Hem','Studier','Möjligheter','Program','Mer']};
+  window.__studielotsV394={version:'v394',bottomNav:['Hem','Möjligheter','Planeraren','Program','Mer']};
 })();
 </script>
 
@@ -33986,6 +33986,41 @@ body{touch-action:pan-y!important}
 .v569-actions{background:#fff;border:1px solid #dfe6e3;border-radius:20px;overflow:hidden}.v569-actions button{width:100%;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:15px;border:0;border-bottom:1px solid #e7ebe9;background:#fff;text-align:left}.v569-actions button:last-child{border-bottom:0}.v569-actions>button>span{color:#176b5d;font-size:20px}.v569-actions strong,.v569-actions small{display:block}.v569-actions strong{font-size:.88rem}.v569-actions small{font-size:.72rem;color:#6d7880;margin-top:3px}.v569-actions>button>b{font-size:1.35rem;color:#29464a}
 #v569Overlay{position:fixed;inset:0;z-index:9999}.v569-backdrop{position:absolute;inset:0;background:rgba(10,30,28,.3);backdrop-filter:blur(3px)}.v569-sheet{position:absolute;left:0;right:0;bottom:0;max-height:82vh;overflow:auto;background:#fbfbf8;border-radius:26px 26px 0 0;padding:18px 18px calc(24px + env(safe-area-inset-bottom))}.v569-sheet header{display:flex;justify-content:space-between;align-items:center;position:sticky;top:-18px;background:#fbfbf8;padding:14px 0;z-index:2}.v569-sheet h2{margin:0}.v569-sheet header button{width:36px;height:36px;border:0;border-radius:50%;background:#edf0ef;font-size:1.3rem}.v569-course{display:flex;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid #e5e9e7}.v569-course>div{display:flex;flex-direction:column;gap:3px}.v569-course small{color:#737d83}.v569-course.credited small{color:#267565}.v569-course>b{white-space:nowrap}.v569-term-detail{margin-top:18px}.v569-term-detail>div:first-child{display:flex;justify-content:space-between;color:#267565;padding-bottom:8px;border-bottom:1px solid #e2e8e5}.v569-fast-detail{background:#f1f8f4;border-radius:18px;padding:16px}.v569-fast-detail>span{display:block;font-size:.68rem;font-weight:900;color:#176b5d}.v569-fast-detail>strong{display:block;margin-top:7px}.v569-empty{color:#6b767d}
 @media(max-width:560px){.v569-fast{grid-template-columns:auto 1fr}.v569-fast>button{grid-column:1/-1;width:100%}.v569-t{min-width:102px}}
+</style>
+
+<script>
+/* v570 — locked five-item navigation */
+(function(){
+  function lockNav(){
+    const nav=document.querySelector('.lotsen-bottomnav');
+    if(!nav)return;
+    const wanted=[
+      ['start','Hem'],['degrees','Möjligheter'],['plannerClean','Planeraren'],['programMatch','Program']
+    ];
+    const buttons=[...nav.querySelectorAll(':scope > button')];
+    buttons.forEach(b=>{
+      const label=(b.querySelector('b')?.textContent||'').trim();
+      if(label==='Studier') b.remove();
+    });
+    const planner=[...nav.querySelectorAll(':scope > button')].find(b=>(b.querySelector('b')?.textContent||'').trim()==='Planeraren');
+    const program=[...nav.querySelectorAll(':scope > button')].find(b=>(b.querySelector('b')?.textContent||'').trim()==='Program');
+    if(planner&&program&&planner.nextElementSibling!==program)nav.insertBefore(planner,program);
+    [...nav.querySelectorAll(':scope > button')].forEach(b=>{
+      const label=(b.querySelector('b')?.textContent||'').trim();
+      if(label==='Planeraren'){
+        b.dataset.screen='plannerClean'; b.dataset.navTarget='plannerClean';
+        b.onclick=()=>window.openStudyPlanner?window.openStudyPlanner():(window.go&&window.go('plannerClean'));
+      }
+    });
+  }
+  lockNav();
+  document.addEventListener('studielots:screen-rendered',()=>setTimeout(lockNav,0));
+  document.addEventListener('click',()=>setTimeout(lockNav,40),true);
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v570',lockedBottomNav:['Hem','Möjligheter','Planeraren','Program','Mer']};
+})();
+</script>
+<style>
+.lotsen-bottomnav{grid-template-columns:repeat(5,minmax(0,1fr))!important}
 </style>
 </body>
 </html>
