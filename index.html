@@ -32390,5 +32390,839 @@ body{touch-action:pan-y!important}
     noFuzzyGuPsychDegreeCredit:true};
 })();
 </script>
+
+<script>
+/* v560 — GU verified degree framework + Business Administration */
+(function(){
+  const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+  const Q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+
+  const RULE={
+    id:'gu-business-administration-ekonomie-bachelor-2026',
+    university:'Göteborgs universitet',
+    subject:'Företagsekonomi',
+    degree:'Ekonomie kandidatexamen',
+    totalHp:180,
+    requirements:[
+      {key:'business',label:'Företagsekonomi',hp:90,thesisHp:15},
+      {key:'economics',label:'Nationalekonomi',hp:30},
+      {key:'statistics',label:'Statistik',hp:15},
+      {key:'elective',label:'Valfria kurser',hp:45}
+    ]
+  };
+  window.STUDIELOTS_VERIFIED_DEGREE_RULES=window.STUDIELOTS_VERIFIED_DEGREE_RULES||{};
+  window.STUDIELOTS_VERIFIED_DEGREE_RULES[RULE.id]=RULE;
+
+  function courses(){
+    const pools=[window.importedCourses,window.courses,window.merits,
+      window.appState?.courses,window.state?.courses,window.__studielotsState?.courses];
+    for(const p of pools)if(Array.isArray(p)&&p.length)return p;
+    try{
+      for(const k of Object.keys(localStorage)){
+        const v=JSON.parse(localStorage.getItem(k)||'null');
+        if(Array.isArray(v?.courses)&&v.courses.length)return v.courses;
+        if(Array.isArray(v)&&v.some(x=>x&&('hp'in x||'credits'in x)&&('name'in x||'title'in x)))return v;
+      }
+    }catch(e){}
+    return [];
+  }
+  const hp=c=>N(c?.hp||c?.credits||c?.points);
+  const nm=c=>Q(c?.name||c?.title||c?.courseName||c?.kursnamn);
+  const subj=c=>Q(c?.subject||c?.subjectName||c?.mainField||c?.huvudomrade);
+  const passed=c=>!/(underkand|fail|ej godkand)/.test(Q(c?.status||c?.grade||c?.result||'godkand'));
+
+  function bucket(c){
+    const s=subj(c),n=nm(c);
+    if(/foretagsekonomi|business administration|business studies/.test(s+' '+n))return'business';
+    if(/nationalekonomi|economics/.test(s+' '+n)&&!/business/.test(s+' '+n))return'economics';
+    if(/statistik|statistics/.test(s+' '+n))return'statistics';
+    return'elective';
+  }
+  function thesis(c){
+    const x=nm(c);
+    return /(kandidatuppsats|examensarbete|bachelor thesis|degree project)/.test(x);
+  }
+
+  window.buildGuBusinessDegreePlan=function(){
+    const all=courses().filter(passed), caps={business:90,economics:30,statistics:15,elective:45};
+    const used={business:0,economics:0,statistics:0,elective:0}, rows=[], leftovers=[];
+    let thesisHp=0;
+
+    // First fill subject-specific requirements. Anything beyond their caps becomes elective.
+    all.forEach(c=>{
+      let b=bucket(c), amount=hp(c);
+      if(!amount)return;
+      if(b!=='elective'){
+        const take=Math.min(amount,Math.max(0,caps[b]-used[b]));
+        if(take){
+          used[b]+=take;
+          rows.push({name:c.name||c.title||RULE.requirements.find(r=>r.key===b)?.label,hp:take,
+            term:Math.max(1,Math.ceil(rows.length/2)),status:'credited',degreeBucket:b,
+            sourceUniversity:c.university||c.institution||''});
+          if(b==='business'&&thesis(c))thesisHp+=Math.min(take,15);
+        }
+        amount-=take;
+      }
+      if(amount>0)leftovers.push({...c,__remainingHp:amount});
+    });
+
+    // Elective block may be filled by any unused passed higher-education credits.
+    leftovers.forEach(c=>{
+      if(used.elective>=caps.elective)return;
+      const take=Math.min(c.__remainingHp||hp(c),caps.elective-used.elective);
+      if(take){
+        used.elective+=take;
+        rows.push({name:c.name||c.title||'Valfri kurs',hp:take,term:5,status:'credited',
+          degreeBucket:'elective',sourceUniversity:c.university||c.institution||''});
+      }
+    });
+
+    // Never claim the business main field is complete without a 15 hp thesis.
+    const missing=[];
+    RULE.requirements.forEach((r,i)=>{
+      const left=Math.max(0,r.hp-used[r.key]);
+      if(left)missing.push({name:r.label,hp:left,term:i<3?i+1:5,status:'remaining',degreeBucket:r.key});
+    });
+    if(used.business>=90 && thesisHp<15){
+      // Reclassify 15 hp of the apparent business completion as unresolved thesis requirement.
+      used.business=75;
+      missing.push({name:'Kandidatuppsats i företagsekonomi',hp:15,term:6,status:'remaining',
+        degreeBucket:'business',note:'Självständigt arbete inom huvudområdet krävs.'});
+    }
+
+    const credited=Math.min(180,used.business+used.economics+used.statistics+used.elective);
+    const snap={
+      version:'v560',type:'degree',verifiedRule:true,ruleId:RULE.id,
+      selection:{subject:'Företagsekonomi',university:RULE.university,degree:RULE.degree},
+      program:{id:RULE.id,name:'Ekonomie kandidatexamen med huvudområde företagsekonomi',university:RULE.university},
+      rows:[...rows,...missing],creditedHp:credited,remainingHp:180-credited,
+      degreeBreakdown:{...used,thesisHp},
+      wording:{credited:'Kan räknas in i examen',remaining:'Återstår'}
+    };
+    sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(snap));
+    return snap;
+  };
+
+  // Use the verified GU rule on the free-standing Business Administration degree route.
+  document.addEventListener('click',e=>{
+    const el=e.target.closest('button,a'); if(!el)return;
+    const t=Q(el.textContent),p=Q(document.body.innerText.slice(0,7000));
+    if((t.includes('skapa plan')||t.includes('planeraren')) &&
+       p.includes('goteborgs universitet') && p.includes('foretagsekonomi') &&
+       (p.includes('ekonomie kandidat')||p.includes('fristaende vag'))){
+      window.buildGuBusinessDegreePlan();
+    }
+  },true);
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v560',
+    guBusinessVerifiedDegreeRule:true,degreeFramework:true,thesisGuard:true,
+    electiveOverflowReuse:true};
+})();
+</script>
+
+<script>
+/* v561 — GU Sport Science verified generic bachelor rule */
+(function(){
+  const Q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+
+  const RULE={id:'gu-sport-science-bachelor-2026',university:'Göteborgs universitet',
+    subject:'Idrottsvetenskap',degree:'Filosofie kandidatexamen',totalHp:180,
+    mainFieldHp:90,thesisHp:15,electiveHp:90};
+  window.STUDIELOTS_VERIFIED_DEGREE_RULES=window.STUDIELOTS_VERIFIED_DEGREE_RULES||{};
+  window.STUDIELOTS_VERIFIED_DEGREE_RULES[RULE.id]=RULE;
+
+  function courses(){
+    const p=[window.importedCourses,window.courses,window.merits,window.appState?.courses,
+      window.state?.courses,window.__studielotsState?.courses];
+    for(const x of p)if(Array.isArray(x)&&x.length)return x;
+    try{for(const k of Object.keys(localStorage)){const v=JSON.parse(localStorage.getItem(k)||'null');
+      if(Array.isArray(v?.courses)&&v.courses.length)return v.courses;
+      if(Array.isArray(v)&&v.some(c=>c&&('hp'in c||'credits'in c)))return v;}}catch(e){}
+    return [];
+  }
+  const hp=c=>N(c?.hp||c?.credits||c?.points);
+  const nm=c=>Q(c?.name||c?.title||c?.courseName||c?.kursnamn);
+  const sj=c=>Q(c?.subject||c?.subjectName||c?.mainField||c?.huvudomrade);
+  const passed=c=>!/(underkand|fail|ej godkand)/.test(Q(c?.status||c?.grade||c?.result||'godkand'));
+  const sport=c=>/(idrottsvetenskap|sport science|sports coaching|idrott|tranarskap)/.test(sj(c)+' '+nm(c));
+  const thesis=c=>/(kandidatuppsats|examensarbete|bachelor thesis|degree project)/.test(nm(c));
+
+  window.buildGuSportScienceDegreePlan=function(){
+    const all=courses().filter(passed),rows=[],main=[],other=[];
+    all.forEach(c=>(sport(c)?main:other).push(c));
+    let mainUsed=0,thesisUsed=0,electiveUsed=0;
+
+    main.forEach(c=>{
+      if(mainUsed>=90){other.push(c);return}
+      const take=Math.min(hp(c),90-mainUsed); if(!take)return;
+      mainUsed+=take;if(thesis(c))thesisUsed+=Math.min(take,15);
+      rows.push({name:c.name||c.title||'Idrottsvetenskap',hp:take,term:Math.max(1,Math.ceil(rows.length/2)),
+        status:'credited',degreeBucket:'main',sourceUniversity:c.university||c.institution||''});
+      if(hp(c)>take)other.push({...c,hp:hp(c)-take});
+    });
+    other.forEach(c=>{
+      if(electiveUsed>=90)return;
+      const take=Math.min(hp(c),90-electiveUsed);if(!take)return;
+      electiveUsed+=take;
+      rows.push({name:c.name||c.title||'Valfri kurs',hp:take,term:4+Math.floor(rows.length/4),
+        status:'credited',degreeBucket:'elective',sourceUniversity:c.university||c.institution||''});
+    });
+
+    const missing=[];
+    if(mainUsed<90)missing.push({name:'Idrottsvetenskap med successiv fördjupning',hp:90-mainUsed,term:3,status:'remaining',degreeBucket:'main'});
+    if(thesisUsed<15)missing.push({name:'Självständigt arbete i idrottsvetenskap',hp:15-thesisUsed,term:3,status:'remaining',
+      degreeBucket:'main',note:'Minst 15 hp examensarbete inom huvudområdet krävs.'});
+    if(electiveUsed<90)missing.push({name:'Övriga/valfria kurser',hp:90-electiveUsed,term:4,status:'remaining',degreeBucket:'elective'});
+
+    // Thesis requirement is part of the 90 hp main field, not extra credits.
+    const mainCredited=Math.min(mainUsed, thesisUsed>=15?90:75);
+    const credited=Math.min(180,mainCredited+electiveUsed);
+    const snap={version:'v561',type:'degree',verifiedRule:true,ruleId:RULE.id,
+      selection:{subject:RULE.subject,university:RULE.university,degree:RULE.degree},
+      program:{id:RULE.id,name:'Filosofie kandidatexamen med huvudområde idrottsvetenskap',university:RULE.university},
+      rows:[...rows,...missing],creditedHp:credited,remainingHp:180-credited,
+      degreeBreakdown:{mainFieldHp:mainCredited,thesisHp:thesisUsed,electiveHp:electiveUsed},
+      wording:{credited:'Kan räknas in i examen',remaining:'Återstår'}};
+    sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(snap));return snap;
+  };
+
+  document.addEventListener('click',e=>{
+    const el=e.target.closest('button,a');if(!el)return;
+    const t=Q(el.textContent),p=Q(document.body.innerText.slice(0,7000));
+    if((t.includes('skapa plan')||t.includes('planeraren'))&&p.includes('goteborgs universitet')&&
+       p.includes('idrottsvetenskap')&&(p.includes('kandidatexamen')||p.includes('fristaende vag'))){
+      window.buildGuSportScienceDegreePlan();
+    }
+  },true);
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v561',
+    guSportScienceVerifiedDegreeRule:true,sportScienceThesisGuard:true};
+})();
+</script>
+
+<script>
+/* v562 — one source of truth between opportunity detail and Planner */
+(function(){
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+  const Q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+
+  function visibleDegreeState(){
+    const host=document.getElementById('universityDetailContent');
+    if(!host)return null;
+    const txt=host.innerText||'';
+    let m=txt.match(/([0-9]+(?:[,.][0-9]+)?)\s*hp\s*kan räknas\s*[·\-]\s*([0-9]+(?:[,.][0-9]+)?)\s*hp\s*kvar(?:\/olöst)?/i);
+    if(!m)m=txt.match(/Tillgodoräknat\s*([0-9]+(?:[,.][0-9]+)?)\s*hp[\s\S]*?Kvar\s*([0-9]+(?:[,.][0-9]+)?)\s*hp/i);
+    if(!m)return null;
+    return {creditedHp:N(m[1]),remainingHp:N(m[2]),totalHp:N(m[1])+N(m[2])};
+  }
+
+  function saveVisibleState(){
+    const v=visibleDegreeState(); if(!v)return null;
+    try{
+      sessionStorage.setItem('studielots_visible_degree_totals',JSON.stringify(v));
+      const canonical=window.__studielotsCanonicalMatch?.current?.();
+      if(canonical && Math.abs(N(canonical.creditedHp)-v.creditedHp)<.01 &&
+          Math.abs(N(canonical.remainingHp)-v.remainingHp)<.01){
+        sessionStorage.setItem('studielots_visible_degree_matches',JSON.stringify(canonical.matches||[]));
+      }else{
+        sessionStorage.removeItem('studielots_visible_degree_matches');
+      }
+    }catch(e){}
+    return v;
+  }
+
+  function forceSnapshotTotals(){
+    let v=null,s=null;
+    try{
+      v=JSON.parse(sessionStorage.getItem('studielots_visible_degree_totals')||'null');
+      s=JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null');
+    }catch(e){}
+    if(!v||!s)return;
+    // The page the user just approved is authoritative for the handoff.
+    s.creditedHp=N(v.creditedHp);
+    s.remainingHp=N(v.remainingHp);
+    s.totalHp=N(v.totalHp)||N(s.totalHp)||180;
+    s.sourceOfTruth='visible-opportunity-detail';
+    try{
+      const matches=JSON.parse(sessionStorage.getItem('studielots_visible_degree_matches')||'[]');
+      if(Array.isArray(matches)&&matches.length)s.matches=matches;
+    }catch(e){}
+    sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(s));
+  }
+
+  document.addEventListener('click',e=>{
+    const el=e.target.closest('button,a'); if(!el)return;
+    const t=Q(el.textContent);
+    if(!(t.includes('skapa plan')||t.includes('planeraren')))return;
+    if(document.querySelector('.screen.active')?.id!=='universityDetail')return;
+    saveVisibleState();
+    // Existing degree builders run in the same click. Reconcile immediately after them.
+    queueMicrotask(forceSnapshotTotals);
+    setTimeout(forceSnapshotTotals,0);
+    setTimeout(forceSnapshotTotals,40);
+  },true);
+
+  // Also reconcile just before the clean planner paints.
+  document.addEventListener('studielots:screen-rendered',e=>{
+    if(e?.detail?.screen==='plannerClean')forceSnapshotTotals();
+  },true);
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v562',
+    plannerOpportunitySingleSourceOfTruth:true,
+    visibleTotalsHandoff:true};
+})();
+</script>
+
+<script>
+/* v563 — one imported-merit source for degree engines and Planner */
+(function(){
+  const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+  const Q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+
+  function allImportedCourses(){
+    const pools=[];
+
+    // Canonical runtime getter, when available.
+    try{
+      if(typeof getStoredCourses==='function')pools.push(...A(getStoredCourses()));
+    }catch(e){}
+
+    // Session import used by the current matching engine.
+    try{
+      pools.push(...A(JSON.parse(sessionStorage.getItem('examensmatch_courses')||'[]')));
+    }catch(e){}
+
+    // Persistent import used by the historical syllabus/import flow.
+    try{
+      pools.push(...A(JSON.parse(localStorage.getItem('lotsen_courses')||'[]')));
+    }catch(e){}
+
+    // Runtime aliases kept for compatibility.
+    [
+      window.userCourses,window.importedCourses,window.ladokCourses,
+      window.courses,window.merits,window.appState?.courses,
+      window.state?.courses,window.__studielotsState?.courses
+    ].forEach(x=>pools.push(...A(x)));
+
+    // Deduplicate without throwing away university or level metadata.
+    const seen=new Map();
+    pools.forEach(c=>{
+      if(!c)return;
+      const name=Q(c.name||c.title||c.courseName||c.kursnamn);
+      const code=Q(c.code||c.courseCode||c.kurskod);
+      const hp=N(c.hp||c.credits||c.points);
+      if(!name&&!code)return;
+      const key=(code||name)+'|'+hp+'|'+Q(c.university||c.institution||c.larosate);
+      const prev=seen.get(key);
+      if(!prev)seen.set(key,c);
+      else{
+        // Prefer the richer representation.
+        const richness=o=>Object.values(o||{}).filter(v=>v!==null&&v!==undefined&&v!=='').length;
+        if(richness(c)>richness(prev))seen.set(key,c);
+      }
+    });
+    return [...seen.values()];
+  }
+
+  window.__studielotsImportedCourses=allImportedCourses;
+
+  function hp(c){return N(c?.hp||c?.credits||c?.points)}
+  function code(c){return Q(c?.code||c?.courseCode||c?.kurskod)}
+  function name(c){return Q(c?.name||c?.title||c?.courseName||c?.kursnamn)}
+  function passed(c){
+    const s=Q(c?.status||c?.grade||c?.result||'godkand');
+    return !/(underkand|fail|ej godkand)/.test(s);
+  }
+
+  // Rebuild GU Psychology using the real imported merit source.
+  window.buildGuPsychologyDegreePlan=function(){
+    const rule=window.STUDIELOTS_VERIFIED_DEGREE_RULES?.['gu-psychology-bachelor-2026'];
+    if(!rule)return null;
+
+    const all=allImportedCourses().filter(passed);
+    const used=new Set(),rows=[];
+    let core=0;
+
+    A(rule.requirements).forEach(r=>{
+      let best=-1;
+      for(let i=0;i<all.length;i++){
+        if(used.has(i))continue;
+        if(code(all[i])===Q(r.code)||name(all[i])===Q(r.name)){best=i;break}
+      }
+      if(best>=0){
+        used.add(best);
+        const take=Math.min(N(r.hp),hp(all[best])||N(r.hp));
+        core+=take;
+        rows.push({...r,status:'credited',sourceName:all[best].name||all[best].title||r.name,
+          sourceUniversity:all[best].university||all[best].institution||''});
+      }else{
+        rows.push({...r,status:'remaining'});
+      }
+    });
+
+    let elective=0;
+    all.forEach((c,i)=>{
+      if(used.has(i)||elective>=90)return;
+      const take=Math.min(hp(c),90-elective);
+      if(take<=0)return;
+      elective+=take;
+      rows.push({name:c.name||c.title||'Valfri kurs',hp:take,term:4,status:'credited',
+        sourceName:c.name||c.title||'',sourceUniversity:c.university||c.institution||'',
+        degreeBucket:'elective'});
+    });
+
+    if(elective<90){
+      rows.push({name:'Valfria kurser',hp:90-elective,term:4,status:'remaining',degreeBucket:'elective'});
+    }
+
+    const credited=Math.min(180,core+elective);
+    const snap={
+      version:'v563',type:'degree',verifiedRule:true,ruleId:rule.id,
+      selection:{subject:'Psykologi',university:'Göteborgs universitet',degree:'Filosofie kandidatexamen'},
+      program:{id:rule.id,name:'Filosofie kandidatexamen i psykologi',university:'Göteborgs universitet'},
+      rows,creditedHp:credited,remainingHp:180-credited,totalHp:180,
+      degreeBreakdown:{psychologyCore:core,electives:elective},
+      wording:{credited:'Kan räknas in i examen',remaining:'Återstår'},
+      meritSource:'v563-unified'
+    };
+    sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(snap));
+    return snap;
+  };
+
+  function isGuPsychDetail(){
+    if(document.querySelector('.screen.active')?.id!=='universityDetail')return false;
+    const host=document.getElementById('universityDetailContent');
+    const t=Q(host?.innerText||'');
+    return t.includes('goteborgs universitet')&&t.includes('psykologi')&&
+      (t.includes('fristaende vag')||t.includes('kandidatexamen i psykologi'));
+  }
+
+  function syncGuPsychDetail(){
+    if(!isGuPsychDetail())return;
+    const snap=window.buildGuPsychologyDegreePlan?.();
+    if(!snap)return;
+
+    const host=document.getElementById('universityDetailContent');
+    if(!host)return;
+
+    // Keep the detail page and Planner on exactly the same rule result.
+    const banner=[...host.querySelectorAll('div')].find(el=>
+      /hp\s*kan räknas/i.test(el.innerText||'') && /hp\s*kvar/i.test(el.innerText||'')
+    );
+    if(banner){
+      banner.innerHTML=`<strong>${String(snap.creditedHp).replace('.',',')} hp kan räknas in i examen · ${String(snap.remainingHp).replace('.',',')} hp kvar</strong>`;
+    }
+
+    const cards=[...host.querySelectorAll('div')];
+    const creditCard=cards.find(el=>/Tillgodoräknat/i.test(el.innerText||'')&&el.querySelector('strong'));
+    const remainCard=cards.find(el=>/(^|\n)Kvar(\n|$)/i.test(el.innerText||'')&&el.querySelector('strong'));
+    if(creditCard){
+      const label=[...creditCard.querySelectorAll('*')].find(x=>/^Tillgodoräknat$/i.test((x.textContent||'').trim()));
+      if(label)label.textContent='Kan räknas in i examen';
+      const strong=creditCard.querySelector('strong');
+      if(strong)strong.textContent=`${String(snap.creditedHp).replace('.',',')} hp`;
+    }
+    if(remainCard){
+      const strong=remainCard.querySelector('strong');
+      if(strong)strong.textContent=`${String(snap.remainingHp).replace('.',',')} hp`;
+    }
+
+    try{
+      sessionStorage.setItem('studielots_visible_degree_totals',JSON.stringify({
+        creditedHp:snap.creditedHp,remainingHp:snap.remainingHp,totalHp:180
+      }));
+    }catch(e){}
+  }
+
+  document.addEventListener('studielots:screen-rendered',e=>{
+    if(e?.detail?.screen==='universityDetail')requestAnimationFrame(syncGuPsychDetail);
+  });
+
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('button,a');
+    if(!b||!isGuPsychDetail())return;
+    const t=Q(b.textContent);
+    if(t.includes('skapa plan')||t.includes('planeraren')){
+      const snap=window.buildGuPsychologyDegreePlan?.();
+      if(snap){
+        sessionStorage.setItem('studielots_visible_degree_totals',JSON.stringify({
+          creditedHp:snap.creditedHp,remainingHp:snap.remainingHp,totalHp:180
+        }));
+      }
+    }
+  },true);
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v563',
+    unifiedImportedMeritSource:true,
+    guPsychDetailPlannerSameRule:true};
+})();
+</script>
+
+<script>
+/* v564 — global unified setup for all universities, degrees and programmes */
+(function(){
+  const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+  const Q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+
+  /* ------------------------------------------------------------
+     1. ONE merit source for the entire app
+  ------------------------------------------------------------ */
+  function importedMerits(){
+    if(typeof window.__studielotsImportedCourses==='function'){
+      try{
+        const x=window.__studielotsImportedCourses();
+        if(Array.isArray(x))return x;
+      }catch(e){}
+    }
+
+    const pool=[];
+    try{if(typeof getStoredCourses==='function')pool.push(...A(getStoredCourses()))}catch(e){}
+    try{pool.push(...A(JSON.parse(sessionStorage.getItem('examensmatch_courses')||'[]')))}catch(e){}
+    try{pool.push(...A(JSON.parse(localStorage.getItem('lotsen_courses')||'[]')))}catch(e){}
+    [
+      window.userCourses,window.importedCourses,window.ladokCourses,
+      window.courses,window.merits,window.appState?.courses,
+      window.state?.courses,window.__studielotsState?.courses
+    ].forEach(x=>pool.push(...A(x)));
+
+    const seen=new Map();
+    pool.forEach(c=>{
+      if(!c)return;
+      const name=Q(c.name||c.title||c.courseName||c.kursnamn);
+      const code=Q(c.code||c.courseCode||c.kurskod);
+      const hp=N(c.hp||c.credits||c.points);
+      const uni=Q(c.university||c.institution||c.larosate);
+      if(!name&&!code)return;
+      const key=(code||name)+'|'+hp+'|'+uni;
+      const prev=seen.get(key);
+      if(!prev)seen.set(key,c);
+      else{
+        const richness=o=>Object.values(o||{}).filter(v=>v!==null&&v!==undefined&&v!=='').length;
+        if(richness(c)>richness(prev))seen.set(key,c);
+      }
+    });
+    return [...seen.values()];
+  }
+  window.__studielotsImportedMerits=importedMerits;
+
+  /* ------------------------------------------------------------
+     2. ONE canonical result shape everywhere
+  ------------------------------------------------------------ */
+  function normalizeResult(raw={},ctx={}){
+    const total=N(raw.totalHp||ctx.totalHp||ctx.program?.hp||180);
+    const credited=Math.max(0,Math.min(total,N(raw.creditedHp||raw.possibleHp||raw.matchedHp||0)));
+    const remaining=Math.max(0,Number.isFinite(Number(raw.remainingHp))
+      ? N(raw.remainingHp)
+      : total-credited);
+
+    return {
+      version:'v564',
+      kind:ctx.kind||raw.kind||'program',
+      university:ctx.university||raw.university||ctx.program?.university||'',
+      subject:ctx.subject||raw.subject||ctx.program?.subject||'',
+      programId:ctx.program?.id||raw.programId||'',
+      programCode:ctx.program?.code||ctx.program?.officialCode||raw.programCode||'',
+      programName:ctx.program?.name||raw.programName||'',
+      totalHp:total,
+      creditedHp:credited,
+      remainingHp:remaining,
+      matches:A(raw.matches),
+      rows:A(raw.rows||raw.requirements||ctx.rows),
+      verifiedRule:Boolean(raw.verifiedRule||ctx.verifiedRule),
+      ruleId:raw.ruleId||ctx.ruleId||'',
+      wording:ctx.kind==='degree'
+        ? {credited:'Kan räknas in i examen',remaining:'Återstår'}
+        : {credited:'Möjligt tillgodoräknande',remaining:'Återstår att läsa'}
+    };
+  }
+
+  /* ------------------------------------------------------------
+     3. SAME programme structure extraction everywhere
+  ------------------------------------------------------------ */
+  function programmeRows(program,path){
+    const out=[],seen=new Set();
+    const add=(x,t)=>{
+      if(!x||N(x.hp)<=0)return;
+      const key=Q(x.code||x.name||x.title||x.label)+'|'+N(x.hp)+'|'+(x.term||x.semester||x.year||t||'');
+      if(seen.has(key))return;
+      seen.add(key);
+      out.push({
+        name:x.name||x.title||x.label||'Kurs',
+        code:x.code||x.courseCode||'',
+        hp:N(x.hp),
+        subject:x.subject||x.mainField||'',
+        level:x.level||x.progression||x.educationLevel||'',
+        term:Number(x.term||x.semester||x.year||t)||null,
+        distance:x.distance===true,
+        startDate:x.startDate||x.courseStart||x.nextStart||'',
+        nextOffering:x.nextOffering||'',
+        applicationOpen:x.applicationOpen===true
+      });
+    };
+
+    A(program?.courses).forEach(x=>add(x));
+    ['verifiedOverviewCourses','courseStructure','programStructure','programmeStructure','requiredCourses'].forEach(k=>{
+      const v=program?.[k];
+      if(Array.isArray(v))v.forEach(x=>add(x));
+      else if(v&&typeof v==='object'){
+        Object.entries(v).forEach(([t,xs])=>A(xs).forEach(x=>add(x,t.match(/\d+/)?.[0])));
+      }
+    });
+
+    if(!out.length){
+      ['courses','courseStructure','requiredCourses','requirements','requiredMissing'].forEach(k=>{
+        const v=path?.[k];
+        if(Array.isArray(v))v.forEach(x=>add(x));
+        else if(v&&typeof v==='object'){
+          Object.entries(v).forEach(([t,xs])=>A(xs).forEach(x=>add(x,t.match(/\d+/)?.[0])));
+        }
+      });
+    }
+    return out.sort((a,b)=>(a.term||99)-(b.term||99));
+  }
+
+  /* ------------------------------------------------------------
+     4. SAME generic programme matching everywhere
+        (verified degree engines can override this)
+  ------------------------------------------------------------ */
+  function genericProgramResult(program,path){
+    let raw=null;
+    try{
+      if(typeof window.estimateProgram==='function')raw=window.estimateProgram(program);
+    }catch(e){}
+    if(!raw){
+      try{
+        if(typeof window.__studielotsEstimateAdvancedTransfer==='function'){
+          const x=window.__studielotsEstimateAdvancedTransfer(program);
+          raw={
+            creditedHp:N(x?.possibleHp),
+            remainingHp:Math.max(0,N(program?.hp)-N(x?.possibleHp)),
+            matches:A(x?.matches)
+          };
+        }
+      }catch(e){}
+    }
+    return normalizeResult(raw||{},{
+      kind:'program',
+      university:program?.university||'',
+      subject:program?.subject||program?.track||'',
+      program,
+      rows:programmeRows(program,path),
+      totalHp:N(program?.hp)
+    });
+  }
+
+  /* ------------------------------------------------------------
+     5. VERIFIED DEGREE RULE ROUTER
+  ------------------------------------------------------------ */
+  function verifiedDegreeResult(subject,university){
+    const s=Q(subject),u=Q(university);
+
+    // Existing specialised builders remain authoritative.
+    try{
+      if(u.includes('goteborgs universitet')&&s.includes('psykologi')&&
+         typeof window.buildGuPsychologyDegreePlan==='function'){
+        const x=window.buildGuPsychologyDegreePlan();
+        return normalizeResult(x,{kind:'degree',verifiedRule:true,ruleId:x?.ruleId});
+      }
+      if(u.includes('goteborgs universitet')&&s.includes('foretagsekonomi')&&
+         typeof window.buildGuBusinessDegreePlan==='function'){
+        const x=window.buildGuBusinessDegreePlan();
+        return normalizeResult(x,{kind:'degree',verifiedRule:true,ruleId:x?.ruleId});
+      }
+      if(u.includes('goteborgs universitet')&&s.includes('idrottsvetenskap')&&
+         typeof window.buildGuSportScienceDegreePlan==='function'){
+        const x=window.buildGuSportScienceDegreePlan();
+        return normalizeResult(x,{kind:'degree',verifiedRule:true,ruleId:x?.ruleId});
+      }
+    }catch(e){}
+    return null;
+  }
+
+  /* ------------------------------------------------------------
+     6. ONE current-result resolver for EVERY view
+  ------------------------------------------------------------ */
+  function currentContext(){
+    const active=document.querySelector('.screen.active')?.id||'';
+    let selection={};
+    try{selection=JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){}
+
+    let program=null,path=null,subject=selection.subject||'',university=selection.university||'';
+
+    if(active==='universityDetail'){
+      try{
+        const key=sessionStorage.getItem('lotsen_detail_key')||'';
+        const profile=sessionStorage.getItem('lotsen_preferred_profile')||'';
+        const o=key&&typeof opportunityByKey==='function'?opportunityByKey(key):null;
+        subject=o?.subject||subject;
+        if(typeof studyPlanPathForProfile==='function')path=studyPlanPathForProfile(profile,subject);
+        if(!path&&typeof bestV21Path==='function')path=bestV21Path(profile,subject);
+        program=path?.program||null;
+        university=path?.provider||program?.university||university||profile;
+        return {kind:'degree',active,selection,program,path,subject,university};
+      }catch(e){}
+    }
+
+    if(active==='programMatch'||selection.source==='program'){
+      try{
+        const id=sessionStorage.getItem('lotsen_selected_program')||selection.programId||'';
+        program=A(window.programCatalog).find(x=>String(x.id||'')===String(id))||
+          A(window.programCatalog).find(x=>selection.programCode&&String(x.code||x.officialCode||'')===String(selection.programCode))||null;
+      }catch(e){}
+      university=program?.university||university;
+      subject=program?.subject||program?.track||subject;
+      return {kind:'program',active,selection,program,path:{program,provider:university},subject,university};
+    }
+
+    return {kind:selection.source==='opportunity'?'degree':'program',active,selection,program,path,subject,university};
+  }
+
+  function currentResult(){
+    const ctx=currentContext();
+
+    if(ctx.kind==='degree'){
+      const verified=verifiedDegreeResult(ctx.subject,ctx.university);
+      if(verified)return verified;
+
+      // Unverified degree route: use current canonical engine, but keep degree wording.
+      try{
+        const c=window.__studielotsCanonicalMatch?.current?.();
+        if(c){
+          return normalizeResult(c,{
+            kind:'degree',
+            university:ctx.university,
+            subject:ctx.subject,
+            program:ctx.program,
+            rows:programmeRows(ctx.program,ctx.path),
+            totalHp:N(ctx.program?.hp)||180
+          });
+        }
+      }catch(e){}
+    }
+
+    if(ctx.program)return genericProgramResult(ctx.program,ctx.path);
+    return null;
+  }
+
+  window.__studielotsUnifiedResult={
+    version:'v564',
+    importedMerits,
+    currentContext,
+    currentResult,
+    normalizeResult,
+    programmeRows
+  };
+
+  /* ------------------------------------------------------------
+     7. SAME snapshot / Planner handoff everywhere
+  ------------------------------------------------------------ */
+  function saveUnifiedSnapshot(){
+    const r=currentResult();
+    if(!r)return null;
+
+    const snap={
+      version:'v564',
+      kind:r.kind,
+      verifiedRule:r.verifiedRule,
+      ruleId:r.ruleId,
+      selection:{
+        source:r.kind==='degree'?'opportunity':'program',
+        subject:r.subject,
+        university:r.university,
+        programId:r.programId,
+        programCode:r.programCode,
+        programName:r.programName
+      },
+      program:{
+        id:r.programId,
+        code:r.programCode,
+        name:r.programName||r.subject,
+        university:r.university
+      },
+      rows:A(r.rows),
+      matches:A(r.matches),
+      creditedHp:r.creditedHp,
+      remainingHp:r.remainingHp,
+      totalHp:r.totalHp,
+      wording:r.wording,
+      sourceOfTruth:'v564-unified'
+    };
+
+    try{
+      sessionStorage.setItem('studielots_planner_selection',JSON.stringify(snap.selection));
+      sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(snap));
+      sessionStorage.setItem('studielots_visible_degree_totals',JSON.stringify({
+        creditedHp:r.creditedHp,remainingHp:r.remainingHp,totalHp:r.totalHp
+      }));
+    }catch(e){}
+    return snap;
+  }
+
+  window.__studielotsSaveUnifiedSnapshot=saveUnifiedSnapshot;
+
+  document.addEventListener('click',e=>{
+    const el=e.target.closest('button,a');
+    if(!el)return;
+    const t=Q(el.textContent);
+    if(t.includes('skapa plan')||t.includes('planeraren')){
+      saveUnifiedSnapshot();
+    }
+  },true);
+
+  /* ------------------------------------------------------------
+     8. SAME labels in detail + Planner
+  ------------------------------------------------------------ */
+  function syncLabels(){
+    const r=currentResult();
+    if(!r)return;
+
+    if(document.querySelector('.screen.active')?.id==='universityDetail'){
+      const host=document.getElementById('universityDetailContent');
+      if(!host)return;
+
+      const banner=[...host.querySelectorAll('div')].find(el=>
+        /hp\s*kan räknas/i.test(el.innerText||'')&&/hp\s*kvar/i.test(el.innerText||'')
+      );
+      if(banner){
+        const label=r.kind==='degree'?'kan räknas in i examen':'möjligt tillgodoräknande';
+        banner.innerHTML=`<strong>${String(r.creditedHp).replace('.',',')} hp ${label} · ${String(r.remainingHp).replace('.',',')} hp kvar</strong>`;
+      }
+
+      const cards=[...host.querySelectorAll('div')];
+      const creditCard=cards.find(el=>/Tillgodoräknat|Kan räknas in i examen/i.test(el.innerText||'')&&el.querySelector('strong'));
+      const remainCard=cards.find(el=>/(^|\n)Kvar(\n|$)/i.test(el.innerText||'')&&el.querySelector('strong'));
+      if(creditCard){
+        const label=[...creditCard.querySelectorAll('*')].find(x=>/^(Tillgodoräknat|Kan räknas in i examen)$/i.test((x.textContent||'').trim()));
+        if(label)label.textContent=r.wording.credited;
+        const strong=creditCard.querySelector('strong');
+        if(strong)strong.textContent=`${String(r.creditedHp).replace('.',',')} hp`;
+      }
+      if(remainCard){
+        const strong=remainCard.querySelector('strong');
+        if(strong)strong.textContent=`${String(r.remainingHp).replace('.',',')} hp`;
+      }
+    }
+  }
+
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(syncLabels));
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v564',
+    unifiedAllUniversities:true,
+    unifiedAllPrograms:true,
+    unifiedAllDegrees:true,
+    oneMeritSource:true,
+    onePlannerSnapshot:true,
+    degreeProgramWordingSeparated:true};
+})();
+</script>
 </body>
 </html>
