@@ -33131,5 +33131,282 @@ body{
   max-height:none !important;
 }
 </style>
+
+<script>
+/* v543 — deduplicate faster alternatives: one alternative course may replace one requirement only */
+(function(){
+  const q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+
+  function dedupeAlternativeCards(){
+    const active=document.querySelector('.screen.active');
+    if(!active)return;
+
+    const cards=[...active.querySelectorAll('.faster-alternative,.alternative-card,.possible-faster-alternative')];
+    if(!cards.length){
+      // Compatibility with legacy markup: locate blocks by their visible heading.
+      const all=[...active.querySelectorAll('div')].filter(x=>{
+        const t=(x.firstElementChild?.textContent||'').trim().toUpperCase();
+        return t==='MÖJLIGT SNABBARE ALTERNATIV';
+      });
+      all.forEach(x=>x.classList.add('v543-alt-card'));
+    }
+
+    const xs=[...active.querySelectorAll('.faster-alternative,.alternative-card,.possible-faster-alternative,.v543-alt-card')];
+    const used=new Set();
+
+    xs.forEach(card=>{
+      // Course identity = alternative course title + hp.  Do not let the same
+      // course be offered repeatedly against several different requirements.
+      const lines=(card.innerText||'').split('\n').map(s=>s.trim()).filter(Boolean);
+      const title=lines.find(s=>!/MÖJLIGT SNABBARE ALTERNATIV/i.test(s) && /\d+(?:[,.]\d+)?\s*hp/i.test(s)) || lines[1] || '';
+      const key=q(title.replace(/\bår\s*\d+\b/ig,''));
+      if(!key)return;
+      if(used.has(key)){
+        card.remove();
+      }else{
+        used.add(key);
+      }
+    });
+  }
+
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(dedupeAlternativeCards));
+  const mo=new MutationObserver(()=>requestAnimationFrame(dedupeAlternativeCards));
+  mo.observe(document.documentElement,{subtree:true,childList:true});
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v543',dedupeFasterAlternatives:true};
+})();
+</script>
+<style>
+/* The faster alternative is secondary information; keep it compact. */
+.v543-alt-card,.faster-alternative,.alternative-card,.possible-faster-alternative{
+  margin-top:10px !important;
+  padding:12px 14px !important;
+}
+</style>
+
+<script>
+/* v544 — planner single truth: real credited hp + classic course/alternative layout */
+(function(){
+  const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+  const F=v=>N(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
+  const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const Q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+
+  function selection(){try{return JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){return{}}}
+
+  function programme(){
+    const s=selection(), cat=A(window.programCatalog);
+    if(s.source==='program'){
+      return cat.find(x=>String(x.id||'')===String(s.programId||''))||
+             cat.find(x=>s.programCode&&String(x.code||x.officialCode||'')===String(s.programCode))||null;
+    }
+    let o=null,path=null;
+    try{if(s.opportunityKey&&typeof opportunityByKey==='function')o=opportunityByKey(s.opportunityKey)}catch(e){}
+    const profile=s.profileId||(()=>{try{return sessionStorage.getItem('lotsen_preferred_profile')||s.university||''}catch(e){return s.university||''}})();
+    try{if(typeof studyPlanPathForProfile==='function')path=studyPlanPathForProfile(profile,o?.subject||s.subject)}catch(e){}
+    try{if(!path&&typeof bestV21Path==='function')path=bestV21Path(profile,o?.subject||s.subject)}catch(e){}
+    return path?.program||null;
+  }
+
+  function rows(p){
+    const out=[],seen=new Set();
+    const add=(x,t)=>{
+      if(!x||N(x.hp)<=0)return;
+      const key=Q(x.code||x.name||x.title||x.label)+'|'+N(x.hp)+'|'+(x.term||x.semester||x.year||t||'');
+      if(seen.has(key))return;seen.add(key);
+      out.push({...x,_term:Number(x.term||x.semester||x.year||t)||null});
+    };
+    A(p?.courses).forEach(x=>add(x));
+    ['verifiedOverviewCourses','courseStructure','programStructure','programmeStructure','requiredCourses'].forEach(k=>{
+      const v=p?.[k];
+      if(Array.isArray(v))v.forEach(x=>add(x));
+      else if(v&&typeof v==='object')Object.entries(v).forEach(([t,xs])=>A(xs).forEach(x=>add(x,t.match(/\d+/)?.[0])));
+    });
+    return out.sort((a,b)=>(a._term||99)-(b._term||99));
+  }
+
+  function fallback(p,s){
+    const uni=Q(p?.university||s?.university||''),txt=Q(`${p?.name||''} ${s?.subject||''}`);
+    if(!/lund/.test(uni)||!/(ekonomie|foretagsekonomi)/.test(txt))return [];
+    return [
+      {name:'Företagsekonomi: Grundkurs',hp:30,_term:1,subject:'Företagsekonomi'},
+      {name:'Nationalekonomi: Grundkurs',hp:30,_term:2,subject:'Nationalekonomi'},
+      {name:'Statistik: Grundkurs 1',hp:15,_term:3,subject:'Statistik'},
+      {name:'Handelsrätt: Juridisk översiktskurs',hp:15,_term:3,subject:'Juridik'},
+      {name:'Fortsättningskurs inom valt huvudområde',hp:30,_term:4,subject:'Företagsekonomi'},
+      {name:'Valbara kurser / utlandsstudier / praktik',hp:30,_term:5,subject:'Valfritt',isElectiveBlock:true},
+      {name:'Specialisering inom huvudområdet',hp:15,_term:6,subject:'Företagsekonomi'},
+      {name:'Examensarbete inom huvudområdet',hp:15,_term:6,subject:'Företagsekonomi',thesis:true}
+    ];
+  }
+
+  function importedRows(){
+    const out=[];
+    try{
+      const xs=JSON.parse(sessionStorage.getItem('examensmatch_courses')||'[]');
+      A(xs).forEach(x=>out.push(x));
+    }catch(e){}
+    try{
+      const xs=JSON.parse(sessionStorage.getItem('studielots_cross_university_matches')||'[]');
+      A(xs).forEach(x=>out.push({
+        name:x.sourceName,university:x.sourceUniversity,hp:x.hp,
+        _targetName:x.targetName,_explicitMatch:true,_confidence:x.confidence
+      }));
+    }catch(e){}
+    return out;
+  }
+
+  function matchRequirement(req,imports,used){
+    const target=Q(req.name||req.title||req.label),code=Q(req.code);
+    // explicit engine match wins
+    for(let i=0;i<imports.length;i++){
+      const x=imports[i], id='i'+i;
+      if(used.has(id))continue;
+      if(x._explicitMatch && Q(x._targetName) && (Q(x._targetName)===target || Q(x._targetName).includes(target) || target.includes(Q(x._targetName)))){
+        used.add(id);return {yes:true,source:x};
+      }
+    }
+    // conservative direct identity/title match
+    for(let i=0;i<imports.length;i++){
+      const x=imports[i],id='i'+i;
+      if(used.has(id))continue;
+      const xn=Q(x.name||x.courseName||x.title),xc=Q(x.code||x.courseCode);
+      if((code&&xc&&code===xc)||(xn&&target&&(xn===target||xn.includes(target)||target.includes(xn)))){
+        used.add(id);return {yes:true,source:x};
+      }
+    }
+    return {yes:false};
+  }
+
+  function fasterAlternative(req,path,usedAlts){
+    if(typeof window.bestFasterAlternative!=='function')return null;
+    try{
+      const hit=window.bestFasterAlternative(req,path,usedAlts);
+      const c=hit?.course||hit?.alternative||null;
+      if(!c)return null;
+      const id=Q(c.code||c.name)+'|'+N(c.hp);
+      if(!id||usedAlts.has(id))return null;
+      usedAlts.add(id);
+      return {course:c,reason:hit?.reason||'',year:c.year||c.studyYear||''};
+    }catch(e){return null}
+  }
+
+  function currentPath(){
+    const s=selection();let o=null,path=null;
+    try{if(s.opportunityKey&&typeof opportunityByKey==='function')o=opportunityByKey(s.opportunityKey)}catch(e){}
+    const profile=s.profileId||(()=>{try{return sessionStorage.getItem('lotsen_preferred_profile')||s.university||''}catch(e){return s.university||''}})();
+    try{if(typeof studyPlanPathForProfile==='function')path=studyPlanPathForProfile(profile,o?.subject||s.subject)}catch(e){}
+    try{if(!path&&typeof bestV21Path==='function')path=bestV21Path(profile,o?.subject||s.subject)}catch(e){}
+    return path||null;
+  }
+
+  function setSummary(host,credited,total){
+    const remaining=Math.max(0,total-credited);
+    const blocks=[...host.querySelectorAll('div')].filter(el=>{
+      const txt=(el.innerText||'').trim();
+      return /kan räknas in$/i.test(txt)||/^kvar$/i.test(txt)||/hp\s+kan räknas in/i.test(txt);
+    });
+
+    // direct robust search by labels rather than legacy class names
+    const all=[...host.querySelectorAll('div')];
+    const creditCard=all.find(el=>/kan räknas in/i.test(el.innerText||'') && el.querySelector('strong'));
+    const remainingCard=all.find(el=>/(^|\n)kvar(\n|$)/i.test(el.innerText||'') && el.querySelector('strong') && el!==creditCard);
+
+    if(creditCard)creditCard.querySelector('strong').textContent=`${F(credited)} hp`;
+    if(remainingCard)remainingCard.querySelector('strong').textContent=`${F(remaining)} hp`;
+
+    // fallback to the two visible metric cards
+    const strongs=[...host.querySelectorAll('strong')].filter(x=>/\d+\s*hp/i.test(x.textContent||''));
+    if(strongs.length>=2){
+      strongs[0].textContent=`${F(credited)} hp`;
+      strongs[1].textContent=`${F(remaining)} hp`;
+    }
+    return remaining;
+  }
+
+  function build(){
+    if(document.querySelector('.screen.active')?.id!=='studyPlanner')return;
+    const host=document.getElementById('studyPlannerContent');if(!host)return;
+
+    const s=selection(),p=programme(),path=currentPath();
+    let all=rows(p);if(!all.length)all=fallback(p,s);if(!all.length)return;
+
+    const imports=importedRows(),used=new Set(),marks=all.map(r=>matchRequirement(r,imports,used));
+    const credited=marks.reduce((sum,m,i)=>sum+(m.yes?Math.min(N(all[i].hp),N(m.source.hp)||N(all[i].hp)):0),0);
+    const total=N(p?.hp||path?.totalHp||all.reduce((sum,x)=>sum+N(x.hp),0)||180);
+    const remaining=setSummary(host,Math.min(total,credited),total);
+
+    const usedAlts=new Set();
+    let body='',term=null;
+    all.forEach((r,i)=>{
+      if(r._term!==term){term=r._term;body+=`<div class="v544-term"><strong>Termin ${term||''}</strong></div>`}
+      const m=marks[i];
+      body+=`<div class="v544-course ${m.yes?'is-credit':''}">
+        <div class="v544-course-main"><div><strong>${E(r.name||r.title||r.label||'Kurs')}</strong><small>${m.yes?'Kan tillgodoräknas':'Återstår att läsa'}</small></div><b>${F(r.hp)} hp</b></div>`;
+
+      if(!m.yes){
+        const alt=fasterAlternative(r,path,usedAlts);
+        if(alt){
+          body+=`<div class="v544-alt">
+            <span>MÖJLIGT SNABBARE ALTERNATIV</span>
+            <div><strong>${E(alt.course.name||alt.course.title||'Alternativ kurs')} · ${F(alt.course.hp)} hp</strong>${alt.year?`<small>År ${E(alt.year)}</small>`:''}</div>
+            <a href="#" onclick="event.preventDefault();return false;">Visa kurs ↗</a>
+          </div>`;
+        }
+      }
+      body+='</div>';
+    });
+
+    const markup=`<div class="detail-block v544-plan">
+      <div class="v544-head"><div><div class="eyebrow">PLANERAREN</div><h2>Din studieplan</h2></div><span>${F(remaining)} hp kvar</span></div>
+      ${body}
+      <p class="v544-disclaimer">Tillgodoräknanden och möjliga ersättningskurser är preliminära. Slutligt beslut fattas av universitetet. StudieLots visar snabbare alternativ endast när samma kurs inte redan används för ett annat krav.</p>
+    </div>`;
+
+    const old=[...host.querySelectorAll('.v541-plan,.v540-plan,.v537-plan,.detail-block')].find(x=>/Din studieplan|Din återstående studieplan|Studieplan/i.test(x.innerText||''));
+    if(old)old.outerHTML=markup;else host.insertAdjacentHTML('beforeend',markup);
+
+    // Remove legacy repeated disclaimer text from anything still rendered outside our plan.
+    host.querySelectorAll('p,small,div').forEach(el=>{
+      if(el.closest('.v544-plan'))return;
+      const t=(el.textContent||'').trim();
+      if(/^Tillgodoräknandet behöver bekräftas av universitetet\.?$/i.test(t))el.remove();
+    });
+  }
+
+  const old=window.openStudyPlanner;
+  window.openStudyPlanner=function(){
+    const r=typeof old==='function'?old.apply(this,arguments):undefined;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(build)));
+    return r;
+  };
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(()=>requestAnimationFrame(build)));
+  document.addEventListener('click',e=>{
+    if(e.target.closest?.('.lotsen-bottomnav'))setTimeout(build,120);
+  },{passive:true});
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v544',
+    plannerTotalsFromRenderedMatches:true,
+    classicAlternativeLayout:true,
+    singleDisclaimer:true};
+})();
+</script>
+<style>
+.v544-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px}
+.v544-head>span{white-space:nowrap;padding:7px 10px;border-radius:999px;background:#edf5f1;color:#246e61;font-size:.72rem;font-weight:900}
+.v544-term{margin:22px 0 8px;padding-top:16px;border-top:1px solid rgba(20,55,60,.1);color:#2f786b;font-size:1.05rem}
+.v544-course{padding:10px 0 15px}
+.v544-course-main{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.v544-course-main>div{display:flex;flex-direction:column;gap:4px}
+.v544-course-main>div>strong{font-size:1rem}.v544-course-main small{font-size:.75rem;color:#7b838c}.v544-course-main>b{white-space:nowrap}
+.v544-course.is-credit .v544-course-main{background:#f1f7f4;margin:0 -9px;padding:11px 9px;border-radius:12px}
+.v544-course.is-credit small{color:#267565;font-weight:750}
+.v544-alt{margin:13px 0 2px;padding:14px 15px;border-radius:17px;background:#f1f6f4;display:flex;flex-direction:column;gap:7px}
+.v544-alt>span{font-size:.68rem;font-weight:900;letter-spacing:.07em;color:#2d786a}
+.v544-alt>div{display:flex;flex-direction:column;gap:2px}.v544-alt>div>strong{font-size:.98rem}.v544-alt small{font-size:.75rem;color:#7a828a}
+.v544-alt a{font-weight:850;color:#2d786a;text-decoration:none;font-size:.86rem}
+.v544-disclaimer{margin:18px 0 2px;padding-top:14px;border-top:1px solid rgba(20,55,60,.1);font-size:.75rem;line-height:1.45;color:#6f777f}
+</style>
 </body>
 </html>
