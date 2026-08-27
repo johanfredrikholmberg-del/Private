@@ -32203,5 +32203,336 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
   window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v535',plannerAlwaysConcrete:true};
 })();
 </script>
+
+<script>
+/* v536 — cross-university credit matching is university-neutral */
+(function(){
+  const norm=s=>String(s||'').toLocaleLowerCase('sv-SE')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9åäö]+/g,' ').trim();
+  const hp=v=>Number(String(v??0).replace(',','.'))||0;
+  const words=s=>new Set(norm(s).split(/\s+/).filter(x=>x.length>2));
+  const overlap=(a,b)=>{
+    const A=words(a),B=words(b); if(!A.size||!B.size)return 0;
+    let n=0; A.forEach(x=>B.has(x)&&n++);
+    return n/Math.max(1,Math.min(A.size,B.size));
+  };
+  const level=c=>norm(c?.level||c?.educationLevel||c?.cycle||c?.progression||'');
+  const subject=c=>norm(c?.subject||c?.mainField||c?.track||'');
+  const title=c=>String(c?.name||c?.title||'');
+  const code=c=>norm(c?.code||c?.courseCode||'');
+  const university=c=>String(c?.university||c?.provider||c?.institution||'');
+
+  function scoreCourse(source,target){
+    if(!source||!target)return {score:0,confidence:'none',reasons:[]};
+    let score=0,reasons=[];
+    const sh=hp(source.hp),th=hp(target.hp);
+    const hpdiff=Math.abs(sh-th);
+    if(sh&&th){
+      if(hpdiff<0.01){score+=22;reasons.push('samma omfattning');}
+      else if(sh>=th){score+=16;reasons.push('tillräcklig omfattning');}
+      else if(hpdiff<=2.5){score+=8;reasons.push('nära omfattning');}
+      else score-=15;
+    }
+    const nameOverlap=overlap(title(source),title(target));
+    score+=Math.round(nameOverlap*38);
+    if(nameOverlap>=.6)reasons.push('starkt innehålls-/namnöverlapp');
+    else if(nameOverlap>=.35)reasons.push('möjligt innehållsöverlapp');
+
+    const ss=subject(source),ts=subject(target);
+    if(ss&&ts){
+      if(ss===ts){score+=22;reasons.push('samma ämne');}
+      else if(ss.includes(ts)||ts.includes(ss)){score+=14;reasons.push('närliggande ämne');}
+    }
+
+    const sl=level(source),tl=level(target);
+    if(sl&&tl){
+      if(sl===tl){score+=12;reasons.push('samma nivå');}
+      else if((/avancer|a1|a2/.test(tl))&&!(/avancer|a1|a2/.test(sl))) score-=30;
+    }
+
+    // Course code is useful only inside the same institution. Never penalize
+    // a course merely because it comes from another Swedish university.
+    if(code(source)&&code(target)&&code(source)===code(target)){
+      score+= university(source)&&university(target)&&norm(university(source))===norm(university(target)) ? 18 : 5;
+    }
+
+    const confidence=score>=70?'strong':score>=48?'possible':'weak';
+    return {score:Math.max(0,Math.min(100,score)),confidence,reasons,
+      crossUniversity:!!(university(source)&&university(target)&&norm(university(source))!==norm(university(target)))};
+  }
+
+  function importedCourses(){
+    try{
+      const c=JSON.parse(sessionStorage.getItem('examensmatch_courses')||'[]');
+      return Array.isArray(c)?c:[];
+    }catch(e){return []}
+  }
+
+  function bestMatch(target,used=new Set()){
+    let best=null;
+    for(const source of importedCourses()){
+      const id=[norm(university(source)),code(source)||norm(title(source)),hp(source.hp)].join('|');
+      if(used.has(id))continue;
+      const m=scoreCourse(source,target);
+      if(!best||m.score>best.match.score)best={source,target,match:m,id};
+    }
+    return best&&best.match.score>=48?best:null;
+  }
+
+  window.__studielotsCrossUniversityCredit={
+    version:'v536',
+    universityNeutral:true,
+    scoreCourse,
+    bestMatch,
+    importedCourses
+  };
+
+  // Enrich the canonical plan with preliminary matches from any university.
+  const old=window.__studielotsCanonicalStudyPlanHtml;
+  if(typeof old==='function'&&!old.__v536){
+    const wrapped=function(path,required,opts={}){
+      const html=old.apply(this,arguments);
+      const req=Array.isArray(required)?required:[];
+      const used=new Set();
+      const matches=req.map(r=>bestMatch(r,used)).filter(Boolean).filter(x=>{
+        if(x.match.confidence==='strong'){used.add(x.id);return true}
+        return false;
+      });
+      try{
+        sessionStorage.setItem('studielots_cross_university_matches',JSON.stringify(matches.map(x=>({
+          sourceName:title(x.source),sourceUniversity:university(x.source),
+          targetName:title(x.target),hp:Math.min(hp(x.source.hp),hp(x.target.hp)),
+          score:x.match.score,confidence:x.match.confidence,crossUniversity:x.match.crossUniversity
+        }))));
+      }catch(e){}
+      return html;
+    };
+    wrapped.__v536=true;
+    window.__studielotsCanonicalStudyPlanHtml=wrapped;
+  }
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v536',
+    crossUniversityCredit:true,universityNeutralMatching:true};
+})();
+</script>
+
+<script>
+/* v537 — one source of truth for planner totals + always concrete plan */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const hp=v=>Number(String(v??0).replace(',','.'))||0;
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const sum=a=>arr(a).reduce((s,x)=>s+hp(x?.hp),0);
+  const fullRows=p=>{
+    const direct=arr(p?.courses).filter(x=>hp(x?.hp)>0);
+    if(direct.length)return direct;
+    const out=[];
+    ['verifiedOverviewCourses','structure','courseStructure','programmeStructure','programStructure','requirements','requiredCourses'].forEach(k=>{
+      const v=p?.[k];
+      if(Array.isArray(v))out.push(...v.filter(x=>hp(x?.hp)>0));
+      else if(v&&typeof v==='object')Object.values(v).forEach(q=>out.push(...arr(q).filter(x=>hp(x?.hp)>0)));
+    });
+    return out;
+  };
+  function selection(){try{return JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){return{}}}
+  function resolve(){
+    const s=selection(); let p=null,path=null,o=null;
+    if(s.source==='program'){
+      p=arr(window.programCatalog).find(x=>String(x.id)===String(s.programId))||
+        arr(window.programCatalog).find(x=>s.programCode&&String(x.code||x.officialCode)===String(s.programCode));
+      if(p)path={program:p,provider:p.university,totalHp:hp(p.hp)};
+    } else {
+      try{o=typeof opportunityByKey==='function'?opportunityByKey(s.opportunityKey):null}catch(e){}
+      const profile=s.profileId||(()=>{try{return sessionStorage.getItem('lotsen_preferred_profile')||s.university||''}catch(e){return s.university||''}})();
+      try{if(typeof studyPlanPathForProfile==='function')path=studyPlanPathForProfile(profile,o?.subject||s.subject)}catch(e){}
+      try{if(!path&&typeof bestV21Path==='function')path=bestV21Path(profile,o?.subject||s.subject)}catch(e){}
+      p=path?.program||null;
+      if(!p && profile) p=arr(window.programCatalog).find(x=>String(x.id)===String(profile)||String(x.code)===String(profile));
+    }
+    return {s,p,path,o};
+  }
+  function rowsFor(r){
+    const missing=arr(r.path?.requiredMissing).filter(x=>hp(x?.hp)>0);
+    const full=fullRows(r.p);
+    return missing.length?missing:full;
+  }
+  function totals(r,rows){
+    const total=hp(r.p?.hp||r.path?.totalHp||r.o?.hp||180);
+    // Prefer the same path result shown on the detail screen. Never infer 180 credited
+    // merely because requiredMissing happened to be empty.
+    let remaining=Number.isFinite(Number(r.path?.remaining))?hp(r.path.remaining):NaN;
+    let credited=Number.isFinite(Number(r.path?.creditedHp))?hp(r.path.creditedHp):NaN;
+    if(!Number.isFinite(remaining) && Number.isFinite(credited))remaining=Math.max(0,total-credited);
+    if(!Number.isFinite(credited) && Number.isFinite(remaining))credited=Math.max(0,total-remaining);
+    if(!Number.isFinite(remaining)){
+      const missing=arr(r.path?.requiredMissing).filter(x=>hp(x?.hp)>0);
+      remaining=missing.length?Math.min(total,sum(missing)):total;
+      credited=Math.max(0,total-remaining);
+    }
+    return {total,credited:Math.min(total,credited),remaining:Math.max(0,Math.min(total,remaining))};
+  }
+  function fallbackHtml(rows,t){
+    if(!rows.length)return '';
+    let cumulative=0,period=1,body='';
+    rows.forEach((c,i)=>{
+      const ch=hp(c.hp); if(i && cumulative>=30){period++;cumulative=0}
+      if(cumulative===0)body+=`<div class="v537-period"><strong>Period ${period}</strong></div>`;
+      body+=`<div class="v537-row"><span>${esc(c.name||c.title||c.label||'Kurs')}</span><b>${String(ch).replace('.',',')} hp</b></div>`;
+      cumulative+=ch;
+    });
+    return `<div class="detail-block v537-plan"><div class="v537-planhead"><h2>${t.remaining<=0?'Färdig studieplan':'Din studieplan'}</h2><span>${t.remaining<=0?'KLAR':'PLAN'}</span></div>${body}<p class="muted v537-note">Planen utgår från den valda utbildningsstrukturen. Tillgodoräknanden är preliminära tills lärosätet har fattat beslut.</p></div>`;
+  }
+  function render(){
+    if(document.querySelector('.screen.active')?.id!=='studyPlanner')return;
+    const host=document.getElementById('studyPlannerContent'); if(!host)return;
+    const r=resolve(), rows=rowsFor(r), t=totals(r,rows);
+
+    // Force summary and plan to use the SAME totals.
+    const nums=host.querySelectorAll('.planner-stat strong,.stat strong,.metric strong');
+    if(nums.length>=2){
+      nums[0].textContent=`${String(t.credited).replace('.',',')} hp`;
+      nums[1].textContent=`${String(t.remaining).replace('.',',')} hp`;
+    }
+    // Hide leaked internal profile/version IDs.
+    host.querySelectorAll('.muted,small,p').forEach(el=>{
+      if(/^v\d+:/i.test((el.textContent||'').trim()))el.remove();
+    });
+
+    const building=[...host.querySelectorAll('.detail-block')].find(x=>/Studieplan byggs/i.test(x.textContent||''));
+    if(building){
+      let html='';
+      try{html=window.__studielotsPlannerPlanHtml?.({...r.path,program:r.p,remaining:t.remaining,totalHp:t.total},rows,{optimized:true})||''}catch(e){}
+      if(!html)html=fallbackHtml(rows,t);
+      if(html)building.outerHTML=html;
+      else building.innerHTML='<h2>Studieplan</h2><p>Den valda vägen saknar ännu en verifierad kursstruktur. Poängen ovan räknas därför inte som en färdig matchning.</p>';
+    }
+  }
+  const prior=window.openStudyPlanner;
+  window.openStudyPlanner=function(){const x=typeof prior==='function'?prior.apply(this,arguments):undefined;requestAnimationFrame(()=>requestAnimationFrame(render));return x};
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(render));
+  if(document.readyState!=='loading')requestAnimationFrame(render);
+  else document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(render),{once:true});
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v537',plannerSingleSource:true,plannerAlwaysConcrete:true};
+})();
+</script>
+<style>
+.v537-planhead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.v537-planhead span{font-size:.72rem;font-weight:900;letter-spacing:.06em;padding:7px 10px;border-radius:999px;background:#edf5f1;color:#246e61}
+.v537-period{margin:22px 0 8px;color:#2f786b;font-size:1.05rem}
+.v537-row{display:flex;justify-content:space-between;gap:18px;padding:13px 0;border-bottom:1px solid rgba(20,55,60,.10);font-weight:750}
+.v537-row b{white-space:nowrap}.v537-note{margin-top:18px;font-size:.76rem;line-height:1.45}
+</style>
+
+<script>
+/* v538 — show hp remaining directly in programme search */
+(function(){
+  const hp=v=>Number(String(v??0).replace(',','.'))||0;
+  const fmt=v=>hp(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
+
+  function remainingFor(p){
+    if(!p)return null;
+    try{
+      if(typeof estimateProgram==='function'){
+        const r=estimateProgram(p);
+        const remaining=Number(r?.remaining ?? r?.remainingHp ?? r?.hpRemaining);
+        if(Number.isFinite(remaining))return Math.max(0,remaining);
+        const credited=Number(r?.creditedHp ?? r?.mappedHp ?? r?.transferHp);
+        const total=hp(p.hp);
+        if(Number.isFinite(credited)&&total)return Math.max(0,total-credited);
+      }
+    }catch(e){}
+    try{
+      if(typeof evaluateProgramV2==='function'){
+        const r=evaluateProgramV2(p);
+        const remaining=Number(r?.remaining);
+        if(Number.isFinite(remaining))return Math.max(0,remaining);
+      }
+    }catch(e){}
+    return null;
+  }
+
+  function decorate(){
+    const host=document.getElementById('programSearchResults');
+    if(!host)return;
+
+    host.querySelectorAll('.program-hit-v393').forEach(row=>{
+      if(row.querySelector('.v538-hp-left'))return;
+      const key=row.dataset.v393Key||'';
+      const p=window.__v393ProgramHits?.[key];
+      if(!p)return;
+
+      const remaining=remainingFor(p);
+      const badge=document.createElement('span');
+      badge.className='v538-hp-left';
+      badge.textContent=remaining==null?'Ej beräknat':`${fmt(remaining)} hp kvar`;
+
+      const arrow=row.querySelector(':scope > span:last-child');
+      if(arrow)arrow.insertAdjacentElement('beforebegin',badge);
+      else row.appendChild(badge);
+    });
+
+    // Compatibility with older row renderer if it is ever used.
+    host.querySelectorAll('[data-program-id]').forEach(row=>{
+      if(row.querySelector('.v538-hp-left'))return;
+      const id=decodeURIComponent(row.dataset.programId||'');
+      const p=(window.programCatalog||[]).find(x=>String(x.id)===String(id));
+      if(!p)return;
+      const remaining=remainingFor(p);
+      const badge=document.createElement('span');
+      badge.className='v538-hp-left';
+      badge.textContent=remaining==null?'Ej beräknat':`${fmt(remaining)} hp kvar`;
+      const arrow=row.querySelector('.program-row-arrow');
+      if(arrow)arrow.insertAdjacentElement('beforebegin',badge);
+      else row.appendChild(badge);
+    });
+  }
+
+  const oldRender=window.renderProgramSearch;
+  if(typeof oldRender==='function'&&!oldRender.__v538){
+    const wrapped=function(){
+      const out=oldRender.apply(this,arguments);
+      requestAnimationFrame(decorate);
+      return out;
+    };
+    wrapped.__v538=true;
+    window.renderProgramSearch=wrapped;
+    try{renderProgramSearch=wrapped}catch(e){}
+  }
+
+  document.addEventListener('studielots:screen-rendered',e=>{
+    if(e?.detail?.screen==='programMatch')requestAnimationFrame(decorate);
+  });
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v538',programSearchRemainingHp:true};
+})();
+</script>
+<style>
+#programSearchResults .program-hit-v393,
+#programSearchResults [data-program-id]{position:relative;gap:10px}
+.v538-hp-left{
+  flex:0 0 auto;
+  align-self:center;
+  white-space:nowrap;
+  padding:7px 9px;
+  border-radius:999px;
+  background:#eef5f2;
+  color:#256f62;
+  font-size:.72rem;
+  line-height:1;
+  font-weight:850;
+}
+@media(max-width:520px){
+  .v538-hp-left{
+    position:absolute;
+    right:30px;
+    top:11px;
+    font-size:.68rem;
+    padding:6px 8px;
+  }
+  #programSearchResults .program-hit-v393 .uni-name-with-logo,
+  #programSearchResults [data-program-id] .uni-name-with-logo{padding-right:74px}
+}
+</style>
 </body>
 </html>
