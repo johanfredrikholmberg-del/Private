@@ -31423,5 +31423,286 @@ body{touch-action:pan-y!important}
   };
 })();
 </script>
+
+<script>
+/* v556 — planner resolves the exact programme carried from Möjligheter/Program */
+(function(){
+  const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+  const F=v=>N(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
+  const Q=s=>String(s||'').toLocaleLowerCase('sv-SE')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9åäö]+/g,' ').trim();
+  const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  function handoff(){
+    try{
+      return JSON.parse(
+        sessionStorage.getItem('studielots_planner_clean_handoff') ||
+        sessionStorage.getItem('studielots_planner_frozen_handoff') ||
+        'null'
+      );
+    }catch(e){return null}
+  }
+
+  function selection(){
+    const h=handoff();
+    if(h?.selection)return h.selection;
+    try{return JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){return{}}
+  }
+
+  function findProgram(s){
+    const cat=A(window.programCatalog);
+
+    // 1. Exact programme identity passed from the previous view.
+    if(s?.programId){
+      const p=cat.find(x=>String(x.id||'')===String(s.programId));
+      if(p)return p;
+    }
+    if(s?.programCode){
+      const p=cat.find(x=>String(x.code||x.officialCode||'')===String(s.programCode));
+      if(p)return p;
+    }
+
+    // 2. Programme name + university.
+    if(s?.programName){
+      const p=cat.find(x=>
+        Q(x.name)===Q(s.programName) &&
+        (!s.university || Q(x.university)===Q(s.university))
+      );
+      if(p)return p;
+    }
+
+    // 3. Re-resolve opportunity only as fallback.
+    let o=null,path=null;
+    try{
+      if(s?.opportunityKey&&typeof opportunityByKey==='function'){
+        o=opportunityByKey(s.opportunityKey);
+      }
+    }catch(e){}
+    const profile=s?.profileId||(()=>{
+      try{return sessionStorage.getItem('lotsen_preferred_profile')||s?.university||''}
+      catch(e){return s?.university||''}
+    })();
+
+    try{
+      if(typeof studyPlanPathForProfile==='function'){
+        path=studyPlanPathForProfile(profile,o?.subject||s?.subject);
+      }
+    }catch(e){}
+    try{
+      if(!path&&typeof bestV21Path==='function'){
+        path=bestV21Path(profile,o?.subject||s?.subject);
+      }
+    }catch(e){}
+
+    return path?.program||null;
+  }
+
+  function resolvePath(s,p){
+    let o=null,path=null;
+    try{
+      if(s?.opportunityKey&&typeof opportunityByKey==='function'){
+        o=opportunityByKey(s.opportunityKey);
+      }
+    }catch(e){}
+    const profile=s?.profileId||(()=>{
+      try{return sessionStorage.getItem('lotsen_preferred_profile')||s?.university||''}
+      catch(e){return s?.university||''}
+    })();
+    try{
+      if(typeof studyPlanPathForProfile==='function'){
+        path=studyPlanPathForProfile(profile,o?.subject||s?.subject);
+      }
+    }catch(e){}
+    try{
+      if(!path&&typeof bestV21Path==='function'){
+        path=bestV21Path(profile,o?.subject||s?.subject);
+      }
+    }catch(e){}
+    return path||{program:p,provider:p?.university||s?.university||''};
+  }
+
+  function structure(p,path){
+    const out=[],seen=new Set();
+
+    function add(x,term){
+      if(!x||N(x.hp)<=0)return;
+      const k=Q(x.code||x.name||x.title||x.label)+'|'+N(x.hp)+'|'+(x.term||x.semester||x.year||term||'');
+      if(seen.has(k))return;
+      seen.add(k);
+      out.push({...x,_term:Number(x.term||x.semester||x.year||term)||null});
+    }
+
+    // Full programme structures first.
+    A(p?.courses).forEach(x=>add(x));
+    ['verifiedOverviewCourses','courseStructure','programStructure','programmeStructure','requiredCourses'].forEach(k=>{
+      const v=p?.[k];
+      if(Array.isArray(v))v.forEach(x=>add(x));
+      else if(v&&typeof v==='object'){
+        Object.entries(v).forEach(([t,xs])=>{
+          A(xs).forEach(x=>add(x,t.match(/\d+/)?.[0]));
+        });
+      }
+    });
+
+    // Path data can carry the structure even if the programme object is thin.
+    if(!out.length){
+      ['courses','courseStructure','requiredCourses','requirements'].forEach(k=>{
+        const v=path?.[k];
+        if(Array.isArray(v))v.forEach(x=>add(x));
+        else if(v&&typeof v==='object'){
+          Object.entries(v).forEach(([t,xs])=>A(xs).forEach(x=>add(x,t.match(/\d+/)?.[0])));
+        }
+      });
+    }
+
+    // Last resort: remaining requirements are still better than an empty planner.
+    if(!out.length){
+      A(path?.requiredMissing).forEach(x=>add(x));
+    }
+
+    return out.sort((a,b)=>(a._term||99)-(b._term||99));
+  }
+
+  function matchMap(h){
+    const code=new Map(),name=new Map();
+    A(h?.matches).forEach(m=>{
+      if(Q(m.targetCode))code.set(Q(m.targetCode),m);
+      if(Q(m.targetName))name.set(Q(m.targetName),m);
+    });
+    return {code,name};
+  }
+
+  function altId(c){return Q(c?.code)||`${Q(c?.name)}|${N(c?.hp)}`}
+  function faster(req,path,used){
+    if(typeof window.bestFasterAlternative!=='function')return null;
+    try{
+      const hit=window.bestFasterAlternative(req,path,used);
+      const c=hit?.course||null;
+      if(!c)return null;
+      const id=altId(c);
+      if(!id||used.has(id))return null;
+      used.add(id);
+      return {hit,course:c};
+    }catch(e){return null}
+  }
+
+  function render(){
+    if(document.querySelector('.screen.active')?.id!=='plannerClean')return;
+
+    const host=document.getElementById('plannerCleanContent');
+    if(!host)return;
+
+    const h=handoff()||{};
+    const s=selection();
+    const p=findProgram(s);
+    const path=resolvePath(s,p);
+    const rows=structure(p,path);
+
+    if(!p && !rows.length){
+      host.innerHTML='<div class="detail-block"><h2>Studieplan</h2><p>StudieLots kunde inte hitta den valda utbildningen. Gå tillbaka till Möjligheter eller Program och välj vägen igen.</p></div>';
+      return;
+    }
+
+    if(!rows.length){
+      host.innerHTML='<div class="detail-block"><h2>Studieplan</h2><p>Kursstrukturen för den valda vägen är ännu inte tillräckligt detaljerad för att bygga planen.</p></div>';
+      return;
+    }
+
+    const credited=N(h.creditedHp);
+    const remaining=Number.isFinite(Number(h.remainingHp))
+      ? N(h.remainingHp)
+      : Math.max(0,(N(p?.hp)||rows.reduce((sum,x)=>sum+N(x.hp),0))-credited);
+
+    const mm=matchMap(h);
+    const usedAlt=new Set();
+    let body='',term=null,altCount=0;
+
+    rows.forEach((r,i)=>{
+      const currentTerm=r._term||Math.floor(i/2)+1;
+      if(currentTerm!==term){
+        term=currentTerm;
+        body+=`<div class="v556-term"><strong>Termin ${term}</strong></div>`;
+      }
+
+      const m=(Q(r.code)&&mm.code.get(Q(r.code)))||mm.name.get(Q(r.name||r.title||r.label))||null;
+
+      body+=`<div class="v556-course ${m?'credit':''}">
+        <div class="v556-main">
+          <div>
+            <strong>${E(r.name||r.title||r.label||'Kurs')}</strong>
+            <small>${m?'Kan tillgodoräknas':'Återstår att läsa'}</small>
+            ${m?.sourceName?`<em>${E(m.sourceName)}${m.sourceUniversity?` · ${E(m.sourceUniversity)}`:''}</em>`:''}
+          </div>
+          <b>${F(r.hp)} hp</b>
+        </div>`;
+
+      if(!m){
+        const alt=faster(r,path,usedAlt);
+        if(alt){
+          altCount++;
+          body+=`<div class="v556-alt">
+            <span>${alt.hit?.verifiedEquivalent?'VERIFIERAT SNABBARE ALTERNATIV':'MÖJLIGT SNABBARE ALTERNATIV'}</span>
+            <div><strong>${E(alt.course.name||alt.course.title||'Alternativ kurs')}</strong><b>${F(alt.course.hp)} hp</b></div>
+          </div>`;
+        }
+      }
+      body+='</div>';
+    });
+
+    host.innerHTML=`
+      <section class="v556-selected">
+        <div>
+          <span>VALD VÄG</span>
+          <strong>${E(s.subject||s.programName||p?.name||'Studieplan')}</strong>
+          <small>${E(s.university||p?.university||'')}</small>
+        </div>
+        <button type="button" class="ghost" onclick="window.__v549NewPlan?.()">Ändra</button>
+      </section>
+
+      <section class="v556-summary">
+        <div><strong>${F(credited)} hp</strong><span>kan räknas in</span></div>
+        <div><strong>${F(remaining)} hp</strong><span>kvar</span></div>
+      </section>
+
+      <section class="detail-block v556-plan">
+        <div class="v556-head">
+          <div><h2>Din studieplan</h2><p>Ordinarie väg med möjliga snabbare alternativ.</p></div>
+          ${altCount?`<span>⚡ ${altCount} genväg${altCount===1?'':'ar'}</span>`:''}
+        </div>
+        ${body}
+        <p class="v556-note">Tillgodoräknanden och alternativa kurser är preliminära tills universitetet fattat beslut.</p>
+      </section>`;
+  }
+
+  // Override only the clean planner render lifecycle, not navigation.
+  document.addEventListener('studielots:screen-rendered',e=>{
+    if(e?.detail?.screen==='plannerClean')requestAnimationFrame(render);
+  });
+
+  const priorOpen=window.openStudyPlanner;
+  window.openStudyPlanner=function(){
+    const r=typeof priorOpen==='function'?priorOpen.apply(this,arguments):undefined;
+    requestAnimationFrame(()=>requestAnimationFrame(render));
+    return r;
+  };
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v556',
+    plannerExactProgramResolution:true,
+    plannerStructureFallback:true};
+})();
+</script>
+<style>
+.v556-selected{display:flex;justify-content:space-between;align-items:center;gap:14px;background:#fff;border:1px solid rgba(20,55,60,.09);border-radius:18px;padding:15px 16px;margin-bottom:10px}
+.v556-selected span{display:block;font-size:.69rem;font-weight:850;letter-spacing:.08em;color:#77818b}.v556-selected strong{display:block;margin-top:3px}.v556-selected small{display:block;margin-top:3px;color:#78828a}
+.v556-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.v556-summary>div{background:rgba(22,94,78,.05);border-radius:16px;padding:14px}.v556-summary strong{display:block;font-size:1.25rem;color:#176b5c}.v556-summary span{display:block;color:#707b83;font-size:.78rem}
+.v556-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.v556-head p{margin:3px 0 0;color:#707a82;font-size:.78rem}.v556-head>span{white-space:nowrap;background:#edf6f2;color:#267565;border-radius:999px;padding:7px 10px;font-size:.7rem;font-weight:900}
+.v556-term{margin-top:22px;padding:15px 0 7px;border-top:1px solid rgba(20,55,60,.1);color:#2f786b;font-size:1.04rem}
+.v556-course{padding:11px 0 15px}.v556-main{display:flex;justify-content:space-between;gap:16px}.v556-main>div{display:flex;flex-direction:column;gap:4px}.v556-main small{font-size:.75rem;color:#7a838b}.v556-main em{font-style:normal;font-size:.72rem;color:#6e7880}.v556-main>b{white-space:nowrap}
+.v556-course.credit .v556-main{background:#f1f7f4;border-radius:14px;padding:13px 12px;margin:0 -4px}.v556-course.credit small{color:#267565;font-weight:800}
+.v556-alt{margin:13px 0 1px;padding:14px 15px;border-radius:17px;background:#f2f6f4;display:flex;flex-direction:column;gap:6px}.v556-alt>span{font-size:.66rem;font-weight:900;letter-spacing:.07em;color:#2d786a}.v556-alt>div{display:flex;justify-content:space-between;gap:12px}.v556-alt>div>b{white-space:nowrap}
+.v556-note{margin-top:20px;padding-top:15px;border-top:1px solid rgba(20,55,60,.1);font-size:.75rem;line-height:1.45;color:#707980}
+</style>
 </body>
 </html>
