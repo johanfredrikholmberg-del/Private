@@ -33485,5 +33485,227 @@ body{touch-action:pan-y!important}
 .v565-alt{margin:12px 0 0;padding:13px 14px;border-radius:15px;background:#f3f6f4;display:flex;flex-direction:column;gap:5px}.v565-alt>span{font-size:.64rem;font-weight:900;letter-spacing:.07em;color:#2d786a}.v565-alt>div{display:flex;justify-content:space-between;gap:12px}.v565-alt>div>b{white-space:nowrap}.v565-alt small{font-size:.7rem;color:#747e83}.v565-alt.verified{background:#eaf5f0}
 .v565-note{margin-top:20px;padding-top:15px;border-top:1px solid rgba(20,55,60,.1);font-size:.74rem;line-height:1.45;color:#707980}
 </style>
+
+<script>
+/* v566 — canonical result sync + planner row reconciliation */
+(function(){
+  const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+  const Q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+
+  function snap(){
+    try{return JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(e){return null}
+  }
+  function save(s){
+    sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(s));
+  }
+
+  // Reconcile row statuses against the authoritative hp totals.
+  // This prevents the planner from saying 90/90 while every row says "Återstår att läsa".
+  function reconcile(s){
+    if(!s||!A(s.rows).length)return s;
+    const target=Math.max(0,N(s.creditedHp));
+    let rows=A(s.rows).map(r=>({...r}));
+    let current=rows.filter(r=>r.status==='credited').reduce((a,r)=>a+N(r.hp),0);
+
+    // Prefer explicit match rows, then rows already carrying source evidence.
+    const matchedNames=new Set(A(s.matches).flatMap(m=>[Q(m.targetName),Q(m.name)].filter(Boolean)));
+    const matchedCodes=new Set(A(s.matches).flatMap(m=>[Q(m.targetCode),Q(m.code)].filter(Boolean)));
+
+    rows.sort((a,b)=>{
+      const sa=(a.status==='credited'?4:0)+(matchedCodes.has(Q(a.code))?3:0)+(matchedNames.has(Q(a.name))?2:0)+(a.sourceName?1:0);
+      const sb=(b.status==='credited'?4:0)+(matchedCodes.has(Q(b.code))?3:0)+(matchedNames.has(Q(b.name))?2:0)+(b.sourceName?1:0);
+      return sb-sa;
+    });
+
+    // Only mark enough rows to equal the canonical credited hp.
+    let used=0;
+    for(const r of rows){
+      const hp=N(r.hp);
+      const explicit=r.status==='credited'||matchedCodes.has(Q(r.code))||matchedNames.has(Q(r.name))||Boolean(r.sourceName);
+      if(explicit && used+hp<=target+0.01){
+        r.status='credited'; used+=hp;
+      }else{
+        r.status='remaining';
+      }
+    }
+
+    // If source matching is coarser than program blocks, don't invent a course match.
+    // Preserve canonical totals but leave unmatched remainder as remaining.
+    s.rows=rows.sort((a,b)=>(N(a.term)-N(b.term))||0);
+    return s;
+  }
+
+  function canonicalFromVisibleDetail(){
+    // Read the blue canonical banner if present: "90 hp ... 90 hp kvar"
+    const active=document.querySelector('.screen.active');
+    if(!active)return null;
+    const txt=active.innerText||'';
+    const m=txt.match(/(\d+(?:[,.]\d+)?)\s*hp\s+kan räknas(?:\s+in i examen)?[\s\S]{0,40}?(\d+(?:[,.]\d+)?)\s*hp\s+kvar/i);
+    if(!m)return null;
+    return {credited:N(m[1]),remaining:N(m[2])};
+  }
+
+  function syncDetailCards(){
+    const c=canonicalFromVisibleDetail();
+    if(!c)return;
+    const active=document.querySelector('.screen.active');
+    if(!active)return;
+
+    // Replace legacy numeric cards only inside visible detail page.
+    const els=[...active.querySelectorAll('*')].filter(el=>el.children.length===0);
+    for(const el of els){
+      const t=(el.textContent||'').trim();
+      if(/^(97[,.]5|82[,.]5)\s*hp$/i.test(t)){
+        const parentText=(el.parentElement?.innerText||'').toLowerCase();
+        if(parentText.includes('tillgodoräkn')) el.textContent=c.credited.toLocaleString('sv-SE',{maximumFractionDigits:1})+' hp';
+        else if(parentText.includes('kvar')) el.textContent=c.remaining.toLocaleString('sv-SE',{maximumFractionDigits:1})+' hp';
+      }
+    }
+
+    let s=snap();
+    if(s){
+      s.creditedHp=c.credited;
+      s.remainingHp=c.remaining;
+      save(reconcile(s));
+    }
+  }
+
+  function refreshPlanner(){
+    let s=snap();
+    if(!s)return;
+    s=reconcile(s); save(s);
+    if(typeof window.__studielotsPlannerSnapshotRender==='function'){
+      window.__studielotsPlannerSnapshotRender();
+    }
+  }
+
+  // Run after every screen render and after click navigation settles.
+  document.addEventListener('studielots:screen-rendered',()=>{
+    setTimeout(syncDetailCards,30);
+    setTimeout(refreshPlanner,60);
+  });
+  document.addEventListener('click',()=>{
+    setTimeout(syncDetailCards,80);
+    setTimeout(refreshPlanner,120);
+  },true);
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v566',
+    canonicalDetailPlannerSync:true,
+    plannerRowReconciliation:true};
+})();
+</script>
+<style>
+/* v566 mobile readability: keep the bottom nav from hiding the last course */
+#plannerCleanContent{padding-bottom:180px!important}
+.v565-plan{overflow:visible!important}
+.v565-term-block:last-of-type{padding-bottom:28px}
+</style>
+
+<script>
+/* v567 — tydlig studiekalender + snabbare väg */
+(function(){
+ const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+ const N=v=>Number(String(v??0).replace(',','.'))||0;
+ const fmt=v=>N(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ function snap(){try{return JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(e){return null}}
+ function activePlanner(){
+   const a=document.querySelector('.screen.active');
+   return a && /Din studieplan/i.test(a.innerText||'') ? a : null;
+ }
+ function termData(s){
+   const m=new Map();
+   A(s.rows).forEach(r=>{const t=N(r.term)||1;if(!m.has(t))m.set(t,[]);m.get(t).push(r)});
+   return [...m].sort((a,b)=>a[0]-b[0]).map(([term,rows])=>{
+     const hp=rows.reduce((x,r)=>x+N(r.hp),0);
+     const done=rows.filter(r=>r.status==='credited').reduce((x,r)=>x+N(r.hp),0);
+     return {term,rows,hp,done,left:Math.max(0,hp-done)};
+   });
+ }
+ function faster(s,terms){
+   let arr=A(s.fasterAlternatives||s.alternatives||s.fasterRoute).map(x=>({
+     name:x.name||x.title||x.courseName||'Snabbare alternativ',
+     hp:N(x.hp||x.credits), term:N(x.term||x.targetTerm)||null,
+     save:N(x.savesTerms||x.termSavings||x.savedTerms),
+     reason:x.reason||x.description||''
+   }));
+   A(s.rows).forEach(r=>{
+     const x=r.fasterAlternative||r.alternative;
+     if(x) arr.push({name:x.name||x.title||x.courseName||'Snabbare alternativ',
+       hp:N(x.hp||x.credits),term:N(x.term||r.term)||null,
+       save:N(x.savesTerms||x.termSavings||x.savedTerms),reason:x.reason||x.description||''});
+   });
+   arr=arr.filter(x=>x.name).sort((a,b)=>b.save-a.save);
+   const best=arr[0]||null;
+   return {best,save:best?.save||0};
+ }
+ function icon(t){
+   if(t.left<=.01)return '<i class="v567dot done">✓</i>';
+   if(t.done>0)return '<i class="v567dot part">◐</i>';
+   return '<i class="v567dot"></i>';
+ }
+ function render(){
+   const host=activePlanner(),s=snap(); if(!host||!s)return;
+   host.querySelector('#v567Enhance')?.remove();
+   const terms=termData(s); if(!terms.length)return;
+   const fr=faster(s,terms);
+   const cards=terms.map(t=>`<button class="v567term" data-v567-term="${t.term}">
+      <b>T${t.term}</b><small>Termin ${t.term}</small>${icon(t)}
+      <strong>${fmt(t.hp)} hp</strong>
+      <em>${t.left<=.01?'Kan räknas in':t.done>0?`${fmt(t.left)} hp kvar`:'Återstår'}</em>
+   </button>`).join('');
+   const fast=fr.best ? `
+     <section class="v567fast">
+       <div class="v567fasttop"><span>⚡</span><div><small>SNABBARE VÄG TILL EXAMEN</small>
+       <h3>${fr.save>0?`Bli klar ${fr.save} termin${fr.save===1?'':'er'} tidigare`:'Snabbare alternativ hittat'}</h3></div></div>
+       <div class="v567rec"><small>REKOMMENDERAD SNABBARE VÄG</small>
+         <b>${esc(fr.best.name)}${fr.best.hp?` · ${fmt(fr.best.hp)} hp`:''}</b>
+         ${fr.best.term?`<span>Läggs i termin ${fr.best.term}</span>`:''}
+         ${fr.best.reason?`<p>${esc(fr.best.reason)}</p>`:''}
+       </div>
+       ${fr.save>0?`<div class="v567cmp"><div><small>Ordinarie</small><b>${terms.length} terminer</b></div><span>→</span>
+       <div><small>Snabbare väg</small><b>${Math.max(1,terms.length-fr.save)} terminer</b></div></div>`:''}
+       <button class="v567show">Visa snabbare väg i planen</button>
+     </section>` : `
+     <section class="v567fast quiet"><div class="v567fasttop"><span>⚡</span><div>
+       <small>SNABBARE VÄG TILL EXAMEN</small><h3>Ingen verifierbar genväg hittad ännu</h3></div></div>
+       <p>En snabbare väg visas här först när kursunderlaget faktiskt stödjer att studietiden kan kortas.</p>
+     </section>`;
+   const el=document.createElement('div'); el.id='v567Enhance';
+   el.innerHTML=`<section class="v567cal"><div class="v567head"><div><small>DIN STUDIEKALENDER</small>
+     <h3>Vägen termin för termin</h3></div><span>${fmt(s.remainingHp)} hp kvar</span></div>
+     <div class="v567strip">${cards}</div>
+     <div class="v567legend"><span><i class="g"></i>Kan räknas in</span><span><i class="y"></i>Delvis</span><span><i></i>Återstår</span></div>
+     </section>${fast}`;
+   const planLabels=[...host.querySelectorAll('h2,h3,h4')].filter(x=>(x.textContent||'').trim()==='Din studieplan');
+   const detail=planLabels[planLabels.length-1];
+   const card=detail?.closest('section,.card,[class*="plan"]');
+   if(card&&card.parentElement) card.parentElement.insertBefore(el,card); else host.appendChild(el);
+   el.querySelectorAll('[data-v567-term]').forEach(b=>b.onclick=()=>{
+     const n=b.dataset.v567Term;
+     const t=[...host.querySelectorAll('*')].find(x=>new RegExp('^Termin\\s*'+n+'$','i').test((x.textContent||'').trim()));
+     t?.scrollIntoView({behavior:'smooth',block:'start'});
+   });
+   el.querySelector('.v567show')?.addEventListener('click',()=>{
+     sessionStorage.setItem('studielots_faster_route_selected',JSON.stringify(fr.best));
+     const t=[...host.querySelectorAll('*')].find(x=>/^Termin\s*\d+$/i.test((x.textContent||'').trim()));
+     t?.scrollIntoView({behavior:'smooth',block:'start'});
+   });
+ }
+ document.addEventListener('click',()=>setTimeout(render,180),true);
+ document.addEventListener('studielots:screen-rendered',()=>setTimeout(render,120));
+ setTimeout(render,300);
+ window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v567',plannerCalendarV2:true,fasterRoutePanel:true};
+})();
+</script>
+<style>
+#v567Enhance{display:grid;gap:16px;margin:18px 0 22px}.v567cal,.v567fast{background:#fff;border:1px solid rgba(17,69,59,.11);border-radius:24px;padding:18px;box-shadow:0 9px 28px rgba(20,55,48,.05)}
+.v567head{display:flex;justify-content:space-between;gap:10px}.v567head small,.v567fast small{font-weight:800;letter-spacing:.07em;color:#65717b}.v567head h3,.v567fast h3{margin:4px 0 0;font-size:21px}.v567head>span{height:max-content;background:#edf6f2;color:#176b5d;padding:8px 11px;border-radius:999px;font-weight:800;white-space:nowrap}
+.v567strip{display:flex;gap:9px;overflow-x:auto;padding:16px 1px 10px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.v567term{min-width:106px;border:1px solid #dfe5e3;background:#fff;border-radius:18px;padding:12px 8px;text-align:center;scroll-snap-align:start;color:#102e31}.v567term b,.v567term small,.v567term strong,.v567term em{display:block}.v567term small{font-size:11px;color:#7a8288;margin:3px 0 8px}.v567term strong{font-size:15px;margin-top:7px}.v567term em{font-size:11px;font-style:normal;color:#747e84;margin-top:4px}.v567dot{width:25px;height:25px;border:2px solid #aeb5b5;border-radius:50%;display:grid;place-items:center;margin:auto;font-style:normal}.v567dot.done{background:#2e8b68;border-color:#2e8b68;color:white}.v567dot.part{border-color:#e5ad24;color:#d89500;background:#fff9e8}.v567legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:#69747a}.v567legend i{display:inline-block;width:9px;height:9px;border:1px solid #aaa;border-radius:50%;margin-right:5px}.v567legend .g{background:#2e8b68;border-color:#2e8b68}.v567legend .y{background:#e5ad24;border-color:#e5ad24}
+.v567fast{background:linear-gradient(145deg,#f2faf6,#fffaf0)}.v567fasttop{display:flex;gap:11px}.v567fasttop>span{width:39px;height:39px;border-radius:50%;display:grid;place-items:center;background:#fff0bf;font-size:20px}.v567fasttop small{color:#176b5d}.v567rec{background:#fff;border:1px solid rgba(23,107,93,.15);border-radius:17px;padding:14px;margin-top:15px}.v567rec b,.v567rec span{display:block}.v567rec b{font-size:17px;margin:4px 0}.v567rec span,.v567rec p,.v567fast.quiet p{font-size:14px;color:#68747a}.v567cmp{display:grid;grid-template-columns:1fr auto 1fr;gap:9px;align-items:center;margin-top:13px}.v567cmp div{background:rgba(255,255,255,.75);border-radius:14px;padding:11px}.v567cmp small,.v567cmp b{display:block}.v567show{width:100%;margin-top:13px;border:0;border-radius:15px;background:#176b5d;color:white;padding:14px;font-weight:800;font-size:15px}
+#plannerCleanContent{padding-bottom:190px!important}
+</style>
 </body>
 </html>
