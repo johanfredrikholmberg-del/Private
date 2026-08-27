@@ -32127,5 +32127,81 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
   window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v534',plannerName:'Planeraren',plannerCTA:true};
 })();
 </script>
+
+<script>
+/* v535 — Planeraren always returns a concrete plan when programme structure exists */
+(function(){
+  const arr=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const hp=v=>Number(v||0);
+
+  function fullProgrammeRows(p){
+    const direct=arr(p?.courses).filter(c=>hp(c?.hp)>0);
+    if(direct.length)return direct;
+    const out=[];
+    for(const key of ['structure','courseStructure','programmeStructure','programStructure','requirements','requiredCourses']){
+      const val=p?.[key];
+      if(Array.isArray(val)) out.push(...val.filter(c=>hp(c?.hp)>0));
+      else if(val && typeof val==='object') Object.values(val).forEach(v=>out.push(...arr(v).filter(c=>hp(c?.hp)>0)));
+    }
+    return out;
+  }
+
+  const oldCanonical=window.__studielotsCanonicalStudyPlanHtml;
+  window.__studielotsPlannerPlanHtml=function(path,required,opts={}){
+    let rows=arr(required).filter(c=>hp(c?.hp)>0);
+    const programme=path?.program;
+    const total=hp(programme?.hp||path?.totalHp);
+    const remaining=Number(path?.remaining ?? rows.reduce((s,c)=>s+hp(c.hp),0));
+
+    // If nothing remains, show the underlying programme/exam structure as the completed plan.
+    // If no transfer can be used, required already equals the full structure and is rendered normally.
+    let completed=false;
+    if(!rows.length && remaining<=0){
+      rows=fullProgrammeRows(programme);
+      completed=rows.length>0;
+    }
+    if(!rows.length)return '';
+
+    let html=typeof oldCanonical==='function'?oldCanonical(path,rows,opts):'';
+    if(completed && html){
+      html=html.replace('<h2>Studieplan</h2>','<h2>Färdig studieplan</h2>')
+               .replace('Kurserna visas i rekommenderad ordning.','Programstrukturen visas i rekommenderad ordning. Dina tidigare studier täcker de återstående kraven.')
+               .replace('<span>OPTIMERAD</span>','<span>KLAR</span>');
+    }
+    return html;
+  };
+
+  // Replace the planner's renderer dependency without touching Program/Möjligheter.
+  const oldOpen=window.openStudyPlanner;
+  function patchPlannerAfterRender(){
+    const host=document.getElementById('studyPlannerContent');
+    if(!host)return;
+    const building=host.querySelector('.detail-block h2');
+    if(!building || building.textContent.trim()!=='Studieplan byggs')return;
+    let sel={};try{sel=JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){}
+    let path=null, required=[];
+    try{
+      if(sel.source==='program'){
+        const p=arr(window.programCatalog).find(x=>String(x.id)===String(sel.programId));
+        if(p){ path={program:p,provider:p.university,remaining:hp(p.hp)}; required=fullProgrammeRows(p); }
+      }else if(sel.source==='opportunity'){
+        const o=typeof opportunityByKey==='function'?opportunityByKey(sel.opportunityKey):null;
+        const profile=sel.profileId||sessionStorage.getItem('lotsen_preferred_profile')||'';
+        if(typeof studyPlanPathForProfile==='function') path=studyPlanPathForProfile(profile,o?.subject);
+        if(!path && typeof bestV21Path==='function') path=bestV21Path(profile,o?.subject);
+        required=arr(path?.requiredMissing);
+      }
+      const html=window.__studielotsPlannerPlanHtml(path,required,{optimized:true});
+      if(html) building.closest('.detail-block').outerHTML=html;
+    }catch(e){ console.warn('v535 planner fallback',e); }
+  }
+  window.openStudyPlanner=function(){
+    const r=typeof oldOpen==='function'?oldOpen.apply(this,arguments):undefined;
+    requestAnimationFrame(patchPlannerAfterRender);return r;
+  };
+  document.addEventListener('studielots:screen-rendered',()=>requestAnimationFrame(patchPlannerAfterRender));
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v535',plannerAlwaysConcrete:true};
+})();
+</script>
 </body>
 </html>
