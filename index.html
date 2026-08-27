@@ -33504,5 +33504,293 @@ body{touch-action:pan-y!important}
 .v545-row.credit{background:#f1f7f4;border-radius:14px;padding:13px 12px;margin:3px -4px}.v545-row.credit small{color:#267565;font-weight:800}
 .v545-note{margin-top:20px;padding-top:15px;border-top:1px solid rgba(20,55,60,.1);font-size:.75rem;line-height:1.45;color:#707980}
 </style>
+
+<script>
+/* v546 — one canonical match result for Möjligheter, Program and Planeraren */
+(function(){
+  const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+  const F=v=>N(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
+  const Q=s=>String(s||'').toLocaleLowerCase('sv-SE')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9åäö]+/g,' ').trim();
+  const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  function selection(){
+    try{return JSON.parse(sessionStorage.getItem('studielots_planner_selection')||'{}')}catch(e){return{}}
+  }
+
+  function userCourses(){
+    try{
+      const x=JSON.parse(sessionStorage.getItem('examensmatch_courses')||'[]');
+      if(Array.isArray(x))return x;
+    }catch(e){}
+    try{
+      if(typeof getStoredCourses==='function'){
+        const x=getStoredCourses();
+        if(Array.isArray(x))return x;
+      }
+    }catch(e){}
+    return [];
+  }
+
+  function resolveProgram(sel=selection()){
+    const cat=A(window.programCatalog);
+    if(sel.source==='program'){
+      return cat.find(x=>String(x.id||'')===String(sel.programId||''))||
+             cat.find(x=>sel.programCode&&String(x.code||x.officialCode||'')===String(sel.programCode))||
+             cat.find(x=>sel.programName&&Q(x.name)===Q(sel.programName)&&(!sel.university||Q(x.university)===Q(sel.university)))||null;
+    }
+    let o=null,path=null;
+    try{if(sel.opportunityKey&&typeof opportunityByKey==='function')o=opportunityByKey(sel.opportunityKey)}catch(e){}
+    const profile=sel.profileId||(()=>{try{return sessionStorage.getItem('lotsen_preferred_profile')||sel.university||''}catch(e){return sel.university||''}})();
+    try{if(typeof studyPlanPathForProfile==='function')path=studyPlanPathForProfile(profile,o?.subject||sel.subject)}catch(e){}
+    try{if(!path&&typeof bestV21Path==='function')path=bestV21Path(profile,o?.subject||sel.subject)}catch(e){}
+    return path?.program||null;
+  }
+
+  function structure(program){
+    const out=[],seen=new Set();
+    const add=(x,t)=>{
+      if(!x||N(x.hp)<=0)return;
+      const key=Q(x.code||x.name||x.title||x.label)+'|'+N(x.hp)+'|'+(x.term||x.semester||t||'');
+      if(seen.has(key))return;
+      seen.add(key);
+      out.push({...x,_term:Number(x.term||x.semester||t)||null});
+    };
+    A(program?.courses).forEach(x=>add(x));
+    ['verifiedOverviewCourses','courseStructure','programStructure','programmeStructure','requiredCourses'].forEach(k=>{
+      const v=program?.[k];
+      if(Array.isArray(v))v.forEach(x=>add(x));
+      else if(v&&typeof v==='object'){
+        Object.entries(v).forEach(([t,xs])=>A(xs).forEach(x=>add(x,t.match(/\d+/)?.[0])));
+      }
+    });
+    return out.sort((a,b)=>(a._term||99)-(b._term||99));
+  }
+
+  function scoreCourse(source,target){
+    if(!source||!target)return 0;
+    let score=0;
+    const sn=Q(source.name||source.title), tn=Q(target.name||target.title||target.label);
+    const sc=Q(source.code||source.courseCode), tc=Q(target.code||target.courseCode);
+    const ss=Q(source.subject||source.mainField), ts=Q(target.subject||target.mainField);
+    const sh=N(source.hp), th=N(target.hp);
+
+    if(sc&&tc&&sc===tc)score+=70;
+    if(sn&&tn&&sn===tn)score+=65;
+    else if(sn&&tn&&(sn.includes(tn)||tn.includes(sn)))score+=35;
+    if(ss&&ts&&ss===ts)score+=18;
+    if(sh&&th){
+      if(Math.abs(sh-th)<.01)score+=15;
+      else if(sh>=th)score+=9;
+      else if(Math.abs(sh-th)<=2.5)score+=4;
+    }
+
+    // University is NEVER a negative. Same university gets a tiny confidence bonus only.
+    if(source.university&&target.university&&Q(source.university)===Q(target.university))score+=3;
+    return Math.min(100,score);
+  }
+
+  function canonical(program){
+    if(!program)return {program:null,totalHp:0,creditedHp:0,remainingHp:0,matches:[],requirements:[]};
+
+    const requirements=structure(program);
+    const imported=userCourses();
+    const used=new Set();
+    const matches=[];
+
+    requirements.forEach((req,ri)=>{
+      let best=null;
+      imported.forEach((src,si)=>{
+        if(used.has(si))return;
+        const score=scoreCourse(src,req);
+        if(!best||score>best.score)best={src,si,score};
+      });
+      if(best&&best.score>=65){
+        used.add(best.si);
+        matches.push({
+          requirementIndex:ri,
+          requirement:req,
+          source:best.src,
+          hp:Math.min(N(req.hp),N(best.src.hp)||N(req.hp)),
+          score:best.score,
+          confidence:best.score>=85?'strong':'possible'
+        });
+      }
+    });
+
+    const totalHp=N(program.hp)||requirements.reduce((s,x)=>s+N(x.hp),0);
+    const creditedHp=Math.min(totalHp,matches.reduce((s,x)=>s+N(x.hp),0));
+    const remainingHp=Math.max(0,totalHp-creditedHp);
+
+    return {program,totalHp,creditedHp,remainingHp,matches,requirements};
+  }
+
+  function currentCanonical(){
+    return canonical(resolveProgram());
+  }
+
+  function persist(result){
+    try{
+      sessionStorage.setItem('studielots_canonical_match',JSON.stringify({
+        programId:result.program?.id||'',
+        programCode:result.program?.code||result.program?.officialCode||'',
+        totalHp:result.totalHp,
+        creditedHp:result.creditedHp,
+        remainingHp:result.remainingHp,
+        matches:result.matches.map(m=>({
+          requirementIndex:m.requirementIndex,
+          targetName:m.requirement?.name||m.requirement?.title||'',
+          sourceName:m.source?.name||m.source?.title||'',
+          sourceUniversity:m.source?.university||m.source?.institution||'',
+          hp:m.hp,
+          score:m.score,
+          confidence:m.confidence
+        }))
+      }));
+    }catch(e){}
+  }
+
+  function updateSummary(host,result){
+    if(!host)return;
+
+    // First try explicit metric/stat containers.
+    const statBlocks=[...host.querySelectorAll('.planner-stat,.stat,.metric')];
+    if(statBlocks.length>=2){
+      const a=statBlocks[0].querySelector('strong');
+      const b=statBlocks[1].querySelector('strong');
+      if(a)a.textContent=`${F(result.creditedHp)} hp`;
+      if(b)b.textContent=`${F(result.remainingHp)} hp`;
+    }
+
+    // Then robust text-based fallback for current UI.
+    const cards=[...host.querySelectorAll('div')];
+    const credit=cards.find(el=>/kan räknas in/i.test(el.innerText||'')&&el.querySelector('strong'));
+    const remain=cards.find(el=>/(^|\n)kvar(\n|$)/i.test(el.innerText||'')&&el.querySelector('strong')&&el!==credit);
+    if(credit)credit.querySelector('strong').textContent=`${F(result.creditedHp)} hp`;
+    if(remain)remain.querySelector('strong').textContent=`${F(result.remainingHp)} hp`;
+
+    // Never allow stale 180/0 to survive.
+    [...host.querySelectorAll('strong')].forEach((el,i,all)=>{
+      const t=(el.textContent||'').trim();
+      if(t==='180 hp'&&result.creditedHp!==180){
+        const parent=(el.parentElement?.innerText||'');
+        if(/kan räknas in/i.test(parent))el.textContent=`${F(result.creditedHp)} hp`;
+      }
+      if(t==='0 hp'&&result.remainingHp!==0){
+        const parent=(el.parentElement?.innerText||'');
+        if(/kvar/i.test(parent))el.textContent=`${F(result.remainingHp)} hp`;
+      }
+    });
+  }
+
+  function plannerHtml(result){
+    const matchByReq=new Map(result.matches.map(m=>[m.requirementIndex,m]));
+    let body='',term=null;
+    result.requirements.forEach((r,i)=>{
+      const m=matchByReq.get(i);
+      if(r._term!==term){
+        term=r._term;
+        body+=`<div class="v546-term"><strong>Termin ${term||''}</strong></div>`;
+      }
+      body+=`<div class="v546-course ${m?'is-credit':''}">
+        <div>
+          <strong>${E(r.name||r.title||r.label||'Kurs')}</strong>
+          <small>${m?'Kan tillgodoräknas':'Återstår att läsa'}</small>
+          ${m&&m.source?.name?`<em>${E(m.source.name)}${m.source.university?` · ${E(m.source.university)}`:''}</em>`:''}
+        </div>
+        <b>${F(r.hp)} hp</b>
+      </div>`;
+    });
+
+    return `<div class="detail-block v546-plan">
+      <div class="v546-head">
+        <div><div class="eyebrow">PLANERAREN</div><h2>Din studieplan</h2></div>
+        <span>${F(result.remainingHp)} hp kvar</span>
+      </div>
+      ${body}
+      <p class="v546-note">Kurser markerade ”Kan tillgodoräknas” är en preliminär bedömning baserad på dina importerade meriter. Slutligt beslut fattas av universitetet.</p>
+    </div>`;
+  }
+
+  function renderPlanner(){
+    if(document.querySelector('.screen.active')?.id!=='studyPlanner')return;
+    const host=document.getElementById('studyPlannerContent');
+    if(!host)return;
+    const result=currentCanonical();
+    if(!result.program||!result.requirements.length)return;
+
+    persist(result);
+    updateSummary(host,result);
+
+    host.querySelectorAll('.v537-plan,.v540-plan,.v541-plan,.v544-plan,.v545-plan,.v546-plan').forEach(x=>x.remove());
+    [...host.querySelectorAll('.detail-block')].filter(x=>/Studieplan byggs|Din studieplan|Din återstående studieplan/i.test(x.innerText||'')).forEach(x=>x.remove());
+    host.insertAdjacentHTML('beforeend',plannerHtml(result));
+  }
+
+  function syncAll(){
+    const id=document.querySelector('.screen.active')?.id||'';
+    const result=currentCanonical();
+    if(!result.program)return;
+    persist(result);
+
+    if(id==='studyPlanner')renderPlanner();
+
+    if(id==='programMatch'){
+      updateSummary(document.getElementById('programMatchResult'),result);
+    }
+    if(id==='universityDetail'){
+      updateSummary(document.getElementById('universityDetailContent'),result);
+    }
+  }
+
+  let queued=false;
+  function queue(){
+    if(queued)return;
+    queued=true;
+    requestAnimationFrame(()=>{
+      queued=false;
+      syncAll();
+    });
+  }
+
+  document.addEventListener('studielots:screen-rendered',queue);
+  document.addEventListener('click',e=>{
+    if(e.target.closest?.('.lotsen-bottomnav,.v534-plan-button,.program-hit-v393,[data-program-id]')){
+      setTimeout(queue,50);
+    }
+  },{passive:true});
+
+  const oldOpen=window.openStudyPlanner;
+  window.openStudyPlanner=function(){
+    const r=typeof oldOpen==='function'?oldOpen.apply(this,arguments):undefined;
+    setTimeout(queue,0);
+    return r;
+  };
+
+  window.__studielotsCanonicalMatch={
+    version:'v546',
+    scoreCourse,
+    canonical,
+    current:currentCanonical
+  };
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v546',
+    canonicalMatchEngine:true,
+    oneSourceOfTruth:true};
+})();
+</script>
+<style>
+.v546-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.v546-head>span{white-space:nowrap;padding:7px 10px;border-radius:999px;background:#edf5f1;color:#246e61;font-size:.72rem;font-weight:900}
+.v546-term{margin-top:22px;padding:15px 0 7px;border-top:1px solid rgba(20,55,60,.1);color:#2f786b;font-size:1.05rem}
+.v546-course{display:flex;justify-content:space-between;gap:18px;padding:14px 0}
+.v546-course>div{display:flex;flex-direction:column;gap:4px}
+.v546-course small{font-size:.75rem;color:#7a838b}.v546-course em{font-style:normal;font-size:.72rem;color:#6e787f}
+.v546-course>b{white-space:nowrap}
+.v546-course.is-credit{background:#f1f7f4;border-radius:14px;padding:13px 12px;margin:3px -4px}
+.v546-course.is-credit small{color:#267565;font-weight:800}
+.v546-note{margin-top:20px;padding-top:15px;border-top:1px solid rgba(20,55,60,.1);font-size:.75rem;line-height:1.45;color:#707980}
+</style>
 </body>
 </html>
