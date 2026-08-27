@@ -33873,5 +33873,119 @@ body{touch-action:pan-y!important}
 .v567term.selected{border-color:#2d786a!important;background:#f0f7f4!important;box-shadow:0 0 0 2px rgba(45,120,106,.10)}
 #v567Enhance{margin-bottom:26px}
 </style>
+
+<script>
+/* v569 — Planner dashboard matching approved mockup */
+(function(){
+  const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+  const F=v=>N(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
+  const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  function snap(){try{return JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(e){return null}}
+  function terms(s){
+    const m=new Map();
+    A(s.rows).forEach((r,i)=>{const t=N(r.term)||Math.max(1,Math.floor(i/2)+1);if(!m.has(t))m.set(t,[]);m.get(t).push(r)});
+    return [...m.entries()].sort((a,b)=>a[0]-b[0]).map(([term,rows])=>{
+      const total=rows.reduce((x,r)=>x+N(r.hp),0);
+      const credited=rows.filter(r=>r.status==='credited').reduce((x,r)=>x+N(r.hp),0);
+      return {term,rows,total,credited,left:Math.max(0,total-credited)};
+    });
+  }
+  function faster(s){
+    const a=[];
+    A(s.fasterAlternatives||s.alternatives||s.fasterRoute).forEach(x=>a.push({
+      name:x.name||x.title||x.courseName||'Snabbare alternativ', hp:N(x.hp||x.credits),
+      term:N(x.term||x.targetTerm)||null, save:N(x.savesTerms||x.termSavings||x.savedTerms),
+      reason:x.reason||x.description||''
+    }));
+    A(s.rows).forEach(r=>{const x=r.fasterAlternative||r.alternative;if(x)a.push({
+      name:x.name||x.title||x.courseName||'Snabbare alternativ',hp:N(x.hp||x.credits),
+      term:N(x.term||r.term)||null,save:N(x.savesTerms||x.termSavings||x.savedTerms),
+      reason:x.reason||x.description||''
+    })});
+    return a.sort((x,y)=>y.save-x.save)[0]||null;
+  }
+  function status(t){
+    if(t.left<=.01)return ['done','✓','Kan räknas in'];
+    if(t.credited>0)return ['part','◐','Delvis kvar att läsa'];
+    return ['todo','','Återstår'];
+  }
+  function courseList(rows,mode){
+    const list=A(rows).filter(r=>mode==='all'||(mode==='credited'?r.status==='credited':r.status!=='credited'));
+    if(!list.length)return '<p class="v569-empty">Inget att visa här ännu.</p>';
+    return list.map(r=>`<div class="v569-course ${r.status==='credited'?'credited':''}">
+      <div><strong>${E(r.name||'Kurs')}</strong><small>${r.status==='credited'?'Kan räknas in':'Återstår att läsa'}</small></div>
+      <b>${F(r.hp)} hp</b>
+    </div>`).join('');
+  }
+  function overlay(s,type,term){
+    document.getElementById('v569Overlay')?.remove();
+    let title='',body='';
+    if(type==='credited'){title='Tillgodoräknade kurser';body=courseList(s.rows,'credited')}
+    if(type==='remaining'){title='Krav som återstår';body=courseList(s.rows,'remaining')}
+    if(type==='plan'){
+      title=term?`Termin ${term}`:'Fullständig studieplan';
+      const ts=terms(s).filter(t=>!term||t.term===term);
+      body=ts.map(t=>`<section class="v569-term-detail"><div><strong>Termin ${t.term}</strong><span>${F(t.total)} hp</span></div>${courseList(t.rows,'all')}</section>`).join('');
+    }
+    if(type==='fast'){
+      title='Snabbare väg till examen';
+      const f=faster(s);
+      body=f?`<div class="v569-fast-detail"><span>REKOMMENDERAD SNABBARE VÄG</span><strong>${E(f.name)}${f.hp?` · ${F(f.hp)} hp`:''}</strong>${f.term?`<p>Läggs i termin ${f.term}.</p>`:''}${f.reason?`<p>${E(f.reason)}</p>`:''}${f.save?`<b>${f.save} termin${f.save===1?'':'er'} tidigare</b>`:''}</div>`:'<p>Ingen verifierbar snabbare väg finns ännu.</p>';
+    }
+    const el=document.createElement('div');
+    el.id='v569Overlay';
+    el.innerHTML=`<div class="v569-backdrop"></div><section class="v569-sheet"><header><h2>${title}</h2><button>×</button></header><div>${body}</div></section>`;
+    document.body.appendChild(el);
+    el.querySelector('header button').onclick=()=>el.remove();
+    el.querySelector('.v569-backdrop').onclick=()=>el.remove();
+  }
+  function render(){
+    if(document.querySelector('.screen.active')?.id!=='plannerClean')return;
+    const host=document.getElementById('plannerCleanContent'),s=snap();
+    if(!host||!s)return;
+    const ts=terms(s),f=faster(s),total=N(s.totalHp)||N(s.creditedHp)+N(s.remainingHp)||180;
+    const pct=total?Math.round(N(s.creditedHp)/total*100):0;
+    const cards=ts.map(t=>{const [cls,ico,label]=status(t);return `<button class="v569-t ${cls}" data-term="${t.term}">
+      <strong>T${t.term}</strong><small>Termin ${t.term}</small><i>${ico}</i><b>${F(t.total)} hp</b><em>${label}</em>
+    </button>`}).join('');
+    host.innerHTML=`
+      <section class="v569-choice"><div class="v569-grad">🎓</div><div><strong>${E(s.selection?.subject||s.program?.name||'Studieplan')}</strong><small>${E(s.program?.university||s.selection?.university||'')}</small></div><button onclick="window.__v549NewPlan?.()">Ändra</button></section>
+      <section class="v569-sum">
+        <button data-detail="credited"><strong>${F(s.creditedHp)} hp</strong><span>kan räknas in i examen ⓘ</span></button>
+        <button data-detail="remaining"><strong>${F(s.remainingHp)} hp</strong><span>kvar att läsa ⓘ</span></button>
+      </section>
+      <section class="v569-cal">
+        <div class="v569-cal-head"><h2>Vägen termin för termin</h2><button>▣ Årsvy</button></div>
+        <div class="v569-strip">${cards}</div>
+        <div class="v569-legend"><span><i class="g"></i>Kan räknas in</span><span><i class="y"></i>Delvis</span><span><i></i>Återstår</span></div>
+        <div class="v569-prog-t"><span>${F(s.creditedHp)} av ${F(total)} hp planerade</span><b>${pct}%</b></div><div class="v569-prog"><i style="width:${pct}%"></i></div>
+      </section>
+      <section class="v569-fast ${f?'':'quiet'}"><div class="v569-bolt">⚡</div><div><div class="v569-fast-title"><span>SNABBARE VÄG TILL EXAMEN</span>${f?.save?`<b>-${f.save} termin${f.save===1?'':'er'}</b>`:''}</div><p>${f?(f.save?`Du kan bli klar ${f.save} termin${f.save===1?'':'er'} tidigare.`:'En snabbare väg har hittats.'):'Ingen verifierbar genväg hittad ännu.'}</p></div>${f?'<button data-detail="fast">Visa snabbare väg →</button>':''}</section>
+      <section class="v569-actions">
+        <button data-detail="credited"><span>▤</span><div><strong>Visa tillgodoräknade kurser (${F(s.creditedHp)} hp)</strong><small>Se alla kurser som kan räknas in</small></div><b>›</b></button>
+        <button data-detail="remaining"><span>☷</span><div><strong>Visa krav som återstår (${F(s.remainingHp)} hp)</strong><small>Se alla kurser och krav som du har kvar att läsa</small></div><b>›</b></button>
+        <button data-detail="plan"><span>◇</span><div><strong>Se fullständig studieplan</strong><small>Se alla terminer och kurser i din studieplan</small></div><b>›</b></button>
+      </section>`;
+    host.querySelectorAll('[data-detail]').forEach(b=>b.onclick=()=>overlay(s,b.dataset.detail));
+    host.querySelectorAll('[data-term]').forEach(b=>b.onclick=()=>overlay(s,'plan',N(b.dataset.term)));
+  }
+  document.addEventListener('studielots:screen-rendered',e=>{if(e?.detail?.screen==='plannerClean')setTimeout(render,80)});
+  document.addEventListener('click',()=>setTimeout(render,120),true);
+  setTimeout(render,250);
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v569',plannerDashboardOnly:true};
+})();
+</script>
+<style>
+#plannerCleanContent{padding-bottom:150px!important}
+.v569-choice{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #dfe6e3;border-radius:20px;padding:16px;margin-bottom:14px}.v569-grad{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#176b5d;color:#fff}.v569-choice>div:nth-child(2){flex:1}.v569-choice strong,.v569-choice small{display:block}.v569-choice small{color:#707b82;margin-top:3px}.v569-choice>button{border:1px solid #d7dfdc;background:#fff;border-radius:12px;padding:10px 14px;color:#176b5d;font-weight:800}
+.v569-sum{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}.v569-sum button{border:0;border-radius:20px;padding:16px;text-align:left;background:#eef7f3}.v569-sum button:nth-child(2){background:#fff8e9}.v569-sum strong{display:block;font-size:1.45rem;color:#176b5d}.v569-sum button:nth-child(2) strong{color:#8a6100}.v569-sum span{display:block;margin-top:6px;color:#5d6971}
+.v569-cal{background:#fff;padding:18px 0}.v569-cal-head{display:flex;align-items:center;justify-content:space-between}.v569-cal-head h2{font-size:1.1rem;margin:0}.v569-cal-head button{border:1px solid #d9e0de;background:#fff;border-radius:12px;padding:8px 11px;color:#176b5d}.v569-strip{display:flex;gap:9px;overflow-x:auto;padding:16px 1px 10px}.v569-t{min-width:108px;border:1px solid #dce4e1;background:#fff;border-radius:18px;padding:13px 8px;text-align:center}.v569-t strong,.v569-t small,.v569-t b,.v569-t em{display:block}.v569-t small{font-size:.7rem;color:#798188;margin:3px 0 8px}.v569-t i{display:grid;place-items:center;width:25px;height:25px;border:2px solid #aeb5b3;border-radius:50%;margin:auto;font-style:normal}.v569-t.done{border-color:#2e8b68}.v569-t.done i{background:#2e8b68;border-color:#2e8b68;color:#fff}.v569-t.part i{border-color:#e4ad25;color:#d99600}.v569-t b{margin-top:7px}.v569-t em{font-size:.7rem;font-style:normal;color:#707a81;margin-top:4px}.v569-legend{display:flex;gap:13px;flex-wrap:wrap;font-size:.75rem;color:#68747a}.v569-legend i{display:inline-block;width:10px;height:10px;border:1px solid #aaa;border-radius:50%;margin-right:5px}.v569-legend .g{background:#2e8b68;border-color:#2e8b68}.v569-legend .y{background:#e4ad25;border-color:#e4ad25}.v569-prog-t{display:flex;justify-content:space-between;margin:17px 0 7px;font-size:.78rem}.v569-prog{height:8px;background:#e4e7e6;border-radius:99px;overflow:hidden}.v569-prog i{display:block;height:100%;background:#176b5d}
+.v569-fast{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:linear-gradient(145deg,#f2faf6,#fffaf0);border:1px solid rgba(23,107,93,.14);border-radius:20px;padding:16px;margin:18px 0}.v569-bolt{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#fff0bd}.v569-fast-title{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.v569-fast-title span{font-size:.72rem;font-weight:900;letter-spacing:.07em;color:#176b5d}.v569-fast-title b{font-size:.7rem;background:#e3f2e7;color:#176b5d;padding:4px 7px;border-radius:99px}.v569-fast p{margin:4px 0 0;font-size:.78rem;color:#657078}.v569-fast>button{border:1px solid #cbd9d5;background:#fff;border-radius:13px;padding:10px 12px;color:#176b5d;font-weight:800}.v569-fast.quiet{grid-template-columns:auto 1fr}
+.v569-actions{background:#fff;border:1px solid #dfe6e3;border-radius:20px;overflow:hidden}.v569-actions button{width:100%;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:15px;border:0;border-bottom:1px solid #e7ebe9;background:#fff;text-align:left}.v569-actions button:last-child{border-bottom:0}.v569-actions>button>span{color:#176b5d;font-size:20px}.v569-actions strong,.v569-actions small{display:block}.v569-actions strong{font-size:.88rem}.v569-actions small{font-size:.72rem;color:#6d7880;margin-top:3px}.v569-actions>button>b{font-size:1.35rem;color:#29464a}
+#v569Overlay{position:fixed;inset:0;z-index:9999}.v569-backdrop{position:absolute;inset:0;background:rgba(10,30,28,.3);backdrop-filter:blur(3px)}.v569-sheet{position:absolute;left:0;right:0;bottom:0;max-height:82vh;overflow:auto;background:#fbfbf8;border-radius:26px 26px 0 0;padding:18px 18px calc(24px + env(safe-area-inset-bottom))}.v569-sheet header{display:flex;justify-content:space-between;align-items:center;position:sticky;top:-18px;background:#fbfbf8;padding:14px 0;z-index:2}.v569-sheet h2{margin:0}.v569-sheet header button{width:36px;height:36px;border:0;border-radius:50%;background:#edf0ef;font-size:1.3rem}.v569-course{display:flex;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid #e5e9e7}.v569-course>div{display:flex;flex-direction:column;gap:3px}.v569-course small{color:#737d83}.v569-course.credited small{color:#267565}.v569-course>b{white-space:nowrap}.v569-term-detail{margin-top:18px}.v569-term-detail>div:first-child{display:flex;justify-content:space-between;color:#267565;padding-bottom:8px;border-bottom:1px solid #e2e8e5}.v569-fast-detail{background:#f1f8f4;border-radius:18px;padding:16px}.v569-fast-detail>span{display:block;font-size:.68rem;font-weight:900;color:#176b5d}.v569-fast-detail>strong{display:block;margin-top:7px}.v569-empty{color:#6b767d}
+@media(max-width:560px){.v569-fast{grid-template-columns:auto 1fr}.v569-fast>button{grid-column:1/-1;width:100%}.v569-t{min-width:102px}}
+</style>
 </body>
 </html>
