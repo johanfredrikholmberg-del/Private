@@ -34022,5 +34022,22 @@ body{touch-action:pan-y!important}
 <style>
 .lotsen-bottomnav{grid-template-columns:repeat(5,minmax(0,1fr))!important}
 </style>
+
+<script>
+/* v571 planner finalization */
+(function(){
+ function fix(){
+  if(document.querySelector('.screen.active')?.id!=='plannerClean') return;
+  const host=document.getElementById('plannerCleanContent'); if(!host) return;
+  let note=host.querySelector('.v571-disclaimer');
+  if(!note){ note=document.createElement('p'); note.className='v571-disclaimer'; note.textContent='Tillgodoräknanden är förslag och behöver slutligt prövas av universitetet.'; host.appendChild(note); }
+ }
+ document.addEventListener('studielots:screen-rendered',()=>setTimeout(fix,150));
+ document.addEventListener('click',()=>setTimeout(fix,180),true);
+ setTimeout(fix,300);
+ window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v571',planner:'approved-dashboard'};
+})();
+</script>
+<style>.v571-disclaimer{font-size:.72rem;color:#737d82;margin:13px 3px 0}#plannerCleanContent{padding-bottom:150px!important}</style>
 </body>
 </html>
