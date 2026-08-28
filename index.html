@@ -1500,6 +1500,7 @@ html,body{
   padding-bottom:calc(150px + env(safe-area-inset-bottom))!important;
 }
 </style>
+<link rel="manifest" href="/manifest.webmanifest">
 </head>
 <body>
 <header class="lotsen-header studielots-visual-header" aria-label="StudieLots – Digital studievägledare">
@@ -35124,5 +35125,254 @@ body{touch-action:pan-y!important}
 .v578-course>b{white-space:nowrap}
 .v578-empty{padding:18px;color:#6f797f}
 </style>
+
+<script>
+/* v579 — Program page TDZ repair: no dependency on V2_ACTIVE_UNIVERSITY_KEYS */
+(function(){
+  const ACTIVE_PROGRAM_UNIVERSITIES = new Set([
+    'chalmers tekniska högskola',
+    'göteborgs universitet',
+    'lunds universitet',
+    'luleå tekniska universitet'
+  ]);
+
+  const norm=v=>String(v||'').trim().toLocaleLowerCase('sv-SE');
+
+  function activeProgram(p){
+    return ACTIVE_PROGRAM_UNIVERSITIES.has(norm(p?.university));
+  }
+
+  function uniquePrograms(rows){
+    const out=[],seen=new Set();
+    (Array.isArray(rows)?rows:[]).forEach(p=>{
+      const key=[norm(p?.university),norm(p?.name),Number(p?.hp||0),norm(p?.code||p?.officialCode)].join('|');
+      if(!seen.has(key)){seen.add(key);out.push(p)}
+    });
+    return out;
+  }
+
+  function searchScore(p,q){
+    if(!q)return 1;
+    const hay=norm(`${p?.name||''} ${p?.university||''} ${p?.code||''} ${p?.officialCode||''}`);
+    if(hay===q)return 1000;
+    if(hay.startsWith(q))return 500;
+    if(hay.includes(q))return 250;
+    const words=q.split(/\s+/).filter(Boolean);
+    return words.reduce((s,w)=>s+(hay.includes(w)?25:0),0);
+  }
+
+  window.renderProgramSearch=function(){
+    const host=document.getElementById('programSearchResults');
+    if(!host)return;
+
+    const input=document.getElementById('programSearchInput');
+    const q=norm(input?.value||'');
+
+    let rows=uniquePrograms((Array.isArray(window.programCatalog)?window.programCatalog:[]).filter(activeProgram));
+
+    if(q){
+      rows=rows.map(p=>({p,score:searchScore(p,q)}))
+        .filter(x=>x.score>0)
+        .sort((a,b)=>b.score-a.score || String(a.p.name||'').localeCompare(String(b.p.name||''),'sv'))
+        .map(x=>x.p);
+    }else{
+      rows.sort((a,b)=>String(a.name||'').localeCompare(String(b.name||''),'sv'));
+    }
+
+    rows=rows.slice(0,30);
+
+    host.innerHTML=rows.length?rows.map(p=>{
+      const id=encodeURIComponent(String(p.id||p.code||p.name||''));
+      const meta=[
+        p.university||'',
+        p.officialCode||p.code||'',
+        Number(p.hp||0)?`${Number(p.hp)} hp`:'',
+        p.level||''
+      ].filter(Boolean).join(' · ');
+      let logo='';
+      try{ logo=typeof universityLogoHtml==='function'?universityLogoHtml(p.university,'sm'):'' }catch(e){}
+      return `<button type="button" class="program-search-row program-search-row-clickable" data-v579-program="${id}">
+        <div class="uni-name-with-logo">${logo}<div><strong>${typeof escapeHtml==='function'?escapeHtml(p.name||'Program'):String(p.name||'Program')}</strong><span>${typeof escapeHtml==='function'?escapeHtml(meta):meta}</span></div></div>
+        <span>›</span>
+      </button>`;
+    }).join(''):'<div class="muted small program-empty">Inget program hittades.</div>';
+
+    host.querySelectorAll('[data-v579-program]').forEach(btn=>{
+      btn.onclick=e=>{
+        e.preventDefault();
+        e.stopPropagation();
+        const key=decodeURIComponent(btn.dataset.v579Program||'');
+        const p=(Array.isArray(window.programCatalog)?window.programCatalog:[]).find(x=>
+          String(x?.id||x?.code||x?.name||'')===key
+        );
+        if(!p)return;
+
+        try{sessionStorage.setItem('lotsen_selected_program',String(p.id||p.code||p.name||''))}catch(e){}
+
+        // Prefer the newest direct opener if available, otherwise use the canonical selector.
+        try{
+          if(typeof window.v390OpenProgram==='function')return window.v390OpenProgram(p.id||p.code||p.name);
+        }catch(e){}
+        try{
+          if(typeof window.v379ActivateProgram==='function')return window.v379ActivateProgram(p.id||p.code||p.name);
+        }catch(e){}
+        try{
+          if(typeof window.selectProgramForMatch==='function')return window.selectProgramForMatch(p.id||p.code||p.name);
+        }catch(e){
+          console.error('v579 program open fallback',e);
+        }
+      };
+    });
+  };
+
+  function safeRender(){
+    try{
+      window.renderProgramSearch();
+    }catch(e){
+      console.error('v579 renderProgramSearch',e);
+      const host=document.getElementById('programSearchResults');
+      if(host)host.innerHTML='<div class="card empty"><strong>Kunde inte visa programmen.</strong><div class="small muted">Ladda om sidan och försök igen.</div></div>';
+    }
+  }
+
+  const input=document.getElementById('programSearchInput');
+  if(input){
+    input.removeAttribute('oninput');
+    input.addEventListener('input',safeRender);
+  }
+
+  document.addEventListener('studielots:screen-rendered',e=>{
+    if(e?.detail?.screen==='programMatch')setTimeout(safeRender,20);
+  });
+
+  document.addEventListener('click',()=>{
+    if(document.querySelector('.screen.active')?.id==='programMatch')setTimeout(safeRender,100);
+  },true);
+
+  // If user is already on Program when this build loads.
+  if(document.querySelector('.screen.active')?.id==='programMatch')setTimeout(safeRender,50);
+
+  window.__studielotsBuild={
+    ...(window.__studielotsBuild||{}),
+    version:'v579',
+    programSearchTdzFixed:true,
+    programSearchOwnUniversityGate:true
+  };
+})();
+</script>
+
+<style>
+/* v581 — one-tap return flow after Ladok */
+#sl581Return{position:fixed;inset:0;z-index:99990;background:rgba(15,28,24,.42);display:none;align-items:flex-end}
+#sl581Return.open{display:flex}
+#sl581Return .sheet{width:100%;background:#fff;border-radius:26px 26px 0 0;padding:22px 18px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -12px 40px rgba(0,0,0,.16)}
+#sl581Return .grab{width:42px;height:5px;border-radius:9px;background:#d7ddd9;margin:0 auto 18px}
+#sl581Return h3{font-size:22px;margin:0 0 7px}
+#sl581Return p{margin:0 0 16px;color:#69716d;line-height:1.45}
+#sl581Return .pick{width:100%;min-height:56px;border:0;border-radius:17px;background:#126052;color:#fff;font-size:17px;font-weight:800}
+#sl581Return .cancel{width:100%;padding:14px;border:0;background:transparent;color:#5e6863;font-weight:650}
+.sl581-badge{display:inline-flex;align-items:center;gap:7px;margin-bottom:12px;padding:7px 10px;border-radius:999px;background:#eaf4ef;color:#126052;font-size:13px;font-weight:750}
+</style>
+<script>
+/* v581 — make the Ladok handoff feel like one continuous flow.
+   Browser security prevents StudieLots from silently reading a file downloaded
+   on another origin, so the only remaining user action is selecting the PDF. */
+(function(){
+  const stateKey='sl_waiting_for_ladok_pdf';
+
+  function fileInput(){
+    return document.querySelector('input[type="file"][accept*="pdf"],input[type="file"]');
+  }
+  function ensureSheet(){
+    if(document.getElementById('sl581Return')) return document.getElementById('sl581Return');
+    const el=document.createElement('div');
+    el.id='sl581Return';
+    el.innerHTML=`<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sl581Title">
+      <div class="grab"></div>
+      <div class="sl581-badge">✓ Tillbaka från Ladok</div>
+      <h3 id="sl581Title">Lägg in ditt resultatintyg</h3>
+      <p>Välj PDF-filen du precis hämtade. StudieLots läser den direkt och fortsätter automatiskt.</p>
+      <button class="pick" type="button">Välj resultatintyg</button>
+      <button class="cancel" type="button">Inte nu</button>
+    </div>`;
+    document.body.appendChild(el);
+    el.addEventListener('click',e=>{ if(e.target===el) el.classList.remove('open'); });
+    el.querySelector('.cancel').onclick=()=>el.classList.remove('open');
+    el.querySelector('.pick').onclick=()=>{
+      const input=fileInput();
+      if(!input){ alert('PDF-importen kunde inte hittas. Gå till Hämta meriter och välj fil där.'); return; }
+      input.click();
+    };
+    const input=fileInput();
+    if(input){
+      input.addEventListener('change',()=>{
+        if(input.files && input.files.length){
+          try{sessionStorage.removeItem(stateKey)}catch(e){}
+          el.classList.remove('open');
+        }
+      });
+    }
+    return el;
+  }
+  function showReturn(){
+    let waiting=false;
+    try{ waiting=sessionStorage.getItem(stateKey)==='1'; }catch(e){}
+    if(waiting) ensureSheet().classList.add('open');
+  }
+
+  // Upgrade v580's Ladok button without depending on its exact URL.
+  function upgradeButton(){
+    const btn=document.getElementById('slOpenLadok');
+    if(!btn || btn.dataset.v581)return;
+    btn.dataset.v581='1';
+    btn.textContent='Öppna Ladok och hämta intyg';
+    btn.onclick=()=>{
+      try{sessionStorage.setItem(stateKey,'1')}catch(e){}
+      // Official student entry point; Ladok handles institution/eduID/Antagning/alumni login.
+      window.open('https://student.ladok.se/','_blank','noopener,noreferrer');
+    };
+    const choose=document.getElementById('slChoosePdf');
+    if(choose) choose.textContent='Jag har redan ett intyg';
+  }
+
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden){
+      setTimeout(()=>{upgradeButton();showReturn()},120);
+    }
+  });
+  window.addEventListener('pageshow',()=>setTimeout(()=>{upgradeButton();showReturn()},120));
+  document.addEventListener('click',()=>setTimeout(upgradeButton,40),true);
+  setTimeout(()=>{upgradeButton();showReturn()},200);
+
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v581',ladokReturnSheet:true};
+})();
+</script>
+<script>/* v582 — PWA share target receiver */
+(function(){
+async function consume(){const q=new URLSearchParams(location.search);if(q.get('studielots-share')!=='1')return;try{const c=await caches.open('studielots-share-v1'),r=await c.match('/__studielots_shared_pdf__');if(!r)return;const b=await r.blob(),f=new File([b],r.headers.get('x-studielots-filename')||'Ladok-resultatintyg.pdf',{type:b.type||'application/pdf'});await c.delete('/__studielots_shared_pdf__');const i=document.querySelector('input[type="file"][accept*="pdf"],input[type="file"]');if(!i)return;const d=new DataTransfer();d.items.add(f);i.files=d.files;i.dispatchEvent(new Event('change',{bubbles:true}));history.replaceState({},'',location.pathname+location.hash)}catch(e){console.error('v582 share import',e)}}
+if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWorker.register('/studielots-sw.js').catch(console.warn);addEventListener('load',consume);window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v582',pwaShareTargetPrepared:true};})();</script>
 </body>
 </html>
+<!-- v580 guided Ladok import prototype: official Ladok handoff, no DOM/session scraping -->
+<script>
+(function(){
+ const URL='https://student.ladok.se/student/app/studentwebb/intyg';
+ function fileInput(){return document.querySelector('input[type=file][accept*=pdf],input[type=file]')}
+ function mount(){
+  if(document.getElementById('slLadokGuide')) return;
+  const els=[...document.querySelectorAll('button,a,h2,h3')];
+  const a=els.find(x=>/ladok|hämta meriter|ladda upp/i.test(x.textContent||''));
+  const p=a?.closest('.card,section,.panel')||a?.parentElement; if(!p)return;
+  const d=document.createElement('div'); d.id='slLadokGuide';
+  d.style='margin:18px 0;padding:20px;border:1px solid #d8e7e1;border-radius:24px;background:#fff';
+  d.innerHTML='<h3 style="margin:0 0 8px">Hämta från Ladok</h3><p style="color:#687078">Öppna Ladok, skapa ett <b>nationellt resultatintyg</b> och kom tillbaka hit. StudieLots får inte tillgång till din Ladok-inloggning.</p><button id="slOpenLadok" style="width:100%;padding:15px;border:0;border-radius:16px;background:#126052;color:white;font-weight:700;font-size:16px">Öppna Ladok</button><button id="slChoosePdf" style="width:100%;margin-top:10px;padding:15px;border:1px solid #cfe0da;border-radius:16px;background:white;color:#126052;font-weight:700;font-size:16px">Jag har intyget – välj PDF</button>';
+  p.insertAdjacentElement('afterend',d);
+  d.querySelector('#slOpenLadok').onclick=()=>{sessionStorage.setItem('sl_waiting_ladok','1');window.open(URL,'_blank','noopener,noreferrer')};
+  d.querySelector('#slChoosePdf').onclick=()=>{const i=fileInput();if(i)i.click();else alert('Använd PDF-importen på sidan.')};
+ }
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(mount,50)});
+ document.addEventListener('click',()=>setTimeout(mount,50),true);
+ setTimeout(mount,100);
+ window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v580',guidedLadokImport:true};
+})();
+</script>
