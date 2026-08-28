@@ -34966,5 +34966,163 @@ body{touch-action:pan-y!important}
 <style>
 #plannerClean .v572-side{display:none!important}
 </style>
+
+<script>
+/* v578 — term cards open visible detail sheet */
+(function(){
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+  const F=v=>N(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
+  const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  function getSnap(){
+    try{return JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(e){return null}
+  }
+
+  function rowsForTerm(s,term){
+    return (Array.isArray(s?.rows)?s.rows:[]).filter((r,i)=>{
+      const t=N(r.term)||Math.max(1,Math.floor(i/4)+1);
+      return t===N(term);
+    });
+  }
+
+  function termSheet(term){
+    const s=getSnap();
+    if(!s)return;
+    const rows=rowsForTerm(s,term);
+    const total=rows.reduce((a,r)=>a+N(r.hp),0);
+    const credited=rows.filter(r=>r.status==='credited').reduce((a,r)=>a+N(r.hp),0);
+    const remaining=Math.max(0,total-credited);
+
+    document.getElementById('v578TermSheet')?.remove();
+
+    const courses=rows.length?rows.map(r=>{
+      const credited=r.status==='credited';
+      return `<div class="v578-course">
+        <span class="v578-course-status ${credited?'done':'left'}">${credited?'✓':'◐'}</span>
+        <div>
+          <strong>${E(r.name||'Kurs')}</strong>
+          <small>${credited?'Kan räknas in':'Kvar att läsa'}</small>
+          ${r.sourceName?`<em>${E(r.sourceName)}${r.sourceUniversity?` · ${E(r.sourceUniversity)}`:''}</em>`:''}
+        </div>
+        <b>${F(r.hp)} hp</b>
+      </div>`;
+    }).join(''):'<p class="v578-empty">Inga kursdetaljer finns för den här terminen ännu.</p>';
+
+    const el=document.createElement('div');
+    el.id='v578TermSheet';
+    el.innerHTML=`
+      <div class="v578-backdrop"></div>
+      <section class="v578-sheet">
+        <div class="v578-sheet-handle"></div>
+        <header>
+          <div>
+            <small>TERMIN ${term}</small>
+            <h2>Termin ${term}</h2>
+          </div>
+          <button type="button" aria-label="Stäng">×</button>
+        </header>
+        <div class="v578-term-summary">
+          <div><strong>${F(credited)} hp</strong><span>kan räknas in</span></div>
+          <div><strong>${F(remaining)} hp</strong><span>kvar att läsa</span></div>
+        </div>
+        <div class="v578-course-list">${courses}</div>
+      </section>`;
+    document.body.appendChild(el);
+
+    const close=()=>el.remove();
+    el.querySelector('header button').onclick=close;
+    el.querySelector('.v578-backdrop').onclick=close;
+  }
+
+  function bind(){
+    if(document.querySelector('.screen.active')?.id!=='plannerClean')return;
+    const root=document.getElementById('plannerClean');
+    if(!root)return;
+
+    // Calendar cards open a real detail sheet.
+    root.querySelectorAll('.v572-term[data-term]').forEach(btn=>{
+      btn.onclick=e=>{
+        e.preventDefault();
+        e.stopPropagation();
+        termSheet(btn.dataset.term);
+      };
+    });
+
+    // Accordion headers still work as an inline alternative.
+    root.querySelectorAll('.v572-term-head').forEach(btn=>{
+      btn.onclick=e=>{
+        e.preventDefault();
+        const sec=btn.closest('.v572-term-section');
+        if(!sec)return;
+        const wasOpen=sec.classList.contains('open');
+        root.querySelectorAll('.v572-term-section').forEach(x=>{
+          x.classList.remove('open');
+          const i=x.querySelector('.v572-term-head i');
+          if(i)i.textContent='⌄';
+        });
+        if(!wasOpen){
+          sec.classList.add('open');
+          const i=sec.querySelector('.v572-term-head i');
+          if(i)i.textContent='⌃';
+        }
+      };
+    });
+  }
+
+  document.addEventListener('studielots:screen-rendered',e=>{
+    if(e?.detail?.screen==='plannerClean'){
+      [50,160,400].forEach(ms=>setTimeout(bind,ms));
+    }
+  });
+  document.addEventListener('click',()=>{
+    if(document.querySelector('.screen.active')?.id==='plannerClean'){
+      setTimeout(bind,180);
+    }
+  },true);
+  setTimeout(bind,300);
+
+  window.__studielotsOpenTermDetails=termSheet;
+  window.__studielotsBuild={
+    ...(window.__studielotsBuild||{}),
+    version:'v578',
+    termCardsOpenDetailSheet:true
+  };
+})();
+</script>
+
+<style>
+#v578TermSheet{position:fixed;inset:0;z-index:20000}
+.v578-backdrop{position:absolute;inset:0;background:rgba(8,28,25,.34);backdrop-filter:blur(3px)}
+.v578-sheet{
+  position:absolute;left:0;right:0;bottom:0;
+  max-height:82vh;overflow:auto;
+  background:#fbfaf7;border-radius:26px 26px 0 0;
+  padding:10px 18px calc(28px + env(safe-area-inset-bottom));
+  box-shadow:0 -18px 50px rgba(0,0,0,.16)
+}
+.v578-sheet-handle{width:44px;height:5px;border-radius:99px;background:#d3d8d6;margin:2px auto 12px}
+.v578-sheet header{display:flex;justify-content:space-between;align-items:center;position:sticky;top:-10px;background:#fbfaf7;padding:10px 0 12px;z-index:2}
+.v578-sheet header small{font-size:.68rem;font-weight:900;letter-spacing:.1em;color:#2c7867}
+.v578-sheet header h2{margin:3px 0 0;font-size:1.45rem}
+.v578-sheet header button{width:38px;height:38px;border:0;border-radius:50%;background:#ecefed;font-size:1.45rem}
+.v578-term-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.v578-term-summary>div{border-radius:16px;padding:13px;background:#edf7f2}
+.v578-term-summary>div+div{background:#fff7e7}
+.v578-term-summary strong,.v578-term-summary span{display:block}
+.v578-term-summary strong{font-size:1.15rem;color:#176b5d}
+.v578-term-summary>div+div strong{color:#8a6100}
+.v578-term-summary span{font-size:.72rem;color:#657078;margin-top:3px}
+.v578-course-list{background:#fff;border:1px solid #e0e6e3;border-radius:16px;overflow:hidden}
+.v578-course{display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:center;padding:14px;border-bottom:1px solid #e8ecea}
+.v578-course:last-child{border-bottom:0}
+.v578-course-status{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.7rem;border:1px solid #c3c9c7}
+.v578-course-status.done{background:#2d946c;border-color:#2d946c;color:#fff}
+.v578-course-status.left{border-color:#e3ad24;color:#d99600}
+.v578-course strong,.v578-course small,.v578-course em{display:block}
+.v578-course small{font-size:.72rem;color:#8a6400;margin-top:3px}
+.v578-course em{font-style:normal;font-size:.68rem;color:#727c81;margin-top:3px}
+.v578-course>b{white-space:nowrap}
+.v578-empty{padding:18px;color:#6f797f}
+</style>
 </body>
 </html>
