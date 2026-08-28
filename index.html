@@ -34730,5 +34730,241 @@ body{touch-action:pan-y!important}
 })();
 </script>
 
+
+<script>
+/* v575 — remove duplicate legacy Planner renderers */
+(function(){
+  function cleanPlanner(){
+    const root=document.getElementById('plannerClean');
+    if(!root)return;
+
+    const shell=root.querySelector('.v572-shell');
+    if(!shell)return;
+
+    // Keep exactly one approved Planner shell.
+    [...root.children].forEach(ch=>{
+      if(ch!==shell) ch.remove();
+    });
+
+    // Remove legacy enhancement blocks that older renderers may append.
+    root.querySelectorAll(
+      '#v567Enhance,.v568-details,.v565-calendar,.v565-plan,.v557-plan,.v558-plan,'+
+      '.v549-planner-page,#plannerCleanContent,.v569-calendar,.v569-fast-card,.v569-actions,'+
+      '.v571,.v568-term-panel,.v565-term-block'
+    ).forEach(el=>{
+      if(!el.closest('.v572-shell')) el.remove();
+    });
+
+    // Inside the new shell, remove any accidental legacy blocks.
+    shell.querySelectorAll('#v567Enhance,.v568-details,.v565-calendar,.v565-plan,.v557-plan,.v558-plan,.v569-calendar,.v569-fast-card,.v569-actions,.v571').forEach(el=>el.remove());
+
+    // Prevent accidental duplicate approved shells.
+    const shells=[...root.querySelectorAll(':scope > .v572-shell')];
+    shells.slice(1).forEach(el=>el.remove());
+  }
+
+  // Run after all old delayed renderers.
+  document.addEventListener('studielots:screen-rendered',e=>{
+    if(e?.detail?.screen==='plannerClean'){
+      [20,80,180,400,800].forEach(ms=>setTimeout(cleanPlanner,ms));
+    }
+  });
+
+  document.addEventListener('click',()=>{
+    if(document.querySelector('.screen.active')?.id==='plannerClean'){
+      [60,180,450].forEach(ms=>setTimeout(cleanPlanner,ms));
+    }
+  },true);
+
+  const observer=new MutationObserver(()=>{
+    if(document.querySelector('.screen.active')?.id==='plannerClean'){
+      requestAnimationFrame(cleanPlanner);
+    }
+  });
+  const root=document.getElementById('plannerClean');
+  if(root)observer.observe(root,{childList:true,subtree:false});
+
+  setTimeout(cleanPlanner,300);
+
+  window.__studielotsBuild={
+    ...(window.__studielotsBuild||{}),
+    version:'v575',
+    plannerSingleRenderer:true,
+    legacyPlannerDuplicatesRemoved:true
+  };
+})();
+</script>
+
+<style>
+/* Belt-and-suspenders: legacy planner blocks never display in the new planner. */
+#plannerClean > .v549-planner-page,
+#plannerClean #v567Enhance,
+#plannerClean .v568-details,
+#plannerClean .v565-calendar,
+#plannerClean .v565-plan,
+#plannerClean .v557-plan,
+#plannerClean .v558-plan,
+#plannerClean .v569-calendar,
+#plannerClean .v569-fast-card,
+#plannerClean .v569-actions,
+#plannerClean .v571{
+  display:none!important;
+}
+#plannerClean > .v572-shell{
+  display:grid!important;
+}
+@media(max-width:900px){
+  #plannerClean > .v572-shell{display:block!important}
+}
+</style>
+
+<script>
+/* v576 — clickable semesters, one open at a time */
+(function(){
+  function setupPlannerTerms(){
+    const root=document.getElementById('plannerClean');
+    if(!root)return;
+    const shell=root.querySelector('.v572-shell');
+    if(!shell)return;
+
+    const sections=[...shell.querySelectorAll('.v572-term-section')];
+    if(!sections.length)return;
+
+    // Start with everything collapsed.
+    sections.forEach(sec=>{
+      sec.classList.remove('open');
+      const icon=sec.querySelector('.v572-term-head i');
+      if(icon)icon.textContent='⌄';
+    });
+
+    function openTerm(term){
+      sections.forEach(sec=>{
+        const same=String(sec.dataset.termSection)===String(term);
+        sec.classList.toggle('open',same);
+        const icon=sec.querySelector('.v572-term-head i');
+        if(icon)icon.textContent=same?'⌃':'⌄';
+      });
+      const target=shell.querySelector(`[data-term-section="${term}"]`);
+      if(target)setTimeout(()=>target.scrollIntoView({behavior:'smooth',block:'start'}),30);
+    }
+
+    // Calendar term cards.
+    shell.querySelectorAll('.v572-term[data-term]').forEach(btn=>{
+      btn.onclick=e=>{
+        e.preventDefault();
+        openTerm(btn.dataset.term);
+      };
+    });
+
+    // Accordion headers.
+    shell.querySelectorAll('.v572-term-head').forEach(btn=>{
+      btn.onclick=e=>{
+        e.preventDefault();
+        const sec=btn.closest('.v572-term-section');
+        const term=sec?.dataset.termSection;
+        const isOpen=sec?.classList.contains('open');
+        if(isOpen){
+          sec.classList.remove('open');
+          const icon=btn.querySelector('i');
+          if(icon)icon.textContent='⌄';
+        }else if(term){
+          openTerm(term);
+        }
+      };
+    });
+
+    // Add a small cue to the calendar cards.
+    shell.querySelectorAll('.v572-term[data-term]').forEach(btn=>{
+      if(!btn.querySelector('.v576-open-cue')){
+        const cue=document.createElement('span');
+        cue.className='v576-open-cue';
+        cue.textContent='Visa';
+        btn.appendChild(cue);
+      }
+    });
+  }
+
+  document.addEventListener('studielots:screen-rendered',e=>{
+    if(e?.detail?.screen==='plannerClean'){
+      [40,140,350].forEach(ms=>setTimeout(setupPlannerTerms,ms));
+    }
+  });
+
+  document.addEventListener('click',()=>{
+    if(document.querySelector('.screen.active')?.id==='plannerClean'){
+      setTimeout(setupPlannerTerms,180);
+    }
+  },true);
+
+  setTimeout(setupPlannerTerms,300);
+
+  window.__studielotsBuild={
+    ...(window.__studielotsBuild||{}),
+    version:'v576',
+    plannerTermsClickable:true,
+    plannerSingleOpenSemester:true
+  };
+})();
+</script>
+
+<style>
+#plannerClean .v572-term-section .v572-term-body{display:none!important}
+#plannerClean .v572-term-section.open .v572-term-body{display:block!important}
+#plannerClean .v572-term[data-term]{cursor:pointer}
+#plannerClean .v572-term[data-term]:active{transform:scale(.985)}
+#plannerClean .v576-open-cue{
+  display:block;
+  margin-top:7px;
+  font-size:.65rem;
+  font-weight:800;
+  color:#176b5d;
+}
+</style>
+
+<script>
+/* v577 — remove duplicate lower faster-route section, keep inline card only */
+(function(){
+  function removeLowerFast(){
+    const root=document.getElementById('plannerClean');
+    if(!root)return;
+
+    // Keep the compact inline card in the main column.
+    // Remove the separate detailed side/lower "Snabbare väg till examen" block.
+    root.querySelectorAll('.v572-side').forEach(el=>el.remove());
+
+    // Safety: remove any standalone duplicate heading block below Studyplan.
+    const headings=[...root.querySelectorAll('h2,h3,strong')].filter(el=>
+      /Snabbare väg till examen/i.test((el.textContent||'').trim())
+    );
+    headings.forEach(h=>{
+      if(h.closest('.v572-fast-inline'))return;
+      const side=h.closest('.v572-side,.v572-recommended,.v572-altway,.v572-empty-fast');
+      if(side)side.remove();
+    });
+  }
+
+  document.addEventListener('studielots:screen-rendered',e=>{
+    if(e?.detail?.screen==='plannerClean'){
+      [40,120,300,600].forEach(ms=>setTimeout(removeLowerFast,ms));
+    }
+  });
+  document.addEventListener('click',()=>{
+    if(document.querySelector('.screen.active')?.id==='plannerClean'){
+      setTimeout(removeLowerFast,160);
+    }
+  },true);
+
+  setTimeout(removeLowerFast,300);
+
+  window.__studielotsBuild={
+    ...(window.__studielotsBuild||{}),
+    version:'v577',
+    singleFasterRouteCard:true
+  };
+})();
+</script>
+<style>
+#plannerClean .v572-side{display:none!important}
+</style>
 </body>
 </html>
