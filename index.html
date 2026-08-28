@@ -1754,8 +1754,15 @@ html,body{
     </span><b>Möjligheter</b>
   </button>
   <button data-screen="plannerClean" data-nav-target="plannerClean" type="button" onclick="if(window.openStudyPlanner){window.openStudyPlanner()}else if(window.go){window.go('plannerClean')}">
-    <span class="bottom-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+    <span class="bottom-icon v573-planner-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M5 18V7.5A2.5 2.5 0 0 1 7.5 5H10"/>
+        <path d="M14 5h2.5A2.5 2.5 0 0 1 19 7.5V16"/>
+        <circle cx="12" cy="5" r="1.6"/>
+        <circle cx="5" cy="19" r="1.6"/>
+        <circle cx="19" cy="17" r="1.6"/>
+        <path d="M6.5 17.8 11 13.5l3 2.5 3.5-3.2"/>
+      </svg>
     </span><b>Planeraren</b>
   </button>
   <button data-screen="programMatch" type="button" onclick="openProgramMatcher()">
@@ -34039,5 +34046,456 @@ body{touch-action:pan-y!important}
 })();
 </script>
 <style>.v571-disclaimer{font-size:.72rem;color:#737d82;margin:13px 3px 0}#plannerCleanContent{padding-bottom:150px!important}</style>
+
+<script>
+/* v572 — approved Planner redesign */
+(function(){
+  const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+  const N=v=>Number(String(v??0).replace(',','.'))||0;
+  const F=v=>N(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
+  const Q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+  const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  function snap(){
+    try{return JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(e){return null}
+  }
+
+  function normalize(s){
+    const rows=A(s?.rows).map((r,i)=>({
+      ...r,
+      hp:N(r.hp),
+      term:N(r.term)||Math.max(1,Math.floor(i/4)+1),
+      status:r.status==='credited'?'credited':'remaining'
+    }));
+    const total=N(s?.totalHp)||N(s?.creditedHp)+N(s?.remainingHp)||180;
+    const credited=N(s?.creditedHp);
+    return {...s,rows,totalHp:total,creditedHp:credited,remainingHp:Math.max(0,total-credited)};
+  }
+
+  function groups(s){
+    const m=new Map();
+    s.rows.forEach(r=>{if(!m.has(r.term))m.set(r.term,[]);m.get(r.term).push(r)});
+    return [...m.entries()].sort((a,b)=>a[0]-b[0]).map(([term,rows])=>{
+      const hp=rows.reduce((a,r)=>a+r.hp,0);
+      const credited=rows.filter(r=>r.status==='credited').reduce((a,r)=>a+r.hp,0);
+      return {term,rows,hp,credited,left:Math.max(0,hp-credited)};
+    });
+  }
+
+  function semesterLabel(t,s){
+    const row=A(s.rows).find(r=>r.term===t);
+    return row?.termLabel||row?.semesterLabel||row?.semester||row?.period||`Termin ${t}`;
+  }
+
+  function fastAlternatives(s){
+    const out=[];
+    A(s.fasterAlternatives||s.alternatives||s.fasterRoute).forEach(x=>out.push({
+      name:x.name||x.title||x.courseName||'Snabbare väg',
+      hp:N(x.hp||x.credits),
+      term:N(x.term||x.targetTerm)||null,
+      save:N(x.savesTerms||x.termSavings||x.savedTerms),
+      reason:x.reason||x.description||''
+    }));
+    s.rows.forEach(r=>{
+      const x=r.fasterAlternative||r.alternative;
+      if(x)out.push({
+        name:x.name||x.title||x.courseName||'Snabbare väg',
+        hp:N(x.hp||x.credits),
+        term:N(x.term||r.term)||null,
+        save:N(x.savesTerms||x.termSavings||x.savedTerms),
+        reason:x.reason||x.description||''
+      });
+    });
+    return out.sort((a,b)=>b.save-a.save);
+  }
+
+  function courseRow(r){
+    const credited=r.status==='credited';
+    return `<div class="v572-course" data-status="${credited?'credited':'remaining'}">
+      <span class="v572-status ${credited?'credited':'remaining'}">${credited?'✓':'◐'}</span>
+      <div class="v572-course-copy">
+        <strong>${E(r.name||'Kurs')}</strong>
+        <small class="${credited?'credited':''}">${credited?'Kan räknas in':'Kvar att läsa'}</small>
+      </div>
+      <b>${F(r.hp)} hp</b>
+      <button type="button" class="v572-more" aria-label="Mer">⋮</button>
+    </div>`;
+  }
+
+  function renderFastSide(s,ts){
+    const alts=fastAlternatives(s);
+    const best=alts[0];
+    const alternate=alts[1];
+    if(!best){
+      return `<section class="v572-side">
+        <div class="v572-side-title"><span>⚡</span><div><h2>Snabbare väg till examen</h2><p>Här ser du alternativa vägar för att bli klar så snabbt som möjligt.</p></div></div>
+        <div class="v572-empty-fast">
+          <strong>Ingen verifierbar genväg hittad ännu</strong>
+          <p>När kursunderlaget stödjer en faktisk tidsvinst visas den rekommenderade snabbare vägen här.</p>
+        </div>
+        <div class="v572-info"><b>ⓘ Så beräknas snabbare vägar</b><p>Vi analyserar vilka kurser som kan räknas in och om resterande kurser kan kombineras smartare utan att bryta mot examenskraven.</p></div>
+        <div class="v572-legendbox">
+          <div><span class="g">✓</span><p><b>Klar / kan räknas in</b><small>Allt i terminen kan räknas in.</small></p></div>
+          <div><span class="y">◐</span><p><b>Delvis</b><small>Några kurser kan räknas in, resten återstår.</small></p></div>
+          <div><span>○</span><p><b>Återstår</b><small>Inget kan räknas in ännu.</small></p></div>
+        </div>
+      </section>`;
+    }
+
+    const timeline=ts.slice(0,4).map(t=>{
+      const done=t.left<=.01,partial=t.credited>0&&!done;
+      return `<div class="v572-mini-term"><b>T${t.term}</b><small>${E(semesterLabel(t.term,s))}</small><i class="${done?'done':partial?'partial':''}">${done?'✓':partial?'◐':''}</i></div>`;
+    }).join('<span class="v572-arrow">→</span>');
+
+    const altBlock=alternate?`
+      <div class="v572-altway">
+        <div class="v572-alt-head"><span>ALTERNATIV VÄG</span><b>${alternate.save?`-${alternate.save} termin${alternate.save===1?'':'er'}`:'Samma tid'}</b></div>
+        <strong>${E(alternate.name)}</strong>
+        <p>${E(alternate.reason||'En alternativ kurskombination med annan belastningsfördelning.')}</p>
+        <button type="button" data-v572-fast-alt="1">Visa denna väg</button>
+      </div>`:'';
+
+    return `<section class="v572-side">
+      <div class="v572-side-title"><span>⚡</span><div><h2>Snabbare väg till examen</h2><p>Här ser du alternativa vägar för att bli klar så snabbt som möjligt.</p></div></div>
+      <div class="v572-recommended">
+        <div class="v572-rec-head"><span>REKOMMENDERAD SNABBARE VÄG</span>${best.save?`<b>-${best.save} termin${best.save===1?'':'er'}</b>`:''}</div>
+        <h3>${E(best.name)}${best.hp?` · ${F(best.hp)} hp`:''}</h3>
+        ${best.reason?`<p>${E(best.reason)}</p>`:''}
+        <div class="v572-mini-line">${timeline}</div>
+        <ul>
+          ${best.hp?`<li>Kräver ${F(best.hp)} hp i den alternativa kursen</li>`:''}
+          ${best.save?`<li>Ger examen ${best.save} termin${best.save===1?'':'er'} tidigare</li>`:''}
+          <li>Universitetets slutliga bedömning gäller alltid</li>
+        </ul>
+        <button type="button" data-v572-fast="1">Visa denna väg i planeraren</button>
+      </div>
+      ${altBlock}
+      <div class="v572-info"><b>ⓘ Så beräknas snabbare vägar</b><p>Vi analyserar dina möjliga tillgodoräknanden och hittar hur resterande kurser kan kombineras smartare eller läsas parallellt.</p></div>
+      <div class="v572-legendbox">
+        <div><span class="g">✓</span><p><b>Klar / kan räknas in</b><small>Allt i terminen kan räknas in.</small></p></div>
+        <div><span class="y">◐</span><p><b>Delvis</b><small>Några kurser kan räknas in, resten återstår.</small></p></div>
+        <div><span>○</span><p><b>Återstår</b><small>Inget kan räknas in ännu.</small></p></div>
+        ${best.hp?`<div><span class="hp">+${F(best.hp)} hp</span><p><b>Extra hp</b><small>Kan korta vägen om kursen går att läsa parallellt.</small></p></div>`:''}
+      </div>
+      <div class="v572-tip"><span>★</span><p><b>Bra att veta</b><small>Du kan alltid växla tillbaka till ordinarie väg om dina förutsättningar ändras.</small></p></div>
+    </section>`;
+  }
+
+  function render(){
+    if(document.querySelector('.screen.active')?.id!=='plannerClean')return;
+    const root=document.getElementById('plannerClean');
+    let s=snap();
+    if(!root||!s)return;
+    s=normalize(s);
+    const ts=groups(s);
+    const pct=s.totalHp?Math.round(s.creditedHp/s.totalHp*100):0;
+    const subject=s.selection?.subject||s.program?.name||'Vald studieväg';
+    const university=s.program?.university||s.selection?.university||'';
+    const best=fastAlternatives(s)[0];
+
+    root.innerHTML=`
+      <div class="v572-shell">
+        <main class="v572-main">
+          <div class="v572-eyebrow">PLANERAREN</div>
+          <h1>Din studieplan</h1>
+          <p class="v572-lead">En konkret väg utifrån vad du redan har läst och vad som återstår.</p>
+
+          <section class="v572-choice">
+            <span class="v572-grad">🎓</span>
+            <div><strong>${E(subject)}</strong><small>${E(university)}</small></div>
+            <button type="button" id="v572Change">Ändra</button>
+          </section>
+
+          <section class="v572-summary">
+            <button type="button" data-filter-jump="credited"><strong>${F(s.creditedHp)} hp</strong><span>kan räknas in i examen ⓘ</span></button>
+            <button type="button" data-filter-jump="remaining"><strong>${F(s.remainingHp)} hp</strong><span>kvar att läsa ⓘ</span></button>
+          </section>
+
+          <section class="v572-calendar">
+            <div class="v572-calendar-head"><h2>Din studiekalender</h2><button type="button" data-yearview="1">▣ Årsvy</button></div>
+            <div class="v572-term-strip">
+              ${ts.map(t=>{
+                const done=t.left<=.01,part=t.credited>0&&!done;
+                return `<button type="button" class="v572-term ${done?'done':part?'part':''}" data-term="${t.term}">
+                  <b>T${t.term}</b><small>${E(semesterLabel(t.term,s))}</small>
+                  <i>${done?'✓':part?'◐':''}</i>
+                  <strong>${F(t.hp)} hp</strong>
+                  <em>${done?'Kan räknas in':part?'Delvis kvar att läsa':'Återstår'}</em>
+                </button>`;
+              }).join('')}
+            </div>
+            <div class="v572-calendar-key"><span><i class="g"></i>Kan räknas in</span><span><i class="y"></i>Delvis</span><span><i></i>Återstår</span></div>
+            <div class="v572-progress-label"><span>${F(s.creditedHp)} av ${F(s.totalHp)} hp planerade</span><b>${pct}%</b></div>
+            <div class="v572-progress"><i style="width:${pct}%"></i></div>
+          </section>
+
+          <section class="v572-fast-inline ${best?'':'quiet'}">
+            <span>⚡</span>
+            <div><div><b>SNABBARE VÄG TILL EXAMEN</b>${best?.save?`<em>-${best.save} termin${best.save===1?'':'er'}</em>`:''}</div>
+            <p>${best?(best.save?`Den rekommenderade vägen kan göra dig klar ${best.save} termin${best.save===1?'':'er'} tidigare.`:'Ett snabbare alternativ har hittats.'):'Ingen verifierbar genväg hittad ännu.'}</p></div>
+            ${best?'<button type="button" data-v572-fast="1">Visa snabbare väg →</button>':''}
+          </section>
+
+          <section class="v572-studyplan">
+            <div class="v572-studyplan-head"><h2>Studieplan</h2><button type="button" class="v572-sort">☷ Sortera</button></div>
+            <div class="v572-filters">
+              <button class="active" data-filter="all">Alla</button>
+              <button data-filter="credited">Kan räknas in</button>
+              <button data-filter="remaining">Kvar att läsa</button>
+            </div>
+            <div class="v572-accordion">
+              ${ts.map((t,idx)=>`<section class="v572-term-section ${idx===0?'open':''}" data-term-section="${t.term}">
+                <button type="button" class="v572-term-head">
+                  <span>Termin ${t.term}${semesterLabel(t.term,s)!==`Termin ${t.term}`?` – ${E(semesterLabel(t.term,s))}`:''}</span>
+                  <b>${F(t.hp)} hp</b><i>${idx===0?'⌃':'⌄'}</i>
+                </button>
+                <div class="v572-term-body">${t.rows.map(courseRow).join('')}</div>
+              </section>`).join('')}
+            </div>
+          </section>
+        </main>
+        ${renderFastSide(s,ts)}
+      </div>`;
+
+    root.querySelector('#v572Change').onclick=()=>window.__v549NewPlan?.();
+
+    root.querySelectorAll('.v572-term-head').forEach(btn=>{
+      btn.onclick=()=>{
+        const sec=btn.closest('.v572-term-section');
+        sec.classList.toggle('open');
+        btn.querySelector('i').textContent=sec.classList.contains('open')?'⌃':'⌄';
+      };
+    });
+
+    root.querySelectorAll('[data-term]').forEach(btn=>{
+      btn.onclick=()=>{
+        const term=btn.dataset.term;
+        const sec=root.querySelector(`[data-term-section="${term}"]`);
+        if(sec){
+          sec.classList.add('open');
+          sec.querySelector('.v572-term-head i').textContent='⌃';
+          sec.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      };
+    });
+
+    root.querySelectorAll('[data-filter]').forEach(btn=>{
+      btn.onclick=()=>{
+        root.querySelectorAll('[data-filter]').forEach(x=>x.classList.remove('active'));
+        btn.classList.add('active');
+        const f=btn.dataset.filter;
+        root.querySelectorAll('.v572-course').forEach(r=>{
+          r.style.display=(f==='all'||r.dataset.status===f)?'grid':'none';
+        });
+      };
+    });
+
+    root.querySelectorAll('[data-filter-jump]').forEach(btn=>{
+      btn.onclick=()=>{
+        const f=btn.dataset.filterJump;
+        const filter=root.querySelector(`[data-filter="${f}"]`);
+        filter?.click();
+        root.querySelector('.v572-studyplan')?.scrollIntoView({behavior:'smooth',block:'start'});
+      };
+    });
+
+    root.querySelectorAll('[data-v572-fast]').forEach(btn=>{
+      btn.onclick=()=>{
+        root.querySelector('.v572-side')?.scrollIntoView({behavior:'smooth',block:'start'});
+      };
+    });
+  }
+
+  document.addEventListener('studielots:screen-rendered',e=>{
+    if(e?.detail?.screen==='plannerClean')setTimeout(render,50);
+  });
+  document.addEventListener('click',()=>setTimeout(render,100),true);
+  setTimeout(render,250);
+  window.__studielotsRenderPlannerV572=render;
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v572',plannerApprovedDesign:true};
+})();
+</script>
+
+<style>
+#plannerClean{padding:0 0 150px!important;background:#fbfaf7!important;overflow:visible!important}
+.v572-shell{max-width:1120px;margin:0 auto;padding:28px 22px 40px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,.9fr);gap:28px;color:#102e31}
+.v572-main,.v572-side{min-width:0}.v572-eyebrow{font-size:.72rem;font-weight:900;letter-spacing:.14em;color:#68747a}.v572-main>h1{font-size:clamp(2.1rem,4vw,3.25rem);line-height:1;margin:6px 0 12px}.v572-lead{font-size:1rem;line-height:1.45;color:#5e6971;margin:0 0 22px;max-width:520px}
+.v572-choice{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #dee6e3;border-radius:18px;padding:14px 15px}.v572-grad{width:45px;height:45px;border-radius:50%;display:grid;place-items:center;background:#176b5d}.v572-choice>div{flex:1}.v572-choice strong,.v572-choice small{display:block}.v572-choice strong{font-size:1.05rem}.v572-choice small{margin-top:3px;color:#68747a}.v572-choice button{border:1px solid #d7dfdc;background:#fff;color:#176b5d;border-radius:12px;padding:10px 14px;font-weight:800}
+.v572-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 20px}.v572-summary button{border:0;border-radius:18px;padding:16px;text-align:left;background:#edf7f2}.v572-summary button+button{background:#fff7e7}.v572-summary strong,.v572-summary span{display:block}.v572-summary strong{font-size:1.45rem;color:#176b5d}.v572-summary button+button strong{color:#8e6100}.v572-summary span{margin-top:6px;color:#536168}
+.v572-calendar{border-top:1px solid #e5e8e7;padding-top:18px}.v572-calendar-head{display:flex;justify-content:space-between;align-items:center}.v572-calendar-head h2,.v572-studyplan h2{font-size:1.08rem;margin:0}.v572-calendar-head button{border:1px solid #d8e0dd;background:#fff;border-radius:12px;padding:8px 11px;color:#176b5d;font-weight:750}
+.v572-term-strip{display:flex;gap:8px;overflow-x:auto;padding:14px 1px 10px;-webkit-overflow-scrolling:touch}.v572-term{min-width:100px;border:1px solid #dce4e1;background:#fff;border-radius:16px;padding:12px 7px;text-align:center;color:#17383b}.v572-term b,.v572-term small,.v572-term strong,.v572-term em{display:block}.v572-term small{font-size:.67rem;color:#788087;margin:3px 0 8px}.v572-term i{display:grid;place-items:center;width:24px;height:24px;border:2px solid #adb5b2;border-radius:50%;margin:auto;font-style:normal}.v572-term.done{border-color:#2f8768}.v572-term.done i{background:#2d946c;border-color:#2d946c;color:#fff}.v572-term.part i{border-color:#e5ae24;color:#d99600}.v572-term strong{margin-top:7px;font-size:.9rem}.v572-term em{font-size:.66rem;font-style:normal;color:#6d777c;margin-top:4px}
+.v572-calendar-key{display:flex;gap:12px;flex-wrap:wrap;font-size:.72rem;color:#69747a}.v572-calendar-key i{display:inline-block;width:10px;height:10px;border:1px solid #aaa;border-radius:50%;margin-right:5px}.v572-calendar-key .g{background:#2d946c;border-color:#2d946c}.v572-calendar-key .y{background:#e5ae24;border-color:#e5ae24}.v572-progress-label{display:flex;justify-content:space-between;font-size:.75rem;margin:15px 0 6px}.v572-progress{height:7px;background:#e5e8e7;border-radius:99px;overflow:hidden}.v572-progress i{display:block;height:100%;background:#176b5d}
+.v572-fast-inline{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:11px;margin:18px 0;padding:14px;border:1px solid #dce8e2;border-radius:17px;background:linear-gradient(135deg,#f2faf6,#fff9ec)}.v572-fast-inline>span{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff0bc}.v572-fast-inline>div>div{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.v572-fast-inline b{font-size:.72rem;letter-spacing:.06em;color:#176b5d}.v572-fast-inline em{font-size:.68rem;font-style:normal;background:#e4f4e8;color:#176b5d;border-radius:99px;padding:4px 7px}.v572-fast-inline p{font-size:.74rem;color:#647078;margin:4px 0 0}.v572-fast-inline button{border:1px solid #cad9d5;background:#fff;border-radius:11px;padding:9px 11px;color:#176b5d;font-weight:800}.v572-fast-inline.quiet{grid-template-columns:auto 1fr}
+.v572-studyplan{margin-top:20px}.v572-studyplan-head{display:flex;justify-content:space-between;align-items:center}.v572-sort{border:0;background:transparent;color:#324b4f}.v572-filters{display:flex;gap:8px;margin:10px 0}.v572-filters button{border:0;background:#f1f3f2;border-radius:999px;padding:8px 13px;color:#385154}.v572-filters button.active{background:#176b5d;color:#fff}
+.v572-accordion{border:1px solid #dfe5e3;border-radius:15px;overflow:hidden;background:#fff}.v572-term-section{border-bottom:1px solid #e4e9e7}.v572-term-section:last-child{border-bottom:0}.v572-term-head{width:100%;display:grid;grid-template-columns:1fr auto 22px;gap:10px;align-items:center;border:0;background:#fff;padding:12px;text-align:left;color:#18383b}.v572-term-head>b{font-size:.8rem}.v572-term-head i{font-style:normal}.v572-term-body{display:none}.v572-term-section.open .v572-term-body{display:block}
+.v572-course{display:grid;grid-template-columns:24px 1fr auto 20px;gap:9px;align-items:center;padding:11px 12px;border-top:1px solid #eef1f0}.v572-status{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:.66rem;border:1px solid #c0c6c4}.v572-status.credited{background:#2d946c;color:#fff;border-color:#2d946c}.v572-status.remaining{border-color:#e3ad24;color:#d99700}.v572-course-copy strong,.v572-course-copy small{display:block}.v572-course-copy strong{font-size:.79rem}.v572-course-copy small{font-size:.66rem;color:#a06c00;margin-top:2px}.v572-course-copy small.credited{color:#26755d}.v572-course>b{font-size:.75rem;white-space:nowrap}.v572-more{border:0;background:transparent}
+.v572-side{padding-top:14px}.v572-side-title{display:flex;gap:10px;align-items:flex-start}.v572-side-title>span{font-size:1.35rem}.v572-side-title h2{font-size:1.2rem;margin:0}.v572-side-title p{font-size:.78rem;color:#657078;margin:4px 0 0}
+.v572-recommended,.v572-altway,.v572-empty-fast{border:1px solid #cfe1da;border-radius:17px;padding:16px;margin-top:16px;background:#fff}.v572-rec-head,.v572-alt-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.v572-rec-head span,.v572-alt-head span{font-size:.66rem;font-weight:900;letter-spacing:.06em;color:#176b5d}.v572-rec-head b,.v572-alt-head b{font-size:.68rem;border-radius:99px;padding:5px 7px;background:#e4f3e8;color:#176b5d}.v572-alt-head b{background:#fff0d8;color:#c67600}.v572-recommended h3,.v572-altway>strong{display:block;font-size:.95rem;margin:10px 0 5px}.v572-recommended p,.v572-altway p,.v572-empty-fast p{font-size:.76rem;color:#657078;line-height:1.45}.v572-mini-line{display:flex;align-items:center;justify-content:center;gap:5px;margin:14px 0}.v572-mini-term{text-align:center}.v572-mini-term b,.v572-mini-term small{display:block}.v572-mini-term small{font-size:.6rem;color:#737d82}.v572-mini-term i{display:grid;place-items:center;width:22px;height:22px;border:1px solid #aaa;border-radius:50%;margin:5px auto;font-style:normal}.v572-mini-term i.done{background:#2d946c;border-color:#2d946c;color:white}.v572-mini-term i.partial{border-color:#e5ae24;color:#d99500}.v572-arrow{color:#8b9497}.v572-recommended ul{padding-left:18px;font-size:.72rem;line-height:1.65}.v572-recommended>button,.v572-altway>button{width:100%;border:0;border-radius:12px;padding:11px;background:#176b5d;color:#fff;font-weight:800}.v572-altway>button{background:#fff;color:#17383b;border:1px solid #d8dfdd}
+.v572-info{margin-top:16px;padding:13px;border-radius:14px;background:#eef4ff;color:#174a8b}.v572-info b{font-size:.77rem}.v572-info p{font-size:.7rem;line-height:1.45;margin:5px 0 0;color:#395f91}.v572-legendbox{margin-top:16px;border:1px solid #dfe5e3;border-radius:14px;padding:12px;background:#fff}.v572-legendbox>div{display:flex;gap:9px;align-items:flex-start;margin:8px 0}.v572-legendbox>div>span{width:21px;height:21px;border-radius:50%;display:grid;place-items:center;border:1px solid #aaa;font-size:.68rem}.v572-legendbox .g{background:#2d946c;border-color:#2d946c;color:#fff}.v572-legendbox .y{border-color:#e5ae24;color:#d99500}.v572-legendbox .hp{width:auto;border:0;border-radius:5px;background:#e5f5e8;color:#176b5d;padding:3px 5px}.v572-legendbox p{margin:0}.v572-legendbox b,.v572-legendbox small{display:block}.v572-legendbox b{font-size:.72rem}.v572-legendbox small{font-size:.66rem;color:#657078;margin-top:2px}.v572-tip{display:flex;gap:9px;margin-top:16px;padding:13px;border-radius:14px;background:#fff4d9}.v572-tip>span{color:#d99600}.v572-tip p{margin:0}.v572-tip b,.v572-tip small{display:block}.v572-tip b{font-size:.74rem}.v572-tip small{font-size:.68rem;color:#765f2c;margin-top:3px}
+@media(max-width:860px){
+ .v572-shell{grid-template-columns:1fr;padding:22px 18px 30px}.v572-side{padding-top:4px}.v572-fast-inline{grid-template-columns:auto 1fr}.v572-fast-inline button{grid-column:1/-1;width:100%}
+}
+</style>
+
+<style>
+/* v573 — pixel refinement toward approved planner mockup */
+#plannerClean{background:#fbfaf7!important}
+.v572-shell{
+  max-width:1040px!important;
+  padding:22px 20px 34px!important;
+  grid-template-columns:minmax(0,1.35fr) minmax(300px,.9fr)!important;
+  gap:22px!important;
+}
+.v572-main>h1{
+  font-size:clamp(2.2rem,4.4vw,3.45rem)!important;
+  letter-spacing:-.035em!important;
+  margin-top:4px!important;
+}
+.v572-lead{
+  font-size:1.02rem!important;
+  max-width:500px!important;
+  color:#59656c!important;
+}
+.v572-choice{
+  border-radius:16px!important;
+  padding:15px 16px!important;
+  box-shadow:none!important;
+}
+.v572-grad{
+  width:46px!important;height:46px!important;
+  font-size:20px!important;
+}
+.v572-summary{
+  gap:10px!important;
+  margin:14px 0 18px!important;
+}
+.v572-summary button{
+  border-radius:16px!important;
+  padding:15px 16px!important;
+}
+.v572-summary strong{
+  font-size:1.5rem!important;
+  letter-spacing:-.02em!important;
+}
+.v572-calendar{
+  padding-top:16px!important;
+}
+.v572-calendar-head h2,
+.v572-studyplan h2{
+  font-size:1.06rem!important;
+  letter-spacing:-.015em!important;
+}
+.v572-term-strip{
+  gap:7px!important;
+  padding-top:13px!important;
+}
+.v572-term{
+  min-width:96px!important;
+  border-radius:15px!important;
+  padding:11px 7px 12px!important;
+}
+.v572-term strong{font-size:.88rem!important}
+.v572-term em{line-height:1.2!important}
+.v572-progress{height:6px!important}
+.v572-fast-inline{
+  border-radius:15px!important;
+  padding:13px 14px!important;
+}
+.v572-studyplan{
+  margin-top:18px!important;
+}
+.v572-filters button{
+  padding:7px 12px!important;
+  font-size:.74rem!important;
+}
+.v572-accordion{
+  border-radius:14px!important;
+}
+.v572-term-head{
+  padding:11px 12px!important;
+}
+.v572-course{
+  padding:10px 12px!important;
+}
+.v572-course-copy strong{
+  font-size:.78rem!important;
+}
+.v572-side-title h2{
+  font-size:1.16rem!important;
+  letter-spacing:-.015em!important;
+}
+.v572-recommended,
+.v572-altway,
+.v572-empty-fast{
+  border-radius:15px!important;
+  padding:15px!important;
+}
+.v572-info,
+.v572-legendbox,
+.v572-tip{
+  border-radius:13px!important;
+}
+.v573-planner-icon svg{
+  width:27px!important;
+  height:27px!important;
+  stroke-width:1.8!important;
+}
+.lotsen-bottomnav button[data-screen="plannerClean"] .bottom-icon,
+.lotsen-bottomnav button[data-nav-target="plannerClean"] .bottom-icon{
+  transform:translateY(-1px);
+}
+.lotsen-bottomnav button.active[data-screen="plannerClean"] .v573-planner-icon,
+.lotsen-bottomnav button.active[data-nav-target="plannerClean"] .v573-planner-icon{
+  background:rgba(23,107,93,.08);
+  border-radius:12px;
+  padding:3px;
+}
+
+@media(max-width:860px){
+  .v572-shell{
+    padding:18px 18px 30px!important;
+    gap:18px!important;
+  }
+  .v572-main>h1{
+    font-size:3rem!important;
+  }
+  .v572-lead{
+    font-size:1rem!important;
+  }
+  .v572-side{
+    margin-top:2px!important;
+  }
+}
+@media(max-width:520px){
+  .v572-shell{
+    padding:14px 14px 28px!important;
+  }
+  .v572-main>h1{
+    font-size:2.85rem!important;
+    line-height:.98!important;
+  }
+  .v572-lead{
+    font-size:.98rem!important;
+    line-height:1.45!important;
+  }
+  .v572-choice{
+    padding:14px!important;
+  }
+  .v572-summary strong{
+    font-size:1.42rem!important;
+  }
+  .v572-term{
+    min-width:94px!important;
+  }
+}
+</style>
+
+<script>
+/* v573 — final visual marker */
+(function(){
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v573',plannerPixelRefined:true,plannerNavIconRefined:true};
+})();
+</script>
 </body>
 </html>
