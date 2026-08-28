@@ -34497,5 +34497,238 @@ body{touch-action:pan-y!important}
   window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v573',plannerPixelRefined:true,plannerNavIconRefined:true};
 })();
 </script>
+
+<style>
+/* v574 — mobile planner repair
+   Force the approved planner into one stable mobile column and remove
+   the desktop side-panel layout that caused squeezed/overlapping blocks. */
+@media (max-width: 900px){
+  #plannerClean .v572-shell{
+    display:block !important;
+    width:100% !important;
+    max-width:680px !important;
+    margin:0 auto !important;
+    padding:18px 16px 170px !important;
+    overflow:visible !important;
+  }
+  #plannerClean .v572-main,
+  #plannerClean .v572-side{
+    display:block !important;
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+    position:static !important;
+    inset:auto !important;
+    transform:none !important;
+  }
+  #plannerClean .v572-side{
+    margin:18px 0 0 !important;
+  }
+
+  /* Header */
+  #plannerClean .v572-main>h1{
+    font-size:42px !important;
+    line-height:1.02 !important;
+    margin:6px 0 12px !important;
+    max-width:100% !important;
+  }
+  #plannerClean .v572-lead{
+    width:100% !important;
+    max-width:520px !important;
+    font-size:17px !important;
+    line-height:1.45 !important;
+    margin-bottom:18px !important;
+  }
+
+  /* Selected path + hp */
+  #plannerClean .v572-choice{
+    display:flex !important;
+    align-items:center !important;
+    gap:12px !important;
+    width:100% !important;
+  }
+  #plannerClean .v572-choice-copy{
+    flex:1 1 auto !important;
+    min-width:0 !important;
+  }
+  #plannerClean .v572-summary{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+    width:100% !important;
+  }
+  #plannerClean .v572-summary button{
+    width:100% !important;
+    min-width:0 !important;
+    height:auto !important;
+  }
+
+  /* Calendar: horizontal cards, never a narrow vertical rail */
+  #plannerClean .v572-calendar{
+    display:block !important;
+    width:100% !important;
+    min-width:0 !important;
+    padding:16px 0 0 !important;
+    overflow:hidden !important;
+  }
+  #plannerClean .v572-calendar-head{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:10px !important;
+    width:100% !important;
+  }
+  #plannerClean .v572-calendar-head h2{
+    width:auto !important;
+    max-width:70% !important;
+    margin:0 !important;
+  }
+  #plannerClean .v572-term-strip{
+    display:flex !important;
+    flex-flow:row nowrap !important;
+    gap:9px !important;
+    width:100% !important;
+    max-width:100% !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    padding:14px 1px 8px !important;
+    scroll-snap-type:x proximity !important;
+    -webkit-overflow-scrolling:touch !important;
+  }
+  #plannerClean .v572-term{
+    flex:0 0 112px !important;
+    width:112px !important;
+    min-width:112px !important;
+    max-width:112px !important;
+    min-height:150px !important;
+    padding:12px 8px !important;
+    scroll-snap-align:start !important;
+    writing-mode:horizontal-tb !important;
+  }
+  #plannerClean .v572-term *{
+    writing-mode:horizontal-tb !important;
+    word-break:normal !important;
+  }
+  #plannerClean .v572-legend{
+    display:flex !important;
+    flex-wrap:wrap !important;
+    gap:8px 14px !important;
+    width:100% !important;
+    margin:8px 0 0 !important;
+  }
+  #plannerClean .v572-progress-row{
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+    width:100% !important;
+    margin-top:12px !important;
+  }
+  #plannerClean .v572-progress{
+    flex:1 1 auto !important;
+    width:auto !important;
+    min-width:80px !important;
+  }
+
+  /* Faster route must stay a normal full-width card */
+  #plannerClean .v572-fast-inline,
+  #plannerClean .v572-recommended,
+  #plannerClean .v572-altway,
+  #plannerClean .v572-empty-fast{
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    height:auto !important;
+    min-height:0 !important;
+    position:static !important;
+    transform:none !important;
+    writing-mode:horizontal-tb !important;
+    overflow:hidden !important;
+  }
+  #plannerClean .v572-fast-inline *,
+  #plannerClean .v572-recommended *,
+  #plannerClean .v572-altway *,
+  #plannerClean .v572-empty-fast *{
+    writing-mode:horizontal-tb !important;
+    word-break:normal !important;
+    max-width:100% !important;
+  }
+
+  /* Study plan */
+  #plannerClean .v572-studyplan{
+    display:block !important;
+    width:100% !important;
+    min-width:0 !important;
+    margin:20px 0 0 !important;
+  }
+  #plannerClean .v572-studyplan-head{
+    display:flex !important;
+    align-items:flex-end !important;
+    justify-content:space-between !important;
+    gap:12px !important;
+    width:100% !important;
+  }
+  #plannerClean .v572-filters{
+    display:flex !important;
+    flex-flow:row wrap !important;
+    align-items:center !important;
+    gap:8px !important;
+    width:100% !important;
+    margin:10px 0 12px !important;
+  }
+  #plannerClean .v572-filters button{
+    width:auto !important;
+    min-width:0 !important;
+    min-height:38px !important;
+    border-radius:20px !important;
+    white-space:nowrap !important;
+    writing-mode:horizontal-tb !important;
+  }
+  #plannerClean .v572-accordion{
+    display:block !important;
+    width:100% !important;
+    min-width:0 !important;
+    height:auto !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+  }
+  #plannerClean .v572-term-head,
+  #plannerClean .v572-course{
+    width:100% !important;
+    min-width:0 !important;
+    writing-mode:horizontal-tb !important;
+  }
+
+  /* Detail panel is inline on mobile, never overlays title/content */
+  #plannerClean .v572-side-title,
+  #plannerClean .v572-info,
+  #plannerClean .v572-legendbox,
+  #plannerClean .v572-tip{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    position:static !important;
+    transform:none !important;
+    writing-mode:horizontal-tb !important;
+  }
+
+  /* Bottom nav stays fixed but content gets enough clearance */
+  #plannerClean{
+    overflow-x:hidden !important;
+  }
+}
+
+@media (max-width: 430px){
+  #plannerClean .v572-shell{padding-left:14px !important;padding-right:14px !important}
+  #plannerClean .v572-main>h1{font-size:38px !important}
+  #plannerClean .v572-term{flex-basis:106px !important;width:106px !important;min-width:106px !important;max-width:106px !important}
+}
+</style>
+<script>
+(function(){
+  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v574',plannerMobileRepair:true};
+})();
+</script>
+
 </body>
 </html>
