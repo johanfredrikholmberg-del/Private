@@ -34063,14 +34063,28 @@ body{touch-action:pan-y!important}
   }
 
   function normalize(s){
-    const rows=A(s?.rows).map((r,i)=>({
-      ...r,
-      hp:N(r.hp),
-      term:N(r.term)||Math.max(1,Math.floor(i/4)+1),
-      status:r.status==='credited'?'credited':'remaining'
-    }));
+    const matches=A(s?.matches);
+    const q=x=>Q(x);
+    const matchFor=r=>matches.find(m=>
+      (q(r.code)&&q(m.targetCode||m.code)===q(r.code)) ||
+      (q(r.name)&&q(m.targetName||m.name)===q(r.name))
+    );
+    const rows=A(s?.rows).map((r,i)=>{
+      const hp=N(r.hp), m=matchFor(r);
+      let matched=N(r.matchedHp||r.creditedHp||m?.matchedHp||m?.creditedHp||m?.hpMatched);
+      if(!matched && m){
+        const explicitPartial=m.partial===true||m.matchType==='partial'||m.type==='partial';
+        const sourceHp=N(m.sourceHp||m.sourceCredits||m.source?.hp);
+        if(explicitPartial && sourceHp) matched=Math.min(hp,sourceHp);
+        else if(!explicitPartial) matched=hp;
+      }
+      matched=Math.max(0,Math.min(hp,matched));
+      const status=matched>=hp-.01?'credited':matched>0?'partial':(r.status==='credited'?'credited':r.status==='partial'?'partial':'remaining');
+      return {...r,hp,matchedHp:status==='credited'?hp:matched,
+        term:N(r.term)||Math.max(1,Math.floor(i/4)+1),status};
+    });
     const total=N(s?.totalHp)||N(s?.creditedHp)+N(s?.remainingHp)||180;
-    const credited=N(s?.creditedHp);
+    const credited=Math.max(0,Math.min(total,N(s?.creditedHp)));
     return {...s,rows,totalHp:total,creditedHp:credited,remainingHp:Math.max(0,total-credited)};
   }
 
@@ -34079,7 +34093,7 @@ body{touch-action:pan-y!important}
     s.rows.forEach(r=>{if(!m.has(r.term))m.set(r.term,[]);m.get(r.term).push(r)});
     return [...m.entries()].sort((a,b)=>a[0]-b[0]).map(([term,rows])=>{
       const hp=rows.reduce((a,r)=>a+r.hp,0);
-      const credited=rows.filter(r=>r.status==='credited').reduce((a,r)=>a+r.hp,0);
+      const credited=rows.reduce((a,r)=>a+(r.status==='credited'?r.hp:N(r.matchedHp)),0);
       return {term,rows,hp,credited,left:Math.max(0,hp-credited)};
     });
   }
@@ -34112,12 +34126,13 @@ body{touch-action:pan-y!important}
   }
 
   function courseRow(r){
-    const credited=r.status==='credited';
-    return `<div class="v572-course" data-status="${credited?'credited':'remaining'}">
-      <span class="v572-status ${credited?'credited':'remaining'}">${credited?'✓':'◐'}</span>
+    const credited=r.status==='credited', partial=r.status==='partial';
+    const state=credited?'credited':partial?'partial':'remaining';
+    return `<div class="v572-course" data-status="${state}">
+      <span class="v572-status ${state}">${credited?'✓':partial?'◐':'○'}</span>
       <div class="v572-course-copy">
         <strong>${E(r.name||'Kurs')}</strong>
-        <small class="${credited?'credited':''}">${credited?'Kan räknas in':'Kvar att läsa'}</small>
+        <small class="${credited?'credited':partial?'partial':''}">${credited?'Kan räknas in':partial?`${F(r.matchedHp)} av ${F(r.hp)} hp kan räknas in`:'Kvar att läsa'}</small>
       </div>
       <b>${F(r.hp)} hp</b>
       <button type="button" class="v572-more" aria-label="Mer">⋮</button>
@@ -35351,6 +35366,375 @@ body{touch-action:pan-y!important}
 (function(){
 async function consume(){const q=new URLSearchParams(location.search);if(q.get('studielots-share')!=='1')return;try{const c=await caches.open('studielots-share-v1'),r=await c.match('/__studielots_shared_pdf__');if(!r)return;const b=await r.blob(),f=new File([b],r.headers.get('x-studielots-filename')||'Ladok-resultatintyg.pdf',{type:b.type||'application/pdf'});await c.delete('/__studielots_shared_pdf__');const i=document.querySelector('input[type="file"][accept*="pdf"],input[type="file"]');if(!i)return;const d=new DataTransfer();d.items.add(f);i.files=d.files;i.dispatchEvent(new Event('change',{bubbles:true}));history.replaceState({},'',location.pathname+location.hash)}catch(e){console.error('v582 share import',e)}}
 if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWorker.register('/studielots-sw.js').catch(console.warn);addEventListener('load',consume);window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v582',pwaShareTargetPrepared:true};})();</script>
+<style>
+/* v584 — återgång till gamla meritimporten */
+#slLadokGuide,#sl581Return,#sl582ShareHelp{display:none!important}
+</style>
+<script>
+(function(){
+ try{sessionStorage.removeItem('sl_waiting_for_ladok_pdf');sessionStorage.removeItem('studielots_waiting_ladok_pdf')}catch(e){}
+ try{if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){var u=String((r.active&&r.active.scriptURL)||(r.waiting&&r.waiting.scriptURL)||(r.installing&&r.installing.scriptURL)||'');if(/studielots-sw\\.js/i.test(u))r.unregister()})}).catch(function(){})}}catch(e){}
+ window.__studielotsBuild=Object.assign({},window.__studielotsBuild||{},{version:'v584',legacyMeritImport:true,ladokGuidedFlow:false,pwaShareTargetPrepared:false});
+})();
+</script>
+
+<style>
+/* v585 — partial match state */
+#plannerClean .v572-status.partial{border-color:#e5ae24;color:#d99500}
+#plannerClean .v572-course-copy small.partial{color:#a06c00}
+</style>
+<script>
+/* v585 — engine/planner QA guard */
+(function(){
+ const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+ const N=v=>Number(String(v??0).replace(',','.'))||0;
+ const Q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+
+ function sanitizeSnapshot(s){
+   if(!s)return s;
+   const total=N(s.totalHp)||180;
+   const credited=Math.max(0,Math.min(total,N(s.creditedHp)));
+   const matches=A(s.matches);
+   const rows=A(s.rows).map(r=>{
+     const hp=N(r.hp);
+     const m=matches.find(x=>
+       (Q(r.code)&&Q(x.targetCode||x.code)===Q(r.code))||
+       (Q(r.name)&&Q(x.targetName||x.name)===Q(r.name))
+     );
+     let matched=N(r.matchedHp||r.creditedHp||m?.matchedHp||m?.creditedHp||m?.hpMatched);
+     if(!matched&&m){
+       const partial=m.partial===true||Q(m.matchType)==='partial'||Q(m.type)==='partial';
+       const sourceHp=N(m.sourceHp||m.sourceCredits||m.source?.hp);
+       matched=partial?(sourceHp?Math.min(hp,sourceHp):0):hp;
+     }
+     matched=Math.max(0,Math.min(hp,matched));
+     const status=matched>=hp-.01?'credited':matched>0?'partial':(r.status==='credited'?'credited':r.status==='partial'?'partial':'remaining');
+     return {...r,hp,matchedHp:status==='credited'?hp:matched,status};
+   });
+   return {...s,rows,totalHp:total,creditedHp:credited,remainingHp:Math.max(0,total-credited),
+     qa:{...(s.qa||{}),v585:true,hpInvariant:Math.abs((credited+Math.max(0,total-credited))-total)<.01}};
+ }
+
+ function resave(){
+   try{
+     const raw=JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null');
+     if(!raw)return;
+     const clean=sanitizeSnapshot(raw);
+     sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(clean));
+     sessionStorage.setItem('studielots_visible_degree_totals',JSON.stringify({
+       creditedHp:clean.creditedHp,remainingHp:clean.remainingHp,totalHp:clean.totalHp
+     }));
+   }catch(e){}
+ }
+
+ document.addEventListener('click',e=>{
+   const el=e.target.closest('button,a'); if(!el)return;
+   const t=Q(el.textContent);
+   if(t.includes('skapa plan')||t.includes('planeraren')){
+     setTimeout(()=>{resave();window.__studielotsRenderPlannerV572?.()},0);
+   }
+ },true);
+
+ window.__studielotsRunQA=function(){
+   let s=null; try{s=JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(e){}
+   const c=sanitizeSnapshot(s);
+   if(!c)return {ok:false,reason:'Ingen sparad planner-snapshot'};
+   const rowHp=A(c.rows).reduce((a,r)=>a+N(r.hp),0);
+   const partial=A(c.rows).filter(r=>r.status==='partial').length;
+   return {
+     ok:Math.abs(c.creditedHp+c.remainingHp-c.totalHp)<.01,
+     totalHp:c.totalHp,creditedHp:c.creditedHp,remainingHp:c.remainingHp,
+     rowHp,rows:A(c.rows).length,partialRows:partial,
+     sourceOfTruth:c.sourceOfTruth||'',verifiedRule:!!c.verifiedRule
+   };
+ };
+ window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v585',plannerPartialMatches:true,qaGuard:true};
+})();
+</script>
+
+<script>
+/* v586 — degree-rule QA guardrails
+   Prevents false 100% candidate matches when subject/progression/thesis evidence is missing.
+   Local verified university rules remain authoritative when explicitly present. */
+(function(){
+ const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+ const N=v=>Number(String(v??0).replace(',','.'))||0;
+ const Q=v=>String(v||'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+ const isAdvanced=r=>/^(a1n|a1f|a1e|a2e|a2f)\b/i.test(String(r?.level||r?.progression||''));
+ const isThesis=r=>/(examensarbete|kandidatuppsats|kandidatarbete|självständigt arbete|degree project|bachelor.?s thesis)/i.test(String(r?.name||''));
+ const subj=(r)=>Q(r?.subject||r?.mainField||r?.huvudomrade||'');
+
+ function candidateAudit(result){
+   if(!result || result.kind!=='degree') return {applicable:false,ok:true};
+   const total=N(result.totalHp)||180;
+   if(total!==180) return {applicable:false,ok:true};
+
+   const rows=A(result.rows);
+   const matches=A(result.matches);
+   const target=Q(result.subject);
+   const creditedRows=rows.filter(r=>r.status==='credited'||N(r.matchedHp)>0);
+   const credited=N(result.creditedHp);
+
+   // Evidence metrics. These are guardrails, not a replacement for a university's verified local rule.
+   const mainHp=creditedRows.filter(r=>target && subj(r)===target).reduce((a,r)=>a+Math.min(N(r.hp),N(r.matchedHp)||N(r.hp)),0);
+   const thesisHp=creditedRows.filter(r=>isThesis(r) && (!target||!subj(r)||subj(r)===target))
+      .reduce((a,r)=>a+Math.min(N(r.hp),N(r.matchedHp)||N(r.hp)),0);
+   const advancedHp=creditedRows.filter(isAdvanced).reduce((a,r)=>a+Math.min(N(r.hp),N(r.matchedHp)||N(r.hp)),0);
+
+   // Generic candidate route must never be called 100% complete without evidence
+   // for 90 hp main field + 15 hp thesis. Verified local rules may provide explicit evidence.
+   const hasExplicitRuleEvidence=Boolean(result.verifiedRule && (result.ruleId||result.ruleEvidence));
+   const falseComplete=credited>=total-.01 && !hasExplicitRuleEvidence && (mainHp<90 || thesisHp<15);
+
+   return {
+     applicable:true,ok:!falseComplete,falseComplete,
+     totalHp:total,creditedHp:credited,mainFieldHp:mainHp,thesisHp,advancedHp,
+     targetSubject:result.subject||'',verifiedRule:!!result.verifiedRule
+   };
+ }
+
+ function auditIssuedDegree(result){
+   const issued=A(window.__studielotsUnifiedMerits?.issuedDegrees||window.__studielotsImportedDegrees||[]);
+   const target=Q(result?.subject);
+   const same=issued.some(d=>{
+     const n=Q(d.name||d.degree||d.title), ds=Q(d.subject||d.mainField||'');
+     return /(kandidat|bachelor)/.test(n) && (!target||!ds||ds===target);
+   });
+   return {sameCandidateAlreadyIssued:same};
+ }
+
+ const previous=window.__studielotsRunQA;
+ window.__studielotsRunQA=function(){
+   const base=typeof previous==='function'?previous():{};
+   let result=null;
+   try{ result=window.__studielotsUnifiedResult?.currentResult?.()||null }catch(e){}
+   const degree=candidateAudit(result);
+   const issued=auditIssuedDegree(result);
+   return {...base,degreeRules:degree,issuedDegree:issued,
+     ok:Boolean(base?.ok!==false && degree.ok!==false)};
+ };
+
+ // Before a planner snapshot is accepted, annotate suspicious generic "100%" results.
+ const oldSave=window.__studielotsSaveUnifiedSnapshot;
+ if(typeof oldSave==='function'){
+   window.__studielotsSaveUnifiedSnapshot=function(){
+     const snap=oldSave();
+     try{
+       const r=window.__studielotsUnifiedResult?.currentResult?.();
+       const qa=candidateAudit(r);
+       if(snap && qa.falseComplete){
+         snap.qa={...(snap.qa||{}),candidateRuleWarning:true,candidateAudit:qa};
+         snap.verifiedRule=false;
+         snap.wording={...(snap.wording||{}),
+           warning:'Examenskraven behöver verifieras: huvudområde och examensarbete kan inte styrkas fullt ut.'};
+         sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(snap));
+       }
+     }catch(e){}
+     return snap;
+   };
+ }
+
+ window.__studielotsDegreeRuleQA={version:'v586',candidateAudit,auditIssuedDegree};
+ window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v586',degreeRuleQA:true};
+})();
+</script>
+
+<script>
+/* v587 — progression + no-double-count QA
+   Audits G1N/G1F/G1E/G2F/G2E/A1N/A1F/A1E/A2E and prevents the same merit
+   from silently satisfying multiple target requirements inside one snapshot. */
+(function(){
+ const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+ const N=v=>Number(String(v??0).replace(',','.'))||0;
+ const Q=v=>String(v||'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+ const LEVELS={g1n:10,g1f:20,g1e:25,g2f:30,g2e:40,a1n:50,a1f:60,a1e:65,a2e:70};
+ const level=r=>Q(r?.level||r?.progression||r?.progressionCode||'').replace(/\s/g,'');
+ const isAdv=r=>/^a[12]/.test(level(r));
+ const thesis=r=>/(examensarbete|kandidatuppsats|kandidatarbete|självständigt arbete|degree project|bachelor.?s thesis)/i.test(String(r?.name||''));
+
+ function sourceKey(m){
+   return Q(m?.sourceId||m?.sourceCode||m?.sourceCourseCode||m?.sourceName||
+            m?.source?.id||m?.source?.code||m?.source?.name||'');
+ }
+ function targetKey(m){
+   return Q(m?.targetId||m?.targetCode||m?.targetName||m?.code||m?.name||'');
+ }
+
+ function audit(snapshot){
+   const rows=A(snapshot?.rows), matches=A(snapshot?.matches);
+   const sourceUse=new Map(), duplicateUses=[];
+   matches.forEach(m=>{
+     const sk=sourceKey(m), tk=targetKey(m);
+     if(!sk||!tk)return;
+     if(!sourceUse.has(sk))sourceUse.set(sk,new Set());
+     sourceUse.get(sk).add(tk);
+   });
+   sourceUse.forEach((targets,source)=>{
+     if(targets.size>1)duplicateUses.push({source,targets:[...targets]});
+   });
+
+   const progression={g1n:0,g1f:0,g1e:0,g2f:0,g2e:0,a1n:0,a1f:0,a1e:0,a2e:0,unknown:0};
+   rows.forEach(r=>{
+     const hp=Math.min(N(r.hp),N(r.matchedHp)||(r.status==='credited'?N(r.hp):0));
+     if(!hp)return;
+     const l=level(r);
+     if(Object.prototype.hasOwnProperty.call(progression,l))progression[l]+=hp;
+     else progression.unknown+=hp;
+   });
+
+   const advancedHp=rows.filter(isAdv).reduce((a,r)=>a+Math.min(N(r.hp),N(r.matchedHp)||(r.status==='credited'?N(r.hp):0)),0);
+   const thesisRows=rows.filter(r=>thesis(r)&&(r.status==='credited'||N(r.matchedHp)>0));
+   const thesisSources=new Map();
+   thesisRows.forEach(r=>{
+     const k=Q(r.sourceCode||r.sourceName||r.code||r.name);
+     if(k)thesisSources.set(k,(thesisSources.get(k)||0)+1);
+   });
+
+   return {
+     ok:duplicateUses.length===0,
+     duplicateMeritUses:duplicateUses,
+     progression,
+     advancedHp,
+     thesisRows:thesisRows.length,
+     progressionKnownHp:Object.entries(progression).filter(([k])=>k!=='unknown').reduce((a,[,v])=>a+v,0),
+     unknownProgressionHp:progression.unknown
+   };
+ }
+
+ function deDuplicate(snapshot){
+   if(!snapshot)return snapshot;
+   const used=new Set();
+   const matches=A(snapshot.matches).map(m=>{
+     const sk=sourceKey(m);
+     if(!sk)return m;
+     if(used.has(sk)){
+       return {...m,duplicateBlocked:true,matchedHp:0,creditedHp:0,hpMatched:0,
+         partial:false,matchType:'blocked-duplicate',
+         qaWarning:'Samma merit används redan för ett annat krav.'};
+     }
+     used.add(sk); return m;
+   });
+   return {...snapshot,matches,qa:{...(snapshot.qa||{}),v587:true}};
+ }
+
+ function fixStored(){
+   try{
+     const raw=JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null');
+     if(!raw)return null;
+     const fixed=deDuplicate(raw);
+     sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(fixed));
+     return fixed;
+   }catch(e){return null}
+ }
+
+ const prev=window.__studielotsRunQA;
+ window.__studielotsRunQA=function(){
+   const base=typeof prev==='function'?prev():{};
+   let snap=null;try{snap=JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(e){}
+   const p=audit(snap);
+   return {...base,progressionAndReuse:p,ok:Boolean(base?.ok!==false&&p.ok)};
+ };
+
+ document.addEventListener('click',e=>{
+   const el=e.target.closest('button,a');if(!el)return;
+   const t=Q(el.textContent);
+   if(t.includes('skapa plan')||t.includes('planeraren')){
+     setTimeout(()=>{fixStored();window.__studielotsRenderPlannerV572?.()},1);
+   }
+ },true);
+
+ window.__studielotsProgressionQA={version:'v587',LEVELS,audit,deDuplicate};
+ window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v587',progressionQA:true,doubleCountGuard:true};
+})();
+</script>
+
+<script>
+/* v588 — advanced-degree QA: candidate prerequisite + magister/master scope */
+(function(){
+ const A=v=>Array.isArray(v)?v:(v?[v]:[]);
+ const N=v=>Number(String(v??0).replace(',','.'))||0;
+ const Q=v=>String(v||'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+ const L=r=>Q(r?.level||r?.progression||r?.progressionCode||'').replace(/\s/g,'');
+ const ADV=r=>/^a[12]/.test(L(r));
+ const THESIS=r=>/(examensarbete|magisteruppsats|masteruppsats|självständigt arbete|degree project|master.?s thesis)/i.test(String(r?.name||''));
+
+ function issuedDegrees(){
+   return A(window.__studielotsUnifiedMerits?.issuedDegrees||window.__studielotsImportedDegrees||[]);
+ }
+ function hasPriorDegree(){
+   return issuedDegrees().some(d=>{
+     const x=Q(d.name||d.degree||d.title);
+     const hp=N(d.hp||d.credits);
+     return /(kandidat|bachelor|yrkesexamen|professional degree)/.test(x) && (!hp||hp>=180);
+   });
+ }
+ function audit(result){
+   if(!result||result.kind!=='degree')return {applicable:false,ok:true};
+   const title=Q(result.programName||result.degreeName||result.name||result.level||'');
+   const total=N(result.totalHp);
+   const magister=/magister/.test(title)||(total===60 && /avancer/.test(Q(result.cycle||'')));
+   const master=/master/.test(title)||(total===120 && /avancer/.test(Q(result.cycle||'')));
+   if(!magister&&!master)return {applicable:false,ok:true};
+
+   const rows=A(result.rows);
+   const creditedRows=rows.filter(r=>r.status==='credited'||N(r.matchedHp)>0);
+   const hpOf=r=>Math.min(N(r.hp),N(r.matchedHp)||(r.status==='credited'?N(r.hp):0));
+   const advancedHp=creditedRows.filter(ADV).reduce((a,r)=>a+hpOf(r),0);
+   const target=Q(result.subject);
+   const mainAdvancedHp=creditedRows.filter(r=>ADV(r)&&(!target||Q(r.subject||r.mainField||r.huvudomrade)===target)).reduce((a,r)=>a+hpOf(r),0);
+   const thesisHp=creditedRows.filter(r=>ADV(r)&&THESIS(r)&&(!target||!Q(r.subject||r.mainField||r.huvudomrade)||Q(r.subject||r.mainField||r.huvudomrade)===target)).reduce((a,r)=>a+hpOf(r),0);
+
+   const prior=hasPriorDegree() || Boolean(result.prerequisiteDegreeVerified);
+   const reqTotal=magister?60:120, reqMain=magister?30:60, reqThesis=magister?15:15;
+   // For master, 30 hp thesis is the normal target; 15 hp can be sufficient only
+   // when a qualifying previous advanced-level independent project exists.
+   const masterThesisException=master && Boolean(result.previousAdvancedThesis15Verified);
+   const effectiveThesisReq=master?(masterThesisException?15:30):15;
+
+   const falseComplete=N(result.creditedHp)>=reqTotal-.01 &&
+      (!prior || advancedHp<reqTotal || mainAdvancedHp<reqMain || thesisHp<effectiveThesisReq);
+
+   return {
+     applicable:true,ok:!falseComplete,falseComplete,type:magister?'magister':'master',
+     prerequisiteDegreeVerified:prior,
+     requiredHp:reqTotal,advancedHp,
+     requiredMainFieldAdvancedHp:reqMain,mainFieldAdvancedHp:mainAdvancedHp,
+     requiredThesisHp:effectiveThesisReq,thesisHp,
+     masterThesisException
+   };
+ }
+
+ const prev=window.__studielotsRunQA;
+ window.__studielotsRunQA=function(){
+   const base=typeof prev==='function'?prev():{};
+   let r=null;try{r=window.__studielotsUnifiedResult?.currentResult?.()||null}catch(e){}
+   const a=audit(r);
+   return {...base,advancedDegree:a,ok:Boolean(base?.ok!==false&&a.ok!==false)};
+ };
+
+ const oldSave=window.__studielotsSaveUnifiedSnapshot;
+ if(typeof oldSave==='function'){
+   window.__studielotsSaveUnifiedSnapshot=function(){
+     const snap=oldSave();
+     try{
+       const r=window.__studielotsUnifiedResult?.currentResult?.();
+       const a=audit(r);
+       if(snap&&a.falseComplete){
+         snap.qa={...(snap.qa||{}),advancedDegreeWarning:true,advancedDegreeAudit:a};
+         snap.verifiedRule=false;
+         snap.wording={...(snap.wording||{}),
+           warning:'Kraven för examen på avancerad nivå behöver verifieras innan planen kan visas som komplett.'};
+         sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(snap));
+       }
+     }catch(e){}
+     return snap;
+   };
+ }
+
+ window.__studielotsAdvancedDegreeQA={version:'v588',audit,hasPriorDegree};
+ window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v588',advancedDegreeQA:true};
+})();
+</script>
 </body>
 </html>
 <!-- v580 guided Ladok import prototype: official Ladok handoff, no DOM/session scraping -->
