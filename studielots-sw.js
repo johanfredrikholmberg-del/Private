@@ -1,7 +1,7 @@
-const STUDIELOTS_PATCH='2026-09-01-o';
+const STUDIELOTS_PATCH='2026-09-01-p';
 self.addEventListener('install',()=>self.skipWaiting());
 self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));
-const latestPatch='<script id="studielots-latest-patch-js" src="/studielots-v602.js?v=602"><\/script>';
+const latestPatch='<script id="studielots-latest-patch-js" src="/studielots-v603.js?v=603"><\/script>';
 self.addEventListener('fetch',event=>{
   const u=new URL(event.request.url);
   if(u.pathname==='/share-ladok'&&event.request.method==='POST'){
