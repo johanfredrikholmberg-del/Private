@@ -1,7 +1,7 @@
-const STUDIELOTS_PATCH='2026-09-01-q';
+const STUDIELOTS_PATCH='2026-09-01-r';
 self.addEventListener('install',()=>self.skipWaiting());
 self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));
-const latestPatch='<script id="studielots-latest-patch-js" src="/studielots-v603.js?v=603"><\/script><script id="studielots-faster-route-v604" src="/studielots-v604.js?v=604"><\/script>';
+const latestPatch='<script id="studielots-latest-patch-js" src="/studielots-v603.js?v=603"><\/script><script id="studielots-faster-route-v604" src="/studielots-v604.js?v=604"><\/script><script id="studielots-distance-route-v605" src="/studielots-v605.js?v=605"><\/script>';
 self.addEventListener('fetch',event=>{
   const u=new URL(event.request.url);
   if(u.pathname==='/share-ladok'&&event.request.method==='POST'){
@@ -26,6 +26,7 @@ self.addEventListener('fetch',event=>{
           .replace(/<style id="studielots-latest-patch">[\s\S]*?<\/style>/g,'')
           .replace(/<script id="studielots-latest-patch-js"[\s\S]*?<\/script>/g,'')
           .replace(/<script id="studielots-faster-route-v604"[\s\S]*?<\/script>/g,'')
+          .replace(/<script id="studielots-distance-route-v605"[\s\S]*?<\/script>/g,'')
           .replace('</body>',latestPatch+'\n</body>');
         const headers=new Headers(response.headers);
         headers.delete('content-length');
