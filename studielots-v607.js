@@ -43,9 +43,21 @@ function repairDistance(){
  section.dataset.distanceEntry=VERSION;
 }
 function repairOpportunityCards(){
- const rows=typeof window.safeDegreeOpportunities==='function'?window.safeDegreeOpportunities().filter(o=>o?.source!=='advanced').slice(0,8):[];
+ let rows=[];try{rows=typeof window.safeDegreeOpportunities==='function'?window.safeDegreeOpportunities().filter(o=>o?.source!=='advanced').slice(0,8):[]}catch(e){return}
  const cards=[...document.querySelectorAll('#degreeResults .opportunity-discovery-card')];
  cards.forEach((card,i)=>{const o=rows[i];if(!o)return;const a=authority(o);const badge=card.querySelector('.opportunity-status');if(badge){const text=a.remaining?fmt(a.remaining)+' hp kvar':'Klar';if(badge.textContent!==text)badge.textContent=text;badge.classList.toggle('ready',a.remaining===0);badge.classList.toggle('near',a.remaining>0&&a.remaining<=30);badge.classList.toggle('normal',a.remaining>30);badge.dataset.hpAuthority=VERSION}const meta=card.querySelector('.opportunity-meta');if(meta&&!meta.querySelector('.distance-available'))meta.insertAdjacentHTML('beforeend','<span class="distance-available">Distansväg finns</span>')});
+}
+function repairHome(){
+ let rows=[];try{rows=window.safeDegreeOpportunities?.()||[]}catch(e){}
+ if(!Array.isArray(rows)||!rows.length)return;
+ const sorted=xs=>xs.slice().filter(x=>hp(x?.remaining)!==null).sort((a,b)=>hp(a.remaining)-hp(b.remaining));
+ const candidate=sorted(rows.filter(x=>x?.source!=='advanced'))[0];
+ const advanced=sorted(rows.filter(x=>x?.source==='advanced'))[0];
+ const shortest=sorted(rows)[0];
+ const set=(id,value)=>{const el=document.getElementById(id);if(el&&el.textContent!==value)el.textContent=value};
+ if(candidate){const a=authority(candidate);set('homeFastestCandidateName',candidate.name||candidate.subject||'Kandidatexamen');set('homeFastestCandidateMeta',fmt(a.credited)+' hp kan räknas · '+fmt(a.remaining)+' hp kvar')}
+ if(advanced){const a=authority(advanced);set('homeFastestAdvancedName',advanced.name||advanced.subject||'Examen på avancerad nivå');set('homeFastestAdvancedMeta',fmt(a.credited)+' hp kan räknas · '+fmt(a.remaining)+' hp kvar')}
+ if(shortest)set('shortest',fmt(authority(shortest).remaining)+' hp');
 }
 function repairDetailNumbers(){
  const root=document.querySelector('#universityDetailContent .v21-detail')||document.getElementById('universityDetailContent');if(!root)return;
@@ -55,7 +67,8 @@ function repairDetailNumbers(){
  if(banner){const strong=banner.querySelector('strong');const html=`<strong>${fmt(a.credited)} hp kan räknas in i examen · ${fmt(a.remaining)} hp kvar</strong>`;if(strong?.parentElement===banner){if(banner.innerHTML!==html)banner.innerHTML=html}}
  root.dataset.hpAuthority=VERSION;
 }
-let queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;installAuthority();repairDistance();repairOpportunityCards();repairDetailNumbers();document.documentElement.dataset.studielotsConsistencyPatch=VERSION})}
+function removeEscapedNewlines(){[...document.body?.childNodes||[]].filter(n=>n.nodeType===3&&/^\s*(?:\\n)+\s*$/.test(n.nodeValue||'')).forEach(n=>n.remove())}
+let queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;installAuthority();repairDistance();repairOpportunityCards();repairHome();repairDetailNumbers();removeEscapedNewlines();document.documentElement.dataset.studielotsConsistencyPatch=VERSION})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',queue);else queue();
 document.addEventListener('click',()=>setTimeout(queue,0),true);
 ['studielots:screen-rendered','studielots:planner-open','studielots:pacechange'].forEach(n=>window.addEventListener(n,queue));
