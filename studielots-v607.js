@@ -30,7 +30,7 @@ function installAuthority(){
  ['openUniversityPath','renderUniversityDetail'].forEach(name=>wrap(name,base=>function(profileId){if(profileId)try{sessionStorage.setItem('lotsen_preferred_profile',String(profileId))}catch(e){}const out=base.apply(this,arguments);queue();return out}));
 }
 function opportunityForDetail(){try{const k=sessionStorage.getItem('lotsen_detail_key');return window.opportunityByKey?.(k)||null}catch(e){return null}}
-function distanceButton(o){return `<button class="uni-path uni-path-btn sl-distance-entry-v607" type="button"><div><strong>Visa distansväg</strong><small>Bygg en plan av kurser som kan läsas helt på distans</small></div><span>›</span></button>`}
+function distanceButton(o){const href='/?studielots-distance='+encodeURIComponent(o.key)+'&verify=610';return `<a class="sl-distance-entry-v607 sl-distance-link-v610" href="${esc(href)}"><div><strong>Visa distansväg</strong><small>Bygg en plan av kurser som kan läsas helt på distans</small></div><span>›</span></a>`}
 let lastDistanceOpen=0;
 function openDistanceDirect(o){
  const now=Date.now();if(now-lastDistanceOpen<700)return;lastDistanceOpen=now;
@@ -49,11 +49,9 @@ function repairDistance(){
  const section=sections.find(s=>low(s.querySelector('h2')?.textContent)==='på distans');if(!section)return;
  const o=opportunityForDetail();if(!o)return;
  const empty=[...section.querySelectorAll('.muted,.small,.tiny-help')].find(el=>/inga tydliga distansalternativ finns i databasen ännu/i.test(el.textContent||''));
+ if(!document.getElementById('sl-distance-link-v610-style')){const s=document.createElement('style');s.id='sl-distance-link-v610-style';s.textContent='.sl-distance-link-v610{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;box-sizing:border-box;margin-top:14px;padding:12px 0;color:#187566;text-decoration:none;touch-action:manipulation}.sl-distance-link-v610 div{display:flex;flex-direction:column;gap:3px}.sl-distance-link-v610 strong{font-size:1.05rem}.sl-distance-link-v610 small{font-size:.86rem;line-height:1.35;color:#707b83;font-weight:400}.sl-distance-link-v610>span{font-size:1.5rem;color:#1685df}';document.head.appendChild(s)}
  let button=section.querySelector('.sl-distance-entry-v607');
- if(!button){const holder=document.createElement('div');holder.innerHTML=distanceButton(o);button=holder.firstElementChild;if(empty)empty.replaceWith(button);else section.appendChild(button)}
- button.onclick=e=>{e?.preventDefault?.();openDistanceDirect(o)};
- button.onpointerdown=e=>{e.preventDefault();openDistanceDirect(o)};
- button.ontouchstart=e=>{e.preventDefault();openDistanceDirect(o)};
+ if(!button||button.tagName!=='A'){const holder=document.createElement('div');holder.innerHTML=distanceButton(o);const link=holder.firstElementChild;if(button)button.replaceWith(link);else if(empty)empty.replaceWith(link);else section.appendChild(link);button=link}
  section.dataset.distanceEntry=VERSION;
 }
 function repairOpportunityCards(){
@@ -85,10 +83,12 @@ function removeEscapedNewlines(){[...document.body?.childNodes||[]].filter(n=>n.
 let queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;installAuthority();repairDistance();repairOpportunityCards();repairHome();repairDetailNumbers();removeEscapedNewlines();document.documentElement.dataset.studielotsConsistencyPatch=VERSION})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',queue);else queue();
 document.addEventListener('click',()=>setTimeout(queue,0),true);
-function captureDistance(e){const b=e.target?.closest?.('.sl-distance-entry-v607');if(!b)return;const o=opportunityForDetail();if(!o)return;e.preventDefault();e.stopImmediatePropagation();openDistanceDirect(o)}
+function captureDistance(e){const b=e.target?.closest?.('button.sl-distance-entry-v607');if(!b)return;const o=opportunityForDetail();if(!o)return;e.preventDefault();e.stopImmediatePropagation();openDistanceDirect(o)}
 document.addEventListener('pointerdown',captureDistance,true);
 document.addEventListener('touchstart',captureDistance,{capture:true,passive:false});
 document.addEventListener('click',captureDistance,true);
+let distanceParamOpened=false;function openDistanceParam(){if(distanceParamOpened)return;let key='';try{key=new URL(location.href).searchParams.get('studielots-distance')||''}catch(e){}if(!key)return;let o=null;try{o=window.opportunityByKey?.(key)||null}catch(e){}if(!o)return;distanceParamOpened=true;try{sessionStorage.setItem('lotsen_detail_key',key)}catch(e){}try{if(typeof go==='function')go('degreeDetail')}catch(e){}try{if(typeof window.renderDegreeDetail==='function')window.renderDegreeDetail(key)}catch(e){}setTimeout(()=>openDistanceDirect(o),60)}
+let distanceParamTries=0;const distanceParamTimer=setInterval(()=>{openDistanceParam();if(distanceParamOpened||++distanceParamTries>40)clearInterval(distanceParamTimer)},250);
 ['studielots:screen-rendered','studielots:planner-open','studielots:pacechange'].forEach(n=>window.addEventListener(n,queue));
 new MutationObserver(queue).observe(document.documentElement,{subtree:true,childList:true});
 window.__studielotsLatestPatch={...(window.__studielotsLatestPatch||{}),consistencyVersion:VERSION,distanceEntryAlwaysVisible:true,singleHpAuthority:true};
