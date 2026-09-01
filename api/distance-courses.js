@@ -19,11 +19,15 @@ export default async function handler(req,res){
     const raw=Array.isArray(data)?data:(Array.isArray(data.courses)?data.courses:[]);
     const courses=raw.filter(x=>x && x.distance===true && x.currentOffering===true).map(x=>({
       name:String(x.name||''),
+      code:String(x.code||x.courseCode||''),
       university:String(x.university||''),
       subject:String(x.subject||subject),
       hp:Number(x.hp||0),
       pace:Number(x.pace||0)||null,
       term:String(x.term||''),
+      period:Number(x.period||0)||null,
+      startDate:String(x.startDate||''),
+      applicationDeadline:String(x.applicationDeadline||''),
       distance:true,
       currentOffering:true,
       verified:true,
