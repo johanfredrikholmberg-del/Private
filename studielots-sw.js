@@ -1,4 +1,4 @@
-const STUDIELOTS_PATCH='2026-09-01-d';
+const STUDIELOTS_PATCH='2026-09-01-e';
 
 self.addEventListener('install',()=>self.skipWaiting());
 self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
@@ -14,55 +14,91 @@ const latestPatch=`
 </style>
 <script id="studielots-latest-patch-js">
 (()=>{
- const PATCH='2026-09-01-d';
+ const PATCH='2026-09-01-e';
  const norm=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
  const hp=n=>Math.round((Number(n)||0)*2)/2;
  const fmt=n=>String(hp(n)).replace('.',',');
  const parseHp=s=>{const m=String(s||'').match(/(\\d+(?:[,.]\\d+)?)\\s*hp/i);return m?Number(m[1].replace(',','.')):null};
- const exactFromBreakdown=b=>b?hp(Math.max(0,Number(b.missingMain||0)+Number(b.missingReq||0)+Number(b.missingElective||0))):null;
  const degreeType=o=>String(o?.degreeType||o?.type||o?.degree||'').toLowerCase();
  const isCandidate=o=>!degreeType(o).includes('magister')&&!degreeType(o).includes('master');
+ const exactFromBreakdown=b=>b?hp(Math.max(0,Number(b.missingMain||0)+Number(b.missingReq||0)+Number(b.missingElective||0))):null;
+
+ function authoritativeRowRemaining(x){
+   try{
+     const candidates=[x?.v2?.remaining,x?.v2?.remainingHp,x?.v2?.missingHp,x?.engineResult?.remaining,x?.result?.remaining];
+     for(const v of candidates){if(Number.isFinite(Number(v)))return hp(v)}
+     let b=x?.v2?.breakdown||x?.breakdown||null;
+     if(!b&&typeof localRuleBreakdown==='function'&&x?.rule)b=localRuleBreakdown(x.rule,typeof passedCourses!=='undefined'?passedCourses:[]);
+     const fromB=exactFromBreakdown(b);if(Number.isFinite(fromB))return fromB;
+   }catch(e){}
+   return null;
+ }
 
  function installHpCanonical(){
   if(window.__studielotsHpCanonical?.version===PATCH)return;
   try{
    const oldOptions=typeof universityOptionsForOpportunity==='function'?universityOptionsForOpportunity:null;if(!oldOptions)return;
-   const buildRows=o=>(oldOptions(o)||[]).map(x=>{try{let b=x?.breakdown||null;if(!b&&typeof localRuleBreakdown==='function'&&x?.rule)b=localRuleBreakdown(x.rule,typeof passedCourses!=='undefined'?passedCourses:[]);const exact=exactFromBreakdown(b);if(!Number.isFinite(exact))return x;const total=Number(x?.degreeHp||o?.hp||o?.degreeHp||180)||180;return {...x,remaining:exact,score:Math.max(0,Math.min(100,Math.round(((total-exact)/total)*100))),breakdown:b,__slExactRemaining:true}}catch(e){return x}});
-   universityOptionsForOpportunity=function(o){return buildRows(o)};window.universityOptionsForOpportunity=universityOptionsForOpportunity;
+   universityOptionsForOpportunity=function(o){
+     const rows=(oldOptions(o)||[]).map(x=>{
+       try{
+         const exact=authoritativeRowRemaining(x);if(!Number.isFinite(exact))return x;
+         const total=Number(x?.degreeHp||o?.hp||o?.degreeHp||180)||180;
+         return {...x,remaining:exact,score:Math.max(0,Math.min(100,Math.round(((total-exact)/total)*100))),__slExactRemaining:true};
+       }catch(e){return x}
+     });
+     if(isCandidate(o)&&rows.length){
+       const chosen=rows.find(x=>x?.verified||x?.d?.verified)||rows[0];
+       if(Number.isFinite(Number(chosen?.remaining))){
+         o.remaining=hp(chosen.remaining);
+         o.score=Number.isFinite(Number(chosen.score))?chosen.score:o.score;
+         o.__slExactRemaining=true;
+       }
+     }
+     return rows;
+   };
+   window.universityOptionsForOpportunity=universityOptionsForOpportunity;
+
    const rowId=x=>String(x?.d?.id||x?.profileId||x?.id||'');
    const chooseRow=(o,profileId='')=>{const rows=universityOptionsForOpportunity(o)||[];if(!rows.length)return null;if(profileId){const hit=rows.find(x=>rowId(x)===String(profileId));if(hit)return hit}return rows.find(x=>x?.verified||x?.d?.verified)||rows[0]};
    const exactRemaining=(o,profileId='')=>{if(!isCandidate(o))return null;const row=chooseRow(o,profileId);return row&&Number.isFinite(Number(row.remaining))?hp(row.remaining):null};
+
+   const oldCanonicalPath=typeof canonicalPathResult==='function'?canonicalPathResult:null;
+   if(oldCanonicalPath){
+     canonicalPathResult=function(o,profileId=''){
+       const base=oldCanonicalPath(o,profileId)||{};
+       const exact=exactRemaining(o,profileId);
+       if(Number.isFinite(exact)){
+         try{o.remaining=exact}catch(e){}
+         const total=Number(o?.hp||o?.degreeHp||180)||180;
+         return {...base,remaining:exact,score:Math.max(0,Math.min(100,Math.round(((total-exact)/total)*100)))};
+       }
+       return base;
+     };
+     window.canonicalPathResult=canonicalPathResult;
+   }
+
    const oldCanonicalRemaining=typeof canonicalRemaining==='function'?canonicalRemaining:null;
-   canonicalRemaining=function(o,profileId=''){const exact=exactRemaining(o,profileId);if(Number.isFinite(exact))return exact;return oldCanonicalRemaining?oldCanonicalRemaining(o,profileId):Number(o?.remaining||0)};window.canonicalRemaining=canonicalRemaining;
+   canonicalRemaining=function(o,profileId=''){const exact=exactRemaining(o,profileId);if(Number.isFinite(exact)){try{o.remaining=exact}catch(e){}return exact}return oldCanonicalRemaining?oldCanonicalRemaining(o,profileId):Number(o?.remaining||0)};window.canonicalRemaining=canonicalRemaining;
    opportunityUniversityRange=function(o){try{const vals=(universityOptionsForOpportunity(o)||[]).map(x=>Number(x.remaining)).filter(Number.isFinite).sort((a,b)=>a-b);if(!vals.length)return null;return {min:hp(vals[0]),max:hp(vals[vals.length-1]),same:hp(vals[0])===hp(vals[vals.length-1])}}catch(e){return null}};window.opportunityUniversityRange=opportunityUniversityRange;
    opportunityRemainingLabel=function(o){const r=opportunityUniversityRange(o);if(r){if(r.same)return r.min?fmt(r.min)+' hp kvar':'Klar';return 'från '+fmt(r.min)+' hp kvar'}const v=canonicalRemaining(o);return Number.isFinite(Number(v))?(Number(v)?fmt(v)+' hp kvar':'Klar'):'Välj lärosäte'};window.opportunityRemainingLabel=opportunityRemainingLabel;
    opportunityStatus=function(o){const r=opportunityUniversityRange(o),value=r?Number(r.min||0):Number(canonicalRemaining(o)||0);if(!value)return {label:'Klar',kind:'ready'};return {label:opportunityRemainingLabel(o),kind:value<=30?'near':'normal'}};window.opportunityStatus=opportunityStatus;
-   window.__studielotsHpCanonical={version:PATCH,formula:'missingMain + missingReq + missingElective',singleSource:true};
+
+   window.__studielotsHpCanonical={version:PATCH,source:'v2.remaining first',singleSource:true};
    if(typeof renderDegrees==='function')requestAnimationFrame(()=>{try{renderDegrees()}catch(e){}});
   }catch(e){console.warn('StudieLots hp canonical patch',e)}
  }
 
  function captureAuthoritativeDetail(){
-  const bodyText=document.body?.innerText||'';
-  if(!/Tillgodoräknat/i.test(bodyText)||!/Kvar/i.test(bodyText))return;
-  const h1=[...document.querySelectorAll('h1,h2')].find(x=>/kandidatexamen/i.test(x.textContent||''));
-  if(!h1)return;
-  const title=h1.textContent||'';
-  const subject=(title.match(/i\\s+([^\\n]+)$/i)||[])[1]?.trim()||'';
-  if(!subject)return;
+  const bodyText=document.body?.innerText||'';if(!/Tillgodoräknat/i.test(bodyText)||!/Kvar/i.test(bodyText))return;
+  const h1=[...document.querySelectorAll('h1,h2')].find(x=>/kandidatexamen/i.test(x.textContent||''));if(!h1)return;
+  const subject=((h1.textContent||'').match(/i\\s+([^\\n]+)$/i)||[])[1]?.trim()||'';if(!subject)return;
   let remaining=null,credited=null;
-  for(const el of document.querySelectorAll('div,section,article')){
-   const t=(el.textContent||'').trim();
-   if(remaining==null&&/^Kvar\\s*\\d+(?:[,.]\\d+)?\\s*hp$/i.test(t.replace(/\\s+/g,' ')))remaining=parseHp(t);
-   if(credited==null&&/^Tillgodoräknat\\s*\\d+(?:[,.]\\d+)?\\s*hp/i.test(t.replace(/\\s+/g,' ')))credited=parseHp(t);
-  }
-  if(remaining==null){const m=bodyText.match(/(\\d+(?:[,.]\\d+)?)\\s*hp kan räknas in i examen\\s*[·•]\\s*(\\d+(?:[,.]\\d+)?)\\s*hp kvar/i);if(m){credited=Number(m[1].replace(',','.'));remaining=Number(m[2].replace(',','.'))}}
+  const summary=bodyText.match(/(\\d+(?:[,.]\\d+)?)\\s*hp kan räknas in i examen\\s*[·•]\\s*(\\d+(?:[,.]\\d+)?)\\s*hp kvar/i);
+  if(summary){credited=Number(summary[1].replace(',','.'));remaining=Number(summary[2].replace(',','.'))}
   if(!Number.isFinite(remaining))return;
   const data={subject,remaining:hp(remaining),credited:Number.isFinite(credited)?hp(credited):hp(180-remaining),total:180,ts:Date.now()};
-  try{sessionStorage.setItem('studielots_authoritative_hp',JSON.stringify(data))}catch(e){}
-  window.__studielotsAuthoritativeHp=data;
+  try{sessionStorage.setItem('studielots_authoritative_hp',JSON.stringify(data))}catch(e){}window.__studielotsAuthoritativeHp=data;
  }
-
  function authoritative(){try{return window.__studielotsAuthoritativeHp||JSON.parse(sessionStorage.getItem('studielots_authoritative_hp')||'null')}catch(e){return null}}
  function syncAuthoritativeUi(){
   captureAuthoritativeDetail();const a=authoritative();if(!a||!a.subject||!Number.isFinite(a.remaining))return;
@@ -83,18 +119,13 @@ const latestPatch=`
 
  function fixProgramSearch(){
   const input=document.getElementById('programSearchInput'),host=document.getElementById('programSearchResults');const catalog=(typeof programCatalog!=='undefined'&&Array.isArray(programCatalog))?programCatalog:(Array.isArray(window.programCatalog)?window.programCatalog:null);if(!input||!host||!catalog)return;
-  if(!input.dataset.slLatest){
-   window.renderProgramSearch=function(){const q=norm(input.value),seen=new Set();const rows=catalog.filter(p=>p&&!p.superseded).filter(p=>!q||norm((p.name||'')+' '+(p.university||'')+' '+(p.code||p.officialCode||'')).includes(q)).filter(p=>{const k=norm((p.name||'')+'|'+(p.university||''));if(seen.has(k))return false;seen.add(k);return true}).slice(0,30);host.innerHTML=rows.length?rows.map(p=>{const id=encodeURIComponent(String(p.id||'')),credits=Number(p.hp)||'';return '<button type="button" class="program-search-row sl-program-hit" data-sl-program-id="'+id+'" style="width:100%;text-align:left;border:0;background:#fff;padding:13px 12px;border-bottom:1px solid #edf0f4;cursor:pointer"><strong>'+String(p.name||'Program')+'</strong><small style="display:block;color:#667085;margin-top:3px">'+String(p.university||'')+(credits?' · '+credits+' hp':'')+'</small></button>'}).join(''):'<div class="empty">Inga program hittades.</div>'};
-   input.dataset.slLatest='1';input.addEventListener('input',()=>window.renderProgramSearch(),{passive:true});host.addEventListener('click',e=>{const row=e.target.closest('[data-sl-program-id]');if(!row)return;e.preventDefault();e.stopPropagation();const id=decodeURIComponent(row.dataset.slProgramId||'');if(typeof window.v379ActivateProgram==='function'){window.v379ActivateProgram(id);return}if(typeof window.openProgramSearchResultSafe==='function'){window.openProgramSearchResultSafe(id);return}if(typeof window.openProgramSearchResult==='function')window.openProgramSearchResult(id)},true);window.renderProgramSearch();
-  }
+  if(!input.dataset.slLatest){window.renderProgramSearch=function(){const q=norm(input.value),seen=new Set();const rows=catalog.filter(p=>p&&!p.superseded).filter(p=>!q||norm((p.name||'')+' '+(p.university||'')+' '+(p.code||p.officialCode||'')).includes(q)).filter(p=>{const k=norm((p.name||'')+'|'+(p.university||''));if(seen.has(k))return false;seen.add(k);return true}).slice(0,30);host.innerHTML=rows.length?rows.map(p=>{const id=encodeURIComponent(String(p.id||'')),credits=Number(p.hp)||'';return '<button type="button" class="program-search-row sl-program-hit" data-sl-program-id="'+id+'" style="width:100%;text-align:left;border:0;background:#fff;padding:13px 12px;border-bottom:1px solid #edf0f4;cursor:pointer"><strong>'+String(p.name||'Program')+'</strong><small style="display:block;color:#667085;margin-top:3px">'+String(p.university||'')+(credits?' · '+credits+' hp':'')+'</small></button>'}).join(''):'<div class="empty">Inga program hittades.</div>'};input.dataset.slLatest='1';input.addEventListener('input',()=>window.renderProgramSearch(),{passive:true});host.addEventListener('click',e=>{const row=e.target.closest('[data-sl-program-id]');if(!row)return;e.preventDefault();e.stopPropagation();const id=decodeURIComponent(row.dataset.slProgramId||'');if(typeof window.v379ActivateProgram==='function'){window.v379ActivateProgram(id);return}if(typeof window.openProgramSearchResultSafe==='function'){window.openProgramSearchResultSafe(id);return}if(typeof window.openProgramSearchResult==='function')window.openProgramSearchResult(id)},true);window.renderProgramSearch()}
  }
-
  function fixPlannerTerms(){const root=document.getElementById('plannerClean'),shell=root?.querySelector('.v572-shell');if(!shell)return;if(!shell.dataset.slTermSetup){shell.dataset.slTermSetup='1';shell.classList.add('sl-terms-collapsed');shell.querySelectorAll('.v572-term-section').forEach(sec=>sec.classList.remove('open'));shell.addEventListener('click',e=>{const card=e.target.closest('.v572-term[data-term]');if(!card)return;const term=card.dataset.term;shell.classList.remove('sl-terms-collapsed');shell.querySelectorAll('.v572-term-section').forEach(sec=>{const open=String(sec.dataset.termSection)===String(term);sec.classList.toggle('open',open);const i=sec.querySelector('.v572-term-head i');if(i)i.textContent=open?'⌃':'⌄'});requestAnimationFrame(()=>shell.querySelector('.v572-studyplan')?.scrollIntoView({behavior:'smooth',block:'start'}))},true)}}
-
  function apply(){installHpCanonical();fixProgramSearch();fixPlannerTerms();syncAuthoritativeUi()}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(apply,0));else setTimeout(apply,0);
  let queued=false;new MutationObserver(()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;apply()})}).observe(document.documentElement,{childList:true,subtree:true,characterData:true});
- window.__studielotsLatestPatch={version:PATCH,programSearchAllCatalog:true,termDetailsOnDemand:true,thinBlurNav:true,hpSingleSource:true,authoritativeUiSync:true};
+ window.__studielotsLatestPatch={version:PATCH,hpSingleSource:true,hpSource:'v2.remaining',authoritativeUiSync:true};
 })();
 <\/script>`;
 
