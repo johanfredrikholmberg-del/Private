@@ -31,6 +31,18 @@ function installAuthority(){
 }
 function opportunityForDetail(){try{const k=sessionStorage.getItem('lotsen_detail_key');return window.opportunityByKey?.(k)||null}catch(e){return null}}
 function distanceButton(o){return `<button class="uni-path uni-path-btn sl-distance-entry-v607" type="button"><div><strong>Visa distansväg</strong><small>Bygg en plan av kurser som kan läsas helt på distans</small></div><span>›</span></button>`}
+let lastDistanceOpen=0;
+function openDistanceDirect(o){
+ const now=Date.now();if(now-lastDistanceOpen<700)return;lastDistanceOpen=now;
+ try{sessionStorage.setItem('lotsen_mypath_mode','distance');sessionStorage.setItem('studielots_mode','distance');sessionStorage.setItem('lotsen_detail_key',o.key)}catch(e){}
+ window.__studielotsLastOpportunity=o;window.__studielotsLastUniversityOptions=options(o);
+ const root=document.getElementById('degreeDetailContent');if(!root)return;
+ let plan='';try{if(typeof myPathDistancePlanHtml==='function')plan=myPathDistancePlanHtml(o)}catch(e){}
+ if(!plan)plan='<section class="mypath-distance-plan"><div class="mypath-distance-plan-head"><div><span>Distans</span><h3>Förslag att läsa</h3></div></div><p class="mypath-distance-intro">Distansplanen byggs av de delar som återstår till examen. Aktuella kurstillfällen visas först när de har verifierats som helt på distans.</p></section>';
+ root.innerHTML=`<div class="detail-hero"><div><div class="eyebrow">På distans</div><h1>${esc(o.subject||o.name)}</h1></div></div>${plan}<button class="secondary sl-distance-back-v609" type="button">‹ Välj annat lärosäte</button>`;
+ root.querySelector('.sl-distance-back-v609')?.addEventListener('click',()=>{if(typeof window.renderDegreeDetail==='function')window.renderDegreeDetail(o.key)});
+ window.scrollTo(0,0);window.dispatchEvent(new CustomEvent('studielots:distance-open',{detail:{key:o.key,version:'609'}}));queue();
+}
 function repairDistance(){
  const root=document.getElementById('degreeDetailContent');if(!root)return;
  const sections=[...root.querySelectorAll('.detail-block')];
@@ -39,7 +51,9 @@ function repairDistance(){
  const empty=[...section.querySelectorAll('.muted,.small,.tiny-help')].find(el=>/inga tydliga distansalternativ finns i databasen ännu/i.test(el.textContent||''));
  let button=section.querySelector('.sl-distance-entry-v607');
  if(!button){const holder=document.createElement('div');holder.innerHTML=distanceButton(o);button=holder.firstElementChild;if(empty)empty.replaceWith(button);else section.appendChild(button)}
- button.onclick=()=>{try{sessionStorage.setItem('lotsen_mypath_mode','distance');sessionStorage.setItem('lotsen_detail_key',o.key)}catch(e){}window.__studielotsLastOpportunity=o;const opts=options(o);window.__studielotsLastUniversityOptions=opts;if(typeof window.openDistancePathFromOpportunity==='function')window.openDistancePathFromOpportunity(o.key);setTimeout(queue,0)};
+ button.onclick=e=>{e?.preventDefault?.();openDistanceDirect(o)};
+ button.onpointerdown=e=>{e.preventDefault();openDistanceDirect(o)};
+ button.ontouchstart=e=>{e.preventDefault();openDistanceDirect(o)};
  section.dataset.distanceEntry=VERSION;
 }
 function repairOpportunityCards(){
@@ -71,6 +85,10 @@ function removeEscapedNewlines(){[...document.body?.childNodes||[]].filter(n=>n.
 let queued=false;function queue(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;installAuthority();repairDistance();repairOpportunityCards();repairHome();repairDetailNumbers();removeEscapedNewlines();document.documentElement.dataset.studielotsConsistencyPatch=VERSION})}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',queue);else queue();
 document.addEventListener('click',()=>setTimeout(queue,0),true);
+function captureDistance(e){const b=e.target?.closest?.('.sl-distance-entry-v607');if(!b)return;const o=opportunityForDetail();if(!o)return;e.preventDefault();e.stopImmediatePropagation();openDistanceDirect(o)}
+document.addEventListener('pointerdown',captureDistance,true);
+document.addEventListener('touchstart',captureDistance,{capture:true,passive:false});
+document.addEventListener('click',captureDistance,true);
 ['studielots:screen-rendered','studielots:planner-open','studielots:pacechange'].forEach(n=>window.addEventListener(n,queue));
 new MutationObserver(queue).observe(document.documentElement,{subtree:true,childList:true});
 window.__studielotsLatestPatch={...(window.__studielotsLatestPatch||{}),consistencyVersion:VERSION,distanceEntryAlwaysVisible:true,singleHpAuthority:true};
