@@ -1,4 +1,4 @@
-const STUDIELOTS_PATCH='2026-09-01-h';
+const STUDIELOTS_PATCH='2026-09-01-i';
 self.addEventListener('install',()=>self.skipWaiting());
 self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
 const latestPatch=`
@@ -10,39 +10,28 @@ const latestPatch=`
 </style>
 <script id="studielots-latest-patch-js">
 (()=>{
- const VERSION='595',PATCH='2026-09-01-h';
+ const VERSION='596',PATCH='2026-09-01-i';
  const hp=n=>Math.round((Number(n)||0)*2)/2,fmt=n=>String(hp(n)).replace('.',',');
  const norm=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
  const key=s=>norm(s).replace(/kandidatexamen|kandidat|examen/g,'').trim();
  function store(data){if(!data||!data.subject||!Number.isFinite(Number(data.remaining)))return;try{const all=JSON.parse(localStorage.getItem('studielots_planner_hp')||'{}');all[key(data.subject)]={...data,remaining:hp(data.remaining),credited:hp(data.credited),ts:Date.now()};localStorage.setItem('studielots_planner_hp',JSON.stringify(all))}catch(e){}}
  function load(subject){try{return JSON.parse(localStorage.getItem('studielots_planner_hp')||'{}')[key(subject)]||null}catch(e){return null}}
+ function latest(){try{const all=JSON.parse(localStorage.getItem('studielots_planner_hp')||'{}');return Object.values(all).sort((a,b)=>(b.ts||0)-(a.ts||0))[0]||null}catch(e){return null}}
  function subjectFromPlanner(){const box=document.querySelector('#plannerClean')||document.body;const t=box?.innerText||'';const known=['Psykologi','Sociologi','Företagsekonomi','Idrottsvetenskap','Nationalekonomi'];return known.find(s=>new RegExp(s,'i').test(t))||''}
- function capturePlanner(){
-   const root=document.querySelector('#plannerClean')||document.body,txt=root?.innerText||'';
-   if(!/Din studieplan/i.test(txt))return;
-   const subject=subjectFromPlanner();if(!subject)return;
-   let credited=null,remaining=null;
-   const cm=txt.match(/(\\d+(?:[,.]\\d+)?)\\s*hp\\s*kan räknas in i examen/i);if(cm)credited=Number(cm[1].replace(',','.'));
-   const rm=txt.match(/(\\d+(?:[,.]\\d+)?)\\s*hp\\s*kvar att läsa/i);if(rm)remaining=Number(rm[1].replace(',','.'));
-   if(Number.isFinite(remaining)){if(!Number.isFinite(credited))credited=Math.max(0,180-remaining);store({subject,credited,remaining,source:'planner'})}
- }
+ function capturePlanner(){const root=document.querySelector('#plannerClean')||document.body,txt=root?.innerText||'';if(!/Din studieplan/i.test(txt))return;const subject=subjectFromPlanner();if(!subject)return;let credited=null,remaining=null;const cm=txt.match(/(\\d+(?:[,.]\\d+)?)\\s*hp\\s*kan räknas in i examen/i);if(cm)credited=Number(cm[1].replace(',','.'));const rm=txt.match(/(\\d+(?:[,.]\\d+)?)\\s*hp\\s*kvar att läsa/i);if(rm)remaining=Number(rm[1].replace(',','.'));if(Number.isFinite(remaining)){if(!Number.isFinite(credited))credited=Math.max(0,180-remaining);store({subject,credited,remaining,source:'planner'})}}
  function captureDetail(){const txt=document.body?.innerText||'';const m=txt.match(/(\\d+(?:[,.]\\d+)?)\\s*hp kan räknas in i examen\\s*[·•]\\s*(\\d+(?:[,.]\\d+)?)\\s*hp kvar/i);const h=[...document.querySelectorAll('h1,h2')].find(x=>/kandidatexamen/i.test(x.textContent||''));if(!m||!h)return;const subject=((h.textContent||'').match(/i\\s+([^\\n]+)$/i)||[])[1]?.trim();if(subject&&!load(subject))store({subject,credited:Number(m[1].replace(',','.')),remaining:Number(m[2].replace(',','.')),source:'detail-seed'})}
- function syncCards(){for(const card of document.querySelectorAll('.opportunity-discovery-card')){const subject=card.querySelector('h3')?.textContent?.trim();const a=load(subject);if(!a)continue;const status=card.querySelector('.opportunity-status');if(status)status.textContent=a.remaining?fmt(a.remaining)+' hp kvar':'Klar'}}
+ function setHpTextWithin(root,a){if(!root||!a)return false;let changed=false;const leaves=[...root.querySelectorAll('*')].filter(el=>el.children.length===0);for(const el of leaves){const t=(el.textContent||'').trim();if(/^\\d+(?:[,.]\\d+)?\\s*hp\\s*kvar$/i.test(t)){const v=fmt(a.remaining)+' hp kvar';if(t!==v){el.textContent=v;changed=true}}else if(/^\\d+(?:[,.]\\d+)?\\s*hp$/i.test(t)&&/kan räknas|tillgodoräknat|matchar kurser/i.test((root.innerText||''))){const v=fmt(a.credited)+' hp';if(t!==v){el.textContent=v;changed=true}}}return changed}
+ function textCardForSubject(subject){const rx=new RegExp(subject,'i');const heads=[...document.querySelectorAll('h1,h2,h3,h4,strong,b')].filter(el=>rx.test((el.textContent||'').trim()));for(const h of heads){let n=h;for(let i=0;i<7&&n;i++,n=n.parentElement){const t=n.innerText||'';if(rx.test(t)&&/hp\\s*kvar/i.test(t)&&t.length<1800)return n}}return null}
+ function syncCards(){const known=['Psykologi','Sociologi','Företagsekonomi','Idrottsvetenskap','Nationalekonomi'];for(const subject of known){const a=load(subject);if(!a)continue;const direct=[...document.querySelectorAll('.opportunity-discovery-card')].find(c=>new RegExp(subject,'i').test(c.innerText||''));const card=direct||textCardForSubject(subject);if(!card)continue;const status=card.querySelector('.opportunity-status');if(status)status.textContent=a.remaining?fmt(a.remaining)+' hp kvar':'Klar';setHpTextWithin(card,a)}}
  function leafMetric(row){return [...(row?.querySelectorAll('strong,b,span,div')||[])].find(el=>el.children.length===0&&/^\\d+(?:[,.]\\d+)?\\s*hp(?:\\s+kvar)?$/i.test((el.textContent||'').trim()))}
- function replaceRow(labelRx,value){for(const el of document.querySelectorAll('div,li,p,span')){if(el.children.length||!labelRx.test((el.textContent||'').trim()))continue;let row=el.parentElement;for(let i=0;i<4&&row;i++,row=row.parentElement){const metric=leafMetric(row);if(metric){metric.textContent=value;return}}}}
- function syncAnalysis(){const txt=document.body?.innerText||'';if(!/Studielots analyserar|Tar fram din studieplan/i.test(txt))return;let a=null;try{const all=JSON.parse(localStorage.getItem('studielots_planner_hp')||'{}');a=Object.values(all).sort((x,y)=>(y.ts||0)-(x.ts||0))[0]}catch(e){}if(!a)return;replaceRow(/Räknar återstående väg/i,fmt(a.remaining)+' hp kvar');replaceRow(/Matchar kurser mot lärosätets/i,fmt(a.credited)+' hp')}
- function installPlannerAuthority(){
-   const oldLabel=typeof opportunityRemainingLabel==='function'?opportunityRemainingLabel:null,oldRemaining=typeof canonicalRemaining==='function'?canonicalRemaining:null;
-   if(window.__studielotsPlannerAuthority)return;
-   try{opportunityRemainingLabel=function(o){const a=load(o?.subject||o?.name);return a?(a.remaining?fmt(a.remaining)+' hp kvar':'Klar'):(oldLabel?oldLabel(o):'Välj lärosäte')};window.opportunityRemainingLabel=opportunityRemainingLabel}catch(e){}
-   try{canonicalRemaining=function(o,p=''){const a=load(o?.subject||o?.name);return a?Number(a.remaining):oldRemaining?oldRemaining(o,p):Number(o?.remaining||0)};window.canonicalRemaining=canonicalRemaining}catch(e){}
-   window.__studielotsPlannerAuthority={version:VERSION,source:'planner actual remaining courses'};
- }
+ function replaceRow(labelRx,value){for(const el of document.querySelectorAll('div,li,p,span')){if(el.children.length||!labelRx.test((el.textContent||'').trim()))continue;let row=el.parentElement;for(let i=0;i<5&&row;i++,row=row.parentElement){const metric=leafMetric(row);if(metric){metric.textContent=value;return true}}}return false}
+ function syncAnalysis(){const txt=document.body?.innerText||'';if(!/Studielots analyserar|Tar fram din studieplan/i.test(txt))return;const a=latest();if(!a)return;replaceRow(/Räknar återstående väg/i,fmt(a.remaining)+' hp kvar');replaceRow(/Matchar kurser mot lärosätets/i,fmt(a.credited)+' hp');const box=[...document.querySelectorAll('section,div')].find(el=>/Studielots analyserar|Tar fram din studieplan/i.test(el.innerText||'')&&/hp/i.test(el.innerText||'')&&(el.innerText||'').length<2200);if(box)setHpTextWithin(box,a)}
+ function installPlannerAuthority(){const oldLabel=typeof opportunityRemainingLabel==='function'?opportunityRemainingLabel:null,oldRemaining=typeof canonicalRemaining==='function'?canonicalRemaining:null;if(window.__studielotsPlannerAuthority?.version===VERSION)return;try{opportunityRemainingLabel=function(o){const a=load(o?.subject||o?.name);return a?(a.remaining?fmt(a.remaining)+' hp kvar':'Klar'):(oldLabel?oldLabel(o):'Välj lärosäte')};window.opportunityRemainingLabel=opportunityRemainingLabel}catch(e){}try{canonicalRemaining=function(o,p=''){const a=load(o?.subject||o?.name);return a?Number(a.remaining):oldRemaining?oldRemaining(o,p):Number(o?.remaining||0)};window.canonicalRemaining=canonicalRemaining}catch(e){}window.__studielotsPlannerAuthority={version:VERSION,source:'planner actual remaining courses'}}
  function cleanup(){const w=document.createTreeWalker(document.body||document.documentElement,NodeFilter.SHOW_TEXT),rm=[];while(w.nextNode()){const n=w.currentNode;if(/^(?:\\\\n)+$/.test((n.nodeValue||'').trim()))rm.push(n)}rm.forEach(n=>n.remove())}
  function apply(){installPlannerAuthority();capturePlanner();captureDetail();syncCards();syncAnalysis();cleanup();document.documentElement.dataset.studielotsPatch=VERSION}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(apply,0));else setTimeout(apply,0);
  let q=false;new MutationObserver(()=>{if(q)return;q=true;requestAnimationFrame(()=>{q=false;apply()})}).observe(document.documentElement,{childList:true,subtree:true,characterData:true});
- window.__studielotsLatestPatch={version:VERSION,patch:PATCH,hpSource:'planner-authoritative'};
+ window.__studielotsLatestPatch={version:VERSION,patch:PATCH,hpSource:'planner-authoritative-text-fallback'};
 })();
 <\/script>`;
 self.addEventListener('fetch',event=>{const u=new URL(event.request.url);if(u.pathname==='/share-ladok'&&event.request.method==='POST'){event.respondWith((async()=>{try{const form=await event.request.formData(),file=form.get('ladokPdf');if(!file)return Response.redirect('/?studielots-share-error=1',303);const c=await caches.open('studielots-share-v1');await c.put('/__studielots_shared_pdf__',new Response(file,{headers:{'content-type':file.type||'application/pdf','x-studielots-filename':file.name||'Ladok-resultatintyg.pdf'}}));return Response.redirect('/?studielots-share=1',303)}catch(e){return Response.redirect('/?studielots-share-error=1',303)}})());return}if(event.request.mode==='navigate'&&event.request.method==='GET'&&u.origin===self.location.origin){event.respondWith((async()=>{try{const response=await fetch(event.request,{cache:'no-store'}),type=response.headers.get('content-type')||'';if(!type.includes('text/html'))return response;let html=await response.text();html=html.replace(/<style id="studielots-latest-patch">[\\s\\S]*?<\\/script>/g,'').replace('</body>',latestPatch+'\n</body>');const headers=new Headers(response.headers);headers.delete('content-length');headers.set('cache-control','no-store, max-age=0');headers.set('x-studielots-patch',STUDIELOTS_PATCH);return new Response(html,{status:response.status,statusText:response.statusText,headers})}catch(e){return fetch(event.request)}})())}});
