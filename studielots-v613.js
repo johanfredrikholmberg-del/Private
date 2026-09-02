@@ -250,10 +250,25 @@ function addCourse(){let n=courseName.value.trim(),hp=Number(courseHp.value),lev
 function removeCourse(i){courses.splice(i,1);saveProfile();renderCourses()}
 function showImport(){importBox.style.display=importBox.style.display==='none'?'block':'none'}
 let importedCandidates=[];
+let pdfJsPromise=null;
+async function loadPdfJs(){
+  if(window.pdfjsLib)return window.pdfjsLib;
+  if(!pdfJsPromise){
+    pdfJsPromise=import('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs')
+      .then(pdfjsLib=>{
+        pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs';
+        window.pdfjsLib=pdfjsLib;
+        return pdfjsLib;
+      })
+      .catch(error=>{pdfJsPromise=null;throw error});
+  }
+  return pdfJsPromise;
+}
 async function readPdfLines(file){
-  if(!window.pdfjsLib) throw new Error('PDF-läsaren kunde inte laddas. Kontrollera internetanslutningen.');
+  const pdfjsLib=await loadPdfJs().catch(()=>null);
+  if(!pdfjsLib) throw new Error('PDF-läsaren kunde inte laddas. Kontrollera internetanslutningen.');
   const data=new Uint8Array(await file.arrayBuffer());
-  const pdf=await window.pdfjsLib.getDocument({data}).promise;
+  const pdf=await pdfjsLib.getDocument({data}).promise;
   let lines=[];
   for(let p=1;p<=pdf.numPages;p++){
     const page=await pdf.getPage(p), content=await page.getTextContent();
@@ -11524,8 +11539,8 @@ async function admissionFileText(file){
  if(!file)return '';
  if(/^image\//i.test(file.type||''))throw new Error('image-needs-ocr');
  if(file.type==='application/pdf'||/\.pdf$/i.test(file.name||'')){
-  if(!window.pdfjsLib)return '';
-  const buf=await file.arrayBuffer(),pdf=await window.pdfjsLib.getDocument({data:buf}).promise;let text='';
+  const pdfjsLib=await loadPdfJs().catch(()=>null);if(!pdfjsLib)return '';
+  const buf=await file.arrayBuffer(),pdf=await pdfjsLib.getDocument({data:buf}).promise;let text='';
   for(let i=1;i<=pdf.numPages;i++){const page=await pdf.getPage(i),c=await page.getTextContent();text+=' '+c.items.map(x=>x.str).join(' ')}
   return text;
  }
