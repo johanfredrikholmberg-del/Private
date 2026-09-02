@@ -11,15 +11,15 @@
       document.body.appendChild(s628);
     };
     const after628=()=>{
-      if(document.querySelector('script[data-studielots-v629]'))return after629();
-      const s629=document.createElement('script');
-      s629.src='/studielots-runtime-v629.js?v=629';
-      s629.dataset.studielotsV629='1';
-      s629.async=false;
-      s629.onload=after629;
-      document.body.appendChild(s629);
+      if(document.querySelector('script[data-studielots-v632]'))return after632();
+      const s632=document.createElement('script');
+      s632.src='/studielots-runtime-v632.js?v=632';
+      s632.dataset.studielotsV632='1';
+      s632.async=false;
+      s632.onload=after632;
+      document.body.appendChild(s632);
     };
-    const after629=()=>{
+    const after632=()=>{
       if(document.querySelector('script[data-studielots-v630]'))return after630();
       const s630=document.createElement('script');
       s630.src='/studielots-runtime-v630.js?v=630';
