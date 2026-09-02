@@ -3,6 +3,7 @@ const DEFAULT_SUSA_URLS=[
   'https://api.skolverket.se/susa-navet/v1/educationEvents',
   'https://api.skolverket.se/susa-navet/educationEvents'
 ];
+const SUSA_SCHEMA_URL='https://api.skolverket.se/susa-navet/susa-navet-emil3.yaml';
 const DISTANCE_RE=/(^|[\s_/-])(distans|distance|remote|online|webb)([\s_/-]|$)/i;
 const CAMPUS_RE=/(^|[\s_/-])(campus|on[- ]?site|på plats|ortsoberoende med träff)([\s_/-]|$)/i;
 
@@ -65,13 +66,25 @@ function normalizeResponse(data,subject){
     if(seen.has(key))return false;seen.add(key);return true;
   }).slice(0,60);
 }
+async function susaUrls(){
+  try{
+    const response=await fetch(SUSA_SCHEMA_URL,{headers:{accept:'text/yaml,text/plain'},signal:AbortSignal.timeout(6000)});
+    if(!response.ok)return DEFAULT_SUSA_URLS;
+    const yaml=await response.text();
+    const server=yaml.match(/^\s*-\s*url:\s*["']?([^\s"']+)/m)?.[1];
+    if(!server)return [...DEFAULT_SUSA_URLS,'https://api.skolverket.se/educationEvents'];
+    const base=new URL(server,SUSA_SCHEMA_URL);
+    if(!base.pathname.endsWith('/'))base.pathname+='/'
+    return [new URL('educationEvents',base).href,...DEFAULT_SUSA_URLS,'https://api.skolverket.se/educationEvents'];
+  }catch(_){return DEFAULT_SUSA_URLS}
+}
 export {eventList,explicitDistance,normalizeEvent,normalizeResponse};
 
 export default async function handler(req,res){
   res.setHeader('Cache-Control','s-maxage=3600, stale-while-revalidate=86400');
   const subject=String(req.query?.subject||'').trim();
   const kind=String(req.query?.kind||'candidate').trim();
-  const bases=process.env.DISTANCE_COURSE_FEED_URL?[process.env.DISTANCE_COURSE_FEED_URL]:DEFAULT_SUSA_URLS;
+  const bases=process.env.DISTANCE_COURSE_FEED_URL?[process.env.DISTANCE_COURSE_FEED_URL]:await susaUrls();
   try{
     let data=null,lastStatus=0;
     for(const base of bases){
