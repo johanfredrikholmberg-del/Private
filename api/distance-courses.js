@@ -99,7 +99,8 @@ export default async function handler(req,res){
     if(data==null)throw new Error(`Susa-navet svarade ${lastStatus||'utan status'}`);
     const rawEvents=eventList(data);
     const courses=normalizeResponse(data,subject);
-    console.log(JSON.stringify({level:'info',msg:'distance source normalized',rawCount:rawEvents.length,courseCount:courses.length,firstKeys:Object.keys(rawEvents[0]||{}).slice(0,20),firstPaths:scalarEntries(rawEvents[0]).map(x=>x.path).slice(0,35)}));
+    const firstScalars=scalarEntries(rawEvents[0]).slice(0,50).map(x=>({path:x.path,value:String(x.value).slice(0,180)}));
+    console.log(JSON.stringify({level:'info',msg:'distance source normalized',rawCount:rawEvents.length,courseCount:courses.length,firstKeys:Object.keys(rawEvents[0]||{}).slice(0,20),firstScalars}));
     return res.status(200).json({courses,updated:new Date().toISOString(),source:process.env.DISTANCE_COURSE_FEED_URL?'configured-feed':'skolverket-susa-navet'});
   }catch(error){
     console.error('distance-courses',error);
