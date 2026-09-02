@@ -1,6 +1,6 @@
 (()=>{
   'use strict';
-  const VERSION='614';
+  const VERSION='615';
   const norm=v=>String(v??'').trim();
   const low=v=>norm(v).toLocaleLowerCase('sv-SE');
   const number=v=>{const n=Number(v);return Number.isFinite(n)?n:null};

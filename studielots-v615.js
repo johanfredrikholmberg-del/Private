@@ -31401,7 +31401,7 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
   };
 })();
 
-/* v579 — Program page TDZ repair: no dependency on V2_ACTIVE_UNIVERSITY_KEYS */
+/* v615 — one authoritative programme search */
 (function(){
   const ACTIVE_PROGRAM_UNIVERSITIES = new Set([
     'chalmers tekniska högskola',
@@ -31416,10 +31416,15 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
     return ACTIVE_PROGRAM_UNIVERSITIES.has(norm(p?.university));
   }
 
+  function catalogue(){
+    if(typeof programCatalog!=='undefined'&&Array.isArray(programCatalog))return programCatalog;
+    return Array.isArray(window.programCatalog)?window.programCatalog:[];
+  }
+
   function uniquePrograms(rows){
     const out=[],seen=new Set();
     (Array.isArray(rows)?rows:[]).forEach(p=>{
-      const key=[norm(p?.university),norm(p?.name),Number(p?.hp||0),norm(p?.code||p?.officialCode)].join('|');
+      const key=[norm(p?.university),norm(p?.name)].join('|');
       if(!seen.has(key)){seen.add(key);out.push(p)}
     });
     return out;
@@ -31442,7 +31447,7 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
     const input=document.getElementById('programSearchInput');
     const q=norm(input?.value||'');
 
-    let rows=uniquePrograms((Array.isArray(window.programCatalog)?window.programCatalog:[]).filter(activeProgram));
+    let rows=uniquePrograms(catalogue().filter(activeProgram));
 
     if(q){
       rows=rows.map(p=>({p,score:searchScore(p,q)}))
@@ -31476,7 +31481,7 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
         e.preventDefault();
         e.stopPropagation();
         const key=decodeURIComponent(btn.dataset.v579Program||'');
-        const p=(Array.isArray(window.programCatalog)?window.programCatalog:[]).find(x=>
+        const p=catalogue().find(x=>
           String(x?.id||x?.code||x?.name||'')===key
         );
         if(!p)return;
@@ -31509,9 +31514,12 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
     }
   }
 
-  const input=document.getElementById('programSearchInput');
-  if(input){
+  const oldInput=document.getElementById('programSearchInput');
+  if(oldInput){
+    const input=oldInput.cloneNode(true);
     input.removeAttribute('oninput');
+    input.dataset.programSearchRuntime='615';
+    oldInput.replaceWith(input);
     input.addEventListener('input',safeRender);
   }
 
@@ -31524,7 +31532,7 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
 
   window.__studielotsBuild={
     ...(window.__studielotsBuild||{}),
-    version:'v579',
+    version:'v615',
     programSearchTdzFixed:true,
     programSearchOwnUniversityGate:true
   };
