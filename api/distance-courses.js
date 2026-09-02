@@ -1,4 +1,8 @@
-const DEFAULT_SUSA_URL='https://api.skolverket.se/susa-navet/educationEvents';
+const DEFAULT_SUSA_URLS=[
+  'https://api.skolverket.se/susa-navet/api/educationEvents',
+  'https://api.skolverket.se/susa-navet/v1/educationEvents',
+  'https://api.skolverket.se/susa-navet/educationEvents'
+];
 const DISTANCE_RE=/(^|[\s_/-])(distans|distance|remote|online|webb)([\s_/-]|$)/i;
 const CAMPUS_RE=/(^|[\s_/-])(campus|on[- ]?site|på plats|ortsoberoende med träff)([\s_/-]|$)/i;
 
@@ -67,14 +71,20 @@ export default async function handler(req,res){
   res.setHeader('Cache-Control','s-maxage=3600, stale-while-revalidate=86400');
   const subject=String(req.query?.subject||'').trim();
   const kind=String(req.query?.kind||'candidate').trim();
-  const base=process.env.DISTANCE_COURSE_FEED_URL||DEFAULT_SUSA_URL;
+  const bases=process.env.DISTANCE_COURSE_FEED_URL?[process.env.DISTANCE_COURSE_FEED_URL]:DEFAULT_SUSA_URLS;
   try{
-    const u=new URL(base);
-    if(process.env.DISTANCE_COURSE_FEED_URL){if(subject)u.searchParams.set('subject',subject);if(kind)u.searchParams.set('kind',kind)}
-    else{u.searchParams.set('page','0');u.searchParams.set('size','500')}
-    const upstream=await fetch(u,{headers:{accept:'application/json'},signal:AbortSignal.timeout(12000)});
-    if(!upstream.ok)throw new Error(`Susa-navet svarade ${upstream.status}`);
-    const courses=normalizeResponse(await upstream.json(),subject);
+    let data=null,lastStatus=0;
+    for(const base of bases){
+      const u=new URL(base);
+      if(process.env.DISTANCE_COURSE_FEED_URL){if(subject)u.searchParams.set('subject',subject);if(kind)u.searchParams.set('kind',kind)}
+      else{u.searchParams.set('page','0');u.searchParams.set('size','500')}
+      const upstream=await fetch(u,{headers:{accept:'application/json'},signal:AbortSignal.timeout(12000)});
+      lastStatus=upstream.status;
+      if(upstream.ok){data=await upstream.json();break}
+      if(upstream.status!==404)break;
+    }
+    if(data==null)throw new Error(`Susa-navet svarade ${lastStatus||'utan status'}`);
+    const courses=normalizeResponse(data,subject);
     return res.status(200).json({courses,updated:new Date().toISOString(),source:process.env.DISTANCE_COURSE_FEED_URL?'configured-feed':'skolverket-susa-navet'});
   }catch(error){
     console.error('distance-courses',error);
