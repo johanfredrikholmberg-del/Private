@@ -3,147 +3,24 @@ const SUSA_FALLBACK_BASE='https://api.skolverket.se/susa-navet/emil3/';
 const DISTANCE_RE=/(distans|distance|remote|online|webb)/i;
 const PHYSICAL_RE=/(obligatorisk[^.\n]{0,60}(närvaro|träff)|träff(ar)?|på plats|campus)/i;
 const NO_PHYSICAL_RE=/(inga? (obligatoriska )?(träffar|närvaromoment)|utan (fysiska )?träffar|helt på distans|100 ?% distans)/i;
-
-function scalarEntries(value,path='',out=[]){
-  if(value==null)return out;
-  if(Array.isArray(value))value.forEach((item,index)=>scalarEntries(item,`${path}[${index}]`,out));
-  else if(typeof value==='object')Object.entries(value).forEach(([key,item])=>scalarEntries(item,path?`${path}.${key}`:key,out));
-  else if(['string','number','boolean'].includes(typeof value))out.push({path,value});
-  return out;
-}
+function scalarEntries(value,path='',out=[]){if(value==null)return out;if(Array.isArray(value))value.forEach((item,index)=>scalarEntries(item,`${path}[${index}]`,out));else if(typeof value==='object')Object.entries(value).forEach(([key,item])=>scalarEntries(item,path?`${path}.${key}`:key,out));else if(['string','number','boolean'].includes(typeof value))out.push({path,value});return out}
 function firstValue(entries,keyRe){return entries.find(x=>keyRe.test(x.path))?.value}
 function textValue(entries,keyRe){const value=firstValue(entries,keyRe);return value==null?'':String(value).trim()}
 function numberValue(entries,keyRe){const match=String(firstValue(entries,keyRe)??'').replace(',','.').match(/\d+(?:\.\d+)?/);return match?Number(match[0]):0}
 function eventList(data){if(Array.isArray(data))return data;for(const key of ['educationEvents','events','items','content','results','data'])if(Array.isArray(data?.[key]))return data[key];return []}
-function localized(value){
-  const strings=value?.strings||value?.urls||[];
-  const swe=strings.find(x=>String(x?.lang||'').toLowerCase()==='swe');
-  return String((swe||strings[0])?.value||'').trim();
-}
+function localized(value){const strings=value?.strings||value?.urls||[];const swe=strings.find(x=>String(x?.lang||'').toLowerCase()==='swe');return String((swe||strings[0])?.value||'').trim()}
 function explicitDistance(entries){return entries.some(x=>/(^|\.)distance(\.|$)/i.test(x.path)||DISTANCE_RE.test(String(x.value))&&/(study.?form|teaching.?form|delivery|attendance)/i.test(x.path))}
-function normalizeEvent(raw,subject){
-  if(!raw||typeof raw!=='object')return null;
-  const entries=scalarEntries(raw);
-  if(!explicitDistance(entries))return null;
-  const haystack=entries.map(x=>String(x.value)).join(' ');
-  if(subject&&!haystack.toLocaleLowerCase('sv').includes(subject.toLocaleLowerCase('sv')))return null;
-  const name=textValue(entries,/(^|\.)(educationName|courseName|title)(\.strings\[\d+\]\.value|\.|$)/i)||textValue(entries,/^(name)$/i);
-  const university=textValue(entries,/(provider|organizer|university|institution).*(name|title).*value$/i);
-  const hp=numberValue(entries,/(credits?|creditPoints?|higherEducationCredits?)(\.|$)/i)||numberValue(entries,/extent\.length$/i);
-  if(!name||!university||!(hp>0))return null;
-  return {name,code:textValue(entries,/(^|\.)(courseCode|applicationCode|code)(\.|$)/i),university,subject,hp,pace:numberValue(entries,/(studyPace|pace|percentage)(\.|$)/i)||null,term:textValue(entries,/(^|\.)(semester|term)(\.|$)/i),period:numberValue(entries,/(^|\.)(period)(\.|$)/i)||null,startDate:textValue(entries,/(^|\.)(startDate|startsAt)(\.|$)/i),applicationDeadline:textValue(entries,/(application|admission).*(close|end|last).*date$/i),applicationOpensAt:textValue(entries,/(application|admission).*(open|start).*date$/i),applicationClosesAt:textValue(entries,/(application|admission).*(close|end|last).*date$/i),applicationOpen:false,distance:true,currentOffering:true,verified:true,noPhysicalMeetings:null,url:textValue(entries,/(^|\.)(url|webpage|informationUrl|applicationUrl).*value?$/i)};
-}
-function normalizeResponse(data,subject){
-  const seen=new Set();
-  return eventList(data).map(x=>normalizeEvent(x,subject)).filter(course=>{if(!course)return false;const key=[course.code,course.name,course.university,course.startDate].join('|').toLocaleLowerCase('sv');if(seen.has(key))return false;seen.add(key);return true}).slice(0,60);
-}
-async function schemaBase(){
-  try{
-    const r=await fetch(SUSA_SCHEMA_URL,{headers:{accept:'text/yaml,text/plain'},signal:AbortSignal.timeout(5000)});
-    if(!r.ok)return SUSA_FALLBACK_BASE;
-    const yaml=await r.text();
-    const server=yaml.match(/^\s*-\s*url:\s*["']?([^\s"']+)/m)?.[1];
-    if(!server)return SUSA_FALLBACK_BASE;
-    const base=new URL(server,SUSA_SCHEMA_URL);if(!base.pathname.endsWith('/'))base.pathname+='/';return base.href;
-  }catch(_){return SUSA_FALLBACK_BASE}
-}
-async function getJson(url,timeout=9000){
-  const r=await fetch(url,{headers:{accept:'application/json'},signal:AbortSignal.timeout(timeout)});
-  if(!r.ok)throw new Error(`Susa-navet ${r.status}`);
-  return r.json();
-}
-function isActive(resource){
-  if(!resource||String(resource.status||'ACTIVE').toUpperCase()!=='ACTIVE')return false;
-  const expires=resource?.content?.expires;
-  return !expires||!Number.isFinite(Date.parse(expires))||Date.parse(expires)>=Date.now()-86400000;
-}
-function subjectTerms(subject){
-  const key=String(subject||'').trim().toLocaleLowerCase('sv');
-  const aliases={
-    'företagsekonomi':['företagsekonomi','business administration','business','redovisning','marknadsföring','organisation','management','finansiering'],
-    'psykologi':['psykologi','psychology'],
-    'idrottsvetenskap':['idrottsvetenskap','sport science','idrott','sport'],
-    'nationalekonomi':['nationalekonomi','economics','ekonomisk teori'],
-    'statsvetenskap':['statsvetenskap','political science'],
-    'historia':['historia','history']
-  };
-  return aliases[key]||[key];
-}
-function matchesSubject(info,subject){
-  if(!subject)return true;
-  const c=info?.content||{};
-  const text=[localized(c.title),localized(c.description),localized(c.eligibility),c.code,...(c.degrees||[]).map(localized)].join(' ').toLocaleLowerCase('sv');
-  return subjectTerms(subject).some(term=>term&&text.includes(term));
-}
-function hpFromInfo(info){
-  const extent=info?.content?.extent||{};
-  const length=Number(extent.length)||0;
-  const unit=String(extent?.unit?.code||'').toLocaleLowerCase('sv');
-  if(!length)return 0;
-  if(/(hp|credit|credits|ects|poäng|points)/i.test(unit))return length;
-  if(/semester/i.test(unit))return length*30;
-  return 0;
-}
-function distanceMeetingState(event){
-  const description=localized(event?.content?.distance?.description);
-  if(!description)return null;
-  if(PHYSICAL_RE.test(description))return false;
-  if(NO_PHYSICAL_RE.test(description))return true;
-  return null;
-}
-function courseFromJoined(event,info,provider,subject){
-  const ec=event?.content||{},ic=info?.content||{},pc=provider?.content||{};
-  if(!isActive(event)||!isActive(info)||!isActive(provider))return null;
-  if(!event?.content?.distance)return null;
-  if(String(ic?.configuration?.code||'').toLowerCase()!=='course')return null;
-  if(!matchesSubject(info,subject))return null;
-  const hp=hpFromInfo(info);if(!(hp>0))return null;
-  const name=localized(ic.title);const university=localized(pc.name);if(!name||!university)return null;
-  const applicationUrl=localized(ec?.application?.url)||localized(ic.url);
-  const startDate=String(ec.startDate||ec.start||ec.from||'');
-  const applicationOpensAt=String(ec?.application?.startDate||ec?.application?.opens||'');
-  const applicationClosesAt=String(ec?.application?.endDate||ec?.application?.lastApplicationDate||'');
-  const now=Date.now(),open=Date.parse(applicationOpensAt),close=Date.parse(applicationClosesAt);
-  return {name,code:String(ic.code||''),university,subject,hp,pace:Number(ec?.paceOfStudy?.percentage)||null,term:'',period:null,startDate,applicationDeadline:applicationClosesAt,applicationOpensAt,applicationClosesAt,applicationOpen:Number.isFinite(open)&&Number.isFinite(close)&&now>=open&&now<=close,distance:true,currentOffering:true,verified:true,noPhysicalMeetings:distanceMeetingState(event),url:applicationUrl};
-}
-async function mapLimit(items,limit,worker){
-  const results=new Array(items.length);let next=0;
-  async function run(){while(true){const i=next++;if(i>=items.length)return;try{results[i]=await worker(items[i],i)}catch(_){results[i]=null}}}
-  await Promise.all(Array.from({length:Math.min(limit,items.length)},run));return results;
-}
-async function fetchSusaCourses(subject){
-  const base=await schemaBase();
-  const pages=Array.from({length:6},(_,page)=>{const u=new URL('educationEvents',base);u.searchParams.set('schoolType','HS');u.searchParams.set('page',String(page));u.searchParams.set('size','250');return u});
-  const responses=await Promise.all(pages.map(u=>getJson(u,10000).catch(()=>null)));
-  const events=responses.flatMap(eventList).filter(e=>isActive(e)&&e?.content?.distance&&e?.content?.education&&e?.content?.providers?.[0]);
-  const unique=[];const seenEvent=new Set();for(const e of events){const id=e.id||e?.content?.identifier;if(id&&!seenEvent.has(id)){seenEvent.add(id);unique.push(e)}}
-  const infoCache=new Map(),providerCache=new Map();
-  const cached=(cache,key,url)=>{if(!cache.has(key))cache.set(key,getJson(url,8000).catch(()=>null));return cache.get(key)};
-  const hydrated=await mapLimit(unique.slice(0,140),10,async event=>{
-    const educationId=event.content.education,providerId=event.content.providers[0];
-    const [info,provider]=await Promise.all([
-      cached(infoCache,educationId,new URL(`educationInfos/${encodeURIComponent(educationId)}`,base)),
-      cached(providerCache,providerId,new URL(`educationProviders/${encodeURIComponent(providerId)}`,base))
-    ]);
-    return info&&provider?courseFromJoined(event,info,provider,subject):null;
-  });
-  const seen=new Set();
-  return hydrated.filter(Boolean).filter(course=>{const key=[course.code,course.university,course.startDate,course.name].join('|').toLocaleLowerCase('sv');if(seen.has(key))return false;seen.add(key);return true}).slice(0,60);
-}
-
+function normalizeEvent(raw,subject){if(!raw||typeof raw!=='object')return null;const entries=scalarEntries(raw);if(!explicitDistance(entries))return null;const haystack=entries.map(x=>String(x.value)).join(' ');if(subject&&!haystack.toLocaleLowerCase('sv').includes(subject.toLocaleLowerCase('sv')))return null;const name=textValue(entries,/(^|\.)(educationName|courseName|title)(\.strings\[\d+\]\.value|\.|$)/i)||textValue(entries,/^(name)$/i);const university=textValue(entries,/(provider|organizer|university|institution).*(name|title).*value$/i);const hp=numberValue(entries,/(credits?|creditPoints?|higherEducationCredits?)(\.|$)/i)||numberValue(entries,/extent\.length$/i);if(!name||!university||!(hp>0))return null;return {name,code:textValue(entries,/(^|\.)(courseCode|applicationCode|code)(\.|$)/i),university,subject,hp,pace:numberValue(entries,/(studyPace|pace|percentage)(\.|$)/i)||null,term:textValue(entries,/(^|\.)(semester|term)(\.|$)/i),period:numberValue(entries,/(^|\.)(period)(\.|$)/i)||null,startDate:textValue(entries,/(^|\.)(startDate|startsAt)(\.|$)/i),applicationDeadline:textValue(entries,/(application|admission).*(close|end|last).*date$/i),applicationOpensAt:textValue(entries,/(application|admission).*(open|start).*date$/i),applicationClosesAt:textValue(entries,/(application|admission).*(close|end|last).*date$/i),applicationOpen:false,distance:true,currentOffering:true,verified:true,noPhysicalMeetings:null,url:textValue(entries,/(^|\.)(url|webpage|informationUrl|applicationUrl).*value?$/i)}}
+function normalizeResponse(data,subject){const seen=new Set();return eventList(data).map(x=>normalizeEvent(x,subject)).filter(course=>{if(!course)return false;const key=[course.code,course.name,course.university,course.startDate].join('|').toLocaleLowerCase('sv');if(seen.has(key))return false;seen.add(key);return true}).slice(0,60)}
+async function schemaBase(){try{const r=await fetch(SUSA_SCHEMA_URL,{headers:{accept:'text/yaml,text/plain'},signal:AbortSignal.timeout(5000)});if(!r.ok)return SUSA_FALLBACK_BASE;const yaml=await r.text();const server=yaml.match(/^\s*-\s*url:\s*["']?([^\s"']+)/m)?.[1];if(!server)return SUSA_FALLBACK_BASE;const base=new URL(server,SUSA_SCHEMA_URL);if(!base.pathname.endsWith('/'))base.pathname+='/';return base.href}catch(_){return SUSA_FALLBACK_BASE}}
+async function getJson(url,timeout=9000){const r=await fetch(url,{headers:{accept:'application/json'},signal:AbortSignal.timeout(timeout)});if(!r.ok)throw new Error(`Susa-navet ${r.status}`);return r.json()}
+function isActive(resource){if(!resource||String(resource.status||'ACTIVE').toUpperCase()!=='ACTIVE')return false;const expires=resource?.content?.expires;return !expires||!Number.isFinite(Date.parse(expires))||Date.parse(expires)>=Date.now()-86400000}
+function subjectTerms(subject){const key=String(subject||'').trim().toLocaleLowerCase('sv');const aliases={'företagsekonomi':['företagsekonomi','business administration','business','redovisning','marknadsföring','organisation','management','finansiering'],'psykologi':['psykologi','psychology'],'idrottsvetenskap':['idrottsvetenskap','sport science','idrott','sport'],'nationalekonomi':['nationalekonomi','economics','ekonomisk teori'],'statsvetenskap':['statsvetenskap','political science'],'historia':['historia','history']};return aliases[key]||[key]}
+function matchesSubject(info,subject){if(!subject)return true;const c=info?.content||{};const text=[localized(c.title),localized(c.description),localized(c.eligibility),c.code,...(c.degrees||[]).map(localized)].join(' ').toLocaleLowerCase('sv');return subjectTerms(subject).some(term=>term&&text.includes(term))}
+function hpFromInfo(info){const extent=info?.content?.extent||{};const length=Number(extent.length)||0;const unit=String(extent?.unit?.code||'').toLocaleLowerCase('sv');if(!length)return 0;if(/(hp|credit|credits|ects|poäng|points)/i.test(unit))return length;if(/semester/i.test(unit))return length*30;if(/week|veck/i.test(unit))return length*1.5;return 0}
+function distanceMeetingState(event){const description=localized(event?.content?.distance?.description);if(!description)return null;if(PHYSICAL_RE.test(description))return false;if(NO_PHYSICAL_RE.test(description))return true;return null}
+function courseFromJoined(event,info,provider,subject){const ec=event?.content||{},ic=info?.content||{},pc=provider?.content||{};if(!isActive(event)||!isActive(info)||!isActive(provider))return null;if(!event?.content?.distance)return null;const configuration=String(ic?.configuration?.code||'').toLocaleLowerCase('sv');if(configuration.includes('program'))return null;if(!matchesSubject(info,subject))return null;const hp=hpFromInfo(info);if(!(hp>0))return null;const name=localized(ic.title);const university=localized(pc.name);if(!name||!university)return null;const applicationUrl=localized(ec?.application?.url)||localized(ic.url);const startDate=String(ec.startDate||ec.start||ec.from||'');const applicationOpensAt=String(ec?.application?.startDate||ec?.application?.opens||'');const applicationClosesAt=String(ec?.application?.endDate||ec?.application?.lastApplicationDate||'');const now=Date.now(),open=Date.parse(applicationOpensAt),close=Date.parse(applicationClosesAt);return {name,code:String(ic.code||''),university,subject,hp,pace:Number(ec?.paceOfStudy?.percentage)||null,term:'',period:null,startDate,applicationDeadline:applicationClosesAt,applicationOpensAt,applicationClosesAt,applicationOpen:Number.isFinite(open)&&Number.isFinite(close)&&now>=open&&now<=close,distance:true,currentOffering:true,verified:true,noPhysicalMeetings:distanceMeetingState(event),url:applicationUrl}}
+async function mapLimit(items,limit,worker){const results=new Array(items.length);let next=0;async function run(){while(true){const i=next++;if(i>=items.length)return;try{results[i]=await worker(items[i],i)}catch(_){results[i]=null}}}await Promise.all(Array.from({length:Math.min(limit,items.length)},run));return results}
+async function fetchSusaCourses(subject){const base=await schemaBase();const pages=Array.from({length:8},(_,page)=>{const u=new URL('educationEvents',base);u.searchParams.set('schoolType','HS');u.searchParams.set('page',String(page));u.searchParams.set('size','250');return u});const responses=await Promise.all(pages.map(u=>getJson(u,10000).catch(()=>null)));const events=responses.flatMap(eventList).filter(e=>isActive(e)&&e?.content?.distance&&e?.content?.education&&e?.content?.providers?.[0]);const unique=[];const seenEvent=new Set();for(const e of events){const id=e.id||e?.content?.identifier;if(id&&!seenEvent.has(id)){seenEvent.add(id);unique.push(e)}}const infoCache=new Map(),providerCache=new Map();const cached=(cache,key,url)=>{if(!cache.has(key))cache.set(key,getJson(url,8000).catch(()=>null));return cache.get(key)};const hydrated=await mapLimit(unique.slice(0,220),12,async event=>{const educationId=event.content.education,providerId=event.content.providers[0];const [info,provider]=await Promise.all([cached(infoCache,educationId,new URL(`educationInfos/${encodeURIComponent(educationId)}`,base)),cached(providerCache,providerId,new URL(`educationProviders/${encodeURIComponent(providerId)}`,base))]);return info&&provider?courseFromJoined(event,info,provider,subject):null});const seen=new Set();return hydrated.filter(Boolean).filter(course=>{const key=[course.code,course.university,course.startDate,course.name].join('|').toLocaleLowerCase('sv');if(seen.has(key))return false;seen.add(key);return true}).slice(0,60)}
 export {eventList,explicitDistance,normalizeEvent,normalizeResponse};
-export default async function handler(req,res){
-  res.setHeader('Cache-Control','s-maxage=3600, stale-while-revalidate=86400');
-  const subject=String(req.query?.subject||'').trim();
-  try{
-    let courses;
-    if(process.env.DISTANCE_COURSE_FEED_URL){
-      const u=new URL(process.env.DISTANCE_COURSE_FEED_URL);if(subject)u.searchParams.set('subject',subject);u.searchParams.set('kind',String(req.query?.kind||'candidate'));
-      courses=normalizeResponse(await getJson(u,10000),subject);
-    }else courses=await fetchSusaCourses(subject);
-    return res.status(200).json({courses,updated:new Date().toISOString(),source:process.env.DISTANCE_COURSE_FEED_URL?'configured-feed':'skolverket-susa-navet'});
-  }catch(error){
-    console.error('distance-courses',error);
-    return res.status(200).json({courses:[],updated:new Date().toISOString(),source:'skolverket-susa-navet',temporarilyUnavailable:true});
-  }
-}
+export default async function handler(req,res){res.setHeader('Cache-Control','s-maxage=3600, stale-while-revalidate=86400');const subject=String(req.query?.subject||'').trim();try{let courses;if(process.env.DISTANCE_COURSE_FEED_URL){const u=new URL(process.env.DISTANCE_COURSE_FEED_URL);if(subject)u.searchParams.set('subject',subject);u.searchParams.set('kind',String(req.query?.kind||'candidate'));courses=normalizeResponse(await getJson(u,10000),subject)}else courses=await fetchSusaCourses(subject);return res.status(200).json({courses,updated:new Date().toISOString(),source:process.env.DISTANCE_COURSE_FEED_URL?'configured-feed':'skolverket-susa-navet'})}catch(error){console.error('distance-courses',error);return res.status(200).json({courses:[],updated:new Date().toISOString(),source:'skolverket-susa-navet',temporarilyUnavailable:true})}}
