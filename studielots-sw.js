@@ -1,4 +1,4 @@
-const STUDIELOTS_PATCH='2026-09-01-v611';
+const STUDIELOTS_PATCH='2026-09-02-v612';
 self.addEventListener('install',()=>self.skipWaiting());
 self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));
 self.addEventListener('fetch',event=>{
