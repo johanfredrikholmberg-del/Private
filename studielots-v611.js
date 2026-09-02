@@ -1,6 +1,6 @@
 (()=>{
   'use strict';
-  const VERSION='611';
+  const VERSION='612';
   const norm=v=>String(v??'').trim();
   const low=v=>norm(v).toLocaleLowerCase('sv-SE');
   const number=v=>{const n=Number(v);return Number.isFinite(n)?n:null};
@@ -211,9 +211,9 @@
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
   window.addEventListener('pageshow',()=>{syncVisible();openDistanceFromUrl()});
-  ['studielots:screen-rendered','studielots:planner-open','studielots:pacechange'].forEach(name=>window.addEventListener(name,()=>requestAnimationFrame(syncVisible)));
+  ['studielots:screen-rendered','studielots:planner-open','studielots:planner-rendered','studielots:pacechange'].forEach(name=>window.addEventListener(name,()=>requestAnimationFrame(syncVisible)));
   if('serviceWorker' in navigator)navigator.serviceWorker.addEventListener('controllerchange',()=>{
-    const key='studielots_sw_611_reloaded';
+    const key='studielots_sw_612_reloaded';
     try{if(!sessionStorage.getItem(key)){sessionStorage.setItem(key,'1');location.reload()}}catch(_){}
   });
   if(!document.getElementById('sl-runtime-611-style')){
