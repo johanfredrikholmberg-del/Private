@@ -1,1 +1,0 @@
-export default async function handler(req,res){try{const id='i.uoh.bth.dv1566.d5999.20262';const url='https://api.skolverket.se/susa-navet/emil3/educationInfos/'+encodeURIComponent(id);const r=await fetch(url,{headers:{accept:'application/json'}});const data=await r.json();return res.status(200).json(data)}catch(e){return res.status(500).json({error:String(e)})}}
