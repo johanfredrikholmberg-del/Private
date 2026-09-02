@@ -11,7 +11,7 @@
   }
   function load(){
     loadScript('/studielots-runtime.js?v=633','data-studielots-runtime',()=>{
-      loadScript('/studielots-distance-planner.js?v=634','data-studielots-distance-planner');
+      loadScript('/studielots-planner.js?v=635','data-studielots-shared-planner');
     });
   }
   if(document.readyState==='complete')load();else window.addEventListener('load',load,{once:true});
