@@ -5,28 +5,29 @@ const [html, css, catalog, app, runtime, manifest] = await Promise.all([
   readFile(new URL('../index.html', import.meta.url), 'utf8'),
   readFile(new URL('../studielots-v615.css', import.meta.url), 'utf8'),
   readFile(new URL('../studielots-catalog-v616.js', import.meta.url), 'utf8'),
-  readFile(new URL('../studielots-v624.js', import.meta.url), 'utf8'),
-  readFile(new URL('../studielots-runtime-v624.js', import.meta.url), 'utf8'),
+  readFile(new URL('../studielots-v625.js', import.meta.url), 'utf8'),
+  readFile(new URL('../studielots-runtime-v625.js', import.meta.url), 'utf8'),
   readFile(new URL('../manifest.webmanifest', import.meta.url), 'utf8'),
 ]);
 
 assert.match(html, /studielots-v615\.css\?v=615/);
 assert.match(html, /studielots-catalog-v616\.js\?v=616/);
-assert.match(html, /studielots-v624\.js\?v=624/);
-assert.match(html, /studielots-runtime-v624\.js\?v=624/);
+assert.match(html, /studielots-v625\.js\?v=625/);
+assert.match(html, /studielots-runtime-v625\.js\?v=625/);
 assert.doesNotMatch(html, /pdf\.min\.mjs/);
 assert.match(app, /async function loadPdfJs\(\)/);
 assert.match(catalog, /window\.programCatalog=\[/);
 assert.match(app, /var programCatalog=window\.programCatalog\|\|\[\]/);
-assert.match(runtime, /const VERSION='624'/);
+assert.match(runtime, /const VERSION='625'/);
 assert.match(runtime, /window\.__studielotsHpAuthority=authority/);
 assert.match(app, /#sl-pace-picker/);
 assert.match(app, /v576-open-cue/);
-assert.match(app, /version:'v624'/);
-assert.match(app, /programSearchRuntime='624'/);
-assert.match(runtime, /data-sl624-program/);
+assert.match(app, /version:'v625'/);
+assert.match(app, /programSearchRuntime='625'/);
+assert.match(runtime, /data-sl625-program/);
 assert.match(runtime, /Hämta dina meriter först/);
 assert.match(runtime, /addEventListener\('pointerdown',open/);
+assert.match(app, /String\(x\?\.id\|\|''\)/);
 assert.match(app, /typeof window\.shouldUseV2==='function'/);
 assert.match(app, /window\.renderV21Detail=renderV21Detail/);
 assert.match(app, /window\.mappedHp=window\.mappedHp\|\|function\(p\)/);
