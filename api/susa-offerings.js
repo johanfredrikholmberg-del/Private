@@ -140,7 +140,16 @@ async function fetchProviders(base){
   const data=await getJson(u,10000);
   return providerMap(list(data,['educationProviders','providers','items','content','results','data']));
 }
-async function fetchOfferings({code,university,type}){
+function requestedCodes(value){
+  const rows=(Array.isArray(value)?value:[value]).flatMap(v=>clean(v).split(/[;,]/)).map(clean).filter(Boolean);
+  const seen=new Set(),out=[];
+  for(const row of rows){const key=codeNorm(row);if(!key||seen.has(key))continue;seen.add(key);out.push(row);if(out.length>=20)break}
+  return out;
+}
+async function fetchOfferings({codes,university,type}){
+  const wantedCodes=requestedCodes(codes);
+  const wantedNorm=new Set(wantedCodes.map(codeNorm));
+  if(!wantedCodes.length)return [];
   const base=await schemaBase();
   const [events,providers]=await Promise.all([fetchAllEventPages(base),fetchProviders(base)]);
   const candidates=[];
@@ -148,7 +157,7 @@ async function fetchOfferings({code,university,type}){
   for(const event of events){
     if(!isActive(event))continue;
     const educationId=clean(event?.content?.education),providerId=clean(event?.content?.providers?.[0]);
-    if(!educationId||!providerId||!codeAppearsInEducationRef(educationId,code))continue;
+    if(!educationId||!providerId||!wantedCodes.some(code=>codeAppearsInEducationRef(educationId,code)))continue;
     const provider=providers.get(providerId);
     if(!provider||!providerMatches(provider,university))continue;
     const id=clean(event?.id||event?.content?.identifier)||[educationId,clean(event?.content?.start)].join('|');
@@ -156,36 +165,38 @@ async function fetchOfferings({code,university,type}){
     candidates.push({event,provider,educationId});
   }
   const infos=new Map();
-  const joined=await mapLimit(candidates,12,async row=>{
+  const joined=await mapLimit(candidates,16,async row=>{
     if(!infos.has(row.educationId))infos.set(row.educationId,getJson(new URL(`educationInfos/${encodeURIComponent(row.educationId)}`,base),9000).catch(()=>null));
     const info=await infos.get(row.educationId);if(!info||!isActive(info))return null;
     const item=offeringFrom(row.event,info,row.provider);
     if(type&&item.type!==type)return null;
-    if(codeNorm(item.code)!==codeNorm(code))return null;
+    if(!wantedNorm.has(codeNorm(item.code)))return null;
     return item;
   });
   const out=[],seenOffering=new Set();
   for(const item of joined.filter(Boolean)){
     if(seenOffering.has(item.offeringKey))continue;seenOffering.add(item.offeringKey);out.push(item);
   }
-  return out.sort((a,b)=>String(a.startDate).localeCompare(String(b.startDate)));
+  return out.sort((a,b)=>codeNorm(a.code).localeCompare(codeNorm(b.code))||String(a.startDate).localeCompare(String(b.startDate)));
 }
 
 export default async function handler(req,res){
   res.setHeader('Cache-Control','s-maxage=3600, stale-while-revalidate=86400');
-  const code=clean(req.query?.code),university=clean(req.query?.university),type=norm(req.query?.type);
-  if(!code)return res.status(400).json({error:'code is required'});
+  const codes=requestedCodes([req.query?.code,req.query?.codes]);
+  const university=clean(req.query?.university),type=norm(req.query?.type);
+  if(!codes.length)return res.status(400).json({error:'code or codes is required'});
   if(type&&!['course','program'].includes(type))return res.status(400).json({error:'type must be course or program'});
   try{
-    const offerings=await fetchOfferings({code,university,type});
+    const offerings=await fetchOfferings({codes,university,type});
     return res.status(200).json({
       offerings,
+      queryCodes:codes,
       identityPolicy:{definition:'university + code + type',offering:'Susa event id + start date',merge:'enrich-only; never replace local degree/program rules'},
       source:'skolverket-susa-navet',
       updated:new Date().toISOString()
     });
   }catch(error){
     console.error('susa-offerings',error);
-    return res.status(200).json({offerings:[],source:'skolverket-susa-navet',temporarilyUnavailable:true,updated:new Date().toISOString()});
+    return res.status(200).json({offerings:[],queryCodes:codes,source:'skolverket-susa-navet',temporarilyUnavailable:true,updated:new Date().toISOString()});
   }
 }
