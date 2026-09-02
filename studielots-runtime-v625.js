@@ -1,6 +1,6 @@
 (()=>{
   'use strict';
-  const VERSION='625';
+  const VERSION='626';
   const norm=v=>String(v??'').trim();
   const low=v=>norm(v).toLocaleLowerCase('sv-SE');
   const number=v=>{const n=Number(v);return Number.isFinite(n)?n:null};
@@ -227,7 +227,7 @@
         try{
           if(typeof window.selectProgramForMatch==='function')window.selectProgramForMatch(id);
           else if(typeof selectProgramForMatch==='function')selectProgramForMatch(id);
-        }catch(error){console.warn('v625 legacy program selector failed safely',error)}
+        }catch(error){console.warn('v626 legacy program selector failed safely',error)}
         const result=document.getElementById('programMatchResult');
         if(result&&!result.textContent.trim()&&p&&typeof window.renderProgramMatch==='function')window.renderProgramMatch(p);
         if(result&&!result.textContent.trim())result.innerHTML='<div class="card empty"><strong>Hämta dina meriter först</strong><div class="small muted">Därefter kan StudieLots jämföra dem med programmet.</div></div>';
@@ -245,6 +245,86 @@
     window.renderProgramSearch=render;
     if(document.querySelector('.screen.active')?.id==='programMatch')render();
   }
+
+  const SUSA_OFFERINGS_API='/api/susa-offerings';
+  const susaCache=new Map();
+  function codeKey(v){return norm(v).toUpperCase().replace(/[^A-Z0-9ÅÄÖ]/g,'')}
+  async function susaOfferings({codes,university,type}){
+    const list=[...new Set((codes||[]).map(norm).filter(Boolean))].slice(0,20);
+    if(!list.length)return [];
+    const key=[type||'',low(university),...list.map(codeKey).sort()].join('|');
+    if(susaCache.has(key))return susaCache.get(key);
+    const task=(async()=>{
+      const q=new URLSearchParams({codes:list.join(','),university:norm(university),type:type||'course'});
+      const r=await fetch(SUSA_OFFERINGS_API+'?'+q.toString(),{headers:{accept:'application/json'}});
+      if(!r.ok)throw new Error('Susa '+r.status);
+      const data=await r.json();
+      return Array.isArray(data?.offerings)?data.offerings:[];
+    })().catch(error=>{console.warn('Studielots Susa enrichment',error);return[]});
+    susaCache.set(key,task);return task;
+  }
+  function programMissingCourses(p){
+    let result=null;
+    try{result=window.evaluateUniversityProgramV2?.(p)||window.evaluateChalmersProgramV2?.(p)||null}catch(_){}
+    const rows=Array.isArray(result?.requiredMissing)?result.requiredMissing:Array.isArray(result?.missingCourses)?result.missingCourses:[];
+    const seen=new Set();
+    return rows.map(row=>row?.programCourse||row?.course||row).filter(Boolean).filter(row=>{
+      const key=codeKey(row?.code);if(!key||seen.has(key))return false;seen.add(key);return true;
+    }).slice(0,12);
+  }
+  function offeringMeta(row){
+    const bits=[];
+    if(row?.distance===true)bits.push('Distans');else if(row?.distance===false)bits.push('Campus/ortsbaserat');
+    if(Number(row?.pace)>0)bits.push(Number(row.pace)+' %');
+    if(row?.startDate)bits.push(row.startDate);
+    return bits.join(' · ')||'Publicerat utbildningstillfälle';
+  }
+  function programOfferingHtml(rows){
+    if(!rows.length)return '<div class="sl-susa-empty">Inget publicerat utbildningstillfälle hittades i Susa-navet för just denna programkod.</div>';
+    return '<div class="sl-susa-list">'+rows.slice(0,5).map(row=>'<div class="sl-susa-row"><div><strong>'+esc(row.name||'Programtillfälle')+'</strong><small>'+esc(offeringMeta(row))+'</small></div><span>'+esc(row.code||'')+'</span></div>').join('')+'</div>';
+  }
+  function courseOfferingHtml(missing,rows){
+    if(!missing.length)return '';
+    const byCode=new Map();rows.forEach(row=>{const k=codeKey(row.code);if(!byCode.has(k))byCode.set(k,[]);byCode.get(k).push(row)});
+    const matched=missing.map(course=>({course,rows:byCode.get(codeKey(course.code))||[]})).filter(x=>x.rows.length);
+    if(!matched.length)return '<div class="sl-susa-course-note">Inga aktuella Susa-tillfällen hittades för de kodsatta kvarvarande kurserna.</div>';
+    return '<div class="sl-susa-course-title">Kvarvarande kurser med publicerade tillfällen</div><div class="sl-susa-course-grid">'+matched.map(x=>{
+      const distance=x.rows.some(r=>r.distance===true),count=x.rows.length;
+      return '<div class="sl-susa-course"><div><strong>'+esc(x.course.name||x.course.code)+'</strong><small>'+esc(x.course.code||'')+(Number(x.course.hp)>0?' · '+esc(fmt(x.course.hp))+' hp':'')+'</small></div><span>'+count+' tillfälle'+(count===1?'':'n')+(distance?' · distans finns':'')+'</span></div>';
+    }).join('')+'</div>';
+  }
+  async function enrichProgramResult(p){
+    const host=document.getElementById('programMatchResult');
+    const programCode=norm(p?.officialCode||p?.code),university=norm(p?.university);
+    if(!host||!programCode||!university)return;
+    let box=host.querySelector('.sl-susa-enrichment');
+    if(!box){
+      box=document.createElement('section');box.className='detail-block sl-susa-enrichment';
+      const anchor=host.querySelector('.suggested-course-block')||host.querySelector('.remaining-primary')||host.lastElementChild;
+      if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(box,anchor);else host.appendChild(box);
+    }
+    box.dataset.programKey=String(p?.id||programCode);
+    box.innerHTML='<div class="sl-susa-head"><div><h2>Aktuella utbildningstillfällen</h2><p>Susa-navet kompletterar vår program- och kursdata utan att ändra examensreglerna.</p></div><span>Susa</span></div><div class="sl-susa-loading">Kontrollerar publicerade tillfällen…</div>';
+    const missing=programMissingCourses(p);
+    const [programRows,courseRows]=await Promise.all([
+      susaOfferings({codes:[programCode],university,type:'program'}),
+      missing.length?susaOfferings({codes:missing.map(x=>x.code),university,type:'course'}):Promise.resolve([])
+    ]);
+    if(!box.isConnected||box.dataset.programKey!==String(p?.id||programCode))return;
+    box.innerHTML='<div class="sl-susa-head"><div><h2>Aktuella utbildningstillfällen</h2><p>Susa-navet används endast som tillfällesdata. StudieLots programregler och hp-beräkning ligger kvar oförändrade.</p></div><span>Susa</span></div>'+programOfferingHtml(programRows)+courseOfferingHtml(missing,courseRows);
+  }
+  function installSusaEnrichment(){
+    const current=window.renderProgramMatch;
+    if(typeof current!=='function'||current.__slSusa626)return;
+    const wrapped=function(p){
+      const out=current.apply(this,arguments);
+      requestAnimationFrame(()=>enrichProgramResult(p));
+      return out;
+    };
+    wrapped.__slSusa626=true;
+    window.renderProgramMatch=wrapped;
+  }
+
   function installPlanner(){
     window.__studielotsBuildProgramSchedule=buildProgramSchedule;
     window.__studielotsOptimizeProgramSchedule=optimizeRows;
@@ -253,7 +333,7 @@
     plannerPolicy();ensurePacePicker();decoratePlanner();
   }
   function removeEscapedNewlines(){[...document.body?.childNodes||[]].filter(n=>n.nodeType===3&&/^\s*(?:\\n)+\s*$/.test(n.nodeValue||'')).forEach(n=>n.remove())}
-  function syncVisible(){installAuthority();installPlanner();installProgramSearch();repairHome();repairCards();repairDetail();ensureDistanceLink();removeEscapedNewlines();document.documentElement.dataset.studielotsRuntime=VERSION}
+  function syncVisible(){installAuthority();installPlanner();installProgramSearch();installSusaEnrichment();repairHome();repairCards();repairDetail();ensureDistanceLink();removeEscapedNewlines();document.documentElement.dataset.studielotsRuntime=VERSION}
   function boot(){
     installAuthority();syncVisible();
     [0,250,900].forEach(delay=>setTimeout(()=>{if(!openDistanceFromUrl())syncVisible()},delay));
@@ -263,8 +343,8 @@
   ['studielots:screen-rendered','studielots:planner-open','studielots:pacechange'].forEach(name=>window.addEventListener(name,()=>requestAnimationFrame(syncVisible)));
   if(!document.getElementById('sl-runtime-611-style')){
     const style=document.createElement('style');style.id='sl-runtime-611-style';
-    style.textContent='.sl-distance-entry-v611{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;box-sizing:border-box;margin-top:14px;padding:12px 0;color:#187566;text-decoration:none;touch-action:manipulation}.sl-distance-entry-v611 div{display:flex;flex-direction:column;gap:3px}.sl-distance-entry-v611 strong{font-size:1.05rem}.sl-distance-entry-v611 small{font-size:.86rem;line-height:1.35;color:#707b83;font-weight:400}.sl-distance-entry-v611>span{font-size:1.5rem;color:#1685df}#sl-pace-picker{margin:12px 14px 16px;padding:14px;border-radius:18px;background:#fff;border:1px solid rgba(15,76,67,.1)}#sl-pace-picker .sl-pace-title{font-weight:800;color:#113d3a}#sl-pace-picker .sl-pace-sub,#sl-pace-picker .sl-pace-note{font-size:12px;color:#74807f;margin-top:4px}#sl-pace-picker .sl-pace-options{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}#sl-pace-picker button{border:1px solid rgba(15,76,67,.16);background:#f6f8f7;color:#155f57;border-radius:14px;padding:10px 5px;font-weight:800}#sl-pace-picker button.active{background:#155f57;color:#fff}.sl-change-wrap{margin-top:8px;display:grid;gap:5px}.sl-change-badge{display:inline-flex;width:max-content;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}.sl-change-badge.credited{background:#eaf6f1;color:#155f57}.sl-change-badge.moved{background:#eef3ff;color:#315db5}.sl-change-copy{font-size:11px;color:#6d7776}';
+    style.textContent='.sl-distance-entry-v611{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;box-sizing:border-box;margin-top:14px;padding:12px 0;color:#187566;text-decoration:none;touch-action:manipulation}.sl-distance-entry-v611 div{display:flex;flex-direction:column;gap:3px}.sl-distance-entry-v611 strong{font-size:1.05rem}.sl-distance-entry-v611 small{font-size:.86rem;line-height:1.35;color:#707b83;font-weight:400}.sl-distance-entry-v611>span{font-size:1.5rem;color:#1685df}#sl-pace-picker{margin:12px 14px 16px;padding:14px;border-radius:18px;background:#fff;border:1px solid rgba(15,76,67,.1)}#sl-pace-picker .sl-pace-title{font-weight:800;color:#113d3a}#sl-pace-picker .sl-pace-sub,#sl-pace-picker .sl-pace-note{font-size:12px;color:#74807f;margin-top:4px}#sl-pace-picker .sl-pace-options{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}#sl-pace-picker button{border:1px solid rgba(15,76,67,.16);background:#f6f8f7;color:#155f57;border-radius:14px;padding:10px 5px;font-weight:800}#sl-pace-picker button.active{background:#155f57;color:#fff}.sl-change-wrap{margin-top:8px;display:grid;gap:5px}.sl-change-badge{display:inline-flex;width:max-content;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}.sl-change-badge.credited{background:#eaf6f1;color:#155f57}.sl-change-badge.moved{background:#eef3ff;color:#315db5}.sl-change-copy{font-size:11px;color:#6d7776}.sl-susa-enrichment{margin-top:14px}.sl-susa-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.sl-susa-head h2{margin:0}.sl-susa-head p{margin:4px 0 0;color:#74807f;font-size:12px;line-height:1.4}.sl-susa-head>span{flex:0 0 auto;border-radius:999px;padding:5px 8px;background:#eaf6f1;color:#155f57;font-size:11px;font-weight:800}.sl-susa-loading,.sl-susa-empty,.sl-susa-course-note{margin-top:12px;color:#74807f;font-size:12px}.sl-susa-list,.sl-susa-course-grid{display:grid;gap:8px;margin-top:12px}.sl-susa-row,.sl-susa-course{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid rgba(15,76,67,.08)}.sl-susa-row:first-child,.sl-susa-course:first-child{border-top:0}.sl-susa-row div,.sl-susa-course div{display:grid;gap:2px}.sl-susa-row small,.sl-susa-course small{font-size:11px;color:#74807f}.sl-susa-row>span,.sl-susa-course>span{font-size:11px;color:#155f57;text-align:right}.sl-susa-course-title{margin-top:15px;font-size:12px;font-weight:800;color:#113d3a}';
     document.head.appendChild(style);
   }
-  window.__studielotsLatestPatch={version:VERSION,consolidatedRuntime:true,singleHpAuthority:true,distanceRealLink:true};
+  window.__studielotsLatestPatch={version:VERSION,consolidatedRuntime:true,singleHpAuthority:true,distanceRealLink:true,susaEnrichment:true,susaMergePolicy:'enrich-only'};
 })();
