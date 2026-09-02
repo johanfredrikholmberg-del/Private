@@ -13,12 +13,8 @@ export default async function handler(req,res){try{
   const first=await (await fetch(firstUrl,{headers:{accept:'application/json'}})).json();
   const totalPages=Number(first?.page?.totalPages)||1;
   const urls=Array.from({length:totalPages},(_,page)=>{const u=new URL(BASE);u.searchParams.set('schoolType','HS');u.searchParams.set('page',String(page));u.searchParams.set('size','2000');return u});
-  const pages=await Promise.all(urls.map(async (u,i)=>i===0?first:(await (await fetch(u,{headers:{accept:'application/json'}})).json()).catch?null:null));
-  const items=[];
-  for(let i=0;i<pages.length;i++){
-    const page=i===0?first:pages[i];
-    if(page?.educationInfos)items.push(...page.educationInfos);
-  }
+  const pages=await Promise.all(urls.map(async (u,i)=>i===0?first:await (await fetch(u,{headers:{accept:'application/json'}})).json()));
+  const items=pages.flatMap(page=>page?.educationInfos||[]);
   const out={};
   for(const [subject,terms] of Object.entries(TARGETS)){
     const matches=items.filter(item=>String(item?.content?.configuration?.code||'').toLowerCase()==='kurs'&&titles(item).some(t=>terms.some(term=>t.toLocaleLowerCase('sv').includes(term))));
