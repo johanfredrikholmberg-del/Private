@@ -5,27 +5,27 @@ const [html, css, catalog, app, runtime, manifest] = await Promise.all([
   readFile(new URL('../index.html', import.meta.url), 'utf8'),
   readFile(new URL('../studielots-v615.css', import.meta.url), 'utf8'),
   readFile(new URL('../studielots-catalog-v616.js', import.meta.url), 'utf8'),
-  readFile(new URL('../studielots-v621.js', import.meta.url), 'utf8'),
-  readFile(new URL('../studielots-runtime-v621.js', import.meta.url), 'utf8'),
+  readFile(new URL('../studielots-v622.js', import.meta.url), 'utf8'),
+  readFile(new URL('../studielots-runtime-v622.js', import.meta.url), 'utf8'),
   readFile(new URL('../manifest.webmanifest', import.meta.url), 'utf8'),
 ]);
 
 assert.match(html, /studielots-v615\.css\?v=615/);
 assert.match(html, /studielots-catalog-v616\.js\?v=616/);
-assert.match(html, /studielots-v621\.js\?v=621/);
-assert.match(html, /studielots-runtime-v621\.js\?v=621/);
+assert.match(html, /studielots-v622\.js\?v=622/);
+assert.match(html, /studielots-runtime-v622\.js\?v=622/);
 assert.doesNotMatch(html, /pdf\.min\.mjs/);
 assert.match(app, /async function loadPdfJs\(\)/);
 assert.match(catalog, /window\.programCatalog=\[/);
 assert.match(app, /var programCatalog=window\.programCatalog\|\|\[\]/);
-assert.match(runtime, /const VERSION='621'/);
+assert.match(runtime, /const VERSION='622'/);
 assert.match(runtime, /window\.__studielotsHpAuthority=authority/);
 assert.match(app, /#sl-pace-picker/);
 assert.match(app, /v576-open-cue/);
-assert.match(app, /version:'v621'/);
-assert.match(app, /programSearchRuntime='621'/);
-assert.match(runtime, /data-sl621-program/);
-assert.match(runtime, /typeof window\.selectProgramForMatch==='function'/);
+assert.match(app, /version:'v622'/);
+assert.match(app, /programSearchRuntime='622'/);
+assert.match(runtime, /data-sl622-program/);
+assert.match(runtime, /typeof selectProgramForMatch==='function'/);
 assert.match(app, /typeof window\.shouldUseV2==='function'/);
 assert.match(app, /window\.renderV21Detail=renderV21Detail/);
 assert.match(app, /window\.mappedHp=window\.mappedHp\|\|function\(p\)/);
