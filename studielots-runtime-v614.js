@@ -1,6 +1,6 @@
 (()=>{
   'use strict';
-  const VERSION='613';
+  const VERSION='614';
   const norm=v=>String(v??'').trim();
   const low=v=>norm(v).toLocaleLowerCase('sv-SE');
   const number=v=>{const n=Number(v);return Number.isFinite(n)?n:null};
@@ -212,10 +212,6 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
   window.addEventListener('pageshow',()=>{syncVisible();openDistanceFromUrl()});
   ['studielots:screen-rendered','studielots:planner-open','studielots:pacechange'].forEach(name=>window.addEventListener(name,()=>requestAnimationFrame(syncVisible)));
-  if('serviceWorker' in navigator)navigator.serviceWorker.addEventListener('controllerchange',()=>{
-    const key='studielots_sw_611_reloaded';
-    try{if(!sessionStorage.getItem(key)){sessionStorage.setItem(key,'1');location.reload()}}catch(_){}
-  });
   if(!document.getElementById('sl-runtime-611-style')){
     const style=document.createElement('style');style.id='sl-runtime-611-style';
     style.textContent='.sl-distance-entry-v611{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;box-sizing:border-box;margin-top:14px;padding:12px 0;color:#187566;text-decoration:none;touch-action:manipulation}.sl-distance-entry-v611 div{display:flex;flex-direction:column;gap:3px}.sl-distance-entry-v611 strong{font-size:1.05rem}.sl-distance-entry-v611 small{font-size:.86rem;line-height:1.35;color:#707b83;font-weight:400}.sl-distance-entry-v611>span{font-size:1.5rem;color:#1685df}#sl-pace-picker{margin:12px 14px 16px;padding:14px;border-radius:18px;background:#fff;border:1px solid rgba(15,76,67,.1)}#sl-pace-picker .sl-pace-title{font-weight:800;color:#113d3a}#sl-pace-picker .sl-pace-sub,#sl-pace-picker .sl-pace-note{font-size:12px;color:#74807f;margin-top:4px}#sl-pace-picker .sl-pace-options{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}#sl-pace-picker button{border:1px solid rgba(15,76,67,.16);background:#f6f8f7;color:#155f57;border-radius:14px;padding:10px 5px;font-weight:800}#sl-pace-picker button.active{background:#155f57;color:#fff}.sl-change-wrap{margin-top:8px;display:grid;gap:5px}.sl-change-badge{display:inline-flex;width:max-content;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}.sl-change-badge.credited{background:#eaf6f1;color:#155f57}.sl-change-badge.moved{background:#eef3ff;color:#315db5}.sl-change-copy{font-size:11px;color:#6d7776}';

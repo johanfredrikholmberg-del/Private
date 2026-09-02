@@ -29803,16 +29803,6 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
     }
   },true);
 
-  // Degree-specific wording: never call elective inclusion "course equivalence".
-  const obs=new MutationObserver(()=>{
-    const s=(()=>{try{return JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(e){return null}})();
-    if(s?.ruleId!==GU_PSYCH.id)return;
-    document.querySelectorAll('#plannerCleanContent small').forEach(n=>{
-      if(Q(n.textContent)==='kan tillgodoraknas')n.textContent='Kan räknas in i examen';
-    });
-  });
-  obs.observe(document.documentElement,{subtree:true,childList:true});
-
   window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v559',
     guPsychologyVerifiedDegreeRule:true,
     degreeVsProgramWording:true,
@@ -30971,361 +30961,15 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
     }
   }
 
-  // Run after every screen render and after click navigation settles.
+  // Synchronize once after each completed screen render.
   document.addEventListener('studielots:screen-rendered',()=>{
     setTimeout(syncDetailCards,30);
     setTimeout(refreshPlanner,60);
   });
-  document.addEventListener('click',()=>{
-    setTimeout(syncDetailCards,80);
-    setTimeout(refreshPlanner,120);
-  },true);
 
   window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v566',
     canonicalDetailPlannerSync:true,
     plannerRowReconciliation:true};
-})();
-
-/* v567 — tydlig studiekalender + snabbare väg */
-(function(){
- const A=v=>Array.isArray(v)?v:(v?[v]:[]);
- const N=v=>Number(String(v??0).replace(',','.'))||0;
- const fmt=v=>N(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
- const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- function snap(){try{return JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(e){return null}}
- function activePlanner(){
-   const a=document.querySelector('.screen.active');
-   return a && /Din studieplan/i.test(a.innerText||'') ? a : null;
- }
- function termData(s){
-   const m=new Map();
-   A(s.rows).forEach(r=>{const t=N(r.term)||1;if(!m.has(t))m.set(t,[]);m.get(t).push(r)});
-   return [...m].sort((a,b)=>a[0]-b[0]).map(([term,rows])=>{
-     const hp=rows.reduce((x,r)=>x+N(r.hp),0);
-     const done=rows.filter(r=>r.status==='credited').reduce((x,r)=>x+N(r.hp),0);
-     return {term,rows,hp,done,left:Math.max(0,hp-done)};
-   });
- }
- function faster(s,terms){
-   let arr=A(s.fasterAlternatives||s.alternatives||s.fasterRoute).map(x=>({
-     name:x.name||x.title||x.courseName||'Snabbare alternativ',
-     hp:N(x.hp||x.credits), term:N(x.term||x.targetTerm)||null,
-     save:N(x.savesTerms||x.termSavings||x.savedTerms),
-     reason:x.reason||x.description||''
-   }));
-   A(s.rows).forEach(r=>{
-     const x=r.fasterAlternative||r.alternative;
-     if(x) arr.push({name:x.name||x.title||x.courseName||'Snabbare alternativ',
-       hp:N(x.hp||x.credits),term:N(x.term||r.term)||null,
-       save:N(x.savesTerms||x.termSavings||x.savedTerms),reason:x.reason||x.description||''});
-   });
-   arr=arr.filter(x=>x.name).sort((a,b)=>b.save-a.save);
-   const best=arr[0]||null;
-   return {best,save:best?.save||0};
- }
- function icon(t){
-   if(t.left<=.01)return '<i class="v567dot done">✓</i>';
-   if(t.done>0)return '<i class="v567dot part">◐</i>';
-   return '<i class="v567dot"></i>';
- }
- function render(){
-   const host=activePlanner(),s=snap(); if(!host||!s)return;
-   host.querySelector('#v567Enhance')?.remove();
-   const terms=termData(s); if(!terms.length)return;
-   const fr=faster(s,terms);
-   const cards=terms.map(t=>`<button class="v567term" data-v567-term="${t.term}">
-      <b>T${t.term}</b><small>Termin ${t.term}</small>${icon(t)}
-      <strong>${fmt(t.hp)} hp</strong>
-      <em>${t.left<=.01?'Kan räknas in':t.done>0?`${fmt(t.left)} hp kvar`:'Återstår'}</em>
-   </button>`).join('');
-   const fast=fr.best ? `
-     <section class="v567fast">
-       <div class="v567fasttop"><span>⚡</span><div><small>SNABBARE VÄG TILL EXAMEN</small>
-       <h3>${fr.save>0?`Bli klar ${fr.save} termin${fr.save===1?'':'er'} tidigare`:'Snabbare alternativ hittat'}</h3></div></div>
-       <div class="v567rec"><small>REKOMMENDERAD SNABBARE VÄG</small>
-         <b>${esc(fr.best.name)}${fr.best.hp?` · ${fmt(fr.best.hp)} hp`:''}</b>
-         ${fr.best.term?`<span>Läggs i termin ${fr.best.term}</span>`:''}
-         ${fr.best.reason?`<p>${esc(fr.best.reason)}</p>`:''}
-       </div>
-       ${fr.save>0?`<div class="v567cmp"><div><small>Ordinarie</small><b>${terms.length} terminer</b></div><span>→</span>
-       <div><small>Snabbare väg</small><b>${Math.max(1,terms.length-fr.save)} terminer</b></div></div>`:''}
-       <button class="v567show">Visa snabbare väg i planen</button>
-     </section>` : `
-     <section class="v567fast quiet"><div class="v567fasttop"><span>⚡</span><div>
-       <small>SNABBARE VÄG TILL EXAMEN</small><h3>Ingen verifierbar genväg hittad ännu</h3></div></div>
-       <p>En snabbare väg visas här först när kursunderlaget faktiskt stödjer att studietiden kan kortas.</p>
-     </section>`;
-   const el=document.createElement('div'); el.id='v567Enhance';
-   el.innerHTML=`<section class="v567cal"><div class="v567head"><div><small>DIN STUDIEKALENDER</small>
-     <h3>Vägen termin för termin</h3></div><span>${fmt(s.remainingHp)} hp kvar</span></div>
-     <div class="v567strip">${cards}</div>
-     <div class="v567legend"><span><i class="g"></i>Kan räknas in</span><span><i class="y"></i>Delvis</span><span><i></i>Återstår</span></div>
-     </section>${fast}`;
-   const planLabels=[...host.querySelectorAll('h2,h3,h4')].filter(x=>(x.textContent||'').trim()==='Din studieplan');
-   const detail=planLabels[planLabels.length-1];
-   const card=detail?.closest('section,.card,[class*="plan"]');
-   if(card&&card.parentElement) card.parentElement.insertBefore(el,card); else host.appendChild(el);
-   el.querySelectorAll('[data-v567-term]').forEach(b=>b.onclick=()=>{
-     const n=b.dataset.v567Term;
-     const t=[...host.querySelectorAll('*')].find(x=>new RegExp('^Termin\\s*'+n+'$','i').test((x.textContent||'').trim()));
-     t?.scrollIntoView({behavior:'smooth',block:'start'});
-   });
-   el.querySelector('.v567show')?.addEventListener('click',()=>{
-     sessionStorage.setItem('studielots_faster_route_selected',JSON.stringify(fr.best));
-     const t=[...host.querySelectorAll('*')].find(x=>/^Termin\s*\d+$/i.test((x.textContent||'').trim()));
-     t?.scrollIntoView({behavior:'smooth',block:'start'});
-   });
- }
- document.addEventListener('click',()=>setTimeout(render,180),true);
- document.addEventListener('studielots:screen-rendered',()=>setTimeout(render,120));
- setTimeout(render,300);
- window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v567',plannerCalendarV2:true,fasterRoutePanel:true};
-})();
-
-/* v568 — kalendern ÄR studieplanen: expanderbara terminer, ingen dubbel lång plan */
-(function(){
-  const A=v=>Array.isArray(v)?v:(v?[v]:[]);
-  const N=v=>Number(String(v??0).replace(',','.'))||0;
-  const F=v=>N(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
-  const Q=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD')
-    .replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
-  const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-  function snap(){
-    try{return JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(e){return null}
-  }
-
-  function groups(s){
-    const m=new Map();
-    A(s?.rows).forEach((r,i)=>{
-      const t=N(r.term)||Math.max(1,Math.floor(i/2)+1);
-      if(!m.has(t))m.set(t,[]);
-      m.get(t).push(r);
-    });
-    return [...m.entries()].sort((a,b)=>a[0]-b[0]);
-  }
-
-  function state(r){
-    return r.status==='credited'?'credited':'remaining';
-  }
-
-  function fasterFor(r,s,used){
-    if(typeof window.bestFasterAlternative!=='function')return null;
-    try{
-      const path={
-        provider:s.program?.university||s.selection?.university||'',
-        program:{...s.program,courses:A(s.rows)}
-      };
-      const hit=window.bestFasterAlternative(r,path,used);
-      const c=hit?.course;
-      if(!c)return null;
-      const id=Q(c.code)||`${Q(c.name)}|${N(c.hp)}`;
-      if(!id||used.has(id))return null;
-      used.add(id);
-      return {hit,course:c};
-    }catch(e){return null}
-  }
-
-  function termPanel(term,rows,s){
-    const used=new Set();
-    const courseHtml=rows.map(r=>{
-      const st=state(r);
-      const alt=st==='remaining'?fasterFor(r,s,used):null;
-      return `<div class="v568-course ${st}">
-        <div class="v568-course-main">
-          <div>
-            <strong>${E(r.name||'Kurs')}</strong>
-            <small>${st==='credited'
-              ? (s.kind==='degree'||s.wording?.credited==='Kan räknas in i examen'
-                ? 'Kan räknas in i examen'
-                : 'Möjligt tillgodoräknande')
-              : 'Återstår att läsa'}</small>
-            ${r.sourceName?`<em>${E(r.sourceName)}${r.sourceUniversity?` · ${E(r.sourceUniversity)}`:''}</em>`:''}
-          </div>
-          <b>${F(r.hp)} hp</b>
-        </div>
-        ${alt?`<div class="v568-alt">
-          <span>${alt.hit?.verifiedEquivalent?'VERIFIERAT SNABBARE ALTERNATIV':'MÖJLIGT SNABBARE ALTERNATIV'}</span>
-          <div><strong>${E(alt.course.name||alt.course.title||'Alternativ kurs')}</strong><b>${F(alt.course.hp)} hp</b></div>
-          ${alt.hit?.reason?`<small>${E(alt.hit.reason)}</small>`:''}
-        </div>`:''}
-      </div>`;
-    }).join('');
-
-    const hp=rows.reduce((sum,r)=>sum+N(r.hp),0);
-    return `<div class="v568-term-panel" data-panel-term="${term}">
-      <div class="v568-term-panel-head">
-        <div><small>TERMIN ${term}</small><h3>Termin ${term}</h3></div>
-        <strong>${F(hp)} hp</strong>
-      </div>
-      ${courseHtml}
-    </div>`;
-  }
-
-  function render(){
-    const s=snap();
-    const active=document.querySelector('.screen.active');
-    if(!s||!active||!/Din studieplan/i.test(active.innerText||''))return;
-
-    const enhance=active.querySelector('#v567Enhance');
-    if(!enhance)return;
-
-    // Remove prior v568 detail, then build term details below the calendar.
-    enhance.querySelector('.v568-details')?.remove();
-
-    const gs=groups(s);
-    const details=document.createElement('div');
-    details.className='v568-details';
-    details.innerHTML=gs.map(([term,rows])=>termPanel(term,rows,s)).join('');
-    const cal=enhance.querySelector('.v567cal');
-    if(cal) cal.insertAdjacentElement('afterend',details);
-    else enhance.prepend(details);
-
-    // Hide the old duplicated full detailed-plan card below the enhanced calendar.
-    const allHeads=[...active.querySelectorAll('h2,h3')].filter(x=>(x.textContent||'').trim()==='Din studieplan');
-    allHeads.forEach(h=>{
-      if(h.closest('#v567Enhance'))return;
-      const card=h.closest('section,.detail-block,[class*="plan"]');
-      if(card)card.classList.add('v568-hide-legacy-plan');
-    });
-
-    // Default: first term open.
-    details.querySelectorAll('.v568-term-panel').forEach((p,i)=>p.classList.toggle('open',i===0));
-
-    // Make the existing term cards true expanders instead of just scroll links.
-    enhance.querySelectorAll('[data-v567-term]').forEach(btn=>{
-      btn.onclick=(ev)=>{
-        ev.preventDefault();
-        const term=btn.getAttribute('data-v567-term');
-        const target=details.querySelector(`[data-panel-term="${term}"]`);
-        if(!target)return;
-
-        const already=target.classList.contains('open');
-        details.querySelectorAll('.v568-term-panel').forEach(p=>p.classList.remove('open'));
-        enhance.querySelectorAll('[data-v567-term]').forEach(b=>b.classList.remove('selected'));
-
-        if(!already){
-          target.classList.add('open');
-          btn.classList.add('selected');
-          setTimeout(()=>target.scrollIntoView({behavior:'smooth',block:'nearest'}),30);
-        }
-      };
-    });
-
-    const first=enhance.querySelector('[data-v567-term]');
-    if(first)first.classList.add('selected');
-  }
-
-  document.addEventListener('studielots:screen-rendered',()=>setTimeout(render,180));
-  document.addEventListener('click',()=>setTimeout(render,220),true);
-  setTimeout(render,350);
-
-  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v568',
-    calendarIsPlanner:true,
-    expandableTerms:true,
-    duplicatePlanRemoved:true};
-})();
-
-/* v569 — Planner dashboard matching approved mockup */
-(function(){
-  const A=v=>Array.isArray(v)?v:(v?[v]:[]);
-  const N=v=>Number(String(v??0).replace(',','.'))||0;
-  const F=v=>N(v).toLocaleString('sv-SE',{maximumFractionDigits:1});
-  const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-  function snap(){try{return JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(e){return null}}
-  function terms(s){
-    const m=new Map();
-    A(s.rows).forEach((r,i)=>{const t=N(r.term)||Math.max(1,Math.floor(i/2)+1);if(!m.has(t))m.set(t,[]);m.get(t).push(r)});
-    return [...m.entries()].sort((a,b)=>a[0]-b[0]).map(([term,rows])=>{
-      const total=rows.reduce((x,r)=>x+N(r.hp),0);
-      const credited=rows.filter(r=>r.status==='credited').reduce((x,r)=>x+N(r.hp),0);
-      return {term,rows,total,credited,left:Math.max(0,total-credited)};
-    });
-  }
-  function faster(s){
-    const a=[];
-    A(s.fasterAlternatives||s.alternatives||s.fasterRoute).forEach(x=>a.push({
-      name:x.name||x.title||x.courseName||'Snabbare alternativ', hp:N(x.hp||x.credits),
-      term:N(x.term||x.targetTerm)||null, save:N(x.savesTerms||x.termSavings||x.savedTerms),
-      reason:x.reason||x.description||''
-    }));
-    A(s.rows).forEach(r=>{const x=r.fasterAlternative||r.alternative;if(x)a.push({
-      name:x.name||x.title||x.courseName||'Snabbare alternativ',hp:N(x.hp||x.credits),
-      term:N(x.term||r.term)||null,save:N(x.savesTerms||x.termSavings||x.savedTerms),
-      reason:x.reason||x.description||''
-    })});
-    return a.sort((x,y)=>y.save-x.save)[0]||null;
-  }
-  function status(t){
-    if(t.left<=.01)return ['done','✓','Kan räknas in'];
-    if(t.credited>0)return ['part','◐','Delvis kvar att läsa'];
-    return ['todo','','Återstår'];
-  }
-  function courseList(rows,mode){
-    const list=A(rows).filter(r=>mode==='all'||(mode==='credited'?r.status==='credited':r.status!=='credited'));
-    if(!list.length)return '<p class="v569-empty">Inget att visa här ännu.</p>';
-    return list.map(r=>`<div class="v569-course ${r.status==='credited'?'credited':''}">
-      <div><strong>${E(r.name||'Kurs')}</strong><small>${r.status==='credited'?'Kan räknas in':'Återstår att läsa'}</small></div>
-      <b>${F(r.hp)} hp</b>
-    </div>`).join('');
-  }
-  function overlay(s,type,term){
-    document.getElementById('v569Overlay')?.remove();
-    let title='',body='';
-    if(type==='credited'){title='Tillgodoräknade kurser';body=courseList(s.rows,'credited')}
-    if(type==='remaining'){title='Krav som återstår';body=courseList(s.rows,'remaining')}
-    if(type==='plan'){
-      title=term?`Termin ${term}`:'Fullständig studieplan';
-      const ts=terms(s).filter(t=>!term||t.term===term);
-      body=ts.map(t=>`<section class="v569-term-detail"><div><strong>Termin ${t.term}</strong><span>${F(t.total)} hp</span></div>${courseList(t.rows,'all')}</section>`).join('');
-    }
-    if(type==='fast'){
-      title='Snabbare väg till examen';
-      const f=faster(s);
-      body=f?`<div class="v569-fast-detail"><span>REKOMMENDERAD SNABBARE VÄG</span><strong>${E(f.name)}${f.hp?` · ${F(f.hp)} hp`:''}</strong>${f.term?`<p>Läggs i termin ${f.term}.</p>`:''}${f.reason?`<p>${E(f.reason)}</p>`:''}${f.save?`<b>${f.save} termin${f.save===1?'':'er'} tidigare</b>`:''}</div>`:'<p>Ingen verifierbar snabbare väg finns ännu.</p>';
-    }
-    const el=document.createElement('div');
-    el.id='v569Overlay';
-    el.innerHTML=`<div class="v569-backdrop"></div><section class="v569-sheet"><header><h2>${title}</h2><button>×</button></header><div>${body}</div></section>`;
-    document.body.appendChild(el);
-    el.querySelector('header button').onclick=()=>el.remove();
-    el.querySelector('.v569-backdrop').onclick=()=>el.remove();
-  }
-  function render(){
-    if(document.querySelector('.screen.active')?.id!=='plannerClean')return;
-    const host=document.getElementById('plannerCleanContent'),s=snap();
-    if(!host||!s)return;
-    const ts=terms(s),f=faster(s),total=N(s.totalHp)||N(s.creditedHp)+N(s.remainingHp)||180;
-    const pct=total?Math.round(N(s.creditedHp)/total*100):0;
-    const cards=ts.map(t=>{const [cls,ico,label]=status(t);return `<button class="v569-t ${cls}" data-term="${t.term}">
-      <strong>T${t.term}</strong><small>Termin ${t.term}</small><i>${ico}</i><b>${F(t.total)} hp</b><em>${label}</em>
-    </button>`}).join('');
-    host.innerHTML=`
-      <section class="v569-choice"><div class="v569-grad">🎓</div><div><strong>${E(s.selection?.subject||s.program?.name||'Studieplan')}</strong><small>${E(s.program?.university||s.selection?.university||'')}</small></div><button onclick="window.__v549NewPlan?.()">Ändra</button></section>
-      <section class="v569-sum">
-        <button data-detail="credited"><strong>${F(s.creditedHp)} hp</strong><span>kan räknas in i examen ⓘ</span></button>
-        <button data-detail="remaining"><strong>${F(s.remainingHp)} hp</strong><span>kvar att läsa ⓘ</span></button>
-      </section>
-      <section class="v569-cal">
-        <div class="v569-cal-head"><h2>Vägen termin för termin</h2><button>▣ Årsvy</button></div>
-        <div class="v569-strip">${cards}</div>
-        <div class="v569-legend"><span><i class="g"></i>Kan räknas in</span><span><i class="y"></i>Delvis</span><span><i></i>Återstår</span></div>
-        <div class="v569-prog-t"><span>${F(s.creditedHp)} av ${F(total)} hp planerade</span><b>${pct}%</b></div><div class="v569-prog"><i style="width:${pct}%"></i></div>
-      </section>
-      <section class="v569-fast ${f?'':'quiet'}"><div class="v569-bolt">⚡</div><div><div class="v569-fast-title"><span>SNABBARE VÄG TILL EXAMEN</span>${f?.save?`<b>-${f.save} termin${f.save===1?'':'er'}</b>`:''}</div><p>${f?(f.save?`Du kan bli klar ${f.save} termin${f.save===1?'':'er'} tidigare.`:'En snabbare väg har hittats.'):'Ingen verifierbar genväg hittad ännu.'}</p></div>${f?'<button data-detail="fast">Visa snabbare väg →</button>':''}</section>
-      <section class="v569-actions">
-        <button data-detail="credited"><span>▤</span><div><strong>Visa tillgodoräknade kurser (${F(s.creditedHp)} hp)</strong><small>Se alla kurser som kan räknas in</small></div><b>›</b></button>
-        <button data-detail="remaining"><span>☷</span><div><strong>Visa krav som återstår (${F(s.remainingHp)} hp)</strong><small>Se alla kurser och krav som du har kvar att läsa</small></div><b>›</b></button>
-        <button data-detail="plan"><span>◇</span><div><strong>Se fullständig studieplan</strong><small>Se alla terminer och kurser i din studieplan</small></div><b>›</b></button>
-      </section>`;
-    host.querySelectorAll('[data-detail]').forEach(b=>b.onclick=()=>overlay(s,b.dataset.detail));
-    host.querySelectorAll('[data-term]').forEach(b=>b.onclick=()=>overlay(s,'plan',N(b.dataset.term)));
-  }
-  document.addEventListener('studielots:screen-rendered',e=>{if(e?.detail?.screen==='plannerClean')setTimeout(render,80)});
-  document.addEventListener('click',()=>setTimeout(render,120),true);
-  setTimeout(render,250);
-  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v569',plannerDashboardOnly:true};
 })();
 
 /* v570 — locked five-item navigation */
@@ -31354,22 +30998,7 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
   }
   lockNav();
   document.addEventListener('studielots:screen-rendered',()=>setTimeout(lockNav,0));
-  document.addEventListener('click',()=>setTimeout(lockNav,40),true);
   window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v570',lockedBottomNav:['Hem','Möjligheter','Planeraren','Program','Mer']};
-})();
-
-/* v571 planner finalization */
-(function(){
- function fix(){
-  if(document.querySelector('.screen.active')?.id!=='plannerClean') return;
-  const host=document.getElementById('plannerCleanContent'); if(!host) return;
-  let note=host.querySelector('.v571-disclaimer');
-  if(!note){ note=document.createElement('p'); note.className='v571-disclaimer'; note.textContent='Tillgodoräknanden är förslag och behöver slutligt prövas av universitetet.'; host.appendChild(note); }
- }
- document.addEventListener('studielots:screen-rendered',()=>setTimeout(fix,150));
- document.addEventListener('click',()=>setTimeout(fix,180),true);
- setTimeout(fix,300);
- window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v571',planner:'approved-dashboard'};
 })();
 
 /* v572 — approved Planner redesign */
@@ -31462,65 +31091,6 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
     </div>`;
   }
 
-  function renderFastSide(s,ts){
-    const alts=fastAlternatives(s);
-    const best=alts[0];
-    const alternate=alts[1];
-    if(!best){
-      return `<section class="v572-side">
-        <div class="v572-side-title"><span>⚡</span><div><h2>Snabbare väg till examen</h2><p>Här ser du alternativa vägar för att bli klar så snabbt som möjligt.</p></div></div>
-        <div class="v572-empty-fast">
-          <strong>Ingen verifierbar genväg hittad ännu</strong>
-          <p>När kursunderlaget stödjer en faktisk tidsvinst visas den rekommenderade snabbare vägen här.</p>
-        </div>
-        <div class="v572-info"><b>ⓘ Så beräknas snabbare vägar</b><p>Vi analyserar vilka kurser som kan räknas in och om resterande kurser kan kombineras smartare utan att bryta mot examenskraven.</p></div>
-        <div class="v572-legendbox">
-          <div><span class="g">✓</span><p><b>Klar / kan räknas in</b><small>Allt i terminen kan räknas in.</small></p></div>
-          <div><span class="y">◐</span><p><b>Delvis</b><small>Några kurser kan räknas in, resten återstår.</small></p></div>
-          <div><span>○</span><p><b>Återstår</b><small>Inget kan räknas in ännu.</small></p></div>
-        </div>
-      </section>`;
-    }
-
-    const timeline=ts.slice(0,4).map(t=>{
-      const done=t.left<=.01,partial=t.credited>0&&!done;
-      return `<div class="v572-mini-term"><b>T${t.term}</b><small>${E(semesterLabel(t.term,s))}</small><i class="${done?'done':partial?'partial':''}">${done?'✓':partial?'◐':''}</i></div>`;
-    }).join('<span class="v572-arrow">→</span>');
-
-    const altBlock=alternate?`
-      <div class="v572-altway">
-        <div class="v572-alt-head"><span>ALTERNATIV VÄG</span><b>${alternate.save?`-${alternate.save} termin${alternate.save===1?'':'er'}`:'Samma tid'}</b></div>
-        <strong>${E(alternate.name)}</strong>
-        <p>${E(alternate.reason||'En alternativ kurskombination med annan belastningsfördelning.')}</p>
-        <button type="button" data-v572-fast-alt="1">Visa denna väg</button>
-      </div>`:'';
-
-    return `<section class="v572-side">
-      <div class="v572-side-title"><span>⚡</span><div><h2>Snabbare väg till examen</h2><p>Här ser du alternativa vägar för att bli klar så snabbt som möjligt.</p></div></div>
-      <div class="v572-recommended">
-        <div class="v572-rec-head"><span>REKOMMENDERAD SNABBARE VÄG</span>${best.save?`<b>-${best.save} termin${best.save===1?'':'er'}</b>`:''}</div>
-        <h3>${E(best.name)}${best.hp?` · ${F(best.hp)} hp`:''}</h3>
-        ${best.reason?`<p>${E(best.reason)}</p>`:''}
-        <div class="v572-mini-line">${timeline}</div>
-        <ul>
-          ${best.hp?`<li>Kräver ${F(best.hp)} hp i den alternativa kursen</li>`:''}
-          ${best.save?`<li>Ger examen ${best.save} termin${best.save===1?'':'er'} tidigare</li>`:''}
-          <li>Universitetets slutliga bedömning gäller alltid</li>
-        </ul>
-        <button type="button" data-v572-fast="1">Visa denna väg i planeraren</button>
-      </div>
-      ${altBlock}
-      <div class="v572-info"><b>ⓘ Så beräknas snabbare vägar</b><p>Vi analyserar dina möjliga tillgodoräknanden och hittar hur resterande kurser kan kombineras smartare eller läsas parallellt.</p></div>
-      <div class="v572-legendbox">
-        <div><span class="g">✓</span><p><b>Klar / kan räknas in</b><small>Allt i terminen kan räknas in.</small></p></div>
-        <div><span class="y">◐</span><p><b>Delvis</b><small>Några kurser kan räknas in, resten återstår.</small></p></div>
-        <div><span>○</span><p><b>Återstår</b><small>Inget kan räknas in ännu.</small></p></div>
-        ${best.hp?`<div><span class="hp">+${F(best.hp)} hp</span><p><b>Extra hp</b><small>Kan korta vägen om kursen går att läsa parallellt.</small></p></div>`:''}
-      </div>
-      <div class="v572-tip"><span>★</span><p><b>Bra att veta</b><small>Du kan alltid växla tillbaka till ordinarie väg om dina förutsättningar ändras.</small></p></div>
-    </section>`;
-  }
-
   function render(){
     if(document.querySelector('.screen.active')?.id!=='plannerClean')return;
     const root=document.getElementById('plannerClean');
@@ -31594,7 +31164,6 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
             </div>
           </section>
         </main>
-        ${renderFastSide(s,ts)}
       </div>`;
 
     root.querySelector('#v572Change').onclick=()=>window.__v549NewPlan?.();
@@ -31641,7 +31210,7 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
 
     root.querySelectorAll('[data-v572-fast]').forEach(btn=>{
       btn.onclick=()=>{
-        root.querySelector('.v572-side')?.scrollIntoView({behavior:'smooth',block:'start'});
+        root.querySelector('#sl-pace-picker')?.scrollIntoView({behavior:'smooth',block:'start'});
       };
     });
   }
@@ -31649,7 +31218,6 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
   document.addEventListener('studielots:screen-rendered',e=>{
     if(e?.detail?.screen==='plannerClean')setTimeout(render,50);
   });
-  document.addEventListener('click',()=>setTimeout(render,100),true);
   setTimeout(render,250);
   window.__studielotsRenderPlannerV572=render;
   window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v572',plannerApprovedDesign:true};
@@ -31680,15 +31248,14 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
 
     // Remove legacy enhancement blocks that older renderers may append.
     root.querySelectorAll(
-      '#v567Enhance,.v568-details,.v565-calendar,.v565-plan,.v557-plan,.v558-plan,'+
-      '.v549-planner-page,#plannerCleanContent,.v569-calendar,.v569-fast-card,.v569-actions,'+
-      '.v571,.v568-term-panel,.v565-term-block'
+      '.v565-calendar,.v565-plan,.v557-plan,.v558-plan,'+
+      '.v549-planner-page,#plannerCleanContent,.v565-term-block'
     ).forEach(el=>{
       if(!el.closest('.v572-shell')) el.remove();
     });
 
     // Inside the new shell, remove any accidental legacy blocks.
-    shell.querySelectorAll('#v567Enhance,.v568-details,.v565-calendar,.v565-plan,.v557-plan,.v558-plan,.v569-calendar,.v569-fast-card,.v569-actions,.v571').forEach(el=>el.remove());
+    shell.querySelectorAll('.v565-calendar,.v565-plan,.v557-plan,.v558-plan').forEach(el=>el.remove());
 
     // Prevent accidental duplicate approved shells.
     const shells=[...root.querySelectorAll(':scope > .v572-shell')];
@@ -31702,20 +31269,6 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
     }
   });
 
-  document.addEventListener('click',()=>{
-    if(document.querySelector('.screen.active')?.id==='plannerClean'){
-      [60,180,450].forEach(ms=>setTimeout(cleanPlanner,ms));
-    }
-  },true);
-
-  const observer=new MutationObserver(()=>{
-    if(document.querySelector('.screen.active')?.id==='plannerClean'){
-      requestAnimationFrame(cleanPlanner);
-    }
-  });
-  const root=document.getElementById('plannerClean');
-  if(root)observer.observe(root,{childList:true,subtree:false});
-
   setTimeout(cleanPlanner,300);
 
   window.__studielotsBuild={
@@ -31723,134 +31276,6 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
     version:'v575',
     plannerSingleRenderer:true,
     legacyPlannerDuplicatesRemoved:true
-  };
-})();
-
-/* v576 — clickable semesters, one open at a time */
-(function(){
-  function setupPlannerTerms(){
-    const root=document.getElementById('plannerClean');
-    if(!root)return;
-    const shell=root.querySelector('.v572-shell');
-    if(!shell)return;
-
-    const sections=[...shell.querySelectorAll('.v572-term-section')];
-    if(!sections.length)return;
-
-    // Start with everything collapsed.
-    sections.forEach(sec=>{
-      sec.classList.remove('open');
-      const icon=sec.querySelector('.v572-term-head i');
-      if(icon)icon.textContent='⌄';
-    });
-
-    function openTerm(term){
-      sections.forEach(sec=>{
-        const same=String(sec.dataset.termSection)===String(term);
-        sec.classList.toggle('open',same);
-        const icon=sec.querySelector('.v572-term-head i');
-        if(icon)icon.textContent=same?'⌃':'⌄';
-      });
-      const target=shell.querySelector(`[data-term-section="${term}"]`);
-      if(target)setTimeout(()=>target.scrollIntoView({behavior:'smooth',block:'start'}),30);
-    }
-
-    // Calendar term cards.
-    shell.querySelectorAll('.v572-term[data-term]').forEach(btn=>{
-      btn.onclick=e=>{
-        e.preventDefault();
-        openTerm(btn.dataset.term);
-      };
-    });
-
-    // Accordion headers.
-    shell.querySelectorAll('.v572-term-head').forEach(btn=>{
-      btn.onclick=e=>{
-        e.preventDefault();
-        const sec=btn.closest('.v572-term-section');
-        const term=sec?.dataset.termSection;
-        const isOpen=sec?.classList.contains('open');
-        if(isOpen){
-          sec.classList.remove('open');
-          const icon=btn.querySelector('i');
-          if(icon)icon.textContent='⌄';
-        }else if(term){
-          openTerm(term);
-        }
-      };
-    });
-
-    // Add a small cue to the calendar cards.
-    shell.querySelectorAll('.v572-term[data-term]').forEach(btn=>{
-      if(!btn.querySelector('.v576-open-cue')){
-        const cue=document.createElement('span');
-        cue.className='v576-open-cue';
-        cue.textContent='Visa';
-        btn.appendChild(cue);
-      }
-    });
-  }
-
-  document.addEventListener('studielots:screen-rendered',e=>{
-    if(e?.detail?.screen==='plannerClean'){
-      [40,140,350].forEach(ms=>setTimeout(setupPlannerTerms,ms));
-    }
-  });
-
-  document.addEventListener('click',()=>{
-    if(document.querySelector('.screen.active')?.id==='plannerClean'){
-      setTimeout(setupPlannerTerms,180);
-    }
-  },true);
-
-  setTimeout(setupPlannerTerms,300);
-
-  window.__studielotsBuild={
-    ...(window.__studielotsBuild||{}),
-    version:'v576',
-    plannerTermsClickable:true,
-    plannerSingleOpenSemester:true
-  };
-})();
-
-/* v577 — remove duplicate lower faster-route section, keep inline card only */
-(function(){
-  function removeLowerFast(){
-    const root=document.getElementById('plannerClean');
-    if(!root)return;
-
-    // Keep the compact inline card in the main column.
-    // Remove the separate detailed side/lower "Snabbare väg till examen" block.
-    root.querySelectorAll('.v572-side').forEach(el=>el.remove());
-
-    // Safety: remove any standalone duplicate heading block below Studyplan.
-    const headings=[...root.querySelectorAll('h2,h3,strong')].filter(el=>
-      /Snabbare väg till examen/i.test((el.textContent||'').trim())
-    );
-    headings.forEach(h=>{
-      if(h.closest('.v572-fast-inline'))return;
-      const side=h.closest('.v572-side,.v572-recommended,.v572-altway,.v572-empty-fast');
-      if(side)side.remove();
-    });
-  }
-
-  document.addEventListener('studielots:screen-rendered',e=>{
-    if(e?.detail?.screen==='plannerClean'){
-      [40,120,300,600].forEach(ms=>setTimeout(removeLowerFast,ms));
-    }
-  });
-  document.addEventListener('click',()=>{
-    if(document.querySelector('.screen.active')?.id==='plannerClean'){
-      setTimeout(removeLowerFast,160);
-    }
-  },true);
-
-  setTimeout(removeLowerFast,300);
-
-  window.__studielotsBuild={
-    ...(window.__studielotsBuild||{}),
-    version:'v577',
-    singleFasterRouteCard:true
   };
 })();
 
@@ -31927,6 +31352,12 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
 
     // Calendar cards open a real detail sheet.
     root.querySelectorAll('.v572-term[data-term]').forEach(btn=>{
+      if(!btn.querySelector('.v576-open-cue')){
+        const cue=document.createElement('span');
+        cue.className='v576-open-cue';
+        cue.textContent='Visa';
+        btn.appendChild(cue);
+      }
       btn.onclick=e=>{
         e.preventDefault();
         e.stopPropagation();
@@ -31960,11 +31391,6 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
       [50,160,400].forEach(ms=>setTimeout(bind,ms));
     }
   });
-  document.addEventListener('click',()=>{
-    if(document.querySelector('.screen.active')?.id==='plannerClean'){
-      setTimeout(bind,180);
-    }
-  },true);
   setTimeout(bind,300);
 
   window.__studielotsOpenTermDetails=termSheet;
@@ -32093,10 +31519,6 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
     if(e?.detail?.screen==='programMatch')setTimeout(safeRender,20);
   });
 
-  document.addEventListener('click',()=>{
-    if(document.querySelector('.screen.active')?.id==='programMatch')setTimeout(safeRender,100);
-  },true);
-
   // If user is already on Program when this build loads.
   if(document.querySelector('.screen.active')?.id==='programMatch')setTimeout(safeRender,50);
 
@@ -32107,84 +31529,6 @@ window.__studielotsBuild={...(window.__studielotsBuild||{}),
     programSearchOwnUniversityGate:true
   };
 })();
-
-/* v581 — make the Ladok handoff feel like one continuous flow.
-   Browser security prevents StudieLots from silently reading a file downloaded
-   on another origin, so the only remaining user action is selecting the PDF. */
-(function(){
-  const stateKey='sl_waiting_for_ladok_pdf';
-
-  function fileInput(){
-    return document.querySelector('input[type="file"][accept*="pdf"],input[type="file"]');
-  }
-  function ensureSheet(){
-    if(document.getElementById('sl581Return')) return document.getElementById('sl581Return');
-    const el=document.createElement('div');
-    el.id='sl581Return';
-    el.innerHTML=`<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sl581Title">
-      <div class="grab"></div>
-      <div class="sl581-badge">✓ Tillbaka från Ladok</div>
-      <h3 id="sl581Title">Lägg in ditt resultatintyg</h3>
-      <p>Välj PDF-filen du precis hämtade. StudieLots läser den direkt och fortsätter automatiskt.</p>
-      <button class="pick" type="button">Välj resultatintyg</button>
-      <button class="cancel" type="button">Inte nu</button>
-    </div>`;
-    document.body.appendChild(el);
-    el.addEventListener('click',e=>{ if(e.target===el) el.classList.remove('open'); });
-    el.querySelector('.cancel').onclick=()=>el.classList.remove('open');
-    el.querySelector('.pick').onclick=()=>{
-      const input=fileInput();
-      if(!input){ alert('PDF-importen kunde inte hittas. Gå till Hämta meriter och välj fil där.'); return; }
-      input.click();
-    };
-    const input=fileInput();
-    if(input){
-      input.addEventListener('change',()=>{
-        if(input.files && input.files.length){
-          try{sessionStorage.removeItem(stateKey)}catch(e){}
-          el.classList.remove('open');
-        }
-      });
-    }
-    return el;
-  }
-  function showReturn(){
-    let waiting=false;
-    try{ waiting=sessionStorage.getItem(stateKey)==='1'; }catch(e){}
-    if(waiting) ensureSheet().classList.add('open');
-  }
-
-  // Upgrade v580's Ladok button without depending on its exact URL.
-  function upgradeButton(){
-    const btn=document.getElementById('slOpenLadok');
-    if(!btn || btn.dataset.v581)return;
-    btn.dataset.v581='1';
-    btn.textContent='Öppna Ladok och hämta intyg';
-    btn.onclick=()=>{
-      try{sessionStorage.setItem(stateKey,'1')}catch(e){}
-      // Official student entry point; Ladok handles institution/eduID/Antagning/alumni login.
-      window.open('https://student.ladok.se/','_blank','noopener,noreferrer');
-    };
-    const choose=document.getElementById('slChoosePdf');
-    if(choose) choose.textContent='Jag har redan ett intyg';
-  }
-
-  document.addEventListener('visibilitychange',()=>{
-    if(!document.hidden){
-      setTimeout(()=>{upgradeButton();showReturn()},120);
-    }
-  });
-  window.addEventListener('pageshow',()=>setTimeout(()=>{upgradeButton();showReturn()},120));
-  document.addEventListener('click',()=>setTimeout(upgradeButton,40),true);
-  setTimeout(()=>{upgradeButton();showReturn()},200);
-
-  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v581',ladokReturnSheet:true};
-})();
-
-/* v582 — PWA share target receiver */
-(function(){
-async function consume(){const q=new URLSearchParams(location.search);if(q.get('studielots-share')!=='1')return;try{const c=await caches.open('studielots-share-v1'),r=await c.match('/__studielots_shared_pdf__');if(!r)return;const b=await r.blob(),f=new File([b],r.headers.get('x-studielots-filename')||'Ladok-resultatintyg.pdf',{type:b.type||'application/pdf'});await c.delete('/__studielots_shared_pdf__');const i=document.querySelector('input[type="file"][accept*="pdf"],input[type="file"]');if(!i)return;const d=new DataTransfer();d.items.add(f);i.files=d.files;i.dispatchEvent(new Event('change',{bubbles:true}));history.replaceState({},'',location.pathname+location.hash)}catch(e){console.error('v582 share import',e)}}
-if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWorker.register('/studielots-sw.js').catch(console.warn);addEventListener('load',consume);window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v582',pwaShareTargetPrepared:true};})();
 
 (function(){
  try{sessionStorage.removeItem('sl_waiting_for_ladok_pdf');sessionStorage.removeItem('studielots_waiting_ladok_pdf')}catch(e){}
@@ -32535,25 +31879,4 @@ if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWo
 
  window.__studielotsAdvancedDegreeQA={version:'v588',audit,hasPriorDegree};
  window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v588',advancedDegreeQA:true};
-})();
-
-(function(){
- const URL='https://student.ladok.se/student/app/studentwebb/intyg';
- function fileInput(){return document.querySelector('input[type=file][accept*=pdf],input[type=file]')}
- function mount(){
-  if(document.getElementById('slLadokGuide')) return;
-  const els=[...document.querySelectorAll('button,a,h2,h3')];
-  const a=els.find(x=>/ladok|hämta meriter|ladda upp/i.test(x.textContent||''));
-  const p=a?.closest('.card,section,.panel')||a?.parentElement; if(!p)return;
-  const d=document.createElement('div'); d.id='slLadokGuide';
-  d.style='margin:18px 0;padding:20px;border:1px solid #d8e7e1;border-radius:24px;background:#fff';
-  d.innerHTML='<h3 style="margin:0 0 8px">Hämta från Ladok</h3><p style="color:#687078">Öppna Ladok, skapa ett <b>nationellt resultatintyg</b> och kom tillbaka hit. StudieLots får inte tillgång till din Ladok-inloggning.</p><button id="slOpenLadok" style="width:100%;padding:15px;border:0;border-radius:16px;background:#126052;color:white;font-weight:700;font-size:16px">Öppna Ladok</button><button id="slChoosePdf" style="width:100%;margin-top:10px;padding:15px;border:1px solid #cfe0da;border-radius:16px;background:white;color:#126052;font-weight:700;font-size:16px">Jag har intyget – välj PDF</button>';
-  p.insertAdjacentElement('afterend',d);
-  d.querySelector('#slOpenLadok').onclick=()=>{sessionStorage.setItem('sl_waiting_ladok','1');window.open(URL,'_blank','noopener,noreferrer')};
-  d.querySelector('#slChoosePdf').onclick=()=>{const i=fileInput();if(i)i.click();else alert('Använd PDF-importen på sidan.')};
- }
- document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(mount,50)});
- document.addEventListener('click',()=>setTimeout(mount,50),true);
- setTimeout(mount,100);
- window.__studielotsBuild={...(window.__studielotsBuild||{}),version:'v580',guidedLadokImport:true};
 })();
