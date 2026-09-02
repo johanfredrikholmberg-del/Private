@@ -5,27 +5,27 @@ const [html, css, catalog, app, runtime, manifest] = await Promise.all([
   readFile(new URL('../index.html', import.meta.url), 'utf8'),
   readFile(new URL('../studielots-v615.css', import.meta.url), 'utf8'),
   readFile(new URL('../studielots-catalog-v616.js', import.meta.url), 'utf8'),
-  readFile(new URL('../studielots-v622.js', import.meta.url), 'utf8'),
-  readFile(new URL('../studielots-runtime-v622.js', import.meta.url), 'utf8'),
+  readFile(new URL('../studielots-v623.js', import.meta.url), 'utf8'),
+  readFile(new URL('../studielots-runtime-v623.js', import.meta.url), 'utf8'),
   readFile(new URL('../manifest.webmanifest', import.meta.url), 'utf8'),
 ]);
 
 assert.match(html, /studielots-v615\.css\?v=615/);
 assert.match(html, /studielots-catalog-v616\.js\?v=616/);
-assert.match(html, /studielots-v622\.js\?v=622/);
-assert.match(html, /studielots-runtime-v622\.js\?v=622/);
+assert.match(html, /studielots-v623\.js\?v=623/);
+assert.match(html, /studielots-runtime-v623\.js\?v=623/);
 assert.doesNotMatch(html, /pdf\.min\.mjs/);
 assert.match(app, /async function loadPdfJs\(\)/);
 assert.match(catalog, /window\.programCatalog=\[/);
 assert.match(app, /var programCatalog=window\.programCatalog\|\|\[\]/);
-assert.match(runtime, /const VERSION='622'/);
+assert.match(runtime, /const VERSION='623'/);
 assert.match(runtime, /window\.__studielotsHpAuthority=authority/);
 assert.match(app, /#sl-pace-picker/);
 assert.match(app, /v576-open-cue/);
-assert.match(app, /version:'v622'/);
-assert.match(app, /programSearchRuntime='622'/);
-assert.match(runtime, /data-sl622-program/);
-assert.match(runtime, /typeof selectProgramForMatch==='function'/);
+assert.match(app, /version:'v623'/);
+assert.match(app, /programSearchRuntime='623'/);
+assert.match(runtime, /data-sl623-program/);
+assert.match(runtime, /Hämta dina meriter först/);
 assert.match(app, /typeof window\.shouldUseV2==='function'/);
 assert.match(app, /window\.renderV21Detail=renderV21Detail/);
 assert.match(app, /window\.mappedHp=window\.mappedHp\|\|function\(p\)/);
