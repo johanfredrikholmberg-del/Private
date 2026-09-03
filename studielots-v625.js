@@ -1,91 +1,18 @@
 (()=>{
-  'use strict';
-  function loadScript(src,marker,onload){
-    const existing=document.querySelector(`script[${marker}]`);
-    if(existing){
-      if(onload){
-        if(existing.dataset.loaded==='1')onload();
-        else existing.addEventListener('load',onload,{once:true});
-      }
-      return;
-    }
-    const script=document.createElement('script');
-    script.src=src;
-    script.setAttribute(marker,'1');
-    script.async=false;
-    script.addEventListener('load',()=>{
-      script.dataset.loaded='1';
-      if(onload)onload();
-    },{once:true});
-    document.body.appendChild(script);
-  }
-  function plannerSnapshot(){
-    try{return JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(_){return null}
-  }
-  function usablePlannerSnapshot(){
-    const s=plannerSnapshot();
-    return !!(s&&((Array.isArray(s.rows)&&s.rows.length)||(Array.isArray(s.courses)&&s.courses.length)));
-  }
-  function openSharedPlanner(source){
-    if(!usablePlannerSnapshot())return false;
-    try{
-      if(typeof window.go==='function')window.go('plannerClean');
-      else{
-        document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));
-        document.getElementById('plannerClean')?.classList.add('active');
-      }
-      window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:source||'direct-open',version:'637'}}));
-      return true;
-    }catch(e){console.warn('[StudieLots] direct planner open failed',e);return false}
-  }
-  function installFastPlannerOpen(){
-    const legacyOpen=window.openStudyPlanner;
-    if(typeof legacyOpen==='function'&&!legacyOpen.__studielotsFastOpen){
-      const fastOpen=function(){
-        if(openSharedPlanner('fast-open'))return true;
-        return legacyOpen.apply(this,arguments);
-      };
-      fastOpen.__studielotsFastOpen=true;
-      fastOpen.__legacyOpen=legacyOpen;
-      window.openStudyPlanner=fastOpen;
-    }
-
-    /* University choice should never stop on the old university/program summary.
-       Let legacy selection logic create the snapshot, then immediately continue
-       to the one shared Planner used by both university and distance routes. */
-    const candidates=['openUniversityPathFromOpportunity','openProgramFromOpportunity','selectOpportunityUniversity','selectUniversityForOpportunity'];
-    candidates.forEach(name=>{
-      const legacy=window[name];
-      if(typeof legacy!=='function'||legacy.__studielotsDirectPlanner)return;
-      const wrapped=function(){
-        const out=legacy.apply(this,arguments);
-        const continueToPlanner=()=>openSharedPlanner('university-direct');
-        if(!continueToPlanner()){
-          requestAnimationFrame(()=>{
-            if(!continueToPlanner())setTimeout(continueToPlanner,0);
-          });
-        }
-        return out;
-      };
-      wrapped.__studielotsDirectPlanner=true;
-      wrapped.__legacyOpen=legacy;
-      window[name]=wrapped;
-    });
-
-    /* Catch the obsolete summary screen even if an inline handler calls an
-       internal selector that is not exported on window. We only redirect when
-       a complete planner snapshot already exists, so normal selection remains safe. */
-    const redirectObsoleteSummary=()=>{
-      if(!usablePlannerSnapshot())return;
-      const active=document.querySelector('.screen.active');
-      if(!active||active.id==='plannerClean')return;
-      const text=(active.textContent||'').replace(/\s+/g,' ').trim();
-      if(/Skapa plan i Planeraren/i.test(text)&&/Tillgodoräknat/i.test(text)&&/Kvar/i.test(text))openSharedPlanner('obsolete-summary-skip');
-    };
-    document.addEventListener('click',()=>requestAnimationFrame(redirectObsoleteSummary),true);
-    window.addEventListener('studielots:planner-snapshot',()=>requestAnimationFrame(redirectObsoleteSummary));
-    window.__studielotsBuild={...(window.__studielotsBuild||{}),plannerOpenGuard:'637',obsoleteUniversitySummary:'skipped'};
-  }
-  loadScript('/studielots-runtime.js?v=633','data-studielots-runtime');
-  loadScript('/studielots-planner.js?v=635','data-studielots-shared-planner',installFastPlannerOpen);
+'use strict';
+const BASE_PACE='studielots_shared_planner_pace',FAST_OPEN='studielots_fast_panel_open',FAST_PACE='studielots_fast_panel_pace';
+function loadScript(src,marker,onload){const old=document.querySelector(`script[${marker}]`);if(old){if(onload){if(old.dataset.loaded==='1')onload();else old.addEventListener('load',onload,{once:true})}return}const s=document.createElement('script');s.src=src;s.setAttribute(marker,'1');s.async=false;s.addEventListener('load',()=>{s.dataset.loaded='1';onload?.()},{once:true});document.body.appendChild(s)}
+function snapshot(){try{return JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null')}catch(_){return null}}
+function usable(){const s=snapshot();return!!(s&&((Array.isArray(s.rows)&&s.rows.length)||(Array.isArray(s.courses)&&s.courses.length)))}
+function openPlanner(source){if(!usable())return false;try{window.go?.('plannerClean');window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:source||'direct-open',version:'638'}}));return true}catch(_){return false}}
+function installDirectOpen(){const legacy=window.openStudyPlanner;if(typeof legacy==='function'&&!legacy.__studielotsFastOpen){const fn=function(){if(openPlanner('fast-open'))return true;return legacy.apply(this,arguments)};fn.__studielotsFastOpen=true;fn.__legacyOpen=legacy;window.openStudyPlanner=fn}['openUniversityPathFromOpportunity','openProgramFromOpportunity','selectOpportunityUniversity','selectUniversityForOpportunity'].forEach(n=>{const old=window[n];if(typeof old!=='function'||old.__studielotsDirectPlanner)return;const fn=function(){const out=old.apply(this,arguments);if(!openPlanner('university-direct'))requestAnimationFrame(()=>openPlanner('university-direct'));return out};fn.__studielotsDirectPlanner=true;window[n]=fn});const skip=()=>{if(!usable())return;const a=document.querySelector('.screen.active');if(!a||a.id==='plannerClean')return;const t=(a.textContent||'').replace(/\s+/g,' ');if(/Skapa plan i Planeraren/i.test(t)&&/Tillgodoräknat/i.test(t)&&/Kvar/i.test(t))openPlanner('obsolete-summary-skip')};document.addEventListener('click',()=>requestAnimationFrame(skip),true);window.addEventListener('studielots:planner-snapshot',()=>requestAnimationFrame(skip))}
+const n=v=>{const x=Number(v);return Number.isFinite(x)?x:0},txt=v=>String(v??'').replace(/\s+/g,' ').trim(),low=v=>txt(v).toLocaleLowerCase('sv-SE'),hp=r=>n(r?.hp??r?.credits??r?.ects??r?.points),credited=r=>!!(r?.credited||r?.completed||r?.done||r?.isCredited||r?.status==='credited'||r?.status==='completed'),name=r=>txt(r?.name??r?.courseName??r?.title??'Kurs'),esc=s=>txt(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),fmt=v=>String(Math.round(n(v)*10)/10).replace('.',',');
+function rows(){const s=snapshot(),live=window.__studielotsLastProgramSchedule;let a=Array.isArray(live?.plannerBaselineRows)&&live.plannerBaselineRows.length?live.plannerBaselineRows:null;if(!a?.length)a=Array.isArray(s?.plannerBaselineRows)&&s.plannerBaselineRows.length?s.plannerBaselineRows:null;if(!a?.length)a=Array.isArray(s?.rows)?s.rows:Array.isArray(s?.courses)?s.courses:[];return(a||[]).map((r,i)=>({...r,__i:r.__slOriginalIndex??i,__t:Math.max(1,n(r.__slOriginalTerm??r.originalTerm??r.term??r.semester)||1)})).sort((a,b)=>a.__t-b.__t||a.__i-b.__i)}
+function stage(r){const t=low([name(r),r?.requirement,r?.description,r?.level].filter(Boolean).join(' '));if(/(uppsats|examensarbete|thesis)/.test(t))return 60;if(/(fördjup|c-kurs|advanced)/.test(t))return 50;if(/(metod|statistik)/.test(t))return 40;if(/(fortsätt|b-kurs|psykologi ii)/.test(t))return 30;if(/(grundkurs|introduktion|a-kurs|psykologi i)/.test(t))return 10;return 20}
+function fastRows(base,pace){if(pace===30)return base.map(r=>({...r,__f:r.__t}));const distance=low(snapshot()?.selection?.university)==='distans'||snapshot()?.distance===true,done=base.filter(credited).map(r=>({...r,__f:r.__t})),todo=base.filter(r=>!credited(r));let term=1,load=0,last=0;const out=todo.map(r=>{const h=hp(r),st=stage(r),earliest=distance?Math.max(1,n(r.__slEarliestTerm)||1):1;term=Math.max(term,earliest);if(st>last&&last&&load){term++;load=0}if(load&&load+h>pace+.001){term++;load=0}load+=h;last=Math.max(last,st);return{...r,__f:term}});return[...done,...out].sort((a,b)=>a.__f-b.__f||a.__i-b.__i)}
+function group(a,key){const m=new Map;for(const r of a){const t=Math.max(1,n(r[key])||1);if(!m.has(t))m.set(t,[]);m.get(t).push(r)}return[...m].sort((a,b)=>a[0]-b[0])}
+function cards(gs){return gs.map(([t,a],i)=>`<details class="sl635-term" ${i===0?'open':''}><summary><strong>Termin ${t}</strong><span>${fmt(a.filter(r=>!credited(r)).reduce((z,r)=>z+hp(r),0))} hp</span><i>⌄</i></summary><div>${a.map(r=>`<div class="sl635-course ${credited(r)?'credited':''}"><span class="sl635-course-icon">${credited(r)?'✓':'▢'}</span><div class="sl635-course-copy"><strong>${esc(name(r))}</strong><div class="sl635-tags">${credited(r)?'<span>Tillgodoräknas</span>':''}</div></div><b>${fmt(hp(r))} hp</b></div>`).join('')}</div></details>`).join('')}
+function enhance(){if(document.querySelector('.screen.active')?.id!=='plannerClean')return;const root=document.getElementById('plannerCleanContent'),card=root?.querySelector('.sl635-fast-card');if(!card||card.dataset.v638==='1')return;card.dataset.v638='1';let open=false,pace=37.5;try{open=sessionStorage.getItem(FAST_OPEN)==='1';pace=Number(sessionStorage.getItem(FAST_PACE))||37.5}catch(_){}if(![30,37.5,45].includes(pace))pace=37.5;const base=rows(),ordinary=group(base,'__t'),fast=group(fastRows(base,pace),'__f'),saved=Math.max(0,ordinary.length-fast.length);card.innerHTML=`<button type="button" class="sl638-fast-toggle"><span>⚡</span><div><b>Kan du bli klar snabbare?</b><p>Undersök om högre studietakt kan korta studietiden.</p></div><i>${open?'⌃':'›'}</i></button><div class="sl638-fast-panel" ${open?'':'hidden'}><div class="sl638-fast-paces">${[30,37.5,45].map(p=>`<button type="button" data-v638-pace="${p}" class="${p===pace?'active':''}">${p===30?'Ordinarie':fmt(p)+' hp/termin'}</button>`).join('')}</div><div class="sl638-fast-result"><b>${pace===30?'Ordinarie väg':saved?`${saved} termin${saved===1?'':'er'} kortare möjlig`:'Ingen säker tidsvinst'}</b><span>Ordinarie: ${ordinary.length} terminer · vald väg: ${fast.length} terminer</span></div>${pace===30?'<p class="sl638-fast-note">Samma schema som den ordinarie planen ovan.</p>':`<p class="sl638-fast-note">Kursordning behålls och distansvägen respekterar kända tidigaste kurstillfällen.</p><div class="sl635-terms">${cards(fast)}</div>`}</div>`;card.querySelector('.sl638-fast-toggle').onclick=()=>{try{sessionStorage.setItem(FAST_OPEN,open?'0':'1')}catch(_){}card.dataset.v638='0';enhance()};card.querySelectorAll('[data-v638-pace]').forEach(b=>b.onclick=()=>{try{sessionStorage.setItem(FAST_OPEN,'1');sessionStorage.setItem(FAST_PACE,b.dataset.v638Pace)}catch(_){}card.dataset.v638='0';enhance()})}
+function installPlannerFix(){try{localStorage.setItem(BASE_PACE,'30')}catch(_){}installDirectOpen();const schedule=()=>setTimeout(enhance,45);['studielots:screen-rendered','studielots:planner-open','studielots:planner-snapshot','studielots:planner-baseline'].forEach(e=>window.addEventListener(e,schedule));window.addEventListener('pageshow',schedule);if(!document.getElementById('sl638-fast-style')){const s=document.createElement('style');s.id='sl638-fast-style';s.textContent='.sl638-fast-toggle{width:100%;border:0;background:transparent;padding:0;display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;text-align:left;color:inherit}.sl638-fast-toggle>span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#fff0bf}.sl638-fast-toggle p{margin:3px 0 0;font-size:11px}.sl638-fast-toggle i{font-style:normal;font-size:20px}.sl638-fast-panel{margin-top:12px;padding-top:12px;border-top:1px solid #efdfb9}.sl638-fast-panel[hidden]{display:none}.sl638-fast-paces{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.sl638-fast-paces button{border:1px solid #ead9ac;background:#fff;border-radius:11px;padding:9px 5px;font-size:10px;font-weight:800}.sl638-fast-paces button.active{background:#176b5b;color:#fff}.sl638-fast-result{display:grid;gap:2px;margin:10px 0;padding:10px;background:#fff;border-radius:11px}.sl638-fast-result span,.sl638-fast-note{font-size:10px;color:#777e78}.sl638-fast-note{line-height:1.4}@media(max-width:640px){.sl638-fast-paces{grid-template-columns:1fr}}';document.head.appendChild(s)}window.__studielotsBuild={...(window.__studielotsBuild||{}),plannerOpenGuard:'638',plannerUxFix:'ordinary-first-fast-click'};window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:'v638-init'}}));schedule()}
+loadScript('/studielots-runtime.js?v=633','data-studielots-runtime');loadScript('/studielots-planner.js?v=635','data-studielots-shared-planner',installPlannerFix);
 })();
