@@ -26,8 +26,8 @@ const OPTIONS={
     {code:'MPPEN',name:'Produktionsutveckling',eligibility:'direct',accredited:true,priority:true,structureReady:true}
   ],
   TKATK:[
-    {code:'MPDSD',name:'Arkitektur och planering för hållbar framtid',eligibility:'direct',accredited:true,priority:true,degree:'architecture'},
-    {code:'MPARC',name:'Arkitektur och stadsbyggnad',eligibility:'direct',accredited:true,priority:true,degree:'architecture'},
+    {code:'MPDSD',name:'Arkitektur och planering för hållbar framtid',eligibility:'direct',accredited:true,priority:true,degree:'architecture',structureReady:true},
+    {code:'MPARC',name:'Arkitektur och stadsbyggnad',eligibility:'direct',accredited:true,priority:true,degree:'architecture',structureReady:true},
     {code:'MPTSE',name:'Industriell ekologi',eligibility:'direct',accredited:true,priority:true,degree:'civil-engineering',structureReady:true},
     {code:'MPCAS',name:'Komplexa adaptiva system',eligibility:'direct',accredited:true,priority:true,degree:'civil-engineering',structureReady:true},
     {code:'MPSOV',name:'Ljud och vibrationer',eligibility:'direct',accredited:true,priority:true,degree:'civil-engineering',structureReady:true}
