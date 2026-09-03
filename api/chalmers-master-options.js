@@ -4,26 +4,26 @@ const OPTIONS={
   TKDAT:[
     {code:'MPALG',name:'Datavetenskap – algoritmer, programspråk och logik',eligibility:'direct',accredited:true,structureReady:true},
     {code:'MPCSC',name:'Datorer, system och cybersäkerhet',eligibility:'direct',accredited:true,priority:true,structureReady:false,structureNote:'Chalmers programplan saknar ännu en komplett maskinläsbar termin 4 i 2026/27-vyn.'},
-    {code:'MPHPC',name:'Högpresterande datorsystem',eligibility:'direct',accredited:true,priority:true},
-    {code:'MPSOF',name:'Software engineering and technology – utveckling och implementering av mjukvara',eligibility:'direct',accredited:true},
+    {code:'MPHPC',name:'Högpresterande datorsystem',eligibility:'direct',accredited:true,priority:true,structureReady:true},
+    {code:'MPSOF',name:'Software engineering and technology – utveckling och implementering av mjukvara',eligibility:'direct',accredited:true,structureReady:true},
     {code:'MPCAS',name:'Komplexa adaptiva system',eligibility:'direct',accredited:true,structureReady:true}
   ],
   TKELT:[
-    {code:'MPHPC',name:'Högpresterande datorsystem',eligibility:'direct',accredited:true},
+    {code:'MPHPC',name:'Högpresterande datorsystem',eligibility:'direct',accredited:true,structureReady:true},
     {code:'MPEES',name:'Inbyggda elektroniksystem',eligibility:'direct',accredited:true,priority:true,structureReady:true},
     {code:'MPTSE',name:'Industriell ekologi',eligibility:'direct',accredited:true,structureReady:true},
     {code:'MPCAS',name:'Komplexa adaptiva system',eligibility:'direct',accredited:true,structureReady:true},
     {code:'MPSOV',name:'Ljud och vibrationer',eligibility:'direct',accredited:true,structureReady:true},
-    {code:'MPENM',name:'Matematik och beräkningsvetenskap',eligibility:'direct',accredited:false},
+    {code:'MPENM',name:'Matematik och beräkningsvetenskap',eligibility:'direct',accredited:false,structureReady:true},
     {code:'MPNAT',name:'Nanoteknologi',eligibility:'direct',accredited:true,structureReady:true}
   ],
   TKMSK:[
     {code:'MPTSE',name:'Industriell ekologi',eligibility:'direct',accredited:true,priority:true,structureReady:true},
     {code:'MPCAS',name:'Komplexa adaptiva system',eligibility:'direct',accredited:true,structureReady:true},
-    {code:'MPQOM',name:'Kvalitets- och verksamhetsledning',eligibility:'direct',accredited:true},
+    {code:'MPQOM',name:'Kvalitets- och verksamhetsledning',eligibility:'direct',accredited:true,structureReady:true},
     {code:'MPSOV',name:'Ljud och vibrationer',eligibility:'direct',accredited:true,structureReady:true},
-    {code:'MPAEM',name:'Materialteknik',eligibility:'direct',accredited:true,priority:true},
-    {code:'MPPEN',name:'Produktionsutveckling',eligibility:'direct',accredited:true,priority:true}
+    {code:'MPAEM',name:'Materialteknik',eligibility:'direct',accredited:true,priority:true,structureReady:true},
+    {code:'MPPEN',name:'Produktionsutveckling',eligibility:'direct',accredited:true,priority:true,structureReady:true}
   ],
   TKATK:[
     {code:'MPDSD',name:'Arkitektur och planering för hållbar framtid',eligibility:'direct',accredited:true,priority:true,degree:'architecture'},
