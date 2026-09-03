@@ -95,16 +95,29 @@ function parseChalmersCourses(html,studyYear){
 function chalmersCompleteness(rows,totalHp){
   const expectedTerms=totalHp>0?Math.round(totalHp/30):0;
   const mandatory=rows.filter(r=>r.category==='obligatoriska');
-  const sums=new Map();
-  mandatory.forEach(r=>sums.set(r.term,(sums.get(r.term)||0)+r.hp));
-  const completeTerms=[];
+  const elective=rows.filter(r=>r.category==='valbara');
+  const voluntary=rows.filter(r=>r.category==='frivilliga');
+  const completeTerms=[],termHp={},slots=[];
+  const round=n=>Math.round(Number(n||0)*10)/10;
   for(let term=1;term<=expectedTerms;term++){
-    const hp=Math.round((sums.get(term)||0)*10)/10;
-    if(hp>=27&&hp<=33)completeTerms.push(term);
+    const m=mandatory.filter(r=>r.term===term),e=elective.filter(r=>r.term===term),v=voluntary.filter(r=>r.term===term);
+    const mandatoryHp=round(m.reduce((s,r)=>s+r.hp,0));
+    const electiveListedHp=round(e.reduce((s,r)=>s+r.hp,0));
+    const voluntaryListedHp=round(v.reduce((s,r)=>s+r.hp,0));
+    let gap=round(Math.max(0,30-mandatoryHp)),covered=false;
+    if(mandatoryHp>=27&&mandatoryHp<=33){covered=true;gap=0}
+    else if(mandatoryHp<27&&gap>0&&electiveListedHp>=gap-0.2){
+      covered=true;
+      slots.push({name:'Valbara kurser enligt programplan',code:'',hp:gap,term,category:'elective-slot',options:e.map(r=>({name:r.name,code:r.code,hp:r.hp}))});
+    }
+    if(covered)completeTerms.push(term);
+    termHp[term]={mandatoryHp,electiveListedHp,voluntaryListedHp,requiredElectiveHp:covered?gap:0,covered};
   }
-  const mandatoryHp=Math.round(mandatory.reduce((s,r)=>s+r.hp,0)*10)/10;
-  const complete=expectedTerms>=2&&completeTerms.length===expectedTerms&&mandatoryHp>=totalHp*0.9&&mandatoryHp<=totalHp*1.1;
-  return{complete,expectedTerms,completeTerms,mandatoryHp,termHp:Object.fromEntries([...sums.entries()].map(([k,v])=>[k,Math.round(v*10)/10]))};
+  const mandatoryHp=round(mandatory.reduce((s,r)=>s+r.hp,0));
+  const electiveSlotHp=round(slots.reduce((s,r)=>s+r.hp,0));
+  const voluntaryHp=round(voluntary.reduce((s,r)=>s+r.hp,0));
+  const complete=expectedTerms>=2&&completeTerms.length===expectedTerms;
+  return{complete,expectedTerms,completeTerms,mandatoryHp,electiveSlotHp,voluntaryHp,termHp,slots};
 }
 async function discoverChalmers({code,name,university}){
   if(!isChalmersUniversity(university))return null;
@@ -129,12 +142,13 @@ async function discoverChalmers({code,name,university}){
   }
   const allRows=pages.flatMap(p=>parseChalmersCourses(p.html,p.year));
   const quality=chalmersCompleteness(allRows,totalHp);
-  const mandatory=allRows.filter(r=>r.category==='obligatoriska').sort((a,b)=>a.term-b.term||a.code.localeCompare(b.code,'sv'));
-  const courses=mandatory.map((r,i)=>({
+  const required=[...allRows.filter(r=>r.category==='obligatoriska'),...quality.slots].sort((a,b)=>a.term-b.term||String(a.code||a.name).localeCompare(String(b.code||b.name),'sv'));
+  const courses=required.map((r,i)=>({
     name:r.name,code:r.code,hp:r.hp,term:r.term,
+    ...(r.options?{options:r.options}:{}),
     originalTerm:r.term,__slOriginalTerm:r.term,__slOriginalIndex:i,
     status:'remaining',credited:false,isCredited:false,
-    programmeSource:'chalmers-programplan',programmeCategory:'mandatory',periods:r.periods
+    programmeSource:'chalmers-programplan',programmeCategory:r.category==='elective-slot'?'elective-slot':'mandatory',periods:r.periods||[]
   }));
   return{
     found:true,
@@ -144,9 +158,9 @@ async function discoverChalmers({code,name,university}){
     sourceUrls:pages.map(p=>p.url),
     source:'chalmers-programplan',
     confidence:quality.complete?'official-machine-readable-sequenced':'official-partial',
-    coverage:quality.complete?'complete-mandatory-sequence':'partial-or-elective-dependent',
-    quality:{...quality,totalHp,pagesFound:pages.map(p=>p.year),academicYear:acYear},
-    policy:'Chalmers structure is activated only when official program-plan pages cover every expected semester with a near-full mandatory course load. Module rows are aggregated by course and semester; elective and voluntary alternatives never inflate required credits.'
+    coverage:quality.complete?'complete-term-sequence':'partial-or-elective-dependent',
+    quality:{...quality,slots:undefined,totalHp,pagesFound:pages.map(p=>p.year),academicYear:acYear},
+    policy:'Chalmers structure is activated only when every expected semester is covered by official programme-plan data. Mandatory courses are kept exact. Official valbara courses may cover only the exact missing semester credits and are represented as one transparent elective slot; frivilliga courses never count toward required programme credits.'
   };
 }
 
