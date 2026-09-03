@@ -1,108 +1,28 @@
 (()=>{
 'use strict';
-const VERSION='649';
-let queued=false,degreeQueued=false;
+const VERSION='650';
+let queued=false,degreeQueued=false,detailQueued=false;
 function plannerRoot(){return document.getElementById('plannerCleanContent')}
 function activePlanner(){return document.querySelector('.screen.active')?.id==='plannerClean'}
 function norm(el){return (el?.textContent||'').replace(/\s+/g,' ').trim()}
-function cleanTermLabels(root){
- if(!root)return;
- const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
- const nodes=[];let n;
- while((n=w.nextNode()))nodes.push(n);
- for(const node of nodes){
-  const raw=node.nodeValue||'';
-  const next=raw.replace(/Termin\s+(\d+)\s*[–—-]\s*\1\b/gi,'Termin $1');
-  if(next!==raw)node.nodeValue=next;
- }
-}
-function fastCandidate(root){
- if(!root)return null;
- const existing=root.querySelector('.sl635-fast-card');
- if(existing)return existing;
- const all=[...root.querySelectorAll('section,div,article,button')];
- const hits=all.filter(el=>{const t=norm(el);return /SNABBARE VÄG TILL EXAMEN/i.test(t)&&t.length<700});
- if(!hits.length)return null;
- hits.sort((a,b)=>norm(a).length-norm(b).length);
- let el=hits[0];
- while(el.parentElement&&el.parentElement!==root){
-  const p=el.parentElement,t=norm(p);
-  if(!/SNABBARE VÄG TILL EXAMEN/i.test(t)||t.length>700)break;
-  if(p.matches('section,article')||/card|fast|shortcut|route/i.test(p.className||''))el=p;
-  else break;
- }
- return el;
-}
+const sval=v=>String(v??'').trim(),slow=v=>sval(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,''),code=v=>sval(v).toUpperCase().replace(/[^A-Z0-9ÅÄÖ]/g,'');
+function cleanTermLabels(root){if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),nodes=[];let n;while((n=w.nextNode()))nodes.push(n);for(const node of nodes){const raw=node.nodeValue||'',next=raw.replace(/Termin\s+(\d+)\s*[–—-]\s*\1\b/gi,'Termin $1');if(next!==raw)node.nodeValue=next}}
+function fastCandidate(root){if(!root)return null;const existing=root.querySelector('.sl635-fast-card');if(existing)return existing;const all=[...root.querySelectorAll('section,div,article,button')],hits=all.filter(el=>{const t=norm(el);return /SNABBARE VÄG TILL EXAMEN/i.test(t)&&t.length<700});if(!hits.length)return null;hits.sort((a,b)=>norm(a).length-norm(b).length);let el=hits[0];while(el.parentElement&&el.parentElement!==root){const p=el.parentElement,t=norm(p);if(!/SNABBARE VÄG TILL EXAMEN/i.test(t)||t.length>700)break;if(p.matches('section,article')||/card|fast|shortcut|route/i.test(p.className||''))el=p;else break}return el}
 function hasPlannerData(){try{const s=JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null');return!!(s&&((Array.isArray(s.rows)&&s.rows.length)||(Array.isArray(s.courses)&&s.courses.length)))}catch(_){return false}}
-function ensureFastRouteHost(root){
- if(!root||root.querySelector('.sl635-fast-card')||/STUDIEUPPLÄGG SAKNAS/i.test(norm(root))||!hasPlannerData())return root?.querySelector('.sl635-fast-card')||null;
- const host=document.createElement('section');
- host.className='sl635-fast-card sl649-fast-universal';
- host.dataset.v641='0';
- host.innerHTML='<button type="button" class="sl649-fast-placeholder"><span>⚡</span><div><b>Kan du bli klar snabbare?</b><p>Se om högre studietakt kan korta tiden till examen.</p></div><i>›</i></button>';
- const heading=[...root.querySelectorAll('h2,h3')].find(el=>/^Studieplan$/i.test(norm(el)));
- if(heading){let anchor=heading;while(anchor.parentElement&&anchor.parentElement!==root)anchor=anchor.parentElement;if(anchor.parentElement===root)root.insertBefore(host,anchor);else root.appendChild(host)}else root.appendChild(host);
- window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:'universal-fast-route',version:VERSION}}));
- return host;
-}
-function enableFastRoute(root){
- let card=fastCandidate(root);
- if(!card)card=ensureFastRouteHost(root);
- if(!card)return;
- if(card.classList.contains('sl635-fast-card')){
-  if(card.dataset.v641!=='1')window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:'fast-route-ready',version:VERSION}}));
-  return;
- }
- card.classList.add('sl635-fast-card','sl647-fast-adapter');
- card.dataset.v641='0';
- card.setAttribute('role','button');
- card.setAttribute('tabindex','0');
- card.setAttribute('aria-label','Öppna snabbare väg till examen');
- const open=()=>{
-  try{sessionStorage.setItem('studielots_fast_panel_open','1')}catch(_){}
-  card.dataset.v641='0';
-  window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:'legacy-fast-card',version:VERSION}}));
-  requestAnimationFrame(()=>card.querySelector('.sl638-fast-toggle')?.click());
- };
- card.addEventListener('click',open,{once:true});
- card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}},{once:true});
- window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:'legacy-fast-adapter',version:VERSION}}));
-}
+function ensureFastRouteHost(root){if(!root||root.querySelector('.sl635-fast-card')||/STUDIEUPPLÄGG SAKNAS/i.test(norm(root))||!hasPlannerData())return root?.querySelector('.sl635-fast-card')||null;const host=document.createElement('section');host.className='sl635-fast-card sl649-fast-universal';host.dataset.v641='0';host.innerHTML='<button type="button" class="sl649-fast-placeholder"><span>⚡</span><div><b>Kan du bli klar snabbare?</b><p>Se om högre studietakt kan korta tiden till examen.</p></div><i>›</i></button>';const heading=[...root.querySelectorAll('h2,h3')].find(el=>/^Studieplan$/i.test(norm(el)));if(heading){let anchor=heading;while(anchor.parentElement&&anchor.parentElement!==root)anchor=anchor.parentElement;if(anchor.parentElement===root)root.insertBefore(host,anchor);else root.appendChild(host)}else root.appendChild(host);window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:'universal-fast-route',version:VERSION}}));return host}
+function enableFastRoute(root){let card=fastCandidate(root);if(!card)card=ensureFastRouteHost(root);if(!card)return;if(card.classList.contains('sl635-fast-card')){if(card.dataset.v641!=='1')window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:'fast-route-ready',version:VERSION}}));return}card.classList.add('sl635-fast-card','sl647-fast-adapter');card.dataset.v641='0';card.setAttribute('role','button');card.setAttribute('tabindex','0');card.setAttribute('aria-label','Öppna snabbare väg till examen');const open=()=>{try{sessionStorage.setItem('studielots_fast_panel_open','1')}catch(_){}card.dataset.v641='0';window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:'legacy-fast-card',version:VERSION}}));requestAnimationFrame(()=>card.querySelector('.sl638-fast-toggle')?.click())};card.addEventListener('click',open,{once:true});card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}},{once:true});window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:'legacy-fast-adapter',version:VERSION}}))}
 function run(){queued=false;if(!activePlanner())return;const root=plannerRoot();if(!root)return;cleanTermLabels(root);ensureFastRouteHost(root);enableFastRoute(root)}
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(run)}
 function degreeCard(el,root){let p=el;while(p&&p.parentElement!==root)p=p.parentElement;return p&&p.parentElement===root?p:null}
-function correctFastestBadge(){
- degreeQueued=false;
- if(document.querySelector('.screen.active')?.id!=='degrees')return;
- const root=document.getElementById('degreeResults');if(!root)return;
- const cards=[...root.children].filter(c=>/\b\d+(?:[,.]\d+)?\s*hp\s*kvar\b/i.test(norm(c))&&/Visa väg/i.test(norm(c)));
- if(cards.length<2)return;
- const ranked=cards.map(c=>{const m=norm(c).match(/(\d+(?:[,.]\d+)?)\s*hp\s*kvar\b/i);return{card:c,hp:m?Number(m[1].replace(',','.')):Infinity}}).filter(x=>Number.isFinite(x.hp));
- if(!ranked.length)return;
- const min=Math.min(...ranked.map(x=>x.hp));
- const winner=ranked.find(x=>Math.abs(x.hp-min)<.001)?.card;if(!winner)return;
- const badgeEls=[...root.querySelectorAll('*')].filter(el=>/^⚡?\s*Snabbaste väg$/i.test(norm(el)));
- if(!badgeEls.length)return;
- badgeEls.sort((a,b)=>norm(a).length-norm(b).length);
- const badge=badgeEls[0];
- const current=degreeCard(badge,root);
- if(current===winner)return;
- let target=null;
- const chip=[...winner.querySelectorAll('span,div')].find(el=>/^(?:\d+\s+lärosäten?|Distans finns)$/i.test(norm(el)));
- if(chip)target=chip.parentElement;
- if(!target||target===winner)target=[...winner.querySelectorAll('div')].find(el=>{const t=norm(el);return /lärosäte/i.test(t)&&/Distans finns/i.test(t)&&t.length<120})||null;
- if(target&&target!==badge.parentElement){target.appendChild(badge)}else if(current!==winner){badge.remove()}
-}
+function correctFastestBadge(){degreeQueued=false;if(document.querySelector('.screen.active')?.id!=='degrees')return;const root=document.getElementById('degreeResults');if(!root)return;const cards=[...root.children].filter(c=>/\b\d+(?:[,.]\d+)?\s*hp\s*kvar\b/i.test(norm(c))&&/Visa väg/i.test(norm(c)));if(cards.length<2)return;const ranked=cards.map(c=>{const m=norm(c).match(/(\d+(?:[,.]\d+)?)\s*hp\s*kvar\b/i);return{card:c,hp:m?Number(m[1].replace(',','.')):Infinity}}).filter(x=>Number.isFinite(x.hp));if(!ranked.length)return;const min=Math.min(...ranked.map(x=>x.hp)),winner=ranked.find(x=>Math.abs(x.hp-min)<.001)?.card;if(!winner)return;const badgeEls=[...root.querySelectorAll('*')].filter(el=>/^⚡?\s*Snabbaste väg$/i.test(norm(el)));if(!badgeEls.length)return;badgeEls.sort((a,b)=>norm(a).length-norm(b).length);const badge=badgeEls[0],current=degreeCard(badge,root);if(current===winner)return;let target=null;const chip=[...winner.querySelectorAll('span,div')].find(el=>/^(?:\d+\s+lärosäten?|Distans finns)$/i.test(norm(el)));if(chip)target=chip.parentElement;if(!target||target===winner)target=[...winner.querySelectorAll('div')].find(el=>{const t=norm(el);return /lärosäte/i.test(t)&&/Distans finns/i.test(t)&&t.length<120})||null;if(target&&target!==badge.parentElement)target.appendChild(badge);else if(current!==winner)badge.remove()}
 function degreeSchedule(){if(degreeQueued)return;degreeQueued=true;requestAnimationFrame(correctFastestBadge)}
-function install(){
- ['studielots:screen-rendered','studielots:planner-open','studielots:planner-snapshot','studielots:planner-baseline','pageshow'].forEach(e=>window.addEventListener(e,schedule));
- ['studielots:screen-rendered','pageshow'].forEach(e=>window.addEventListener(e,degreeSchedule));
- document.addEventListener('click',()=>{schedule();degreeSchedule()},true);
- const root=plannerRoot();if(root){new MutationObserver(schedule).observe(root,{childList:true,subtree:true,characterData:true})}
- const degrees=document.getElementById('degreeResults');if(degrees){new MutationObserver(degreeSchedule).observe(degrees,{childList:true,subtree:true,characterData:true})}
- if(!document.getElementById('sl649-style')){const s=document.createElement('style');s.id='sl649-style';s.textContent='.sl647-fast-adapter,.sl649-fast-universal{cursor:pointer;touch-action:manipulation}.sl647-fast-adapter:focus-visible{outline:2px solid currentColor;outline-offset:3px}.sl649-fast-placeholder{width:100%;border:0;background:transparent;padding:0;display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;text-align:left;color:inherit}.sl649-fast-placeholder>span{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#fff0bf;font-size:22px}.sl649-fast-placeholder b{display:block}.sl649-fast-placeholder p{margin:4px 0 0;color:#747d78}.sl649-fast-placeholder i{font-style:normal;font-size:24px}';document.head.appendChild(s)}
- window.__studielotsBuild={...(window.__studielotsBuild||{}),plannerUiFix:VERSION,cleanTermLabels:true,legacyFastRouteClickable:true,fastestOpportunityByRemainingHp:true,fastRouteForAllPlannerSubjects:true};
- schedule();degreeSchedule();setTimeout(schedule,120);setTimeout(schedule,350);setTimeout(schedule,700);setTimeout(degreeSchedule,120);setTimeout(degreeSchedule,350);
-}
+function opportunityContext(){let o=null;try{const key=sessionStorage.getItem('lotsen_detail_key');if(key&&typeof window.opportunityByKey==='function')o=window.opportunityByKey(key)}catch(_){}const root=document.getElementById('degreeDetailContent'),hero=root?.querySelector('.detail-hero h1');const subject=sval(o?.subject||hero?.textContent||'').replace(/^Kandidat(?:examen)?\s+i\s+/i,'').replace(/^Master(?:examen)?\s+i\s+/i,'').replace(/^Magister(?:examen)?\s+i\s+/i,'');const text=norm(root),kind=slow(o?.degreeType||o?.kind||(/magister/i.test(text)?'magister':/master/i.test(text)?'master':'candidate'));return{subject,kind,o}}
+function importedCourses(){try{return JSON.parse(sessionStorage.getItem('examensmatch_courses')||'[]')}catch(_){return[]}}
+function exactCredit(row,merits){const rc=code(row?.code),rn=slow(row?.name);return merits.find(c=>{const cc=code(c?.code),cn=slow(c?.name);return(rc&&cc&&rc===cc)||(rn&&cn&&rn===cn)})||null}
+function showSusaMessage(list,msg){let n=list?.parentElement?.querySelector('.sl650-susa-message');if(!n&&list){n=document.createElement('div');n.className='sl650-susa-message';list.insertAdjacentElement('afterend',n)}if(n)n.textContent=msg}
+async function openSusaUniversityPath(item,ctx,list){showSusaMessage(list,`Kontrollerar studieupplägg för ${item.university}…`);try{const q=new URLSearchParams({name:item.programName||ctx.subject,university:item.university});if(item.programCode)q.set('code',item.programCode);const r=await fetch('/api/program-structure?'+q.toString()),data=await r.json();if(!data?.found||!data?.structureAvailable||!Array.isArray(data.courses)||data.courses.length<2){showSusaMessage(list,`Program hittat via Susa vid ${item.university}, men universitetet har ännu inte publicerat en maskinläsbar terminsordning som StudieLots kan använda.`);return}const merits=importedCourses(),rows=data.courses.map((row,i)=>{const hit=exactCredit(row,merits);return{...row,__slOriginalTerm:Number(row.__slOriginalTerm||row.term)||1,__slOriginalIndex:i,credited:Boolean(hit),completed:Boolean(hit),isCredited:Boolean(hit),status:hit?'credited':'remaining',creditEvidence:hit?'potential-exact-match':'',matchType:hit?'exact':'',matchedCourse:hit?.name||''}}),remainingHp=rows.filter(x=>!x.credited).reduce((s,x)=>s+Number(x.hp||0),0),totalHp=rows.reduce((s,x)=>s+Number(x.hp||0),0),snapshot={selection:{university:item.university,program:item.programName},program:{university:item.university,name:item.programName,code:item.programCode||''},routeMode:'university',source:'susa-national-path-v650',programmeStructureSource:'susa-auto-v641',scheduleSource:'susa-auto-v641',rows,plannerBaselineRows:rows,totalHp,remainingHp,sharedPlannerVersion:'635'};sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(snapshot));sessionStorage.setItem('studielots_planner_origin','program');window.dispatchEvent(new CustomEvent('studielots:planner-snapshot',{detail:{source:'susa-national-path',version:VERSION}}));window.go?.('plannerClean');window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:'susa-national-path',version:VERSION}}))}catch(_){showSusaMessage(list,'Susa kunde inte kontrolleras just nu. Försök igen om en stund.')}}
+async function expandUniversityPaths(){detailQueued=false;if(document.querySelector('.screen.active')?.id!=='degreeDetail')return;const root=document.getElementById('degreeDetailContent'),list=root?.querySelector('.uni-path-list');if(!list)return;const ctx=opportunityContext();if(!ctx.subject)return;const key=slow(ctx.subject)+'|'+ctx.kind;if(list.dataset.susaKey===key)return;list.dataset.susaKey=key;let status=list.parentElement?.querySelector('.sl650-susa-status');if(!status){status=document.createElement('div');status.className='sl650-susa-status';status.textContent='Söker fler lärosäten via Susa…';list.insertAdjacentElement('afterend',status)}try{const r=await fetch('/api/university-paths?'+new URLSearchParams({subject:ctx.subject,kind:ctx.kind})),data=await r.json();if(list.dataset.susaKey!==key)return;const local=new Set([...list.querySelectorAll('.uni-path strong')].map(x=>slow(x.textContent))),extra=(data?.universities||[]).filter(x=>x?.university&&!local.has(slow(x.university)));for(const item of extra){const b=document.createElement('button');b.className='uni-path uni-path-btn sl650-susa-path';b.type='button';b.innerHTML=`<div><strong>${sval(item.university).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}</strong><small>Susa · ej verifierad examensregel</small><em>${sval(item.programName).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}</em></div><span>›</span>`;b.addEventListener('click',()=>openSusaUniversityPath(item,ctx,list));list.appendChild(b)}status.textContent=extra.length?`${extra.length} ytterligare lärosäte${extra.length===1?'':'n'} hittades via Susa.`:'Inga ytterligare säkra programträffar hittades via Susa för den här examensvägen.'}catch(_){status.textContent='Kunde inte hämta fler lärosäten från Susa just nu.'}}
+function detailSchedule(){if(detailQueued)return;detailQueued=true;setTimeout(expandUniversityPaths,80)}
+function install(){['studielots:screen-rendered','studielots:planner-open','studielots:planner-snapshot','studielots:planner-baseline','pageshow'].forEach(e=>window.addEventListener(e,schedule));['studielots:screen-rendered','pageshow'].forEach(e=>window.addEventListener(e,degreeSchedule));['studielots:screen-rendered','pageshow'].forEach(e=>window.addEventListener(e,detailSchedule));document.addEventListener('click',()=>{schedule();degreeSchedule();detailSchedule()},true);const root=plannerRoot();if(root)new MutationObserver(schedule).observe(root,{childList:true,subtree:true,characterData:true});const degrees=document.getElementById('degreeResults');if(degrees)new MutationObserver(degreeSchedule).observe(degrees,{childList:true,subtree:true,characterData:true});const detail=document.getElementById('degreeDetailContent');if(detail)new MutationObserver(detailSchedule).observe(detail,{childList:true,subtree:true});if(!document.getElementById('sl650-style')){const s=document.createElement('style');s.id='sl650-style';s.textContent='.sl647-fast-adapter,.sl649-fast-universal{cursor:pointer;touch-action:manipulation}.sl647-fast-adapter:focus-visible{outline:2px solid currentColor;outline-offset:3px}.sl649-fast-placeholder{width:100%;border:0;background:transparent;padding:0;display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;text-align:left;color:inherit}.sl649-fast-placeholder>span{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#fff0bf;font-size:22px}.sl649-fast-placeholder b{display:block}.sl649-fast-placeholder p{margin:4px 0 0;color:#747d78}.sl649-fast-placeholder i{font-style:normal;font-size:24px}.sl650-susa-status,.sl650-susa-message{margin-top:10px;font-size:12px;line-height:1.45;color:#6d7772}.sl650-susa-message{padding:10px 12px;border-radius:12px;background:#eef5f2;color:#275e53}.sl650-susa-path em{display:block;margin-top:2px;font-size:10px;font-style:normal;color:#7a827e}';document.head.appendChild(s)}window.__studielotsBuild={...(window.__studielotsBuild||{}),plannerUiFix:VERSION,cleanTermLabels:true,legacyFastRouteClickable:true,fastestOpportunityByRemainingHp:true,fastRouteForAllPlannerSubjects:true,nationalUniversityPaths:'susa-v650'};schedule();degreeSchedule();detailSchedule();setTimeout(schedule,120);setTimeout(schedule,350);setTimeout(schedule,700);setTimeout(degreeSchedule,120);setTimeout(degreeSchedule,350);setTimeout(detailSchedule,200)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
 })();
