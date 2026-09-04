@@ -1,6 +1,6 @@
 (()=>{
 'use strict';
-const VERSION='690';
+const VERSION='697';
 const norm=v=>String(v??'').trim();
 const low=v=>norm(v).toLocaleLowerCase('sv-SE');
 const num=v=>{const n=Number(v);return Number.isFinite(n)?n:0};
@@ -78,6 +78,9 @@ const themes=[
  [/(finans|finansiering|financial)/,/(finans|finansiering|financial)/],[/(nationalekonomi|mikroekonomi|makroekonomi)/,/(nationalekonomi|mikroekonomi|makroekonomi)/],
  [/(psykologi|psychology)/,/(psykologi|psychology)/],[/(idrott|träning|traning|sport)/,/(idrott|träning|traning|sport)/]
 ];
+const codeKey=v=>String(v??'').trim().toUpperCase().replace(/[^A-Z0-9ÅÄÖ]/g,'');
+const definitionKey=r=>String(r?.definitionKey||[rankNorm(r?.university),codeKey(r?.code),rankNorm(r?.name)].join('|'));
+function semanticRelevant(course,need){const nt=needText(need),ct=courseText(course),subject=rankNorm(need?.subject||'');const nTokens=tokens(nt).filter(x=>x!==subject),cTokens=new Set(tokens(ct));const overlap=nTokens.some(x=>cTokens.has(x));const themed=themes.some(([nr,cr])=>nr.test(nt)&&cr.test(ct));const subjectNamed=subject&&tokens(subject).some(x=>ct.includes(x));const generic=!nTokens.length&&!themes.some(([nr])=>nr.test(nt));return overlap||themed||(generic&&subjectNamed)}
 function scoreCourseForNeed(course,need){
  if(!course||course.verified!==true||course.distance!==true||!(Number(course.hp)>0)||course.noPhysicalMeetings===false)return-Infinity;
  const nt=needText(need),ct=courseText(course);let score=0;
@@ -91,9 +94,10 @@ function scoreCourseForNeed(course,need){
 }
 function rankedCoursesForNeed(need){
  let rows=[];try{rows=typeof allDistanceCourses==='function'?allDistanceCourses():window.allDistanceCourses?.()||[]}catch(_){}
- return rows.map(course=>({course,score:scoreCourseForNeed(course,need)})).filter(x=>Number.isFinite(x.score)&&x.score>=42).sort((a,b)=>b.score-a.score||Number(a.course.semester||99999)-Number(b.course.semester||99999)||String(a.course.university||'').localeCompare(String(b.course.university||''),'sv')).slice(0,12).map(x=>({...x.course,matchScore:x.score,distanceConfidence:x.course.noPhysicalMeetings===true?'no-physical-meetings-verified':'distance-verified-meetings-unknown'}));
+ const ranked=rows.map(course=>({course,score:scoreCourseForNeed(course,need)})).filter(x=>Number.isFinite(x.score)&&x.score>=42&&semanticRelevant(x.course,need)).sort((a,b)=>b.score-a.score||Number(a.course.semester||99999)-Number(b.course.semester||99999)||String(a.course.university||'').localeCompare(String(b.course.university||''),'sv'));
+ const seen=new Set(),out=[];for(const x of ranked){const k=definitionKey(x.course);if(!k||seen.has(k))continue;seen.add(k);out.push({...x.course,sourceOfferingKey:x.course.offeringKey||'',offeringKey:'definition|'+k,semanticDistanceMatch:true,matchScore:x.score,distanceConfidence:x.course.noPhysicalMeetings===true?'no-physical-meetings-verified':'distance-verified-meetings-unknown'});if(out.length>=12)break}return out;
 }
-try{distanceCourseMatchesNeed=(c,n)=>scoreCourseForNeed(c,n)>=42}catch(_){};window.distanceCourseMatchesNeed=(c,n)=>scoreCourseForNeed(c,n)>=42;
+try{distanceCourseMatchesNeed=(c,n)=>scoreCourseForNeed(c,n)>=42&&semanticRelevant(c,n)}catch(_){};window.distanceCourseMatchesNeed=(c,n)=>scoreCourseForNeed(c,n)>=42&&semanticRelevant(c,n);
 try{verifiedDistanceCoursesForNeed=rankedCoursesForNeed}catch(_){};window.verifiedDistanceCoursesForNeed=rankedCoursesForNeed;
 
 /* ---------- Planner: choose real programme structure ---------- */
@@ -153,8 +157,8 @@ window.addEventListener('pageshow',()=>refreshPlanner(false));
 if(!document.getElementById('sl633-style')){const style=document.createElement('style');style.id='sl633-style';style.textContent=`#sl-pace-picker{display:none!important}.sl633-course.sl633-skip{background:#f0f8f4!important;opacity:.82}.sl633-course.sl633-skip .v572-course-copy strong{text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:#4d8c79}.sl633-course .v572-course-copy small.credited{color:#17745f!important;font-weight:800}.sl633-circle{width:30px;height:30px;border:3px solid #b7c1bd;border-radius:50%;display:block;margin:9px auto}.v572-term.done .sl633-circle{border-color:#2b9c77;background:#dff3eb}.v572-term.part .sl633-circle{border-color:#e9b020}.v572-term>strong{display:block;font-size:18px}.v572-term>em{display:block;font-style:normal;font-size:10px;color:#74807f;margin-top:2px}.v572-term>i{display:block;font-style:normal;color:#17745f;font-weight:800;font-size:11px;margin-top:6px}.v572-fast-inline [data-sl633-fast]{display:inline-flex!important;margin-top:10px;border:0;border-radius:999px;background:#176b5b;color:#fff;padding:10px 14px;font-weight:850}.sl633-fast-modal{display:none;position:fixed;inset:0;z-index:5000;background:rgba(8,32,35,.42);padding:18px;align-items:flex-end;justify-content:center}.sl633-fast-modal.open{display:flex}.sl633-modal-open{overflow:hidden!important}.sl633-fast-sheet{width:min(720px,100%);max-height:88dvh;overflow:auto;background:#fbfaf6;border-radius:28px 28px 20px 20px;padding:20px 18px calc(22px + env(safe-area-inset-bottom));box-shadow:0 24px 60px rgba(8,32,35,.28)}.sl633-fast-head{display:flex;align-items:flex-start;gap:14px;justify-content:space-between}.sl633-fast-head span{font-size:10px;letter-spacing:.12em;font-weight:900;color:#17745f}.sl633-fast-head h2{margin:4px 0 6px;font-size:26px;letter-spacing:-.035em}.sl633-fast-head p{margin:0;color:#69757d;font-size:12px;line-height:1.45}.sl633-fast-head button{border:0;background:#eef2ef;border-radius:50%;width:34px;height:34px;font-size:22px;color:#49615b}.sl633-results{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}.sl633-results button{border:1px solid rgba(21,88,79,.14);border-radius:17px;background:#fff;padding:12px 6px;color:#15584f}.sl633-results button.active{background:#176b5b;color:#fff}.sl633-results strong,.sl633-results span,.sl633-results small{display:block}.sl633-results strong{font-size:17px}.sl633-results span{font-size:11px;margin-top:3px}.sl633-results small{font-size:9px;margin-top:4px;opacity:.82}.sl633-fast-summary{padding:13px 14px;border-radius:16px;background:#eef6f2;display:grid;gap:3px}.sl633-fast-summary strong{font-size:14px}.sl633-fast-summary span{font-size:11px;color:#60736e}.sl633-fast-terms{display:grid;gap:10px;margin-top:14px}.sl633-fast-terms section{background:#fff;border:1px solid rgba(21,88,79,.1);border-radius:17px;padding:12px}.sl633-fast-terms section>div,.sl633-fast-terms p{display:flex;justify-content:space-between;gap:12px}.sl633-fast-terms section>div{padding-bottom:8px;border-bottom:1px solid #edf0ee}.sl633-fast-terms p{margin:8px 0 0;font-size:11px}.sl633-fast-terms p b{white-space:nowrap}.sl633-caution{font-size:10px;line-height:1.45;color:#7c8582;margin:14px 2px 0}`;document.head.appendChild(style)}
 
 requestAnimationFrame(()=>refreshPlanner(true));
-window.__studielotsRuntime={version:VERSION,modules:['susa-distance','distance-ranking','real-programme-planner','faster-route'],singleRuntime:true,noGlobalMutationObserver:true,legacyUniversityDetailRemoved:true};
+window.__studielotsRuntime={version:VERSION,modules:['susa-distance','distance-ranking','real-programme-planner','faster-route'],singleRuntime:true,noGlobalMutationObserver:true,legacyUniversityDetailRemoved:true,distancePolicyNative:true};
 window.__studielotsDistanceSource={version:VERSION,primary:'skolverket-susa-navet',subjectAwareCache:true,dedupe:true};
-window.__studielotsDistanceRanking={version:VERSION,policy:'requirement-first',rejectPhysicalMeetings:true,topPerNeed:12};
+window.__studielotsDistanceRanking={version:VERSION,policy:'requirement-first-semantic-definition-dedupe',rejectPhysicalMeetings:true,topPerNeed:12};
 window.__studielotsFasterRoute={version:VERSION,ordinaryPlanAlwaysBaseline:true,fastPaces:PACES.slice(),optIn:true,calculate:calculateFast,eventDriven:true,noMutationObserver:true};
 })();
