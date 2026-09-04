@@ -1,16 +1,6 @@
 (()=>{
 'use strict';
-const VERSION='688',SNAPSHOT='studielots_planner_snapshot';
-const official=v=>/^(chalmers-programplan|chalmers-master-programplan|kth-programplan|gu-official-programplan|lund-official-programplan)(?:-v\d+)?$/.test(String(v||''));
-function normalizeOfficialSnapshot(){
- let s=null;try{s=JSON.parse(sessionStorage.getItem(SNAPSHOT)||'null')}catch(_){}if(!s)return;
- const rows=Array.isArray(s.rows)?s.rows:[];
- const rowSource=rows.map(r=>r?.programmeSource).find(official)||'';
- const source=official(s.programmeStructureSource)?s.programmeStructureSource:rowSource;
- if(!source||s.programmeStructureVerified===true)return;
- const next={...s,programmeStructureSource:source,programmeStructureVerified:true,programmeStructureMachineReadable:true};
- try{sessionStorage.setItem(SNAPSHOT,JSON.stringify(next))}catch(_){}
-}
+const VERSION='694',SNAPSHOT='studielots_planner_snapshot';
 function ensureNewPlan(){
  if(typeof window.__v549NewPlan==='function')return;
  window.__v549NewPlan=()=>{try{sessionStorage.removeItem(SNAPSHOT);sessionStorage.removeItem('studielots_planner_origin')}catch(_){};if(typeof window.go==='function')window.go('degrees')};
@@ -25,7 +15,7 @@ function audit(){
  window.__studielotsButtonAudit={version:VERSION,total:all.length,unwired:issues};
  return issues;
 }
-function refresh(){normalizeOfficialSnapshot();ensureNewPlan();setTimeout(audit,0)}
+function refresh(){ensureNewPlan();setTimeout(audit,0)}
 installNavFallback();['studielots:planner-snapshot','studielots:planner-open','studielots:screen-rendered','pageshow'].forEach(n=>window.addEventListener(n,refresh));if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refresh,{once:true});else refresh();
-window.__studielotsBuild={...(window.__studielotsBuild||{}),interactionGuard:VERSION,buttonAudit:'enabled',officialSnapshotRepair:'enabled',newPlanFallback:'enabled'};
+window.__studielotsBuild={...(window.__studielotsBuild||{}),interactionGuard:VERSION,buttonAudit:'enabled',officialSnapshotRepair:'removed-v694',newPlanFallback:'enabled'};
 })();
