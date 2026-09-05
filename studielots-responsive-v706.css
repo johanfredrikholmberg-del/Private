@@ -1,4 +1,4 @@
-/* StudieLots responsive web shell v706
+/* StudieLots responsive web shell v707
    Desktop = full web service. Mobile = compact single-column app-like experience.
    Kept as an override layer so the existing matching/planner logic remains untouched. */
 
@@ -11,6 +11,7 @@
 }
 
 html{scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
 body{min-height:100vh}
 button,a,input,select,textarea{touch-action:manipulation}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
@@ -18,8 +19,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   outline-offset:2px!important;
 }
 
-/* Desktop/tablet web shell */
-@media (min-width: 900px){
+/* Desktop web shell */
+@media (min-width: 1024px){
   body{
     background:
       radial-gradient(circle at 8% -10%,rgba(38,94,232,.08),transparent 28rem),
@@ -95,6 +96,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     width:19px!important;
     height:19px!important;
     margin:0!important;
+    flex:0 0 auto!important;
   }
   .lotsen-bottomnav.nav button b{font-size:13px!important;line-height:1!important}
   .lotsen-bottomnav.nav button.active{
@@ -109,11 +111,18 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     margin:0 auto!important;
     padding:42px var(--sl-shell-pad) 72px!important;
   }
-
-  .screen.active{animation:slFadeIn .16s ease-out}
+  .screen.active{width:100%!important;min-width:0!important;animation:slFadeIn .16s ease-out}
   @keyframes slFadeIn{from{opacity:.65;transform:translateY(2px)}to{opacity:1;transform:none}}
 
-  .top{margin-bottom:28px!important}
+  .top{
+    display:flex!important;
+    align-items:flex-start!important;
+    justify-content:space-between!important;
+    gap:22px!important;
+    margin-bottom:28px!important;
+  }
+  .top>div{min-width:0!important}
+  .top>.primary{flex:0 0 auto!important}
   .top h1,#start h1,.v549-planner-page>h1{font-size:clamp(32px,3vw,46px)!important;letter-spacing:-.035em!important}
   .top p{font-size:16px!important;max-width:720px!important}
 
@@ -122,11 +131,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     display:grid!important;
     grid-template-columns:minmax(0,5fr) minmax(0,7fr)!important;
     gap:22px!important;
-    align-items:start!important;
+    align-items:stretch!important;
   }
-  #start>.home-welcome-card{grid-column:1!important;grid-row:1!important;height:100%!important;min-height:320px!important}
-  #start>.home-result-area{grid-column:2!important;grid-row:1!important;margin:0!important}
-  #start>.home-fast{grid-column:1 / -1!important;margin-top:0!important}
+  #start>.home-welcome-card{grid-column:1!important;grid-row:1!important;height:100%!important;min-height:320px!important;min-width:0!important}
+  #start>.home-result-area{grid-column:2!important;grid-row:1!important;margin:0!important;min-width:0!important}
+  #start>.home-fast{grid-column:1 / -1!important;margin-top:0!important;min-width:0!important}
 
   .home-welcome-card,.home-result-area,.home-fast,.card,.detail-block,.v533-privacy-hero,.v533-note,
   .admission-score-card,.admission-search-card,.program-search-card{
@@ -134,19 +143,20 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   }
   .home-welcome-card{padding:30px!important;box-shadow:var(--sl-shell-shadow)!important}
   .home-welcome-card .home-cta{width:auto!important;min-width:190px!important;max-width:100%!important}
-  .home-result-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
-  .home-result-card{min-height:148px!important}
+  .home-result-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+  .home-result-card{min-width:0!important;min-height:148px!important}
   .home-action-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
 
   /* Studies / import */
-  #studies .import-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
-  #studies .study-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
-  #studies .study-item{height:100%!important}
-  #studies .study-meta{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  #studies .import-choice-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+  #studies .study-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+  #studies .study-item{height:100%!important;min-width:0!important}
+  #studies .study-meta{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important}
 
   /* Opportunities and programme pages */
   #degreeResults,.program-search-results,#programMatchResult,#myPathFlow,#degreeDetailContent,#compareResults{
     width:100%!important;
+    min-width:0!important;
   }
   #degrees .opportunities-head{max-width:850px!important}
   #programMatch .program-search-card{padding:24px!important}
@@ -157,6 +167,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 
   /* Compare and admissions benefit from two-column inputs on desktop. */
   .compare-picker,.admission-search-grid,.higher-score-grid{
+    display:grid!important;
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
     gap:14px!important;
   }
@@ -173,15 +184,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   .more-menu-handle{display:none!important}
 }
 
-/* Tablet: keep web proportions, simplify the header/navigation. */
-@media (min-width: 700px) and (max-width: 899px){
-  .main{max-width:860px!important;margin:0 auto!important;padding-left:24px!important;padding-right:24px!important}
-  .home-result-grid,.home-action-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+/* Tablet: keep the mobile navigation, but give content more room. */
+@media (min-width: 700px) and (max-width: 1023px){
+  .main{max-width:900px!important;margin:0 auto!important;padding-left:24px!important;padding-right:24px!important}
+  .home-result-grid,.home-action-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+  .import-choice-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+  .admission-search-grid,.higher-score-grid,.compare-picker{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
 }
 
 /* Mobile remains intentionally compact and app-like. */
-@media (max-width: 899px){
-  .main{width:100%!important;max-width:720px!important;margin:0 auto!important}
+@media (max-width: 1023px){
+  .main{width:100%!important;margin-left:auto!important;margin-right:auto!important}
   .lotsen-bottomnav.nav{
     padding-bottom:max(7px,env(safe-area-inset-bottom))!important;
   }
@@ -191,6 +204,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 @media (max-width: 560px){
   #start.screen.active{display:block!important}
   .home-result-grid,.home-action-list,.import-choice-grid,.compare-picker,.admission-search-grid,.higher-score-grid{
+    display:grid!important;
     grid-template-columns:1fr!important;
   }
 }
