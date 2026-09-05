@@ -1,0 +1,200 @@
+/* StudieLots responsive web shell v706
+   Desktop = full web service. Mobile = compact single-column app-like experience.
+   Kept as an override layer so the existing matching/planner logic remains untouched. */
+
+:root{
+  --sl-shell-max:1280px;
+  --sl-shell-pad:clamp(18px,3vw,42px);
+  --sl-nav-bg:rgba(255,255,255,.90);
+  --sl-nav-border:rgba(15,23,42,.10);
+  --sl-shell-shadow:0 18px 50px rgba(15,23,42,.08);
+}
+
+html{scroll-behavior:smooth}
+body{min-height:100vh}
+button,a,input,select,textarea{touch-action:manipulation}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid rgba(38,94,232,.35)!important;
+  outline-offset:2px!important;
+}
+
+/* Desktop/tablet web shell */
+@media (min-width: 900px){
+  body{
+    background:
+      radial-gradient(circle at 8% -10%,rgba(38,94,232,.08),transparent 28rem),
+      #f6f8fc!important;
+    padding-bottom:0!important;
+  }
+
+  .studielots-visual-header{
+    position:sticky!important;
+    top:0!important;
+    z-index:880!important;
+    height:78px!important;
+    min-height:78px!important;
+    background:rgba(255,255,255,.92)!important;
+    backdrop-filter:blur(18px)!important;
+    -webkit-backdrop-filter:blur(18px)!important;
+    border-bottom:1px solid var(--sl-nav-border)!important;
+    box-shadow:0 5px 24px rgba(15,23,42,.05)!important;
+  }
+
+  .studielots-visual-header-image{
+    width:min(260px,24vw)!important;
+    height:78px!important;
+    margin-left:max(24px,calc((100vw - var(--sl-shell-max))/2 + 20px))!important;
+    background-size:contain!important;
+    background-position:left center!important;
+    background-repeat:no-repeat!important;
+  }
+
+  /* Re-use the existing navigation, but turn it into a desktop top navigation. */
+  .lotsen-bottomnav.nav{
+    position:fixed!important;
+    z-index:990!important;
+    top:10px!important;
+    bottom:auto!important;
+    left:auto!important;
+    right:max(24px,calc((100vw - var(--sl-shell-max))/2 + 20px))!important;
+    transform:none!important;
+    width:auto!important;
+    max-width:min(760px,65vw)!important;
+    min-height:58px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:5px!important;
+    padding:6px!important;
+    margin:0!important;
+    border:1px solid var(--sl-nav-border)!important;
+    border-radius:18px!important;
+    background:var(--sl-nav-bg)!important;
+    box-shadow:0 10px 32px rgba(15,23,42,.08)!important;
+    backdrop-filter:blur(18px)!important;
+    -webkit-backdrop-filter:blur(18px)!important;
+    overflow:visible!important;
+  }
+
+  .lotsen-bottomnav.nav button{
+    width:auto!important;
+    min-width:0!important;
+    min-height:44px!important;
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:7px!important;
+    padding:9px 12px!important;
+    margin:0!important;
+    border-radius:12px!important;
+    white-space:nowrap!important;
+    color:#475467!important;
+  }
+  .lotsen-bottomnav.nav button .bottom-icon{
+    width:19px!important;
+    height:19px!important;
+    margin:0!important;
+  }
+  .lotsen-bottomnav.nav button b{font-size:13px!important;line-height:1!important}
+  .lotsen-bottomnav.nav button.active{
+    background:#142033!important;
+    color:#fff!important;
+  }
+  .lotsen-bottomnav.nav button.active svg{stroke:currentColor!important}
+
+  .main{
+    width:100%!important;
+    max-width:var(--sl-shell-max)!important;
+    margin:0 auto!important;
+    padding:42px var(--sl-shell-pad) 72px!important;
+  }
+
+  .screen.active{animation:slFadeIn .16s ease-out}
+  @keyframes slFadeIn{from{opacity:.65;transform:translateY(2px)}to{opacity:1;transform:none}}
+
+  .top{margin-bottom:28px!important}
+  .top h1,#start h1,.v549-planner-page>h1{font-size:clamp(32px,3vw,46px)!important;letter-spacing:-.035em!important}
+  .top p{font-size:16px!important;max-width:720px!important}
+
+  /* Home: use desktop width rather than stretching a mobile column. */
+  #start.screen.active{
+    display:grid!important;
+    grid-template-columns:minmax(0,5fr) minmax(0,7fr)!important;
+    gap:22px!important;
+    align-items:start!important;
+  }
+  #start>.home-welcome-card{grid-column:1!important;grid-row:1!important;height:100%!important;min-height:320px!important}
+  #start>.home-result-area{grid-column:2!important;grid-row:1!important;margin:0!important}
+  #start>.home-fast{grid-column:1 / -1!important;margin-top:0!important}
+
+  .home-welcome-card,.home-result-area,.home-fast,.card,.detail-block,.v533-privacy-hero,.v533-note,
+  .admission-score-card,.admission-search-card,.program-search-card{
+    border-radius:22px!important;
+  }
+  .home-welcome-card{padding:30px!important;box-shadow:var(--sl-shell-shadow)!important}
+  .home-welcome-card .home-cta{width:auto!important;min-width:190px!important;max-width:100%!important}
+  .home-result-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+  .home-result-card{min-height:148px!important}
+  .home-action-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+
+  /* Studies / import */
+  #studies .import-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  #studies .study-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+  #studies .study-item{height:100%!important}
+  #studies .study-meta{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+
+  /* Opportunities and programme pages */
+  #degreeResults,.program-search-results,#programMatchResult,#myPathFlow,#degreeDetailContent,#compareResults{
+    width:100%!important;
+  }
+  #degrees .opportunities-head{max-width:850px!important}
+  #programMatch .program-search-card{padding:24px!important}
+  #programSearchInput{min-height:50px!important;font-size:16px!important}
+
+  /* Planner gets a comfortable reading column while keeping desktop breathing room. */
+  #plannerClean .v549-planner-page{max-width:1080px!important;margin:0 auto!important}
+
+  /* Compare and admissions benefit from two-column inputs on desktop. */
+  .compare-picker,.admission-search-grid,.higher-score-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:14px!important;
+  }
+
+  /* Desktop “More” is a centred panel instead of a phone bottom sheet. */
+  .more-menu-backdrop{align-items:center!important;justify-content:center!important;padding:30px!important}
+  .more-menu-sheet{
+    width:min(620px,calc(100vw - 60px))!important;
+    max-height:min(760px,calc(100vh - 70px))!important;
+    border-radius:26px!important;
+    padding:24px!important;
+    box-shadow:0 28px 90px rgba(15,23,42,.22)!important;
+  }
+  .more-menu-handle{display:none!important}
+}
+
+/* Tablet: keep web proportions, simplify the header/navigation. */
+@media (min-width: 700px) and (max-width: 899px){
+  .main{max-width:860px!important;margin:0 auto!important;padding-left:24px!important;padding-right:24px!important}
+  .home-result-grid,.home-action-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+
+/* Mobile remains intentionally compact and app-like. */
+@media (max-width: 899px){
+  .main{width:100%!important;max-width:720px!important;margin:0 auto!important}
+  .lotsen-bottomnav.nav{
+    padding-bottom:max(7px,env(safe-area-inset-bottom))!important;
+  }
+  input,select,textarea{font-size:16px!important}
+}
+
+@media (max-width: 560px){
+  #start.screen.active{display:block!important}
+  .home-result-grid,.home-action-list,.import-choice-grid,.compare-picker,.admission-search-grid,.higher-score-grid{
+    grid-template-columns:1fr!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
