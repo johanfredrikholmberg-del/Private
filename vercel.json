@@ -1,6 +1,10 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/api/gu-program-structure", "destination": "/api/gu-program-structure-v702" },
+    { "source": "/api/lu-program-structure", "destination": "/api/lu-program-structure-v702" }
+  ],
   "headers": [
     {
       "source": "/studielots-v615.css",
