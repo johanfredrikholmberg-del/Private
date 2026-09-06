@@ -1,6 +1,6 @@
 (()=>{
 'use strict';
-const BASELINE='709';
+const BASELINE='710';
 const loaded=[];
 const failed=[];
 function script(src,attrs={}){
@@ -20,7 +20,6 @@ function css(href){
   const l=document.createElement('link');l.rel='stylesheet';l.href=href;l.dataset.studielotsResponsive='706';document.head.appendChild(l);
 }
 async function boot(){
-  // One explicit beta baseline. Core first, then every currently active feature layer.
   await script('/studielots-v624.js?v=624',{studielotsCore:'624'});
   css('/studielots-responsive-v706.css?v=707');
   await script('/studielots-planner-ui-v647.js?v=700',{studielotsPlannerUi:'700'});
@@ -30,19 +29,11 @@ async function boot(){
   await script('/studielots-auto-structure.js?v=701',{studielotsAutoStructure:'701'});
   await script('/studielots-official-source-v704.js?v=704',{studielotsOfficialSource:'704'});
   await script('/studielots-studies-compact-v707.js?v=707',{studielotsStudiesCompact:'707'});
+  await script('/studielots-planner-handoff-v710.js?v=710',{studielotsPlannerHandoff:'710'});
   await script('/studielots-planner.js?v=690',{studielotsPlanner:'690'});
 
-  window.__studielotsBaseline={
-    version:BASELINE,
-    core:'624',runtime:'706',responsive:'707',plannerUi:'700',masterSelector:'684',plannerSummary:'703',
-    autoStructure:'701',officialSource:'704',studiesCompact:'707',planner:'690',loaded:[...loaded],failed:[...failed]
-  };
-  window.__studielotsLoaderAudit={
-    version:BASELINE,
-    ok:failed.length===0,
-    failed:[...failed],
-    expected:['core-624','responsive-707','planner-ui-700','master-selector-684','planner-summary-703','runtime-overlay-706','auto-structure-701','official-source-704','studies-compact-707','planner-690']
-  };
+  window.__studielotsBaseline={version:BASELINE,core:'624',runtime:'706',responsive:'707',plannerUi:'700',masterSelector:'684',plannerSummary:'703',autoStructure:'701',officialSource:'704',studiesCompact:'707',plannerHandoff:'710',planner:'690',loaded:[...loaded],failed:[...failed]};
+  window.__studielotsLoaderAudit={version:BASELINE,ok:failed.length===0,failed:[...failed],expected:['core-624','responsive-707','planner-ui-700','master-selector-684','planner-summary-703','runtime-overlay-706','auto-structure-701','official-source-704','studies-compact-707','planner-handoff-710','planner-690']};
   window.dispatchEvent(new CustomEvent('studielots:baseline-ready',{detail:window.__studielotsBaseline}));
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
