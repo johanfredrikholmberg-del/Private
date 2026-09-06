@@ -1,0 +1,17 @@
+/* Beta home layout restoration — keep Hem compact and separate from Mina studier */
+@media (max-width:700px){
+  #start .home-result-grid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:14px!important;
+  }
+  #start .home-result-card{
+    min-width:0!important;
+    width:100%!important;
+  }
+  #start .home-result-card b,
+  #start .home-result-card small{
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+}
