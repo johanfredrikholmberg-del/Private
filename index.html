@@ -6,32 +6,31 @@
 <meta name="robots" content="noindex,nofollow" />
 <meta name="description" content="StudieLots hjälper dig hitta kortaste vägen till din examen utifrån det du redan har läst." />
 <title>StudieLots – öppnar snart</title>
+<link rel="stylesheet" href="/studielots-v615.css?v=615">
 <style>
-:root{color-scheme:light;--ink:#172033;--muted:#667085;--blue:#315fd6;--blue-soft:#edf3ff;--green:#278a64;--green-soft:#eaf8f2;--line:rgba(23,32,51,.09);--shadow:0 24px 70px rgba(23,32,51,.10)}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#f6f8fc}body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 0,rgba(49,95,214,.13),transparent 36rem)}
-main{min-height:100svh;display:grid;place-items:center;padding:calc(24px + env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom))}.card{position:relative;width:min(620px,100%);overflow:hidden;background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.9);border-radius:32px;padding:36px 34px 30px;box-shadow:var(--shadow);text-align:center}.card:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:var(--green-soft);right:-95px;bottom:-110px;z-index:0}.content{position:relative;z-index:1}.top{display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:30px}.mark{width:46px;height:46px;border-radius:15px;background:var(--blue-soft);display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(49,95,214,.05)}.mark svg{width:30px;height:30px;fill:none;stroke:var(--blue);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.brand{font-size:21px;font-weight:850;letter-spacing:-.035em}.pill{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:12px;font-weight:800;letter-spacing:.03em;margin-bottom:17px}.pill:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}h1{font-size:clamp(36px,7vw,58px);line-height:1.01;letter-spacing:-.052em;margin:0 auto 15px;max-width:540px}p{font-size:17px;line-height:1.52;color:var(--muted);max-width:480px;margin:0 auto}.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:8px;margin:30px auto 0;max-width:500px}.step{min-width:0;border:1px solid var(--line);background:#fbfcfe;border-radius:16px;padding:12px 8px;font-size:13px;font-weight:750;color:#344054}.arrow{color:#98a2b3;font-size:17px}footer{margin-top:28px;font-size:13px;color:#98a2b3}
-@media(max-width:560px){main{place-items:start center;padding-top:calc(34px + env(safe-area-inset-top))}.card{border-radius:28px;padding:30px 20px 25px}.top{margin-bottom:26px}.mark{width:43px;height:43px;border-radius:14px}.brand{font-size:20px}h1{font-size:42px;max-width:360px}p{font-size:16px;max-width:360px}.flow{grid-template-columns:1fr;margin-top:25px;gap:7px}.arrow{transform:rotate(90deg);font-size:15px;line-height:1}.step{padding:10px 12px;max-width:250px;width:100%;margin:auto}footer{margin-top:24px}}
+:root{color-scheme:light;--green:#124d40;--green-2:#176b5b;--mint:#dff1e8;--cream:#f7f4ec;--white:#fff;--soft:rgba(255,255,255,.72)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--green)}body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;color:var(--white);overflow-x:hidden}
+body:before{content:"";position:fixed;width:520px;height:520px;border-radius:50%;right:-260px;top:-210px;background:rgba(223,241,232,.09);pointer-events:none}body:after{content:"";position:fixed;width:420px;height:420px;border-radius:50%;left:-250px;bottom:-260px;background:rgba(255,255,255,.05);pointer-events:none}
+main{position:relative;z-index:1;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:calc(28px + env(safe-area-inset-top)) 22px calc(28px + env(safe-area-inset-bottom))}
+.hero{width:min(760px,100%);text-align:center}.logo-wrap{display:inline-flex;align-items:center;justify-content:center;background:var(--cream);border-radius:22px;padding:8px 17px;margin-bottom:40px;box-shadow:0 16px 45px rgba(0,0,0,.10)}.app-logo.studielots-visual-header-image{width:230px!important;height:64px!important;margin:0!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important}
+.eyebrow{display:inline-flex!important;align-items:center!important;gap:8px!important;background:rgba(223,241,232,.13)!important;border:1px solid rgba(223,241,232,.18)!important;color:#dff1e8!important;border-radius:999px!important;padding:9px 13px!important;margin:0 0 20px!important;font-size:13px!important;font-weight:800!important;letter-spacing:.02em!important;text-transform:none!important}.eyebrow:before{content:"";width:8px;height:8px;border-radius:50%;background:#7fc5a5}
+h1{font-size:clamp(42px,8vw,72px)!important;line-height:.98!important;letter-spacing:-.055em!important;margin:0 auto 20px!important;max-width:700px!important;color:#fff!important;font-weight:850!important}p{font-size:clamp(18px,2.3vw,22px)!important;line-height:1.5!important;color:rgba(255,255,255,.76)!important;max-width:560px!important;margin:0 auto!important}.flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:34px auto 0}.step{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:999px;padding:11px 15px;font-size:14px;font-weight:750;color:#fff}.arrow{color:#8fc8b2;font-size:20px;line-height:1}footer{margin-top:34px;color:rgba(255,255,255,.50);font-size:13px}
+@media(max-width:560px){main{align-items:flex-start;padding-top:calc(42px + env(safe-area-inset-top))}.logo-wrap{margin-bottom:34px;border-radius:18px;padding:6px 13px}.app-logo.studielots-visual-header-image{width:205px!important;height:58px!important}.eyebrow{margin-bottom:18px!important}h1{font-size:46px!important;max-width:390px!important}p{font-size:17px!important;max-width:350px!important}.flow{margin-top:30px;gap:8px}.step{padding:10px 13px;font-size:13px}.arrow{font-size:17px}footer{margin-top:28px}}
 </style>
 </head>
 <body>
 <main>
-  <section class="card">
-    <div class="content">
-      <div class="top">
-        <div class="mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M12 39h40l-6 11H20z"/><path d="M24 39V24h18v15"/><path d="M28 24v-8h9v8"/><path d="M37 16V9"/><path d="M37 9l10 5-10 4"/><path d="M8 54c7-4 12 4 19 0s12 4 19 0 8 1 10 0"/></svg></div>
-        <div class="brand">StudieLots</div>
-      </div>
-      <div class="pill">Öppnar snart</div>
-      <h1>Hitta kortaste vägen till din examen.</h1>
-      <p>Dina tidigare studier kan ta dig längre än du tror.</p>
-      <div class="flow" aria-label="Så fungerar StudieLots">
-        <div class="step">Importera meriter</div><div class="arrow">›</div>
-        <div class="step">Se möjligheter</div><div class="arrow">›</div>
-        <div class="step">Planera vägen</div>
-      </div>
-      <footer>StudieLots · Lanseras snart</footer>
+  <section class="hero">
+    <div class="logo-wrap"><div class="app-logo studielots-visual-header-image" role="img" aria-label="StudieLots"></div></div>
+    <div><span class="eyebrow">Öppnar snart</span></div>
+    <h1>Hitta kortaste vägen till din examen.</h1>
+    <p>Se hur det du redan har läst kan ta dig vidare.</p>
+    <div class="flow" aria-label="Så fungerar StudieLots">
+      <span class="step">Importera meriter</span><span class="arrow">›</span>
+      <span class="step">Se möjligheter</span><span class="arrow">›</span>
+      <span class="step">Planera vägen</span>
     </div>
+    <footer>StudieLots · Lanseras snart</footer>
   </section>
 </main>
 </body>
