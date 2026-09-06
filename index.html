@@ -6,60 +6,33 @@
 <meta name="robots" content="noindex,nofollow" />
 <meta name="description" content="StudieLots hjälper dig hitta kortaste vägen till din examen utifrån det du redan har läst." />
 <title>StudieLots – öppnar snart</title>
-<!-- Appens stylesheet laddas enbart för den befintliga StudieLots-headerbilden. Alla teaser-stilar nedan isoleras med !important. -->
-<link rel="stylesheet" href="/studielots-v615.css?v=615">
 <style>
-:root{--green:#124d40;--green2:#176b5b;--mint:#dff1e8;--cream:#f7f4ec;--white:#fff}
-*{box-sizing:border-box}
-html,body{margin:0!important;padding:0!important;min-height:100%!important;background:#124d40!important;color:#fff!important;overflow-x:hidden!important}
-body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;-webkit-font-smoothing:antialiased!important;background:linear-gradient(155deg,#103f36 0%,#15584a 56%,#0f493e 100%)!important}
-body:before{content:""!important;position:fixed!important;width:520px!important;height:520px!important;border-radius:50%!important;right:-280px!important;top:-240px!important;background:rgba(223,241,232,.08)!important;pointer-events:none!important;z-index:0!important}
-body:after{content:""!important;position:fixed!important;width:430px!important;height:430px!important;border-radius:50%!important;left:-265px!important;bottom:-280px!important;background:rgba(255,255,255,.045)!important;pointer-events:none!important;z-index:0!important}
-main{position:relative!important;z-index:1!important;width:100%!important;max-width:none!important;min-height:100svh!important;margin:0!important;padding:calc(30px + env(safe-area-inset-top)) 22px calc(30px + env(safe-area-inset-bottom))!important;display:flex!important;align-items:center!important;justify-content:center!important;background:transparent!important}
-.hero{width:min(760px,100%)!important;margin:0!important;padding:0!important;text-align:center!important;background:transparent!important;border:0!important;box-shadow:none!important}
-
-/* Visa endast vänsterdelen av appens befintliga headerbild: logotyp + hela StudieLots + Digital studievägledare. */
-.logo-crop{position:relative!important;display:block!important;width:355px!important;height:78px!important;margin:0 auto 40px!important;overflow:hidden!important;border-radius:18px!important;background:#f7f4ec!important;box-shadow:0 16px 42px rgba(0,0,0,.15)!important}
-.app-logo.studielots-visual-header-image{position:absolute!important;display:block!important;left:9px!important;top:7px!important;width:500px!important;height:64px!important;margin:0!important;padding:0!important;background-size:500px auto!important;background-position:left center!important;background-repeat:no-repeat!important;transform:none!important;border:0!important}
-
-.eyebrow{display:inline-flex!important;align-items:center!important;gap:8px!important;margin:0 0 19px!important;padding:9px 13px!important;border:1px solid rgba(223,241,232,.20)!important;border-radius:999px!important;background:rgba(223,241,232,.11)!important;color:#dff1e8!important;font-size:13px!important;font-weight:800!important;letter-spacing:.01em!important;text-transform:none!important;line-height:1!important}
-.eyebrow:before{content:""!important;width:8px!important;height:8px!important;border-radius:50%!important;background:#82cbaa!important}
-h1{max-width:700px!important;margin:0 auto 20px!important;color:#fff!important;font-size:clamp(42px,8vw,70px)!important;font-weight:850!important;line-height:.99!important;letter-spacing:-.052em!important;text-shadow:none!important}
-.hero>p{max-width:560px!important;margin:0 auto!important;color:rgba(255,255,255,.82)!important;font-size:clamp(18px,2.3vw,21px)!important;line-height:1.5!important}
-.flow{display:flex!important;align-items:center!important;justify-content:center!important;gap:10px!important;flex-wrap:wrap!important;margin:34px auto 0!important;padding:0!important}
-.step{display:inline-flex!important;align-items:center!important;min-height:42px!important;padding:10px 15px!important;border:1px solid rgba(255,255,255,.18)!important;border-radius:999px!important;background:rgba(255,255,255,.09)!important;color:#fff!important;font-size:14px!important;font-weight:760!important;line-height:1.2!important;box-shadow:none!important}
-.arrow{color:#93ceb6!important;font-size:20px!important;line-height:1!important}
-footer{margin-top:34px!important;color:rgba(255,255,255,.60)!important;font-size:13px!important}
-
-@media(max-width:560px){
- main{align-items:flex-start!important;padding-top:calc(42px + env(safe-area-inset-top))!important}
- .logo-crop{width:min(326px,calc(100vw - 44px))!important;height:70px!important;margin-bottom:34px!important;border-radius:17px!important}
- .app-logo.studielots-visual-header-image{left:8px!important;top:6px!important;width:452px!important;height:58px!important;background-size:452px auto!important}
- h1{max-width:390px!important;font-size:46px!important;line-height:1!important}
- .hero>p{max-width:350px!important;font-size:17px!important;color:rgba(255,255,255,.84)!important}
- .flow{margin-top:30px!important;gap:8px!important}
- .step{padding:10px 13px!important;font-size:13px!important}
- .arrow{font-size:17px!important}
- footer{margin-top:28px!important}
-}
+:root{--bg:#075447;--bg2:#063f36;--mint:#9bd6bf;--cream:#f7f3e9;--muted:#b8d8cd}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg2);color:var(--cream)}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 105% 8%,rgba(113,194,165,.14) 0 22%,transparent 22.2%),linear-gradient(155deg,#063f36,#086050 58%,#06483e);overflow-x:hidden}
+main{min-height:100svh;position:relative;display:flex;justify-content:center;padding:calc(34px + env(safe-area-inset-top)) 22px calc(22px + env(safe-area-inset-bottom));overflow:hidden}
+main:before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;left:-270px;bottom:80px;background:rgba(151,211,188,.06)}
+.hero{position:relative;z-index:1;width:min(720px,100%);text-align:center;display:flex;flex-direction:column;align-items:center}
+.brand{display:flex;align-items:center;justify-content:center;gap:15px;margin:8px 0 28px;color:var(--cream)}
+.mark{width:72px;height:72px;border:3px solid var(--cream);border-radius:50%;position:relative;flex:0 0 auto;overflow:hidden}
+.mark:before{content:"";position:absolute;left:27px;top:14px;width:17px;height:31px;background:var(--cream);clip-path:polygon(30% 0,70% 0,70% 18%,100% 28%,84% 38%,84% 100%,16% 100%,16% 38%,0 28%,30% 18%)}
+.mark:after{content:"≈";position:absolute;left:8px;right:8px;bottom:-3px;font-size:38px;font-weight:800;line-height:1;color:var(--bg)}
+.brandtext{text-align:left}.brandname{font-size:32px;font-weight:850;letter-spacing:-.04em;line-height:1}.brandname span{color:var(--mint)}.tagline{margin-top:7px;color:var(--muted);font-size:15px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:9px 14px;border:1px solid rgba(247,243,233,.22);border-radius:999px;background:rgba(255,255,255,.04);font-size:14px;font-weight:800;color:var(--cream)}.eyebrow:before{content:"";width:8px;height:8px;border-radius:50%;background:#70c9a8}
+h1{max-width:680px;margin:30px auto 18px;font-size:clamp(45px,8vw,72px);line-height:.98;letter-spacing:-.055em;font-weight:880;color:var(--cream)}
+.lead{max-width:520px;margin:0;color:var(--muted);font-size:20px;line-height:1.45}
+.flow{width:100%;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:start;gap:10px;margin-top:42px}.item{display:flex;flex-direction:column;align-items:center;gap:11px;font-size:14px;font-weight:800;line-height:1.2}.icon{width:82px;height:82px;border:1.5px solid rgba(155,214,191,.35);border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.025);font-size:31px;color:var(--mint)}.arrow{align-self:center;margin-top:28px;color:var(--mint);font-size:25px}
+.sea{position:relative;width:calc(100% + 44px);height:120px;margin-top:auto;min-height:120px;overflow:hidden}.sea:before,.sea:after{content:"";position:absolute;left:-10%;width:120%;height:75px;border-radius:50% 50% 0 0/35% 35% 0 0}.sea:before{bottom:-32px;background:#0b6958;transform:rotate(-2deg)}.sea:after{bottom:-50px;background:#075043;transform:rotate(2deg)}
+.boat{position:absolute;z-index:2;left:58%;bottom:22px;width:94px;height:32px;border:3px solid var(--cream);border-top:0;border-radius:3px 3px 28px 12px;transform:skewX(-8deg)}.boat:before{content:"";position:absolute;width:45px;height:23px;left:19px;top:-22px;border:3px solid var(--cream);border-bottom:0}.boat:after{content:"⚑";position:absolute;left:42px;top:-48px;font-size:25px;color:var(--cream);transform:skewX(8deg)}
+footer{margin-top:8px;color:rgba(184,216,205,.72);font-size:13px;padding-bottom:5px}
+@media(max-width:560px){main{padding-top:calc(28px + env(safe-area-inset-top))}.brand{margin-bottom:24px;gap:12px}.mark{width:62px;height:62px}.mark:before{left:23px;top:12px;width:15px;height:27px}.mark:after{font-size:33px;left:7px}.brandname{font-size:28px}.tagline{font-size:13px}.eyebrow{font-size:13px}h1{font-size:47px;max-width:390px;margin-top:27px}.lead{font-size:17px;max-width:340px}.flow{margin-top:36px;gap:4px}.icon{width:66px;height:66px;font-size:25px}.item{font-size:12px}.arrow{font-size:20px;margin-top:23px}.sea{height:105px;min-height:105px;margin-top:32px}.boat{transform:scale(.82) skewX(-8deg);transform-origin:bottom center}footer{font-size:12px}}
 </style>
 </head>
-<body>
-<main>
-  <section class="hero">
-    <div class="logo-crop" aria-label="StudieLots – Digital studievägledare">
-      <div class="app-logo studielots-visual-header-image" role="img" aria-hidden="true"></div>
-    </div>
-    <div><span class="eyebrow">Öppnar snart</span></div>
-    <h1>Hitta kortaste vägen till din examen.</h1>
-    <p>Se hur det du redan har läst kan ta dig vidare.</p>
-    <div class="flow" aria-label="Så fungerar StudieLots">
-      <span class="step">Importera meriter</span><span class="arrow">›</span>
-      <span class="step">Se möjligheter</span><span class="arrow">›</span>
-      <span class="step">Planera vägen</span>
-    </div>
-    <footer>StudieLots · Lanseras snart</footer>
-  </section>
-</main>
-</body>
-</html>
+<body><main><section class="hero">
+<div class="brand" aria-label="StudieLots – Digital studievägledare"><div class="mark" aria-hidden="true"></div><div class="brandtext"><div class="brandname">Studie<span>Lots</span></div><div class="tagline">Digital studievägledare</div></div></div>
+<div class="eyebrow">Öppnar snart</div>
+<h1>Hitta kortaste vägen till din examen.</h1>
+<p class="lead">Se hur det du redan har läst kan ta dig vidare.</p>
+<div class="flow" aria-label="Så fungerar StudieLots"><div class="item"><div class="icon">▤</div><span>Importera<br>meriter</span></div><div class="arrow">›</div><div class="item"><div class="icon">⌕</div><span>Se<br>möjligheter</span></div><div class="arrow">›</div><div class="item"><div class="icon">⌖</div><span>Planera<br>vägen</span></div></div>
+<div class="sea" aria-hidden="true"><div class="boat"></div></div><footer>StudieLots · Lanseras snart</footer>
+</section></main></body></html>
