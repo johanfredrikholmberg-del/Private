@@ -1,0 +1,61 @@
+{
+  "fixture": "ladok-national-regression-01",
+  "source": "anonymized real national Ladok result certificate",
+  "privacy": "All name, personal identity number, verification URL/code and document identifiers removed.",
+  "expected": {
+    "courseCount": 33,
+    "totalHp": 255,
+    "institutionCount": 6,
+    "issuedDegrees": [
+      {
+        "title": "Filosofie kandidatexamen",
+        "hp": 180,
+        "subject": "Idrottsvetenskap",
+        "completedDate": "2018-06-25",
+        "issuedDate": "2018-08-13"
+      }
+    ]
+  },
+  "courses": [
+    {"institution":"Göteborgs universitet","code":"IIG190","name":"Socialpsykologiska perspektiv på idrott","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IIG191","name":"Sociologiska perspektiv på idrott","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IKG301","name":"Vetenskap och profession","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IIG199","name":"Anatomi","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IIG412","name":"Hållbar utveckling och fysisk aktivitet","hp":5},
+    {"institution":"Göteborgs universitet","code":"IIG204","name":"Idrottsfysiologi","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IIG145","name":"Hälsopromotion","hp":2.5},
+    {"institution":"Göteborgs universitet","code":"IIG196","name":"Rörelselära och biomekanik","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IIG113","name":"Träningslära","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IIG142","name":"Fysisk aktivitet och hälsa","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IKG302","name":"Vetenskapliga metoder I","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IIG200","name":"Coaching","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IDG515","name":"Fysisk aktivitet, stress och hälsa","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IKG244","name":"Epidemiologi","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IDG233","name":"Folkhälsovetenskap","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IKG246","name":"Hälsofrämjande arbete - pedagogiska och psykologiska perspektiv","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IKG242","name":"Hälsokommunikation","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IKG300","name":"Tillämpad hälsopromotion","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IIG213","name":"Träningslära II","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IIG217","name":"Idrottsmedicin","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IKG303","name":"Vetenskapliga metoder II","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IKG441","name":"Verksamhetsförlagd utbildning","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IKG243","name":"Kandidatuppsats","hp":15,"thesis":true},
+    {"institution":"Göteborgs universitet","code":"IKA302","name":"Mätmetoder 2 - Rörelse, styrka, kroppssammansättning och fysisk kapacitet","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IKA304","name":"Idrottsmedicin inom hälsa och prestation","hp":7.5},
+    {"institution":"Göteborgs universitet","code":"IKA307","name":"Interventionsstrategier i hälsa och prestation","hp":15},
+    {"institution":"Högskolan i Halmstad","code":"ID2006","name":"Ett hållbart idrottsledarskap","hp":7.5},
+    {"institution":"Högskolan i Halmstad","code":"PS2005","name":"Psykologi - idrottspsykologi I","hp":7.5},
+    {"institution":"Högskolan i Jönköping","code":"LPLG15","name":"Projektledning i praktiken","hp":7.5},
+    {"institution":"Linnéuniversitetet","code":"1MT024","name":"Ledarskap i producerande företag","hp":7.5},
+    {"institution":"Mittuniversitetet","code":"FÖ032G","name":"Företagsekonomi GR (A), Marknadsföring","hp":7.5},
+    {"institution":"Mittuniversitetet","code":"FÖ118G","name":"Företagsekonomi GR (A), Organisation och ledarskap","hp":7.5},
+    {"institution":"Mälardalens universitet","code":"FOA115","name":"Sports management","hp":7.5}
+  ],
+  "engineExpectations": {
+    "doNotInferExactDegreeMembership": true,
+    "doNotReuseSameBachelorThesisAsAnotherMainFieldThesis": true,
+    "doNotInferCourseLevelFromCertificateWhenLevelIsAbsent": true,
+    "preserveMultilineCourseNames": true,
+    "singleHpAuthorityRequired": true
+  }
+}
