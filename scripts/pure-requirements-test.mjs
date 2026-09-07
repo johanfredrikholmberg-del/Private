@@ -8,7 +8,7 @@ vm.createContext(context);
 vm.runInContext(source,context);
 const e=context.window.__studielotsPureEngine;
 function assert(ok,msg){if(!ok){console.error('FAIL:',msg);process.exitCode=1}else console.log('OK:',msg)}
-assert(e?.version==='724','pure engine v724 loads');
+assert(e?.version==='728','pure engine v728 loads');
 assert(typeof e?.evaluateRequirements==='function','requirement evaluator is exposed');
 const courses=[
  {name:'Psykologi: Grundkurs',hp:30,subject:'Psykologi',level:'G1N'},
@@ -25,4 +25,11 @@ assert(candidate.gaps.totalGap===60&&candidate.gaps.subjectGap===15&&candidate.g
 assert(candidate.remainingHp===60,'remaining hp preserves legacy overlapping-gap max semantics');
 const all=e.evaluateRequirements(courses,{subject:'Psykologi',totalHp:180,subjectHp:90,thesisHp:15});
 assert(all.completed.totalHp===135,'advanced credits remain included when not explicitly excluded');
+const missingSubject=[
+ {name:'Statistik',hp:15,level:'G1N'},
+ {name:'Psykologi introduktion',hp:15,level:'G1N'}
+];
+const guarded=e.evaluateRequirements(missingSubject,{subject:'Psykologi',totalHp:30,subjectHp:15,thesisHp:0});
+assert(guarded.completed.subjectHp===15,'course with empty subject metadata does not automatically match every subject');
+assert(e.subjectMatch({name:'Statistik',hp:15},'Psykologi')===false,'empty subject no longer creates a false positive');
 if(process.exitCode)process.exit(process.exitCode);
