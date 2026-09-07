@@ -4,14 +4,21 @@ import assert from 'node:assert/strict';
 
 const source=fs.readFileSync('studielots-fast-route-v802.js','utf8');
 const storage=()=>{const m=new Map();return {getItem:k=>m.has(k)?m.get(k):null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)}};
-const context={window:{},document:{readyState:'loading',addEventListener:()=>{}},sessionStorage:storage(),localStorage:storage(),console,URLSearchParams,fetch:async()=>({ok:true,json:async()=>({offerings:[]})}),MutationObserver:class{observe(){}},setTimeout:()=>0,clearTimeout:()=>{},CustomEvent:class{},Date};
-context.window.addEventListener=()=>{}; context.window.dispatchEvent=()=>{};
-vm.createContext(context); vm.runInContext(source,context);
+const document={
+  readyState:'complete',
+  head:{appendChild:()=>{}},
+  createElement:()=>({id:'',textContent:'',dataset:{},appendChild:()=>{},insertAdjacentElement:()=>{},querySelector:()=>null}),
+  getElementById:()=>null,
+  addEventListener:()=>{}
+};
+const context={window:{},document,sessionStorage:storage(),localStorage:storage(),console,URLSearchParams,fetch:async()=>({ok:true,json:async()=>({offerings:[]})}),MutationObserver:class{observe(){}},setTimeout:()=>0,clearTimeout:()=>{},CustomEvent:class{},Date};
+context.window.addEventListener=()=>{};context.window.dispatchEvent=()=>{};
+vm.createContext(context);vm.runInContext(source,context);
 const e=context.window.__studielotsFastRoute;
 assert.equal(e?.version,'802');
 
 const row=(code,term,hp=7.5,extra={})=>({code,name:code,hp,__term:term,...extra});
-const flatten=result=>result.terms.flatMap((t,ti)=>t.rows.map(r=>({r,ti,term:t}))); 
+const flatten=result=>result.terms.flatMap((t,ti)=>t.rows.map(r=>({r,ti,term:t})));
 
 // 1. No verified standalone offering: a course from ordinary term 3 must never be accelerated merely because earlier terms have capacity.
 {
