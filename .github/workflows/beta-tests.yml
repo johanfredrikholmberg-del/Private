@@ -29,3 +29,5 @@ jobs:
         run: node scripts/fast-route-behavior-test.mjs
       - name: Planner scenario stress suite
         run: node scripts/planner-scenario-stress-test.mjs
+      - name: Fast access/paywall boundary
+        run: node scripts/fast-access-regression-test.mjs
