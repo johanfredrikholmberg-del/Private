@@ -8,19 +8,20 @@ vm.createContext(context);
 vm.runInContext(source,context);
 const e=context.window.__studielotsPureEngine;
 function assert(ok,msg){if(!ok){console.error('FAIL:',msg);process.exitCode=1}else console.log('OK:',msg)}
-assert(e?.version==='729','pure engine v729 loads');
+assert(e?.version==='730','pure engine v730 loads');
 assert(typeof e?.evaluateRequirements==='function','requirement evaluator is exposed');
-assert(e.isAdvanced({progression:'A1N'})===true,'A1N is advanced');
-assert(e.isAdvanced({progression:'A1F'})===true,'A1F is advanced');
-assert(e.isAdvanced({progression:'A1E'})===true,'A1E is advanced');
-assert(e.isAdvanced({progression:'A2E'})===true,'A2E is advanced');
-assert(e.isAdvanced({progression:'G2E',name:'Avancerad analys av data'})===false,'G2E stays basic even if course title contains the word avancerad');
+assert(e.isAdvanced({progression:'A1N'})===true,'A1N progression is advanced');
+assert(e.isAdvanced({level:'A1N'})===true,'A1N in level field is advanced');
+assert(e.isAdvanced({level:'A1F'})===true,'A1F in level field is advanced');
+assert(e.isAdvanced({level:'A1E'})===true,'A1E in level field is advanced');
+assert(e.isAdvanced({level:'A2E'})===true,'A2E in level field is advanced');
+assert(e.isAdvanced({level:'G2E',name:'Avancerad analys av data'})===false,'G2E stays basic even if course title contains the word avancerad');
 const courses=[
- {name:'Psykologi: Grundkurs',hp:30,subject:'Psykologi',progression:'G1N'},
- {name:'Psykologi: Fortsättningskurs',hp:30,subject:'Psykologi',progression:'G1F'},
- {name:'Psykologi: Kandidatuppsats',hp:15,subject:'Psykologi',progression:'G2E'},
- {name:'Valbar kurs',hp:45,subject:'Sociologi',progression:'G1N'},
- {name:'Avancerad kurs',hp:15,subject:'Psykologi',progression:'A1N'}
+ {name:'Psykologi: Grundkurs',hp:30,subject:'Psykologi',level:'G1N'},
+ {name:'Psykologi: Fortsättningskurs',hp:30,subject:'Psykologi',level:'G1F'},
+ {name:'Psykologi: Kandidatuppsats',hp:15,subject:'Psykologi',level:'G2E'},
+ {name:'Valbar kurs',hp:45,subject:'Sociologi',level:'G1N'},
+ {name:'Avancerad kurs',hp:15,subject:'Psykologi',level:'A1N'}
 ];
 const candidate=e.evaluateRequirements(courses,{subject:'Psykologi',totalHp:180,subjectHp:90,thesisHp:15,excludeAdvancedFromTotal:true});
 assert(candidate.completed.totalHp===120,'advanced credits can be excluded from candidate total');
@@ -31,8 +32,8 @@ assert(candidate.remainingHp===60,'remaining hp preserves legacy overlapping-gap
 const all=e.evaluateRequirements(courses,{subject:'Psykologi',totalHp:180,subjectHp:90,thesisHp:15});
 assert(all.completed.totalHp===135,'advanced credits remain included when not explicitly excluded');
 const missingSubject=[
- {name:'Statistik',hp:15,progression:'G1N'},
- {name:'Psykologi introduktion',hp:15,progression:'G1N'}
+ {name:'Statistik',hp:15,level:'G1N'},
+ {name:'Psykologi introduktion',hp:15,level:'G1N'}
 ];
 const guarded=e.evaluateRequirements(missingSubject,{subject:'Psykologi',totalHp:30,subjectHp:15,thesisHp:0});
 assert(guarded.completed.subjectHp===15,'course with empty subject metadata does not automatically match every subject');
