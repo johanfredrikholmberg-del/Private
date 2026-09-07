@@ -1,6 +1,6 @@
 (()=>{
 'use strict';
-const VERSION='729';
+const VERSION='730';
 const num=v=>{const n=Number(v);return Number.isFinite(n)?n:0};
 const text=v=>String(v??'').replace(/\s+/g,' ').trim();
 const low=v=>text(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
@@ -8,8 +8,8 @@ const hpOf=c=>num(c?.hp??c?.credits??c?.credit??c?.ects??c?.points);
 const courseName=c=>text(c?.name??c?.courseName??c?.title??c?.course??c?.label);
 const courseCode=c=>text(c?.code??c?.courseCode).toUpperCase().replace(/\s+/g,'');
 const isCredited=c=>Boolean(c?.credited||c?.completed||c?.done||c?.tillgodoraknad||c?.isCredited||c?.status==='credited'||c?.status==='completed');
-const progressionOf=c=>text(c?.progression??c?.levelCode??c?.progressionCode).toUpperCase().replace(/\s+/g,'');
-const isAdvanced=c=>{const p=progressionOf(c);if(/^(A1N|A1F|A1E|A2E|A2F|AXX)$/.test(p))return true;if(/^(G1N|G1F|G1E|G2F|G2E|GXX)$/.test(p))return false;const t=low([c?.level,c?.educationLevel].filter(Boolean).join(' '));return /\bavancerad(?:\s+niva)?\b|\badvanced(?:\s+level)?\b/.test(t)};
+const progressionOf=c=>{for(const raw of [c?.progression,c?.levelCode,c?.progressionCode,c?.level]){const p=text(raw).toUpperCase().replace(/\s+/g,'');if(/^(?:A|G)[12X][NFE X]?$/.test(p)||/^(?:A|G)(?:1N|1F|1E|2F|2E|XX)$/.test(p))return p}return''};
+const isAdvanced=c=>{const p=progressionOf(c);if(/^A/.test(p))return true;if(/^G/.test(p))return false;const t=low([c?.level,c?.educationLevel].filter(Boolean).join(' '));return /\bavancerad(?:\s+niva)?\b|\badvanced(?:\s+level)?\b/.test(t)};
 const isThesis=c=>{const t=low([courseName(c),c?.type,c?.category,c?.description].filter(Boolean).join(' '));return /kandidatuppsats|examensarbete|sjalvstandigt arbete|thesis|c-uppsats|masteruppsats|magisteruppsats/.test(t)};
 const subjectOf=c=>text(c?.subject??c?.mainField??c?.huvudomrade??c?.field);
 function normalizeCourses(courses){return (Array.isArray(courses)?courses:[]).filter(Boolean).map((c,i)=>({...c,__engineIndex:i,hp:hpOf(c),name:courseName(c),code:courseCode(c),subject:subjectOf(c),isAdvanced:isAdvanced(c),isThesis:isThesis(c)}))}
