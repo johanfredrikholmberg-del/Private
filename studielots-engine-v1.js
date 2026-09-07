@@ -1,9 +1,11 @@
 (()=>{
 'use strict';
-const VERSION='731';
+const VERSION='732';
 const num=v=>{const n=Number(v);return Number.isFinite(n)?n:0};
 const text=v=>String(v??'').replace(/\s+/g,' ').trim();
 const low=v=>text(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const words=v=>low(v).split(/[^a-z0-9]+/).filter(Boolean);
+const phraseMatch=(value,wanted)=>{const a=words(value),b=words(wanted);if(!a.length||!b.length)return false;if(a.join(' ')===b.join(' '))return true;if(b.length===1)return a.includes(b[0]);for(let i=0;i<=a.length-b.length;i++)if(b.every((w,j)=>a[i+j]===w))return true;return false};
 const hpOf=c=>num(c?.hp??c?.credits??c?.credit??c?.ects??c?.points);
 const courseName=c=>text(c?.name??c?.courseName??c?.title??c?.course??c?.label);
 const courseCode=c=>text(c?.code??c?.courseCode).toUpperCase().replace(/\s+/g,'');
@@ -18,7 +20,7 @@ function sumHp(courses,predicate=()=>true){return normalizeCourses(courses).filt
 function summarizeCourses(courses){const rows=normalizeCourses(courses);return Object.freeze({courseCount:rows.length,totalHp:rows.reduce((s,c)=>s+c.hp,0),advancedHp:rows.filter(c=>c.isAdvanced).reduce((s,c)=>s+c.hp,0),thesisHp:rows.filter(c=>c.isThesis).reduce((s,c)=>s+c.hp,0),creditedHp:rows.filter(isCredited).reduce((s,c)=>s+c.hp,0)})}
 function requirementGap({required=0,completed=0}){return Math.max(0,num(required)-num(completed))}
 function degreeGaps(input={}){const totalGap=requirementGap({required:input.totalRequired,completed:input.totalCompleted});const subjectGap=requirementGap({required:input.subjectRequired,completed:input.subjectCompleted});const thesisGap=requirementGap({required:input.thesisRequired,completed:input.thesisCompleted});return Object.freeze({totalGap,subjectGap,thesisGap,remainingHp:Math.max(totalGap,subjectGap,thesisGap)})}
-function subjectMatch(course,subject){const wanted=low(subject);if(!wanted)return false;const actual=low(subjectOf(course));if(actual&&(actual===wanted||actual.includes(wanted)||wanted.includes(actual)))return true;const hay=low([courseName(course),course?.subjectArea,course?.mainField].filter(Boolean).join(' '));return Boolean(hay)&&hay.includes(wanted)}
+function subjectMatch(course,subject){const wanted=text(subject);if(!wanted)return false;const actual=subjectOf(course);if(actual)return phraseMatch(actual,wanted);for(const fallback of [course?.subjectArea,course?.mainField])if(text(fallback)&&phraseMatch(fallback,wanted))return true;return phraseMatch(courseName(course),wanted)}
 function evaluateRequirements(courses,requirements={}){
  const rows=normalizeCourses(courses),excludeAdvanced=Boolean(requirements.excludeAdvancedFromTotal),eligible=excludeAdvanced?rows.filter(c=>!c.isAdvanced):rows;
  const subject=text(requirements.subject??requirements.mainField??requirements.huvudomrade),totalRequired=num(requirements.totalHp??requirements.totalRequired),subjectRequired=num(requirements.subjectHp??requirements.subjectRequired),thesisRequired=num(requirements.thesisHp??requirements.thesisRequired);
