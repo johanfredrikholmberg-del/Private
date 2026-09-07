@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 
-const source=fs.readFileSync('studielots-fast-route-v802.js','utf8');
+const source=fs.readFileSync('studielots-fast-route-v804.js','utf8');
 const storage=()=>{const m=new Map();return {getItem:k=>m.has(k)?m.get(k):null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)}};
 const document={
   readyState:'complete',
@@ -15,7 +15,7 @@ const context={window:{},document,sessionStorage:storage(),localStorage:storage(
 context.window.addEventListener=()=>{};context.window.dispatchEvent=()=>{};
 vm.createContext(context);vm.runInContext(source,context);
 const e=context.window.__studielotsFastRoute;
-assert.equal(e?.version,'802');
+assert.equal(e?.version,'804');
 const row=(code,term,hp=7.5,extra={})=>({code,name:code,hp,__term:term,...extra});
 const flat=r=>r.terms.flatMap((t,termIndex)=>t.rows.map(x=>({x,t,termIndex})));
 const scheduledHp=r=>flat(r).reduce((s,v)=>s+Number(v.x.hp||0),0);
@@ -79,7 +79,7 @@ for(const [name,rows,cap,summer] of scenarios){
  assert.equal(result.terms.some(t=>t.kind==='summer'),false,'summer term leaked through disabled setting');
 }
 
-// Desired acceleration rule: a verified standalone regular-term offering earlier than the programme term should be allowed to move the course earlier.
+// A verified standalone regular-term offering earlier than the programme term should accelerate the course.
 {
  const rows=[row('BASE',1,7.5),row('EARLY',3,7.5,{offerings:[{startDate:'2026-09-01',standaloneSearchable:true,url:'https://example.test/early'}]})];
  const result=e.build(rows,{startYear:2026},30,true);
