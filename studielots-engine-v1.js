@@ -1,6 +1,6 @@
 (()=>{
 'use strict';
-const VERSION='723';
+const VERSION='724';
 const num=v=>{const n=Number(v);return Number.isFinite(n)?n:0};
 const text=v=>String(v??'').replace(/\s+/g,' ').trim();
 const low=v=>text(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
@@ -16,7 +16,15 @@ function sumHp(courses,predicate=()=>true){return normalizeCourses(courses).filt
 function summarizeCourses(courses){const rows=normalizeCourses(courses);return Object.freeze({courseCount:rows.length,totalHp:rows.reduce((s,c)=>s+c.hp,0),advancedHp:rows.filter(c=>c.isAdvanced).reduce((s,c)=>s+c.hp,0),thesisHp:rows.filter(c=>c.isThesis).reduce((s,c)=>s+c.hp,0),creditedHp:rows.filter(isCredited).reduce((s,c)=>s+c.hp,0)})}
 function requirementGap({required=0,completed=0}){return Math.max(0,num(required)-num(completed))}
 function degreeGaps(input={}){const totalGap=requirementGap({required:input.totalRequired,completed:input.totalCompleted});const subjectGap=requirementGap({required:input.subjectRequired,completed:input.subjectCompleted});const thesisGap=requirementGap({required:input.thesisRequired,completed:input.thesisCompleted});return Object.freeze({totalGap,subjectGap,thesisGap,remainingHp:Math.max(totalGap,subjectGap,thesisGap)})}
-window.__studielotsPureEngine=Object.freeze({version:VERSION,hpOf,courseName,courseCode,isCredited,isAdvanced,isThesis,subjectOf,normalizeCourses,sumHp,summarizeCourses,requirementGap,degreeGaps});
-window.__studielotsBuild={...(window.__studielotsBuild||{}),pureEngine:VERSION};
+function subjectMatch(course,subject){const wanted=low(subject);if(!wanted)return false;const actual=low(subjectOf(course));const hay=low([subjectOf(course),courseName(course),course?.subjectArea,course?.mainField].filter(Boolean).join(' '));return actual===wanted||actual.includes(wanted)||wanted.includes(actual)||hay.includes(wanted)}
+function evaluateRequirements(courses,requirements={}){
+ const rows=normalizeCourses(courses),excludeAdvanced=Boolean(requirements.excludeAdvancedFromTotal),eligible=excludeAdvanced?rows.filter(c=>!c.isAdvanced):rows;
+ const subject=text(requirements.subject??requirements.mainField??requirements.huvudomrade),totalRequired=num(requirements.totalHp??requirements.totalRequired),subjectRequired=num(requirements.subjectHp??requirements.subjectRequired),thesisRequired=num(requirements.thesisHp??requirements.thesisRequired);
+ const totalCompleted=eligible.reduce((s,c)=>s+c.hp,0),subjectRows=eligible.filter(c=>subjectMatch(c,subject)),subjectCompleted=subjectRows.reduce((s,c)=>s+c.hp,0),thesisRows=subjectRows.filter(c=>c.isThesis),thesisCompleted=thesisRows.reduce((s,c)=>s+c.hp,0);
+ const gaps=degreeGaps({totalRequired,totalCompleted,subjectRequired,subjectCompleted,thesisRequired,thesisCompleted});
+ return Object.freeze({engineVersion:VERSION,requirements:Object.freeze({subject,totalRequired,subjectRequired,thesisRequired,excludeAdvancedFromTotal:excludeAdvanced}),completed:Object.freeze({totalHp:totalCompleted,subjectHp:subjectCompleted,thesisHp:thesisCompleted}),gaps,remainingHp:gaps.remainingHp,eligibleCourseCount:eligible.length,subjectCourseCount:subjectRows.length,thesisCourseCount:thesisRows.length});
+}
+window.__studielotsPureEngine=Object.freeze({version:VERSION,hpOf,courseName,courseCode,isCredited,isAdvanced,isThesis,subjectOf,normalizeCourses,sumHp,summarizeCourses,requirementGap,degreeGaps,subjectMatch,evaluateRequirements});
+window.__studielotsBuild={...(window.__studielotsBuild||{}),pureEngine:VERSION,pureRequirementEngine:true};
 window.dispatchEvent(new CustomEvent('studielots:pure-engine-ready',{detail:{version:VERSION}}));
 })();
