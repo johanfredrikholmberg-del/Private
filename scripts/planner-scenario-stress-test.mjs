@@ -4,7 +4,14 @@ import assert from 'node:assert/strict';
 
 const source=fs.readFileSync('studielots-fast-route-v802.js','utf8');
 const storage=()=>{const m=new Map();return {getItem:k=>m.has(k)?m.get(k):null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)}};
-const context={window:{},document:{readyState:'loading',addEventListener:()=>{}},sessionStorage:storage(),localStorage:storage(),console,URLSearchParams,fetch:async()=>({ok:true,json:async()=>({offerings:[]})}),MutationObserver:class{observe(){}},setTimeout:()=>0,clearTimeout:()=>{},CustomEvent:class{},Date};
+const document={
+  readyState:'complete',
+  head:{appendChild:()=>{}},
+  createElement:()=>({id:'',textContent:'',dataset:{},appendChild:()=>{},insertAdjacentElement:()=>{},querySelector:()=>null}),
+  getElementById:()=>null,
+  addEventListener:()=>{}
+};
+const context={window:{},document,sessionStorage:storage(),localStorage:storage(),console,URLSearchParams,fetch:async()=>({ok:true,json:async()=>({offerings:[]})}),MutationObserver:class{observe(){}},setTimeout:()=>0,clearTimeout:()=>{},CustomEvent:class{},Date};
 context.window.addEventListener=()=>{};context.window.dispatchEvent=()=>{};
 vm.createContext(context);vm.runInContext(source,context);
 const e=context.window.__studielotsFastRoute;
@@ -34,6 +41,8 @@ scenarios.push(['fractional hp',[row('A',1,6),row('B',1,9),row('C',2,12)],30,tru
 scenarios.push(['almost complete',[row('DONE1',1,30,{credited:true}),row('DONE2',2,30,{credited:true}),row('LAST',3,7.5)],30,true]);
 scenarios.push(['zero hp ignored effectively',[row('ZERO',1,0),row('A',1,7.5)],30,true]);
 scenarios.push(['duplicate prerequisite references',[row('A',1),row('B',2,7.5,{prerequisiteCodes:['A','A']})],30,true]);
+scenarios.push(['mixed full and partial credit',[row('A',1,15,{credited:true}),row('B',1,15,{creditedHp:7.5}),row('C',2,15)],30,true]);
+scenarios.push(['dense prerequisites',[row('A',1),row('B',2,7.5,{prerequisiteCodes:['A']}),row('C',2,7.5,{prerequisiteCodes:['A']}),row('D',3,7.5,{prerequisiteCodes:['B','C']})],30,true]);
 
 for(const [name,rows,cap,summer] of scenarios){
  const before=JSON.stringify(rows);
@@ -47,7 +56,7 @@ for(const [name,rows,cap,summer] of scenarios){
  if(!summer)assert.equal(result.terms.some(t=>t.kind==='summer'),false,`${name}: summer term created while disabled`);
 }
 
-// Critical invariant: without a standalone offering, a late program course cannot jump into an earlier ordinary slot.
+// Critical invariant: without standalone evidence, a late program course cannot jump forward.
 {
  const rows=[row('T1',1,7.5),row('T4',4,7.5)];
  const result=e.build(rows,{startYear:2026},60,true);
@@ -56,4 +65,27 @@ for(const [name,rows,cap,summer] of scenarios){
  assert.ok(p.termIndex>=1,'late course illegally accelerated without standalone evidence');
 }
 
-console.log(`PASS planner scenario stress suite (${scenarios.length+1} scenarios)`);
+// A verified standalone summer offering may create a summer term when enabled.
+{
+ const rows=[row('BASE',1,7.5),row('SUM',3,7.5,{offerings:[{startDate:'2026-07-01',standaloneSearchable:true,url:'https://example.test/sum'}]})];
+ const result=e.build(rows,{startYear:2026},30,true);
+ assert.ok(result.terms.some(t=>t.kind==='summer'&&t.rows.some(r=>r.code==='SUM')),'verified standalone summer course was not used');
+}
+
+// The same summer offering must not be used when summer is disabled.
+{
+ const rows=[row('BASE',1,7.5),row('SUM',3,7.5,{offerings:[{startDate:'2026-07-01',standaloneSearchable:true,url:'https://example.test/sum'}]})];
+ const result=e.build(rows,{startYear:2026},30,false);
+ assert.equal(result.terms.some(t=>t.kind==='summer'),false,'summer term leaked through disabled setting');
+}
+
+// Desired acceleration rule: a verified standalone regular-term offering earlier than the programme term should be allowed to move the course earlier.
+{
+ const rows=[row('BASE',1,7.5),row('EARLY',3,7.5,{offerings:[{startDate:'2026-09-01',standaloneSearchable:true,url:'https://example.test/early'}]})];
+ const result=e.build(rows,{startYear:2026},30,true);
+ const p=flat(result).find(v=>v.x.code==='EARLY');
+ assert.ok(p,'EARLY scheduled');
+ assert.equal(p.termIndex,0,'verified earlier standalone regular-term offering should accelerate the course');
+}
+
+console.log(`PASS planner scenario stress suite (${scenarios.length+4} scenarios)`);
