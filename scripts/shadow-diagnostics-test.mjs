@@ -11,7 +11,7 @@ const context={
  window:{dispatchEvent:()=>{}}
 };
 context.window.canonicalPathResult=(courses,requirements)=>({remainingHp:60,totalHp:requirements.totalHp,subjectHp:requirements.subjectHp,thesisHp:requirements.thesisHp,subject:requirements.subject});
-context.window.evaluateUniversityProgramV2=(courses,requirements)=>({remainingHp:45,totalHp:requirements.totalHp,subjectHp:requirements.subjectHp,thesisHp:requirements.thesisHp,subject:requirements.subject});
+context.window.evaluateUniversityProgramV2=(courses,requirements)=>({remainingHp:60,totalHp:requirements.totalHp,subjectHp:requirements.subjectHp,thesisHp:requirements.thesisHp,subject:requirements.subject});
 vm.createContext(context);
 vm.runInContext(pureSource,context);
 vm.runInContext(ownerSource,context);
@@ -22,11 +22,17 @@ const courses=[
  {name:'Valbar kurs',hp:45,subject:'Sociologi',level:'G1N'}
 ];
 const requirements={totalHp:180,subjectHp:90,thesisHp:15,subject:'Psykologi'};
-const legacy=context.window.canonicalPathResult(courses,requirements);
-if(legacy.remainingHp!==60)throw new Error('legacy result must be preserved');
+for(let i=0;i<5;i++){
+ const legacy=context.window.canonicalPathResult(courses,requirements);
+ if(legacy.remainingHp!==60)throw new Error('legacy result must be preserved');
+}
 const report=context.window.__studielotsEngine.getShadowReport();
-if(report.version!=='727')throw new Error('shadow diagnostics v727 must load');
-if(report.comparable<1)throw new Error('at least one shadow comparison expected');
-if(!report.byReason?.total)throw new Error('mismatch classification must group by dominant requirement');
+if(report.version!=='733')throw new Error('shadow diagnostics v733 must load');
+if(report.comparable<5)throw new Error('at least five shadow comparisons expected');
 if(!Array.isArray(report.deltas)||!report.deltas.length)throw new Error('shadow details must be retained');
-console.log(JSON.stringify({ok:true,version:report.version,comparable:report.comparable,byReason:report.byReason,last:report.last?.classification},null,2));
+const parity=context.window.__studielotsEngine.getParityReport();
+if(parity.uiTakeover!==false)throw new Error('parity gate must not take over UI');
+if(parity.entries.canonicalPathResult.eligible!==true)throw new Error('five clean matches should make canonicalPathResult eligible');
+if(context.window.__studielotsEngine.isPureEligible('canonicalPathResult')!==true)throw new Error('eligibility helper should expose established parity');
+if(parity.allEligible!==false)throw new Error('allEligible must stay false until every owned entry establishes parity');
+console.log(JSON.stringify({ok:true,version:report.version,parity},null,2));
