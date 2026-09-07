@@ -1,0 +1,24 @@
+name: StudieLots v2 regression tests
+on:
+  push:
+    branches: [studielots-v2]
+  pull_request:
+    branches: [studielots-v2]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Existing Ladok fixture
+        run: node scripts/ladok-regression-test.mjs
+      - name: V2 degree engine
+        run: node scripts/v2-engine-regression-test.mjs
+      - name: V2 Ladok parser
+        run: node scripts/v2-ladok-parser-test.mjs
