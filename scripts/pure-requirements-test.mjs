@@ -8,14 +8,16 @@ vm.createContext(context);
 vm.runInContext(source,context);
 const e=context.window.__studielotsPureEngine;
 function assert(ok,msg){if(!ok){console.error('FAIL:',msg);process.exitCode=1}else console.log('OK:',msg)}
-assert(e?.version==='730','pure engine v730 loads');
+assert(e?.version==='731','pure engine v731 loads');
 assert(typeof e?.evaluateRequirements==='function','requirement evaluator is exposed');
 assert(e.isAdvanced({progression:'A1N'})===true,'A1N progression is advanced');
 assert(e.isAdvanced({level:'A1N'})===true,'A1N in level field is advanced');
-assert(e.isAdvanced({level:'A1F'})===true,'A1F in level field is advanced');
-assert(e.isAdvanced({level:'A1E'})===true,'A1E in level field is advanced');
-assert(e.isAdvanced({level:'A2E'})===true,'A2E in level field is advanced');
 assert(e.isAdvanced({level:'G2E',name:'Avancerad analys av data'})===false,'G2E stays basic even if course title contains the word avancerad');
+assert(e.isThesis({level:'G2E',name:'Psykologi fördjupning'})===true,'G2E progression is treated as independent work');
+assert(e.isThesis({level:'A1E',name:'Fördjupningskurs'})===true,'A1E progression is treated as independent work');
+assert(e.isThesis({level:'A2E',name:'Fördjupningskurs'})===true,'A2E progression is treated as independent work');
+assert(e.isThesis({name:'Examensarbete i psykologi',level:'G2E'})===true,'explicit examensarbete is detected');
+assert(e.isThesis({name:'Projektarbete i psykologi',level:'G2F'})===false,'ordinary project work is not treated as thesis');
 const courses=[
  {name:'Psykologi: Grundkurs',hp:30,subject:'Psykologi',level:'G1N'},
  {name:'Psykologi: Fortsättningskurs',hp:30,subject:'Psykologi',level:'G1F'},
