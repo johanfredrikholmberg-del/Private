@@ -27,3 +27,5 @@ jobs:
         run: node scripts/runtime-ownership-test.mjs
       - name: Fast route behavior
         run: node scripts/fast-route-behavior-test.mjs
+      - name: Planner scenario stress suite
+        run: node scripts/planner-scenario-stress-test.mjs
