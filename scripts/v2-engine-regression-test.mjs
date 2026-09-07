@@ -1,0 +1,10 @@
+import {readFile} from 'node:fs/promises';import vm from 'node:vm';import assert from 'node:assert/strict';
+const fixture=JSON.parse(await readFile(new URL('../tests/fixtures/ladok-national-regression-01.json',import.meta.url),'utf8'));
+const src=await readFile(new URL('../v2-engine.js',import.meta.url),'utf8');
+const sandbox={window:{}};vm.createContext(sandbox);vm.runInContext(src,sandbox);const engine=sandbox.window.StudieLotsV2.engine;
+const summary=engine.summarizeCourses(fixture.courses);
+assert.equal(summary.courseCount,33);assert.equal(summary.totalHp,255);assert.equal(summary.institutionCount,6);assert.equal(summary.thesisHp,15);
+assert.equal(engine.normalizeCourses(fixture.courses).find(c=>c.code==='IKG246').name,'Hälsofrämjande arbete - pedagogiska och psykologiska perspektiv');
+assert.equal(engine.subjectMatch({name:'Idrottsvetenskap'},'Vetenskap'),false);assert.equal(engine.subjectMatch({name:'Företagsekonomi'},'Ekonomi'),false);assert.equal(engine.subjectMatch({name:'Neuropsykologi'},'Psykologi'),false);
+const adv=engine.evaluate([{name:'Grundkurs',hp:90,subject:'Psykologi'},{name:'Avancerad kurs',hp:30,subject:'Psykologi',progression:'A1N'}],{totalHp:180,subject:'Psykologi',subjectHp:90,thesisHp:15,excludeAdvancedFromTotal:true});assert.equal(adv.completed.totalHp,90);assert.equal(adv.remainingHp,90);
+console.log('StudieLots v2 engine regression passed',summary);
