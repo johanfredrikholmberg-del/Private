@@ -1,0 +1,18 @@
+(()=>{
+'use strict';
+const VERSION='707',MASTER_SELECTOR='/studielots-master-selector-v684.js?v=684',RESPONSIVE_CSS='/studielots-responsive-v706.css?v=707',SNAPSHOT='studielots_planner_snapshot',ORIGIN='studielots_planner_origin';
+const text=v=>String(v??'').replace(/\s+/g,' ').trim(),low=v=>text(v).toLocaleLowerCase('sv-SE');
+function loadOnce(src,selector,marker,value){if(document.querySelector(selector))return;const s=document.createElement('script');s.src=src;s.async=false;s.dataset[marker]=value;document.body.appendChild(s)}
+function loadCssOnce(){if(document.querySelector('link[data-studielots-responsive="706"]'))return;const l=document.createElement('link');l.rel='stylesheet';l.href=RESPONSIVE_CSS;l.dataset.studielotsResponsive='706';document.head.appendChild(l)}
+function read(){try{return JSON.parse(sessionStorage.getItem(SNAPSHOT)||'null')}catch(_){return null}}
+function rowsOf(s){if(Array.isArray(s?.plannerBaselineRows)&&s.plannerBaselineRows.length)return s.plannerBaselineRows;if(Array.isArray(s?.rows)&&s.rows.length)return s.rows;if(Array.isArray(s?.courses)&&s.courses.length)return s.courses;return[]}
+function usable(){const s=read();return!!(s&&rowsOf(s).length)}
+function openPlanner(source){if(!usable())return false;try{window.go?.('plannerClean');window.dispatchEvent(new CustomEvent('studielots:planner-open',{detail:{source:source||'direct-open',version:VERSION}}));setTimeout(()=>window.__studielotsRenderSharedPlanner?.(),0);return true}catch(_){return false}}
+function installDirectOpen(){const old=window.openStudyPlanner;if(typeof old==='function'&&!old.__sl707Direct){const fn=function(){if(openPlanner('direct-open'))return true;return old.apply(this,arguments)};fn.__sl707Direct=true;fn.__legacy=old;window.openStudyPlanner=fn}}
+function ensureNewPlan(){if(typeof window.__v549NewPlan==='function')return;window.__v549NewPlan=()=>{try{sessionStorage.removeItem(SNAPSHOT);sessionStorage.removeItem(ORIGIN)}catch(_){};window.go?.('degrees')}}
+function targetScreen(el){const id=el?.dataset?.screen||el?.dataset?.navTarget||'';return id&&document.getElementById(id)?id:''}
+function installNavFallback(){document.addEventListener('click',e=>{const b=e.target.closest?.('.lotsen-bottomnav [data-screen]');if(!b||b.hasAttribute('onclick'))return;const id=targetScreen(b);if(id)window.go?.(id)},false)}
+function purgeLegacyPlanner(){for(const s of [...document.scripts]){const src=s.getAttribute('src')||'';if(/studielots-planner-(ui-v647|summary-v703|credit-visibility-v715|handoff-v710)\.js|studielots-flow-v713\.js/.test(src))s.remove()}document.getElementById('sl719-style')?.remove();}
+function install(){loadCssOnce();loadOnce(MASTER_SELECTOR,'script[data-studielots-master-selector="684"]','studielotsMasterSelector','684');purgeLegacyPlanner();installNavFallback();installDirectOpen();ensureNewPlan();['studielots:screen-rendered','studielots:planner-open','pageshow'].forEach(e=>window.addEventListener(e,()=>{purgeLegacyPlanner();if(document.querySelector('.screen.active')?.id==='plannerClean')setTimeout(()=>window.__studielotsRenderSharedPlanner?.(),0)}));window.__studielotsBuild={...(window.__studielotsBuild||{}),runtimeOverlay:VERSION,legacyPlannerUi:false,legacyPlannerSummary:false,plannerUiOwner:'planner-runtime-720'};window.dispatchEvent(new CustomEvent('studielots:runtime-overlay-ready',{detail:{version:VERSION,legacyPlannerUi:false}}))}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
+})();
