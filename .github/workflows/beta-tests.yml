@@ -1,0 +1,29 @@
+name: Beta regression tests
+
+on:
+  push:
+    branches: [beta]
+  pull_request:
+    branches: [beta]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Ladok fixture
+        run: node scripts/ladok-regression-test.mjs
+      - name: Pure requirements
+        run: node scripts/pure-requirements-test.mjs
+      - name: Runtime ownership
+        run: node scripts/runtime-ownership-test.mjs
+      - name: Fast route behavior
+        run: node scripts/fast-route-behavior-test.mjs
