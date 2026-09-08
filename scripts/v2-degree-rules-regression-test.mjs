@@ -25,6 +25,9 @@ assert.equal(rules.get('Lunds universitet','Företagsekonomi').id,'lu-business-c
 assert.equal(rules.get('LU','Nationalekonomi').id,'lu-economics-candidate');
 assert.equal(rules.get('ORU','Psykologi').id,'oru-general-candidate');
 assert.equal(rules.get('KTH','Teknik').id,'kth-technology-candidate');
+assert.equal(rules.get('Lunds universitet','Psykologi').outsideSubjectHp,undefined);
+assert.equal(rules.get('Chalmers tekniska högskola','Teknik').minInstitutionHp,undefined);
+assert.equal(rules.get('KTH','Teknik').mathScienceHp,undefined);
 
 const base=[
  {code:'P1',name:'Psykologi I',subject:'Psykologi',hp:30,progression:'G1N'},
@@ -39,6 +42,9 @@ const oru=rules.evaluate(base,{university:'Örebro universitet',subject:'Psykolo
 assert.equal(oru.result.remainingHp,0);
 assert.equal(oru.failedLocalRequirements.length,0);
 assert.equal(oru.unknownLocalRequirements.length,0);
+assert.equal(oru.sourceVerified,true);
+assert.equal(oru.evaluationComplete,true);
+assert.equal(oru.verified,true);
 assert.equal(oru.eligible,true);
 
 const badOru=rules.evaluate(base.map(c=>c.code==='PX'?{...c,progression:'G1E'}:c),{university:'ORU',subject:'Psykologi'});
@@ -47,16 +53,33 @@ assert.ok(badOru.failedLocalRequirements.some(x=>x.id==='thesisLevel'));
 
 const noLevels=rules.evaluate(base.map(({progression,...c})=>c),{university:'ORU',subject:'Psykologi'});
 assert.equal(noLevels.eligible,false);
+assert.equal(noLevels.sourceVerified,true);
+assert.equal(noLevels.evaluationComplete,false);
+assert.equal(noLevels.verified,false);
 assert.ok(noLevels.unknownLocalRequirements.some(x=>x.id==='progression'));
 assert.ok(noLevels.unknownLocalRequirements.some(x=>x.id==='thesisLevel'));
 
-const lu=rules.evaluate(base,{university:'LU',subject:'Psykologi'});
-assert.ok(lu.extraChecks.some(x=>x.id==='outsideSubjectHp'&&x.status==='pass'));
+const gu=rules.evaluate(base,{university:'GU',subject:'Psykologi'});
+assert.equal(gu.sourceVerified,true);
+assert.equal(gu.evaluationComplete,false);
+assert.ok(gu.unknownLocalRequirements.some(x=>x.id==='specialMainField'));
 
-const suCourses=[...base,{code:'A1',name:'Avancerad kurs',subject:'Annat',hp:37.5,progression:'A1N'}];
-const su=rules.evaluate(suCourses,{university:'SU',subject:'Psykologi'});
-assert.ok(su.failedLocalRequirements.some(x=>x.id==='maxAdvancedHp'));
-assert.equal(su.eligible,false);
+const lu=rules.evaluate(base,{university:'LU',subject:'Psykologi'});
+assert.ok(lu.unknownLocalRequirements.some(x=>x.id==='outsideSubjectHp'));
+assert.equal(lu.evaluationComplete,false);
+
+const su=rules.evaluate(base,{university:'SU',subject:'Psykologi'});
+assert.equal(su.sourceVerified,true);
+assert.equal(su.evaluationComplete,false);
+assert.ok(su.unknownLocalRequirements.some(x=>x.id==='maxAdvancedHp'));
+
+const kth=rules.evaluate(base,{university:'KTH',subject:'Psykologi'});
+assert.equal(kth.evaluationComplete,false);
+assert.ok(kth.unknownLocalRequirements.some(x=>x.id==='programmePlan'));
+
+const chalmers=rules.evaluate(base,{university:'Chalmers tekniska högskola',subject:'Psykologi'});
+assert.equal(chalmers.evaluationComplete,false);
+assert.ok(chalmers.unknownLocalRequirements.some(x=>x.id==='localDegreeOrder'));
 
 const econ=[
  {code:'NEK1',name:'Nationalekonomi grundkurs',subject:'Nationalekonomi',hp:30,progression:'G1N'},
@@ -70,5 +93,6 @@ const econ=[
 const econResult=rules.evaluate(econ,{university:'Lunds universitet',subject:'Nationalekonomi'});
 assert.ok(econResult.missingRequiredCodes.includes('NEKG31'));
 assert.equal(econResult.eligible,false);
+assert.equal(econResult.evaluationComplete,false);
 
 console.log('v2 degree-rules regression: PASS');
