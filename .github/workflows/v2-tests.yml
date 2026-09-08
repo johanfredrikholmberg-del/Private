@@ -22,3 +22,9 @@ jobs:
         run: node scripts/v2-engine-regression-test.mjs
       - name: V2 Ladok parser
         run: node scripts/v2-ladok-parser-test.mjs
+      - name: V2 local degree rules
+        run: node scripts/v2-degree-rules-regression-test.mjs
+      - name: V2 credit matching
+        run: node scripts/v2-credit-match-regression-test.mjs
+      - name: V2 fast route
+        run: node scripts/v2-fast-route-regression-test.mjs
