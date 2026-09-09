@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const clean=v=>String(v??'').trim(),norm=v=>clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,''),code=v=>clean(v).toUpperCase().replace(/[^A-Z0-9ÅÄÖ]/g,''),hp=v=>Number(v?.hp??v?.credits??v?.ects??0)||0;
-const official=v=>/^(chalmers-programplan|chalmers-master-programplan|kth-programplan|gu-official-programplan|lund-official-programplan)(?:-v\d+)?$/.test(clean(v));
+const official=v=>/^(chalmers-programplan|chalmers-master-programplan|kth-programplan|gu-official-programplan|lund-official-programplan|stockholm-official-programplan|umea-official-programplan)(?:-v\d+)?$/.test(clean(v));
 const stop=new Set('kurs course grundkurs fortsättningskurs introduktion till och i av för med samt inom om grundnivå avancerad nivå hp ects gr a b c d'.split(' '));
 function endpoint(university){const u=norm(university);if(/(^|\s)(kth|kungliga tekniska högskolan)(\s|$)/.test(u))return'/api/kth-program-structure';if(/göteborgs universitet|goteborgs universitet|(^|\s)gu(\s|$)/.test(u))return'/api/gu-program-structure';if(/lunds universitet|(^|\s)lu(\s|$)/.test(u))return'/api/lu-program-structure';return'/api/program-structure'}
 async function getJson(url,timeout=10000){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);try{const r=await fetch(url,{signal:controller.signal});if(!r.ok)throw Error(`HTTP ${r.status}`);return await r.json()}finally{clearTimeout(timer)}}
