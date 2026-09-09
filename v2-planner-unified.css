@@ -1,0 +1,52 @@
+/* Shared Planner presentation for Ordinarie väg + Snabbare väg */
+#planner{--planner-green:#07584c;--planner-green-2:#0b695b;--planner-soft:#e9f4ef;--planner-card:rgba(255,255,252,.92);--planner-line:rgba(11,65,57,.11)}
+#planner .planner-top{border-bottom:0;margin-bottom:4px}
+#planner .planner-top>div b{font-size:17px;letter-spacing:-.035em}
+#planner .planner-top>div span{font-size:11px}
+#planner .route-switch{position:relative;top:auto;z-index:4;margin:7px 0 14px;padding:3px;border-radius:16px;background:rgba(225,231,226,.9);box-shadow:none;overflow:hidden}
+#planner .route-switch button{min-height:44px;border-radius:13px;font-size:12px;color:#4c625e;transition:.18s ease}
+#planner .route-switch button.active{background:linear-gradient(135deg,var(--planner-green-2),var(--planner-green));color:#fff;box-shadow:0 8px 20px rgba(7,88,76,.14)}
+#planner .planner-progress{border-radius:21px;padding:17px 18px;margin:0 0 14px;background:linear-gradient(145deg,rgba(255,255,252,.96),rgba(247,249,246,.92));border:1px solid var(--planner-line);box-shadow:0 10px 30px rgba(18,47,43,.045)}
+#planner .planner-progress strong{font-size:22px}
+#planner .planner-progress .info-note{border-radius:14px;background:rgba(229,243,236,.82)}
+#planner .term-list,#planner .proposal-periods{display:grid;gap:12px;background:transparent;border:0;border-radius:0;overflow:visible;box-shadow:none}
+#planner .term-row,#planner .proposal-period{position:relative;background:var(--planner-card);border:1px solid var(--planner-line);border-radius:22px;overflow:hidden;box-shadow:0 9px 25px rgba(18,47,43,.035);margin:0}
+#planner .term-row{border-bottom:1px solid var(--planner-line)}
+#planner .term-summary,#planner .proposal-period-head{min-height:72px;padding:15px 17px 14px 68px;display:grid;grid-template-columns:1fr auto 18px;gap:8px;align-items:center;background:rgba(248,250,247,.72);position:relative}
+#planner .proposal-period-head{display:flex;justify-content:space-between;padding-left:68px}
+#planner .term-summary:before,#planner .proposal-period-head:before{content:"";position:absolute;left:18px;top:16px;width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,var(--planner-green-2),var(--planner-green));box-shadow:0 5px 13px rgba(7,88,76,.16)}
+#planner .term-summary:after,#planner .proposal-period-head:after{content:"";position:absolute;left:36px;top:54px;bottom:-28px;width:2px;background:#d7e9e1}
+#planner .term-row:last-child .term-summary:after,#planner .proposal-period:last-child .proposal-period-head:after{display:none}
+#planner .term-summary b,#planner .proposal-period-head b{font-size:16px;letter-spacing:-.025em}
+#planner .term-summary strong,#planner .proposal-period-head>strong{background:var(--planner-soft);color:var(--planner-green);padding:7px 10px;border-radius:999px;font-size:12px;font-weight:900}
+#planner .course-list{padding:0 16px 14px 68px}
+#planner .course-list:before{left:36px;top:-10px;bottom:22px;background:#d7e9e1}
+#planner .course,#planner .proposal-course{border:1px solid rgba(11,65,57,.08);border-radius:15px;background:#fff;margin-top:8px;padding:12px 13px;box-shadow:0 4px 12px rgba(18,47,43,.025)}
+#planner .course+.course{margin-top:8px}
+#planner .course-main b,#planner .proposal-course b{font-size:13px;line-height:1.35}
+#planner .course-main strong,#planner .proposal-course>strong{font-size:11px;color:var(--planner-green);font-weight:900}
+#planner .status{margin-top:6px}
+#planner #fastPlan .fast-controls{background:var(--planner-card);border:1px solid var(--planner-line);border-radius:19px;padding:13px 14px;margin:0 0 9px;gap:7px;box-shadow:0 8px 24px rgba(18,47,43,.03)}
+#planner #fastPlan .fast-controls+ .fast-controls{padding:13px 14px;margin-top:0}
+#planner #fastPlan .fast-controls>span{font-size:9px;letter-spacing:.11em;margin-bottom:2px}
+#planner #fastPlan .fast-controls button{min-height:38px;padding:8px 13px;border-radius:11px;background:#fff;border:1px solid rgba(11,65,57,.13);font-size:11px}
+#planner #fastPlan .fast-controls button.active{background:linear-gradient(135deg,var(--planner-green-2),var(--planner-green));border-color:transparent;color:#fff;box-shadow:0 5px 14px rgba(7,88,76,.13)}
+#planner #fastPlan .fast-note,#planner #fastPlan>.info-note{background:linear-gradient(135deg,#e6f2ec,#eef6f2);border:1px solid rgba(11,65,57,.07);border-radius:18px;padding:14px 16px;margin:8px 0 12px;color:#173d38}
+#planner .fast-course-proposal{display:grid;gap:12px;margin:0 0 24px}
+#planner .proposal-head{display:grid;gap:5px;padding:15px 17px;background:linear-gradient(135deg,#e6f2ec,#eef6f2);border:1px solid rgba(11,65,57,.07);border-radius:18px;color:#123d37}
+#planner .proposal-head b{font-size:14px}
+#planner .proposal-head span{font-size:11px;line-height:1.45;color:#4d6661}
+#planner .proposal-requirement{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:15px 17px;border:1px solid var(--planner-line);border-radius:19px;background:var(--planner-card);box-shadow:0 8px 24px rgba(18,47,43,.03)}
+#planner .proposal-requirement.done{background:linear-gradient(135deg,#e6f4ed,#edf7f2)}
+#planner .proposal-requirement>div{display:grid;gap:3px}
+#planner .proposal-requirement small{font-size:9px;letter-spacing:.12em;color:#6b7b77}
+#planner .proposal-requirement b{font-size:14px;line-height:1.3}
+#planner .proposal-requirement span{font-size:11px;color:#5e6d69}
+#planner .proposal-requirement>strong{color:var(--planner-green);font-size:17px}
+#planner .proposal-period-head span,#planner .proposal-course span,#planner .proposal-course small,#planner .proposal-foot{font-size:10px;color:#71807c;line-height:1.4}
+#planner .proposal-course{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:8px 16px 14px 68px;padding:12px 13px;border-top:1px solid rgba(11,65,57,.08)}
+#planner .proposal-course+ .proposal-course{margin-top:-6px}
+#planner .proposal-foot{display:block;padding:0 4px 4px}
+#planner .fast-entry{border:1px solid rgba(11,65,57,.09);background:linear-gradient(135deg,#e7f2ed,#edf6f2);border-radius:18px;box-shadow:none;margin-top:12px}
+#planner .fast-entry small{color:#56716b}
+@media(max-width:480px){#planner .term-summary,#planner .proposal-period-head{padding-left:62px}#planner .term-summary:before,#planner .proposal-period-head:before{left:15px;width:36px;height:36px}#planner .term-summary:after,#planner .proposal-period-head:after{left:32px}.course-list{padding-left:62px!important}#planner .course-list:before{left:32px}#planner .proposal-course{margin-left:62px;margin-right:13px}#planner #fastPlan .fast-controls{padding:12px}}
