@@ -19,28 +19,33 @@ const rows=[
  {code:'B',name:'B',hp:15,term:2,prerequisiteCodes:['A']},
  {code:'C',name:'C',hp:15,term:2}
 ];
+// Without verified future offerings, fast route must not invent a schedule.
 const base=await fast.build(rows,{maxHp:30,summer:false});
 assert.equal(base.remainingHp,30);
-assert.equal(base.terms.reduce((s,t)=>s+t.hp,0),30);
-assert.ok(base.terms.every(t=>t.hp<=30));
+assert.equal(base.scheduledHp,0);
+assert.equal(base.terms.length,0);
+assert.equal(base.unscheduled.length,2);
 
 const high=await fast.build(rows,{maxHp:60,summer:false});
 assert.equal(high.maxHp,60);
 assert.equal(high.remainingHp,30);
-assert.ok(high.terms.every(t=>t.hp<=60));
+assert.equal(high.scheduledHp,0);
+assert.equal(high.terms.length,0);
 
 // Unverified alternatives must never replace the required course.
 const unsafe=[{code:'REQ',name:'Required',hp:7.5,term:1,alternatives:[{code:'ALT',name:'Alt',verified:false}]}];
-offerings.push({code:'ALT',standaloneSearchable:true,url:'https://example.test/alt',startDate:'2030-01-15'});
+offerings.push({code:'ALT',standaloneSearchable:true,url:'https://example.test/alt',startDate:'2030-01-15',distance:true});
 const unsafeResult=await fast.build(unsafe,{maxHp:30,summer:false});
-assert.equal(unsafeResult.terms[0].rows[0].code,'REQ');
+assert.equal(unsafeResult.terms.length,0);
+assert.equal(unsafeResult.unscheduled[0].row.code,'REQ');
 
 // A summer offering is only placed in summer when summer optimization is enabled.
-offerings.push({code:'SUM',standaloneSearchable:true,url:'https://example.test/sum',startDate:'2030-07-01'});
+offerings.push({code:'SUM',standaloneSearchable:true,url:'https://example.test/sum',startDate:'2030-07-01',distance:true});
 const summerRow=[{code:'SUM',name:'Summer',hp:7.5,term:1}];
 const withSummer=await fast.build(summerRow,{maxHp:30,summer:true});
 assert.ok(withSummer.terms.some(t=>t.kind==='summer'));
 const withoutSummer=await fast.build(summerRow,{maxHp:30,summer:false});
 assert.ok(withoutSummer.terms.every(t=>t.kind!=='summer'));
+assert.equal(withoutSummer.scheduledHp,0);
 
 console.log('v2 fast-route regression: PASS');
