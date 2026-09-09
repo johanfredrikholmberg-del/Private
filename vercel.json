@@ -3,7 +3,8 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/api/gu-program-structure", "destination": "/api/program-structure-resolved" },
-    { "source": "/api/lu-program-structure", "destination": "/api/program-structure-resolved" }
+    { "source": "/api/lu-program-structure", "destination": "/api/program-structure-resolved" },
+    { "source": "/api/program-structure", "destination": "/api/program-structure-resolved" }
   ],
   "headers": [
     { "source": "/studielots-v615.css", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
