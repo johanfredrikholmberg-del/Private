@@ -1,41 +1,11 @@
 (()=>{'use strict';
-function sync(){
-  const fast=document.querySelector('#fastPlan');
-  const ordinary=document.querySelector('#ordinaryPlan .term-list');
-  if(!fast||fast.hidden||!ordinary)return;
-  const old=fast.querySelector('.fast-layout-fallback');
-  if(fast.querySelector('.term-list:not(.fast-layout-fallback .term-list)')){old?.remove();return}
-  if(old)return;
-  const wrap=document.createElement('section');
-  wrap.className='fast-layout-fallback';
-  wrap.innerHTML='<div class="info-note"><b>Terminsupplägg medan snabbvägen verifieras</b><span>Det här är den ordinarie terminsföljden för de återstående programkraven. StudieLots flyttar bara en kurs till en tidigare termin när ett faktiskt framtida kurstillfälle kan verifieras.</span></div>';
-  const clone=ordinary.cloneNode(true);
-  clone.querySelectorAll('.course').forEach(c=>{
-    const status=c.querySelector('.status');
-    if(status&&!/kan räknas in/i.test(status.textContent||'')){
-      status.textContent='Kurstillfälle ej verifierat';
-      status.classList.remove('potential');
-      status.classList.add('remain');
-    }
-    c.querySelectorAll('.offer-link').forEach(x=>x.remove());
-  });
-  wrap.appendChild(clone);
-  fast.appendChild(wrap);
-  clone.querySelectorAll('.term-summary').forEach((b,i)=>{
-    const list=b.closest('.term-row')?.querySelector('.course-list');
-    const chev=b.querySelector('.chev');
-    if(!list)return;
-    list.hidden=i!==0;
-    if(chev)chev.textContent=list.hidden?'⌄':'⌃';
-    b.addEventListener('click',()=>{list.hidden=!list.hidden;if(chev)chev.textContent=list.hidden?'⌄':'⌃'})
-  });
-}
-function install(){
-  const root=document.querySelector('#fastPlan');
-  if(!root)return;
-  new MutationObserver(()=>requestAnimationFrame(sync)).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden']});
-  document.addEventListener('click',()=>setTimeout(sync,40),true);
-  setTimeout(sync,300);
-}
+const fmt=n=>Number(n||0).toLocaleString('sv-SE',{maximumFractionDigits:1});
+const num=v=>Number(String(v||'').replace(',','.').match(/\d+(?:\.\d+)?/)?.[0]||0);
+function degreeRemaining(){const p=document.querySelector('#planner .planner-progress');if(!p)return 0;const m=p.textContent.match(/([\d,.]+)\s*hp\s+återstår\s+enligt\s+examensmatchningen/i);return m?num(m[1]):0}
+function selectedMax(){const b=document.querySelector('#fastPlan [data-max].active');return b?num(b.textContent):30}
+function scheduled(){const p=document.querySelector('#fastPlan');if(!p)return 0;const m=p.textContent.match(/([\d,.]+)\s+av\s+([\d,.]+)\s+hp\s+kan\s+schemaläggas/i);return m?num(m[1]):0}
+function blocks(hp,max){const out=[];let left=Math.max(0,hp);while(left>.01){const x=Math.min(left,max);out.push(x);left-=x}return out}
+function sync(){const fast=document.querySelector('#fastPlan');if(!fast||fast.hidden)return;fast.querySelector('.fast-layout-fallback')?.remove();const remain=degreeRemaining();if(remain<=0)return;const done=Math.min(remain,scheduled()),left=Math.max(0,remain-done),max=selectedMax(),parts=blocks(left,max);const wrap=document.createElement('section');wrap.className='fast-layout-fallback';wrap.innerHTML=`<div class="info-note"><b>Optimerad plan utifrån ${fmt(remain)} hp som återstår</b><span>${done>0?`${fmt(done)} hp har verifierbara kurstillfällen. `:''}${left>0?`${fmt(left)} hp saknar ännu verifierad kursplacering.`:'Alla återstående hp har verifierbara kurstillfällen.'} Vi visar inte den ordinarie sexterminsplanen som om allt måste läsas om.</span></div>${parts.length?`<div class="fast-capacity-list">${parts.map((x,i)=>`<div class="fast-capacity-row"><div><b>${i===0?'Nästa möjliga studieperiod':`Studieperiod ${i+1}`}</b><span>Kursplacering återstår</span></div><strong>${fmt(x)} hp</strong></div>`).join('')}</div><small class="fast-capacity-note">Detta är en kapacitetsplan, inte verifierade terminsdatum. Faktiska terminer sätts först när StudieLots hittar kurstillfällen på valt lärosäte eller distans.</small>`:''}`;fast.appendChild(wrap)}
+function install(){if(!document.getElementById('fast-layout-fallback-style')){const s=document.createElement('style');s.id='fast-layout-fallback-style';s.textContent='.fast-layout-fallback{display:grid;gap:10px;margin:12px 0 20px}.fast-capacity-list{display:grid;gap:8px}.fast-capacity-row{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff;border:1px solid rgba(0,63,54,.10);border-radius:16px;padding:14px}.fast-capacity-row div{display:grid;gap:3px}.fast-capacity-row b,.fast-capacity-row strong{color:#003f36}.fast-capacity-row span,.fast-capacity-note{font-size:12px;line-height:1.4;color:#68736f}.fast-capacity-note{display:block;padding:0 4px}';document.head.appendChild(s)}const root=document.querySelector('#fastPlan');if(!root)return;new MutationObserver(()=>requestAnimationFrame(sync)).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','class']});document.addEventListener('click',e=>{if(e.target.closest('[data-max],[data-summer],[data-route="fast"]'))setTimeout(sync,80)},true);setTimeout(sync,300)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
 })();
