@@ -28,8 +28,8 @@ jobs:
         run: node scripts/v2-credit-match-regression-test.mjs
       - name: V2 fast route
         run: node scripts/v2-fast-route-regression-test.mjs
-      - name: Ordinary study path remainder batch 3
+      - name: Ordinary study path remainder batch 4
         continue-on-error: true
         env:
           STUDIELOTS_BASE_URL: https://studielots-git-studi-5f5a74-johanfredrikholmberg-6513s-projects.vercel.app
-        run: node scripts/audit-program-coverage.mjs --offset 100 --limit 50 --concurrency 1 --timeout 30000
+        run: node scripts/audit-program-coverage.mjs --offset 150 --limit 50 --concurrency 1 --timeout 30000
