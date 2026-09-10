@@ -32,4 +32,4 @@ jobs:
         continue-on-error: true
         env:
           STUDIELOTS_BASE_URL: https://studielots-git-studi-5f5a74-johanfredrikholmberg-6513s-projects.vercel.app
-        run: node scripts/audit-program-coverage.mjs --offset 0 --limit 50 --concurrency 4 --timeout 10000
+        run: node scripts/audit-program-coverage.mjs --offset 0 --limit 50 --concurrency 2 --timeout 15000
