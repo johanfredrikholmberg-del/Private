@@ -33,3 +33,8 @@ jobs:
         env:
           STUDIELOTS_BASE_URL: https://studielots-git-studi-5f5a74-johanfredrikholmberg-6513s-projects.vercel.app
         run: node scripts/audit-program-coverage-stable.mjs --offset 0 --limit 50 --concurrency 2 --timeout 20000
+      - name: Ordinary study path remainder batch 2
+        continue-on-error: true
+        env:
+          STUDIELOTS_BASE_URL: https://studielots-git-studi-5f5a74-johanfredrikholmberg-6513s-projects.vercel.app
+        run: node scripts/audit-program-coverage-stable.mjs --offset 50 --limit 50 --concurrency 2 --timeout 20000
