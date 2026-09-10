@@ -10,7 +10,7 @@ permissions:
 jobs:
   regression:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,3 +28,7 @@ jobs:
         run: node scripts/v2-credit-match-regression-test.mjs
       - name: V2 fast route
         run: node scripts/v2-fast-route-regression-test.mjs
+      - name: Ordinary study path coverage audit
+        env:
+          STUDIELOTS_BASE_URL: https://private-two-gamma.vercel.app
+        run: node scripts/audit-program-coverage.mjs --concurrency 12
