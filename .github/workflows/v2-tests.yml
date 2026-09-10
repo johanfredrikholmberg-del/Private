@@ -28,12 +28,12 @@ jobs:
         run: node scripts/v2-credit-match-regression-test.mjs
       - name: V2 fast route
         run: node scripts/v2-fast-route-regression-test.mjs
-      - name: Ordinary study path all remaining coverage batches
+      - name: Ordinary study path full stable coverage audit
         continue-on-error: true
         env:
           STUDIELOTS_BASE_URL: https://studielots-git-studi-5f5a74-johanfredrikholmberg-6513s-projects.vercel.app
         run: |
-          for offset in $(seq 250 50 3000); do
-            echo "===== Coverage batch offset ${offset} ====="
-            node scripts/audit-program-coverage.mjs --offset "$offset" --limit 50 --concurrency 1 --timeout 30000 || true
+          for offset in $(seq 0 50 3150); do
+            echo "===== Stable coverage batch offset ${offset} ====="
+            node scripts/audit-program-coverage.mjs --catalogue-source program-index --offset "$offset" --limit 50 --concurrency 1 --timeout 30000 || true
           done
