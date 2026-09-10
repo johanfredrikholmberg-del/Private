@@ -21,7 +21,17 @@ function allocateProgrammeMatches(courseRows,merits,programmeSubject=''){
  for(const row of out){if(row.credited||row.matchedHp>0)continue;if(row.slotType==='main-field-or-elective-slot')continue;const need=hp(row);if(!(need>0))continue;const target=rowSubject(row,programmeSubject);if(!target)continue;const candidates=meritRows.filter(x=>!used.has(x.i)&&meritSubject(x.c)===target).sort((a,b)=>b.hp-a.hp);if(!candidates.length)continue;let sum=0;const picked=[];for(const m of candidates){if(sum>=need-.01)break;picked.push(m);sum+=m.hp}if(sum<=0)continue;const matched=Math.min(need,sum);for(const m of picked)used.add(m.i);row.creditMatch=matched>=need-.01?'potential':'partial';row.matchScore=matched/need;row.matchedHp=matched;row.matchedCourse=picked.map(x=>x.c?.name||x.c?.code||'Kurs').join(' + ');row.matchedCourseCode=picked.map(x=>x.c?.code).filter(Boolean).join(', ')}
  return out
 }
-async function discover(subject,kind='candidate'){const local=window.StudieLotsV2?.programIndex?.find?.(subject,kind)||[];if(local.length){local.meta={source:'studielots-index',instant:true};return local}try{const data=await getJson('/api/university-paths?'+new URLSearchParams({subject,kind}),8000),universities=Array.isArray(data?.universities)?data.universities:[];universities.meta={temporarilyUnavailable:data?.temporarilyUnavailable===true,source:data?.source||'',updated:data?.updated||''};return universities}catch(_){const empty=[];empty.meta={temporarilyUnavailable:true,source:'skolverket-susa-navet'};return empty}}
+async function discover(subject,kind='candidate'){
+ const fallback=()=>window.StudieLotsV2?.programIndex?.find?.(subject,kind)||[];
+ if(norm(kind)!=='candidate'){const empty=[];empty.meta={source:'program-index',instant:false};return empty}
+ try{
+  const data=await getJson('/api/program-index?'+new URLSearchParams({subject}),35000),programs=Array.isArray(data?.programs)?data.programs:[];
+  if(programs.length&&!data?.fallback){programs.meta={temporarilyUnavailable:false,source:data?.source||'program-index',catalogue:data?.catalogue||null};return programs}
+  const local=fallback();if(local.length){local.meta={temporarilyUnavailable:true,source:'studielots-index-fallback'};return local}
+ }catch(_){}
+ try{const data=await getJson('/api/university-paths?'+new URLSearchParams({subject,kind}),12000),universities=Array.isArray(data?.universities)?data.universities:[];universities.meta={temporarilyUnavailable:data?.temporarilyUnavailable===true,source:data?.source||'',updated:data?.updated||''};if(universities.length)return universities}catch(_){}
+ const local=fallback();local.meta={temporarilyUnavailable:true,source:'studielots-index-fallback'};return local
+}
 async function structure(item,merits=[]){const qs=new URLSearchParams({name:item.programName||'',university:item.university||''});if(item.programCode)qs.set('code',item.programCode);if(item.subject)qs.set('subject',item.subject);const data=await getJson(endpoint(item.university)+'?'+qs,10000);if(!data?.found||!data?.structureAvailable||!Array.isArray(data.courses)||data.courses.length<2)return null;const source=clean(data.source)||'skolverket-susa-navet',rows=allocateProgrammeMatches(data.courses,merits,item.subject||'');return{item,source,verified:official(source),rows,totalHp:Number(data.totalHp)||rows.reduce((s,x)=>s+Number(x.hp||0),0),creditedHp:rows.filter(x=>x.credited).reduce((s,x)=>s+Number(x.matchedHp||x.hp||0),0),potentialHp:rows.filter(x=>x.creditMatch==='potential'||x.creditMatch==='partial').reduce((s,x)=>s+Number(x.matchedHp||0),0)}}
 window.StudieLotsV2=window.StudieLotsV2||{};window.StudieLotsV2.paths=Object.freeze({discover,structure,exactCredit,potentialCredit,creditMatch,allocateProgrammeMatches});
 })();
