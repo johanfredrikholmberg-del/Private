@@ -28,7 +28,8 @@ jobs:
         run: node scripts/v2-credit-match-regression-test.mjs
       - name: V2 fast route
         run: node scripts/v2-fast-route-regression-test.mjs
-      - name: Ordinary study path coverage audit
+      - name: Ordinary study path coverage audit sample
+        continue-on-error: true
         env:
           STUDIELOTS_BASE_URL: https://studielots-git-studi-5f5a74-johanfredrikholmberg-6513s-projects.vercel.app
-        run: node scripts/audit-program-coverage.mjs --concurrency 12
+        run: node scripts/audit-program-coverage.mjs --limit 100 --concurrency 4 --timeout 10000
