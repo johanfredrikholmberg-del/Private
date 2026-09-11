@@ -19,7 +19,7 @@
       "https://www.hb.se/utbildning/omraden/polis/polisprogrammet/"
     ],
     "rows": [],
-    "checkedAt": "2026-09-11T19:25:23.102Z"
+    "checkedAt": "2026-09-11T19:27:32.926Z"
   },
   {
     "key": "beckmans-designhogskola:form",
@@ -14107,7 +14107,7 @@
       "7": 30,
       "8": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.856Z",
+    "checkedAt": "2026-09-11T19:27:47.745Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=ACEKO&language=SV&revision=18%2C20&type=program",
     "verifiedProgrammeOverride": true,
     "trackContinuityRequired": true,
@@ -14198,7 +14198,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:25:41.879Z"
+    "checkedAt": "2026-09-11T19:27:45.529Z"
   },
   {
     "key": "hogskolan-i-boras:AMATM",
@@ -14401,7 +14401,7 @@
       "3": 30,
       "4": 15
     },
-    "checkedAt": "2026-09-11T19:25:41.639Z"
+    "checkedAt": "2026-09-11T19:27:45.435Z"
   },
   {
     "key": "hogskolan-i-boras:ASYST",
@@ -14679,7 +14679,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:25:41.807Z"
+    "checkedAt": "2026-09-11T19:27:45.846Z"
   },
   {
     "key": "hogskolan-i-boras:DMODE",
@@ -14855,7 +14855,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:25:41.911Z"
+    "checkedAt": "2026-09-11T19:27:45.891Z"
   },
   {
     "key": "hogskolan-i-boras:DTDES",
@@ -14890,6 +14890,54 @@
         "isThesis": false
       },
       {
+        "term": 1,
+        "name": "Färgeri, tryck och beredning, bas",
+        "hp": 6,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Valbara teknik- och designkurser: färgeri, tryck och beredning",
+        "hp": 9,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "name": "Fördjupning + designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Färgeri, tryck och beredning, fördjupning",
+                "hp": 4.5
+              },
+              {
+                "name": "Färgeri, tryck och beredning, designprojekt",
+                "hp": 4.5
+              }
+            ]
+          },
+          {
+            "name": "Designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Färgeri, tryck och beredning, designprojekt",
+                "hp": 9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 1,
+        "name": "Färglära",
+        "hp": 5.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
         "term": 2,
         "name": "Väv, bas",
         "hp": 6,
@@ -14898,45 +14946,37 @@
       },
       {
         "term": 2,
-        "name": "Valbara teknik- och designkurser om",
-        "hp": 9,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Valbart alternativ",
-        "hp": 1,
-        "type": "choice",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Väv, fördjupning",
-        "hp": 4.5,
-        "type": "choice",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Väv, designprojekt",
-        "hp": 4.5,
-        "type": "choice",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Valbart alternativ",
-        "hp": 2,
-        "type": "choice",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Väv, designprojekt",
+        "name": "Valbara teknik- och designkurser: väv",
         "hp": 9,
         "type": "choice",
-        "isThesis": false
+        "isThesis": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "name": "Fördjupning + designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Väv, fördjupning",
+                "hp": 4.5
+              },
+              {
+                "name": "Väv, designprojekt",
+                "hp": 4.5
+              }
+            ]
+          },
+          {
+            "name": "Designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Väv, designprojekt",
+                "hp": 9
+              }
+            ]
+          }
+        ]
       },
       {
         "term": 2,
@@ -14968,51 +15008,43 @@
       },
       {
         "term": 3,
-        "name": "Valbara teknik- och designkurser om",
-        "hp": 9,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "name": "Valbart alternativ",
-        "hp": 1,
-        "type": "choice",
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "name": "Stickat och trikå, fördjupning",
-        "hp": 4.5,
-        "type": "choice",
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "name": "Stickat och trikå, designprojekt",
-        "hp": 4.5,
-        "type": "choice",
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "name": "Valbart alternativ",
-        "hp": 2,
-        "type": "choice",
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "name": "Stickat och trikå, designprojekt",
+        "name": "Valbara teknik- och designkurser: stickat och trikå",
         "hp": 9,
         "type": "choice",
-        "isThesis": false
+        "isThesis": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "name": "Fördjupning + designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Stickat och trikå, fördjupning",
+                "hp": 4.5
+              },
+              {
+                "name": "Stickat och trikå, designprojekt",
+                "hp": 4.5
+              }
+            ]
+          },
+          {
+            "name": "Designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Stickat och trikå, designprojekt",
+                "hp": 9
+              }
+            ]
+          }
+        ]
       },
       {
         "term": 3,
-        "name": "Valbara kurser om",
+        "name": "Valbara kurser",
         "hp": 7.5,
-        "type": "required",
+        "type": "choice",
         "isThesis": false
       },
       {
@@ -15052,46 +15084,26 @@
       },
       {
         "term": 5,
-        "name": "Designprojekt 4: designuppdrag / Designprojekt 4: tillämpad design",
+        "name": "Designprojekt 4",
         "hp": 18,
         "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
         "options": [
           {
             "name": "Designprojekt 4: designuppdrag",
             "hp": 18
           },
           {
-            "name": "Designprojekt 4: tillämpad design",
+            "name": "Designprojekt 4: tillämpad design / designpraktik",
             "hp": 18
           }
-        ],
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Designuppdrag",
-        "hp": 18,
-        "type": "choice",
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Designpraktik",
-        "hp": 18,
-        "type": "choice",
-        "isThesis": false
+        ]
       },
       {
         "term": 5,
         "name": "Designmetodik 3: designforskning",
         "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Designprojekt: koncept- och designutveckling",
-        "hp": 15,
         "type": "required",
         "isThesis": false
       },
@@ -15110,17 +15122,34 @@
         "isThesis": true
       }
     ],
-    "coverage": "manual-review",
-    "reason": "term-over-target",
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-complete-structure-with-cross-semester-course",
     "termSums": {
-      "1": 10,
-      "2": 50.5,
-      "3": 51,
+      "1": 30.5,
+      "2": 29.5,
+      "3": 30,
       "4": 30,
-      "5": 76.5,
+      "5": 25.5,
       "6": 19.5
     },
-    "checkedAt": "2026-09-11T19:25:41.985Z"
+    "checkedAt": "2026-09-11T19:27:47.760Z",
+    "academicYearSums": {
+      "1": 60,
+      "2": 60,
+      "3": 60
+    },
+    "spanningCourses": [
+      {
+        "name": "Designprojekt: koncept- och designutveckling",
+        "hp": 15,
+        "startTerm": 5,
+        "endTerm": 6,
+        "type": "required"
+      }
+    ],
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=DTDES&language=SV&revision=23%2C10&type=program",
+    "verifiedProgrammeOverride": true,
+    "studyStructureGranularity": "term-with-spanning-course"
   },
   {
     "key": "hogskolan-i-boras:DTEIN",
@@ -15302,7 +15331,7 @@
     "reason": "official-course-list-incomplete-hp",
     "courseListHp": 172.5,
     "missingHp": 7.5,
-    "checkedAt": "2026-09-11T19:25:42.342Z"
+    "checkedAt": "2026-09-11T19:27:46.353Z"
   },
   {
     "key": "hogskolan-i-boras:DTEKO",
@@ -15727,7 +15756,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T19:25:42.493Z"
+    "checkedAt": "2026-09-11T19:27:46.410Z"
   },
   {
     "key": "hogskolan-i-boras:GINTE",
@@ -15937,7 +15966,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T19:25:41.934Z"
+    "checkedAt": "2026-09-11T19:27:46.554Z"
   },
   {
     "key": "hogskolan-i-boras:GPSYK",
@@ -16163,7 +16192,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:25:42.173Z"
+    "checkedAt": "2026-09-11T19:27:45.923Z"
   },
   {
     "key": "hogskolan-i-boras:KANDI",
@@ -16486,7 +16515,7 @@
     "unassignedCourses": [],
     "coverage": "manual-review",
     "reason": "foundation-year-credit-system-needs-normalisation",
-    "checkedAt": "2026-09-11T19:25:42.335Z"
+    "checkedAt": "2026-09-11T19:27:45.998Z"
   },
   {
     "key": "hogskolan-i-boras:KMATM",
@@ -16502,7 +16531,7 @@
     "source": "hogskolan-i-boras-utbildningsplan",
     "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KMATM&revision=4,10&language=SV",
     "sourceUrls": [
-      "https://www.hb.se/utbildning/program-och-kurser/program/konstnarligt-masterprogram-i-textil--och-modedesign-inriktning-textildesign/",
+      "https://www.hb.se/utbildning/program-och-kurser/program/konstnarligt-masterprogram-i-textil--och-modedesign-inriktning-modedesign/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KMATM&revision=4,10&language=SV"
     ],
     "rows": [
@@ -16565,7 +16594,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:25:42.435Z"
+    "checkedAt": "2026-09-11T19:27:46.324Z"
   },
   {
     "key": "hogskolan-i-boras:LAG46",
@@ -16861,7 +16890,7 @@
       "7": 30,
       "8": 15
     },
-    "checkedAt": "2026-09-11T19:25:42.327Z"
+    "checkedAt": "2026-09-11T19:27:46.269Z"
   },
   {
     "key": "hogskolan-i-boras:LGFUD",
@@ -17079,7 +17108,7 @@
       "6": 15,
       "7": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.708Z"
+    "checkedAt": "2026-09-11T19:27:47.238Z"
   },
   {
     "key": "hogskolan-i-boras:MAIDI",
@@ -17375,7 +17404,7 @@
       "4": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:25:42.549Z"
+    "checkedAt": "2026-09-11T19:27:46.614Z"
   },
   {
     "key": "hogskolan-i-boras:NGBID",
@@ -17416,7 +17445,7 @@
       "5": 15,
       "6": 7.5
     },
-    "checkedAt": "2026-09-11T19:25:42.563Z"
+    "checkedAt": "2026-09-11T19:27:46.488Z"
   },
   {
     "key": "hogskolan-i-boras:SAMAR",
@@ -17504,7 +17533,7 @@
     "termSums": {
       "1": 7.5
     },
-    "checkedAt": "2026-09-11T19:25:42.717Z"
+    "checkedAt": "2026-09-11T19:27:46.678Z"
   },
   {
     "key": "hogskolan-i-boras:SGEMA",
@@ -17587,7 +17616,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:25:42.875Z"
+    "checkedAt": "2026-09-11T19:27:46.829Z"
   },
   {
     "key": "hogskolan-i-boras:SGKMM",
@@ -17762,7 +17791,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T19:25:42.812Z"
+    "checkedAt": "2026-09-11T19:27:46.903Z"
   },
   {
     "key": "hogskolan-i-boras:SGKTM",
@@ -17937,7 +17966,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T19:25:43.686Z"
+    "checkedAt": "2026-09-11T19:27:47.620Z"
   },
   {
     "key": "hogskolan-i-boras:SGOFD",
@@ -18037,7 +18066,7 @@
       "4": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:25:42.848Z"
+    "checkedAt": "2026-09-11T19:27:46.738Z"
   },
   {
     "key": "hogskolan-i-boras:SGOPS",
@@ -18660,7 +18689,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:25:42.765Z"
+    "checkedAt": "2026-09-11T19:27:46.894Z"
   },
   {
     "key": "hogskolan-i-boras:TAREC",
@@ -18776,7 +18805,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.758Z",
+    "checkedAt": "2026-09-11T19:27:47.664Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAREC&language=SV&revision=2%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -18861,7 +18890,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:25:42.928Z"
+    "checkedAt": "2026-09-11T19:27:46.944Z"
   },
   {
     "key": "hogskolan-i-boras:TAREP",
@@ -18951,7 +18980,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.080Z"
+    "checkedAt": "2026-09-11T19:27:47.012Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEB",
@@ -19034,7 +19063,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:25:42.984Z"
+    "checkedAt": "2026-09-11T19:27:46.931Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEC",
@@ -19150,7 +19179,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.758Z",
+    "checkedAt": "2026-09-11T19:27:47.664Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAVEC&language=SV&revision=1%2C00&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -19235,7 +19264,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.199Z"
+    "checkedAt": "2026-09-11T19:27:47.162Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEP",
@@ -19325,7 +19354,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.221Z"
+    "checkedAt": "2026-09-11T19:27:47.245Z"
   },
   {
     "key": "hogskolan-i-boras:TGAPF",
@@ -19459,7 +19488,7 @@
     "reason": "official-course-list-incomplete-hp",
     "courseListHp": 157.5,
     "missingHp": 22.5,
-    "checkedAt": "2026-09-11T19:25:43.397Z"
+    "checkedAt": "2026-09-11T19:27:47.247Z"
   },
   {
     "key": "hogskolan-i-boras:TGBYI",
@@ -20108,7 +20137,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.806Z",
+    "checkedAt": "2026-09-11T19:27:47.705Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGENA&language=SV&revision=8%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -20379,7 +20408,7 @@
       "5": 52.5,
       "6": 45
     },
-    "checkedAt": "2026-09-11T19:25:43.299Z"
+    "checkedAt": "2026-09-11T19:27:47.179Z"
   },
   {
     "key": "hogskolan-i-boras:TGIEL",
@@ -20571,7 +20600,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.218Z"
+    "checkedAt": "2026-09-11T19:27:47.534Z"
   },
   {
     "key": "hogskolan-i-boras:TGIEO",
@@ -20763,7 +20792,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.291Z"
+    "checkedAt": "2026-09-11T19:27:47.228Z"
   },
   {
     "key": "hogskolan-i-boras:TGITI",
@@ -20934,7 +20963,7 @@
       "5": 22.5,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.426Z"
+    "checkedAt": "2026-09-11T19:27:47.352Z"
   },
   {
     "key": "hogskolan-i-boras:TGKEH",
@@ -21011,7 +21040,7 @@
       "2": 2,
       "6": 18
     },
-    "checkedAt": "2026-09-11T19:25:43.442Z"
+    "checkedAt": "2026-09-11T19:27:47.507Z"
   },
   {
     "key": "hogskolan-i-boras:TGMAA",
@@ -21189,7 +21218,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.439Z"
+    "checkedAt": "2026-09-11T19:27:47.432Z"
   },
   {
     "key": "hogskolan-i-boras:TGTPI",
@@ -21423,7 +21452,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.806Z",
+    "checkedAt": "2026-09-11T19:27:47.705Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGTPI&language=EN&revision=3%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -21545,7 +21574,7 @@
       "3": 30,
       "4": 15
     },
-    "checkedAt": "2026-09-11T19:25:43.500Z"
+    "checkedAt": "2026-09-11T19:27:47.435Z"
   },
   {
     "key": "hogskolan-i-boras:VAADM",
@@ -21630,7 +21659,7 @@
       "3": 22.5,
       "4": 22.5
     },
-    "checkedAt": "2026-09-11T19:25:43.509Z"
+    "checkedAt": "2026-09-11T19:27:47.443Z"
   },
   {
     "key": "hogskolan-i-boras:VABAM",
@@ -21709,7 +21738,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 90,
-    "checkedAt": "2026-09-11T19:25:43.618Z"
+    "checkedAt": "2026-09-11T19:27:47.589Z"
   },
   {
     "key": "hogskolan-i-boras:VABAR",
@@ -21935,7 +21964,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T19:25:43.645Z"
+    "checkedAt": "2026-09-11T19:27:47.542Z"
   },
   {
     "key": "hogskolan-i-boras:VGLOV",
@@ -22113,7 +22142,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:25:43.806Z",
+    "checkedAt": "2026-09-11T19:27:47.705Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=VGLOV&language=SV&revision=1%2C000&type=program",
     "verifiedProgrammeOverride": true,
     "studyPaceVariant": "helfart",
