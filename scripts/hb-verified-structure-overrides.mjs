@@ -95,3 +95,4 @@ meta.counts=rows.reduce((a,x)=>(a[x.coverage]=(a[x.coverage]||0)+1,a),{});
 meta.retryable=rows.filter(x=>['metadata-only','manual-review'].includes(x.coverage)).length;
 await fs.writeFile(META,JSON.stringify(meta,null,2)+'\n');
 console.log('Applied verified Borås structure overrides:', ['ASYST','TGTPI','TAREC','TAVEC','LAG46'].map(code=>({code,coverage:byCode.get(code)?.coverage,reason:byCode.get(code)?.reason,termSums:byCode.get(code)?.termSums})));
+// Trigger refresh after workflow integration.
