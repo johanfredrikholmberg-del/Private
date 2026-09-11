@@ -25,13 +25,13 @@ const term = v => {
 };
 
 async function fetchText(url) {
-  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.2' }, redirect: 'follow', signal: AbortSignal.timeout(25000) });
+  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.3' }, redirect: 'follow', signal: AbortSignal.timeout(25000) });
   if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
   return { url: r.url, text: await r.text() };
 }
 
 async function fetchBuffer(url) {
-  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.2' }, redirect: 'follow', signal: AbortSignal.timeout(30000) });
+  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.3' }, redirect: 'follow', signal: AbortSignal.timeout(30000) });
   if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
   return { url: r.url, buffer: Buffer.from(await r.arrayBuffer()) };
 }
@@ -129,6 +129,24 @@ function programmePageUrl(item, index) {
   return `https://www.hb.se/utbildning/program-och-kurser/program/${slug(item.programName || item.name || '')}/`;
 }
 
+function extractChoice(line) {
+  const normalized = line.replace(/[–—]/g, '-');
+  const altMatch = normalized.match(/^(.*?)\s*,?\s*(\d+(?:[,.]\d+)?)\s*(?:hp|högskolepoäng)\s*(?:alt\.?|eller)\s*(.*?)\s*,?\s*(\d+(?:[,.]\d+)?)\s*(?:hp|högskolepoäng)/i);
+  if (!altMatch) return null;
+  const firstHp = Number(altMatch[2].replace(',', '.'));
+  const secondHp = Number(altMatch[4].replace(',', '.'));
+  if (!Number.isFinite(firstHp) || !Number.isFinite(secondHp) || Math.abs(firstHp - secondHp) > 0.01) return null;
+  return {
+    name: `${clean(altMatch[1])} / ${clean(altMatch[3])}`,
+    hp: firstHp,
+    type: 'choice',
+    options: [
+      { name: clean(altMatch[1]), hp: firstHp },
+      { name: clean(altMatch[3]), hp: secondHp }
+    ]
+  };
+}
+
 function parseRows(text) {
   const lines = text.split(/\r?\n/).map(clean).filter(Boolean);
   const rows = [];
@@ -140,11 +158,18 @@ function parseRows(text) {
       if (/^(?:programmets kurser\s*)?(?:kurser\s+under\s+)?termin\s*\d+/i.test(line)) continue;
     }
     if (!currentTerm) continue;
+
+    const groupedChoice = extractChoice(line);
+    if (groupedChoice) {
+      rows.push({ term: currentTerm, ...groupedChoice, isThesis: false });
+      continue;
+    }
+
     const credits = hp(line);
     if (!credits || credits > 30) continue;
     const name = line.replace(/^[•\-–]\s*/, '').replace(/\s*,?\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng).*$/i, '').trim();
     if (name.length < 3) continue;
-    const choice = /\balt\.?\b|alternativ|valbar|valfri/i.test(line);
+    const choice = /\balt\.?\b|alternativ|valbar|valfri|\beller\b/i.test(line);
     const thesis = /examensarbete|självständigt arbete/i.test(name);
     rows.push({ term: currentTerm, name, hp: credits, type: choice ? 'choice' : 'required', isThesis: thesis });
   }
