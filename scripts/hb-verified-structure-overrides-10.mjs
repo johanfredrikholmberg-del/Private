@@ -8,3 +8,4 @@ if(p){p.rows=[r(1,'Introduktion till vårdvetenskap med inriktning mot omvårdna
 await fs.writeFile(FILE,JSON.stringify(all,null,2)+'\n');
 const meta=JSON.parse(await fs.readFile(META,'utf8'));meta.generatedAt=new Date().toISOString();meta.counts=all.reduce((a,v)=>(a[v.coverage]=(a[v.coverage]||0)+1,a),{});meta.retryable=all.filter(v=>['metadata-only','manual-review'].includes(v.coverage)&&!v.verifiedProgrammeOverride).length;await fs.writeFile(META,JSON.stringify(meta,null,2)+'\n');
 console.log('HB verified batch 10',p&&{code:p.programCode,coverage:p.coverage,termSums:p.termSums});
+await import('./hb-verified-structure-overrides-11.mjs');
