@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-11",
+  "programs": [
+    {
+      "id": "lu:SAMPS:2026HT",
+      "university": "Lunds universitet",
+      "programCode": "SAMPS",
+      "programName": "Masterprogram i psykologi",
+      "programHp": 120,
+      "level": "Avancerad nivå",
+      "subject": "Psykologi",
+      "catalogueSubject": "Psykologi",
+      "validFrom": "2026HT",
+      "validTo": null,
+      "coverage": "choice-required",
+      "verified": true,
+      "source": "lund-official-programplan",
+      "sourceUrls": [
+        "https://www.lu.se/studera/psykologi-masterprogram-SAMPS",
+        "https://www.lu.se/studera/psykologi-masterprogram-SAMPS/programmets-innehall"
+      ],
+      "rows": [
+        {"term":1,"code":"","name":"Psykologi: Avancerade vetenskapliga metoder i psykologin","hp":15,"category":"mandatory"},
+        {"term":1,"code":"","name":"Psykologi: Psykologisk vetenskap från filosofiska och praktiska perspektiv","hp":15,"category":"mandatory"},
+        {"term":2,"code":"","name":"Psykologi: Specialiserade teman","hp":7.5,"category":"mandatory"},
+        {"term":2,"code":"","name":"Valbara studier enligt programplan","hp":22.5,"category":"elective","slotType":"elective-slot","isSlot":true,"options":[
+          {"name":"Avancerad socialpsykologi I","code":"","hp":7.5},
+          {"name":"Avancerad arbets- och organisationspsykologi I","code":"","hp":7.5},
+          {"name":"Avancerad personlighetspsykologi, typisk och atypisk I","code":"","hp":7.5},
+          {"name":"Avancerad kognitiv neurovetenskap I","code":"","hp":7.5},
+          {"name":"Avancerad utvecklingspsykologi, typisk och atypisk I","code":"","hp":7.5}
+        ]},
+        {"term":3,"code":"","name":"Psykologi: Empiriskt arbete inom psykologi","hp":7.5,"category":"mandatory"},
+        {"term":3,"code":"","name":"Valbara studier enligt programplan","hp":22.5,"category":"elective","slotType":"elective-slot","isSlot":true,"options":[
+          {"name":"Avancerad socialpsykologi II","code":"","hp":7.5},
+          {"name":"Avancerad arbets- och organisationspsykologi II","code":"","hp":7.5},
+          {"name":"Avancerad personlighetspsykologi, typisk och atypisk II","code":"","hp":7.5},
+          {"name":"Avancerad kognitiv neurovetenskap II","code":"","hp":7.5},
+          {"name":"Avancerad utvecklingspsykologi, typisk och atypisk II","code":"","hp":7.5}
+        ]},
+        {"term":4,"code":"","name":"Psykologi: Examensarbete för masterexamen","hp":30,"category":"mandatory","isThesis":true}
+      ]
+    }
+  ]
+}
