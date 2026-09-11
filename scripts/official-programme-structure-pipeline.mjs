@@ -33,4 +33,10 @@ async function enrich(item){try{const a=await viaApi(item);if(a)return a}catch{/
 async function pool(items){const out=new Array(items.length);let i=0;async function worker(){for(;;){const n=i++;if(n>=items.length)return;out[n]=await enrich(items[n]);console.log(`${n+1}/${items.length} ${out[n].coverage} ${items[n].university} ${items[n].programCode||''}`);await sleep(40)}}await Promise.all(Array.from({length:Math.min(CONCURRENCY,items.length)},worker));return out}
 
 async function main(){const queue=JSON.parse(await fs.readFile(path.join(ROOT,'structure-queue.json'),'utf8'));let previous=[];try{previous=JSON.parse(await fs.readFile(path.join(ROOT,'structures.json'),'utf8'))}catch{}const done=new Map(previous.map(x=>[x.key,x]));const retryable=x=>!x||['metadata-only','manual-review'].includes(x.coverage);const pending=queue.filter(x=>retryable(done.get(x.key))).slice(0,LIMIT);const fresh=await pool(pending);for(const x of fresh)done.set(x.key,x);const all=[...done.values()];const counts=all.reduce((a,x)=>(a[x.coverage]=(a[x.coverage]||0)+1,a),{});const retryableCount=all.filter(x=>['metadata-only','manual-review'].includes(x.coverage)).length;await fs.writeFile(path.join(ROOT,'structures.json'),JSON.stringify(all,null,2)+'\n');await fs.writeFile(path.join(ROOT,'structure-meta.json'),JSON.stringify({generatedAt:new Date().toISOString(),processed:all.length,remaining:Math.max(0,queue.length-all.length),retryable:retryableCount,counts},null,2)+'\n');console.log({processed:all.length,remaining:queue.length-all.length,retryable:retryableCount,counts})}
-main().catch(e=>{console.error(e);process.exitCode=1});
+
+main()
+  .then(async()=>{
+    console.log('Running Högskolan i Borås education-plan importer in the same pipeline...');
+    await import('./hb-programme-structure-pipeline.mjs');
+  })
+  .catch(e=>{console.error(e);process.exitCode=1});
