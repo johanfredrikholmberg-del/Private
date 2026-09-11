@@ -69,6 +69,35 @@
         {"term":5,"code":"","name":"Valbar termin inom Sverige eller utomlands","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},
         {"term":6,"code":"","name":"Huvudområde och examensarbete enligt programplan","hp":30,"category":"elective","slotType":"main-field-thesis-slot","isSlot":true,"includesThesisHp":15}
       ]
+    },
+    {
+      "id": "lu:EGSYS:2026HT",
+      "university": "Lunds universitet",
+      "programCode": "EGSYS",
+      "programName": "Systemvetenskapligt kandidatprogram - design av informationssystem",
+      "programHp": 180,
+      "level": "Grundnivå",
+      "subject": "Informatik",
+      "catalogueSubject": "Informatik",
+      "validFrom": "2026HT",
+      "validTo": null,
+      "coverage": "complete",
+      "verified": true,
+      "source": "lund-official-programplan",
+      "sourceUrls": [
+        "https://www.lu.se/studera/systemvetenskapligt-kandidatprogram-design-av-informationssystem-EGSYS",
+        "https://www.lu.se/studera/systemvetenskapligt-kandidatprogram-design-av-informationssystem-EGSYS/programmets-innehall"
+      ],
+      "rows": [
+        {"term":1,"code":"","name":"Informatik: Introduktion till informationssystem","hp":30,"category":"mandatory"},
+        {"term":2,"code":"","name":"Informatik: Informationssystem och verksamhet","hp":30,"category":"mandatory"},
+        {"term":3,"code":"","name":"Informatik: Informationssystems- och verksamhetsutveckling","hp":30,"category":"mandatory"},
+        {"term":4,"code":"","name":"Informatik: IT-arkitektur och mjukvarusystem","hp":30,"category":"mandatory"},
+        {"term":5,"code":"","name":"Valbar termin i Sverige eller utomlands","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},
+        {"term":6,"code":"","name":"Informatik: Examensarbete (uppsats) för kandidatexamen","hp":15,"category":"mandatory","isThesis":true},
+        {"term":6,"code":"","name":"Informationssystem: Lärandeportfölj","hp":1,"category":"mandatory"},
+        {"term":6,"code":"","name":"Informationssystem: Projektarbete på Systemvetenskapliga kandidatprogrammet","hp":14,"category":"mandatory"}
+      ]
     }
   ]
 }
