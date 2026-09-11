@@ -2,6 +2,7 @@
 /** StudieLots offline official programme structure enrichment.
  * Reads data/susa/structure-queue.json and fetches official programme pages in batches.
  * Conservative: only machine-verifies semester rows when their HP sums are internally consistent.
+ * Workflow trigger marker: 2026-09-11.
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
