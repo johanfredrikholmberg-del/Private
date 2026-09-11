@@ -19,7 +19,7 @@
       "https://www.hb.se/utbildning/omraden/polis/polisprogrammet/"
     ],
     "rows": [],
-    "checkedAt": "2026-09-11T18:55:20.381Z"
+    "checkedAt": "2026-09-11T18:59:08.331Z"
   },
   {
     "key": "beckmans-designhogskola:form",
@@ -13994,7 +13994,7 @@
       "7": 60,
       "8": 90
     },
-    "checkedAt": "2026-09-11T18:55:32.306Z"
+    "checkedAt": "2026-09-11T18:59:19.651Z"
   },
   {
     "key": "hogskolan-i-boras:ACIVE",
@@ -14077,7 +14077,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T18:55:32.270Z"
+    "checkedAt": "2026-09-11T18:59:19.646Z"
   },
   {
     "key": "hogskolan-i-boras:AMATM",
@@ -14280,7 +14280,7 @@
       "3": 30,
       "4": 15
     },
-    "checkedAt": "2026-09-11T18:55:32.225Z"
+    "checkedAt": "2026-09-11T18:59:19.940Z"
   },
   {
     "key": "hogskolan-i-boras:ASYST",
@@ -14428,23 +14428,24 @@
       },
       {
         "term": 5,
-        "name": "Enterprise Architecture och strategisk styrning av IT (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Datahantering för beslutsfattande (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Webb- och mobilutveckling (",
-        "hp": 7.5,
-        "type": "required",
+        "name": "Två av tre valbara systemvetarkurser",
+        "hp": 15,
+        "type": "choice",
+        "choiceSlots": 2,
+        "options": [
+          {
+            "name": "Enterprise Architecture och strategisk styrning av IT (",
+            "hp": 7.5
+          },
+          {
+            "name": "Datahantering för beslutsfattande (",
+            "hp": 7.5
+          },
+          {
+            "name": "Webb- och mobilutveckling (",
+            "hp": 7.5
+          }
+        ],
         "isThesis": false
       },
       {
@@ -14469,17 +14470,19 @@
         "isThesis": true
       }
     ],
-    "coverage": "manual-review",
-    "reason": "term-over-target",
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-two-of-three-choice-term-5",
     "termSums": {
       "1": 30,
       "2": 30,
       "3": 30,
       "4": 30,
-      "5": 37.5,
+      "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:55:32.256Z"
+    "checkedAt": "2026-09-11T18:59:21.749Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=ASYST&language=SV&revision=15&type=program",
+    "verifiedProgrammeOverride": true
   },
   {
     "key": "hogskolan-i-boras:BMBD1",
@@ -14555,7 +14558,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T18:55:32.527Z"
+    "checkedAt": "2026-09-11T18:59:19.931Z"
   },
   {
     "key": "hogskolan-i-boras:DMODE",
@@ -14731,7 +14734,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:55:32.582Z"
+    "checkedAt": "2026-09-11T18:59:19.719Z"
   },
   {
     "key": "hogskolan-i-boras:DTDES",
@@ -14996,7 +14999,7 @@
       "5": 76.5,
       "6": 19.5
     },
-    "checkedAt": "2026-09-11T18:55:32.811Z"
+    "checkedAt": "2026-09-11T18:59:20.131Z"
   },
   {
     "key": "hogskolan-i-boras:DTEIN",
@@ -15178,7 +15181,7 @@
     "reason": "official-course-list-incomplete-hp",
     "courseListHp": 172.5,
     "missingHp": 7.5,
-    "checkedAt": "2026-09-11T18:55:32.790Z"
+    "checkedAt": "2026-09-11T18:59:20.123Z"
   },
   {
     "key": "hogskolan-i-boras:DTEKO",
@@ -15603,7 +15606,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T18:55:32.589Z"
+    "checkedAt": "2026-09-11T18:59:20.142Z"
   },
   {
     "key": "hogskolan-i-boras:GINTE",
@@ -15813,7 +15816,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T18:55:32.598Z"
+    "checkedAt": "2026-09-11T18:59:20.147Z"
   },
   {
     "key": "hogskolan-i-boras:GPSYK",
@@ -16039,7 +16042,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:55:32.615Z"
+    "checkedAt": "2026-09-11T18:59:20.173Z"
   },
   {
     "key": "hogskolan-i-boras:KANDI",
@@ -16362,7 +16365,7 @@
     "unassignedCourses": [],
     "coverage": "manual-review",
     "reason": "foundation-year-credit-system-needs-normalisation",
-    "checkedAt": "2026-09-11T18:55:32.935Z"
+    "checkedAt": "2026-09-11T18:59:20.316Z"
   },
   {
     "key": "hogskolan-i-boras:KMATM",
@@ -16441,7 +16444,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T18:55:32.864Z"
+    "checkedAt": "2026-09-11T18:59:20.404Z"
   },
   {
     "key": "hogskolan-i-boras:LAG46",
@@ -16491,16 +16494,20 @@
       },
       {
         "term": 3,
-        "name": "Kurs: Samhällsorienterade ämnen för grundlärare med inriktning mot arbete i grundskolans årskurs 4-6",
+        "name": "Tillvalsämne för grundlärare 4–6",
         "hp": 30,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "name": "Kurs: Naturvetenskap och teknik för grundlärare med inriktning mot arbete i grundskolans årskurs 4-6",
-        "hp": 30,
-        "type": "required",
+        "type": "choice",
+        "choiceSlots": 1,
+        "options": [
+          {
+            "name": "Kurs: Samhällsorienterade ämnen för grundlärare med inriktning mot arbete i grundskolans årskurs 4-6",
+            "hp": 30
+          },
+          {
+            "name": "Kurs: Naturvetenskap och teknik för grundlärare med inriktning mot arbete i grundskolans årskurs 4-6",
+            "hp": 30
+          }
+        ],
         "isThesis": false
       },
       {
@@ -16574,19 +16581,21 @@
         "isThesis": true
       }
     ],
-    "coverage": "manual-review",
-    "reason": "term-over-target",
+    "coverage": "partial-structure",
+    "reason": "official-plan-verified-term-3-elective-subject-block",
     "termSums": {
       "1": 30,
       "2": 30,
-      "3": 60,
+      "3": 30,
       "4": 30,
       "5": 30,
       "6": 30,
       "7": 30,
       "8": 15
     },
-    "checkedAt": "2026-09-11T18:55:32.851Z"
+    "checkedAt": "2026-09-11T18:59:21.750Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=LAG46&language=SV&revision=22%2C10&type=program",
+    "verifiedProgrammeOverride": true
   },
   {
     "key": "hogskolan-i-boras:LAGF3",
@@ -16731,7 +16740,7 @@
       "7": 30,
       "8": 15
     },
-    "checkedAt": "2026-09-11T18:55:32.855Z"
+    "checkedAt": "2026-09-11T18:59:20.464Z"
   },
   {
     "key": "hogskolan-i-boras:LGFUD",
@@ -16949,7 +16958,7 @@
       "6": 15,
       "7": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.612Z"
+    "checkedAt": "2026-09-11T18:59:21.187Z"
   },
   {
     "key": "hogskolan-i-boras:MAIDI",
@@ -17245,7 +17254,7 @@
       "4": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:55:32.908Z"
+    "checkedAt": "2026-09-11T18:59:20.481Z"
   },
   {
     "key": "hogskolan-i-boras:NGBID",
@@ -17286,7 +17295,7 @@
       "5": 15,
       "6": 7.5
     },
-    "checkedAt": "2026-09-11T18:55:33.141Z"
+    "checkedAt": "2026-09-11T18:59:20.467Z"
   },
   {
     "key": "hogskolan-i-boras:SAMAR",
@@ -17374,7 +17383,7 @@
     "termSums": {
       "1": 7.5
     },
-    "checkedAt": "2026-09-11T18:55:33.175Z"
+    "checkedAt": "2026-09-11T18:59:20.649Z"
   },
   {
     "key": "hogskolan-i-boras:SGEMA",
@@ -17457,7 +17466,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.098Z"
+    "checkedAt": "2026-09-11T18:59:20.630Z"
   },
   {
     "key": "hogskolan-i-boras:SGKMM",
@@ -17632,7 +17641,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T18:55:33.114Z"
+    "checkedAt": "2026-09-11T18:59:20.735Z"
   },
   {
     "key": "hogskolan-i-boras:SGKTM",
@@ -17807,7 +17816,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T18:55:33.653Z"
+    "checkedAt": "2026-09-11T18:59:21.413Z"
   },
   {
     "key": "hogskolan-i-boras:SGOFD",
@@ -17907,7 +17916,7 @@
       "4": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.162Z"
+    "checkedAt": "2026-09-11T18:59:20.818Z"
   },
   {
     "key": "hogskolan-i-boras:SGOPS",
@@ -18530,7 +18539,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.339Z"
+    "checkedAt": "2026-09-11T18:59:20.811Z"
   },
   {
     "key": "hogskolan-i-boras:TAREC",
@@ -18614,20 +18623,41 @@
         "isThesis": false
       },
       {
-        "term": 2,
+        "term": 3,
+        "name": "Examensarbete i Resursåtervinning del 1",
+        "hp": 30,
+        "type": "choice",
+        "options": [
+          {
+            "name": "Examensarbete i Resursåtervinning del 1",
+            "hp": 30
+          },
+          {
+            "name": "Godkända kurser inom hållbar byggteknik/internationalisering",
+            "hp": 30
+          }
+        ],
+        "isThesis": true
+      },
+      {
+        "term": 4,
         "name": "Examensarbete i Resursåtervinning",
         "hp": 30,
         "type": "required",
         "isThesis": true
       }
     ],
-    "coverage": "manual-review",
-    "reason": "term-over-target",
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-year-2-terms-3-and-4",
     "termSums": {
       "1": 30,
-      "2": 60
+      "2": 30,
+      "3": 30,
+      "4": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.381Z"
+    "checkedAt": "2026-09-11T18:59:21.750Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAREC&language=SV&revision=2%2C20&type=program",
+    "verifiedProgrammeOverride": true
   },
   {
     "key": "hogskolan-i-boras:TAREE",
@@ -18710,7 +18740,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.297Z"
+    "checkedAt": "2026-09-11T18:59:20.958Z"
   },
   {
     "key": "hogskolan-i-boras:TAREP",
@@ -18800,7 +18830,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.313Z"
+    "checkedAt": "2026-09-11T18:59:20.962Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEB",
@@ -18883,7 +18913,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.409Z"
+    "checkedAt": "2026-09-11T18:59:21.060Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEC",
@@ -18967,20 +18997,41 @@
         "isThesis": false
       },
       {
-        "term": 2,
+        "term": 3,
+        "name": "Examensarbete i Resursåtervinning del 1",
+        "hp": 30,
+        "type": "choice",
+        "options": [
+          {
+            "name": "Examensarbete i Resursåtervinning del 1",
+            "hp": 30
+          },
+          {
+            "name": "Godkända kurser inom hållbar byggteknik/internationalisering",
+            "hp": 30
+          }
+        ],
+        "isThesis": true
+      },
+      {
+        "term": 4,
         "name": "Examensarbete i Resursåtervinning",
         "hp": 30,
         "type": "required",
         "isThesis": true
       }
     ],
-    "coverage": "manual-review",
-    "reason": "term-over-target",
+    "coverage": "choice-required",
+    "reason": "official-plan-successor-structure-year-2-verified",
     "termSums": {
       "1": 30,
-      "2": 60
+      "2": 30,
+      "3": 30,
+      "4": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.556Z"
+    "checkedAt": "2026-09-11T18:59:21.750Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAVEC&language=SV&revision=1%2C00&type=program",
+    "verifiedProgrammeOverride": true
   },
   {
     "key": "hogskolan-i-boras:TAVEE",
@@ -19063,7 +19114,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.449Z"
+    "checkedAt": "2026-09-11T18:59:21.012Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEP",
@@ -19153,7 +19204,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.461Z"
+    "checkedAt": "2026-09-11T18:59:21.170Z"
   },
   {
     "key": "hogskolan-i-boras:TGAPF",
@@ -19287,7 +19338,7 @@
     "reason": "official-course-list-incomplete-hp",
     "courseListHp": 157.5,
     "missingHp": 22.5,
-    "checkedAt": "2026-09-11T18:55:33.595Z"
+    "checkedAt": "2026-09-11T18:59:21.274Z"
   },
   {
     "key": "hogskolan-i-boras:TGBYI",
@@ -19778,7 +19829,7 @@
       "1": 7.5,
       "6": 37.5
     },
-    "checkedAt": "2026-09-11T18:55:33.540Z"
+    "checkedAt": "2026-09-11T18:59:21.155Z"
   },
   {
     "key": "hogskolan-i-boras:TGIEA",
@@ -20047,7 +20098,7 @@
       "5": 52.5,
       "6": 45
     },
-    "checkedAt": "2026-09-11T18:55:33.659Z"
+    "checkedAt": "2026-09-11T18:59:21.350Z"
   },
   {
     "key": "hogskolan-i-boras:TGIEL",
@@ -20239,7 +20290,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.621Z"
+    "checkedAt": "2026-09-11T18:59:21.251Z"
   },
   {
     "key": "hogskolan-i-boras:TGIEO",
@@ -20431,7 +20482,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.618Z"
+    "checkedAt": "2026-09-11T18:59:21.531Z"
   },
   {
     "key": "hogskolan-i-boras:TGITI",
@@ -20602,7 +20653,7 @@
       "5": 22.5,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.688Z"
+    "checkedAt": "2026-09-11T18:59:21.394Z"
   },
   {
     "key": "hogskolan-i-boras:TGKEH",
@@ -20679,7 +20730,7 @@
       "2": 2,
       "6": 18
     },
-    "checkedAt": "2026-09-11T18:55:33.832Z"
+    "checkedAt": "2026-09-11T18:59:21.420Z"
   },
   {
     "key": "hogskolan-i-boras:TGMAA",
@@ -20857,7 +20908,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.759Z"
+    "checkedAt": "2026-09-11T18:59:21.694Z"
   },
   {
     "key": "hogskolan-i-boras:TGTPI",
@@ -20974,6 +21025,20 @@
         "hp": 5,
         "type": "required",
         "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Kvalitetssäkring och textil provning",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Sammanfogningstekniker för textila produkter",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
       }
     ],
     "coverage": "partial-structure",
@@ -20983,7 +21048,8 @@
       "2": 30,
       "3": 20
     },
-    "checkedAt": "2026-09-11T18:26:53.741Z"
+    "checkedAt": "2026-09-11T18:26:53.741Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGTPI&language=EN&revision=3%2C20&type=program"
   },
   {
     "key": "hogskolan-i-boras:TMFMM",
@@ -21103,7 +21169,7 @@
       "3": 30,
       "4": 15
     },
-    "checkedAt": "2026-09-11T18:55:33.808Z"
+    "checkedAt": "2026-09-11T18:59:21.464Z"
   },
   {
     "key": "hogskolan-i-boras:VAADM",
@@ -21188,7 +21254,7 @@
       "3": 22.5,
       "4": 22.5
     },
-    "checkedAt": "2026-09-11T18:55:33.953Z"
+    "checkedAt": "2026-09-11T18:59:21.679Z"
   },
   {
     "key": "hogskolan-i-boras:VABAM",
@@ -21267,7 +21333,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 90,
-    "checkedAt": "2026-09-11T18:55:33.902Z"
+    "checkedAt": "2026-09-11T18:59:21.604Z"
   },
   {
     "key": "hogskolan-i-boras:VABAR",
@@ -21493,7 +21559,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T18:55:33.828Z"
+    "checkedAt": "2026-09-11T18:59:21.610Z"
   },
   {
     "key": "hogskolan-i-boras:VGLOV",
@@ -21678,7 +21744,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:55:33.844Z"
+    "checkedAt": "2026-09-11T18:59:21.622Z"
   },
   {
     "key": "hogskolan-i-boras:VOPER",
