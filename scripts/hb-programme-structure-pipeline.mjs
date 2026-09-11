@@ -17,8 +17,8 @@ const normCode=v=>clean(v).toLocaleUpperCase('sv-SE').replace(/\s+/g,'');
 
 function hpFlexible(v){
   const s=clean(v);
-  let m=s.replace(',','.').match(/(\d+(?:\.\d+)?)\s*(?:hp|högskolepoäng)\b/i);
-  if(m)return Number(m[1]);
+  let m=s.match(/(\d+(?:[,.]\d+)?)\s*(?:hp|högskolepoäng)\b/i);
+  if(m)return Number(m[1].replace(',','.'));
   m=s.match(/[\[(]\s*(\d+(?:[,.]\d+)?)\s*[\])](?:\s|$)/); if(m)return Number(m[1].replace(',','.'));
   m=s.match(/(?:^|\s)(\d+(?:[,.]\d+)?)\s*$/); if(m){const n=Number(m[1].replace(',','.'));if(n>=1&&n<=30)return n}
   return null;
@@ -27,7 +27,9 @@ function headingTerm(line){
   const s=clean(line);
   let m=s.match(/^(?:kurser\s+under\s+)?termin\s*(\d{1,2})\b/i); if(m)return Number(m[1]);
   const words={första:1,andra:2,tredje:3,fjärde:4,femte:5,sjätte:6,sjunde:7,åttonde:8,nionde:9,tionde:10};
-  for(const [w,n] of Object.entries(words))if(new RegExp(`^(?:under\\s+)?${w}\\s+termin(?:en)?\\b|^termin\\s+${w}\\b`,'i').test(s)&&s.length<100)return n;
+  for(const [w,n] of Object.entries(words)){
+    if(new RegExp(`^(?:under\\s+)?${w}\\s+termin(?:en)?\\b|^termin\\s+${w}\\b|^under\\s+${w}\\s+termin(?:en)?\\s+läser\\b`,'i').test(s)&&s.length<180)return n;
+  }
   return null;
 }
 function yearSeasonTerm(line){
@@ -40,8 +42,8 @@ function creditRange(line){
   const m=clean(line).match(/^(\d+)\s*[-–]\s*(\d+)\s*(?:hp|högskolepoäng)\b/i); if(!m)return null;
   const a=Number(m[1]),b=Number(m[2]); if(!a||b<a)return null; return {start:a,end:b,baseTerm:Math.floor((a-1)/30)+1,total:b-a+1};
 }
-async function fetchText(url){const r=await fetch(url,{headers:{'user-agent':'StudieLots-HB-import/2.0'},redirect:'follow',signal:AbortSignal.timeout(25000)});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);return{url:r.url,text:await r.text()}}
-async function fetchBuffer(url){const r=await fetch(url,{headers:{'user-agent':'StudieLots-HB-import/2.0'},redirect:'follow',signal:AbortSignal.timeout(30000)});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);return{url:r.url,buffer:Buffer.from(await r.arrayBuffer())}}
+async function fetchText(url){const r=await fetch(url,{headers:{'user-agent':'StudieLots-HB-import/2.1'},redirect:'follow',signal:AbortSignal.timeout(25000)});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);return{url:r.url,text:await r.text()}}
+async function fetchBuffer(url){const r=await fetch(url,{headers:{'user-agent':'StudieLots-HB-import/2.1'},redirect:'follow',signal:AbortSignal.timeout(30000)});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);return{url:r.url,buffer:Buffer.from(await r.arrayBuffer())}}
 function decodeHtml(s){return String(s||'').replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'").replace(/&aring;/gi,'å').replace(/&auml;/gi,'ä').replace(/&ouml;/gi,'ö').replace(/&Aring;/g,'Å').replace(/&Auml;/g,'Ä').replace(/&Ouml;/g,'Ö')}
 function stripHtml(s){return clean(decodeHtml(String(s||'').replace(/<[^>]+>/g,' ')))}
 function linksFromHtml(html,base){const out=[];for(const m of html.matchAll(/href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)){try{out.push({url:new URL(decodeHtml(m[1]),base).href,label:stripHtml(m[2])})}catch{}}return out}
