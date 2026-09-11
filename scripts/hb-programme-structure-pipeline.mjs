@@ -21,19 +21,25 @@ const hp = v => {
   const m = clean(v).replace(',', '.').match(/(\d+(?:\.\d+)?)\s*(?:hp|högskolepoäng)/i);
   return m ? Number(m[1]) : null;
 };
+const hpFlexible = v => {
+  const withUnit = hp(v);
+  if (withUnit) return withUnit;
+  const m = clean(v).match(/[\[(]\s*(\d+(?:[,.]\d+)?)\s*[\])](?:\s|$)/);
+  return m ? Number(m[1].replace(',', '.')) : null;
+};
 const term = v => {
   const m = clean(v).match(/(?:kurser\s+under\s+)?termin\s*(\d{1,2})/i);
   return m ? Number(m[1]) : null;
 };
 
 async function fetchText(url) {
-  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.4' }, redirect: 'follow', signal: AbortSignal.timeout(25000) });
+  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.5' }, redirect: 'follow', signal: AbortSignal.timeout(25000) });
   if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
   return { url: r.url, text: await r.text() };
 }
 
 async function fetchBuffer(url) {
-  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.4' }, redirect: 'follow', signal: AbortSignal.timeout(30000) });
+  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.5' }, redirect: 'follow', signal: AbortSignal.timeout(30000) });
   if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
   return { url: r.url, buffer: Buffer.from(await r.arrayBuffer()) };
 }
@@ -190,13 +196,56 @@ function parseRows(text) {
   const lines = text.split(/\r?\n/).map(clean).filter(Boolean);
   const rows = [];
   let currentTerm = null;
+  let currentYear = null;
+  let inCourseSection = false;
+  let explicitTermMode = false;
+
   for (const line of lines) {
+    if (/^programmets kurser\b/i.test(line)) {
+      inCourseSection = true;
+      explicitTermMode = true;
+      currentTerm = null;
+      continue;
+    }
+
     const t = term(line);
     if (t && t <= 20) {
+      inCourseSection = true;
+      explicitTermMode = true;
       currentTerm = t;
-      if (/^(?:programmets kurser\s*)?(?:kurser\s+under\s+)?termin\s*\d+/i.test(line)) continue;
+      continue;
     }
-    if (!currentTerm) continue;
+
+    const yearMatch = line.match(/^År(?:skurs)?\s*(\d{1,2})\b/i);
+    if (yearMatch) {
+      currentYear = Number(yearMatch[1]);
+      if (currentYear >= 1 && currentYear <= 10) inCourseSection = true;
+      currentTerm = null;
+      continue;
+    }
+
+    if (currentYear) {
+      if (/^Höstterminen\b/i.test(line)) {
+        currentTerm = (currentYear - 1) * 2 + 1;
+        inCourseSection = true;
+        continue;
+      }
+      if (/^Vårterminen\b/i.test(line)) {
+        currentTerm = (currentYear - 1) * 2 + 2;
+        inCourseSection = true;
+        continue;
+      }
+    }
+
+    if (inCourseSection && currentTerm && /^(?:Informationssökning|Förkunskapskrav|Examen|Studentinflytande|Övrigt|Vetenskaplig teori|Självständigt arbete \(examensarbete\)|Undervisningsformer|Internationalisering)\b/i.test(line)) {
+      if (explicitTermMode) break;
+      currentTerm = null;
+      currentYear = null;
+      inCourseSection = false;
+      continue;
+    }
+
+    if (!inCourseSection || !currentTerm) continue;
 
     const groupedChoice = extractChoice(line);
     if (groupedChoice) {
@@ -204,10 +253,15 @@ function parseRows(text) {
       continue;
     }
 
-    const credits = hp(line);
+    const credits = hpFlexible(line);
     if (!credits || credits > 30) continue;
-    const name = line.replace(/^[•\-–]\s*/, '').replace(/\s*,?\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng).*$/i, '').trim();
+    const name = line
+      .replace(/^[•\-–]\s*/, '')
+      .replace(/\s*,?\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng).*$/i, '')
+      .replace(/\s*[\[(]\s*\d+(?:[,.]\d+)?\s*[\])]\s*$/i, '')
+      .trim();
     if (name.length < 3) continue;
+    if (/^(?:År|Höstterminen|Vårterminen|Valbart|Obligatoriska kurser)/i.test(name)) continue;
     const choice = /\balt\.?\b|alternativ|valbar|valfri|\beller\b/i.test(line);
     const thesis = /examensarbete|självständigt arbete/i.test(name);
     rows.push({ term: currentTerm, name, hp: credits, type: choice ? 'choice' : 'required', isThesis: thesis });
@@ -238,7 +292,7 @@ function normalizeChoicePools(rows) {
         out.push(...required);
         out.push({
           term: termNo,
-          name: `Valbara/alternativa kurser (${Math.round(slots)} val)` ,
+          name: `Valbara/alternativa kurser (${Math.round(slots)} val)`,
           hp: remaining,
           type: 'choice',
           choiceSlots: Math.round(slots),
