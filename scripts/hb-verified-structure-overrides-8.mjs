@@ -27,3 +27,4 @@ if(dm){dm.coverage='manual-review';dm.reason='official-current-plan-verifies-cou
 await fs.writeFile(FILE,JSON.stringify(all,null,2)+'\n');
 const meta=JSON.parse(await fs.readFile(META,'utf8'));meta.generatedAt=new Date().toISOString();meta.counts=all.reduce((a,v)=>(a[v.coverage]=(a[v.coverage]||0)+1,a),{});meta.retryable=all.filter(v=>['metadata-only','manual-review'].includes(v.coverage)&&!v.verifiedProgrammeOverride).length;await fs.writeFile(META,JSON.stringify(meta,null,2)+'\n');
 console.log('HB verified batch 8',all.filter(v=>['LAGF3','TMFMM','DMODE'].includes(String(v.programCode||'').toUpperCase())).map(v=>({code:v.programCode,coverage:v.coverage,reason:v.reason,termSums:v.termSums})));
+await import('./hb-verified-structure-overrides-9.mjs');
