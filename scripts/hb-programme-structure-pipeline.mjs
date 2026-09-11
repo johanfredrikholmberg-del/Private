@@ -1,322 +1,97 @@
 #!/usr/bin/env node
-/** Högskolan i Borås programme structure importer.
- * Reads HB's official programme pages + education-plan PDFs and only promotes
- * structures whose term totals can be validated conservatively.
- * This script is the fast-path target for Borås-only enrichment runs.
- */
+/** Högskolan i Borås programme structure importer. */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import { spawn } from 'node:child_process';
 
-const ROOT = process.env.STRUCTURE_ROOT || 'data/susa';
-const LIMIT = Number(process.env.HB_STRUCTURE_LIMIT || 100);
-const CONCURRENCY = Number(process.env.HB_STRUCTURE_CONCURRENCY || 5);
-const INDEX_CONCURRENCY = Number(process.env.HB_INDEX_CONCURRENCY || 6);
-const HB_INDEX = 'https://www.hb.se/utbildning/program-och-kurser/?lang=sv&types=Programme&userInput=true';
-const clean = v => String(v ?? '').replace(/\s+/g, ' ').trim();
-const norm = v => clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
-const slug = v => norm(v).replace(/\s+/g, '-');
-const normCode = v => clean(v).toLocaleUpperCase('sv-SE').replace(/\s+/g, '');
+const ROOT=process.env.STRUCTURE_ROOT||'data/susa';
+const LIMIT=Number(process.env.HB_STRUCTURE_LIMIT||100);
+const CONCURRENCY=Number(process.env.HB_STRUCTURE_CONCURRENCY||5);
+const INDEX_CONCURRENCY=Number(process.env.HB_INDEX_CONCURRENCY||6);
+const HB_INDEX='https://www.hb.se/utbildning/program-och-kurser/?lang=sv&types=Programme&userInput=true';
+const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
+const norm=v=>clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+const slug=v=>norm(v).replace(/\s+/g,'-');
+const normCode=v=>clean(v).toLocaleUpperCase('sv-SE').replace(/\s+/g,'');
 
-function hpFlexible(v) {
-  const s = clean(v);
-  let m = s.replace(',', '.').match(/(\d+(?:\.\d+)?)\s*(?:hp|högskolepoäng)\b/i);
-  if (m) return Number(m[1]);
-  m = s.match(/[\[(]\s*(\d+(?:[,.]\d+)?)\s*[\])](?:\s|$)/);
-  if (m) return Number(m[1].replace(',', '.'));
-  m = s.match(/(?:^|\s)(\d+(?:[,.]\d+)?)\s*$/);
-  if (m) {
-    const n = Number(m[1].replace(',', '.'));
-    if (Number.isFinite(n) && n >= 1 && n <= 30) return n;
-  }
+function hpFlexible(v){
+  const s=clean(v);
+  let m=s.replace(',','.').match(/(\d+(?:\.\d+)?)\s*(?:hp|högskolepoäng)\b/i);
+  if(m)return Number(m[1]);
+  m=s.match(/[\[(]\s*(\d+(?:[,.]\d+)?)\s*[\])](?:\s|$)/); if(m)return Number(m[1].replace(',','.'));
+  m=s.match(/(?:^|\s)(\d+(?:[,.]\d+)?)\s*$/); if(m){const n=Number(m[1].replace(',','.'));if(n>=1&&n<=30)return n}
   return null;
 }
-
-function explicitTerm(v) {
-  const m = clean(v).match(/(?:kurser\s+under\s+)?termin\s*(\d{1,2})/i);
-  return m ? Number(m[1]) : null;
-}
-
-function ordinalTerm(v) {
-  const s = clean(v).toLocaleLowerCase('sv-SE');
-  const map = new Map([
-    ['första',1],['andra',2],['tredje',3],['fjärde',4],['femte',5],['sjätte',6],['sjunde',7],['åttonde',8],['nionde',9],['tionde',10]
-  ]);
-  for (const [word,n] of map) if (new RegExp(`(?:under\\s+)?${word}\\s+termin(?:en)?|termin\\s+${word}`).test(s)) return n;
+function headingTerm(line){
+  const s=clean(line);
+  let m=s.match(/^(?:kurser\s+under\s+)?termin\s*(\d{1,2})\b/i); if(m)return Number(m[1]);
+  const words={första:1,andra:2,tredje:3,fjärde:4,femte:5,sjätte:6,sjunde:7,åttonde:8,nionde:9,tionde:10};
+  for(const [w,n] of Object.entries(words))if(new RegExp(`^(?:under\\s+)?${w}\\s+termin(?:en)?\\b|^termin\\s+${w}\\b`,'i').test(s)&&s.length<100)return n;
   return null;
 }
+function yearSeasonTerm(line){
+  const s=clean(line);let m=s.match(/^År(?:skurs)?\s*(\d{1,2}).*?\b(Hösttermin(?:en)?|Vårtermin(?:en)?)\b/i);
+  if(!m)m=s.match(/^(Hösttermin(?:en)?|Vårtermin(?:en)?).*?År(?:skurs)?\s*(\d{1,2})\b/i);
+  if(!m)return null; const seasonFirst=/^(?:Höst|Vår)/i.test(m[1]); const y=Number(seasonFirst?m[2]:m[1]); const season=seasonFirst?m[1]:m[2];
+  return y>=1&&y<=10?(y-1)*2+(/^Vår/i.test(season)?2:1):null;
+}
+function creditRange(line){
+  const m=clean(line).match(/^(\d+)\s*[-–]\s*(\d+)\s*(?:hp|högskolepoäng)\b/i); if(!m)return null;
+  const a=Number(m[1]),b=Number(m[2]); if(!a||b<a)return null; return {start:a,end:b,baseTerm:Math.floor((a-1)/30)+1,total:b-a+1};
+}
+async function fetchText(url){const r=await fetch(url,{headers:{'user-agent':'StudieLots-HB-import/2.0'},redirect:'follow',signal:AbortSignal.timeout(25000)});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);return{url:r.url,text:await r.text()}}
+async function fetchBuffer(url){const r=await fetch(url,{headers:{'user-agent':'StudieLots-HB-import/2.0'},redirect:'follow',signal:AbortSignal.timeout(30000)});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);return{url:r.url,buffer:Buffer.from(await r.arrayBuffer())}}
+function decodeHtml(s){return String(s||'').replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'").replace(/&aring;/gi,'å').replace(/&auml;/gi,'ä').replace(/&ouml;/gi,'ö').replace(/&Aring;/g,'Å').replace(/&Auml;/g,'Ä').replace(/&Ouml;/g,'Ö')}
+function stripHtml(s){return clean(decodeHtml(String(s||'').replace(/<[^>]+>/g,' ')))}
+function linksFromHtml(html,base){const out=[];for(const m of html.matchAll(/href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)){try{out.push({url:new URL(decodeHtml(m[1]),base).href,label:stripHtml(m[2])})}catch{}}return out}
+function educationPlanUrl(html,base){for(const l of linksFromHtml(html,base))if(/utbildningsplan/i.test(l.label)||(/kursinfodoc\.hb\.se/i.test(l.url)&&/type=program/i.test(l.url)))return l.url;return''}
+function codeFromEducationPlanUrl(url){try{return normCode(new URL(url).searchParams.get('code')||'')}catch{return''}}
+function run(cmd,args,options={}){return new Promise((resolve,reject)=>{const p=spawn(cmd,args,{stdio:['ignore','pipe','pipe'],...options});let out='',err='';p.stdout.on('data',d=>out+=d);p.stderr.on('data',d=>err+=d);p.on('error',reject);p.on('close',c=>c===0?resolve(out):reject(new Error(`${cmd} exited ${c}: ${err}`)))})}
+let pdftotextReady;async function ensurePdfToText(){if(pdftotextReady)return pdftotextReady;pdftotextReady=(async()=>{try{await run('pdftotext',['-v']);return}catch{}console.log('pdftotext missing; installing poppler-utils on GitHub runner...');await run('sudo',['apt-get','update','-qq']);await run('sudo',['apt-get','install','-y','-qq','poppler-utils']);await run('pdftotext',['-v'])})();return pdftotextReady}
+async function pdfToText(url,key){await ensurePdfToText();const {url:finalUrl,buffer}=await fetchBuffer(url);const dir=await fs.mkdtemp(path.join(os.tmpdir(),'studielots-hb-'));const pdf=path.join(dir,`${String(key).replace(/[^a-z0-9_-]/gi,'_')}.pdf`);try{await fs.writeFile(pdf,buffer);return{url:finalUrl,text:await run('pdftotext',['-layout',pdf,'-'])}}finally{await fs.rm(dir,{recursive:true,force:true})}}
+async function boundedMap(items,n,fn){const out=new Array(items.length);let i=0;async function worker(){for(;;){const x=i++;if(x>=items.length)return;out[x]=await fn(items[x],x)}}await Promise.all(Array.from({length:Math.min(n,items.length||1)},worker));return out}
+async function buildProgrammeIndex(){const page=await fetchText(HB_INDEX);const links=linksFromHtml(page.text,page.url).filter(x=>/\/utbildning\/program-och-kurser\/program\//i.test(x.url));const unique=[...new Map(links.map(x=>[x.url,x])).values()];const byName=new Map(),byCode=new Map();for(const x of unique){const k=norm(x.label.replace(/,?\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng).*$/i,''));if(k&&!byName.has(k))byName.set(k,x.url)}await boundedMap(unique,INDEX_CONCURRENCY,async x=>{try{const p=await fetchText(x.url);const u=educationPlanUrl(p.text,p.url);const c=codeFromEducationPlanUrl(u);if(c&&!byCode.has(c))byCode.set(c,{pageUrl:p.url,pdfUrl:u})}catch{}});console.log(`HB programme index: ${byName.size} named programme pages, ${byCode.size} programme codes`);return{byName,byCode}}
+function programmePageUrl(item,index){const code=normCode(item.programCode||item.code||'');if(code&&index.byCode.has(code))return index.byCode.get(code).pageUrl;const cs=[item.programName,item.name,item.title].filter(Boolean).map(norm);for(const c of cs)if(index.byName.has(c))return index.byName.get(c);for(const c of cs){const h=[...index.byName.entries()].find(([k])=>k===c||k.startsWith(c+' ')||c.startsWith(k+' '));if(h)return h[1]}const d=[item.sourceUrl,item.url,item.officialUrl].find(u=>typeof u==='string'&&/hb\.se\/utbildning\/program-och-kurser\/program\//i.test(u));return d||`https://www.hb.se/utbildning/program-och-kurser/program/${slug(item.programName||item.name||'')}/`}
 
-function yearSeasonTerm(line) {
-  const s = clean(line);
-  let m = s.match(/År(?:skurs)?\s*(\d{1,2}).*?\b(Hösttermin(?:en)?|Vårtermin(?:en)?)\b/i);
-  if (!m) m = s.match(/\b(Hösttermin(?:en)?|Vårtermin(?:en)?)\b.*?År(?:skurs)?\s*(\d{1,2})/i);
-  if (!m) return null;
-  const seasonFirst = /^(?:Höst|Vår)/i.test(m[1]);
-  const year = Number(seasonFirst ? m[2] : m[1]);
-  const season = seasonFirst ? m[1] : m[2];
-  if (!Number.isFinite(year) || year < 1 || year > 10) return null;
-  return (year - 1) * 2 + (/^Vår/i.test(season) ? 2 : 1);
-}
+function cleanCourseName(line){return line.replace(/^[•\-–]\s*/,'').replace(/^\d+[.)]\s*/,'').replace(/\s*,?\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng).*$/i,'').replace(/\s*[\[(]\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng)?\s*[\])].*$/i,'').replace(/\s+\d+(?:[,.]\d+)?\s*$/,'').trim()}
+function isAggregate(name,line){return /^(?:Revision|År(?:skurs)?|Termin|Hösttermin|Vårtermin|Obligatoriska kurser|Vårdvetenskap|Medicinsk vetenskap|Huvudämne|Summa|Basblock|Studier inom|Utbildningsvetenskaplig kärna)\b/i.test(name)||/\b(?:omfattar|motsvarande|minst|totalt|varav|kursfordringar|högskolepoäng inom|utbildningen består|programmet omfattar|examen på)\b/i.test(line)}
+function courseFromLine(line){const hp=hpFlexible(line);if(!hp||hp>30)return null;const name=cleanCourseName(line);if(name.length<3||isAggregate(name,line))return null;return{name,hp,type:/\b(?:valbar|valfri|alternativ|eller|alt\.)\b/i.test(line)?'choice':'required',isThesis:/examensarbete|självständigt arbete/i.test(name)}}
+function dedupeRows(rows){const seen=new Set();return rows.filter(r=>{const k=`${r.term||''}|${norm(r.name)}|${r.hp}`;if(seen.has(k))return false;seen.add(k);return true})}
+function targets(total){const out=[];let left=Number(total)||0;while(left>.01){const n=Math.min(30,left);out.push(n);left-=n}return out}
+function splitSequentially(rows,totalHp,baseTerm=1){if(!rows.length)return[];const ts=targets(totalHp);const out=[];let i=0;for(let t=0;t<ts.length;t++){let sum=0,start=i;while(i<rows.length&&sum<ts[t]-.01){sum+=rows[i].hp;i++}if(Math.abs(sum-ts[t])>.01)return[];for(const r of rows.slice(start,i))out.push({term:baseTerm+t,...r})}return i===rows.length?out:[]}
+function plainCourseRows(text){const rows=[];for(const line of text.split(/\r?\n/).map(clean).filter(Boolean)){const r=courseFromLine(line);if(r)rows.push(r)}return dedupeRows(rows)}
+function extractChoice(line){const s=line.replace(/[–—]/g,'-');const m=s.match(/^(.*?)\s*,?\s*(\d+(?:[,.]\d+)?)\s*(?:hp|högskolepoäng)\s*(?:alt\.?|eller)\s*(.*?)\s*,?\s*(\d+(?:[,.]\d+)?)\s*(?:hp|högskolepoäng)/i);if(!m)return null;const a=Number(m[2].replace(',','.')),b=Number(m[4].replace(',','.'));if(Math.abs(a-b)>.01)return null;return{name:`${clean(m[1])} / ${clean(m[3])}`,hp:a,type:'choice',options:[{name:clean(m[1]),hp:a},{name:clean(m[3]),hp:b}]}}
+function normalizeChoicePools(rows){const by=new Map();for(const r of rows){if(!by.has(r.term))by.set(r.term,[]);by.get(r.term).push(r)}const out=[];for(const [term,rs] of by){const req=rs.filter(r=>r.type!=='choice'),ch=rs.filter(r=>r.type==='choice');const reqHp=req.reduce((s,r)=>s+r.hp,0),choiceHp=ch.reduce((s,r)=>s+r.hp,0),remaining=Math.round((30-reqHp)*100)/100;if(ch.length>1&&reqHp<30.01&&choiceHp>remaining+.01&&remaining>0){const unit=ch[0].hp,same=ch.every(r=>Math.abs(r.hp-unit)<.01),slots=same?remaining/unit:NaN;if(same&&Math.abs(slots-Math.round(slots))<.01&&Math.round(slots)>=1){out.push(...req,{term,name:`Valbara/alternativa kurser (${Math.round(slots)} val)`,hp:remaining,type:'choice',choiceSlots:Math.round(slots),options:ch.flatMap(r=>r.options||[{name:r.name,hp:r.hp}]),isThesis:false});continue}}out.push(...rs)}return out.sort((a,b)=>a.term-b.term)}
 
-async function fetchText(url) {
-  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.8' }, redirect: 'follow', signal: AbortSignal.timeout(25000) });
-  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-  return { url: r.url, text: await r.text() };
-}
-
-async function fetchBuffer(url) {
-  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.8' }, redirect: 'follow', signal: AbortSignal.timeout(30000) });
-  if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-  return { url: r.url, buffer: Buffer.from(await r.arrayBuffer()) };
-}
-
-function decodeHtml(s) {
-  return String(s || '').replace(/&amp;/gi, '&').replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'").replace(/&aring;/gi, 'å').replace(/&auml;/gi, 'ä').replace(/&ouml;/gi, 'ö').replace(/&Aring;/g, 'Å').replace(/&Auml;/g, 'Ä').replace(/&Ouml;/g, 'Ö');
-}
-function stripHtml(s) { return clean(decodeHtml(String(s || '').replace(/<[^>]+>/g, ' '))); }
-function linksFromHtml(html, base) {
-  const out = [];
-  for (const m of html.matchAll(/href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
-    try { out.push({ url: new URL(decodeHtml(m[1]), base).href, label: stripHtml(m[2]) }); } catch {}
-  }
-  return out;
-}
-function educationPlanUrl(html, base) {
-  for (const link of linksFromHtml(html, base)) {
-    if (/utbildningsplan/i.test(link.label) || (/kursinfodoc\.hb\.se/i.test(link.url) && /type=program/i.test(link.url))) return link.url;
-  }
-  return '';
-}
-function codeFromEducationPlanUrl(url) {
-  try { return normCode(new URL(url).searchParams.get('code') || ''); } catch { return ''; }
-}
-
-function run(cmd, args, options = {}) {
-  return new Promise((resolve, reject) => {
-    const p = spawn(cmd, args, { stdio: ['ignore', 'pipe', 'pipe'], ...options });
-    let out = '', err = '';
-    p.stdout.on('data', d => { out += d; });
-    p.stderr.on('data', d => { err += d; });
-    p.on('error', reject);
-    p.on('close', code => code === 0 ? resolve(out) : reject(new Error(`${cmd} exited ${code}: ${err}`)));
-  });
-}
-
-let pdftotextReady;
-async function ensurePdfToText() {
-  if (pdftotextReady) return pdftotextReady;
-  pdftotextReady = (async () => {
-    try { await run('pdftotext', ['-v']); return; } catch {}
-    console.log('pdftotext missing; installing poppler-utils on GitHub runner...');
-    await run('sudo', ['apt-get', 'update', '-qq']);
-    await run('sudo', ['apt-get', 'install', '-y', '-qq', 'poppler-utils']);
-    await run('pdftotext', ['-v']);
-  })();
-  return pdftotextReady;
-}
-async function pdfToText(url, key) {
-  await ensurePdfToText();
-  const { url: finalUrl, buffer } = await fetchBuffer(url);
-  const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'studielots-hb-'));
-  const pdf = path.join(dir, `${String(key).replace(/[^a-z0-9_-]/gi, '_')}.pdf`);
-  try {
-    await fs.writeFile(pdf, buffer);
-    return { url: finalUrl, text: await run('pdftotext', ['-layout', pdf, '-']) };
-  } finally { await fs.rm(dir, { recursive: true, force: true }); }
-}
-
-async function boundedMap(items, concurrency, fn) {
-  const out = new Array(items.length); let i = 0;
-  async function worker() { for (;;) { const n = i++; if (n >= items.length) return; out[n] = await fn(items[n], n); } }
-  await Promise.all(Array.from({ length: Math.min(concurrency, items.length || 1) }, worker));
-  return out;
-}
-
-async function buildProgrammeIndex() {
-  const page = await fetchText(HB_INDEX);
-  const links = linksFromHtml(page.text, page.url).filter(x => /\/utbildning\/program-och-kurser\/program\//i.test(x.url));
-  const unique = [...new Map(links.map(x => [x.url, x])).values()];
-  const byName = new Map(), byCode = new Map();
-  for (const x of unique) {
-    const key = norm(x.label.replace(/,?\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng).*$/i, ''));
-    if (key && !byName.has(key)) byName.set(key, x.url);
-  }
-  await boundedMap(unique, INDEX_CONCURRENCY, async x => {
-    try {
-      const programme = await fetchText(x.url);
-      const pdfUrl = educationPlanUrl(programme.text, programme.url);
-      const code = codeFromEducationPlanUrl(pdfUrl);
-      if (code && !byCode.has(code)) byCode.set(code, { pageUrl: programme.url, pdfUrl });
-    } catch {}
-  });
-  console.log(`HB programme index: ${byName.size} named programme pages, ${byCode.size} programme codes`);
-  return { byName, byCode };
-}
-
-function programmePageUrl(item, index) {
-  const code = normCode(item.programCode || item.code || '');
-  if (code && index.byCode.has(code)) return index.byCode.get(code).pageUrl;
-  const candidates = [item.programName, item.name, item.title].filter(Boolean).map(norm);
-  for (const candidate of candidates) if (index.byName.has(candidate)) return index.byName.get(candidate);
-  for (const candidate of candidates) {
-    const hit = [...index.byName.entries()].find(([k]) => k === candidate || k.startsWith(candidate + ' ') || candidate.startsWith(k + ' '));
-    if (hit) return hit[1];
-  }
-  const direct = [item.sourceUrl, item.url, item.officialUrl].find(u => typeof u === 'string' && /hb\.se\/utbildning\/program-och-kurser\/program\//i.test(u));
-  if (direct) return direct;
-  return `https://www.hb.se/utbildning/program-och-kurser/program/${slug(item.programName || item.name || '')}/`;
-}
-
-function extractChoice(line) {
-  const normalized = line.replace(/[–—]/g, '-');
-  const m = normalized.match(/^(.*?)\s*,?\s*(\d+(?:[,.]\d+)?)\s*(?:hp|högskolepoäng)\s*(?:alt\.?|eller)\s*(.*?)\s*,?\s*(\d+(?:[,.]\d+)?)\s*(?:hp|högskolepoäng)/i);
-  if (!m) return null;
-  const a = Number(m[2].replace(',', '.')), b = Number(m[4].replace(',', '.'));
-  if (!Number.isFinite(a) || !Number.isFinite(b) || Math.abs(a - b) > 0.01) return null;
-  return { name: `${clean(m[1])} / ${clean(m[3])}`, hp: a, type: 'choice', options: [{ name: clean(m[1]), hp: a }, { name: clean(m[3]), hp: b }] };
-}
-
-function mergeSplitAlternatives(rows) {
-  const out = [];
-  for (let i = 0; i < rows.length; i++) {
-    const row = rows[i], next = rows[i + 1];
-    if (row.choiceContinuation && next && next.term === row.term && next.type === 'required' && Math.abs(next.hp - row.hp) < 0.01) {
-      out.push({ term: row.term, name: `${row.name} / ${next.name}`, hp: row.hp, type: 'choice', options: [{ name: row.name, hp: row.hp }, { name: next.name, hp: next.hp }], isThesis: row.isThesis || next.isThesis });
-      i++; continue;
+function parseRows(text,programmeHp){
+  const lines=text.split(/\r?\n/).map(clean).filter(Boolean),direct=[],yearBuckets=new Map(),rangeBuckets=[];
+  let term=null,year=null,range=null,seasonCounter=0,inCourses=false;
+  for(const line of lines){
+    if(/^(?:programmets\s+kurser|programmets\s+innehåll|kurser\s+i\s+programmet)\b/i.test(line)){inCourses=true;term=null;year=null;range=null;continue}
+    const ys=yearSeasonTerm(line);if(ys){term=ys;year=Math.ceil(ys/2);range=null;inCourses=true;continue}
+    const ht=headingTerm(line);if(ht&&ht<=20){term=ht;year=Math.ceil(ht/2);range=null;seasonCounter=Math.max(seasonCounter,ht);inCourses=true;continue}
+    const ym=line.match(/^År(?:skurs)?\s*(\d{1,2})\b/i);if(ym){year=Number(ym[1]);term=null;range=null;inCourses=true;continue}
+    const cr=creditRange(line);if(cr){range={...cr,rows:[]};rangeBuckets.push(range);term=null;year=null;inCourses=true;continue}
+    if(/^(?:Hösttermin(?:en)?|Vårtermin(?:en)?)\s*:?$/i.test(line)){
+      if(year)term=(year-1)*2+(/^Vår/i.test(line)?2:1);else{seasonCounter++;term=seasonCounter}
+      range=null;inCourses=true;continue;
     }
-    const { choiceContinuation, ...cleanRow } = row; out.push(cleanRow);
+    if(inCourses&&/^(?:Informationssökning|Förkunskapskrav|Examen|Studentinflytande|Övrigt|Undervisningsformer|Internationalisering|Programmets mål|Kvalitetssäkring|Övergångsbestämmelser|Examinationsformer)\b/i.test(line)){term=null;year=null;range=null;inCourses=false;continue}
+    if(!inCourses)continue;
+    const choice=extractChoice(line);const r=choice?{...choice,isThesis:false}:courseFromLine(line);if(!r)continue;
+    if(term)direct.push({term,...r});else if(range)range.rows.push(r);else if(year){if(!yearBuckets.has(year))yearBuckets.set(year,[]);yearBuckets.get(year).push(r)}
   }
-  return out;
+  let rows=dedupeRows(direct);
+  for(const [y,rs0] of yearBuckets){const rs=dedupeRows(rs0);const split=splitSequentially(rs,60,(y-1)*2+1);if(split.length)rows.push(...split)}
+  for(const b of rangeBuckets){const rs=dedupeRows(b.rows);const split=splitSequentially(rs,b.total,b.baseTerm);if(split.length)rows.push(...split)}
+  rows=normalizeChoicePools(dedupeRows(rows)); if(rows.length)return rows;
+  const generic=plainCourseRows(text);const exact=generic.reduce((s,r)=>s+r.hp,0);
+  if(Math.abs(exact-Number(programmeHp||0))<.01)return splitSequentially(generic,Number(programmeHp)||0);
+  return[];
 }
-
-function cleanCourseName(line) {
-  return line
-    .replace(/^[•\-–]\s*/, '')
-    .replace(/\s*,?\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng).*$/i, '')
-    .replace(/\s*[\[(]\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng)?\s*[\])].*$/i, '')
-    .replace(/\s+\d+(?:[,.]\d+)?\s*$/, '')
-    .trim();
-}
-
-function plainCourseRows(text) {
-  const lines = text.split(/\r?\n/).map(clean).filter(Boolean);
-  const rows = [];
-  for (const line of lines) {
-    const credits = hpFlexible(line);
-    if (!credits || credits > 30) continue;
-    if (/\b(?:omfattar|motsvarande|minst|totalt|varav|kursfordringar|högskolepoäng inom|utbildningen|programmet|examen på)\b/i.test(line)) continue;
-    const name = cleanCourseName(line);
-    if (name.length < 3 || /^(?:Revision|År|Termin|Hösttermin|Vårtermin|Obligatoriska kurser|Vårdvetenskap|Huvudämne|Summa)\b/i.test(name)) continue;
-    rows.push({ name, hp: credits, type: /\bvalbar|valfri|alternativ|\beller\b/i.test(line) ? 'choice' : 'required', isThesis: /examensarbete|självständigt arbete/i.test(name) });
-  }
-  return rows;
-}
-
-function splitSequentially(rows, totalHp) {
-  if (!rows.length || !Number.isFinite(totalHp) || totalHp <= 0) return [];
-  const targets = [];
-  let left = totalHp;
-  while (left > 0.01) { const n = Math.min(30, left); targets.push(n); left -= n; }
-  const out = []; let i = 0;
-  for (let t = 0; t < targets.length; t++) {
-    let sum = 0; const start = i;
-    while (i < rows.length && sum < targets[t] - 0.01) { sum += rows[i].hp; i++; }
-    if (Math.abs(sum - targets[t]) > 0.01) return [];
-    for (const r of rows.slice(start, i)) out.push({ term: t + 1, ...r });
-  }
-  if (i !== rows.length) return [];
-  return out;
-}
-
-function parseRows(text, programmeHp) {
-  const lines = text.split(/\r?\n/).map(clean).filter(Boolean);
-  const rows = [];
-  let currentTerm = null, currentYear = null, inCourseSection = false, explicitTermMode = false;
-  for (const line of lines) {
-    if (/^(?:programmets\s+kurser|programmets\s+innehåll|kurser\s+i\s+programmet)\b/i.test(line)) { inCourseSection = true; currentTerm = null; continue; }
-    const combined = yearSeasonTerm(line);
-    if (combined) { currentTerm = combined; currentYear = Math.ceil(combined / 2); inCourseSection = true; continue; }
-    const t = explicitTerm(line) || ordinalTerm(line);
-    if (t && t <= 20 && /(?:termin|term)/i.test(line)) { currentTerm = t; inCourseSection = true; explicitTermMode = true; continue; }
-    const ym = line.match(/^År(?:skurs)?\s*(\d{1,2})\b/i);
-    if (ym) { currentYear = Number(ym[1]); currentTerm = null; if (currentYear >= 1 && currentYear <= 10) inCourseSection = true; continue; }
-    if (currentYear && /^Hösttermin(?:en)?\b/i.test(line)) { currentTerm = (currentYear - 1) * 2 + 1; inCourseSection = true; continue; }
-    if (currentYear && /^Vårtermin(?:en)?\b/i.test(line)) { currentTerm = (currentYear - 1) * 2 + 2; inCourseSection = true; continue; }
-    if (inCourseSection && currentTerm && /^(?:Informationssökning|Förkunskapskrav|Examen|Studentinflytande|Övrigt|Vetenskaplig teori|Undervisningsformer|Internationalisering|Programmets mål|Mål|Kvalitetssäkring|Övergångsbestämmelser|Examinationsformer)\b/i.test(line)) {
-      if (explicitTermMode) break;
-      currentTerm = null; currentYear = null; inCourseSection = false; continue;
-    }
-    if (!inCourseSection || !currentTerm) continue;
-    const grouped = extractChoice(line);
-    if (grouped) { rows.push({ term: currentTerm, ...grouped, isThesis: false }); continue; }
-    const credits = hpFlexible(line);
-    if (!credits || credits > 30 || /\b(?:omfattar|motsvarande|totalt|varav)\b/i.test(line)) continue;
-    const name = cleanCourseName(line);
-    if (name.length < 3 || /^(?:År|Hösttermin|Vårtermin|Valbart|Obligatoriska kurser|Summa)\b/i.test(name)) continue;
-    const choice = /\balt\.?\b|alternativ|valbar|valfri|\beller\b/i.test(line);
-    rows.push({ term: currentTerm, name, hp: credits, type: choice ? 'choice' : 'required', choiceContinuation: /\balt\.?\s*$|\beller\s*$/i.test(line), isThesis: /examensarbete|självständigt arbete/i.test(name) });
-  }
-  const parsed = normalizeChoicePools(mergeSplitAlternatives(rows));
-  if (parsed.length) return parsed;
-  return splitSequentially(plainCourseRows(text), Number(programmeHp) || 0);
-}
-
-function normalizeChoicePools(rows) {
-  const byTerm = new Map();
-  for (const row of rows) { if (!byTerm.has(row.term)) byTerm.set(row.term, []); byTerm.get(row.term).push(row); }
-  const out = [];
-  for (const [termNo, termRows] of byTerm) {
-    const required = termRows.filter(r => r.type !== 'choice'), choices = termRows.filter(r => r.type === 'choice');
-    const requiredHp = required.reduce((s, r) => s + r.hp, 0), choiceHp = choices.reduce((s, r) => s + r.hp, 0);
-    const remaining = Math.round((30 - requiredHp) * 100) / 100;
-    if (choices.length > 1 && requiredHp < 30.01 && choiceHp > remaining + 0.01 && remaining > 0) {
-      const unit = choices[0].hp, sameUnit = choices.every(r => Math.abs(r.hp - unit) < 0.01), slots = sameUnit ? remaining / unit : NaN;
-      if (sameUnit && Math.abs(slots - Math.round(slots)) < 0.01 && Math.round(slots) >= 1 && choices.length >= Math.round(slots)) {
-        out.push(...required, { term: termNo, name: `Valbara/alternativa kurser (${Math.round(slots)} val)`, hp: remaining, type: 'choice', choiceSlots: Math.round(slots), options: choices.flatMap(r => r.options || [{ name: r.name, hp: r.hp }]), isThesis: false });
-        continue;
-      }
-    }
-    out.push(...termRows);
-  }
-  return out.sort((a, b) => a.term - b.term);
-}
-
-function classify(rows, programmeHp) {
-  if (!rows.length) return { coverage: 'metadata-only', reason: 'no-semester-rows' };
-  const sums = new Map(); for (const r of rows) sums.set(r.term, (sums.get(r.term) || 0) + r.hp);
-  const terms = [...sums].sort((a,b)=>a[0]-b[0]);
-  const targets = [];
-  if (programmeHp > 0) { let left = programmeHp; while (left > 0.01) { const n = Math.min(30,left); targets.push(n); left -= n; } }
-  const over = terms.filter(([,s],i)=>s > (targets[i] || 30) + 0.01);
-  const exact = terms.filter(([,s],i)=>Math.abs(s - (targets[i] || 30)) < 0.01).length;
-  const hasChoice = rows.some(r=>r.type==='choice');
-  if (over.length) return { coverage:'manual-review', reason:'term-over-target', termSums:Object.fromEntries(terms) };
-  if (targets.length && terms.length===targets.length && exact===targets.length) return { coverage:hasChoice?'choice-required':'complete', reason:'official-education-plan-all-terms-validated', termSums:Object.fromEntries(terms) };
-  if (exact>=2) return { coverage:'partial-structure', reason:'official-education-plan-some-complete-terms', termSums:Object.fromEntries(terms) };
-  return { coverage:'manual-review', reason:'official-education-plan-insufficient-consistency', termSums:Object.fromEntries(terms) };
-}
-
-async function enrich(item,index) {
-  const pageUrl=programmePageUrl(item,index);
-  try {
-    const code=normCode(item.programCode||item.code||'');
-    let page,pdfUrl='';
-    if(code&&index.byCode.has(code)){const hit=index.byCode.get(code);page={url:hit.pageUrl,text:''};pdfUrl=hit.pdfUrl}else{page=await fetchText(pageUrl);pdfUrl=educationPlanUrl(page.text,page.url)}
-    if(!pdfUrl)throw new Error('education-plan-link-not-found');
-    const pdf=await pdfToText(pdfUrl,item.programCode||item.key);
-    const rows=parseRows(pdf.text, Number(item.hp)||0);
-    const c=classify(rows,Number(item.hp)||0);
-    if(c.reason==='no-semester-rows'){
-      const diag=pdf.text.split(/\r?\n/).map(clean).filter(Boolean).filter(x=>/(termin|årskurs|^år\s*\d|högskolepoäng|\bhp\b)/i.test(x)).slice(0,20);
-      console.log(`HB-DIAG ${item.programCode||item.key}: ${JSON.stringify(diag)}`);
-    }
-    return {...item,status:'processed',source:'hogskolan-i-boras-utbildningsplan',sourceUrl:pdf.url,sourceUrls:[page.url,pdf.url],rows,...c,checkedAt:new Date().toISOString()};
-  }catch(e){return {...item,status:'manual-review',coverage:'metadata-only',reason:`hb-import:${e.message}`,attemptedPageUrl:pageUrl,checkedAt:new Date().toISOString()}}
-}
-
+function classify(rows,programmeHp){if(!rows.length)return{coverage:'metadata-only',reason:'no-semester-rows'};const sums=new Map();for(const r of rows)sums.set(r.term,(sums.get(r.term)||0)+r.hp);const terms=[...sums].sort((a,b)=>a[0]-b[0]),ts=targets(programmeHp);const over=terms.filter(([t,s])=>s>(ts[t-1]||30)+.01),exact=terms.filter(([t,s])=>Math.abs(s-(ts[t-1]||30))<.01).length,hasChoice=rows.some(r=>r.type==='choice');if(over.length)return{coverage:'manual-review',reason:'term-over-target',termSums:Object.fromEntries(terms)};if(ts.length&&terms.length===ts.length&&exact===ts.length)return{coverage:hasChoice?'choice-required':'complete',reason:'official-education-plan-all-terms-validated',termSums:Object.fromEntries(terms)};if(exact>=2)return{coverage:'partial-structure',reason:'official-education-plan-some-complete-terms',termSums:Object.fromEntries(terms)};return{coverage:'manual-review',reason:'official-education-plan-insufficient-consistency',termSums:Object.fromEntries(terms)}}
+async function enrich(item,index){const pageUrl=programmePageUrl(item,index);try{const code=normCode(item.programCode||item.code||'');let page,pdfUrl='';if(code&&index.byCode.has(code)){const h=index.byCode.get(code);page={url:h.pageUrl,text:''};pdfUrl=h.pdfUrl}else{page=await fetchText(pageUrl);pdfUrl=educationPlanUrl(page.text,page.url)}if(!pdfUrl)throw new Error('education-plan-link-not-found');const pdf=await pdfToText(pdfUrl,item.programCode||item.key);const rows=parseRows(pdf.text,Number(item.hp)||0),c=classify(rows,Number(item.hp)||0);if(c.reason==='no-semester-rows'){const diag=pdf.text.split(/\r?\n/).map(clean).filter(Boolean).filter(x=>/(termin|årskurs|^år\s*\d|högskolepoäng|\bhp\b)/i.test(x)).slice(0,24);console.log(`HB-DIAG ${item.programCode||item.key}: ${JSON.stringify(diag)}`)}return{...item,status:'processed',source:'hogskolan-i-boras-utbildningsplan',sourceUrl:pdf.url,sourceUrls:[page.url,pdf.url],rows,...c,checkedAt:new Date().toISOString()}}catch(e){return{...item,status:'manual-review',coverage:'metadata-only',reason:`hb-import:${e.message}`,attemptedPageUrl:pageUrl,checkedAt:new Date().toISOString()}}}
 async function pool(items,index){const out=new Array(items.length);let i=0;async function worker(){for(;;){const n=i++;if(n>=items.length)return;out[n]=await enrich(items[n],index);console.log(`${n+1}/${items.length} ${out[n].coverage} ${items[n].programCode||''} ${out[n].reason}`)}}await Promise.all(Array.from({length:Math.min(CONCURRENCY,items.length||1)},worker));return out}
-
-async function main(){const queue=JSON.parse(await fs.readFile(path.join(ROOT,'structure-queue.json'),'utf8'));let structures=[];try{structures=JSON.parse(await fs.readFile(path.join(ROOT,'structures.json'),'utf8'))}catch{}const map=new Map(structures.map(x=>[x.key,x]));const hb=queue.filter(x=>norm(x.university)==='hogskolan i boras').filter(x=>!map.get(x.key)||['metadata-only','manual-review','partial-structure'].includes(map.get(x.key).coverage)).slice(0,LIMIT);const index=await buildProgrammeIndex();const fresh=await pool(hb,index);const rank={complete:5,'choice-required':4,'partial-structure':3,'manual-review':2,'metadata-only':1};for(const x of fresh){const old=map.get(x.key);if(!old||(rank[x.coverage]||0)>=(rank[old.coverage]||0))map.set(x.key,x)}const all=[...map.values()];const counts=all.reduce((a,x)=>(a[x.coverage]=(a[x.coverage]||0)+1,a),{});const hbCounts=fresh.reduce((a,x)=>(a[x.coverage]=(a[x.coverage]||0)+1,a),{});const retryable=all.filter(x=>['metadata-only','manual-review'].includes(x.coverage)).length;await fs.writeFile(path.join(ROOT,'structures.json'),JSON.stringify(all,null,2)+'\n');await fs.writeFile(path.join(ROOT,'structure-meta.json'),JSON.stringify({generatedAt:new Date().toISOString(),processed:all.length,remaining:Math.max(0,queue.length-all.length),retryable,counts},null,2)+'\n');console.log({hbProcessed:fresh.length,hbCounts,processed:all.length,counts})}
-
+async function main(){const queue=JSON.parse(await fs.readFile(path.join(ROOT,'structure-queue.json'),'utf8'));let structures=[];try{structures=JSON.parse(await fs.readFile(path.join(ROOT,'structures.json'),'utf8'))}catch{}const map=new Map(structures.map(x=>[x.key,x]));const hb=queue.filter(x=>norm(x.university)==='hogskolan i boras').filter(x=>!map.get(x.key)||['metadata-only','manual-review','partial-structure'].includes(map.get(x.key).coverage)).slice(0,LIMIT);const index=await buildProgrammeIndex();const fresh=await pool(hb,index);const rank={complete:5,'choice-required':4,'partial-structure':3,'manual-review':2,'metadata-only':1};for(const x of fresh){const old=map.get(x.key);if(!old||(rank[x.coverage]||0)>=(rank[old.coverage]||0))map.set(x.key,x)}const all=[...map.values()],counts=all.reduce((a,x)=>(a[x.coverage]=(a[x.coverage]||0)+1,a),{}),hbCounts=fresh.reduce((a,x)=>(a[x.coverage]=(a[x.coverage]||0)+1,a),{}),retryable=all.filter(x=>['metadata-only','manual-review'].includes(x.coverage)).length;await fs.writeFile(path.join(ROOT,'structures.json'),JSON.stringify(all,null,2)+'\n');await fs.writeFile(path.join(ROOT,'structure-meta.json'),JSON.stringify({generatedAt:new Date().toISOString(),processed:all.length,remaining:Math.max(0,queue.length-all.length),retryable,counts},null,2)+'\n');console.log({hbProcessed:fresh.length,hbCounts,processed:all.length,counts})}
 main().catch(e=>{console.error(e);process.exitCode=1});
