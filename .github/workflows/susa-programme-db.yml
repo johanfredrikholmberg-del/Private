@@ -1,0 +1,49 @@
+name: SUSA programme database
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * 1'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: susa-programme-db
+  cancel-in-progress: false
+
+jobs:
+  materialise:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download and normalise SUSA higher education catalogue
+        run: node scripts/susa-programme-db-pipeline.mjs
+      - name: Validate materialised catalogue
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const meta=JSON.parse(fs.readFileSync('data/susa/meta.json','utf8'));
+          const programmes=JSON.parse(fs.readFileSync('data/susa/programmes.json','utf8'));
+          const courses=JSON.parse(fs.readFileSync('data/susa/courses.json','utf8'));
+          const queue=JSON.parse(fs.readFileSync('data/susa/structure-queue.json','utf8'));
+          if (!programmes.length || !courses.length || queue.length !== programmes.length) throw new Error('SUSA materialisation failed validation');
+          if (meta.counts.programmes !== programmes.length || meta.counts.courses !== courses.length) throw new Error('SUSA counts mismatch');
+          console.log(meta.counts);
+          NODE
+      - name: Commit changed catalogue
+        run: |
+          if git diff --quiet -- data/susa; then
+            echo 'No SUSA catalogue changes.'
+            exit 0
+          fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/susa
+          git commit -m 'Refresh SUSA higher education catalogue'
+          git push origin HEAD:studielots-v2
