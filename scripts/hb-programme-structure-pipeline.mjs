@@ -32,14 +32,26 @@ const term = v => {
   return m ? Number(m[1]) : null;
 };
 
+function yearSeasonTerm(line) {
+  const s = clean(line);
+  let m = s.match(/År(?:skurs)?\s*(\d{1,2}).*?\b(Hösttermin(?:en)?|Vårtermin(?:en)?)\b/i);
+  if (!m) m = s.match(/\b(Hösttermin(?:en)?|Vårtermin(?:en)?)\b.*?År(?:skurs)?\s*(\d{1,2})/i);
+  if (!m) return null;
+  const seasonFirst = /^(?:Höst|Vår)/i.test(m[1]);
+  const year = Number(seasonFirst ? m[2] : m[1]);
+  const season = seasonFirst ? m[1] : m[2];
+  if (!Number.isFinite(year) || year < 1 || year > 10) return null;
+  return (year - 1) * 2 + (/^Vår/i.test(season) ? 2 : 1);
+}
+
 async function fetchText(url) {
-  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.5' }, redirect: 'follow', signal: AbortSignal.timeout(25000) });
+  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.6' }, redirect: 'follow', signal: AbortSignal.timeout(25000) });
   if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
   return { url: r.url, text: await r.text() };
 }
 
 async function fetchBuffer(url) {
-  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.5' }, redirect: 'follow', signal: AbortSignal.timeout(30000) });
+  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.6' }, redirect: 'follow', signal: AbortSignal.timeout(30000) });
   if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
   return { url: r.url, buffer: Buffer.from(await r.arrayBuffer()) };
 }
@@ -192,6 +204,29 @@ function extractChoice(line) {
   };
 }
 
+function mergeSplitAlternatives(rows) {
+  const out = [];
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    const next = rows[i + 1];
+    if (row.choiceContinuation && next && next.term === row.term && next.type === 'required' && Math.abs(next.hp - row.hp) < 0.01) {
+      out.push({
+        term: row.term,
+        name: `${row.name} / ${next.name}`,
+        hp: row.hp,
+        type: 'choice',
+        options: [{ name: row.name, hp: row.hp }, { name: next.name, hp: next.hp }],
+        isThesis: row.isThesis || next.isThesis
+      });
+      i++;
+      continue;
+    }
+    const { choiceContinuation, ...cleanRow } = row;
+    out.push(cleanRow);
+  }
+  return out;
+}
+
 function parseRows(text) {
   const lines = text.split(/\r?\n/).map(clean).filter(Boolean);
   const rows = [];
@@ -205,6 +240,14 @@ function parseRows(text) {
       inCourseSection = true;
       explicitTermMode = true;
       currentTerm = null;
+      continue;
+    }
+
+    const combinedTerm = yearSeasonTerm(line);
+    if (combinedTerm) {
+      currentTerm = combinedTerm;
+      currentYear = Math.ceil(combinedTerm / 2);
+      inCourseSection = true;
       continue;
     }
 
@@ -225,19 +268,19 @@ function parseRows(text) {
     }
 
     if (currentYear) {
-      if (/^Höstterminen\b/i.test(line)) {
+      if (/^Hösttermin(?:en)?\b/i.test(line)) {
         currentTerm = (currentYear - 1) * 2 + 1;
         inCourseSection = true;
         continue;
       }
-      if (/^Vårterminen\b/i.test(line)) {
+      if (/^Vårtermin(?:en)?\b/i.test(line)) {
         currentTerm = (currentYear - 1) * 2 + 2;
         inCourseSection = true;
         continue;
       }
     }
 
-    if (inCourseSection && currentTerm && /^(?:Informationssökning|Förkunskapskrav|Examen|Studentinflytande|Övrigt|Vetenskaplig teori|Självständigt arbete \(examensarbete\)|Undervisningsformer|Internationalisering)\b/i.test(line)) {
+    if (inCourseSection && currentTerm && /^(?:Informationssökning|Förkunskapskrav|Examen|Studentinflytande|Övrigt|Vetenskaplig teori|Självständigt arbete \(examensarbete\)|Undervisningsformer|Internationalisering|Programmets mål|Mål|Kvalitetssäkring|Övergångsbestämmelser)\b/i.test(line)) {
       if (explicitTermMode) break;
       currentTerm = null;
       currentYear = null;
@@ -261,12 +304,13 @@ function parseRows(text) {
       .replace(/\s*[\[(]\s*\d+(?:[,.]\d+)?\s*[\])]\s*$/i, '')
       .trim();
     if (name.length < 3) continue;
-    if (/^(?:År|Höstterminen|Vårterminen|Valbart|Obligatoriska kurser)/i.test(name)) continue;
+    if (/^(?:År|Hösttermin|Vårtermin|Valbart|Obligatoriska kurser)/i.test(name)) continue;
     const choice = /\balt\.?\b|alternativ|valbar|valfri|\beller\b/i.test(line);
+    const choiceContinuation = /\balt\.?\s*$|\beller\s*$/i.test(line);
     const thesis = /examensarbete|självständigt arbete/i.test(name);
-    rows.push({ term: currentTerm, name, hp: credits, type: choice ? 'choice' : 'required', isThesis: thesis });
+    rows.push({ term: currentTerm, name, hp: credits, type: choice ? 'choice' : 'required', choiceContinuation, isThesis: thesis });
   }
-  return normalizeChoicePools(rows);
+  return normalizeChoicePools(mergeSplitAlternatives(rows));
 }
 
 function normalizeChoicePools(rows) {
