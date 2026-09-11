@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Verified Civilekonom branch model; this file also triggers all chained Borås overrides (incl. Affärsingenjör).
+// Verified Civilekonom branch model; this file also triggers all chained Borås overrides.
 import fs from 'node:fs/promises';
 const FILE='data/susa/structures.json',META='data/susa/structure-meta.json';
 const all=JSON.parse(await fs.readFile(FILE,'utf8'));
@@ -24,7 +24,7 @@ const meta=JSON.parse(await fs.readFile(META,'utf8'));meta.generatedAt=new Date(
 console.log('ACEKO verified:',x&&{coverage:x.coverage,reason:x.reason,termSums:x.termSums});
 await import('./hb-verified-structure-overrides-4.mjs');
 await import('./hb-verified-structure-overrides-5.mjs');
-for(const code of ['GDIST','SGKMM','SGKTM','VABAM','VDIST','TGKEH']){
+for(const code of ['NGBIB','NGBID','SAMPD','TGIEL','TGIEO','TGITI','TGMAA']){
  const p=all.find(v=>String(v.programCode||'').toUpperCase()===code);
- if(p) console.log('HB-SELECTED-DIAG',JSON.stringify({code,name:p.programName,hp:p.hp,coverage:p.coverage,reason:p.reason,rows:p.rows,unassignedCourses:p.unassignedCourses,sourceUrl:p.sourceUrl,sourceUrls:p.sourceUrls,academicYearSums:p.academicYearSums,studyStructureGranularity:p.studyStructureGranularity,termSums:p.termSums}));
+ if(p) console.log('HB-NEXT-DIAG',JSON.stringify({code,name:p.programName,hp:p.hp,coverage:p.coverage,reason:p.reason,rows:p.rows,unassignedCourses:p.unassignedCourses,sourceUrl:p.sourceUrl,sourceUrls:p.sourceUrls,termSums:p.termSums}));
 }
