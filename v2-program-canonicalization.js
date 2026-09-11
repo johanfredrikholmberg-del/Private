@@ -28,4 +28,6 @@ window.fetch=async function(input,init){
  }catch(_){return response}
 };
 window.StudieLotsV2=window.StudieLotsV2||{};window.StudieLotsV2.programCanonicalization=Object.freeze({canonicalize,isLater});
+function inject(src,onload){const s=document.createElement('script');s.src=src;s.async=true;if(onload)s.onload=onload;document.head.appendChild(s)}
+inject('/v2-program-db.js?v=1',()=>{let tries=0;const timer=setInterval(()=>{tries++;if(window.StudieLotsV2?.paths&&window.StudieLotsV2?.programDB){clearInterval(timer);inject('/v2-program-db-adapter.js?v=1')}else if(tries>100)clearInterval(timer)},50)});
 })();
