@@ -26,6 +26,8 @@ function hpFlexible(v){
 function headingTerm(line){
   const s=clean(line);
   let m=s.match(/^(?:kurser\s+under\s+)?termin\s*(\d{1,2})\b/i); if(m)return Number(m[1]);
+  const card={ett:1,en:1,två:2,tre:3,fyra:4,fem:5,sex:6,sju:7,åtta:8,nio:9,tio:10};
+  m=s.match(/^termin\s+(ett|en|två|tre|fyra|fem|sex|sju|åtta|nio|tio)\b/i);if(m)return card[m[1].toLocaleLowerCase('sv-SE')]||null;
   const words={första:1,andra:2,tredje:3,fjärde:4,femte:5,sjätte:6,sjunde:7,åttonde:8,nionde:9,tionde:10};
   for(const [w,n] of Object.entries(words)){
     if(new RegExp(`^(?:under\\s+)?${w}\\s+termin(?:en)?\\b|^termin\\s+${w}\\b|^under\\s+${w}\\s+termin(?:en)?\\s+läser\\b`,'i').test(s)&&s.length<180)return n;
@@ -42,8 +44,8 @@ function creditRange(line){
   const m=clean(line).match(/^(\d+)\s*[-–]\s*(\d+)\s*(?:hp|högskolepoäng)\b/i); if(!m)return null;
   const a=Number(m[1]),b=Number(m[2]); if(!a||b<a)return null; return {start:a,end:b,baseTerm:Math.floor((a-1)/30)+1,total:b-a+1};
 }
-async function fetchText(url){const r=await fetch(url,{headers:{'user-agent':'StudieLots-HB-import/2.1'},redirect:'follow',signal:AbortSignal.timeout(25000)});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);return{url:r.url,text:await r.text()}}
-async function fetchBuffer(url){const r=await fetch(url,{headers:{'user-agent':'StudieLots-HB-import/2.1'},redirect:'follow',signal:AbortSignal.timeout(30000)});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);return{url:r.url,buffer:Buffer.from(await r.arrayBuffer())}}
+async function fetchText(url){const r=await fetch(url,{headers:{'user-agent':'StudieLots-HB-import/2.2'},redirect:'follow',signal:AbortSignal.timeout(25000)});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);return{url:r.url,text:await r.text()}}
+async function fetchBuffer(url){const r=await fetch(url,{headers:{'user-agent':'StudieLots-HB-import/2.2'},redirect:'follow',signal:AbortSignal.timeout(30000)});if(!r.ok)throw new Error(`${r.status} ${r.statusText}`);return{url:r.url,buffer:Buffer.from(await r.arrayBuffer())}}
 function decodeHtml(s){return String(s||'').replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'").replace(/&aring;/gi,'å').replace(/&auml;/gi,'ä').replace(/&ouml;/gi,'ö').replace(/&Aring;/g,'Å').replace(/&Auml;/g,'Ä').replace(/&Ouml;/g,'Ö')}
 function stripHtml(s){return clean(decodeHtml(String(s||'').replace(/<[^>]+>/g,' ')))}
 function linksFromHtml(html,base){const out=[];for(const m of html.matchAll(/href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)){try{out.push({url:new URL(decodeHtml(m[1]),base).href,label:stripHtml(m[2])})}catch{}}return out}
@@ -57,7 +59,11 @@ async function buildProgrammeIndex(){const page=await fetchText(HB_INDEX);const 
 function programmePageUrl(item,index){const code=normCode(item.programCode||item.code||'');if(code&&index.byCode.has(code))return index.byCode.get(code).pageUrl;const cs=[item.programName,item.name,item.title].filter(Boolean).map(norm);for(const c of cs)if(index.byName.has(c))return index.byName.get(c);for(const c of cs){const h=[...index.byName.entries()].find(([k])=>k===c||k.startsWith(c+' ')||c.startsWith(k+' '));if(h)return h[1]}const d=[item.sourceUrl,item.url,item.officialUrl].find(u=>typeof u==='string'&&/hb\.se\/utbildning\/program-och-kurser\/program\//i.test(u));return d||`https://www.hb.se/utbildning/program-och-kurser/program/${slug(item.programName||item.name||'')}/`}
 
 function cleanCourseName(line){return line.replace(/^[•\-–]\s*/,'').replace(/^\d+[.)]\s*/,'').replace(/\s*,?\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng).*$/i,'').replace(/\s*[\[(]\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng)?\s*[\])].*$/i,'').replace(/\s+\d+(?:[,.]\d+)?\s*$/,'').trim()}
-function isAggregate(name,line){return /^(?:Revision|År(?:skurs)?|Termin|Hösttermin|Vårtermin|Obligatoriska kurser|Vårdvetenskap|Medicinsk vetenskap|Huvudämne|Summa|Basblock|Studier inom|Utbildningsvetenskaplig kärna)\b/i.test(name)||/\b(?:omfattar|motsvarande|minst|totalt|varav|kursfordringar|högskolepoäng inom|utbildningen består|programmet omfattar|examen på)\b/i.test(line)}
+function isAggregate(name,line){
+  if(/^(?:Revision|År(?:skurs)?|Termin|Hösttermin|Vårtermin|Obligatoriska kurser|Vårdvetenskap|Medicinsk vetenskap|Huvudämne|Summa|Basblock|Studier inom|Utbildningsvetenskaplig kärna)\b/i.test(name))return true;
+  if(/^(?:Kursen\b|Examensarbete är\b|Student(?:en)?\b|Varje\b|För särskild\b|Examen\b|göra\b|att göra\b|Om student\b|Under den avslutande terminen\b)/i.test(line))return true;
+  return /\b(?:omfattar|omfattande|motsvarande|minst|totalt|varav|kursfordringar|högskolepoäng inom|utbildningen består|programmet omfattar|examen på|genomför|ersätts|utmynnar|behörig att söka)\b/i.test(line);
+}
 function courseFromLine(line){const hp=hpFlexible(line);if(!hp||hp>30)return null;const name=cleanCourseName(line);if(name.length<3||isAggregate(name,line))return null;return{name,hp,type:/\b(?:valbar|valfri|alternativ|eller|alt\.)\b/i.test(line)?'choice':'required',isThesis:/examensarbete|självständigt arbete/i.test(name)}}
 function dedupeRows(rows){const seen=new Set();return rows.filter(r=>{const k=`${r.term||''}|${norm(r.name)}|${r.hp}`;if(seen.has(k))return false;seen.add(k);return true})}
 function targets(total){const out=[];let left=Number(total)||0;while(left>.01){const n=Math.min(30,left);out.push(n);left-=n}return out}
