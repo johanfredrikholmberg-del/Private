@@ -11,15 +11,19 @@
     "status": "processed",
     "attempts": 0,
     "coverage": "manual-review",
-    "reason": "official-police-programme-national-plan-needed",
-    "officialHp": null,
+    "reason": "official-national-police-plan-special-case",
+    "officialHp": 120,
     "source": "hogskolan-i-boras-official-programme-page",
     "sourceUrl": "https://www.hb.se/utbildning/omraden/polis/polisprogrammet/",
     "sourceUrls": [
       "https://www.hb.se/utbildning/omraden/polis/polisprogrammet/"
     ],
     "rows": [],
-    "checkedAt": "2026-09-11T21:10:26.755Z"
+    "checkedAt": "2026-09-11T21:13:28.395Z",
+    "studyStructureGranularity": "national-plan-special",
+    "termPlacementVerified": false,
+    "sourceEvidenceUrl": "https://www.hb.se/utbildning/omraden/polis/polisprogrammet/",
+    "verifiedProgrammeOverride": true
   },
   {
     "key": "beckmans-designhogskola:form",
@@ -14107,7 +14111,7 @@
       "7": 30,
       "8": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.443Z",
+    "checkedAt": "2026-09-11T21:13:28.335Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=ACEKO&language=SV&revision=18%2C20&type=program",
     "verifiedProgrammeOverride": true,
     "trackContinuityRequired": true,
@@ -14198,7 +14202,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:10:44.524Z"
+    "checkedAt": "2026-09-11T21:13:26.581Z"
   },
   {
     "key": "hogskolan-i-boras:AMATM",
@@ -14401,7 +14405,7 @@
       "3": 30,
       "4": 15
     },
-    "checkedAt": "2026-09-11T21:10:44.624Z"
+    "checkedAt": "2026-09-11T21:13:26.654Z"
   },
   {
     "key": "hogskolan-i-boras:ASYST",
@@ -14679,7 +14683,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.055Z"
+    "checkedAt": "2026-09-11T21:13:26.888Z"
   },
   {
     "key": "hogskolan-i-boras:DMODE",
@@ -14855,7 +14859,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.042Z"
+    "checkedAt": "2026-09-11T21:13:26.827Z"
   },
   {
     "key": "hogskolan-i-boras:DTDES",
@@ -15132,7 +15136,7 @@
       "5": 25.5,
       "6": 19.5
     },
-    "checkedAt": "2026-09-11T21:10:46.461Z",
+    "checkedAt": "2026-09-11T21:13:28.353Z",
     "academicYearSums": {
       "1": 60,
       "2": 60,
@@ -15328,10 +15332,200 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "official-course-list-incomplete-hp",
+    "reason": "official-plan-verifies-complete-academic-year-course-structure-with-one-elective-slot-term-placement-unresolved",
     "courseListHp": 172.5,
     "missingHp": 7.5,
-    "checkedAt": "2026-09-11T21:10:45.285Z"
+    "checkedAt": "2026-09-11T21:13:28.395Z",
+    "academicYearCourses": {
+      "1": [
+        {
+          "name": "Textil baskurs",
+          "hp": 5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Textilkemi I",
+          "hp": 4.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Väveriteknik",
+          "hp": 5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Trikåteknik",
+          "hp": 5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Fiber- och garnteknologi",
+          "hp": 5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Färgning och beredning",
+          "hp": 5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Nonwoventeknik",
+          "hp": 5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Inledande matematik",
+          "hp": 3,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Matematisk analys",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Linjär algebra och differentialekvationer",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Matematisk statistik",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        }
+      ],
+      "2": [
+        {
+          "name": "Textil mekanik- och hållfasthetslära",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Textilkemi II",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Fiber och garnteknologi påbyggnad",
+          "hp": 5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Konfektionsteknik",
+          "hp": 5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Sammanfogningstekniker",
+          "hp": 5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Kvalitetssäkring och textil provning med statistisk försöksplanering",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Vävteknik påbyggnad",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Polymerteknik",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Hållbarhet inom textil och mode",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        }
+      ],
+      "3": [
+        {
+          "name": "Trikåteknik påbyggnad",
+          "hp": 5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Textilåtervinning",
+          "hp": 2.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Fältstudie",
+          "hp": 15,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Utvärdering av egenskaper och miljöpåverkan hos tekniska textilier",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Vetenskaplig metod inom textilteknologi, kandidatnivå",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Examensarbete Textilingenjör",
+          "hp": 15,
+          "type": "required",
+          "isThesis": true
+        },
+        {
+          "name": "Valbar kurs: Smarta textilier eller Biopolymerer",
+          "hp": 7.5,
+          "type": "choice",
+          "choiceSlots": 1,
+          "options": [
+            {
+              "name": "Smarta textilier",
+              "hp": 7.5
+            },
+            {
+              "name": "Biopolymerer",
+              "hp": 7.5
+            }
+          ],
+          "isThesis": false
+        }
+      ]
+    },
+    "academicYearSums": {
+      "1": 60,
+      "2": 60,
+      "3": 60
+    },
+    "studyStructureGranularity": "academic-year-only",
+    "termPlacementVerified": false,
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=DTEIN&language=SV&revision=20%2C10&type=program",
+    "verifiedProgrammeOverride": true
   },
   {
     "key": "hogskolan-i-boras:DTEKO",
@@ -15799,7 +15993,7 @@
     "coverage": "complete",
     "reason": "official-term-evidence-verified-full-time-75hp-structure",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T21:10:46.462Z",
+    "checkedAt": "2026-09-11T21:13:28.354Z",
     "spanningCourses": [
       {
         "name": "Familjehälsovård med inriktning mot barnhälsovård och elevhälsovård",
@@ -16045,7 +16239,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.314Z"
+    "checkedAt": "2026-09-11T21:13:27.066Z"
   },
   {
     "key": "hogskolan-i-boras:GPSYK",
@@ -16271,7 +16465,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.616Z"
+    "checkedAt": "2026-09-11T21:13:27.356Z"
   },
   {
     "key": "hogskolan-i-boras:KANDI",
@@ -16593,8 +16787,14 @@
     "rows": [],
     "unassignedCourses": [],
     "coverage": "manual-review",
-    "reason": "foundation-year-credit-system-needs-normalisation",
-    "checkedAt": "2026-09-11T21:10:45.482Z"
+    "reason": "official-foundation-year-40-weeks-preparatory-non-higher-education-credit-system",
+    "checkedAt": "2026-09-11T21:13:28.395Z",
+    "officialHp": null,
+    "officialDurationWeeks": 40,
+    "studyStructureGranularity": "preparatory-year",
+    "termPlacementVerified": false,
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=KBAST&language=SV&revision=11%2C000&type=program",
+    "verifiedProgrammeOverride": true
   },
   {
     "key": "hogskolan-i-boras:KMATM",
@@ -16610,7 +16810,7 @@
     "source": "hogskolan-i-boras-utbildningsplan",
     "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KMATM&revision=4,10&language=SV",
     "sourceUrls": [
-      "https://www.hb.se/utbildning/program-och-kurser/program/konstnarligt-masterprogram-i-textil--och-modedesign-inriktning-modedesign/",
+      "https://www.hb.se/utbildning/program-och-kurser/program/konstnarligt-masterprogram-i-textil--och-modedesign-inriktning-performance-wear/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KMATM&revision=4,10&language=SV"
     ],
     "rows": [
@@ -16673,7 +16873,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:10:44.938Z"
+    "checkedAt": "2026-09-11T21:13:27.062Z"
   },
   {
     "key": "hogskolan-i-boras:LAG46",
@@ -16829,7 +17029,7 @@
       "7": 30,
       "8": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.462Z",
+    "checkedAt": "2026-09-11T21:13:28.353Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=LAG46&language=SV&revision=20%2C000&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -16976,7 +17176,7 @@
       "7": 30,
       "8": 15
     },
-    "checkedAt": "2026-09-11T21:10:45.051Z"
+    "checkedAt": "2026-09-11T21:13:27.109Z"
   },
   {
     "key": "hogskolan-i-boras:LGFUD",
@@ -17194,7 +17394,7 @@
       "6": 15,
       "7": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.990Z"
+    "checkedAt": "2026-09-11T21:13:28.183Z"
   },
   {
     "key": "hogskolan-i-boras:MAIDI",
@@ -17498,7 +17698,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.489Z",
+    "checkedAt": "2026-09-11T21:13:28.380Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=NGBIB&language=SV&revision=17%2C00&type=program",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term"
@@ -17522,9 +17722,51 @@
     ],
     "rows": [
       {
-        "term": 5,
-        "name": "inom kunskapsorganisation från Kunskapsorganisation och sökteknik – grund",
+        "term": 1,
+        "name": "Introduktion till biblioteks- och informationsvetenskap",
         "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Kunskapsorganisation och sökteknik – grund",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Bibliotek i samhället",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Bibliotek och användare",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Vetenskapsteori och forskningsmetoder 1",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Kunskapsorganisation och sökteknik med fokus explorativ sökteknik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Vetenskapsteori och forskningsmetoder 2",
+        "hp": 7.5,
         "type": "required",
         "isThesis": false
       },
@@ -17534,15 +17776,41 @@
         "hp": 7.5,
         "type": "required",
         "isThesis": false
+      },
+      {
+        "term": 7,
+        "name": "Bibliotekens redskap och arbetsmetoder",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 8,
+        "name": "Kandidatuppsats",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
       }
     ],
-    "coverage": "manual-review",
-    "reason": "official-education-plan-insufficient-consistency",
+    "coverage": "complete",
+    "reason": "official-current-plan-and-course-plans-verified-eight-semester-half-time-structure",
     "termSums": {
+      "1": 15,
+      "2": 15,
+      "3": 15,
+      "4": 15,
       "5": 15,
-      "6": 7.5
+      "6": 15,
+      "7": 15,
+      "8": 15
     },
-    "checkedAt": "2026-09-11T21:10:45.336Z"
+    "checkedAt": "2026-09-11T21:13:28.395Z",
+    "expectedHpPerTerm": 15,
+    "studyPacePercent": 50,
+    "studyStructureGranularity": "term",
+    "termPlacementVerified": true,
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=NGBID&language=SV&revision=17%2C20&type=program",
+    "verifiedProgrammeOverride": true
   },
   {
     "key": "hogskolan-i-boras:SAMAR",
@@ -17630,7 +17898,7 @@
     "termSums": {
       "1": 7.5
     },
-    "checkedAt": "2026-09-11T21:10:45.353Z"
+    "checkedAt": "2026-09-11T21:13:27.398Z"
   },
   {
     "key": "hogskolan-i-boras:SGEMA",
@@ -17713,7 +17981,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.476Z"
+    "checkedAt": "2026-09-11T21:13:27.519Z"
   },
   {
     "key": "hogskolan-i-boras:SGKMM",
@@ -17888,7 +18156,7 @@
     "coverage": "manual-review",
     "reason": "official-plan-verifies-academic-years-but-explicitly-not-chronological-within-years",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T21:10:46.477Z",
+    "checkedAt": "2026-09-11T21:13:28.368Z",
     "academicYearCourses": {
       "1": [
         {
@@ -18230,7 +18498,7 @@
     "coverage": "manual-review",
     "reason": "official-plan-verifies-academic-years-but-explicitly-not-chronological-within-years",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T21:10:46.477Z",
+    "checkedAt": "2026-09-11T21:13:28.368Z",
     "academicYearCourses": {
       "1": [
         {
@@ -18498,7 +18766,7 @@
       "4": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.629Z"
+    "checkedAt": "2026-09-11T21:13:27.672Z"
   },
   {
     "key": "hogskolan-i-boras:SGOPS",
@@ -19121,7 +19389,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.644Z"
+    "checkedAt": "2026-09-11T21:13:27.697Z"
   },
   {
     "key": "hogskolan-i-boras:TAREC",
@@ -19237,7 +19505,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.347Z",
+    "checkedAt": "2026-09-11T21:13:28.238Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAREC&language=SV&revision=2%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -19322,7 +19590,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.924Z"
+    "checkedAt": "2026-09-11T21:13:27.739Z"
   },
   {
     "key": "hogskolan-i-boras:TAREP",
@@ -19412,7 +19680,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.922Z"
+    "checkedAt": "2026-09-11T21:13:27.934Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEB",
@@ -19495,7 +19763,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.908Z"
+    "checkedAt": "2026-09-11T21:13:27.831Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEC",
@@ -19611,7 +19879,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.347Z",
+    "checkedAt": "2026-09-11T21:13:28.238Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAVEC&language=SV&revision=1%2C00&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -19696,7 +19964,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:10:45.949Z"
+    "checkedAt": "2026-09-11T21:13:27.921Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEP",
@@ -19786,7 +20054,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.208Z"
+    "checkedAt": "2026-09-11T21:13:27.990Z"
   },
   {
     "key": "hogskolan-i-boras:TGAPF",
@@ -19917,10 +20185,153 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "official-course-list-incomplete-hp",
+    "reason": "official-plan-verifies-complete-academic-year-course-structure-term-placement-unresolved",
     "courseListHp": 157.5,
     "missingHp": 22.5,
-    "checkedAt": "2026-09-11T21:10:46.111Z"
+    "checkedAt": "2026-09-11T21:13:28.395Z",
+    "academicYearCourses": {
+      "1": [
+        {
+          "name": "Byggnadsteknik",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Matematik 1",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Industriell ekonomi",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Statistiska modeller och metoder",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Byggnadsteknologi och affärsutveckling",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Juridisk översiktskurs",
+          "hp": 15,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Ritteknik med CAD och BIM",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        }
+      ],
+      "2": [
+        {
+          "name": "Projektteknik",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Kvalitet och ledningssystem",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Produktion grundkurs",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Logistikens verktyg och metoder",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Ledarskap, organisation och kommunikation",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Innemiljö",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Produktion fortsättningskurs",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Projektering i byggprocessen",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        }
+      ],
+      "3": [
+        {
+          "name": "Fastighetsrätt",
+          "hp": 15,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Styrning och samordning av byggprojekt",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Fastighetsförvaltning",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Livscykelanalys och miljöklassning",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Fastighetsutveckling",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Kandidatuppsats i byggteknik",
+          "hp": 15,
+          "type": "required",
+          "isThesis": true
+        }
+      ]
+    },
+    "academicYearSums": {
+      "1": 60,
+      "2": 60,
+      "3": 60
+    },
+    "studyStructureGranularity": "academic-year-only",
+    "termPlacementVerified": false,
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGAPF&language=SV&revision=3%2C20&type=program",
+    "verifiedProgrammeOverride": true
   },
   {
     "key": "hogskolan-i-boras:TGBYI",
@@ -20569,7 +20980,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.395Z",
+    "checkedAt": "2026-09-11T21:13:28.287Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGENA&language=SV&revision=8%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -21015,7 +21426,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.462Z",
+    "checkedAt": "2026-09-11T21:13:28.353Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGIEA&language=SV&revision=12%2C60&type=program",
     "verifiedProgrammeOverride": true,
     "trackContinuityRequired": true,
@@ -21053,6 +21464,20 @@
       {
         "term": 1,
         "name": "Industriell Ekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys 1",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys 2",
         "hp": 7.5,
         "type": "required",
         "isThesis": false
@@ -21243,7 +21668,7 @@
     "coverage": "complete",
     "reason": "official-plan-verified-numbered-course-titles-restored",
     "termSums": {
-      "1": 60,
+      "1": 75,
       "2": 30,
       "3": 30,
       "4": 30,
@@ -21283,6 +21708,20 @@
       {
         "term": 1,
         "name": "Industriell Ekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys 1",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys 2",
         "hp": 7.5,
         "type": "required",
         "isThesis": false
@@ -21473,7 +21912,7 @@
     "coverage": "complete",
     "reason": "official-plan-verified-numbered-course-titles-restored",
     "termSums": {
-      "1": 60,
+      "1": 75,
       "2": 30,
       "3": 30,
       "4": 30,
@@ -21668,7 +22107,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.490Z",
+    "checkedAt": "2026-09-11T21:13:28.381Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGITI&language=SV&revision=5%2C30&type=program",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term"
@@ -21870,7 +22309,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.489Z",
+    "checkedAt": "2026-09-11T21:13:28.380Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGKEH&language=SV&revision=2%2C20&type=program",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term"
@@ -21903,6 +22342,20 @@
       {
         "term": 1,
         "name": "Industriell ekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys 1",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys 2",
         "hp": 7.5,
         "type": "required",
         "isThesis": false
@@ -21992,6 +22445,13 @@
         "isThesis": false
       },
       {
+        "term": 2,
+        "name": "Beräkningsmekanik 1",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
         "term": 3,
         "name": "Grundläggande statistik med regressionsanalys",
         "hp": 7.5,
@@ -22001,6 +22461,20 @@
       {
         "term": 3,
         "name": "Styr- och reglerteknik-Smarta hus",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Beräkningsmekanik 2",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Mekaniska konstruktioner 1",
         "hp": 7.5,
         "type": "required",
         "isThesis": false
@@ -22090,6 +22564,13 @@
         "isThesis": false
       },
       {
+        "term": 4,
+        "name": "Mekaniska konstruktioner 2",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
         "term": 5,
         "name": "Kvalitet och ledningssystem,",
         "hp": 7.5,
@@ -22135,10 +22616,10 @@
     "coverage": "choice-required",
     "reason": "official-plan-verified-numbered-course-titles-restored",
     "termSums": {
-      "1": 60,
-      "2": 45,
-      "3": 60,
-      "4": 45,
+      "1": 75,
+      "2": 52.5,
+      "3": 75,
+      "4": 52.5,
       "5": 30,
       "6": 30
     },
@@ -22379,7 +22860,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.395Z",
+    "checkedAt": "2026-09-11T21:13:28.287Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGTPI&language=EN&revision=3%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -22501,7 +22982,7 @@
       "3": 30,
       "4": 15
     },
-    "checkedAt": "2026-09-11T21:10:46.107Z"
+    "checkedAt": "2026-09-11T21:13:27.940Z"
   },
   {
     "key": "hogskolan-i-boras:VAADM",
@@ -22579,7 +23060,7 @@
       "3": 15,
       "4": 15
     },
-    "checkedAt": "2026-09-11T21:10:46.462Z",
+    "checkedAt": "2026-09-11T21:13:28.353Z",
     "studyPacePercent": 50,
     "expectedHpPerTerm": 15,
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=VAADM&language=SV&revision=10%2C00&type=program",
@@ -22712,7 +23193,7 @@
     "coverage": "complete",
     "reason": "official-programme-overview-verified-three-term-structure",
     "courseListHp": 90,
-    "checkedAt": "2026-09-11T21:10:46.462Z",
+    "checkedAt": "2026-09-11T21:13:28.353Z",
     "spanningCourses": [
       {
         "name": "Examensarbete i sexuell och reproduktiv hälsa",
@@ -23034,7 +23515,7 @@
     "coverage": "complete",
     "reason": "official-term-evidence-verified-half-time-75hp-structure",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T21:10:46.462Z",
+    "checkedAt": "2026-09-11T21:13:28.354Z",
     "spanningCourses": [
       {
         "name": "Familjehälsovård med inriktning mot barnhälsovård och elevhälsovård",
@@ -23247,7 +23728,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:10:46.396Z",
+    "checkedAt": "2026-09-11T21:13:28.287Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=VGLOV&language=SV&revision=1%2C000&type=program",
     "verifiedProgrammeOverride": true,
     "studyPaceVariant": "helfart",
