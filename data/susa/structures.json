@@ -19,7 +19,7 @@
       "https://www.hb.se/utbildning/omraden/polis/polisprogrammet/"
     ],
     "rows": [],
-    "checkedAt": "2026-09-11T21:22:45.133Z",
+    "checkedAt": "2026-09-11T21:24:58.601Z",
     "studyStructureGranularity": "national-plan-special",
     "termPlacementVerified": false,
     "sourceEvidenceUrl": "https://www.hb.se/utbildning/omraden/polis/polisprogrammet/",
@@ -14111,7 +14111,7 @@
       "7": 30,
       "8": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.060Z",
+    "checkedAt": "2026-09-11T21:24:58.528Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=ACEKO&language=SV&revision=18%2C20&type=program",
     "verifiedProgrammeOverride": true,
     "trackContinuityRequired": true,
@@ -14138,71 +14138,127 @@
       "https://www.hb.se/utbildning/program-och-kurser/program/ekonomutbildning/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=ACIVE&revision=16,20&language=SV"
     ],
-    "rows": [
-      {
-        "term": 1,
-        "name": "Makroekonomi (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 1,
-        "name": "Organisering och ledning (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 1,
-        "name": "Statistik I (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 1,
-        "name": "Redovisningens grunder och tekniker (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Mikroekonomi (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Grundläggande marknadsföring (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Internationell ekonomi (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Ekonomistyrning I (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      }
-    ],
-    "coverage": "partial-structure",
-    "reason": "official-education-plan-some-complete-terms",
+    "rows": [],
+    "coverage": "manual-review",
+    "reason": "official-current-plan-verifies-complete-academic-year-structure-with-year-3-specialisation-choice-term-placement-unresolved",
     "termSums": {
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:22:43.106Z"
+    "checkedAt": "2026-09-11T21:24:58.684Z",
+    "academicYearCourses": {
+      "1": [
+        {
+          "name": "Makroekonomi",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Organisering och ledning",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Statistik I",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Redovisningens grunder och tekniker",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Mikroekonomi",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Grundläggande marknadsföring",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Internationell ekonomi",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Ekonomistyrning I",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        }
+      ],
+      "2": [
+        {
+          "name": "Affärsjuridik I",
+          "hp": 15,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Finansiell planering",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Strategisk marknadsföring",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Finansiell ekonomi",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Statistik II",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Organisationsdesign och managementrecept",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Externredovisning",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        }
+      ],
+      "3": [
+        {
+          "name": "Vald inriktning: management, marknadsföring eller redovisning",
+          "hp": 60,
+          "type": "choice",
+          "isThesis": false
+        }
+      ]
+    },
+    "academicYearSums": {
+      "1": 60,
+      "2": 60,
+      "3": 60
+    },
+    "verifiedProgrammeOverride": true,
+    "studyStructureGranularity": "academic-year-only",
+    "termPlacementVerified": false,
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=ACIVE&language=SV&revision=16%2C20&type=program"
   },
   {
     "key": "hogskolan-i-boras:AMATM",
@@ -14405,7 +14461,7 @@
       "3": 30,
       "4": 15
     },
-    "checkedAt": "2026-09-11T21:22:43.004Z"
+    "checkedAt": "2026-09-11T21:24:56.839Z"
   },
   {
     "key": "hogskolan-i-boras:ASYST",
@@ -14683,7 +14739,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.160Z",
+    "checkedAt": "2026-09-11T21:24:58.630Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "credit-block-only",
     "termPlacementVerified": false,
@@ -14867,7 +14923,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.148Z",
+    "checkedAt": "2026-09-11T21:24:58.611Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term-with-cross-term-course",
     "termPlacementVerified": false,
@@ -15148,7 +15204,7 @@
       "5": 25.5,
       "6": 19.5
     },
-    "checkedAt": "2026-09-11T21:22:45.082Z",
+    "checkedAt": "2026-09-11T21:24:58.539Z",
     "academicYearSums": {
       "1": 60,
       "2": 60,
@@ -15347,7 +15403,7 @@
     "reason": "official-plan-verifies-complete-academic-year-course-structure-with-one-elective-slot-term-placement-unresolved",
     "courseListHp": 172.5,
     "missingHp": 7.5,
-    "checkedAt": "2026-09-11T21:22:45.133Z",
+    "checkedAt": "2026-09-11T21:24:58.601Z",
     "academicYearCourses": {
       "1": [
         {
@@ -16005,7 +16061,7 @@
     "coverage": "complete",
     "reason": "official-term-evidence-verified-full-time-75hp-structure",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T21:22:45.083Z",
+    "checkedAt": "2026-09-11T21:24:58.539Z",
     "spanningCourses": [
       {
         "name": "Familjehälsovård med inriktning mot barnhälsovård och elevhälsovård",
@@ -16251,7 +16307,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.160Z",
+    "checkedAt": "2026-09-11T21:24:58.629Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "academic-year-only",
     "termPlacementVerified": false,
@@ -16500,7 +16556,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.173Z",
+    "checkedAt": "2026-09-11T21:24:58.638Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "termPlacementVerified": true,
@@ -16827,7 +16883,7 @@
     "unassignedCourses": [],
     "coverage": "manual-review",
     "reason": "official-foundation-year-40-weeks-preparatory-non-higher-education-credit-system",
-    "checkedAt": "2026-09-11T21:22:45.133Z",
+    "checkedAt": "2026-09-11T21:24:58.601Z",
     "officialHp": null,
     "officialDurationWeeks": 40,
     "studyStructureGranularity": "preparatory-year",
@@ -16849,7 +16905,7 @@
     "source": "hogskolan-i-boras-utbildningsplan",
     "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KMATM&revision=4,10&language=SV",
     "sourceUrls": [
-      "https://www.hb.se/utbildning/program-och-kurser/program/konstnarligt-masterprogram-i-textil--och-modedesign-inriktning-textildesign/",
+      "https://www.hb.se/utbildning/program-och-kurser/program/konstnarligt-masterprogram-i-textil--och-modedesign-inriktning-performance-wear/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KMATM&revision=4,10&language=SV"
     ],
     "rows": [
@@ -16912,7 +16968,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:22:43.524Z"
+    "checkedAt": "2026-09-11T21:24:57.309Z"
   },
   {
     "key": "hogskolan-i-boras:LAG46",
@@ -17068,7 +17124,7 @@
       "7": 30,
       "8": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.082Z",
+    "checkedAt": "2026-09-11T21:24:58.539Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=LAG46&language=SV&revision=20%2C000&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -17222,7 +17278,7 @@
       "7": 30,
       "8": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.148Z",
+    "checkedAt": "2026-09-11T21:24:58.610Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "termPlacementVerified": true,
@@ -17444,7 +17500,7 @@
       "6": 15,
       "7": 30
     },
-    "checkedAt": "2026-09-11T21:22:44.528Z"
+    "checkedAt": "2026-09-11T21:24:58.174Z"
   },
   {
     "key": "hogskolan-i-boras:MAIDI",
@@ -17748,7 +17804,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.118Z",
+    "checkedAt": "2026-09-11T21:24:58.592Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=NGBIB&language=SV&revision=17%2C00&type=program",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term"
@@ -17854,7 +17910,7 @@
       "7": 15,
       "8": 15
     },
-    "checkedAt": "2026-09-11T21:22:45.133Z",
+    "checkedAt": "2026-09-11T21:24:58.601Z",
     "expectedHpPerTerm": 15,
     "studyPacePercent": 50,
     "studyStructureGranularity": "term",
@@ -17948,7 +18004,7 @@
     "termSums": {
       "1": 7.5
     },
-    "checkedAt": "2026-09-11T21:22:44.073Z"
+    "checkedAt": "2026-09-11T21:24:57.405Z"
   },
   {
     "key": "hogskolan-i-boras:SGEMA",
@@ -17967,71 +18023,151 @@
       "https://www.hb.se/utbildning/program-och-kurser/program/event-management/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=SGEMA&revision=16,30&language=SV"
     ],
-    "rows": [
-      {
-        "term": 1,
-        "name": "Entreprenörskap och försäljning (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 1,
-        "name": "Event som upplevelseproduktion (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 1,
-        "name": "Grundläggande redovisning (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 1,
-        "name": "Ekonomi och samhälle (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Marknadskommunikation för event (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Projektledning för event (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Organisering och ledning (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Eventledning och praktiskt eventarbete (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      }
-    ],
-    "coverage": "partial-structure",
-    "reason": "official-education-plan-some-complete-terms",
+    "rows": [],
+    "coverage": "manual-review",
+    "reason": "official-current-plan-verifies-complete-academic-year-structure-with-explicit-year-3-choice-term",
     "termSums": {
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:22:43.946Z"
+    "checkedAt": "2026-09-11T21:24:58.684Z",
+    "academicYearCourses": {
+      "1": [
+        {
+          "name": "Entreprenörskap och försäljning",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Event som upplevelseproduktion",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Grundläggande redovisning",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Ekonomi och samhälle",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Marknadskommunikation för event",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Projektledning för event",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Organisering och ledning",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Eventledning och praktiskt eventarbete",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        }
+      ],
+      "2": [
+        {
+          "name": "Konsumentbeteende",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Strategisk marknadsföring för event",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Evenemangsjuridik",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Ekonomistyrning",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Eventmarknadsföring",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Projektbaserat utvecklingsarbete",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Organisering av event",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Strategisk destinationsutveckling genom event",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        }
+      ],
+      "3": [
+        {
+          "name": "Praktiktermin, utlandstermin eller valbara kurser",
+          "hp": 30,
+          "type": "choice",
+          "isThesis": false
+        },
+        {
+          "name": "Eventstudier",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Forskningsmetoder på kandidatnivå",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Självständigt arbete för kandidatexamen inom företagsekonomi",
+          "hp": 15,
+          "type": "required",
+          "isThesis": true
+        }
+      ]
+    },
+    "academicYearSums": {
+      "1": 60,
+      "2": 60,
+      "3": 60
+    },
+    "verifiedProgrammeOverride": true,
+    "studyStructureGranularity": "academic-year-only",
+    "termPlacementVerified": false,
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=SGEMA&language=SV&revision=16%2C30&type=program"
   },
   {
     "key": "hogskolan-i-boras:SGKMM",
@@ -18206,7 +18342,7 @@
     "coverage": "manual-review",
     "reason": "official-plan-verifies-academic-years-but-explicitly-not-chronological-within-years",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T21:22:45.102Z",
+    "checkedAt": "2026-09-11T21:24:58.549Z",
     "academicYearCourses": {
       "1": [
         {
@@ -18548,7 +18684,7 @@
     "coverage": "manual-review",
     "reason": "official-plan-verifies-academic-years-but-explicitly-not-chronological-within-years",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T21:22:45.102Z",
+    "checkedAt": "2026-09-11T21:24:58.549Z",
     "academicYearCourses": {
       "1": [
         {
@@ -18735,80 +18871,9 @@
       "https://www.hb.se/utbildning/program-och-kurser/program/kandidatprogram-i-offentlig-forvaltning-distansutbildning/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=SGOFD&revision=5,10&language=SV"
     ],
-    "rows": [
-      {
-        "term": 1,
-        "name": "Förvaltning och politiska system (",
-        "hp": 20,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 1,
-        "name": "Samhällsekonomi (",
-        "hp": 10,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Organisationsteori för offentlig sektor (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Förvaltningsrätt (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Ekonomistyrning (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "Redovisning i offentlig sektor (",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "name": "Forskningsmetoder i offentlig förvaltning (",
-        "hp": 15,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "name": "Självständigt arbete för kandidatexamen i offentlig förvaltning (",
-        "hp": 15,
-        "type": "required",
-        "isThesis": true
-      },
-      {
-        "term": 4,
-        "name": "Handledd studiepraktik i offentlig förvaltning (",
-        "hp": 30,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 6,
-        "name": "Utlandstermin",
-        "hp": 30,
-        "type": "required",
-        "isThesis": false
-      }
-    ],
-    "coverage": "partial-structure",
-    "reason": "official-education-plan-some-complete-terms",
+    "rows": [],
+    "coverage": "manual-review",
+    "reason": "official-current-plan-verifies-years-1-2-and-explicit-terms-5-6-with-choice-term",
     "termSums": {
       "1": 30,
       "2": 30,
@@ -18816,7 +18881,126 @@
       "4": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:44.297Z"
+    "checkedAt": "2026-09-11T21:24:58.684Z",
+    "academicYearCourses": {
+      "1": [
+        {
+          "name": "Förvaltning och politiska system",
+          "hp": 20,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Samhällsekonomi",
+          "hp": 10,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Organisationsteori för offentlig sektor",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Förvaltningsrätt",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Ekonomistyrning",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Redovisning i offentlig sektor",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        }
+      ],
+      "2": [
+        {
+          "name": "Etik och hållbar utveckling",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Projektbaserat förändringsarbete i offentliga organisationer",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Introduktion till forskningsmetoder i offentlig förvaltning",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Maktrelationer och förvaltningspraktik",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Styrning och ledning i offentlig sektor",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Reformer, utvärdering och implementering",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Välfärdens utmaningar",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Utvärdering i praktiken",
+          "hp": 7.5,
+          "type": "required",
+          "isThesis": false
+        }
+      ],
+      "3": [
+        {
+          "name": "Forskningsmetoder i offentlig förvaltning",
+          "hp": 15,
+          "type": "required",
+          "isThesis": false
+        },
+        {
+          "name": "Självständigt arbete för kandidatexamen i offentlig förvaltning",
+          "hp": 15,
+          "type": "required",
+          "isThesis": true
+        },
+        {
+          "name": "Handledd studiepraktik, valbara kurser eller utlandstermin",
+          "hp": 30,
+          "type": "choice",
+          "isThesis": false
+        }
+      ]
+    },
+    "academicYearSums": {
+      "1": 60,
+      "2": 60,
+      "3": 60
+    },
+    "verifiedProgrammeOverride": true,
+    "studyStructureGranularity": "academic-year-only",
+    "termPlacementVerified": false,
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=SGOFD&language=SV&revision=5%2C10&type=program"
   },
   {
     "key": "hogskolan-i-boras:SGOPS",
@@ -19439,7 +19623,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:22:44.402Z"
+    "checkedAt": "2026-09-11T21:24:57.791Z"
   },
   {
     "key": "hogskolan-i-boras:TAREC",
@@ -19555,7 +19739,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T21:22:44.956Z",
+    "checkedAt": "2026-09-11T21:24:58.459Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAREC&language=SV&revision=2%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -19640,7 +19824,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:22:44.309Z"
+    "checkedAt": "2026-09-11T21:24:57.806Z"
   },
   {
     "key": "hogskolan-i-boras:TAREP",
@@ -19730,7 +19914,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:22:44.516Z"
+    "checkedAt": "2026-09-11T21:24:57.769Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEB",
@@ -19813,7 +19997,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:22:44.447Z"
+    "checkedAt": "2026-09-11T21:24:57.782Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEC",
@@ -19929,7 +20113,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T21:22:44.956Z",
+    "checkedAt": "2026-09-11T21:24:58.459Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAVEC&language=SV&revision=1%2C00&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -20014,7 +20198,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:22:44.691Z"
+    "checkedAt": "2026-09-11T21:24:57.854Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEP",
@@ -20104,7 +20288,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:22:44.512Z"
+    "checkedAt": "2026-09-11T21:24:58.151Z"
   },
   {
     "key": "hogskolan-i-boras:TGAPF",
@@ -20238,7 +20422,7 @@
     "reason": "official-plan-verifies-complete-academic-year-course-structure-term-placement-unresolved",
     "courseListHp": 157.5,
     "missingHp": 22.5,
-    "checkedAt": "2026-09-11T21:22:45.133Z",
+    "checkedAt": "2026-09-11T21:24:58.601Z",
     "academicYearCourses": {
       "1": [
         {
@@ -21030,7 +21214,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.010Z",
+    "checkedAt": "2026-09-11T21:24:58.493Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGENA&language=SV&revision=8%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -21476,7 +21660,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.083Z",
+    "checkedAt": "2026-09-11T21:24:58.539Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGIEA&language=SV&revision=12%2C60&type=program",
     "verifiedProgrammeOverride": true,
     "trackContinuityRequired": true,
@@ -21683,7 +21867,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.118Z",
+    "checkedAt": "2026-09-11T21:24:58.592Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGIEL&language=SV&revision=12%2C30&type=program"
@@ -21885,7 +22069,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.118Z",
+    "checkedAt": "2026-09-11T21:24:58.592Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGIEO&language=SV&revision=12%2C30&type=program"
@@ -22073,7 +22257,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.119Z",
+    "checkedAt": "2026-09-11T21:24:58.592Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGITI&language=SV&revision=5%2C30&type=program",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term"
@@ -22275,7 +22459,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.118Z",
+    "checkedAt": "2026-09-11T21:24:58.592Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGKEH&language=SV&revision=2%2C20&type=program",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term"
@@ -22463,7 +22647,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.119Z",
+    "checkedAt": "2026-09-11T21:24:58.592Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGMAA&language=SV&revision=6%2C20&type=program"
@@ -22700,7 +22884,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.010Z",
+    "checkedAt": "2026-09-11T21:24:58.493Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGTPI&language=EN&revision=3%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -22822,7 +23006,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.148Z",
+    "checkedAt": "2026-09-11T21:24:58.610Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "termPlacementVerified": true,
@@ -22904,7 +23088,7 @@
       "3": 15,
       "4": 15
     },
-    "checkedAt": "2026-09-11T21:22:45.083Z",
+    "checkedAt": "2026-09-11T21:24:58.539Z",
     "studyPacePercent": 50,
     "expectedHpPerTerm": 15,
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=VAADM&language=SV&revision=10%2C00&type=program",
@@ -23037,7 +23221,7 @@
     "coverage": "complete",
     "reason": "official-programme-overview-verified-three-term-structure",
     "courseListHp": 90,
-    "checkedAt": "2026-09-11T21:22:45.083Z",
+    "checkedAt": "2026-09-11T21:24:58.539Z",
     "spanningCourses": [
       {
         "name": "Examensarbete i sexuell och reproduktiv hälsa",
@@ -23359,7 +23543,7 @@
     "coverage": "complete",
     "reason": "official-term-evidence-verified-half-time-75hp-structure",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T21:22:45.083Z",
+    "checkedAt": "2026-09-11T21:24:58.540Z",
     "spanningCourses": [
       {
         "name": "Familjehälsovård med inriktning mot barnhälsovård och elevhälsovård",
@@ -23572,7 +23756,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:22:45.010Z",
+    "checkedAt": "2026-09-11T21:24:58.493Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=VGLOV&language=SV&revision=1%2C000&type=program",
     "verifiedProgrammeOverride": true,
     "studyPaceVariant": "helfart",
