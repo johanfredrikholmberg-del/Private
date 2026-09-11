@@ -11,10 +11,12 @@ import { spawn } from 'node:child_process';
 const ROOT = process.env.STRUCTURE_ROOT || 'data/susa';
 const LIMIT = Number(process.env.HB_STRUCTURE_LIMIT || 100);
 const CONCURRENCY = Number(process.env.HB_STRUCTURE_CONCURRENCY || 5);
+const INDEX_CONCURRENCY = Number(process.env.HB_INDEX_CONCURRENCY || 6);
 const HB_INDEX = 'https://www.hb.se/utbildning/program-och-kurser/?lang=sv&types=Programme&userInput=true';
 const clean = v => String(v ?? '').replace(/\s+/g, ' ').trim();
 const norm = v => clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 const slug = v => norm(v).replace(/\s+/g, '-');
+const normCode = v => clean(v).toLocaleUpperCase('sv-SE').replace(/\s+/g, '');
 const hp = v => {
   const m = clean(v).replace(',', '.').match(/(\d+(?:\.\d+)?)\s*(?:hp|högskolepoäng)/i);
   return m ? Number(m[1]) : null;
@@ -25,13 +27,13 @@ const term = v => {
 };
 
 async function fetchText(url) {
-  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.3' }, redirect: 'follow', signal: AbortSignal.timeout(25000) });
+  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.4' }, redirect: 'follow', signal: AbortSignal.timeout(25000) });
   if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
   return { url: r.url, text: await r.text() };
 }
 
 async function fetchBuffer(url) {
-  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.3' }, redirect: 'follow', signal: AbortSignal.timeout(30000) });
+  const r = await fetch(url, { headers: { 'user-agent': 'StudieLots-HB-import/1.4' }, redirect: 'follow', signal: AbortSignal.timeout(30000) });
   if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
   return { url: r.url, buffer: Buffer.from(await r.arrayBuffer()) };
 }
@@ -59,6 +61,14 @@ function educationPlanUrl(html, base) {
     if (/utbildningsplan/i.test(link.label) || (/kursinfodoc\.hb\.se/i.test(link.url) && /type=program/i.test(link.url))) return link.url;
   }
   return '';
+}
+
+function codeFromEducationPlanUrl(url) {
+  try {
+    return normCode(new URL(url).searchParams.get('code') || '');
+  } catch {
+    return '';
+  }
 }
 
 function run(cmd, args, options = {}) {
@@ -103,25 +113,54 @@ async function pdfToText(url, key) {
   }
 }
 
+async function boundedMap(items, concurrency, fn) {
+  const out = new Array(items.length);
+  let i = 0;
+  async function worker() {
+    for (;;) {
+      const n = i++;
+      if (n >= items.length) return;
+      out[n] = await fn(items[n], n);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length || 1) }, worker));
+  return out;
+}
+
 async function buildProgrammeIndex() {
   const page = await fetchText(HB_INDEX);
   const links = linksFromHtml(page.text, page.url).filter(x => /\/utbildning\/program-och-kurser\/program\//i.test(x.url));
+  const unique = [...new Map(links.map(x => [x.url, x])).values()];
   const byName = new Map();
-  for (const x of links) {
+  const byCode = new Map();
+  for (const x of unique) {
     const key = norm(x.label.replace(/,?\s*\d+(?:[,.]\d+)?\s*(?:hp|högskolepoäng).*$/i, ''));
     if (key && !byName.has(key)) byName.set(key, x.url);
   }
-  console.log(`HB programme index: ${byName.size} named programme pages`);
-  return byName;
+
+  await boundedMap(unique, INDEX_CONCURRENCY, async x => {
+    try {
+      const programme = await fetchText(x.url);
+      const pdfUrl = educationPlanUrl(programme.text, programme.url);
+      const code = codeFromEducationPlanUrl(pdfUrl);
+      if (code && !byCode.has(code)) byCode.set(code, { pageUrl: programme.url, pdfUrl });
+    } catch {}
+  });
+
+  console.log(`HB programme index: ${byName.size} named programme pages, ${byCode.size} programme codes`);
+  return { byName, byCode };
 }
 
 function programmePageUrl(item, index) {
+  const code = normCode(item.programCode || item.code || '');
+  if (code && index.byCode.has(code)) return index.byCode.get(code).pageUrl;
+
   const candidates = [item.programName, item.name, item.title].filter(Boolean).map(norm);
   for (const candidate of candidates) {
-    if (index.has(candidate)) return index.get(candidate);
+    if (index.byName.has(candidate)) return index.byName.get(candidate);
   }
   for (const candidate of candidates) {
-    const hit = [...index.entries()].find(([k]) => k === candidate || k.startsWith(candidate + ' ') || candidate.startsWith(k + ' '));
+    const hit = [...index.byName.entries()].find(([k]) => k === candidate || k.startsWith(candidate + ' ') || candidate.startsWith(k + ' '));
     if (hit) return hit[1];
   }
   const direct = [item.sourceUrl, item.url, item.officialUrl].find(u => typeof u === 'string' && /hb\.se\/utbildning\/program-och-kurser\/program\//i.test(u));
@@ -173,7 +212,45 @@ function parseRows(text) {
     const thesis = /examensarbete|självständigt arbete/i.test(name);
     rows.push({ term: currentTerm, name, hp: credits, type: choice ? 'choice' : 'required', isThesis: thesis });
   }
-  return rows;
+  return normalizeChoicePools(rows);
+}
+
+function normalizeChoicePools(rows) {
+  const byTerm = new Map();
+  for (const row of rows) {
+    if (!byTerm.has(row.term)) byTerm.set(row.term, []);
+    byTerm.get(row.term).push(row);
+  }
+  const out = [];
+  for (const [termNo, termRows] of byTerm) {
+    const required = termRows.filter(r => r.type !== 'choice');
+    const choices = termRows.filter(r => r.type === 'choice');
+    const requiredHp = required.reduce((s, r) => s + r.hp, 0);
+    const choiceHp = choices.reduce((s, r) => s + r.hp, 0);
+    const remaining = Math.round((30 - requiredHp) * 100) / 100;
+
+    if (choices.length > 1 && requiredHp < 30.01 && choiceHp > remaining + 0.01 && remaining > 0) {
+      const optionHps = choices.map(r => r.hp);
+      const unit = optionHps[0];
+      const sameUnit = optionHps.every(v => Math.abs(v - unit) < 0.01);
+      const slots = sameUnit ? remaining / unit : NaN;
+      if (sameUnit && Number.isInteger(Math.round(slots)) && Math.abs(slots - Math.round(slots)) < 0.01 && Math.round(slots) >= 1 && choices.length >= Math.round(slots)) {
+        out.push(...required);
+        out.push({
+          term: termNo,
+          name: `Valbara/alternativa kurser (${Math.round(slots)} val)` ,
+          hp: remaining,
+          type: 'choice',
+          choiceSlots: Math.round(slots),
+          options: choices.flatMap(r => r.options || [{ name: r.name, hp: r.hp }]),
+          isThesis: false
+        });
+        continue;
+      }
+    }
+    out.push(...termRows);
+  }
+  return out.sort((a, b) => a.term - b.term);
 }
 
 function classify(rows, programmeHp) {
@@ -194,8 +271,17 @@ function classify(rows, programmeHp) {
 async function enrich(item, index) {
   const pageUrl = programmePageUrl(item, index);
   try {
-    const page = await fetchText(pageUrl);
-    const pdfUrl = educationPlanUrl(page.text, page.url);
+    const code = normCode(item.programCode || item.code || '');
+    let page;
+    let pdfUrl = '';
+    if (code && index.byCode.has(code)) {
+      const hit = index.byCode.get(code);
+      page = { url: hit.pageUrl, text: '' };
+      pdfUrl = hit.pdfUrl;
+    } else {
+      page = await fetchText(pageUrl);
+      pdfUrl = educationPlanUrl(page.text, page.url);
+    }
     if (!pdfUrl) throw new Error('education-plan-link-not-found');
     const pdf = await pdfToText(pdfUrl, item.programCode || item.key);
     const rows = parseRows(pdf.text);
