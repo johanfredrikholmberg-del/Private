@@ -19,7 +19,7 @@
       "https://www.hb.se/utbildning/omraden/polis/polisprogrammet/"
     ],
     "rows": [],
-    "checkedAt": "2026-09-11T19:02:14.553Z"
+    "checkedAt": "2026-09-11T19:25:23.102Z"
   },
   {
     "key": "beckmans-designhogskola:form",
@@ -13802,199 +13802,320 @@
         "isThesis": false
       },
       {
-        "term": 5,
-        "name": "Performativ managementrevision",
+        "term": 3,
+        "name": "Affärsjuridik I",
         "hp": 15,
         "type": "required",
         "isThesis": false
       },
       {
-        "term": 5,
-        "name": "Chefskap, ledarskap och medarbetarskap",
+        "term": 3,
+        "name": "Externredovisning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Finansiell ekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Strategisk marknadsföring",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Organisationsdesign och managementrecept",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Statistik II",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Finansiell planering",
         "hp": 7.5,
         "type": "required",
         "isThesis": false
       },
       {
         "term": 5,
-        "name": "Valbar kurs",
-        "hp": 7.5,
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
         "type": "choice",
-        "isThesis": false
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "ACEKO-track",
+        "options": [
+          {
+            "track": "Management",
+            "hp": 30,
+            "courses": [
+              [
+                "Performativ managementrevision",
+                15
+              ],
+              [
+                "Chefskap, ledarskap och medarbetarskap",
+                7.5
+              ],
+              [
+                "Valbar kurs",
+                7.5
+              ]
+            ]
+          },
+          {
+            "track": "Marknadsföring",
+            "hp": 30,
+            "courses": [
+              [
+                "Marknadsundersökning och marknadsanalys",
+                7.5
+              ],
+              [
+                "Konsumentbeteende",
+                7.5
+              ],
+              [
+                "Marknadskommunikation",
+                7.5
+              ],
+              [
+                "Valbar kurs",
+                7.5
+              ]
+            ]
+          },
+          {
+            "track": "Redovisning",
+            "hp": 30,
+            "courses": [
+              [
+                "Redovisningsteori och koncernredovisning",
+                7.5
+              ],
+              [
+                "Ekonomistyrning II",
+                7.5
+              ],
+              [
+                "Valbart block",
+                15
+              ]
+            ]
+          }
+        ]
       },
       {
-        "term": 5,
-        "name": "Marknadsundersökning och marknadsanalys",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Konsumentbeteende",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Marknadskommunikation",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Varbar kurs",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Redovisningsteori och koncernredovisning",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Ekonomistyrning II",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Operativ styrning",
-        "hp": 7.5,
+        "term": 6,
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
         "type": "choice",
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "name": "Skatterätt I",
-        "hp": 15,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 6,
-        "name": "Tjänstelogik i teori och praktik",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 6,
-        "name": "Management och revision i professionella organisationer",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 6,
-        "name": "Fallstudie i företagspraktik",
-        "hp": 15,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 6,
-        "name": "Affärsdesign och investeringsbeslut",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 6,
-        "name": "Affärsjuridik II",
-        "hp": 15,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 7,
-        "name": "Pragmatiskt förändringsledarskap",
-        "hp": 15,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 7,
-        "name": "Ledarskap och reflekterande etik",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 7,
-        "name": "Forskningsmetoder i företagsekonomi",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "ACEKO-track",
+        "options": [
+          {
+            "track": "Management",
+            "hp": 30,
+            "courses": [
+              [
+                "Tjänstelogik i teori och praktik",
+                7.5
+              ],
+              [
+                "Management och revision i professionella organisationer",
+                7.5
+              ],
+              [
+                "Fallstudie i företagspraktik",
+                15
+              ]
+            ]
+          },
+          {
+            "track": "Marknadsföring",
+            "hp": 30,
+            "courses": [
+              [
+                "Affärsdesign och investeringsbeslut",
+                7.5
+              ],
+              [
+                "Tjänstelogik i teori och praktik",
+                7.5
+              ],
+              [
+                "Fallstudie i företagspraktik",
+                15
+              ]
+            ]
+          },
+          {
+            "track": "Redovisning",
+            "hp": 30,
+            "courses": [
+              [
+                "Fallstudie i företagspraktik",
+                15
+              ],
+              [
+                "Valbart block",
+                15
+              ]
+            ]
+          }
+        ]
       },
       {
         "term": 7,
-        "name": "Digital marknadskommunikation",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 7,
-        "name": "Management av affärsrelationer",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 7,
-        "name": "Internationell redovisning",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 7,
-        "name": "Räkenskapsanalys och värdering",
-        "hp": 7.5,
-        "type": "required",
-        "isThesis": false
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "ACEKO-track",
+        "options": [
+          {
+            "track": "Management",
+            "hp": 30,
+            "courses": [
+              [
+                "Pragmatiskt förändringsledarskap",
+                15
+              ],
+              [
+                "Ledarskap och reflekterande etik",
+                7.5
+              ],
+              [
+                "Forskningsmetoder i företagsekonomi",
+                7.5
+              ]
+            ]
+          },
+          {
+            "track": "Marknadsföring",
+            "hp": 30,
+            "courses": [
+              [
+                "Digital marknadskommunikation",
+                7.5
+              ],
+              [
+                "Management av affärsrelationer",
+                7.5
+              ],
+              [
+                "Ledarskap och reflekterande etik",
+                7.5
+              ],
+              [
+                "Forskningsmetoder i företagsekonomi",
+                7.5
+              ]
+            ]
+          },
+          {
+            "track": "Redovisning",
+            "hp": 30,
+            "courses": [
+              [
+                "Internationell redovisning",
+                7.5
+              ],
+              [
+                "Räkenskapsanalys och värdering",
+                7.5
+              ],
+              [
+                "Forskningsmetoder i företagsekonomi",
+                7.5
+              ],
+              [
+                "Ledarskap och reflekterande etik",
+                7.5
+              ]
+            ]
+          }
+        ]
       },
       {
         "term": 8,
-        "name": "Självständigt arbete för civilekonomexamen, management",
+        "name": "Inriktningsspecifik termin",
         "hp": 30,
-        "type": "required",
-        "isThesis": true
-      },
-      {
-        "term": 8,
-        "name": "Självständigt arbete för civilekonomexamen, marknadsföring",
-        "hp": 30,
-        "type": "required",
-        "isThesis": true
-      },
-      {
-        "term": 8,
-        "name": "Självständigt arbete för civilekonomexamen, redovisning",
-        "hp": 30,
-        "type": "required",
-        "isThesis": true
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "ACEKO-track",
+        "options": [
+          {
+            "track": "Management",
+            "hp": 30,
+            "courses": [
+              [
+                "Självständigt arbete för civilekonomexamen, management",
+                30
+              ]
+            ]
+          },
+          {
+            "track": "Marknadsföring",
+            "hp": 30,
+            "courses": [
+              [
+                "Självständigt arbete för civilekonomexamen, marknadsföring",
+                30
+              ]
+            ]
+          },
+          {
+            "track": "Redovisning",
+            "hp": 30,
+            "courses": [
+              [
+                "Självständigt arbete för civilekonomexamen, redovisning",
+                30
+              ]
+            ]
+          }
+        ]
       }
     ],
-    "coverage": "manual-review",
-    "reason": "term-over-target",
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-complete-four-year-track-structure",
     "termSums": {
       "1": 30,
       "2": 30,
-      "5": 97.5,
-      "6": 52.5,
-      "7": 60,
-      "8": 90
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30,
+      "7": 30,
+      "8": 30
     },
-    "checkedAt": "2026-09-11T19:02:25.041Z"
+    "checkedAt": "2026-09-11T19:25:43.856Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=ACEKO&language=SV&revision=18%2C20&type=program",
+    "verifiedProgrammeOverride": true,
+    "trackContinuityRequired": true,
+    "tracks": [
+      "Management",
+      "Marknadsföring",
+      "Redovisning"
+    ]
   },
   {
     "key": "hogskolan-i-boras:ACIVE",
@@ -14077,7 +14198,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:02:25.097Z"
+    "checkedAt": "2026-09-11T19:25:41.879Z"
   },
   {
     "key": "hogskolan-i-boras:AMATM",
@@ -14280,7 +14401,7 @@
       "3": 30,
       "4": 15
     },
-    "checkedAt": "2026-09-11T19:02:25.499Z"
+    "checkedAt": "2026-09-11T19:25:41.639Z"
   },
   {
     "key": "hogskolan-i-boras:ASYST",
@@ -14558,7 +14679,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:02:25.649Z"
+    "checkedAt": "2026-09-11T19:25:41.807Z"
   },
   {
     "key": "hogskolan-i-boras:DMODE",
@@ -14734,7 +14855,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.020Z"
+    "checkedAt": "2026-09-11T19:25:41.911Z"
   },
   {
     "key": "hogskolan-i-boras:DTDES",
@@ -14999,7 +15120,7 @@
       "5": 76.5,
       "6": 19.5
     },
-    "checkedAt": "2026-09-11T19:02:25.807Z"
+    "checkedAt": "2026-09-11T19:25:41.985Z"
   },
   {
     "key": "hogskolan-i-boras:DTEIN",
@@ -15181,7 +15302,7 @@
     "reason": "official-course-list-incomplete-hp",
     "courseListHp": 172.5,
     "missingHp": 7.5,
-    "checkedAt": "2026-09-11T19:02:25.966Z"
+    "checkedAt": "2026-09-11T19:25:42.342Z"
   },
   {
     "key": "hogskolan-i-boras:DTEKO",
@@ -15606,7 +15727,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T19:02:26.121Z"
+    "checkedAt": "2026-09-11T19:25:42.493Z"
   },
   {
     "key": "hogskolan-i-boras:GINTE",
@@ -15816,7 +15937,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T19:02:25.387Z"
+    "checkedAt": "2026-09-11T19:25:41.934Z"
   },
   {
     "key": "hogskolan-i-boras:GPSYK",
@@ -16042,7 +16163,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:02:25.442Z"
+    "checkedAt": "2026-09-11T19:25:42.173Z"
   },
   {
     "key": "hogskolan-i-boras:KANDI",
@@ -16365,7 +16486,7 @@
     "unassignedCourses": [],
     "coverage": "manual-review",
     "reason": "foundation-year-credit-system-needs-normalisation",
-    "checkedAt": "2026-09-11T19:02:25.634Z"
+    "checkedAt": "2026-09-11T19:25:42.335Z"
   },
   {
     "key": "hogskolan-i-boras:KMATM",
@@ -16444,7 +16565,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:02:25.688Z"
+    "checkedAt": "2026-09-11T19:25:42.435Z"
   },
   {
     "key": "hogskolan-i-boras:LAG46",
@@ -16740,7 +16861,7 @@
       "7": 30,
       "8": 15
     },
-    "checkedAt": "2026-09-11T19:02:25.881Z"
+    "checkedAt": "2026-09-11T19:25:42.327Z"
   },
   {
     "key": "hogskolan-i-boras:LGFUD",
@@ -16958,7 +17079,7 @@
       "6": 15,
       "7": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.688Z"
+    "checkedAt": "2026-09-11T19:25:43.708Z"
   },
   {
     "key": "hogskolan-i-boras:MAIDI",
@@ -17254,7 +17375,7 @@
       "4": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:02:25.927Z"
+    "checkedAt": "2026-09-11T19:25:42.549Z"
   },
   {
     "key": "hogskolan-i-boras:NGBID",
@@ -17295,7 +17416,7 @@
       "5": 15,
       "6": 7.5
     },
-    "checkedAt": "2026-09-11T19:02:26.153Z"
+    "checkedAt": "2026-09-11T19:25:42.563Z"
   },
   {
     "key": "hogskolan-i-boras:SAMAR",
@@ -17383,7 +17504,7 @@
     "termSums": {
       "1": 7.5
     },
-    "checkedAt": "2026-09-11T19:02:26.106Z"
+    "checkedAt": "2026-09-11T19:25:42.717Z"
   },
   {
     "key": "hogskolan-i-boras:SGEMA",
@@ -17466,7 +17587,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.033Z"
+    "checkedAt": "2026-09-11T19:25:42.875Z"
   },
   {
     "key": "hogskolan-i-boras:SGKMM",
@@ -17641,7 +17762,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T19:02:26.087Z"
+    "checkedAt": "2026-09-11T19:25:42.812Z"
   },
   {
     "key": "hogskolan-i-boras:SGKTM",
@@ -17816,7 +17937,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T19:02:26.698Z"
+    "checkedAt": "2026-09-11T19:25:43.686Z"
   },
   {
     "key": "hogskolan-i-boras:SGOFD",
@@ -17916,7 +18037,7 @@
       "4": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.197Z"
+    "checkedAt": "2026-09-11T19:25:42.848Z"
   },
   {
     "key": "hogskolan-i-boras:SGOPS",
@@ -18539,7 +18660,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.453Z"
+    "checkedAt": "2026-09-11T19:25:42.765Z"
   },
   {
     "key": "hogskolan-i-boras:TAREC",
@@ -18655,7 +18776,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.956Z",
+    "checkedAt": "2026-09-11T19:25:43.758Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAREC&language=SV&revision=2%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -18740,7 +18861,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.252Z"
+    "checkedAt": "2026-09-11T19:25:42.928Z"
   },
   {
     "key": "hogskolan-i-boras:TAREP",
@@ -18830,7 +18951,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.366Z"
+    "checkedAt": "2026-09-11T19:25:43.080Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEB",
@@ -18913,7 +19034,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.482Z"
+    "checkedAt": "2026-09-11T19:25:42.984Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEC",
@@ -19029,7 +19150,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.956Z",
+    "checkedAt": "2026-09-11T19:25:43.758Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAVEC&language=SV&revision=1%2C00&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -19114,7 +19235,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.390Z"
+    "checkedAt": "2026-09-11T19:25:43.199Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEP",
@@ -19204,7 +19325,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.344Z"
+    "checkedAt": "2026-09-11T19:25:43.221Z"
   },
   {
     "key": "hogskolan-i-boras:TGAPF",
@@ -19338,7 +19459,7 @@
     "reason": "official-course-list-incomplete-hp",
     "courseListHp": 157.5,
     "missingHp": 22.5,
-    "checkedAt": "2026-09-11T19:02:26.399Z"
+    "checkedAt": "2026-09-11T19:25:43.397Z"
   },
   {
     "key": "hogskolan-i-boras:TGBYI",
@@ -19987,7 +20108,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:02:27.004Z",
+    "checkedAt": "2026-09-11T19:25:43.806Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGENA&language=SV&revision=8%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -20258,7 +20379,7 @@
       "5": 52.5,
       "6": 45
     },
-    "checkedAt": "2026-09-11T19:02:26.530Z"
+    "checkedAt": "2026-09-11T19:25:43.299Z"
   },
   {
     "key": "hogskolan-i-boras:TGIEL",
@@ -20450,7 +20571,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.542Z"
+    "checkedAt": "2026-09-11T19:25:43.218Z"
   },
   {
     "key": "hogskolan-i-boras:TGIEO",
@@ -20642,7 +20763,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.649Z"
+    "checkedAt": "2026-09-11T19:25:43.291Z"
   },
   {
     "key": "hogskolan-i-boras:TGITI",
@@ -20813,7 +20934,7 @@
       "5": 22.5,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.704Z"
+    "checkedAt": "2026-09-11T19:25:43.426Z"
   },
   {
     "key": "hogskolan-i-boras:TGKEH",
@@ -20890,7 +21011,7 @@
       "2": 2,
       "6": 18
     },
-    "checkedAt": "2026-09-11T19:02:26.667Z"
+    "checkedAt": "2026-09-11T19:25:43.442Z"
   },
   {
     "key": "hogskolan-i-boras:TGMAA",
@@ -21068,7 +21189,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:02:26.676Z"
+    "checkedAt": "2026-09-11T19:25:43.439Z"
   },
   {
     "key": "hogskolan-i-boras:TGTPI",
@@ -21302,7 +21423,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:02:27.004Z",
+    "checkedAt": "2026-09-11T19:25:43.806Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGTPI&language=EN&revision=3%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -21424,7 +21545,7 @@
       "3": 30,
       "4": 15
     },
-    "checkedAt": "2026-09-11T19:02:26.897Z"
+    "checkedAt": "2026-09-11T19:25:43.500Z"
   },
   {
     "key": "hogskolan-i-boras:VAADM",
@@ -21509,7 +21630,7 @@
       "3": 22.5,
       "4": 22.5
     },
-    "checkedAt": "2026-09-11T19:02:26.822Z"
+    "checkedAt": "2026-09-11T19:25:43.509Z"
   },
   {
     "key": "hogskolan-i-boras:VABAM",
@@ -21588,7 +21709,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 90,
-    "checkedAt": "2026-09-11T19:02:26.833Z"
+    "checkedAt": "2026-09-11T19:25:43.618Z"
   },
   {
     "key": "hogskolan-i-boras:VABAR",
@@ -21814,7 +21935,7 @@
     "coverage": "manual-review",
     "reason": "official-course-list-complete-term-placement-unresolved",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T19:02:26.842Z"
+    "checkedAt": "2026-09-11T19:25:43.645Z"
   },
   {
     "key": "hogskolan-i-boras:VGLOV",
@@ -21992,7 +22113,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T19:02:27.004Z",
+    "checkedAt": "2026-09-11T19:25:43.806Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=VGLOV&language=SV&revision=1%2C000&type=program",
     "verifiedProgrammeOverride": true,
     "studyPaceVariant": "helfart",
