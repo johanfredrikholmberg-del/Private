@@ -18,6 +18,15 @@ if(vaadm){
  vaadm.rows=[r(1,'Hållbar organisering och styrning inom vård och omsorg',7.5),r(1,'Hälsofrämjande ledarskap och medarbetarskap inom vård och omsorg',7.5),r(2,'Förbättringskunskap och vårdutveckling ur ett hållbarhetsperspektiv',7.5),r(2,'Hållbart HRM-arbete',7.5),r(3,'Valfri kurs',7.5,'choice'),r(3,'Valbar kurs i vetenskaplig metod',7.5,'choice'),r(4,'Examensarbete',15)];
  vaadm.coverage='choice-required';vaadm.reason='official-plan-verified-half-speed-four-term-structure';vaadm.termSums={1:15,2:15,3:15,4:15};vaadm.studyPacePercent=50;vaadm.expectedHpPerTerm=15;vaadm.sourceEvidenceUrl='https://kursinfodoc.hb.se/PdfMaker.aspx?code=VAADM&language=SV&revision=10%2C00&type=program';vaadm.verifiedProgrammeOverride=true;vaadm.checkedAt=new Date().toISOString();
 }
+const vabam=all.find(v=>String(v.programCode||'').toUpperCase()==='VABAM');
+if(vabam){
+ vabam.rows=[r(1,'Profession, teori och metod',7.5),r(1,'Kvinnors sexuella och reproduktiva hälsa',6),r(1,'Det normala barnafödandet',9),r(2,'Förlossningskonst I',12),r(2,'Kvinno- och familjehälsa I',12),r(3,'Förlossningskonst II',10.5),r(3,'Kvinno- och familjehälsa II',10.5)];
+ vabam.spanningCourses=[
+  {name:'Examensarbete i sexuell och reproduktiv hälsa',hp:15,startTerm:1,endTerm:3,type:'required',isThesis:true,termAllocations:[{term:1,hp:7.5},{term:2,hp:1.5},{term:3,hp:6}]},
+  {name:'Professionellt förhållningssätt och komplicerat barnafödande',hp:7.5,startTerm:2,endTerm:3,type:'required',termAllocations:[{term:2,hp:4.5},{term:3,hp:3}]}
+ ];
+ vabam.coverage='complete';vabam.reason='official-programme-overview-verified-three-term-structure';vabam.termSums={1:30,2:30,3:30};vabam.sourceEvidenceUrl='https://www.hb.se/contentassets/a96c75bb84d24b5eb4dcde8ce1f3d399/oversikt-over-programmet-start-hostterminen-2020-vabmo20h.pdf';vabam.sourceEvidenceUrls=[vabam.sourceEvidenceUrl,'https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=VABAM&revision=7%2C00&language=SV'];vabam.verifiedProgrammeOverride=true;vabam.studyStructureGranularity='term-with-spanning-courses';vabam.checkedAt=new Date().toISOString();
+}
 await fs.writeFile(FILE,JSON.stringify(all,null,2)+'\n');
 const meta=JSON.parse(await fs.readFile(META,'utf8'));meta.generatedAt=new Date().toISOString();meta.counts=all.reduce((a,v)=>(a[v.coverage]=(a[v.coverage]||0)+1,a),{});meta.retryable=all.filter(v=>['metadata-only','manual-review'].includes(v.coverage)).length;await fs.writeFile(META,JSON.stringify(meta,null,2)+'\n');
-console.log('Verified structures 4:',[{code:'DTDES',coverage:dtdes?.coverage},{code:'LAG46',coverage:lag46?.coverage},{code:'TGIEA',coverage:tgiea?.coverage,termSums:tgiea?.termSums},{code:'VAADM',coverage:vaadm?.coverage,termSums:vaadm?.termSums}]);
+console.log('Verified structures 4:',[{code:'DTDES',coverage:dtdes?.coverage},{code:'LAG46',coverage:lag46?.coverage},{code:'TGIEA',coverage:tgiea?.coverage,termSums:tgiea?.termSums},{code:'VAADM',coverage:vaadm?.coverage,termSums:vaadm?.termSums},{code:'VABAM',coverage:vabam?.coverage,termSums:vabam?.termSums}]);
