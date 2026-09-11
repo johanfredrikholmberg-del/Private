@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "generatedAt": "2026-09-11",
   "refreshPolicy": {
     "majorReviewsPerYear": 2,
@@ -98,6 +98,75 @@
         {"term":6,"code":"","name":"Multivariata metoder","hp":7.5,"category":"mandatory"},
         {"term":6,"code":"","name":"Utvalda statistiska metoder med tillämpningar","hp":7.5,"category":"mandatory"},
         {"term":6,"code":"","name":"Självständigt arbete i statistik för kandidatexamen","hp":15,"category":"mandatory","isThesis":true}
+      ]
+    },
+    {
+      "id": "umu:SGEKA:2026HT:foretagsekonomi",
+      "university": "Umeå universitet",
+      "programCode": "SGEKA",
+      "programName": "Ekonomie kandidatprogrammet",
+      "programHp": 180,
+      "level": "Grundnivå",
+      "subject": "Företagsekonomi",
+      "catalogueSubject": "Företagsekonomi",
+      "validFrom": "2026HT",
+      "validTo": null,
+      "coverage": "complete",
+      "verified": true,
+      "source": "umea-official-programplan",
+      "sourceUrls": ["https://www.umu.se/utbildning/kurs-och-utbildningsplan/sgeka/"],
+      "rows": [
+        {"term":1,"code":"","name":"Trender och utmaningar för framtidens företagande","hp":15,"category":"mandatory"},
+        {"term":1,"code":"","name":"Mikroekonomi: Konsumenten, företaget och marknaden","hp":15,"category":"mandatory"},
+        {"term":2,"code":"","name":"Marknadsföring","hp":7.5,"category":"mandatory"},
+        {"term":2,"code":"","name":"Redovisning och ekonomistyrning","hp":7.5,"category":"mandatory"},
+        {"term":2,"code":"","name":"Makroekonomi: Tillväxt och policy","hp":15,"category":"mandatory"},
+        {"term":3,"code":"","name":"Datadrivet beslutsfattande och affärsanalys","hp":15,"category":"mandatory"},
+        {"term":3,"code":"","name":"Datahantering och datainsamling för affärsanalys","hp":5,"category":"mandatory"},
+        {"term":3,"code":"","name":"Affärsjuridik","hp":10,"category":"mandatory"},
+        {"term":4,"code":"","name":"Affärsutveckling och innovation","hp":7.5,"category":"mandatory"},
+        {"term":4,"code":"","name":"Projektledning","hp":7.5,"category":"mandatory"},
+        {"term":4,"code":"","name":"Finansiering","hp":7.5,"category":"mandatory"},
+        {"term":4,"code":"","name":"Hållbarhet och ansvar i företagande","hp":7.5,"category":"mandatory"},
+        {"term":5,"code":"","name":"Valbara/fria kurser","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},
+        {"term":6,"code":"","name":"Vetenskaplig metod","hp":7.5,"category":"mandatory"},
+        {"term":6,"code":"","name":"Kandidatuppsats, företagsekonomi","hp":15,"category":"mandatory","isThesis":true},
+        {"term":6,"code":"","name":"Förändringsarbete och ledarskap","hp":7.5,"category":"mandatory"}
+      ]
+    },
+    {
+      "id": "umu:SGEKA:2026HT:nationalekonomi",
+      "university": "Umeå universitet",
+      "programCode": "SGEKA",
+      "programName": "Ekonomie kandidatprogrammet",
+      "programHp": 180,
+      "level": "Grundnivå",
+      "subject": "Nationalekonomi",
+      "catalogueSubject": "Företagsekonomi",
+      "validFrom": "2026HT",
+      "validTo": null,
+      "coverage": "complete",
+      "verified": true,
+      "source": "umea-official-programplan",
+      "sourceUrls": ["https://www.umu.se/utbildning/kurs-och-utbildningsplan/sgeka/"],
+      "rows": [
+        {"term":1,"code":"","name":"Trender och utmaningar för framtidens företagande","hp":15,"category":"mandatory"},
+        {"term":1,"code":"","name":"Mikroekonomi: Konsumenten, företaget och marknaden","hp":15,"category":"mandatory"},
+        {"term":2,"code":"","name":"Marknadsföring","hp":7.5,"category":"mandatory"},
+        {"term":2,"code":"","name":"Redovisning och ekonomistyrning","hp":7.5,"category":"mandatory"},
+        {"term":2,"code":"","name":"Makroekonomi: Tillväxt och policy","hp":15,"category":"mandatory"},
+        {"term":3,"code":"","name":"Datadrivet beslutsfattande och affärsanalys","hp":15,"category":"mandatory"},
+        {"term":3,"code":"","name":"Datahantering och datainsamling för affärsanalys","hp":5,"category":"mandatory"},
+        {"term":3,"code":"","name":"Affärsjuridik","hp":10,"category":"mandatory"},
+        {"term":4,"code":"","name":"Ekonomisk modellering med tillämpningar","hp":10,"category":"mandatory"},
+        {"term":4,"code":"","name":"Industriell organisation","hp":5,"category":"mandatory"},
+        {"term":4,"code":"","name":"Offentlig ekonomi: Effektivitet och rättvisa","hp":7.5,"category":"mandatory"},
+        {"term":4,"code":"","name":"Strategiskt beteende och sociala dilemman","hp":7.5,"category":"mandatory"},
+        {"term":5,"code":"","name":"Valbara/fria kurser","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},
+        {"term":6,"code":"","name":"Mikroekonomi: Konsumentbeteende","hp":5,"category":"mandatory"},
+        {"term":6,"code":"","name":"Makroekonomi: Institutioner och policy","hp":5,"category":"mandatory"},
+        {"term":6,"code":"","name":"Aktuella ämnen inom nationalekonomi","hp":5,"category":"mandatory"},
+        {"term":6,"code":"","name":"Kandidatuppsats i nationalekonomi","hp":15,"category":"mandatory","isThesis":true}
       ]
     }
   ]
