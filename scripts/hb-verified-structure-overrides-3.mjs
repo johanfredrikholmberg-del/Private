@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Verified Civilekonom branch model; edit also acts as the Borås fast-path trigger.
+// Verified Civilekonom branch model; this file also triggers all chained Borås overrides.
 import fs from 'node:fs/promises';
 const FILE='data/susa/structures.json',META='data/susa/structure-meta.json';
 const all=JSON.parse(await fs.readFile(FILE,'utf8'));
