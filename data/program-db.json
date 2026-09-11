@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-11",
+  "refreshPolicy": {
+    "majorReviewsPerYear": 2,
+    "changeChecks": "monthly",
+    "strategy": "new-version-on-change"
+  },
+  "programs": [
+    {
+      "id": "gu:S1EKA:2026HT",
+      "university": "Göteborgs universitet",
+      "programCode": "S1EKA",
+      "programName": "Ekonomie kandidatprogram",
+      "programHp": 180,
+      "level": "Grundnivå",
+      "validFrom": "2026HT",
+      "validTo": null,
+      "coverage": "choice-required",
+      "verified": true,
+      "source": "gu-official-programplan",
+      "sourceUrls": [
+        "https://studentportal.gu.se/program/ekonomie-kandidatprogrammet",
+        "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogrammet-kurser-och-valmojligheter"
+      ],
+      "rows": [
+        {"term":1,"code":"EKFN10","name":"Introduktion till ekonomi","hp":2,"category":"mandatory"},
+        {"term":1,"code":"EKF111","name":"Externredovisning","hp":8,"category":"mandatory"},
+        {"term":1,"code":"EKF103","name":"Ekonomistyrning","hp":6,"category":"mandatory"},
+        {"term":1,"code":"EKN102","name":"Mikroekonomi","hp":6,"category":"mandatory"},
+        {"term":1,"code":"EKS101","name":"Statistik 1a","hp":8,"category":"mandatory"},
+        {"term":2,"code":"EKN101","name":"Makroekonomi","hp":6,"category":"mandatory"},
+        {"term":2,"code":"EKN103","name":"Financial economics","hp":6,"category":"mandatory"},
+        {"term":2,"code":"EKR101","name":"Introduktion till handelsrätt","hp":3,"category":"mandatory"},
+        {"term":2,"code":"EKF104","name":"Marketing","hp":6,"category":"mandatory"},
+        {"term":2,"code":"EKF105","name":"Ledarskap och organisation","hp":6,"category":"mandatory"},
+        {"term":2,"code":"EKF106","name":"Företagsekonomi i praktiken","hp":3,"category":"mandatory"},
+        {"term":3,"code":"EKS102","name":"Statistik 1b","hp":7,"category":"mandatory"},
+        {"term":3,"code":"EKN104","name":"Economics in Practice","hp":6,"category":"mandatory"},
+        {"term":3,"code":"EKN115","name":"International Economics","hp":5,"category":"mandatory"},
+        {"term":3,"code":"EKR102","name":"Handelsrätt","hp":12,"category":"mandatory"},
+        {"term":4,"code":"","name":"Fortsättningskurser inom valt huvudområde","hp":30,"category":"elective","slotType":"main-field-slot","isSlot":true},
+        {"term":5,"code":"","name":"Valfria kurser","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},
+        {"term":6,"code":"","name":"Fördjupningskurser inom valt huvudområde","hp":15,"category":"elective","slotType":"main-field-slot","isSlot":true},
+        {"term":6,"code":"","name":"Kandidatuppsats inom valt huvudområde","hp":15,"category":"mandatory","isThesis":true}
+      ]
+    },
+    {
+      "id": "uu:SEK1K:2026HT",
+      "university": "Uppsala universitet",
+      "programCode": "SEK1K",
+      "programName": "Ekonomie kandidatprogram",
+      "programHp": 180,
+      "level": "Grundnivå",
+      "validFrom": "2026HT",
+      "validTo": null,
+      "coverage": "choice-required",
+      "verified": true,
+      "source": "uppsala-official-programplan",
+      "sourceUrls": ["https://www.uu.se/utbildning/program/ekonomie-kandidatprogram"],
+      "rows": [
+        {"term":1,"code":"","name":"Företagsekonomi A","hp":30,"category":"mandatory"},
+        {"term":2,"code":"","name":"Nationalekonomi A","hp":30,"category":"mandatory"},
+        {"term":3,"code":"","name":"Grundläggande statistik och dataanalys I","hp":15,"category":"mandatory"},
+        {"term":3,"code":"","name":"Valbar kurs","hp":15,"category":"elective","slotType":"elective-slot","isSlot":true},
+        {"term":null,"code":"","name":"Ytterligare huvudområdesstudier","hp":45,"category":"elective","slotType":"main-field-requirement","isSlot":true,"orderFlexible":true},
+        {"term":null,"code":"","name":"G2/C-nivå inklusive kandidatuppsats","hp":30,"category":"mandatory","slotType":"main-field-advanced-requirement","isSlot":true,"orderFlexible":true,"includesThesisHp":15},
+        {"term":null,"code":"","name":"Valbara kurser","hp":30,"category":"elective","slotType":"elective-requirement","isSlot":true,"orderFlexible":true}
+      ]
+    },
+    {
+      "id": "su:SODAK:2026HT",
+      "university": "Stockholms universitet",
+      "programCode": "SODAK",
+      "programName": "Kandidatprogram i statistik och dataanalys",
+      "programHp": 180,
+      "level": "Grundnivå",
+      "validFrom": "2026HT",
+      "validTo": null,
+      "coverage": "complete",
+      "verified": true,
+      "source": "stockholm-official-programplan",
+      "sourceUrls": ["https://www.su.se/utbildning/utbildningskatalog/so/sodak"],
+      "rows": [
+        {"term":1,"code":"","name":"Statistik och dataanalys I","hp":15,"category":"mandatory"},
+        {"term":1,"code":"","name":"Statistik och dataanalys II","hp":15,"category":"mandatory"},
+        {"term":2,"code":"","name":"Akademiskt och vetenskapligt skrivande på engelska","hp":7.5,"category":"mandatory"},
+        {"term":2,"code":"","name":"Kunskapsteori och vetenskapsfilosofi","hp":7.5,"category":"mandatory"},
+        {"term":2,"code":"","name":"Matematik för samhällsvetare","hp":15,"category":"mandatory"},
+        {"term":3,"code":"","name":"Statistik och dataanalys III","hp":15,"category":"mandatory"},
+        {"term":3,"code":"","name":"Databasmetodik","hp":7.5,"category":"mandatory"},
+        {"term":3,"code":"","name":"GIS och rumslig analys I","hp":7.5,"category":"mandatory"},
+        {"term":4,"code":"","name":"Urvalsundersökningar","hp":7.5,"category":"mandatory"},
+        {"term":4,"code":"","name":"Programmeringsteknik","hp":7.5,"category":"mandatory"},
+        {"term":4,"code":"","name":"Generaliserade linjära modeller","hp":7.5,"category":"mandatory"},
+        {"term":4,"code":"","name":"Tidserieanalys","hp":7.5,"category":"mandatory"},
+        {"term":5,"code":"","name":"Valfria kurser","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},
+        {"term":6,"code":"","name":"Multivariata metoder","hp":7.5,"category":"mandatory"},
+        {"term":6,"code":"","name":"Utvalda statistiska metoder med tillämpningar","hp":7.5,"category":"mandatory"},
+        {"term":6,"code":"","name":"Självständigt arbete i statistik för kandidatexamen","hp":15,"category":"mandatory","isThesis":true}
+      ]
+    }
+  ]
+}
