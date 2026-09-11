@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>StudieLots – test av tillgodoräknande</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f7f5;color:#123b34;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:680px;margin:0 auto;padding:24px 16px 60px}.brand{font-weight:900;font-size:22px;margin-bottom:8px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:#176b5b;text-transform:uppercase}.lead{color:#63716b;line-height:1.5;margin:8px 0 20px}.summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}.summary>div{background:#fff;border:1px solid #dce9e3;border-radius:16px;padding:14px}.summary b{display:block;font-size:20px}.summary small{color:#6c756f}.term{background:#fff;border:1px solid #dce9e3;border-radius:18px;padding:14px;margin-top:12px}.term h2{font-size:16px;margin:0 0 12px}.course{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:start;padding:12px 0;border-top:1px solid #edf2ef}.course:first-of-type{border-top:0}.icon{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#eef7f3;color:#176b5b;font-weight:900}.name{font-weight:800}.meta{font-size:11px;color:#6b756f;margin-top:3px}.tag{display:inline-flex;margin-top:6px;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:800}.credited .tag{background:#e7f5ee;color:#176b5b}.potential .tag{background:#f2f5f4;color:#4f5b56}.hp{font-weight:800;white-space:nowrap}.note{margin-top:18px;padding:12px 14px;background:#fff;border:1px solid #dce9e3;border-radius:14px;font-size:12px;line-height:1.5;color:#5f6b65}.source{margin-top:16px;font-size:11px;color:#7b8580}.error{padding:12px;border-radius:12px;background:#fff3f0;color:#8c3a2b;border:1px solid #f0c8bf;display:none}@media(max-width:520px){.summary{grid-template-columns:1fr 1fr}.course{grid-template-columns:26px 1fr}.hp{grid-column:2}.wrap{padding-top:18px}}
+</style></head><body><main class="wrap"><div class="brand">StudieLots</div><div class="eyebrow">Test – historisk matchning</div><h1>Så här ser matchningen ut</h1><p class="lead">Det här testet använder ett verkligt historiskt bifall från Karlstads universitets underlag och visar samtidigt ett exempel på en match som bara är potentiell.</p><div id="error" class="error"></div><section class="summary"><div><b id="creditedHp">–</b><small>hp tillgodoräknat</small></div><div><b id="remainingHp">–</b><small>hp kvar att läsa</small></div></section><section class="term"><h2>Exempel på studieplan</h2><div id="courses"></div></section><div class="note"><b>Vad testas?</b><br>En exakt historisk träff ska visas som <b>Tillgodoräknat</b> och räknas av. En egen StudieLots-matchning ska visas som <b>Potentiellt tillgodoräknande</b>, ligga kvar att läsa och inte minska återstående hp.</div><div class="source">Testunderlag: Karlstads universitet, 2026. Ingen studentinformation används.</div></main>
+<script>
+window.__studielotsMerits=[
+ {name:'Företagsekonomi, grundkurs',hp:30,institution:'Örebro universitet'},
+ {name:'Organisation och ledarskap',hp:7.5,institution:'Örebro universitet'}
+];
+const snapshot={
+ totalHp:60,
+ rows:[
+  {name:'Företagsekonomi',code:'FEGB01',hp:30,university:'Karlstads universitet',status:'remaining'},
+  {name:'Organisation och ledarskap',code:'DEMO01',hp:7.5,university:'Karlstads universitet',status:'remaining',potentialCredit:true,potentialHp:7.5},
+  {name:'Valbar kurs',code:'DEMO02',hp:22.5,university:'Karlstads universitet',status:'remaining'}
+ ]
+};
+sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(snapshot));
+</script>
+<script src="/studielots-historical-credit-karlstad-2026-p1.js?v=711"></script>
+<script src="/studielots-historical-credit-karlstad-2026-p2.js?v=711"></script>
+<script src="/studielots-historical-credit-karlstad-2026-p3.js?v=711"></script>
+<script src="/studielots-credit-policy-v709.js?v=711"></script>
+<script>
+(function(){
+ const fmt=n=>String(Math.round((Number(n)||0)*10)/10).replace('.',',')+' hp';
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ function run(){
+  try{
+   const raw=JSON.parse(sessionStorage.getItem('studielots_planner_snapshot')||'null');
+   const clean=window.StudieLotsCreditPolicy?.sanitizeSnapshot(raw)||raw;
+   if(!clean)throw new Error('Ingen testdata kunde läsas.');
+   sessionStorage.setItem('studielots_planner_snapshot',JSON.stringify(clean));
+   document.getElementById('creditedHp').textContent=fmt(clean.creditedHp||0);
+   document.getElementById('remainingHp').textContent=fmt(clean.remainingHp||0);
+   const rows=clean.rows||[];
+   document.getElementById('courses').innerHTML=rows.map(r=>{
+    const hist=r.historicalExactMatch===true;
+    const pot=r.potentialCredit===true&&!hist;
+    const tag=hist?'Tillgodoräknat':pot?'Potentiellt tillgodoräknande':'';
+    const cls=hist?'credited':pot?'potential':'';
+    const meta=hist?'Exakt historiskt bifall · Karlstads universitet 2026':pot?'StudieLots bedömning · räknas inte av':'Kvar att läsa';
+    return `<div class="course ${cls}"><div class="icon">${hist?'✓':'▢'}</div><div><div class="name">${esc(r.name||'Kurs')}</div><div class="meta">${esc(meta)}</div>${tag?`<span class="tag">${esc(tag)}</span>`:''}</div><div class="hp">${fmt(r.hp)}</div></div>`;
+   }).join('');
+  }catch(e){const el=document.getElementById('error');el.style.display='block';el.textContent='Testet kunde inte köras: '+e.message;}
+ }
+ setTimeout(run,80);
+})();
+</script></body></html>
