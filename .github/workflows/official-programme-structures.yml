@@ -1,0 +1,54 @@
+name: Official programme structures
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - 'scripts/official-programme-structure-pipeline.mjs'
+  schedule:
+    - cron: '47 3 * * 2,4,6'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: official-programme-structures
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    if: ${{ github.actor != 'studielots-bot' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Enrich next programme batch from official university pages
+        env:
+          STRUCTURE_LIMIT: '500'
+          STRUCTURE_CONCURRENCY: '10'
+        run: node scripts/official-programme-structure-pipeline.mjs
+      - name: Validate structure output
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const meta=JSON.parse(fs.readFileSync('data/susa/structure-meta.json','utf8'));
+          const rows=JSON.parse(fs.readFileSync('data/susa/structures.json','utf8'));
+          if (!rows.length || rows.length !== meta.processed) throw new Error('Structure output validation failed');
+          const allowed=new Set(['complete','choice-required','partial-structure','manual-review','metadata-only']);
+          if(rows.some(x=>!allowed.has(x.coverage))) throw new Error('Unknown coverage status');
+          console.log(meta);
+          NODE
+      - name: Commit structure progress
+        run: |
+          if [ -z "$(git status --porcelain -- data/susa/structures.json data/susa/structure-meta.json)" ]; then exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/susa/structures.json data/susa/structure-meta.json
+          git commit -m 'Enrich official programme structures [skip ci]'
+          git push origin HEAD:studielots-v2
