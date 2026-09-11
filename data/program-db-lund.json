@@ -3,101 +3,18 @@
   "generatedAt": "2026-09-11",
   "programs": [
     {
-      "id": "lu:SAMPS:2026HT",
-      "university": "Lunds universitet",
-      "programCode": "SAMPS",
-      "programName": "Masterprogram i psykologi",
-      "programHp": 120,
-      "level": "Avancerad nivå",
-      "subject": "Psykologi",
-      "catalogueSubject": "Psykologi",
-      "validFrom": "2026HT",
-      "validTo": null,
-      "coverage": "choice-required",
-      "verified": true,
-      "source": "lund-official-programplan",
-      "sourceUrls": [
-        "https://www.lu.se/studera/psykologi-masterprogram-SAMPS",
-        "https://www.lu.se/studera/psykologi-masterprogram-SAMPS/programmets-innehall"
-      ],
-      "rows": [
-        {"term":1,"code":"","name":"Psykologi: Avancerade vetenskapliga metoder i psykologin","hp":15,"category":"mandatory"},
-        {"term":1,"code":"","name":"Psykologi: Psykologisk vetenskap från filosofiska och praktiska perspektiv","hp":15,"category":"mandatory"},
-        {"term":2,"code":"","name":"Psykologi: Specialiserade teman","hp":7.5,"category":"mandatory"},
-        {"term":2,"code":"","name":"Valbara studier enligt programplan","hp":22.5,"category":"elective","slotType":"elective-slot","isSlot":true,"options":[
-          {"name":"Avancerad socialpsykologi I","code":"","hp":7.5},
-          {"name":"Avancerad arbets- och organisationspsykologi I","code":"","hp":7.5},
-          {"name":"Avancerad personlighetspsykologi, typisk och atypisk I","code":"","hp":7.5},
-          {"name":"Avancerad kognitiv neurovetenskap I","code":"","hp":7.5},
-          {"name":"Avancerad utvecklingspsykologi, typisk och atypisk I","code":"","hp":7.5}
-        ]},
-        {"term":3,"code":"","name":"Psykologi: Empiriskt arbete inom psykologi","hp":7.5,"category":"mandatory"},
-        {"term":3,"code":"","name":"Valbara studier enligt programplan","hp":22.5,"category":"elective","slotType":"elective-slot","isSlot":true,"options":[
-          {"name":"Avancerad socialpsykologi II","code":"","hp":7.5},
-          {"name":"Avancerad arbets- och organisationspsykologi II","code":"","hp":7.5},
-          {"name":"Avancerad personlighetspsykologi, typisk och atypisk II","code":"","hp":7.5},
-          {"name":"Avancerad kognitiv neurovetenskap II","code":"","hp":7.5},
-          {"name":"Avancerad utvecklingspsykologi, typisk och atypisk II","code":"","hp":7.5}
-        ]},
-        {"term":4,"code":"","name":"Psykologi: Examensarbete för masterexamen","hp":30,"category":"mandatory","isThesis":true}
+      "id":"lu:SGFKO:2026HT","university":"Lunds universitet","programCode":"SGFKO","programName":"Freds- och konfliktvetenskap - Kandidatprogram","programHp":180,"level":"Grundnivå","subject":"Freds- och konfliktvetenskap","catalogueSubject":"Freds- och konfliktvetenskap","validFrom":"2026HT","validTo":null,"coverage":"choice-required","verified":true,"source":"lund-official-programplan","sourceUrls":["https://www.lu.se/studera/freds-och-konfliktvetenskap-kandidatprogram-SGFKO/programmets-innehall"],"rows":[
+        {"term":1,"code":"","name":"Freds- och konfliktvetenskap, grundkurs","hp":30,"category":"mandatory"},
+        {"term":2,"code":"","name":"Statsvetenskap, grundkurs","hp":30,"category":"mandatory"},
+        {"term":3,"code":"","name":"Freds- och konfliktvetenskap, fortsättningskurs","hp":30,"category":"mandatory"},
+        {"term":4,"code":"","name":"Tematermin enligt programplan","hp":30,"category":"elective","slotType":"theme-slot","isSlot":true,"options":[{"name":"Historia – konflikters historia","code":"","hp":30},{"name":"Ekonomisk historia – ekonomi och konflikt","code":"","hp":30},{"name":"Socialantropologi – kultur och försoning","code":"","hp":30},{"name":"Statsvetenskap, fortsättningskurs","code":"","hp":30},{"name":"GIS – konfliktens rumsliga dimension","code":"","hp":30}]},
+        {"term":5,"code":"","name":"Arbetslivspraktik, utlandsstudier eller valbara kurser","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},
+        {"term":6,"code":"","name":"Freds- och konfliktvetenskap, kandidatkurs inklusive uppsats","hp":30,"category":"mandatory","isThesis":true}
       ]
     },
     {
-      "id": "lu:EGEKO:2026HT",
-      "university": "Lunds universitet",
-      "programCode": "EGEKO",
-      "programName": "Ekonomie kandidatprogram",
-      "programHp": 180,
-      "level": "Grundnivå",
-      "subject": "Företagsekonomi",
-      "catalogueSubject": "Företagsekonomi",
-      "validFrom": "2026HT",
-      "validTo": null,
-      "coverage": "choice-required",
-      "verified": true,
-      "source": "lund-official-programplan",
-      "sourceUrls": [
-        "https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO",
-        "https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO/programmets-innehall"
-      ],
-      "rows": [
-        {"term":1,"code":"","name":"Företagsekonomi: Grundkurs","hp":30,"category":"mandatory"},
-        {"term":2,"code":"","name":"Nationalekonomi: Grundkurs","hp":30,"category":"mandatory"},
-        {"term":3,"code":"","name":"Handelsrätt: Juridisk översiktskurs","hp":15,"category":"mandatory"},
-        {"term":3,"code":"","name":"Statistik: Grundkurs 1","hp":15,"category":"mandatory"},
-        {"term":4,"code":"","name":"Huvudområde enligt programplan","hp":30,"category":"elective","slotType":"main-field-slot","isSlot":true},
-        {"term":5,"code":"","name":"Valbar termin inom Sverige eller utomlands","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},
-        {"term":6,"code":"","name":"Huvudområde och examensarbete enligt programplan","hp":30,"category":"elective","slotType":"main-field-thesis-slot","isSlot":true,"includesThesisHp":15}
-      ]
-    },
-    {
-      "id": "lu:EGSYS:2026HT",
-      "university": "Lunds universitet",
-      "programCode": "EGSYS",
-      "programName": "Systemvetenskapligt kandidatprogram - design av informationssystem",
-      "programHp": 180,
-      "level": "Grundnivå",
-      "subject": "Informatik",
-      "catalogueSubject": "Informatik",
-      "validFrom": "2026HT",
-      "validTo": null,
-      "coverage": "complete",
-      "verified": true,
-      "source": "lund-official-programplan",
-      "sourceUrls": [
-        "https://www.lu.se/studera/systemvetenskapligt-kandidatprogram-design-av-informationssystem-EGSYS",
-        "https://www.lu.se/studera/systemvetenskapligt-kandidatprogram-design-av-informationssystem-EGSYS/programmets-innehall"
-      ],
-      "rows": [
-        {"term":1,"code":"","name":"Informatik: Introduktion till informationssystem","hp":30,"category":"mandatory"},
-        {"term":2,"code":"","name":"Informatik: Informationssystem och verksamhet","hp":30,"category":"mandatory"},
-        {"term":3,"code":"","name":"Informatik: Informationssystems- och verksamhetsutveckling","hp":30,"category":"mandatory"},
-        {"term":4,"code":"","name":"Informatik: IT-arkitektur och mjukvarusystem","hp":30,"category":"mandatory"},
-        {"term":5,"code":"","name":"Valbar termin i Sverige eller utomlands","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},
-        {"term":6,"code":"","name":"Informatik: Examensarbete (uppsats) för kandidatexamen","hp":15,"category":"mandatory","isThesis":true},
-        {"term":6,"code":"","name":"Informationssystem: Lärandeportfölj","hp":1,"category":"mandatory"},
-        {"term":6,"code":"","name":"Informationssystem: Projektarbete på Systemvetenskapliga kandidatprogrammet","hp":14,"category":"mandatory"}
-      ]
-    }
+      "id": "lu:SAMPS:2026HT", "university":"Lunds universitet","programCode":"SAMPS","programName":"Masterprogram i psykologi","programHp":120,"level":"Avancerad nivå","subject":"Psykologi","catalogueSubject":"Psykologi","validFrom":"2026HT","validTo":null,"coverage":"choice-required","verified":true,"source":"lund-official-programplan","sourceUrls":["https://www.lu.se/studera/psykologi-masterprogram-SAMPS","https://www.lu.se/studera/psykologi-masterprogram-SAMPS/programmets-innehall"],"rows":[{"term":1,"code":"","name":"Psykologi: Avancerade vetenskapliga metoder i psykologin","hp":15,"category":"mandatory"},{"term":1,"code":"","name":"Psykologi: Psykologisk vetenskap från filosofiska och praktiska perspektiv","hp":15,"category":"mandatory"},{"term":2,"code":"","name":"Psykologi: Specialiserade teman","hp":7.5,"category":"mandatory"},{"term":2,"code":"","name":"Valbara studier enligt programplan","hp":22.5,"category":"elective","slotType":"elective-slot","isSlot":true},{"term":3,"code":"","name":"Psykologi: Empiriskt arbete inom psykologi","hp":7.5,"category":"mandatory"},{"term":3,"code":"","name":"Valbara studier enligt programplan","hp":22.5,"category":"elective","slotType":"elective-slot","isSlot":true},{"term":4,"code":"","name":"Psykologi: Examensarbete för masterexamen","hp":30,"category":"mandatory","isThesis":true}]},
+    {"id":"lu:EGEKO:2026HT","university":"Lunds universitet","programCode":"EGEKO","programName":"Ekonomie kandidatprogram","programHp":180,"level":"Grundnivå","subject":"Företagsekonomi","catalogueSubject":"Företagsekonomi","validFrom":"2026HT","validTo":null,"coverage":"choice-required","verified":true,"source":"lund-official-programplan","sourceUrls":["https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO","https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO/programmets-innehall"],"rows":[{"term":1,"code":"","name":"Företagsekonomi: Grundkurs","hp":30,"category":"mandatory"},{"term":2,"code":"","name":"Nationalekonomi: Grundkurs","hp":30,"category":"mandatory"},{"term":3,"code":"","name":"Handelsrätt: Juridisk översiktskurs","hp":15,"category":"mandatory"},{"term":3,"code":"","name":"Statistik: Grundkurs 1","hp":15,"category":"mandatory"},{"term":4,"code":"","name":"Huvudområde enligt programplan","hp":30,"category":"elective","slotType":"main-field-slot","isSlot":true},{"term":5,"code":"","name":"Valbar termin inom Sverige eller utomlands","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},{"term":6,"code":"","name":"Huvudområde och examensarbete enligt programplan","hp":30,"category":"elective","slotType":"main-field-thesis-slot","isSlot":true,"includesThesisHp":15}]},
+    {"id":"lu:EGSYS:2026HT","university":"Lunds universitet","programCode":"EGSYS","programName":"Systemvetenskapligt kandidatprogram - design av informationssystem","programHp":180,"level":"Grundnivå","subject":"Informatik","catalogueSubject":"Informatik","validFrom":"2026HT","validTo":null,"coverage":"complete","verified":true,"source":"lund-official-programplan","sourceUrls":["https://www.lu.se/studera/systemvetenskapligt-kandidatprogram-design-av-informationssystem-EGSYS","https://www.lu.se/studera/systemvetenskapligt-kandidatprogram-design-av-informationssystem-EGSYS/programmets-innehall"],"rows":[{"term":1,"code":"","name":"Informatik: Introduktion till informationssystem","hp":30,"category":"mandatory"},{"term":2,"code":"","name":"Informatik: Informationssystem och verksamhet","hp":30,"category":"mandatory"},{"term":3,"code":"","name":"Informatik: Informationssystems- och verksamhetsutveckling","hp":30,"category":"mandatory"},{"term":4,"code":"","name":"Informatik: IT-arkitektur och mjukvarusystem","hp":30,"category":"mandatory"},{"term":5,"code":"","name":"Valbar termin i Sverige eller utomlands","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},{"term":6,"code":"","name":"Informatik: Examensarbete (uppsats) för kandidatexamen","hp":15,"category":"mandatory","isThesis":true},{"term":6,"code":"","name":"Informationssystem: Lärandeportfölj","hp":1,"category":"mandatory"},{"term":6,"code":"","name":"Informationssystem: Projektarbete på Systemvetenskapliga kandidatprogrammet","hp":14,"category":"mandatory"}]}
   ]
 }
