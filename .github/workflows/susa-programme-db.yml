@@ -46,12 +46,12 @@ jobs:
           NODE
       - name: Commit changed catalogue
         run: |
-          if git diff --quiet -- data/susa; then
+          if [ -z "$(git status --porcelain -- data/susa)" ]; then
             echo 'No SUSA catalogue changes.'
             exit 0
           fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add data/susa
+          git add -f data/susa
           git commit -m 'Refresh SUSA higher education catalogue [skip ci]'
           git push origin HEAD:studielots-v2
