@@ -29,6 +29,41 @@ if(lag46){
  ];
  lag46.coverage='choice-required';lag46.reason='official-plan-verified-complete-eight-semester-structure';lag46.termSums={1:30,2:30,3:30,4:30,5:30,6:30,7:30,8:30};lag46.sourceEvidenceUrl='https://kursinfodoc.hb.se/PdfMaker.aspx?code=LAG46&language=SV&revision=20%2C000&type=program';lag46.verifiedProgrammeOverride=true;lag46.checkedAt=new Date().toISOString();
 }
+const tgiea=all.find(v=>String(v.programCode||'').toUpperCase()==='TGIEA');
+if(tgiea){
+ const tracks=['Byggteknik','Maskinteknik','Digitalisering'];
+ const tr=(term,options)=>r(term,'Inriktningsspecifik termin',30,'choice',{choiceSlots:1,choiceGroup:'TGIEA-track',options});
+ const opt=(track,courses)=>({track,hp:30,courses:courses.map(([name,hp])=>({name,hp}))});
+ tgiea.rows=[
+  r(1,'Matematisk analys 1',7.5),r(1,'Introduktion till ingenjörsmässigt arbete',7.5),r(1,'Matematisk analys 2',7.5),r(1,'Industriell Ekonomi',7.5),
+  tr(2,[
+   opt('Byggteknik',[['Linjär algebra',7.5],['Introduktion till byggteknik med ritteknik',7.5],['Vetenskapsteori och metod',2.5],['Grunder för uppföljning i kalkyleringsprogram',5],['Naturvetenskap',7.5]]),
+   opt('Maskinteknik',[['Linjär algebra',7.5],['Grundläggande programmering i Python',7.5],['Vetenskapsteori och metod',2.5],['Grunder för uppföljning i kalkyleringsprogram',5],['Naturvetenskap',7.5]]),
+   opt('Digitalisering',[['Linjär algebra',7.5],['Grundläggande programmering i Python',7.5],['Vetenskapsteori och metod',2.5],['Grunder för uppföljning i kalkyleringsprogram',5],['Naturvetenskap',7.5]])
+  ]),
+  tr(3,[
+   opt('Byggteknik',[['Kvalitet och ledningssystem',7.5],['Grundläggande statistik med regressionsanalys',7.5],['Logistikens verktyg och metoder',7.5],['Produktion grundkurs',7.5]]),
+   opt('Maskinteknik',[['Kvalitet och ledningssystem',7.5],['Grundläggande statistik med regressionsanalys',7.5],['Produktionsteknik',7.5],['Logistikens verktyg och metoder',7.5]]),
+   opt('Digitalisering',[['Kvalitet och ledningssystem',7.5],['Grundläggande statistik med regressionsanalys',7.5],['Produktionsteknik',7.5],['Logistikens verktyg och metoder',7.5]])
+  ]),
+  tr(4,[
+   opt('Byggteknik',[['Produktion II',7.5],['Inköp och investeringar',7.5],['Lean management',7.5],['Tillämpad byggnadsfysik och byggnadsmaterial',7.5]]),
+   opt('Maskinteknik',[['Inköp och investeringar',7.5],['Tillverkningsteknologi',7.5],['Lean management',7.5],['Beräkningsmekanik 1',7.5]]),
+   opt('Digitalisering',[['Distribution och e-handel',7.5],['Inköp och investeringar',7.5],['Lean management',7.5],['Cybersäkerhet för uppkopplade enheter',7.5]])
+  ]),
+  tr(5,[
+   opt('Byggteknik',[['Styrning av försörjningskedjor',7.5],['Projektledning med rapportskrivning',7.5],['Fastighetsförvaltning',7.5],['Statistisk försöksplanering och kvalitetsstyrning',7.5]]),
+   opt('Maskinteknik',[['Styrning av försörjningskedjor',7.5],['Projektledning med rapportskrivning',7.5],['Statistisk försöksplanering och kvalitetsstyrning',7.5],['Mekaniska konstruktioner 1',7.5]]),
+   opt('Digitalisering',[['Styrning av försörjningskedjor',7.5],['Projektledning med rapportskrivning',7.5],['Statistisk försöksplanering och kvalitetsstyrning',7.5],['AI för affärsutveckling',7.5]])
+  ]),
+  tr(6,[
+   opt('Byggteknik',[['Innemiljö',7.5],['Hållbar utveckling i ett ingenjörsperspektiv',7.5],['Examensarbete i industriell ekonomi',15]]),
+   opt('Maskinteknik',[['Mekatronik',7.5],['Hållbar utveckling i ett ingenjörsperspektiv',7.5],['Examensarbete i industriell ekonomi',15]]),
+   opt('Digitalisering',[['Databaser och dataanalys',7.5],['Hållbar utveckling i ett ingenjörsperspektiv',7.5],['Examensarbete i industriell ekonomi',15]])
+  ])
+ ];
+ tgiea.coverage='choice-required';tgiea.reason='official-plan-verified-complete-six-semester-specialisation-structure';tgiea.termSums={1:30,2:30,3:30,4:30,5:30,6:30};tgiea.sourceEvidenceUrl='https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGIEA&language=SV&revision=12%2C60&type=program';tgiea.verifiedProgrammeOverride=true;tgiea.trackContinuityRequired=true;tgiea.tracks=tracks;tgiea.checkedAt=new Date().toISOString();
+}
 await fs.writeFile(FILE,JSON.stringify(all,null,2)+'\n');
 const meta=JSON.parse(await fs.readFile(META,'utf8'));meta.generatedAt=new Date().toISOString();meta.counts=all.reduce((a,v)=>(a[v.coverage]=(a[v.coverage]||0)+1,a),{});meta.retryable=all.filter(v=>['metadata-only','manual-review'].includes(v.coverage)).length;await fs.writeFile(META,JSON.stringify(meta,null,2)+'\n');
-console.log('Verified structures 4:',[{code:'DTDES',coverage:dtdes?.coverage,reason:dtdes?.reason},{code:'LAG46',coverage:lag46?.coverage,reason:lag46?.reason}]);
+console.log('Verified structures 4:',[{code:'DTDES',coverage:dtdes?.coverage,reason:dtdes?.reason},{code:'LAG46',coverage:lag46?.coverage,reason:lag46?.reason},{code:'TGIEA',coverage:tgiea?.coverage,reason:tgiea?.reason,termSums:tgiea?.termSums}]);
