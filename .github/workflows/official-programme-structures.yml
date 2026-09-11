@@ -7,6 +7,7 @@ on:
     paths:
       - 'scripts/official-programme-structure-pipeline.mjs'
       - 'scripts/hb-programme-structure-pipeline.mjs'
+      - 'scripts/hb-verified-structure-overrides.mjs'
   schedule:
     - cron: '47 3 * * 2,4,6'
 
@@ -37,13 +38,14 @@ jobs:
           HB_STRUCTURE_CONCURRENCY: '8'
           HB_INDEX_CONCURRENCY: '10'
         run: |
-          if [ "${{ github.event_name }}" = "push" ] && git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" | grep -q '^scripts/hb-programme-structure-pipeline\.mjs$'; then
-            echo 'Borås parser changed: running fast Borås-only enrichment.'
+          if [ "${{ github.event_name }}" = "push" ] && git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" | grep -Eq '^scripts/hb-(programme-structure-pipeline|verified-structure-overrides)\.mjs$'; then
+            echo 'Borås code changed: running fast Borås-only enrichment.'
             node scripts/hb-programme-structure-pipeline.mjs
           else
             echo 'Running full official programme enrichment.'
             node scripts/official-programme-structure-pipeline.mjs
           fi
+          node scripts/hb-verified-structure-overrides.mjs
       - name: Validate structure output
         run: |
           node - <<'NODE'
