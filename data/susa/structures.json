@@ -19,7 +19,7 @@
       "https://www.hb.se/utbildning/omraden/polis/polisprogrammet/"
     ],
     "rows": [],
-    "checkedAt": "2026-09-11T21:20:47.165Z",
+    "checkedAt": "2026-09-11T21:21:23.403Z",
     "studyStructureGranularity": "national-plan-special",
     "termPlacementVerified": false,
     "sourceEvidenceUrl": "https://www.hb.se/utbildning/omraden/polis/polisprogrammet/",
@@ -14111,7 +14111,7 @@
       "7": 30,
       "8": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.105Z",
+    "checkedAt": "2026-09-11T21:21:23.335Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=ACEKO&language=SV&revision=18%2C20&type=program",
     "verifiedProgrammeOverride": true,
     "trackContinuityRequired": true,
@@ -14202,7 +14202,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:20:45.455Z"
+    "checkedAt": "2026-09-11T21:21:22.048Z"
   },
   {
     "key": "hogskolan-i-boras:AMATM",
@@ -14405,7 +14405,7 @@
       "3": 30,
       "4": 15
     },
-    "checkedAt": "2026-09-11T21:20:45.581Z"
+    "checkedAt": "2026-09-11T21:21:22.153Z"
   },
   {
     "key": "hogskolan-i-boras:ASYST",
@@ -14677,13 +14677,21 @@
         "isThesis": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "official-education-plan-some-complete-terms",
+    "coverage": "manual-review",
+    "reason": "official-plan-verifies-complete-1-60-and-61-120-credit-blocks-with-alternative-and-elective-courses-no-term-placement",
     "termSums": {
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:20:45.463Z"
+    "checkedAt": "2026-09-11T21:21:23.430Z",
+    "verifiedProgrammeOverride": true,
+    "studyStructureGranularity": "credit-block-only",
+    "termPlacementVerified": false,
+    "creditBlockSums": {
+      "1-60": 60,
+      "61-120": 60
+    },
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=BMBD1&language=SV&revision=7%2C100&type=program"
   },
   {
     "key": "hogskolan-i-boras:DMODE",
@@ -14859,7 +14867,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.180Z",
+    "checkedAt": "2026-09-11T21:21:23.418Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term-with-cross-term-course",
     "termPlacementVerified": false,
@@ -15140,7 +15148,7 @@
       "5": 25.5,
       "6": 19.5
     },
-    "checkedAt": "2026-09-11T21:20:47.123Z",
+    "checkedAt": "2026-09-11T21:21:23.355Z",
     "academicYearSums": {
       "1": 60,
       "2": 60,
@@ -15339,7 +15347,7 @@
     "reason": "official-plan-verifies-complete-academic-year-course-structure-with-one-elective-slot-term-placement-unresolved",
     "courseListHp": 172.5,
     "missingHp": 7.5,
-    "checkedAt": "2026-09-11T21:20:47.165Z",
+    "checkedAt": "2026-09-11T21:21:23.403Z",
     "academicYearCourses": {
       "1": [
         {
@@ -15997,7 +16005,7 @@
     "coverage": "complete",
     "reason": "official-term-evidence-verified-full-time-75hp-structure",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T21:20:47.123Z",
+    "checkedAt": "2026-09-11T21:21:23.355Z",
     "spanningCourses": [
       {
         "name": "Familjehälsovård med inriktning mot barnhälsovård och elevhälsovård",
@@ -16235,15 +16243,24 @@
         "isThesis": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "official-education-plan-some-complete-terms",
+    "coverage": "manual-review",
+    "reason": "official-plan-verifies-complete-academic-year-course-structure-with-year-3-degree-track-choice-term-placement-unresolved",
     "termSums": {
       "1": 30,
       "2": 30,
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T21:20:45.940Z"
+    "checkedAt": "2026-09-11T21:21:23.430Z",
+    "verifiedProgrammeOverride": true,
+    "studyStructureGranularity": "academic-year-only",
+    "termPlacementVerified": false,
+    "academicYearSums": {
+      "1": 60,
+      "2": 60,
+      "3": 60
+    },
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=GITEK&language=SV&revision=1%2C000&type=program"
   },
   {
     "key": "hogskolan-i-boras:GPSYK",
@@ -16469,7 +16486,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:45.654Z"
+    "checkedAt": "2026-09-11T21:21:22.427Z"
   },
   {
     "key": "hogskolan-i-boras:KANDI",
@@ -16792,7 +16809,7 @@
     "unassignedCourses": [],
     "coverage": "manual-review",
     "reason": "official-foundation-year-40-weeks-preparatory-non-higher-education-credit-system",
-    "checkedAt": "2026-09-11T21:20:47.165Z",
+    "checkedAt": "2026-09-11T21:21:23.403Z",
     "officialHp": null,
     "officialDurationWeeks": 40,
     "studyStructureGranularity": "preparatory-year",
@@ -16814,7 +16831,7 @@
     "source": "hogskolan-i-boras-utbildningsplan",
     "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KMATM&revision=4,10&language=SV",
     "sourceUrls": [
-      "https://www.hb.se/utbildning/program-och-kurser/program/konstnarligt-masterprogram-i-textil--och-modedesign-inriktning-textildesign/",
+      "https://www.hb.se/utbildning/program-och-kurser/program/konstnarligt-masterprogram-i-textil--och-modedesign-inriktning-performance-wear/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KMATM&revision=4,10&language=SV"
     ],
     "rows": [
@@ -16877,7 +16894,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:20:45.977Z"
+    "checkedAt": "2026-09-11T21:21:22.440Z"
   },
   {
     "key": "hogskolan-i-boras:LAG46",
@@ -17033,7 +17050,7 @@
       "7": 30,
       "8": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.123Z",
+    "checkedAt": "2026-09-11T21:21:23.355Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=LAG46&language=SV&revision=20%2C000&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -17187,7 +17204,7 @@
       "7": 30,
       "8": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.179Z",
+    "checkedAt": "2026-09-11T21:21:23.418Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "termPlacementVerified": true,
@@ -17409,7 +17426,7 @@
       "6": 15,
       "7": 30
     },
-    "checkedAt": "2026-09-11T21:20:46.794Z"
+    "checkedAt": "2026-09-11T21:21:23.133Z"
   },
   {
     "key": "hogskolan-i-boras:MAIDI",
@@ -17713,7 +17730,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.150Z",
+    "checkedAt": "2026-09-11T21:21:23.389Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=NGBIB&language=SV&revision=17%2C00&type=program",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term"
@@ -17819,7 +17836,7 @@
       "7": 15,
       "8": 15
     },
-    "checkedAt": "2026-09-11T21:20:47.165Z",
+    "checkedAt": "2026-09-11T21:21:23.403Z",
     "expectedHpPerTerm": 15,
     "studyPacePercent": 50,
     "studyStructureGranularity": "term",
@@ -17913,7 +17930,7 @@
     "termSums": {
       "1": 7.5
     },
-    "checkedAt": "2026-09-11T21:20:46.092Z"
+    "checkedAt": "2026-09-11T21:21:22.533Z"
   },
   {
     "key": "hogskolan-i-boras:SGEMA",
@@ -17996,7 +18013,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:20:46.139Z"
+    "checkedAt": "2026-09-11T21:21:22.524Z"
   },
   {
     "key": "hogskolan-i-boras:SGKMM",
@@ -18171,7 +18188,7 @@
     "coverage": "manual-review",
     "reason": "official-plan-verifies-academic-years-but-explicitly-not-chronological-within-years",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T21:20:47.138Z",
+    "checkedAt": "2026-09-11T21:21:23.373Z",
     "academicYearCourses": {
       "1": [
         {
@@ -18513,7 +18530,7 @@
     "coverage": "manual-review",
     "reason": "official-plan-verifies-academic-years-but-explicitly-not-chronological-within-years",
     "courseListHp": 180,
-    "checkedAt": "2026-09-11T21:20:47.138Z",
+    "checkedAt": "2026-09-11T21:21:23.373Z",
     "academicYearCourses": {
       "1": [
         {
@@ -18781,7 +18798,7 @@
       "4": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:46.292Z"
+    "checkedAt": "2026-09-11T21:21:22.710Z"
   },
   {
     "key": "hogskolan-i-boras:SGOPS",
@@ -19404,7 +19421,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:20:46.600Z"
+    "checkedAt": "2026-09-11T21:21:22.819Z"
   },
   {
     "key": "hogskolan-i-boras:TAREC",
@@ -19520,7 +19537,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.009Z",
+    "checkedAt": "2026-09-11T21:21:23.231Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAREC&language=SV&revision=2%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -19605,7 +19622,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:20:46.341Z"
+    "checkedAt": "2026-09-11T21:21:22.909Z"
   },
   {
     "key": "hogskolan-i-boras:TAREP",
@@ -19695,7 +19712,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:20:46.451Z"
+    "checkedAt": "2026-09-11T21:21:22.797Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEB",
@@ -19778,7 +19795,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:20:46.494Z"
+    "checkedAt": "2026-09-11T21:21:22.976Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEC",
@@ -19894,7 +19911,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.009Z",
+    "checkedAt": "2026-09-11T21:21:23.231Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAVEC&language=SV&revision=1%2C00&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -19979,7 +19996,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:20:46.533Z"
+    "checkedAt": "2026-09-11T21:21:22.972Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEP",
@@ -20069,7 +20086,7 @@
       "1": 30,
       "2": 30
     },
-    "checkedAt": "2026-09-11T21:20:46.952Z"
+    "checkedAt": "2026-09-11T21:21:23.004Z"
   },
   {
     "key": "hogskolan-i-boras:TGAPF",
@@ -20203,7 +20220,7 @@
     "reason": "official-plan-verifies-complete-academic-year-course-structure-term-placement-unresolved",
     "courseListHp": 157.5,
     "missingHp": 22.5,
-    "checkedAt": "2026-09-11T21:20:47.165Z",
+    "checkedAt": "2026-09-11T21:21:23.403Z",
     "academicYearCourses": {
       "1": [
         {
@@ -20995,7 +21012,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.057Z",
+    "checkedAt": "2026-09-11T21:21:23.283Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGENA&language=SV&revision=8%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -21441,7 +21458,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.123Z",
+    "checkedAt": "2026-09-11T21:21:23.355Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGIEA&language=SV&revision=12%2C60&type=program",
     "verifiedProgrammeOverride": true,
     "trackContinuityRequired": true,
@@ -21648,7 +21665,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.151Z",
+    "checkedAt": "2026-09-11T21:21:23.389Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGIEL&language=SV&revision=12%2C30&type=program"
@@ -21850,7 +21867,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.151Z",
+    "checkedAt": "2026-09-11T21:21:23.389Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGIEO&language=SV&revision=12%2C30&type=program"
@@ -22038,7 +22055,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.151Z",
+    "checkedAt": "2026-09-11T21:21:23.389Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGITI&language=SV&revision=5%2C30&type=program",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term"
@@ -22240,7 +22257,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.150Z",
+    "checkedAt": "2026-09-11T21:21:23.389Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGKEH&language=SV&revision=2%2C20&type=program",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term"
@@ -22428,7 +22445,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.151Z",
+    "checkedAt": "2026-09-11T21:21:23.389Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGMAA&language=SV&revision=6%2C20&type=program"
@@ -22665,7 +22682,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.057Z",
+    "checkedAt": "2026-09-11T21:21:23.283Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGTPI&language=EN&revision=3%2C20&type=program",
     "verifiedProgrammeOverride": true
   },
@@ -22787,7 +22804,7 @@
       "3": 30,
       "4": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.180Z",
+    "checkedAt": "2026-09-11T21:21:23.418Z",
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "termPlacementVerified": true,
@@ -22869,7 +22886,7 @@
       "3": 15,
       "4": 15
     },
-    "checkedAt": "2026-09-11T21:20:47.123Z",
+    "checkedAt": "2026-09-11T21:21:23.355Z",
     "studyPacePercent": 50,
     "expectedHpPerTerm": 15,
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=VAADM&language=SV&revision=10%2C00&type=program",
@@ -23002,7 +23019,7 @@
     "coverage": "complete",
     "reason": "official-programme-overview-verified-three-term-structure",
     "courseListHp": 90,
-    "checkedAt": "2026-09-11T21:20:47.123Z",
+    "checkedAt": "2026-09-11T21:21:23.355Z",
     "spanningCourses": [
       {
         "name": "Examensarbete i sexuell och reproduktiv hälsa",
@@ -23324,7 +23341,7 @@
     "coverage": "complete",
     "reason": "official-term-evidence-verified-half-time-75hp-structure",
     "courseListHp": 75,
-    "checkedAt": "2026-09-11T21:20:47.123Z",
+    "checkedAt": "2026-09-11T21:21:23.355Z",
     "spanningCourses": [
       {
         "name": "Familjehälsovård med inriktning mot barnhälsovård och elevhälsovård",
@@ -23537,7 +23554,7 @@
       "5": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T21:20:47.057Z",
+    "checkedAt": "2026-09-11T21:21:23.283Z",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=VGLOV&language=SV&revision=1%2C000&type=program",
     "verifiedProgrammeOverride": true,
     "studyPaceVariant": "helfart",
