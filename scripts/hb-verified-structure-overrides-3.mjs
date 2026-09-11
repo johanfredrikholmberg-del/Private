@@ -33,3 +33,4 @@ if(x){
 await fs.writeFile(FILE,JSON.stringify(all,null,2)+'\n');
 const meta=JSON.parse(await fs.readFile(META,'utf8'));meta.generatedAt=new Date().toISOString();meta.counts=all.reduce((a,v)=>(a[v.coverage]=(a[v.coverage]||0)+1,a),{});meta.retryable=all.filter(v=>['metadata-only','manual-review'].includes(v.coverage)).length;await fs.writeFile(META,JSON.stringify(meta,null,2)+'\n');
 console.log('ACEKO verified:',x&&{coverage:x.coverage,reason:x.reason,termSums:x.termSums});
+await import('./hb-verified-structure-overrides-4.mjs');
