@@ -41,6 +41,34 @@
         ]},
         {"term":4,"code":"","name":"Psykologi: Examensarbete för masterexamen","hp":30,"category":"mandatory","isThesis":true}
       ]
+    },
+    {
+      "id": "lu:EGEKO:2026HT",
+      "university": "Lunds universitet",
+      "programCode": "EGEKO",
+      "programName": "Ekonomie kandidatprogram",
+      "programHp": 180,
+      "level": "Grundnivå",
+      "subject": "Företagsekonomi",
+      "catalogueSubject": "Företagsekonomi",
+      "validFrom": "2026HT",
+      "validTo": null,
+      "coverage": "choice-required",
+      "verified": true,
+      "source": "lund-official-programplan",
+      "sourceUrls": [
+        "https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO",
+        "https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO/programmets-innehall"
+      ],
+      "rows": [
+        {"term":1,"code":"","name":"Företagsekonomi: Grundkurs","hp":30,"category":"mandatory"},
+        {"term":2,"code":"","name":"Nationalekonomi: Grundkurs","hp":30,"category":"mandatory"},
+        {"term":3,"code":"","name":"Handelsrätt: Juridisk översiktskurs","hp":15,"category":"mandatory"},
+        {"term":3,"code":"","name":"Statistik: Grundkurs 1","hp":15,"category":"mandatory"},
+        {"term":4,"code":"","name":"Huvudområde enligt programplan","hp":30,"category":"elective","slotType":"main-field-slot","isSlot":true},
+        {"term":5,"code":"","name":"Valbar termin inom Sverige eller utomlands","hp":30,"category":"elective","slotType":"elective-slot","isSlot":true},
+        {"term":6,"code":"","name":"Huvudområde och examensarbete enligt programplan","hp":30,"category":"elective","slotType":"main-field-thesis-slot","isSlot":true,"includesThesisHp":15}
+      ]
     }
   ]
 }
