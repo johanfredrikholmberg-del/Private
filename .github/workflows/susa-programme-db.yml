@@ -2,6 +2,12 @@ name: SUSA programme database
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - studielots-v2
+    paths:
+      - 'scripts/susa-programme-db-pipeline.mjs'
+      - '.github/workflows/susa-programme-db.yml'
   schedule:
     - cron: '17 3 * * 1'
 
@@ -14,11 +20,13 @@ concurrency:
 
 jobs:
   materialise:
+    if: ${{ github.actor != 'studielots-bot' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: studielots-v2
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -45,5 +53,5 @@ jobs:
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add data/susa
-          git commit -m 'Refresh SUSA higher education catalogue'
+          git commit -m 'Refresh SUSA higher education catalogue [skip ci]'
           git push origin HEAD:studielots-v2
