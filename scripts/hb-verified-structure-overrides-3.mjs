@@ -23,7 +23,8 @@ await fs.writeFile(FILE,JSON.stringify(all,null,2)+'\n');
 const meta=JSON.parse(await fs.readFile(META,'utf8'));meta.generatedAt=new Date().toISOString();meta.counts=all.reduce((a,v)=>(a[v.coverage]=(a[v.coverage]||0)+1,a),{});meta.retryable=all.filter(v=>['metadata-only','manual-review'].includes(v.coverage)).length;await fs.writeFile(META,JSON.stringify(meta,null,2)+'\n');
 console.log('ACEKO verified:',x&&{coverage:x.coverage,reason:x.reason,termSums:x.termSums});
 await import('./hb-verified-structure-overrides-4.mjs');
+await import('./hb-verified-structure-overrides-5.mjs');
 for(const code of ['GDIST','SGKMM','SGKTM','VABAM','VDIST']){
  const p=all.find(v=>String(v.programCode||'').toUpperCase()===code);
- if(p) console.log('HB-SELECTED-DIAG',JSON.stringify({code,name:p.programName,hp:p.hp,coverage:p.coverage,reason:p.reason,rows:p.rows,unassignedCourses:p.unassignedCourses,sourceUrl:p.sourceUrl,sourceUrls:p.sourceUrls}));
+ if(p) console.log('HB-SELECTED-DIAG',JSON.stringify({code,name:p.programName,hp:p.hp,coverage:p.coverage,reason:p.reason,rows:p.rows,unassignedCourses:p.unassignedCourses,sourceUrl:p.sourceUrl,sourceUrls:p.sourceUrls,academicYearSums:p.academicYearSums,studyStructureGranularity:p.studyStructureGranularity}));
 }
