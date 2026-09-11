@@ -42,3 +42,4 @@ if(kbast){kbast.rows=[];kbast.coverage='manual-review';kbast.reason='official-fo
 await fs.writeFile(FILE,JSON.stringify(all,null,2)+'\n');
 const meta=JSON.parse(await fs.readFile(META,'utf8'));meta.generatedAt=new Date().toISOString();meta.counts=all.reduce((a,v)=>(a[v.coverage]=(a[v.coverage]||0)+1,a),{});meta.retryable=all.filter(v=>['metadata-only','manual-review'].includes(v.coverage)&&!v.verifiedProgrammeOverride).length;await fs.writeFile(META,JSON.stringify(meta,null,2)+'\n');
 console.log('HB verified batch 7',all.filter(v=>['TGAPF','DTEIN','NGBID','POLIS','KBAST'].includes(String(v.programCode||'').toUpperCase())).map(v=>({code:v.programCode,coverage:v.coverage,reason:v.reason,termSums:v.termSums,academicYearSums:v.academicYearSums})));
+await import('./hb-verified-structure-overrides-8.mjs');
