@@ -24,7 +24,7 @@ const meta=JSON.parse(await fs.readFile(META,'utf8'));meta.generatedAt=new Date(
 console.log('ACEKO verified:',x&&{coverage:x.coverage,reason:x.reason,termSums:x.termSums});
 await import('./hb-verified-structure-overrides-4.mjs');
 await import('./hb-verified-structure-overrides-5.mjs');
-for(const code of ['GDIST','SGKMM','SGKTM','VABAM','VDIST']){
+for(const code of ['GDIST','SGKMM','SGKTM','VABAM','VDIST','TGKEH']){
  const p=all.find(v=>String(v.programCode||'').toUpperCase()===code);
- if(p) console.log('HB-SELECTED-DIAG',JSON.stringify({code,name:p.programName,hp:p.hp,coverage:p.coverage,reason:p.reason,rows:p.rows,unassignedCourses:p.unassignedCourses,sourceUrl:p.sourceUrl,sourceUrls:p.sourceUrls,academicYearSums:p.academicYearSums,studyStructureGranularity:p.studyStructureGranularity}));
+ if(p) console.log('HB-SELECTED-DIAG',JSON.stringify({code,name:p.programName,hp:p.hp,coverage:p.coverage,reason:p.reason,rows:p.rows,unassignedCourses:p.unassignedCourses,sourceUrl:p.sourceUrl,sourceUrls:p.sourceUrls,academicYearSums:p.academicYearSums,studyStructureGranularity:p.studyStructureGranularity,termSums:p.termSums}));
 }
