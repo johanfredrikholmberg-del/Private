@@ -13,7 +13,7 @@
     "coverage": "metadata-only",
     "reason": "hb-import:404 Not Found",
     "attemptedPageUrl": "https://www.hb.se/utbildning/program-och-kurser/program/polisutbildningen/",
-    "checkedAt": "2026-09-11T18:07:35.671Z"
+    "checkedAt": "2026-09-11T18:26:38.700Z"
   },
   {
     "key": "beckmans-designhogskola:form",
@@ -13755,7 +13755,7 @@
       },
       {
         "term": 5,
-        "name": "Valbar kurs (7,5) inom det särskilda kursutbudet för internationalisering på hemmaplan vid Akademin för textil,",
+        "name": "Valbar kurs",
         "hp": 7.5,
         "type": "choice",
         "isThesis": false
@@ -13783,7 +13783,7 @@
       },
       {
         "term": 5,
-        "name": "Varbar kurs (7,5) inom det särskilda kursutbudet för internationalisering på hemmaplan vid Akademin för textil,",
+        "name": "Varbar kurs",
         "hp": 7.5,
         "type": "required",
         "isThesis": false
@@ -13804,7 +13804,7 @@
       },
       {
         "term": 5,
-        "name": "Operativ styrning (7,5) och Valbar kurs (7,5) inom det särskilda kursutbudet för internationalisering på hemmaplan",
+        "name": "Operativ styrning",
         "hp": 7.5,
         "type": "choice",
         "isThesis": false
@@ -13860,7 +13860,7 @@
       },
       {
         "term": 6,
-        "name": "Affärsdesign och investeringsbeslut (7,5) och",
+        "name": "Affärsdesign och investeringsbeslut",
         "hp": 7.5,
         "type": "required",
         "isThesis": false
@@ -13884,20 +13884,6 @@
         "name": "Fallstudie i företagspraktik",
         "hp": 15,
         "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 6,
-        "name": "förväntas läsa totalt vid ett lärosäte utomlands ska minst",
-        "hp": 15,
-        "type": "choice",
-        "isThesis": false
-      },
-      {
-        "term": 6,
-        "name": "Utlandstermin varav valbara kurser (15) samt valbara kurser inom företagsekonomi",
-        "hp": 15,
-        "type": "choice",
         "isThesis": false
       },
       {
@@ -14000,14 +13986,14 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "5": 97.5,
-      "6": 135,
+      "6": 105,
       "7": 90,
       "8": 90
     },
-    "checkedAt": "2026-09-11T18:07:47.156Z"
+    "checkedAt": "2026-09-11T18:26:51.166Z"
   },
   {
     "key": "hogskolan-i-boras:ACIVE",
@@ -14029,7 +14015,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:47.148Z"
+    "checkedAt": "2026-09-11T18:26:51.290Z"
   },
   {
     "key": "hogskolan-i-boras:AMATM",
@@ -14048,10 +14034,78 @@
       "https://www.hb.se/utbildning/program-och-kurser/program/magisterprogram-i-textilt-management/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=AMATM&revision=11,20&language=SV"
     ],
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:47.388Z"
+    "rows": [
+      {
+        "term": 1,
+        "name": "Företagande och management i textil och modebranschen, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Hållbarhetsinriktade affärsmodeller i textil- och klädesindustrin, (",
+        "hp": 4,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Grundläggande teorier inom Supply Chain Management och Fashion Management, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Metodologi och vetenskapsteori inom Textilt Management, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Affärsstrategi och Strategic Management, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "som utmynnar i en magisteruppsats om",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Fashion retail marknadsföring, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Hållbar styrning av värdekedjor inom textil- och klädindustrin, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Självständigt arbete för magisterexamen inom Textilt Management, (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "term-over-target",
+    "termSums": {
+      "1": 24,
+      "2": 40
+    },
+    "checkedAt": "2026-09-11T18:26:51.348Z"
   },
   {
     "key": "hogskolan-i-boras:AMSTV",
@@ -14070,10 +14124,128 @@
       "https://www.hb.se/utbildning/program-och-kurser/program/masterprogram-i-styrning-av-textila-vardekedjor/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=AMSTV&revision=11,20&language=SV"
     ],
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:47.456Z"
+    "rows": [
+      {
+        "term": 1,
+        "name": "Företagande och management i textil- och modebranschen, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Hållbarhetsinriktade affärsmodeller i textil- och klädesindustrin, (",
+        "hp": 4,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Grundläggande teorier inom Supply Chain Management och Fashion Management, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Metodologi och vetenskapsteori inom Textilt Management, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Affärsstrategi och Strategic Management, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Fashion retail marknadsföring, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Hållbar styrning av värdekedjor inom textil- och klädindustrin, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Fältstudier inom Textilt Management (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "kursen Field Study in Textile Management (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Efterfrågeprognoser (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Tillämpningar av styrning av textila värdekedjor (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Risk och resiliens i textila försörjningskedjor (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Spårbarhet i textila försörjningskedjor (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Termin fyra genomför studenten ett självständigt forskningsarbete som utmynnar i en masteruppsats om",
+        "hp": 30,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "samhällsvetenskaplig metod och dess tillämpning. Om studenten genomfört examensarbete för magisterexamen om",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      },
+      {
+        "term": 3,
+        "name": "ersätts detta av kursen Fältstudie i Textilt Management på",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "term-over-target",
+    "termSums": {
+      "1": 24,
+      "2": 40,
+      "3": 90
+    },
+    "checkedAt": "2026-09-11T18:26:51.216Z"
   },
   {
     "key": "hogskolan-i-boras:ASYST",
@@ -14206,13 +14378,6 @@
         "isThesis": false
       },
       {
-        "term": 4,
-        "name": "Utlandstermin omfattande",
-        "hp": 30,
-        "type": "required",
-        "isThesis": false
-      },
-      {
         "term": 5,
         "name": "Systemutvecklingsprojekt (",
         "hp": 7.5,
@@ -14270,16 +14435,16 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 30,
       "2": 30,
       "3": 30,
-      "4": 60,
+      "4": 30,
       "5": 37.5,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:07:47.466Z"
+    "checkedAt": "2026-09-11T18:26:51.513Z"
   },
   {
     "key": "hogskolan-i-boras:BMBD1",
@@ -14301,7 +14466,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:47.505Z"
+    "checkedAt": "2026-09-11T18:26:51.642Z"
   },
   {
     "key": "hogskolan-i-boras:DMODE",
@@ -14341,7 +14506,7 @@
     "termSums": {
       "1": 9.5
     },
-    "checkedAt": "2026-09-11T18:07:47.522Z"
+    "checkedAt": "2026-09-11T18:26:51.628Z"
   },
   {
     "key": "hogskolan-i-boras:DTDES",
@@ -14381,7 +14546,7 @@
     "termSums": {
       "1": 10
     },
-    "checkedAt": "2026-09-11T18:07:47.761Z"
+    "checkedAt": "2026-09-11T18:26:51.978Z"
   },
   {
     "key": "hogskolan-i-boras:DTEIN",
@@ -14400,10 +14565,112 @@
       "https://www.hb.se/utbildning/program-och-kurser/program/textilingenjorsutbildning/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=DTEIN&revision=20,10&language=SV"
     ],
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:47.865Z"
+    "rows": [
+      {
+        "term": 5,
+        "name": "Läsår",
+        "hp": 1,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Textil baskurs",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Textilkemi I",
+        "hp": 4.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Väveriteknik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Trikåteknik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Fiber- och garnteknologi",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Färgning och beredning",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Nonwoventeknik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Läsår",
+        "hp": 2,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Textil mekanik- och hållfasthetslära",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Textilkemi II",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Fiber och garnteknologi påbyggnad",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Konfektionsteknik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Sammanfogningstekniker",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "term-over-target",
+    "termSums": {
+      "5": 67.5
+    },
+    "checkedAt": "2026-09-11T18:26:51.681Z"
   },
   {
     "key": "hogskolan-i-boras:DTEKO",
@@ -14425,7 +14692,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:47.838Z"
+    "checkedAt": "2026-09-11T18:26:51.739Z"
   },
   {
     "key": "hogskolan-i-boras:GAMBU",
@@ -14447,7 +14714,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:47.758Z"
+    "checkedAt": "2026-09-11T18:26:51.821Z"
   },
   {
     "key": "hogskolan-i-boras:GANES",
@@ -14469,7 +14736,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:47.775Z"
+    "checkedAt": "2026-09-11T18:26:52.035Z"
   },
   {
     "key": "hogskolan-i-boras:GDIST",
@@ -14491,7 +14758,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:47.968Z"
+    "checkedAt": "2026-09-11T18:26:52.054Z"
   },
   {
     "key": "hogskolan-i-boras:GINTE",
@@ -14513,7 +14780,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:47.966Z"
+    "checkedAt": "2026-09-11T18:26:52.149Z"
   },
   {
     "key": "hogskolan-i-boras:GITEK",
@@ -14535,7 +14802,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:48.060Z"
+    "checkedAt": "2026-09-11T18:26:52.156Z"
   },
   {
     "key": "hogskolan-i-boras:GPSYK",
@@ -14557,7 +14824,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:48.089Z"
+    "checkedAt": "2026-09-11T18:26:52.046Z"
   },
   {
     "key": "hogskolan-i-boras:GSJUK",
@@ -14663,7 +14930,7 @@
       "3": 30,
       "4": 21
     },
-    "checkedAt": "2026-09-11T18:07:48.152Z"
+    "checkedAt": "2026-09-11T18:26:52.120Z"
   },
   {
     "key": "hogskolan-i-boras:KANDI",
@@ -15087,7 +15354,7 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 60,
       "2": 50,
@@ -15096,7 +15363,7 @@
       "5": 55,
       "6": 40
     },
-    "checkedAt": "2026-09-11T18:07:48.122Z"
+    "checkedAt": "2026-09-11T18:26:52.192Z"
   },
   {
     "key": "hogskolan-i-boras:KBAST",
@@ -15118,7 +15385,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:48.118Z"
+    "checkedAt": "2026-09-11T18:26:52.649Z"
   },
   {
     "key": "hogskolan-i-boras:KMATM",
@@ -15134,13 +15401,13 @@
     "source": "hogskolan-i-boras-utbildningsplan",
     "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KMATM&revision=4,10&language=SV",
     "sourceUrls": [
-      "https://www.hb.se/utbildning/program-och-kurser/program/konstnarligt-masterprogram-i-textil--och-modedesign-inriktning-textildesign/",
+      "https://www.hb.se/utbildning/program-och-kurser/program/konstnarligt-masterprogram-i-textil--och-modedesign-inriktning-modedesign/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KMATM&revision=4,10&language=SV"
     ],
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:48.315Z"
+    "checkedAt": "2026-09-11T18:26:52.259Z"
   },
   {
     "key": "hogskolan-i-boras:LAG46",
@@ -15288,7 +15555,7 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 30,
       "2": 30,
@@ -15299,7 +15566,7 @@
       "7": 30,
       "8": 15
     },
-    "checkedAt": "2026-09-11T18:07:48.345Z"
+    "checkedAt": "2026-09-11T18:26:52.576Z"
   },
   {
     "key": "hogskolan-i-boras:LAGF3",
@@ -15444,7 +15711,7 @@
       "7": 30,
       "8": 10
     },
-    "checkedAt": "2026-09-11T18:07:48.279Z"
+    "checkedAt": "2026-09-11T18:26:52.423Z"
   },
   {
     "key": "hogskolan-i-boras:LGFUD",
@@ -15466,7 +15733,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:48.277Z"
+    "checkedAt": "2026-09-11T18:26:52.507Z"
   },
   {
     "key": "hogskolan-i-boras:LGFÖR",
@@ -15482,7 +15749,7 @@
     "coverage": "metadata-only",
     "reason": "hb-import:500 Internal Server Error",
     "attemptedPageUrl": "https://www.hb.se/utbildning/program-och-kurser/program/forskollararutbildning/",
-    "checkedAt": "2026-09-11T18:07:48.878Z"
+    "checkedAt": "2026-09-11T18:26:53.182Z"
   },
   {
     "key": "hogskolan-i-boras:MAIDI",
@@ -15504,6 +15771,13 @@
     "rows": [
       {
         "term": 1,
+        "name": "metodkunskap genom kursen Forskningsmetoder (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
         "name": "Introduktion till informationsvetenskap (",
         "hp": 7.5,
         "type": "required",
@@ -15519,13 +15793,6 @@
       {
         "term": 1,
         "name": "Forskningsmetoder (",
-        "hp": 15,
-        "type": "required",
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "name": "metodkunskap genom kursen Forskningsmetoder (",
         "hp": 15,
         "type": "required",
         "isThesis": false
@@ -15574,14 +15841,14 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
-      "1": 30,
-      "2": 45,
+      "1": 45,
+      "2": 30,
       "3": 27.5,
       "4": 30
     },
-    "checkedAt": "2026-09-11T18:07:48.447Z"
+    "checkedAt": "2026-09-11T18:26:52.533Z"
   },
   {
     "key": "hogskolan-i-boras:NADIM",
@@ -15600,10 +15867,71 @@
       "https://www.hb.se/utbildning/program-och-kurser/program/magisterprogram-i-informatik---datadriven-it-management/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=NADIM&revision=7,20&language=SV"
     ],
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:48.448Z"
+    "rows": [
+      {
+        "term": 1,
+        "name": "Forskningsmetoder i informatik (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Trender inom informatik (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Business Intelligence (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Affärsprocessmodellering (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Data mining (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Datadriven tjänsteutveckling (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Självständigt arbete för magisterexamen inom informatik (Avancerad nivå",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      },
+      {
+        "term": 2,
+        "name": "ekonomi eller organisation. Självständigt arbete (G2E/C-nivå) om",
+        "hp": 15,
+        "type": "choice",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-education-plan-all-terms-validated",
+    "termSums": {
+      "1": 30,
+      "2": 30
+    },
+    "checkedAt": "2026-09-11T18:26:52.563Z"
   },
   {
     "key": "hogskolan-i-boras:NGBIB",
@@ -15779,7 +16107,7 @@
       "5": 16,
       "6": 15
     },
-    "checkedAt": "2026-09-11T18:07:48.635Z"
+    "checkedAt": "2026-09-11T18:26:52.791Z"
   },
   {
     "key": "hogskolan-i-boras:SAMAR",
@@ -15801,7 +16129,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:48.627Z"
+    "checkedAt": "2026-09-11T18:26:52.663Z"
   },
   {
     "key": "hogskolan-i-boras:SAMPD",
@@ -15851,11 +16179,11 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 50
     },
-    "checkedAt": "2026-09-11T18:07:48.631Z"
+    "checkedAt": "2026-09-11T18:26:52.892Z"
   },
   {
     "key": "hogskolan-i-boras:SGEMA",
@@ -15875,6 +16203,69 @@
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=SGEMA&revision=16,30&language=SV"
     ],
     "rows": [
+      {
+        "term": 1,
+        "name": "Praktik är en kurs på",
+        "hp": 30,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Praktiktermin (",
+        "hp": 30,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Eventstudier (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Forskningsmetoder på kandidatnivå (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Självständigt arbete för kandidatexamen inom företagsekonomi (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      },
+      {
+        "term": 1,
+        "name": "Valbara kurser (",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Eventstudier (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Forskningsmetoder på kandidatnivå (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Självständigt arbete för kandidatexamen inom företagsekonomi (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      },
       {
         "term": 5,
         "name": "Utlandstermin (",
@@ -15905,11 +16296,12 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
+      "1": 150,
       "5": 60
     },
-    "checkedAt": "2026-09-11T18:07:48.645Z"
+    "checkedAt": "2026-09-11T18:26:52.904Z"
   },
   {
     "key": "hogskolan-i-boras:SGKMM",
@@ -15931,7 +16323,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:48.782Z"
+    "checkedAt": "2026-09-11T18:26:52.778Z"
   },
   {
     "key": "hogskolan-i-boras:SGKTM",
@@ -15953,7 +16345,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:49.368Z"
+    "checkedAt": "2026-09-11T18:26:53.815Z"
   },
   {
     "key": "hogskolan-i-boras:SGOFD",
@@ -15973,6 +16365,13 @@
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=SGOFD&revision=5,10&language=SV"
     ],
     "rows": [
+      {
+        "term": 1,
+        "name": "Praktik är en kurs på",
+        "hp": 30,
+        "type": "required",
+        "isThesis": false
+      },
       {
         "term": 3,
         "name": "Forskningsmetoder i offentlig förvaltning (",
@@ -15995,13 +16394,6 @@
         "isThesis": false
       },
       {
-        "term": 4,
-        "name": "Valbara kurser med relevant inriktning vid Högskolan i Borås motsvarande",
-        "hp": 30,
-        "type": "choice",
-        "isThesis": false
-      },
-      {
         "term": 6,
         "name": "Utlandstermin",
         "hp": 30,
@@ -16009,14 +16401,15 @@
         "isThesis": false
       }
     ],
-    "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "coverage": "partial-structure",
+    "reason": "official-education-plan-some-complete-terms",
     "termSums": {
+      "1": 30,
       "3": 30,
-      "4": 60,
+      "4": 30,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:07:48.787Z"
+    "checkedAt": "2026-09-11T18:26:52.858Z"
   },
   {
     "key": "hogskolan-i-boras:SGOPS",
@@ -16136,7 +16529,7 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 30,
       "2": 30,
@@ -16145,7 +16538,7 @@
       "5": 45,
       "6": 45
     },
-    "checkedAt": "2026-09-11T18:07:48.803Z"
+    "checkedAt": "2026-09-11T18:26:53.039Z"
   },
   {
     "key": "hogskolan-i-boras:SYARK",
@@ -16167,7 +16560,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:48.932Z"
+    "checkedAt": "2026-09-11T18:26:52.989Z"
   },
   {
     "key": "hogskolan-i-boras:TAMTE",
@@ -16189,7 +16582,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:48.939Z"
+    "checkedAt": "2026-09-11T18:26:53.006Z"
   },
   {
     "key": "hogskolan-i-boras:TAMTI",
@@ -16387,13 +16780,6 @@
       },
       {
         "term": 3,
-        "name": "Examensarbete i Resursåtervinning",
-        "hp": 30,
-        "type": "required",
-        "isThesis": true
-      },
-      {
-        "term": 3,
         "name": "Resursåtervinning del 1, mot kurser omfattande",
         "hp": 30,
         "type": "required",
@@ -16401,13 +16787,13 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "official-education-plan-insufficient-consistency",
     "termSums": {
       "1": 25,
       "2": 25,
-      "3": 60
+      "3": 30
     },
-    "checkedAt": "2026-09-11T18:07:49.053Z"
+    "checkedAt": "2026-09-11T18:26:53.065Z"
   },
   {
     "key": "hogskolan-i-boras:TAREC",
@@ -16513,13 +16899,13 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 25,
       "2": 30,
       "3": 90
     },
-    "checkedAt": "2026-09-11T18:07:49.028Z"
+    "checkedAt": "2026-09-11T18:26:53.109Z"
   },
   {
     "key": "hogskolan-i-boras:TAREE",
@@ -16597,13 +16983,6 @@
       },
       {
         "term": 3,
-        "name": "Examensarbete i Resursåtervinning",
-        "hp": 30,
-        "type": "required",
-        "isThesis": true
-      },
-      {
-        "term": 3,
         "name": "Resursåtervinning del 1, mot kurser omfattande",
         "hp": 30,
         "type": "required",
@@ -16611,13 +16990,13 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "official-education-plan-insufficient-consistency",
     "termSums": {
       "1": 25,
       "2": 25,
-      "3": 60
+      "3": 30
     },
-    "checkedAt": "2026-09-11T18:07:49.079Z"
+    "checkedAt": "2026-09-11T18:26:53.271Z"
   },
   {
     "key": "hogskolan-i-boras:TAREP",
@@ -16702,13 +17081,6 @@
       },
       {
         "term": 3,
-        "name": "Examensarbete i Resursåtervinning",
-        "hp": 30,
-        "type": "required",
-        "isThesis": true
-      },
-      {
-        "term": 3,
         "name": "Resursåtervinning del 1, mot kurser omfattande",
         "hp": 30,
         "type": "required",
@@ -16716,13 +17088,13 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "official-education-plan-insufficient-consistency",
     "termSums": {
       "1": 25,
       "2": 27.5,
-      "3": 60
+      "3": 30
     },
-    "checkedAt": "2026-09-11T18:07:49.089Z"
+    "checkedAt": "2026-09-11T18:26:53.198Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEB",
@@ -16800,13 +17172,6 @@
       },
       {
         "term": 3,
-        "name": "Examensarbete i Resursåtervinning",
-        "hp": 30,
-        "type": "required",
-        "isThesis": true
-      },
-      {
-        "term": 3,
         "name": "Resursåtervinning del 1, mot kurser omfattande",
         "hp": 30,
         "type": "required",
@@ -16814,13 +17179,13 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "official-education-plan-insufficient-consistency",
     "termSums": {
       "1": 25,
       "2": 25,
-      "3": 60
+      "3": 30
     },
-    "checkedAt": "2026-09-11T18:07:49.177Z"
+    "checkedAt": "2026-09-11T18:26:53.216Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEC",
@@ -16926,13 +17291,13 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 30,
       "2": 25,
       "3": 90
     },
-    "checkedAt": "2026-09-11T18:07:49.219Z"
+    "checkedAt": "2026-09-11T18:26:53.409Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEE",
@@ -17010,13 +17375,6 @@
       },
       {
         "term": 3,
-        "name": "Examensarbete i Resursåtervinning",
-        "hp": 30,
-        "type": "required",
-        "isThesis": true
-      },
-      {
-        "term": 3,
         "name": "Resursåtervinning del 1, mot kurser omfattande",
         "hp": 30,
         "type": "required",
@@ -17024,13 +17382,13 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "official-education-plan-insufficient-consistency",
     "termSums": {
       "1": 25,
       "2": 25,
-      "3": 60
+      "3": 30
     },
-    "checkedAt": "2026-09-11T18:07:49.229Z"
+    "checkedAt": "2026-09-11T18:26:53.275Z"
   },
   {
     "key": "hogskolan-i-boras:TAVEP",
@@ -17115,13 +17473,6 @@
       },
       {
         "term": 3,
-        "name": "Examensarbete i Resursåtervinning",
-        "hp": 30,
-        "type": "required",
-        "isThesis": true
-      },
-      {
-        "term": 3,
         "name": "Resursåtervinning del 1, mot kurser omfattande",
         "hp": 30,
         "type": "required",
@@ -17129,13 +17480,13 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "official-education-plan-insufficient-consistency",
     "termSums": {
       "1": 27.5,
       "2": 25,
-      "3": 60
+      "3": 30
     },
-    "checkedAt": "2026-09-11T18:07:49.240Z"
+    "checkedAt": "2026-09-11T18:26:53.315Z"
   },
   {
     "key": "hogskolan-i-boras:TGAPF",
@@ -17157,7 +17508,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:49.330Z"
+    "checkedAt": "2026-09-11T18:26:53.392Z"
   },
   {
     "key": "hogskolan-i-boras:TGBYI",
@@ -17359,7 +17710,7 @@
       "5": 22.5,
       "6": 30
     },
-    "checkedAt": "2026-09-11T18:07:49.389Z"
+    "checkedAt": "2026-09-11T18:26:53.564Z"
   },
   {
     "key": "hogskolan-i-boras:TGDEP",
@@ -17381,7 +17732,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:49.406Z"
+    "checkedAt": "2026-09-11T18:26:53.425Z"
   },
   {
     "key": "hogskolan-i-boras:TGENA",
@@ -17942,7 +18293,7 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 60,
       "2": 75,
@@ -17951,7 +18302,7 @@
       "5": 60,
       "6": 75
     },
-    "checkedAt": "2026-09-11T18:07:49.486Z"
+    "checkedAt": "2026-09-11T18:26:53.652Z"
   },
   {
     "key": "hogskolan-i-boras:TGIEL",
@@ -18148,7 +18499,7 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 20,
       "2": 25,
@@ -18157,7 +18508,7 @@
       "5": 20,
       "6": 25
     },
-    "checkedAt": "2026-09-11T18:07:49.521Z"
+    "checkedAt": "2026-09-11T18:26:53.527Z"
   },
   {
     "key": "hogskolan-i-boras:TGIEO",
@@ -18354,7 +18705,7 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 20,
       "2": 25,
@@ -18363,7 +18714,7 @@
       "5": 20,
       "6": 25
     },
-    "checkedAt": "2026-09-11T18:07:49.540Z"
+    "checkedAt": "2026-09-11T18:26:53.608Z"
   },
   {
     "key": "hogskolan-i-boras:TGITI",
@@ -18548,7 +18899,7 @@
       "5": 20,
       "6": 25
     },
-    "checkedAt": "2026-09-11T18:07:49.599Z"
+    "checkedAt": "2026-09-11T18:26:53.627Z"
   },
   {
     "key": "hogskolan-i-boras:TGKEH",
@@ -18611,7 +18962,7 @@
       "2": 2,
       "6": 3
     },
-    "checkedAt": "2026-09-11T18:07:49.618Z"
+    "checkedAt": "2026-09-11T18:26:53.791Z"
   },
   {
     "key": "hogskolan-i-boras:TGMAA",
@@ -18794,7 +19145,7 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 35,
       "2": 20,
@@ -18803,7 +19154,7 @@
       "5": 25,
       "6": 25
     },
-    "checkedAt": "2026-09-11T18:07:49.637Z"
+    "checkedAt": "2026-09-11T18:26:53.703Z"
   },
   {
     "key": "hogskolan-i-boras:TGTPI",
@@ -18929,7 +19280,7 @@
       "2": 30,
       "3": 20
     },
-    "checkedAt": "2026-09-11T18:07:49.680Z"
+    "checkedAt": "2026-09-11T18:26:53.741Z"
   },
   {
     "key": "hogskolan-i-boras:TMFMM",
@@ -18948,10 +19299,128 @@
       "https://www.hb.se/utbildning/program-och-kurser/program/masterprogram-i-fashion-management-och-marknadsforing2/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TMFMM&revision=6,20&language=SV"
     ],
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:49.690Z"
+    "rows": [
+      {
+        "term": 1,
+        "name": "Företagande och management i textil- och modebranschen, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Hållbarhetsinriktade affärsmodeller i textil- och klädesindustrin, (",
+        "hp": 4,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Grundläggande teorier inom Supply Chain Management och Fashion Management, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Metodologi och vetenskapsteori inom Textilt Management, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Affärsstrategi och Strategic Management, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Fashion retail marknadsföring, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Hållbar styrning av värdekedjor inom textil- och klädindustrin, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Fältstudier inom Textilt Management, (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "kursen Field Study in Textile Management (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Digital Marknadskommunikation i textil och mode, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Konsumentbeteende i modesektorn, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Trendanalys inom modets marknad och system, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Konsumtion och varumärkesbyggande - kulturella perspektiv på modemarknaden, (",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Termin fyra genomför studenten ett självständigt forskningsarbete som utmynnar i en masteruppsats om",
+        "hp": 30,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "samhällsvetenskaplig metod och dess tillämpning. Om studenten genomfört examensarbete för magisterexamen om",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      },
+      {
+        "term": 3,
+        "name": "ersätts denna med kursen Fältstudie i Textilt Management på",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "term-over-target",
+    "termSums": {
+      "1": 24,
+      "2": 40,
+      "3": 80
+    },
+    "checkedAt": "2026-09-11T18:26:53.807Z"
   },
   {
     "key": "hogskolan-i-boras:VAADM",
@@ -19036,13 +19505,13 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 10,
       "2": 10,
       "3": 57.5
     },
-    "checkedAt": "2026-09-11T18:07:49.752Z"
+    "checkedAt": "2026-09-11T18:26:53.839Z"
   },
   {
     "key": "hogskolan-i-boras:VABAM",
@@ -19064,7 +19533,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:49.768Z"
+    "checkedAt": "2026-09-11T18:26:53.848Z"
   },
   {
     "key": "hogskolan-i-boras:VABAR",
@@ -19083,10 +19552,71 @@
       "https://www.hb.se/utbildning/program-och-kurser/program/specialistsjukskoterskeutbildning-med-inriktning-mot-halso--och-sjukvard-for-barn-och-ungdomar/",
       "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=VABAR&revision=11,00&language=SV"
     ],
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:49.820Z"
+    "rows": [
+      {
+        "term": 1,
+        "name": "Specialistsjuksköterskans vårdande och folkhälsoarbete",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Familjehälsovård med inriktning mot barn- och elevhälsovård",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Medicinsk vetenskap med inriktning mot pediatrik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Pediatrisk omvårdnad i klinisk praxis",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Kurs i vetenskaplig teori och metod",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Ledarskap och förbättringsarbete",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Examensarbete med inriktning mot hälso- och sjukvård för barn och ungdom",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      },
+      {
+        "term": 2,
+        "name": "Examensarbete är ett självständigt arbete omfattande",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "complete",
+    "reason": "official-education-plan-all-terms-validated",
+    "termSums": {
+      "1": 30,
+      "2": 30
+    },
+    "checkedAt": "2026-09-11T18:26:53.861Z"
   },
   {
     "key": "hogskolan-i-boras:VAKUT",
@@ -19133,7 +19663,7 @@
     "termSums": {
       "1": 15
     },
-    "checkedAt": "2026-09-11T18:07:49.829Z"
+    "checkedAt": "2026-09-11T18:26:53.908Z"
   },
   {
     "key": "hogskolan-i-boras:VDIST",
@@ -19155,7 +19685,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:49.842Z"
+    "checkedAt": "2026-09-11T18:26:53.950Z"
   },
   {
     "key": "hogskolan-i-boras:VGLOV",
@@ -19254,13 +19784,13 @@
       }
     ],
     "coverage": "manual-review",
-    "reason": "term-over-30hp",
+    "reason": "term-over-target",
     "termSums": {
       "1": 32.5,
       "2": 27.5,
       "3": 12.5
     },
-    "checkedAt": "2026-09-11T18:07:49.902Z"
+    "checkedAt": "2026-09-11T18:26:54.011Z"
   },
   {
     "key": "hogskolan-i-boras:VOPER",
@@ -19282,7 +19812,7 @@
     "rows": [],
     "coverage": "metadata-only",
     "reason": "no-semester-rows",
-    "checkedAt": "2026-09-11T18:07:49.918Z"
+    "checkedAt": "2026-09-11T18:26:54.018Z"
   },
   {
     "key": "hogskolan-dalarna:DBIMA",
