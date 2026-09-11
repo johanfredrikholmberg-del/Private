@@ -1,0 +1,16 @@
+(()=>{
+'use strict';
+const SNAP='studielots_planner_snapshot', FLAG='studielots_demo_mode';
+const DEMO_MERIT={name:'Företagsekonomi, grundkurs',courseName:'Företagsekonomi, grundkurs',hp:30,credits:30,institution:'Örebro universitet',university:'Örebro universitet',demoHistoricalMatch:true};
+const norm=v=>String(v??'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9åäö]+/g,' ').trim();
+const isDemoClick=e=>{const el=e.target?.closest?.('button,a,[role="button"]');if(!el)return false;const t=norm(el.textContent);return t.includes('testa studielots')||t.includes('testmerit')||t.includes('demo merit')||t.includes('demomerit')};
+const hasMerit=a=>Array.isArray(a)&&a.some(r=>norm(r?.name??r?.courseName??r?.title)==='foretagsekonomi grundkurs'&&Math.abs(Number(r?.hp??r?.credits)-30)<.01&&norm(r?.institution??r?.university)==='orebro universitet');
+function addToArray(a){if(!Array.isArray(a))return false;if(hasMerit(a))return false;a.push({...DEMO_MERIT});return true}
+function patchSnapshotObject(s){if(!s||typeof s!=='object')return s;let changed=false;const out={...s};let key=['merits','importedMerits','importedCourses','priorCourses','previousCourses','completedCourses','userCourses','studies','sourceCourses'].find(k=>Array.isArray(out[k]));if(!key){key='importedMerits';out[key]=[];changed=true}else out[key]=out[key].map(r=>({...r}));if(!hasMerit(out[key])){out[key].push({...DEMO_MERIT});changed=true}if(out.import&&typeof out.import==='object'){out.import={...out.import};if(Array.isArray(out.import.courses)){out.import.courses=out.import.courses.map(r=>({...r}));if(!hasMerit(out.import.courses)){out.import.courses.push({...DEMO_MERIT});changed=true}}}out.demoMode=true;out.demoKarlstadHistoricalMatch=true;return changed?out:out}
+function activate(){try{sessionStorage.setItem(FLAG,'1')}catch(_){};window.__studielotsDemoMode=true;window.__studielotsMerits=Array.isArray(window.__studielotsMerits)?window.__studielotsMerits:[];addToArray(window.__studielotsMerits);if(Array.isArray(window.__studielotsImportedCourses))addToArray(window.__studielotsImportedCourses);if(Array.isArray(window.importedCandidates))addToArray(window.importedCandidates);patchStored();window.dispatchEvent(new CustomEvent('studielots:demo-merits-updated',{detail:{version:'711',added:'Företagsekonomi, grundkurs 30 hp, Örebro universitet'}}))}
+function patchStored(){let active=false;try{active=sessionStorage.getItem(FLAG)==='1'}catch(_){}if(!active)return;try{const raw=sessionStorage.getItem(SNAP);if(!raw)return;const s=JSON.parse(raw),next=patchSnapshotObject(s),text=JSON.stringify(next);if(text!==raw)sessionStorage.setItem(SNAP,text)}catch(_){} }
+document.addEventListener('click',e=>{if(!isDemoClick(e))return;[0,60,180,450,900].forEach(ms=>setTimeout(activate,ms))},true);
+const original=Storage.prototype.setItem;if(!window.__slDemoStorageGuard){window.__slDemoStorageGuard=true;Storage.prototype.setItem=function(k,v){if(this===sessionStorage&&k===SNAP){let active=false;try{active=sessionStorage.getItem(FLAG)==='1'}catch(_){}if(active){try{v=JSON.stringify(patchSnapshotObject(JSON.parse(v)))}catch(_){}}}return original.call(this,k,v)}}
+try{if(sessionStorage.getItem(FLAG)==='1')activate()}catch(_){}
+window.StudieLotsDemoMerits={version:'711',activate,merit:{...DEMO_MERIT}};
+})();
