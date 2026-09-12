@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 
-const code=fs.readFileSync(new URL('../v2-degree-rules.js',import.meta.url),'utf8');
+const code=fs.readFileSync(new URL('../src/core/degree-rules.js',import.meta.url),'utf8');
 const engine={
  subjectMatch:(c,s)=>String(c.subject||'').toLowerCase()===String(s||'').toLowerCase(),
  isAdvanced:c=>/^A/.test(String(c.progression||c.levelCode||'')),
