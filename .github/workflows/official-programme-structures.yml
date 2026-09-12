@@ -8,6 +8,7 @@ on:
       - 'scripts/official-programme-structure-pipeline.mjs'
       - 'scripts/hb-programme-structure-pipeline.mjs'
       - 'scripts/hb-verified-structure-overrides*.mjs'
+      - 'scripts/hb-77-audit.mjs'
   schedule:
     - cron: '47 3 * * 2,4,6'
 
@@ -48,6 +49,8 @@ jobs:
           node scripts/hb-verified-structure-overrides.mjs
           node scripts/hb-verified-structure-overrides-2.mjs
           node scripts/hb-verified-structure-overrides-3.mjs
+      - name: Audit Borås 77-programme catalogue
+        run: node scripts/hb-77-audit.mjs
       - name: Validate structure output
         run: |
           node - <<'NODE'
