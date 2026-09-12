@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 
-const source=fs.readFileSync(new URL('../src/features/program-paths/program-paths.js',import.meta.url),'utf8');
+const source=fs.readFileSync(new URL('../src/features/programs/program-paths.js',import.meta.url),'utf8');
 const window={};
 const context=vm.createContext({window,console,fetch:async()=>{throw new Error('fetch must not be called in credit matcher tests')},URLSearchParams});
 vm.runInContext(source,context,{filename:'program-paths.js'});
