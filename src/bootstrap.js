@@ -7,7 +7,7 @@ const groups=[
   {name:'programs',scripts:['/src/features/programs/program-index.js?v=4','/src/features/programs/program-canonicalization.js?v=1','/src/features/programs/program-paths.js?v=9','/src/features/programs/kau-paths.js?v=1','/src/features/programs/discover-guard.js?v=1']},
   {name:'credit-transfer',scripts:['/src/features/credit-transfer/historical-credit.js?v=1','/src/features/credit-transfer/credit-allocation.js?v=2']},
   {name:'fast-route',scripts:['/src/features/fast-route/fast-route.js?v=6','/src/features/fast-route/fast-guard.js?v=2','/src/features/fast-route/fast-preload.js?v=3']},
-  {name:'program-ui',scripts:['/src/features/programs/programs.js?v=7']},
+  {name:'program-page',scripts:['/src/pages/programs/controller.js?v=8']},
   {name:'app-shell',scripts:['/src/ui/app.js?v=16']},
   {name:'post-processing',scripts:['/src/core/match-consistency.js?v=2','/src/features/planner/planner-summary.js?v=4','/src/ui/loading/loading-overlay.js?v=6','/src/features/credit-transfer/credit-labels.js?v=1','/src/features/demo/demo.js?v=5']}
 ];
