@@ -3,11 +3,11 @@
 // Reads the official HB programme catalogue and local SUSA data without modifying generated data.
 // This file is included in the official programme-structures workflow path filters.
 import fs from 'node:fs/promises';
-const URL='https://www.hb.se/utbildning/program-och-kurser/?lang=sv&types=Programme&userInput=true';
+const CATALOGUE_URL='https://www.hb.se/utbildning/program-och-kurser/?lang=sv&types=Programme&userInput=true';
 const clean=s=>String(s??'').replace(/\s+/g,' ').trim();
 const norm=s=>clean(s).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
-const html=await (await fetch(URL,{headers:{'user-agent':'StudieLots-HB-audit/1.0'}})).text();
-const rows=[...html.matchAll(/href=["']([^"']*\/utbildning\/program-och-kurser\/program\/[^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi)].map(m=>({url:new URL(m[1],URL).href,title:clean(m[2].replace(/<[^>]+>/g,' '))}));
+const html=await (await fetch(CATALOGUE_URL,{headers:{'user-agent':'StudieLots-HB-audit/1.1'}})).text();
+const rows=[...html.matchAll(/href=["']([^"']*\/utbildning\/program-och-kurser\/program\/[^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi)].map(m=>({url:new globalThis.URL(m[1],CATALOGUE_URL).href,title:clean(m[2].replace(/<[^>]+>/g,' '))}));
 const official=[...new Map(rows.filter(x=>x.title).map(x=>[norm(x.title),x])).values()];
 const programmes=JSON.parse(await fs.readFile('data/susa/programmes.json','utf8'));
 const structures=JSON.parse(await fs.readFile('data/susa/structures.json','utf8'));
