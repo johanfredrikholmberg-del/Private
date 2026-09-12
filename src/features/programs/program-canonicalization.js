@@ -1,0 +1,13 @@
+(()=>{'use strict';
+const nativeFetch=window.fetch.bind(window);
+const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
+const norm=v=>clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const isLater=p=>/^senare del(?: av program)?\s*:/i.test(clean(p?.programName));
+const groupKey=p=>{const code=norm(p?.programCode),university=norm(p?.university);return code&&university?`${university}|${code}`:''};
+function canonicalize(programs){const rows=Array.isArray(programs)?programs:[],groups=new Map();for(const p of rows){const k=groupKey(p);if(!k)continue;const g=groups.get(k)||[];g.push(p);groups.set(k,g)}const drop=new Set(),annotate=new Map();let collapsed=0;for(const group of groups.values()){const base=group.filter(p=>!isLater(p)),later=group.filter(isLater);if(!base.length||!later.length)continue;const canonical=[...base].sort((a,b)=>(Number(b?.programHp)||0)-(Number(a?.programHp)||0))[0];for(const p of later){drop.add(p);collapsed++}annotate.set(canonical,{admissionVariantsCollapsed:later.length,hasLaterPartAdmission:true})}const out=[];for(const p of rows){if(drop.has(p))continue;out.push(annotate.has(p)?{...p,...annotate.get(p)}:p)}return{programs:out,collapsed}}
+function shouldNormalize(input){try{const raw=typeof input==='string'?input:input?.url;if(!raw)return false;const u=new URL(raw,location.href);return u.origin===location.origin&&u.pathname==='/api/program-index'}catch(_){return false}}
+window.fetch=async function(input,init){const response=await nativeFetch(input,init);if(!shouldNormalize(input)||!response.ok)return response;try{const data=await response.clone().json();if(!Array.isArray(data?.programs))return response;const normalized=canonicalize(data.programs),headers=new Headers(response.headers);headers.delete('content-length');headers.set('content-type','application/json; charset=utf-8');const catalogue={...(data.catalogue||{}),visiblePrograms:normalized.programs.length,admissionVariantsCollapsed:normalized.collapsed};return new Response(JSON.stringify({...data,programs:normalized.programs,catalogue}),{status:response.status,statusText:response.statusText,headers})}catch(_){return response}};
+window.StudieLotsV2=window.StudieLotsV2||{};window.StudieLotsV2.programCanonicalization=Object.freeze({canonicalize,isLater});
+function inject(src,onload){const s=document.createElement('script');s.src=src;s.async=true;if(onload)s.onload=onload;document.head.appendChild(s)}
+inject('/v2-program-db.js?v=3',()=>{let tries=0;const timer=setInterval(()=>{tries++;if(window.StudieLotsV2?.paths&&window.StudieLotsV2?.programDB){clearInterval(timer);inject('/v2-program-db-adapter.js?v=1')}else if(tries>100)clearInterval(timer)},50)});
+})();

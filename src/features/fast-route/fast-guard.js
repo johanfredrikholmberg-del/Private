@@ -1,0 +1,5 @@
+(()=>{'use strict';
+const root=window.StudieLotsV2=window.StudieLotsV2||{},fast=root.fast;if(!fast||fast.__guarded||typeof fast.build!=='function')return;const original=fast.build.bind(fast),remaining=fast.remaining;
+async function build(rows,opts={}){const active=(rows||[]).filter(r=>(typeof remaining==='function'?remaining(r):Number(r?.hp||0))>.01),fallback=()=>({terms:[],suggestions:[],acceleratingSuggestions:[],unscheduled:active.map(row=>({row,reason:'Kurstillfällen kunde inte hämtas i tid'})),maxHp:Number(opts.maxHp||30),summer:opts.summer!==false,remainingHp:active.reduce((s,r)=>s+(typeof remaining==='function'?remaining(r):Number(r?.hp||0)),0),scheduledHp:0,offeringCount:0,distanceCount:0,university:opts.university||'',accelerationCount:0,alternativeCount:0,summerCount:0,timedOut:true});let timer;try{return await Promise.race([original(rows,opts),new Promise(resolve=>{timer=setTimeout(()=>resolve(fallback()),15000)})])}catch(_){return fallback()}finally{clearTimeout(timer)}}
+root.fast=Object.freeze({...fast,__guarded:true,build});
+})();
