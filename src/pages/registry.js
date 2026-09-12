@@ -1,0 +1,1 @@
+(()=>{'use strict';const pages=[];const api=window.StudieLotsPages=window.StudieLotsPages||{};api.register=(id,html)=>{if(id&&html)pages.push({id,html})};api.mount=root=>{if(!root)throw new Error('page root missing');root.innerHTML=pages.map(page=>page.html).join('');return pages.length};api.list=()=>pages.map(page=>page.id)})();
