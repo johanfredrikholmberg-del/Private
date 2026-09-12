@@ -1,0 +1,1 @@
+(()=>{window.StudieLotsPages.register('opportunities',`<section id="opportunities" class="page"><header class="section-top"><div><div class="eyebrow">Möjligheter</div><h1>Dina närmaste vägar</h1></div></header><div class="opportunity-list compact-list"></div></section>`);})();
