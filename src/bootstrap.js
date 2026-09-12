@@ -8,7 +8,7 @@ const groups=[
   {name:'credit-transfer',scripts:['/src/features/credit-transfer/historical-credit.js?v=1','/src/features/credit-transfer/credit-allocation.js?v=2']},
   {name:'fast-route',scripts:['/src/features/fast-route/fast-route.js?v=6','/src/features/fast-route/fast-guard.js?v=2','/src/features/fast-route/fast-preload.js?v=3']},
   {name:'program-page',scripts:['/src/pages/programs/controller.js?v=8']},
-  {name:'app-shell',scripts:['/src/ui/app.js?v=16']},
+  {name:'app-runtime',scripts:['/src/app/runtime.js?v=17']},
   {name:'post-processing',scripts:['/src/core/match-consistency.js?v=2','/src/features/planner/planner-summary.js?v=4','/src/ui/loading/loading-overlay.js?v=6','/src/features/credit-transfer/credit-labels.js?v=1','/src/features/demo/demo.js?v=5']}
 ];
 function load(src){return new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=src;script.async=false;script.dataset.studielotsModule=src;script.onload=resolve;script.onerror=()=>reject(new Error(`Kunde inte ladda ${src}`));document.body.appendChild(script)})}
