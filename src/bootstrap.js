@@ -1,5 +1,6 @@
 (()=>{'use strict';
 const groups=[
+  {name:'pages',scripts:['/src/pages/registry.js?v=1','/src/pages/home/page.js?v=1','/src/pages/studies/page.js?v=1','/src/pages/opportunities/page.js?v=1','/src/pages/planner/page.js?v=1','/src/pages/programs/page.js?v=1','/src/pages/more/page.js?v=1','/src/pages/method/page.js?v=1']},
   {name:'core',scripts:['/src/core/engine.js?v=3']},
   {name:'merit-import',scripts:['/src/features/merit-import/ladok-import.js?v=1']},
   {name:'degree-rules',scripts:['/src/core/degree-rules.js?v=2']},
@@ -11,5 +12,5 @@ const groups=[
   {name:'post-processing',scripts:['/src/core/match-consistency.js?v=2','/src/features/planner/planner-summary.js?v=4','/src/ui/loading-overlay.js?v=5','/src/features/credit-transfer/credit-labels.js?v=1','/src/ui/demo.js?v=4']}
 ];
 function load(src){return new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=src;script.async=false;script.dataset.studielotsModule=src;script.onload=resolve;script.onerror=()=>reject(new Error(`Kunde inte ladda ${src}`));document.body.appendChild(script)})}
-(async()=>{for(const group of groups){for(const src of group.scripts)await load(src)}document.documentElement.dataset.studielotsBoot='ready';window.dispatchEvent(new CustomEvent('studielots:ready'))})().catch(error=>{console.error('[StudieLots bootstrap]',error);document.documentElement.dataset.studielotsBoot='error';window.dispatchEvent(new CustomEvent('studielots:error',{detail:{message:error?.message||String(error)}}))});
+(async()=>{for(const group of groups){for(const src of group.scripts)await load(src);if(group.name==='pages')window.StudieLotsPages.mount(document.querySelector('.shell'))}document.documentElement.dataset.studielotsBoot='ready';window.dispatchEvent(new CustomEvent('studielots:ready'))})().catch(error=>{console.error('[StudieLots bootstrap]',error);document.documentElement.dataset.studielotsBoot='error';window.dispatchEvent(new CustomEvent('studielots:error',{detail:{message:error?.message||String(error)}}))});
 })();
