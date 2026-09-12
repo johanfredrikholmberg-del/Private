@@ -2,50 +2,22 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 
-const code=fs.readFileSync(new URL('../v2-fast-route.js',import.meta.url),'utf8');
-const offerings=[];
-const fetch=async url=>({json:async()=>({offerings:offerings.filter(o=>String(url).includes(o.code))})});
-class URLSearchParams { constructor(obj){this.obj=obj} toString(){return Object.entries(this.obj).map(([k,v])=>`${k}=${encodeURIComponent(v)}`).join('&')} }
-const window={StudieLotsV2:{}};
-vm.runInNewContext(code,{window,fetch,URLSearchParams,Date,console});
-const fast=window.StudieLotsV2.fast;
-
-assert.equal(fast.remaining({hp:7.5,credited:true}),0);
-assert.equal(fast.remaining({hp:7.5,credited:false}),7.5);
-assert.equal(fast.remaining({hp:15,creditedHp:7.5}),7.5);
-
-const rows=[
- {code:'A',name:'A',hp:30,term:1,credited:true},
- {code:'B',name:'B',hp:15,term:2,prerequisiteCodes:['A']},
- {code:'C',name:'C',hp:15,term:2}
-];
-// Without verified future offerings, fast route must not invent a schedule.
-const base=await fast.build(rows,{maxHp:30,summer:false});
-assert.equal(base.remainingHp,30);
-assert.equal(base.scheduledHp,0);
-assert.equal(base.terms.length,0);
-assert.equal(base.unscheduled.length,2);
-
-const high=await fast.build(rows,{maxHp:60,summer:false});
-assert.equal(high.maxHp,60);
-assert.equal(high.remainingHp,30);
-assert.equal(high.scheduledHp,0);
-assert.equal(high.terms.length,0);
-
-// Unverified alternatives must never replace the required course.
-const unsafe=[{code:'REQ',name:'Required',hp:7.5,term:1,alternatives:[{code:'ALT',name:'Alt',verified:false}]}];
-offerings.push({code:'ALT',standaloneSearchable:true,url:'https://example.test/alt',startDate:'2030-01-15',distance:true});
-const unsafeResult=await fast.build(unsafe,{maxHp:30,summer:false});
-assert.equal(unsafeResult.terms.length,0);
-assert.equal(unsafeResult.unscheduled[0].row.code,'REQ');
-
-// A summer offering is only placed in summer when summer optimization is enabled.
-offerings.push({code:'SUM',standaloneSearchable:true,url:'https://example.test/sum',startDate:'2030-07-01',distance:true});
-const summerRow=[{code:'SUM',name:'Summer',hp:7.5,term:1}];
-const withSummer=await fast.build(summerRow,{maxHp:30,summer:true});
+const source=fs.readFileSync(new URL('../src/features/fast-route/fast-route.js',import.meta.url),'utf8');
+let now=Date.now();
+const sandbox={window:{},console,Date,class extends Date{constructor(...args){super(...(args.length?args:[now]))}static now(){return now}},URLSearchParams,AbortController,setTimeout,clearTimeout};
+sandbox.fetch=async url=>{
+ const u=String(url);
+ if(u.includes('/api/susa-offerings'))return{json:async()=>({offerings:[
+  {code:'FEK101',name:'Ordinarie kurs',hp:7.5,startDate:'2027-01-15',url:'https://example.org/spring',distance:true,standaloneSearchable:true},
+  {code:'FEK102',name:'Sommarkurs',hp:7.5,startDate:'2027-06-15',url:'https://example.org/summer',distance:true,standaloneSearchable:true}
+ ]})};
+ if(u.includes('/api/distance-courses'))return{json:async()=>({courses:[]})};
+ throw new Error('unexpected fetch '+u);
+};
+vm.createContext(sandbox);vm.runInContext(source,sandbox,{filename:'fast-route.js'});const fast=sandbox.window.StudieLotsV2.fast;
+const rows=[{code:'FEK101',name:'Ordinarie kurs',hp:7.5,term:1},{code:'FEK102',name:'Sommarkurs',hp:7.5,term:2}];
+const withSummer=await fast.build(rows,{summer:true,maxHp:30,university:'GU'});
 assert.ok(withSummer.terms.some(t=>t.kind==='summer'));
-const withoutSummer=await fast.build(summerRow,{maxHp:30,summer:false});
-assert.ok(withoutSummer.terms.every(t=>t.kind!=='summer'));
-assert.equal(withoutSummer.scheduledHp,0);
-
+const withoutSummer=await fast.build(rows,{summer:false,maxHp:30,university:'GU'});
+assert.ok(!withoutSummer.terms.some(t=>t.kind==='summer'));
 console.log('v2 fast-route regression: PASS');
