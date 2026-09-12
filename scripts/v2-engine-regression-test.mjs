@@ -1,6 +1,6 @@
 import {readFile} from 'node:fs/promises';import vm from 'node:vm';import assert from 'node:assert/strict';
 const fixture=JSON.parse(await readFile(new URL('../tests/fixtures/ladok-national-regression-01.json',import.meta.url),'utf8'));
-const src=await readFile(new URL('../v2-engine.js',import.meta.url),'utf8');
+const src=await readFile(new URL('../src/core/engine.js',import.meta.url),'utf8');
 const sandbox={window:{}};vm.createContext(sandbox);vm.runInContext(src,sandbox);const engine=sandbox.window.StudieLotsV2.engine;
 const summary=engine.summarizeCourses(fixture.courses);
 assert.equal(summary.courseCount,33);assert.equal(summary.totalHp,255);assert.equal(summary.institutionCount,6);assert.equal(summary.thesisHp,15);
