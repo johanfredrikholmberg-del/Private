@@ -1,0 +1,2 @@
+# Legacy compatibility
+Rotens äldre `v2-*`-filer behålls tillfälligt eftersom befintliga Node-regressionstester fortfarande läser dem direkt. Den aktiva webbsidan laddar nu motsvarande filer från `src/`. Nya frontendändringar ska göras i `src/`; därefter flyttas testerna och rotkopiorna tas bort.
