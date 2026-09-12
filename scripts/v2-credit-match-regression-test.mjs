@@ -2,10 +2,10 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 
-const source=fs.readFileSync(new URL('../v2-program-paths.js',import.meta.url),'utf8');
+const source=fs.readFileSync(new URL('../src/features/program-paths/program-paths.js',import.meta.url),'utf8');
 const window={};
 const context=vm.createContext({window,console,fetch:async()=>{throw new Error('fetch must not be called in credit matcher tests')},URLSearchParams});
-vm.runInContext(source,context,{filename:'v2-program-paths.js'});
+vm.runInContext(source,context,{filename:'program-paths.js'});
 const {exactCredit,potentialCredit,creditMatch}=window.StudieLotsV2.paths;
 
 const merit=(name,hp=7.5,subject='',code='')=>({name,hp,subject,code});
@@ -24,7 +24,6 @@ const possible=potentialCredit(row('Organisation ledarskap och förändringsarbe
 assert.ok(possible&&possible.score>=.72,'similar distinctive title with same hp and subject may be potential');
 assert.equal(creditMatch(row('Organisation ledarskap och förändringsarbete',7.5,'Företagsekonomi'),[merit('Organisation ledarskap och förändring',7.5,'Företagsekonomi')])?.kind,'potential','non-exact similarity must stay potential');
 
-// Mirror structure aggregation invariant: only exact matches may count as credited hp.
 const programme=[row('Organisation och ledarskap',7.5,'Företagsekonomi','FEK101'),row('Organisation ledarskap och förändringsarbete',7.5,'Företagsekonomi','FEK102')];
 const merits=[merit('Organisation och ledarskap',7.5,'Företagsekonomi','FEK101'),merit('Organisation ledarskap och förändring',7.5,'Företagsekonomi','OTHER')];
 const matches=programme.map(r=>creditMatch(r,merits));
