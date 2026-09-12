@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // StudieLots: Karlstads universitet catalogue reconciliation audit.
 // Read-only: compares KAU's official programme pages with local SUSA programmes/structures.
+// Workflow trigger: KAU baseline audit v1.
 import fs from 'node:fs/promises';
 
 const PAGES=[
