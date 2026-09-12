@@ -1,12 +1,5 @@
 name: StudieLots v2 regression tests
 on:
-  push:
-    branches: [studielots-v2]
-    paths-ignore:
-      - 'data/susa/**'
-      - 'scripts/hb-programme-structure-pipeline.mjs'
-      - 'scripts/hb-verified-structure-overrides*.mjs'
-      - 'scripts/official-programme-structure-pipeline.mjs'
   pull_request:
     branches: [studielots-v2]
   workflow_dispatch:
