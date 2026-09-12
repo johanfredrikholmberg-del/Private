@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // StudieLots: Borås catalogue reconciliation audit.
 // Reads the official HB programme catalogue and local SUSA data without modifying generated data.
+// This file is included in the official programme-structures workflow path filters.
 import fs from 'node:fs/promises';
 const URL='https://www.hb.se/utbildning/program-och-kurser/?lang=sv&types=Programme&userInput=true';
 const clean=s=>String(s??'').replace(/\s+/g,' ').trim();
