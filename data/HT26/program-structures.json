@@ -8136,7 +8136,7 @@
       "sourcePages": 3,
       "parsedRows": 46
     },
-    "checkedAt": "2026-09-13T18:44:24.664Z"
+    "checkedAt": "2026-09-13T19:02:35.544Z"
   },
   {
     "key": "goteborgs-universitet:H1ARK",
@@ -8259,7 +8259,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:20.465Z"
+    "checkedAt": "2026-09-13T19:02:36.950Z"
   },
   {
     "key": "goteborgs-universitet:H1KAP",
@@ -8369,7 +8369,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:20.180Z"
+    "checkedAt": "2026-09-13T19:02:36.317Z"
   },
   {
     "key": "goteborgs-universitet:H1KEN",
@@ -8383,77 +8383,164 @@
     "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "manual-review",
-    "reason": "official-gu-insufficient-consistency",
+    "coverage": "choice-required",
+    "reason": "official-gu-direct-verification",
     "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Engelska: Grundkurs",
+        "hp": 30,
+        "category": "required",
+        "isSlot": false,
+        "isThesis": false,
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-education-plan",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Engelska, Fortsättningskurs",
+        "hp": 30,
+        "category": "required",
+        "isSlot": false,
+        "isThesis": false,
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-education-plan",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Programspecifik specialiseringskurs I",
+        "hp": 30,
+        "category": "required",
+        "isSlot": false,
+        "isThesis": false,
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-education-plan",
+        "programmeCategory": "required"
+      },
       {
         "term": 4,
         "code": "",
-        "name": "ia kurser, i engelska eller andra ämnen vid institutionen, universitetet eller andra lärosäten. Ett annat alternativ är att göra ett utbyte och studera utomlands. Terminen omfattar",
+        "name": "Valfri breddning, fördjupning i engelska eller utlandsstudier",
         "hp": 30,
-        "category": "unknown",
+        "category": "elective",
+        "isSlot": true,
+        "isThesis": false,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-education-plan",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Programspecifik specialiseringskurs II",
+        "hp": 30,
+        "category": "required",
         "isSlot": false,
-        "isThesis": false
+        "isThesis": false,
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-education-plan",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Fördjupning i engelsk litteraturvetenskap eller språkvetenskap inklusive kandidatuppsats",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-education-plan",
+        "programmeCategory": "elective"
       }
     ],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kandidatprogram-i-engelska-med-arbetslivsanknytning-h1ken",
+    "source": "gu-official-education-plan",
+    "sourceUrl": "https://www.gu.se/syllabus/1f48dd3f-dbf3-11f0-9c81-2a1b32074717",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kandidatprogram-i-engelska-med-arbetslivsanknytning-h1ken",
-      "https://www.gu.se/syllabus/1f48dd3f-dbf3-11f0-9c81-2a1b32074717",
-      "https://www.gu.se/studera/hitta-utbildning/programoversikt-for-kandidatprogram-i-engelska-med-arbetslivsanknytning"
+      "https://www.gu.se/syllabus/1f48dd3f-dbf3-11f0-9c81-2a1b32074717"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "officialProgramCode": "FRÄMJAR",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-direct-verification",
+    "officialProgramCode": "H1KEN",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
       "completeTerms": [
-        4
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
       ],
       "termHp": {
         "1": {
-          "listedHp": 60,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 60,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 90,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
           "listedHp": 30,
           "covered": true
         },
         "5": {
-          "listedHp": 105,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "6": {
-          "listedHp": 90,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [
-        {
-          "code": "",
-          "name": "ia kurser, i engelska eller andra ämnen vid institutionen, universitetet eller andra lärosäten. Ett annat alternativ är att göra ett utbyte och studera utomlands. Terminen omfattar",
-          "hp": 30,
-          "term": 4,
-          "category": "unknown"
-        }
-      ],
-      "slotCount": 0,
+      "slotCount": 2,
+      "parsedRows": 6,
       "totalHp": 180,
-      "sourcePages": 3,
-      "parsedRows": 24
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:19.993Z"
+    "checkedAt": "2026-09-13T19:03:03.958Z"
   },
   {
     "key": "goteborgs-universitet:H1KLT",
@@ -8526,7 +8613,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:20.217Z"
+    "checkedAt": "2026-09-13T19:02:36.357Z"
   },
   {
     "key": "goteborgs-universitet:H1LIB",
@@ -8739,7 +8826,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:20.313Z"
+    "checkedAt": "2026-09-13T19:02:36.178Z"
   },
   {
     "key": "goteborgs-universitet:H1MEK",
@@ -8804,7 +8891,7 @@
       "sourcePages": 2,
       "parsedRows": 34
     },
-    "checkedAt": "2026-09-13T18:44:20.642Z"
+    "checkedAt": "2026-09-13T19:02:36.434Z"
   },
   {
     "key": "goteborgs-universitet:H1MKE",
@@ -8870,7 +8957,7 @@
       "sourcePages": 2,
       "parsedRows": 34
     },
-    "checkedAt": "2026-09-13T18:44:20.638Z"
+    "checkedAt": "2026-09-13T19:02:36.487Z"
   },
   {
     "key": "goteborgs-universitet:H1PPE",
@@ -9082,7 +9169,7 @@
       "sourcePages": 2,
       "parsedRows": 25
     },
-    "checkedAt": "2026-09-13T18:44:20.595Z"
+    "checkedAt": "2026-09-13T19:02:36.617Z"
   },
   {
     "key": "goteborgs-universitet:H1RED",
@@ -9155,7 +9242,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:20.895Z"
+    "checkedAt": "2026-09-13T19:02:37.211Z"
   },
   {
     "key": "goteborgs-universitet:H1RKT",
@@ -9218,7 +9305,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:21.433Z"
+    "checkedAt": "2026-09-13T19:02:37.715Z"
   },
   {
     "key": "goteborgs-universitet:H1SPK",
@@ -9281,7 +9368,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:21.028Z"
+    "checkedAt": "2026-09-13T19:02:37.011Z"
   },
   {
     "key": "goteborgs-universitet:H2EVI",
@@ -9292,21 +9379,174 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "",
-    "sourceUrls": [],
-    "apiCoverage": "",
-    "apiConfidence": "",
-    "officialProgramCode": "",
+    "coverage": "complete",
+    "reason": "official-gu-direct-verification",
+    "rows": [
+      {
+        "term": 1,
+        "code": "VT2110",
+        "name": "Evidens i praktiken: Kritisk granskning av vetenskaplig litteratur",
+        "hp": 15,
+        "category": "required",
+        "isSlot": false,
+        "isThesis": false,
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-programme-page",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "VT2120",
+        "name": "Perspektiv på evidens: att göra verkligheten mätbar",
+        "hp": 15,
+        "category": "required",
+        "isSlot": false,
+        "isThesis": false,
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-programme-page",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "VT2111",
+        "name": "Evidens i praktiken: Sammanställning av evidens i översikter och riktlinjer",
+        "hp": 15,
+        "category": "required",
+        "isSlot": false,
+        "isThesis": false,
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-programme-page",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "EV2520",
+        "name": "Perspektiv på evidens: syntetisering och prioritering",
+        "hp": 15,
+        "category": "required",
+        "isSlot": false,
+        "isThesis": false,
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-programme-page",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "EV2113",
+        "name": "Evidens i praktiken: förändring av verksamheter utifrån evidens",
+        "hp": 15,
+        "category": "required",
+        "isSlot": false,
+        "isThesis": false,
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-programme-page",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "EV2124",
+        "name": "Perspektiv på evidens: samverkan och standardisering",
+        "hp": 15,
+        "category": "required",
+        "isSlot": false,
+        "isThesis": false,
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-programme-page",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "EV2330",
+        "name": "Masterexamensarbete i evidensbasering",
+        "hp": 30,
+        "category": "required",
+        "isSlot": false,
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 6,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-programme-page",
+        "programmeCategory": "required"
+      }
+    ],
+    "source": "gu-official-programme-page",
+    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/mer-om-programmet-evidensbasering-praktik-teori-kontext",
+    "sourceUrls": [
+      "https://www.gu.se/studera/hitta-utbildning/mer-om-programmet-evidensbasering-praktik-teori-kontext"
+    ],
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-direct-verification",
+    "officialProgramCode": "H2EVI",
     "officialAliases": [],
-    "quality": {},
-    "checkedAt": "2026-09-13T18:44:24.562Z"
+    "quality": {
+      "complete": true,
+      "expectedTerms": 4,
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "termHp": {
+        "1": {
+          "listedHp": 30,
+          "covered": true
+        },
+        "2": {
+          "listedHp": 30,
+          "covered": true
+        },
+        "3": {
+          "listedHp": 30,
+          "covered": true
+        },
+        "4": {
+          "listedHp": 30,
+          "covered": true
+        }
+      },
+      "slotCount": 0,
+      "parsedRows": 7,
+      "totalHp": 120,
+      "sourcePages": 1
+    },
+    "checkedAt": "2026-09-13T19:03:03.958Z"
   },
   {
     "key": "goteborgs-universitet:H2GPR",
@@ -9361,7 +9601,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:21.309Z"
+    "checkedAt": "2026-09-13T19:02:37.504Z"
   },
   {
     "key": "goteborgs-universitet:H2KOD",
@@ -9492,7 +9732,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:21.647Z"
+    "checkedAt": "2026-09-13T19:02:37.837Z"
   },
   {
     "key": "goteborgs-universitet:H2KST",
@@ -9547,7 +9787,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:21.597Z"
+    "checkedAt": "2026-09-13T19:02:37.908Z"
   },
   {
     "key": "goteborgs-universitet:H2KTX",
@@ -9798,7 +10038,7 @@
       "sourcePages": 2,
       "parsedRows": 4
     },
-    "checkedAt": "2026-09-13T18:44:21.874Z"
+    "checkedAt": "2026-09-13T19:02:37.962Z"
   },
   {
     "key": "goteborgs-universitet:H2LTG",
@@ -9937,7 +10177,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:22.149Z"
+    "checkedAt": "2026-09-13T19:02:38.285Z"
   },
   {
     "key": "goteborgs-universitet:H2MAS",
@@ -9984,7 +10224,7 @@
       "sourcePages": 2,
       "parsedRows": 26
     },
-    "checkedAt": "2026-09-13T18:44:22.101Z"
+    "checkedAt": "2026-09-13T19:02:38.294Z"
   },
   {
     "key": "goteborgs-universitet:H2PTA",
@@ -10039,7 +10279,7 @@
       "sourcePages": 2,
       "parsedRows": 25
     },
-    "checkedAt": "2026-09-13T18:44:22.305Z"
+    "checkedAt": "2026-09-13T19:02:38.417Z"
   },
   {
     "key": "goteborgs-universitet:H2RTM",
@@ -10064,7 +10304,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:24.664Z"
+    "checkedAt": "2026-09-13T19:02:39.108Z"
   },
   {
     "key": "goteborgs-universitet:H2SIK",
@@ -10089,7 +10329,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:25.205Z"
+    "checkedAt": "2026-09-13T19:02:39.063Z"
   },
   {
     "key": "goteborgs-universitet:K1BAF",
@@ -10284,7 +10524,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:22.900Z"
+    "checkedAt": "2026-09-13T19:02:39.439Z"
   },
   {
     "key": "goteborgs-universitet:K1CRF",
@@ -10547,7 +10787,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T18:44:22.651Z"
+    "checkedAt": "2026-09-13T19:02:38.720Z"
   },
   {
     "key": "goteborgs-universitet:K1DES",
@@ -10795,7 +11035,7 @@
       "sourcePages": 2,
       "parsedRows": 11
     },
-    "checkedAt": "2026-09-13T18:44:22.986Z"
+    "checkedAt": "2026-09-13T19:02:38.729Z"
   },
   {
     "key": "goteborgs-universitet:K1FOT",
@@ -11008,7 +11248,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:23.555Z"
+    "checkedAt": "2026-09-13T19:02:39.176Z"
   },
   {
     "key": "goteborgs-universitet:K1FRI",
@@ -11288,7 +11528,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T18:44:23.319Z"
+    "checkedAt": "2026-09-13T19:02:39.157Z"
   },
   {
     "key": "goteborgs-universitet:K1IMP",
@@ -11351,7 +11591,7 @@
       "sourcePages": 2,
       "parsedRows": 40
     },
-    "checkedAt": "2026-09-13T18:44:23.951Z"
+    "checkedAt": "2026-09-13T19:02:39.621Z"
   },
   {
     "key": "goteborgs-universitet:K1IND",
@@ -11415,7 +11655,7 @@
       "sourcePages": 3,
       "parsedRows": 47
     },
-    "checkedAt": "2026-09-13T18:44:24.385Z"
+    "checkedAt": "2026-09-13T19:02:40.093Z"
   },
   {
     "key": "goteborgs-universitet:K1KHV",
@@ -11440,7 +11680,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:25.138Z"
+    "checkedAt": "2026-09-13T19:02:40.877Z"
   },
   {
     "key": "goteborgs-universitet:K1KLA",
@@ -11503,7 +11743,7 @@
       "sourcePages": 2,
       "parsedRows": 37
     },
-    "checkedAt": "2026-09-13T18:44:25.315Z"
+    "checkedAt": "2026-09-13T19:02:40.033Z"
   },
   {
     "key": "goteborgs-universitet:K1KMP",
@@ -11566,7 +11806,7 @@
       "sourcePages": 2,
       "parsedRows": 36
     },
-    "checkedAt": "2026-09-13T18:44:25.205Z"
+    "checkedAt": "2026-09-13T19:02:40.055Z"
   },
   {
     "key": "goteborgs-universitet:K1KYR",
@@ -11629,7 +11869,7 @@
       "sourcePages": 2,
       "parsedRows": 36
     },
-    "checkedAt": "2026-09-13T18:44:25.402Z"
+    "checkedAt": "2026-09-13T19:02:40.339Z"
   },
   {
     "key": "goteborgs-universitet:K1LIT",
@@ -11909,7 +12149,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T18:44:25.004Z"
+    "checkedAt": "2026-09-13T19:02:40.052Z"
   },
   {
     "key": "goteborgs-universitet:K1MAL",
@@ -12066,7 +12306,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:26.361Z"
+    "checkedAt": "2026-09-13T19:02:42.147Z"
   },
   {
     "key": "goteborgs-universitet:K1MDT",
@@ -12329,7 +12569,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T18:44:25.481Z"
+    "checkedAt": "2026-09-13T19:02:40.490Z"
   },
   {
     "key": "goteborgs-universitet:K1MGG",
@@ -12592,7 +12832,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T18:44:25.547Z"
+    "checkedAt": "2026-09-13T19:02:40.502Z"
   },
   {
     "key": "goteborgs-universitet:K1MLP",
@@ -12841,7 +13081,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:26.057Z"
+    "checkedAt": "2026-09-13T19:02:41.865Z"
   },
   {
     "key": "goteborgs-universitet:K1OPE",
@@ -12903,7 +13143,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:25.855Z"
+    "checkedAt": "2026-09-13T19:02:41.057Z"
   },
   {
     "key": "goteborgs-universitet:K1SCE",
@@ -12966,7 +13206,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:26.245Z"
+    "checkedAt": "2026-09-13T19:02:41.682Z"
   },
   {
     "key": "goteborgs-universitet:K1TRA",
@@ -13029,7 +13269,7 @@
       "sourcePages": 2,
       "parsedRows": 36
     },
-    "checkedAt": "2026-09-13T18:44:26.206Z"
+    "checkedAt": "2026-09-13T19:02:41.394Z"
   },
   {
     "key": "goteborgs-universitet:K2CCD",
@@ -13142,7 +13382,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:26.196Z"
+    "checkedAt": "2026-09-13T19:02:41.633Z"
   },
   {
     "key": "goteborgs-universitet:K2COM",
@@ -13167,7 +13407,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:26.908Z"
+    "checkedAt": "2026-09-13T19:02:42.668Z"
   },
   {
     "key": "goteborgs-universitet:K2DEN",
@@ -13232,7 +13472,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:26.720Z"
+    "checkedAt": "2026-09-13T19:02:42.592Z"
   },
   {
     "key": "goteborgs-universitet:K2EMD",
@@ -13345,7 +13585,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:26.856Z"
+    "checkedAt": "2026-09-13T19:02:42.677Z"
   },
   {
     "key": "goteborgs-universitet:K2FOT",
@@ -13476,7 +13716,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:26.858Z"
+    "checkedAt": "2026-09-13T19:02:42.447Z"
   },
   {
     "key": "goteborgs-universitet:K2FRI",
@@ -13607,7 +13847,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:26.811Z"
+    "checkedAt": "2026-09-13T19:02:42.609Z"
   },
   {
     "key": "goteborgs-universitet:K2IMP",
@@ -13662,7 +13902,7 @@
       "sourcePages": 2,
       "parsedRows": 33
     },
-    "checkedAt": "2026-09-13T18:44:27.006Z"
+    "checkedAt": "2026-09-13T19:02:43.036Z"
   },
   {
     "key": "goteborgs-universitet:K2KMP",
@@ -13865,7 +14105,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:27.477Z"
+    "checkedAt": "2026-09-13T19:02:43.496Z"
   },
   {
     "key": "goteborgs-universitet:K2KOR",
@@ -13911,7 +14151,7 @@
       "sourcePages": 1,
       "parsedRows": 1
     },
-    "checkedAt": "2026-09-13T18:44:27.660Z"
+    "checkedAt": "2026-09-13T19:02:44.068Z"
   },
   {
     "key": "goteborgs-universitet:K2LIG",
@@ -14069,7 +14309,7 @@
       "sourcePages": 2,
       "parsedRows": 6
     },
-    "checkedAt": "2026-09-13T18:44:27.200Z"
+    "checkedAt": "2026-09-13T19:02:43.050Z"
   },
   {
     "key": "goteborgs-universitet:K2LIT",
@@ -14094,7 +14334,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:27.775Z"
+    "checkedAt": "2026-09-13T19:02:43.417Z"
   },
   {
     "key": "goteborgs-universitet:K2MAF",
@@ -14284,7 +14524,7 @@
       "sourcePages": 2,
       "parsedRows": 8
     },
-    "checkedAt": "2026-09-13T18:44:27.239Z"
+    "checkedAt": "2026-09-13T19:02:43.106Z"
   },
   {
     "key": "goteborgs-universitet:K2MDG",
@@ -14338,7 +14578,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:27.533Z"
+    "checkedAt": "2026-09-13T19:02:43.914Z"
   },
   {
     "key": "goteborgs-universitet:K2MIV",
@@ -14541,7 +14781,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:27.964Z"
+    "checkedAt": "2026-09-13T19:02:44.253Z"
   },
   {
     "key": "goteborgs-universitet:K2ORG",
@@ -14596,7 +14836,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:27.988Z"
+    "checkedAt": "2026-09-13T19:02:44.150Z"
   },
   {
     "key": "goteborgs-universitet:K2ORK",
@@ -14735,7 +14975,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:28.228Z"
+    "checkedAt": "2026-09-13T19:02:44.458Z"
   },
   {
     "key": "goteborgs-universitet:K2PAC",
@@ -14890,7 +15130,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:28.770Z"
+    "checkedAt": "2026-09-13T19:02:44.685Z"
   },
   {
     "key": "goteborgs-universitet:K2TIL",
@@ -14915,7 +15155,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:28.937Z"
+    "checkedAt": "2026-09-13T19:02:45.035Z"
   },
   {
     "key": "goteborgs-universitet:L1FHG",
@@ -14940,7 +15180,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:29.118Z"
+    "checkedAt": "2026-09-13T19:02:44.919Z"
   },
   {
     "key": "goteborgs-universitet:L1FÖL",
@@ -14965,7 +15205,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:28.831Z"
+    "checkedAt": "2026-09-13T19:02:45.004Z"
   },
   {
     "key": "goteborgs-universitet:L1KPA",
@@ -14990,7 +15230,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:28.983Z"
+    "checkedAt": "2026-09-13T19:02:45.146Z"
   },
   {
     "key": "goteborgs-universitet:L1KPO",
@@ -15015,7 +15255,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:29.184Z"
+    "checkedAt": "2026-09-13T19:02:45.260Z"
   },
   {
     "key": "goteborgs-universitet:L1UUL",
@@ -15074,7 +15314,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:29.205Z"
+    "checkedAt": "2026-09-13T19:02:45.259Z"
   },
   {
     "key": "goteborgs-universitet:L1VAL",
@@ -15128,7 +15368,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:29.159Z"
+    "checkedAt": "2026-09-13T19:02:45.344Z"
   },
   {
     "key": "goteborgs-universitet:L1YRL",
@@ -15179,7 +15419,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:29.693Z"
+    "checkedAt": "2026-09-13T19:02:45.905Z"
   },
   {
     "key": "goteborgs-universitet:L1Ä79",
@@ -15204,7 +15444,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:30.045Z"
+    "checkedAt": "2026-09-13T19:02:45.926Z"
   },
   {
     "key": "goteborgs-universitet:L1ÄGY",
@@ -15229,7 +15469,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:30.032Z"
+    "checkedAt": "2026-09-13T19:02:45.918Z"
   },
   {
     "key": "goteborgs-universitet:L246G",
@@ -15254,7 +15494,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:30.224Z"
+    "checkedAt": "2026-09-13T19:02:46.042Z"
   },
   {
     "key": "goteborgs-universitet:L2BUV",
@@ -15366,7 +15606,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:29.835Z"
+    "checkedAt": "2026-09-13T19:02:46.301Z"
   },
   {
     "key": "goteborgs-universitet:L2EUR",
@@ -15420,7 +15660,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:29.532Z"
+    "checkedAt": "2026-09-13T19:02:45.767Z"
   },
   {
     "key": "goteborgs-universitet:L2F3G",
@@ -15491,7 +15731,7 @@
       "sourcePages": 2,
       "parsedRows": 6
     },
-    "checkedAt": "2026-09-13T18:44:29.980Z"
+    "checkedAt": "2026-09-13T19:02:46.360Z"
   },
   {
     "key": "goteborgs-universitet:L2SLL",
@@ -15542,7 +15782,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:30.123Z"
+    "checkedAt": "2026-09-13T19:02:46.483Z"
   },
   {
     "key": "goteborgs-universitet:L2SLP",
@@ -15567,7 +15807,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:31.052Z"
+    "checkedAt": "2026-09-13T19:02:46.701Z"
   },
   {
     "key": "goteborgs-universitet:L2SLU",
@@ -15618,7 +15858,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:30.408Z"
+    "checkedAt": "2026-09-13T19:02:46.517Z"
   },
   {
     "key": "goteborgs-universitet:L2SPP",
@@ -15669,7 +15909,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:30.462Z"
+    "checkedAt": "2026-09-13T19:02:46.767Z"
   },
   {
     "key": "goteborgs-universitet:M1BMA",
@@ -15732,7 +15972,7 @@
       "sourcePages": 2,
       "parsedRows": 60
     },
-    "checkedAt": "2026-09-13T18:44:30.485Z"
+    "checkedAt": "2026-09-13T19:02:46.896Z"
   },
   {
     "key": "goteborgs-universitet:M1DIP",
@@ -15804,7 +16044,7 @@
       "sourcePages": 3,
       "parsedRows": 55
     },
-    "checkedAt": "2026-09-13T18:44:30.669Z"
+    "checkedAt": "2026-09-13T19:02:47.116Z"
   },
   {
     "key": "goteborgs-universitet:M2CMA",
@@ -15829,7 +16069,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:31.262Z"
+    "checkedAt": "2026-09-13T19:02:47.655Z"
   },
   {
     "key": "goteborgs-universitet:M2KUL",
@@ -15854,7 +16094,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:31.573Z"
+    "checkedAt": "2026-09-13T19:02:47.334Z"
   },
   {
     "key": "goteborgs-universitet:M2LP6",
@@ -15994,7 +16234,7 @@
       "sourcePages": 2,
       "parsedRows": 36
     },
-    "checkedAt": "2026-09-13T18:44:30.853Z"
+    "checkedAt": "2026-09-13T19:02:47.178Z"
   },
   {
     "key": "goteborgs-universitet:M2PHP",
@@ -16168,7 +16408,7 @@
       "sourcePages": 3,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T18:44:30.962Z"
+    "checkedAt": "2026-09-13T19:02:47.349Z"
   },
   {
     "key": "goteborgs-universitet:M2SLP",
@@ -16568,7 +16808,7 @@
       "sourcePages": 2,
       "parsedRows": 27
     },
-    "checkedAt": "2026-09-13T18:44:32.366Z"
+    "checkedAt": "2026-09-13T19:02:47.367Z"
   },
   {
     "key": "goteborgs-universitet:M2STA",
@@ -16709,7 +16949,7 @@
       "sourcePages": 3,
       "parsedRows": 19
     },
-    "checkedAt": "2026-09-13T18:44:31.295Z"
+    "checkedAt": "2026-09-13T19:02:47.698Z"
   },
   {
     "key": "goteborgs-universitet:N1BBA",
@@ -16772,7 +17012,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:31.583Z"
+    "checkedAt": "2026-09-13T19:02:47.772Z"
   },
   {
     "key": "goteborgs-universitet:N1BHP",
@@ -16835,7 +17075,7 @@
       "sourcePages": 2,
       "parsedRows": 2
     },
-    "checkedAt": "2026-09-13T18:44:31.497Z"
+    "checkedAt": "2026-09-13T19:02:47.921Z"
   },
   {
     "key": "goteborgs-universitet:N1BIO",
@@ -16898,7 +17138,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:31.701Z"
+    "checkedAt": "2026-09-13T19:02:47.927Z"
   },
   {
     "key": "goteborgs-universitet:N1CAI",
@@ -16961,7 +17201,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:31.725Z"
+    "checkedAt": "2026-09-13T19:02:47.950Z"
   },
   {
     "key": "goteborgs-universitet:N1COS",
@@ -17024,7 +17264,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:31.930Z"
+    "checkedAt": "2026-09-13T19:02:48.264Z"
   },
   {
     "key": "goteborgs-universitet:N1DAF",
@@ -17079,7 +17319,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:32.005Z"
+    "checkedAt": "2026-09-13T19:02:48.277Z"
   },
   {
     "key": "goteborgs-universitet:N1ENV",
@@ -17141,7 +17381,7 @@
       "sourcePages": 1,
       "parsedRows": 1
     },
-    "checkedAt": "2026-09-13T18:44:31.915Z"
+    "checkedAt": "2026-09-13T19:02:48.213Z"
   },
   {
     "key": "goteborgs-universitet:N1FAR",
@@ -17166,7 +17406,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:32.722Z"
+    "checkedAt": "2026-09-13T19:02:49.038Z"
   },
   {
     "key": "goteborgs-universitet:N1FYS",
@@ -17229,7 +17469,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:32.158Z"
+    "checkedAt": "2026-09-13T19:02:48.510Z"
   },
   {
     "key": "goteborgs-universitet:N1GEO",
@@ -17292,7 +17532,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:32.852Z"
+    "checkedAt": "2026-09-13T19:02:48.855Z"
   },
   {
     "key": "goteborgs-universitet:N1GVS",
@@ -17355,7 +17595,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:32.369Z"
+    "checkedAt": "2026-09-13T19:02:48.796Z"
   },
   {
     "key": "goteborgs-universitet:N1HTL",
@@ -17418,7 +17658,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:32.752Z"
+    "checkedAt": "2026-09-13T19:02:49.213Z"
   },
   {
     "key": "goteborgs-universitet:N1KEM",
@@ -17678,7 +17918,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:32.816Z"
+    "checkedAt": "2026-09-13T19:02:49.097Z"
   },
   {
     "key": "goteborgs-universitet:N1KVP",
@@ -17741,7 +17981,7 @@
       "sourcePages": 2,
       "parsedRows": 20
     },
-    "checkedAt": "2026-09-13T18:44:32.819Z"
+    "checkedAt": "2026-09-13T19:02:49.401Z"
   },
   {
     "key": "goteborgs-universitet:N1MAT",
@@ -17937,7 +18177,7 @@
       "sourcePages": 2,
       "parsedRows": 30
     },
-    "checkedAt": "2026-09-13T18:44:33.020Z"
+    "checkedAt": "2026-09-13T19:02:49.292Z"
   },
   {
     "key": "goteborgs-universitet:N1MAV",
@@ -18000,7 +18240,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:33.157Z"
+    "checkedAt": "2026-09-13T19:02:49.583Z"
   },
   {
     "key": "goteborgs-universitet:N1MB1",
@@ -18064,7 +18304,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:33.291Z"
+    "checkedAt": "2026-09-13T19:02:49.766Z"
   },
   {
     "key": "goteborgs-universitet:N1MVN",
@@ -18126,7 +18366,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:33.150Z"
+    "checkedAt": "2026-09-13T19:02:49.528Z"
   },
   {
     "key": "goteborgs-universitet:N1SJU",
@@ -18205,7 +18445,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:33.362Z"
+    "checkedAt": "2026-09-13T19:02:49.794Z"
   },
   {
     "key": "goteborgs-universitet:N1SOF",
@@ -18268,7 +18508,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:33.718Z"
+    "checkedAt": "2026-09-13T19:02:50.635Z"
   },
   {
     "key": "goteborgs-universitet:N1SYD",
@@ -18331,7 +18571,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:33.471Z"
+    "checkedAt": "2026-09-13T19:02:49.979Z"
   },
   {
     "key": "goteborgs-universitet:N2ACE",
@@ -18385,7 +18625,7 @@
       "sourcePages": 1,
       "parsedRows": 18
     },
-    "checkedAt": "2026-09-13T18:44:33.484Z"
+    "checkedAt": "2026-09-13T19:02:49.967Z"
   },
   {
     "key": "goteborgs-universitet:N2BIN",
@@ -18441,7 +18681,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:33.705Z"
+    "checkedAt": "2026-09-13T19:02:50.321Z"
   },
   {
     "key": "goteborgs-universitet:N2BIO",
@@ -18496,7 +18736,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:33.726Z"
+    "checkedAt": "2026-09-13T19:02:50.339Z"
   },
   {
     "key": "goteborgs-universitet:N2BIS",
@@ -18550,7 +18790,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:33.687Z"
+    "checkedAt": "2026-09-13T19:02:50.221Z"
   },
   {
     "key": "goteborgs-universitet:N2CAS",
@@ -18605,7 +18845,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:34.217Z"
+    "checkedAt": "2026-09-13T19:02:50.706Z"
   },
   {
     "key": "goteborgs-universitet:N2CMN",
@@ -18659,7 +18899,7 @@
       "sourcePages": 1,
       "parsedRows": 2
     },
-    "checkedAt": "2026-09-13T18:44:33.816Z"
+    "checkedAt": "2026-09-13T19:02:50.408Z"
   },
   {
     "key": "goteborgs-universitet:N2COS",
@@ -18684,7 +18924,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:34.619Z"
+    "checkedAt": "2026-09-13T19:02:50.995Z"
   },
   {
     "key": "goteborgs-universitet:N2DGL",
@@ -18739,7 +18979,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:34.136Z"
+    "checkedAt": "2026-09-13T19:02:50.897Z"
   },
   {
     "key": "goteborgs-universitet:N2FOC",
@@ -18794,7 +19034,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:34.147Z"
+    "checkedAt": "2026-09-13T19:02:50.943Z"
   },
   {
     "key": "goteborgs-universitet:N2GDT",
@@ -18849,7 +19089,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:34.391Z"
+    "checkedAt": "2026-09-13T19:02:51.320Z"
   },
   {
     "key": "goteborgs-universitet:N2GEO",
@@ -18904,7 +19144,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:34.244Z"
+    "checkedAt": "2026-09-13T19:02:51.209Z"
   },
   {
     "key": "goteborgs-universitet:N2GVS",
@@ -18961,7 +19201,7 @@
       "sourcePages": 4,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:34.767Z"
+    "checkedAt": "2026-09-13T19:02:51.588Z"
   },
   {
     "key": "goteborgs-universitet:N2HSH",
@@ -19017,7 +19257,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:34.679Z"
+    "checkedAt": "2026-09-13T19:02:51.627Z"
   },
   {
     "key": "goteborgs-universitet:N2KEL",
@@ -19072,7 +19312,7 @@
       "sourcePages": 2,
       "parsedRows": 1
     },
-    "checkedAt": "2026-09-13T18:44:34.651Z"
+    "checkedAt": "2026-09-13T19:02:51.527Z"
   },
   {
     "key": "goteborgs-universitet:N2KEM",
@@ -19127,7 +19367,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:34.671Z"
+    "checkedAt": "2026-09-13T19:02:51.575Z"
   },
   {
     "key": "goteborgs-universitet:N2KUV",
@@ -19182,7 +19422,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:34.822Z"
+    "checkedAt": "2026-09-13T19:02:51.785Z"
   },
   {
     "key": "goteborgs-universitet:N2KVP",
@@ -19237,7 +19477,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:35.052Z"
+    "checkedAt": "2026-09-13T19:02:51.903Z"
   },
   {
     "key": "goteborgs-universitet:N2LIT",
@@ -19284,7 +19524,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:35.080Z"
+    "checkedAt": "2026-09-13T19:02:52.102Z"
   },
   {
     "key": "goteborgs-universitet:N2LKI",
@@ -19309,7 +19549,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:35.588Z"
+    "checkedAt": "2026-09-13T19:02:52.341Z"
   },
   {
     "key": "goteborgs-universitet:N2MAB",
@@ -19363,7 +19603,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:35.004Z"
+    "checkedAt": "2026-09-13T19:02:52.016Z"
   },
   {
     "key": "goteborgs-universitet:N2MAT",
@@ -19418,7 +19658,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:35.195Z"
+    "checkedAt": "2026-09-13T19:02:52.202Z"
   },
   {
     "key": "goteborgs-universitet:N2MAV",
@@ -19474,7 +19714,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:35.360Z"
+    "checkedAt": "2026-09-13T19:02:52.513Z"
   },
   {
     "key": "goteborgs-universitet:N2MBI",
@@ -19530,7 +19770,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:35.536Z"
+    "checkedAt": "2026-09-13T19:02:52.637Z"
   },
   {
     "key": "goteborgs-universitet:N2MIH",
@@ -19585,7 +19825,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:35.483Z"
+    "checkedAt": "2026-09-13T19:02:52.593Z"
   },
   {
     "key": "goteborgs-universitet:N2MOL",
@@ -19610,7 +19850,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:36.149Z"
+    "checkedAt": "2026-09-13T19:02:52.856Z"
   },
   {
     "key": "goteborgs-universitet:N2MVN",
@@ -19664,7 +19904,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:35.523Z"
+    "checkedAt": "2026-09-13T19:02:52.623Z"
   },
   {
     "key": "goteborgs-universitet:N2PHY",
@@ -19719,7 +19959,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:35.918Z"
+    "checkedAt": "2026-09-13T19:02:53.537Z"
   },
   {
     "key": "goteborgs-universitet:N2SOF",
@@ -19908,7 +20148,7 @@
       "sourcePages": 3,
       "parsedRows": 11
     },
-    "checkedAt": "2026-09-13T18:44:35.917Z"
+    "checkedAt": "2026-09-13T19:02:53.253Z"
   },
   {
     "key": "goteborgs-universitet:N2TOX",
@@ -19962,7 +20202,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:35.850Z"
+    "checkedAt": "2026-09-13T19:02:53.021Z"
   },
   {
     "key": "goteborgs-universitet:O1THG",
@@ -20209,7 +20449,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T18:44:35.895Z"
+    "checkedAt": "2026-09-13T19:02:53.074Z"
   },
   {
     "key": "goteborgs-universitet:O1THN",
@@ -20456,7 +20696,7 @@
       "sourcePages": 2,
       "parsedRows": 14
     },
-    "checkedAt": "2026-09-13T18:44:35.942Z"
+    "checkedAt": "2026-09-13T19:02:53.087Z"
   },
   {
     "key": "goteborgs-universitet:O1TTP",
@@ -20519,7 +20759,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:36.281Z"
+    "checkedAt": "2026-09-13T19:02:53.436Z"
   },
   {
     "key": "goteborgs-universitet:O2TDU",
@@ -20544,7 +20784,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:36.981Z"
+    "checkedAt": "2026-09-13T19:02:53.752Z"
   },
   {
     "key": "goteborgs-universitet:O2TLP",
@@ -20623,7 +20863,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:36.348Z"
+    "checkedAt": "2026-09-13T19:02:53.664Z"
   },
   {
     "key": "goteborgs-universitet:S1ANT",
@@ -20705,7 +20945,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:36.675Z"
+    "checkedAt": "2026-09-13T19:02:54.011Z"
   },
   {
     "key": "goteborgs-universitet:S1ARB",
@@ -20768,7 +21008,7 @@
       "sourcePages": 2,
       "parsedRows": 24
     },
-    "checkedAt": "2026-09-13T18:44:36.381Z"
+    "checkedAt": "2026-09-13T19:02:53.834Z"
   },
   {
     "key": "goteborgs-universitet:S1EKA",
@@ -21079,7 +21319,7 @@
       "sourcePages": 4,
       "parsedRows": 38
     },
-    "checkedAt": "2026-09-13T18:44:36.735Z"
+    "checkedAt": "2026-09-13T19:02:54.211Z"
   },
   {
     "key": "goteborgs-universitet:S1EUR",
@@ -21104,7 +21344,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:37.096Z"
+    "checkedAt": "2026-09-13T19:02:54.424Z"
   },
   {
     "key": "goteborgs-universitet:S1GLS",
@@ -21168,7 +21408,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:36.982Z"
+    "checkedAt": "2026-09-13T19:02:54.552Z"
   },
   {
     "key": "goteborgs-universitet:S1GSA",
@@ -21639,7 +21879,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:37.535Z"
+    "checkedAt": "2026-09-13T19:02:54.891Z"
   },
   {
     "key": "goteborgs-universitet:S1HSK",
@@ -21740,7 +21980,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:37.590Z"
+    "checkedAt": "2026-09-13T19:02:55.093Z"
   },
   {
     "key": "goteborgs-universitet:S1INT",
@@ -22037,7 +22277,7 @@
       "sourcePages": 3,
       "parsedRows": 14
     },
-    "checkedAt": "2026-09-13T18:44:37.329Z"
+    "checkedAt": "2026-09-13T19:02:54.803Z"
   },
   {
     "key": "goteborgs-universitet:S1JOU",
@@ -22100,7 +22340,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:37.459Z"
+    "checkedAt": "2026-09-13T19:02:54.983Z"
   },
   {
     "key": "goteborgs-universitet:S1KOL",
@@ -22321,7 +22561,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:37.760Z"
+    "checkedAt": "2026-09-13T19:02:55.345Z"
   },
   {
     "key": "goteborgs-universitet:S1KSO",
@@ -22372,7 +22612,7 @@
       "sourcePages": 2,
       "parsedRows": 18
     },
-    "checkedAt": "2026-09-13T18:44:37.537Z"
+    "checkedAt": "2026-09-13T19:02:55.145Z"
   },
   {
     "key": "goteborgs-universitet:S1LOG",
@@ -22652,7 +22892,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T18:44:37.664Z"
+    "checkedAt": "2026-09-13T19:02:55.246Z"
   },
   {
     "key": "goteborgs-universitet:S1MKG",
@@ -22715,7 +22955,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:38.018Z"
+    "checkedAt": "2026-09-13T19:02:55.783Z"
   },
   {
     "key": "goteborgs-universitet:S1OFF",
@@ -22740,7 +22980,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:38.659Z"
+    "checkedAt": "2026-09-13T19:02:55.758Z"
   },
   {
     "key": "goteborgs-universitet:S1OFV",
@@ -22803,7 +23043,7 @@
       "sourcePages": 2,
       "parsedRows": 9
     },
-    "checkedAt": "2026-09-13T18:44:37.974Z"
+    "checkedAt": "2026-09-13T19:02:55.679Z"
   },
   {
     "key": "goteborgs-universitet:S1PED",
@@ -23083,7 +23323,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T18:44:37.924Z"
+    "checkedAt": "2026-09-13T19:02:55.573Z"
   },
   {
     "key": "goteborgs-universitet:S1PER",
@@ -23146,7 +23386,7 @@
       "sourcePages": 2,
       "parsedRows": 32
     },
-    "checkedAt": "2026-09-13T18:44:38.110Z"
+    "checkedAt": "2026-09-13T19:02:55.820Z"
   },
   {
     "key": "goteborgs-universitet:S1SMI",
@@ -23254,7 +23494,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:38.843Z"
+    "checkedAt": "2026-09-13T19:02:56.507Z"
   },
   {
     "key": "goteborgs-universitet:S1SPS",
@@ -23316,7 +23556,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:38.310Z"
+    "checkedAt": "2026-09-13T19:02:56.102Z"
   },
   {
     "key": "goteborgs-universitet:S1STV",
@@ -23380,7 +23620,7 @@
       "sourcePages": 3,
       "parsedRows": 81
     },
-    "checkedAt": "2026-09-13T18:44:38.565Z"
+    "checkedAt": "2026-09-13T19:02:56.515Z"
   },
   {
     "key": "goteborgs-universitet:S1TRP",
@@ -23820,7 +24060,7 @@
       "sourcePages": 2,
       "parsedRows": 23
     },
-    "checkedAt": "2026-09-13T18:44:38.444Z"
+    "checkedAt": "2026-09-13T19:02:56.218Z"
   },
   {
     "key": "goteborgs-universitet:S2ARB",
@@ -23867,7 +24107,7 @@
       "sourcePages": 2,
       "parsedRows": 7
     },
-    "checkedAt": "2026-09-13T18:44:38.734Z"
+    "checkedAt": "2026-09-13T19:02:56.556Z"
   },
   {
     "key": "goteborgs-universitet:S2DID",
@@ -23892,7 +24132,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:39.194Z"
+    "checkedAt": "2026-09-13T19:02:56.879Z"
   },
   {
     "key": "goteborgs-universitet:S2ESD",
@@ -23947,7 +24187,7 @@
       "sourcePages": 2,
       "parsedRows": 26
     },
-    "checkedAt": "2026-09-13T18:44:38.886Z"
+    "checkedAt": "2026-09-13T19:02:56.688Z"
   },
   {
     "key": "goteborgs-universitet:S2EUS",
@@ -23972,7 +24212,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:39.708Z"
+    "checkedAt": "2026-09-13T19:02:57.127Z"
   },
   {
     "key": "goteborgs-universitet:S2FIN",
@@ -24027,7 +24267,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:39.420Z"
+    "checkedAt": "2026-09-13T19:02:57.728Z"
   },
   {
     "key": "goteborgs-universitet:S2GST",
@@ -24234,7 +24474,7 @@
       "sourcePages": 3,
       "parsedRows": 9
     },
-    "checkedAt": "2026-09-13T18:44:39.167Z"
+    "checkedAt": "2026-09-13T19:02:57.095Z"
   },
   {
     "key": "goteborgs-universitet:S2HRM",
@@ -24289,7 +24529,7 @@
       "sourcePages": 2,
       "parsedRows": 20
     },
-    "checkedAt": "2026-09-13T18:44:39.275Z"
+    "checkedAt": "2026-09-13T19:02:57.138Z"
   },
   {
     "key": "goteborgs-universitet:S2HSK",
@@ -24336,7 +24576,7 @@
       "sourcePages": 2,
       "parsedRows": 7
     },
-    "checkedAt": "2026-09-13T18:44:39.534Z"
+    "checkedAt": "2026-09-13T19:02:57.446Z"
   },
   {
     "key": "goteborgs-universitet:S2IAG",
@@ -24391,7 +24631,7 @@
       "sourcePages": 2,
       "parsedRows": 49
     },
-    "checkedAt": "2026-09-13T18:44:39.604Z"
+    "checkedAt": "2026-09-13T19:02:57.460Z"
   },
   {
     "key": "goteborgs-universitet:S2IFM",
@@ -24416,7 +24656,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:40.065Z"
+    "checkedAt": "2026-09-13T19:02:57.844Z"
   },
   {
     "key": "goteborgs-universitet:S2IFÖ",
@@ -24621,7 +24861,7 @@
       "sourcePages": 2,
       "parsedRows": 11
     },
-    "checkedAt": "2026-09-13T18:44:39.707Z"
+    "checkedAt": "2026-09-13T19:02:57.854Z"
   },
   {
     "key": "goteborgs-universitet:S2IIM",
@@ -24676,7 +24916,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:39.849Z"
+    "checkedAt": "2026-09-13T19:02:57.710Z"
   },
   {
     "key": "goteborgs-universitet:S2IME",
@@ -24731,7 +24971,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:39.964Z"
+    "checkedAt": "2026-09-13T19:02:58.028Z"
   },
   {
     "key": "goteborgs-universitet:S2IOL",
@@ -24787,7 +25027,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:40.143Z"
+    "checkedAt": "2026-09-13T19:02:58.198Z"
   },
   {
     "key": "goteborgs-universitet:S2ITL",
@@ -24843,7 +25083,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:40.253Z"
+    "checkedAt": "2026-09-13T19:02:58.458Z"
   },
   {
     "key": "goteborgs-universitet:S2JOU",
@@ -24890,7 +25130,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:40.235Z"
+    "checkedAt": "2026-09-13T19:02:58.315Z"
   },
   {
     "key": "goteborgs-universitet:S2JUR",
@@ -24985,7 +25225,7 @@
       "sourcePages": 2,
       "parsedRows": 6
     },
-    "checkedAt": "2026-09-13T18:44:40.306Z"
+    "checkedAt": "2026-09-13T19:02:58.443Z"
   },
   {
     "key": "goteborgs-universitet:S2KBE",
@@ -25040,7 +25280,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:40.418Z"
+    "checkedAt": "2026-09-13T19:02:58.464Z"
   },
   {
     "key": "goteborgs-universitet:S2KEN",
@@ -25095,7 +25335,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:40.718Z"
+    "checkedAt": "2026-09-13T19:02:58.905Z"
   },
   {
     "key": "goteborgs-universitet:S2KRI",
@@ -25290,7 +25530,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:40.663Z"
+    "checkedAt": "2026-09-13T19:02:58.897Z"
   },
   {
     "key": "goteborgs-universitet:S2LOT",
@@ -25345,7 +25585,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:40.840Z"
+    "checkedAt": "2026-09-13T19:02:59.194Z"
   },
   {
     "key": "goteborgs-universitet:S2LTM",
@@ -25485,7 +25725,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T18:44:40.642Z"
+    "checkedAt": "2026-09-13T19:02:58.885Z"
   },
   {
     "key": "goteborgs-universitet:S2LÄR",
@@ -25532,7 +25772,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:41.052Z"
+    "checkedAt": "2026-09-13T19:02:59.641Z"
   },
   {
     "key": "goteborgs-universitet:S2MAN",
@@ -25587,7 +25827,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:41.325Z"
+    "checkedAt": "2026-09-13T19:02:59.660Z"
   },
   {
     "key": "goteborgs-universitet:S2MAP",
@@ -25643,7 +25883,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:41.409Z"
+    "checkedAt": "2026-09-13T19:02:59.795Z"
   },
   {
     "key": "goteborgs-universitet:S2MKG",
@@ -25737,7 +25977,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T18:44:41.533Z"
+    "checkedAt": "2026-09-13T19:02:59.801Z"
   },
   {
     "key": "goteborgs-universitet:S2MOK",
@@ -25792,7 +26032,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:41.272Z"
+    "checkedAt": "2026-09-13T19:02:59.666Z"
   },
   {
     "key": "goteborgs-universitet:S2MSA",
@@ -25846,7 +26086,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:41.176Z"
+    "checkedAt": "2026-09-13T19:02:59.618Z"
   },
   {
     "key": "goteborgs-universitet:S2MÄR",
@@ -25902,7 +26142,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:41.903Z"
+    "checkedAt": "2026-09-13T19:03:00.690Z"
   },
   {
     "key": "goteborgs-universitet:S2NAT",
@@ -25957,7 +26197,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:41.752Z"
+    "checkedAt": "2026-09-13T19:03:00.609Z"
   },
   {
     "key": "goteborgs-universitet:S2OFF",
@@ -25982,7 +26222,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:42.235Z"
+    "checkedAt": "2026-09-13T19:03:00.429Z"
   },
   {
     "key": "goteborgs-universitet:S2PED",
@@ -26007,7 +26247,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:42.238Z"
+    "checkedAt": "2026-09-13T19:03:00.475Z"
   },
   {
     "key": "goteborgs-universitet:S2PSC",
@@ -26062,7 +26302,7 @@
       "sourcePages": 2,
       "parsedRows": 49
     },
-    "checkedAt": "2026-09-13T18:44:41.845Z"
+    "checkedAt": "2026-09-13T19:03:00.397Z"
   },
   {
     "key": "goteborgs-universitet:S2PSY",
@@ -26390,7 +26630,7 @@
       "sourcePages": 2,
       "parsedRows": 31
     },
-    "checkedAt": "2026-09-13T18:44:41.900Z"
+    "checkedAt": "2026-09-13T19:03:00.283Z"
   },
   {
     "key": "goteborgs-universitet:S2PTE",
@@ -26415,7 +26655,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:42.733Z"
+    "checkedAt": "2026-09-13T19:03:01.225Z"
   },
   {
     "key": "goteborgs-universitet:S2REF",
@@ -26470,7 +26710,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:42.496Z"
+    "checkedAt": "2026-09-13T19:03:01.453Z"
   },
   {
     "key": "goteborgs-universitet:S2SOC",
@@ -26645,7 +26885,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:42.324Z"
+    "checkedAt": "2026-09-13T19:03:00.905Z"
   },
   {
     "key": "goteborgs-universitet:S2SWH",
@@ -26670,7 +26910,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:43.226Z"
+    "checkedAt": "2026-09-13T19:03:01.391Z"
   },
   {
     "key": "goteborgs-universitet:T2HAI",
@@ -26725,7 +26965,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:42.985Z"
+    "checkedAt": "2026-09-13T19:03:01.453Z"
   },
   {
     "key": "goteborgs-universitet:V1ART",
@@ -26788,7 +27028,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:42.764Z"
+    "checkedAt": "2026-09-13T19:03:01.479Z"
   },
   {
     "key": "goteborgs-universitet:V1AUM",
@@ -27084,7 +27324,7 @@
       "sourcePages": 2,
       "parsedRows": 14
     },
-    "checkedAt": "2026-09-13T18:44:42.681Z"
+    "checkedAt": "2026-09-13T19:03:01.451Z"
   },
   {
     "key": "goteborgs-universitet:V1FYP",
@@ -27147,7 +27387,7 @@
       "sourcePages": 2,
       "parsedRows": 18
     },
-    "checkedAt": "2026-09-13T18:44:42.951Z"
+    "checkedAt": "2026-09-13T19:03:01.830Z"
   },
   {
     "key": "goteborgs-universitet:V1RTS",
@@ -27210,7 +27450,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:43.111Z"
+    "checkedAt": "2026-09-13T19:03:01.991Z"
   },
   {
     "key": "goteborgs-universitet:V1SSP",
@@ -27273,7 +27513,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:43.173Z"
+    "checkedAt": "2026-09-13T19:03:02.045Z"
   },
   {
     "key": "goteborgs-universitet:V2ANV",
@@ -27320,7 +27560,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:43.201Z"
+    "checkedAt": "2026-09-13T19:03:02.031Z"
   },
   {
     "key": "goteborgs-universitet:V2BMP",
@@ -27371,7 +27611,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:43.399Z"
+    "checkedAt": "2026-09-13T19:03:02.060Z"
   },
   {
     "key": "goteborgs-universitet:V2BUV",
@@ -27418,7 +27658,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:43.433Z"
+    "checkedAt": "2026-09-13T19:03:02.076Z"
   },
   {
     "key": "goteborgs-universitet:V2DIS",
@@ -27469,7 +27709,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:43.543Z"
+    "checkedAt": "2026-09-13T19:03:02.409Z"
   },
   {
     "key": "goteborgs-universitet:V2DIV",
@@ -27494,7 +27734,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:44.176Z"
+    "checkedAt": "2026-09-13T19:03:02.765Z"
   },
   {
     "key": "goteborgs-universitet:V2GLH",
@@ -27619,7 +27859,7 @@
       "sourcePages": 3,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T18:44:43.636Z"
+    "checkedAt": "2026-09-13T19:03:02.611Z"
   },
   {
     "key": "goteborgs-universitet:V2HSV",
@@ -27666,7 +27906,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:43.661Z"
+    "checkedAt": "2026-09-13T19:03:02.618Z"
   },
   {
     "key": "goteborgs-universitet:V2INV",
@@ -27713,7 +27953,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:43.829Z"
+    "checkedAt": "2026-09-13T19:03:02.646Z"
   },
   {
     "key": "goteborgs-universitet:V2KRG",
@@ -27760,7 +28000,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:43.864Z"
+    "checkedAt": "2026-09-13T19:03:02.656Z"
   },
   {
     "key": "goteborgs-universitet:V2NEU",
@@ -27785,7 +28025,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:44.480Z"
+    "checkedAt": "2026-09-13T19:03:03.172Z"
   },
   {
     "key": "goteborgs-universitet:V2NSV",
@@ -27832,7 +28072,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:44.067Z"
+    "checkedAt": "2026-09-13T19:03:03.190Z"
   },
   {
     "key": "goteborgs-universitet:V2ONL",
@@ -27879,7 +28119,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:44.096Z"
+    "checkedAt": "2026-09-13T19:03:03.193Z"
   },
   {
     "key": "goteborgs-universitet:V2OPV",
@@ -27926,7 +28166,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:44.261Z"
+    "checkedAt": "2026-09-13T19:03:03.244Z"
   },
   {
     "key": "goteborgs-universitet:V2PSI",
@@ -27973,7 +28213,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:44.297Z"
+    "checkedAt": "2026-09-13T19:03:03.231Z"
   },
   {
     "key": "goteborgs-universitet:V2PSK",
@@ -27998,7 +28238,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T18:44:45.243Z"
+    "checkedAt": "2026-09-13T19:03:03.565Z"
   },
   {
     "key": "goteborgs-universitet:V2SGE",
@@ -28045,7 +28285,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:44.523Z"
+    "checkedAt": "2026-09-13T19:03:03.747Z"
   },
   {
     "key": "goteborgs-universitet:Z1BAN",
@@ -28083,7 +28323,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T18:44:44.610Z"
+    "checkedAt": "2026-09-13T19:03:03.762Z"
   },
   {
     "key": "hogskolan-i-boras:ACEKO",
