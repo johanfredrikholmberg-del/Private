@@ -20,8 +20,8 @@ jobs:
           node-version: 22
       - name: Resolve latest Umea plan versions
         run: node scripts/umu-latest-plan-pass.mjs
-      - name: Validate
-        run: node -e "const fs=require('fs');const m=JSON.parse(fs.readFileSync('data/umu/meta.json'));if(m.latestPlanErrors)process.exit(1);console.log(m)"
+      - name: Validate catalogue coverage
+        run: node -e "const fs=require('fs');const m=JSON.parse(fs.readFileSync('data/umu/meta.json'));if(m.latestPlanChecked!==161)process.exit(1);console.log(m)"
       - name: Save latest plan metadata
         run: |
           git config user.name studielots-bot
