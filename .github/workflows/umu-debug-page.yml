@@ -1,0 +1,18 @@
+name: Umea page debug
+on:
+  push:
+    branches: [umu-program-import]
+    paths:
+      - 'scripts/umu-debug-page.mjs'
+      - '.github/workflows/umu-debug-page.yml'
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: umu-program-import
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/umu-debug-page.mjs
