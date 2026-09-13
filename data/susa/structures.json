@@ -24766,19 +24766,97 @@
     "university": "Karlstads universitet",
     "programCode": "HAENG",
     "programName": "Masterprogram i engelska",
-    "hp": 120,
+    "hp": 120.0,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/HAENG"
     ],
-    "status": "manual-review",
-    "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/HAENG",
-    "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-verified-term-structure",
+    "status": "processed",
+    "sourceUrl": "https://www3.kau.se/utbildningsplaner/sv/HAENG_20262-sv.pdf",
+    "source": "karlstad-official-education-plan",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Text, kultur och samhälle: Engelska i samtiden",
+        "hp": 15.0,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Obligatoriska kurser enligt utbildningsplan",
+        "hp": 15.0,
+        "type": "required",
+        "category": "mandatory-slot"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Självständigt arbete inom engelsk lingvistik (Magister)",
+        "hp": 15.0,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Självständigt arbete inom engelskspråkig litteratur (Magister)",
+        "hp": 15.0,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Text, kultur och samhälle: Engelska i samtiden",
+        "hp": 15.0,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Obligatoriska kurser enligt utbildningsplan",
+        "hp": 15.0,
+        "type": "required",
+        "category": "mandatory-slot"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara studier enligt utbildningsplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valbara studier enligt utbildningsplan",
+            "hp": 30.0
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Utlandsstudier",
+        "hp": 30.0,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "partial-structure",
+    "reason": "official-education-plan-pdf-reconciled",
     "expectedTerms": 4,
-    "completeTerms": [],
+    "completeTerms": [
+      1,
+      2,
+      3
+    ],
     "termSums": {
       "1": {
         "target": 30,
@@ -24810,7 +24888,12 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:38:17.934Z"
+    "checkedAt": "2026-09-13T06:49:04Z",
+    "sourceUrls": [
+      "https://www.kau.se/utbildning/program-och-kurser/program/HAENG",
+      "https://www3.kau.se/utbildningsplaner/sv/HAENG_20262-sv.pdf"
+    ],
+    "educationPlanUrl": "https://www3.kau.se/utbildningsplaner/sv/HAENG_20262-sv.pdf"
   },
   {
     "key": "karlstads-universitet:HAMSK",
@@ -34378,51 +34461,115 @@
     "university": "Karlstads universitet",
     "programCode": "SAPFD",
     "programName": "Masterprogram i statsvetenskap - inriktning psykologiskt försvar och desinformation",
-    "hp": 120,
+    "hp": 120.0,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/SAPFD"
     ],
     "status": "processed",
-    "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SAPFD",
-    "source": "karlstad-official-study-path",
+    "sourceUrl": "https://www3.kau.se/utbildningsplaner/sv/SAPFD_20252.pdf",
+    "source": "karlstad-official-education-plan",
     "rows": [
       {
         "term": 1,
-        "code": "SVAP11",
-        "name": "Hotad demokrati",
+        "code": "",
+        "name": "− Hotad demokrati",
         "hp": 7.5,
         "type": "required",
         "category": "mandatory"
       },
       {
         "term": 1,
-        "code": "SVAP13",
-        "name": "Motståndskraftig demokrati",
+        "code": "",
+        "name": "− Motståndskraftig demokrati",
         "hp": 7.5,
         "type": "required",
         "category": "mandatory"
       },
       {
         "term": 1,
-        "code": "SVAP12",
-        "name": "Desinformation och säkerhet",
-        "hp": 15,
+        "code": "",
+        "name": "− Desinformation och säkerhet",
+        "hp": 15.0,
         "type": "required",
         "category": "mandatory"
       },
       {
-        "term": 3,
-        "code": "SVAP32",
-        "name": "Säkerhetsskydd och cybersäkerhet",
+        "term": 2,
+        "code": "",
+        "name": "− Metodkurs I: Caseanalyser och receptionsanalys",
         "hp": 7.5,
         "type": "required",
         "category": "mandatory"
       },
       {
+        "term": 2,
+        "code": "",
+        "name": "− Artificiell intelligens (AI) och institutionell kapacitet",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "− Självständigt arbete - magister",
+        "hp": 15.0,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "− Hotad demokrati",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "− Motståndskraftig demokrati",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "− Desinformation och säkerhet",
+        "hp": 15.0,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "− Metodkurs I: Caseanalyser och receptionsanalys",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "− Artificiell intelligens (AI) och institutionell kapacitet",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "− Ledarskap och desinformation",
+        "hp": 15.0,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
         "term": 3,
-        "code": "SVAP33",
-        "name": "Metodkurs II: Analys av big data och omvärldsbevakning",
+        "code": "",
+        "name": "− Säkerhetsskydd och cybersäkerhet",
         "hp": 7.5,
         "type": "required",
         "category": "mandatory"
@@ -34430,44 +34577,42 @@
       {
         "term": 3,
         "code": "",
-        "name": "Valbara studier enligt programplan",
-        "hp": 15,
-        "type": "choice",
-        "category": "elective-slot",
-        "slotType": "elective-slot",
-        "isSlot": true,
-        "options": [
-          {
-            "code": "IKAD03",
-            "name": "Kommunikation och kulturell mångfald",
-            "hp": 7.5
-          },
-          {
-            "code": "SVAP35",
-            "name": "Strategisk kommunikation",
-            "hp": 7.5
-          },
-          {
-            "code": "SVAP34",
-            "name": "Praktik: statsvetenskap",
-            "hp": 15
-          }
-        ]
+        "name": "− Metodkurs II: Analys av ”big data”, omvärldsbevakning och metaanalyser",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "- Strategisk kommunikation",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "- Kommunikation och kulturell mångfald",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
       },
       {
         "term": 4,
-        "code": "SVAP41",
-        "name": "Självständigt arbete i statsvetenskap – master",
-        "hp": 30,
+        "code": "",
+        "name": "− Självständigt arbete - master",
+        "hp": 30.0,
         "type": "required",
         "category": "mandatory"
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "complete",
+    "reason": "official-education-plan-pdf-reconciled",
     "expectedTerms": 4,
     "completeTerms": [
       1,
+      2,
       3,
       4
     ],
@@ -34502,7 +34647,12 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:40:41.700Z"
+    "checkedAt": "2026-09-13T06:50:15Z",
+    "sourceUrls": [
+      "https://www.kau.se/utbildning/program-och-kurser/program/SAPFD",
+      "https://www3.kau.se/utbildningsplaner/sv/SAPFD_20252.pdf"
+    ],
+    "educationPlanUrl": "https://www3.kau.se/utbildningsplaner/sv/SAPFD_20252.pdf"
   },
   {
     "key": "karlstads-universitet:SARHS",
@@ -34693,26 +34843,26 @@
     "university": "Karlstads universitet",
     "programCode": "SARUM",
     "programName": "Masterprogram: Samhällets rumsliga och sociala omvandlingar",
-    "hp": 120,
+    "hp": 120.0,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/SARUM"
     ],
     "status": "processed",
-    "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SARUM",
-    "source": "karlstad-official-study-path",
+    "sourceUrl": "https://www3.kau.se/utbildningsplaner/sv/SARUM_20262-sv.pdf",
+    "source": "karlstad-official-education-plan",
     "rows": [
       {
         "term": 1,
-        "code": "KGA100",
-        "name": "Omvandlingens geografier - en introduktion",
+        "code": "",
+        "name": "Omvandlingens geografier – en introduktion",
         "hp": 7.5,
         "type": "required",
         "category": "mandatory"
       },
       {
         "term": 1,
-        "code": "KGA101",
+        "code": "",
         "name": "Stad och land i samspel",
         "hp": 7.5,
         "type": "required",
@@ -34720,7 +34870,7 @@
       },
       {
         "term": 1,
-        "code": "KGA102",
+        "code": "",
         "name": "Digitaliseringens geografier",
         "hp": 7.5,
         "type": "required",
@@ -34728,7 +34878,7 @@
       },
       {
         "term": 1,
-        "code": "KGA103",
+        "code": "",
         "name": "Turism som en samhällsomvandlande kraft",
         "hp": 7.5,
         "type": "required",
@@ -34736,7 +34886,7 @@
       },
       {
         "term": 2,
-        "code": "KGA200",
+        "code": "",
         "name": "Kulturgeografiska och turismvetenskapliga klassiker",
         "hp": 7.5,
         "type": "required",
@@ -34745,75 +34895,124 @@
       {
         "term": 2,
         "code": "",
-        "name": "Valbara studier enligt programplan",
-        "hp": 22.5,
-        "type": "choice",
-        "category": "elective-slot",
-        "slotType": "elective-slot",
-        "isSlot": true,
-        "options": [
-          {
-            "code": "KGA201",
-            "name": "Kris, resiliens och omställning",
-            "hp": 7.5
-          },
-          {
-            "code": "KGA202",
-            "name": "Kulturgeografiska perspektiv inom planeringsteori",
-            "hp": 7.5
-          },
-          {
-            "code": "KGA203",
-            "name": "Mobilitet, säkerhet och geopolitik",
-            "hp": 7.5
-          },
-          {
-            "code": "KGA204",
-            "name": "Vetenskapliga metoder i kulturgeografi",
-            "hp": 7.5
-          },
-          {
-            "code": "KGA205",
-            "name": "Magisteruppsats i kulturgeografi",
-            "hp": 15
-          }
-        ]
+        "name": "Vetenskapliga metoder",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Självständigt arbete i kulturgeografi",
+        "hp": 15.0,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Omvandlingens geografier – en introduktion",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Stad och land i samspel",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Digitaliseringens geografier",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Turism som en samhällsomvandlande kraft",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Kulturgeografiska och turismvetenskapliga klassiker",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Kris, resiliens och omställning",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Planeringsteori",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Mobilitet, säkerhet och geopolitik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
       },
       {
         "term": 3,
         "code": "",
-        "name": "Valbara studier enligt programplan",
-        "hp": 30,
-        "type": "choice",
-        "category": "elective-slot",
-        "slotType": "elective-slot",
-        "isSlot": true,
-        "options": [
-          {
-            "code": "KGA300",
-            "name": "Regionala studier, exkursionskurs",
-            "hp": 7.5
-          },
-          {
-            "code": "KGA301",
-            "name": "Samtida turism- och planeringsforskning",
-            "hp": 15
-          },
-          {
-            "code": "KGA302",
-            "name": "Metoder för empiriska studier av samhällsomvandling",
-            "hp": 7.5
-          }
-        ]
+        "name": "Regionala studier, exkursionskurs",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Nutida turism- och planeringsforskning",
+        "hp": 15.0,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Metoder för empiriska studier av samhällsomvandling",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Självständigt arbete i kulturgeografi",
+        "hp": 30.0,
+        "type": "required",
+        "category": "mandatory"
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "complete",
+    "reason": "official-education-plan-pdf-reconciled",
     "expectedTerms": 4,
     "completeTerms": [
       1,
       2,
-      3
+      3,
+      4
     ],
     "termSums": {
       "1": {
@@ -34846,7 +35045,12 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:40:45.807Z"
+    "checkedAt": "2026-09-13T06:50:17Z",
+    "sourceUrls": [
+      "https://www.kau.se/utbildning/program-och-kurser/program/SARUM",
+      "https://www3.kau.se/utbildningsplaner/sv/SARUM_20262-sv.pdf"
+    ],
+    "educationPlanUrl": "https://www3.kau.se/utbildningsplaner/sv/SARUM_20262-sv.pdf"
   },
   {
     "key": "karlstads-universitet:SASKT",
