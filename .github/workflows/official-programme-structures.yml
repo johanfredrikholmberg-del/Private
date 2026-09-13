@@ -10,6 +10,8 @@ on:
       - 'scripts/hb-verified-structure-overrides*.mjs'
       - 'scripts/hb-77-audit.mjs'
       - 'scripts/kau-catalogue-audit.mjs'
+      - 'scripts/kau-static-export.mjs'
+      - 'scripts/kau-programme-structure-pipeline.mjs'
       - '.github/workflows/official-programme-structures.yml'
   schedule:
     - cron: '47 3 * * 2,4,6'
@@ -52,6 +54,14 @@ jobs:
           for n in $(seq 2 13); do
             node "scripts/hb-verified-structure-overrides-${n}.mjs"
           done
+      - name: Build complete Karlstad catalogues
+        env:
+          KAU_COURSE_CONCURRENCY: '12'
+        run: node scripts/kau-static-export.mjs
+      - name: Enrich all Karlstad programme structures
+        env:
+          KAU_STRUCTURE_CONCURRENCY: '10'
+        run: node scripts/kau-programme-structure-pipeline.mjs
       - name: Audit Borås 77-programme catalogue
         run: node scripts/hb-77-audit.mjs
       - name: Audit Karlstad programme catalogue
@@ -60,20 +70,34 @@ jobs:
         run: |
           node - <<'NODE'
           const fs=require('fs');
-          const meta=JSON.parse(fs.readFileSync('data/susa/structure-meta.json','utf8'));
           const rows=JSON.parse(fs.readFileSync('data/susa/structures.json','utf8'));
-          if (!rows.length || rows.length !== meta.processed) throw new Error('Structure output validation failed');
+          const kauMeta=JSON.parse(fs.readFileSync('data/kau/meta.json','utf8'));
+          const kauStructure=JSON.parse(fs.readFileSync('data/kau/structure-meta.json','utf8'));
+          if (!rows.length) throw new Error('Structure output validation failed');
           const allowed=new Set(['complete','choice-required','partial-structure','manual-review','metadata-only']);
           if(rows.some(x=>!allowed.has(x.coverage))) throw new Error('Unknown coverage status');
-          console.log(meta);
+          if(kauMeta.counts.programmes!==134) throw new Error('Karlstad programme catalogue is not complete');
+          if(kauMeta.counts.susaCourseDefinitions<500) throw new Error('Karlstad course catalogue unexpectedly small');
+          if(kauStructure.officialProgrammes!==134||kauStructure.processed!==134) throw new Error('Karlstad structure audit did not cover all programmes');
+          console.log({kauMeta,kauStructure});
+          NODE
+      - name: Refresh global structure meta
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const rows=JSON.parse(fs.readFileSync('data/susa/structures.json','utf8'));
+          const counts=rows.reduce((a,x)=>(a[x.coverage||'metadata-only']=(a[x.coverage||'metadata-only']||0)+1,a),{});
+          const retryable=rows.filter(x=>['metadata-only','manual-review'].includes(x.coverage)).length;
+          const meta={generatedAt:new Date().toISOString(),processed:rows.length,remaining:0,retryable,counts};
+          fs.writeFileSync('data/susa/structure-meta.json',JSON.stringify(meta,null,2)+'\n');
           NODE
       - name: Commit structure progress
         run: |
-          if [ -z "$(git status --porcelain -- data/susa/structures.json data/susa/structure-meta.json)" ]; then exit 0; fi
+          if [ -z "$(git status --porcelain -- data/susa/structures.json data/susa/structure-meta.json data/kau)" ]; then exit 0; fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/susa/structures.json data/susa/structure-meta.json
-          git commit -m 'Enrich official programme structures [skip ci]'
+          git add -f data/susa/structures.json data/susa/structure-meta.json data/kau
+          git commit -m 'Enrich Karlstad programme and course database [skip ci]'
           git fetch origin studielots-v2
           git rebase origin/studielots-v2
           git push origin HEAD:studielots-v2

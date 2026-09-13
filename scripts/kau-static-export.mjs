@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+/** StudieLots offline Karlstad University export.
+ * Builds a complete KAU programme catalogue and a local KAU course catalogue from SUSA,
+ * then verifies whether each course is offered as a standalone course on KAU's official page.
+ */
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+const OUT='data/kau';
+const COURSE_SOURCE='data/susa/courses.json';
+const PROGRAM_PAGES=[
+  {level:'basic',url:'https://www.kau.se/utbildning/program-och-kurser/program/program-pa-grundniva-o'},
+  {level:'advanced',url:'https://www.kau.se/utbildning/program-och-kurser/program/program-pa-avancerad-niva-o'}
+];
+const CONCURRENCY=Number(process.env.KAU_COURSE_CONCURRENCY||12);
+const clean=v=>String(v??'').replace(/&nbsp;|&#160;/gi,' ').replace(/&amp;/gi,'&').replace(/&aring;/gi,'å').replace(/&auml;/gi,'ä').replace(/&ouml;/gi,'ö').replace(/&ndash;|&#8211;/gi,'–').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+const norm=v=>clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const isKau=v=>/karlstads universitet/.test(norm(v));
+const courseUrl=code=>`https://www.kau.se/utbildning/program-och-kurser/kurser/${encodeURIComponent(String(code||'').toUpperCase())}`;
+async function getText(url,timeout=15000){const r=await fetch(url,{headers:{accept:'text/html,application/xhtml+xml','user-agent':'StudieLots-KAU-export/1.0'},redirect:'follow',signal:AbortSignal.timeout(timeout)});if(!r.ok)throw new Error(`HTTP ${r.status}`);return{url:r.url||url,text:await r.text()}}
+async function programmeCatalogue(){const rows=[];for(const page of PROGRAM_PAGES){const {text}=await getText(page.url);for(const m of text.matchAll(/<a\b[^>]*href=["']([^"']*\/utbildning\/program-och-kurser\/program\/([^?#"']+))["'][^>]*>([\s\S]*?)<\/a>/gi)){const code=String(m[2]||'').replace(/\/$/,'').toUpperCase();if(!/^[A-ZÅÄÖ0-9]{4,8}$/.test(code))continue;const name=clean(m[3]);if(!name||/program-pa-(?:grund|avancerad)-niva-o/i.test(code))continue;rows.push({code,name,level:page.level,university:'Karlstads universitet',sourceUrl:new URL(m[1],page.url).href,source:'karlstad-official-program-catalog'})}}return[...new Map(rows.map(x=>[x.code,x])).values()].sort((a,b)=>a.code.localeCompare(b.code,'sv'))}
+function officialCourseUrl(row){return (row.urls||[]).find(u=>/kau\.se\/utbildning\/program-och-kurser\/kurser\//i.test(String(u)))||courseUrl(row.code)}
+function compactCourse(row){return{susaId:row.susaId||'',code:row.code||'',name:row.name||'',hp:row.hp??null,level:row.level||'',subject:row.subject||'',university:'Karlstads universitet',events:Array.isArray(row.events)?row.events:[],urls:Array.isArray(row.urls)?row.urls:[],source:'skolverket-susa-navet'}}
+async function verifyCourse(row){const url=officialCourseUrl(row);if(!row.code)return{...compactCourse(row),sourceUrl:url,standalone:null,standaloneStatus:'unverified-no-code'};try{const page=await getText(url);const text=clean(page.text);const standalone=/\bFristående kurs\b/i.test(text);const programme=/\bProgramkurs\b/i.test(text);return{...compactCourse(row),sourceUrl:page.url,standalone,standaloneStatus:standalone?'verified-standalone-offering':(programme?'program-course-only-current-page':'unverified-offering-type'),distance:(row.events||[]).some(e=>e?.distance===true),verifiedAt:new Date().toISOString(),verificationSource:'karlstad-official-course-page'}}catch(error){return{...compactCourse(row),sourceUrl:url,standalone:null,standaloneStatus:'temporarily-unverified',verificationError:String(error?.message||error)}}}
+async function pool(items){const out=new Array(items.length);let next=0;async function worker(){for(;;){const i=next++;if(i>=items.length)return;out[i]=await verifyCourse(items[i]);if((i+1)%50===0||i+1===items.length)console.log(`KAU courses ${i+1}/${items.length}`)}}await Promise.all(Array.from({length:Math.min(CONCURRENCY,items.length)},worker));return out}
+async function main(){await fs.mkdir(OUT,{recursive:true});const [programmes,allCourses]=await Promise.all([programmeCatalogue(),fs.readFile(COURSE_SOURCE,'utf8').then(JSON.parse)]);if(programmes.length!==134)throw new Error(`Expected 134 official KAU programme codes, got ${programmes.length}`);const raw=allCourses.filter(x=>isKau(x.university));const deduped=[...new Map(raw.map(x=>[String(x.code||x.susaId||x.name).toUpperCase(),x])).values()];const courses=await pool(deduped);const counts={programmes:programmes.length,susaCourseDefinitions:deduped.length,verifiedStandalone:courses.filter(x=>x.standalone===true).length,verifiedProgramOnly:courses.filter(x=>x.standalone===false).length,unresolvedStandaloneStatus:courses.filter(x=>x.standalone==null).length,distance:courses.filter(x=>x.distance===true).length};const meta={generatedAt:new Date().toISOString(),university:'Karlstads universitet',counts,policy:'All KAU course definitions are retained. standalone=true only when the official KAU course page contains an offering labelled Fristående kurs. Unknown or temporarily unreachable pages are never assumed standalone.'};await Promise.all([fs.writeFile(path.join(OUT,'programmes.json'),JSON.stringify(programmes,null,2)+'\n'),fs.writeFile(path.join(OUT,'courses.json'),JSON.stringify(courses,null,2)+'\n'),fs.writeFile(path.join(OUT,'meta.json'),JSON.stringify(meta,null,2)+'\n')]);console.log(JSON.stringify(meta,null,2));if(deduped.length<500)throw new Error(`Unexpectedly low KAU course count: ${deduped.length}`)}
+main().catch(e=>{console.error(e);process.exitCode=1});
