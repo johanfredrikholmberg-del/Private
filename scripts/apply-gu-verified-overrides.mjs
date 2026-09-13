@@ -19,7 +19,6 @@ for(const name of names){
 const structures=JSON.parse(await fs.readFile(TARGET,'utf8'));
 const queue=JSON.parse(await fs.readFile(QUEUE,'utf8'));
 const guQueue=queue.filter(x=>/goteborgs universitet/.test(norm(x.university)));
-const guKeys=new Set(guQueue.map(x=>x.key));
 const byCode=new Map(structures.map((x,i)=>[codeNorm(x.programCode),i]));
 let applied=0;
 for(const o of overrides){
@@ -37,7 +36,9 @@ for(const o of overrides){
     programmeSource:'gu-official-direct-verification',
     programmeCategory:r.category||'unknown'
   }));
-  structures[i]={...old,term:'HT26',status:'processed',coverage:o.coverage||'choice-required',reason:o.reason||'official-gu-direct-verification',rows,courses:rows,source:o.source||'gu-official-direct-verification',sourceUrl:o.sourceUrl||old.sourceUrl||'',sourceUrls:o.sourceUrl?[o.sourceUrl]:(old.sourceUrls||[]),quality:{complete:true,expectedTerms:Math.round(Number(o.hp||old.hp||0)/30),parsedRows:rows.length,totalHp:Number(o.hp||old.hp||0)},checkedAt:new Date().toISOString()};
+  const maxTerm=Math.max(0,...rows.map(r=>Number(r.term)||0));
+  const expectedTerms=Number(o.expectedTerms)||maxTerm||Math.max(1,Math.round(Number(o.hp||old.hp||0)/30));
+  structures[i]={...old,term:'HT26',status:'processed',coverage:o.coverage||'choice-required',reason:o.reason||'official-gu-direct-verification',rows,courses:rows,source:o.source||'gu-official-direct-verification',sourceUrl:o.sourceUrl||old.sourceUrl||'',sourceUrls:o.sourceUrl?[o.sourceUrl]:(old.sourceUrls||[]),quality:{complete:true,expectedTerms,parsedRows:rows.length,totalHp:Number(o.hp||old.hp||0)},checkedAt:new Date().toISOString()};
   applied++;
 }
 await fs.writeFile(TARGET,JSON.stringify(structures,null,2)+'\n');
