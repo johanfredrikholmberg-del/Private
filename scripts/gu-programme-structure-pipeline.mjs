@@ -52,14 +52,19 @@ async function extractPdfText(url){
   try{const {stdout}=await execFileAsync('pdftotext',['-layout',tmp,'-'],{maxBuffer:8*1024*1024});return stdout}finally{await fs.rm(tmp,{force:true})}
 }
 function parsePdfRows(text){
-  const rows=[];let term=0;
+  const rows=[];let term=0,year=0,yearHp=0;
   const lines=String(text||'').split(/\r?\n/).map(clean).filter(Boolean);
+  const assignTerm=hp=>{
+    if(year){const offset=Math.min(1,Math.floor((yearHp+0.001)/30));const t=(year-1)*2+1+offset;yearHp+=hp;return t}
+    return term;
+  };
   for(const line of lines){
-    const t=line.match(/^(?:Termin|År)\s+(\d{1,2})\b/i);if(t){const n=Number(t[1]);term=/^År/i.test(line)?((n-1)*2+1):n;continue}
+    const tm=line.match(/^Termin\s+(\d{1,2})\b/i);if(tm){term=Number(tm[1]);year=0;yearHp=0;continue}
+    const ym=line.match(/^År\s+(\d{1,2})\b/i);if(ym){year=Number(ym[1]);term=(year-1)*2+1;yearHp=0;continue}
     const explicit=[...line.matchAll(/\b([A-ZÅÄÖ]{2,8}\d{1,4}[A-Z]?)\b\s+(.{2,160}?)\s*[,(]?\s*(\d+(?:[.,]\d+)?)\s*hp\b/gi)];
-    for(const m of explicit){const hp=Number(m[3].replace(',','.'));if(term&&hp>0&&hp<=30)rows.push({term,code:codeNorm(m[1]),name:clean(m[2]),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}
+    for(const m of explicit){const hp=Number(m[3].replace(',','.'));if((term||year)&&hp>0&&hp<=30){const assigned=assignTerm(hp);rows.push({term:assigned,code:codeNorm(m[1]),name:clean(m[2]),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}}
     const simple=line.match(/^(.{3,160}?)\s*[,(]?\s*(\d+(?:[.,]\d+)?)\s*hp\b/i);
-    if(term&&simple&&!explicit.length){const hp=Number(simple[2].replace(',','.'));if(hp>0&&hp<=30)rows.push({term,code:'',name:clean(simple[1]),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}
+    if((term||year)&&simple&&!explicit.length){const hp=Number(simple[2].replace(',','.'));if(hp>0&&hp<=30){const assigned=assignTerm(hp);rows.push({term:assigned,code:'',name:clean(simple[1]),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}}
   }
   const map=new Map();for(const r of rows){const k=`${r.term}|${r.code||norm(r.name)}`;if(!map.has(k))map.set(k,r)}return[...map.values()]
 }
@@ -111,4 +116,4 @@ async function main(){
 
 main().catch(e=>{console.error(e);process.exitCode=1});
 
-// trigger: gu-pdf-fallback
+// trigger: gu-pdf-year-term-fix
