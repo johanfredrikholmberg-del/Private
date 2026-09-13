@@ -32,7 +32,8 @@ jobs:
         run: node scripts/kau-static-export.mjs
       - name: Enrich all Karlstad programme structures
         env:
-          KAU_STRUCTURE_CONCURRENCY: '16'
+          KAU_STRUCTURE_CONCURRENCY: '3'
+          KAU_REQUEST_GAP_MS: '350'
         run: node scripts/kau-programme-structure-pipeline.mjs
       - name: Export standalone Karlstad structures
         run: node scripts/kau-extract-structures.mjs
@@ -47,6 +48,7 @@ jobs:
           if(meta.counts.susaCourseDefinitions<500) throw new Error(`Unexpectedly low course count: ${meta.counts.susaCourseDefinitions}`);
           if(meta.counts.currentKauOfferingCodes<100) throw new Error(`Unexpectedly low official offering count: ${meta.counts.currentKauOfferingCodes}`);
           if(structures.officialProgrammes!==134||structures.processed!==134||rows.length!==134) throw new Error('Not all official KAU programmes were processed/exported');
+          if((structures.temporaryErrors||0)!==0) throw new Error(`Temporary KAU fetch errors remain: ${structures.temporaryErrors}`);
           console.log(JSON.stringify({meta,structures,exportedStructures:rows.length},null,2));
           NODE
       - name: Commit Karlstad data
