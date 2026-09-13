@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import os from 'node:os';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { discover as discoverGuStructure } from '../api/gu-program-structure.js';
 
+const execFileAsync=promisify(execFile);
 const SRC='data/susa';
 const DEST='data/HT26';
 const CONCURRENCY=Number(process.env.GU_CONCURRENCY||6);
@@ -10,6 +14,8 @@ const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
 const norm=v=>clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 const isGU=x=>/goteborgs universitet/.test(norm(x.university));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const slugify=v=>norm(v).replace(/[^a-z0-9åäö]+/g,'-').replace(/^-+|-+$/g,'').replace(/å/g,'a').replace(/ä/g,'a').replace(/ö/g,'o');
+const codeNorm=v=>clean(v).toUpperCase().replace(/[^A-Z0-9ÅÄÖ]/g,'');
 
 function classify(data){
   const rows=(Array.isArray(data?.courses)?data.courses:[]).map(r=>({
@@ -26,10 +32,52 @@ function classify(data){
   return {coverage:'manual-review',reason:'official-gu-insufficient-consistency',rows};
 }
 
+function decodeHtml(s){return String(s??'').replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'")}
+function abs(href,base){try{return new URL(decodeHtml(href),base).href}catch{return''}}
+function htmlText(s){return clean(String(s??'').replace(/<script\b[\s\S]*?<\/script>/gi,' ').replace(/<style\b[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' '))}
+async function getText(url){const r=await fetch(url,{headers:{accept:'text/html,application/xhtml+xml'},redirect:'follow',signal:AbortSignal.timeout(20000)});if(!r.ok)throw new Error(`HTTP ${r.status}`);return{html:await r.text(),url:r.url||url}}
+async function findEducationPlanPdf(item){
+  const main=`https://www.gu.se/studera/hitta-utbildning/${slugify(item.programName)}-${String(item.programCode||'').toLowerCase()}`;
+  const page=await getText(main);
+  for(const m of page.html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)){
+    const href=abs(m[1],page.url),label=htmlText(m[2]);
+    if(/utbildningsplan/i.test(`${label} ${href}`)&&/\.pdf(?:$|\?)/i.test(href)) return href;
+  }
+  return'';
+}
+async function extractPdfText(url){
+  const r=await fetch(url,{redirect:'follow',signal:AbortSignal.timeout(30000)});if(!r.ok)throw new Error(`PDF HTTP ${r.status}`);
+  const tmp=path.join(os.tmpdir(),`gu-${Date.now()}-${Math.random().toString(36).slice(2)}.pdf`);
+  await fs.writeFile(tmp,Buffer.from(await r.arrayBuffer()));
+  try{const {stdout}=await execFileAsync('pdftotext',['-layout',tmp,'-'],{maxBuffer:8*1024*1024});return stdout}finally{await fs.rm(tmp,{force:true})}
+}
+function parsePdfRows(text){
+  const rows=[];let term=0;
+  const lines=String(text||'').split(/\r?\n/).map(clean).filter(Boolean);
+  for(const line of lines){
+    const t=line.match(/^(?:Termin|År)\s+(\d{1,2})\b/i);if(t){const n=Number(t[1]);term=/^År/i.test(line)?((n-1)*2+1):n;continue}
+    const explicit=[...line.matchAll(/\b([A-ZÅÄÖ]{2,8}\d{1,4}[A-Z]?)\b\s+(.{2,160}?)\s*[,(]?\s*(\d+(?:[.,]\d+)?)\s*hp\b/gi)];
+    for(const m of explicit){const hp=Number(m[3].replace(',','.'));if(term&&hp>0&&hp<=30)rows.push({term,code:codeNorm(m[1]),name:clean(m[2]),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}
+    const simple=line.match(/^(.{3,160}?)\s*[,(]?\s*(\d+(?:[.,]\d+)?)\s*hp\b/i);
+    if(term&&simple&&!explicit.length){const hp=Number(simple[2].replace(',','.'));if(hp>0&&hp<=30)rows.push({term,code:'',name:clean(simple[1]),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}
+  }
+  const map=new Map();for(const r of rows){const k=`${r.term}|${r.code||norm(r.name)}`;if(!map.has(k))map.set(k,r)}return[...map.values()]
+}
+function buildPdfResult(item,rows,pdfUrl){
+  const expected=Math.max(1,Math.round((Number(item.hp)||0)/30));const completeTerms=[],termHp={};
+  for(let t=1;t<=expected;t++){const listed=Math.round(rows.filter(r=>r.term===t).reduce((s,r)=>s+r.hp,0)*10)/10;const covered=listed>=29.8&&listed<=30.2;termHp[t]={listedHp:listed,covered};if(covered)completeTerms.push(t)}
+  const complete=completeTerms.length===expected;const courses=rows.filter(r=>completeTerms.includes(r.term)).map((r,i)=>({...r,originalTerm:r.term,__slOriginalTerm:r.term,__slOriginalIndex:i,status:'remaining',credited:false,isCredited:false,programmeSource:'gu-official-education-plan-pdf',programmeCategory:r.category}));
+  return{found:rows.length>0,structureAvailable:complete,courses,sourceUrls:[pdfUrl],source:'gu-official-education-plan-pdf',confidence:complete?'official-pdf-sequenced':'official-pdf-partial',coverage:complete?'complete-term-sequence':'partial-or-choice-dependent',quality:{complete,expectedTerms:expected,completeTerms,termHp,slotCount:rows.filter(r=>r.category==='elective').length,parsedRows:rows.length,totalHp:Number(item.hp)||0,sourcePages:1}}
+}
+async function pdfFallback(item){try{const pdfUrl=await findEducationPlanPdf(item);if(!pdfUrl)return null;const text=await extractPdfText(pdfUrl);const rows=parsePdfRows(text);return buildPdfResult(item,rows,pdfUrl)}catch(e){console.log(`PDF fallback skipped ${item.programCode||''}: ${e.message}`);return null}}
+
 async function enrich(item){
   try{
-    const data=await discoverGuStructure({code:item.programCode||'',name:item.programName||'',university:'Göteborgs universitet'});
-    const c=classify(data);
+    let data=await discoverGuStructure({code:item.programCode||'',name:item.programName||'',university:'Göteborgs universitet'});
+    let c=classify(data);
+    if(['metadata-only','manual-review'].includes(c.coverage)){
+      const pdf=await pdfFallback(item);if(pdf){const pc=classify(pdf);if(({complete:5,'choice-required':4,'partial-structure':3,'manual-review':2,'metadata-only':1}[pc.coverage]||0)>({complete:5,'choice-required':4,'partial-structure':3,'manual-review':2,'metadata-only':1}[c.coverage]||0)){data=pdf;c=pc}}
+    }
     return {...item,term:'HT26',status:c.coverage==='metadata-only'?'manual-review':'processed',...c,source:data?.source||'gu-official-programplan',sourceUrl:(data?.sourceUrls||[])[0]||'',sourceUrls:data?.sourceUrls||[],apiCoverage:data?.coverage||'',apiConfidence:data?.confidence||'',quality:data?.quality||{},checkedAt:new Date().toISOString()};
   }catch(e){return {...item,term:'HT26',status:'manual-review',coverage:'metadata-only',reason:`gu-import:${e.message}`,checkedAt:new Date().toISOString()}}
 }
@@ -63,4 +111,4 @@ async function main(){
 
 main().catch(e=>{console.error(e);process.exitCode=1});
 
-// trigger: local-gu-resolver
+// trigger: gu-pdf-fallback
