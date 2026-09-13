@@ -1,0 +1,16 @@
+{
+  "database": "StudieLots HT26",
+  "term": "HT26",
+  "schemaVersion": 1,
+  "canonical": true,
+  "status": "initial-migration",
+  "policy": "One canonical programme record and one canonical course record per provider. University-specific importers enrich canonical records and may not create parallel programme databases.",
+  "tables": {
+    "programs": "programs.json",
+    "programStructures": "program-structures.json",
+    "courses": "courses.json",
+    "providers": "providers.json",
+    "syllabusVersions": "syllabus-versions.json",
+    "degreeRequirements": "degree-requirements.json"
+  }
+}
