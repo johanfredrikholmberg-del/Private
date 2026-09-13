@@ -10,7 +10,6 @@ on:
       - 'scripts/merge-gu-official-structures.mjs'
       - 'scripts/apply-gu-verified-overrides.mjs'
       - 'data/gu/official-structures.json'
-      - 'data/gu/verified-*.json'
       - '.github/workflows/gu-program-import.yml'
 
 permissions:
@@ -62,4 +61,4 @@ jobs:
           git rebase origin/gu-program-import
           git push origin HEAD:gu-program-import
 
-# trigger: full-gu-run-2026-09-13
+# trigger: batch-gu-import-only
