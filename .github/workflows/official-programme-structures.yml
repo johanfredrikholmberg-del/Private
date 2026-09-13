@@ -10,6 +10,7 @@ on:
       - 'scripts/hb-verified-structure-overrides*.mjs'
       - 'scripts/hb-77-audit.mjs'
       - 'scripts/kau-catalogue-audit.mjs'
+      - '.github/workflows/official-programme-structures.yml'
   schedule:
     - cron: '47 3 * * 2,4,6'
 
@@ -48,8 +49,9 @@ jobs:
             node scripts/official-programme-structure-pipeline.mjs
           fi
           node scripts/hb-verified-structure-overrides.mjs
-          node scripts/hb-verified-structure-overrides-2.mjs
-          node scripts/hb-verified-structure-overrides-3.mjs
+          for n in $(seq 2 13); do
+            node "scripts/hb-verified-structure-overrides-${n}.mjs"
+          done
       - name: Audit Borås 77-programme catalogue
         run: node scripts/hb-77-audit.mjs
       - name: Audit Karlstad programme catalogue
