@@ -1,0 +1,55 @@
+name: Karlstad fast import
+
+on:
+  push:
+    branches: [kau-fast-import]
+    paths:
+      - '.github/workflows/kau-fast-import.yml'
+      - 'scripts/kau-static-export.mjs'
+      - 'scripts/kau-programme-structure-pipeline.mjs'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: karlstad-fast-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    if: ${{ github.actor != 'studielots-bot' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: kau-fast-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build complete Karlstad catalogues
+        run: node scripts/kau-static-export.mjs
+      - name: Enrich all Karlstad programme structures
+        env:
+          KAU_STRUCTURE_CONCURRENCY: '16'
+        run: node scripts/kau-programme-structure-pipeline.mjs
+      - name: Validate Karlstad output
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const meta=JSON.parse(fs.readFileSync('data/kau/meta.json','utf8'));
+          const structures=JSON.parse(fs.readFileSync('data/kau/structure-meta.json','utf8'));
+          if(meta.counts.programmes!==134) throw new Error(`Expected 134 programmes, got ${meta.counts.programmes}`);
+          if(meta.counts.susaCourseDefinitions<500) throw new Error(`Unexpectedly low course count: ${meta.counts.susaCourseDefinitions}`);
+          if(meta.counts.currentKauOfferingCodes<100) throw new Error(`Unexpectedly low official offering count: ${meta.counts.currentKauOfferingCodes}`);
+          if(structures.officialProgrammes!==134||structures.processed!==134) throw new Error('Not all official KAU programmes were processed');
+          console.log(JSON.stringify({meta,structures},null,2));
+          NODE
+      - name: Commit Karlstad data
+        run: |
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/kau data/susa/structures.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Complete optimized Karlstad database import [skip ci]'
+          git push origin HEAD:kau-fast-import
