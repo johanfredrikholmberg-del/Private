@@ -2,6 +2,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
+// Canonical term database builder. SUSA and university-specific feeds are staging sources only.
 const TERM='HT26';
 const SRC='data/susa';
 const DEST=`data/${TERM}`;
