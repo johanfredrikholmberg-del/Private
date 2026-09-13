@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+import fs from 'node:fs/promises';
+const rows=JSON.parse(await fs.readFile('data/susa/structures.json','utf8'));
+const kau=rows.filter(x=>/karlstads universitet/i.test(String(x.university||'')));
+const unresolved=kau.filter(x=>['metadata-only','manual-review','partial-structure'].includes(x.coverage)).map(x=>({programCode:x.programCode,programName:x.programName,hp:x.hp,coverage:x.coverage,reason:x.reason,underPlanning:Boolean(x.underPlanning),rawRows:x.rawRows??x.rows?.length??0,expectedTerms:x.expectedTerms??null,completeTerms:x.completeTerms??[],termSums:x.termSums??{},sourceUrl:x.sourceUrl||x.officialUrls?.[0]||''}));
+const critical=unresolved.filter(x=>['metadata-only','manual-review'].includes(x.coverage));
+await fs.writeFile('data/kau/unresolved.json',JSON.stringify({generatedAt:new Date().toISOString(),counts:{totalKau:kau.length,unresolved:unresolved.length,critical:critical.length,metadataOnly:critical.filter(x=>x.coverage==='metadata-only').length,manualReview:critical.filter(x=>x.coverage==='manual-review').length,partial:unresolved.filter(x=>x.coverage==='partial-structure').length},critical,partial:unresolved.filter(x=>x.coverage==='partial-structure')},null,2)+'\n');
+console.log(JSON.stringify({counts:{totalKau:kau.length,critical:critical.length,metadataOnly:critical.filter(x=>x.coverage==='metadata-only').length,manualReview:critical.filter(x=>x.coverage==='manual-review').length,partial:unresolved.filter(x=>x.coverage==='partial-structure').length},critical:critical.map(x=>({code:x.programCode,name:x.programName,coverage:x.coverage,reason:x.reason,rows:x.rawRows,underPlanning:x.underPlanning}))},null,2));
