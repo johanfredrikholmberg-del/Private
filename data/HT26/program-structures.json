@@ -8134,7 +8134,7 @@
       "sourcePages": 3,
       "parsedRows": 46
     },
-    "checkedAt": "2026-09-13T17:41:24.146Z"
+    "checkedAt": "2026-09-13T17:46:51.553Z"
   },
   {
     "key": "goteborgs-universitet:H1ARK",
@@ -8145,57 +8145,117 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/arkeologprogrammet-kandidatprogram-h1ark",
+    "coverage": "choice-required",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Arkeologisk grundkurs,",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Arkeologisk fortsättningskurs,",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fritt valda kurser,",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Arkeologiska perspektiv och hjälpvetenskaper,",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Arkeologisk fördjupningskurs,",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Arkeologiska tillämpningar,",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2024-03/Utbildningsplan_Arkeologprogrammet_H1ARK.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/arkeologprogrammet-kandidatprogram-h1ark",
       "https://www.gu.se/sites/default/files/2024-03/Utbildningsplan_Arkeologprogrammet_H1ARK.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "5": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "6": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
-      "slotCount": 0,
+      "slotCount": 1,
+      "parsedRows": 6,
       "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:24.861Z"
+    "checkedAt": "2026-09-13T17:46:52.631Z"
   },
   {
     "key": "goteborgs-universitet:H1KAP",
@@ -8206,32 +8266,80 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kulturarvsprogrammet-h1kap",
+    "coverage": "partial-structure",
+    "reason": "official-gu-partial-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "KA1110",
+        "name": "Kulturarvets former",
+        "hp": 20,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "KA1120",
+        "name": "Kulturarvets politik och ideologi",
+        "hp": 10,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "KA1210",
+        "name": "Kulturarvets förvaltning och regelverk",
+        "hp": 10,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "KA1220",
+        "name": "Kulturarvets kommunikation",
+        "hp": 10,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "KA1230",
+        "name": "Kulturarvspedagogik",
+        "hp": 10,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2024-03/Utbildningsplan_Kulturarvsprogrammet_H1KAP.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kulturarvsprogrammet-h1kap",
       "https://www.gu.se/sites/default/files/2024-03/Utbildningsplan_Kulturarvsprogrammet_H1KAP.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
           "listedHp": 0,
@@ -8242,21 +8350,20 @@
           "covered": false
         },
         "5": {
-          "listedHp": 0,
+          "listedHp": 15,
           "covered": false
         },
         "6": {
-          "listedHp": 0,
+          "listedHp": 60,
           "covered": false
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 8,
       "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:24.649Z"
+    "checkedAt": "2026-09-13T17:46:51.896Z"
   },
   {
     "key": "goteborgs-universitet:H1KEN",
@@ -8338,7 +8445,7 @@
       "sourcePages": 3,
       "parsedRows": 24
     },
-    "checkedAt": "2026-09-13T17:41:24.390Z"
+    "checkedAt": "2026-09-13T17:46:51.726Z"
   },
   {
     "key": "goteborgs-universitet:H1KLT",
@@ -8349,57 +8456,67 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kultur-kandidatprogram-h1klt",
+    "coverage": "manual-review",
+    "reason": "official-gu-insufficient-consistency",
+    "rows": [
+      {
+        "term": 3,
+        "code": "",
+        "name": "Andra året inleds med en breddningstermin",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2023-03/utb.planH1KLT23.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kultur-kandidatprogram-h1klt",
       "https://www.gu.se/sites/default/files/2023-03/utb.planH1KLT23.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        3
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
+          "listedHp": 45,
           "covered": false
         },
         "2": {
-          "listedHp": 0,
+          "listedHp": 45,
           "covered": false
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
+          "listedHp": 22.5,
           "covered": false
         },
         "5": {
-          "listedHp": 0,
+          "listedHp": 22.5,
           "covered": false
         },
         "6": {
-          "listedHp": 0,
+          "listedHp": 27.5,
           "covered": false
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 15,
       "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:24.742Z"
+    "checkedAt": "2026-09-13T17:46:52.352Z"
   },
   {
     "key": "goteborgs-universitet:H1LIB",
@@ -8410,57 +8527,207 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/liberal-arts-kandidatprogram-h1lib",
+    "coverage": "complete",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "● Språkfilosofisk verktygslära",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "● Dödsrikets litteraturhistoria",
+        "hp": 5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "● Klassisk filologi 1",
+        "hp": 10,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "● Kunskapsteori och kunskapsredskap",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "● Astronomi och dess idéhistoria",
+        "hp": 5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "● Klassisk filologi 2",
+        "hp": 10,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "● Medvetandet och matematiken",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "● Biologisk hierarki och evolution",
+        "hp": 5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "● Klassisk filologi 3",
+        "hp": 10,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "● Samhällsfilosofi och etik",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "● Projekt- och praktikförberedelser",
+        "hp": 5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "● Klassisk filologi 4",
+        "hp": 10,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "● Praktik i form av projektarbete utanför eller inom universitetet",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "● Självständigt arbete",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "● Specialisering",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "● Metodkurs",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2021-03/H1LIB-Liberal-arts-%20kandidatprogram-%20utbildningsplan.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/liberal-arts-kandidatprogram-h1lib",
       "https://www.gu.se/sites/default/files/2021-03/H1LIB-Liberal-arts-%20kandidatprogram-%20utbildningsplan.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "5": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "6": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 16,
       "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:24.646Z"
+    "checkedAt": "2026-09-13T17:46:52.152Z"
   },
   {
     "key": "goteborgs-universitet:H1MEK",
@@ -8521,7 +8788,7 @@
       "sourcePages": 2,
       "parsedRows": 34
     },
-    "checkedAt": "2026-09-13T17:41:24.848Z"
+    "checkedAt": "2026-09-13T17:46:52.444Z"
   },
   {
     "key": "goteborgs-universitet:H1MKE",
@@ -8582,7 +8849,7 @@
       "sourcePages": 2,
       "parsedRows": 34
     },
-    "checkedAt": "2026-09-13T17:41:24.899Z"
+    "checkedAt": "2026-09-13T17:46:52.324Z"
   },
   {
     "key": "goteborgs-universitet:H1PPE",
@@ -8792,7 +9059,7 @@
       "sourcePages": 2,
       "parsedRows": 25
     },
-    "checkedAt": "2026-09-13T17:41:25.021Z"
+    "checkedAt": "2026-09-13T17:46:52.350Z"
   },
   {
     "key": "goteborgs-universitet:H1RED",
@@ -8803,27 +9070,38 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/redaktionell-praktik-litteraturvetenskapligt-kandidatprogram-h1red",
+    "coverage": "manual-review",
+    "reason": "official-gu-insufficient-consistency",
+    "rows": [
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valfria alternativt valbara kurser",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2020-06/Redaktionell%20praktik%20utbildningsplan%202020.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/redaktionell-praktik-litteraturvetenskapligt-kandidatprogram-h1red",
       "https://www.gu.se/sites/default/files/2020-06/Redaktionell%20praktik%20utbildningsplan%202020.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        6
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
+          "listedHp": 60,
           "covered": false
         },
         "2": {
@@ -8831,7 +9109,7 @@
           "covered": false
         },
         "3": {
-          "listedHp": 0,
+          "listedHp": 60,
           "covered": false
         },
         "4": {
@@ -8839,21 +9117,20 @@
           "covered": false
         },
         "5": {
-          "listedHp": 0,
+          "listedHp": 60,
           "covered": false
         },
         "6": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
-      "slotCount": 0,
+      "slotCount": 1,
+      "parsedRows": 9,
       "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:25.370Z"
+    "checkedAt": "2026-09-13T17:46:53.087Z"
   },
   {
     "key": "goteborgs-universitet:H1RKT",
@@ -8914,7 +9191,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:25.757Z"
+    "checkedAt": "2026-09-13T17:46:53.846Z"
   },
   {
     "key": "goteborgs-universitet:H1SPK",
@@ -8975,7 +9252,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:25.326Z"
+    "checkedAt": "2026-09-13T17:46:52.926Z"
   },
   {
     "key": "goteborgs-universitet:H2EVI",
@@ -8998,7 +9275,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:25.499Z"
+    "checkedAt": "2026-09-13T17:46:52.980Z"
   },
   {
     "key": "goteborgs-universitet:H2GPR",
@@ -9051,7 +9328,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:25.488Z"
+    "checkedAt": "2026-09-13T17:46:53.197Z"
   },
   {
     "key": "goteborgs-universitet:H2KOD",
@@ -9062,49 +9339,125 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kultur-och-demokrati-masterprogram-h2kod",
+    "coverage": "complete",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "1:1 Introduktion: Kultur och demokrati",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "1:2 Kultur och estetik i en global värld",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "1:3 Röster, texter, tolkningar",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "2:1 Barns och ungas delaktighet i samhälle, kultur och politik",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "2:2 Det offentliga samtalets praktik",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "3:1 Kulturens praktiska fält",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "3:2 Kulturvetenskaplig metodologi",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "4:1 Examensarbete",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2023-03/utb.planH2KOD23.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kultur-och-demokrati-masterprogram-h2kod",
       "https://www.gu.se/sites/default/files/2023-03/utb.planH2KOD23.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 4,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 8,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:25.608Z"
+    "checkedAt": "2026-09-13T17:46:53.388Z"
   },
   {
     "key": "goteborgs-universitet:H2KST",
@@ -9157,7 +9510,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:26.008Z"
+    "checkedAt": "2026-09-13T17:46:53.709Z"
   },
   {
     "key": "goteborgs-universitet:H2KTX",
@@ -9406,7 +9759,7 @@
       "sourcePages": 2,
       "parsedRows": 4
     },
-    "checkedAt": "2026-09-13T17:41:25.952Z"
+    "checkedAt": "2026-09-13T17:46:53.669Z"
   },
   {
     "key": "goteborgs-universitet:H2LTG",
@@ -9417,49 +9770,133 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/sprakteknologi-masterprogram-h2ltg",
+    "coverage": "partial-structure",
+    "reason": "official-gu-partial-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "LT2001",
+        "name": "Introduktion till programmering",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "LT2002",
+        "name": "Introduktion till formell lingvistik",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "LT2123",
+        "name": "Grundläggande färdigheter för språkteknologi",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "LT2124",
+        "name": "Teman i datalingvistik och språkteknologi",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LT2222",
+        "name": "Maskininlärning för statistisk datalingvistik: inledning",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LT2216",
+        "name": "Dialogsystem",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LT2213",
+        "name": "Komputationell semantik",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LT2214",
+        "name": "Komputationell syntax",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "LT2402",
+        "name": "Masterprojekt",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2024-02/H2LTG-sv.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/sprakteknologi-masterprogram-h2ltg",
       "https://www.gu.se/sites/default/files/2024-02/H2LTG-sv.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 4,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        4
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
+          "listedHp": 97.5,
           "covered": false
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
-      "slotCount": 0,
+      "slotCount": 2,
+      "parsedRows": 16,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:26.186Z"
+    "checkedAt": "2026-09-13T17:46:54.105Z"
   },
   {
     "key": "goteborgs-universitet:H2MAS",
@@ -9504,7 +9941,7 @@
       "sourcePages": 2,
       "parsedRows": 26
     },
-    "checkedAt": "2026-09-13T17:41:26.078Z"
+    "checkedAt": "2026-09-13T17:46:53.975Z"
   },
   {
     "key": "goteborgs-universitet:H2PTA",
@@ -9557,7 +9994,7 @@
       "sourcePages": 2,
       "parsedRows": 25
     },
-    "checkedAt": "2026-09-13T17:41:26.220Z"
+    "checkedAt": "2026-09-13T17:46:55.154Z"
   },
   {
     "key": "goteborgs-universitet:H2RTM",
@@ -9580,7 +10017,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:26.504Z"
+    "checkedAt": "2026-09-13T17:46:54.326Z"
   },
   {
     "key": "goteborgs-universitet:H2SIK",
@@ -9603,7 +10040,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:26.545Z"
+    "checkedAt": "2026-09-13T17:46:55.065Z"
   },
   {
     "key": "goteborgs-universitet:K1BAF",
@@ -9614,57 +10051,189 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/konstnarligt-kandidatprogram-i-film-k1baf",
+    "coverage": "choice-required",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Filmisk praktik I",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Reflektion I",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Teknik och postproduktion",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Filmisk praktik II",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Reflektion II",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Filmisk praktik III - iscensättande metoder",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Reflektion III - rumslighet och berättande",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Filmisk praktik IV - efterbearbetning och personregi",
+        "hp": 22.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Filmisk praktik V - projektformulering",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Examensarbete i film I - filmprojekt",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Examensarbete i film II - essä",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Filmisk praktik VI - publikt arbete",
+        "hp": 22.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2024-06/K1BAF%20SVE%20HT24.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/konstnarligt-kandidatprogram-i-film-k1baf",
       "https://www.gu.se/sites/default/files/2024-06/K1BAF%20SVE%20HT24.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "5": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "6": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
-      "slotCount": 0,
+      "slotCount": 2,
+      "parsedRows": 14,
       "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:26.784Z"
+    "checkedAt": "2026-09-13T17:46:56.101Z"
   },
   {
     "key": "goteborgs-universitet:K1CRF",
@@ -9925,7 +10494,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T17:41:26.433Z"
+    "checkedAt": "2026-09-13T17:46:55.326Z"
   },
   {
     "key": "goteborgs-universitet:K1DES",
@@ -10171,7 +10740,7 @@
       "sourcePages": 2,
       "parsedRows": 11
     },
-    "checkedAt": "2026-09-13T17:41:26.556Z"
+    "checkedAt": "2026-09-13T17:46:55.536Z"
   },
   {
     "key": "goteborgs-universitet:K1FOT",
@@ -10182,57 +10751,207 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/konstnarligt-kandidatprogram-i-fotografi-k1fot",
+    "coverage": "choice-required",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Fotografisk gestaltning I – introduktion till fotografiska metoder och praktiker",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Fotografins historia I",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Fotografisk teknik och visualisering I",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Fotografisk gestaltning II – utveckling av fotografiska praktiker och metoder",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Fotografins teoribildning – en introduktion",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Fotografisk teknik och visualisering II",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fotografisk gestaltning III – format och kontext",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fotografi, teori och praktik – analys och tolkning",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Fotografisk gestaltning IV – format och kontext II",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Fotografi, teori och praktik – individuell fördjupning",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Fotografisk gestaltning V – fördjupade studier",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Arbetslivsorientering",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Kandidatessä i fotografi (innehåller det självständiga arbetet)",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Kandidatexamenskurs i fotografi (innehåller det självständiga arbetet)",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2024-09/K1FOT%20sve%20230926.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/konstnarligt-kandidatprogram-i-fotografi-k1fot",
       "https://www.gu.se/sites/default/files/2024-09/K1FOT%20sve%20230926.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "5": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "6": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
-      "slotCount": 0,
+      "slotCount": 2,
+      "parsedRows": 16,
       "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:26.797Z"
+    "checkedAt": "2026-09-13T17:46:56.141Z"
   },
   {
     "key": "goteborgs-universitet:K1FRI",
@@ -10510,7 +11229,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T17:41:26.791Z"
+    "checkedAt": "2026-09-13T17:46:55.492Z"
   },
   {
     "key": "goteborgs-universitet:K1IMP",
@@ -10571,7 +11290,7 @@
       "sourcePages": 2,
       "parsedRows": 40
     },
-    "checkedAt": "2026-09-13T17:41:27.184Z"
+    "checkedAt": "2026-09-13T17:46:56.032Z"
   },
   {
     "key": "goteborgs-universitet:K1IND",
@@ -10633,7 +11352,7 @@
       "sourcePages": 3,
       "parsedRows": 47
     },
-    "checkedAt": "2026-09-13T17:41:27.335Z"
+    "checkedAt": "2026-09-13T17:46:56.376Z"
   },
   {
     "key": "goteborgs-universitet:K1KHV",
@@ -10656,7 +11375,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:27.089Z"
+    "checkedAt": "2026-09-13T17:46:56.110Z"
   },
   {
     "key": "goteborgs-universitet:K1KLA",
@@ -10717,7 +11436,7 @@
       "sourcePages": 2,
       "parsedRows": 37
     },
-    "checkedAt": "2026-09-13T17:41:27.456Z"
+    "checkedAt": "2026-09-13T17:46:56.417Z"
   },
   {
     "key": "goteborgs-universitet:K1KMP",
@@ -10778,7 +11497,7 @@
       "sourcePages": 2,
       "parsedRows": 36
     },
-    "checkedAt": "2026-09-13T17:41:27.465Z"
+    "checkedAt": "2026-09-13T17:46:56.908Z"
   },
   {
     "key": "goteborgs-universitet:K1KYR",
@@ -10839,7 +11558,7 @@
       "sourcePages": 2,
       "parsedRows": 36
     },
-    "checkedAt": "2026-09-13T17:41:27.503Z"
+    "checkedAt": "2026-09-13T17:46:56.980Z"
   },
   {
     "key": "goteborgs-universitet:K1LIT",
@@ -11117,7 +11836,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T17:41:27.447Z"
+    "checkedAt": "2026-09-13T17:46:56.544Z"
   },
   {
     "key": "goteborgs-universitet:K1MAL",
@@ -11128,56 +11847,151 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/musikalartist-k1mal",
+    "coverage": "partial-structure",
+    "reason": "official-gu-partial-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "ML1011",
+        "name": "Scenisk gestaltning, teori och reflektion 1",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "ML1012",
+        "name": "Scenisk gestaltning, teori och reflektion 2",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "ML1211",
+        "name": "Vokal gestaltning 1",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "ML1511",
+        "name": "Rörelse, dans och fysisk gestaltning 1",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "ML1512",
+        "name": "Rörelse, dans och fysisk gestaltning 2",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "ML1013",
+        "name": "Scenisk gestaltning, teori och reflektion 3",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "ML1014",
+        "name": "Scenisk gestaltning, teori och reflektion 4",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "ML1213",
+        "name": "Vokal gestaltning 2",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "ML1513",
+        "name": "Rörelse, dans och fysisk gestaltning 3",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "ML1514",
+        "name": "Rörelse, dans och fysisk gestaltning 4",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "http://gu.se/sites/default/files/2020-06/K1MAL%20rev%20dec19.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/musikalartist-k1mal"
+      "http://gu.se/sites/default/files/2020-06/K1MAL%20rev%20dec19.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "5": {
-          "listedHp": 0,
+          "listedHp": 37.5,
           "covered": false
         },
         "6": {
-          "listedHp": 0,
+          "listedHp": 22.5,
           "covered": false
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 13,
       "totalHp": 180,
-      "sourcePages": 1,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:28.741Z"
+    "checkedAt": "2026-09-13T17:46:58.509Z"
   },
   {
     "key": "goteborgs-universitet:K1MDT",
@@ -11438,7 +12252,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T17:41:27.689Z"
+    "checkedAt": "2026-09-13T17:46:56.822Z"
   },
   {
     "key": "goteborgs-universitet:K1MGG",
@@ -11699,7 +12513,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T17:41:27.812Z"
+    "checkedAt": "2026-09-13T17:46:56.845Z"
   },
   {
     "key": "goteborgs-universitet:K1MLP",
@@ -11710,57 +12524,243 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/musik-och-ljudproduktion-k1mlp",
+    "coverage": "choice-required",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "MLP201",
+        "name": "Huvudämne, musik- och ljudproduktion 1",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "MLP301",
+        "name": "Produktions- och projektkunskap 1",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "IMU401",
+        "name": "Konstnärlig teori och praktik 1",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "MLP202",
+        "name": "Huvudämne, musik- och ljudproduktion 2",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "MLP302",
+        "name": "Produktions- och projektkunskap 2",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "MLP402",
+        "name": "Konstnärlig teori och praktik 2",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "MLP203",
+        "name": "Huvudämne, musik- och ljudproduktion 3",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "MLP303",
+        "name": "Produktions- och projektkunskap 3",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "MLP133",
+        "name": "Personlig profil 1",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "MLP204",
+        "name": "Huvudämne, musik- och ljudproduktion 4",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "MLP304",
+        "name": "Produktions- och projektkunskap 4",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "MLP234",
+        "name": "Personlig profil 2",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "MLP205",
+        "name": "Huvudämne, musik- och ljudproduktion 5",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "MLP305",
+        "name": "Produktions- och projektkunskap 5",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "MLP135",
+        "name": "Personlig profil 3",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "KYR125",
+        "name": "Självständigt arbete (examensarbete) kandidat",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "MLP206",
+        "name": "Huvudämne, musik- och ljudproduktion 6",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "MLP306",
+        "name": "Produktions- och projektkunskap 6",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "KYR125",
+        "name": "Självständigt arbete (examensarbete) kandidat",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2021-05/K1MLP%20VT21-sve.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/musik-och-ljudproduktion-k1mlp",
       "https://www.gu.se/sites/default/files/2021-05/K1MLP%20VT21-sve.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "5": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "6": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
-      "slotCount": 0,
+      "slotCount": 1,
+      "parsedRows": 20,
       "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:28.269Z"
+    "checkedAt": "2026-09-13T17:46:57.929Z"
   },
   {
     "key": "goteborgs-universitet:K1OPE",
@@ -11820,7 +12820,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:28.050Z"
+    "checkedAt": "2026-09-13T17:46:57.545Z"
   },
   {
     "key": "goteborgs-universitet:K1SCE",
@@ -11881,7 +12881,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:28.298Z"
+    "checkedAt": "2026-09-13T17:46:58.089Z"
   },
   {
     "key": "goteborgs-universitet:K1TRA",
@@ -11942,7 +12942,7 @@
       "sourcePages": 2,
       "parsedRows": 36
     },
-    "checkedAt": "2026-09-13T17:41:28.365Z"
+    "checkedAt": "2026-09-13T17:46:57.914Z"
   },
   {
     "key": "goteborgs-universitet:K2CCD",
@@ -11953,49 +12953,107 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-child-culture-design-k2ccd",
+    "coverage": "choice-required",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Konstruktionen av barndomen",
+        "hp": 22.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Design Studies",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Lek och deltagande",
+        "hp": 22.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Barn och samhälle",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Examensarbete för konstnärlig masterexamen i Child Culture Design",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2023-12/K2CCD%20svensk%20231219.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-child-culture-design-k2ccd",
       "https://www.gu.se/sites/default/files/2023-12/K2CCD%20svensk%20231219.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 4,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
-      "slotCount": 0,
+      "slotCount": 1,
+      "parsedRows": 6,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:28.388Z"
+    "checkedAt": "2026-09-13T17:46:57.926Z"
   },
   {
     "key": "goteborgs-universitet:K2COM",
@@ -12018,7 +13076,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:28.607Z"
+    "checkedAt": "2026-09-13T17:46:58.160Z"
   },
   {
     "key": "goteborgs-universitet:K2DEN",
@@ -12029,24 +13087,35 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-design-k2den",
+    "coverage": "manual-review",
+    "reason": "official-gu-insufficient-consistency",
+    "rows": [
+      {
+        "term": 3,
+        "code": "",
+        "name": "Att delta genom designpraktik",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2023-12/K2DEN%20svensk%20231219.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-design-k2den",
       "https://www.gu.se/sites/default/files/2023-12/K2DEN%20svensk%20231219.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 4,
-      "completeTerms": [],
+      "completeTerms": [
+        3
+      ],
       "termHp": {
         "1": {
           "listedHp": 0,
@@ -12057,21 +13126,20 @@
           "covered": false
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
           "listedHp": 0,
           "covered": false
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 1,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:29.082Z"
+    "checkedAt": "2026-09-13T17:46:58.960Z"
   },
   {
     "key": "goteborgs-universitet:K2EMD",
@@ -12082,49 +13150,107 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-design-inriktning-embedded-design-k2emd",
+    "coverage": "choice-required",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Design som en organisationsintegrerad praktik",
+        "hp": 22.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Design Studies",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Designpraktik i organisatoriska sammanhang",
+        "hp": 22.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Att delta genom en integrerad designpraktik",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Examensarbete för konstnärlig masterexamen i design med inriktning Embedded Design",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2023-12/K2EMD%20svensk%20231219.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-design-inriktning-embedded-design-k2emd",
       "https://www.gu.se/sites/default/files/2023-12/K2EMD%20svensk%20231219.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 4,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
-      "slotCount": 0,
+      "slotCount": 1,
+      "parsedRows": 6,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:28.872Z"
+    "checkedAt": "2026-09-13T17:46:58.689Z"
   },
   {
     "key": "goteborgs-universitet:K2FOT",
@@ -12135,49 +13261,125 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-fotografi-k2fot",
+    "coverage": "choice-required",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Fotografiskt arbete I",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Fotografins teori",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Den fotografiska publikationen",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Fotografiskt arbete II",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Att skriva om fotografi I",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Masterexamenskurs i fotografi I",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Masterexamenskurs i fotografi II",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2023-10/K2FOT%20svensk%20reviderad%20231013%5B23%5D.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-fotografi-k2fot",
       "https://www.gu.se/sites/default/files/2023-10/K2FOT%20svensk%20reviderad%20231013%5B23%5D.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 4,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
-      "slotCount": 0,
+      "slotCount": 1,
+      "parsedRows": 8,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:28.954Z"
+    "checkedAt": "2026-09-13T17:46:59.137Z"
   },
   {
     "key": "goteborgs-universitet:K2FRI",
@@ -12188,49 +13390,125 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-fri-konst-k2fri",
+    "coverage": "choice-required",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Konstnärlig praktik I",
+        "hp": 22.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Kontextualisering I",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Konstnärlig praktik II",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Kontextualisering II",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Konstnärlig praktik III",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Kontextualisering III (innehåller självständigt arbete)",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Examenskurs master i fri konst (innehåller självständigt arbete)",
+        "hp": 30,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2023-10/K2FRI%20sve%20230926.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-fri-konst-k2fri",
       "https://www.gu.se/sites/default/files/2023-10/K2FRI%20sve%20230926.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 4,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
-      "slotCount": 0,
+      "slotCount": 1,
+      "parsedRows": 8,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:29.162Z"
+    "checkedAt": "2026-09-13T17:46:58.855Z"
   },
   {
     "key": "goteborgs-universitet:K2IMP",
@@ -12283,7 +13561,7 @@
       "sourcePages": 2,
       "parsedRows": 33
     },
-    "checkedAt": "2026-09-13T17:41:29.293Z"
+    "checkedAt": "2026-09-13T17:46:59.048Z"
   },
   {
     "key": "goteborgs-universitet:K2KMP",
@@ -12294,49 +13572,197 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/experimental-composition-and-creation-k2kmp",
+    "coverage": "complete",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "KMP271",
+        "name": "Huvudämne kompositoriska och performativa praktiker 1",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "MAS201",
+        "name": "Självständigt arbete (examensarbete) 1",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "MAS231",
+        "name": "Masterseminarier 1",
+        "hp": 3,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "KMP261",
+        "name": "Den reflekterande konstnären 1",
+        "hp": 4.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "KMP272",
+        "name": "Huvudämne kompositoriska och performativa praktiker 2",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "MAS202",
+        "name": "Självständigt arbete (examensarbete) 2",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "MAS232",
+        "name": "Masterseminarier 2",
+        "hp": 3,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "KMP262",
+        "name": "Den reflekterande konstnären 2",
+        "hp": 4.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "KMP273",
+        "name": "Huvudämne kompositoriska och performativa praktiker 3",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "MAS203",
+        "name": "Självständigt arbete (examensarbete) 3",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "MAS233",
+        "name": "Masterseminarier 3",
+        "hp": 3,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "KMP263",
+        "name": "Den reflekterande konstnären 3",
+        "hp": 4.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "KMP274",
+        "name": "Huvudämne kompositoriska och performativa praktiker 4",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "MAS204",
+        "name": "Självständigt arbete (examensarbete) 4",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "MAS234",
+        "name": "Masterseminarier 4",
+        "hp": 3,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "KMP264",
+        "name": "Den reflekterande konstnären 4",
+        "hp": 4.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2021-08/K2KMP%20rev%20juni21.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/experimental-composition-and-creation-k2kmp",
       "https://www.gu.se/sites/default/files/2021-08/K2KMP%20rev%20juni21.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 4,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 16,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:29.535Z"
+    "checkedAt": "2026-09-13T17:47:00.456Z"
   },
   {
     "key": "goteborgs-universitet:K2KOR",
@@ -12380,7 +13806,7 @@
       "sourcePages": 1,
       "parsedRows": 1
     },
-    "checkedAt": "2026-09-13T17:41:29.763Z"
+    "checkedAt": "2026-09-13T17:47:00.739Z"
   },
   {
     "key": "goteborgs-universitet:K2LIG",
@@ -12536,7 +13962,7 @@
       "sourcePages": 2,
       "parsedRows": 6
     },
-    "checkedAt": "2026-09-13T17:41:29.303Z"
+    "checkedAt": "2026-09-13T17:46:59.989Z"
   },
   {
     "key": "goteborgs-universitet:K2LIT",
@@ -12559,7 +13985,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:29.606Z"
+    "checkedAt": "2026-09-13T17:47:00.098Z"
   },
   {
     "key": "goteborgs-universitet:K2MAF",
@@ -12747,7 +14173,7 @@
       "sourcePages": 2,
       "parsedRows": 8
     },
-    "checkedAt": "2026-09-13T17:41:29.518Z"
+    "checkedAt": "2026-09-13T17:47:00.180Z"
   },
   {
     "key": "goteborgs-universitet:K2MDG",
@@ -12799,7 +14225,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:30.053Z"
+    "checkedAt": "2026-09-13T17:47:00.444Z"
   },
   {
     "key": "goteborgs-universitet:K2MIV",
@@ -12810,49 +14236,197 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/improvisation-or-world-music-k2miv",
+    "coverage": "complete",
+    "reason": "official-gu-complete-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "MIV201",
+        "name": "Huvudämne master improvisation/världsmusik 1",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "MAS201",
+        "name": "Självständigt arbete (examensarbete) master 1",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "MIV231",
+        "name": "Den reflekterande tonkonstnären 1",
+        "hp": 4.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "MAS231",
+        "name": "Masterseminarier 1",
+        "hp": 3,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "MIV202",
+        "name": "Huvudämne master improvisation/världsmusik 2",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "MAS202",
+        "name": "Självständigt arbete (examensarbete) master 2",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "MIV232",
+        "name": "Den reflekterande tonkonstnären 2",
+        "hp": 4.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "MAS232",
+        "name": "Masterseminarier 2",
+        "hp": 3,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "MIV203",
+        "name": "Huvudämne master improvisation/världsmusik 3",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "MAS203",
+        "name": "Självständigt arbete (examensarbete) master 3",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "MIV233",
+        "name": "Den reflekterande tonkonstnären 3",
+        "hp": 4.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "MAS233",
+        "name": "Masterseminarier 3",
+        "hp": 3,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "MIV204",
+        "name": "Huvudämne master improvisation/världsmusik 4",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "MAS204",
+        "name": "Självständigt arbete (examensarbete) master 4",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "MIV234",
+        "name": "Den reflekterande tonkonstnären 4",
+        "hp": 4.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "MAS234",
+        "name": "Masterseminarier 4",
+        "hp": 3,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2021-08/K2MIV%20rev%20juni21.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/improvisation-or-world-music-k2miv",
       "https://www.gu.se/sites/default/files/2021-08/K2MIV%20rev%20juni21.pdf"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-pdf-sequenced",
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 4,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 16,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:30.095Z"
+    "checkedAt": "2026-09-13T17:47:01.192Z"
   },
   {
     "key": "goteborgs-universitet:K2ORG",
@@ -12905,7 +14479,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:30.307Z"
+    "checkedAt": "2026-09-13T17:47:01.290Z"
   },
   {
     "key": "goteborgs-universitet:K2ORK",
@@ -12916,49 +14490,133 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/symfoniskt-orkesterspel-k2ork",
+    "coverage": "partial-structure",
+    "reason": "official-gu-partial-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "ORK201",
+        "name": "Huvudämne orkesterspel 1",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "MAS201",
+        "name": "Självständigt arbete (examensarbete) 1",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "ORK241",
+        "name": "Instrumentala studier och kammarmusik 1",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "ORK202",
+        "name": "Huvudämne orkesterspel 2",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "MAS202",
+        "name": "Självständigt arbete (examensarbete) 2",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "ORK242",
+        "name": "Instrumentala studier och kammarmusik 2",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "ORK203",
+        "name": "Huvudämne orkesterspel 3",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "MAS203",
+        "name": "Självständigt arbete (examensarbete) 3",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "ORK243",
+        "name": "Instrumentala studier och kammarmusik 3",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2021-08/K2ORK%20rev%20juni21.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/symfoniskt-orkesterspel-k2ork",
       "https://www.gu.se/sites/default/files/2021-08/K2ORK%20rev%20juni21.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 4,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
+          "listedHp": 22.5,
           "covered": false
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 11,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:30.321Z"
+    "checkedAt": "2026-09-13T17:47:01.225Z"
   },
   {
     "key": "goteborgs-universitet:K2PAC",
@@ -13111,7 +14769,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:30.287Z"
+    "checkedAt": "2026-09-13T17:47:01.079Z"
   },
   {
     "key": "goteborgs-universitet:K2TIL",
@@ -13134,7 +14792,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:30.583Z"
+    "checkedAt": "2026-09-13T17:47:01.363Z"
   },
   {
     "key": "goteborgs-universitet:L1FHG",
@@ -13157,7 +14815,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:30.662Z"
+    "checkedAt": "2026-09-13T17:47:01.733Z"
   },
   {
     "key": "goteborgs-universitet:L1FÖL",
@@ -13180,7 +14838,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:30.793Z"
+    "checkedAt": "2026-09-13T17:47:01.811Z"
   },
   {
     "key": "goteborgs-universitet:L1KPA",
@@ -13203,7 +14861,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:30.827Z"
+    "checkedAt": "2026-09-13T17:47:01.872Z"
   },
   {
     "key": "goteborgs-universitet:L1KPO",
@@ -13226,7 +14884,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:30.866Z"
+    "checkedAt": "2026-09-13T17:47:01.897Z"
   },
   {
     "key": "goteborgs-universitet:L1UUL",
@@ -13283,7 +14941,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:30.789Z"
+    "checkedAt": "2026-09-13T17:47:01.948Z"
   },
   {
     "key": "goteborgs-universitet:L1VAL",
@@ -13335,7 +14993,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:30.929Z"
+    "checkedAt": "2026-09-13T17:47:02.161Z"
   },
   {
     "key": "goteborgs-universitet:L1YRL",
@@ -13384,7 +15042,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:31.341Z"
+    "checkedAt": "2026-09-13T17:47:03.484Z"
   },
   {
     "key": "goteborgs-universitet:L1Ä79",
@@ -13407,7 +15065,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:31.326Z"
+    "checkedAt": "2026-09-13T17:47:02.489Z"
   },
   {
     "key": "goteborgs-universitet:L1ÄGY",
@@ -13430,7 +15088,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:31.651Z"
+    "checkedAt": "2026-09-13T17:47:02.530Z"
   },
   {
     "key": "goteborgs-universitet:L246G",
@@ -13453,7 +15111,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:31.378Z"
+    "checkedAt": "2026-09-13T17:47:02.589Z"
   },
   {
     "key": "goteborgs-universitet:L2BUV",
@@ -13464,49 +15122,106 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/barn-och-ungdomsvetenskap-masterprogram-l2buv",
+    "coverage": "partial-structure",
+    "reason": "official-gu-partial-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "PDA509",
+        "name": "- Introduktion till Barn- och ungdomsvetenskap",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "PDA510",
+        "name": "- Barn- och ungdomsvetenskapliga perspektiv på globalisering och digitalisering",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "PDA511",
+        "name": "- Metodologi inom Barn- och ungdomsvetenskap",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "PDA522",
+        "name": "- Magisteruppsats i Barn- och ungdomsvetenskap",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "PDA525",
+        "name": "- Barn och unga i en globaliserad värld",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "PDA526",
+        "name": "- Barn och unga i en digitaliserad värld",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2021-10/l2buv-211004.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/barn-och-ungdomsvetenskap-masterprogram-l2buv",
       "https://www.gu.se/sites/default/files/2021-10/l2buv-211004.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 4,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
+          "listedHp": 90,
           "covered": false
         }
       },
-      "courses": [],
-      "slotCount": 0,
+      "slotCount": 1,
+      "parsedRows": 12,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:31.541Z"
+    "checkedAt": "2026-09-13T17:47:03.105Z"
   },
   {
     "key": "goteborgs-universitet:L2EUR",
@@ -13558,7 +15273,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:31.279Z"
+    "checkedAt": "2026-09-13T17:47:02.731Z"
   },
   {
     "key": "goteborgs-universitet:L2F3G",
@@ -13627,7 +15342,7 @@
       "sourcePages": 2,
       "parsedRows": 6
     },
-    "checkedAt": "2026-09-13T17:41:31.748Z"
+    "checkedAt": "2026-09-13T17:47:03.090Z"
   },
   {
     "key": "goteborgs-universitet:L2SLL",
@@ -13676,7 +15391,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:31.784Z"
+    "checkedAt": "2026-09-13T17:47:03.102Z"
   },
   {
     "key": "goteborgs-universitet:L2SLP",
@@ -13699,7 +15414,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:31.883Z"
+    "checkedAt": "2026-09-13T17:47:03.242Z"
   },
   {
     "key": "goteborgs-universitet:L2SLU",
@@ -13748,7 +15463,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:31.835Z"
+    "checkedAt": "2026-09-13T17:47:03.455Z"
   },
   {
     "key": "goteborgs-universitet:L2SPP",
@@ -13797,7 +15512,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:32.022Z"
+    "checkedAt": "2026-09-13T17:47:03.672Z"
   },
   {
     "key": "goteborgs-universitet:M1BMA",
@@ -13858,7 +15573,7 @@
       "sourcePages": 2,
       "parsedRows": 60
     },
-    "checkedAt": "2026-09-13T17:41:32.129Z"
+    "checkedAt": "2026-09-13T17:47:03.701Z"
   },
   {
     "key": "goteborgs-universitet:M1DIP",
@@ -13928,7 +15643,7 @@
       "sourcePages": 3,
       "parsedRows": 55
     },
-    "checkedAt": "2026-09-13T17:41:32.325Z"
+    "checkedAt": "2026-09-13T17:47:03.844Z"
   },
   {
     "key": "goteborgs-universitet:M2CMA",
@@ -13951,7 +15666,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:32.325Z"
+    "checkedAt": "2026-09-13T17:47:03.867Z"
   },
   {
     "key": "goteborgs-universitet:M2KUL",
@@ -13974,7 +15689,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:32.415Z"
+    "checkedAt": "2026-09-13T17:47:04.208Z"
   },
   {
     "key": "goteborgs-universitet:M2LP6",
@@ -14112,7 +15827,7 @@
       "sourcePages": 2,
       "parsedRows": 36
     },
-    "checkedAt": "2026-09-13T17:41:32.254Z"
+    "checkedAt": "2026-09-13T17:47:03.935Z"
   },
   {
     "key": "goteborgs-universitet:M2PHP",
@@ -14284,7 +15999,7 @@
       "sourcePages": 3,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T17:41:32.501Z"
+    "checkedAt": "2026-09-13T17:47:04.257Z"
   },
   {
     "key": "goteborgs-universitet:M2SLP",
@@ -14682,7 +16397,7 @@
       "sourcePages": 2,
       "parsedRows": 28
     },
-    "checkedAt": "2026-09-13T17:41:32.490Z"
+    "checkedAt": "2026-09-13T17:47:04.284Z"
   },
   {
     "key": "goteborgs-universitet:M2STA",
@@ -14821,7 +16536,7 @@
       "sourcePages": 3,
       "parsedRows": 19
     },
-    "checkedAt": "2026-09-13T17:41:32.736Z"
+    "checkedAt": "2026-09-13T17:47:04.431Z"
   },
   {
     "key": "goteborgs-universitet:N1BBA",
@@ -14882,7 +16597,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:32.798Z"
+    "checkedAt": "2026-09-13T17:47:04.441Z"
   },
   {
     "key": "goteborgs-universitet:N1BHP",
@@ -14943,7 +16658,7 @@
       "sourcePages": 2,
       "parsedRows": 2
     },
-    "checkedAt": "2026-09-13T17:41:32.793Z"
+    "checkedAt": "2026-09-13T17:47:04.521Z"
   },
   {
     "key": "goteborgs-universitet:N1BIO",
@@ -15004,7 +16719,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:32.878Z"
+    "checkedAt": "2026-09-13T17:47:04.791Z"
   },
   {
     "key": "goteborgs-universitet:N1CAI",
@@ -15065,7 +16780,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:32.946Z"
+    "checkedAt": "2026-09-13T17:47:04.831Z"
   },
   {
     "key": "goteborgs-universitet:N1COS",
@@ -15126,7 +16841,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:32.976Z"
+    "checkedAt": "2026-09-13T17:47:04.880Z"
   },
   {
     "key": "goteborgs-universitet:N1DAF",
@@ -15179,7 +16894,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:33.197Z"
+    "checkedAt": "2026-09-13T17:47:05.009Z"
   },
   {
     "key": "goteborgs-universitet:N1ENV",
@@ -15239,7 +16954,7 @@
       "sourcePages": 1,
       "parsedRows": 1
     },
-    "checkedAt": "2026-09-13T17:41:33.148Z"
+    "checkedAt": "2026-09-13T17:47:04.874Z"
   },
   {
     "key": "goteborgs-universitet:N1FAR",
@@ -15262,7 +16977,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:33.297Z"
+    "checkedAt": "2026-09-13T17:47:05.261Z"
   },
   {
     "key": "goteborgs-universitet:N1FYS",
@@ -15323,7 +17038,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:33.335Z"
+    "checkedAt": "2026-09-13T17:47:05.377Z"
   },
   {
     "key": "goteborgs-universitet:N1GEO",
@@ -15384,7 +17099,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:33.629Z"
+    "checkedAt": "2026-09-13T17:47:06.159Z"
   },
   {
     "key": "goteborgs-universitet:N1GVS",
@@ -15445,7 +17160,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:33.438Z"
+    "checkedAt": "2026-09-13T17:47:05.458Z"
   },
   {
     "key": "goteborgs-universitet:N1HTL",
@@ -15506,7 +17221,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:34.134Z"
+    "checkedAt": "2026-09-13T17:47:05.854Z"
   },
   {
     "key": "goteborgs-universitet:N1KEM",
@@ -15764,7 +17479,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:33.758Z"
+    "checkedAt": "2026-09-13T17:47:05.852Z"
   },
   {
     "key": "goteborgs-universitet:N1KVP",
@@ -15825,7 +17540,7 @@
       "sourcePages": 2,
       "parsedRows": 20
     },
-    "checkedAt": "2026-09-13T17:41:33.794Z"
+    "checkedAt": "2026-09-13T17:47:05.956Z"
   },
   {
     "key": "goteborgs-universitet:N1MAT",
@@ -16019,7 +17734,7 @@
       "sourcePages": 2,
       "parsedRows": 30
     },
-    "checkedAt": "2026-09-13T17:41:33.786Z"
+    "checkedAt": "2026-09-13T17:47:05.887Z"
   },
   {
     "key": "goteborgs-universitet:N1MAV",
@@ -16080,7 +17795,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:34.096Z"
+    "checkedAt": "2026-09-13T17:47:06.442Z"
   },
   {
     "key": "goteborgs-universitet:N1MB1",
@@ -16142,7 +17857,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:34.326Z"
+    "checkedAt": "2026-09-13T17:47:06.591Z"
   },
   {
     "key": "goteborgs-universitet:N1MVN",
@@ -16202,7 +17917,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:34.115Z"
+    "checkedAt": "2026-09-13T17:47:06.322Z"
   },
   {
     "key": "goteborgs-universitet:N1SJU",
@@ -16279,7 +17994,7 @@
       "sourcePages": 2,
       "parsedRows": 35
     },
-    "checkedAt": "2026-09-13T17:41:34.264Z"
+    "checkedAt": "2026-09-13T17:47:06.550Z"
   },
   {
     "key": "goteborgs-universitet:N1SOF",
@@ -16340,7 +18055,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:34.582Z"
+    "checkedAt": "2026-09-13T17:47:06.940Z"
   },
   {
     "key": "goteborgs-universitet:N1SYD",
@@ -16401,7 +18116,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:34.557Z"
+    "checkedAt": "2026-09-13T17:47:06.734Z"
   },
   {
     "key": "goteborgs-universitet:N2ACE",
@@ -16453,7 +18168,7 @@
       "sourcePages": 1,
       "parsedRows": 18
     },
-    "checkedAt": "2026-09-13T17:41:34.464Z"
+    "checkedAt": "2026-09-13T17:47:06.759Z"
   },
   {
     "key": "goteborgs-universitet:N2BIN",
@@ -16507,7 +18222,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:34.708Z"
+    "checkedAt": "2026-09-13T17:47:07.183Z"
   },
   {
     "key": "goteborgs-universitet:N2BIO",
@@ -16560,7 +18275,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:34.720Z"
+    "checkedAt": "2026-09-13T17:47:07.126Z"
   },
   {
     "key": "goteborgs-universitet:N2BIS",
@@ -16612,7 +18327,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:34.674Z"
+    "checkedAt": "2026-09-13T17:47:07.014Z"
   },
   {
     "key": "goteborgs-universitet:N2CAS",
@@ -16665,7 +18380,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:35.039Z"
+    "checkedAt": "2026-09-13T17:47:07.643Z"
   },
   {
     "key": "goteborgs-universitet:N2CMN",
@@ -16717,7 +18432,7 @@
       "sourcePages": 1,
       "parsedRows": 2
     },
-    "checkedAt": "2026-09-13T17:41:34.905Z"
+    "checkedAt": "2026-09-13T17:47:07.195Z"
   },
   {
     "key": "goteborgs-universitet:N2COS",
@@ -16740,7 +18455,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:35.116Z"
+    "checkedAt": "2026-09-13T17:47:07.797Z"
   },
   {
     "key": "goteborgs-universitet:N2DGL",
@@ -16793,7 +18508,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:35.135Z"
+    "checkedAt": "2026-09-13T17:47:07.590Z"
   },
   {
     "key": "goteborgs-universitet:N2FOC",
@@ -16846,7 +18561,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:35.179Z"
+    "checkedAt": "2026-09-13T17:47:07.728Z"
   },
   {
     "key": "goteborgs-universitet:N2GDT",
@@ -16899,7 +18614,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:35.294Z"
+    "checkedAt": "2026-09-13T17:47:07.941Z"
   },
   {
     "key": "goteborgs-universitet:N2GEO",
@@ -16952,7 +18667,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:35.362Z"
+    "checkedAt": "2026-09-13T17:47:07.774Z"
   },
   {
     "key": "goteborgs-universitet:N2GVS",
@@ -17007,7 +18722,7 @@
       "sourcePages": 4,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:35.719Z"
+    "checkedAt": "2026-09-13T17:47:08.478Z"
   },
   {
     "key": "goteborgs-universitet:N2HSH",
@@ -17061,7 +18776,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:35.685Z"
+    "checkedAt": "2026-09-13T17:47:08.381Z"
   },
   {
     "key": "goteborgs-universitet:N2KEL",
@@ -17114,7 +18829,7 @@
       "sourcePages": 2,
       "parsedRows": 1
     },
-    "checkedAt": "2026-09-13T17:41:35.601Z"
+    "checkedAt": "2026-09-13T17:47:08.305Z"
   },
   {
     "key": "goteborgs-universitet:N2KEM",
@@ -17167,7 +18882,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:35.643Z"
+    "checkedAt": "2026-09-13T17:47:08.348Z"
   },
   {
     "key": "goteborgs-universitet:N2KUV",
@@ -17220,7 +18935,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:35.758Z"
+    "checkedAt": "2026-09-13T17:47:08.392Z"
   },
   {
     "key": "goteborgs-universitet:N2KVP",
@@ -17273,7 +18988,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:35.819Z"
+    "checkedAt": "2026-09-13T17:47:08.520Z"
   },
   {
     "key": "goteborgs-universitet:N2LIT",
@@ -17318,7 +19033,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:36.058Z"
+    "checkedAt": "2026-09-13T17:47:08.894Z"
   },
   {
     "key": "goteborgs-universitet:N2LKI",
@@ -17341,7 +19056,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:36.257Z"
+    "checkedAt": "2026-09-13T17:47:08.949Z"
   },
   {
     "key": "goteborgs-universitet:N2MAB",
@@ -17393,7 +19108,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:36.030Z"
+    "checkedAt": "2026-09-13T17:47:08.806Z"
   },
   {
     "key": "goteborgs-universitet:N2MAT",
@@ -17446,7 +19161,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:36.177Z"
+    "checkedAt": "2026-09-13T17:47:08.971Z"
   },
   {
     "key": "goteborgs-universitet:N2MAV",
@@ -17500,7 +19215,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:36.332Z"
+    "checkedAt": "2026-09-13T17:47:09.227Z"
   },
   {
     "key": "goteborgs-universitet:N2MBI",
@@ -17554,7 +19269,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:36.386Z"
+    "checkedAt": "2026-09-13T17:47:09.248Z"
   },
   {
     "key": "goteborgs-universitet:N2MIH",
@@ -17607,7 +19322,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:36.491Z"
+    "checkedAt": "2026-09-13T17:47:09.394Z"
   },
   {
     "key": "goteborgs-universitet:N2MOL",
@@ -17630,7 +19345,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:36.599Z"
+    "checkedAt": "2026-09-13T17:47:09.523Z"
   },
   {
     "key": "goteborgs-universitet:N2MVN",
@@ -17682,7 +19397,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:36.524Z"
+    "checkedAt": "2026-09-13T17:47:09.372Z"
   },
   {
     "key": "goteborgs-universitet:N2PHY",
@@ -17735,7 +19450,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:36.828Z"
+    "checkedAt": "2026-09-13T17:47:09.893Z"
   },
   {
     "key": "goteborgs-universitet:N2SOF",
@@ -17922,7 +19637,7 @@
       "sourcePages": 3,
       "parsedRows": 11
     },
-    "checkedAt": "2026-09-13T17:41:36.796Z"
+    "checkedAt": "2026-09-13T17:47:10.437Z"
   },
   {
     "key": "goteborgs-universitet:N2TOX",
@@ -17974,7 +19689,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:36.730Z"
+    "checkedAt": "2026-09-13T17:47:09.670Z"
   },
   {
     "key": "goteborgs-universitet:O1THG",
@@ -18219,7 +19934,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T17:41:36.857Z"
+    "checkedAt": "2026-09-13T17:47:09.818Z"
   },
   {
     "key": "goteborgs-universitet:O1THN",
@@ -18464,7 +20179,7 @@
       "sourcePages": 2,
       "parsedRows": 14
     },
-    "checkedAt": "2026-09-13T17:41:36.873Z"
+    "checkedAt": "2026-09-13T17:47:09.835Z"
   },
   {
     "key": "goteborgs-universitet:O1TTP",
@@ -18525,7 +20240,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:37.079Z"
+    "checkedAt": "2026-09-13T17:47:10.125Z"
   },
   {
     "key": "goteborgs-universitet:O2TDU",
@@ -18548,7 +20263,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:37.281Z"
+    "checkedAt": "2026-09-13T17:47:10.256Z"
   },
   {
     "key": "goteborgs-universitet:O2TLP",
@@ -18625,7 +20340,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:37.253Z"
+    "checkedAt": "2026-09-13T17:47:10.416Z"
   },
   {
     "key": "goteborgs-universitet:S1ANT",
@@ -18636,58 +20351,76 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/antropologprogrammet-s1ant",
+    "coverage": "manual-review",
+    "reason": "official-gu-insufficient-consistency",
+    "rows": [
+      {
+        "term": 5,
+        "code": "SA1312",
+        "name": "Forskningsdesign inom antropologi",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "SA1411",
+        "name": "Socialantropologi: fältarbete",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2022-05/S1ANT%20-%20Utbildningsplan%20Antroplogprogrammet.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/antropologprogrammet-s1ant",
-      "https://www.gu.se/sites/default/files/2022-05/S1ANT%20-%20Utbildningsplan%20Antroplogprogrammet.pdf",
-      "https://www.gu.se/sites/default/files/2025-11/Visuell%20programstruktur%20A3%20S1ANT%20251111_0.pdf"
+      "https://www.gu.se/sites/default/files/2022-05/S1ANT%20-%20Utbildningsplan%20Antroplogprogrammet.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        5
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
+          "listedHp": 15,
           "covered": false
         },
         "2": {
-          "listedHp": 0,
+          "listedHp": 15,
           "covered": false
         },
         "3": {
-          "listedHp": 0,
+          "listedHp": 15,
           "covered": false
         },
         "4": {
-          "listedHp": 0,
+          "listedHp": 15,
           "covered": false
         },
         "5": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "6": {
-          "listedHp": 0,
+          "listedHp": 15,
           "covered": false
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 7,
       "totalHp": 180,
-      "sourcePages": 3,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:37.616Z"
+    "checkedAt": "2026-09-13T17:47:10.733Z"
   },
   {
     "key": "goteborgs-universitet:S1ARB",
@@ -18748,7 +20481,7 @@
       "sourcePages": 2,
       "parsedRows": 24
     },
-    "checkedAt": "2026-09-13T17:41:37.316Z"
+    "checkedAt": "2026-09-13T17:47:10.478Z"
   },
   {
     "key": "goteborgs-universitet:S1EKA",
@@ -18976,7 +20709,7 @@
       "sourcePages": 4,
       "parsedRows": 67
     },
-    "checkedAt": "2026-09-13T17:41:37.571Z"
+    "checkedAt": "2026-09-13T17:47:10.887Z"
   },
   {
     "key": "goteborgs-universitet:S1EUR",
@@ -18999,7 +20732,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:37.697Z"
+    "checkedAt": "2026-09-13T17:47:10.910Z"
   },
   {
     "key": "goteborgs-universitet:S1GLS",
@@ -19061,7 +20794,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:37.940Z"
+    "checkedAt": "2026-09-13T17:47:11.314Z"
   },
   {
     "key": "goteborgs-universitet:S1GSA",
@@ -19304,57 +21037,233 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/halsopromotionsprogrammet-med-fokus-pa-kost-och-fysisk-aktivitet-s1hpk",
+    "coverage": "partial-structure",
+    "reason": "official-gu-partial-term-sequence",
+    "rows": [
+      {
+        "term": 2,
+        "code": "",
+        "name": "Folkhälsa och hållbar utveckling",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Näringslära II",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Måltider och ätande",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Hälsopsykologi och förändringsarbete",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Vetenskapliga metoder I",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Maten i samhället",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fysiologi och anatomi",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fysisk aktivitet och hälsa I",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Fysisk aktivitet och hälsa II",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Kost, fysisk aktivitet och sjukdom",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Coaching och ledarskap",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Hälsokommunikation",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Motiverande samtal",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Hälsofrämjande arbete och projektledning",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Tillämpad nutrition",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Epidemiologi",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Vetenskapliga metoder II",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Praktik",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Kandidatuppsats",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2021-09/S1HPK%20%286%29.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/halsopromotionsprogrammet-med-fokus-pa-kost-och-fysisk-aktivitet-s1hpk",
       "https://www.gu.se/sites/default/files/2021-09/S1HPK%20%286%29.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
+          "listedHp": 87.5,
           "covered": false
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "5": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "6": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 30,
       "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:38.255Z"
+    "checkedAt": "2026-09-13T17:47:11.704Z"
   },
   {
     "key": "goteborgs-universitet:S1HSK",
@@ -19365,44 +21274,82 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kandidatprogrammet-i-hallbar-utveckling-samhallsforandring-och-klimatomstallning-s1hsk",
+    "coverage": "partial-structure",
+    "reason": "official-gu-partial-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "hållbar utveckling fattigdom och miljöförändring, 15 motstånd",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "och omställning, 15 fördelning",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "förändring",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "katastrofer",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2023-02/S1HSK-Utbildningsplan%20fr%C3%A5n%202023.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kandidatprogrammet-i-hallbar-utveckling-samhallsforandring-och-klimatomstallning-s1hsk",
-      "https://www.gu.se/sites/default/files/2023-02/S1HSK-Utbildningsplan%20fr%C3%A5n%202023.pdf",
-      "https://www.gu.se/sites/default/files/2025-11/Visuell%20programstruktur%20A3%20S1HSK%20250314%202.pdf"
+      "https://www.gu.se/sites/default/files/2023-02/S1HSK-Utbildningsplan%20fr%C3%A5n%202023.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        3
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
           "listedHp": 0,
           "covered": false
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
           "listedHp": 0,
           "covered": false
         },
         "5": {
-          "listedHp": 0,
+          "listedHp": 15,
           "covered": false
         },
         "6": {
@@ -19410,13 +21357,12 @@
           "covered": false
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 5,
       "totalHp": 180,
-      "sourcePages": 3,
-      "parsedRows": 0
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:38.371Z"
+    "checkedAt": "2026-09-13T17:47:11.941Z"
   },
   {
     "key": "goteborgs-universitet:S1INT",
@@ -19711,7 +21657,7 @@
       "sourcePages": 3,
       "parsedRows": 14
     },
-    "checkedAt": "2026-09-13T17:41:38.073Z"
+    "checkedAt": "2026-09-13T17:47:11.481Z"
   },
   {
     "key": "goteborgs-universitet:S1JOU",
@@ -19772,7 +21718,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:38.166Z"
+    "checkedAt": "2026-09-13T17:47:11.490Z"
   },
   {
     "key": "goteborgs-universitet:S1KOL",
@@ -19783,57 +21729,215 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kost-och-ledarskapsprogrammet-s1kol",
+    "coverage": "partial-structure",
+    "reason": "official-gu-partial-term-sequence",
+    "rows": [
+      {
+        "term": 2,
+        "code": "",
+        "name": "Mat, hälsa och hållbar utveckling",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Näringslära II",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Livsmedelsvetenskap med metodmatlagning",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Sensorisk analys, produktutveckling och måltidspedagogik",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Vetenskapliga metoder I",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Maten i samhället",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Måltidsservice I med praktik",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Ledarskap inom kostverksamhet I",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Företagsekonomi",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Måltidsservice II",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Dietetik med tillämpning",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Ledarskap inom kostverksamhet II",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Gastronomi",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Entreprenörskap med arbetsrätt",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Vetenskapliga metoder II",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Praktik inom kost- och ledarskap",
+        "hp": 7.5,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Kandidatuppsats",
+        "hp": 15,
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2022-03/S1KOL%20220228.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kost-och-ledarskapsprogrammet-s1kol",
       "https://www.gu.se/sites/default/files/2022-03/S1KOL%20220228.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "listedHp": 0,
+          "listedHp": 72.5,
           "covered": false
         },
         "2": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "5": {
-          "listedHp": 0,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         },
         "6": {
-          "listedHp": 15,
-          "covered": false
+          "listedHp": 30,
+          "covered": true
         }
       },
-      "courses": [],
       "slotCount": 0,
+      "parsedRows": 26,
       "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 2
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:41:38.661Z"
+    "checkedAt": "2026-09-13T17:47:11.989Z"
   },
   {
     "key": "goteborgs-universitet:S1KSO",
@@ -19882,7 +21986,7 @@
       "sourcePages": 2,
       "parsedRows": 18
     },
-    "checkedAt": "2026-09-13T17:41:38.402Z"
+    "checkedAt": "2026-09-13T17:47:11.901Z"
   },
   {
     "key": "goteborgs-universitet:S1LOG",
@@ -20160,7 +22264,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T17:41:38.422Z"
+    "checkedAt": "2026-09-13T17:47:11.911Z"
   },
   {
     "key": "goteborgs-universitet:S1MKG",
@@ -20221,7 +22325,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:38.751Z"
+    "checkedAt": "2026-09-13T17:47:12.247Z"
   },
   {
     "key": "goteborgs-universitet:S1OFF",
@@ -20244,7 +22348,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:38.795Z"
+    "checkedAt": "2026-09-13T17:47:12.344Z"
   },
   {
     "key": "goteborgs-universitet:S1OFV",
@@ -20305,7 +22409,7 @@
       "sourcePages": 2,
       "parsedRows": 9
     },
-    "checkedAt": "2026-09-13T17:41:38.829Z"
+    "checkedAt": "2026-09-13T17:47:12.482Z"
   },
   {
     "key": "goteborgs-universitet:S1PED",
@@ -20583,7 +22687,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T17:41:38.761Z"
+    "checkedAt": "2026-09-13T17:47:12.340Z"
   },
   {
     "key": "goteborgs-universitet:S1PER",
@@ -20644,7 +22748,7 @@
       "sourcePages": 2,
       "parsedRows": 32
     },
-    "checkedAt": "2026-09-13T17:41:38.885Z"
+    "checkedAt": "2026-09-13T17:47:12.532Z"
   },
   {
     "key": "goteborgs-universitet:S1SMI",
@@ -20725,7 +22829,7 @@
       "sourcePages": 2,
       "parsedRows": 39
     },
-    "checkedAt": "2026-09-13T17:41:39.138Z"
+    "checkedAt": "2026-09-13T17:47:12.593Z"
   },
   {
     "key": "goteborgs-universitet:S1SOP",
@@ -20748,7 +22852,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:39.298Z"
+    "checkedAt": "2026-09-13T17:47:12.870Z"
   },
   {
     "key": "goteborgs-universitet:S1SPS",
@@ -20808,7 +22912,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:39.109Z"
+    "checkedAt": "2026-09-13T17:47:12.764Z"
   },
   {
     "key": "goteborgs-universitet:S1STV",
@@ -20870,7 +22974,7 @@
       "sourcePages": 3,
       "parsedRows": 81
     },
-    "checkedAt": "2026-09-13T17:41:39.380Z"
+    "checkedAt": "2026-09-13T17:47:13.094Z"
   },
   {
     "key": "goteborgs-universitet:S1TRP",
@@ -21308,7 +23412,7 @@
       "sourcePages": 2,
       "parsedRows": 23
     },
-    "checkedAt": "2026-09-13T17:41:39.187Z"
+    "checkedAt": "2026-09-13T17:47:12.920Z"
   },
   {
     "key": "goteborgs-universitet:S2ARB",
@@ -21353,7 +23457,7 @@
       "sourcePages": 2,
       "parsedRows": 7
     },
-    "checkedAt": "2026-09-13T17:41:39.344Z"
+    "checkedAt": "2026-09-13T17:47:13.107Z"
   },
   {
     "key": "goteborgs-universitet:S2DID",
@@ -21376,7 +23480,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:39.677Z"
+    "checkedAt": "2026-09-13T17:47:13.211Z"
   },
   {
     "key": "goteborgs-universitet:S2ESD",
@@ -21429,7 +23533,7 @@
       "sourcePages": 2,
       "parsedRows": 26
     },
-    "checkedAt": "2026-09-13T17:41:40.155Z"
+    "checkedAt": "2026-09-13T17:47:13.359Z"
   },
   {
     "key": "goteborgs-universitet:S2EUS",
@@ -21452,7 +23556,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:40.189Z"
+    "checkedAt": "2026-09-13T17:47:13.513Z"
   },
   {
     "key": "goteborgs-universitet:S2FIN",
@@ -21505,7 +23609,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:40.930Z"
+    "checkedAt": "2026-09-13T17:47:14.137Z"
   },
   {
     "key": "goteborgs-universitet:S2GST",
@@ -21710,7 +23814,7 @@
       "sourcePages": 3,
       "parsedRows": 9
     },
-    "checkedAt": "2026-09-13T17:41:40.390Z"
+    "checkedAt": "2026-09-13T17:47:13.681Z"
   },
   {
     "key": "goteborgs-universitet:S2HRM",
@@ -21763,7 +23867,7 @@
       "sourcePages": 2,
       "parsedRows": 20
     },
-    "checkedAt": "2026-09-13T17:41:40.393Z"
+    "checkedAt": "2026-09-13T17:47:13.685Z"
   },
   {
     "key": "goteborgs-universitet:S2HSK",
@@ -21808,7 +23912,7 @@
       "sourcePages": 2,
       "parsedRows": 7
     },
-    "checkedAt": "2026-09-13T17:41:41.657Z"
+    "checkedAt": "2026-09-13T17:47:13.968Z"
   },
   {
     "key": "goteborgs-universitet:S2IAG",
@@ -21861,7 +23965,7 @@
       "sourcePages": 2,
       "parsedRows": 49
     },
-    "checkedAt": "2026-09-13T17:41:40.627Z"
+    "checkedAt": "2026-09-13T17:47:13.971Z"
   },
   {
     "key": "goteborgs-universitet:S2IFM",
@@ -21884,7 +23988,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:40.739Z"
+    "checkedAt": "2026-09-13T17:47:14.128Z"
   },
   {
     "key": "goteborgs-universitet:S2IFÖ",
@@ -22087,7 +24191,7 @@
       "sourcePages": 2,
       "parsedRows": 11
     },
-    "checkedAt": "2026-09-13T17:41:40.849Z"
+    "checkedAt": "2026-09-13T17:47:14.265Z"
   },
   {
     "key": "goteborgs-universitet:S2IIM",
@@ -22140,7 +24244,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:40.945Z"
+    "checkedAt": "2026-09-13T17:47:14.269Z"
   },
   {
     "key": "goteborgs-universitet:S2IME",
@@ -22193,7 +24297,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:41.099Z"
+    "checkedAt": "2026-09-13T17:47:14.548Z"
   },
   {
     "key": "goteborgs-universitet:S2IOL",
@@ -22247,7 +24351,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:41.301Z"
+    "checkedAt": "2026-09-13T17:47:14.728Z"
   },
   {
     "key": "goteborgs-universitet:S2ITL",
@@ -22301,7 +24405,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:41.415Z"
+    "checkedAt": "2026-09-13T17:47:14.866Z"
   },
   {
     "key": "goteborgs-universitet:S2JOU",
@@ -22346,7 +24450,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:41.385Z"
+    "checkedAt": "2026-09-13T17:47:14.734Z"
   },
   {
     "key": "goteborgs-universitet:S2JUR",
@@ -22527,7 +24631,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:41.548Z"
+    "checkedAt": "2026-09-13T17:47:14.886Z"
   },
   {
     "key": "goteborgs-universitet:S2KEN",
@@ -22580,7 +24684,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:41.971Z"
+    "checkedAt": "2026-09-13T17:47:15.435Z"
   },
   {
     "key": "goteborgs-universitet:S2KRI",
@@ -22773,7 +24877,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:41.867Z"
+    "checkedAt": "2026-09-13T17:47:15.319Z"
   },
   {
     "key": "goteborgs-universitet:S2LOT",
@@ -22826,7 +24930,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:42.187Z"
+    "checkedAt": "2026-09-13T17:47:15.757Z"
   },
   {
     "key": "goteborgs-universitet:S2LTM",
@@ -22964,7 +25068,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T17:41:41.892Z"
+    "checkedAt": "2026-09-13T17:47:15.295Z"
   },
   {
     "key": "goteborgs-universitet:S2LÄR",
@@ -23009,7 +25113,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:42.347Z"
+    "checkedAt": "2026-09-13T17:47:16.066Z"
   },
   {
     "key": "goteborgs-universitet:S2MAN",
@@ -23062,7 +25166,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:42.734Z"
+    "checkedAt": "2026-09-13T17:47:16.185Z"
   },
   {
     "key": "goteborgs-universitet:S2MAP",
@@ -23116,7 +25220,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:42.554Z"
+    "checkedAt": "2026-09-13T17:47:16.232Z"
   },
   {
     "key": "goteborgs-universitet:S2MKG",
@@ -23136,9 +25240,18 @@
       {
         "term": 1,
         "code": "MK2201",
-        "name": "Politisk kommunikation i den digitala tidsåldern",
+        "name": "Politisk kommunikation i den digatala tidsåldern",
         "hp": 30,
-        "category": "mandatory",
+        "category": "unknown",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "SF2222",
+        "name": "Citizens, Politicians and the Media",
+        "hp": 15,
+        "category": "unknown",
         "isSlot": false,
         "isThesis": false
       },
@@ -23147,16 +25260,7 @@
         "code": "MK2202",
         "name": "Kriskommunikation",
         "hp": 15,
-        "category": "mandatory-unlabelled",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "code": "SF2222",
-        "name": "Medborgare, politiker och medier",
-        "hp": 15,
-        "category": "mandatory",
+        "category": "unknown",
         "isSlot": false,
         "isThesis": false
       },
@@ -23165,19 +25269,18 @@
         "code": "MK2502",
         "name": "Examensarbete i medie- och kommunikationsvetenskap",
         "hp": 30,
-        "category": "mandatory-unlabelled",
+        "category": "unknown",
         "isSlot": false,
         "isThesis": false
       }
     ],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-politisk-kommunikation-s2mkg",
+    "source": "gu-official-education-plan-pdf",
+    "sourceUrl": "https://www.gu.se/sites/default/files/2020-06/S2MKG-Sv.pdf",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-politisk-kommunikation-s2mkg",
-      "https://www.gu.se/studera/hitta-utbildning/programstruktur-och-innehall-for-masterprogrammet-i-politisk-kommunikation-polcom"
+      "https://www.gu.se/sites/default/files/2020-06/S2MKG-Sv.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiConfidence": "official-pdf-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 4,
@@ -23188,48 +25291,28 @@
       ],
       "termHp": {
         "1": {
-          "mandatoryHp": 30,
           "listedHp": 30,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": true,
-          "fixedUnlabelled": false
+          "covered": true
         },
         "2": {
-          "mandatoryHp": 15,
           "listedHp": 30,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 15,
-          "covered": true,
-          "fixedUnlabelled": true
+          "covered": true
         },
         "3": {
-          "mandatoryHp": 0,
-          "listedHp": 75,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 75,
-          "covered": false,
-          "fixedUnlabelled": false
+          "listedHp": 60,
+          "covered": false
         },
         "4": {
-          "mandatoryHp": 0,
           "listedHp": 30,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 30,
-          "covered": true,
-          "fixedUnlabelled": true
+          "covered": true
         }
       },
       "slotCount": 0,
+      "parsedRows": 8,
       "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 9
+      "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T17:32:45.408Z"
+    "checkedAt": "2026-09-13T17:47:16.527Z"
   },
   {
     "key": "goteborgs-universitet:S2MOK",
@@ -23282,7 +25365,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:42.751Z"
+    "checkedAt": "2026-09-13T17:47:16.327Z"
   },
   {
     "key": "goteborgs-universitet:S2MSA",
@@ -23334,7 +25417,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:42.537Z"
+    "checkedAt": "2026-09-13T17:47:16.182Z"
   },
   {
     "key": "goteborgs-universitet:S2MÄR",
@@ -23388,7 +25471,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:43.120Z"
+    "checkedAt": "2026-09-13T17:47:17.087Z"
   },
   {
     "key": "goteborgs-universitet:S2NAT",
@@ -23441,7 +25524,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:43.231Z"
+    "checkedAt": "2026-09-13T17:47:16.946Z"
   },
   {
     "key": "goteborgs-universitet:S2OFF",
@@ -23464,7 +25547,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:43.092Z"
+    "checkedAt": "2026-09-13T17:47:16.823Z"
   },
   {
     "key": "goteborgs-universitet:S2PED",
@@ -23487,7 +25570,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:43.295Z"
+    "checkedAt": "2026-09-13T17:47:16.882Z"
   },
   {
     "key": "goteborgs-universitet:S2PSC",
@@ -23540,7 +25623,7 @@
       "sourcePages": 2,
       "parsedRows": 49
     },
-    "checkedAt": "2026-09-13T17:41:43.184Z"
+    "checkedAt": "2026-09-13T17:47:16.913Z"
   },
   {
     "key": "goteborgs-universitet:S2PSY",
@@ -23866,7 +25949,7 @@
       "sourcePages": 2,
       "parsedRows": 31
     },
-    "checkedAt": "2026-09-13T17:41:43.226Z"
+    "checkedAt": "2026-09-13T17:47:16.985Z"
   },
   {
     "key": "goteborgs-universitet:S2PTE",
@@ -23889,7 +25972,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:43.644Z"
+    "checkedAt": "2026-09-13T17:47:17.457Z"
   },
   {
     "key": "goteborgs-universitet:S2REF",
@@ -23942,7 +26025,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:43.893Z"
+    "checkedAt": "2026-09-13T17:47:17.642Z"
   },
   {
     "key": "goteborgs-universitet:S2SOC",
@@ -24115,7 +26198,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:43.574Z"
+    "checkedAt": "2026-09-13T17:47:17.369Z"
   },
   {
     "key": "goteborgs-universitet:S2SWH",
@@ -24138,7 +26221,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:43.782Z"
+    "checkedAt": "2026-09-13T17:47:17.554Z"
   },
   {
     "key": "goteborgs-universitet:T2HAI",
@@ -24191,7 +26274,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:43.965Z"
+    "checkedAt": "2026-09-13T17:47:17.854Z"
   },
   {
     "key": "goteborgs-universitet:V1ART",
@@ -24252,7 +26335,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:44.026Z"
+    "checkedAt": "2026-09-13T17:47:17.949Z"
   },
   {
     "key": "goteborgs-universitet:V1AUM",
@@ -24546,7 +26629,7 @@
       "sourcePages": 2,
       "parsedRows": 14
     },
-    "checkedAt": "2026-09-13T17:41:43.995Z"
+    "checkedAt": "2026-09-13T17:47:17.907Z"
   },
   {
     "key": "goteborgs-universitet:V1FYP",
@@ -24607,7 +26690,7 @@
       "sourcePages": 2,
       "parsedRows": 18
     },
-    "checkedAt": "2026-09-13T17:41:44.131Z"
+    "checkedAt": "2026-09-13T17:47:18.094Z"
   },
   {
     "key": "goteborgs-universitet:V1RTS",
@@ -24668,7 +26751,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:44.258Z"
+    "checkedAt": "2026-09-13T17:47:18.129Z"
   },
   {
     "key": "goteborgs-universitet:V1SSP",
@@ -24729,7 +26812,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:44.358Z"
+    "checkedAt": "2026-09-13T17:47:18.236Z"
   },
   {
     "key": "goteborgs-universitet:V2ANV",
@@ -24774,7 +26857,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:44.417Z"
+    "checkedAt": "2026-09-13T17:47:18.438Z"
   },
   {
     "key": "goteborgs-universitet:V2BMP",
@@ -24823,7 +26906,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:44.461Z"
+    "checkedAt": "2026-09-13T17:47:18.496Z"
   },
   {
     "key": "goteborgs-universitet:V2BUV",
@@ -24868,7 +26951,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:44.492Z"
+    "checkedAt": "2026-09-13T17:47:18.536Z"
   },
   {
     "key": "goteborgs-universitet:V2DIS",
@@ -24917,7 +27000,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:44.594Z"
+    "checkedAt": "2026-09-13T17:47:18.685Z"
   },
   {
     "key": "goteborgs-universitet:V2DIV",
@@ -24940,7 +27023,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:44.962Z"
+    "checkedAt": "2026-09-13T17:47:18.761Z"
   },
   {
     "key": "goteborgs-universitet:V2GLH",
@@ -24994,7 +27077,7 @@
       "sourcePages": 3,
       "parsedRows": 18
     },
-    "checkedAt": "2026-09-13T17:41:44.923Z"
+    "checkedAt": "2026-09-13T17:47:18.981Z"
   },
   {
     "key": "goteborgs-universitet:V2HSV",
@@ -25039,7 +27122,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:44.865Z"
+    "checkedAt": "2026-09-13T17:47:19.026Z"
   },
   {
     "key": "goteborgs-universitet:V2INV",
@@ -25084,7 +27167,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:44.911Z"
+    "checkedAt": "2026-09-13T17:47:19.084Z"
   },
   {
     "key": "goteborgs-universitet:V2KRG",
@@ -25129,7 +27212,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:44.946Z"
+    "checkedAt": "2026-09-13T17:47:19.124Z"
   },
   {
     "key": "goteborgs-universitet:V2NEU",
@@ -25152,7 +27235,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:45.113Z"
+    "checkedAt": "2026-09-13T17:47:19.284Z"
   },
   {
     "key": "goteborgs-universitet:V2NSV",
@@ -25197,7 +27280,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:45.325Z"
+    "checkedAt": "2026-09-13T17:47:19.342Z"
   },
   {
     "key": "goteborgs-universitet:V2ONL",
@@ -25242,7 +27325,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:45.360Z"
+    "checkedAt": "2026-09-13T17:47:19.554Z"
   },
   {
     "key": "goteborgs-universitet:V2OPV",
@@ -25287,7 +27370,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:45.372Z"
+    "checkedAt": "2026-09-13T17:47:19.616Z"
   },
   {
     "key": "goteborgs-universitet:V2PSI",
@@ -25332,7 +27415,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:45.393Z"
+    "checkedAt": "2026-09-13T17:47:19.659Z"
   },
   {
     "key": "goteborgs-universitet:V2PSK",
@@ -25355,7 +27438,7 @@
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T17:41:45.497Z"
+    "checkedAt": "2026-09-13T17:47:19.747Z"
   },
   {
     "key": "goteborgs-universitet:V2SGE",
@@ -25400,7 +27483,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:45.567Z"
+    "checkedAt": "2026-09-13T17:47:19.865Z"
   },
   {
     "key": "goteborgs-universitet:Z1BAN",
@@ -25436,7 +27519,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T17:41:46.296Z"
+    "checkedAt": "2026-09-13T17:47:19.924Z"
   },
   {
     "key": "hogskolan-i-boras:ACEKO",
