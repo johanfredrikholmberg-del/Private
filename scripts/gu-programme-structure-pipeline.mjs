@@ -83,7 +83,7 @@ async function enrich(item){
     if(['metadata-only','manual-review'].includes(c.coverage)){
       const pdf=await pdfFallback(item);if(pdf){const pc=classify(pdf);if(({complete:5,'choice-required':4,'partial-structure':3,'manual-review':2,'metadata-only':1}[pc.coverage]||0)>({complete:5,'choice-required':4,'partial-structure':3,'manual-review':2,'metadata-only':1}[c.coverage]||0)){data=pdf;c=pc}}
     }
-    return {...item,term:'HT26',status:c.coverage==='metadata-only'?'manual-review':'processed',...c,source:data?.source||'gu-official-programplan',sourceUrl:(data?.sourceUrls||[])[0]||'',sourceUrls:data?.sourceUrls||[],apiCoverage:data?.coverage||'',apiConfidence:data?.confidence||'',quality:data?.quality||{},checkedAt:new Date().toISOString()};
+    return {...item,term:'HT26',status:c.coverage==='metadata-only'?'manual-review':'processed',...c,source:data?.source||'gu-official-programplan',sourceUrl:(data?.sourceUrls||[])[0]||'',sourceUrls:data?.sourceUrls||[],apiCoverage:data?.coverage||'',apiConfidence:data?.confidence||'',officialProgramCode:codeNorm(data?.program?.code),officialAliases:(data?.programAliases||[]).map(codeNorm).filter(Boolean),quality:data?.quality||{},checkedAt:new Date().toISOString()};
   }catch(e){return {...item,term:'HT26',status:'manual-review',coverage:'metadata-only',reason:`gu-import:${e.message}`,checkedAt:new Date().toISOString()}}
 }
 
@@ -95,12 +95,29 @@ async function pool(items){
 
 const rank={complete:5,'choice-required':4,'partial-structure':3,'manual-review':2,'metadata-only':1};
 
+function applyOfficialAliases(fresh){
+  const byCode=new Map(fresh.map(x=>[codeNorm(x.programCode),x]));
+  for(const current of fresh){
+    if((rank[current.coverage]||0)<3)continue;
+    for(const alias of current.officialAliases||[]){
+      const old=byCode.get(codeNorm(alias));
+      if(!old)continue;
+      if(Number(old.hp||0)!==Number(current.hp||0))continue;
+      if((rank[old.coverage]||0)>=3)continue;
+      const inherited={...current,key:old.key,programCode:old.programCode,programName:old.programName,hp:old.hp,coverage:current.coverage,reason:'official-gu-superseded-code-alias',status:'processed',aliasOf:current.programCode,officialProgramCode:current.officialProgramCode||current.programCode,checkedAt:new Date().toISOString()};
+      Object.assign(old,inherited);
+      console.log(`alias ${old.programCode} -> ${current.programCode} ${old.coverage}`);
+    }
+  }
+}
+
 async function main(){
   const queue=JSON.parse(await fs.readFile(path.join(SRC,'structure-queue.json'),'utf8'));
   let structures=[];try{structures=JSON.parse(await fs.readFile(path.join(DEST,'program-structures.json'),'utf8'))}catch{}
   const map=new Map(structures.map(x=>[x.key,x]));
   const gu=queue.filter(isGU);
   const fresh=await pool(gu);
+  applyOfficialAliases(fresh);
   for(const x of fresh){const old=map.get(x.key);if(!old||(rank[x.coverage]||0)>=(rank[old.coverage]||0))map.set(x.key,x)}
   const all=[...map.values()];
   const guRows=gu.map(x=>map.get(x.key)).filter(Boolean);
@@ -116,4 +133,4 @@ async function main(){
 
 main().catch(e=>{console.error(e);process.exitCode=1});
 
-// trigger: gu-pdf-punctuation-fix
+// trigger: gu-official-alias-resolution
