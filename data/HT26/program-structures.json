@@ -8136,7 +8136,7 @@
       "sourcePages": 3,
       "parsedRows": 46
     },
-    "checkedAt": "2026-09-13T19:05:42.801Z"
+    "checkedAt": "2026-09-13T19:36:32.589Z"
   },
   {
     "key": "goteborgs-universitet:H1ARK",
@@ -8259,7 +8259,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:43.842Z"
+    "checkedAt": "2026-09-13T19:36:33.613Z"
   },
   {
     "key": "goteborgs-universitet:H1KAP",
@@ -8369,7 +8369,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:44.671Z"
+    "checkedAt": "2026-09-13T19:36:33.079Z"
   },
   {
     "key": "goteborgs-universitet:H1KEN",
@@ -8540,7 +8540,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:06:17.354Z"
+    "checkedAt": "2026-09-13T19:36:58.027Z"
   },
   {
     "key": "goteborgs-universitet:H1KLT",
@@ -8554,20 +8554,177 @@
     "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "manual-review",
-    "reason": "official-gu-insufficient-consistency",
+    "coverage": "choice-required",
+    "reason": "official-gu-direct-verification",
     "rows": [
+      {
+        "term": 1,
+        "code": "KP1150",
+        "name": "Kulturvetenskaper, grundkurs",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "KP1250",
+        "name": "Kulturvetenskap, fortsättningskurs",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
       {
         "term": 3,
         "code": "",
-        "name": "Andra året inleds med en breddningstermin",
+        "name": "Breddningstermin eller utbytesstudier",
         "hp": 30,
-        "category": "unknown",
-        "isSlot": false,
-        "isThesis": false
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "KP1410",
+        "name": "Kultur och demokrati: brytningstider",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "KP1420",
+        "name": "Kultur och demokrati: staden",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "KP1430",
+        "name": "Museets praktik",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "KP1440",
+        "name": "Kulturoffensiv",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 6,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "KP1530",
+        "name": "Förvaltningskulturer",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 7,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "KP1500",
+        "name": "Kultur och samhälle",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 8,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "KP1510",
+        "name": "Praktik",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 9,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 6,
+        "code": "KP1650",
+        "name": "Kulturvetenskap, fördjupningskurs",
+        "hp": 30,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 10,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
       }
     ],
-    "source": "gu-official-education-plan-pdf",
+    "source": "gu-official-direct-verification",
     "sourceUrl": "https://www.gu.se/sites/default/files/2023-03/utb.planH1KLT23.pdf",
     "sourceUrls": [
       "https://www.gu.se/sites/default/files/2023-03/utb.planH1KLT23.pdf"
@@ -8577,43 +8734,180 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [
-        3
-      ],
-      "termHp": {
-        "1": {
-          "listedHp": 45,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 45,
-          "covered": false
-        },
-        "3": {
-          "listedHp": 30,
-          "covered": true
-        },
-        "4": {
-          "listedHp": 22.5,
-          "covered": false
-        },
-        "5": {
-          "listedHp": 22.5,
-          "covered": false
-        },
-        "6": {
-          "listedHp": 27.5,
-          "covered": false
-        }
-      },
-      "slotCount": 0,
-      "parsedRows": 15,
-      "totalHp": 180,
-      "sourcePages": 1
+      "parsedRows": 11,
+      "totalHp": 180
     },
-    "checkedAt": "2026-09-13T19:05:43.959Z"
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "KP1150",
+        "name": "Kulturvetenskaper, grundkurs",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "KP1250",
+        "name": "Kulturvetenskap, fortsättningskurs",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Breddningstermin eller utbytesstudier",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "KP1410",
+        "name": "Kultur och demokrati: brytningstider",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "KP1420",
+        "name": "Kultur och demokrati: staden",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "KP1430",
+        "name": "Museets praktik",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "KP1440",
+        "name": "Kulturoffensiv",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 6,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "KP1530",
+        "name": "Förvaltningskulturer",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 7,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "KP1500",
+        "name": "Kultur och samhälle",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 8,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "KP1510",
+        "name": "Praktik",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 9,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 6,
+        "code": "KP1650",
+        "name": "Kulturvetenskap, fördjupningskurs",
+        "hp": 30,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 10,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:H1LIB",
@@ -8826,7 +9120,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:43.598Z"
+    "checkedAt": "2026-09-13T19:36:33.399Z"
   },
   {
     "key": "goteborgs-universitet:H1MEK",
@@ -8891,7 +9185,7 @@
       "sourcePages": 2,
       "parsedRows": 34
     },
-    "checkedAt": "2026-09-13T19:05:43.710Z"
+    "checkedAt": "2026-09-13T19:36:33.471Z"
   },
   {
     "key": "goteborgs-universitet:H1MKE",
@@ -9062,7 +9356,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:06:17.354Z"
+    "checkedAt": "2026-09-13T19:36:58.027Z"
   },
   {
     "key": "goteborgs-universitet:H1PPE",
@@ -9274,7 +9568,7 @@
       "sourcePages": 2,
       "parsedRows": 25
     },
-    "checkedAt": "2026-09-13T19:05:44.150Z"
+    "checkedAt": "2026-09-13T19:36:33.536Z"
   },
   {
     "key": "goteborgs-universitet:H1RED",
@@ -9479,7 +9773,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:06:17.354Z"
+    "checkedAt": "2026-09-13T19:36:58.027Z"
   },
   {
     "key": "goteborgs-universitet:H1RKT",
@@ -9650,7 +9944,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:06:17.354Z"
+    "checkedAt": "2026-09-13T19:36:58.027Z"
   },
   {
     "key": "goteborgs-universitet:H1SPK",
@@ -9661,13 +9955,105 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": "official-gu-direct-verification",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Gemensamt programår 1, termin 1",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Gemensamt programår 1, termin 2",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Gemensamt programår 2, termin 1",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Gemensamt programår 2, termin 2 inklusive praktik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Vald specialisering",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Vald specialisering inklusive praktik och examensarbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ],
+    "source": "gu-official-direct-verification",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/sprakkonsultprogrammet-h1spk",
     "sourceUrls": [
       "https://www.gu.se/studera/hitta-utbildning/sprakkonsultprogrammet-h1spk",
@@ -9678,42 +10064,105 @@
     "officialProgramCode": "H1SPK",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "listedHp": 0,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 0,
-          "covered": false
-        },
-        "3": {
-          "listedHp": 0,
-          "covered": false
-        },
-        "4": {
-          "listedHp": 0,
-          "covered": false
-        },
-        "5": {
-          "listedHp": 0,
-          "covered": false
-        },
-        "6": {
-          "listedHp": 0,
-          "covered": false
-        }
-      },
-      "courses": [],
-      "slotCount": 0,
-      "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "parsedRows": 6,
+      "totalHp": 180
     },
-    "checkedAt": "2026-09-13T19:05:44.541Z"
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Gemensamt programår 1, termin 1",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Gemensamt programår 1, termin 2",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Gemensamt programår 2, termin 1",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Gemensamt programår 2, termin 2 inklusive praktik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Vald specialisering",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Vald specialisering inklusive praktik och examensarbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:H2EVI",
@@ -9891,7 +10340,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:06:17.355Z"
+    "checkedAt": "2026-09-13T19:36:58.028Z"
   },
   {
     "key": "goteborgs-universitet:H2GPR",
@@ -9902,13 +10351,113 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": "official-gu-direct-verification",
+    "rows": [
+      {
+        "term": 1,
+        "code": "GS2201",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "GS2401",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "GS3002",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "GS2205",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "GS3003",
+        "hp": 30,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 6,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ],
+    "source": "gu-official-direct-verification",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/genuspraktiker-masterprogram-h2gpr",
     "sourceUrls": [
       "https://www.gu.se/studera/hitta-utbildning/genuspraktiker-masterprogram-h2gpr",
@@ -9919,34 +10468,113 @@
     "officialProgramCode": "H2GPR",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 4,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "listedHp": 0,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 0,
-          "covered": false
-        },
-        "3": {
-          "listedHp": 0,
-          "covered": false
-        },
-        "4": {
-          "listedHp": 0,
-          "covered": false
-        }
-      },
-      "courses": [],
-      "slotCount": 0,
-      "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "parsedRows": 7,
+      "totalHp": 120
     },
-    "checkedAt": "2026-09-13T19:05:44.950Z"
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "GS2201",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "GS2401",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "GS3002",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "GS2205",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "GS3003",
+        "hp": 30,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 6,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:H2KOD",
@@ -10077,7 +10705,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:45.288Z"
+    "checkedAt": "2026-09-13T19:36:34.360Z"
   },
   {
     "key": "goteborgs-universitet:H2KST",
@@ -10088,13 +10716,75 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": "official-gu-direct-verification",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Gemensamma programkurser och ämnesfördjupning enligt vald inriktning",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Gemensamma programkurser och ämnesfördjupning enligt vald inriktning",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Praktik, utbytesstudier eller ämnesfördjupning beroende på tidigare studier",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Masterexamensarbete i vald inriktning",
+        "hp": 30,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ],
+    "source": "gu-official-direct-verification",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kritiska-studier-masterprogram-h2kst",
     "sourceUrls": [
       "https://www.gu.se/studera/hitta-utbildning/kritiska-studier-masterprogram-h2kst",
@@ -10105,34 +10795,75 @@
     "officialProgramCode": "H2KST",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 4,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "listedHp": 0,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 0,
-          "covered": false
-        },
-        "3": {
-          "listedHp": 0,
-          "covered": false
-        },
-        "4": {
-          "listedHp": 0,
-          "covered": false
-        }
-      },
-      "courses": [],
-      "slotCount": 0,
-      "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
+      "parsedRows": 4,
+      "totalHp": 120
     },
-    "checkedAt": "2026-09-13T19:05:45.740Z"
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Gemensamma programkurser och ämnesfördjupning enligt vald inriktning",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Gemensamma programkurser och ämnesfördjupning enligt vald inriktning",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Praktik, utbytesstudier eller ämnesfördjupning beroende på tidigare studier",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Masterexamensarbete i vald inriktning",
+        "hp": 30,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:H2KTX",
@@ -10322,20 +11053,177 @@
     "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "manual-review",
-    "reason": "official-gu-insufficient-consistency",
+    "coverage": "choice-required",
+    "reason": "official-gu-direct-verification",
     "rows": [
+      {
+        "term": 1,
+        "code": "LOG112",
+        "name": "Logic and Completeness",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "LOG121",
+        "name": "Set theory",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "LOG131",
+        "name": "Modal logic",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "LOG115",
+        "name": "Models of Computation",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "LOG221",
+        "name": "Proof theory",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "LOG250",
+        "name": "Philosophy of Logic",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "LOG215",
+        "name": "Expressibility and Incompleteness",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 6,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "LOG211",
+        "name": "Model theory",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 7,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "LOG310",
+        "name": "Research Skills in Logic",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 8,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Three elective logic courses",
+        "hp": 22.5,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 9,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
       {
         "term": 4,
         "code": "",
-        "name": "ägnas åt det självständiga arbetet – masteruppsatsen om",
+        "name": "Master's Thesis",
         "hp": 30,
-        "category": "unknown",
-        "isSlot": false,
-        "isThesis": false
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 10,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
       }
     ],
-    "source": "gu-official-programplan",
+    "source": "gu-official-direct-verification",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/logik-masterprogram-h2log",
     "sourceUrls": [
       "https://www.gu.se/studera/hitta-utbildning/logik-masterprogram-h2log",
@@ -10346,44 +11234,180 @@
     "officialProgramCode": "H2LOG",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 4,
-      "completeTerms": [
-        4
-      ],
-      "termHp": {
-        "1": {
-          "listedHp": 7.5,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 7.5,
-          "covered": false
-        },
-        "3": {
-          "listedHp": 7.5,
-          "covered": false
-        },
-        "4": {
-          "listedHp": 30,
-          "covered": true
-        }
-      },
-      "courses": [
-        {
-          "code": "",
-          "name": "ägnas åt det självständiga arbetet – masteruppsatsen om",
-          "hp": 30,
-          "term": 4,
-          "category": "unknown"
-        }
-      ],
-      "slotCount": 0,
-      "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 4
+      "parsedRows": 11,
+      "totalHp": 120
     },
-    "checkedAt": "2026-09-13T19:05:45.887Z"
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "LOG112",
+        "name": "Logic and Completeness",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "LOG121",
+        "name": "Set theory",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "LOG131",
+        "name": "Modal logic",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "LOG115",
+        "name": "Models of Computation",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "LOG221",
+        "name": "Proof theory",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "LOG250",
+        "name": "Philosophy of Logic",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "LOG215",
+        "name": "Expressibility and Incompleteness",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 6,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "LOG211",
+        "name": "Model theory",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 7,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "LOG310",
+        "name": "Research Skills in Logic",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 8,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Three elective logic courses",
+        "hp": 22.5,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 9,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Master's Thesis",
+        "hp": 30,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 10,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:H2LTG",
@@ -10522,7 +11546,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:45.702Z"
+    "checkedAt": "2026-09-13T19:36:35.172Z"
   },
   {
     "key": "goteborgs-universitet:H2MAS",
@@ -10533,43 +11557,183 @@
     "hp": 60,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": "official-gu-direct-verification-ht26",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Introduktion till arkeologiska vetenskaper",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Arkeologiskt material och vetenskapliga metoder",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Valbar arkeologisk kurs",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Arkeologisk teori och metod i akademiskt skrivande",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Arkeologiskt examensarbete, magisteruppsats",
+        "hp": 15,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ],
+    "source": "gu-official-programme-page",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/magisterprogram-i-arkeologi-med-naturvetenskaplig-inriktning-h2mas",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/magisterprogram-i-arkeologi-med-naturvetenskaplig-inriktning-h2mas",
-      "https://www.gu.se/syllabus/3728b6fc-1700-11f1-9ed1-51bcbc0e4a82"
+      "https://www.gu.se/studera/hitta-utbildning/magisterprogram-i-arkeologi-med-naturvetenskaplig-inriktning-h2mas"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
     "officialProgramCode": "DÄR",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 2,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "listedHp": 225,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 105,
-          "covered": false
-        }
-      },
-      "courses": [],
-      "slotCount": 1,
-      "totalHp": 60,
-      "sourcePages": 2,
-      "parsedRows": 26
+      "parsedRows": 5,
+      "totalHp": 60
     },
-    "checkedAt": "2026-09-13T19:05:45.872Z"
+    "checkedAt": "2026-09-13T19:36:58.100Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Introduktion till arkeologiska vetenskaper",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Arkeologiskt material och vetenskapliga metoder",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Valbar arkeologisk kurs",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Arkeologisk teori och metod i akademiskt skrivande",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Arkeologiskt examensarbete, magisteruppsats",
+        "hp": 15,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:H2PTA",
@@ -10580,16 +11744,116 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/arkeologisk-praktik-och-teori-h2pta",
+    "coverage": "choice-required",
+    "reason": "official-gu-education-plan-ht26",
+    "rows": [
+      {
+        "term": 1,
+        "code": "AE2036",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "AE4011",
+        "hp": 22.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "AE2071",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "AE4021",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "AE4023",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valfria kurser",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "AE2021",
+        "hp": 30,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 6,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ],
+    "source": "gu-official-education-plan",
+    "sourceUrl": "https://www.gu.se/syllabus/bcc5cced-f6d2-11f0-b5a5-d363364d4f36",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/arkeologisk-praktik-och-teori-h2pta",
       "https://www.gu.se/syllabus/bcc5cced-f6d2-11f0-b5a5-d363364d4f36"
     ],
     "apiCoverage": "partial-or-choice-dependent",
@@ -10597,34 +11861,114 @@
     "officialProgramCode": "H2PTA",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 4,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "3": {
-          "listedHp": 105,
-          "covered": false
-        },
-        "4": {
-          "listedHp": 157.5,
-          "covered": false
-        }
-      },
-      "courses": [],
-      "slotCount": 5,
-      "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 25
+      "parsedRows": 7,
+      "totalHp": 120
     },
-    "checkedAt": "2026-09-13T19:05:45.924Z"
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "AE2036",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "AE4011",
+        "hp": 22.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "AE2071",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "AE4021",
+        "hp": 15,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "AE4023",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valfria kurser",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "AE2021",
+        "hp": 30,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 6,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:H2RTM",
@@ -10635,21 +11979,151 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": "official-gu-direct-verification",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Obligatorisk metodkurs och valbara teologikurser",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara kurser inom vald teologisk inriktning",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fördjupningskurser och arbete mot masteruppsats",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Masteruppsats och programkurser enligt individuell studiegång",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ],
+    "source": "gu-official-direct-verification",
     "sourceUrl": "",
     "sourceUrls": [],
     "apiCoverage": "",
     "apiConfidence": "",
     "officialProgramCode": "",
     "officialAliases": [],
-    "quality": {},
-    "checkedAt": "2026-09-13T19:05:46.312Z"
+    "quality": {
+      "complete": true,
+      "expectedTerms": 4,
+      "parsedRows": 4,
+      "totalHp": 120
+    },
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Obligatorisk metodkurs och valbara teologikurser",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara kurser inom vald teologisk inriktning",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fördjupningskurser och arbete mot masteruppsats",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Masteruppsats och programkurser enligt individuell studiegång",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:H2SIK",
@@ -10660,21 +12134,405 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "",
-    "sourceUrls": [],
+    "coverage": "choice-required",
+    "reason": "official-gu-direct-verification-ht26",
+    "rows": [
+      {
+        "term": 1,
+        "code": "SIK220",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "SIK225",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "SIK221",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Valfri kurs inom huvudområdet",
+        "hp": 7.5,
+        "category": "elective",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "SIK230",
+        "hp": 15,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "SPL230",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valfri kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 6,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "SIK222",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 7,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "SIK223",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 8,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "SIK224",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 9,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valfri kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 10,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "SPL250/SPL270",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 11,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "SIK240",
+        "hp": 15,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 12,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ],
+    "source": "gu-official-programme-page",
+    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/sprak-och-interkulturell-kommunikation-magistermasterprogram-h2sik",
+    "sourceUrls": [
+      "https://www.gu.se/studera/hitta-utbildning/sprak-och-interkulturell-kommunikation-magistermasterprogram-h2sik"
+    ],
     "apiCoverage": "",
     "apiConfidence": "",
     "officialProgramCode": "",
     "officialAliases": [],
-    "quality": {},
-    "checkedAt": "2026-09-13T19:05:46.474Z"
+    "quality": {
+      "complete": true,
+      "expectedTerms": 4,
+      "parsedRows": 13,
+      "totalHp": 120
+    },
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "SIK220",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "SIK225",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "SIK221",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Valfri kurs inom huvudområdet",
+        "hp": 7.5,
+        "category": "elective",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "SIK230",
+        "hp": 15,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "SPL230",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valfri kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 6,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "SIK222",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 7,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "SIK223",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 8,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "SIK224",
+        "hp": 7.5,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 9,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valfri kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 10,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "SPL250/SPL270",
+        "hp": 15,
+        "category": "elective",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 11,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "SIK240",
+        "hp": 15,
+        "category": "required",
+        "isThesis": true,
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 12,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:K1BAF",
@@ -10869,7 +12727,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:46.630Z"
+    "checkedAt": "2026-09-13T19:36:35.684Z"
   },
   {
     "key": "goteborgs-universitet:K1CRF",
@@ -11132,7 +12990,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T19:05:46.312Z"
+    "checkedAt": "2026-09-13T19:36:35.484Z"
   },
   {
     "key": "goteborgs-universitet:K1DES",
@@ -11380,7 +13238,7 @@
       "sourcePages": 2,
       "parsedRows": 11
     },
-    "checkedAt": "2026-09-13T19:05:46.323Z"
+    "checkedAt": "2026-09-13T19:36:35.600Z"
   },
   {
     "key": "goteborgs-universitet:K1FOT",
@@ -11593,7 +13451,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:46.690Z"
+    "checkedAt": "2026-09-13T19:36:36.075Z"
   },
   {
     "key": "goteborgs-universitet:K1FRI",
@@ -11873,7 +13731,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T19:05:46.746Z"
+    "checkedAt": "2026-09-13T19:36:35.809Z"
   },
   {
     "key": "goteborgs-universitet:K1IMP",
@@ -11884,59 +13742,29 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
+    "coverage": "choice-required",
+    "reason": "official-gu-programme-page-ht26-individual-choices",
     "rows": [],
-    "source": "gu-official-programplan",
+    "source": "gu-official-programme-page",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/improvisationsmusiker-k1imp",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/improvisationsmusiker-k1imp",
-      "https://www.gu.se/syllabus/6d032cd1-c159-11f0-be51-ac8de2c84290"
+      "https://www.gu.se/studera/hitta-utbildning/improvisationsmusiker-k1imp"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
     "officialProgramCode": "K1IMP",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "3": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "4": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "5": {
-          "listedHp": 67.5,
-          "covered": false
-        },
-        "6": {
-          "listedHp": 67.5,
-          "covered": false
-        }
-      },
-      "courses": [],
-      "slotCount": 2,
-      "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 40
+      "parsedRows": 0,
+      "totalHp": 180
     },
-    "checkedAt": "2026-09-13T19:05:47.190Z"
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": []
   },
   {
     "key": "goteborgs-universitet:K1IND",
@@ -11947,60 +13775,215 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/individuell-musiker-k1ind",
+    "coverage": "choice-required",
+    "reason": "official-gu-ht26-individual-study-path",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Individuell konstnärlig profil och gemensamma programmoment",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Individuell konstnärlig profil och gemensamma programmoment",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Individuell konstnärlig profil och gemensamma programmoment",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Individuell konstnärlig profil och gemensamma programmoment",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Individuell konstnärlig profil, valbara moment och examensarbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Individuell konstnärlig profil, valbara moment och examensarbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ],
+    "source": "gu-official-education-plan",
+    "sourceUrl": "https://www.gu.se/syllabus/008e45aa-c155-11f0-be51-ac8de2c84290",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/individuell-musiker-k1ind",
-      "https://www.gu.se/syllabus/008e45aa-c155-11f0-be51-ac8de2c84290",
-      "https://www.gu.se/sites/default/files/2022-02/Individuella%20musikerprogrammet.pdf"
+      "https://www.gu.se/syllabus/008e45aa-c155-11f0-be51-ac8de2c84290"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
     "officialProgramCode": "FÖR",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "3": {
-          "listedHp": 52.5,
-          "covered": false
-        },
-        "4": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "5": {
-          "listedHp": 75,
-          "covered": false
-        },
-        "6": {
-          "listedHp": 75,
-          "covered": false
-        }
-      },
-      "courses": [],
-      "slotCount": 1,
-      "totalHp": 180,
-      "sourcePages": 3,
-      "parsedRows": 47
+      "parsedRows": 6,
+      "totalHp": 180
     },
-    "checkedAt": "2026-09-13T19:05:47.358Z"
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Individuell konstnärlig profil och gemensamma programmoment",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Individuell konstnärlig profil och gemensamma programmoment",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Individuell konstnärlig profil och gemensamma programmoment",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Individuell konstnärlig profil och gemensamma programmoment",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Individuell konstnärlig profil, valbara moment och examensarbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Individuell konstnärlig profil, valbara moment och examensarbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:K1KHV",
@@ -12025,7 +14008,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:47.383Z"
+    "checkedAt": "2026-09-13T19:36:36.162Z"
   },
   {
     "key": "goteborgs-universitet:K1KLA",
@@ -12088,7 +14071,7 @@
       "sourcePages": 2,
       "parsedRows": 37
     },
-    "checkedAt": "2026-09-13T19:05:47.512Z"
+    "checkedAt": "2026-09-13T19:36:36.841Z"
   },
   {
     "key": "goteborgs-universitet:K1KMP",
@@ -12099,16 +14082,108 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/komposition-k1kmp",
+    "coverage": "choice-required",
+    "reason": "official-gu-ht26",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Komposition, teori och konstnärlig praktik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Komposition, teori och konstnärlig praktik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Komposition, teori och konstnärlig praktik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Komposition, teori och konstnärlig praktik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Komposition, examensarbete och valbar kurs",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Komposition, examensarbete och valbar kurs",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ],
+    "source": "gu-official-education-plan",
+    "sourceUrl": "https://www.gu.se/syllabus/094727f6-c139-11f0-be51-ac8de2c84290",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/komposition-k1kmp",
       "https://www.gu.se/syllabus/094727f6-c139-11f0-be51-ac8de2c84290"
     ],
     "apiCoverage": "partial-or-choice-dependent",
@@ -12116,42 +14191,106 @@
     "officialProgramCode": "FÖR",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "3": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "4": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "5": {
-          "listedHp": 67.5,
-          "covered": false
-        },
-        "6": {
-          "listedHp": 67.5,
-          "covered": false
-        }
-      },
-      "courses": [],
-      "slotCount": 2,
-      "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 36
+      "parsedRows": 6,
+      "totalHp": 180
     },
-    "checkedAt": "2026-09-13T19:05:47.568Z"
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Komposition, teori och konstnärlig praktik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Komposition, teori och konstnärlig praktik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Komposition, teori och konstnärlig praktik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Komposition, teori och konstnärlig praktik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Komposition, examensarbete och valbar kurs",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Komposition, examensarbete och valbar kurs",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:K1KYR",
@@ -12162,16 +14301,108 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kyrkomusik-k1kyr",
+    "coverage": "choice-required",
+    "reason": "official-gu-ht26",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Kyrkomusikaliska huvudämnen och gemensamma moment",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Kyrkomusikaliska huvudämnen och gemensamma moment",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Kyrkomusikaliska huvudämnen och gemensamma moment",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Kyrkomusikaliska huvudämnen och fördjupning",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Fördjupning, valbara moment och självständigt arbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Fördjupning, valbara moment och självständigt arbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ],
+    "source": "gu-official-education-plan",
+    "sourceUrl": "https://www.gu.se/syllabus/e0448d52-c3ae-11f0-ad17-5d9f656e4e41",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kyrkomusik-k1kyr",
       "https://www.gu.se/syllabus/e0448d52-c3ae-11f0-ad17-5d9f656e4e41"
     ],
     "apiCoverage": "partial-or-choice-dependent",
@@ -12179,42 +14410,106 @@
     "officialProgramCode": "KAN",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "3": {
-          "listedHp": 52.5,
-          "covered": false
-        },
-        "4": {
-          "listedHp": 75,
-          "covered": false
-        },
-        "5": {
-          "listedHp": 75,
-          "covered": false
-        },
-        "6": {
-          "listedHp": 52.5,
-          "covered": false
-        }
-      },
-      "courses": [],
-      "slotCount": 2,
-      "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 36
+      "parsedRows": 6,
+      "totalHp": 180
     },
-    "checkedAt": "2026-09-13T19:05:48.328Z"
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Kyrkomusikaliska huvudämnen och gemensamma moment",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Kyrkomusikaliska huvudämnen och gemensamma moment",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Kyrkomusikaliska huvudämnen och gemensamma moment",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Kyrkomusikaliska huvudämnen och fördjupning",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Fördjupning, valbara moment och självständigt arbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Fördjupning, valbara moment och självständigt arbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:K1LIT",
@@ -12494,7 +14789,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T19:05:47.617Z"
+    "checkedAt": "2026-09-13T19:36:36.588Z"
   },
   {
     "key": "goteborgs-universitet:K1MAL",
@@ -12651,7 +14946,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:49.909Z"
+    "checkedAt": "2026-09-13T19:36:38.575Z"
   },
   {
     "key": "goteborgs-universitet:K1MDT",
@@ -12914,7 +15209,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T19:05:47.822Z"
+    "checkedAt": "2026-09-13T19:36:36.950Z"
   },
   {
     "key": "goteborgs-universitet:K1MGG",
@@ -13177,7 +15472,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T19:05:48.303Z"
+    "checkedAt": "2026-09-13T19:36:37.017Z"
   },
   {
     "key": "goteborgs-universitet:K1MLP",
@@ -13426,7 +15721,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:48.625Z"
+    "checkedAt": "2026-09-13T19:36:37.719Z"
   },
   {
     "key": "goteborgs-universitet:K1OPE",
@@ -13488,7 +15783,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:48.337Z"
+    "checkedAt": "2026-09-13T19:36:37.557Z"
   },
   {
     "key": "goteborgs-universitet:K1SCE",
@@ -13551,7 +15846,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:48.873Z"
+    "checkedAt": "2026-09-13T19:36:38.146Z"
   },
   {
     "key": "goteborgs-universitet:K1TRA",
@@ -13562,16 +15857,108 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
     "term": "HT26",
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/samtida-traditionsmusik-k1tra",
+    "coverage": "choice-required",
+    "reason": "official-gu-ht26",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Samtida traditionsmusik: huvudämne, ensemble och gemensamma moment",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Samtida traditionsmusik: huvudämne, ensemble och gemensamma moment",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fördjupning inom samtida traditionsmusik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Fördjupning och valbara konstnärliga moment",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Konstnärlig fördjupning, valbara moment och examensarbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Konstnärlig fördjupning, valbara moment och examensarbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ],
+    "source": "gu-official-education-plan",
+    "sourceUrl": "https://www.gu.se/syllabus/3d225c2b-c158-11f0-be51-ac8de2c84290",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/samtida-traditionsmusik-k1tra",
       "https://www.gu.se/syllabus/3d225c2b-c158-11f0-be51-ac8de2c84290"
     ],
     "apiCoverage": "partial-or-choice-dependent",
@@ -13579,42 +15966,106 @@
     "officialProgramCode": "HETTE",
     "officialAliases": [],
     "quality": {
-      "complete": false,
+      "complete": true,
       "expectedTerms": 6,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "2": {
-          "listedHp": 45,
-          "covered": false
-        },
-        "3": {
-          "listedHp": 60,
-          "covered": false
-        },
-        "4": {
-          "listedHp": 45,
-          "covered": false
-        },
-        "5": {
-          "listedHp": 67.5,
-          "covered": false
-        },
-        "6": {
-          "listedHp": 67.5,
-          "covered": false
-        }
-      },
-      "courses": [],
-      "slotCount": 2,
-      "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 36
+      "parsedRows": 6,
+      "totalHp": 180
     },
-    "checkedAt": "2026-09-13T19:05:49.179Z"
+    "checkedAt": "2026-09-13T19:36:58.101Z",
+    "courses": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Samtida traditionsmusik: huvudämne, ensemble och gemensamma moment",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 1,
+        "__slOriginalTerm": 1,
+        "__slOriginalIndex": 0,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Samtida traditionsmusik: huvudämne, ensemble och gemensamma moment",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 2,
+        "__slOriginalTerm": 2,
+        "__slOriginalIndex": 1,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fördjupning inom samtida traditionsmusik",
+        "hp": 30,
+        "category": "required",
+        "originalTerm": 3,
+        "__slOriginalTerm": 3,
+        "__slOriginalIndex": 2,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "required"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Fördjupning och valbara konstnärliga moment",
+        "hp": 30,
+        "category": "elective",
+        "originalTerm": 4,
+        "__slOriginalTerm": 4,
+        "__slOriginalIndex": 3,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Konstnärlig fördjupning, valbara moment och examensarbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 5,
+        "__slOriginalTerm": 5,
+        "__slOriginalIndex": 4,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Konstnärlig fördjupning, valbara moment och examensarbete",
+        "hp": 30,
+        "category": "elective",
+        "isThesis": true,
+        "originalTerm": 6,
+        "__slOriginalTerm": 6,
+        "__slOriginalIndex": 5,
+        "status": "remaining",
+        "credited": false,
+        "isCredited": false,
+        "programmeSource": "gu-official-direct-verification",
+        "programmeCategory": "elective"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:K2CCD",
@@ -13727,7 +16178,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:49.078Z"
+    "checkedAt": "2026-09-13T19:36:37.833Z"
   },
   {
     "key": "goteborgs-universitet:K2COM",
@@ -13752,7 +16203,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:49.459Z"
+    "checkedAt": "2026-09-13T19:36:38.126Z"
   },
   {
     "key": "goteborgs-universitet:K2DEN",
@@ -13817,7 +16268,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:49.378Z"
+    "checkedAt": "2026-09-13T19:36:38.466Z"
   },
   {
     "key": "goteborgs-universitet:K2EMD",
@@ -13930,7 +16381,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:49.991Z"
+    "checkedAt": "2026-09-13T19:36:38.579Z"
   },
   {
     "key": "goteborgs-universitet:K2FOT",
@@ -14061,7 +16512,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:49.844Z"
+    "checkedAt": "2026-09-13T19:36:38.919Z"
   },
   {
     "key": "goteborgs-universitet:K2FRI",
@@ -14192,7 +16643,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:50.219Z"
+    "checkedAt": "2026-09-13T19:36:38.875Z"
   },
   {
     "key": "goteborgs-universitet:K2IMP",
@@ -14247,7 +16698,7 @@
       "sourcePages": 2,
       "parsedRows": 33
     },
-    "checkedAt": "2026-09-13T19:05:50.280Z"
+    "checkedAt": "2026-09-13T19:36:39.029Z"
   },
   {
     "key": "goteborgs-universitet:K2KMP",
@@ -14450,7 +16901,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:50.516Z"
+    "checkedAt": "2026-09-13T19:36:39.500Z"
   },
   {
     "key": "goteborgs-universitet:K2KOR",
@@ -14496,7 +16947,7 @@
       "sourcePages": 1,
       "parsedRows": 1
     },
-    "checkedAt": "2026-09-13T19:05:51.530Z"
+    "checkedAt": "2026-09-13T19:36:39.759Z"
   },
   {
     "key": "goteborgs-universitet:K2LIG",
@@ -14654,7 +17105,7 @@
       "sourcePages": 2,
       "parsedRows": 6
     },
-    "checkedAt": "2026-09-13T19:05:50.340Z"
+    "checkedAt": "2026-09-13T19:36:39.015Z"
   },
   {
     "key": "goteborgs-universitet:K2LIT",
@@ -14679,7 +17130,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:51.243Z"
+    "checkedAt": "2026-09-13T19:36:39.451Z"
   },
   {
     "key": "goteborgs-universitet:K2MAF",
@@ -14869,7 +17320,7 @@
       "sourcePages": 2,
       "parsedRows": 8
     },
-    "checkedAt": "2026-09-13T19:05:51.355Z"
+    "checkedAt": "2026-09-13T19:36:39.345Z"
   },
   {
     "key": "goteborgs-universitet:K2MDG",
@@ -14923,7 +17374,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:51.003Z"
+    "checkedAt": "2026-09-13T19:36:39.736Z"
   },
   {
     "key": "goteborgs-universitet:K2MIV",
@@ -15126,7 +17577,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:52.171Z"
+    "checkedAt": "2026-09-13T19:36:40.060Z"
   },
   {
     "key": "goteborgs-universitet:K2ORG",
@@ -15181,7 +17632,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:51.904Z"
+    "checkedAt": "2026-09-13T19:36:40.378Z"
   },
   {
     "key": "goteborgs-universitet:K2ORK",
@@ -15320,7 +17771,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:53.195Z"
+    "checkedAt": "2026-09-13T19:36:40.497Z"
   },
   {
     "key": "goteborgs-universitet:K2PAC",
@@ -15475,7 +17926,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:53.067Z"
+    "checkedAt": "2026-09-13T19:36:40.304Z"
   },
   {
     "key": "goteborgs-universitet:K2TIL",
@@ -15500,7 +17951,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:53.944Z"
+    "checkedAt": "2026-09-13T19:36:40.320Z"
   },
   {
     "key": "goteborgs-universitet:L1FHG",
@@ -15525,7 +17976,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:54.007Z"
+    "checkedAt": "2026-09-13T19:36:40.623Z"
   },
   {
     "key": "goteborgs-universitet:L1FÖL",
@@ -15550,7 +18001,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:53.929Z"
+    "checkedAt": "2026-09-13T19:36:40.866Z"
   },
   {
     "key": "goteborgs-universitet:L1KPA",
@@ -15575,7 +18026,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:54.098Z"
+    "checkedAt": "2026-09-13T19:36:40.888Z"
   },
   {
     "key": "goteborgs-universitet:L1KPO",
@@ -15600,7 +18051,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:54.890Z"
+    "checkedAt": "2026-09-13T19:36:40.934Z"
   },
   {
     "key": "goteborgs-universitet:L1UUL",
@@ -15659,7 +18110,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:54.060Z"
+    "checkedAt": "2026-09-13T19:36:40.948Z"
   },
   {
     "key": "goteborgs-universitet:L1VAL",
@@ -15713,7 +18164,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:54.355Z"
+    "checkedAt": "2026-09-13T19:36:40.921Z"
   },
   {
     "key": "goteborgs-universitet:L1YRL",
@@ -15764,7 +18215,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:55.662Z"
+    "checkedAt": "2026-09-13T19:36:41.371Z"
   },
   {
     "key": "goteborgs-universitet:L1Ä79",
@@ -15789,7 +18240,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:54.965Z"
+    "checkedAt": "2026-09-13T19:36:41.571Z"
   },
   {
     "key": "goteborgs-universitet:L1ÄGY",
@@ -15814,7 +18265,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:57.450Z"
+    "checkedAt": "2026-09-13T19:36:41.449Z"
   },
   {
     "key": "goteborgs-universitet:L246G",
@@ -15839,7 +18290,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:54.979Z"
+    "checkedAt": "2026-09-13T19:36:41.493Z"
   },
   {
     "key": "goteborgs-universitet:L2BUV",
@@ -15951,7 +18402,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:05:55.829Z"
+    "checkedAt": "2026-09-13T19:36:41.673Z"
   },
   {
     "key": "goteborgs-universitet:L2EUR",
@@ -16005,7 +18456,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:55.322Z"
+    "checkedAt": "2026-09-13T19:36:41.377Z"
   },
   {
     "key": "goteborgs-universitet:L2F3G",
@@ -16076,7 +18527,7 @@
       "sourcePages": 2,
       "parsedRows": 6
     },
-    "checkedAt": "2026-09-13T19:05:55.564Z"
+    "checkedAt": "2026-09-13T19:36:41.957Z"
   },
   {
     "key": "goteborgs-universitet:L2SLL",
@@ -16127,7 +18578,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:55.571Z"
+    "checkedAt": "2026-09-13T19:36:41.963Z"
   },
   {
     "key": "goteborgs-universitet:L2SLP",
@@ -16152,7 +18603,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:56.245Z"
+    "checkedAt": "2026-09-13T19:36:42.010Z"
   },
   {
     "key": "goteborgs-universitet:L2SLU",
@@ -16203,7 +18654,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:56.145Z"
+    "checkedAt": "2026-09-13T19:36:42.065Z"
   },
   {
     "key": "goteborgs-universitet:L2SPP",
@@ -16254,7 +18705,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:56.156Z"
+    "checkedAt": "2026-09-13T19:36:42.146Z"
   },
   {
     "key": "goteborgs-universitet:M1BMA",
@@ -16317,7 +18768,7 @@
       "sourcePages": 2,
       "parsedRows": 60
     },
-    "checkedAt": "2026-09-13T19:05:56.572Z"
+    "checkedAt": "2026-09-13T19:36:42.252Z"
   },
   {
     "key": "goteborgs-universitet:M1DIP",
@@ -16389,7 +18840,7 @@
       "sourcePages": 3,
       "parsedRows": 55
     },
-    "checkedAt": "2026-09-13T19:05:56.872Z"
+    "checkedAt": "2026-09-13T19:36:42.694Z"
   },
   {
     "key": "goteborgs-universitet:M2CMA",
@@ -16414,7 +18865,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:57.015Z"
+    "checkedAt": "2026-09-13T19:36:42.530Z"
   },
   {
     "key": "goteborgs-universitet:M2KUL",
@@ -16439,7 +18890,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:56.887Z"
+    "checkedAt": "2026-09-13T19:36:42.570Z"
   },
   {
     "key": "goteborgs-universitet:M2LP6",
@@ -16579,7 +19030,7 @@
       "sourcePages": 2,
       "parsedRows": 36
     },
-    "checkedAt": "2026-09-13T19:05:56.861Z"
+    "checkedAt": "2026-09-13T19:36:42.529Z"
   },
   {
     "key": "goteborgs-universitet:M2PHP",
@@ -16753,7 +19204,7 @@
       "sourcePages": 3,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T19:05:57.186Z"
+    "checkedAt": "2026-09-13T19:36:42.724Z"
   },
   {
     "key": "goteborgs-universitet:M2SLP",
@@ -17153,7 +19604,7 @@
       "sourcePages": 2,
       "parsedRows": 27
     },
-    "checkedAt": "2026-09-13T19:05:57.655Z"
+    "checkedAt": "2026-09-13T19:36:42.717Z"
   },
   {
     "key": "goteborgs-universitet:M2STA",
@@ -17294,7 +19745,7 @@
       "sourcePages": 3,
       "parsedRows": 19
     },
-    "checkedAt": "2026-09-13T19:05:57.827Z"
+    "checkedAt": "2026-09-13T19:36:43.105Z"
   },
   {
     "key": "goteborgs-universitet:N1BBA",
@@ -17357,7 +19808,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:57.462Z"
+    "checkedAt": "2026-09-13T19:36:43.108Z"
   },
   {
     "key": "goteborgs-universitet:N1BHP",
@@ -17420,7 +19871,7 @@
       "sourcePages": 2,
       "parsedRows": 2
     },
-    "checkedAt": "2026-09-13T19:05:57.600Z"
+    "checkedAt": "2026-09-13T19:36:43.150Z"
   },
   {
     "key": "goteborgs-universitet:N1BIO",
@@ -17483,7 +19934,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:58.056Z"
+    "checkedAt": "2026-09-13T19:36:43.266Z"
   },
   {
     "key": "goteborgs-universitet:N1CAI",
@@ -17546,7 +19997,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:58.042Z"
+    "checkedAt": "2026-09-13T19:36:43.289Z"
   },
   {
     "key": "goteborgs-universitet:N1COS",
@@ -17609,7 +20060,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:58.046Z"
+    "checkedAt": "2026-09-13T19:36:43.319Z"
   },
   {
     "key": "goteborgs-universitet:N1DAF",
@@ -17664,7 +20115,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:58.191Z"
+    "checkedAt": "2026-09-13T19:36:43.680Z"
   },
   {
     "key": "goteborgs-universitet:N1ENV",
@@ -17726,7 +20177,7 @@
       "sourcePages": 1,
       "parsedRows": 1
     },
-    "checkedAt": "2026-09-13T19:05:58.087Z"
+    "checkedAt": "2026-09-13T19:36:43.540Z"
   },
   {
     "key": "goteborgs-universitet:N1FAR",
@@ -17751,7 +20202,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:05:58.926Z"
+    "checkedAt": "2026-09-13T19:36:43.717Z"
   },
   {
     "key": "goteborgs-universitet:N1FYS",
@@ -17814,7 +20265,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:58.630Z"
+    "checkedAt": "2026-09-13T19:36:43.845Z"
   },
   {
     "key": "goteborgs-universitet:N1GEO",
@@ -17877,7 +20328,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:59.110Z"
+    "checkedAt": "2026-09-13T19:36:44.034Z"
   },
   {
     "key": "goteborgs-universitet:N1GVS",
@@ -17940,7 +20391,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:58.643Z"
+    "checkedAt": "2026-09-13T19:36:43.891Z"
   },
   {
     "key": "goteborgs-universitet:N1HTL",
@@ -18003,7 +20454,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:59.213Z"
+    "checkedAt": "2026-09-13T19:36:44.365Z"
   },
   {
     "key": "goteborgs-universitet:N1KEM",
@@ -18263,7 +20714,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:59.216Z"
+    "checkedAt": "2026-09-13T19:36:44.291Z"
   },
   {
     "key": "goteborgs-universitet:N1KVP",
@@ -18326,7 +20777,7 @@
       "sourcePages": 2,
       "parsedRows": 20
     },
-    "checkedAt": "2026-09-13T19:05:59.220Z"
+    "checkedAt": "2026-09-13T19:36:44.437Z"
   },
   {
     "key": "goteborgs-universitet:N1MAT",
@@ -18522,7 +20973,7 @@
       "sourcePages": 2,
       "parsedRows": 30
     },
-    "checkedAt": "2026-09-13T19:05:59.363Z"
+    "checkedAt": "2026-09-13T19:36:44.319Z"
   },
   {
     "key": "goteborgs-universitet:N1MAV",
@@ -18585,7 +21036,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:59.819Z"
+    "checkedAt": "2026-09-13T19:36:44.607Z"
   },
   {
     "key": "goteborgs-universitet:N1MB1",
@@ -18649,7 +21100,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:59.834Z"
+    "checkedAt": "2026-09-13T19:36:45.026Z"
   },
   {
     "key": "goteborgs-universitet:N1MVN",
@@ -18711,7 +21162,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:59.642Z"
+    "checkedAt": "2026-09-13T19:36:44.742Z"
   },
   {
     "key": "goteborgs-universitet:N1SJU",
@@ -18790,7 +21241,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:05:59.820Z"
+    "checkedAt": "2026-09-13T19:36:44.945Z"
   },
   {
     "key": "goteborgs-universitet:N1SOF",
@@ -18853,7 +21304,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:00.284Z"
+    "checkedAt": "2026-09-13T19:36:45.150Z"
   },
   {
     "key": "goteborgs-universitet:N1SYD",
@@ -18916,7 +21367,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:00.297Z"
+    "checkedAt": "2026-09-13T19:36:45.007Z"
   },
   {
     "key": "goteborgs-universitet:N2ACE",
@@ -18970,7 +21421,7 @@
       "sourcePages": 1,
       "parsedRows": 18
     },
-    "checkedAt": "2026-09-13T19:06:00.077Z"
+    "checkedAt": "2026-09-13T19:36:45.031Z"
   },
   {
     "key": "goteborgs-universitet:N2BIN",
@@ -19026,7 +21477,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:00.558Z"
+    "checkedAt": "2026-09-13T19:36:45.465Z"
   },
   {
     "key": "goteborgs-universitet:N2BIO",
@@ -19081,7 +21532,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:00.408Z"
+    "checkedAt": "2026-09-13T19:36:45.517Z"
   },
   {
     "key": "goteborgs-universitet:N2BIS",
@@ -19135,7 +21586,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:00.257Z"
+    "checkedAt": "2026-09-13T19:36:45.429Z"
   },
   {
     "key": "goteborgs-universitet:N2CAS",
@@ -19190,7 +21641,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:00.968Z"
+    "checkedAt": "2026-09-13T19:36:45.765Z"
   },
   {
     "key": "goteborgs-universitet:N2CMN",
@@ -19244,7 +21695,7 @@
       "sourcePages": 1,
       "parsedRows": 2
     },
-    "checkedAt": "2026-09-13T19:06:00.699Z"
+    "checkedAt": "2026-09-13T19:36:45.458Z"
   },
   {
     "key": "goteborgs-universitet:N2COS",
@@ -19269,7 +21720,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:01.480Z"
+    "checkedAt": "2026-09-13T19:36:46.001Z"
   },
   {
     "key": "goteborgs-universitet:N2DGL",
@@ -19324,7 +21775,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:00.873Z"
+    "checkedAt": "2026-09-13T19:36:46.000Z"
   },
   {
     "key": "goteborgs-universitet:N2FOC",
@@ -19379,7 +21830,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:00.989Z"
+    "checkedAt": "2026-09-13T19:36:46.030Z"
   },
   {
     "key": "goteborgs-universitet:N2GDT",
@@ -19434,7 +21885,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:02.303Z"
+    "checkedAt": "2026-09-13T19:36:46.216Z"
   },
   {
     "key": "goteborgs-universitet:N2GEO",
@@ -19489,7 +21940,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:01.624Z"
+    "checkedAt": "2026-09-13T19:36:46.094Z"
   },
   {
     "key": "goteborgs-universitet:N2GVS",
@@ -19546,7 +21997,7 @@
       "sourcePages": 4,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:01.750Z"
+    "checkedAt": "2026-09-13T19:36:46.783Z"
   },
   {
     "key": "goteborgs-universitet:N2HSH",
@@ -19602,7 +22053,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:01.695Z"
+    "checkedAt": "2026-09-13T19:36:46.744Z"
   },
   {
     "key": "goteborgs-universitet:N2KEL",
@@ -19657,7 +22108,7 @@
       "sourcePages": 2,
       "parsedRows": 1
     },
-    "checkedAt": "2026-09-13T19:06:01.565Z"
+    "checkedAt": "2026-09-13T19:36:46.583Z"
   },
   {
     "key": "goteborgs-universitet:N2KEM",
@@ -19712,7 +22163,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:02.057Z"
+    "checkedAt": "2026-09-13T19:36:46.602Z"
   },
   {
     "key": "goteborgs-universitet:N2KUV",
@@ -19767,7 +22218,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:02.143Z"
+    "checkedAt": "2026-09-13T19:36:46.666Z"
   },
   {
     "key": "goteborgs-universitet:N2KVP",
@@ -19822,7 +22273,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:02.199Z"
+    "checkedAt": "2026-09-13T19:36:46.786Z"
   },
   {
     "key": "goteborgs-universitet:N2LIT",
@@ -19869,7 +22320,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:02.270Z"
+    "checkedAt": "2026-09-13T19:36:47.171Z"
   },
   {
     "key": "goteborgs-universitet:N2LKI",
@@ -19894,7 +22345,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:02.544Z"
+    "checkedAt": "2026-09-13T19:36:47.167Z"
   },
   {
     "key": "goteborgs-universitet:N2MAB",
@@ -19948,7 +22399,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:02.483Z"
+    "checkedAt": "2026-09-13T19:36:47.088Z"
   },
   {
     "key": "goteborgs-universitet:N2MAT",
@@ -20003,7 +22454,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:02.717Z"
+    "checkedAt": "2026-09-13T19:36:47.314Z"
   },
   {
     "key": "goteborgs-universitet:N2MAV",
@@ -20059,7 +22510,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:02.927Z"
+    "checkedAt": "2026-09-13T19:36:47.504Z"
   },
   {
     "key": "goteborgs-universitet:N2MBI",
@@ -20115,7 +22566,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:02.997Z"
+    "checkedAt": "2026-09-13T19:36:47.524Z"
   },
   {
     "key": "goteborgs-universitet:N2MIH",
@@ -20170,7 +22621,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:02.881Z"
+    "checkedAt": "2026-09-13T19:36:47.672Z"
   },
   {
     "key": "goteborgs-universitet:N2MOL",
@@ -20195,7 +22646,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:03.627Z"
+    "checkedAt": "2026-09-13T19:36:48.038Z"
   },
   {
     "key": "goteborgs-universitet:N2MVN",
@@ -20249,7 +22700,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:02.973Z"
+    "checkedAt": "2026-09-13T19:36:47.593Z"
   },
   {
     "key": "goteborgs-universitet:N2PHY",
@@ -20304,7 +22755,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:05.512Z"
+    "checkedAt": "2026-09-13T19:36:48.056Z"
   },
   {
     "key": "goteborgs-universitet:N2SOF",
@@ -20493,7 +22944,7 @@
       "sourcePages": 3,
       "parsedRows": 11
     },
-    "checkedAt": "2026-09-13T19:06:03.954Z"
+    "checkedAt": "2026-09-13T19:36:48.082Z"
   },
   {
     "key": "goteborgs-universitet:N2TOX",
@@ -20547,7 +22998,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:03.712Z"
+    "checkedAt": "2026-09-13T19:36:47.951Z"
   },
   {
     "key": "goteborgs-universitet:O1THG",
@@ -20794,7 +23245,7 @@
       "sourcePages": 2,
       "parsedRows": 15
     },
-    "checkedAt": "2026-09-13T19:06:03.421Z"
+    "checkedAt": "2026-09-13T19:36:48.037Z"
   },
   {
     "key": "goteborgs-universitet:O1THN",
@@ -21041,7 +23492,7 @@
       "sourcePages": 2,
       "parsedRows": 14
     },
-    "checkedAt": "2026-09-13T19:06:03.440Z"
+    "checkedAt": "2026-09-13T19:36:48.105Z"
   },
   {
     "key": "goteborgs-universitet:O1TTP",
@@ -21104,7 +23555,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:04.353Z"
+    "checkedAt": "2026-09-13T19:36:48.527Z"
   },
   {
     "key": "goteborgs-universitet:O2TDU",
@@ -21129,7 +23580,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:04.933Z"
+    "checkedAt": "2026-09-13T19:36:48.609Z"
   },
   {
     "key": "goteborgs-universitet:O2TLP",
@@ -21208,7 +23659,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:04.556Z"
+    "checkedAt": "2026-09-13T19:36:48.611Z"
   },
   {
     "key": "goteborgs-universitet:S1ANT",
@@ -21290,7 +23741,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:06:06.124Z"
+    "checkedAt": "2026-09-13T19:36:48.950Z"
   },
   {
     "key": "goteborgs-universitet:S1ARB",
@@ -21353,7 +23804,7 @@
       "sourcePages": 2,
       "parsedRows": 24
     },
-    "checkedAt": "2026-09-13T19:06:04.532Z"
+    "checkedAt": "2026-09-13T19:36:48.660Z"
   },
   {
     "key": "goteborgs-universitet:S1EKA",
@@ -21664,7 +24115,7 @@
       "sourcePages": 4,
       "parsedRows": 38
     },
-    "checkedAt": "2026-09-13T19:06:05.486Z"
+    "checkedAt": "2026-09-13T19:36:49.017Z"
   },
   {
     "key": "goteborgs-universitet:S1EUR",
@@ -21689,7 +24140,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:05.318Z"
+    "checkedAt": "2026-09-13T19:36:49.089Z"
   },
   {
     "key": "goteborgs-universitet:S1GLS",
@@ -21753,7 +24204,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:06.074Z"
+    "checkedAt": "2026-09-13T19:36:49.335Z"
   },
   {
     "key": "goteborgs-universitet:S1GSA",
@@ -22224,7 +24675,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:06:07.019Z"
+    "checkedAt": "2026-09-13T19:36:50.567Z"
   },
   {
     "key": "goteborgs-universitet:S1HSK",
@@ -22325,7 +24776,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:06:07.375Z"
+    "checkedAt": "2026-09-13T19:36:50.007Z"
   },
   {
     "key": "goteborgs-universitet:S1INT",
@@ -22622,7 +25073,7 @@
       "sourcePages": 3,
       "parsedRows": 14
     },
-    "checkedAt": "2026-09-13T19:06:06.105Z"
+    "checkedAt": "2026-09-13T19:36:49.593Z"
   },
   {
     "key": "goteborgs-universitet:S1JOU",
@@ -22685,7 +25136,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:06.112Z"
+    "checkedAt": "2026-09-13T19:36:49.681Z"
   },
   {
     "key": "goteborgs-universitet:S1KOL",
@@ -22906,7 +25357,7 @@
       "totalHp": 180,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:06:07.136Z"
+    "checkedAt": "2026-09-13T19:36:50.253Z"
   },
   {
     "key": "goteborgs-universitet:S1KSO",
@@ -22957,7 +25408,7 @@
       "sourcePages": 2,
       "parsedRows": 18
     },
-    "checkedAt": "2026-09-13T19:06:07.046Z"
+    "checkedAt": "2026-09-13T19:36:49.916Z"
   },
   {
     "key": "goteborgs-universitet:S1LOG",
@@ -23237,7 +25688,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T19:06:06.556Z"
+    "checkedAt": "2026-09-13T19:36:50.022Z"
   },
   {
     "key": "goteborgs-universitet:S1MKG",
@@ -23300,7 +25751,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:07.588Z"
+    "checkedAt": "2026-09-13T19:36:50.421Z"
   },
   {
     "key": "goteborgs-universitet:S1OFF",
@@ -23325,7 +25776,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:07.349Z"
+    "checkedAt": "2026-09-13T19:36:50.618Z"
   },
   {
     "key": "goteborgs-universitet:S1OFV",
@@ -23388,7 +25839,7 @@
       "sourcePages": 2,
       "parsedRows": 9
     },
-    "checkedAt": "2026-09-13T19:06:07.952Z"
+    "checkedAt": "2026-09-13T19:36:50.585Z"
   },
   {
     "key": "goteborgs-universitet:S1PED",
@@ -23668,7 +26119,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T19:06:07.474Z"
+    "checkedAt": "2026-09-13T19:36:50.449Z"
   },
   {
     "key": "goteborgs-universitet:S1PER",
@@ -23731,7 +26182,7 @@
       "sourcePages": 2,
       "parsedRows": 32
     },
-    "checkedAt": "2026-09-13T19:06:07.716Z"
+    "checkedAt": "2026-09-13T19:36:50.827Z"
   },
   {
     "key": "goteborgs-universitet:S1SMI",
@@ -23839,7 +26290,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:08.426Z"
+    "checkedAt": "2026-09-13T19:36:51.020Z"
   },
   {
     "key": "goteborgs-universitet:S1SPS",
@@ -23901,7 +26352,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:07.900Z"
+    "checkedAt": "2026-09-13T19:36:50.989Z"
   },
   {
     "key": "goteborgs-universitet:S1STV",
@@ -23965,7 +26416,7 @@
       "sourcePages": 3,
       "parsedRows": 81
     },
-    "checkedAt": "2026-09-13T19:06:08.484Z"
+    "checkedAt": "2026-09-13T19:36:51.337Z"
   },
   {
     "key": "goteborgs-universitet:S1TRP",
@@ -24405,7 +26856,7 @@
       "sourcePages": 2,
       "parsedRows": 23
     },
-    "checkedAt": "2026-09-13T19:06:08.152Z"
+    "checkedAt": "2026-09-13T19:36:51.043Z"
   },
   {
     "key": "goteborgs-universitet:S2ARB",
@@ -24452,7 +26903,7 @@
       "sourcePages": 2,
       "parsedRows": 7
     },
-    "checkedAt": "2026-09-13T19:06:08.491Z"
+    "checkedAt": "2026-09-13T19:36:51.398Z"
   },
   {
     "key": "goteborgs-universitet:S2DID",
@@ -24477,7 +26928,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:08.716Z"
+    "checkedAt": "2026-09-13T19:36:51.694Z"
   },
   {
     "key": "goteborgs-universitet:S2ESD",
@@ -24532,7 +26983,7 @@
       "sourcePages": 2,
       "parsedRows": 26
     },
-    "checkedAt": "2026-09-13T19:06:08.681Z"
+    "checkedAt": "2026-09-13T19:36:51.592Z"
   },
   {
     "key": "goteborgs-universitet:S2EUS",
@@ -24557,7 +27008,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:08.887Z"
+    "checkedAt": "2026-09-13T19:36:51.590Z"
   },
   {
     "key": "goteborgs-universitet:S2FIN",
@@ -24612,7 +27063,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:09.476Z"
+    "checkedAt": "2026-09-13T19:36:51.800Z"
   },
   {
     "key": "goteborgs-universitet:S2GST",
@@ -24819,7 +27270,7 @@
       "sourcePages": 3,
       "parsedRows": 9
     },
-    "checkedAt": "2026-09-13T19:06:09.415Z"
+    "checkedAt": "2026-09-13T19:36:51.915Z"
   },
   {
     "key": "goteborgs-universitet:S2HRM",
@@ -24874,7 +27325,7 @@
       "sourcePages": 2,
       "parsedRows": 20
     },
-    "checkedAt": "2026-09-13T19:06:09.076Z"
+    "checkedAt": "2026-09-13T19:36:51.970Z"
   },
   {
     "key": "goteborgs-universitet:S2HSK",
@@ -24921,7 +27372,7 @@
       "sourcePages": 2,
       "parsedRows": 7
     },
-    "checkedAt": "2026-09-13T19:06:09.922Z"
+    "checkedAt": "2026-09-13T19:36:52.340Z"
   },
   {
     "key": "goteborgs-universitet:S2IAG",
@@ -24976,7 +27427,7 @@
       "sourcePages": 2,
       "parsedRows": 49
     },
-    "checkedAt": "2026-09-13T19:06:09.298Z"
+    "checkedAt": "2026-09-13T19:36:52.181Z"
   },
   {
     "key": "goteborgs-universitet:S2IFM",
@@ -25001,7 +27452,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:09.661Z"
+    "checkedAt": "2026-09-13T19:36:52.253Z"
   },
   {
     "key": "goteborgs-universitet:S2IFÖ",
@@ -25206,7 +27657,7 @@
       "sourcePages": 2,
       "parsedRows": 11
     },
-    "checkedAt": "2026-09-13T19:06:10.009Z"
+    "checkedAt": "2026-09-13T19:36:52.375Z"
   },
   {
     "key": "goteborgs-universitet:S2IIM",
@@ -25261,7 +27712,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:09.876Z"
+    "checkedAt": "2026-09-13T19:36:52.487Z"
   },
   {
     "key": "goteborgs-universitet:S2IME",
@@ -25316,7 +27767,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:09.993Z"
+    "checkedAt": "2026-09-13T19:36:52.541Z"
   },
   {
     "key": "goteborgs-universitet:S2IOL",
@@ -25372,7 +27823,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:10.204Z"
+    "checkedAt": "2026-09-13T19:36:52.905Z"
   },
   {
     "key": "goteborgs-universitet:S2ITL",
@@ -25428,7 +27879,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:10.389Z"
+    "checkedAt": "2026-09-13T19:36:52.979Z"
   },
   {
     "key": "goteborgs-universitet:S2JOU",
@@ -25475,7 +27926,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:10.453Z"
+    "checkedAt": "2026-09-13T19:36:52.912Z"
   },
   {
     "key": "goteborgs-universitet:S2JUR",
@@ -25570,7 +28021,7 @@
       "sourcePages": 2,
       "parsedRows": 6
     },
-    "checkedAt": "2026-09-13T19:06:10.515Z"
+    "checkedAt": "2026-09-13T19:36:52.960Z"
   },
   {
     "key": "goteborgs-universitet:S2KBE",
@@ -25625,7 +28076,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:10.920Z"
+    "checkedAt": "2026-09-13T19:36:53.077Z"
   },
   {
     "key": "goteborgs-universitet:S2KEN",
@@ -25680,7 +28131,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:12.309Z"
+    "checkedAt": "2026-09-13T19:36:53.839Z"
   },
   {
     "key": "goteborgs-universitet:S2KRI",
@@ -25875,7 +28326,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:12.141Z"
+    "checkedAt": "2026-09-13T19:36:53.489Z"
   },
   {
     "key": "goteborgs-universitet:S2LOT",
@@ -25930,7 +28381,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:12.888Z"
+    "checkedAt": "2026-09-13T19:36:53.700Z"
   },
   {
     "key": "goteborgs-universitet:S2LTM",
@@ -26070,7 +28521,7 @@
       "sourcePages": 2,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T19:06:11.549Z"
+    "checkedAt": "2026-09-13T19:36:53.408Z"
   },
   {
     "key": "goteborgs-universitet:S2LÄR",
@@ -26117,7 +28568,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:12.092Z"
+    "checkedAt": "2026-09-13T19:36:53.940Z"
   },
   {
     "key": "goteborgs-universitet:S2MAN",
@@ -26172,7 +28623,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:12.807Z"
+    "checkedAt": "2026-09-13T19:36:54.280Z"
   },
   {
     "key": "goteborgs-universitet:S2MAP",
@@ -26228,7 +28679,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:12.887Z"
+    "checkedAt": "2026-09-13T19:36:54.375Z"
   },
   {
     "key": "goteborgs-universitet:S2MKG",
@@ -26322,7 +28773,7 @@
       "totalHp": 120,
       "sourcePages": 1
     },
-    "checkedAt": "2026-09-13T19:06:13.282Z"
+    "checkedAt": "2026-09-13T19:36:54.386Z"
   },
   {
     "key": "goteborgs-universitet:S2MOK",
@@ -26377,7 +28828,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:13.174Z"
+    "checkedAt": "2026-09-13T19:36:54.443Z"
   },
   {
     "key": "goteborgs-universitet:S2MSA",
@@ -26431,7 +28882,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:13.113Z"
+    "checkedAt": "2026-09-13T19:36:54.262Z"
   },
   {
     "key": "goteborgs-universitet:S2MÄR",
@@ -26487,7 +28938,7 @@
       "sourcePages": 3,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:13.833Z"
+    "checkedAt": "2026-09-13T19:36:54.971Z"
   },
   {
     "key": "goteborgs-universitet:S2NAT",
@@ -26542,7 +28993,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:13.792Z"
+    "checkedAt": "2026-09-13T19:36:55.009Z"
   },
   {
     "key": "goteborgs-universitet:S2OFF",
@@ -26567,7 +29018,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:13.653Z"
+    "checkedAt": "2026-09-13T19:36:54.842Z"
   },
   {
     "key": "goteborgs-universitet:S2PED",
@@ -26592,7 +29043,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:13.903Z"
+    "checkedAt": "2026-09-13T19:36:54.943Z"
   },
   {
     "key": "goteborgs-universitet:S2PSC",
@@ -26647,7 +29098,7 @@
       "sourcePages": 2,
       "parsedRows": 49
     },
-    "checkedAt": "2026-09-13T19:06:13.758Z"
+    "checkedAt": "2026-09-13T19:36:54.958Z"
   },
   {
     "key": "goteborgs-universitet:S2PSY",
@@ -26975,7 +29426,7 @@
       "sourcePages": 2,
       "parsedRows": 31
     },
-    "checkedAt": "2026-09-13T19:06:13.744Z"
+    "checkedAt": "2026-09-13T19:36:54.897Z"
   },
   {
     "key": "goteborgs-universitet:S2PTE",
@@ -27000,7 +29451,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:14.534Z"
+    "checkedAt": "2026-09-13T19:36:55.401Z"
   },
   {
     "key": "goteborgs-universitet:S2REF",
@@ -27055,7 +29506,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:15.157Z"
+    "checkedAt": "2026-09-13T19:36:55.644Z"
   },
   {
     "key": "goteborgs-universitet:S2SOC",
@@ -27230,7 +29681,7 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:14.217Z"
+    "checkedAt": "2026-09-13T19:36:55.379Z"
   },
   {
     "key": "goteborgs-universitet:S2SWH",
@@ -27255,7 +29706,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:14.607Z"
+    "checkedAt": "2026-09-13T19:36:55.531Z"
   },
   {
     "key": "goteborgs-universitet:T2HAI",
@@ -27310,7 +29761,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:14.808Z"
+    "checkedAt": "2026-09-13T19:36:55.758Z"
   },
   {
     "key": "goteborgs-universitet:V1ART",
@@ -27373,7 +29824,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:14.806Z"
+    "checkedAt": "2026-09-13T19:36:55.970Z"
   },
   {
     "key": "goteborgs-universitet:V1AUM",
@@ -27669,7 +30120,7 @@
       "sourcePages": 2,
       "parsedRows": 14
     },
-    "checkedAt": "2026-09-13T19:06:14.925Z"
+    "checkedAt": "2026-09-13T19:36:55.837Z"
   },
   {
     "key": "goteborgs-universitet:V1FYP",
@@ -27732,7 +30183,7 @@
       "sourcePages": 2,
       "parsedRows": 18
     },
-    "checkedAt": "2026-09-13T19:06:15.143Z"
+    "checkedAt": "2026-09-13T19:36:56.111Z"
   },
   {
     "key": "goteborgs-universitet:V1RTS",
@@ -27795,7 +30246,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:15.184Z"
+    "checkedAt": "2026-09-13T19:36:56.123Z"
   },
   {
     "key": "goteborgs-universitet:V1SSP",
@@ -27858,7 +30309,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:15.391Z"
+    "checkedAt": "2026-09-13T19:36:56.223Z"
   },
   {
     "key": "goteborgs-universitet:V2ANV",
@@ -27905,7 +30356,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:15.400Z"
+    "checkedAt": "2026-09-13T19:36:56.348Z"
   },
   {
     "key": "goteborgs-universitet:V2BMP",
@@ -27956,7 +30407,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:15.509Z"
+    "checkedAt": "2026-09-13T19:36:56.422Z"
   },
   {
     "key": "goteborgs-universitet:V2BUV",
@@ -28003,7 +30454,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:15.717Z"
+    "checkedAt": "2026-09-13T19:36:56.545Z"
   },
   {
     "key": "goteborgs-universitet:V2DIS",
@@ -28054,7 +30505,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:15.738Z"
+    "checkedAt": "2026-09-13T19:36:56.684Z"
   },
   {
     "key": "goteborgs-universitet:V2DIV",
@@ -28079,7 +30530,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:16.118Z"
+    "checkedAt": "2026-09-13T19:36:56.686Z"
   },
   {
     "key": "goteborgs-universitet:V2GLH",
@@ -28204,7 +30655,7 @@
       "sourcePages": 3,
       "parsedRows": 13
     },
-    "checkedAt": "2026-09-13T19:06:15.969Z"
+    "checkedAt": "2026-09-13T19:36:56.795Z"
   },
   {
     "key": "goteborgs-universitet:V2HSV",
@@ -28251,7 +30702,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:15.975Z"
+    "checkedAt": "2026-09-13T19:36:56.921Z"
   },
   {
     "key": "goteborgs-universitet:V2INV",
@@ -28298,7 +30749,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:16.092Z"
+    "checkedAt": "2026-09-13T19:36:56.994Z"
   },
   {
     "key": "goteborgs-universitet:V2KRG",
@@ -28345,7 +30796,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:16.291Z"
+    "checkedAt": "2026-09-13T19:36:57.116Z"
   },
   {
     "key": "goteborgs-universitet:V2NEU",
@@ -28370,7 +30821,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:16.690Z"
+    "checkedAt": "2026-09-13T19:36:57.246Z"
   },
   {
     "key": "goteborgs-universitet:V2NSV",
@@ -28417,7 +30868,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:16.557Z"
+    "checkedAt": "2026-09-13T19:36:57.257Z"
   },
   {
     "key": "goteborgs-universitet:V2ONL",
@@ -28464,7 +30915,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:16.560Z"
+    "checkedAt": "2026-09-13T19:36:57.366Z"
   },
   {
     "key": "goteborgs-universitet:V2OPV",
@@ -28511,7 +30962,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:16.675Z"
+    "checkedAt": "2026-09-13T19:36:57.497Z"
   },
   {
     "key": "goteborgs-universitet:V2PSI",
@@ -28558,7 +31009,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:16.703Z"
+    "checkedAt": "2026-09-13T19:36:57.565Z"
   },
   {
     "key": "goteborgs-universitet:V2PSK",
@@ -28583,7 +31034,7 @@
     "officialProgramCode": "",
     "officialAliases": [],
     "quality": {},
-    "checkedAt": "2026-09-13T19:06:17.071Z"
+    "checkedAt": "2026-09-13T19:36:57.678Z"
   },
   {
     "key": "goteborgs-universitet:V2SGE",
@@ -28630,7 +31081,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:17.147Z"
+    "checkedAt": "2026-09-13T19:36:57.819Z"
   },
   {
     "key": "goteborgs-universitet:Z1BAN",
@@ -28668,7 +31119,7 @@
       "sourcePages": 2,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T19:06:17.140Z"
+    "checkedAt": "2026-09-13T19:36:57.826Z"
   },
   {
     "key": "hogskolan-i-boras:ACEKO",
