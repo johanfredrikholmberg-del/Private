@@ -1,21 +1,15 @@
 #!/usr/bin/env node
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { discover as discoverGuStructure } from '../api/gu-program-structure.js';
 
 const SRC='data/susa';
 const DEST='data/HT26';
-const API=(process.env.GU_API_BASE||'https://private-two-gamma.vercel.app').replace(/\/$/,'');
 const CONCURRENCY=Number(process.env.GU_CONCURRENCY||6);
 const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
 const norm=v=>clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 const isGU=x=>/goteborgs universitet/.test(norm(x.university));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-
-async function getJson(url){
-  const r=await fetch(url,{headers:{accept:'application/json','user-agent':'StudieLots-GU-import/HT26'},redirect:'follow',signal:AbortSignal.timeout(25000)});
-  if(!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-  return r.json();
-}
 
 function classify(data){
   const rows=(Array.isArray(data?.courses)?data.courses:[]).map(r=>({
@@ -33,12 +27,8 @@ function classify(data){
 }
 
 async function enrich(item){
-  const u=new URL('/api/gu-program-structure',API);
-  u.searchParams.set('code',item.programCode||'');
-  u.searchParams.set('name',item.programName||'');
-  u.searchParams.set('university','Göteborgs universitet');
   try{
-    const data=await getJson(u);
+    const data=await discoverGuStructure({code:item.programCode||'',name:item.programName||'',university:'Göteborgs universitet'});
     const c=classify(data);
     return {...item,term:'HT26',status:c.coverage==='metadata-only'?'manual-review':'processed',...c,source:data?.source||'gu-official-programplan',sourceUrl:(data?.sourceUrls||[])[0]||'',sourceUrls:data?.sourceUrls||[],apiCoverage:data?.coverage||'',apiConfidence:data?.confidence||'',quality:data?.quality||{},checkedAt:new Date().toISOString()};
   }catch(e){return {...item,term:'HT26',status:'manual-review',coverage:'metadata-only',reason:`gu-import:${e.message}`,checkedAt:new Date().toISOString()}}
@@ -73,4 +63,4 @@ async function main(){
 
 main().catch(e=>{console.error(e);process.exitCode=1});
 
-// trigger: rerun-after-gu-table-parser
+// trigger: local-gu-resolver
