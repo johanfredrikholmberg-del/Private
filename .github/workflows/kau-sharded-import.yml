@@ -7,6 +7,7 @@ on:
       - '.github/workflows/kau-sharded-import.yml'
       - 'scripts/kau-programme-structure-pipeline.mjs'
       - 'scripts/kau-merge-shards.mjs'
+      - 'scripts/kau-unresolved-report.mjs'
 
 permissions:
   contents: write
@@ -56,17 +57,21 @@ jobs:
           KAU_SHARD_TOTAL: '8'
         run: |
           node scripts/kau-merge-shards.mjs
+          node scripts/kau-unresolved-report.mjs
           node - <<'NODE'
           const fs=require('fs');
           const m=JSON.parse(fs.readFileSync('data/kau/structure-meta.json','utf8'));
+          const u=JSON.parse(fs.readFileSync('data/kau/unresolved.json','utf8'));
           if(m.processed!==134) throw new Error(`Expected 134, got ${m.processed}`);
           if(m.withParsedRows<30) throw new Error(`Unexpectedly low parsed structures: ${m.withParsedRows}`);
+          if(u.counts.totalKau!==134) throw new Error(`Unresolved audit expected 134, got ${u.counts.totalKau}`);
           console.log(JSON.stringify(m,null,2));
+          console.log(JSON.stringify(u.counts,null,2));
           NODE
       - name: Commit merged Karlstad structures
         run: |
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/kau/structure-meta.json data/susa/structures.json
-          git commit -m 'Merge sharded Karlstad structures [skip ci]' || exit 0
+          git add -f data/kau/structure-meta.json data/kau/unresolved.json data/susa/structures.json
+          git commit -m 'Merge sharded Karlstad structures and audit [skip ci]' || exit 0
           git push origin HEAD:kau-sharded-import
