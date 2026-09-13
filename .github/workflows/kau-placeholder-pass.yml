@@ -1,0 +1,30 @@
+name: Karlstad placeholder-row pass
+on:
+  push:
+    branches: [kau-fast-import]
+    paths: ['.github/workflows/kau-placeholder-pass.yml']
+permissions:
+  contents: write
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: kau-fast-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Parse non-linked official study-path rows
+        run: node scripts/kau-placeholder-row-pass.mjs
+      - name: Validate Karlstad dataset
+        run: node -e "const fs=require('fs');const r=JSON.parse(fs.readFileSync('data/kau/structures.json','utf8'));const m=JSON.parse(fs.readFileSync('data/kau/structure-meta.json','utf8'));if(r.length!==134||m.placeholderPassFetchErrors)process.exit(1);console.log(m)"
+      - name: Save improvements
+        run: |
+          git config user.name studielots-bot
+          git config user.email actions@users.noreply.github.com
+          git add -f data/kau data/susa/structures.json
+          git diff --cached --quiet || git commit -m 'Parse Karlstad non-linked programme rows [skip ci]'
+          git pull --rebase origin kau-fast-import
+          git push origin HEAD:kau-fast-import
