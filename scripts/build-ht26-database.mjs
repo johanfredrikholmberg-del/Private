@@ -8,17 +8,20 @@ const SRC='data/susa';
 const DEST=`data/${TERM}`;
 
 const readJson=async file=>JSON.parse(await fs.readFile(file,'utf8'));
+const readOptionalJson=async(file,fallback=[])=>{try{return await readJson(file)}catch{return fallback}};
 const writeJson=async(file,value)=>{await fs.mkdir(path.dirname(file),{recursive:true});await fs.writeFile(file,JSON.stringify(value,null,2)+'\n')};
 const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
 const norm=v=>clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 const keyFor=(university,code,name,hp)=>[norm(university),clean(code).toUpperCase()||norm(name),Number(hp)||0].join('|');
 
 async function main(){
-  const [programmes,courses,structures,providers]=await Promise.all([
+  const [programmes,courses,structures,providers,existingSyllabusVersions,existingDegreeRequirements]=await Promise.all([
     readJson(path.join(SRC,'programmes.json')),
     readJson(path.join(SRC,'courses.json')),
     readJson(path.join(SRC,'structures.json')),
-    readJson(path.join(SRC,'providers.json'))
+    readJson(path.join(SRC,'providers.json')),
+    readOptionalJson(path.join(DEST,'syllabus-versions.json'),[]),
+    readOptionalJson(path.join(DEST,'degree-requirements.json'),[])
   ]);
 
   const programMap=new Map();
@@ -61,14 +64,16 @@ async function main(){
   const canonicalCourses=[...courseMap.values()];
   const programmeKeys=new Set(programs.map(x=>x.key));
   const orphanStructures=programStructures.filter(x=>!programmeKeys.has(x.key)).map(x=>x.key);
+  const syllabusVersions=Array.isArray(existingSyllabusVersions)?existingSyllabusVersions:[];
+  const degreeRequirements=Array.isArray(existingDegreeRequirements)?existingDegreeRequirements:[];
 
   await Promise.all([
     writeJson(path.join(DEST,'programs.json'),programs),
     writeJson(path.join(DEST,'program-structures.json'),programStructures),
     writeJson(path.join(DEST,'courses.json'),canonicalCourses),
     writeJson(path.join(DEST,'providers.json'),providers),
-    writeJson(path.join(DEST,'syllabus-versions.json'),[]),
-    writeJson(path.join(DEST,'degree-requirements.json'),[])
+    writeJson(path.join(DEST,'syllabus-versions.json'),syllabusVersions),
+    writeJson(path.join(DEST,'degree-requirements.json'),degreeRequirements)
   ]);
 
   const manifest={
@@ -83,8 +88,8 @@ async function main(){
       programStructures:{file:'program-structures.json',rows:programStructures.length},
       courses:{file:'courses.json',rows:canonicalCourses.length},
       providers:{file:'providers.json',rows:providers.length},
-      syllabusVersions:{file:'syllabus-versions.json',rows:0},
-      degreeRequirements:{file:'degree-requirements.json',rows:0}
+      syllabusVersions:{file:'syllabus-versions.json',rows:syllabusVersions.length},
+      degreeRequirements:{file:'degree-requirements.json',rows:degreeRequirements.length}
     },
     validation:{orphanStructures:orphanStructures.length,orphanStructureKeys:orphanStructures.slice(0,100)}
   };
