@@ -24766,7 +24766,7 @@
     "university": "Karlstads universitet",
     "programCode": "HAENG",
     "programName": "Masterprogram i engelska",
-    "hp": null,
+    "hp": 120,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/HAENG"
@@ -24776,9 +24776,42 @@
     "source": "karlstad-official-study-path",
     "rows": [],
     "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.624Z"
+    "reason": "no-verified-term-structure",
+    "expectedTerms": 4,
+    "completeTerms": [],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 0,
+    "checkedAt": "2026-09-13T06:18:29.042Z"
   },
   {
     "key": "karlstads-universitet:HAMSK",
@@ -24786,19 +24819,109 @@
     "university": "Karlstads universitet",
     "programCode": "HAMSK",
     "programName": "Konstnärlig master musiker",
-    "hp": null,
+    "hp": 120,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/HAMSK"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/HAMSK",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.612Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "KOAV02",
+        "name": "Ensemble I, västerländsk konstmusik",
+        "hp": 5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KOAV01",
+        "name": "Huvudinstrument I, västerländsk konstmusik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "KOAV06",
+        "name": "Ensemble II, västerländsk konstmusik",
+        "hp": 5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "KOAV05",
+        "name": "Huvudinstrument II, västerländsk konstmusik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "KOAV09",
+        "name": "Ensemble III, västerländsk konstmusik",
+        "hp": 5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "KOAV08",
+        "name": "Huvudinstrument III, västerländsk konstmusik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "KOAV10",
+        "name": "Huvudinstrument IV, västerländsk konstmusik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "published-rows-not-fully-reconciled",
+    "expectedTerms": 4,
+    "completeTerms": [],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 20,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 20,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 20,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 7,
+    "checkedAt": "2026-09-13T06:18:29.029Z"
   },
   {
     "key": "karlstads-universitet:HGKVP",
@@ -24806,19 +24929,242 @@
     "university": "Karlstads universitet",
     "programCode": "HGKVP",
     "programName": "Kulturvetarprogrammet",
-    "hp": null,
+    "hp": 180,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/HGKVP"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/HGKVP",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.611Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "KVGAS1",
+        "name": "Introduktionskurs i kulturpolitik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KVGAS2",
+        "name": "Kulturpolitikens praktik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KVGAU2",
+        "name": "Kulturarv",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KVGAS3",
+        "name": "Kultur och globalisering",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "KVGAV1",
+        "name": "Kulturproduktionens villkor",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "KVGBM1",
+        "name": "Kulturvetenskapliga metoder I",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "KVGBS1",
+        "name": "Självständigt arbete I - Kulturstudier",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "HIGA01",
+            "name": "Historia I",
+            "hp": 30
+          },
+          {
+            "code": "KVGH10",
+            "name": "Idéhistoria I",
+            "hp": 30
+          },
+          {
+            "code": "KVGK30",
+            "name": "Konst- och bildvetenskap I",
+            "hp": 30
+          },
+          {
+            "code": "SVGA10",
+            "name": "Statsvetenskap I",
+            "hp": 30
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Historia II",
+            "hp": 30
+          },
+          {
+            "code": "KVGH20",
+            "name": "Idéhistoria II",
+            "hp": 30
+          },
+          {
+            "code": "KVGK40",
+            "name": "Konst- och bildvetenskap II",
+            "hp": 30
+          },
+          {
+            "code": "SVGB10",
+            "name": "Statsvetenskap II",
+            "hp": 30
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "code": "KVGAKM",
+        "name": "Kommunikationsplanering - Kulturstudier",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "KVGAWP",
+        "name": "Digitala medier och webbpublicering - Kulturstudier",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "KVGAPL",
+        "name": "Projektledning - kulturstudier",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "KVGCKM",
+        "name": "Kulturvetenskaplig metod II",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "KVGC02",
+        "name": "Självständigt arbete II: Kulturstudier",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "KVGCPK",
+        "name": "Praktik: kulturstudier",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 6,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 120,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 120,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 21,
+    "checkedAt": "2026-09-13T06:18:29.214Z"
   },
   {
     "key": "karlstads-universitet:HGMPK",
@@ -24826,19 +25172,286 @@
     "university": "Karlstads universitet",
     "programCode": "HGMPK",
     "programName": "Musikproduktionsprogrammet",
-    "hp": null,
+    "hp": 180,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/HGMPK"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/HGMPK",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.608Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LJGM10",
+        "name": "Musikproduktion 1",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LJGM11",
+        "name": "Låtskrivande 1",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LJGT10",
+        "name": "Musikteori och gehörslära 1",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LJGE10",
+        "name": "Musikbranschen och dess aktörer",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LJGM12",
+        "name": "Musikproduktion 2",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LJGM17",
+        "name": "Elektroniskt musikskapande",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LJGM13",
+        "name": "Låtskrivande 2",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LJGT11",
+        "name": "Musikteori och gehörslära 2",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "LJGM18",
+        "name": "Musikproduktion 3",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "LJGM14",
+        "name": "Låtskrivarprojekt 1",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "LJGE12",
+        "name": "Lansering av musikprojekt 1",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "LJGT12",
+        "name": "Praktisk instrumentkännedom och genrekunskap",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LJGM15",
+        "name": "Låtskrivarprojekt 2",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LJGE15",
+        "name": "Lansering av musikprojekt 2",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LJGE11",
+        "name": "Entreprenörskap inom musikbranschen",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LJGM19",
+        "name": "Film- och dataspelsmusik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "LJGM21",
+        "name": "Musikproduktion 4",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "LJGM20",
+        "name": "Artistprojekt",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "LJGE17",
+        "name": "Lansering av musikprojekt 3",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 7.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "LJGM23",
+            "name": "Komposition för akustisk ensemble",
+            "hp": 7.5
+          },
+          {
+            "code": "LJGM22",
+            "name": "Kreativ teknik och elektronik",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "code": "LJGM26",
+        "name": "Specialisering inom musikproduktion",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "LJGM40",
+        "name": "Självständigt arbete i musikproduktion",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 7.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "LJGM25",
+            "name": "Artistisk gestaltning",
+            "hp": 7.5
+          },
+          {
+            "code": "LJGM24",
+            "name": "Liveproduktion",
+            "hp": 7.5
+          }
+        ]
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 6,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 22.5,
+        "unknownHp": 0,
+        "choiceOptionsHp": 15,
+        "covered": true
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 22.5,
+        "unknownHp": 0,
+        "choiceOptionsHp": 15,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 25,
+    "checkedAt": "2026-09-13T06:18:29.208Z"
   },
   {
     "key": "karlstads-universitet:HGMSK",
@@ -24846,19 +25459,168 @@
     "university": "Karlstads universitet",
     "programCode": "HGMSK",
     "programName": "Konstnärlig kandidat, musiker",
-    "hp": null,
+    "hp": 180,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/HGMSK"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/HGMSK",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.617Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "KOGV00",
+        "name": "Huvudinstrument I, västerländsk konstmusik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KOGV02",
+        "name": "Ensemble I, västerländsk konstmusik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KOGV21",
+        "name": "Musikkunskap I, västerländsk konstmusik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "KOGV03",
+        "name": "Huvudinstrument II, västerländsk konstmusik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "KOGV04",
+        "name": "Ensemble II, västerländsk konstmusik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "KOGV22",
+        "name": "Musikkunskap II, västerländsk konstmusik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "KOGV06",
+        "name": "Huvudinstrument III, västerländsk konstmusik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "KOGV07",
+        "name": "Ensemble III, västerländsk konstmusik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "KOGV23",
+        "name": "Musikkunskap III, västerländsk konstmusik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "KOGV09",
+        "name": "Huvudinstrument IV, västerländsk konstmusik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "KOGV10",
+        "name": "Ensemble IV, västerländsk konstmusik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "KOGV24",
+        "name": "Musikkunskap IV, västerländsk konstmusik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "partial-structure",
+    "reason": "some-complete-terms",
+    "expectedTerms": 6,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 22.5,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 7.5,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 16,
+    "checkedAt": "2026-09-13T06:18:29.556Z"
   },
   {
     "key": "karlstads-universitet:JALAW",
@@ -24866,19 +25628,253 @@
     "university": "Karlstads universitet",
     "programCode": "JALAW",
     "programName": "Juristprogrammet",
-    "hp": null,
+    "hp": 270,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/JALAW"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/JALAW",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.647Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "JPGT01",
+        "name": "Allmän rättslära I, offentlig rätt, EU-rätt och internationell rätt",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "JPGT02",
+        "name": "Civilrätt",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "JPG014",
+        "name": "Straffrätt",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "JPG015",
+        "name": "Processrätt",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "JPGT04",
+        "name": "Allmän rättslära II, förvaltningsrätt, förvaltningsprocessrätt och miljörätt",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "JPG018",
+        "name": "Socialrätt",
+        "hp": 10,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "JPG019",
+        "name": "Immaterialrätt, marknadsrätt, upphandlingsrätt och IT-rätt",
+        "hp": 20,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "JPAH02",
+            "name": "Miljörätt och social hållbarhet",
+            "hp": 15
+          },
+          {
+            "code": "JPA010",
+            "name": "Förundersökning",
+            "hp": 15
+          },
+          {
+            "code": "JPAS01",
+            "name": "Företagsbeskattning",
+            "hp": 15
+          },
+          {
+            "code": "JPA005",
+            "name": "Legal Tech, AI och Rules-as-Code",
+            "hp": 15
+          },
+          {
+            "code": "JPAH01",
+            "name": "Juridiskt socialt arbete",
+            "hp": 15
+          },
+          {
+            "code": "JPAP02",
+            "name": "Det straffrättsliga sanktionssystemet och påföljdsbestämning",
+            "hp": 15
+          },
+          {
+            "code": "JPAS05",
+            "name": "Internationell beskattning och skatteprocess",
+            "hp": 15
+          },
+          {
+            "code": "JPA007",
+            "name": "Skadeståndsrätt och immaterialrätt",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 8,
+        "code": "JPA004",
+        "name": "Allmän rättslära III med praktik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "JPA008",
+            "name": "Straffprocess i teori och praktik",
+            "hp": 15
+          },
+          {
+            "code": "JPAS04",
+            "name": "Skattejuridisk metodkurs",
+            "hp": 15
+          },
+          {
+            "code": "JPA006",
+            "name": "Bolagsrätt och aktiemarknadsrätt",
+            "hp": 15
+          },
+          {
+            "code": "JPA013",
+            "name": "IT-rättsliga perspektiv",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 9,
+        "code": "JPA003",
+        "name": "Examensarbete inom juridik",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "partial-structure",
+    "reason": "remaining-terms-under-planning",
+    "expectedTerms": 9,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "7": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 120,
+        "covered": true
+      },
+      "8": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 60,
+        "covered": true
+      },
+      "9": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": true,
+    "rawRows": 22,
+    "checkedAt": "2026-09-13T06:18:29.550Z"
   },
   {
     "key": "karlstads-universitet:LAAML",
@@ -24886,19 +25882,514 @@
     "university": "Karlstads universitet",
     "programCode": "LAAML",
     "programName": "Musiklärarprogrammet",
-    "hp": null,
+    "hp": 300,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAAML"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAAML",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.783Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "MUGL40",
+        "name": "Musik med didaktisk inriktning 1",
+        "hp": 22.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "MUGL35",
+        "name": "Skola som system och idé - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "MUGLV1",
+        "name": "Verksamhetsförlagd utbildning 1 - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "MUGL41",
+        "name": "Musik med didaktisk inriktning 2",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "MUGL36",
+        "name": "Lärarens didaktiska verktyg - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "MUGL42",
+        "name": "Musik med didaktisk inriktning 3",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "MUGL37",
+        "name": "Lärarens pedagogiska förhållningssätt 1 - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 7.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "MUGL43",
+            "name": "Instrument och ensemble 1",
+            "hp": 7.5
+          },
+          {
+            "code": "MUGL44",
+            "name": "Musik i klass 1",
+            "hp": 7.5
+          },
+          {
+            "code": "MUGL45",
+            "name": "Musikteori och komposition 1",
+            "hp": 7.5
+          },
+          {
+            "code": "MUGL46",
+            "name": "Musik- och ljudproduktion 1",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "MUGL22",
+        "name": "Verksamhetsförlagd utbildning 2 - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "MUGL47",
+        "name": "Musik med didaktisk inriktning 4",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "MUGL38",
+        "name": "Lärarens pedagogiska förhållningssätt 2 - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 7.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "MUGL48",
+            "name": "Instrument och ensemble 2",
+            "hp": 7.5
+          },
+          {
+            "code": "MUGL49",
+            "name": "Musik i klass 2",
+            "hp": 7.5
+          },
+          {
+            "code": "MUGL50",
+            "name": "Musikteori och komposition 2",
+            "hp": 7.5
+          },
+          {
+            "code": "MUGL51",
+            "name": "Musik- och ljudproduktion 2",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "code": "MUGL52",
+        "name": "Musik med didaktisk inriktning 5",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 22.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "MUGL53",
+            "name": "Instrument och ensemble 3",
+            "hp": 15
+          },
+          {
+            "code": "MUGL54",
+            "name": "Musik i klass 3",
+            "hp": 15
+          },
+          {
+            "code": "MUGL55",
+            "name": "Musikteori och komposition 3",
+            "hp": 15
+          },
+          {
+            "code": "MUGL56",
+            "name": "Musik- och ljudproduktion 3",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "code": "MUGL57",
+        "name": "Musik med didaktisk inriktning 6",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 22.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "MUGL58",
+            "name": "Instrument och ensemble 4",
+            "hp": 15
+          },
+          {
+            "code": "MUGL59",
+            "name": "Musik i klass 4",
+            "hp": 15
+          },
+          {
+            "code": "MUGL60",
+            "name": "Musikteori och komposition 4",
+            "hp": 15
+          },
+          {
+            "code": "MUGL61",
+            "name": "Musik- och ljudproduktion 4",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 7,
+        "code": "MUGL62",
+        "name": "Musik med didaktisk inriktning 7",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "MUAL18",
+        "name": "Lärarens professionella ledarskap 1 - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "MUGL63",
+            "name": "Instrument och ensemble 5",
+            "hp": 15
+          },
+          {
+            "code": "MUGL64",
+            "name": "Musik i klass 5",
+            "hp": 15
+          },
+          {
+            "code": "MUGL65",
+            "name": "Musikteori och komposition 5",
+            "hp": 15
+          },
+          {
+            "code": "MUGL66",
+            "name": "Musik- och ljudproduktion 5",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 8,
+        "code": "MUAL06",
+        "name": "Verksamhetsförlagd utbildning 3 - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "MUAL30",
+        "name": "Musik med didaktisk inriktning 8",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "MUAL19",
+        "name": "Lärarens professionella ledarskap 2 - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 7.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "MUAL31",
+            "name": "Instrument och ensemble 6",
+            "hp": 7.5
+          },
+          {
+            "code": "MUAL32",
+            "name": "Musik i klass 6",
+            "hp": 7.5
+          },
+          {
+            "code": "MUAL33",
+            "name": "Musikteori och komposition 6",
+            "hp": 7.5
+          },
+          {
+            "code": "MUAL34",
+            "name": "Musik- och ljudproduktion 6",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 9,
+        "code": "MUAL35",
+        "name": "Musik med didaktisk inriktning 9",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "code": "MUAL20",
+        "name": "Betyg och bedömning - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "code": "MUAL21",
+        "name": "Skola på vetenskaplig grund - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 7.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "MUAL36",
+            "name": "Instrument och ensemble 7",
+            "hp": 7.5
+          },
+          {
+            "code": "MUAL37",
+            "name": "Musik i klass 7",
+            "hp": 7.5
+          },
+          {
+            "code": "MUAL38",
+            "name": "Musikteori och komposition 7",
+            "hp": 7.5
+          },
+          {
+            "code": "MUAL39",
+            "name": "Musik- och ljudproduktion 7",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 10,
+        "code": "MUAL12",
+        "name": "Verksamhetsförlagd utbildning 4 - musiklärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "code": "MUAL40",
+        "name": "Musik med didaktisk inriktning 10",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "code": "MUAL15",
+        "name": "Självständigt arbete 2 - musiklärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 10,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 22.5,
+        "unknownHp": 0,
+        "choiceOptionsHp": 30,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 22.5,
+        "unknownHp": 0,
+        "choiceOptionsHp": 30,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 7.5,
+        "unknownHp": 0,
+        "choiceOptionsHp": 60,
+        "covered": true
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 7.5,
+        "unknownHp": 0,
+        "choiceOptionsHp": 60,
+        "covered": true
+      },
+      "7": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 60,
+        "covered": true
+      },
+      "8": {
+        "target": 30,
+        "requiredHp": 22.5,
+        "unknownHp": 0,
+        "choiceOptionsHp": 30,
+        "covered": true
+      },
+      "9": {
+        "target": 30,
+        "requiredHp": 22.5,
+        "unknownHp": 0,
+        "choiceOptionsHp": 30,
+        "covered": true
+      },
+      "10": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 51,
+    "checkedAt": "2026-09-13T06:18:29.561Z"
   },
   {
     "key": "karlstads-universitet:LAF13",
@@ -24906,19 +26397,201 @@
     "university": "Karlstads universitet",
     "programCode": "LAF13",
     "programName": "Grundlärarprogrammet förskoleklass och årskurs 1-3",
-    "hp": null,
+    "hp": 240,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAF13"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAF13",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.764Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGG00",
+        "name": "Lärarens didaktiska verktyg",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGG22",
+        "name": "Skola som system och idé - grundlärare",
+        "hp": 9,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGG24",
+        "name": "Lärarens pedagogiska förhållningssätt - grundlärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPGG26",
+        "name": "Svenska för grundlärare i förskoleklass och årskurs 1-3",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "LPGG06",
+        "name": "Kreativ matematik för grundlärare i förskoleklass och årskurs 1-3",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGG07",
+        "name": "Engelska för grundlärare i förskoleklass och årskurs 1-3",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGG08",
+        "name": "Samhällsorienterande ämnen för grundlärare i förskoleklass och årskurs 1-3",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "LPGG33",
+        "name": "Samhällsorienterande ämnen för grundlärare i förskoleklass och årskurs 1-3",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "LPGG41",
+        "name": "Naturvetenskap och teknik F-3",
+        "hp": 22.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "LPGG17",
+        "name": "Svenska för grundlärare i förskoleklass och årskurs 1-3 II",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "LPAG07",
+        "name": "Lärarens professionella ledarskap",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "LPAG20",
+        "name": "Bedömning som pedagogiskt redskap",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "LPAG04",
+        "name": "Verksamhetsförlagd utbildning III - grundlärare i förskoleklass och årskurs 1-3",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "LPAG13",
+        "name": "Skola på vetenskaplig grund - grundlärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "partial-structure",
+    "reason": "some-complete-terms",
+    "expectedTerms": 8,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "7": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "8": {
+        "target": 30,
+        "requiredHp": 120,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 18,
+    "checkedAt": "2026-09-13T06:18:29.565Z"
   },
   {
     "key": "karlstads-universitet:LAG46",
@@ -24926,19 +26599,247 @@
     "university": "Karlstads universitet",
     "programCode": "LAG46",
     "programName": "Grundlärarprogrammet årskurs 4-6",
-    "hp": null,
+    "hp": 240,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAG46"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAG46",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.773Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGG00",
+        "name": "Lärarens didaktiska verktyg",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGG22",
+        "name": "Skola som system och idé - grundlärare",
+        "hp": 9,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGG24",
+        "name": "Lärarens pedagogiska förhållningssätt - grundlärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPGG05",
+        "name": "Kreativ matematik för grundlärare i årskurs 4-6",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "LPGG25",
+        "name": "Svenska för grundlärare i årskurs 4-6",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "LPGG20",
+            "name": "Bild för grundlärare i årskurs 4-6",
+            "hp": 30
+          },
+          {
+            "code": "LPGVKM",
+            "name": "Musik för grundlärare i årskurs 4-6",
+            "hp": 30
+          },
+          {
+            "code": "LPGG90",
+            "name": "Naturvetenskap och teknik för grundlärare i årskurs 4-6",
+            "hp": 30
+          },
+          {
+            "code": "LPGG30",
+            "name": "Samhällsorienterande ämnen för grundlärare i årskurs 4-6",
+            "hp": 30
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "code": "LPGG15",
+        "name": "Engelska för grundlärare i årskurs 4-6",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "LPGG18",
+        "name": "Kreativ matematik för grundlärare i årskurs 4-6 II",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "LPAG07",
+        "name": "Lärarens professionella ledarskap",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "LPAG20",
+        "name": "Bedömning som pedagogiskt redskap",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "LPAG13",
+        "name": "Skola på vetenskaplig grund - grundlärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "LPAG05",
+        "name": "Verksamhetsförlagd utbildning III - grundlärare i årskurs 4-6",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "LXAG71",
+            "name": "Examensarbete Grundlärarprogrammet, 4-6 - Engelska",
+            "hp": 30
+          },
+          {
+            "code": "LXAG72",
+            "name": "Examensarbete Grundlärarprogrammet, 4-6 - SO",
+            "hp": 30
+          },
+          {
+            "code": "LXAG73",
+            "name": "Examensarbete Grundlärarprogrammet, 4-6 - NO/Teknik",
+            "hp": 30
+          },
+          {
+            "code": "LXAG74",
+            "name": "Examensarbete Grundlärarprogrammet - Matematik",
+            "hp": 30
+          },
+          {
+            "code": "LXAG75",
+            "name": "Examensarbete Grundlärarprogrammet - Svenska språket",
+            "hp": 30
+          }
+        ]
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 8,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 120,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "7": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "8": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 150,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 20,
+    "checkedAt": "2026-09-13T06:18:30.068Z"
   },
   {
     "key": "karlstads-universitet:LAGBI",
@@ -24946,19 +26847,217 @@
     "university": "Karlstads universitet",
     "programCode": "LAGBI",
     "programName": "Ämneslärarprogrammet gymnasieskolan: Biologi",
-    "hp": null,
+    "hp": 300,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAGBI"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAGBI",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.789Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "BIGBI1",
+        "name": "Biologi med didaktisk inriktning 1",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "BIGBI2",
+        "name": "Biologi med didaktisk inriktning 2",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "BIGBI3",
+        "name": "Biologi med didaktisk inriktning 3",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA13",
+        "name": "Lärarens didaktiska verktyg",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA14",
+        "name": "Skola som system och idé - ämneslärare",
+        "hp": 9,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA15",
+        "name": "Lärarens pedagogiska förhållningssätt - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 1-30 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 31-60 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 61-90 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA05",
+        "name": "Lärarens professionella ledarskap - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA06",
+        "name": "Betyg och bedömning - ämneslärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA07",
+        "name": "Skola på vetenskaplig grund-ämneslärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "code": "LPAA04",
+        "name": "Verksamhetsförlagd utbildning III - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "code": "LXAA01",
+        "name": "Examensarbete för ämneslärare - biologi med didaktisk inriktning",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "partial-structure",
+    "reason": "some-complete-terms",
+    "expectedTerms": 10,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "7": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "8": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "9": {
+        "target": 30,
+        "requiredHp": 60,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "10": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 18,
+    "checkedAt": "2026-09-13T06:18:30.063Z"
   },
   {
     "key": "karlstads-universitet:LAGEN",
@@ -24978,7 +27077,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.782Z"
+    "checkedAt": "2026-09-13T06:18:35.194Z"
   },
   {
     "key": "karlstads-universitet:LAGHI",
@@ -24998,7 +27097,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:41.790Z"
+    "checkedAt": "2026-09-13T06:18:35.198Z"
   },
   {
     "key": "karlstads-universitet:LAGIH",
@@ -25018,7 +27117,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:47.048Z"
+    "checkedAt": "2026-09-13T06:18:35.385Z"
   },
   {
     "key": "karlstads-universitet:LAGKE",
@@ -25038,7 +27137,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:46.752Z"
+    "checkedAt": "2026-09-13T06:18:35.386Z"
   },
   {
     "key": "karlstads-universitet:LAGMA",
@@ -25058,7 +27157,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:46.756Z"
+    "checkedAt": "2026-09-13T06:18:35.408Z"
   },
   {
     "key": "karlstads-universitet:LAGMF",
@@ -25078,7 +27177,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:46.762Z"
+    "checkedAt": "2026-09-13T06:18:35.390Z"
   },
   {
     "key": "karlstads-universitet:LAGNA",
@@ -25086,19 +27185,217 @@
     "university": "Karlstads universitet",
     "programCode": "LAGNA",
     "programName": "Ämneslärarprogrammet gymnasieskolan: Naturkunskap",
-    "hp": null,
+    "hp": 300,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAGNA"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAGNA",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:46.769Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "BIGN10",
+        "name": "Naturkunskap med didaktisk inriktning 1",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "BIGN20",
+        "name": "Naturkunskap med didaktisk inriktning 2",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Naturkunskap med ett didaktiskt perspektiv 3",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA13",
+        "name": "Lärarens didaktiska verktyg",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA14",
+        "name": "Skola som system och idé - ämneslärare",
+        "hp": 9,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA15",
+        "name": "Lärarens pedagogiska förhållningssätt - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 1-30 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 31-60 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 61-90 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA05",
+        "name": "Lärarens professionella ledarskap - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA06",
+        "name": "Betyg och bedömning - ämneslärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA07",
+        "name": "Skola på vetenskaplig grund-ämneslärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "code": "LPAA04",
+        "name": "Verksamhetsförlagd utbildning III - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "code": "LXAA08",
+        "name": "Examensarbete för ämneslärare - naturkunskap med didaktisk inriktning",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "partial-structure",
+    "reason": "some-complete-terms",
+    "expectedTerms": 10,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "7": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "8": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "9": {
+        "target": 30,
+        "requiredHp": 60,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "10": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 18,
+    "checkedAt": "2026-09-13T06:18:29.228Z"
   },
   {
     "key": "karlstads-universitet:LAGRE",
@@ -25106,19 +27403,217 @@
     "university": "Karlstads universitet",
     "programCode": "LAGRE",
     "programName": "Ämneslärarprogrammet gymnasieskolan: Religion",
-    "hp": null,
+    "hp": 300,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAGRE"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAGRE",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:46.795Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "REG1L1",
+        "name": "Religionsvetenskap med didaktisk inriktning 1",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "REG2L1",
+        "name": "Religionsvetenskap med didaktisk inriktning 2",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "REG3L2",
+        "name": "Religionsvetenskap med didaktisk inriktning 3",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA13",
+        "name": "Lärarens didaktiska verktyg",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA14",
+        "name": "Skola som system och idé - ämneslärare",
+        "hp": 9,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA15",
+        "name": "Lärarens pedagogiska förhållningssätt - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 1-30 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 31-60 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 61-90 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA05",
+        "name": "Lärarens professionella ledarskap - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA06",
+        "name": "Betyg och bedömning - ämneslärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA07",
+        "name": "Skola på vetenskaplig grund-ämneslärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "code": "REA4L1",
+        "name": "Religionsvetenskap med didaktisk inriktning 4",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet",
+        "hp": 22.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "partial-structure",
+    "reason": "some-complete-terms",
+    "expectedTerms": 10,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "7": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "8": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "9": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "10": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 15,
+    "checkedAt": "2026-09-13T06:18:29.243Z"
   },
   {
     "key": "karlstads-universitet:LAGSA",
@@ -25126,19 +27621,241 @@
     "university": "Karlstads universitet",
     "programCode": "LAGSA",
     "programName": "Ämneslärarprogrammet gymnasieskolan: Samhällskunskap",
-    "hp": null,
+    "hp": 330,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAGSA"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAGSA",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:46.914Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "SHGL01",
+        "name": "Samhällskunskap med didaktisk inriktning 1",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "SHGL12",
+        "name": "Samhällskunskap II med didaktisk inriktning",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "SHGL13",
+        "name": "Samhällskunskap III med didaktisk inriktning",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA13",
+        "name": "Lärarens didaktiska verktyg",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA15",
+        "name": "Lärarens pedagogiska förhållningssätt - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA14",
+        "name": "Skola som system och idé - ämneslärare",
+        "hp": 9,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 1-30 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 31-60 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 61-90 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA05",
+        "name": "Lärarens professionella ledarskap - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA06",
+        "name": "Betyg och bedömning - ämneslärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA07",
+        "name": "Skola på vetenskaplig grund-ämneslärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "code": "SHAL92",
+        "name": "Samhällskunskap med didaktisk inriktning 5",
+        "hp": 22.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "code": "LPAA04",
+        "name": "Verksamhetsförlagd utbildning III - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "code": "LXAA10",
+        "name": "Examensarbete för ämneslärare - samhällskunskap med didaktisk inriktning",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "partial-structure",
+    "reason": "some-complete-terms",
+    "expectedTerms": 11,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "7": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "8": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "9": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "10": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "11": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 16,
+    "checkedAt": "2026-09-13T06:18:29.416Z"
   },
   {
     "key": "karlstads-universitet:LAGSV",
@@ -25146,19 +27863,224 @@
     "university": "Karlstads universitet",
     "programCode": "LAGSV",
     "programName": "Ämneslärarprogrammet gymnasieskolan: Svenska",
-    "hp": null,
+    "hp": 330,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAGSV"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAGSV",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:46.915Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "SVGL01",
+        "name": "Svenska med didaktisk inriktning 1",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "SVGL12",
+        "name": "Svenska II med didaktisk inriktning",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "SVGL13",
+        "name": "Svenska III med didaktisk inriktning",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA13",
+        "name": "Lärarens didaktiska verktyg",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA14",
+        "name": "Skola som system och idé - ämneslärare",
+        "hp": 9,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPGA15",
+        "name": "Lärarens pedagogiska förhållningssätt - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 1-30 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 31-60 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Ämne 2 Ämneslärarprogrammet, 61-90 hp",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA05",
+        "name": "Lärarens professionella ledarskap - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA06",
+        "name": "Betyg och bedömning - ämneslärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "LPAA07",
+        "name": "Skola på vetenskaplig grund-ämneslärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "code": "LPAA04",
+        "name": "Verksamhetsförlagd utbildning III - ämneslärare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "code": "LXAA12",
+        "name": "Examensarbete för ämneslärare - svenska med didaktisk inriktning",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "partial-structure",
+    "reason": "some-complete-terms",
+    "expectedTerms": 11,
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "4": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "5": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "6": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "7": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "8": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "9": {
+        "target": 30,
+        "requiredHp": 52.5,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "10": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "11": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 17,
+    "checkedAt": "2026-09-13T06:18:29.422Z"
   },
   {
     "key": "karlstads-universitet:LAKG1",
@@ -25166,19 +28088,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKG1",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Svenska gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKG1"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKG1",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:46.927Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.429Z"
   },
   {
     "key": "karlstads-universitet:LAKG2",
@@ -25186,19 +28179,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKG2",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Spanska gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKG2"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKG2",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:46.930Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.447Z"
   },
   {
     "key": "karlstads-universitet:LAKG3",
@@ -25206,19 +28270,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKG3",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Samhällskunskap gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKG3"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKG3",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:46.936Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.624Z"
   },
   {
     "key": "karlstads-universitet:LAKG4",
@@ -25226,7 +28361,7 @@
     "university": "Karlstads universitet",
     "programCode": "LAKG4",
     "programName": "Kompletterande pedagogisk utbildning ämneslärare, 60hp: Fysik gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKG4"
@@ -25236,9 +28371,28 @@
     "source": "karlstad-official-study-path",
     "rows": [],
     "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:46.937Z"
+    "reason": "no-verified-term-structure",
+    "expectedTerms": 2,
+    "completeTerms": [],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 0,
+    "checkedAt": "2026-09-13T06:18:29.627Z"
   },
   {
     "key": "karlstads-universitet:LAKGB",
@@ -25246,7 +28400,7 @@
     "university": "Karlstads universitet",
     "programCode": "LAKGB",
     "programName": "Kompletterande pedagogisk utbildning ämneslärare, 60hp: Biologi gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKGB"
@@ -25256,9 +28410,28 @@
     "source": "karlstad-official-study-path",
     "rows": [],
     "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:52.198Z"
+    "reason": "no-verified-term-structure",
+    "expectedTerms": 2,
+    "completeTerms": [],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 0,
+    "checkedAt": "2026-09-13T06:18:29.631Z"
   },
   {
     "key": "karlstads-universitet:LAKGE",
@@ -25266,19 +28439,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKGE",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Engelska gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKGE"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKGE",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:51.896Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.644Z"
   },
   {
     "key": "karlstads-universitet:LAKGF",
@@ -25286,19 +28530,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKGF",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Företagsekonomi gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKGF"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKGF",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:51.907Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.762Z"
   },
   {
     "key": "karlstads-universitet:LAKGG",
@@ -25306,19 +28621,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKGG",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Geografi gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKGG"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKGG",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:51.914Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.754Z"
   },
   {
     "key": "karlstads-universitet:LAKGH",
@@ -25326,19 +28712,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKGH",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Historia gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKGH"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKGH",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:51.940Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.761Z"
   },
   {
     "key": "karlstads-universitet:LAKGI",
@@ -25346,19 +28803,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKGI",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Idrott och hälsa gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKGI"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKGI",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:52.062Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.766Z"
   },
   {
     "key": "karlstads-universitet:LAKGK",
@@ -25366,7 +28894,7 @@
     "university": "Karlstads universitet",
     "programCode": "LAKGK",
     "programName": "Kompletterande pedagogisk utbildning ämneslärare, 60hp: Kemi gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKGK"
@@ -25376,9 +28904,28 @@
     "source": "karlstad-official-study-path",
     "rows": [],
     "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:52.065Z"
+    "reason": "no-verified-term-structure",
+    "expectedTerms": 2,
+    "completeTerms": [],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 0,
+    "checkedAt": "2026-09-13T06:18:29.827Z"
   },
   {
     "key": "karlstads-universitet:LAKGM",
@@ -25386,7 +28933,7 @@
     "university": "Karlstads universitet",
     "programCode": "LAKGM",
     "programName": "Kompletterande pedagogisk utbildning ämneslärare, 60hp: Matematik gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKGM"
@@ -25396,9 +28943,28 @@
     "source": "karlstad-official-study-path",
     "rows": [],
     "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:52.069Z"
+    "reason": "no-verified-term-structure",
+    "expectedTerms": 2,
+    "completeTerms": [],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 0,
+    "checkedAt": "2026-09-13T06:18:29.824Z"
   },
   {
     "key": "karlstads-universitet:LAKGR",
@@ -25406,19 +28972,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKGR",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Religion gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKGR"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKGR",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:52.076Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.830Z"
   },
   {
     "key": "karlstads-universitet:LAKGT",
@@ -25426,7 +29063,7 @@
     "university": "Karlstads universitet",
     "programCode": "LAKGT",
     "programName": "Kompletterande pedagogisk utbildning ämneslärare, 60hp: Teknik gymnasieskolan",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKGT"
@@ -25436,9 +29073,28 @@
     "source": "karlstad-official-study-path",
     "rows": [],
     "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:52.083Z"
+    "reason": "no-verified-term-structure",
+    "expectedTerms": 2,
+    "completeTerms": [],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 0,
+    "checkedAt": "2026-09-13T06:18:29.837Z"
   },
   {
     "key": "karlstads-universitet:LAKH1",
@@ -25446,19 +29102,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKH1",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Svenska 7-9",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKH1"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKH1",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:52.084Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.958Z"
   },
   {
     "key": "karlstads-universitet:LAKH2",
@@ -25466,19 +29193,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKH2",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Spanska 7-9",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKH2"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKH2",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:52.195Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.961Z"
   },
   {
     "key": "karlstads-universitet:LAKH3",
@@ -25486,19 +29284,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKH3",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Samhällskunskap 7-9",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKH3"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKH3",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.332Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.963Z"
   },
   {
     "key": "karlstads-universitet:LAKHE",
@@ -25506,19 +29375,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKHE",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Engelska 7-9",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKHE"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKHE",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.047Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:29.966Z"
   },
   {
     "key": "karlstads-universitet:LAKHG",
@@ -25526,19 +29466,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKHG",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Geografi 7-9",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKHG"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKHG",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.059Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:30.030Z"
   },
   {
     "key": "karlstads-universitet:LAKHH",
@@ -25546,19 +29557,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKHH",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Historia 7-9",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKHH"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKHH",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.087Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:31.078Z"
   },
   {
     "key": "karlstads-universitet:LAKHI",
@@ -25566,19 +29648,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKHI",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Idrott och hälsa 7-9",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKHI"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKHI",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.207Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:31.099Z"
   },
   {
     "key": "karlstads-universitet:LAKHM",
@@ -25586,7 +29739,7 @@
     "university": "Karlstads universitet",
     "programCode": "LAKHM",
     "programName": "Kompletterande pedagogisk utbildning ämneslärare, 60hp: Matematik årskurs 7–9",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKHM"
@@ -25596,9 +29749,28 @@
     "source": "karlstad-official-study-path",
     "rows": [],
     "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.212Z"
+    "reason": "no-verified-term-structure",
+    "expectedTerms": 2,
+    "completeTerms": [],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 0,
+    "checkedAt": "2026-09-13T06:18:30.350Z"
   },
   {
     "key": "karlstads-universitet:LAKHR",
@@ -25606,19 +29778,90 @@
     "university": "Karlstads universitet",
     "programCode": "LAKHR",
     "programName": "Kompletterande pedagogisk utbildning 60hp, Religion 7-9",
-    "hp": null,
+    "hp": 60,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKHR"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKHR",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.218Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK23",
+        "name": "Skola som system och idé - KPU 60",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK32",
+        "name": "Lärarens pedagogiska förhållningssätt och VFU I - KPU 60",
+        "hp": 16.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK42",
+        "name": "Ämnesstudier och ämnesdidaktik - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK52",
+        "name": "Bedömning och betygsättning - KPU 60",
+        "hp": 4.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK62",
+        "name": "Lärarens professionella ledarskap och VFU II - KPU 60",
+        "hp": 18,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAK72",
+        "name": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 2,
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:31.144Z"
   },
   {
     "key": "karlstads-universitet:LAKPU",
@@ -25626,19 +29869,128 @@
     "university": "Karlstads universitet",
     "programCode": "LAKPU",
     "programName": "Kompletterande pedagogisk utbildning",
-    "hp": null,
+    "hp": 90,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LAKPU"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LAKPU",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.220Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPGK08",
+        "name": "Skola som system och idé - KPU",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "LPGK02",
+        "name": "Den lärande eleven - KPU",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPGK03",
+        "name": "Verksamhetsförlagd utbildning 1 och 2 - KPU",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "LPAK04",
+            "name": "Leda lärande - KPU",
+            "hp": 15
+          },
+          {
+            "code": "LPAK40",
+            "name": "Leda lärande, bedömning och betygssättning - KPU",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "LPAK05",
+            "name": "Bedömning, betygsättning och VFU - KPU",
+            "hp": 15
+          },
+          {
+            "code": "LPAK09",
+            "name": "Utvecklingsarbete på forskningsmässig grund och VFU - KPU",
+            "hp": 15
+          },
+          {
+            "code": "LXAA50",
+            "name": "Självständigt arbete med ämnesdidaktisk inriktning - KPU",
+            "hp": 15
+          },
+          {
+            "code": "LPAK10",
+            "name": "Verksamhetsförlagd utbildning 3 och 4 - KPU",
+            "hp": 15
+          }
+        ]
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "all-published-terms-reconciled",
+    "expectedTerms": 3,
+    "completeTerms": [
+      1,
+      2,
+      3
+    ],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 30,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": true
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 30,
+        "covered": true
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 0,
+        "unknownHp": 0,
+        "choiceOptionsHp": 60,
+        "covered": true
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 9,
+    "checkedAt": "2026-09-13T06:18:30.156Z"
   },
   {
     "key": "karlstads-universitet:LASPL",
@@ -25646,19 +29998,94 @@
     "university": "Karlstads universitet",
     "programCode": "LASPL",
     "programName": "Speciallärprogrammet, specialisering: Intellektuell funktionsnedsättning",
-    "hp": null,
+    "hp": 90,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LASPL"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LASPL",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.228Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPAGS1",
+        "name": "Specialpedagogik som forsknings- och verksamhetsområde",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAGS9",
+        "name": "Specialpedagogisk praktik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "LPAIF1",
+        "name": "Lärande och undervisning i anpassade skolan Del I",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "LPAIF2",
+        "name": "Lärande och undervisning i anpassade skolan Del II",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "LPAS10",
+        "name": "Vetenskapliga metoder i specialpedagogisk forskning",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "LPAGS7",
+        "name": "Examensarbete i speciallärarprogrammet",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "published-rows-not-fully-reconciled",
+    "expectedTerms": 3,
+    "completeTerms": [],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:30.154Z"
   },
   {
     "key": "karlstads-universitet:LASPP",
@@ -25666,19 +30093,94 @@
     "university": "Karlstads universitet",
     "programCode": "LASPP",
     "programName": "Specialpedagogprogrammet",
-    "hp": null,
+    "hp": 90,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/LASPP"
     ],
-    "status": "manual-review",
+    "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/LASPP",
     "source": "karlstad-official-study-path",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "official-page-temporarily-unavailable",
-    "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.231Z"
+    "rows": [
+      {
+        "term": 1,
+        "code": "LPAS11",
+        "name": "Specialpedagogik som forsknings- och verksamhetsområde",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "LPAS20",
+        "name": "Specialpedagogisk praktik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "LPAS30",
+        "name": "Specialpedagogen som kvalificerad samtalspartner och pedagogisk ledare",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Att identifiera och undanröja hinder och svårigheter i lärmiljöer",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Vetenskapsteori och metod med ämnesfördjupning i specialpedagogik",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Examensarbete i specialpedagogprogrammet",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "published-rows-not-fully-reconciled",
+    "expectedTerms": 3,
+    "completeTerms": [],
+    "termSums": {
+      "1": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "2": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      },
+      "3": {
+        "target": 30,
+        "requiredHp": 15,
+        "unknownHp": 0,
+        "choiceOptionsHp": 0,
+        "covered": false
+      }
+    },
+    "underPlanning": false,
+    "rawRows": 6,
+    "checkedAt": "2026-09-13T06:18:30.576Z"
   },
   {
     "key": "karlstads-universitet:LGFLP",
@@ -25698,7 +30200,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.341Z"
+    "checkedAt": "2026-09-13T06:18:35.199Z"
   },
   {
     "key": "karlstads-universitet:LGFLV",
@@ -25718,7 +30220,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:14:57.351Z"
+    "checkedAt": "2026-09-13T06:18:35.237Z"
   },
   {
     "key": "karlstads-universitet:LGGLF",
@@ -25738,7 +30240,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.494Z"
+    "checkedAt": "2026-09-13T06:18:35.235Z"
   },
   {
     "key": "karlstads-universitet:LGVAL",
@@ -25758,7 +30260,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.209Z"
+    "checkedAt": "2026-09-13T06:18:35.316Z"
   },
   {
     "key": "karlstads-universitet:LGYRK",
@@ -25778,7 +30280,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.234Z"
+    "checkedAt": "2026-09-13T06:18:35.331Z"
   },
   {
     "key": "karlstads-universitet:NABIM",
@@ -25798,7 +30300,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.353Z"
+    "checkedAt": "2026-09-13T06:18:35.519Z"
   },
   {
     "key": "karlstads-universitet:NGBIO",
@@ -25818,7 +30320,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.357Z"
+    "checkedAt": "2026-09-13T06:18:35.752Z"
   },
   {
     "key": "karlstads-universitet:NGFYA",
@@ -25838,7 +30340,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.366Z"
+    "checkedAt": "2026-09-13T06:18:36.247Z"
   },
   {
     "key": "karlstads-universitet:NGKEA",
@@ -25858,7 +30360,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.369Z"
+    "checkedAt": "2026-09-13T06:18:36.265Z"
   },
   {
     "key": "karlstads-universitet:NGMAA",
@@ -25878,7 +30380,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.370Z"
+    "checkedAt": "2026-09-13T06:18:36.311Z"
   },
   {
     "key": "karlstads-universitet:OGTHY",
@@ -25898,7 +30400,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.376Z"
+    "checkedAt": "2026-09-13T06:18:41.212Z"
   },
   {
     "key": "karlstads-universitet:SAABV",
@@ -25918,7 +30420,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.478Z"
+    "checkedAt": "2026-09-13T06:18:40.362Z"
   },
   {
     "key": "karlstads-universitet:SACEK",
@@ -25938,7 +30440,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.486Z"
+    "checkedAt": "2026-09-13T06:18:40.364Z"
   },
   {
     "key": "karlstads-universitet:SADID",
@@ -25958,7 +30460,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:02.498Z"
+    "checkedAt": "2026-09-13T06:18:40.404Z"
   },
   {
     "key": "karlstads-universitet:SAFPL",
@@ -25978,7 +30480,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.655Z"
+    "checkedAt": "2026-09-13T06:18:40.402Z"
   },
   {
     "key": "karlstads-universitet:SAFSP",
@@ -25998,7 +30500,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.374Z"
+    "checkedAt": "2026-09-13T06:18:40.478Z"
   },
   {
     "key": "karlstads-universitet:SAGEO",
@@ -26018,7 +30520,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.499Z"
+    "checkedAt": "2026-09-13T06:18:40.492Z"
   },
   {
     "key": "karlstads-universitet:SAHIS",
@@ -26038,7 +30540,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.502Z"
+    "checkedAt": "2026-09-13T06:18:40.549Z"
   },
   {
     "key": "karlstads-universitet:SAIDV",
@@ -26058,7 +30560,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.511Z"
+    "checkedAt": "2026-09-13T06:18:40.552Z"
   },
   {
     "key": "karlstads-universitet:SAIND",
@@ -26078,7 +30580,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.515Z"
+    "checkedAt": "2026-09-13T06:18:40.553Z"
   },
   {
     "key": "karlstads-universitet:SAINF",
@@ -26098,7 +30600,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.518Z"
+    "checkedAt": "2026-09-13T06:18:40.576Z"
   },
   {
     "key": "karlstads-universitet:SALYS",
@@ -26118,7 +30620,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.518Z"
+    "checkedAt": "2026-09-13T06:18:40.689Z"
   },
   {
     "key": "karlstads-universitet:SAMGM",
@@ -26138,7 +30640,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.624Z"
+    "checkedAt": "2026-09-13T06:18:40.921Z"
   },
   {
     "key": "karlstads-universitet:SANEA",
@@ -26158,7 +30660,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.633Z"
+    "checkedAt": "2026-09-13T06:18:41.417Z"
   },
   {
     "key": "karlstads-universitet:SAPFD",
@@ -26178,7 +30680,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.639Z"
+    "checkedAt": "2026-09-13T06:18:41.434Z"
   },
   {
     "key": "karlstads-universitet:SARHS",
@@ -26198,7 +30700,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:07.645Z"
+    "checkedAt": "2026-09-13T06:18:41.477Z"
   },
   {
     "key": "karlstads-universitet:SARUM",
@@ -26218,7 +30720,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.805Z"
+    "checkedAt": "2026-09-13T06:18:46.259Z"
   },
   {
     "key": "karlstads-universitet:SASKT",
@@ -26238,7 +30740,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.638Z"
+    "checkedAt": "2026-09-13T06:18:45.528Z"
   },
   {
     "key": "karlstads-universitet:SASMF",
@@ -26258,7 +30760,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.647Z"
+    "checkedAt": "2026-09-13T06:18:45.566Z"
   },
   {
     "key": "karlstads-universitet:SASOC",
@@ -26278,7 +30780,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.656Z"
+    "checkedAt": "2026-09-13T06:18:45.569Z"
   },
   {
     "key": "karlstads-universitet:SASPP",
@@ -26298,7 +30800,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.661Z"
+    "checkedAt": "2026-09-13T06:18:45.647Z"
   },
   {
     "key": "karlstads-universitet:SASRS",
@@ -26318,7 +30820,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.678Z"
+    "checkedAt": "2026-09-13T06:18:45.651Z"
   },
   {
     "key": "karlstads-universitet:SASTV",
@@ -26338,7 +30840,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.680Z"
+    "checkedAt": "2026-09-13T06:18:45.710Z"
   },
   {
     "key": "karlstads-universitet:SAUTS",
@@ -26358,7 +30860,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.781Z"
+    "checkedAt": "2026-09-13T06:18:45.716Z"
   },
   {
     "key": "karlstads-universitet:SGBET",
@@ -26378,7 +30880,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.779Z"
+    "checkedAt": "2026-09-13T06:18:45.721Z"
   },
   {
     "key": "karlstads-universitet:SGDMA",
@@ -26398,7 +30900,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.785Z"
+    "checkedAt": "2026-09-13T06:18:45.738Z"
   },
   {
     "key": "karlstads-universitet:SGFEK",
@@ -26418,7 +30920,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.791Z"
+    "checkedAt": "2026-09-13T06:18:45.857Z"
   },
   {
     "key": "karlstads-universitet:SGFHA",
@@ -26438,7 +30940,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:12.802Z"
+    "checkedAt": "2026-09-13T06:18:46.092Z"
   },
   {
     "key": "karlstads-universitet:SGGEN",
@@ -26458,7 +30960,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:18.056Z"
+    "checkedAt": "2026-09-13T06:18:46.392Z"
   },
   {
     "key": "karlstads-universitet:SGGGJ",
@@ -26478,7 +30980,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:17.787Z"
+    "checkedAt": "2026-09-13T06:18:46.585Z"
   },
   {
     "key": "karlstads-universitet:SGIHP",
@@ -26498,7 +31000,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:17.816Z"
+    "checkedAt": "2026-09-13T06:18:46.605Z"
   },
   {
     "key": "karlstads-universitet:SGIPA",
@@ -26518,7 +31020,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:17.817Z"
+    "checkedAt": "2026-09-13T06:18:46.647Z"
   },
   {
     "key": "karlstads-universitet:SGITD",
@@ -26538,7 +31040,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:17.822Z"
+    "checkedAt": "2026-09-13T06:18:51.026Z"
   },
   {
     "key": "karlstads-universitet:SGKPR",
@@ -26558,7 +31060,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:17.827Z"
+    "checkedAt": "2026-09-13T06:18:50.731Z"
   },
   {
     "key": "karlstads-universitet:SGMIR",
@@ -26578,7 +31080,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:17.928Z"
+    "checkedAt": "2026-09-13T06:18:50.733Z"
   },
   {
     "key": "karlstads-universitet:SGPAR",
@@ -26598,7 +31100,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:17.941Z"
+    "checkedAt": "2026-09-13T06:18:50.825Z"
   },
   {
     "key": "karlstads-universitet:SGSAM",
@@ -26618,7 +31120,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:17.943Z"
+    "checkedAt": "2026-09-13T06:18:50.821Z"
   },
   {
     "key": "karlstads-universitet:SGSTV",
@@ -26638,7 +31140,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:17.941Z"
+    "checkedAt": "2026-09-13T06:18:50.885Z"
   },
   {
     "key": "karlstads-universitet:SGSYE",
@@ -26658,7 +31160,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:17.949Z"
+    "checkedAt": "2026-09-13T06:18:50.879Z"
   },
   {
     "key": "karlstads-universitet:SGSYS",
@@ -26678,7 +31180,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:17.952Z"
+    "checkedAt": "2026-09-13T06:18:50.886Z"
   },
   {
     "key": "karlstads-universitet:SGTPD",
@@ -26698,7 +31200,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:23.232Z"
+    "checkedAt": "2026-09-13T06:18:50.905Z"
   },
   {
     "key": "karlstads-universitet:SGVKD",
@@ -26718,7 +31220,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:22.956Z"
+    "checkedAt": "2026-09-13T06:18:51.020Z"
   },
   {
     "key": "karlstads-universitet:SGWEB",
@@ -26738,7 +31240,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:22.962Z"
+    "checkedAt": "2026-09-13T06:18:51.260Z"
   },
   {
     "key": "karlstads-universitet:TACDA",
@@ -26758,7 +31260,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:22.968Z"
+    "checkedAt": "2026-09-13T06:18:51.430Z"
   },
   {
     "key": "karlstads-universitet:TACEM",
@@ -26778,7 +31280,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:22.973Z"
+    "checkedAt": "2026-09-13T06:18:51.560Z"
   },
   {
     "key": "karlstads-universitet:TACIE",
@@ -26798,7 +31300,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:23.075Z"
+    "checkedAt": "2026-09-13T06:18:51.755Z"
   },
   {
     "key": "karlstads-universitet:TACKT",
@@ -26818,7 +31320,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:23.091Z"
+    "checkedAt": "2026-09-13T06:18:51.772Z"
   },
   {
     "key": "karlstads-universitet:TACMA",
@@ -26838,7 +31340,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:23.087Z"
+    "checkedAt": "2026-09-13T06:18:51.817Z"
   },
   {
     "key": "karlstads-universitet:TACTF",
@@ -26858,7 +31360,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:23.089Z"
+    "checkedAt": "2026-09-13T06:18:56.245Z"
   },
   {
     "key": "karlstads-universitet:TAMCS",
@@ -26878,7 +31380,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:23.092Z"
+    "checkedAt": "2026-09-13T06:18:55.896Z"
   },
   {
     "key": "karlstads-universitet:TAMCY",
@@ -26898,7 +31400,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:23.098Z"
+    "checkedAt": "2026-09-13T06:18:55.985Z"
   },
   {
     "key": "karlstads-universitet:TAMDD",
@@ -26918,7 +31420,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:23.202Z"
+    "checkedAt": "2026-09-13T06:18:55.995Z"
   },
   {
     "key": "karlstads-universitet:TAMEM",
@@ -26938,7 +31440,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.390Z"
+    "checkedAt": "2026-09-13T06:18:56.043Z"
   },
   {
     "key": "karlstads-universitet:TAMFN",
@@ -26958,7 +31460,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.101Z"
+    "checkedAt": "2026-09-13T06:18:56.047Z"
   },
   {
     "key": "karlstads-universitet:TAMFT",
@@ -26978,7 +31480,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.114Z"
+    "checkedAt": "2026-09-13T06:18:56.046Z"
   },
   {
     "key": "karlstads-universitet:TAMGM",
@@ -26998,7 +31500,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.118Z"
+    "checkedAt": "2026-09-13T06:18:56.070Z"
   },
   {
     "key": "karlstads-universitet:TAMIC",
@@ -27018,7 +31520,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.221Z"
+    "checkedAt": "2026-09-13T06:18:56.188Z"
   },
   {
     "key": "karlstads-universitet:TAMIS",
@@ -27038,7 +31540,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.234Z"
+    "checkedAt": "2026-09-13T06:18:56.190Z"
   },
   {
     "key": "karlstads-universitet:TGDDI",
@@ -27058,7 +31560,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.234Z"
+    "checkedAt": "2026-09-13T06:18:56.422Z"
   },
   {
     "key": "karlstads-universitet:TGHBY",
@@ -27078,7 +31580,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.239Z"
+    "checkedAt": "2026-09-13T06:18:56.599Z"
   },
   {
     "key": "karlstads-universitet:TGHEL",
@@ -27098,7 +31600,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.240Z"
+    "checkedAt": "2026-09-13T06:18:56.753Z"
   },
   {
     "key": "karlstads-universitet:TGHEM",
@@ -27118,7 +31620,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.241Z"
+    "checkedAt": "2026-09-13T06:18:56.928Z"
   },
   {
     "key": "karlstads-universitet:TGHID",
@@ -27138,7 +31640,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.347Z"
+    "checkedAt": "2026-09-13T06:18:56.941Z"
   },
   {
     "key": "karlstads-universitet:TGHMT",
@@ -27158,7 +31660,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:28.378Z"
+    "checkedAt": "2026-09-13T06:18:56.988Z"
   },
   {
     "key": "karlstads-universitet:TGKAI",
@@ -27178,7 +31680,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.705Z"
+    "checkedAt": "2026-09-13T06:19:01.774Z"
   },
   {
     "key": "karlstads-universitet:TGKDV",
@@ -27198,7 +31700,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.254Z"
+    "checkedAt": "2026-09-13T06:19:01.148Z"
   },
   {
     "key": "karlstads-universitet:TGLIT",
@@ -27218,7 +31720,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.263Z"
+    "checkedAt": "2026-09-13T06:19:01.158Z"
   },
   {
     "key": "karlstads-universitet:TGLMK",
@@ -27238,7 +31740,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.367Z"
+    "checkedAt": "2026-09-13T06:19:01.214Z"
   },
   {
     "key": "karlstads-universitet:VABLI",
@@ -27258,7 +31760,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.380Z"
+    "checkedAt": "2026-09-13T06:19:01.213Z"
   },
   {
     "key": "karlstads-universitet:VAPFO",
@@ -27278,7 +31780,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.380Z"
+    "checkedAt": "2026-09-13T06:19:01.209Z"
   },
   {
     "key": "karlstads-universitet:VAPSY",
@@ -27298,7 +31800,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.385Z"
+    "checkedAt": "2026-09-13T06:19:01.237Z"
   },
   {
     "key": "karlstads-universitet:VASAM",
@@ -27318,7 +31820,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.386Z"
+    "checkedAt": "2026-09-13T06:19:01.352Z"
   },
   {
     "key": "karlstads-universitet:VASDI",
@@ -27338,7 +31840,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.388Z"
+    "checkedAt": "2026-09-13T06:19:01.357Z"
   },
   {
     "key": "karlstads-universitet:VASIN",
@@ -27358,7 +31860,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.490Z"
+    "checkedAt": "2026-09-13T06:19:01.409Z"
   },
   {
     "key": "karlstads-universitet:VASOP",
@@ -27378,7 +31880,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.524Z"
+    "checkedAt": "2026-09-13T06:19:01.593Z"
   },
   {
     "key": "karlstads-universitet:VGBMA",
@@ -27398,7 +31900,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:33.537Z"
+    "checkedAt": "2026-09-13T06:19:01.762Z"
   },
   {
     "key": "karlstads-universitet:VGHMS",
@@ -27418,7 +31920,7 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:38.702Z"
+    "checkedAt": "2026-09-13T06:19:01.920Z"
   },
   {
     "key": "karlstads-universitet:VGSSP",
@@ -27438,6 +31940,6 @@
     "coverage": "metadata-only",
     "reason": "official-page-temporarily-unavailable",
     "error": "HTTP 429",
-    "checkedAt": "2026-09-13T06:15:38.403Z"
+    "checkedAt": "2026-09-13T06:19:02.098Z"
   }
 ]
