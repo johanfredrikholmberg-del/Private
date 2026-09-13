@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /** StudieLots offline SUSA bulk importer. Materialises Swedish higher-ed programmes,
- * courses, providers and a queue for official university structure enrichment. */
+ * courses, providers and a queue for official university structure enrichment.
+ * Full refresh marker: 2026-09-13. */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
