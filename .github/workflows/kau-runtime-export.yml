@@ -1,0 +1,42 @@
+name: Karlstad runtime export
+
+on:
+  push:
+    branches: [kau-sharded-import]
+    paths:
+      - '.github/workflows/kau-runtime-export.yml'
+      - 'scripts/kau-runtime-export.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: kau-sharded-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Export audited Karlstad runtime database
+        run: node scripts/kau-runtime-export.mjs
+      - name: Validate generated database
+        run: |
+          node - <<'NODE'
+          import('./lib/kau-program-database.generated.js').then(m=>{
+            const rows=Object.keys(m.KAU_GENERATED_PROGRAMS||{});
+            if(rows.length!==134)throw new Error(`Expected 134 generated programmes, got ${rows.length}`);
+            for(const code of ['TGKDV','LAKGM','HAENG','LGVAL','SGITD'])if(!m.getKauGeneratedProgram(code))throw new Error(`Missing ${code}`);
+            console.log({programmes:rows.length});
+          });
+          NODE
+      - name: Commit runtime database
+        run: |
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f lib/kau-program-database.generated.js
+          git commit -m 'Export audited Karlstad runtime database [skip ci]' || exit 0
+          git push origin HEAD:kau-sharded-import
