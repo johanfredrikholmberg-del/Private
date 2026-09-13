@@ -1,0 +1,33 @@
+name: Umea static import
+on:
+  push:
+    branches: [umu-program-import]
+    paths:
+      - 'scripts/umu-static-import.mjs'
+      - '.github/workflows/umu-static-import.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: umu-program-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build Umea programme and course database
+        run: node scripts/umu-static-import.mjs
+      - name: Validate output
+        run: node -e "const fs=require('fs');const m=JSON.parse(fs.readFileSync('data/umu/meta.json'));if(!m.programmes||!m.courses||m.temporaryErrors)process.exit(1);console.log(m)"
+      - name: Save Umea data
+        run: |
+          git config user.name studielots-bot
+          git config user.email actions@users.noreply.github.com
+          git add -f data/umu
+          git diff --cached --quiet || git commit -m 'Import Umea programme and course catalogue [skip ci]'
+          git pull --rebase origin umu-program-import
+          git push origin HEAD:umu-program-import
