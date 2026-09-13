@@ -1,0 +1,35 @@
+name: Karlstad unresolved report
+on:
+  push:
+    branches: [kau-fast-import]
+    paths: ['.github/workflows/kau-unresolved-report.yml']
+permissions:
+  contents: write
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: kau-fast-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build unresolved report
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const rows=JSON.parse(fs.readFileSync('data/kau/structures.json','utf8'));
+          const unresolved=rows.filter(x=>!['complete','choice-required'].includes(x.coverage)).map(x=>({code:x.programCode,name:x.programName,hp:x.hp,coverage:x.coverage,reason:x.reason,completeTerms:x.completeTerms||[],expectedTerms:x.expectedTerms||null,underPlanning:!!x.underPlanning,source:x.source,sourceUrl:x.sourceUrl,educationPlanUrl:x.educationPlanUrl||null}));
+          fs.writeFileSync('data/kau/unresolved.json',JSON.stringify(unresolved,null,2)+'\n');
+          console.log(JSON.stringify({count:unresolved.length,metadata:unresolved.filter(x=>x.coverage==='metadata-only').map(x=>x.code),manual:unresolved.filter(x=>x.coverage==='manual-review').map(x=>x.code),partial:unresolved.filter(x=>x.coverage==='partial-structure').map(x=>x.code)},null,2));
+          NODE
+      - name: Save report
+        run: |
+          git config user.name studielots-bot
+          git config user.email actions@users.noreply.github.com
+          git add -f data/kau/unresolved.json
+          git diff --cached --quiet || git commit -m 'Add Karlstad unresolved structure report [skip ci]'
+          git pull --rebase origin kau-fast-import
+          git push origin HEAD:kau-fast-import
