@@ -61,10 +61,10 @@ function parsePdfRows(text){
   for(const line of lines){
     const tm=line.match(/^Termin\s+(\d{1,2})\b/i);if(tm){term=Number(tm[1]);year=0;yearHp=0;continue}
     const ym=line.match(/^År\s+(\d{1,2})\b/i);if(ym){year=Number(ym[1]);term=(year-1)*2+1;yearHp=0;continue}
-    const explicit=[...line.matchAll(/\b([A-ZÅÄÖ]{2,8}\d{1,4}[A-Z]?)\b\s+(.{2,160}?)\s*[,(]?\s*(\d+(?:[.,]\d+)?)\s*hp\b/gi)];
-    for(const m of explicit){const hp=Number(m[3].replace(',','.'));if((term||year)&&hp>0&&hp<=30){const assigned=assignTerm(hp);rows.push({term:assigned,code:codeNorm(m[1]),name:clean(m[2]),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}}
-    const simple=line.match(/^(.{3,160}?)\s*[,(]?\s*(\d+(?:[.,]\d+)?)\s*hp\b/i);
-    if((term||year)&&simple&&!explicit.length){const hp=Number(simple[2].replace(',','.'));if(hp>0&&hp<=30){const assigned=assignTerm(hp);rows.push({term:assigned,code:'',name:clean(simple[1]),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}}
+    const explicit=[...line.matchAll(/\b([A-ZÅÄÖ]{2,8}\d{1,4}[A-Z]?)\b\s+(.{2,160}?)\s*[,;:\-–(]*\s*(\d+(?:[.,]\d+)?)\s*hp\b/gi)];
+    for(const m of explicit){const hp=Number(m[3].replace(',','.'));if((term||year)&&hp>0&&hp<=30){const assigned=assignTerm(hp);rows.push({term:assigned,code:codeNorm(m[1]),name:clean(m[2].replace(/[,(;:\-–\s]+$/g,'')),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}}
+    const simple=line.match(/^(.{3,160}?)\s*[,;:\-–(]*\s*(\d+(?:[.,]\d+)?)\s*hp\b/i);
+    if((term||year)&&simple&&!explicit.length){const hp=Number(simple[2].replace(',','.'));if(hp>0&&hp<=30){const assigned=assignTerm(hp);rows.push({term:assigned,code:'',name:clean(simple[1].replace(/[,(;:\-–\s]+$/g,'')),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}}
   }
   const map=new Map();for(const r of rows){const k=`${r.term}|${r.code||norm(r.name)}`;if(!map.has(k))map.set(k,r)}return[...map.values()]
 }
@@ -116,4 +116,4 @@ async function main(){
 
 main().catch(e=>{console.error(e);process.exitCode=1});
 
-// trigger: gu-pdf-year-term-fix
+// trigger: gu-pdf-punctuation-fix
