@@ -1,6 +1,5 @@
 import guHandler from './gu-program-structure.js';
 import lundHandler from './lu-program-structure.js';
-import karlstadHandler from './kau-program-structure.js';
 import genericHandler from './program-structure.js';
 
 const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
@@ -10,7 +9,7 @@ function provider(university){
   const u=norm(university);
   if(/goteborgs universitet|(^|\s)gu(\s|$)/.test(u))return{handler:guHandler,name:'Göteborgs universitet',specialized:true};
   if(/lunds universitet|(^|\s)lund(\s|$)/.test(u))return{handler:lundHandler,name:'Lunds universitet',specialized:true};
-  if(/karlstads universitet|(^|\s)kau(\s|$)/.test(u))return{handler:karlstadHandler,name:'Karlstads universitet',specialized:true};
+  if(/karlstads universitet|(^|\s)kau(\s|$)/.test(u))return{handler:genericHandler,name:'Karlstads universitet',specialized:true};
   return{handler:genericHandler,name:clean(university),specialized:false};
 }
 
