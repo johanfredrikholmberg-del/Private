@@ -133,4 +133,4 @@ async function main(){
 
 main().catch(e=>{console.error(e);process.exitCode=1});
 
-// trigger: gu-official-alias-resolution
+// trigger: gu-resolver-url-fallback-run
