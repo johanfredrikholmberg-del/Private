@@ -7,6 +7,7 @@ on:
     paths:
       - 'api/gu-program-structure.js'
       - 'scripts/gu-programme-structure-pipeline.mjs'
+      - 'scripts/gu-studentportal-enrichment.mjs'
       - 'scripts/merge-gu-official-structures.mjs'
       - 'scripts/apply-gu-verified-overrides.mjs'
       - 'data/gu/official-structures.json'
@@ -36,6 +37,8 @@ jobs:
         env:
           GU_CONCURRENCY: '6'
         run: node scripts/gu-programme-structure-pipeline.mjs
+      - name: Enrich from official GU Studentportal
+        run: node scripts/gu-studentportal-enrichment.mjs
       - name: Apply directly verified GU structures
         run: node scripts/merge-gu-official-structures.mjs
       - name: Apply per-program GU verified overrides
@@ -61,4 +64,4 @@ jobs:
           git rebase origin/gu-program-import
           git push origin HEAD:gu-program-import
 
-# trigger: batch-gu-import-only
+# trigger: studentportal-full-gu-pass
