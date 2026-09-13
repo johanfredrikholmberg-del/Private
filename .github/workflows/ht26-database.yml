@@ -1,0 +1,52 @@
+name: Build StudieLots HT26 database
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [gu-program-import]
+    paths:
+      - 'scripts/build-ht26-database.mjs'
+      - '.github/workflows/ht26-database.yml'
+      - 'data/susa/programmes.json'
+      - 'data/susa/courses.json'
+      - 'data/susa/structures.json'
+      - 'data/susa/providers.json'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-program-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build canonical HT26 database
+        run: node scripts/build-ht26-database.mjs
+      - name: Validate HT26 database
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const m=JSON.parse(fs.readFileSync('data/HT26/manifest.json','utf8'));
+          if(m.database!=='StudieLots HT26') throw new Error('Wrong database name');
+          if(!m.canonical) throw new Error('HT26 must be canonical');
+          if((m.tables.programs?.rows||0)<1000) throw new Error('Programme table unexpectedly small');
+          if((m.tables.courses?.rows||0)<1000) throw new Error('Course table unexpectedly small');
+          if((m.validation?.orphanStructures||0)>0) throw new Error(`Orphan programme structures: ${m.validation.orphanStructures}`);
+          console.log(m);
+          NODE
+      - name: Commit HT26 database
+        run: |
+          if [ -z "$(git status --porcelain -- data/HT26)" ]; then exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/HT26
+          git commit -m 'Build canonical StudieLots HT26 database [skip ci]'
+          git fetch origin gu-program-import
+          git rebase origin/gu-program-import
+          git push origin HEAD:gu-program-import
