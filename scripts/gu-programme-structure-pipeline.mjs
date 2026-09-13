@@ -35,13 +35,35 @@ function classify(data){
 function decodeHtml(s){return String(s??'').replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'")}
 function abs(href,base){try{return new URL(decodeHtml(href),base).href}catch{return''}}
 function htmlText(s){return clean(String(s??'').replace(/<script\b[\s\S]*?<\/script>/gi,' ').replace(/<style\b[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' '))}
+function pageLinks(html,base){const out=[];for(const m of String(html||'').matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)){const href=abs(m[1],base),label=htmlText(m[2]);if(href)out.push({href,label})}return out}
 async function getText(url){const r=await fetch(url,{headers:{accept:'text/html,application/xhtml+xml'},redirect:'follow',signal:AbortSignal.timeout(20000)});if(!r.ok)throw new Error(`HTTP ${r.status}`);return{html:await r.text(),url:r.url||url}}
+async function resolveProgrammePage(item){
+  const direct=`https://www.gu.se/studera/hitta-utbildning/${slugify(item.programName)}-${String(item.programCode||'').toLowerCase()}`;
+  try{return await getText(direct)}catch{}
+  const code=String(item.programCode||'').trim();
+  if(!code)return null;
+  try{
+    const search=await getText(`https://www.gu.se/sok?q=${encodeURIComponent(code)}`);
+    const exact=pageLinks(search.html,search.url).filter(x=>/\/studera\/hitta-utbildning\//.test(x.href));
+    const codeLower=code.toLowerCase();
+    const hit=exact.find(x=>x.href.toLowerCase().includes(codeLower))||exact.find(x=>new RegExp(`\\b${code.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\b`,'i').test(x.label));
+    if(hit)return await getText(hit.href);
+  }catch{}
+  return null;
+}
 async function findEducationPlanPdf(item){
-  const main=`https://www.gu.se/studera/hitta-utbildning/${slugify(item.programName)}-${String(item.programCode||'').toLowerCase()}`;
-  const page=await getText(main);
-  for(const m of page.html.matchAll(/<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)){
-    const href=abs(m[1],page.url),label=htmlText(m[2]);
-    if(/utbildningsplan/i.test(`${label} ${href}`)&&/\.pdf(?:$|\?)/i.test(href)) return href;
+  const page=await resolveProgrammePage(item);
+  if(!page)return'';
+  const links=pageLinks(page.html,page.url);
+  for(const x of links){
+    if(/utbildningsplan/i.test(`${x.label} ${x.href}`)&&/\.pdf(?:$|\?)/i.test(x.href)) return x.href;
+  }
+  for(const x of links.filter(x=>/utbildningsplan/i.test(`${x.label} ${x.href}`)).slice(0,4)){
+    try{
+      const plan=await getText(x.href);
+      const pdf=pageLinks(plan.html,plan.url).find(y=>/\.pdf(?:$|\?)/i.test(y.href));
+      if(pdf)return pdf.href;
+    }catch{}
   }
   return'';
 }
@@ -62,17 +84,20 @@ function parsePdfRows(text){
     const tm=line.match(/^Termin\s+(\d{1,2})\b/i);if(tm){term=Number(tm[1]);year=0;yearHp=0;continue}
     const ym=line.match(/^År\s+(\d{1,2})\b/i);if(ym){year=Number(ym[1]);term=(year-1)*2+1;yearHp=0;continue}
     const explicit=[...line.matchAll(/\b([A-ZÅÄÖ]{2,8}\d{1,4}[A-Z]?)\b\s+(.{2,160}?)\s*[,;:\-–(]*\s*(\d+(?:[.,]\d+)?)\s*hp\b/gi)];
-    for(const m of explicit){const hp=Number(m[3].replace(',','.'));if((term||year)&&hp>0&&hp<=30){const assigned=assignTerm(hp);rows.push({term:assigned,code:codeNorm(m[1]),name:clean(m[2].replace(/[,(;:\-–\s]+$/g,'')),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}}
-    const simple=line.match(/^(.{3,160}?)\s*[,;:\-–(]*\s*(\d+(?:[.,]\d+)?)\s*hp\b/i);
-    if((term||year)&&simple&&!explicit.length){const hp=Number(simple[2].replace(',','.'));if(hp>0&&hp<=30){const assigned=assignTerm(hp);rows.push({term:assigned,code:'',name:clean(simple[1].replace(/[,(;:\-–\s]+$/g,'')),hp,category:/valbar|fritt vald/i.test(line)?'elective':'unknown'})}}
+    for(const m of explicit){const hp=Number(m[3].replace(',','.'));if((term||year)&&hp>0&&hp<=30){const assigned=assignTerm(hp);rows.push({term:assigned,code:codeNorm(m[1]),name:clean(m[2].replace(/[,(;:\-–\s]+$/g,'')),hp,category:/valbar|valfri|fritt vald/i.test(line)?'elective':'unknown'})}}
+    const simple=line.match(/^(.{3,160}?)\s*[,;:\-–(]*\s*(\d+(?:[.,]\d+)?)\s*(?:hp|högskolepoäng)\b/i);
+    if((term||year)&&simple&&!explicit.length){const hp=Number(simple[2].replace(',','.'));if(hp>0&&hp<=30){const assigned=assignTerm(hp);rows.push({term:assigned,code:'',name:clean(simple[1].replace(/[,(;:\-–\s]+$/g,'')),hp,category:/valbar|valfri|fritt vald/i.test(line)?'elective':'unknown'})}}
   }
   const map=new Map();for(const r of rows){const k=`${r.term}|${r.code||norm(r.name)}`;if(!map.has(k))map.set(k,r)}return[...map.values()]
 }
 function buildPdfResult(item,rows,pdfUrl){
-  const expected=Math.max(1,Math.round((Number(item.hp)||0)/30));const completeTerms=[],termHp={};
-  for(let t=1;t<=expected;t++){const listed=Math.round(rows.filter(r=>r.term===t).reduce((s,r)=>s+r.hp,0)*10)/10;const covered=listed>=29.8&&listed<=30.2;termHp[t]={listedHp:listed,covered};if(covered)completeTerms.push(t)}
+  const maxTerm=Math.max(0,...rows.map(r=>Number(r.term)||0));
+  const expected=Math.max(maxTerm,Math.max(1,Math.round((Number(item.hp)||0)/30)));
+  const targetPerTerm=maxTerm>Math.round((Number(item.hp)||0)/30)&&maxTerm>0?Math.round((Number(item.hp)||0)/maxTerm*10)/10:30;
+  const completeTerms=[],termHp={};
+  for(let t=1;t<=expected;t++){const listed=Math.round(rows.filter(r=>r.term===t).reduce((s,r)=>s+r.hp,0)*10)/10;const covered=Math.abs(listed-targetPerTerm)<=0.2;termHp[t]={listedHp:listed,covered};if(covered)completeTerms.push(t)}
   const complete=completeTerms.length===expected;const courses=rows.filter(r=>completeTerms.includes(r.term)).map((r,i)=>({...r,originalTerm:r.term,__slOriginalTerm:r.term,__slOriginalIndex:i,status:'remaining',credited:false,isCredited:false,programmeSource:'gu-official-education-plan-pdf',programmeCategory:r.category}));
-  return{found:rows.length>0,structureAvailable:complete,courses,sourceUrls:[pdfUrl],source:'gu-official-education-plan-pdf',confidence:complete?'official-pdf-sequenced':'official-pdf-partial',coverage:complete?'complete-term-sequence':'partial-or-choice-dependent',quality:{complete,expectedTerms:expected,completeTerms,termHp,slotCount:rows.filter(r=>r.category==='elective').length,parsedRows:rows.length,totalHp:Number(item.hp)||0,sourcePages:1}}
+  return{found:rows.length>0,structureAvailable:complete,courses,sourceUrls:[pdfUrl],source:'gu-official-education-plan-pdf',confidence:complete?'official-pdf-sequenced':'official-pdf-partial',coverage:complete?'complete-term-sequence':'partial-or-choice-dependent',quality:{complete,expectedTerms:expected,completeTerms,termHp,slotCount:rows.filter(r=>r.category==='elective').length,parsedRows:rows.length,totalHp:Number(item.hp)||0,sourcePages:1,targetPerTerm}}
 }
 async function pdfFallback(item){try{const pdfUrl=await findEducationPlanPdf(item);if(!pdfUrl)return null;const text=await extractPdfText(pdfUrl);const rows=parsePdfRows(text);return buildPdfResult(item,rows,pdfUrl)}catch(e){console.log(`PDF fallback skipped ${item.programCode||''}: ${e.message}`);return null}}
 
@@ -133,4 +158,4 @@ async function main(){
 
 main().catch(e=>{console.error(e);process.exitCode=1});
 
-// trigger: gu-resolver-url-fallback-run
+// trigger: direct-gu-code-url-and-pdf-pass
