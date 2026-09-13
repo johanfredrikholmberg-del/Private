@@ -10,7 +10,20 @@
     "programStructures": "program-structures.json",
     "courses": "courses.json",
     "providers": "providers.json",
-    "syllabusVersions": "syllabus-versions.json",
+    "syllabusVersions": {
+      "file": "syllabus-versions.json",
+      "rows": 250
+    },
     "degreeRequirements": "degree-requirements.json"
+  },
+  "generatedAt": "2026-09-13T15:29:30.414Z",
+  "guSyllabusImport": {
+    "term": "HT26",
+    "totalCourses": 2836,
+    "processed": 250,
+    "resolved": 250,
+    "unresolved": 0,
+    "remaining": 2586,
+    "exactVersionVerified": 0
   }
 }
