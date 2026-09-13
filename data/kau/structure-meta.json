@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-09-13T06:16:24.877Z",
+  "generatedAt": "2026-09-13T06:42:53.130Z",
   "officialProgrammes": 134,
   "processed": 134,
   "counts": {
-    "metadata-only": 103,
-    "manual-review": 1,
-    "choice-required": 4,
-    "partial-structure": 13,
-    "complete": 13
+    "metadata-only": 10,
+    "manual-review": 16,
+    "choice-required": 33,
+    "partial-structure": 51,
+    "complete": 24
   },
-  "underPlanning": 1,
-  "policy": "Every official KAU programme receives a status. Complete/choice-required only when every published expected term reconciles to its target hp; unpublished terms remain explicit partial/metadata."
+  "temporaryErrors": 0,
+  "underPlanning": 7,
+  "policy": "Every official KAU programme receives a status. Complete/choice-required only when every published expected term reconciles to its target hp; unpublished terms remain explicit partial/metadata. HTTP 429/5xx responses are retried with exponential backoff."
 }
