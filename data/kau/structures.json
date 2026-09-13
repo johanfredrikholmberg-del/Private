@@ -8425,50 +8425,61 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SAGEO",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-profile-aware",
     "rows": [
       {
         "term": 1,
+        "endTerm": 1,
         "code": "MKA100",
         "name": "Introduktion till geomediastudier",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "MKA101",
         "name": "Specialiseringskurs 1: Geomedia, kultur och vardagsliv",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "MKA102",
         "name": "Specialiseringskurs 2: Geomedia, opinionsbildning och offentlighet",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "MKA103",
         "name": "Specialiseringskurs 3: Geomedia, rumslig planering och mobilitet",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "MKA200",
         "name": "Geomediastudier i praktiken",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "",
         "name": "Valbara studier enligt programplan",
         "hp": 15,
@@ -8480,30 +8491,60 @@
           {
             "code": "MKA202",
             "name": "Magisteruppsats i geomediastudier",
-            "hp": 15
+            "hp": 15,
+            "profileOption": false
           },
           {
             "code": "MKA201",
             "name": "Projektledning och design",
-            "hp": 15
+            "hp": 15,
+            "profileOption": false
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "endTerm": 3,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "MKA300",
+            "name": "Praktik: Geomedia",
+            "hp": 15,
+            "profileOption": false
+          },
+          {
+            "code": "",
+            "name": "Valfri kurs (Valfri)",
+            "hp": 15,
+            "profileOption": false
           }
         ]
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "MKA400",
         "name": "Masteruppsats i geomediastudier",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "profile-aware-all-terms-reconciled",
     "expectedTerms": 4,
     "completeTerms": [
       1,
       2,
+      3,
       4
     ],
     "termSums": {
@@ -8537,7 +8578,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:40:25.244Z"
+    "checkedAt": "2026-09-13T06:44:52.262Z"
   },
   {
     "key": "karlstads-universitet:SAHIS",
@@ -9194,103 +9235,155 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SAMGM",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-profile-aware",
     "rows": [
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD61",
         "name": "Strategier för värdeskapande",
         "hp": 5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD35",
         "name": "Innovation genom tjänstedesign",
         "hp": 5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD37",
         "name": "Affärsmodeller i en föränderlig omgivning",
         "hp": 5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD39",
         "name": "Tjänstefiering i teori och praktik",
         "hp": 5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD32",
         "name": "Att stärka organisationers förändringskapacitet",
         "hp": 5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD34",
         "name": "Förändringsledarskap",
         "hp": 5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "FEAD63",
         "name": "Leda människor: humankapital, makt och påverkan inom organisationer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "FEAD62",
         "name": "Ledning och styrning i multikulturella organisationer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "FEAD65",
         "name": "Motståndskraftiga system och innovation",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "FEAD64",
         "name": "Social hållbarhet i affärsutveckling",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
+      },
+      {
+        "term": 3,
+        "endTerm": 3,
+        "code": "FEAD53",
+        "name": "Bedriva forskning i företagsekonomi",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "profileOption": false
+      },
+      {
+        "term": 3,
+        "endTerm": 3,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Valfri)",
+            "hp": 15,
+            "profileOption": false
+          }
+        ]
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "FEAE01",
         "name": "Företagsekonomi - masteruppsats",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "profile-aware-all-terms-reconciled",
     "expectedTerms": 4,
     "completeTerms": [
       1,
       2,
+      3,
       4
     ],
     "termSums": {
@@ -9324,7 +9417,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:40:37.579Z"
+    "checkedAt": "2026-09-13T06:45:00.201Z"
   },
   {
     "key": "karlstads-universitet:SANEA",
@@ -10081,70 +10174,114 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SASMF",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-profile-aware",
     "rows": [
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD56",
         "name": "Affärsmarknadsföring",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD57",
         "name": "Konsumentforskning inom marknadsföring",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD55",
         "name": "Marknadsföringsteori",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD58",
         "name": "Ansvarsfull styrning och ledarskap",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
+      },
+      {
+        "term": 2,
+        "endTerm": 2,
+        "code": "STGA14",
+        "name": "Grundläggande statistik och regressionsanalys",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "profileOption": false
+      },
+      {
+        "term": 2,
+        "endTerm": 2,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Valfri)",
+            "hp": 15,
+            "profileOption": false
+          }
+        ]
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "FEAD54",
         "name": "Bedriva forskning i företagsekonomi",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "FEAE11",
         "name": "Aktuell forskning inom marknadsföring",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "FEAE01",
         "name": "Företagsekonomi - masteruppsats",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "profile-aware-all-terms-reconciled",
     "expectedTerms": 4,
     "completeTerms": [
       1,
+      2,
       3,
       4
     ],
@@ -10179,7 +10316,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:40:49.919Z"
+    "checkedAt": "2026-09-13T06:45:06.140Z"
   },
   {
     "key": "karlstads-universitet:SASOC",
@@ -10194,18 +10331,56 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SASOC",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-profile-aware",
     "rows": [
       {
+        "term": 3,
+        "endTerm": 3,
+        "code": "SMAAE1",
+        "name": "Fördjupningskurs samhällsvetenskapliga analysmetoder",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "profileOption": false
+      },
+      {
+        "term": 3,
+        "endTerm": 3,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 22.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Obligatorisk) För studenter som ska ta magisterexamen",
+            "hp": 15,
+            "profileOption": false
+          },
+          {
+            "code": "",
+            "name": "Valfri kurs (Obligatorisk) För studenter som ska ta masterexamen",
+            "hp": 7.5,
+            "profileOption": false
+          }
+        ]
+      },
+      {
         "term": 4,
+        "endTerm": 4,
         "code": "SMAES1",
         "name": "Självständigt arbete i socialt arbete II",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "",
         "name": "Valbara studier enligt programplan",
         "hp": 15,
@@ -10217,15 +10392,17 @@
           {
             "code": "SMAES2",
             "name": "Socialt arbete - Självständigt arbete II",
-            "hp": 30
+            "hp": 30,
+            "profileOption": false
           }
         ]
       }
     ],
-    "coverage": "manual-review",
-    "reason": "published-rows-not-fully-reconciled",
+    "coverage": "partial-structure",
+    "reason": "profile-aware-partial",
     "expectedTerms": 4,
     "completeTerms": [
+      3,
       4
     ],
     "termSums": {
@@ -10259,7 +10436,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:40:51.970Z"
+    "checkedAt": "2026-09-13T06:45:08.118Z"
   },
   {
     "key": "karlstads-universitet:SASPP",
@@ -10351,70 +10528,114 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SASRS",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-profile-aware",
     "rows": [
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD11",
         "name": "International Financial Accounting",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD28",
         "name": "Revision",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD27",
         "name": "Ekonomistyrsystem",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "FEAD58",
         "name": "Ansvarsfull styrning och ledarskap",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
+      },
+      {
+        "term": 2,
+        "endTerm": 2,
+        "code": "STGA14",
+        "name": "Grundläggande statistik och regressionsanalys",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "profileOption": false
+      },
+      {
+        "term": 2,
+        "endTerm": 2,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Valfri)",
+            "hp": 15,
+            "profileOption": false
+          }
+        ]
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "FEAD54",
         "name": "Bedriva forskning i företagsekonomi",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "FEAE12",
         "name": "Aktuell forskning inom redovisning och styrning",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "FEAE01",
         "name": "Företagsekonomi - masteruppsats",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "profile-aware-all-terms-reconciled",
     "expectedTerms": 4,
     "completeTerms": [
       1,
+      2,
       3,
       4
     ],
@@ -10449,7 +10670,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:40:56.086Z"
+    "checkedAt": "2026-09-13T06:45:12.081Z"
   },
   {
     "key": "karlstads-universitet:SASTV",
@@ -10993,113 +11214,157 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SGDMA",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-profile-aware",
     "rows": [
       {
         "term": 1,
+        "endTerm": 1,
         "code": "MKGA02",
         "name": "Introduktion till Medie- och kommunikationsvetenskap",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "MKGA03",
         "name": "Text, kommunikation och organisation",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "MKGA90",
         "name": "Yrkesroll, juridik och etik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "MKGA92",
         "name": "Sociala medier och samhällsteorier",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "MKGA91",
         "name": "Den digitala tidsålderns mediepublik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "MKGA93",
         "name": "Strategisk kommunikation och organisationsanalys",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "MKGB90",
         "name": "Tekniska principer av digitala medier och digital design",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "MKGB91",
         "name": "Digitala analysmetoder",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "MKGB96",
         "name": "Datavisualisering och kommunikation",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "MKGB94",
         "name": "Projektarbete i medieanalys",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "MKGB95",
         "name": "Data, makt och etik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
+      },
+      {
+        "term": 5,
+        "endTerm": 5,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Valfri)",
+            "hp": 30,
+            "profileOption": false
+          }
+        ]
       },
       {
         "term": 6,
+        "endTerm": 6,
         "code": "MKGC90",
         "name": "Självständigt arbete: Digital analys",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "profile-aware-all-terms-reconciled",
     "expectedTerms": 6,
     "completeTerms": [
       1,
       2,
       3,
       4,
+      5,
       6
     ],
     "termSums": {
@@ -11147,7 +11412,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:41:04.312Z"
+    "checkedAt": "2026-09-13T06:45:16.039Z"
   },
   {
     "key": "karlstads-universitet:SGFEK",
@@ -11999,105 +12264,147 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SGIHP",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-profile-aware",
     "rows": [
       {
         "term": 1,
+        "endTerm": 1,
         "code": "IDGA12",
         "name": "Idrottsvetenskap I",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "IDGBA2",
         "name": "Idrottsvetenskap II",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "IDGB11",
         "name": "Idrottspsykologi",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "IDGB13",
         "name": "Träningslära",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "IDGB14",
         "name": "Idrotts- och hälsorelaterad verksamhetsförlagd utbildning I",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "IDGB12",
         "name": "Tillämpad idrottspsykologi",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "IDGB15",
         "name": "Idrottsdidaktik och fysisk aktivitet",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "IDGB16",
         "name": "Kost- och näringslära",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "IDGB17",
         "name": "Idrotts- och hälsorelaterad verksamhetsförlagd utbildning II",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "IDGB18",
         "name": "Prestationsutvecklingsstrategier",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
+      },
+      {
+        "term": 5,
+        "endTerm": 5,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Obligatorisk)",
+            "hp": 30,
+            "profileOption": false
+          }
+        ]
       },
       {
         "term": 6,
+        "endTerm": 6,
         "code": "IDGCC6",
         "name": "Idrottsvetenskap III",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "profile-aware-all-terms-reconciled",
     "expectedTerms": 6,
     "completeTerms": [
       1,
       2,
       3,
       4,
+      5,
       6
     ],
     "termSums": {
@@ -12145,7 +12452,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:41:14.587Z"
+    "checkedAt": "2026-09-13T06:45:21.981Z"
   },
   {
     "key": "karlstads-universitet:SGIPA",
@@ -12575,74 +12882,108 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SGKPR",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-profile-aware",
     "rows": [
       {
         "term": 1,
+        "endTerm": 1,
         "code": "MKGA02",
         "name": "Introduktion till Medie- och kommunikationsvetenskap",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "MKGA03",
         "name": "Text, kommunikation och organisation",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "MKGA24",
         "name": "Kommunikationsarbete i teori och praktik",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "MKGB23",
         "name": "Strategisk kommunikation",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "MKGB03",
         "name": "Forskningsmetoder och självständigt arbete",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "MKGB24",
         "name": "Projektledning och produktion",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 5,
+        "endTerm": 5,
         "code": "MKGC10",
         "name": "Medie- och kommunikationsvetenskap III",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
+      },
+      {
+        "term": 6,
+        "endTerm": 6,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Obligatorisk)",
+            "hp": 30,
+            "profileOption": false
+          }
+        ]
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "profile-aware-all-terms-reconciled",
     "expectedTerms": 6,
     "completeTerms": [
       1,
       2,
       3,
       4,
-      5
+      5,
+      6
     ],
     "termSums": {
       "1": {
@@ -12689,7 +13030,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:41:20.763Z"
+    "checkedAt": "2026-09-13T06:45:25.934Z"
   },
   {
     "key": "karlstads-universitet:SGMIR",
@@ -12704,42 +13045,51 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SGMIR",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-profile-aware",
     "rows": [
       {
         "term": 1,
+        "endTerm": 1,
         "code": "MVG101",
         "name": "Miljövetenskap 1: Grunderna",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "MVG201",
         "name": "Miljövetenskap 2: strategier, styrning och förvaltning",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "MVG301",
         "name": "Riskhantering med fokus på föroreningar och klimat",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "MVG300",
         "name": "Miljö, risk och hållbar utveckling",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "",
         "name": "Valbara studier enligt programplan",
         "hp": 15,
@@ -12751,40 +13101,66 @@
           {
             "code": "MVG401",
             "name": "Miljövetarprogrammets praktikkurs",
-            "hp": 7.5
+            "hp": 7.5,
+            "profileOption": false
           },
           {
             "code": "MVG402",
             "name": "Skydd av biologisk mångfald: från det lokala till det globala",
-            "hp": 7.5
+            "hp": 7.5,
+            "profileOption": false
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "endTerm": 5,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Valfri) En termin med valfria kurser",
+            "hp": 30,
+            "profileOption": false
           }
         ]
       },
       {
         "term": 6,
+        "endTerm": 6,
         "code": "MVG601",
         "name": "Metod och teori inom miljövetenskap och risk",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 6,
+        "endTerm": 6,
         "code": "MVG602",
         "name": "Självständigt arbete i miljövetenskap",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "profile-aware-all-terms-reconciled",
     "expectedTerms": 6,
     "completeTerms": [
       1,
       2,
       3,
       4,
+      5,
       6
     ],
     "termSums": {
@@ -12832,7 +13208,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:41:22.819Z"
+    "checkedAt": "2026-09-13T06:45:27.919Z"
   },
   {
     "key": "karlstads-universitet:SGPAR",
@@ -13278,34 +13654,41 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SGSTV",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-profile-aware",
     "rows": [
       {
         "term": 1,
+        "endTerm": 1,
         "code": "SVGA10",
         "name": "Statsvetenskap I",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "NEGA07",
         "name": "Nationalekonomi för Pol. Kand",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "RVGA11",
         "name": "Rättskunskap I",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "",
         "name": "Valbara studier enligt programplan",
         "hp": 15,
@@ -13317,17 +13700,20 @@
           {
             "code": "RVGA12",
             "name": "Rättskunskap II",
-            "hp": 15
+            "hp": 15,
+            "profileOption": false
           },
           {
             "code": "STGA01",
             "name": "Statistik",
-            "hp": 15
+            "hp": 15,
+            "profileOption": false
           }
         ]
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "",
         "name": "Valbara studier enligt programplan",
         "hp": 30,
@@ -13339,17 +13725,39 @@
           {
             "code": "NEGB01",
             "name": "Nationalekonomi - fortsättningskurs",
-            "hp": 30
+            "hp": 30,
+            "profileOption": false
           },
           {
             "code": "SVGB10",
             "name": "Statsvetenskap II",
-            "hp": 30
+            "hp": 30,
+            "profileOption": false
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "endTerm": 5,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Obligatorisk)",
+            "hp": 30,
+            "profileOption": false
           }
         ]
       },
       {
         "term": 6,
+        "endTerm": 6,
         "code": "",
         "name": "Valbara studier enligt programplan",
         "hp": 30,
@@ -13361,34 +13769,39 @@
           {
             "code": "NEGC25",
             "name": "Arbetsmarknadens ekonomi",
-            "hp": 7.5
+            "hp": 7.5,
+            "profileOption": false
           },
           {
             "code": "NEGC04",
             "name": "Nationalekonomi - Kandidatuppsats",
-            "hp": 15
+            "hp": 15,
+            "profileOption": false
           },
           {
             "code": "NEGC18",
             "name": "Portföljval",
-            "hp": 7.5
+            "hp": 7.5,
+            "profileOption": false
           },
           {
             "code": "SVGC20",
             "name": "Statsvetenskap III",
-            "hp": 30
+            "hp": 30,
+            "profileOption": false
           }
         ]
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "profile-aware-all-terms-reconciled",
     "expectedTerms": 6,
     "completeTerms": [
       1,
       2,
       3,
       4,
+      5,
       6
     ],
     "termSums": {
@@ -13436,7 +13849,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:41:28.982Z"
+    "checkedAt": "2026-09-13T06:45:29.904Z"
   },
   {
     "key": "karlstads-universitet:SGSYE",
@@ -14196,65 +14609,97 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SGVKD",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-profile-aware",
     "rows": [
       {
         "term": 1,
+        "endTerm": 1,
         "code": "MKGA02",
         "name": "Introduktion till Medie- och kommunikationsvetenskap",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 1,
+        "endTerm": 1,
         "code": "MKGA03",
         "name": "Text, kommunikation och organisation",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 2,
+        "endTerm": 2,
         "code": "MKGA61",
         "name": "Visuell kommunikation och design I",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 3,
+        "endTerm": 3,
         "code": "MKGB61",
         "name": "Visuell kommunikation och design II",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       },
       {
         "term": 4,
+        "endTerm": 4,
         "code": "MKGB62",
         "name": "Strategisk digital kommunikation",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
+      },
+      {
+        "term": 5,
+        "endTerm": 5,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Valfri)",
+            "hp": 30,
+            "profileOption": false
+          }
+        ]
       },
       {
         "term": 6,
+        "endTerm": 6,
         "code": "MKGC60",
         "name": "Visuell kommunikation och design III",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "profileOption": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "profile-aware-all-terms-reconciled",
     "expectedTerms": 6,
     "completeTerms": [
       1,
       2,
       3,
       4,
+      5,
       6
     ],
     "termSums": {
@@ -14302,7 +14747,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:41:37.211Z"
+    "checkedAt": "2026-09-13T06:45:31.884Z"
   },
   {
     "key": "karlstads-universitet:SGWEB",
