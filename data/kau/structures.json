@@ -5,7 +5,7 @@
     "university": "Karlstads universitet",
     "programCode": "HAENG",
     "programName": "Masterprogram i engelska",
-    "hp": 120.0,
+    "hp": 120,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/HAENG"
@@ -18,7 +18,7 @@
         "term": 1,
         "code": "",
         "name": "Text, kultur och samhälle: Engelska i samtiden",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory"
       },
@@ -26,7 +26,7 @@
         "term": 1,
         "code": "",
         "name": "Obligatoriska kurser enligt utbildningsplan",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory-slot"
       },
@@ -34,7 +34,7 @@
         "term": 2,
         "code": "",
         "name": "Självständigt arbete inom engelsk lingvistik (Magister)",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory"
       },
@@ -42,7 +42,7 @@
         "term": 2,
         "code": "",
         "name": "Självständigt arbete inom engelskspråkig litteratur (Magister)",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory"
       },
@@ -50,7 +50,7 @@
         "term": 1,
         "code": "",
         "name": "Text, kultur och samhälle: Engelska i samtiden",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory"
       },
@@ -58,7 +58,7 @@
         "term": 1,
         "code": "",
         "name": "Obligatoriska kurser enligt utbildningsplan",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory-slot"
       },
@@ -75,7 +75,7 @@
           {
             "code": "",
             "name": "Valbara studier enligt utbildningsplan",
-            "hp": 30.0
+            "hp": 30
           }
         ]
       },
@@ -83,7 +83,7 @@
         "term": 3,
         "code": "",
         "name": "Utlandsstudier",
-        "hp": 30.0,
+        "hp": 30,
         "type": "required",
         "category": "mandatory"
       }
@@ -947,7 +947,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/JALAW",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -955,7 +955,8 @@
         "name": "Allmän rättslära I, offentlig rätt, EU-rätt och internationell rätt",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -963,7 +964,8 @@
         "name": "Civilrätt",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -971,7 +973,8 @@
         "name": "Straffrätt",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -979,7 +982,8 @@
         "name": "Processrätt",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 4,
@@ -987,7 +991,26 @@
         "name": "Allmän rättslära II, förvaltningsrätt, förvaltningsprocessrätt och miljörätt",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Under planering (Obligatorisk) Redovisningsrätt, insolvensrätt och associationsrätt",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 5,
+        "code": "JPG012",
+        "name": "Skatterätt",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 6,
@@ -995,7 +1018,8 @@
         "name": "Socialrätt",
         "hp": 10,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 6,
@@ -1003,12 +1027,13 @@
         "name": "Immaterialrätt, marknadsrätt, upphandlingsrätt och IT-rätt",
         "hp": 20,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 7,
         "code": "",
-        "name": "Valbara studier enligt programplan",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 30,
         "type": "choice",
         "category": "elective-slot",
@@ -1054,6 +1079,11 @@
             "code": "JPA007",
             "name": "Skadeståndsrätt och immaterialrätt",
             "hp": 15
+          },
+          {
+            "code": "",
+            "name": "Valfri kurs (Valbar) Studera utomlands, mer information: https://www.kau.se/utbildning/om-utlandsstudier/studera-utomlands/att-studera-utomlands",
+            "hp": 30
           }
         ]
       },
@@ -1063,12 +1093,13 @@
         "name": "Allmän rättslära III med praktik",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 8,
         "code": "",
-        "name": "Valbara studier enligt programplan",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 15,
         "type": "choice",
         "category": "elective-slot",
@@ -1103,17 +1134,19 @@
         "name": "Examensarbete inom juridik",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "remaining-terms-under-planning",
+    "coverage": "choice-required",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 9,
     "completeTerms": [
       1,
       2,
       3,
       4,
+      5,
       6,
       7,
       8,
@@ -1185,7 +1218,7 @@
       }
     },
     "underPlanning": true,
-    "checkedAt": "2026-09-13T06:38:28.205Z"
+    "checkedAt": "2026-09-13T06:53:58.572Z"
   },
   {
     "key": "karlstads-universitet:LAAML",
@@ -6982,7 +7015,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/NABIM",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -6990,7 +7023,8 @@
         "name": "Ekosystem i en föränderlig värld",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -6998,12 +7032,13 @@
         "name": "Naturvårdsvetenskap för bevarande av biodiversitet",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
         "code": "",
-        "name": "Valbara studier enligt programplan",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 30,
         "type": "choice",
         "category": "elective-slot",
@@ -7028,9 +7063,31 @@
         ]
       },
       {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "BIAD20",
+            "name": "Masteruppsats i biologi",
+            "hp": 60
+          },
+          {
+            "code": "",
+            "name": "Valfri kurs (Valfri)",
+            "hp": 15
+          }
+        ]
+      },
+      {
         "term": 4,
         "code": "",
-        "name": "Valbara studier enligt programplan",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 30,
         "type": "choice",
         "category": "elective-slot",
@@ -7045,12 +7102,13 @@
         ]
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 4,
     "completeTerms": [
       1,
       2,
+      3,
       4
     ],
     "termSums": {
@@ -7084,7 +7142,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:40:02.614Z"
+    "checkedAt": "2026-09-13T06:54:31.773Z"
   },
   {
     "key": "karlstads-universitet:NGBIO",
@@ -7295,7 +7353,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/NGFYA",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -7303,7 +7361,8 @@
         "name": "Matematisk grundkurs",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -7311,7 +7370,8 @@
         "name": "Analys och geometri",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -7319,7 +7379,8 @@
         "name": "Experimentell problemlösning för fysiker",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -7327,7 +7388,8 @@
         "name": "Introduktion till programmering och databehandling",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -7335,7 +7397,8 @@
         "name": "Vågfysik och optik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -7343,7 +7406,8 @@
         "name": "Linjär algebra",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -7351,7 +7415,8 @@
         "name": "Mekanik med tillämpningar 1",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -7359,7 +7424,8 @@
         "name": "Flervariabelanalys",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -7367,7 +7433,8 @@
         "name": "Inledande modern fysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -7375,7 +7442,8 @@
         "name": "Termodynamik och statistisk fysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -7383,7 +7451,8 @@
         "name": "Mekanik med tillämpningar 2",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -7391,7 +7460,8 @@
         "name": "Stokastiska metoder",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 4,
@@ -7399,7 +7469,8 @@
         "name": "Materialteknik för civilingenjörer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 4,
@@ -7407,7 +7478,8 @@
         "name": "Elektromagnetisk fältteori för civilingenjörer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 4,
@@ -7415,7 +7487,8 @@
         "name": "Komplex analys och transformer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 4,
@@ -7423,7 +7496,44 @@
         "name": "Kvantfysik I",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 5,
+        "code": "FYGC09",
+        "name": "Fasta tillståndets fysik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 5,
+        "code": "ELGB13",
+        "name": "Elteknik för civilingenjörer",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 5,
+        "code": "CBGB06",
+        "name": "Nanovetenskap I",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Projekt och ledarskap för civilingenjörer (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
       },
       {
         "term": 6,
@@ -7431,7 +7541,8 @@
         "name": "Hållfasthetslära I för civilingenjörer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 6,
@@ -7439,12 +7550,13 @@
         "name": "Numeriska metoder",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 6,
         "code": "",
-        "name": "Valbara studier enligt programplan",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 15,
         "type": "choice",
         "category": "elective-slot",
@@ -7464,14 +7576,15 @@
         ]
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 6,
     "completeTerms": [
       1,
       2,
       3,
       4,
+      5,
       6
     ],
     "termSums": {
@@ -7519,7 +7632,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:40:06.731Z"
+    "checkedAt": "2026-09-13T06:54:33.228Z"
   },
   {
     "key": "karlstads-universitet:NGKEA",
@@ -7740,31 +7853,16 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/NGMAA",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
-        "term": 1,
-        "code": "MAGA51",
-        "name": "Matematisk grundkurs",
+        "term": 2,
+        "code": "",
+        "name": "Linjär algebra (Obligatorisk)",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "MAGA52",
-        "name": "Analys och geometri",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "DVGA01",
-        "name": "Programmeringsteknik",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory"
+        "category": "mandatory-placeholder",
+        "placeholder": true
       },
       {
         "term": 2,
@@ -7772,77 +7870,56 @@
         "name": "Flervariabelanalys",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
-        "code": "MAGA55",
-        "name": "Diskret matematik",
-        "hp": 7.5,
-        "type": "choice",
-        "category": "elective"
-      },
-      {
-        "term": 3,
-        "code": "MAGB18",
-        "name": "Grundläggande analys",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "MAGB22",
-        "name": "Optimering med projekt",
-        "hp": 7.5,
-        "type": "choice",
-        "category": "elective"
-      },
-      {
-        "term": 3,
-        "code": "MAGB64",
-        "name": "Stokastiska metoder",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "MAGB01",
-        "name": "Ordinära differentialekvationer",
-        "hp": 6,
-        "type": "required",
-        "category": "mandatory"
-      },
-      {
-        "term": 4,
-        "code": "MAGB15",
-        "name": "Numeriska metoder",
-        "hp": 7.5,
-        "type": "choice",
-        "category": "elective"
-      },
-      {
-        "term": 4,
-        "code": "MAGB61",
-        "name": "Komplex analys och transformer",
-        "hp": 7.5,
-        "type": "choice",
-        "category": "elective"
-      },
-      {
-        "term": 6,
-        "code": "MAGC00",
-        "name": "Matematik, examensarbete",
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 15,
-        "type": "required",
-        "category": "mandatory"
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "MAGA55",
+            "name": "Diskret matematik",
+            "hp": 7.5
+          },
+          {
+            "code": "",
+            "name": "Geometri (Valfri) Kan ersättas av annan valfri kurs",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Valfri) Terminen består helt av valfria kurser och kan t.ex. användas för utbytesstudier.",
+            "hp": 30
+          }
+        ]
       }
     ],
-    "coverage": "manual-review",
-    "reason": "published-rows-not-fully-reconciled",
+    "coverage": "partial-structure",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 6,
-    "completeTerms": [],
+    "completeTerms": [
+      2,
+      5
+    ],
     "termSums": {
       "1": {
         "target": 30,
@@ -7888,7 +7965,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:40:10.846Z"
+    "checkedAt": "2026-09-13T06:54:36.115Z"
   },
   {
     "key": "karlstads-universitet:OGTHY",
@@ -8911,15 +8988,88 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SAIND",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Industriell Transformation (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Innovationsledning (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 1,
+        "code": "IEAD04",
+        "name": "Service Management för ingenjörer",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 1,
+        "code": "IEGC01",
+        "name": "Sales management",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 2,
+        "code": "IEAD06",
+        "name": "Idéhantering i innovationer",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Entreprenörskap (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 2,
+        "code": "IEAD08",
+        "name": "Tjänstefiering för ingenjörer",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 2,
+        "code": "IEAD09",
+        "name": "Digitalisering",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
       {
         "term": 3,
         "code": "IEAE04",
         "name": "Forskningsmetod inom industriell ekonomi",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -8927,7 +9077,8 @@
         "name": "Hållbar produkt- och affärsutveckling",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 4,
@@ -8935,13 +9086,16 @@
         "name": "Industriell ekonomi - examensarbete",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "complete",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 4,
     "completeTerms": [
+      1,
+      2,
       3,
       4
     ],
@@ -8976,7 +9130,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:40:31.414Z"
+    "checkedAt": "2026-09-13T06:54:49.134Z"
   },
   {
     "key": "karlstads-universitet:SAINF",
@@ -9700,7 +9854,7 @@
     "university": "Karlstads universitet",
     "programCode": "SAPFD",
     "programName": "Masterprogram i statsvetenskap - inriktning psykologiskt försvar och desinformation",
-    "hp": 120.0,
+    "hp": 120,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/SAPFD"
@@ -9729,7 +9883,7 @@
         "term": 1,
         "code": "",
         "name": "− Desinformation och säkerhet",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory"
       },
@@ -9753,7 +9907,7 @@
         "term": 2,
         "code": "",
         "name": "− Självständigt arbete - magister",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory"
       },
@@ -9777,7 +9931,7 @@
         "term": 1,
         "code": "",
         "name": "− Desinformation och säkerhet",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory"
       },
@@ -9801,7 +9955,7 @@
         "term": 2,
         "code": "",
         "name": "− Ledarskap och desinformation",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory"
       },
@@ -9841,7 +9995,7 @@
         "term": 4,
         "code": "",
         "name": "− Självständigt arbete - master",
-        "hp": 30.0,
+        "hp": 30,
         "type": "required",
         "category": "mandatory"
       }
@@ -10082,7 +10236,7 @@
     "university": "Karlstads universitet",
     "programCode": "SARUM",
     "programName": "Masterprogram: Samhällets rumsliga och sociala omvandlingar",
-    "hp": 120.0,
+    "hp": 120,
     "subject": "",
     "officialUrls": [
       "https://www.kau.se/utbildning/program-och-kurser/program/SARUM"
@@ -10143,7 +10297,7 @@
         "term": 2,
         "code": "",
         "name": "Självständigt arbete i kulturgeografi",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory"
       },
@@ -10223,7 +10377,7 @@
         "term": 3,
         "code": "",
         "name": "Nutida turism- och planeringsforskning",
-        "hp": 15.0,
+        "hp": 15,
         "type": "required",
         "category": "mandatory"
       },
@@ -10239,7 +10393,7 @@
         "term": 4,
         "code": "",
         "name": "Självständigt arbete i kulturgeografi",
-        "hp": 30.0,
+        "hp": 30,
         "type": "required",
         "category": "mandatory"
       }
@@ -11868,7 +12022,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SGFHA",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -11876,7 +12030,8 @@
         "name": "Företagsekonomi I",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -11884,7 +12039,8 @@
         "name": "Marknadsföring och affärsutveckling",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -11892,7 +12048,8 @@
         "name": "Kommunikation och samarbetsförmåga för yrkeslivet",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -11900,7 +12057,8 @@
         "name": "Internationell affärsmiljö",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -11908,7 +12066,8 @@
         "name": "Affärsetik och hållbara affärer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -11916,7 +12075,35 @@
         "name": "Nationalekonomi med miljöekonomi",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "FEGB31",
+        "name": "Business research methods",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "IKGABC",
+        "name": "Interkulturell affärskommunikation",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Praktisk affärskommunikation (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
       },
       {
         "term": 5,
@@ -11924,12 +12111,13 @@
         "name": "Företagsekonomi - kandidatuppsats",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 5,
         "code": "",
-        "name": "Valbara studier enligt programplan",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 15,
         "type": "choice",
         "category": "elective-slot",
@@ -11947,16 +12135,35 @@
             "hp": 15
           }
         ]
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Obligatorisk) Obligatorisk utlandstermin",
+            "hp": 30
+          }
+        ]
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 6,
     "completeTerms": [
       1,
       2,
       3,
-      5
+      4,
+      5,
+      6
     ],
     "termSums": {
       "1": {
@@ -12003,7 +12210,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:41:08.420Z"
+    "checkedAt": "2026-09-13T06:54:54.933Z"
   },
   {
     "key": "karlstads-universitet:SGGEN",
@@ -12342,7 +12549,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/SGGGJ",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -12350,7 +12557,8 @@
         "name": "Introduktion till globala genusstudier",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -12358,7 +12566,8 @@
         "name": "Globala feminismer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -12366,7 +12575,8 @@
         "name": "Genusvetenskaplig teori och metod",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -12374,7 +12584,8 @@
         "name": "Genusrättsliga perspektiv",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -12382,7 +12593,8 @@
         "name": "Intersektionalitet i en globaliserad värld",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -12390,7 +12602,8 @@
         "name": "Genusvetenskaplig metod I",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -12398,15 +12611,155 @@
         "name": "Mänskliga rättigheter",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 3,
+        "code": "GVGJ31",
+        "name": "Kultur, kön och sexualitet",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Bortom binära förståelser av kön (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Sexuell hälsa och reproduktiva rättigheter (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Genusvetenskaplig metod II (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Familjepolitik (Obligatorisk)",
+        "hp": 10,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Våld och makt (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Arbete, arbetsliv och organisationsförändring (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Ledarskap i teori och praktik (Obligatorisk)",
+        "hp": 5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Feminism och miljö (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Resurser, ägande och hållbarhet (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Genus och teknik (Obligatorisk)",
+        "hp": 5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Genus, rättvisa och aktivism (Obligatorisk)",
+        "hp": 5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Genusvetenskaplig metod III (Obligatorisk)",
+        "hp": 5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Praktik (Obligatorisk)",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Självständigt arbete (Obligatorisk)",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "complete",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 6,
     "completeTerms": [
       1,
-      2
+      2,
+      3,
+      4,
+      5,
+      6
     ],
     "termSums": {
       "1": {
@@ -12453,7 +12806,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:41:12.533Z"
+    "checkedAt": "2026-09-13T06:54:56.382Z"
   },
   {
     "key": "karlstads-universitet:SGIHP",
@@ -17223,7 +17576,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/TACTF",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -17231,7 +17584,8 @@
         "name": "Experimentell problemlösning för fysiker",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -17239,7 +17593,8 @@
         "name": "Matematisk grundkurs",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -17247,7 +17602,8 @@
         "name": "Analys och geometri",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -17255,7 +17611,8 @@
         "name": "Introduktion till programmering och databehandling",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -17263,7 +17620,8 @@
         "name": "Linjär algebra",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -17271,7 +17629,8 @@
         "name": "Vågfysik och optik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -17279,7 +17638,8 @@
         "name": "Flervariabelanalys",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -17287,7 +17647,8 @@
         "name": "Mekanik med tillämpningar 1",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -17295,7 +17656,8 @@
         "name": "Termodynamik och statistisk fysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -17303,7 +17665,8 @@
         "name": "Inledande modern fysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -17311,7 +17674,8 @@
         "name": "Stokastiska metoder",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -17319,7 +17683,8 @@
         "name": "Mekanik med tillämpningar 2",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 4,
@@ -17327,7 +17692,8 @@
         "name": "Materialteknik för civilingenjörer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 4,
@@ -17335,7 +17701,8 @@
         "name": "Elektromagnetisk fältteori för civilingenjörer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 4,
@@ -17343,7 +17710,8 @@
         "name": "Komplex analys och transformer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 4,
@@ -17351,7 +17719,44 @@
         "name": "Kvantfysik I",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 5,
+        "code": "FYGC09",
+        "name": "Fasta tillståndets fysik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 5,
+        "code": "ELGB13",
+        "name": "Elteknik för civilingenjörer",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 5,
+        "code": "CBGB06",
+        "name": "Nanovetenskap I",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Projekt och ledarskap för civilingenjörer (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
       },
       {
         "term": 6,
@@ -17359,7 +17764,8 @@
         "name": "Numeriska metoder",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 6,
@@ -17367,12 +17773,13 @@
         "name": "Hållfasthetslära I för civilingenjörer",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 6,
         "code": "",
-        "name": "Valbara studier enligt programplan",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 15,
         "type": "choice",
         "category": "elective-slot",
@@ -17402,7 +17809,8 @@
         "name": "Matematisk fysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 7,
@@ -17410,7 +17818,8 @@
         "name": "Ytfysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 7,
@@ -17418,7 +17827,8 @@
         "name": "Kvantfysik II",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 7,
@@ -17426,12 +17836,13 @@
         "name": "Fysikalisk elektronik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 8,
         "code": "",
-        "name": "Valbara studier enligt programplan",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 30,
         "type": "choice",
         "category": "elective-slot",
@@ -17476,7 +17887,8 @@
         "name": "Beräkningsfysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 9,
@@ -17484,7 +17896,8 @@
         "name": "Symmetri - matematiska strukturer och tillämpningar",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 9,
@@ -17492,7 +17905,8 @@
         "name": "Nanovetenskap II",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 9,
@@ -17500,7 +17914,8 @@
         "name": "Kvant-mångkroppsfysik - från sammanflätning till emergens",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 10,
@@ -17508,17 +17923,19 @@
         "name": "Examensarbete för civilingenjörsexamen i teknisk fysik",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 10,
     "completeTerms": [
       1,
       2,
       3,
       4,
+      5,
       6,
       7,
       8,
@@ -17598,7 +18015,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:41:51.629Z"
+    "checkedAt": "2026-09-13T06:55:03.622Z"
   },
   {
     "key": "karlstads-universitet:TAMCS",
@@ -17990,7 +18407,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/TAMDD",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -17998,7 +18415,8 @@
         "name": "Dataanalys och tillämpad maskininlärning",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -18006,7 +18424,8 @@
         "name": "Programmering med maskintekniska tillämpningar",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -18014,12 +18433,13 @@
         "name": "Polymerteknik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
         "code": "",
-        "name": "Valbara studier enligt programplan",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 7.5,
         "type": "choice",
         "category": "elective-slot",
@@ -18044,7 +18464,8 @@
         "name": "Datadrivna dynamiska system",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -18052,7 +18473,8 @@
         "name": "Konstruktionsoptimering",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -18060,7 +18482,8 @@
         "name": "Nätverk och cybersäkerhet för ingenjörsstudenter",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -18068,15 +18491,68 @@
         "name": "Simulering och modellering",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Projektarbete kring datadriven maskinteknik (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
+        "hp": 22.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Teknik för elkraftsystem (Valbar)",
+            "hp": 7.5
+          },
+          {
+            "code": "MSAD23",
+            "name": "Hållbar produktutveckling",
+            "hp": 15
+          },
+          {
+            "code": "MTAD14",
+            "name": "Projektarbete kring simulering och modellering",
+            "hp": 7.5
+          },
+          {
+            "code": "",
+            "name": "Robotteknik och intelligenta styrsystem (Valbar)",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Under planering (Obligatorisk) Final Project",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "remaining-terms-under-planning",
+    "coverage": "choice-required",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 4,
     "completeTerms": [
       1,
-      2
+      2,
+      3,
+      4
     ],
     "termSums": {
       "1": {
@@ -18109,7 +18585,7 @@
       }
     },
     "underPlanning": true,
-    "checkedAt": "2026-09-13T06:41:57.811Z"
+    "checkedAt": "2026-09-13T06:55:05.067Z"
   },
   {
     "key": "karlstads-universitet:TAMEM",
@@ -18124,21 +18600,88 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/TAMEM",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Reningsteknik fördjupning (Valbar)",
+            "hp": 7.5
+          },
+          {
+            "code": "",
+            "name": "Teknik för elkraftsystem (Valfri)",
+            "hp": 7.5
+          },
+          {
+            "code": "EMAD19",
+            "name": "Tillämpad värme- och masstransport",
+            "hp": 7.5
+          },
+          {
+            "code": "STGA09",
+            "name": "Matematisk statistik",
+            "hp": 7.5
+          },
+          {
+            "code": "MVGT01",
+            "name": "MKB, miljökonsekvensbeskrivning",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Optimering av energi- och miljösystem med MATLAB (Obligatorisk)",
+        "hp": 10,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Energisystem: exergianalys och pinchoptimering (Obligatorisk)",
+        "hp": 10,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Teknik för hållbarhetsbedömning (Obligatorisk)",
+        "hp": 10,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
       {
         "term": 4,
         "code": "EMAE16",
         "name": "Examensarbete för civilingenjörsexamen i energi- och miljöteknik",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       }
     ],
-    "coverage": "manual-review",
-    "reason": "published-rows-not-fully-reconciled",
+    "coverage": "partial-structure",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 4,
     "completeTerms": [
+      1,
+      2,
       4
     ],
     "termSums": {
@@ -18172,7 +18715,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:41:59.862Z"
+    "checkedAt": "2026-09-13T06:55:06.508Z"
   },
   {
     "key": "karlstads-universitet:TAMFN",
@@ -18187,7 +18730,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/TAMFN",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -18195,7 +18738,8 @@
         "name": "Fysikalisk elektronik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -18203,7 +18747,8 @@
         "name": "Karaktärisering av material för fysiker",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -18211,7 +18756,8 @@
         "name": "Kvantfysik II",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -18219,7 +18765,8 @@
         "name": "Matematisk fysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -18227,7 +18774,8 @@
         "name": "Beräkningsfysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -18235,7 +18783,8 @@
         "name": "Funktionella material",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -18243,7 +18792,8 @@
         "name": "Nanovetenskap II",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -18251,7 +18801,40 @@
         "name": "Ytfysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "FYAD16",
+            "name": "Analytisk mekanik",
+            "hp": 7.5
+          },
+          {
+            "code": "",
+            "name": "Avancerad kvantmekanik (Valfri)",
+            "hp": 7.5
+          },
+          {
+            "code": "ELGB17",
+            "name": "Reglerteknik",
+            "hp": 7.5
+          },
+          {
+            "code": "FYAD07",
+            "name": "Svepprobmikroskopi",
+            "hp": 7.5
+          }
+        ]
       },
       {
         "term": 4,
@@ -18259,15 +18842,17 @@
         "name": "Examensarbete för civilingenjörsexamen i teknisk fysik",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 4,
     "completeTerms": [
       1,
       2,
+      3,
       4
     ],
     "termSums": {
@@ -18301,7 +18886,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:42:01.919Z"
+    "checkedAt": "2026-09-13T06:55:07.949Z"
   },
   {
     "key": "karlstads-universitet:TAMFT",
@@ -18316,7 +18901,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/TAMFT",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -18324,7 +18909,8 @@
         "name": "Matematisk fysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -18332,7 +18918,8 @@
         "name": "Analytisk mekanik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -18340,7 +18927,8 @@
         "name": "Kvantfysik II",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -18348,7 +18936,8 @@
         "name": "Symmetri - matematiska strukturer och tillämpningar",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -18356,7 +18945,8 @@
         "name": "Beräkningsfysik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -18364,7 +18954,8 @@
         "name": "Nanovetenskap II",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -18372,7 +18963,8 @@
         "name": "Kvant-mångkroppsfysik - från sammanflätning till emergens",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -18380,7 +18972,49 @@
         "name": "Kvantfältteori",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 3,
+        "code": "FYAD19",
+        "name": "Fysikalisk elektronik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
+        "hp": 22.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Avancerad kvantmekanik (Valfri)",
+            "hp": 7.5
+          },
+          {
+            "code": "FYAD07",
+            "name": "Svepprobmikroskopi",
+            "hp": 7.5
+          },
+          {
+            "code": "",
+            "name": "Teknik för elkraftsystem (Valfri)",
+            "hp": 7.5
+          },
+          {
+            "code": "",
+            "name": "Teknik för förnybar energi (Valfri)",
+            "hp": 7.5
+          }
+        ]
       },
       {
         "term": 4,
@@ -18388,15 +19022,17 @@
         "name": "Examensarbete för civilingenjörsexamen i teknisk fysik",
         "hp": 30,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 4,
     "completeTerms": [
       1,
       2,
+      3,
       4
     ],
     "termSums": {
@@ -18430,7 +19066,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:42:03.977Z"
+    "checkedAt": "2026-09-13T06:55:09.389Z"
   },
   {
     "key": "karlstads-universitet:TAMGM",
@@ -18445,29 +19081,112 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/TAMGM",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
-        "term": 1,
-        "code": "GMAN01",
-        "name": "Fjärranalysprinciper",
+        "term": 2,
+        "code": "",
+        "name": "Geospatial analys med molnbaserad databehandling (Obligatorisk)",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory-placeholder",
+        "placeholder": true
       },
       {
-        "term": 1,
-        "code": "GMAN02",
-        "name": "GIS-principer",
+        "term": 2,
+        "code": "",
+        "name": "Under planering (Obligatorisk) GMAF02 Rumslig analys och geostatistik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Under planering (Obligatorisk) GMAF03 Metoder inom geospatial och hållbarhetsforskning",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Under planering (Obligatorisk) GMAF05 Naturfaror och konsekvenser",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Under planering (Obligatorisk) GAMF07 Avancerad GeoAI",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Under planering (Obligatorisk) GMAF10 Tillämpad GeoAI för hållbar utveckling",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Under planering (Valbar) GMAF06 Geospatial modellering för social-ekologiska system",
+            "hp": 7.5
+          },
+          {
+            "code": "",
+            "name": "Under planering (Valbar) GMAF08 Analys av katastrofrisker",
+            "hp": 7.5
+          },
+          {
+            "code": "",
+            "name": "Under planering (Valbar) GMAF09 Praktik",
+            "hp": 7.5
+          },
+          {
+            "code": "",
+            "name": "Under planering (Valbar) GMAF11 Projekt i riskbedömning",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Examensarbete i GeoAI för hållbara framtider (Obligatorisk)",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
       }
     ],
-    "coverage": "manual-review",
-    "reason": "programme-under-planning",
+    "coverage": "partial-structure",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 4,
-    "completeTerms": [],
+    "completeTerms": [
+      2,
+      3,
+      4
+    ],
     "termSums": {
       "1": {
         "target": 30,
@@ -18499,7 +19218,7 @@
       }
     },
     "underPlanning": true,
-    "checkedAt": "2026-09-13T06:42:06.034Z"
+    "checkedAt": "2026-09-13T06:55:10.832Z"
   },
   {
     "key": "karlstads-universitet:TAMIC",
@@ -19375,7 +20094,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/TGHEL",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -19383,7 +20102,8 @@
         "name": "Introduktion till elektroteknik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -19391,7 +20111,8 @@
         "name": "Matematik för ingenjörer I",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -19399,7 +20120,8 @@
         "name": "Introduktion till programmering och databehandling",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -19407,7 +20129,8 @@
         "name": "Kretsteknik 1",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -19415,7 +20138,8 @@
         "name": "Kretsteknik 2",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -19423,7 +20147,8 @@
         "name": "Digitalteknik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -19431,7 +20156,8 @@
         "name": "Kraftelektronik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -19439,7 +20165,8 @@
         "name": "Matematik för ingenjörer II",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -19447,7 +20174,8 @@
         "name": "Introduktion till elkraftsystem",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -19455,7 +20183,8 @@
         "name": "Matematik för ingenjörer III",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -19463,7 +20192,8 @@
         "name": "Reglerteknik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -19471,7 +20201,44 @@
         "name": "Industriella automationssystem",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "ELGB23",
+        "name": "Signaler och system",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "ELGB19",
+        "name": "Elmaskiner",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "ELGB15",
+        "name": "Modellering och simulering av dynamiska system",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Förnybara energikällor och tillämpningar (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
       },
       {
         "term": 5,
@@ -19479,7 +20246,8 @@
         "name": "Elkraftsystem",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 5,
@@ -19487,7 +20255,8 @@
         "name": "Tillämpningar av kraftelektronik",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 5,
@@ -19495,7 +20264,8 @@
         "name": "Integrering av förnybar energi i elkraftsystem",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 5,
@@ -19503,17 +20273,51 @@
         "name": "Elinstallationer och introduktion till skyddssystem i elkraftsystem",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Examensarbete (Obligatorisk)",
+        "hp": 22.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
+        "hp": 7.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "DVGA02",
+            "name": "Programutvecklingsmetodik",
+            "hp": 7.5
+          },
+          {
+            "code": "FEGAT1",
+            "name": "Företagsekonomins grunder",
+            "hp": 7.5
+          }
+        ]
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "some-complete-terms",
+    "coverage": "choice-required",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 6,
     "completeTerms": [
       1,
       2,
       3,
-      5
+      4,
+      5,
+      6
     ],
     "termSums": {
       "1": {
@@ -19560,7 +20364,7 @@
       }
     },
     "underPlanning": false,
-    "checkedAt": "2026-09-13T06:42:16.344Z"
+    "checkedAt": "2026-09-13T06:55:13.728Z"
   },
   {
     "key": "karlstads-universitet:TGHEM",
@@ -21841,7 +22645,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/VGBMA",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -21849,7 +22653,8 @@
         "name": "Anatomi och fysiologi",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -21857,7 +22662,8 @@
         "name": "Medicinsk mikrobiologi och immunologi",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -21865,7 +22671,17 @@
         "name": "Sjukdomslära I",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Grundläggande kemi (Obligatorisk)",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
       },
       {
         "term": 3,
@@ -21873,7 +22689,8 @@
         "name": "Introduktion till biomedicinska analytikeryrket",
         "hp": 4,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -21881,7 +22698,8 @@
         "name": "Metoder inom hematologi, morfologisk cellbiologi och transfusionsmedicin",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -21889,7 +22707,8 @@
         "name": "Sjukdomslära II",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -21897,7 +22716,8 @@
         "name": "Transfusionsmedicin",
         "hp": 3.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 3,
@@ -21905,15 +22725,65 @@
         "name": "Verksamhetsförlagd utbildning I (VFU I)",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "BIG103",
+        "name": "Cell- och molekylärbiologi",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "BLG005",
+        "name": "Mikrobiologisk och immunologisk metodik",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Under planering (Obligatorisk)",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Under planering (Obligatorisk)",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Under planering (Obligatorisk)",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "remaining-terms-under-planning",
+    "coverage": "complete",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 6,
     "completeTerms": [
       1,
-      3
+      2,
+      3,
+      4,
+      5,
+      6
     ],
     "termSums": {
       "1": {
@@ -21960,7 +22830,7 @@
       }
     },
     "underPlanning": true,
-    "checkedAt": "2026-09-13T06:42:47.202Z"
+    "checkedAt": "2026-09-13T06:55:23.839Z"
   },
   {
     "key": "karlstads-universitet:VGHMS",
@@ -21975,7 +22845,7 @@
     ],
     "status": "processed",
     "sourceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/VGHMS",
-    "source": "karlstad-official-study-path",
+    "source": "karlstad-official-study-path-placeholder-aware",
     "rows": [
       {
         "term": 1,
@@ -21983,7 +22853,8 @@
         "name": "Introduktion till folkhälsovetenskap",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -21991,7 +22862,8 @@
         "name": "Introduktion till kvalitativa och kvantitativa forskningsmetoder",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 1,
@@ -21999,7 +22871,8 @@
         "name": "Hälsofrämjande arbete I",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -22007,7 +22880,8 @@
         "name": "Hälsofrämjande arbete II",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
@@ -22015,12 +22889,13 @@
         "name": "Projektledning och utvärdering i folkhälsoarbete",
         "hp": 7.5,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 2,
         "code": "",
-        "name": "Valbara studier enligt programplan",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 15,
         "type": "choice",
         "category": "elective-slot",
@@ -22035,17 +22910,103 @@
         ]
       },
       {
+        "term": 3,
+        "code": "FHGHMH",
+        "name": "Hälsa, miljö och hållbar utveckling",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Under planering (Obligatorisk) Kvalitativ forskningsmetod med självständigt arbete, FHGBEB, är under fastställande",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory-placeholder",
+        "placeholder": true
+      },
+      {
+        "term": 4,
+        "code": "FHGEF1",
+        "name": "Epidemiologi och folkhälsoarbete",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "FHGOP1",
+        "name": "Organisation, politisk styrning och folkhälsoarbete",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "placeholder": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
+        "hp": 7.5,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "",
+            "name": "Valfri kurs (Valfri)",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valbara studier enligt publicerad studiegång",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "FHAMH1",
+            "name": "Miljöns betydelse för hälsa och utveckling",
+            "hp": 7.5
+          },
+          {
+            "code": "",
+            "name": "Valfri kurs (Valfri)",
+            "hp": 7.5
+          },
+          {
+            "code": "FHGGH1",
+            "name": "Global hälsa",
+            "hp": 7.5
+          },
+          {
+            "code": "FHGVR2",
+            "name": "Våld i nära relationer ur ett folkhälsoperspektiv",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
         "term": 6,
         "code": "FHGBE2",
         "name": "Folkhälsovetenskap: examensarbete",
         "hp": 15,
         "type": "required",
-        "category": "mandatory"
+        "category": "mandatory",
+        "placeholder": false
       },
       {
         "term": 6,
         "code": "",
-        "name": "Valbara studier enligt programplan",
+        "name": "Valbara studier enligt publicerad studiegång",
         "hp": 15,
         "type": "choice",
         "category": "elective-slot",
@@ -22060,12 +23021,15 @@
         ]
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "remaining-terms-under-planning",
+    "coverage": "choice-required",
+    "reason": "official-study-path-including-nonlinked-placeholders",
     "expectedTerms": 6,
     "completeTerms": [
       1,
       2,
+      3,
+      4,
+      5,
       6
     ],
     "termSums": {
@@ -22113,7 +23077,7 @@
       }
     },
     "underPlanning": true,
-    "checkedAt": "2026-09-13T06:42:49.258Z"
+    "checkedAt": "2026-09-13T06:55:25.280Z"
   },
   {
     "key": "karlstads-universitet:VGSSP",
