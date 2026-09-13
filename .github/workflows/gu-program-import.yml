@@ -5,7 +5,10 @@ on:
   push:
     branches: [gu-program-import]
     paths:
+      - 'api/gu-program-structure.js'
       - 'scripts/gu-programme-structure-pipeline.mjs'
+      - 'scripts/merge-gu-official-structures.mjs'
+      - 'data/gu/official-structures.json'
       - '.github/workflows/gu-program-import.yml'
 
 permissions:
@@ -32,6 +35,8 @@ jobs:
         env:
           GU_CONCURRENCY: '6'
         run: node scripts/gu-programme-structure-pipeline.mjs
+      - name: Apply directly verified GU structures
+        run: node scripts/merge-gu-official-structures.mjs
       - name: Validate GU output
         run: |
           node - <<'NODE'
@@ -52,5 +57,3 @@ jobs:
           git fetch origin gu-program-import
           git rebase origin/gu-program-import
           git push origin HEAD:gu-program-import
-
-# trigger: term-range-parser
