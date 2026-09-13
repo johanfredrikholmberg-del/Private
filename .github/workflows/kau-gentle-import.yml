@@ -1,0 +1,36 @@
+name: Karlstad gentle verification
+on:
+  push:
+    branches: [kau-fast-import]
+    paths: ['.github/workflows/kau-gentle-import.yml']
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: kau-fast-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Refresh Karlstad catalogue
+        run: node scripts/kau-static-export.mjs
+      - name: Verify Karlstad programme pages gently
+        env:
+          KAU_STRUCTURE_CONCURRENCY: '1'
+          KAU_REQUEST_GAP_MS: '1800'
+        run: node scripts/kau-programme-structure-pipeline.mjs
+      - name: Export Karlstad structures
+        run: node scripts/kau-extract-structures.mjs
+      - name: Check completeness
+        run: node -e "const fs=require('fs');const m=JSON.parse(fs.readFileSync('data/kau/structure-meta.json','utf8'));if(m.officialProgrammes!==134||m.processed!==134||m.temporaryErrors)process.exit(1);console.log(m)"
+      - name: Save verified Karlstad data
+        run: |
+          git config user.name studielots-bot
+          git config user.email actions@users.noreply.github.com
+          git add -f data/kau data/susa/structures.json
+          git diff --cached --quiet || git commit -m 'Verify all Karlstad programme pages [skip ci]'
+          git push origin HEAD:kau-fast-import
