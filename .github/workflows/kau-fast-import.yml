@@ -7,6 +7,7 @@ on:
       - '.github/workflows/kau-fast-import.yml'
       - 'scripts/kau-static-export.mjs'
       - 'scripts/kau-programme-structure-pipeline.mjs'
+      - 'scripts/kau-extract-structures.mjs'
 
 permissions:
   contents: write
@@ -33,17 +34,20 @@ jobs:
         env:
           KAU_STRUCTURE_CONCURRENCY: '16'
         run: node scripts/kau-programme-structure-pipeline.mjs
+      - name: Export standalone Karlstad structures
+        run: node scripts/kau-extract-structures.mjs
       - name: Validate Karlstad output
         run: |
           node - <<'NODE'
           const fs=require('fs');
           const meta=JSON.parse(fs.readFileSync('data/kau/meta.json','utf8'));
           const structures=JSON.parse(fs.readFileSync('data/kau/structure-meta.json','utf8'));
+          const rows=JSON.parse(fs.readFileSync('data/kau/structures.json','utf8'));
           if(meta.counts.programmes!==134) throw new Error(`Expected 134 programmes, got ${meta.counts.programmes}`);
           if(meta.counts.susaCourseDefinitions<500) throw new Error(`Unexpectedly low course count: ${meta.counts.susaCourseDefinitions}`);
           if(meta.counts.currentKauOfferingCodes<100) throw new Error(`Unexpectedly low official offering count: ${meta.counts.currentKauOfferingCodes}`);
-          if(structures.officialProgrammes!==134||structures.processed!==134) throw new Error('Not all official KAU programmes were processed');
-          console.log(JSON.stringify({meta,structures},null,2));
+          if(structures.officialProgrammes!==134||structures.processed!==134||rows.length!==134) throw new Error('Not all official KAU programmes were processed/exported');
+          console.log(JSON.stringify({meta,structures,exportedStructures:rows.length},null,2));
           NODE
       - name: Commit Karlstad data
         run: |
