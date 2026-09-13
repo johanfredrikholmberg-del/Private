@@ -1,0 +1,31 @@
+name: Karlstad unresolved report
+
+on:
+  push:
+    branches: [kau-sharded-import]
+    paths:
+      - '.github/workflows/kau-unresolved-report.yml'
+      - 'scripts/kau-unresolved-report.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: kau-sharded-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/kau-unresolved-report.mjs
+      - name: Commit report
+        run: |
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/kau/unresolved.json
+          git commit -m 'Audit unresolved Karlstad structures [skip ci]' || exit 0
+          git push origin HEAD:kau-sharded-import
