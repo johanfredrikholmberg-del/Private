@@ -1,0 +1,72 @@
+name: Karlstad sharded import
+
+on:
+  push:
+    branches: [kau-sharded-import]
+    paths:
+      - '.github/workflows/kau-sharded-import.yml'
+      - 'scripts/kau-programme-structure-pipeline.mjs'
+      - 'scripts/kau-merge-shards.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  shard:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0,1,2,3,4,5,6,7]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: kau-sharded-import
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import Karlstad shard
+        env:
+          KAU_SHARD_TOTAL: '8'
+          KAU_SHARD_INDEX: ${{ matrix.shard }}
+          KAU_STRUCTURE_CONCURRENCY: '2'
+          KAU_STRUCTURE_RETRIES: '2'
+        run: node scripts/kau-programme-structure-pipeline.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kau-shard-${{ matrix.shard }}
+          path: data/kau/shard-${{ matrix.shard }}.json
+          retention-days: 1
+
+  merge:
+    needs: shard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: kau-sharded-import
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: kau-shard-*
+          path: data/kau
+          merge-multiple: true
+      - name: Merge and validate Karlstad structures
+        env:
+          KAU_SHARD_TOTAL: '8'
+        run: |
+          node scripts/kau-merge-shards.mjs
+          node - <<'NODE'
+          const fs=require('fs');
+          const m=JSON.parse(fs.readFileSync('data/kau/structure-meta.json','utf8'));
+          if(m.processed!==134) throw new Error(`Expected 134, got ${m.processed}`);
+          if(m.withParsedRows<30) throw new Error(`Unexpectedly low parsed structures: ${m.withParsedRows}`);
+          console.log(JSON.stringify(m,null,2));
+          NODE
+      - name: Commit merged Karlstad structures
+        run: |
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/kau/structure-meta.json data/susa/structures.json
+          git commit -m 'Merge sharded Karlstad structures [skip ci]' || exit 0
+          git push origin HEAD:kau-sharded-import
