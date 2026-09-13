@@ -5,14 +5,97 @@
     "hp": 120,
     "university": "Umeå universitet",
     "type": "programme",
-    "source": "umea-official-education-plan",
+    "source": "umea-official-programoversikt",
     "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/daapm/",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-programme-layout-heading",
+    "rows": [
+      {
+        "term": 1,
+        "name": "APD",
+        "code": "",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "CAID steg 1 och steg2",
+        "code": "5ID230",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Projekt 1: Metodik i produktdesign",
+        "code": "5ID224",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Ljud i industridesign",
+        "code": "5ID208",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "konstruktion",
+        "code": "och",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Projekt 2: Strategisk produktdesign",
+        "code": "5ID210",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "historieberättande i industridesign",
+        "code": "Visuellt",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Konceptuella produktlösningar",
+        "code": "5ID218",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "produktdesign,",
+        "code": "kring",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Examensarbete och examination",
+        "code": "5ID201",
+        "hp": 30,
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "programoversikt-all-terms-reconciled",
     "expectedTerms": 4,
-    "completeTerms": [],
-    "checkedAt": "2026-09-13T07:11:25.704Z"
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "checkedAt": "2026-09-13T07:18:47.425Z",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30
+    },
+    "overfullTerms": []
   },
   {
     "code": "DAIDM",
@@ -20,14 +103,105 @@
     "hp": 120,
     "university": "Umeå universitet",
     "type": "programme",
-    "source": "umea-official-education-plan",
+    "source": "umea-official-programoversikt",
     "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/daidm/",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-programme-layout-heading",
+    "rows": [
+      {
+        "term": 1,
+        "name": "5ID242, Färdigheter och tekniker, IxD",
+        "code": "",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": ", Grafisk form och uttryck,",
+        "code": "5ID236",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": ", Projekt 1: Specialiserad produkt,",
+        "code": "5ID237",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "5ID226, Workshop i formlära,",
+        "code": "",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": ", Iscensättande av samskapande,",
+        "code": "5ID247",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": ", Projekt 2: Generell produkt,",
+        "code": "5ID079",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "5ID245, Praktik i interaktionsdesign,",
+        "code": "kurser",
+        "hp": 30,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "name": "5ID239, Upplevelseprototyper,",
+        "code": "eller",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "name": ", Projekt 3: Interaktionskoncept,",
+        "code": "5ID082",
+        "hp": 15,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "name": ", Kreativa reflektioner kring interaktionsdesign,",
+        "code": "5ID238",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 4,
+        "name": "5ID202, Examensarbete i interaktionsdesign,",
+        "code": "",
+        "hp": 30,
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "programoversikt-alternative-or-profile-overfill",
     "expectedTerms": 4,
-    "completeTerms": [],
-    "checkedAt": "2026-09-13T07:11:26.245Z"
+    "completeTerms": [
+      1,
+      2,
+      4
+    ],
+    "checkedAt": "2026-09-13T07:18:47.944Z",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 60,
+      "4": 30
+    },
+    "overfullTerms": [
+      3
+    ]
   },
   {
     "code": "DAITM",
@@ -35,14 +209,112 @@
     "hp": 120,
     "university": "Umeå universitet",
     "type": "programme",
-    "source": "umea-official-education-plan",
+    "source": "umea-official-programoversikt",
     "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/daitm/",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-programme-layout-heading",
+    "rows": [
+      {
+        "term": 1,
+        "name": "tekniker, TD",
+        "code": "och",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "nivå steg 1",
+        "code": "Avancerad",
+        "hp": 3,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "nivå steg",
+        "code": "Avancerad",
+        "hp": 4.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "1: Fordonsdesign",
+        "code": "Projekt",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Form i transportdesign,",
+        "code": "",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "inom fordonsdesign,",
+        "code": "Analys",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "2: Strategisk design",
+        "code": "Projekt",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Praktik i transportdesign",
+        "code": "kurser",
+        "hp": 30,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "name": "Design,",
+        "code": "",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "name": "3: Interiör i fordonsdesign,",
+        "code": "Projekt",
+        "hp": 15,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "name": "mobilitet,",
+        "code": "Framtida",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 4,
+        "name": "Examensprojekt i transportdesign,",
+        "code": "",
+        "hp": 30,
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "programoversikt-alternative-or-profile-overfill",
     "expectedTerms": 4,
-    "completeTerms": [],
-    "checkedAt": "2026-09-13T07:11:26.823Z"
+    "completeTerms": [
+      1,
+      2,
+      4
+    ],
+    "checkedAt": "2026-09-13T07:18:48.453Z",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 60,
+      "4": 30
+    },
+    "overfullTerms": [
+      3
+    ]
   },
   {
     "code": "DGIND",
@@ -487,16 +759,357 @@
     "hp": 240,
     "university": "Umeå universitet",
     "type": "programme",
-    "source": "umea-official-education-plan",
+    "source": "umea-official-programoversikt",
     "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/lygrm/",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-course-rows-parsed",
+    "rows": [
+      {
+        "term": 1,
+        "name": "e som profession (UK)",
+        "code": "Grundlärar",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Att vara grundlärare (VFU)",
+        "code": "ligatorisk",
+        "hp": 1.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Lärande och undervisning (UK)",
+        "code": "ligatorisk",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Kunskap, vetenskap och forskningsmetodik (UK)",
+        "code": "ligatorisk",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": ", demokrati och den heterogena lärandemiljön (UK)",
+        "code": "Etik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Svenska för åk 4-6, kurs 1",
+        "code": "ligatorisk",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "för åk 4-6, kurs 1",
+        "code": "Engelska",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Matematik 1 för grundskolans årskurs 4-6",
+        "code": "ligatorisk",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Matematik 2 för grundskolans årskurs 4-6",
+        "code": "ligatorisk",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "4 innehåller en sommarkurs: Svenska för åk 4-6, kurs 2",
+        "code": "Termin",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Engelska för åk 4-6, kurs 2",
+        "code": "",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Matematik 3 för grundskolans årskurs 4-6",
+        "code": "ligatorisk",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "grundskolan (UK)",
+        "code": "för",
+        "hp": 8,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Svenska för åk 4-6, kurs 2",
+        "code": "ligatorisk",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "name": "för och av lärande i grundskolan (UK)",
+        "code": "Bedömning",
+        "hp": 11,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "name": "Specialpedagogik - för grundskolan (UK)",
+        "code": "ligatorisk",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "name": "Att undervisa i åk 4-6 (VFU)",
+        "code": "ligatorisk",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "name": "6 innehåller en sommarkurs: Matematik 4 för grundskolans åk 4-6,",
+        "code": "Termin",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "name": "Engelska för åk 4-6, kurs 3",
+        "code": "",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "name": "Svenska för åk 4-6, kurs 3",
+        "code": "ligatorisk",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "name": "Matematik 4 för grundskolans årskurs 4-6",
+        "code": "ligatorisk",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "name": "Välj* mellan Samhällsorientering åk 4-6,",
+        "code": "",
+        "hp": 30,
+        "category": "elective"
+      },
+      {
+        "term": 7,
+        "name": "Naturorientering och teknik för grundskolan åk 4-6,",
+        "code": "eller",
+        "hp": 30,
+        "category": "elective"
+      },
+      {
+        "term": 7,
+        "name": ", varav",
+        "code": "",
+        "hp": 22.5,
+        "category": "elective"
+      },
+      {
+        "term": 8,
+        "name": "Samhällsorientering åk 4-6",
+        "code": "",
+        "hp": 30,
+        "category": "elective"
+      },
+      {
+        "term": 8,
+        "name": "Naturorientering och teknik för grundskolans årskurs 4-6",
+        "code": "Valbar",
+        "hp": 30,
+        "category": "elective"
+      },
+      {
+        "term": 8,
+        "name": "4-6,",
+        "code": "åk",
+        "hp": 30,
+        "category": "elective"
+      },
+      {
+        "term": 8,
+        "name": ", Naturorientering och teknik för grundskolan åk 4-6,",
+        "code": "eller",
+        "hp": 30,
+        "category": "elective"
+      },
+      {
+        "term": 7,
+        "name": "22,",
+        "code": "med",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "name": "VFU-kursen, Läraryrkets dimensioner,",
+        "code": "",
+        "hp": 22.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "name": "denna termin med",
+        "code": "inleds",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "name": "Samhällsorientering åk 4-6",
+        "code": "",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "name": "tering och teknik för grundskolans årskurs 4-6",
+        "code": "Naturorien",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "name": "(VFU)",
+        "code": "",
+        "hp": 22.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "name": "dimensioner,",
+        "code": "äraryrkets",
+        "hp": 22.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "name": "d 1",
+        "code": "me",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "name": "Examensarbetet",
+        "code": "",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "name": "denna termin med",
+        "code": "inleds",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "name": "d 1",
+        "code": "me",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "name": "(VFU)",
+        "code": "",
+        "hp": 22.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "name": "grundskolans år 4-6",
+        "code": "mot",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "name": "Fortsättning på Examensarbetet,",
+        "code": "",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 9,
+        "name": "d 1",
+        "code": "me",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "name": "d 1",
+        "code": "me",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "name": "grundskolans år 4-6",
+        "code": "mot",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 10,
+        "name": "(UK)",
+        "code": "",
+        "hp": 7.5,
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "programoversikt-alternative-or-profile-overfill",
     "expectedTerms": 8,
     "completeTerms": [],
-    "termSums": {},
-    "overfullTerms": [],
-    "checkedAt": "2026-09-13T07:11:40.232Z"
+    "termSums": {
+      "1": 22.5,
+      "2": 22.5,
+      "3": 22.5,
+      "4": 38,
+      "5": 22,
+      "6": 37.5,
+      "7": 87.5,
+      "8": 162.5,
+      "9": 155,
+      "10": 130
+    },
+    "overfullTerms": [
+      4,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "checkedAt": "2026-09-13T07:18:56.903Z"
   },
   {
     "code": "LYKPU",
@@ -1004,14 +1617,83 @@
     "hp": 120,
     "university": "Umeå universitet",
     "type": "programme",
-    "source": "umea-official-education-plan",
+    "source": "umea-official-programoversikt",
     "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/sadmm/",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-programme-layout-heading",
+    "rows": [
+      {
+        "term": 1,
+        "name": "strategi,",
+        "code": "Digital",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Management av digitalisering,",
+        "code": "ligatorisk",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "organisationer,",
+        "code": "Datadrivna",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Forskningsmetodik för att förstå digitalisering,",
+        "code": "ligatorisk",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Att driva digital förändring,",
+        "code": "ligatorisk",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Digital innovation och entreprenörskap,",
+        "code": "sterexamen",
+        "hp": 15,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "name": "Valbara/fria kurser,",
+        "code": "ligatorisk",
+        "hp": 15,
+        "category": "elective"
+      },
+      {
+        "term": 4,
+        "name": "Masteruppsats i informatik med inriktning mot digital management och innovation, 2,",
+        "code": "sterexamen",
+        "hp": 30,
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "programoversikt-all-terms-reconciled",
     "expectedTerms": 4,
-    "completeTerms": [],
-    "checkedAt": "2026-09-13T07:11:59.777Z"
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "checkedAt": "2026-09-13T07:19:07.238Z",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30
+    },
+    "overfullTerms": []
   },
   {
     "code": "SAELM",
@@ -1019,16 +1701,51 @@
     "hp": 120,
     "university": "Umeå universitet",
     "type": "programme",
-    "source": "umea-official-education-plan",
+    "source": "umea-official-programoversikt",
     "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/saelm/",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-course-rows-parsed",
+    "rows": [
+      {
+        "term": 1,
+        "name": "omställning och entreprenöriellt ledarskap,",
+        "code": "Hållbar",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Etik, beslutsfattande och självledarskap,",
+        "code": "ligatorisk",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "leda för hållbar innovation,",
+        "code": "Att",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Företagsekonomi, magisteruppsats med inriktning mot entreprenöriellt ledarskap och hållbar omställning,",
+        "code": "ligatorisk",
+        "hp": 15,
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "partial-structure",
+    "reason": "programoversikt-partial",
     "expectedTerms": 4,
-    "completeTerms": [],
-    "termSums": {},
+    "completeTerms": [
+      1,
+      2
+    ],
+    "termSums": {
+      "1": 30,
+      "2": 30
+    },
     "overfullTerms": [],
-    "checkedAt": "2026-09-13T07:12:00.543Z"
+    "checkedAt": "2026-09-13T07:19:07.954Z"
   },
   {
     "code": "SAFIM",
@@ -1096,14 +1813,73 @@
     "hp": 60,
     "university": "Umeå universitet",
     "type": "programme",
-    "source": "umea-official-education-plan",
+    "source": "umea-official-programoversikt",
     "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/sakgr/",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-programme-layout-heading",
+    "rows": [
+      {
+        "term": 1,
+        "name": "design,",
+        "code": "Geodatabas",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "kartografi,",
+        "code": "Tillämpad",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "GIS-analys,",
+        "code": "Avancerad",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "-GIS,",
+        "code": "Transport",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "-modellering och siktanalys,",
+        "code": "3D",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "psats,",
+        "code": "Magisterup",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Magisterexamen",
+        "code": "",
+        "hp": 60,
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "programoversikt-alternative-or-profile-overfill",
     "expectedTerms": 2,
-    "completeTerms": [],
-    "checkedAt": "2026-09-13T07:12:03.302Z"
+    "completeTerms": [
+      1
+    ],
+    "checkedAt": "2026-09-13T07:19:09.758Z",
+    "termSums": {
+      "1": 30,
+      "2": 90
+    },
+    "overfullTerms": [
+      2
+    ]
   },
   {
     "code": "SAKPE",
@@ -1203,14 +1979,51 @@
     "hp": 60,
     "university": "Umeå universitet",
     "type": "programme",
-    "source": "umea-official-education-plan",
+    "source": "umea-official-programoversikt",
     "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/samrm/",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-programme-layout-heading",
+    "rows": [
+      {
+        "term": 1,
+        "name": "Rättsstaten, konstitutionalism och grundläggande principer,",
+        "code": "",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Rättsligt skydd för mänskliga rättigheter,",
+        "code": "",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Maktbalans och konstitutionellt genomdrivande,",
+        "code": "",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Självständigt arbete i rättsvetenskap med inriktning mot konstitutionell rätt och mänskliga rättigheter,",
+        "code": "",
+        "hp": 15,
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "complete",
+    "reason": "programoversikt-all-terms-reconciled",
     "expectedTerms": 2,
-    "completeTerms": [],
-    "checkedAt": "2026-09-13T07:12:07.321Z"
+    "completeTerms": [
+      1,
+      2
+    ],
+    "checkedAt": "2026-09-13T07:19:12.406Z",
+    "termSums": {
+      "1": 30,
+      "2": 30
+    },
+    "overfullTerms": []
   },
   {
     "code": "SAMSV",
@@ -1248,14 +2061,91 @@
     "hp": 120,
     "university": "Umeå universitet",
     "type": "programme",
-    "source": "umea-official-education-plan",
+    "source": "umea-official-programoversikt",
     "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/sanem/",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-programme-layout-heading",
+    "rows": [
+      {
+        "term": 2,
+        "name": "ekonomi eller Arbetsmarknadsekonomi",
+        "code": "Offentlig",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Makroekonomi",
+        "code": "",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "psats",
+        "code": "Magisterup",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Valbara/fria kurser",
+        "code": "",
+        "hp": 30,
+        "category": "elective-slot",
+        "isSlot": true,
+        "slotType": "elective-slot"
+      },
+      {
+        "term": 4,
+        "name": "ekonomi eller Arbetsmarknadsekonomi",
+        "code": "Offentlig",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "(vartannat år) Offentlig ekonomi eller Arbetsmarknadsekonomi",
+        "code": "",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Mijöekonomi eller Hälsoekonomi",
+        "code": "",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "ats",
+        "code": "Masterupps",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "(inriktad mot profilområdet) Masteruppsats",
+        "code": "",
+        "hp": 15,
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "programoversikt-alternative-or-profile-overfill",
     "expectedTerms": 4,
-    "completeTerms": [],
-    "checkedAt": "2026-09-13T07:12:09.160Z"
+    "completeTerms": [
+      2,
+      3
+    ],
+    "checkedAt": "2026-09-13T07:19:13.675Z",
+    "termSums": {
+      "2": 30,
+      "3": 30,
+      "4": 52.5
+    },
+    "overfullTerms": [
+      4
+    ]
   },
   {
     "code": "SAOFU",
@@ -3241,14 +4131,177 @@
     "hp": 180,
     "university": "Umeå universitet",
     "type": "programme",
-    "source": "umea-official-education-plan",
+    "source": "umea-official-programoversikt",
     "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/tyhed/",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-programme-layout-heading",
+    "rows": [
+      {
+        "term": 2,
+        "name": "Mikrodatorteknik 1,",
+        "code": "årterminen",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "programmering (C),",
+        "code": "Imperativ",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "elektronik,",
+        "code": "Analog",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Signaler och system,",
+        "code": "stterminen",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "mätmetoder,",
+        "code": "Mätsystem",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "teknik 2,",
+        "code": "Mikrodator",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "PCB-design,",
+        "code": "Elektronik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Datakommunikation*,",
+        "code": "årterminen",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 4,
+        "name": "nde medicinsk teknik,",
+        "code": "Grundlägga",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 4,
+        "name": "ionens grunder*,",
+        "code": "Kommunikat",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 4,
+        "name": "Medicin med medicintekniska tillämpningar,",
+        "code": "kurs",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 5,
+        "name": "Diagnostisk radiologi,",
+        "code": "stterminen",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "name": "ka mätsystem,",
+        "code": "Fysiologis",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "name": "medicinska system,",
+        "code": "Säkra",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "name": "ckling och hållbart värdeskapande,",
+        "code": "Teknikutve",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "name": "Strålbehandling och nuklearmedicin ur ett ingenjörsperspektiv,",
+        "code": "årterminen",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 6,
+        "name": "utveckling inom elektronik och medicinsk teknik,",
+        "code": "Aktuell",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 6,
+        "name": "ete för högskoleingenjörsexamen i elektronik och medicinsk teknik,",
+        "code": "Examensarb",
+        "hp": 15,
+        "category": "elective"
+      },
+      {
+        "term": 6,
+        "name": "*En av kurserna Datakommunikation,",
+        "code": "",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 6,
+        "name": ", eller Kommunikationens grunder,",
+        "code": "",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 4,
+        "name": "Databasteknik och webbaserade system,",
+        "code": "årterminen",
+        "hp": 7.5,
+        "category": "mandatory"
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "programoversikt-alternative-or-profile-overfill",
     "expectedTerms": 6,
-    "completeTerms": [],
-    "checkedAt": "2026-09-13T07:12:44.521Z"
+    "completeTerms": [
+      2,
+      3,
+      5
+    ],
+    "checkedAt": "2026-09-13T07:19:33.312Z",
+    "termSums": {
+      "2": 30,
+      "3": 30,
+      "4": 37.5,
+      "5": 30,
+      "6": 45
+    },
+    "overfullTerms": [
+      4,
+      6
+    ]
   },
   {
     "code": "TYHEK",
@@ -3461,14 +4514,101 @@
     "hp": 120,
     "university": "Umeå universitet",
     "type": "programme",
-    "source": "umea-official-education-plan",
+    "source": "umea-official-programoversikt",
     "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/vaomm/",
-    "rows": [],
-    "coverage": "metadata-only",
-    "reason": "no-programme-layout-heading",
+    "rows": [
+      {
+        "term": 1,
+        "name": "Kvantitativ metod II,",
+        "code": "",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "metod II,",
+        "code": "Kvalitativ",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Klinisk bedömning,",
+        "code": "",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "ämnesfördjupning inom huvudområdet/valbara kurser,",
+        "code": "",
+        "hp": 15,
+        "category": "elective"
+      },
+      {
+        "term": 2,
+        "name": "Omvårdnad, examensarbete för master,",
+        "code": "",
+        "hp": 30,
+        "category": "elective"
+      },
+      {
+        "term": 2,
+        "name": "Omvårdnad, examensarbete för master,",
+        "code": "",
+        "hp": 15,
+        "category": "elective"
+      },
+      {
+        "term": 2,
+        "name": "(alternativ för den som redan har genomfört ett arbete om",
+        "code": "",
+        "hp": 15,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "name": "ämnesfördjupning inom huvudområdet/valbara kurser,",
+        "code": "",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "name": "metod II,",
+        "code": "Kvalitativ",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "name": "ämnesfördjupning inom huvudområdet/valbara kurser,",
+        "code": "",
+        "hp": 15,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "name": "Omvårdnad, examensarbete för master,",
+        "code": "",
+        "hp": 30,
+        "category": "elective"
+      }
+    ],
+    "coverage": "manual-review",
+    "reason": "programoversikt-alternative-or-profile-overfill",
     "expectedTerms": 4,
     "completeTerms": [],
-    "checkedAt": "2026-09-13T07:12:53.116Z"
+    "checkedAt": "2026-09-13T07:19:38.570Z",
+    "termSums": {
+      "1": 22.5,
+      "2": 75,
+      "3": 60
+    },
+    "overfullTerms": [
+      2,
+      3
+    ]
   },
   {
     "code": "VYABU",
