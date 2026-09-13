@@ -8,7 +8,9 @@ on:
       - 'api/gu-program-structure.js'
       - 'scripts/gu-programme-structure-pipeline.mjs'
       - 'scripts/merge-gu-official-structures.mjs'
+      - 'scripts/apply-gu-verified-overrides.mjs'
       - 'data/gu/official-structures.json'
+      - 'data/gu/verified-*.json'
       - '.github/workflows/gu-program-import.yml'
 
 permissions:
@@ -37,6 +39,8 @@ jobs:
         run: node scripts/gu-programme-structure-pipeline.mjs
       - name: Apply directly verified GU structures
         run: node scripts/merge-gu-official-structures.mjs
+      - name: Apply per-program GU verified overrides
+        run: node scripts/apply-gu-verified-overrides.mjs
       - name: Validate GU output
         run: |
           node - <<'NODE'
