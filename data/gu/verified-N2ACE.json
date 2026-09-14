@@ -1,0 +1,40 @@
+{
+  "programCode": "N2ACE",
+  "programName": "Atmosfärsvetenskap, klimat och ekosystem, masterprogram",
+  "hp": 120,
+  "expectedTerms": 4,
+  "coverage": "choice-required",
+  "reason": "official-gu-mandatory-semester-1-then-profile-choice-and-thesis-pathway",
+  "source": "gu-official-studentportal",
+  "sourceUrl": "https://studentportal.gu.se/en/programme/atmosphere-climate-and-ecosystems-masters-programme",
+  "rows": [
+    {"term":1,"code":"ES2613","name":"Global change - problem, analysis, measures","hp":7.5,"category":"required"},
+    {"term":1,"code":"GVN460","name":"Climate Change in an Earth System Perspective","hp":7.5,"category":"required"},
+    {"term":1,"code":"KEM171","name":"Atmospheric Chemistry 1","hp":7.5,"category":"required"},
+    {"term":1,"code":"ES2618","name":"Nature based solutions – potentials, pitfalls and goal conflicts","hp":7.5,"category":"required"}
+  ],
+  "choiceModel": {
+    "term2": {
+      "credits": 30,
+      "type": "profile-choice",
+      "profiles": {
+        "atmosphere": ["ES2417", "KEM720"],
+        "climate": ["GVN360", "GVN370", "Earth Systems, Field Course"],
+        "ecosystems": ["BIO506", "BIO503"]
+      },
+      "note": "GU permits mixing courses between profiles."
+    },
+    "year2": {
+      "type": "thesis-pathway",
+      "options": [
+        {"thesisHp":60,"electiveHp":0},
+        {"thesisHp":45,"electiveHp":15}
+      ]
+    }
+  },
+  "degreeRules": {
+    "fieldHpMinimum": 75,
+    "advancedLevelHpMinimum": 90,
+    "thesisHpMinimum": 45
+  }
+}
