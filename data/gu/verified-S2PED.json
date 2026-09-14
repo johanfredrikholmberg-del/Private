@@ -1,0 +1,26 @@
+{
+  "programCode": "S2PED",
+  "programName": "Pedagogik, masterprogram",
+  "hp": 120,
+  "coverage": "choice-required",
+  "reason": "official-gu-current-term-sequence-with-specialisation-choices",
+  "source": "Göteborgs universitet Studentportal",
+  "sourceUrl": "https://studentportal.gu.se/program/pedagogik-masterprogram",
+  "expectedTerms": 8,
+  "rows": [
+    {"term":1,"code":"PDA310","name":"Pedagogik som disciplin, forskning och verksamhetsutveckling, kurs 1","hp":15,"category":"required"},
+    {"term":2,"code":"PDA320","name":"Pedagogik som disciplin, forskning och verksamhetsutveckling, kurs 2","hp":15,"category":"required"},
+    {"term":3,"name":"Inriktningsspecifik kurs","hp":15,"category":"elective"},
+    {"term":4,"code":"PDA330","name":"Metod och vetenskapliga teorier, kurs 1","hp":15,"category":"required"},
+    {"term":5,"name":"Inriktningsspecifik kurs","hp":15,"category":"elective"},
+    {"term":6,"code":"PDA340","name":"Metod och vetenskapliga teorier, kurs 2","hp":15,"category":"required"},
+    {"term":7,"name":"Masteruppsats i pedagogik, del 1","hp":15,"category":"thesis","isThesis":true},
+    {"term":8,"name":"Masteruppsats i pedagogik, del 2","hp":15,"category":"thesis","isThesis":true}
+  ],
+  "rules": {
+    "term3Options": ["PDA311","PDA312","PDA313"],
+    "term5Options": ["PDA321","PDA322","PDA323"],
+    "thesisOptions": ["PDA331","PDA332","PDA333"],
+    "studyPace": "50%"
+  }
+}
