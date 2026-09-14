@@ -23,10 +23,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify next 250 GU HT26 syllabus versions
+      - name: Verify all remaining GU HT26 syllabus versions
         env:
           GU_SYLLABUS_CONCURRENCY: '5'
-          GU_SYLLABUS_LIMIT: '250'
+          GU_SYLLABUS_LIMIT: '3000'
         run: node scripts/gu-syllabus-version-pipeline.mjs
       - name: Commit verification progress
         run: |
