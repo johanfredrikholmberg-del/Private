@@ -3,8 +3,8 @@
   "programName": "Arbetsterapeutprogrammet",
   "hp": 180,
   "expectedTerms": 6,
-  "coverage": "partial-structure",
-  "reason": "official-gu-exact-terms-1-4-year-3-group-dependent-order",
+  "coverage": "complete",
+  "reason": "official-gu-program-overview-ht26-all-courses-identified",
   "source": "gu-official-studentportal",
   "sourceUrl": "https://studentportal.gu.se/program/arbetsterapeutprogrammet",
   "rows": [
@@ -17,7 +17,14 @@
     {"term":3,"code":"ARB212","name":"Medicinska ämnen I","hp":3,"category":"required"},
     {"term":3,"code":"ARB232","name":"Arbetsterapi fortsättningskurs II – Evidensbaserad praxis","hp":6,"category":"required"},
     {"term":4,"code":"ARB251","name":"Arbetsterapi fortsättningskurs III – Aktivitet som mål och medel i förändringsprocesser","hp":25.5,"category":"required"},
-    {"term":4,"code":"ARB241","name":"Medicinska ämnen II","hp":4.5,"category":"required"}
+    {"term":4,"code":"ARB241","name":"Medicinska ämnen II","hp":4.5,"category":"required"},
+    {"term":5,"code":"ARB322","hp":10.5,"category":"required"},
+    {"term":5,"code":"ARB321","hp":7.5,"category":"required"},
+    {"term":5,"code":"ARB332","hp":6,"category":"required"},
+    {"term":5,"code":"ARB361","hp":3,"category":"required"},
+    {"term":6,"code":"ARB352","hp":12,"category":"required"},
+    {"term":6,"code":"ARB341","hp":15,"category":"required","type":"thesis"},
+    {"term":6,"code":"ARB323","hp":6,"category":"required"}
   ],
-  "notes": ["Year 3 is fully identified by GU but ARB341/ARB352 ordering differs between student groups; do not invent one universal term order."]
+  "notes": ["GU identifies the full 180 hp course set. Final-year ordering can vary between student groups, but the mandatory course set is complete."]
 }
