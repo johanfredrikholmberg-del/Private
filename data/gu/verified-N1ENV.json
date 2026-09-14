@@ -1,0 +1,29 @@
+{
+  "programCode": "N1ENV",
+  "programName": "Naturvetenskapligt miljövetarprogram",
+  "hp": 180,
+  "expectedTerms": 6,
+  "coverage": "choice-required",
+  "reason": "official-gu-year-structure-with-profile-choice-and-electives",
+  "source": "gu-official-programme-page",
+  "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/naturvetenskapligt-miljovetarprogram-n1env",
+  "structure": {
+    "year1": "miljövetenskap, naturresurser och samhällets miljöhantering, därefter kemi och ekologi",
+    "year2": "profilämne biologi, geovetenskaper eller kemi; termin 4 innehåller miljövetenskaplig metod och klimat/föroreningsmoment",
+    "year3": "fördjupning och valbara miljövetenskapliga kurser samt examensarbete",
+    "profileChoices": ["biologi", "geovetenskaper", "kemi"],
+    "thesisMinimumHp": 15
+  },
+  "rows": [
+    {"year":1,"term":null,"code":null,"name":"Grundläggande miljövetenskap","hp":null,"category":"required"},
+    {"year":1,"term":null,"code":null,"name":"Naturresurser och samhällets hantering av miljöproblem","hp":null,"category":"required"},
+    {"year":1,"term":null,"code":null,"name":"Kemi","hp":null,"category":"required"},
+    {"year":1,"term":null,"code":null,"name":"Ekologi","hp":null,"category":"required"},
+    {"year":2,"term":null,"code":null,"name":"Profilämne: biologi, geovetenskaper eller kemi","hp":null,"category":"specialisation-choice"},
+    {"year":2,"term":4,"code":null,"name":"Miljövetenskaplig metod","hp":null,"category":"required"},
+    {"year":2,"term":4,"code":null,"name":"Klimatförändringar, föroreningars omvandling, spridning och effekter","hp":null,"category":"required"},
+    {"year":3,"term":null,"code":null,"name":"Miljövetenskaplig fördjupning och valbara kurser","hp":null,"category":"choice"},
+    {"year":3,"term":null,"code":null,"name":"Självständigt arbete i miljövetenskap","hp":15,"category":"thesis","isThesis":true,"minimumHp":true}
+  ],
+  "notes": ["GU:s HT26-sida beskriver den aktuella studiegången på års- och profilnivå men anger inte fullständig kurskod/hp-fördelning. Därför sparas endast explicit verifierad struktur och examensarbetets miniminivå."]
+}
