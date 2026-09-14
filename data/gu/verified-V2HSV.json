@@ -1,0 +1,19 @@
+{
+  "programCode": "V2HSV",
+  "hp": 60,
+  "expectedTerms": 4,
+  "coverage": "choice-required",
+  "reason": "official-gu-ht26-direct-verification",
+  "source": "GU Studentportal and HT26 education plan",
+  "sourceUrl": "https://studentportal.gu.se/program/specialistsjukskoterskeprogrammet-med-inriktning-mot-hjartsjukvard",
+  "rows": [
+    {"term":1,"code":"OM7800","name":"Specialistsjuksköterskans funktion med inriktning mot hjärtsjukvård","hp":1.5,"category":"mandatory"},
+    {"term":1,"code":"MED011","name":"Ischemisk hjärtsjukdom","hp":7.5,"category":"mandatory"},
+    {"term":1,"code":"MED022","name":"Hjärtsvikt 1","hp":7.5,"category":"mandatory","note":"continues in term 2; count once"},
+    {"term":2,"code":"MED033","name":"Kardiovaskulär samsjuklighet och prevention","hp":7.5,"category":"mandatory"},
+    {"term":2,"code":"OM7810","name":"Klinisk fördjupning inom hjärtsjukvård","hp":6,"category":"mandatory"},
+    {"term":3,"code":"OM0007","name":"Vetenskaplig metod","hp":7.5,"category":"mandatory"},
+    {"term":3,"code":"OM7820","name":"Examensarbete i omvårdnad med inriktning mot hjärtsjukvård","hp":15,"category":"thesis","note":"continues in term 4; count once"},
+    {"term":4,"code":"ELECTIVE","name":"Valfri kurs med relevans för hjärtsjukvård","hp":7.5,"category":"elective"}
+  ]
+}
