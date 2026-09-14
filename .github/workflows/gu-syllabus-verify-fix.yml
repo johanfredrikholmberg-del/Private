@@ -1,0 +1,40 @@
+name: GU syllabus exact-version verification
+on:
+  workflow_dispatch:
+  push:
+    branches: [gu-syllabus-verify-fix]
+    paths:
+      - 'scripts/gu-syllabus-version-pipeline.mjs'
+      - '.github/workflows/gu-syllabus-verify-fix.yml'
+permissions:
+  contents: write
+concurrency:
+  group: gu-syllabus-exact-version
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-syllabus-verify-fix
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify next 250 GU HT26 syllabus versions
+        env:
+          GU_SYLLABUS_CONCURRENCY: '5'
+          GU_SYLLABUS_LIMIT: '250'
+        run: node scripts/gu-syllabus-version-pipeline.mjs
+      - name: Commit verification progress
+        run: |
+          if [ -z "$(git status --porcelain -- data/HT26/syllabus-versions.json data/HT26/manifest.json data/gu/syllabus-meta.json)" ]; then exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/HT26/syllabus-versions.json data/HT26/manifest.json data/gu/syllabus-meta.json
+          git commit -m 'Verify GU HT26 syllabus versions [skip ci]'
+          git fetch origin gu-syllabus-verify-fix
+          git rebase origin/gu-syllabus-verify-fix
+          git push origin HEAD:gu-syllabus-verify-fix
