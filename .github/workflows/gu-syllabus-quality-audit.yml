@@ -1,0 +1,34 @@
+name: GU syllabus quality audit
+on:
+  workflow_dispatch:
+  push:
+    branches: [gu-syllabus-quality-20260914]
+    paths:
+      - 'scripts/gu-syllabus-quality-audit.mjs'
+      - '.github/workflows/gu-syllabus-quality-audit.yml'
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-syllabus-quality-20260914
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Audit GU HT26 syllabus quality
+        run: node scripts/gu-syllabus-quality-audit.mjs
+      - name: Commit audit report
+        run: |
+          if [ -z "$(git status --porcelain -- data/gu/syllabus-quality-audit.json)" ]; then exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/gu/syllabus-quality-audit.json
+          git commit -m 'Audit GU HT26 syllabus quality [skip ci]'
+          git fetch origin gu-syllabus-quality-20260914
+          git rebase origin/gu-syllabus-quality-20260914
+          git push origin HEAD:gu-syllabus-quality-20260914
