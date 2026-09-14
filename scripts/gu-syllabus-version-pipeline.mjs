@@ -29,60 +29,29 @@ async function resolveCourse(course){
   const name=clean(course.courseName||course.name||course.title);
   const hp=Number(course.courseHp||course.hp||course.credits)||0;
   const u=new URL('/api/syllabus',API);
-  u.searchParams.set('code',code);
-  u.searchParams.set('name',name);
-  u.searchParams.set('university',UNIVERSITY);
-  u.searchParams.set('term',TERM);
+  u.searchParams.set('code',code);u.searchParams.set('name',name);u.searchParams.set('university',UNIVERSITY);u.searchParams.set('term',TERM);
   try{
     const {status,data}=await getJson(u);
     const url=clean(data?.url);
     const hasUsefulContent=Boolean(clean(data?.level)||clean(data?.progression)||(Array.isArray(data?.learningGoals)&&data.learningGoals.length)||clean(data?.content));
-    return {
-      key:keyFor(code),university:UNIVERSITY,term:TERM,courseCode:code,courseName:name,courseHp:hp,
-      requestedVersion:TERM,version:clean(data?.version)||TERM,
-      status:hasUsefulContent?'resolved':'manual-review',httpStatus:status,
-      versionVerified:false,
-      versionEvidence:'GU resolver currently resolves the official syllabus page for the requested course; exact HT26 version must be confirmed before versionVerified=true.',
-      level:clean(data?.level),progression:clean(data?.progression),content:clean(data?.content),
-      learningGoals:Array.isArray(data?.learningGoals)?data.learningGoals:[],sourceUrl:url,
-      source:'gu-official-syllabus',checkedAt:new Date().toISOString(),
-      unresolved:Boolean(data?.unresolved)||!hasUsefulContent
-    };
-  }catch(error){
-    return {key:keyFor(code),university:UNIVERSITY,term:TERM,courseCode:code,courseName:name,courseHp:hp,requestedVersion:TERM,version:TERM,status:'manual-review',versionVerified:false,source:'gu-official-syllabus',checkedAt:new Date().toISOString(),unresolved:true,reason:String(error?.message||error)};
-  }
+    const versionText=clean(data?.validFromTerm||data?.validFrom||data?.version||data?.term);
+    const versionVerified=/hösttermin(?:en)?\s*2026|ht\s*26|ht26/i.test(versionText);
+    return {key:keyFor(code),university:UNIVERSITY,term:TERM,courseCode:code,courseName:name,courseHp:hp,requestedVersion:TERM,version:versionText||TERM,status:hasUsefulContent?'resolved':'manual-review',httpStatus:status,versionVerified,versionEvidence:versionVerified?`Official GU syllabus reports ${versionText} as applicable version.`:'Official GU syllabus resolved, but the resolver did not expose an explicit HT26 applicable-version value.',level:clean(data?.level),progression:clean(data?.progression),content:clean(data?.content),learningGoals:Array.isArray(data?.learningGoals)?data.learningGoals:[],sourceUrl:url,source:'gu-official-syllabus',checkedAt:new Date().toISOString(),unresolved:Boolean(data?.unresolved)||!hasUsefulContent};
+  }catch(error){return {key:keyFor(code),university:UNIVERSITY,term:TERM,courseCode:code,courseName:name,courseHp:hp,requestedVersion:TERM,version:TERM,status:'manual-review',versionVerified:false,source:'gu-official-syllabus',checkedAt:new Date().toISOString(),unresolved:true,reason:String(error?.message||error)}}
 }
-
-async function pool(items){
-  const out=new Array(items.length);let next=0;
-  async function worker(){for(;;){const i=next++;if(i>=items.length)return;out[i]=await resolveCourse(items[i]);console.log(`${i+1}/${items.length} ${out[i].status} ${out[i].courseCode}`);await sleep(150)}}
-  await Promise.all(Array.from({length:Math.min(CONCURRENCY,items.length)},worker));
-  return out;
-}
+async function pool(items){const out=new Array(items.length);let next=0;async function worker(){for(;;){const i=next++;if(i>=items.length)return;out[i]=await resolveCourse(items[i]);console.log(`${i+1}/${items.length} ${out[i].status} verified=${out[i].versionVerified} ${out[i].courseCode}`);await sleep(150)}}await Promise.all(Array.from({length:Math.min(CONCURRENCY,items.length)},worker));return out}
 
 async function main(){
-  const [courses,existing,manifest]=await Promise.all([
-    readJson(path.join(DB,'courses.json')),
-    readJson(path.join(DB,'syllabus-versions.json')),
-    readJson(path.join(DB,'manifest.json'),{})
-  ]);
-  const guCourses=courses.filter(isGU).filter(c=>clean(c.courseCode||c.code));
-  const map=new Map(existing.map(x=>[x.key||keyFor(x.courseCode),x]));
-  const pending=guCourses.filter(c=>!map.has(keyFor(c.courseCode||c.code))).slice(0,LIMIT);
-  const fresh=await pool(pending);
-  for(const row of fresh) map.set(row.key,row);
-  const all=[...map.values()].sort((a,b)=>String(a.university).localeCompare(String(b.university),'sv')||String(a.courseCode).localeCompare(String(b.courseCode),'sv'));
-  await writeJson(path.join(DB,'syllabus-versions.json'),all);
-  const guRows=all.filter(isGU);
-  const resolved=guRows.filter(x=>x.status==='resolved').length;
-  const unresolved=guRows.length-resolved;
-  const nextManifest={...manifest,generatedAt:new Date().toISOString(),tables:{...(manifest.tables||{}),syllabusVersions:{file:'syllabus-versions.json',rows:all.length}},guSyllabusImport:{term:TERM,totalCourses:guCourses.length,processed:guRows.length,resolved,unresolved,remaining:Math.max(0,guCourses.length-guRows.length),exactVersionVerified:guRows.filter(x=>x.versionVerified===true).length}};
-  await writeJson(path.join(DB,'manifest.json'),nextManifest);
-  await fs.mkdir('data/gu',{recursive:true});
-  await writeJson('data/gu/syllabus-meta.json',{database:'StudieLots HT26',generatedAt:new Date().toISOString(),term:TERM,totalCourses:guCourses.length,processed:guRows.length,resolved,unresolved,remaining:Math.max(0,guCourses.length-guRows.length),exactVersionVerified:guRows.filter(x=>x.versionVerified===true).length});
-  console.log(JSON.stringify(nextManifest.guSyllabusImport,null,2));
+ const [courses,existing,manifest]=await Promise.all([readJson(path.join(DB,'courses.json')),readJson(path.join(DB,'syllabus-versions.json')),readJson(path.join(DB,'manifest.json'),{})]);
+ const guCourses=courses.filter(isGU).filter(c=>clean(c.courseCode||c.code));
+ const map=new Map(existing.map(x=>[x.key||keyFor(x.courseCode),x]));
+ // Crucial: retry existing GU rows until their exact HT26 syllabus version is verified.
+ const pending=guCourses.filter(c=>map.get(keyFor(c.courseCode||c.code))?.versionVerified!==true).slice(0,LIMIT);
+ const fresh=await pool(pending);for(const row of fresh)map.set(row.key,row);
+ const all=[...map.values()].sort((a,b)=>String(a.university).localeCompare(String(b.university),'sv')||String(a.courseCode).localeCompare(String(b.courseCode),'sv'));
+ await writeJson(path.join(DB,'syllabus-versions.json'),all);
+ const guRows=all.filter(isGU),resolved=guRows.filter(x=>x.status==='resolved').length,unresolved=guRows.length-resolved,exactVersionVerified=guRows.filter(x=>x.versionVerified===true).length;
+ const nextManifest={...manifest,generatedAt:new Date().toISOString(),tables:{...(manifest.tables||{}),syllabusVersions:{file:'syllabus-versions.json',rows:all.length}},guSyllabusImport:{term:TERM,totalCourses:guCourses.length,processed:guRows.length,resolved,unresolved,remainingVerification:Math.max(0,guCourses.length-exactVersionVerified),exactVersionVerified}};
+ await writeJson(path.join(DB,'manifest.json'),nextManifest);await fs.mkdir('data/gu',{recursive:true});await writeJson('data/gu/syllabus-meta.json',{database:'StudieLots HT26',generatedAt:new Date().toISOString(),term:TERM,totalCourses:guCourses.length,processed:guRows.length,resolved,unresolved,remainingVerification:Math.max(0,guCourses.length-exactVersionVerified),exactVersionVerified});console.log(JSON.stringify(nextManifest.guSyllabusImport,null,2));
 }
-
 main().catch(error=>{console.error(error);process.exitCode=1});
-
-// trigger: batch-13
