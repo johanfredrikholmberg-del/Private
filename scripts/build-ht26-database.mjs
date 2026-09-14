@@ -15,13 +15,14 @@ const norm=v=>clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0
 const keyFor=(university,code,name,hp)=>[norm(university),clean(code).toUpperCase()||norm(name),Number(hp)||0].join('|');
 
 async function main(){
-  const [programmes,courses,structures,providers,existingSyllabusVersions,existingDegreeRequirements]=await Promise.all([
+  const [programmes,courses,structures,providers,existingSyllabusVersions,existingDegreeRequirements,existingCourseOfferings]=await Promise.all([
     readJson(path.join(SRC,'programmes.json')),
     readJson(path.join(SRC,'courses.json')),
     readJson(path.join(SRC,'structures.json')),
     readJson(path.join(SRC,'providers.json')),
     readOptionalJson(path.join(DEST,'syllabus-versions.json'),[]),
-    readOptionalJson(path.join(DEST,'degree-requirements.json'),[])
+    readOptionalJson(path.join(DEST,'degree-requirements.json'),[]),
+    readOptionalJson(path.join(DEST,'course-offerings.json'),[])
   ]);
 
   const programMap=new Map();
@@ -66,6 +67,7 @@ async function main(){
   const orphanStructures=programStructures.filter(x=>!programmeKeys.has(x.key)).map(x=>x.key);
   const syllabusVersions=Array.isArray(existingSyllabusVersions)?existingSyllabusVersions:[];
   const degreeRequirements=Array.isArray(existingDegreeRequirements)?existingDegreeRequirements:[];
+  const courseOfferings=Array.isArray(existingCourseOfferings)?existingCourseOfferings:[];
 
   await Promise.all([
     writeJson(path.join(DEST,'programs.json'),programs),
@@ -73,13 +75,14 @@ async function main(){
     writeJson(path.join(DEST,'courses.json'),canonicalCourses),
     writeJson(path.join(DEST,'providers.json'),providers),
     writeJson(path.join(DEST,'syllabus-versions.json'),syllabusVersions),
-    writeJson(path.join(DEST,'degree-requirements.json'),degreeRequirements)
+    writeJson(path.join(DEST,'degree-requirements.json'),degreeRequirements),
+    writeJson(path.join(DEST,'course-offerings.json'),courseOfferings)
   ]);
 
   const manifest={
     database:'StudieLots HT26',
     term:TERM,
-    schemaVersion:1,
+    schemaVersion:2,
     generatedAt:new Date().toISOString(),
     canonical:true,
     policy:'One canonical record per programme and per course/provider/credit combination. University-specific importers enrich these records; they must not create parallel programme databases.',
@@ -89,7 +92,8 @@ async function main(){
       courses:{file:'courses.json',rows:canonicalCourses.length},
       providers:{file:'providers.json',rows:providers.length},
       syllabusVersions:{file:'syllabus-versions.json',rows:syllabusVersions.length},
-      degreeRequirements:{file:'degree-requirements.json',rows:degreeRequirements.length}
+      degreeRequirements:{file:'degree-requirements.json',rows:degreeRequirements.length},
+      courseOfferings:{file:'course-offerings.json',rows:courseOfferings.length}
     },
     validation:{orphanStructures:orphanStructures.length,orphanStructureKeys:orphanStructures.slice(0,100)}
   };
