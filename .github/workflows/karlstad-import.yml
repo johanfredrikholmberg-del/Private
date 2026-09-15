@@ -6,6 +6,7 @@ on:
     branches: [karlstad-import]
     paths:
       - 'scripts/karlstad-bootstrap.mjs'
+      - 'scripts/karlstad-gap-audit.mjs'
       - 'data/karlstad/schema.json'
       - '.github/workflows/karlstad-import.yml'
 
@@ -25,6 +26,8 @@ jobs:
           node-version: 22
       - name: Build Karlstad canonical slice
         run: node scripts/karlstad-bootstrap.mjs
+      - name: Audit Karlstad gaps
+        run: node scripts/karlstad-gap-audit.mjs
       - name: Validate Karlstad data
         run: |
           node - <<'NODE'
