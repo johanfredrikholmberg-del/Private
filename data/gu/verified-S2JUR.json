@@ -1,0 +1,32 @@
+{
+  "programCode": "S2JUR",
+  "programName": "Juristprogrammet",
+  "hp": 270,
+  "coverage": "choice-required",
+  "reason": "official-gu-current-structure-has-fixed-first-six-terms-choice-dependent-terms-seven-eight-and-final-thesis",
+  "source": "Göteborgs universitet",
+  "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/juristprogrammet-s2jur/utbildningsplan/fe4cd45e-8c8d-11ef-9b57-c24d3b124098",
+  "rows": [
+    {"code":"HRO101","name":"Grundläggande juridisk metod","hp":15,"category":"required"},
+    {"code":"HRO102","name":"Offentlig rätt","hp":15,"category":"required"},
+    {"code":"HRO201","name":"Obligationsrätt","hp":15,"category":"required"},
+    {"code":"HRO212","name":"Immaterial-försäkrings-skadestånds- och associationsrätt","hp":9,"category":"required"},
+    {"code":"HRO203","name":"Familjerätt","hp":6,"category":"required"},
+    {"code":"HRO301","name":"Teoritermin med allmän- och speciell förvaltningsrätt samt miljörätt","hp":30,"category":"required"},
+    {"code":"HRO401","name":"Straffrätt","hp":30,"category":"required"},
+    {"code":"HRO402","name":"Processrätt","hp":15,"category":"required"},
+    {"code":"HRO560","name":"Kredit- och exekutionsrätt","hp":15,"category":"required"},
+    {"code":"HRO580","name":"Arbetsrätt med mera","hp":15,"category":"required"},
+    {"code":"HRO600","name":"Internationell rätt","hp":15,"category":"required"},
+    {"code":"HRO700","name":"Skatterätt med redovisning","hp":15,"category":"required"},
+    {"name":"Valbara fördjupningskurser","hp":60,"category":"elective"},
+    {"code":"HRO800","name":"Examensarbete","hp":30,"category":"thesis","isThesis":true}
+  ],
+  "rules": {
+    "mandatoryFirstSixTermsHp": 180,
+    "electiveAdvancedTerms7to8Hp": 60,
+    "finalThesisHp": 30,
+    "upTo30HpElectivesMayBeReplacedUnderProgrammeRules": true,
+    "safeExactTermMappingForAllMandatoryCourses": false
+  }
+}

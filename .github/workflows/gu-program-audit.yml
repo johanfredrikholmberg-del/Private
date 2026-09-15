@@ -1,0 +1,37 @@
+name: GU programme database audit
+
+on:
+  push:
+    branches: [gu-program-import]
+    paths:
+      - '.github/workflows/gu-program-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-program-import
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Audit GU catalogue and canonical resolver
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const queue=JSON.parse(fs.readFileSync('data/susa/structure-queue.json','utf8'));
+          let structures=[];
+          try { structures=JSON.parse(fs.readFileSync('data/susa/structures.json','utf8')); } catch {}
+          const norm=s=>String(s||'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+          const isGU=x=>/goteborgs universitet/.test(norm(x.university));
+          const gu=queue.filter(isGU);
+          const map=new Map(structures.map(x=>[x.key,x]));
+          const counts={};
+          for(const p of gu){const c=map.get(p.key)?.coverage||'not-processed';counts[c]=(counts[c]||0)+1;}
+          console.log(JSON.stringify({guProgrammes:gu.length,counts,unresolved:gu.filter(p=>!map.get(p.key)||['metadata-only','manual-review'].includes(map.get(p.key).coverage)).map(p=>({key:p.key,code:p.programCode,name:p.programName,hp:p.hp,coverage:map.get(p.key)?.coverage||'not-processed'}))},null,2));
+          NODE

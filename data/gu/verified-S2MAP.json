@@ -1,0 +1,30 @@
+{
+  "programCode": "S2MAP",
+  "programName": "Masterprogram i psykologisk vetenskap",
+  "hp": 120,
+  "coverage": "partial-structure",
+  "reason": "official-gu-complete-course-set-without-safe-term-mapping",
+  "source": "Göteborgs universitet utbildningsplan",
+  "sourceUrl": "https://www.gu.se/sites/default/files/2021-06/Programplan%20master%20S2MAP.svensk.HT22.pdf",
+  "rows": [
+    {"name":"Psykologi som vetenskap","hp":9,"category":"required"},
+    {"name":"Metod I","hp":5,"category":"required"},
+    {"name":"Praktik","hp":6,"category":"required"},
+    {"name":"Personlighetspsykologi","hp":9,"category":"required"},
+    {"name":"Metod II","hp":5,"category":"required"},
+    {"name":"Kognitiv psykologi","hp":9,"category":"required"},
+    {"name":"Metod III","hp":5,"category":"required"},
+    {"name":"Socialpsykologi","hp":9,"category":"required"},
+    {"name":"Metod IV","hp":5,"category":"required"},
+    {"name":"Utvecklingspsykologi i ett livscykelperspektiv","hp":9,"category":"required"},
+    {"name":"Metod V","hp":5,"category":"required"},
+    {"name":"Human neuropsykologi","hp":9,"category":"required"},
+    {"name":"Metod VI","hp":5,"category":"required"},
+    {"name":"Masteruppsats","hp":30,"category":"thesis","isThesis":true}
+  ],
+  "rules": {
+    "allCoursesRequired": true,
+    "practiceRunsAcrossFirstThreeTerms": true,
+    "safeTermMapping": false
+  }
+}

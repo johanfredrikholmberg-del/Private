@@ -1,0 +1,23 @@
+{
+  "programCode": "T2HAI",
+  "programName": "Human-centered Artificial Intelligence masterprogram",
+  "hp": 120,
+  "coverage": "choice-required",
+  "reason": "official-gu-required-core-plus-30hp-electives-and-thesis",
+  "source": "Göteborgs universitet",
+  "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/human-centered-artificial-intelligence-masterprogram-t2hai",
+  "rows": [
+    {"year":1,"code":"TIA400","name":"Introduction to Human-centered AI","hp":15,"category":"required"},
+    {"year":1,"code":"TIA405","name":"Interaction Design and AI","hp":15,"category":"required"},
+    {"year":1,"code":"TIA410","name":"AI and Human Thinking","hp":15,"category":"required"},
+    {"year":1,"code":"TIA415","name":"Fairness, Accountability and Transparency in Artificial Intelligence","hp":15,"category":"required"},
+    {"year":2,"name":"Elective courses","hp":30,"category":"elective"},
+    {"year":2,"code":"TIA440","name":"Master's Thesis","hp":30,"category":"thesis","isThesis":true}
+  ],
+  "rules": {
+    "requiredCoreHp": 60,
+    "electiveHp": 30,
+    "thesisHp": 30,
+    "safeTermMapping": false
+  }
+}

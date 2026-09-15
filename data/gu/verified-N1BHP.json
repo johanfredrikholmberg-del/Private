@@ -1,0 +1,21 @@
+{
+  "programCode": "N1BHP",
+  "programName": "Bygghantverksprogrammet",
+  "hp": 180,
+  "expectedTerms": 6,
+  "coverage": "choice-required",
+  "reason": "official-gu-ht26-term5-electives-and-two-practice-courses",
+  "source": "gu-official-education-plan",
+  "sourceUrl": "https://www.gu.se/syllabus/20e1d69a-1be8-11f1-84d1-4c27b6f345b5",
+  "structure": {
+    "fullTimeYears": 3,
+    "term5Electives": true,
+    "practiceCourses": [{"hp":7.5},{"hp":7.5}],
+    "thesisIncluded": true,
+    "tracks": ["trä", "murhantverk"]
+  },
+  "rows": [
+    {"term":5,"code":"CHOICE-N1BHP-T5","name":"Valbara fördjupningskurser inom bygghantverk","hp":30,"category":"choice"}
+  ],
+  "notes": ["HT26 education plan states that term 5 contains elective advanced courses, all other courses are mandatory, and the programme includes two 7.5 hp work-placement courses. Exact course-level placement is delegated to the programme appendix, so no additional course rows are inferred here."]
+}

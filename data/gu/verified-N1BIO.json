@@ -1,0 +1,24 @@
+{
+  "programCode": "N1BIO",
+  "programName": "Biologi, kandidatprogram",
+  "hp": 180,
+  "expectedTerms": 6,
+  "coverage": "choice-required",
+  "reason": "official-gu-fixed-year-1-flexible-from-term-3",
+  "source": "gu-official-studentportal-and-gu-program-page",
+  "sourceUrl": "https://studentportal.gu.se/program/kandidatprogrammet-i-biologi",
+  "rows": [
+    {"term":1,"code":"BIO900","name":"Cellbiologi, baskurs","hp":15,"category":"required"},
+    {"term":1,"code":"BIO906","name":"Molekylär genetik och evolution, baskurs","hp":15,"category":"required"},
+    {"term":2,"code":"BIO911","name":"Botanisk och zoologisk fysiologi, baskurs","hp":12,"category":"required"},
+    {"term":2,"code":"BIO916","name":"Biodiversitet och ekologi, baskurs","hp":18,"category":"required"}
+  ],
+  "requirements": {
+    "biologyCredits": 90,
+    "thesisMinimumCredits": 15,
+    "mandatoryCourseCodesAfterYear1": ["BIO172","NTH001"],
+    "normalThesisCode": "BIO602",
+    "extendedThesisCode": "BIO603"
+  },
+  "notes": ["Terms 1-2 are fixed. From term 3 the programme is flexible; BIO172 and NTH001 remain mandatory. BIO602 is the normal 15 hp thesis and may be extended to BIO603 30 hp."]
+}

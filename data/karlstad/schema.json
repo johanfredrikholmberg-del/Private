@@ -1,0 +1,40 @@
+{
+  "university": "Karlstads universitet",
+  "database": "StudieLots HT26",
+  "schemaVersion": 2,
+  "policy": "Karlstad uses the same canonical fields and verification rules as GU. Missing values are never guessed.",
+  "recordTypes": ["programme", "course", "programme_course", "course_offering"],
+  "fields": [
+    "recordType",
+    "university",
+    "programmeCode",
+    "programmeName",
+    "programmeCredits",
+    "degree",
+    "programmeLevel",
+    "programmeTerm",
+    "courseCode",
+    "courseName",
+    "courseCredits",
+    "courseLevel",
+    "subject",
+    "mandatoryOptional",
+    "prerequisites",
+    "offeringTerm",
+    "startDate",
+    "endDate",
+    "studyPace",
+    "studyMode",
+    "location",
+    "applicationCode",
+    "verificationStatus",
+    "sourceType",
+    "sourceUrl",
+    "sourceRetrievedAt",
+    "note"
+  ],
+  "historicalCreditTransferEvidence": {
+    "separateEvidenceLayer": true,
+    "description": "Historical tillgodoräknande decisions are linked as evidence and do not replace canonical programme/course/offering facts."
+  }
+}
