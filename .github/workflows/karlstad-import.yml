@@ -1,0 +1,47 @@
+name: Karlstad canonical import
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [karlstad-import]
+    paths:
+      - 'scripts/karlstad-bootstrap.mjs'
+      - 'data/karlstad/schema.json'
+      - '.github/workflows/karlstad-import.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: karlstad-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build Karlstad canonical slice
+        run: node scripts/karlstad-bootstrap.mjs
+      - name: Validate Karlstad data
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const m=JSON.parse(fs.readFileSync('data/karlstad/meta.json','utf8'));
+          if(m.university!=='Karlstads universitet') throw new Error('Wrong university');
+          if(m.schemaVersion!==2) throw new Error('Wrong schema');
+          if(!Number.isInteger(m.programmes)||!Number.isInteger(m.courses)) throw new Error('Invalid counts');
+          console.log(m);
+          NODE
+      - name: Commit Karlstad data
+        run: |
+          if [ -z "$(git status --porcelain -- data/karlstad)" ]; then exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/karlstad
+          git commit -m 'Build Karlstad canonical data [skip ci]'
+          git fetch origin karlstad-import
+          git rebase origin/karlstad-import
+          git push origin HEAD:karlstad-import
