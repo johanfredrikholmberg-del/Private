@@ -4,14 +4,19 @@ on:
   push:
     branches: [gu-syllabus-quality-20260914]
     paths:
+      - 'api/syllabus.js'
+      - 'scripts/gu-syllabus-version-pipeline.mjs'
       - 'scripts/gu-syllabus-quality-audit.mjs'
       - '.github/workflows/gu-syllabus-quality-audit.yml'
 permissions:
   contents: write
+concurrency:
+  group: gu-syllabus-quality-rebuild
+  cancel-in-progress: false
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,15 +25,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Start local GU syllabus resolver
+        run: |
+          npx --yes vercel dev --listen 3000 > /tmp/vercel.log 2>&1 &
+          echo $! > /tmp/vercel.pid
+          for i in $(seq 1 60); do
+            if curl -fsS http://127.0.0.1:3000/api/syllabus?code=HPA102\&university=G%C3%B6teborgs%20universitet\&term=HT26 >/tmp/smoke.json; then break; fi
+            sleep 2
+          done
+          cat /tmp/smoke.json
+      - name: Rebuild all GU HT26 syllabus records from official resolver
+        env:
+          GU_API_BASE: 'http://127.0.0.1:3000'
+          GU_SYLLABUS_CONCURRENCY: '5'
+          GU_SYLLABUS_LIMIT: '3000'
+        run: node scripts/gu-syllabus-version-pipeline.mjs
       - name: Audit GU HT26 syllabus quality
         run: node scripts/gu-syllabus-quality-audit.mjs
-      - name: Commit audit report
+      - name: Commit rebuilt data and audit report
         run: |
-          if [ -z "$(git status --porcelain -- data/gu/syllabus-quality-audit.json)" ]; then exit 0; fi
+          if [ -z "$(git status --porcelain -- data/HT26/syllabus-versions.json data/HT26/manifest.json data/gu/syllabus-meta.json data/gu/syllabus-quality-audit.json)" ]; then exit 0; fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/gu/syllabus-quality-audit.json
-          git commit -m 'Audit GU HT26 syllabus quality [skip ci]'
+          git add -f data/HT26/syllabus-versions.json data/HT26/manifest.json data/gu/syllabus-meta.json data/gu/syllabus-quality-audit.json
+          git commit -m 'Rebuild and audit GU HT26 syllabus data [skip ci]'
           git fetch origin gu-syllabus-quality-20260914
           git rebase origin/gu-syllabus-quality-20260914
           git push origin HEAD:gu-syllabus-quality-20260914
