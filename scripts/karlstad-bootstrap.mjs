@@ -25,3 +25,5 @@ const syllabusCodes=new Set(kv.map(x=>String(x.courseCode||'').toUpperCase()).fi
 const meta={database:'StudieLots HT26',term:TERM,university:UNI,schemaVersion:2,generatedAt:new Date().toISOString(),programmes:kp.length,programmeStructures:ks.length,structuredProgrammes:[...structured].filter(x=>programmeKeys.has(x)).length,courses:kc.length,courseOfferings:ko.length,coursesWithOfferings:[...offered].filter(x=>courseCodes.has(x)).length,syllabusVersions:kv.length,coursesWithSyllabus:[...syllabusCodes].filter(x=>courseCodes.has(x)).length,policy:'Same canonical model as GU; no guessed values.'};
 await Promise.all([write(`${OUT}/programs.json`,kp),write(`${OUT}/program-structures.json`,ks),write(`${OUT}/courses.json`,kc),write(`${OUT}/course-offerings.json`,ko),write(`${OUT}/syllabus-versions.json`,kv),write(`${OUT}/meta.json`,meta)]);
 console.log(JSON.stringify(meta,null,2));
+
+// Trigger isolated Karlstad import batch 2026-09-15.
