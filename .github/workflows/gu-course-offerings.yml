@@ -30,7 +30,7 @@ jobs:
       - name: Import GU course offerings and dates
         env:
           GU_OFFERING_CONCURRENCY: '6'
-          GU_OFFERING_LIMIT: '800'
+          GU_OFFERING_LIMIT: '3000'
         run: node scripts/gu-course-offerings-pipeline.mjs
       - name: Validate GU offering output
         run: |
@@ -41,6 +41,7 @@ jobs:
           if(meta.database!=='StudieLots HT26') throw new Error('Wrong target database');
           if(!Array.isArray(rows)) throw new Error('course-offerings.json missing');
           if(meta.offeringRows!==rows.filter(x=>String(x.university||'').toLowerCase().includes('göteborgs universitet')).length) throw new Error('Offering row count mismatch');
+          if(meta.processedThisRun < meta.remaining && meta.processedThisRun < 2000) throw new Error('GU import stopped before full unresolved sweep');
           console.log({meta,totalRows:rows.length});
           NODE
       - name: Commit GU course offering progress
