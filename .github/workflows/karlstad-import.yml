@@ -5,6 +5,8 @@ on:
   push:
     branches: [karlstad-import]
     paths:
+      - 'scripts/kau-static-export.mjs'
+      - 'scripts/kau-programme-structure-pipeline.mjs'
       - 'scripts/karlstad-bootstrap.mjs'
       - 'scripts/karlstad-gap-audit.mjs'
       - 'data/karlstad/schema.json'
@@ -16,6 +18,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,9 +27,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Restore and refresh existing Karlstad catalogue
+        env:
+          KAU_COURSE_CONCURRENCY: 16
+        run: node scripts/kau-static-export.mjs
+      - name: Restore and refresh existing Karlstad programme structures
+        env:
+          KAU_STRUCTURE_CONCURRENCY: 12
+        run: node scripts/kau-programme-structure-pipeline.mjs
+      - name: Rebuild canonical HT26 database
+        run: node scripts/build-ht26-database.mjs
       - name: Build Karlstad canonical slice
         run: node scripts/karlstad-bootstrap.mjs
-      - name: Audit Karlstad gaps
+      - name: Audit true remaining Karlstad gaps
         run: node scripts/karlstad-gap-audit.mjs
       - name: Validate Karlstad data
         run: |
@@ -38,13 +51,13 @@ jobs:
           if(!Number.isInteger(m.programmes)||!Number.isInteger(m.courses)) throw new Error('Invalid counts');
           console.log(m);
           NODE
-      - name: Commit Karlstad data
+      - name: Commit Karlstad enrichment and canonical data
         run: |
-          if [ -z "$(git status --porcelain -- data/karlstad)" ]; then exit 0; fi
+          if [ -z "$(git status --porcelain -- data/kau data/susa data/HT26 data/karlstad)" ]; then exit 0; fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/karlstad
-          git commit -m 'Build Karlstad canonical data [skip ci]'
+          git add -f data/kau data/susa data/HT26 data/karlstad
+          git commit -m 'Refresh Karlstad canonical enrichment [skip ci]'
           git fetch origin karlstad-import
           git rebase origin/karlstad-import
           git push origin HEAD:karlstad-import
