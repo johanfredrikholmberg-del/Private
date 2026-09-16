@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T17:38:33.918Z",
+  "generatedAt": "2026-09-16T17:40:12.857Z",
   "university": "Karlstads universitet",
   "counts": {
     "programmes": 134,
@@ -7,7 +7,8 @@
     "verifiedStandalone": 1,
     "verifiedProgramOnly": 37,
     "unresolvedStandaloneStatus": 1618,
-    "distance": 22
+    "distance": 650
   },
-  "policy": "All KAU course definitions are retained. standalone=true only when the official KAU course page contains an offering labelled Fristående kurs. Unknown or temporarily unreachable pages are never assumed standalone."
+  "verificationMode": "catalogue-only",
+  "policy": "All KAU course definitions retained. standalone=true only when verified on the official course page; unverified records remain null."
 }
