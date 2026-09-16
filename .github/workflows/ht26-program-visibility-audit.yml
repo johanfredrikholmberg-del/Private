@@ -1,0 +1,25 @@
+name: HT26 program visibility audit
+on:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - 'data/HT26/programs.json'
+      - 'data/HT26/program-structures.json'
+      - 'scripts/audit-ht26-program-visibility.mjs'
+      - '.github/workflows/ht26-program-visibility-audit.yml'
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Audit programme joins and verification flags
+        run: node scripts/audit-ht26-program-visibility.mjs | tee ht26-program-visibility-audit.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ht26-program-visibility-audit
+          path: ht26-program-visibility-audit.json
