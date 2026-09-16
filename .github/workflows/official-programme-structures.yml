@@ -1,0 +1,77 @@
+name: Official programme structures
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/official-programme-structures.yml'
+  schedule:
+    - cron: '47 3 * * 2,4,6'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: official-programme-structures
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import official programme structures
+        env:
+          STRUCTURE_LIMIT: '750'
+          STRUCTURE_CONCURRENCY: '10'
+          HB_STRUCTURE_LIMIT: '100'
+          HB_STRUCTURE_CONCURRENCY: '8'
+          HB_INDEX_CONCURRENCY: '10'
+        run: |
+          node scripts/official-programme-structure-pipeline.mjs
+          node scripts/hb-verified-structure-overrides.mjs
+          for n in $(seq 2 13); do
+            node "scripts/hb-verified-structure-overrides-${n}.mjs"
+          done
+      - name: Import Karlstad course catalogue
+        env:
+          KAU_COURSE_CONCURRENCY: '12'
+        run: node scripts/kau-static-export.mjs
+      - name: Import Karlstad programme structures
+        env:
+          KAU_STRUCTURE_CONCURRENCY: '10'
+        run: node scripts/kau-programme-structure-pipeline.mjs
+      - name: Validate imported data
+        run: |
+          node scripts/hb-77-audit.mjs
+          node scripts/kau-catalogue-audit.mjs
+          node - <<'NODE'
+          const fs = require('fs');
+          const rows = JSON.parse(fs.readFileSync('data/susa/structures.json','utf8'));
+          const meta = JSON.parse(fs.readFileSync('data/kau/meta.json','utf8'));
+          const structure = JSON.parse(fs.readFileSync('data/kau/structure-meta.json','utf8'));
+          const allowed = new Set(['complete','choice-required','partial-structure','manual-review','metadata-only']);
+          if (!rows.length || rows.some(row => !allowed.has(row.coverage))) throw new Error('Invalid programme structure data');
+          if (meta.counts.programmes !== 134 || meta.counts.susaCourseDefinitions < 500) throw new Error('Karlstad catalogue incomplete');
+          if (structure.officialProgrammes !== 134 || structure.processed !== 134) throw new Error('Karlstad programme structure audit incomplete');
+          NODE
+      - name: Commit verified imports to existing database
+        run: |
+          if [ -z "$(git status --porcelain -- data/susa/structures.json data/susa/structure-meta.json data/kau)" ]; then
+            echo 'No database changes to commit.'
+            exit 0
+          fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/susa/structures.json data/susa/structure-meta.json data/kau
+          git commit -m 'Import official university programme and course data [skip ci]'
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
+          git push origin HEAD:studielots-v2
