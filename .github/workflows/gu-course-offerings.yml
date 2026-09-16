@@ -28,6 +28,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Apply lossless merge and strict JSON input safeguards
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const file = 'scripts/gu-course-offerings-pipeline.mjs';
+          let script = fs.readFileSync(file, 'utf8');
+          const replacements = [
+            ["async function readJson(f,d=[]){try{return JSON.parse(await fs.readFile(f,'utf8'))}catch{return d}}", "async function readJson(f,d=[]){try{return JSON.parse(await fs.readFile(f,'utf8'))}catch(e){if(e.code==='ENOENT')return d;throw e}}"],
+            ["refreshed=new Set(results.map(r=>r.courseCode)),map=new Map(existing.filter(r=>!isGU(r)||!refreshed.has(r.courseCode)).map(r=>[r.key,r]));for(const result of results)for(const row of result.rows)map.set(row.key,row);", "map=new Map(existing.map(r=>[r.key,r]));for(const result of results)for(const row of result.rows){if(result.status==='resolved'||!rowsByCode.has(result.courseCode))map.set(row.key,row)}"],
+            ["guCourses=courses.filter(isGU).filter(c=>codeOf(c));", "guCourses=courses.filter(isGU).filter(c=>codeOf(c));if(!Array.isArray(courses)||!Array.isArray(existing)||!guCourses.length||!existing.length)throw new Error('Missing or empty canonical input');"]
+          ];
+          for (const [before, after] of replacements) {
+            if (!script.includes(before)) throw new Error('Expected pipeline code not found: '+before.slice(0,80));
+            script = script.replace(before, after);
+          }
+          fs.writeFileSync(file, script);
+          NODE
       - name: Import GU course offerings and dates
         env:
           GU_OFFERING_CONCURRENCY: '6'
@@ -48,6 +65,9 @@ jobs:
           if(meta.offeringRows!==guRows.length) throw new Error('Offering row count mismatch');
           const key=x=>String(x.key||'');
           if(new Set(rows.map(key)).size!==rows.length) throw new Error('Duplicate offering keys');
+          const retainedKeys=new Set(rows.map(key));
+          const lost=previous.filter(x=>!retainedKeys.has(key(x)));
+          if(lost.length) throw new Error('Existing offering rows lost: '+lost.slice(0,30).map(key).join(', '));
           const usable=x=>Boolean(x.startDate&&x.endDate&&x.sourceUrl&&x.standaloneSearchable===true&&x.applicationStatus!=='cancelled');
           const retained=new Set(guRows.filter(usable).map(x=>String(x.courseCode||'').toUpperCase()));
           const missing=[...new Set(previous.filter(isGU).filter(usable).map(x=>String(x.courseCode||'').toUpperCase()))].filter(code=>!retained.has(code));
