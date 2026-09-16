@@ -1,8 +1,0 @@
-(()=>{'use strict';
-const root=window.StudieLotsEngines=window.StudieLotsEngines||{};
-const getEngine=()=>root.creditTransferV2;
-function assess(source,target,options={}){const engine=getEngine();if(!engine?.assess)return null;return engine.assess(source,target,options)}
-function applyToRows(rows,merits,options={}){const sourceRows=Array.isArray(merits)?merits:[],history=options.history||[];return(Array.isArray(rows)?rows:[]).map(row=>{let best=null;for(const merit of sourceRows){const result=assess(merit,row,{history});if(!result)continue;const rank=result.classification==='strong'?3:result.classification==='relevant'?2:1;if(!best||rank>best.rank)best={rank,result,merit}}if(!best)return{...row,tgV2:null};const result=best.result;return{...row,tgV2:result,tgV2Label:result.label,tgV2CountsInStudyPlan:result.countsInStudyPlan,tgV2MatchedCourse:best.merit?.name||best.merit?.title||'',tgV2MatchedCourseCode:best.merit?.code||best.merit?.courseCode||''}})}
-function summary(rows){const assessed=(Array.isArray(rows)?rows:[]).filter(r=>r?.tgV2);const strong=assessed.filter(r=>r.tgV2CountsInStudyPlan);const relevant=assessed.filter(r=>r.tgV2?.classification==='relevant');const limited=assessed.filter(r=>r.tgV2?.classification==='limited');const hp=r=>Number(r?.hp??r?.credits??r?.ects??0)||0;return Object.freeze({strongCount:strong.length,strongHp:strong.reduce((s,r)=>s+hp(r),0),relevantCount:relevant.length,limitedCount:limited.length,disclaimer:'StudieLots bedömning är preliminär och vägledande. Det aktuella lärosätet fattar alltid det slutliga beslutet om tillgodoräknande.'})}
-root.creditTransferV2Adapter=Object.freeze({assess,applyToRows,summary});
-})();
