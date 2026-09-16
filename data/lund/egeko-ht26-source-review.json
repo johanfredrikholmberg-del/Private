@@ -1,0 +1,23 @@
+{
+  "programCode": "EGEKO",
+  "programName": "Ekonomie kandidatprogram",
+  "reviewedFor": "HT2026",
+  "evidenceStatus": "official-sources-reviewed-not-complete-programme-import",
+  "sources": [
+    {"url":"https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO/programmets-innehall","kind":"official-programme-content","supports":"Term 1–3 fixed courses, term 4 choice of major, term 5 elective 30 hp, term 6 major and thesis, degree requirements"},
+    {"url":"https://www.lu.se/sites/www.lu.se/files/2026-03/EGEKO-Ekonomie-kandidatprogrammet.pdf","kind":"official-HT2026-programme-instructions","supports":"Term 4 major choice: business administration continuation package or economics advanced courses; HT2026-specific guidance"}
+  ],
+  "termRequirements": [
+    {"term":1,"mandatoryHp":30,"course":"Företagsekonomi: Grundkurs","sourceConfirmed":true},
+    {"term":2,"mandatoryHp":30,"course":"Nationalekonomi: Grundkurs","sourceConfirmed":true},
+    {"term":3,"mandatoryHp":30,"components":[{"course":"Statistik: Grundkurs 1","hp":15},{"course":"Handelsrätt: Juridisk översiktskurs","hp":15}],"sourceConfirmed":true},
+    {"term":4,"choiceGroup":"major","options":["företagsekonomi","nationalekonomi"],"requiredHp":null,"note":"Official HT2026 instructions name the choice and business-administration package but do not establish a complete 30 hp course-level list for both choices in this review."},
+    {"term":5,"classification":"elective-or-free-choice","requiredHp":30,"options":"Courses in Sweden or abroad; do not count every option cumulatively."},
+    {"term":6,"classification":"major-specialisation-and-thesis","requiredHp":30,"thesisHp":15,"thesisHpEvidence":"Degree requirements on official programme page specify independent work of 15 hp; exact term-six course combination still needs verification."}
+  ],
+  "degreeRequirementsFromProgrammeFAQ":{"totalHp":180,"majorHpAtLeast":90,"thesisHp":15,"businessAdministrationHpAtLeast":30,"economicsHpAtLeast":30,"statisticsHp":15,"introductoryLawHp":15,"electiveHp":30},
+  "dataQualityNotes":["The source table has a term-four choice row without a numeric hp value; earlier parser omitted it. Do not interpret the missing row as no term-four study.","Term-six row is labelled Valbar on the programme page but includes major-area studies and thesis; the row is a mixed requirement, not 30 hp of unrestricted electives.","A source row named Valbar kurs can have type Obligatorisk: classification must consider both name and requirement semantics, not only type."],
+  "ht26ProgrammeStructureVerified":false,
+  "canonicalImportAllowed":false,
+  "canonicalDatabaseWritten":false
+}
