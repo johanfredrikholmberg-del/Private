@@ -2,7 +2,7 @@
   "institution": "Mälardalens universitet",
   "institutionKey": "mdu",
   "targetCohort": "HT2026",
-  "generatedAt": "2026-09-16T20:29:01.654874+00:00",
+  "generatedAt": "2026-09-16T21:02:35.764280+00:00",
   "status": "source-discovery-unverified",
   "cohortVerified": false,
   "canonicalDatabaseWritten": false,
@@ -24,6 +24,73 @@
       "label": "Hitta utbildningsplan och kursplan",
       "url": "https://www.mdu.se/utbildning/hitta-utbildningsplan-och-kursplan",
       "verifiedForHT26": false
+    }
+  ],
+  "inspectedPages": [
+    {
+      "sourceUrl": "https://www.mdu.se/utbildning/hitta-utbildningsplan-och-kursplan",
+      "status": "page-fetched-unverified",
+      "candidateLinks": [
+        {
+          "label": "Gå till innehållet",
+          "url": "https://www.mdu.se/utbildning/hitta-utbildningsplan-och-kursplan",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "Programschema för aktuell termin",
+          "url": "https://www.mdu.se/student/praktiskt-om-studierna/schema-och-terminstider/programschema",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "In English",
+          "url": "https://www.mdu.se/en/malardalen-university/education/find-your-syllabus",
+          "verifiedForHT26": false
+        }
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.mdu.se/utbildning/hitta-utbildningsplan-och-kursplan",
+      "title": "Hitta utbildningsplan och kursplan\n\n\t\t\t– Mälardalens universitet",
+      "htmlBytes": 50883
+    },
+    {
+      "sourceUrl": "https://www.mdu.se/utbildning/sok-utbildning?query=&page=0&educationType=programs",
+      "status": "page-fetched-unverified",
+      "candidateLinks": [
+        {
+          "label": "Gå till innehållet",
+          "url": "https://www.mdu.se/utbildning/sok-utbildning?query=&page=0&educationType=programs",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "In English",
+          "url": "https://www.mdu.se/en/malardalen-university/education/find-education?educationType=programs&query=&page=0",
+          "verifiedForHT26": false
+        }
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.mdu.se/utbildning/sok-utbildning?query=&page=0&educationType=programs",
+      "title": "Sök utbildning\n\n\t\t\t– Mälardalens universitet",
+      "htmlBytes": 52653
+    },
+    {
+      "sourceUrl": "https://www.mdu.se/utbildning/sok-utbildning?query=&page=0&semester=VT27&educationType=programs",
+      "status": "page-fetched-unverified",
+      "candidateLinks": [
+        {
+          "label": "Gå till innehållet",
+          "url": "https://www.mdu.se/utbildning/sok-utbildning?query=&page=0&semester=VT27&educationType=programs",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "In English",
+          "url": "https://www.mdu.se/en/malardalen-university/education/find-education?educationType=programs&query=&semester=VT27&page=0",
+          "verifiedForHT26": false
+        }
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.mdu.se/utbildning/sok-utbildning?query=&page=0&semester=VT27&educationType=programs",
+      "title": "Sök utbildning\n\n\t\t\t– Mälardalens universitet",
+      "htmlBytes": 52749
     }
   ],
   "diagnostics": {
