@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+// Read-only evidence audit: never upgrades coverage or writes canonical HT26.
+import fs from 'node:fs/promises';
+const rows=JSON.parse(await fs.readFile('data/lund/structures.json','utf8'));
+const unresolved=rows.filter(x=>x.coverage==='metadata-only');
+const keys=['url','urls','sourceUrl','sourceUrls','programmeUrl','programUrl','educationPlanUrl','syllabusUrl','link','links'];
+const candidates=x=>{const found=[];for(const key of keys){const value=x[key];for(const item of (Array.isArray(value)?value:[value])){const raw=typeof item==='string'?item:item?.url;if(typeof raw!=='string')continue;try{const u=new URL(raw);if(u.protocol==='https:'&&/(^|\.)lu\.se$/.test(u.hostname))found.push(u.href)}catch{}}}return [...new Set(found)]};
+const limit=Math.max(1,Math.min(118,Number(process.env.LUND_SOURCE_LIMIT||30)));
+const selected=unresolved.filter(x=>candidates(x).length).slice(0,limit);
+const out=[];let next=0;
+async function worker(){while(next<selected.length){const x=selected[next++];const urls=candidates(x);const checks=[];for(const url of urls.slice(0,3)){try{const r=await fetch(url,{redirect:'follow',signal:AbortSignal.timeout(10000),headers:{accept:'text/html,application/pdf'}});const type=r.headers.get('content-type')||'';const final=new URL(r.url);const official=/(^|\.)lu\.se$/.test(final.hostname);const html=official&&r.ok&&type.includes('text/html')?(await r.text()).slice(0,400000):'';checks.push({url,finalUrl:r.url,httpStatus:r.status,contentType:type,official,hasEducationPlan:/utbildningsplan|programme syllabus|program syllabus/i.test(html),hasCourseList:/kurslista|kurser som ingår|courses included|programstruktur/i.test(html),hasTermEvidence:/termin\s*[1-9]|semester\s*[1-9]/i.test(html)});}catch(e){checks.push({url,error:String(e.message||e)})}}out.push({key:x.key,programCode:x.programCode,programName:x.programName,checks});}}
+await Promise.all(Array.from({length:Math.min(4,selected.length)},worker));
+const report={generatedAt:new Date().toISOString(),unresolved:unresolved.length,withOfficialLinks:unresolved.filter(x=>candidates(x).length).length,checked:out.length,officialAccessible:out.filter(x=>x.checks.some(c=>c.official&&c.httpStatus===200)).length,withEducationPlanMention:out.filter(x=>x.checks.some(c=>c.hasEducationPlan)).length,policy:'Discovery only. HTML keyword matches are not verified programme structures. No coverage upgrades or canonical writes.',results:out};
+await fs.mkdir('data/lund',{recursive:true});await fs.writeFile('data/lund/source-audit.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({unresolved:report.unresolved,withOfficialLinks:report.withOfficialLinks,checked:report.checked,officialAccessible:report.officialAccessible,withEducationPlanMention:report.withEducationPlanMention},null,2));
