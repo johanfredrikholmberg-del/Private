@@ -6,7 +6,7 @@ on:
     branches: [karlstad-import]
     paths:
       - 'scripts/kau-static-export.mjs'
-      - 'scripts/kau-programme-structure-pipeline.mjs'
+      - 'scripts/karlstad-merge-audited.mjs'
       - 'scripts/karlstad-bootstrap.mjs'
       - 'scripts/karlstad-gap-audit.mjs'
       - 'data/karlstad/schema.json'
@@ -27,14 +27,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Restore and refresh existing Karlstad catalogue
+      - name: Refresh Karlstad course catalogue
         env:
           KAU_COURSE_CONCURRENCY: 16
         run: node scripts/kau-static-export.mjs
-      - name: Restore and refresh existing Karlstad programme structures
-        env:
-          KAU_STRUCTURE_CONCURRENCY: 12
-        run: node scripts/kau-programme-structure-pipeline.mjs
+      - name: Merge fully audited Karlstad programme structures
+        run: node scripts/karlstad-merge-audited.mjs
       - name: Rebuild canonical HT26 database
         run: node scripts/build-ht26-database.mjs
       - name: Build Karlstad canonical slice
@@ -49,6 +47,7 @@ jobs:
           if(m.university!=='Karlstads universitet') throw new Error('Wrong university');
           if(m.schemaVersion!==2) throw new Error('Wrong schema');
           if(!Number.isInteger(m.programmes)||!Number.isInteger(m.courses)) throw new Error('Invalid counts');
+          if(m.programmeStructures<134) throw new Error('Audited Karlstad structures were lost');
           console.log(m);
           NODE
       - name: Commit Karlstad enrichment and canonical data
