@@ -24,7 +24,7 @@ jobs:
           node-version: '22'
       - name: Import Lund into isolated staging
         env:
-          LUND_LIMIT: '100'
+          LUND_LIMIT: '194'
           LUND_CONCURRENCY: '6'
         run: node scripts/lund-isolated-import.mjs
       - name: Validate isolated Lund output
