@@ -57,13 +57,31 @@ jobs:
           if(new Set(programmes.map(x=>x.code)).size!==programmes.length)throw new Error('Duplicate programme codes');
           console.log(JSON.stringify({programmes:programmes.length,courses:courses.length,structureCoverage:structureMeta.counts,verifiedStandalone:meta.counts.verifiedStandalone},null,2));
           NODE
-      - name: Commit verified Karlstad data
+      - name: Merge Karlstad structures into canonical HT26 database
+        run: node scripts/build-ht26-database.mjs
+      - name: Validate canonical HT26 merge and preserve existing offerings
         run: |
-          if [ -z "$(git status --porcelain -- data/kau data/susa/structures.json)" ]; then exit 0; fi
+          node - <<'NODE'
+          const fs=require('fs');
+          const cp=require('child_process');
+          const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+          const manifest=read('data/HT26/manifest.json');
+          const structures=read('data/HT26/program-structures.json');
+          const offerings=read('data/HT26/course-offerings.json');
+          const previousOfferings=JSON.parse(cp.execFileSync('git',['show','HEAD:data/HT26/course-offerings.json'],{encoding:'utf8',maxBuffer:100*1024*1024}));
+          const isKau=x=>String(x.university||'').toLocaleLowerCase('sv-SE')==='karlstads universitet';
+          if(manifest.database!=='StudieLots HT26'||!manifest.canonical)throw new Error('Canonical database invalid');
+          if(structures.filter(isKau).length!==134)throw new Error('Karlstad structures not merged into HT26');
+          if(JSON.stringify(offerings)!==JSON.stringify(previousOfferings))throw new Error('Existing course offerings changed');
+          console.log(JSON.stringify({karlstadCanonicalStructures:structures.filter(isKau).length,offeringRowsRetained:offerings.length},null,2));
+          NODE
+      - name: Commit verified Karlstad data and canonical HT26 structures
+        run: |
+          if [ -z "$(git status --porcelain -- data/kau data/susa/structures.json data/HT26)" ]; then exit 0; fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/kau data/susa/structures.json
-          git commit -m 'Import Karlstad official catalogue and structures [skip ci]'
+          git add -f data/kau data/susa/structures.json data/HT26
+          git commit -m 'Import Karlstad catalogue and canonical HT26 structures [skip ci]'
           git fetch origin gu-program-import
           git rebase origin/gu-program-import
           git push origin HEAD:gu-program-import
