@@ -2,7 +2,7 @@
   "institution": "Sveriges lantbruksuniversitet",
   "institutionKey": "slu",
   "targetCohort": "HT2026",
-  "generatedAt": "2026-09-16T20:28:38.500024+00:00",
+  "generatedAt": "2026-09-16T21:02:21.267400+00:00",
   "status": "source-discovery-unverified",
   "cohortVerified": false,
   "canonicalDatabaseWritten": false,
@@ -14,6 +14,28 @@
       "label": "Program",
       "url": "https://www.slu.se/utbildning/studera/",
       "verifiedForHT26": false
+    }
+  ],
+  "inspectedPages": [
+    {
+      "sourceUrl": "https://www.slu.se/utbildning/studera/",
+      "status": "page-fetched-unverified",
+      "candidateLinks": [
+        {
+          "label": "Program",
+          "url": "https://www.slu.se/utbildning/studera/program-pa-grundniva/",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "Masterprogram",
+          "url": "https://www.slu.se/utbildning/studera/program-pa-avancerad-niva/",
+          "verifiedForHT26": false
+        }
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.slu.se/utbildning/studera/",
+      "title": "Studera hos oss | slu.se",
+      "htmlBytes": 71638
     }
   ],
   "diagnostics": {
