@@ -1,0 +1,69 @@
+name: GU programme structure import
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [gu-program-import]
+    paths:
+      - 'api/gu-program-structure.js'
+      - 'scripts/gu-programme-structure-pipeline.mjs'
+      - 'scripts/gu-studentportal-enrichment.mjs'
+      - 'scripts/merge-gu-official-structures.mjs'
+      - 'scripts/apply-gu-verified-overrides.mjs'
+      - 'data/gu/official-structures.json'
+      - 'data/gu/verified-*.json'
+      - 'data/gu/inactive-HT26.json'
+      - '.github/workflows/gu-program-import.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gu-program-structure-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-program-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PDF text extraction
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Import GU structures into StudieLots HT26
+        env:
+          GU_CONCURRENCY: '6'
+        run: node scripts/gu-programme-structure-pipeline.mjs
+      - name: Enrich from official GU Studentportal
+        run: node scripts/gu-studentportal-enrichment.mjs
+      - name: Apply directly verified GU structures
+        run: node scripts/merge-gu-official-structures.mjs
+      - name: Apply per-program GU verified overrides
+        run: node scripts/apply-gu-verified-overrides.mjs
+      - name: Validate GU output
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const meta=JSON.parse(fs.readFileSync('data/gu/meta.json','utf8'));
+          if(meta.database!=='StudieLots HT26') throw new Error('GU importer did not target StudieLots HT26');
+          if(meta.programmes<200) throw new Error('GU programme catalogue unexpectedly small');
+          const resolved=(meta.counts.complete||0)+(meta.counts['choice-required']||0)+(meta.counts['partial-structure']||0);
+          console.log({meta,resolved});
+          NODE
+      - name: Commit GU progress
+        run: |
+          if [ -z "$(git status --porcelain -- data/HT26/program-structures.json data/gu)" ]; then exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/HT26/program-structures.json data/gu
+          git commit -m 'Import GU structures into StudieLots HT26 [skip ci]'
+          git fetch origin gu-program-import
+          git rebase origin/gu-program-import
+          git push origin HEAD:gu-program-import
+
+# trigger: verified-gu-batch-2026-09-14-2016

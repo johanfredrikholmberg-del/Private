@@ -1,0 +1,27 @@
+{
+  "programCode": "N2BIN",
+  "programName": "Bioinformatik, Masterprogram",
+  "hp": 120,
+  "expectedTerms": 4,
+  "coverage": "choice-required",
+  "reason": "official-gu-fixed-first-year-plus-elective-second-year-and-thesis-choice",
+  "source": "gu-official-programme-syllabus",
+  "sourceUrl": "https://www.gu.se/en/study-gothenburg/masters-programme-in-bioinformatics-n2bin/syllabus/061aa2fb-cdb8-11ef-9e07-d56117ae456b",
+  "structure": {
+    "year1FixedHp": 60,
+    "year2Flexible": true,
+    "thesisOptionsHp": [30,45,60],
+    "individualStudyPlan": true
+  },
+  "rows": [
+    {"year": 1, "term": null, "code": null, "name": "Bioinformatics in genomics", "hp": 15, "category": "required"},
+    {"year": 1, "term": null, "code": null, "name": "Bioinformatics in RNA and protein analysis", "hp": 15, "category": "required"},
+    {"year": 1, "term": null, "code": null, "name": "Evolutionary genomics", "hp": 15, "category": "required"},
+    {"year": 1, "term": null, "code": null, "name": "Systems biology", "hp": 15, "category": "required"},
+    {"year": 2, "term": null, "code": "CHOICE-N2BIN-Y2", "name": "Elective advanced-level courses and degree project according to individual study plan", "hp": 60, "category": "choice"}
+  ],
+  "rules": {
+    "degreeProject": {"allowedHp": [30,45,60], "isThesis": true}
+  },
+  "notes": ["The official programme syllabus fixes four 15-credit subject blocks in year 1. Year 2 is individualized with advanced electives and a 30, 45 or 60 credit degree project, so semester-level rows are not inferred."]
+}

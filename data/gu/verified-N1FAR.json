@@ -1,0 +1,20 @@
+{
+  "programCode": "N1FAR",
+  "programName": "Receptarieprogrammet/Farmaci, kandidatprogram",
+  "hp": 180,
+  "expectedTerms": 6,
+  "coverage": "partial-structure",
+  "reason": "official-gu-ht26-current-cohort-requirements-verified",
+  "source": "gu-official-studentportal",
+  "sourceUrl": "https://studentportal.gu.se/en/node/27995",
+  "rows": [
+    {"term":4,"code":"KER240","name":"Läkemedels ursprung, struktur, tillverkning och toxikologi","hp":15,"category":"required"},
+    {"term":6,"code":"FAR200","name":"Examenskurs i farmaci","hp":15,"category":"thesis"},
+    {"term":6,"code":"TAF200","name":"Tillämpad apoteksfarmaci","hp":15,"category":"required"}
+  ],
+  "requirements": {
+    "term6PrerequisitePharmacyCourseCodes": ["IBM220","KER240","KER250","SHF210","KFK200"],
+    "term6ElectiveAlternativeCourseCodes": ["LFD200","KER260"]
+  },
+  "notes": ["HT26 education plan and the programme overview for students starting HT2025 or later are the applicable cohort sources. Only course placement explicitly supported by the current Studentportal page is encoded here; remaining terms are intentionally unresolved until the linked programme overview is parsed."]
+}

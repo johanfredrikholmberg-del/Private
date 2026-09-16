@@ -1,0 +1,57 @@
+name: GU course offering import
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [gu-program-import]
+    paths:
+      - 'scripts/gu-course-offerings-pipeline.mjs'
+      - '.github/workflows/gu-course-offerings.yml'
+      - 'data/gu/manual-course-complement-2026-09-15.csv'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gu-course-offering-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-program-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import GU course offerings and dates
+        env:
+          GU_OFFERING_CONCURRENCY: '10'
+          GU_OFFERING_LIMIT: '3000'
+        run: node scripts/gu-course-offerings-pipeline.mjs
+      - name: Validate GU offering output
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const meta=JSON.parse(fs.readFileSync('data/gu/course-offerings-meta.json','utf8'));
+          const rows=JSON.parse(fs.readFileSync('data/HT26/course-offerings.json','utf8'));
+          if(meta.database!=='StudieLots HT26') throw new Error('Wrong target database');
+          if(!Array.isArray(rows)) throw new Error('course-offerings.json missing');
+          if(meta.offeringRows!==rows.filter(x=>String(x.university||'').toLowerCase().includes('göteborgs universitet')).length) throw new Error('Offering row count mismatch');
+          if(meta.processedThisRun < meta.remaining && meta.processedThisRun < 2000) throw new Error('GU import stopped before full unresolved sweep');
+          console.log({meta,totalRows:rows.length});
+          NODE
+      - name: Commit GU course offering progress
+        run: |
+          if [ -z "$(git status --porcelain -- data/HT26/course-offerings.json data/HT26/manifest.json data/gu/course-offerings-meta.json)" ]; then exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/HT26/course-offerings.json data/HT26/manifest.json data/gu/course-offerings-meta.json
+          git commit -m 'Import GU course offerings into StudieLots HT26 [skip ci]'
+          git fetch origin gu-program-import
+          git rebase origin/gu-program-import
+          git push origin HEAD:gu-program-import

@@ -1,0 +1,21 @@
+{
+  "programCode": "V2NSV",
+  "programName": "Specialistsjuksköterskeprogrammet med inriktning mot neurosjukvård",
+  "hp": 60,
+  "expectedTerms": 4,
+  "coverage": "choice-required",
+  "reason": "official-gu-ht26-structure-with-elective-and-cross-term-courses",
+  "source": "gu-official-studentportal",
+  "sourceUrl": "https://studentportal.gu.se/program/specialistsjukskoterskeprogrammet-med-inriktning-mot-neurosjukvard-v2nsv",
+  "rows": [
+    {"term":1,"code":"OMN100","name":"Specialistsjuksköterskans funktion med inriktning mot neurosjukvård","hp":1.5,"category":"required"},
+    {"term":1,"code":"MNV235","name":"Akut neurosjukvård","hp":7.5,"category":"required"},
+    {"term":1,"code":"MNV256","name":"Stroke i det tidiga skedet - ett multidisciplinärt vårdprocessperspektiv","hp":7.5,"category":"required","spansTerms":[1,2]},
+    {"term":2,"code":"OMN200","name":"Klinisk fördjupning inom neurosjukvård","hp":6,"category":"required"},
+    {"term":2,"type":"elective","hp":7.5,"category":"elective","name":"Valfri kurs på avancerad nivå med relevans för neurosjukvård"},
+    {"term":3,"code":"OM0007","name":"Vetenskaplig metod","hp":7.5,"category":"required"},
+    {"term":3,"code":"OM7830","name":"Examensarbete i omvårdnad med inriktning mot neurosjukvård","hp":15,"category":"required","type":"thesis","spansTerms":[3,4]},
+    {"term":4,"code":"MNV241","name":"Rehabiliteringsmedicin med fokus mot personer med neurologiska funktionshinder","hp":7.5,"category":"required"}
+  ],
+  "notes": ["MNV256 spans terms 1-2 and counts once. OM7830 spans terms 3-4 and counts once."]
+}

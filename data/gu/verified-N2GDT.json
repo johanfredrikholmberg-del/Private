@@ -1,0 +1,25 @@
+{
+  "programCode": "N2GDT",
+  "programName": "Game Design & Technology masterprogram",
+  "hp": 120,
+  "coverage": "partial-structure",
+  "reason": "official-gu-ht26-verified-mandatory-course-subset-and-thesis-variants",
+  "source": "Göteborgs universitet",
+  "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/game-design-technology-masterprogram-n2gdt",
+  "rows": [
+    {"code":"DIT285","name":"Advanced Requirements Engineering","hp":7.5,"category":"required"},
+    {"code":"DIT248","name":"An Introduction to Game Research","hp":7.5,"category":"required"},
+    {"code":"DIT224","name":"Computer Graphics","hp":7.5,"category":"required"},
+    {"code":"DIT098","name":"Gameplay Design","hp":7.5,"category":"required"},
+    {"code":"DIT572","name":"Game Engine Architecture","hp":7.5,"category":"required"},
+    {"code":"DIT468","name":"Current Trends in Gaming","hp":7.5,"category":"required"}
+  ],
+  "rules": {
+    "alsoMandatory": ["Game Development Project"],
+    "thesisHpOptions": [30,60],
+    "ifThesis60ThenGameDevelopmentProjectNotRequired": true,
+    "electivesAvailable": true,
+    "safeTermMapping": false,
+    "verifiedSubsetOnly": true
+  }
+}
