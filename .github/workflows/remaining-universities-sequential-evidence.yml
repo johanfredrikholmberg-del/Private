@@ -1,0 +1,53 @@
+name: Remaining universities sequential source discovery
+on:
+  push:
+    branches: [program-import]
+    paths:
+      - '.github/workflows/remaining-universities-sequential-evidence.yml'
+      - 'scripts/remaining-universities-sequential-evidence.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  discover:
+    strategy:
+      fail-fast: false
+      matrix:
+        institution: [stockholm, orebro, mittuniversitetet, ltu, slu, mdu]
+    concurrency:
+      group: remaining-university-${{ matrix.institution }}
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: program-import
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install requests beautifulsoup4
+      - name: Discover one institution source sequentially
+        env:
+          INSTITUTION: ${{ matrix.institution }}
+        run: python scripts/remaining-universities-sequential-evidence.py
+      - name: Validate and preserve unverified diagnostics only
+        env:
+          INSTITUTION: ${{ matrix.institution }}
+        run: |
+          python - <<'PY'
+          import json,os,pathlib
+          p=pathlib.Path('data')/os.environ['INSTITUTION']/'ht26-source-discovery.json'
+          d=json.loads(p.read_text())
+          assert d['institutionKey']==os.environ['INSTITUTION']
+          assert d['cohortVerified'] is False and d['programmePlansVerified']==0
+          assert d['canonicalDatabaseWritten'] is False and d['liveDatabaseWritten'] is False
+          print(d['institutionKey'],d['status'],len(d['candidateLinks']))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "data/${INSTITUTION}/ht26-source-discovery.json"
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "data: preserve ${INSTITUTION} source discovery [skip ci]"
+          git pull --rebase origin program-import
+          git push origin HEAD:program-import
