@@ -30,7 +30,7 @@ jobs:
           node-version: '22'
       - name: Import GU course offerings and dates
         env:
-          GU_OFFERING_CONCURRENCY: '6'
+          GU_OFFERING_CONCURRENCY: '10'
           GU_OFFERING_LIMIT: '3000'
         run: node scripts/gu-course-offerings-pipeline.mjs
       - name: Validate GU offering output
