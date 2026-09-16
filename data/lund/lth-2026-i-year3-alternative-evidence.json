@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "university": "Lunds universitet",
+  "faculty": "LTH",
+  "academicYear": "2026/27",
+  "programmeCode": "I",
+  "year": 3,
+  "sourceUrl": "https://kurser.lth.se/lot/programme?programme=I",
+  "classification": "alternative-obligatory-with-profile-dependent-rules",
+  "status": "partial-official-source-evidence",
+  "courses": [
+    {"code":"EITF45","name":"Datorkommunikation","hp":7.5,"level":"G2","periods":[4],"note":"Also elective in programme."},
+    {"code":"FHLF20","name":"Finita elementmetoden","hp":7.5,"level":"G2","periods":[4],"mandatoryInProfile":"Teknisk design","cohortRule":"admitted from H15","note":"Also elective in programme."},
+    {"code":"FBRF01","name":"Grundläggande förbränning","hp":7.5,"level":"G2","periods":[4],"mandatoryInProfile":"Energi- och miljöteknik","cohortRule":"admitted from H15","note":"Also elective in programme."},
+    {"code":"FMSN40","name":"Linjär och logistisk regression med datainsamling","hp":9,"level":"A","periods":[4],"mandatoryInProfile":"Dataanalys och algoritmer","cohortRule":"admitted from H16","exclusionGroup":["FMSN30","FMSN40"],"note":"Also elective; only one of FMSN30 and FMSN40 may count toward degree."},
+    {"code":"FMIN05","name":"Miljösystemanalys: Klimat som vetenskap och politik","hp":7.5,"level":"A","periods":[4],"mandatoryInProfile":"Energi- och miljöteknik","cohortRule":"admitted from H15","note":"Also elective in programme."},
+    {"code":"FMNF10","name":"Numerisk analys","hp":6,"level":"G2","periods":[4],"mandatoryInProfile":"Dataanalys och algoritmer","cohortRule":"admitted from H18","note":"Also elective in programme."},
+    {"code":"EITP45","name":"Projekt i inbyggda system","hp":7.5,"level":"A","periods":[4],"mandatoryInProfile":"System- och programvaruutveckling","cohortRule":"admitted from H24","note":"Also elective in programme."}
+  ],
+  "rowCount": 7,
+  "canonicalDatabaseWritten": false,
+  "liveDatabaseWritten": false,
+  "qualityCaution": "These are alternatives, not seven additive mandatory courses. Verify full profile selection, cohort and programme education plan before constructing a complete degree route."
+}
