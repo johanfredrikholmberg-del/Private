@@ -1,45 +1,31 @@
 (()=>{'use strict';
-const root=window.StudieLotsV2||{};
-const planner=document.getElementById('planner');
+const root=window.StudieLotsV2||{},planner=document.getElementById('planner');
 if(!planner)return;
-const ordinary=document.getElementById('ordinaryPlan');
-const fast=document.getElementById('fastPlan');
-const fastTab=planner.querySelector('[data-route="fast"]');
-const switcher=planner.querySelector('.route-switch');
+const ordinary=document.getElementById('ordinaryPlan'),fast=document.getElementById('fastPlan'),fastTab=planner.querySelector('[data-route="fast"]'),switcher=planner.querySelector('.route-switch');
 if(!ordinary||!fast||!fastTab||!switcher)return;
-const note=document.createElement('p');
-note.className='planner-route-help';
-note.setAttribute('aria-live','polite');
-switcher.insertAdjacentElement('afterend',note);
-const style=document.createElement('style');
-style.textContent='.planner-route-help{font-size:12px;line-height:1.5;color:var(--muted,#64746d);margin:8px 4px 16px}.route-switch [data-route]{min-width:0}.fast-result-note{margin:12px 0 16px}';
-document.head.appendChild(style);
+const style=document.createElement('style');style.textContent=`
+#planner .route-switch{margin-bottom:16px}#planner .planner-route-help{display:none!important}
+#planner .fast-controls{display:flex;flex-direction:column;gap:14px;padding:18px;border:1px solid var(--line,#dce4df);border-radius:20px;background:#fff;margin-bottom:16px}
+#planner .fast-controls label{display:flex;flex-direction:column;align-items:stretch;gap:8px;min-width:0;font-size:14px;font-weight:700;line-height:1.35}
+#planner .fast-controls select{display:block;width:100%;max-width:100%;min-width:0;box-sizing:border-box;padding:12px;border:1px solid #dce4df;border-radius:12px;background:#f5f8f6;color:#173c34;font-size:14px;white-space:normal}
+#planner .fast-controls .summer-toggle{display:flex;flex-direction:row;align-items:center;gap:10px;font-size:14px}#planner .fast-controls .summer-toggle input{width:20px;height:20px;flex:0 0 20px}
+#planner .fast-result-note{margin:0 0 14px}#planner .fast-result-note b{display:block;margin-bottom:5px}#planner .fast-result-note span{display:block;line-height:1.5}
+#planner #studyPlanCta{display:flex;width:100%;margin-top:18px}#planner #fastCta{display:none!important}
+`;document.head.appendChild(style);
 let pending=false;
-function sync(){
-  pending=false;
-  const data=root.appContext?.state?.plannerData;
-  const hasPlan=Array.isArray(data?.rows)&&data.rows.length>0;
-  const canOptimize=hasPlan&&data.verified===true;
-  if(fastTab.hidden===canOptimize)fastTab.hidden=!canOptimize;
-  // The old unlock action only scrolled to a plan that was already open; both CTAs duplicated the route switch.
-  ordinary.querySelector('#studyPlanCta')?.remove();
-  ordinary.querySelector('#fastCta')?.remove();
-  if(!canOptimize&&fastTab.classList.contains('active'))planner.querySelector('[data-route="ordinary"]')?.click();
-  const message=!hasPlan?'Välj ett program för att se din studieplan.':canOptimize?'Välj ordinarie väg eller undersök om en snabbare väg går att styrka med tillgängliga kurstillfällen.':'Ordinarie studieplan visas. Snabbare väg visas först när programplanen är verifierad.';
-  if(note.textContent!==message)note.textContent=message;
-  if(fast.hidden||!canOptimize||fast.querySelector('.fast-result-note')||!fast.querySelector('.fast-controls'))return;
-  const hasWin=!!fast.querySelector('.fast-win');
-  const unscheduled=!!fast.querySelector('.info-note');
-  const result=document.createElement('div');
-  result.className='info-note fast-result-note';
-  const title=document.createElement('b');
-  const detail=document.createElement('span');
-  title.textContent=hasWin?'Jämför med ordinarie väg':unscheduled?'Snabbare väg kan ännu inte bekräftas':'Ingen verifierad tidsvinst hittades';
-  detail.textContent=hasWin?'Se den beräknade tidsvinsten och kurstillfällena nedan.':unscheduled?'Alla återstående kurser kan inte placeras säkert. Ordinarie väg är fortsatt utgångspunkten.':'Vi hittade ingen kortare komplett väg med de kurstillfällen som finns i databasen. Ordinarie väg är fortsatt utgångspunkten.';
-  result.append(title,detail);
-  fast.insertBefore(result,fast.querySelector('.fast-controls').nextSibling);
+function sync(){pending=false;const data=root.appContext?.state?.plannerData,hasPlan=Array.isArray(data?.rows)&&data.rows.length>0,canOptimize=hasPlan&&data.verified===true;
+fastTab.hidden=!canOptimize;
+ordinary.querySelector('#fastCta')?.remove();
+const unlock=ordinary.querySelector('#studyPlanCta');if(unlock){unlock.querySelector('b')?.replaceChildren(document.createTextNode('Lås upp din studieplan'));const small=unlock.querySelector('small');if(small)small.textContent='Testläge · öppet utan betalning';}
+if(!canOptimize&&fastTab.classList.contains('active'))planner.querySelector('[data-route="ordinary"]')?.click();
+fast.querySelectorAll('.fast-result-note').forEach(el=>el.remove());
+if(fast.hidden||!canOptimize||fast.textContent.includes('Optimerar studieplanen'))return;
+const controls=fast.querySelector('.fast-controls');if(!controls)return;
+const win=fast.querySelector('.fast-win'),unscheduled=fast.querySelector('.info-note');
+const note=document.createElement('div');note.className='info-note fast-result-note';const heading=document.createElement('b'),detail=document.createElement('span');
+heading.textContent=win?'Jämför med ordinarie väg':unscheduled?'Snabbare väg kan ännu inte bekräftas':'Ingen säker tidsvinst hittades';
+detail.textContent=win?'Den beräknade tidsvinsten och tillgängliga kurstillfällen visas nedan.':unscheduled?'Alla återstående kurser kan inte placeras med verifierade tillfällen. Ordinarie väg gäller tills vidare.':'Inga verifierade kurstillfällen ger just nu en kortare komplett studieplan.';
+note.append(heading,detail);controls.after(note);
 }
-const observer=new MutationObserver(()=>{if(pending)return;pending=true;queueMicrotask(sync)});
-observer.observe(planner,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','class']});
-sync();
+const observer=new MutationObserver(()=>{if(pending)return;pending=true;queueMicrotask(sync)});observer.observe(planner,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','class']});sync();
 })();
