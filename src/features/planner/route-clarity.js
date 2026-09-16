@@ -16,6 +16,8 @@ let pending=false;
 function sync(){pending=false;const data=root.appContext?.state?.plannerData,hasPlan=Array.isArray(data?.rows)&&data.rows.length>0,canOptimize=hasPlan&&data.verified===true;
 fastTab.hidden=!canOptimize;
 ordinary.querySelector('#fastCta')?.remove();
+// The preview already contains its analysis. Do not show an extra button that merely repeats it.
+ordinary.querySelectorAll('button,a').forEach(el=>{if(/^(se analys och förslag|visa förhandsanalys)$/i.test(el.textContent.trim()))el.remove()});
 const unlock=ordinary.querySelector('#studyPlanCta');if(unlock){unlock.querySelector('b')?.replaceChildren(document.createTextNode('Lås upp din studieplan'));const small=unlock.querySelector('small');if(small)small.textContent='Testläge · öppet utan betalning';}
 if(!canOptimize&&fastTab.classList.contains('active'))planner.querySelector('[data-route="ordinary"]')?.click();
 fast.querySelectorAll('.fast-result-note').forEach(el=>el.remove());
