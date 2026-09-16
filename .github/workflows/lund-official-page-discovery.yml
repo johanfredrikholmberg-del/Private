@@ -1,0 +1,42 @@
+name: Lund official page discovery
+on:
+  workflow_dispatch:
+  push:
+    branches: [gu-program-import]
+    paths:
+      - '.github/workflows/lund-official-page-discovery.yml'
+permissions:
+  contents: write
+concurrency:
+  group: lund-official-page-discovery
+  cancel-in-progress: false
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-program-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Discover official pages for unresolved Lund programmes
+        env:
+          LUND_DISCOVERY_LIMIT: '118'
+        run: node scripts/lund-official-page-discovery.mjs
+      - name: Validate discovery evidence
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');const a=JSON.parse(fs.readFileSync('data/lund/official-page-discovery.json'));if(a.unresolved!==118||a.checked!==118||a.results.length!==118||a.officialPagesFound>118)throw Error('Invalid discovery report');console.log({checked:a.checked,officialPagesFound:a.officialPagesFound});
+          NODE
+      - name: Commit evidence on isolated branch only
+        run: |
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/lund/official-page-discovery.json
+          git commit -m 'Record Lund official page discovery [skip ci]'
+          git fetch origin gu-program-import
+          git rebase origin/gu-program-import
+          git push origin HEAD:gu-program-import
