@@ -12,11 +12,9 @@ jobs:
   discover:
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         institution: [stockholm, orebro, mittuniversitetet, ltu, slu, mdu]
-    concurrency:
-      group: remaining-university-${{ matrix.institution }}
-      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
@@ -49,5 +47,11 @@ jobs:
           git add "data/${INSTITUTION}/ht26-source-discovery.json"
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "data: preserve ${INSTITUTION} source discovery [skip ci]"
-          git pull --rebase origin program-import
-          git push origin HEAD:program-import
+          for attempt in 1 2 3 4 5 6 7 8; do
+            git pull --rebase origin program-import
+            if git push origin HEAD:program-import; then exit 0; fi
+            echo "Concurrent push detected; retry ${attempt}/8"
+            sleep 2
+          done
+          echo 'Unable to persist evidence after eight retries' >&2
+          exit 1
