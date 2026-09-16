@@ -6,7 +6,7 @@ const groups=[
   {name:'merit-import',scripts:['/src/features/merit-import/ladok-import.js?v=1']},
   {name:'degree-rules',scripts:['/src/core/degree-rules.js?v=2']},
   {name:'programs',scripts:['/src/features/programs/program-index.js?v=4','/src/features/programs/program-canonicalization.js?v=1','/src/features/programs/program-paths.js?v=9','/src/features/programs/kau-paths.js?v=1','/src/features/programs/discover-guard.js?v=1']},
-  {name:'credit-transfer',scripts:['/src/engines/credit-transfer/engine.js?v=1','/src/engines/credit-transfer/adapter.js?v=2']},
+  {name:'credit-transfer',scripts:['/src/engines/credit-transfer/history.js?v=1','/src/engines/credit-transfer/engine.js?v=1','/src/engines/credit-transfer/adapter.js?v=2']},
   {name:'fast-route',scripts:['/src/features/fast-route/fast-route.js?v=6','/src/features/fast-route/fast-guard.js?v=2','/src/features/fast-route/fast-preload.js?v=3']},
   {name:'page-controllers',scripts:['/src/pages/programs/controller.js?v=8','/src/pages/studies/controller.js?v=1','/src/pages/opportunities/controller.js?v=1','/src/pages/planner/controller.js?v=1']},
   {name:'app-runtime',scripts:['/src/app/runtime.js?v=18']},
