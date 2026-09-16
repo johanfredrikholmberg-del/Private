@@ -2,7 +2,7 @@
   "institution": "Mittuniversitetet",
   "institutionKey": "mittuniversitetet",
   "targetCohort": "HT2026",
-  "generatedAt": "2026-09-16T20:28:04.178048+00:00",
+  "generatedAt": "2026-09-16T21:01:12.145506+00:00",
   "status": "source-discovery-unverified",
   "cohortVerified": false,
   "canonicalDatabaseWritten": false,
@@ -26,10 +26,97 @@
       "verifiedForHT26": false
     }
   ],
+  "inspectedPages": [
+    {
+      "sourceUrl": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/",
+      "status": "page-fetched-unverified",
+      "candidateLinks": [
+        {
+          "label": "Kurser och program",
+          "url": "https://www.miun.se/utbildning/",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "Kursplaner",
+          "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/",
+          "verifiedForHT26": false
+        }
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/",
+      "title": "Sök kurs- och utbildningsplaner | Mittuniversitetet miun.se",
+      "htmlBytes": 30574
+    },
+    {
+      "sourceUrl": "https://www.miun.se/utbildning/",
+      "status": "page-fetched-unverified",
+      "candidateLinks": [
+        {
+          "label": "Kurser och program",
+          "url": "https://www.miun.se/utbildning/",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "Kursplaner",
+          "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "Sök program",
+          "url": "https://www.miun.se/utbildning/program/",
+          "verifiedForHT26": false
+        }
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.miun.se/utbildning/",
+      "title": "Sök program och kurser | Mittuniversitetet miun.se",
+      "htmlBytes": 51645
+    },
+    {
+      "sourceUrl": "https://www.miun.se/utbildning/program/",
+      "status": "page-fetched-unverified",
+      "candidateLinks": [
+        {
+          "label": "Kurser och program",
+          "url": "https://www.miun.se/utbildning/",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "Kursplaner",
+          "url": "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "Behörighetsgivande utbildningar",
+          "url": "https://www.miun.se/utbildning/program/behorighetsgivande-utbildningar-a-o/",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "Program på avancerad nivå",
+          "url": "https://www.miun.se/utbildning/program/MagisterMasterPabyggnad/",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "Program på grundnivå",
+          "url": "https://www.miun.se/utbildning/program/grundprogram/",
+          "verifiedForHT26": false
+        },
+        {
+          "label": "Utbildning på forskarnivå",
+          "url": "https://www.miun.se/utbildning/program/forskarutbildning/",
+          "verifiedForHT26": false
+        }
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.miun.se/utbildning/program/",
+      "title": "Sök program | Mittuniversitetet miun.se",
+      "htmlBytes": 35038
+    }
+  ],
   "diagnostics": {
     "httpStatus": 200,
     "finalUrl": "https://www.miun.se/utbildning/",
     "title": "Sök program och kurser | Mittuniversitetet miun.se",
-    "htmlBytes": 51769
+    "htmlBytes": 51605
   }
 }
