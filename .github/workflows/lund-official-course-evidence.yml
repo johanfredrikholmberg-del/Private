@@ -1,0 +1,41 @@
+name: Lund official course evidence
+on:
+  workflow_dispatch:
+  push:
+    branches: [gu-program-import]
+    paths:
+      - '.github/workflows/lund-official-course-evidence.yml'
+permissions:
+  contents: write
+concurrency:
+  group: lund-official-course-evidence
+  cancel-in-progress: false
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-program-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Extract official Lund course evidence
+        run: node scripts/lund-official-course-evidence.mjs
+      - name: Validate evidence boundaries
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');const d=JSON.parse(fs.readFileSync('data/lund/official-course-evidence.json'));if(d.checked!==d.candidates||d.candidates>118||d.results.length!==d.checked||d.results.some(x=>x.rows.some(r=>!r.name||r.hp<=0||r.term<1)))throw Error('Invalid evidence');console.log({checked:d.checked,withCourseRows:d.withCourseRows,totalRows:d.totalRows});
+          NODE
+      - name: Commit isolated evidence
+        run: |
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/lund/official-course-evidence.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record Lund official course evidence [skip ci]'
+          git fetch origin gu-program-import
+          git rebase origin/gu-program-import
+          git push origin HEAD:gu-program-import
