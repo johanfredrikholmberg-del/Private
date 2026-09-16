@@ -22,19 +22,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Diagnose source fields in Lund and SUSA records
+        run: node scripts/lund-source-field-diagnostic.mjs
       - name: Inspect Lund official links without promoting unverified data
         run: node scripts/lund-source-audit.mjs
-      - name: Validate source audit
+      - name: Validate source audit and diagnostic
         run: |
           node - <<'NODE'
-          const fs=require('fs');const a=JSON.parse(fs.readFileSync('data/lund/source-audit.json'));if(a.unresolved!==118||a.checked>a.withOfficialLinks||a.results.length!==a.checked)throw Error('Invalid Lund source audit');console.log({unresolved:a.unresolved,withOfficialLinks:a.withOfficialLinks,checked:a.checked,officialAccessible:a.officialAccessible});
+          const fs=require('fs');const a=JSON.parse(fs.readFileSync('data/lund/source-audit.json'));const d=JSON.parse(fs.readFileSync('data/lund/source-field-diagnostic.json'));if(a.unresolved!==d.unresolved||a.checked>a.withOfficialLinks||a.results.length!==a.checked)throw Error('Invalid Lund source audit');console.log({unresolved:a.unresolved,matchedQueueByCode:d.matchedQueueByCode,urlFields:d.urlFields,checked:a.checked});
           NODE
       - name: Commit audit evidence only
         run: |
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/lund/source-audit.json
-          git commit -m 'Record Lund official source audit [skip ci]'
+          git add -f data/lund/source-audit.json data/lund/source-field-diagnostic.json
+          git commit -m 'Record Lund source-field diagnosis [skip ci]'
           git fetch origin gu-program-import
           git rebase origin/gu-program-import
           git push origin HEAD:gu-program-import
