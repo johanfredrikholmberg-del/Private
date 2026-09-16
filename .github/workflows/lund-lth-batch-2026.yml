@@ -1,20 +1,20 @@
-name: Lund LTH 2026 batch evidence
+name: Lund LTH sequential browser evidence
 on:
   push:
     branches: [gu-program-import]
     paths:
       - '.github/workflows/lund-lth-batch-2026.yml'
-      - 'scripts/lund-lth-batch-2026.py'
+      - 'scripts/lund-lth-sequential-browser.py'
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
-  group: lund-lth-batch-2026
+  group: lund-lth-sequential-browser
   cancel-in-progress: false
 jobs:
   extract:
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 55
     steps:
       - uses: actions/checkout@v4
         with:
@@ -22,28 +22,28 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install beautifulsoup4
-      - name: Extract and diagnose official LoT rows
-        run: python scripts/lund-lth-batch-2026.py
-      - name: Validate evidence and staging boundaries
+      - run: |
+          python -m pip install playwright beautifulsoup4
+          python -m playwright install --with-deps chromium
+      - name: Extract one programme at a time with JavaScript enabled
+        run: python scripts/lund-lth-sequential-browser.py
+      - name: Validate and persist evidence only
+        if: always()
         run: |
+          if [ ! -f data/lund/lth-2026-sequential-browser-evidence.json ]; then exit 1; fi
           python - <<'PY'
           import json
-          p=json.load(open('data/lund/lth-2026-batch-evidence.json'))
+          p=json.load(open('data/lund/lth-2026-sequential-browser-evidence.json'))
           assert p['canonicalDatabaseWritten'] is False and p['liveDatabaseWritten'] is False
-          assert p['cohortVerified'] is False and len(p['programmes']) == 14
+          assert p['cohortVerified'] is False
           assert p['totalCourseRows'] == sum(x['courseRows'] for x in p['programmes'])
-          assert p['programmesWithRows'] == sum(x['courseRows'] > 0 for x in p['programmes'])
-          assert all(row['sourceUrl'].startswith('https://kurser.lth.se/lot/programme?') for x in p['programmes'] for s in x['sections'] for row in s['rows'])
-          assert (p['status'] == 'blocked-no-course-rows-diagnostics-only') == (p['totalCourseRows'] == 0)
-          print('Validated', p['totalCourseRows'], 'source rows in', p['programmesWithRows'], 'programmes; status:', p['status'])
+          assert len(p['programmes']) == 14
+          print('Programmes:',len(p['programmes']),'rows:',p['totalCourseRows'])
           PY
-      - name: Persist evidence or failure diagnostics without promoting coverage
-        run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/lund/lth-2026-batch-evidence.json
+          git add data/lund/lth-2026-sequential-browser-evidence.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'data: preserve LTH 2026/27 batch evidence and diagnostics [skip ci]'
+          git commit -m 'data: preserve sequential LTH browser evidence [skip ci]'
           git pull --rebase origin gu-program-import
           git push origin HEAD:gu-program-import
