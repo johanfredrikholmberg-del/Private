@@ -1,0 +1,40 @@
+name: Lund elective classification
+on:
+  push:
+    branches: [gu-program-import]
+    paths: [.github/workflows/lund-elective-classification.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  classify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-program-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Classify course evidence
+        run: node scripts/lund-elective-classification.mjs
+      - name: Validate conservative classification
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const d=JSON.parse(fs.readFileSync('data/lund/elective-classification.json'));
+          if(d.summary.programmes!==37||d.summary.rows!==87||d.summary.mandatory+d.summary.elective+d.summary.freeChoice+d.summary.unclassified!==87)throw Error('Classification totals invalid');
+          if(d.results.some(p=>p.ht26Verified||p.coveragePromotionAllowed||p.terms.some(t=>t.termComplete||t.requiredElectiveHp!==null)))throw Error('Unsafe promotion');
+          console.log(d.summary);
+          NODE
+      - name: Commit isolated classification
+        run: |
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/lund/elective-classification.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Record Lund elective classification [skip ci]'
+          git fetch origin gu-program-import
+          git rebase origin/gu-program-import
+          git push origin HEAD:gu-program-import
