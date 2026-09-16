@@ -1,15 +1,16 @@
 {
-  "generatedAt": "2026-09-16T19:08:08.053Z",
+  "generatedAt": "2026-09-16T19:13:09.303Z",
   "summary": {
     "programmes": 37,
     "withRows": 8,
     "rows": 87,
-    "mandatory": 79,
-    "elective": 8,
+    "mandatory": 78,
+    "elective": 7,
     "freeChoice": 0,
-    "unclassified": 0
+    "mixedMajorAndThesis": 1,
+    "unclassified": 1
   },
-  "policy": "Evidence-only classification. Elective options are not additive requirements. Required elective credits and HT26 syllabus version must be verified independently. No structure, coverage, or canonical writes.",
+  "policy": "Evidence-only classification. Mixed major/thesis rows are not free electives; options are not additive. EGEKO requirements are programme-level evidence, not verified course-level HT26 structures. No coverage or canonical writes.",
   "results": [
     {
       "key": "lunds-universitet:EGEKO",
@@ -23,6 +24,7 @@
           "term": 1,
           "hp": 30,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO/programmets-innehall",
           "ht26Verified": false
         },
@@ -32,6 +34,7 @@
           "term": 2,
           "hp": 30,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO/programmets-innehall",
           "ht26Verified": false
         },
@@ -41,6 +44,7 @@
           "term": 3,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO/programmets-innehall",
           "ht26Verified": false
         },
@@ -50,6 +54,7 @@
           "term": 3,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO/programmets-innehall",
           "ht26Verified": false
         },
@@ -59,6 +64,7 @@
           "term": 5,
           "hp": 30,
           "classification": "elective",
+          "classificationNote": "Programme review confirms a 30 hp elective term; options must not be added together.",
           "sourceUrl": "https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO/programmets-innehall",
           "ht26Verified": false
         },
@@ -67,7 +73,8 @@
           "type": "Valbar",
           "term": 6,
           "hp": 30,
-          "classification": "elective",
+          "classification": "mixed-major-and-thesis",
+          "classificationNote": "Major-area studies and thesis: do not count as unrestricted elective credits.",
           "sourceUrl": "https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO/programmets-innehall",
           "ht26Verified": false
         }
@@ -78,9 +85,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -88,9 +99,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -98,9 +113,30 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
+          "termComplete": false
+        },
+        {
+          "term": 4,
+          "mandatoryHp": 0,
+          "electiveOptionsHp": 0,
+          "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
+          "unclassified": 0,
+          "requiredElectiveHp": null,
+          "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [
+            "företagsekonomi",
+            "nationalekonomi"
+          ],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -108,19 +144,27 @@
           "mandatoryHp": 0,
           "electiveOptionsHp": 30,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
-          "requiredElectiveHp": null,
+          "requiredElectiveHp": 30,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
           "term": 6,
           "mandatoryHp": 0,
-          "electiveOptionsHp": 30,
+          "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 30,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": 15,
           "termComplete": false
         }
       ],
@@ -199,6 +243,7 @@
           "term": 1,
           "hp": 30,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/politices-kandidatprogrammet-SGPOL/programmets-innehall",
           "ht26Verified": false
         },
@@ -208,6 +253,7 @@
           "term": 2,
           "hp": 30,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/politices-kandidatprogrammet-SGPOL/programmets-innehall",
           "ht26Verified": false
         },
@@ -217,6 +263,7 @@
           "term": 3,
           "hp": 30,
           "classification": "elective",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/politices-kandidatprogrammet-SGPOL/programmets-innehall",
           "ht26Verified": false
         },
@@ -226,6 +273,7 @@
           "term": 4,
           "hp": 30,
           "classification": "elective",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/politices-kandidatprogrammet-SGPOL/programmets-innehall",
           "ht26Verified": false
         },
@@ -235,6 +283,7 @@
           "term": 4,
           "hp": 30,
           "classification": "elective",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/politices-kandidatprogrammet-SGPOL/programmets-innehall",
           "ht26Verified": false
         },
@@ -244,6 +293,7 @@
           "term": 5,
           "hp": 30,
           "classification": "elective",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/politices-kandidatprogrammet-SGPOL/programmets-innehall",
           "ht26Verified": false
         }
@@ -254,9 +304,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -264,9 +318,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -274,9 +332,13 @@
           "mandatoryHp": 0,
           "electiveOptionsHp": 30,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -284,9 +346,13 @@
           "mandatoryHp": 0,
           "electiveOptionsHp": 60,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -294,9 +360,13 @@
           "mandatoryHp": 0,
           "electiveOptionsHp": 30,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         }
       ],
@@ -535,6 +605,7 @@
           "term": 1,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -544,6 +615,7 @@
           "term": 1,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -553,6 +625,7 @@
           "term": 1,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -562,6 +635,7 @@
           "term": 1,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -571,6 +645,7 @@
           "term": 2,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -580,6 +655,7 @@
           "term": 2,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -589,6 +665,7 @@
           "term": 2,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -598,6 +675,7 @@
           "term": 2,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -607,6 +685,7 @@
           "term": 3,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -616,6 +695,7 @@
           "term": 3,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -625,6 +705,7 @@
           "term": 3,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -634,6 +715,7 @@
           "term": 3,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -643,6 +725,7 @@
           "term": 4,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -652,6 +735,7 @@
           "term": 4,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -661,6 +745,7 @@
           "term": 4,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -670,6 +755,7 @@
           "term": 4,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -679,6 +765,7 @@
           "term": 5,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -688,6 +775,7 @@
           "term": 5,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -697,6 +785,7 @@
           "term": 5,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -706,6 +795,7 @@
           "term": 5,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -715,6 +805,7 @@
           "term": 6,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -724,6 +815,7 @@
           "term": 6,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -733,6 +825,7 @@
           "term": 6,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -742,6 +835,7 @@
           "term": 6,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -751,6 +845,7 @@
           "term": 7,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -760,6 +855,7 @@
           "term": 7,
           "hp": 33,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -768,7 +864,8 @@
           "type": "Obligatorisk",
           "term": 7,
           "hp": 7.5,
-          "classification": "mandatory",
+          "classification": "unclassified",
+          "classificationNote": "Course name and source type conflict; requires source-level review.",
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -778,6 +875,7 @@
           "term": 7,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -787,6 +885,7 @@
           "term": 8,
           "hp": 33,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         },
@@ -796,6 +895,7 @@
           "term": 8,
           "hp": 4.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/logopedprogrammet-VALGP/programmets-innehall",
           "ht26Verified": false
         }
@@ -806,9 +906,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -816,9 +920,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -826,9 +934,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -836,9 +948,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -846,9 +962,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -856,19 +976,27 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
           "term": 7,
-          "mandatoryHp": 55.5,
+          "mandatoryHp": 48,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
-          "unclassified": 0,
+          "mixedRequirementHp": 0,
+          "unclassified": 1,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -876,9 +1004,13 @@
           "mandatoryHp": 37.5,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         }
       ],
@@ -907,6 +1039,7 @@
           "term": 1,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-intensivvard-VASIS/programmets-innehall",
           "ht26Verified": false
         },
@@ -916,6 +1049,7 @@
           "term": 1,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-intensivvard-VASIS/programmets-innehall",
           "ht26Verified": false
         },
@@ -925,6 +1059,7 @@
           "term": 1,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-intensivvard-VASIS/programmets-innehall",
           "ht26Verified": false
         },
@@ -934,6 +1069,7 @@
           "term": 1,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-intensivvard-VASIS/programmets-innehall",
           "ht26Verified": false
         },
@@ -943,6 +1079,7 @@
           "term": 2,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-intensivvard-VASIS/programmets-innehall",
           "ht26Verified": false
         },
@@ -952,6 +1089,7 @@
           "term": 2,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-intensivvard-VASIS/programmets-innehall",
           "ht26Verified": false
         },
@@ -961,6 +1099,7 @@
           "term": 2,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-intensivvard-VASIS/programmets-innehall",
           "ht26Verified": false
         }
@@ -971,9 +1110,13 @@
           "mandatoryHp": 45,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -981,9 +1124,13 @@
           "mandatoryHp": 37.5,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         }
       ],
@@ -1002,6 +1149,7 @@
           "term": 1,
           "hp": 4.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-ambulanssjukvard-VASMS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1011,6 +1159,7 @@
           "term": 1,
           "hp": 18,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-ambulanssjukvard-VASMS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1020,6 +1169,7 @@
           "term": 1,
           "hp": 3,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-ambulanssjukvard-VASMS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1029,6 +1179,7 @@
           "term": 2,
           "hp": 4.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-ambulanssjukvard-VASMS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1038,6 +1189,7 @@
           "term": 2,
           "hp": 18,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-ambulanssjukvard-VASMS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1047,6 +1199,7 @@
           "term": 2,
           "hp": 12,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-ambulanssjukvard-VASMS/programmets-innehall",
           "ht26Verified": false
         }
@@ -1057,9 +1210,13 @@
           "mandatoryHp": 25.5,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -1067,9 +1224,13 @@
           "mandatoryHp": 34.5,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         }
       ],
@@ -1088,6 +1249,7 @@
           "term": 1,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-operationssjukvard-VASOS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1097,6 +1259,7 @@
           "term": 1,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-operationssjukvard-VASOS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1106,6 +1269,7 @@
           "term": 1,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-operationssjukvard-VASOS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1115,6 +1279,7 @@
           "term": 1,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-operationssjukvard-VASOS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1124,6 +1289,7 @@
           "term": 2,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-operationssjukvard-VASOS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1133,6 +1299,7 @@
           "term": 2,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-operationssjukvard-VASOS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1142,6 +1309,7 @@
           "term": 2,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/specialistsjukskoterskeprogrammet-operationssjukvard-VASOS/programmets-innehall",
           "ht26Verified": false
         }
@@ -1152,9 +1320,13 @@
           "mandatoryHp": 45,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -1162,9 +1334,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         }
       ],
@@ -1183,6 +1359,7 @@
           "term": 1,
           "hp": 4.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1192,6 +1369,7 @@
           "term": 1,
           "hp": 13.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1201,6 +1379,7 @@
           "term": 1,
           "hp": 12,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1210,6 +1389,7 @@
           "term": 2,
           "hp": 16.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1219,6 +1399,7 @@
           "term": 2,
           "hp": 13.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1228,6 +1409,7 @@
           "term": 3,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1237,6 +1419,7 @@
           "term": 3,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1246,6 +1429,7 @@
           "term": 4,
           "hp": 12,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1255,6 +1439,7 @@
           "term": 4,
           "hp": 4.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1264,6 +1449,7 @@
           "term": 4,
           "hp": 4.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1273,6 +1459,7 @@
           "term": 4,
           "hp": 9,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1282,6 +1469,7 @@
           "term": 5,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1291,6 +1479,7 @@
           "term": 5,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1300,6 +1489,7 @@
           "term": 5,
           "hp": 3,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1309,6 +1499,7 @@
           "term": 5,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1318,6 +1509,7 @@
           "term": 6,
           "hp": 9,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1327,6 +1519,7 @@
           "term": 6,
           "hp": 15,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1336,6 +1529,7 @@
           "term": 6,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1345,6 +1539,7 @@
           "term": 6,
           "hp": 7.5,
           "classification": "elective",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1354,6 +1549,7 @@
           "term": 6,
           "hp": 7.5,
           "classification": "elective",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         },
@@ -1363,6 +1559,7 @@
           "term": 6,
           "hp": 3,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/fysioterapeutprogrammet-VGFYT/programmets-innehall",
           "ht26Verified": false
         }
@@ -1373,9 +1570,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -1383,9 +1584,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -1393,9 +1598,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -1403,9 +1612,13 @@
           "mandatoryHp": 30,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -1413,9 +1626,13 @@
           "mandatoryHp": 33,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -1423,9 +1640,13 @@
           "mandatoryHp": 34.5,
           "electiveOptionsHp": 15,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         }
       ],
@@ -1444,6 +1665,7 @@
           "term": 1,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/halsovetenskapligt-basar-VZBAS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1453,6 +1675,7 @@
           "term": 1,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/halsovetenskapligt-basar-VZBAS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1462,6 +1685,7 @@
           "term": 2,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/halsovetenskapligt-basar-VZBAS/programmets-innehall",
           "ht26Verified": false
         },
@@ -1471,6 +1695,7 @@
           "term": 2,
           "hp": 7.5,
           "classification": "mandatory",
+          "classificationNote": null,
           "sourceUrl": "https://www.lu.se/studera/halsovetenskapligt-basar-VZBAS/programmets-innehall",
           "ht26Verified": false
         }
@@ -1481,9 +1706,13 @@
           "mandatoryHp": 15,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         },
         {
@@ -1491,9 +1720,13 @@
           "mandatoryHp": 15,
           "electiveOptionsHp": 0,
           "freeChoiceOptionsHp": 0,
+          "mixedRequirementHp": 0,
           "unclassified": 0,
           "requiredElectiveHp": null,
           "requiredFreeChoiceHp": null,
+          "majorChoiceOptions": [],
+          "requiredMajorChoiceHp": null,
+          "thesisHp": null,
           "termComplete": false
         }
       ],
