@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "university": "Lunds universitet",
+  "targetTerm": "HT2026",
+  "storage": "versioned-git-evidence-store",
+  "importStatus": "persisted-unverified-evidence",
+  "canonicalProgrammeDatabaseImported": false,
+  "liveDatabaseImported": false,
+  "sourceBranch": "gu-program-import",
+  "sources": [
+    {"path":"data/lund/structures.json","role":"programme-staging","programmeCount":194},
+    {"path":"data/lund/meta.json","role":"staging-status","programmeCount":194},
+    {"path":"data/lund/official-course-evidence.json","role":"original-official-page-course-rows","programmesChecked":37,"courseRows":87,"blobSha":"5cec46761412c44d374a2335cd22c7783fa54804"},
+    {"path":"data/lund/course-evidence-quality.json","role":"original-quality-audit","blobSha":"6ed9af14f30eed97c924550a5f340cf12a2975d9","caution":"Old elective-option sums and elective-course issue flags are not valid programme-completeness criteria."},
+    {"path":"data/lund/elective-classification.json","role":"corrected-course-classification","blobSha":"67a66ab0bc85fb857a4a92b98684650f56157ae3","courseRows":87,"mandatoryRows":78,"electiveRows":7,"mixedMajorAndThesisRows":1,"unclassifiedRows":1},
+    {"path":"data/lund/egeko-ht26-source-review.json","role":"EGEKO-HT26-official-source-review","blobSha":"a0f050ccfb1819553f17464e71b5e0d81343ed53"}
+  ],
+  "retentionPolicy": "Preserve original evidence, classification and source review as distinct versioned files. Do not overwrite original evidence with inferred requirements. No programme is promoted solely by this index.",
+  "promotionRequirements": ["Verify HT26 programme syllabus version and effective date", "Resolve all mandatory course requirements and major-choice alternatives", "Separate elective requirement credits from offered elective options", "Validate term and degree credit totals", "Retain official source URL and evidence for each promoted fact"],
+  "note": "This index is a durable import into the repository's evidence store, not a write to the application's canonical HT26 or live database."
+}
