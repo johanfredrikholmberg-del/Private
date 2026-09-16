@@ -6,6 +6,7 @@ on:
     branches: [gu-program-import]
     paths:
       - '.github/workflows/karlstad-catalogue-import.yml'
+      - 'scripts/kau-static-export.mjs'
 
 permissions:
   contents: write
@@ -26,9 +27,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Import official Karlstad programmes and course catalogue
+      - name: Import Karlstad catalogue first without blocking on individual course pages
         env:
-          KAU_COURSE_CONCURRENCY: '12'
+          KAU_VERIFY_STANDALONE: '0'
         run: node scripts/kau-static-export.mjs
       - name: Import official Karlstad programme structures
         env:
