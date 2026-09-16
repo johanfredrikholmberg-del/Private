@@ -1,0 +1,47 @@
+name: Lund isolated programme import
+on:
+  workflow_dispatch:
+  push:
+    branches: [gu-program-import]
+    paths:
+      - '.github/workflows/lund-isolated-import.yml'
+permissions:
+  contents: write
+concurrency:
+  group: lund-isolated-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-program-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import Lund into isolated staging
+        env:
+          LUND_LIMIT: '100'
+          LUND_CONCURRENCY: '6'
+        run: node scripts/lund-isolated-import.mjs
+      - name: Validate isolated Lund output
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');const q=JSON.parse(fs.readFileSync('data/susa/structure-queue.json'));const m=JSON.parse(fs.readFileSync('data/lund/meta.json'));const rows=JSON.parse(fs.readFileSync('data/lund/structures.json'));const expected=q.filter(x=>String(x.university||'').toLowerCase().includes('lunds universitet')).length;
+          if(!expected||m.queue!==expected||!m.attempted||rows.length!==m.processed)throw Error('Lund coverage inconsistent');
+          if(rows.some(x=>!String(x.university||'').toLowerCase().includes('lunds universitet')))throw Error('Non-Lund data in isolated output');
+          console.log(JSON.stringify(m,null,2));
+          NODE
+      - name: Commit Lund staging only
+        run: |
+          if [ -z "$(git status --porcelain -- data/lund)" ]; then exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/lund
+          git commit -m 'Stage isolated Lund programme structures [skip ci]'
+          git fetch origin gu-program-import
+          git rebase origin/gu-program-import
+          git push origin HEAD:gu-program-import
