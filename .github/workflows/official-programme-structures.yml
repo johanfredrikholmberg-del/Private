@@ -19,7 +19,7 @@ concurrency:
 jobs:
   import-offline:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 55
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,39 +28,38 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      # These importers fetch the university's official pages directly. Never call
-      # the deployed StudieLots API: importing via Vercel exhausted its CPU quota.
+      # Read official sources directly from GitHub Actions, never the Vercel API.
       - name: Import Karlstad course catalogue from official sources
         env:
           KAU_COURSE_CONCURRENCY: '4'
         run: node scripts/kau-static-export.mjs
-      - name: Import Karlstad programme structures from official sources
-        env:
-          KAU_STRUCTURE_CONCURRENCY: '4'
-        run: node scripts/kau-programme-structure-pipeline.mjs
-      - name: Validate imported data
+      # Do not overwrite previously verified programme structures: the current
+      # Karlstad structure parser returned metadata-only for all 134 programmes.
+      # Re-enable structure import only after its parser passes regression tests.
+      - name: Validate imported catalogue locally without additional university requests
         run: |
-          node scripts/kau-catalogue-audit.mjs
           node - <<'NODE'
           const fs = require('fs');
-          const rows = JSON.parse(fs.readFileSync('data/susa/structures.json','utf8'));
+          const programmes = JSON.parse(fs.readFileSync('data/kau/programmes.json','utf8'));
+          const courses = JSON.parse(fs.readFileSync('data/kau/courses.json','utf8'));
           const meta = JSON.parse(fs.readFileSync('data/kau/meta.json','utf8'));
-          const structure = JSON.parse(fs.readFileSync('data/kau/structure-meta.json','utf8'));
-          const allowed = new Set(['complete','choice-required','partial-structure','manual-review','metadata-only']);
-          if (!rows.length || rows.some(row => !allowed.has(row.coverage))) throw new Error('Invalid programme structure data');
-          if (meta.counts.programmes !== 134 || meta.counts.susaCourseDefinitions < 500) throw new Error('Karlstad catalogue incomplete');
-          if (structure.officialProgrammes !== 134 || structure.processed !== 134) throw new Error('Karlstad programme structure audit incomplete');
+          if (programmes.length !== 134 || meta.counts.programmes !== programmes.length) throw new Error('Karlstad programme catalogue incomplete');
+          if (courses.length < 500 || meta.counts.susaCourseDefinitions !== courses.length) throw new Error('Karlstad course catalogue incomplete');
+          if (new Set(programmes.map(p => p.code)).size !== programmes.length) throw new Error('Duplicate Karlstad programme codes');
+          if (courses.some(c => !c.code || !c.name || c.university !== 'Karlstads universitet')) throw new Error('Invalid Karlstad course');
+          if (courses.some(c => c.standalone === true && c.standaloneStatus !== 'verified-standalone-offering')) throw new Error('Unverified standalone course');
+          console.log(`Validated ${programmes.length} programmes and ${courses.length} courses; existing programme structures preserved.`);
           NODE
       - name: Commit verified imports to existing database
         run: |
-          if [ -z "$(git status --porcelain -- data/susa/structures.json data/susa/structure-meta.json data/kau)" ]; then
+          if [ -z "$(git status --porcelain -- data/kau/programmes.json data/kau/courses.json data/kau/meta.json)" ]; then
             echo 'No database changes to commit.'
             exit 0
           fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/susa/structures.json data/susa/structure-meta.json data/kau
-          git commit -m 'Import official Karlstad university data [skip ci]'
+          git add -f data/kau/programmes.json data/kau/courses.json data/kau/meta.json
+          git commit -m 'Import verified Karlstad programme and course catalogue [skip ci]'
           git fetch origin studielots-v2
           git rebase origin/studielots-v2
           git push origin HEAD:studielots-v2
