@@ -1,0 +1,47 @@
+name: Chalmers sequential programme plans 2026
+on:
+  push:
+    branches: [gu-program-import]
+    paths:
+      - '.github/workflows/chalmers-sequential-programplans.yml'
+      - 'scripts/chalmers-sequential-programplans.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: chalmers-sequential-programplans
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-program-import
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install requests beautifulsoup4
+      - name: Collect official programme plans one year at a time
+        run: python scripts/chalmers-sequential-programplans.py
+      - name: Validate evidence boundaries and persist results
+        if: always()
+        run: |
+          if [ ! -f data/chalmers/programplans-2026-sequential-evidence.json ]; then exit 1; fi
+          python - <<'PY'
+          import json
+          p=json.load(open('data/chalmers/programplans-2026-sequential-evidence.json'))
+          assert p['canonicalDatabaseWritten'] is False and p['liveDatabaseWritten'] is False
+          assert p['cohortVerified'] is False
+          assert p['totalSourceRows'] == sum(y['sourceRows'] for x in p['programmes'] for y in x['years'])
+          assert [x['programmeCode'] for x in p['programmes']] == ['TKAUT','MPENM']
+          print('Chalmers source module rows:',p['totalSourceRows'])
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/chalmers/programplans-2026-sequential-evidence.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'data: stage Chalmers 2026 programme-plan source evidence [skip ci]'
+          git pull --rebase origin gu-program-import
+          git push origin HEAD:gu-program-import
