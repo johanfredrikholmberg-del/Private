@@ -2,15 +2,18 @@
   "university": "Lunds universitet",
   "faculty": "LTH",
   "targetAcademicYear": "2026/27",
-  "discoveryStatus": "official-source-endpoints-confirmed-not-crawled",
+  "discoveryStatus": "official-source-endpoints-confirmed-direct-lot-html-requires-javascript",
   "sources": [
-    {"url":"https://kurser.lth.se/kursplaner/","kind":"course-syllabus-index","evidence":"Lists adopted course syllabi and LTH programme offerings for 2026/27 and standalone courses HT2026"},
-    {"url":"https://kurser.lth.se/lot/","kind":"programme-course-structure","evidence":"Programme by academic year or entry cohort; course classifications, specialisations and theses; changes after approved offering"},
-    {"url":"https://www.student.lth.se/kurs-och-programinformation/programinnehall","kind":"programme-syllabus-index","evidence":"Programme education plans and links to programme course schedules"}
+    {"url":"https://kurser.lth.se/kursplaner/","kind":"course-syllabus-index","status":"official-index-identified-not-extracted"},
+    {"url":"https://kurser.lth.se/lot/","kind":"programme-course-structure","status":"direct-html-extraction-blocked-javascript-required","directPageText":"Javascript måste vara påslaget / Javascript must be enabled","dataDimensions":["programme-academic-year","programme-entry-cohort","department-academic-year","thesis","post-decision-changes","course-history"]},
+    {"url":"https://www.student.lth.se/kurs-och-programinformation/programinnehall","kind":"programme-syllabus-index","status":"official-index-identified-not-extracted","dataDimensions":["mandatory-and-elective-courses","specialisations","thesis","academic-year","study-period","syllabus-links"]},
+    {"url":"https://www.lth.se/lthin/utbildningsadministration/kursutbud/?L=2","kind":"official-publication-process","status":"official-page-reviewed","evidence":"Published course offerings and syllabi available from early May for forthcoming academic year at kurser.lth.se; Proplan requires login even for reading."},
+    {"url":"https://www.lth.se/fileadmin/lth/anstallda/utbildningsadministration/kursutbud/Tidsplan_utbud_2026_2027.pdf","kind":"2026-27-publication-schedule","status":"official-pdf-reviewed","evidence":"Education plans scheduled published March 9 2026; course plans and programme course schedules published after April 17 2026 decisions."}
   ],
-  "nextImport": "Extract 2026/27 programme-year and cohort-specific course rows with course code, hp, mandatory/elective status, period, syllabus URL and effective year; independently verify against programme education plans.",
-  "courseRowsImported": 0,
-  "canonicalDatabaseWritten": false,
-  "liveDatabaseWritten": false,
-  "caution": "Discovery record only; do not infer complete HT26 programme structures or promote staging coverage."
+  "extractionBlocker":"The publicly accessible LOT entry page returns only a JavaScript-required message to a text-only fetch. Do not report course rows as extracted or infer a public API. Obtain rendered programme/cohort pages or documented machine-readable feed and validate against the published syllabi.",
+  "nextImport":"Extract actual 2026/27 programme-year and cohort-specific course rows with course code, hp, mandatory/elective status, period, syllabus URL and effective year; independently verify against programme education plans. Keep original sources and provenance.",
+  "courseRowsImported":0,
+  "canonicalDatabaseWritten":false,
+  "liveDatabaseWritten":false,
+  "caution":"This file records confirmed source availability and a tested extraction blocker, not imported course records or verified HT26 programme structures."
 }
