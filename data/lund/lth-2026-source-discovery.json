@@ -1,0 +1,16 @@
+{
+  "university": "Lunds universitet",
+  "faculty": "LTH",
+  "targetAcademicYear": "2026/27",
+  "discoveryStatus": "official-source-endpoints-confirmed-not-crawled",
+  "sources": [
+    {"url":"https://kurser.lth.se/kursplaner/","kind":"course-syllabus-index","evidence":"Lists adopted course syllabi and LTH programme offerings for 2026/27 and standalone courses HT2026"},
+    {"url":"https://kurser.lth.se/lot/","kind":"programme-course-structure","evidence":"Programme by academic year or entry cohort; course classifications, specialisations and theses; changes after approved offering"},
+    {"url":"https://www.student.lth.se/kurs-och-programinformation/programinnehall","kind":"programme-syllabus-index","evidence":"Programme education plans and links to programme course schedules"}
+  ],
+  "nextImport": "Extract 2026/27 programme-year and cohort-specific course rows with course code, hp, mandatory/elective status, period, syllabus URL and effective year; independently verify against programme education plans.",
+  "courseRowsImported": 0,
+  "canonicalDatabaseWritten": false,
+  "liveDatabaseWritten": false,
+  "caution": "Discovery record only; do not infer complete HT26 programme structures or promote staging coverage."
+}
