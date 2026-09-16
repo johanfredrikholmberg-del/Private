@@ -1,0 +1,56 @@
+name: Import official StudieLots study data
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/import-official-study-data.yml']
+  schedule:
+    - cron: '47 3 * * 2,4,6'
+permissions:
+  contents: write
+concurrency:
+  group: studielots-official-data-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Enrich existing canonical data from official university sources
+        env:
+          STRUCTURE_LIMIT: '500'
+          STRUCTURE_CONCURRENCY: '8'
+          HB_STRUCTURE_LIMIT: '100'
+          HB_STRUCTURE_CONCURRENCY: '8'
+        run: node scripts/official-programme-structure-pipeline.mjs
+      - name: Validate enriched structures before saving
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const rows=JSON.parse(fs.readFileSync('data/susa/structures.json','utf8'));
+          const keys=rows.map(x=>x.key);
+          if (!rows.length || keys.some(x=>!x) || new Set(keys).size!==keys.length) throw Error('Missing or duplicate programme keys');
+          const allowed=new Set(['complete','choice-required','partial-structure','manual-review','metadata-only']);
+          if (rows.some(x=>!allowed.has(x.coverage))) throw Error('Invalid coverage classification');
+          const queue=JSON.parse(fs.readFileSync('data/susa/structure-queue.json','utf8'));
+          const meta=JSON.parse(fs.readFileSync('data/susa/structure-meta.json','utf8'));
+          if(meta.processed!==rows.length || meta.remaining!==Math.max(0,queue.length-rows.length)) throw Error('Inconsistent import counts');
+          console.log(`Validated ${rows.length} structures; ${meta.remaining} not yet processed`);
+          NODE
+      - name: Save verified import progress to existing database files
+        run: |
+          if [ -z "$(git status --porcelain -- data/susa/structures.json data/susa/structure-meta.json)" ]; then echo 'No new structure data'; exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/susa/structures.json data/susa/structure-meta.json
+          git commit -m 'Import official programme structures [skip ci]'
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
+          git push origin HEAD:studielots-v2
