@@ -1,0 +1,61 @@
+name: Remaining universities canonical import
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [remaining-universities-import]
+    paths:
+      - '.github/workflows/remaining-universities-import.yml'
+      - 'scripts/official-programme-structure-pipeline.mjs'
+      - 'scripts/build-ht26-database.mjs'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: remaining-universities-canonical-import
+  cancel-in-progress: false
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: remaining-universities-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Enrich unresolved programme structures across remaining universities
+        env:
+          STRUCTURE_LIMIT: '3000'
+          STRUCTURE_CONCURRENCY: '12'
+        run: node scripts/official-programme-structure-pipeline.mjs
+      - name: Rebuild canonical HT26 database with deduplication
+        run: node scripts/build-ht26-database.mjs
+      - name: Validate canonical uniqueness
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const programs=JSON.parse(fs.readFileSync('data/HT26/programs.json','utf8'));
+          const courses=JSON.parse(fs.readFileSync('data/HT26/courses.json','utf8'));
+          const structures=JSON.parse(fs.readFileSync('data/HT26/program-structures.json','utf8'));
+          const dup=(rows,key)=>{const seen=new Set(),d=[];for(const x of rows){const k=key(x);if(seen.has(k))d.push(k);else seen.add(k)}return d};
+          const pd=dup(programs,x=>x.key);
+          const cd=dup(courses,x=>x.key);
+          const sd=dup(structures,x=>x.key);
+          if(pd.length||cd.length||sd.length) throw new Error(`Canonical duplicates: programs=${pd.length}, courses=${cd.length}, structures=${sd.length}`);
+          console.log({programs:programs.length,courses:courses.length,structures:structures.length,duplicatePrograms:0,duplicateCourses:0,duplicateStructures:0});
+          NODE
+      - name: Commit remaining university enrichment
+        run: |
+          if [ -z "$(git status --porcelain -- data/susa/structures.json data/susa/structure-meta.json data/HT26)" ]; then exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/susa/structures.json data/susa/structure-meta.json data/HT26
+          git commit -m 'Enrich remaining universities in canonical HT26 database [skip ci]'
+          git fetch origin remaining-universities-import
+          git rebase origin/remaining-universities-import
+          git push origin HEAD:remaining-universities-import
