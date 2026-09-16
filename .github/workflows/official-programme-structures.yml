@@ -1,4 +1,4 @@
-name: Official programme structures
+name: Official university data import (off Vercel)
 
 on:
   workflow_dispatch:
@@ -17,8 +17,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  enrich:
+  import-offline:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
@@ -27,30 +28,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Import official programme structures
+      # These importers fetch the university's official pages directly. Never call
+      # the deployed StudieLots API: importing via Vercel exhausted its CPU quota.
+      - name: Import Karlstad course catalogue from official sources
         env:
-          STRUCTURE_LIMIT: '750'
-          STRUCTURE_CONCURRENCY: '10'
-          HB_STRUCTURE_LIMIT: '100'
-          HB_STRUCTURE_CONCURRENCY: '8'
-          HB_INDEX_CONCURRENCY: '10'
-        run: |
-          node scripts/official-programme-structure-pipeline.mjs
-          node scripts/hb-verified-structure-overrides.mjs
-          for n in $(seq 2 13); do
-            node "scripts/hb-verified-structure-overrides-${n}.mjs"
-          done
-      - name: Import Karlstad course catalogue
-        env:
-          KAU_COURSE_CONCURRENCY: '12'
+          KAU_COURSE_CONCURRENCY: '4'
         run: node scripts/kau-static-export.mjs
-      - name: Import Karlstad programme structures
+      - name: Import Karlstad programme structures from official sources
         env:
-          KAU_STRUCTURE_CONCURRENCY: '10'
+          KAU_STRUCTURE_CONCURRENCY: '4'
         run: node scripts/kau-programme-structure-pipeline.mjs
       - name: Validate imported data
         run: |
-          node scripts/hb-77-audit.mjs
           node scripts/kau-catalogue-audit.mjs
           node - <<'NODE'
           const fs = require('fs');
@@ -71,7 +60,7 @@ jobs:
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add -f data/susa/structures.json data/susa/structure-meta.json data/kau
-          git commit -m 'Import official university programme and course data [skip ci]'
+          git commit -m 'Import official Karlstad university data [skip ci]'
           git fetch origin studielots-v2
           git rebase origin/studielots-v2
           git push origin HEAD:studielots-v2
