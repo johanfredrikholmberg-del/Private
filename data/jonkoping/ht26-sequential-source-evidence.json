@@ -1,0 +1,20 @@
+{
+  "institution": "jonkoping",
+  "targetStart": "HT2026",
+  "generatedAt": "2026-09-16T19:51:41.935635+00:00",
+  "status": "source-diagnostics-unverified",
+  "cohortVerified": false,
+  "canonicalDatabaseWritten": false,
+  "liveDatabaseWritten": false,
+  "programmes": [
+    {
+      "programme": "Bachelor in International Economics, HT2026",
+      "sourceUrl": "https://jonkopinguniversity.se/student/studier/utbildningsplaner-med-kursplaner.html?id=748ada1b-79ba-11f0-b4fd-2140da76402d&year=2026",
+      "courseRows": 0,
+      "candidateTextLines": [],
+      "status": "fetch-error",
+      "error": "HTTPSConnectionPool(host='jonkopinguniversity.se', port=443): Max retries exceeded with url: /student/studier/utbildningsplaner-med-kursplaner.html?id=748ada1b-79ba-11f0-b4fd-2140da76402d&year=2026 (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'jonkopinguniversity.se'. (_ssl.c:1010)\")))"
+    }
+  ],
+  "totalCandidateLines": 0
+}
