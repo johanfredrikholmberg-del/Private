@@ -1,0 +1,69 @@
+name: Import Karlstad catalogue and programme structures
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [gu-program-import]
+    paths:
+      - '.github/workflows/karlstad-catalogue-import.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: karlstad-catalogue-import
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gu-program-import
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import official Karlstad programmes and course catalogue
+        env:
+          KAU_COURSE_CONCURRENCY: '12'
+        run: node scripts/kau-static-export.mjs
+      - name: Import official Karlstad programme structures
+        env:
+          KAU_STRUCTURE_CONCURRENCY: '10'
+        run: node scripts/kau-programme-structure-pipeline.mjs
+      - name: Validate Karlstad import and retain other universities
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const cp=require('child_process');
+          const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+          const meta=read('data/kau/meta.json');
+          const structureMeta=read('data/kau/structure-meta.json');
+          const programmes=read('data/kau/programmes.json');
+          const courses=read('data/kau/courses.json');
+          const rows=read('data/susa/structures.json');
+          const previous=JSON.parse(cp.execFileSync('git',['show','HEAD:data/susa/structures.json'],{encoding:'utf8',maxBuffer:100*1024*1024}));
+          const isKau=x=>String(x.university||'').toLocaleLowerCase('sv-SE')==='karlstads universitet';
+          if(programmes.length!==134||structureMeta.officialProgrammes!==134||structureMeta.processed!==134)throw new Error('Karlstad programme coverage incomplete');
+          if(courses.length<500||meta.counts.susaCourseDefinitions!==courses.length)throw new Error('Karlstad course catalogue incomplete');
+          if(rows.filter(isKau).length!==134)throw new Error('Karlstad structures missing');
+          const key=x=>JSON.stringify(x);
+          const otherBefore=previous.filter(x=>!isKau(x)).map(key).sort();
+          const otherAfter=rows.filter(x=>!isKau(x)).map(key).sort();
+          if(JSON.stringify(otherBefore)!==JSON.stringify(otherAfter))throw new Error('Other universities changed');
+          if(new Set(programmes.map(x=>x.code)).size!==programmes.length)throw new Error('Duplicate programme codes');
+          console.log(JSON.stringify({programmes:programmes.length,courses:courses.length,structureCoverage:structureMeta.counts,verifiedStandalone:meta.counts.verifiedStandalone},null,2));
+          NODE
+      - name: Commit verified Karlstad data
+        run: |
+          if [ -z "$(git status --porcelain -- data/kau data/susa/structures.json)" ]; then exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/kau data/susa/structures.json
+          git commit -m 'Import Karlstad official catalogue and structures [skip ci]'
+          git fetch origin gu-program-import
+          git rebase origin/gu-program-import
+          git push origin HEAD:gu-program-import
