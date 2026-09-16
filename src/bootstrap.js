@@ -1,6 +1,6 @@
 (()=>{'use strict';
 const groups=[
-  {name:'pages',scripts:['/src/pages/registry.js?v=1','/src/pages/home/page.js?v=1','/src/pages/studies/page.js?v=1','/src/pages/opportunities/page.js?v=1','/src/pages/planner/page.js?v=1','/src/pages/programs/page.js?v=1','/src/pages/more/page.js?v=1','/src/pages/method/page.js?v=1']},
+  {name:'pages',scripts:['/src/pages/registry.js?v=1','/src/pages/home/page.js?v=2','/src/pages/studies/page.js?v=1','/src/pages/opportunities/page.js?v=1','/src/pages/planner/page.js?v=1','/src/pages/programs/page.js?v=1','/src/pages/more/page.js?v=1','/src/pages/method/page.js?v=1']},
   {name:'app-context',scripts:['/src/app/context.js?v=1']},
   {name:'core',scripts:['/src/core/engine.js?v=3']},
   {name:'merit-import',scripts:['/src/features/merit-import/ladok-import.js?v=1']},
