@@ -1,0 +1,15 @@
+import fs from 'node:fs';import vm from 'node:vm';import assert from 'node:assert/strict';
+const window={};const context=vm.createContext({window,console});
+for(const f of ['src/engines/credit-transfer/engine.js','src/engines/credit-transfer/adapter.js'])vm.runInContext(fs.readFileSync(f,'utf8'),context,{filename:f});
+const {creditTransfer:engine,creditTransferAdapter:adapter}=window.StudieLotsEngines;
+const course=(code,name,hp=7.5,extra={})=>({code,name,hp,subject:name,content:name,learningOutcomes:name,levelCode:'G1N',...extra});
+let passed=0;const test=(name,fn)=>{fn();passed++;console.log('✓',name)};
+test('strong counts in study plan',()=>{const s=course('S1','Redovisning och ekonomistyrning'),t=course('T1','Redovisning och ekonomistyrning');const r=engine.assess(s,t);assert.equal(r.classification,'strong');assert.equal(r.countsInStudyPlan,true)});
+test('low extent cannot be strong',()=>{const r=engine.assess(course('S2','Marknadsföring',3),course('T2','Marknadsföring',7.5));assert.notEqual(r.classification,'strong');assert.equal(r.countsInStudyPlan,false)});
+test('historical approval alone cannot make strong',()=>{const s=course('S3','Biologi',7.5,{subject:'Biologi',content:'celler arter ekologi',learningOutcomes:'förstå ekologi'}),t=course('T3','Företagsekonomi',7.5,{subject:'Företagsekonomi',content:'redovisning finansiering organisation',learningOutcomes:'analysera företag'});const r=engine.assess(s,t,{history:[{sourceCode:'S3',targetCode:'T3',decision:'bifall'}]});assert.notEqual(r.classification,'strong');assert.equal(r.countsInStudyPlan,false)});
+test('level conflict blocks strong',()=>{const s=course('S4','Strategisk ledning',7.5,{levelCode:'G1N'}),t=course('T4','Strategisk ledning',7.5,{levelCode:'A1N'});assert.notEqual(engine.assess(s,t).classification,'strong')});
+test('one source cannot count twice',()=>{const merit=course('S5','Organisation och ledarskap');const rows=[course('T5A','Organisation och ledarskap'),course('T5B','Organisation och ledarskap')];const out=adapter.applyToRows(rows,[merit]);assert.equal(out.filter(r=>r.creditTransferCountsInStudyPlan).length,1);assert.equal(adapter.summary(out).strongHp,7.5)});
+test('ordinary credited target is not TG matched',()=>{const rows=[{...course('T6','Nationalekonomi'),credited:true,matchedCourseCode:'S6'}],out=adapter.applyToRows(rows,[course('S6','Nationalekonomi')]);assert.equal(out[0].creditTransfer,null);assert.equal(adapter.summary(out).strongHp,0)});
+test('ordinary-used source cannot be reused for TG',()=>{const merit=course('S7','Statistik');const rows=[{...course('T7A','Statistik'),credited:true,matchedCourseCode:'S7'},course('T7B','Statistik')],out=adapter.applyToRows(rows,[merit]);assert.equal(out.filter(r=>r.creditTransferCountsInStudyPlan).length,0)});
+test('only strong contributes hp',()=>{const rows=adapter.applyToRows([course('T8','Redovisning'),course('T9','Juridik')],[course('S8','Redovisning'),course('S9','Biologi')]);const sum=adapter.summary(rows);assert.equal(sum.strongHp,7.5);assert.equal(sum.strongCount,1)});
+console.log(`TG regression: ${passed} tests passed`);
