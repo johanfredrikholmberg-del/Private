@@ -37,7 +37,7 @@ jobs:
           node-version: '22'
       - name: Enrich programme structures
         env:
-          STRUCTURE_LIMIT: '500'
+          STRUCTURE_LIMIT: '750'
           STRUCTURE_CONCURRENCY: '10'
           HB_STRUCTURE_LIMIT: '100'
           HB_STRUCTURE_CONCURRENCY: '8'
