@@ -1,10 +1,11 @@
 import {readFile} from 'node:fs/promises';
+import {join} from 'node:path';
 
 // The programme search uses the imported HT26 catalogue only. No live provider requests.
 const norm=v=>String(v??'').trim().toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const code=v=>String(v??'').trim().toUpperCase();
 const identity=(university,programCode)=>`${norm(university)}:${code(programCode)}`;
-const read=async name=>JSON.parse(await readFile(new URL(`../data/HT26/${name}.json`,import.meta.url),'utf8'));
+const read=async name=>JSON.parse(await readFile(join(process.cwd(),'data','HT26',`${name}.json`),'utf8'));
 let cached;
 async function catalogue(){
   if(cached)return cached;
