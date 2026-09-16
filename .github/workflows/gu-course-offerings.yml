@@ -33,17 +33,30 @@ jobs:
           GU_OFFERING_CONCURRENCY: '10'
           GU_OFFERING_LIMIT: '3000'
         run: node scripts/gu-course-offerings-pipeline.mjs
-      - name: Validate GU offering output
+      - name: Validate GU offering output and prevent data loss
         run: |
           node - <<'NODE'
           const fs=require('fs');
+          const cp=require('child_process');
           const meta=JSON.parse(fs.readFileSync('data/gu/course-offerings-meta.json','utf8'));
           const rows=JSON.parse(fs.readFileSync('data/HT26/course-offerings.json','utf8'));
+          const previous=JSON.parse(cp.execFileSync('git',['show','HEAD:data/HT26/course-offerings.json'],{encoding:'utf8',maxBuffer:100*1024*1024}));
           if(meta.database!=='StudieLots HT26') throw new Error('Wrong target database');
           if(!Array.isArray(rows)) throw new Error('course-offerings.json missing');
-          if(meta.offeringRows!==rows.filter(x=>String(x.university||'').toLowerCase().includes('göteborgs universitet')).length) throw new Error('Offering row count mismatch');
+          const isGU=x=>String(x.university||'').toLocaleLowerCase('sv-SE')==='göteborgs universitet';
+          const guRows=rows.filter(isGU);
+          if(meta.offeringRows!==guRows.length) throw new Error('Offering row count mismatch');
+          const key=x=>String(x.key||'');
+          if(new Set(rows.map(key)).size!==rows.length) throw new Error('Duplicate offering keys');
+          const usable=x=>Boolean(x.startDate&&x.endDate&&x.sourceUrl&&x.standaloneSearchable===true&&x.applicationStatus!=='cancelled');
+          const retained=new Set(guRows.filter(usable).map(x=>String(x.courseCode||'').toUpperCase()));
+          const missing=[...new Set(previous.filter(isGU).filter(usable).map(x=>String(x.courseCode||'').toUpperCase()))].filter(code=>!retained.has(code));
+          if(missing.length) throw new Error('Existing usable GU courses lost: '+missing.slice(0,30).join(', '));
+          const otherBefore=previous.filter(x=>!isGU(x)).map(key).sort();
+          const otherAfter=rows.filter(x=>!isGU(x)).map(key).sort();
+          if(JSON.stringify(otherBefore)!==JSON.stringify(otherAfter)) throw new Error('Other universities changed');
           if(meta.processedThisRun < meta.remaining && meta.processedThisRun < 2000) throw new Error('GU import stopped before full unresolved sweep');
-          console.log({meta,totalRows:rows.length});
+          console.log({totalRows:rows.length,guRows:guRows.length,previousUsableGU:previous.filter(isGU).filter(usable).length,currentUsableGU:guRows.filter(usable).length});
           NODE
       - name: Commit GU course offering progress
         run: |
