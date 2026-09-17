@@ -24,8 +24,22 @@ def main():
             response.raise_for_status()
             soup = BeautifulSoup(response.text, 'html.parser')
             text = soup.get_text(' ', strip=True)
-            item['diagnostics'] = {'httpStatus': response.status_code, 'finalUrl': response.url, 'title': soup.title.get_text(' ', strip=True) if soup.title else None, 'tableCount': len(soup.find_all('table')), 'textExcerpt': text[:250], 'ht26Mentioned': bool(re.search(r'HT\s*2026|HT\s*26', text, re.I))}
-            if not item['diagnostics']['ht26Mentioned']:
+            diagnostics = {'httpStatus': response.status_code, 'finalUrl': response.url, 'title': soup.title.get_text(' ', strip=True) if soup.title else None, 'tableCount': len(soup.find_all('table')), 'textExcerpt': text[:250], 'ht26Mentioned': bool(re.search(r'HT\s*2026|HT\s*26', text, re.I))}
+            # Preserve bounded, source-derived DOM clues when the legacy table parser finds no rows.
+            # These are diagnostic samples, NOT verified courses or an import source.
+            main = soup.find('main') or soup.find(id='main') or soup.body or soup
+            diagnostics['mainElement'] = main.name if main else None
+            diagnostics['mainTextExcerpt'] = main.get_text(' ', strip=True)[:1200] if main else ''
+            diagnostics['courseCodeTextMatches'] = list(dict.fromkeys(re.findall(r'\b[A-Z]{1,4}[0-9]{3}[A-Z0-9]?\b', main.get_text(' ', strip=True))))[:20] if main else []
+            diagnostics['courseLinkSamples'] = [
+                {'href': a.get('href', '')[:250], 'text': a.get_text(' ', strip=True)[:180], 'parentTag': a.parent.name if a.parent else None, 'parentClass': (a.parent.get('class') or [])[:5] if a.parent else []}
+                for a in (main.find_all('a', href=True) if main else [])
+                if re.search(r'/kurser/|/course/|kurs|course', a.get('href', ''), re.I)
+            ][:18]
+            diagnostics['headingSamples'] = [{'tag': h.name, 'text': h.get_text(' ', strip=True)[:160]} for h in (main.find_all(['h1', 'h2', 'h3', 'h4']) if main else [])][:24]
+            diagnostics['embeddedDataScriptSamples'] = [{'id': s.get('id'), 'type': s.get('type'), 'textExcerpt': (s.string or s.get_text(' ', strip=True))[:240]} for s in soup.find_all('script') if s.get('type') == 'application/json' or s.get('id') == '__NEXT_DATA__'][:4]
+            item['diagnostics'] = diagnostics
+            if not diagnostics['ht26Mentioned']:
                 item['status'] = 'cohort-not-confirmed'
             else:
                 seen = set()
