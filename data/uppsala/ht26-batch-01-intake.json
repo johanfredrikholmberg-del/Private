@@ -1,0 +1,23 @@
+{
+  "university":"Uppsala universitet",
+  "cohort":"HT2026",
+  "batchTarget":20,
+  "status":"intake-only-not-verified-not-imported",
+  "source":"https://www.uu.se/utbildning/sok?query=civilingenj%C3%B6r",
+  "existingPartialProgrammeCodes":["SPA1K","UPE1K"],
+  "newProgrammeCandidates":[
+    {"name":"Civilingenjörsprogrammet i informationsteknologi","source":"https://www.uu.se/utbildning/program/civilingenjorsprogrammet-informationsteknologi.html"},
+    {"name":"Civilingenjörsprogrammet i teknisk fysik","code":"TTF2Y"},
+    {"name":"Civilingenjörsprogrammet i miljö- och vattenteknik","code":"TMV2Y","source":"https://www.uu.se/utbildning/program/civilingenjorsprogrammet-miljo-och-vattenteknik"},
+    {"name":"Civilingenjörsprogrammet i teknisk matematik","source":"https://www.uu.se/utbildning/program/civilingenjorsprogrammet-teknisk-matematik"},
+    {"name":"Civilingenjörsprogrammet i molekylär bioteknik","code":"TMB2Y"},
+    {"name":"Civilingenjörsprogrammet i elektroteknik","source":"https://www.uu.se/utbildning/program/civilingenjorsprogrammet-elektroteknik"},
+    {"name":"Civilingenjörsprogrammet i kemiteknik","code":"TKT2Y","source":"https://www.uu.se/utbildning/program/civilingenjorsprogrammet-kemiteknik"},
+    {"name":"Civilingenjörsprogrammet i energisystem","code":"TES2Y"},
+    {"name":"Civilingenjörsprogrammet i industriell ekonomi"},
+    {"name":"Civilingenjörsprogrammet i teknisk fysik med materialvetenskap","code":"TTM2Y"}
+  ],
+  "requirementsBeforeImport":["Official HT2026 programme and education-plan version","Official HT2026 study-plan term and course structure","All applicable individual course syllabi","Mandatory/elective paths and prerequisite rules","Course offerings and teaching modes","Credit reconciliation per valid path"],
+  "canonicalDatabaseWritten":false,
+  "liveDatabaseWritten":false
+}
