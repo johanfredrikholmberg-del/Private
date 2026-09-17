@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "programmeCode": "TAROM",
+  "sourceEvidence": "data/umea/ht26-sequential-studyplan-evidence.json",
+  "officialSourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/tarom/",
+  "sourcePlanTitle": "Utbildningsplan, Masterprogrammet i robotik och reglerteknik, 2026-08-31 och tillsvidare",
+  "status": "pathways-separated-review-required",
+  "ht26IntakeIndependentlyVerified": false,
+  "canonicalDatabaseWritten": false,
+  "liveDatabaseWritten": false,
+  "pathways": [
+    {
+      "id": "computer-science",
+      "label": "Fördjupningsprofil datavetenskap, inriktning robotik och reglerteknik",
+      "sourceTermBlockIndicesZeroBased": [0, 1, 2, 3],
+      "termNumbers": [1, 2, 3, 4],
+      "term4ThesisSourceLines": ["Examensarbete för masterexamen i", "datavetenskap, inriktning robotik och reglerteknik*, 30 hp"],
+      "term4ThesisCandidateName": "Examensarbete för masterexamen i datavetenskap, inriktning robotik och reglerteknik",
+      "term4ThesisCandidateHp": 30,
+      "term4ThesisCourseCodeVerified": false,
+      "term4ReplacementNote": "**Kan ersättas av kursen Studentkonferens i elektronik och mekatronik, 7,5 hp",
+      "term4ReplacementNoteIsAdditionalCourse": false,
+      "requirementsVerified": false
+    },
+    {
+      "id": "electronics",
+      "label": "Fördjupningsprofil elektronik, inriktning robotik och reglerteknik",
+      "sourceProfileHeading": "Studieplan för fördjupningsprofil elektronik (inriktning robotik och reglerteknik)",
+      "sourceTermBlockIndicesZeroBased": [4, 5, 6, 7],
+      "termNumbers": [1, 2, 3, 4],
+      "term4ThesisCandidateName": "Examensarbete för masterexamen i elektronik, inriktning robotik och reglerteknik",
+      "term4ThesisCandidateHp": 30,
+      "term4ThesisCourseCodeVerified": false,
+      "term4ReplacementNote": "**Kan ersättas av kursen Student Conference in Computing Science, 7,5 hp.",
+      "term4ReplacementNoteIsAdditionalCourse": false,
+      "requirementsVerified": false
+    }
+  ],
+  "electiveCatalogue": {
+    "sourceTermBlockIndexZeroBased": 7,
+    "startsAtHeading": "Valbara kurser",
+    "belongsToSingleTerm": false,
+    "notAdditiveToTerm4Credits": true,
+    "areas": ["datavetenskap", "elektronik"],
+    "starredCourseDegreeRequirementsNeedValidation": true,
+    "note": "The catalogue and starred-course rules are not ordinary fourth-term courses. Preserve the original source lines and verify each degree requirement against the official plan before any import."
+  },
+  "reviewBlockers": ["Verify applicability to HT2026 intake independently", "Confirm first pathway heading and both pathway boundaries in official plan", "Verify course codes and whether thesis titles are complete", "Resolve starred degree requirements and elective choices separately", "Do not merge repeated term numbers across pathways"]
+}
