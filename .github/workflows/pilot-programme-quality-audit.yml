@@ -1,0 +1,47 @@
+name: Pilot programme quality audit
+on:
+  push:
+    branches: [program-import]
+    paths:
+      - 'scripts/pilot-programme-quality-audit.py'
+      - '.github/workflows/pilot-programme-quality-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: pilot-programme-quality-audit
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: program-import
+      - name: Audit existing pilot evidence
+        run: python scripts/pilot-programme-quality-audit.py
+      - name: Validate and preserve review-only audit
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('data/pilot-programme-quality-audit.json'))
+          assert p['status']=='pilot-quality-review-required'
+          assert p['cohortVerified'] is False
+          assert p['canonicalDatabaseWritten'] is False and p['liveDatabaseWritten'] is False
+          assert len(p['uppsala']) == 1 and len(p['umea']) == 2
+          assert all(x['reviewRequired'] for x in p['uppsala'] + p['umea'])
+          print('Review-only audit validated')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/pilot-programme-quality-audit.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'data: preserve pilot quality review [skip ci]'
+          for attempt in 1 2 3 4 5 6 7 8; do
+            git pull --rebase origin program-import
+            if git push origin HEAD:program-import; then exit 0; fi
+            sleep 2
+          done
+          echo 'Could not persist pilot audit after retries' >&2
+          exit 1
