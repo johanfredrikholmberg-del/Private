@@ -14,20 +14,18 @@ const style=document.createElement('style');style.textContent=`
 `;document.head.appendChild(style);
 let pending=false;
 function sync(){pending=false;const data=root.appContext?.state?.plannerData,hasPlan=Array.isArray(data?.rows)&&data.rows.length>0,canOptimize=hasPlan&&data.verified===true;
-fastTab.hidden=!canOptimize;
+if(fastTab.hidden===canOptimize)fastTab.hidden=!canOptimize;
 ordinary.querySelector('#fastCta')?.remove();
-// The preview already contains its analysis. Do not show an extra button that merely repeats it.
 ordinary.querySelectorAll('button,a').forEach(el=>{if(/^(se analys och förslag|visa förhandsanalys)$/i.test(el.textContent.trim()))el.remove()});
-const unlock=ordinary.querySelector('#studyPlanCta');if(unlock){unlock.querySelector('b')?.replaceChildren(document.createTextNode('Lås upp din studieplan'));const small=unlock.querySelector('small');if(small)small.textContent='Testläge · öppet utan betalning';}
+const unlock=ordinary.querySelector('#studyPlanCta');if(unlock){const heading=unlock.querySelector('b');if(heading&&heading.textContent!=='Lås upp din studieplan')heading.textContent='Lås upp din studieplan';const small=unlock.querySelector('small');if(small&&small.textContent!=='Testläge · öppet utan betalning')small.textContent='Testläge · öppet utan betalning';}
 if(!canOptimize&&fastTab.classList.contains('active'))planner.querySelector('[data-route="ordinary"]')?.click();
-fast.querySelectorAll('.fast-result-note').forEach(el=>el.remove());
-if(fast.hidden||!canOptimize||fast.textContent.includes('Optimerar studieplanen'))return;
-const controls=fast.querySelector('.fast-controls');if(!controls)return;
-const win=fast.querySelector('.fast-win'),unscheduled=fast.querySelector('.info-note');
-const note=document.createElement('div');note.className='info-note fast-result-note';const heading=document.createElement('b'),detail=document.createElement('span');
-heading.textContent=win?'Jämför med ordinarie väg':unscheduled?'Snabbare väg kan ännu inte bekräftas':'Ingen säker tidsvinst hittades';
-detail.textContent=win?'Den beräknade tidsvinsten och tillgängliga kurstillfällen visas nedan.':unscheduled?'Alla återstående kurser kan inte placeras med verifierade tillfällen. Ordinarie väg gäller tills vidare.':'Inga verifierade kurstillfällen ger just nu en kortare komplett studieplan.';
-note.append(heading,detail);controls.after(note);
+const controls=fast.querySelector('.fast-controls'),existing=fast.querySelector('.fast-result-note');
+if(fast.hidden||!canOptimize||fast.textContent.includes('Optimerar studieplanen')||!controls){existing?.remove();return;}
+const win=fast.querySelector('.fast-win'),unscheduled=fast.querySelector('.info-note:not(.fast-result-note)');
+const heading=win?'Jämför med ordinarie väg':unscheduled?'Snabbare väg kan ännu inte bekräftas':'Ingen säker tidsvinst hittades';
+const detail=win?'Den beräknade tidsvinsten och tillgängliga kurstillfällen visas nedan.':unscheduled?'Alla återstående kurser kan inte placeras med verifierade tillfällen. Ordinarie väg gäller tills vidare.':'Inga verifierade kurstillfällen ger just nu en kortare komplett studieplan.';
+if(existing&&existing.querySelector('b')?.textContent===heading&&existing.querySelector('span')?.textContent===detail&&existing.previousElementSibling===controls)return;
+existing?.remove();const note=document.createElement('div');note.className='info-note fast-result-note';const b=document.createElement('b'),span=document.createElement('span');b.textContent=heading;span.textContent=detail;note.append(b,span);controls.after(note);
 }
-const observer=new MutationObserver(()=>{if(pending)return;pending=true;queueMicrotask(sync)});observer.observe(planner,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','class']});sync();
+const observer=new MutationObserver(()=>{if(pending)return;pending=true;setTimeout(sync,50)});observer.observe(planner,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','class']});sync();
 })();
