@@ -1,0 +1,23 @@
+name: Validate Umea TAROM pathways
+on:
+  push:
+    branches: [program-import]
+    paths:
+      - 'scripts/validate-umea-tarom-pathways.py'
+      - 'data/umea/tarom-ht26-pathway-review.json'
+      - 'data/umea/tarom-ht26-official-plan-validation.json'
+      - 'data/umea/ht26-sequential-studyplan-evidence.json'
+      - '.github/workflows/validate-umea-tarom-pathways.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: program-import
+      - name: Check pathway boundaries and prevent premature import
+        run: python scripts/validate-umea-tarom-pathways.py
