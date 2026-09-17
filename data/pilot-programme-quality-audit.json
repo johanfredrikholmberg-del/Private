@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "status": "pilot-quality-review-required",
   "cohortVerified": false,
   "canonicalDatabaseWritten": false,
@@ -95,6 +95,7 @@
             "Matematiska grunder för data science, 7,5 hp"
           ],
           "electivePlaceholders": [],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 30.0,
           "requiresReview": true
@@ -109,6 +110,7 @@
             "Datainsamling och datahantering, 7,5 hp"
           ],
           "electivePlaceholders": [],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 30.0,
           "requiresReview": true
@@ -124,6 +126,7 @@
           "electivePlaceholders": [
             "Valbar kurs, 7,5 hp"
           ],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 22.5,
           "requiresReview": true
@@ -138,6 +141,7 @@
             "Databasdesign, 7,5 hp"
           ],
           "electivePlaceholders": [],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 30.0,
           "requiresReview": true
@@ -147,6 +151,7 @@
           "duplicateTermHeading": false,
           "candidateCourseLines": [],
           "electivePlaceholders": [],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 0,
           "requiresReview": true
@@ -160,13 +165,14 @@
             "Examensarbete i statistik för kandidatexamen, 15 hp"
           ],
           "electivePlaceholders": [],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 30.0,
           "requiresReview": true
         }
       ],
       "reviewRequired": true,
-      "note": "Candidate credits are not programme requirements; alternatives and split lines need manual source validation."
+      "note": "Candidate credits are not programme requirements. Duplicate term headings may indicate separate pathways; replacement notes, alternatives and split lines require official source validation."
     },
     {
       "programmeCode": "TAROM",
@@ -182,6 +188,7 @@
             "Mobil robotik*, 7,5 hp"
           ],
           "electivePlaceholders": [],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 30.0,
           "requiresReview": true
@@ -197,6 +204,7 @@
             "Valbar kurs, 7,5 hp",
             "Valbar kurs, 7,5 hp"
           ],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 7.5,
           "requiresReview": true
@@ -212,6 +220,7 @@
             "Valbar kurs, 7,5 hp",
             "Valbar kurs, 7,5 hp"
           ],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 7.5,
           "requiresReview": true
@@ -220,12 +229,14 @@
           "term": 4,
           "duplicateTermHeading": false,
           "candidateCourseLines": [
-            "datavetenskap, inriktning robotik och reglerteknik*, 30 hp",
-            "**Kan ersättas av kursen Studentkonferens i elektronik och mekatronik, 7,5 hp"
+            "datavetenskap, inriktning robotik och reglerteknik*, 30 hp"
           ],
           "electivePlaceholders": [],
+          "replacementOrExplanatoryNotes": [
+            "**Kan ersättas av kursen Studentkonferens i elektronik och mekatronik, 7,5 hp"
+          ],
           "ambiguousHpLines": [],
-          "candidateCreditsHp": 37.5,
+          "candidateCreditsHp": 30.0,
           "requiresReview": true
         },
         {
@@ -238,6 +249,7 @@
             "Mobil robotik*, 7,5 hp"
           ],
           "electivePlaceholders": [],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 30.0,
           "requiresReview": true
@@ -253,6 +265,7 @@
             "Valbar kurs, 7,5 hp",
             "Valbar kurs, 7,5 hp"
           ],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 15.0,
           "requiresReview": true
@@ -268,6 +281,7 @@
             "Valbar kurs, 7,5 hp",
             "Valbar kurs, 7,5 hp"
           ],
+          "replacementOrExplanatoryNotes": [],
           "ambiguousHpLines": [],
           "candidateCreditsHp": 15.0,
           "requiresReview": true
@@ -279,8 +293,10 @@
             "Examensarbete för masterexamen i elektronik, inriktning robotik och reglerteknik**, 30 hp"
           ],
           "electivePlaceholders": [],
+          "replacementOrExplanatoryNotes": [
+            "**Kan ersättas av kursen Student Conference in Computing Science, 7,5 hp."
+          ],
           "ambiguousHpLines": [
-            "**Kan ersättas av kursen Student Conference in Computing Science, 7,5 hp.",
             "Artificiell intelligens – metoder och tillämpningar (avancerad nivå) 7,5 hp.",
             "Design av interaktiva AI-system*, 7,5 hp (avancerad nivå)",
             "Djup maskininlärning*, 7,5 hp (avancerad nivå)",
@@ -310,7 +326,7 @@
         }
       ],
       "reviewRequired": true,
-      "note": "Candidate credits are not programme requirements; alternatives and split lines need manual source validation."
+      "note": "Candidate credits are not programme requirements. Duplicate term headings may indicate separate pathways; replacement notes, alternatives and split lines require official source validation."
     }
   ]
 }
