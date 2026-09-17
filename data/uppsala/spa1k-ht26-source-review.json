@@ -1,0 +1,28 @@
+{
+  "university": "Uppsala universitet",
+  "programmeCode": "SPA1K",
+  "cohort": "HT2026",
+  "status": "source-reviewed-partial-not-imported",
+  "studyPlanUrl": "https://www.uu.se/utbildning/studieplan?query=8198521a-f7e1-460c-9d49-5ac61489fd49",
+  "educationPlanUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1344d53c-37f1-11f1-bd53-3c578aaf4932",
+  "programmeCreditsHp": 180,
+  "mandatoryTerms": [
+    {"term": 1, "courseCodes": ["4PE193", "2SC146"], "hp": 30},
+    {"term": 2, "courseCodes": ["2PP533", "2SC211"], "hp": 30},
+    {"term": 3, "courseCodes": ["2FE160", "2FE161", "2FE159"], "hp": 30},
+    {"term": 4, "courseCodes": ["2HR111", "2HR121"], "hp": 30}
+  ],
+  "specialisationPaths": [
+    {"subject": "Pedagogik", "term5": {"code": "2PE381", "hp": 30}, "term6": {"code": "2PE382", "hp": 30}},
+    {"subject": "Sociologi", "term5": {"code": "2SC018", "hp": 30}, "term6": {"code": "2SC111", "hp": 30}},
+    {"subject": "Psykologi", "term5": {"code": "2PP536", "hp": 30}, "term6": {"code": "2PP537", "hp": 30}}
+  ],
+  "pathRule": "Choose one B course in term 5 and the C course in the same subject in term 6; do not add alternative course credits together.",
+  "verifiedCourseSyllabi": [
+    {"courseCode": "4PE193", "syllabusUrl": "https://www.uu.se/utbildning/kursplan?query=42336b01-0750-11f1-85d9-a1ed927d4a1e", "syllabusDecisionDate": "2026-02-05"},
+    {"courseCode": "2PP537", "syllabusUrl": "https://www.uu.se/utbildning/kursplan?query=960228aa-d045-11f0-8398-f473a8a341d5", "validFrom": "HT2026", "thesisIncluded": true, "courseOfferingUrl": "https://www.uu.se/utbildning/kurs?query=2PP537"}
+  ],
+  "unverified": ["Remaining individual course syllabi and version applicability", "Complete course offering and teaching mode per cohort and term", "Degree and progression requirements beyond the published study-plan pathway"],
+  "canonicalDatabaseWritten": false,
+  "liveDatabaseWritten": false
+}
