@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "status": "pilot-quality-review-required",
+  "cohortVerified": false,
+  "canonicalDatabaseWritten": false,
+  "liveDatabaseWritten": false,
+  "uppsala": [
+    {
+      "programmeCode": "SPA1K",
+      "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=8198521a-f7e1-460c-9d49-5ac61489fd49",
+      "termAudit": [
+        {
+          "term": 1,
+          "fixedCreditsHp": 30.0,
+          "alternativeOptions": [],
+          "alternativeCreditsNotSummed": true,
+          "requiresReview": false
+        },
+        {
+          "term": 2,
+          "fixedCreditsHp": 30.0,
+          "alternativeOptions": [],
+          "alternativeCreditsNotSummed": true,
+          "requiresReview": false
+        },
+        {
+          "term": 3,
+          "fixedCreditsHp": 30.0,
+          "alternativeOptions": [],
+          "alternativeCreditsNotSummed": true,
+          "requiresReview": false
+        },
+        {
+          "term": 4,
+          "fixedCreditsHp": 30.0,
+          "alternativeOptions": [],
+          "alternativeCreditsNotSummed": true,
+          "requiresReview": false
+        },
+        {
+          "term": 5,
+          "fixedCreditsHp": 0,
+          "alternativeOptions": [
+            {
+              "courseCode": "2PE381",
+              "hp": 30.0
+            },
+            {
+              "courseCode": "2SC018",
+              "hp": 30.0
+            },
+            {
+              "courseCode": "2PP536",
+              "hp": 30.0
+            }
+          ],
+          "alternativeCreditsNotSummed": true,
+          "requiresReview": true
+        },
+        {
+          "term": 6,
+          "fixedCreditsHp": 0,
+          "alternativeOptions": [
+            {
+              "courseCode": "2PE382",
+              "hp": 30.0
+            },
+            {
+              "courseCode": "2SC111",
+              "hp": 30.0
+            },
+            {
+              "courseCode": "2PP537",
+              "hp": 30.0
+            }
+          ],
+          "alternativeCreditsNotSummed": true,
+          "requiresReview": true
+        }
+      ],
+      "reviewRequired": true
+    }
+  ],
+  "umea": [
+    {
+      "programmeCode": "SGSDS",
+      "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/sgsds/",
+      "termAudit": [
+        {
+          "term": 1,
+          "duplicateTermHeading": false,
+          "candidateCourseLines": [
+            "Introduktion till statistik och data science, 15 hp",
+            "Visualisering av data, 7,5 hp",
+            "Matematiska grunder för data science, 7,5 hp"
+          ],
+          "electivePlaceholders": [],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 30.0,
+          "requiresReview": true
+        },
+        {
+          "term": 2,
+          "duplicateTermHeading": false,
+          "candidateCourseLines": [
+            "Verktyg för data science, 7,5 hp",
+            "Diskret matematik för data science, 7,5 hp",
+            "Sannolikhetsmodeller och inferens, 7,5 hp",
+            "Datainsamling och datahantering, 7,5 hp"
+          ],
+          "electivePlaceholders": [],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 30.0,
+          "requiresReview": true
+        },
+        {
+          "term": 3,
+          "duplicateTermHeading": false,
+          "candidateCourseLines": [
+            "Statistisk modellering, 7,5 hp",
+            "Statistisk inferens, 7,5 hp",
+            "Maskininlärning, 7,5 hp"
+          ],
+          "electivePlaceholders": [
+            "Valbar kurs, 7,5 hp"
+          ],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 22.5,
+          "requiresReview": true
+        },
+        {
+          "term": 4,
+          "duplicateTermHeading": false,
+          "candidateCourseLines": [
+            "Linjär algebra, 7,5 hp",
+            "Data science i yrkesliv och samhälle, 7,5 hp",
+            "Objektorienterad programmering, 7,5 hp",
+            "Databasdesign, 7,5 hp"
+          ],
+          "electivePlaceholders": [],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 30.0,
+          "requiresReview": true
+        },
+        {
+          "term": 5,
+          "duplicateTermHeading": false,
+          "candidateCourseLines": [],
+          "electivePlaceholders": [],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 0,
+          "requiresReview": true
+        },
+        {
+          "term": 6,
+          "duplicateTermHeading": false,
+          "candidateCourseLines": [
+            "Simuleringsbaserad inferens, 7,5 hp",
+            "AI-metoder, 7,5 hp",
+            "Examensarbete i statistik för kandidatexamen, 15 hp"
+          ],
+          "electivePlaceholders": [],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 30.0,
+          "requiresReview": true
+        }
+      ],
+      "reviewRequired": true,
+      "note": "Candidate credits are not programme requirements; alternatives and split lines need manual source validation."
+    },
+    {
+      "programmeCode": "TAROM",
+      "sourceUrl": "https://www.umu.se/utbildning/kurs-och-utbildningsplan/tarom/",
+      "termAudit": [
+        {
+          "term": 1,
+          "duplicateTermHeading": false,
+          "candidateCourseLines": [
+            "Linjära reglersystem, 7,5 hp",
+            "Människocentrerad artificiell intelligens, 7,5 hp",
+            "Mekatronik*, 7,5 hp",
+            "Mobil robotik*, 7,5 hp"
+          ],
+          "electivePlaceholders": [],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 30.0,
+          "requiresReview": true
+        },
+        {
+          "term": 2,
+          "duplicateTermHeading": false,
+          "candidateCourseLines": [
+            "Modellering inom robotik*, 7,5 hp"
+          ],
+          "electivePlaceholders": [
+            "Valbar kurs, 7,5 hp",
+            "Valbar kurs, 7,5 hp",
+            "Valbar kurs, 7,5 hp"
+          ],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 7.5,
+          "requiresReview": true
+        },
+        {
+          "term": 3,
+          "duplicateTermHeading": false,
+          "candidateCourseLines": [
+            "Student Conference in Computing Science,*,**, 7,5 hp"
+          ],
+          "electivePlaceholders": [
+            "Valbar kurs, 7,5 hp",
+            "Valbar kurs, 7,5 hp",
+            "Valbar kurs, 7,5 hp"
+          ],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 7.5,
+          "requiresReview": true
+        },
+        {
+          "term": 4,
+          "duplicateTermHeading": false,
+          "candidateCourseLines": [
+            "datavetenskap, inriktning robotik och reglerteknik*, 30 hp",
+            "**Kan ersättas av kursen Studentkonferens i elektronik och mekatronik, 7,5 hp"
+          ],
+          "electivePlaceholders": [],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 37.5,
+          "requiresReview": true
+        },
+        {
+          "term": 1,
+          "duplicateTermHeading": true,
+          "candidateCourseLines": [
+            "Linjära reglersystem, 7,5 hp",
+            "Människocentrerad artificiell intelligens, 7,5 hp",
+            "Mekatronik*, 7,5 hp",
+            "Mobil robotik*, 7,5 hp"
+          ],
+          "electivePlaceholders": [],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 30.0,
+          "requiresReview": true
+        },
+        {
+          "term": 2,
+          "duplicateTermHeading": true,
+          "candidateCourseLines": [
+            "Modellering inom robotik*, 7,5 hp",
+            "Adaptiv reglerteknik, 7,5 hp"
+          ],
+          "electivePlaceholders": [
+            "Valbar kurs, 7,5 hp",
+            "Valbar kurs, 7,5 hp"
+          ],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 15.0,
+          "requiresReview": true
+        },
+        {
+          "term": 3,
+          "duplicateTermHeading": true,
+          "candidateCourseLines": [
+            "Telerobotik och tillämpad sensorfusion, 7,5 hp",
+            "Studentkonferens i elektronik och mekatronik*,**, 7,5 hp"
+          ],
+          "electivePlaceholders": [
+            "Valbar kurs, 7,5 hp",
+            "Valbar kurs, 7,5 hp"
+          ],
+          "ambiguousHpLines": [],
+          "candidateCreditsHp": 15.0,
+          "requiresReview": true
+        },
+        {
+          "term": 4,
+          "duplicateTermHeading": true,
+          "candidateCourseLines": [
+            "Examensarbete för masterexamen i elektronik, inriktning robotik och reglerteknik**, 30 hp"
+          ],
+          "electivePlaceholders": [],
+          "ambiguousHpLines": [
+            "**Kan ersättas av kursen Student Conference in Computing Science, 7,5 hp.",
+            "Artificiell intelligens – metoder och tillämpningar (avancerad nivå) 7,5 hp.",
+            "Design av interaktiva AI-system*, 7,5 hp (avancerad nivå)",
+            "Djup maskininlärning*, 7,5 hp (avancerad nivå)",
+            "Kognitiv interaktionsdesign, 7,5 hp (avancerad nivå)",
+            "Matrisberäkningar och tillämpningar, 7,5 hp (avancerad nivå)",
+            "Människa-robotinteraktion*, 7,5 hp (avancerad nivå)",
+            "Optimering med tillämpningar, 7,5 hp (avancerad nivå)",
+            "Projektkurs i datorseende*, 7,5 hp (avancerad nivå)",
+            "Tillförlitlig människa-AI-interaktion*, 7,5 hp (avancerad nivå).",
+            "Adaptiv reglerteknik*,** 7,5 hp (avancerad nivå)",
+            "Applikationer i sensornätverk, 7,5 hp (avancerad nivå)",
+            "Bildbehandling, 7,5 hp (avancerad nivå)",
+            "Deep Learning - metoder och tillämpningar, 7,5 hp (grundnivå)",
+            "Digitalteknik, 7,5 hp (grundnivå)",
+            "Linjära reglersystem**, 7,5 hp (avancerad nivå)",
+            "Mätsystem och mätmetoder, 7,5 hp (grundnivå)",
+            "Optimal reglering av linjära system*,**, 7,5 hp (avancerad nivå)",
+            "Projekt i elektronik 3, 15 hp (avancerad nivå)",
+            "Projekt i elektronik 4, 7,5 hp (avancerad nivå)",
+            "Reglermetoder för robotapplikationer*,**, 7,5 hp (avancerad nivå)",
+            "Sensorer och elektronik, 7,5 hp (grundnivå)",
+            "Telerobotik och tillämpad sensorfusion*,**, 7,5 hp (avancerad nivå)",
+            "Tillämpad digital signalbehandling, 7,5 hp (avancerad nivå)"
+          ],
+          "candidateCreditsHp": 30.0,
+          "requiresReview": true
+        }
+      ],
+      "reviewRequired": true,
+      "note": "Candidate credits are not programme requirements; alternatives and split lines need manual source validation."
+    }
+  ]
+}
