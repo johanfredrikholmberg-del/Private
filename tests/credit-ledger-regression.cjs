@@ -1,0 +1,21 @@
+// Run with: node tests/credit-ledger-regression.cjs
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const window={StudieLotsV2:{appContext:{state:{courses:[]}}},StudieLotsEngines:{creditTransferHistory:{forAssessment:()=>[]}}};
+window.StudieLotsEngines.creditTransferAdapter={applyToRows(rows){return rows.map(r=>({...r,creditTransferCountsInStudyPlan:false}))}};
+const context={window,document:{readyState:'loading',addEventListener(){},documentElement:{}},MutationObserver:class{observe(){}},requestAnimationFrame(){},sessionStorage:{getItem(){return null}},CustomEvent:class{}};
+vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname,'../src/core/match-consistency.js'),'utf8'),context);
+const ledger=window.StudieLotsV2.matchConsistency.ledger;
+const row=(extra={})=>({hp:30,credited:false,matchedHp:0,creditMatch:'none',...extra});
+const data=rows=>({totalHp:180,rows});
+assert.equal(ledger(data([row({credited:true,matchedHp:0})])).credited,0,'Explicit zero must never become full credit');
+assert.equal(ledger(data([row({creditMatch:'potential',matchedHp:30})])).credited,0,'Potential is not credited');
+assert.equal(ledger(data([row({credited:true,matchedHp:15})])).credited,15,'Partial direct match counts only its hp');
+assert.equal(ledger(data([row({credited:true,matchedHp:15,creditTransferCountsInStudyPlan:true,creditTransferMatchedHp:30,creditTransfer:{classification:'strong'}})])).credited,30,'One target cannot count twice');
+assert.equal(ledger(data([row({creditTransferCountsInStudyPlan:true,creditTransferMatchedHp:15,creditTransfer:{classification:'strong'}})])).credited,15,'Strong transfer is capped to matched hp');
+assert.equal(ledger(data([row({creditTransferCountsInStudyPlan:true,creditTransferMatchedHp:30,creditTransfer:{classification:'relevant'}})])).credited,0,'Good evidence cannot deduct credits');
+assert.equal(ledger(data([row({credited:true,matchedHp:30}),row({credited:true,matchedHp:30}),row({credited:true,matchedHp:30}),row({credited:true,matchedHp:30}),row({credited:true,matchedHp:30}),row({credited:true,matchedHp:30}),row({credited:true,matchedHp:30})])).credited,180,'Never exceed programme total');
+const original=data([row({credited:true,matchedHp:15})]);const once=ledger(original);const twice=ledger({...original,rows:once.rows});assert.equal(once.credited,twice.credited,'Reprocessing prepared rows must be idempotent');
+console.log('Credit ledger regression checks passed (8 cases)');
