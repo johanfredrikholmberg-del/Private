@@ -1,0 +1,13 @@
+(()=>{'use strict';
+const root=window.StudieLotsV2,planner=root?.planner;if(!planner?.renderFast||planner.__remainingCourses)return;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const hp=r=>Math.max(0,Number(r?.hp)||0),fmt=n=>Number(n).toLocaleString('sv-SE',{maximumFractionDigits:2});
+const original=planner.renderFast.bind(planner);
+planner.renderFast=async function(...args){const result=await original(...args),host=document.querySelector('#fastPlan'),data=root.appContext?.state?.plannerData;if(!host||!Array.isArray(data?.rows))return result;
+ const total=data.rows.reduce((sum,row)=>sum+hp(row),0),counted=data.rows.reduce((sum,row)=>{const credited=Math.max(0,Number(row.creditedHp??(row.credited?hp(row):0))||0),strong=row.creditTransferCountsInStudyPlan&&row.creditTransfer?.classification==='strong'?Math.max(0,Number(row.creditTransferMatchedHp)||0):0;return sum+Math.min(hp(row),Math.max(credited,strong))},0),left=Math.max(0,total-counted);
+ const note=document.createElement('div');note.className='info-note fast-remaining-summary';note.innerHTML='<b>Återstående kurser · '+esc(fmt(left))+' hp</b><span>Starkt underlag räknas preliminärt. Relevant och begränsat underlag räknas inte av. Lärosätet fattar beslut om tillgodoräknande.</span>';
+ const controls=host.querySelector('.fast-controls');if(controls)controls.after(note);else host.prepend(note);
+ const unplaced=[...host.querySelectorAll('.info-note')].find(el=>/kurser kan inte placeras säkert ännu/.test(el.textContent));
+ if(unplaced){const ul=document.createElement('ul');ul.className='fast-unplaced-courses';const remaining=data.rows.filter(r=>{const credited=Math.max(0,Number(r.creditedHp??(r.credited?hp(r):0))||0),strong=r.creditTransferCountsInStudyPlan&&r.creditTransfer?.classification==='strong'?Math.max(0,Number(r.creditTransferMatchedHp)||0):0;return hp(r)-Math.min(hp(r),Math.max(credited,strong))>.01});for(const row of remaining){const li=document.createElement('li');li.textContent=(row.code?row.code+' · ':'')+(row.name||'Kurs')+' · '+fmt(Math.max(0,hp(row)-Math.min(hp(row),Math.max(0,Number(row.creditedHp??(row.credited?hp(row):0))||0),row.creditTransferCountsInStudyPlan&&row.creditTransfer?.classification==='strong'?Math.max(0,Number(row.creditTransferMatchedHp)||0):0)))+' hp kvar';ul.append(li)}if(ul.children.length){const p=document.createElement('small');p.textContent='Kurser som fortfarande har hp kvar (inte enbart de som saknar kurstillfälle):';unplaced.append(p,ul)}}
+ return result};planner.__remainingCourses=true;
+})();
