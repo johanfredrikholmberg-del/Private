@@ -4,6 +4,9 @@ const norm=v=>String(v??'').trim().toLocaleLowerCase('sv-SE').normalize('NFD').r
 const code=v=>String(v??'').trim().toUpperCase();
 const identity=(university,programCode)=>`${norm(university)}:${code(programCode)}`;
 const read=async name=>JSON.parse(await readFile(join(process.cwd(),'data','HT26',`${name}.json`),'utf8'));
+// HT26 catalogue records frequently lack subject metadata. Infer only explicit programme-name subjects;
+// never classify an unrelated programme merely because the user has merits in that subject.
+function programmeSubject(p){if(p.subject)return p.subject;const name=norm(p.programName||p.name);if(/foretagsekonomi|ekonomie-kandidat|civilekonom|marknadsforing|redovisning-och-styrning|business-administration/.test(name))return 'Företagsekonomi';if(/nationalekonomi|economics/.test(name))return 'Nationalekonomi';if(/psykologi|psychology/.test(name))return 'Psykologi';if(/idrottsvetenskap|sport-science/.test(name))return 'Idrottsvetenskap';if(/juridik|juristprogram|skatteratt/.test(name))return 'Juridik';return ''}
 let cached;
 async function catalogue(){
  if(cached)return cached;
@@ -24,7 +27,7 @@ async function catalogue(){
  }
  const rows=programs.filter(p=>p.university&&(p.programName||p.name)).map(p=>{
   const structure=complete.get(p.key),isComplete=!!structure;
-  return {subject:p.subject||'',university:p.university,programName:p.programName||p.name,programCode:p.programCode||'',programHp:Number(p.programHp)||null,level:p.level||'',source:'studielots-ht26',structureCoverage:isComplete?'complete':'metadata-only',effectiveStructureCoverage:isComplete?'complete':'metadata-only',plannerCoverage:isComplete?'complete':'unavailable',verified:isComplete,...(structure||{})};
+  return {subject:programmeSubject(p),university:p.university,programName:p.programName||p.name,programCode:p.programCode||'',programHp:Number(p.programHp)||null,level:p.level||'',source:'studielots-ht26',structureCoverage:isComplete?'complete':'metadata-only',effectiveStructureCoverage:isComplete?'complete':'metadata-only',plannerCoverage:isComplete?'complete':'unavailable',verified:isComplete,...(structure||{})};
  });
  cached={rows,totalPrograms:programs.length,totalStructures:structures.length};return cached;
 }
