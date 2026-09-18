@@ -40,13 +40,17 @@ function render(){
   original();
   const run=generation,host=ctx.q('#opportunities .opportunity-list');
   if(!host||!ctx.state.courses.length)return;
+  const note=host.querySelector('.program-section-note');
+  if(note)note.textContent='Se hur långt dina meriter räcker i olika program.';
   const buttons=[...host.querySelectorAll('[data-op]')],key=signature(),courses=ctx.state.courses.slice(),kind=op.levelKind();
   const subjects=buttons.map(button=>{
     const name=button.querySelector('.op-copy b')?.textContent||'';
     const subject=kind==='advanced'?name.replace(/, master\/magister$/,''):name;
     const scoreNode=document.createElement('strong');
     scoreNode.className='subject-program-score';scoreNode.dataset.subjectScore='';scoreNode.setAttribute('aria-live','polite');
-    button.querySelector('.op-copy')?.appendChild(scoreNode);
+    scoreNode.style.cssText='position:absolute;right:38px;top:17px;font-size:15px;font-weight:850;color:var(--teal);white-space:nowrap;font-variant-numeric:tabular-nums';
+    button.style.paddingRight='112px';
+    button.appendChild(scoreNode);
     return{button,subject};
   });
   let next=0;
