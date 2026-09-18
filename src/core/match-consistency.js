@@ -6,7 +6,6 @@ function merits(){const current=root.appContext?.state?.courses;if(Array.isArray
 function ledger(data,sourceMerits=merits()){
  if(!Array.isArray(data?.rows))return null;
  const adapter=window.StudieLotsEngines?.creditTransferAdapter,history=window.StudieLotsEngines?.creditTransferHistory?.forAssessment?.()||[];
- // Reusing prepared rows is essential: reapplying the adapter can allocate the same source twice.
  const prepared=data.rows.every(r=>Object.prototype.hasOwnProperty.call(r,'creditTransferCountsInStudyPlan'));
  const rows=prepared?data.rows:adapter?.applyToRows?.(data.rows,sourceMerits,{history})||data.rows;
  const total=n(data.totalHp)||rows.reduce((s,r)=>s+n(r.hp),0);let credited=0,possible=0;
@@ -14,6 +13,7 @@ function ledger(data,sourceMerits=merits()){
  credited=Math.min(total,credited);possible=Math.min(Math.max(0,total-credited),possible);
  return Object.freeze({total,credited,possible,remaining:Math.max(0,total-credited),pct:Math.round(100*credited/Math.max(1,total)),rows});
 }
+store.ledger=ledger;
 function wrapPaths(){const paths=root.paths;if(!paths||paths.__matchConsistencyWrapped||typeof paths.structure!=='function')return;const original=paths.structure.bind(paths);root.paths=Object.freeze({...paths,__matchConsistencyWrapped:true,async structure(item,...args){const data=await original(item,...args);if(!data){store.latest=null;return data}const result=ledger(data,Array.isArray(args[0])?args[0]:merits());if(result){data.creditLedger=result;data.rows=result.rows;store.cache.set(key(data.item||item),result)}store.latest=data;return data}})}
 function fixGeneralOpportunities(){document.querySelectorAll('#opportunities .op-score').forEach(score=>{const strong=score.querySelector('strong'),label=score.querySelector('span');if(!strong||!label||!/[\d,.]+\s*hp\s+klara/i.test(label.textContent))return;label.textContent=label.textContent.replace(/hp\s+klara/i,'hp mot generella examenskrav');strong.setAttribute('aria-label',`${strong.textContent} generell examensmatchning`)})}
 function programmeContext(){const title=document.querySelector('#opportunities .page-title h2');if(!title||!/välj program/i.test(title.textContent||''))return null;const parts=(document.querySelector('#opportunities .page-title p')?.textContent||'').split('·').map(x=>x.trim());return{university:parts[0]||'',subject:parts.slice(1).join(' · ')}}
