@@ -4,7 +4,9 @@ on:
     branches: [studielots-v2]
     paths:
       - 'src/engines/credit-transfer/**'
+      - 'src/core/match-consistency.js'
       - 'src/pages/planner/**'
+      - 'tests/credit-ledger-regression.cjs'
       - 'scripts/test-credit-transfer.mjs'
       - '.github/workflows/tg-regression.yml'
   workflow_dispatch:
@@ -21,3 +23,5 @@ jobs:
           node-version: '22'
       - name: Run TG regression suite
         run: node scripts/test-credit-transfer.mjs
+      - name: Run shared credit ledger regression suite
+        run: node tests/credit-ledger-regression.cjs
