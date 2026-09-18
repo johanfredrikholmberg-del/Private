@@ -10,7 +10,7 @@ async function catalogue(){
  const [programs,structures]=await Promise.all([read('programs'),read('program-structures')]);
  const byKey=new Map(programs.map(p=>[p.key,p])),byIdentity=new Map();
  for(const p of programs){if(!code(p.programCode))continue;const k=identity(p.university,p.programCode);if(!byIdentity.has(k))byIdentity.set(k,[]);byIdentity.get(k).push(p)}
- const eligible=[],seen=new Set();
+ const complete=new Map();
  for(const s of structures){
   if(String(s.coverage||s.structureCoverage||'').toLowerCase()!=='complete')continue;
   const evidence=s.sourceEvidenceUrl||s.sourceUrl||s.sourceUrls?.[0];
@@ -20,16 +20,19 @@ async function catalogue(){
   if(matches.length!==1)continue;
   const p=matches[0];
   if(Number(s.hp)>0&&Number(p.programHp)>0&&Math.abs(Number(s.hp)-Number(p.programHp))>.01)continue;
-  if(seen.has(p.key))continue;
-  seen.add(p.key);
-  eligible.push({subject:p.subject||s.subject||'',university:p.university,programName:p.programName||p.name||s.programName,programCode:p.programCode,programHp:Number(p.programHp||s.hp)||null,level:p.level||'',source:'studielots-ht26',structureCoverage:'complete',effectiveStructureCoverage:'complete',plannerCoverage:'complete',verified:true,sourceEvidenceUrl:evidence,structureKey:s.key,rows:s.rows});
+  if(!complete.has(p.key))complete.set(p.key,{sourceEvidenceUrl:evidence,structureKey:s.key,rows:s.rows});
  }
- cached={rows:eligible,totalPrograms:programs.length,totalStructures:structures.length};return cached;
+ const rows=programs.filter(p=>p.university&&(p.programName||p.name)).map(p=>{
+  const structure=complete.get(p.key),isComplete=!!structure;
+  return {subject:p.subject||'',university:p.university,programName:p.programName||p.name,programCode:p.programCode||'',programHp:Number(p.programHp)||null,level:p.level||'',source:'studielots-ht26',structureCoverage:isComplete?'complete':'metadata-only',effectiveStructureCoverage:isComplete?'complete':'metadata-only',plannerCoverage:isComplete?'complete':'unavailable',verified:isComplete,...(structure||{})};
+ });
+ cached={rows,totalPrograms:programs.length,totalStructures:structures.length};return cached;
 }
 export default async function handler(req,res){
  res.setHeader('Cache-Control','s-maxage=60, stale-while-revalidate=300');
  try{const data=await catalogue(),query=norm(req.query?.q),subject=norm(req.query?.subject),university=norm(req.query?.university),coverage=norm(req.query?.coverage);
- const rows=data.rows.filter(p=>(!subject||norm(p.subject)===subject)&&(!university||norm(p.university).includes(university))&&(!query||norm(`${p.programName} ${p.university} ${p.subject} ${p.programCode}`).includes(query))&&(!coverage||coverage==='complete'));
- return res.status(200).json({programs:rows,coverage:{complete:rows.length,partial:0,metadataOnly:0,total:rows.length},catalogue:{uniquePrograms:data.rows.length,importedPrograms:data.totalPrograms,importedStructures:data.totalStructures},source:'studielots-ht26',fallback:false});
+ const rows=data.rows.filter(p=>(!subject||norm(p.subject)===subject)&&(!university||norm(p.university).includes(university))&&(!query||norm(`${p.programName} ${p.university} ${p.subject} ${p.programCode}`).includes(query))&&(!coverage||coverage==='complete'&&p.structureCoverage==='complete'||coverage==='metadata-only'&&p.structureCoverage==='metadata-only'));
+ const complete=rows.filter(p=>p.structureCoverage==='complete').length;
+ return res.status(200).json({programs:rows,coverage:{complete,partial:0,metadataOnly:rows.length-complete,total:rows.length},catalogue:{uniquePrograms:data.rows.length,importedPrograms:data.totalPrograms,importedStructures:data.totalStructures},source:'studielots-ht26',fallback:false});
  }catch(error){console.error('program-index HT26',error);return res.status(503).json({programs:[],source:'studielots-ht26',fallback:false,error:'HT26-programdatabasen är tillfälligt otillgänglig'});}
 }
