@@ -17,7 +17,7 @@ function fetchRecovery(){
    const plan=await response.json();
    return plan?.source==='gu-official-programplan'&&plan.structureAvailable===true&&Array.isArray(plan.courses)&&plan.courses.length>=2&&Number(plan.totalHp)===180&&Array.isArray(plan.sourceUrls)&&plan.sourceUrls.some(url=>/^https:\/\//i.test(String(url)))?plan:null;
   }catch(error){console.warn('[StudieLots GU plan recovery]',error);return null}
- })();
+ })().then(plan=>{if(!plan)recoveryPromise=null;return plan});
  return recoveryPromise;
 }
 async function discover(subject,kind='candidate'){
@@ -30,7 +30,8 @@ async function discover(subject,kind='candidate'){
  return updated;
 }
 async function structure(item,merits=[]){
- const canonical=await originalStructure(item,merits);
+ let canonical=null;
+ try{canonical=await originalStructure(item,merits)}catch(error){if(!isGuEconomics(item))throw error;console.warn('[StudieLots GU canonical structure]',error)}
  if(canonical||!isGuEconomics(item))return canonical;
  const plan=await fetchRecovery();
  if(!plan)return canonical;
