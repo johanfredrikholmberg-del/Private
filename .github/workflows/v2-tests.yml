@@ -14,6 +14,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Module boundaries and bootstrap dependencies
+        run: node scripts/v2-module-boundaries-test.mjs
       - name: Existing Ladok fixture
         run: node scripts/ladok-regression-test.mjs
       - name: V2 degree engine
