@@ -15,7 +15,8 @@ window.StudieLotsEngines.creditTransferAdapter = {
   applyToRows(rows) { return rows.map(row => ({ ...row, creditTransferCountsInStudyPlan: row.creditTransferCountsInStudyPlan || false })); }
 };
 const document = { readyState: 'complete', querySelectorAll() { return []; }, querySelector() { return null; }, documentElement: {} };
-const context = { window, document, MutationObserver: class { observe() {} }, requestAnimationFrame() {}, sessionStorage: { getItem() { return null; } }, CustomEvent: class {} };
+// In a browser globalThis and window refer to the same object. Reproduce that in the VM.
+const context = { window, globalThis: window, document, MutationObserver: class { observe() {} }, requestAnimationFrame() {}, sessionStorage: { getItem() { return null; } }, CustomEvent: class {} };
 for (const file of ['credit-ledger-math.js', 'match-consistency.js']) {
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../src/core', file), 'utf8'), context, { filename: file });
 }
