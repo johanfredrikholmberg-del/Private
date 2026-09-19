@@ -1,0 +1,27 @@
+name: Lund standalone course audit
+on:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - 'data/lund-standalone-ht26-candidates.json'
+      - 'scripts/lund-standalone-dedupe.mjs'
+      - '.github/workflows/lund-standalone-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compare Lund candidates with canonical courses (dry run only)
+        run: node scripts/lund-standalone-dedupe.mjs --input=data/lund-standalone-ht26-candidates.json | tee lund-audit-report.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lund-standalone-audit
+          path: lund-audit-report.txt
+          if-no-files-found: warn
