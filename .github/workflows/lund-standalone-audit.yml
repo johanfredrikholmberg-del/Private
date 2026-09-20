@@ -22,6 +22,25 @@ jobs:
         run: |
           set -o pipefail
           node scripts/lund-standalone-dedupe.mjs --input=data/lund-standalone-ht26-candidates.json --output=lund-review-candidates.json | tee lund-audit-report.txt
+      - name: Show audit result in job summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## Lund: kontroll av kurskandidater'
+            echo ''
+            echo 'Detta är en läskontroll. Inga kurser eller kurstillfällen har importerats.'
+            echo ''
+            if [ -s lund-audit-report.txt ]; then
+              echo '```text'
+              cat lund-audit-report.txt
+              echo '```'
+            else
+              echo 'Ingen granskningsrapport skapades. Kontrollera fel i körningen.'
+            fi
+            echo ''
+            echo 'Granskningsfilen finns även som artifact om kontrollen kunde skapa den.'
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
