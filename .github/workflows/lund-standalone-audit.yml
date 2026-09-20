@@ -17,11 +17,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Compare Lund candidates with canonical courses (dry run only)
-        run: node scripts/lund-standalone-dedupe.mjs --input=data/lund-standalone-ht26-candidates.json | tee lund-audit-report.txt
+      - name: Compare Lund candidates with canonical courses (read-only)
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/lund-standalone-dedupe.mjs --input=data/lund-standalone-ht26-candidates.json --output=lund-review-candidates.json | tee lund-audit-report.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: lund-standalone-audit
-          path: lund-audit-report.txt
+          path: |
+            lund-audit-report.txt
+            lund-review-candidates.json
           if-no-files-found: warn
