@@ -8,12 +8,14 @@ on:
       - '.github/workflows/lund-standalone-audit.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -22,6 +24,21 @@ jobs:
         run: |
           set -o pipefail
           node scripts/lund-standalone-dedupe.mjs --input=data/lund-standalone-ht26-candidates.json --output=lund-review-candidates.json | tee lund-audit-report.txt
+      - name: Save audit result to review file on studielots-v2
+        if: success() && github.ref == 'refs/heads/studielots-v2'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s lund-review-candidates.json
+          mkdir -p data/import-reviews
+          cp lund-review-candidates.json data/import-reviews/lund-standalone-ht26.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/import-reviews/lund-standalone-ht26.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Lund course audit for manual review [skip ci]'
+            git push origin HEAD:studielots-v2
+          fi
       - name: Show audit result in job summary
         if: always()
         shell: bash
@@ -39,7 +56,7 @@ jobs:
               echo 'Ingen granskningsrapport skapades. Kontrollera fel i körningen.'
             fi
             echo ''
-            echo 'Granskningsfilen finns även som artifact om kontrollen kunde skapa den.'
+            echo 'Granskningsfilen sparas även under data/import-reviews om körningen och skrivåtkomsten lyckas.'
           } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
