@@ -19,26 +19,32 @@ function hasFullStructure(s,p){
  const last=Math.max(...terms);
  return Number.isFinite(last)&&last<=Math.ceil(total/30)+2&&Array.from({length:last},(_,i)=>i+1).every(t=>terms.has(t));
 }
+// Compare actual course/semester content, not source URLs or array ordering.
+// Two different verified plans for one programme must be resolved before publication.
+function structureSignature(rows){return JSON.stringify(rows.map(r=>[Number(r.term),code(r.code),norm(r.name),Number(r.hp)]).sort((a,b)=>a[0]-b[0]||String(a[1]).localeCompare(String(b[1]))||String(a[2]).localeCompare(String(b[2]))||a[3]-b[3]));}
 let cached;
 async function catalogue(){
  if(cached)return cached;
  const [programs,structures]=await Promise.all([read('programs'),read('program-structures')]);
- const byKey=new Map(programs.map(p=>[p.key,p])),byIdentity=new Map();
- for(const p of programs){if(!code(p.programCode))continue;const k=identity(p.university,p.programCode);if(!byIdentity.has(k))byIdentity.set(k,[]);byIdentity.get(k).push(p)}
- const complete=new Map();
+ const byKey=new Map(),byIdentity=new Map();
+ for(const p of programs){if(!p.key)continue;if(!byKey.has(p.key))byKey.set(p.key,[]);byKey.get(p.key).push(p);if(!code(p.programCode))continue;const k=identity(p.university,p.programCode);if(!byIdentity.has(k))byIdentity.set(k,[]);byIdentity.get(k).push(p)}
+ const complete=new Map(),conflicting=new Set();
  for(const s of structures){
   if(String(s.coverage||s.structureCoverage||'').toLowerCase()!=='complete')continue;
   const evidence=s.sourceEvidenceUrl||s.sourceUrl||s.sourceUrls?.[0];
   if(!/^https:\/\//i.test(String(evidence||'')))continue;
-  const exact=byKey.get(s.key),matches=exact?[exact]:(byIdentity.get(identity(s.university,s.programCode))||[]);
+  const exact=byKey.get(s.key)||[],matches=exact.length?exact:(byIdentity.get(identity(s.university,s.programCode))||[]);
   if(matches.length!==1)continue;
   const p=matches[0];
   if(Number(s.hp)>0&&Number(p.programHp)>0&&Math.abs(Number(s.hp)-Number(p.programHp))>.01)continue;
   if(!hasFullStructure(s,p))continue;
-  if(!complete.has(p.key))complete.set(p.key,{sourceEvidenceUrl:evidence,structureKey:s.key,rows:s.rows});
+  const signature=structureSignature(s.rows),previous=complete.get(p.key);
+  if(previous&&previous.signature!==signature){conflicting.add(p.key);continue;}
+  if(!previous)complete.set(p.key,{signature,sourceEvidenceUrl:evidence,structureKey:s.key,rows:s.rows});
  }
- const rows=programs.filter(p=>p.university&&(p.programName||p.name)&&complete.has(p.key)).map(p=>{
-  const structure=complete.get(p.key);
+ for(const key of conflicting)complete.delete(key);
+ const rows=programs.filter(p=>p.university&&(p.programName||p.name)&&complete.has(p.key)&&(byKey.get(p.key)||[]).length===1).map(p=>{
+  const {signature,...structure}=complete.get(p.key);
   return {subject:programmeSubject(p),university:p.university,programName:p.programName||p.name,programCode:p.programCode||'',programHp:Number(p.programHp)||null,level:p.level||'',source:'studielots-ht26',structureCoverage:'complete',effectiveStructureCoverage:'complete',plannerCoverage:'complete',verified:true,...structure};
  });
  cached={rows,totalPrograms:programs.length,totalStructures:structures.length};return cached;
