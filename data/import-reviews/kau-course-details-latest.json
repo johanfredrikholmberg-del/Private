@@ -1,7 +1,28 @@
 {
-  "attempted": 25,
-  "imported": 25,
-  "previous": 0,
-  "total": 25,
-  "errors": []
+  "attempted": 100,
+  "imported": 95,
+  "previous": 25,
+  "total": 120,
+  "errors": [
+    {
+      "code": "BYGC11",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "CBAD82",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "DAGDDT",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "DAGSP1",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "DAGSP2",
+      "reason": "HTTP 404"
+    }
+  ]
 }
