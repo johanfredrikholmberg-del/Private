@@ -9,12 +9,14 @@ on:
       - 'scripts/audit-kau-ht26-import.mjs'
       - '.github/workflows/kau-ht26-import-audit.yml'
 permissions:
-  contents: read
+  contents: write
 jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -23,13 +25,29 @@ jobs:
         run: |
           set -euo pipefail
           node scripts/audit-kau-ht26-import.mjs | tee kau-ht26-import-audit.json
+          node -e 'JSON.parse(require("node:fs").readFileSync("kau-ht26-import-audit.json", "utf8"))'
+      - name: Save audit report on studielots-v2
+        if: success() && github.ref == 'refs/heads/studielots-v2'
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s kau-ht26-import-audit.json
+          mkdir -p data/import-reviews
+          cp kau-ht26-import-audit.json data/import-reviews/kau-ht26-full-batch.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/import-reviews/kau-ht26-full-batch.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record Karlstad HT26 full-batch audit [skip ci]'
+            git push origin HEAD:studielots-v2
+          fi
       - name: Summarize batch without claiming an import
         if: always()
         shell: bash
         run: |
           {
             echo '## Karlstad: full-batch preflight'
-            echo 'This is a read-only audit. No canonical records were imported.'
+            echo 'Read-only audit: no canonical records imported.'
             if [ -s kau-ht26-import-audit.json ]; then
               echo '```json'
               cat kau-ht26-import-audit.json
