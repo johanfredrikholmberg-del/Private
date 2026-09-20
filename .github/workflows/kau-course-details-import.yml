@@ -1,0 +1,38 @@
+name: Import Karlstad course details
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - scripts/import-kau-course-details.mjs
+      - .github/workflows/kau-course-details-import.yml
+permissions:
+  contents: write
+concurrency:
+  group: kau-course-details-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import official course details
+        env:
+          KAU_COURSE_LIMIT: '25'
+        run: node scripts/import-kau-course-details.mjs
+      - name: Commit verified data and import report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/HT26/course-details.json data/import-reviews/kau-course-details-latest.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Import verified Karlstad course details into HT26'
+            git push origin HEAD:studielots-v2
+          fi
