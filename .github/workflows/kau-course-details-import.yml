@@ -25,7 +25,7 @@ jobs:
           node-version: '22'
       - name: Import official course details
         env:
-          KAU_COURSE_LIMIT: '25'
+          KAU_COURSE_LIMIT: '100'
         run: node scripts/import-kau-course-details.mjs
       - name: Commit verified data and import report
         run: |
