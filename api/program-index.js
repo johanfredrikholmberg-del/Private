@@ -4,8 +4,21 @@ const norm=v=>String(v??'').trim().toLocaleLowerCase('sv-SE').normalize('NFD').r
 const code=v=>String(v??'').trim().toUpperCase();
 const identity=(university,programCode)=>`${norm(university)}:${code(programCode)}`;
 const read=async name=>JSON.parse(await readFile(join(process.cwd(),'data','HT26',`${name}.json`),'utf8'));
-// Infer only subjects explicitly named in the programme; never infer from a student's merits.
 function programmeSubject(p){if(p.subject)return p.subject;const name=norm(p.programName||p.name);if(/foretagsekonomi|ekonomie-kandidat|civilekonom|marknadsforing|redovisning-och-styrning|business-administration/.test(name))return 'Företagsekonomi';if(/nationalekonomi|economics/.test(name))return 'Nationalekonomi';if(/psykologi|psychology/.test(name))return 'Psykologi';if(/idrottsvetenskap|sport-science/.test(name))return 'Idrottsvetenskap';if(/juridik|juristprogram|skatteratt/.test(name))return 'Juridik';return ''}
+// A source's "complete" flag alone is not enough: every semester and all programme
+// credits must be accounted for before the programme can appear in search.
+function hasFullStructure(s,p){
+ const rows=s.rows,total=Number(p.programHp);
+ if(!Number.isFinite(total)||total<=0||!Array.isArray(rows)||!rows.length)return false;
+ const terms=new Set();let credits=0;
+ for(const r of rows){const term=Number(r.term),hp=Number(r.hp);
+  if(!Number.isInteger(term)||term<1||!Number.isFinite(hp)||hp<=0||!(r.name||r.code))return false;
+  terms.add(term);credits+=hp;
+ }
+ if(Math.abs(credits-total)>.01)return false;
+ const last=Math.max(...terms);
+ return Number.isFinite(last)&&last<=Math.ceil(total/30)+2&&Array.from({length:last},(_,i)=>i+1).every(t=>terms.has(t));
+}
 let cached;
 async function catalogue(){
  if(cached)return cached;
@@ -17,16 +30,13 @@ async function catalogue(){
   if(String(s.coverage||s.structureCoverage||'').toLowerCase()!=='complete')continue;
   const evidence=s.sourceEvidenceUrl||s.sourceUrl||s.sourceUrls?.[0];
   if(!/^https:\/\//i.test(String(evidence||'')))continue;
-  if(!Array.isArray(s.rows)||!s.rows.length||!s.rows.every(r=>Number.isInteger(Number(r.term))&&Number(r.term)>0&&Number(r.hp)>0&&(r.name||r.code)))continue;
   const exact=byKey.get(s.key),matches=exact?[exact]:(byIdentity.get(identity(s.university,s.programCode))||[]);
   if(matches.length!==1)continue;
   const p=matches[0];
   if(Number(s.hp)>0&&Number(p.programHp)>0&&Math.abs(Number(s.hp)-Number(p.programHp))>.01)continue;
+  if(!hasFullStructure(s,p))continue;
   if(!complete.has(p.key))complete.set(p.key,{sourceEvidenceUrl:evidence,structureKey:s.key,rows:s.rows});
  }
- // Only fully structured programmes enter the searchable catalogue. Incomplete SUSA
- // metadata remains in the canonical database and can become searchable independently
- // as soon as its verified structure is imported.
  const rows=programs.filter(p=>p.university&&(p.programName||p.name)&&complete.has(p.key)).map(p=>{
   const structure=complete.get(p.key);
   return {subject:programmeSubject(p),university:p.university,programName:p.programName||p.name,programCode:p.programCode||'',programHp:Number(p.programHp)||null,level:p.level||'',source:'studielots-ht26',structureCoverage:'complete',effectiveStructureCoverage:'complete',plannerCoverage:'complete',verified:true,...structure};
