@@ -1,0 +1,46 @@
+name: Karlstad HT26 full-batch import audit
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - 'data/kau/programmes.json'
+      - 'data/kau/courses.json'
+      - 'scripts/audit-kau-ht26-import.mjs'
+      - '.github/workflows/kau-ht26-import-audit.yml'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Audit complete Karlstad staging against canonical HT26
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/audit-kau-ht26-import.mjs | tee kau-ht26-import-audit.json
+      - name: Summarize batch without claiming an import
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## Karlstad: full-batch preflight'
+            echo 'This is a read-only audit. No canonical records were imported.'
+            if [ -s kau-ht26-import-audit.json ]; then
+              echo '```json'
+              cat kau-ht26-import-audit.json
+              echo '```'
+            else
+              echo 'Audit did not produce a report; inspect the job failure.'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kau-ht26-full-batch-audit
+          path: kau-ht26-import-audit.json
+          if-no-files-found: warn
