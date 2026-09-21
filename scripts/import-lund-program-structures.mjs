@@ -383,6 +383,7 @@ function pdfRows(pdfText) {
 async function discover(program) {
   let best = null;
   const attemptedUrls = candidateUrls(program);
+  const pdfDiagnostics = [];
 
   // Lund's official programme-plan PDF endpoint is stable by programme code
   // even when a programme page has moved or its HTML plan is incomplete.
@@ -400,9 +401,10 @@ async function discover(program) {
         program: { name: program.programName, code: code(program.programCode), university: 'Lunds universitet' },
         sourceUrls: [pdf.url], source: 'lund-official-programme-plan-pdf',
         quality: { ...parsed, totalHp: pdfTotalHp, pdfRows: parsedRows.length } };
+      pdfDiagnostics.push({ url: pdf.url, rows: parsedRows.length, complete: parsed.complete, completeTerms: parsed.completeTerms, totalHp: pdfTotalHp, termHp: parsed.termHp });
       if (parsed.complete) return { ...result, attemptedUrls: [...attemptedUrls, ...directPdfUrls] };
       if (!best || (parsed.completeTerms?.length || 0) > (best.quality.completeTerms?.length || 0)) best = result;
-    } catch { /* continue with official programme pages */ }
+    } catch (error) { pdfDiagnostics.push({ url: pdfUrl, error: String(error?.message || error) }); }
   }
 
   for (const url of attemptedUrls) {
@@ -440,14 +442,15 @@ async function discover(program) {
             program: { name: program.programName, code: code(program.programCode), university: 'Lunds universitet' },
             sourceUrls: [pdf.url, main.url, ...(content.url !== main.url ? [content.url] : [])], source: 'lund-official-programme-plan-pdf',
             quality: { ...pdfParsed, totalHp: pdfTotalHp, pdfRows: pdfParsedRows.length } };
-          if (pdfParsed.complete) return { ...pdfResult, attemptedUrls };
+          pdfDiagnostics.push({ url: pdf.url, rows: pdfParsedRows.length, complete: pdfParsed.complete, completeTerms: pdfParsed.completeTerms, totalHp: pdfTotalHp, termHp: pdfParsed.termHp });
+          if (pdfParsed.complete) return { ...pdfResult, attemptedUrls, pdfDiagnostics };
           if (!best || (pdfParsed.completeTerms?.length || 0) > (best.quality.completeTerms?.length || 0)) best = pdfResult;
-        } catch { /* continue with other official PDF links */ }
+        } catch (error) { pdfDiagnostics.push({ url: pdfUrl, error: String(error?.message || error) }); }
       }
     } catch { /* try the next official slug */ }
   }
   const allAttemptedUrls = [...attemptedUrls, ...directPdfUrls];
-  return best ? { ...best, attemptedUrls: allAttemptedUrls } : { found: false, structureAvailable: false, courses: [], source: 'lund-official-programplan', attemptedUrls: allAttemptedUrls };
+  return best ? { ...best, attemptedUrls: allAttemptedUrls, pdfDiagnostics } : { found: false, structureAvailable: false, courses: [], source: 'lund-official-programplan', attemptedUrls: allAttemptedUrls, pdfDiagnostics };
 }
 
 function normaliseRows(rows) {
@@ -596,7 +599,7 @@ async function main() {
     const qualityInfo = result.quality || {};
     const reason = result.found ? `partial:${(qualityInfo.completeTerms || []).join(',') || 'none'}` : 'official-page-not-found';
     errors.push({ code: code(program.programCode), name: program.programName, reason,
-      attemptedUrls: result.attemptedUrls || [], bestSourceUrls: result.sourceUrls || [], bestQuality: qualityInfo });
+      attemptedUrls: result.attemptedUrls || [], bestSourceUrls: result.sourceUrls || [], bestQuality: qualityInfo, pdfDiagnostics: result.pdfDiagnostics || [] });
     console.log(`REVIEW ${program.programCode} ${reason}`);
     return { program, ok: false, reason };
   }, CONCURRENCY);
