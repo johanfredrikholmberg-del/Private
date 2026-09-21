@@ -6,7 +6,7 @@ const norm=v=>String(v??'').trim().toLocaleLowerCase('sv-SE').normalize('NFD').r
 const code=v=>String(v??'').trim().toUpperCase();
 const isLund=x=>norm(x.university)==='lunds universitet';
 const [susaCourses,susaProgrammes,courses,programmes,details]=await Promise.all([
- read('data/susa/courses.json'),read('data/susa/programmes.json'),read('data/HT26/courses.json'),read('data/HT26/programmes.json'),read('data/HT26/course-details.json')
+ read('data/susa/courses.json'),read('data/susa/programmes.json'),read('data/HT26/courses.json'),read('data/HT26/programs.json'),read('data/HT26/course-details.json')
 ]);
 for(const table of [susaCourses,susaProgrammes,courses,programmes,details])if(!Array.isArray(table))throw Error('Expected array data');
 const canonicalCourses=courses.filter(isLund),canonicalProgrammes=programmes.filter(isLund);
