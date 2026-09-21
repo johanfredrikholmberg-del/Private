@@ -8,6 +8,9 @@
  */
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import os from 'node:os';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 
 const DATA = path.join(process.cwd(), 'data', 'HT26');
 const REPORT = path.join(process.cwd(), 'data', 'import-reviews', 'lund-program-structures-latest.json');
@@ -15,6 +18,8 @@ const LIMIT = Math.max(1, Number(process.env.LUND_STRUCTURE_LIMIT || 300));
 const CONCURRENCY = Math.max(1, Math.min(8, Number(process.env.LUND_STRUCTURE_CONCURRENCY || 4)));
 const REQUEST_TIMEOUT = Math.max(5000, Number(process.env.LUND_STRUCTURE_TIMEOUT || 20000));
 const LU_BASE = 'https://www.lu.se/studera/';
+const LU_EN_BASE = 'https://www.lunduniversity.lu.se/study/';
+const execFileAsync = promisify(execFile);
 
 const clean = value => String(value ?? '').replace(/\s+/g, ' ').trim();
 const norm = value => clean(value).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -62,6 +67,23 @@ async function getText(url) {
   throw last;
 }
 
+async function getPdfText(url) {
+  const response = await fetch(url, {
+    headers: { accept: 'application/pdf', 'user-agent': 'StudieLots-Lund-structure-import/1.0' },
+    redirect: 'follow',
+    signal: AbortSignal.timeout(REQUEST_TIMEOUT),
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  const file = path.join(os.tmpdir(), `studielots-lund-${process.pid}-${Date.now()}.pdf`);
+  try {
+    await fs.writeFile(file, Buffer.from(await response.arrayBuffer()));
+    const result = await execFileAsync('pdftotext', ['-layout', file, '-'], { maxBuffer: 8 * 1024 * 1024 });
+    return { text: result.stdout || '', url: response.url || url };
+  } finally {
+    await fs.rm(file, { force: true });
+  }
+}
+
 function decodeHtml(value) {
   return String(value ?? '')
     .replace(/&nbsp;/gi, ' ')
@@ -86,7 +108,7 @@ function text(value) {
 const round1 = value => Math.round(Number(value || 0) * 10) / 10;
 
 function hpFromPage(html) {
-  const values = [...text(html).matchAll(/(\d+(?:[.,]\d+)?)\s*(?:högskolepoäng|hp)\b/gi)]
+  const values = [...text(html).matchAll(/(\d+(?:[.,]\d+)?)\s*(?:högskolepoäng|hp|credits)\b/gi)]
     .map(match => Number(match[1].replace(',', '.')))
     .filter(value => value >= 30 && value <= 360 && value % 30 === 0);
   return values[0] || 0;
@@ -99,8 +121,8 @@ function cellTexts(row) {
 
 function category(value) {
   const valueNorm = norm(value);
-  if (/obligatorisk/.test(valueNorm) && !/alternativ|valbar|valfri/.test(valueNorm)) return 'mandatory';
-  if (/valbar|valfri|alternativobligatorisk|alternativ obligatorisk/.test(valueNorm)) return 'elective';
+  if (/(obligatorisk|mandatory|required|obligatory)/.test(valueNorm) && !/alternativ|valbar|valfri|optional|elective/.test(valueNorm)) return 'mandatory';
+  if (/valbar|valfri|alternativobligatorisk|alternativ obligatorisk|optional|elective/.test(valueNorm)) return 'elective';
   return 'unknown';
 }
 
@@ -126,7 +148,7 @@ function parseTableRows(html) {
       if (termMatch && !term) term = Number(termMatch[1]);
       const hpMatch = cell.match(/^(\d+(?:[.,]\d+)?)\s*hp$/i);
       if (hpMatch && !credits) credits = Number(hpMatch[1].replace(',', '.'));
-      if (/obligatorisk|valbar|valfri|alternativ/i.test(cell)) type = cell;
+      if (/obligatorisk|valbar|valfri|alternativ|mandatory|required|optional|elective/i.test(cell)) type = cell;
     }
     if (!(term >= 1 && term <= 20 && credits > 0 && credits <= 30)) continue;
     const name = cells.find(cell => cell !== type && !/^(?:Termin\s*)?\d{1,2}$/i.test(cell) &&
@@ -144,7 +166,7 @@ function parseTableRows(html) {
 
 function termSegments(html) {
   const paragraph = text(html);
-  const marks = [...paragraph.matchAll(/\bTermin\s+(\d{1,2})\b/gi)]
+  const marks = [...paragraph.matchAll(/\b(?:Termin|Term)\s+(\d{1,2})(?:\s*[–-]\s*(\d{1,2}))?\b/gi)]
     .map(match => ({ term: Number(match[1]), index: match.index || 0, end: (match.index || 0) + match[0].length }));
   const out = [];
   for (let i = 0; i < marks.length; i += 1) {
@@ -157,7 +179,7 @@ function termSegments(html) {
 function parseTermStatements(html) {
   const rows = [];
   for (const part of termSegments(html)) {
-    for (const match of part.text.matchAll(/([^.;:]{3,160}?)\s*\(?\s*(\d+(?:[.,]\d+)?)\s*hp\s*\)?/gi)) {
+    for (const match of part.text.matchAll(/([^.;:]{3,160}?)\s*\(?\s*(\d+(?:[.,]\d+)?)\s*(?:hp|credits)\s*\)?/gi)) {
       const credits = Number(match[2].replace(',', '.'));
       if (!(credits > 0 && credits <= 30)) continue;
       let name = clean(match[1].replace(/^[-–:;,\s]+/, '').replace(/^(?:och|samt)\s+/i, ''));
@@ -166,7 +188,7 @@ function parseTermStatements(html) {
       name = clean(name.replace(/\s*\([A-ZÅÄÖ]{2,8}\d{1,4}[A-Z]?\)\s*$/i, ''));
       const context = `${name} ${part.text.slice(Math.max(0, (match.index || 0) - 80), (match.index || 0) + match[0].length + 80)}`;
       rows.push({ name, code: codeMatch ? code(codeMatch[1]) : '', hp: round1(credits), term: part.term,
-        category: /valbar|valfri|välj|utlandsstudier|praktik/i.test(context) ? 'elective' : 'unknown', sourceKind: 'term-text' });
+        category: /valbar|valfri|välj|utlandsstudier|praktik|elective|optional|exchange|internship/i.test(context) ? 'elective' : 'unknown', sourceKind: 'term-text' });
     }
   }
   return dedupe(rows);
@@ -174,17 +196,17 @@ function parseTermStatements(html) {
 
 function parseChoiceTerms(html, occupied) {
   const paragraph = text(html), rows = [], seen = new Set();
-  for (const match of paragraph.matchAll(/\bTermin\s+(\d{1,2})\b/gi)) {
+  for (const match of paragraph.matchAll(/\b(?:Termin|Term)\s+(\d{1,2})\b/gi)) {
     const term = Number(match[1]);
     if (!(term >= 1 && term <= 20) || occupied.has(term) || seen.has(term)) continue;
     const raw = paragraph.slice((match.index || 0) + match[0].length, (match.index || 0) + match[0].length + 1200);
     const after = norm(raw);
-    const explicit = (/tematermin/.test(after) && /välj bland|valbar|valfri/.test(after)) ||
-      /arbetslivspraktik|utlandsstudier|praktik eller valbara|valbara kurser/.test(after) ||
-      /val av huvudomrade|valja huvudomrade|välja huvudområde/.test(after) || /examensarbete/.test(after);
+    const explicit = (/tematermin/.test(after) && /välj bland|valbar|valfri|elective|optional/.test(after)) ||
+      /arbetslivspraktik|utlandsstudier|praktik eller valbara|valbara kurser|exchange|internship|elective courses|optional courses/.test(after) ||
+      /val av huvudomrade|valja huvudomrade|välja huvudområde|main field|specialisation|specialization/.test(after) || /examensarbete|thesis|degree project/.test(after);
     if (!explicit) continue;
     seen.add(term);
-    if (term === 6 && /examensarbete/.test(after)) {
+    if (term === 6 && /examensarbete|thesis|degree project/.test(after)) {
       rows.push({ name: 'Examensarbete inom huvudområdet', code: '', hp: 15, term, category: 'mandatory', sourceKind: 'thesis-explicit' });
       rows.push({ name: 'Fördjupning inom huvudområdet', code: '', hp: 15, term, category: 'elective', sourceKind: 'main-subject-specialisation' });
     } else {
@@ -249,6 +271,11 @@ function candidateNames(program) {
   const names = new Set([original]);
   const master = original.match(/^Masterprogram\s+i\s+(.+)$/i);
   const magister = original.match(/^Magisterprogram\s+i\s+(.+)$/i);
+  const candidate = original.match(/^Kandidatprogram(?:met)?\s+i\s+(.+)$/i);
+  const candidateNoI = original.match(/^Kandidatprogram(?:met)?\s+(.+)$/i);
+  const civil = original.match(/^Civilingenjörsutbildning\s+i\s+(.+)$/i);
+  const masterEdu = original.match(/^Masterutbildning\s+i\s+(.+)$/i);
+  const högskole = original.match(/^Högskoleingenjörsutbildning\s+i\s+(.+)$/i);
   if (master) {
     names.add(`${master[1]} Masterprogram`);
     names.add(`${master[1]} - Masterprogram`);
@@ -259,6 +286,28 @@ function candidateNames(program) {
     names.add(`${magister[1]} - Magisterprogram`);
     names.add(`${magister[1]} Masters Programme One Year`);
   }
+  if (candidate) {
+    names.add(`${candidate[1]} Kandidatprogram`);
+    names.add(`${candidate[1]} - Kandidatprogram`);
+    names.add(`${candidate[1]} Bachelors Programme`);
+  }
+  if (candidateNoI) {
+    names.add(`${candidateNoI[1]} Kandidatprogram`);
+    names.add(`${candidateNoI[1]} - Kandidatprogram`);
+  }
+  if (civil) {
+    names.add(`${civil[1]} Civilingenjörsutbildning`);
+    names.add(`${civil[1]} - Civilingenjörsutbildning`);
+  }
+  if (masterEdu) {
+    names.add(`${masterEdu[1]} Masterutbildning`);
+    names.add(`${masterEdu[1]} - Masterutbildning`);
+    names.add(`${masterEdu[1]} Masters Programme`);
+  }
+  if (högskole) {
+    names.add(`${högskole[1]} Högskoleingenjörsutbildning`);
+    names.add(`${högskole[1]} - Högskoleingenjörsutbildning`);
+  }
   names.add(original.replace(/\s*[-–]\s*(Kandidatprogram|Masterprogram|Magisterprogram)\s*$/i, ' $1'));
   return [...names].filter(Boolean);
 }
@@ -266,7 +315,63 @@ function candidateNames(program) {
 function candidateUrls(program) {
   const urls = [];
   for (const name of candidateNames(program)) urls.push(`${LU_BASE}${slug(name)}-${code(program.programCode)}`);
+  const original = clean(program.programName || program.name);
+  const master = original.match(/^(?:Masterprogram|Masterutbildning)\s+i\s+(.+)$/i);
+  const magister = original.match(/^Magisterprogram\s+i\s+(.+)$/i);
+  const candidate = original.match(/^Kandidatprogram(?:met)?\s+i\s+(.+)$/i);
+  if (master) urls.push(`${LU_EN_BASE}${slug(master[1])}-masters-programme-${code(program.programCode)}`);
+  if (magister) urls.push(`${LU_EN_BASE}${slug(magister[1])}-masters-programme-one-year-${code(program.programCode)}`);
+  if (candidate) urls.push(`${LU_EN_BASE}${slug(candidate[1])}-bachelors-programme-${code(program.programCode)}`);
   return [...new Set(urls)];
+}
+
+function extractLinks(html, baseUrl) {
+  const links = [];
+  for (const match of String(html || '').matchAll(/\bhref\s*=\s*["']([^"']+)["']/gi)) {
+    const href = decodeHtml(match[1]);
+    try { links.push(new URL(href, baseUrl).href); } catch { /* ignore malformed links */ }
+  }
+  return [...new Set(links)];
+}
+
+function pdfRows(pdfText) {
+  const lines = String(pdfText || '').split(/\r?\n/).map(clean).filter(Boolean);
+  const rows = [];
+  let currentTerm = 0;
+  let buffer = [];
+  const flush = (credits, categoryHint = '') => {
+    const filtered = buffer.filter(line => !/^(?:år|year|period|termin|term|programstruktur|program structure|kursuppgifter|course information|höst|vår|autumn|spring)/i.test(line));
+    if (currentTerm > 0 && !(credits > 0)) {
+      const choiceText = clean(filtered.join(' '));
+      if (/valfri|valbar|utbytesstudier|praktik|exchange|internship|elective|optional/i.test(choiceText)) {
+        rows.push({ name: 'Valbara studier enligt programplan', code: '', hp: 30, term: currentTerm, category: 'elective', sourceKind: 'programme-pdf-choice' });
+      }
+      buffer = [];
+      return;
+    }
+    if (!(currentTerm > 0 && credits > 0)) { buffer = []; return; }
+    const name = clean(filtered.join(' ').replace(/\s*[-–:]\s*$/, ''));
+    buffer = [];
+    if (name.length < 3 || name.length > 220 || /^(?:hp|credits|ects)$/i.test(name)) return;
+    const codeMatch = name.match(/\b([A-ZÅÄÖ]{2,8}\d{1,4}[A-Z]?)\b/);
+    rows.push({ name, code: codeMatch ? code(codeMatch[1]) : '', hp: round1(credits), term: currentTerm,
+      category: category(categoryHint || name), sourceKind: 'programme-pdf' });
+  };
+  for (const line of lines) {
+    const termMatch = line.match(/^(?:Termin|Term)\s+(\d{1,2})(?:\s*[–-]\s*(\d{1,2}))?/i);
+    if (termMatch) { flush(0); currentTerm = Number(termMatch[1]); buffer = []; continue; }
+    if (/^(?:År|Year)\s+\d+/i.test(line) || /^(?:Period|Termin|Term)\b/i.test(line)) { buffer = []; continue; }
+    const hpMatch = line.match(/(?:\(|\s)(\d+(?:[.,]\d+)?)\s*(?:hp|credits|ECTS)\s*\)?$/i);
+    if (hpMatch) {
+      const before = clean(line.slice(0, hpMatch.index));
+      if (before) buffer.push(before);
+      flush(Number(hpMatch[1].replace(',', '.')));
+      continue;
+    }
+    if (currentTerm && !/^(?:Programmet|The programme|Skolan|Lunds universitet|Lund University|\d+\/\d+)/i.test(line)) buffer.push(line);
+  }
+  flush(0);
+  return dedupe(rows);
 }
 
 async function discover(program) {
@@ -275,9 +380,13 @@ async function discover(program) {
   for (const url of attemptedUrls) {
     try {
       const main = await getText(url);
-      const contentUrl = `${main.url.replace(/\/$/, '')}/programmets-innehall`;
       let content = main;
-      try { content = await getText(contentUrl); } catch { /* the main page may contain the plan */ }
+      const contentCandidates = main.url.includes('lunduniversity.lu.se')
+        ? [`${main.url.replace(/\/$/, '')}/programme-structure`, `${main.url.replace(/\/$/, '')}/programmets-innehall`]
+        : [`${main.url.replace(/\/$/, '')}/programmets-innehall`, `${main.url.replace(/\/$/, '')}/programme-structure`];
+      for (const contentUrl of contentCandidates) {
+        try { content = await getText(contentUrl); break; } catch { /* try the next official content page */ }
+      }
       const table = parseTableRows(content.html);
       const termRows = parseTermStatements(content.html);
       const choiceRows = parseChoiceTerms(content.html, new Set(table.map(row => row.term)));
@@ -290,6 +399,23 @@ async function discover(program) {
         quality: { ...parsed, totalHp, tableRows: table.length, textRows: termRows.length, choiceTerms: choiceRows.map(row => row.term) } };
       if (parsed.complete) return { ...result, attemptedUrls };
       if (!best || (parsed.completeTerms?.length || 0) > (best.quality.completeTerms?.length || 0)) best = result;
+
+      const pdfLinks = [...extractLinks(main.html, main.url), ...extractLinks(content.html, content.url)]
+        .filter(link => /kursplaner\.lu\.se\/pdf\/program\//i.test(link) || /(?:utbildningsplan|programstruktur|programme-structure).*\.pdf/i.test(link));
+      for (const pdfUrl of [...new Set(pdfLinks)]) {
+        try {
+          const pdf = await getPdfText(pdfUrl);
+          const pdfTotalHp = hpFromPage(pdf.text) || Number(program.programHp);
+          const pdfParsedRows = pdfRows(pdf.text);
+          const pdfParsed = quality(pdfParsedRows, pdfTotalHp);
+          const pdfResult = { found: true, structureAvailable: pdfParsed.complete, courses: pdfParsed.courses,
+            program: { name: program.programName, code: code(program.programCode), university: 'Lunds universitet' },
+            sourceUrls: [pdf.url, main.url, ...(content.url !== main.url ? [content.url] : [])], source: 'lund-official-programme-plan-pdf',
+            quality: { ...pdfParsed, totalHp: pdfTotalHp, pdfRows: pdfParsedRows.length } };
+          if (pdfParsed.complete) return { ...pdfResult, attemptedUrls };
+          if (!best || (pdfParsed.completeTerms?.length || 0) > (best.quality.completeTerms?.length || 0)) best = pdfResult;
+        } catch { /* continue with other official PDF links */ }
+      }
     } catch { /* try the next official slug */ }
   }
   return best ? { ...best, attemptedUrls } : { found: false, structureAvailable: false, courses: [], source: 'lund-official-programplan', attemptedUrls };
