@@ -33,6 +33,8 @@ jobs:
           set -uo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # Correct the legacy audit filename in this bounded run; do not modify other workflows.
+          sed -i 's@data/HT26/programmes.json@data/HT26/programs.json@g' scripts/audit-lund-susa-coverage.mjs
           node scripts/audit-lund-susa-coverage.mjs || exit $?
           node scripts/import-lund-course-details.mjs
           import_status=$?
