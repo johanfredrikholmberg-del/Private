@@ -25,7 +25,7 @@ jobs:
           node-version: '22'
       - name: Install PDF text extractor
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
-      - name: Audit SUSA baseline and import at most ten Lund syllabuses
+      - name: Preserve known 404s and attempt a fresh bounded Lund batch
         env:
           LUND_COURSE_LIMIT: '10'
         shell: bash
@@ -34,16 +34,31 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           node scripts/audit-lund-susa-coverage.mjs || exit $?
+          # Earlier failed runs repeatedly retried the same 404 codes because their
+          # unavailable file was never committed. Seed it from the saved report.
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const dir="data/import-reviews/";
+            const file=dir+"lund-course-details-unavailable.json";
+            const previous=JSON.parse(fs.readFileSync(dir+"lund-course-details-latest.json","utf8"));
+            const known=fs.existsSync(file)?JSON.parse(fs.readFileSync(file,"utf8")):[];
+            const byCode=new Map(known.map(row=>[row.code,row]));
+            for(const row of previous.errors||[]){
+              if(row.reason==="HTTP 404" && row.code && !byCode.has(row.code))
+                byCode.set(row.code,{code:row.code,reason:row.reason,sourceUrl:`https://kursplaner.lu.se/pdf/kurs/sv/${encodeURIComponent(row.code)}`});
+            }
+            fs.writeFileSync(file,JSON.stringify([...byCode.values()].sort((a,b)=>a.code.localeCompare(b.code)),null,2)+"\n");
+            console.log(`Known unavailable URLs excluded from this attempt: ${byCode.size}`);
+          ' || exit $?
           node scripts/import-lund-course-details.mjs
           import_status=$?
           node scripts/audit-lund-susa-coverage.mjs || exit $?
           git add -A -- data/HT26/course-details.json data/import-reviews/lund-susa-coverage.json data/import-reviews/lund-course-details-latest.json data/import-reviews/lund-course-details-unavailable.json
           if ! git diff --cached --quiet; then
-            git commit -m 'Save Lund SUSA audit and small syllabus batch [skip ci]' || exit $?
+            git commit -m 'Save Lund syllabus import results and unavailable URLs [skip ci]' || exit $?
             git fetch origin studielots-v2 || exit $?
             git rebase origin/studielots-v2 || exit $?
             git push origin HEAD:studielots-v2 || exit $?
           fi
           node -e "const r=require('./data/import-reviews/lund-course-details-latest.json');const a=require('./data/import-reviews/lund-susa-coverage.json');console.log(JSON.stringify({batch:r,coverage:a.counts}))"
           exit "$import_status"
-# HT26 Lund bounded batch requested 2026-09-21 15:35 Europe/Stockholm.
