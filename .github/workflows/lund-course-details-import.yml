@@ -5,6 +5,7 @@ on:
     branches: [studielots-v2]
     paths:
       - scripts/import-lund-course-details.mjs
+      - scripts/audit-lund-susa-coverage.mjs
       - .github/workflows/lund-course-details-import.yml
 permissions:
   contents: write
@@ -26,6 +27,20 @@ jobs:
           node-version: '22'
       - name: Install PDF text extractor
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Audit SUSA coverage and persist missing Lund records
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          node scripts/audit-lund-susa-coverage.mjs
+          git add -A -- data/import-reviews/lund-susa-coverage.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Audit Lund SUSA coverage [skip ci]'
+            git fetch origin studielots-v2
+            git rebase origin/studielots-v2
+            git push origin HEAD:studielots-v2
+          fi
       - name: Import Lund syllabuses in batches and save each completed batch
         env:
           LUND_COURSE_LIMIT: '100'
