@@ -6,6 +6,8 @@ on:
     paths:
       - scripts/import-kau-course-details.mjs
       - .github/workflows/kau-course-details-import.yml
+  schedule:
+    - cron: '37 4 * * *'
 permissions:
   contents: write
 concurrency:
@@ -14,11 +16,12 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
           ref: studielots-v2
+          fetch-depth: 0
           persist-credentials: true
       - uses: actions/setup-node@v4
         with:
@@ -33,6 +36,8 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/HT26/course-details.json data/import-reviews/kau-course-details-latest.json
           if ! git diff --cached --quiet; then
-            git commit -m 'Import verified Karlstad course details into HT26'
+            git commit -m 'Import verified Karlstad course details into HT26 [skip ci]'
+            git fetch origin studielots-v2
+            git rebase origin/studielots-v2
             git push origin HEAD:studielots-v2
           fi
