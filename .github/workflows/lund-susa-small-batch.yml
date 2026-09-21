@@ -28,7 +28,7 @@ jobs:
       - name: Import the next bounded Lund HT26 batch after successful verification
         env:
           LUND_COURSE_LIMIT: '10'
-          LUND_BATCH_LABEL: 'ht26-round-5'
+          LUND_BATCH_LABEL: 'ht26-final-remaining-3'
         shell: bash
         run: |
           set -uo pipefail
