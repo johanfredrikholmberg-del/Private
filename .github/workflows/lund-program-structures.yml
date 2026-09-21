@@ -34,6 +34,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Install PDF text extractor
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - name: Import verified Lund programme structures
         env:
           LUND_STRUCTURE_LIMIT: '300'
@@ -63,5 +65,3 @@ jobs:
           path: |
             data/import-reviews/lund-program-structures-latest.json
             lund-program-search-readiness.json
-
-# Trigger note: this workflow is intentionally scoped to the v2 branch only.
