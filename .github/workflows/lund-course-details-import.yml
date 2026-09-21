@@ -6,8 +6,6 @@ on:
     paths:
       - scripts/import-lund-course-details.mjs
       - .github/workflows/lund-course-details-import.yml
-  schedule:
-    - cron: '17 3 * * *'
 permissions:
   contents: write
 concurrency:
@@ -16,7 +14,7 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,19 +26,33 @@ jobs:
           node-version: '22'
       - name: Install PDF text extractor
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
-      - name: Import verified official Lund syllabus details
+      - name: Import Lund syllabuses in batches and save each completed batch
         env:
           LUND_COURSE_LIMIT: '100'
-        run: node scripts/import-lund-course-details.mjs
-      - name: Commit verified course details and report
-        if: always()
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A -- data/HT26/course-details.json data/import-reviews/lund-course-details-latest.json
-          if ! git diff --cached --quiet; then
-            git commit -m 'Import verified Lund course details into HT26 [skip ci]'
-            git fetch origin studielots-v2
-            git rebase origin/studielots-v2
-            git push origin HEAD:studielots-v2
-          fi
+          for batch in $(seq 1 25); do
+            echo "Lund batch ${batch}"
+            node scripts/import-lund-course-details.mjs
+            git add -A -- data/HT26/course-details.json data/import-reviews/lund-course-details-latest.json
+            if ! git diff --cached --quiet; then
+              git commit -m "Import verified Lund syllabus details batch ${batch} [skip ci]"
+              git fetch origin studielots-v2
+              git rebase origin/studielots-v2
+              git push origin HEAD:studielots-v2
+            fi
+            remaining=$(node -p "const r=require('./data/import-reviews/lund-course-details-latest.json'); Math.max(0,r.remainingBeforeBatch-r.attempted)")
+            imported=$(node -p "require('./data/import-reviews/lund-course-details-latest.json').imported")
+            echo "Remaining eligible candidates: ${remaining}; imported in batch: ${imported}"
+            if [ "$remaining" -eq 0 ]; then
+              echo 'All eligible canonical Lund course codes have been attempted; review errors and excluded identities separately.'
+              break
+            fi
+            if [ "$imported" -eq 0 ]; then
+              echo 'No progress: stopping to avoid retrying the same failing codes indefinitely.'
+              exit 1
+            fi
+          done
