@@ -446,7 +446,8 @@ async function discover(program) {
       }
     } catch { /* try the next official slug */ }
   }
-  return best ? { ...best, attemptedUrls } : { found: false, structureAvailable: false, courses: [], source: 'lund-official-programplan', attemptedUrls };
+  const allAttemptedUrls = [...attemptedUrls, ...directPdfUrls];
+  return best ? { ...best, attemptedUrls: allAttemptedUrls } : { found: false, structureAvailable: false, courses: [], source: 'lund-official-programplan', attemptedUrls: allAttemptedUrls };
 }
 
 function normaliseRows(rows) {
@@ -594,7 +595,8 @@ async function main() {
     }
     const qualityInfo = result.quality || {};
     const reason = result.found ? `partial:${(qualityInfo.completeTerms || []).join(',') || 'none'}` : 'official-page-not-found';
-    errors.push({ code: code(program.programCode), name: program.programName, reason, attemptedUrls: result.attemptedUrls || [] });
+    errors.push({ code: code(program.programCode), name: program.programName, reason,
+      attemptedUrls: result.attemptedUrls || [], bestSourceUrls: result.sourceUrls || [], bestQuality: qualityInfo });
     console.log(`REVIEW ${program.programCode} ${reason}`);
     return { program, ok: false, reason };
   }, CONCURRENCY);
