@@ -30,17 +30,19 @@ jobs:
           LUND_COURSE_LIMIT: '10'
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          node scripts/audit-lund-susa-coverage.mjs
+          node scripts/audit-lund-susa-coverage.mjs || exit $?
           node scripts/import-lund-course-details.mjs
-          node scripts/audit-lund-susa-coverage.mjs
+          import_status=$?
+          node scripts/audit-lund-susa-coverage.mjs || exit $?
           git add -A -- data/HT26/course-details.json data/import-reviews/lund-susa-coverage.json data/import-reviews/lund-course-details-latest.json data/import-reviews/lund-course-details-unavailable.json
           if ! git diff --cached --quiet; then
-            git commit -m 'Save Lund SUSA audit and small syllabus batch [skip ci]'
-            git fetch origin studielots-v2
-            git rebase origin/studielots-v2
-            git push origin HEAD:studielots-v2
+            git commit -m 'Save Lund SUSA audit and small syllabus batch [skip ci]' || exit $?
+            git fetch origin studielots-v2 || exit $?
+            git rebase origin/studielots-v2 || exit $?
+            git push origin HEAD:studielots-v2 || exit $?
           fi
           node -e "const r=require('./data/import-reviews/lund-course-details-latest.json');const a=require('./data/import-reviews/lund-susa-coverage.json');console.log(JSON.stringify({batch:r,coverage:a.counts}))"
+          exit "$import_status"
