@@ -9,7 +9,7 @@ const exec=promisify(execFile),root='data/HT26',review='data/import-reviews';
 const read=p=>fs.readFile(p,'utf8').then(JSON.parse);
 const norm=s=>String(s??'').trim().toLocaleLowerCase('sv-SE');
 const code=s=>String(s??'').trim().toUpperCase();
-const HT26_SUSA_TERM='20262';
+const DEFAULT_SUSA_TERM='20262';
 const canonical=await read(`${root}/courses.json`);
 const existing=await read(`${root}/course-details.json`).catch(e=>{if(e.code==='ENOENT')return [];throw e});
 const failures=await read(`${review}/lund-course-details-unavailable.json`).catch(e=>{if(e.code==='ENOENT')return [];throw e});
@@ -21,8 +21,10 @@ const byCode=new Map();
 for(const row of canonical){if(norm(row.university)!=='lunds universitet'||!code(row.code))continue;const k=code(row.code);byCode.set(k,[...(byCode.get(k)||[]),row]);}
 const already=new Set(existing.filter(x=>norm(x.university)==='lunds universitet').map(x=>code(x.code)));
 const unavailable=new Map(failures.filter(x=>x&&code(x.code)&&String(x.reason||'').includes('HTTP 404')).map(x=>[code(x.code),x]));
-const isHt26=row=>String(row?.susaId||'').endsWith(`.${HT26_SUSA_TERM}`);
-const eligible=[...byCode.entries()].filter(([id,rows])=>/^[A-ZÅÄÖ0-9]{5,12}$/.test(id)&&rows.length===1&&rows.some(isHt26)&&!already.has(id));
+const requestedTerms=String(process.env.LUND_COURSE_TERMS||DEFAULT_SUSA_TERM).split(',').map(x=>x.trim()).filter(Boolean);
+const allSnapshotTerms=requestedTerms.length===1&&requestedTerms[0].toLowerCase()==='all';
+const inRequestedTerms=row=>allSnapshotTerms||requestedTerms.some(term=>String(row?.susaId||'').endsWith(`.${term}`));
+const eligible=[...byCode.entries()].filter(([id,rows])=>/^[A-ZÅÄÖ0-9]{5,12}$/.test(id)&&rows.length===1&&rows.some(inRequestedTerms)&&!already.has(id));
 const pending=eligible.filter(([id])=>!unavailable.has(id)).sort(([a],[b])=>a.localeCompare(b,'sv'));
 const limit=Math.max(1,Math.min(100,Number(process.env.LUND_COURSE_LIMIT||40)));
 const requestedCodes=String(process.env.LUND_COURSE_CODES||'').split(',').map(code).filter(Boolean);
@@ -30,7 +32,8 @@ const candidates=(requestedCodes.length
  ? eligible.filter(([id])=>requestedCodes.includes(id))
  : pending
 ).slice(0,limit);
-const report={scope:'Lund HT26 (SUSA term 20262)',attempted:0,imported:0,errors:[],candidateLimit:limit,requestedCodes,remainingBeforeBatch:pending.length,unavailableBeforeBatch:unavailable.size},added=[];
+const scope=allSnapshotTerms?'Lund all SUSA snapshot terms':`Lund SUSA term${requestedTerms.length===1?'':'s'} ${requestedTerms.join(', ')}`;
+const report={scope,attempted:0,imported:0,errors:[],candidateLimit:limit,requestedCodes,requestedTerms,remainingBeforeBatch:pending.length,unavailableBeforeBatch:unavailable.size},added=[];
 const dir=await fs.mkdtemp(path.join(os.tmpdir(),'studielots-lund-'));
 try{
 for(const [id,matches] of candidates){
