@@ -1,22 +1,63 @@
 {
-  "scope": "Lund HT26 (SUSA term 20262)",
-  "attempted": 7,
-  "imported": 7,
-  "errors": [],
-  "candidateLimit": 10,
-  "requestedCodes": [
-    "PFE11",
-    "PKU08",
-    "PKU09",
-    "PKU10",
-    "PST02",
-    "PST06",
-    "PUT01"
+  "scope": "Lund all SUSA snapshot terms",
+  "attempted": 20,
+  "imported": 17,
+  "errors": [
+    {
+      "code": "PEH01",
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PEH01",
+        "https://kurser.lth.se/kursplaner/senaste/PEH01.pdf"
+      ]
+    },
+    {
+      "code": "PEH02",
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PEH02",
+        "https://kurser.lth.se/kursplaner/senaste/PEH02.pdf"
+      ]
+    },
+    {
+      "code": "PEH04",
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PEH04",
+        "https://kurser.lth.se/kursplaner/senaste/PEH04.pdf"
+      ]
+    }
   ],
-  "remainingBeforeBatch": 0,
-  "unavailableBeforeBatch": 7,
-  "previous": 2056,
-  "total": 2063,
-  "remainingAfterBatch": 0,
-  "unavailableAfterBatch": 0
+  "candidateLimit": 20,
+  "requestedCodes": [
+    "EDAF05",
+    "EDAF50",
+    "EDAN40",
+    "EDAN75",
+    "EDAP01",
+    "GEMA66",
+    "GEMA70",
+    "PEH01",
+    "PEH02",
+    "PEH04",
+    "TFRA02",
+    "TFRA41",
+    "TFRA42",
+    "TFRB76",
+    "TFRB85",
+    "TFRC66",
+    "TFRC70",
+    "TFRC75",
+    "TFRC80",
+    "TFRC95"
+  ],
+  "requestedTerms": [
+    "all"
+  ],
+  "remainingBeforeBatch": 196,
+  "unavailableBeforeBatch": 0,
+  "previous": 2063,
+  "total": 2080,
+  "remainingAfterBatch": 176,
+  "unavailableAfterBatch": 3
 }
