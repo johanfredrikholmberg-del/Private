@@ -1,6 +1,6 @@
 {
   "attempted": 100,
-  "imported": 92,
+  "imported": 89,
   "skipped": [],
   "errors": [
     {
@@ -34,10 +34,22 @@
     {
       "code": "EDAP01",
       "reason": "HTTP 404"
+    },
+    {
+      "code": "GEMA20",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "GEMA66",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "GEMA70",
+      "reason": "HTTP 404"
     }
   ],
   "candidateLimit": 100,
-  "remainingBeforeBatch": 1516,
-  "previous": 632,
-  "total": 724
+  "remainingBeforeBatch": 1424,
+  "previous": 724,
+  "total": 813
 }
