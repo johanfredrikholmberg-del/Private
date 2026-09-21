@@ -29,8 +29,8 @@ jobs:
         env:
           LUND_COURSE_LIMIT: '20'
           LUND_COURSE_TERMS: 'all'
-          LUND_COURSE_CODES: 'YIDB04,YIDC06,YIDC10,YIDC12,YIDC13,YIDC14,YIDD10,YIDD12,YIDD20,ÄEND02,ÄEND03,ÄENM12,ÄFRD02,ÄFRM12,ÄFYD14,ÄFYD32,ÄFYM12,ÄHID02,ÄHID03,ÄITD12'
-          LUND_BATCH_LABEL: 'snapshot-course-structures-8'
+          LUND_COURSE_CODES: 'ÄITM12,ÄKID01,ÄKIM12,ÄMAB01,ÄMAB02,ÄMAB03,ÄMAM12,ÄNPF02,ÄRED02,ÄRED12,ÄSAD13,ÄSAD22,ÄSAM12,ÄSPD32,ÄSPM12,ÄSVD02,ÄSVD03,ÄSVD13,ÄSVM12,ÄTYD02'
+          LUND_BATCH_LABEL: 'snapshot-course-structures-9'
         shell: bash
         run: |
           set -uo pipefail
