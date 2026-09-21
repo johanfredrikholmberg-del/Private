@@ -27,10 +27,10 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - name: Import the next bounded Lund snapshot batch after successful verification
         env:
-          LUND_COURSE_LIMIT: '20'
+          LUND_COURSE_LIMIT: '19'
           LUND_COURSE_TERMS: 'all'
-          LUND_COURSE_CODES: 'ÄITM12,ÄKID01,ÄKIM12,ÄMAB01,ÄMAB02,ÄMAB03,ÄMAM12,ÄNPF02,ÄRED02,ÄRED12,ÄSAD13,ÄSAD22,ÄSAM12,ÄSPD32,ÄSPM12,ÄSVD02,ÄSVD03,ÄSVD13,ÄSVM12,ÄTYD02'
-          LUND_BATCH_LABEL: 'snapshot-course-structures-9'
+          LUND_COURSE_CODES: 'ÄTYM12,ÄUVD11,ÄUVD14,ÄUVD15,ÄUVD22,ÄUVD23,ÄUVD33,ÄUVN17,ÄVGD11,ÄVGD21,ÄVGN02,ÖCKB06,ÖCKB07,ÖCKB14,ÖCKB16,ÖCKB17,ÖCKK11,ÖVSE02,ÖVSG03'
+          LUND_BATCH_LABEL: 'snapshot-course-structures-final'
         shell: bash
         run: |
           set -uo pipefail
