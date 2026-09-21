@@ -1,0 +1,42 @@
+name: Import Lund course details
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - scripts/import-lund-course-details.mjs
+      - .github/workflows/lund-course-details-import.yml
+permissions:
+  contents: write
+concurrency:
+  group: lund-course-details-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PDF text extractor
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Import verified official Lund syllabus details
+        run: node scripts/import-lund-course-details.mjs
+      - name: Commit verified course details and report
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/HT26/course-details.json data/import-reviews/lund-course-details-latest.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Import verified Lund course details into HT26 [skip ci]'
+            git fetch origin studielots-v2
+            git rebase origin/studielots-v2
+            git push origin HEAD:studielots-v2
+          fi
