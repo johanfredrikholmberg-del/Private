@@ -51,7 +51,7 @@ for(const [id,matches] of candidates){
   await fs.writeFile(pdf,bytes);
   const {stdout}=await exec('pdftotext',['-layout','-enc','UTF-8',pdf,'-'],{maxBuffer:2_000_000,timeout:15000});
   const text=stdout.replace(/\r/g,'');
-  if(!new RegExp(`\\b${id}\\b`,'i').test(text))throw Error('Course code absent from official syllabus');
+  if(!text.toLocaleUpperCase('sv-SE').includes(id))throw Error('Course code absent from official syllabus');
   if(!/kursplan/i.test(text))throw Error('Document does not identify as course syllabus');
   const headings=['Förkunskapskrav','Behörighet','Kursens innehåll','Kursinnehåll','Innehåll','Lärandemål','Kursens mål','Mål','Undervisning','Kursens examination','Examination','Fastställande','Kurslitteratur','Moduler','Antagningsuppgifter'];
   const headingPattern=headings.map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|');
