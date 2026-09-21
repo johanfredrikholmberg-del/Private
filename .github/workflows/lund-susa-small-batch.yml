@@ -29,8 +29,8 @@ jobs:
         env:
           LUND_COURSE_LIMIT: '20'
           LUND_COURSE_TERMS: 'all'
-          LUND_COURSE_CODES: 'PFE12,PFE14,PFE20,PFE22,PIN10,PKE03,PSO01,PSO02,PST09,RÄSA03,RÄSA34,RÄSK02,SASI07,SKÅA91,SKÅA92,SKÅA98,SKÅA99,SKÅB34,SKÅB35,SKÅB37'
-          LUND_BATCH_LABEL: 'snapshot-course-structures-3-package-overrides'
+          LUND_COURSE_CODES: 'SKÅB38,SKÅN24,TFRD30,TFRD46,TFRD47,TFRD49,TFRD50,TFRD75,TFRE01,TFRE20,TFRE25,TFRE30,TFRE40,TFRE85,TFRE90,TFRG85,TFRG95,TFRH05,TFRH15,TFRH25'
+          LUND_BATCH_LABEL: 'snapshot-course-structures-4'
         shell: bash
         run: |
           set -uo pipefail
