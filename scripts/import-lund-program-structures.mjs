@@ -262,6 +262,24 @@ function quality(rows, totalHp) {
   return { complete: expectedTerms >= 2 && completeTerms.length === expectedTerms, expectedTerms, completeTerms, termHp, courses };
 }
 
+// `quality()` deliberately tolerates small gaps while deciding which pages are
+// worth reviewing.  Publishing is stricter: every term and the programme
+// total must reconcile exactly, otherwise a PDF or another official source
+// still needs to be tried.
+function exactQuality(parsed, totalHp) {
+  if (!parsed?.complete || !(Number(totalHp) > 0)) return false;
+  const expected = round1(Number(totalHp));
+  const rows = Array.isArray(parsed.courses) ? parsed.courses : [];
+  const total = round1(rows.reduce((sum, row) => sum + Number(row.hp || 0), 0));
+  if (Math.abs(total - expected) > 0.01) return false;
+  return [...Array(parsed.expectedTerms).keys()].every(index => {
+    const term = index + 1;
+    const termTotal = round1(rows.filter(row => Number(row.term) === term)
+      .reduce((sum, row) => sum + Number(row.hp || 0), 0));
+    return Math.abs(termTotal - 30) <= 0.01;
+  });
+}
+
 function title(html) {
   return text(String(html).match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || '');
 }
@@ -402,7 +420,7 @@ async function discover(program) {
         sourceUrls: [pdf.url], source: 'lund-official-programme-plan-pdf',
         quality: { ...parsed, totalHp: pdfTotalHp, pdfRows: parsedRows.length } };
       pdfDiagnostics.push({ url: pdf.url, rows: parsedRows.length, complete: parsed.complete, completeTerms: parsed.completeTerms, totalHp: pdfTotalHp, termHp: parsed.termHp });
-      if (parsed.complete) return { ...result, attemptedUrls: [...attemptedUrls, ...directPdfUrls] };
+      if (exactQuality(parsed, pdfTotalHp)) return { ...result, attemptedUrls: [...attemptedUrls, ...directPdfUrls], pdfDiagnostics };
       if (!best || (parsed.completeTerms?.length || 0) > (best.quality.completeTerms?.length || 0)) best = result;
     } catch (error) { pdfDiagnostics.push({ url: pdfUrl, error: String(error?.message || error) }); }
   }
@@ -427,7 +445,7 @@ async function discover(program) {
         program: { name: title(main.html) || program.programName, code: code(program.programCode), university: 'Lunds universitet' },
         sourceUrls: [main.url, ...(content.url !== main.url ? [content.url] : [])], source: 'lund-official-programplan',
         quality: { ...parsed, totalHp, tableRows: table.length, textRows: termRows.length, choiceTerms: choiceRows.map(row => row.term) } };
-      if (parsed.complete) return { ...result, attemptedUrls };
+      if (exactQuality(parsed, totalHp)) return { ...result, attemptedUrls, pdfDiagnostics };
       if (!best || (parsed.completeTerms?.length || 0) > (best.quality.completeTerms?.length || 0)) best = result;
 
       const pdfLinks = [...extractLinks(main.html, main.url), ...extractLinks(content.html, content.url)]
@@ -443,7 +461,7 @@ async function discover(program) {
             sourceUrls: [pdf.url, main.url, ...(content.url !== main.url ? [content.url] : [])], source: 'lund-official-programme-plan-pdf',
             quality: { ...pdfParsed, totalHp: pdfTotalHp, pdfRows: pdfParsedRows.length } };
           pdfDiagnostics.push({ url: pdf.url, rows: pdfParsedRows.length, complete: pdfParsed.complete, completeTerms: pdfParsed.completeTerms, totalHp: pdfTotalHp, termHp: pdfParsed.termHp });
-          if (pdfParsed.complete) return { ...pdfResult, attemptedUrls, pdfDiagnostics };
+          if (exactQuality(pdfParsed, pdfTotalHp)) return { ...pdfResult, attemptedUrls, pdfDiagnostics };
           if (!best || (pdfParsed.completeTerms?.length || 0) > (best.quality.completeTerms?.length || 0)) best = pdfResult;
         } catch (error) { pdfDiagnostics.push({ url: pdfUrl, error: String(error?.message || error) }); }
       }
