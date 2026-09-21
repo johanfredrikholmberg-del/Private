@@ -1,16 +1,71 @@
 {
   "scope": "Lund HT26 (SUSA term 20262)",
-  "attempted": 0,
-  "imported": 0,
-  "errors": [],
-  "candidateLimit": 10,
-  "requestedCodes": [
-    "ÄEND21"
+  "attempted": 10,
+  "imported": 3,
+  "errors": [
+    {
+      "code": "PFE11",
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PFE11",
+        "https://kurser.lth.se/kursplaner/senaste/PFE11.pdf"
+      ]
+    },
+    {
+      "code": "PKU08",
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PKU08",
+        "https://kurser.lth.se/kursplaner/senaste/PKU08.pdf"
+      ]
+    },
+    {
+      "code": "PKU09",
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PKU09",
+        "https://kurser.lth.se/kursplaner/senaste/PKU09.pdf"
+      ]
+    },
+    {
+      "code": "PKU10",
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PKU10",
+        "https://kurser.lth.se/kursplaner/senaste/PKU10.pdf"
+      ]
+    },
+    {
+      "code": "PST02",
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PST02",
+        "https://kurser.lth.se/kursplaner/senaste/PST02.pdf"
+      ]
+    },
+    {
+      "code": "PST06",
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PST06",
+        "https://kurser.lth.se/kursplaner/senaste/PST06.pdf"
+      ]
+    },
+    {
+      "code": "PUT01",
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PUT01",
+        "https://kurser.lth.se/kursplaner/senaste/PUT01.pdf"
+      ]
+    }
   ],
+  "candidateLimit": 10,
+  "requestedCodes": [],
   "remainingBeforeBatch": 46,
   "unavailableBeforeBatch": 0,
   "previous": 2017,
-  "total": 2017,
-  "remainingAfterBatch": 46,
-  "unavailableAfterBatch": 0
+  "total": 2020,
+  "remainingAfterBatch": 36,
+  "unavailableAfterBatch": 7
 }
