@@ -1,12 +1,6 @@
 name: Import Lund course details
 on:
   workflow_dispatch:
-  push:
-    branches: [studielots-v2]
-    paths:
-      - scripts/import-lund-course-details.mjs
-      - scripts/audit-lund-susa-coverage.mjs
-      - .github/workflows/lund-course-details-import.yml
 permissions:
   contents: write
 concurrency:
