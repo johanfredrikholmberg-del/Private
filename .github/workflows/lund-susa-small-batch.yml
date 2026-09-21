@@ -1,0 +1,46 @@
+name: Lund SUSA small batch
+on:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - .github/workflows/lund-susa-small-batch.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: lund-course-details-import
+  cancel-in-progress: false
+jobs:
+  audit-and-import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PDF text extractor
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Audit SUSA baseline and import at most ten Lund syllabuses
+        env:
+          LUND_COURSE_LIMIT: '10'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          node scripts/audit-lund-susa-coverage.mjs
+          node scripts/import-lund-course-details.mjs
+          node scripts/audit-lund-susa-coverage.mjs
+          git add -A -- data/HT26/course-details.json data/import-reviews/lund-susa-coverage.json data/import-reviews/lund-course-details-latest.json data/import-reviews/lund-course-details-unavailable.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Save Lund SUSA audit and small syllabus batch [skip ci]'
+            git fetch origin studielots-v2
+            git rebase origin/studielots-v2
+            git push origin HEAD:studielots-v2
+          fi
+          node -e "const r=require('./data/import-reviews/lund-course-details-latest.json');const a=require('./data/import-reviews/lund-susa-coverage.json');console.log(JSON.stringify({batch:r,coverage:a.counts}))"
