@@ -1,10 +1,43 @@
 {
   "attempted": 100,
-  "imported": 100,
+  "imported": 92,
   "skipped": [],
-  "errors": [],
+  "errors": [
+    {
+      "code": "EDAA01",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "EDAF05",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "EDAF50",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "EDAG01",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "EDAN26",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "EDAN40",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "EDAN75",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "EDAP01",
+      "reason": "HTTP 404"
+    }
+  ],
   "candidateLimit": 100,
-  "remainingBeforeBatch": 1800,
-  "previous": 348,
-  "total": 448
+  "remainingBeforeBatch": 1700,
+  "previous": 448,
+  "total": 540
 }
