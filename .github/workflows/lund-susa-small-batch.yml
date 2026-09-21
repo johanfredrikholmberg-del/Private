@@ -27,13 +27,14 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - name: Import the next bounded Lund HT26 batch after successful verification
         env:
-          LUND_COURSE_LIMIT: '10'
-          LUND_COURSE_CODES: 'PFE11,PKU08,PKU09,PKU10,PST02,PST06,PUT01'
-          LUND_BATCH_LABEL: 'ht26-official-course-packages'
+          LUND_COURSE_LIMIT: '20'
+          LUND_COURSE_TERMS: 'all'
+          LUND_COURSE_CODES: 'EDAF05,EDAF50,EDAN40,EDAN75,EDAP01,GEMA66,GEMA70,PEH01,PEH02,PEH04,TFRA02,TFRA41,TFRA42,TFRB76,TFRB85,TFRC66,TFRC70,TFRC75,TFRC80,TFRC95'
+          LUND_BATCH_LABEL: 'snapshot-course-structures-1'
         shell: bash
         run: |
           set -uo pipefail
-          echo "Starting ${LUND_BATCH_LABEL}: next unresolved HT26 codes only"
+          echo "Starting ${LUND_BATCH_LABEL}: explicitly selected unresolved snapshot codes"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           node scripts/audit-lund-susa-coverage.mjs || exit $?
