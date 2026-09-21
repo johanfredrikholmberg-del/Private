@@ -37,18 +37,18 @@ jobs:
           for batch in $(seq 1 25); do
             echo "Lund batch ${batch}"
             node scripts/import-lund-course-details.mjs
-            git add -A -- data/HT26/course-details.json data/import-reviews/lund-course-details-latest.json
+            git add -A -- data/HT26/course-details.json data/import-reviews/lund-course-details-latest.json data/import-reviews/lund-course-details-unavailable.json
             if ! git diff --cached --quiet; then
               git commit -m "Import verified Lund syllabus details batch ${batch} [skip ci]"
               git fetch origin studielots-v2
               git rebase origin/studielots-v2
               git push origin HEAD:studielots-v2
             fi
-            remaining=$(node -p "const r=require('./data/import-reviews/lund-course-details-latest.json'); Math.max(0,r.remainingBeforeBatch-r.attempted)")
+            remaining=$(node -p "require('./data/import-reviews/lund-course-details-latest.json').remainingAfterBatch")
             imported=$(node -p "require('./data/import-reviews/lund-course-details-latest.json').imported")
             echo "Remaining eligible candidates: ${remaining}; imported in batch: ${imported}"
             if [ "$remaining" -eq 0 ]; then
-              echo 'All eligible canonical Lund course codes have been attempted; review errors and excluded identities separately.'
+              echo 'All eligible canonical Lund course codes have been attempted; review unavailable and excluded identities separately.'
               break
             fi
             if [ "$imported" -eq 0 ]; then
