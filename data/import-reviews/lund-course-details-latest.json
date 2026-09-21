@@ -1,255 +1,111 @@
 {
+  "scope": "Lund HT26 (SUSA term 20262)",
   "attempted": 100,
-  "imported": 39,
-  "skipped": [],
+  "imported": 88,
   "errors": [
     {
-      "code": "EDAA01",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "EDAF05",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "EDAF50",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "EDAG01",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "EDAN26",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "EDAN40",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "EDAN75",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "EDAP01",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "GEMA20",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "GEMA66",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "GEMA70",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PEH01",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PEH02",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PEH04",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PEH05",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PEH06",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PEH15",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PEH16",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PEH17",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE01",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE02",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE05",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE07",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE08",
-      "reason": "HTTP 404"
-    },
-    {
       "code": "PFE11",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE12",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE13",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE14",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE15",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE16",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE17",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE18",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE19",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE20",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE21",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PFE22",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PIN10",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PKE03",
-      "reason": "HTTP 404"
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PFE11",
+        "https://kurser.lth.se/kursplaner/senaste/PFE11.pdf"
+      ]
     },
     {
       "code": "PKU08",
-      "reason": "HTTP 404"
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PKU08",
+        "https://kurser.lth.se/kursplaner/senaste/PKU08.pdf"
+      ]
     },
     {
       "code": "PKU09",
-      "reason": "HTTP 404"
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PKU09",
+        "https://kurser.lth.se/kursplaner/senaste/PKU09.pdf"
+      ]
     },
     {
       "code": "PKU10",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PSO01",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PSO02",
-      "reason": "HTTP 404"
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PKU10",
+        "https://kurser.lth.se/kursplaner/senaste/PKU10.pdf"
+      ]
     },
     {
       "code": "PST02",
-      "reason": "HTTP 404"
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PST02",
+        "https://kurser.lth.se/kursplaner/senaste/PST02.pdf"
+      ]
     },
     {
       "code": "PST06",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "PST09",
-      "reason": "HTTP 404"
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PST06",
+        "https://kurser.lth.se/kursplaner/senaste/PST06.pdf"
+      ]
     },
     {
       "code": "PUT01",
-      "reason": "HTTP 404"
+      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/PUT01",
+        "https://kurser.lth.se/kursplaner/senaste/PUT01.pdf"
+      ]
     },
     {
-      "code": "SASI07",
-      "reason": "HTTP 404"
+      "code": "ÄEND21",
+      "reason": "Course code absent from official syllabus",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/%C3%84END21",
+        "https://kurser.lth.se/kursplaner/senaste/%C3%84END21.pdf"
+      ]
     },
     {
-      "code": "SASI10",
-      "reason": "HTTP 404"
+      "code": "ÄEND24",
+      "reason": "Course code absent from official syllabus",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/%C3%84END24",
+        "https://kurser.lth.se/kursplaner/senaste/%C3%84END24.pdf"
+      ]
     },
     {
-      "code": "TFRA02",
-      "reason": "HTTP 404"
+      "code": "ÄFRD11",
+      "reason": "Course code absent from official syllabus",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/%C3%84FRD11",
+        "https://kurser.lth.se/kursplaner/senaste/%C3%84FRD11.pdf"
+      ]
     },
     {
-      "code": "TFRA41",
-      "reason": "HTTP 404"
+      "code": "ÄFRD14",
+      "reason": "Course code absent from official syllabus",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/%C3%84FRD14",
+        "https://kurser.lth.se/kursplaner/senaste/%C3%84FRD14.pdf"
+      ]
     },
     {
-      "code": "TFRA42",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "TFRB76",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "TFRB85",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "TFRC06",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "TFRC10",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "TFRC20",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "TFRC35",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "TFRC66",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "TFRC70",
-      "reason": "HTTP 404"
-    },
-    {
-      "code": "TFRC75",
-      "reason": "HTTP 404"
+      "code": "ÄFRD40",
+      "reason": "Course code absent from official syllabus",
+      "attemptedSourceUrls": [
+        "https://kursplaner.lu.se/pdf/kurs/sv/%C3%84FRD40",
+        "https://kurser.lth.se/kursplaner/senaste/%C3%84FRD40.pdf"
+      ]
     }
   ],
   "candidateLimit": 100,
-  "remainingBeforeBatch": 259,
-  "previous": 1889,
-  "total": 1928
+  "requestedCodes": [],
+  "remainingBeforeBatch": 135,
+  "unavailableBeforeBatch": 0,
+  "previous": 1928,
+  "total": 2016,
+  "remainingAfterBatch": 40,
+  "unavailableAfterBatch": 7
 }
