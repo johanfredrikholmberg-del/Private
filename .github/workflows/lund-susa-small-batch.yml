@@ -25,12 +25,12 @@ jobs:
           node-version: '22'
       - name: Install PDF text extractor
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
-      - name: Import the next bounded Lund HT26 batch after successful verification
+      - name: Import the next bounded Lund snapshot batch after successful verification
         env:
           LUND_COURSE_LIMIT: '20'
           LUND_COURSE_TERMS: 'all'
-          LUND_COURSE_CODES: 'EDAF05,EDAF50,EDAN40,EDAN75,EDAP01,GEMA66,GEMA70,PEH01,PEH02,PEH04,TFRA02,TFRA41,TFRA42,TFRB76,TFRB85,TFRC66,TFRC70,TFRC75,TFRC80,TFRC95'
-          LUND_BATCH_LABEL: 'snapshot-course-structures-1'
+          LUND_COURSE_CODES: 'PEH05,PEH06,PEH15,PEH16,PEH17,PFE01,PFE02,PFE05,PFE07,PFE08,PFE12,PFE13,PFE14,PFE15,PFE16,PFE17,PFE18,PFE19,PFE20,PFE21'
+          LUND_BATCH_LABEL: 'snapshot-course-structures-2'
         shell: bash
         run: |
           set -uo pipefail
