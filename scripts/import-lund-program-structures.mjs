@@ -361,11 +361,17 @@ function pdfRows(pdfText) {
     const termMatch = line.match(/^(?:Termin|Term)\s+(\d{1,2})(?:\s*[–-]\s*(\d{1,2}))?/i);
     if (termMatch) { flush(0); currentTerm = Number(termMatch[1]); buffer = []; continue; }
     if (/^(?:År|Year)\s+\d+/i.test(line) || /^(?:Period|Termin|Term)\b/i.test(line)) { buffer = []; continue; }
-    const hpMatch = line.match(/(?:\(|\s)(\d+(?:[.,]\d+)?)\s*(?:hp|credits|ECTS)\s*\)?$/i);
-    if (hpMatch) {
-      const before = clean(line.slice(0, hpMatch.index));
-      if (before) buffer.push(before);
-      flush(Number(hpMatch[1].replace(',', '.')));
+    const creditMatches = [...line.matchAll(/(?:\(|\s)(\d+(?:[.,]\d+)?)\s*(?:hp|credits|ECTS)\s*\)?/gi)];
+    if (creditMatches.length) {
+      let cursor = 0;
+      for (const match of creditMatches) {
+        const before = clean(line.slice(cursor, match.index));
+        if (before) buffer.push(before);
+        flush(Number(match[1].replace(',', '.')));
+        cursor = (match.index || 0) + match[0].length;
+      }
+      const after = clean(line.slice(cursor));
+      if (after && !/^(?:hp|credits|ECTS)$/i.test(after)) buffer.push(after);
       continue;
     }
     if (currentTerm && !/^(?:Programmet|The programme|Skolan|Lunds universitet|Lund University|\d+\/\d+)/i.test(line)) buffer.push(line);
@@ -377,6 +383,28 @@ function pdfRows(pdfText) {
 async function discover(program) {
   let best = null;
   const attemptedUrls = candidateUrls(program);
+
+  // Lund's official programme-plan PDF endpoint is stable by programme code
+  // even when a programme page has moved or its HTML plan is incomplete.
+  const directPdfUrls = [
+    `https://kursplaner.lu.se/pdf/program/sv/${code(program.programCode)}`,
+    `https://kursplaner.lu.se/pdf/program/en/${code(program.programCode)}`,
+  ];
+  for (const pdfUrl of directPdfUrls) {
+    try {
+      const pdf = await getPdfText(pdfUrl);
+      const pdfTotalHp = hpFromPage(pdf.text) || Number(program.programHp);
+      const parsedRows = pdfRows(pdf.text);
+      const parsed = quality(parsedRows, pdfTotalHp);
+      const result = { found: true, structureAvailable: parsed.complete, courses: parsed.courses,
+        program: { name: program.programName, code: code(program.programCode), university: 'Lunds universitet' },
+        sourceUrls: [pdf.url], source: 'lund-official-programme-plan-pdf',
+        quality: { ...parsed, totalHp: pdfTotalHp, pdfRows: parsedRows.length } };
+      if (parsed.complete) return { ...result, attemptedUrls: [...attemptedUrls, ...directPdfUrls] };
+      if (!best || (parsed.completeTerms?.length || 0) > (best.quality.completeTerms?.length || 0)) best = result;
+    } catch { /* continue with official programme pages */ }
+  }
+
   for (const url of attemptedUrls) {
     try {
       const main = await getText(url);
