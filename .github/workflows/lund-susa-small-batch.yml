@@ -46,4 +46,4 @@ jobs:
           fi
           node -e "const r=require('./data/import-reviews/lund-course-details-latest.json');const a=require('./data/import-reviews/lund-susa-coverage.json');console.log(JSON.stringify({batch:r,coverage:a.counts}))"
           exit "$import_status"
-# Next bounded HT26 Lund batch; only studielots-v2.
+# HT26 Lund bounded batch requested 2026-09-21 15:35 Europe/Stockholm.
