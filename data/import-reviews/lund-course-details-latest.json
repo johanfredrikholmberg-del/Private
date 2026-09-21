@@ -1,87 +1,38 @@
 {
   "scope": "Lund all SUSA snapshot terms",
   "attempted": 20,
-  "imported": 14,
-  "errors": [
-    {
-      "code": "PFE22",
-      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
-      "attemptedSourceUrls": [
-        "https://kursplaner.lu.se/pdf/kurs/sv/PFE22",
-        "https://kurser.lth.se/kursplaner/senaste/PFE22.pdf"
-      ]
-    },
-    {
-      "code": "PIN10",
-      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
-      "attemptedSourceUrls": [
-        "https://kursplaner.lu.se/pdf/kurs/sv/PIN10",
-        "https://kurser.lth.se/kursplaner/senaste/PIN10.pdf"
-      ]
-    },
-    {
-      "code": "PKE03",
-      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
-      "attemptedSourceUrls": [
-        "https://kursplaner.lu.se/pdf/kurs/sv/PKE03",
-        "https://kurser.lth.se/kursplaner/senaste/PKE03.pdf"
-      ]
-    },
-    {
-      "code": "PSO01",
-      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
-      "attemptedSourceUrls": [
-        "https://kursplaner.lu.se/pdf/kurs/sv/PSO01",
-        "https://kurser.lth.se/kursplaner/senaste/PSO01.pdf"
-      ]
-    },
-    {
-      "code": "PSO02",
-      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
-      "attemptedSourceUrls": [
-        "https://kursplaner.lu.se/pdf/kurs/sv/PSO02",
-        "https://kurser.lth.se/kursplaner/senaste/PSO02.pdf"
-      ]
-    },
-    {
-      "code": "PST09",
-      "reason": "kursplaner.lu.se: HTTP 404; kurser.lth.se: HTTP 404",
-      "attemptedSourceUrls": [
-        "https://kursplaner.lu.se/pdf/kurs/sv/PST09",
-        "https://kurser.lth.se/kursplaner/senaste/PST09.pdf"
-      ]
-    }
-  ],
+  "imported": 20,
+  "errors": [],
   "candidateLimit": 20,
   "requestedCodes": [
-    "PFE12",
-    "PFE14",
-    "PFE20",
-    "PFE22",
-    "PIN10",
-    "PKE03",
-    "PSO01",
-    "PSO02",
-    "PST09",
-    "RÄSA03",
-    "RÄSA34",
-    "RÄSK02",
-    "SASI07",
-    "SKÅA91",
-    "SKÅA92",
-    "SKÅA98",
-    "SKÅA99",
-    "SKÅB34",
-    "SKÅB35",
-    "SKÅB37"
+    "SKÅB38",
+    "SKÅN24",
+    "TFRD30",
+    "TFRD46",
+    "TFRD47",
+    "TFRD49",
+    "TFRD50",
+    "TFRD75",
+    "TFRE01",
+    "TFRE20",
+    "TFRE25",
+    "TFRE30",
+    "TFRE40",
+    "TFRE85",
+    "TFRE90",
+    "TFRG85",
+    "TFRG95",
+    "TFRH05",
+    "TFRH15",
+    "TFRH25"
   ],
   "requestedTerms": [
     "all"
   ],
-  "remainingBeforeBatch": 156,
-  "unavailableBeforeBatch": 23,
-  "previous": 2080,
-  "total": 2094,
-  "remainingAfterBatch": 139,
+  "remainingBeforeBatch": 139,
+  "unavailableBeforeBatch": 26,
+  "previous": 2094,
+  "total": 2114,
+  "remainingAfterBatch": 119,
   "unavailableAfterBatch": 26
 }
