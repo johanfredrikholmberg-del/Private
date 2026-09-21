@@ -28,9 +28,11 @@ jobs:
       - name: Import the next bounded Lund HT26 batch after successful verification
         env:
           LUND_COURSE_LIMIT: '10'
+          LUND_BATCH_LABEL: 'ht26-round-2'
         shell: bash
         run: |
           set -uo pipefail
+          echo "Starting ${LUND_BATCH_LABEL}: next unresolved HT26 codes only"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           node scripts/audit-lund-susa-coverage.mjs || exit $?
