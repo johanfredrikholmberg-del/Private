@@ -28,7 +28,8 @@ jobs:
       - name: Import the next bounded Lund HT26 batch after successful verification
         env:
           LUND_COURSE_LIMIT: '10'
-          LUND_BATCH_LABEL: 'ht26-final-remaining-3'
+          LUND_COURSE_CODES: 'PFE11,PKU08,PKU09,PKU10,PST02,PST06,PUT01'
+          LUND_BATCH_LABEL: 'ht26-official-course-packages'
         shell: bash
         run: |
           set -uo pipefail
