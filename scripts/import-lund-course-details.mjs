@@ -13,7 +13,10 @@ const HT26_SUSA_TERM='20262';
 const canonical=await read(`${root}/courses.json`);
 const existing=await read(`${root}/course-details.json`).catch(e=>{if(e.code==='ENOENT')return [];throw e});
 const failures=await read(`${review}/lund-course-details-unavailable.json`).catch(e=>{if(e.code==='ENOENT')return [];throw e});
-if(!Array.isArray(canonical)||!Array.isArray(existing)||!Array.isArray(failures))throw Error('Expected array tables');
+const packageOverrides=await read(`${review}/lund-official-package-overrides.json`).catch(e=>{if(e.code==='ENOENT')return [];throw e});
+if(!Array.isArray(canonical)||!Array.isArray(existing)||!Array.isArray(failures)||!Array.isArray(packageOverrides))throw Error('Expected array tables');
+const packageOverrideByCode=new Map(packageOverrides.map(x=>[code(x.code),x]));
+if(packageOverrideByCode.size!==packageOverrides.length||packageOverrides.some(x=>!code(x.code)||!x.sourceUrl||!x.content))throw Error('Invalid Lund package override table');
 const byCode=new Map();
 for(const row of canonical){if(norm(row.university)!=='lunds universitet'||!code(row.code))continue;const k=code(row.code);byCode.set(k,[...(byCode.get(k)||[]),row]);}
 const already=new Set(existing.filter(x=>norm(x.university)==='lunds universitet').map(x=>code(x.code)));
@@ -32,6 +35,7 @@ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'studielots-lund-'));
 try{
 for(const [id,matches] of candidates){
  report.attempted++;
+ const packageOverride=packageOverrideByCode.get(id);
  const urls=[
   `https://kursplaner.lu.se/pdf/kurs/sv/${encodeURIComponent(id)}`,
   `https://kurser.lth.se/kursplaner/senaste/${encodeURIComponent(id)}.pdf`,
@@ -62,7 +66,17 @@ for(const [id,matches] of candidates){
   if(!requirements&&!content&&!goals)throw Error('No reliably delimited detail fields');
   added.push({university:'Lunds universitet',code:id,canonicalKey:matches[0].key||null,sourceUrl:url,sourceType:'official-university-syllabus-pdf',verifiedFields:['code',...(requirements?['entryRequirements']:[]),...(content?['content']:[]),...(goals?['learningOutcomes']:[])],entryRequirements:requirements,content,learningOutcomes:goals});
   already.add(id);report.imported++;
- }catch(e){const reason=String(e.message||e);report.errors.push({code:id,reason,attemptedSourceUrls:urls});if(urls.every(url=>reason.includes(`${new URL(url).hostname}: HTTP 404`)))unavailable.set(id,{code:id,reason,sourceUrls:urls});}
+ }catch(e){
+  const reason=String(e.message||e);
+  if(packageOverride){
+   const sourceUrls=Array.isArray(packageOverride.sourceUrls)&&packageOverride.sourceUrls.length?packageOverride.sourceUrls:[packageOverride.sourceUrl];
+   const components=Array.isArray(packageOverride.components)?packageOverride.components:[];
+   added.push({university:'Lunds universitet',code:id,canonicalKey:matches[0].key||null,sourceUrl:packageOverride.sourceUrl,sourceUrls,sourceType:packageOverride.sourceType||'official-university-course-package-page',verifiedFields:['code',...(packageOverride.entryRequirements?['entryRequirements']:[]),'content',...(packageOverride.learningOutcomes?['learningOutcomes']:[]),...(components.length?['components']:[])],entryRequirements:packageOverride.entryRequirements||null,content:packageOverride.content,learningOutcomes:packageOverride.learningOutcomes||null,components});
+   already.add(id);unavailable.delete(id);report.imported++;continue;
+  }
+  report.errors.push({code:id,reason,attemptedSourceUrls:urls});
+  if(urls.every(url=>reason.includes(`${new URL(url).hostname}: HTTP 404`)))unavailable.set(id,{code:id,reason,sourceUrls:urls});
+ }
 }
 }finally{await fs.rm(dir,{recursive:true,force:true});}
 const merged=[...existing,...added];
