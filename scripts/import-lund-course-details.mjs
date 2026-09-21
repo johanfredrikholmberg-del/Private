@@ -17,7 +17,7 @@ if(!Array.isArray(canonical)||!Array.isArray(existing)||!Array.isArray(failures)
 const byCode=new Map();
 for(const row of canonical){if(norm(row.university)!=='lunds universitet'||!code(row.code))continue;const k=code(row.code);byCode.set(k,[...(byCode.get(k)||[]),row]);}
 const already=new Set(existing.filter(x=>norm(x.university)==='lunds universitet').map(x=>code(x.code)));
-const unavailable=new Map(failures.filter(x=>x&&code(x.code)&&x.reason==='HTTP 404').map(x=>[code(x.code),x]));
+const unavailable=new Map(failures.filter(x=>x&&code(x.code)&&String(x.reason||'').includes('HTTP 404')).map(x=>[code(x.code),x]));
 const isHt26=row=>String(row?.susaId||'').endsWith(`.${HT26_SUSA_TERM}`);
 const eligible=[...byCode.entries()].filter(([id,rows])=>/^[A-ZÅÄÖ0-9]{5,12}$/.test(id)&&rows.length===1&&rows.some(isHt26)&&!already.has(id));
 const pending=eligible.filter(([id])=>!unavailable.has(id)).sort(([a],[b])=>a.localeCompare(b,'sv'));
