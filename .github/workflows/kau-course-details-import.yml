@@ -30,6 +30,26 @@ jobs:
         env:
           KAU_COURSE_LIMIT: '100'
         run: node scripts/import-kau-course-details.mjs
+      - name: Validate imported course identities and provenance
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const courses=JSON.parse(fs.readFileSync('data/HT26/courses.json','utf8'));
+          const details=JSON.parse(fs.readFileSync('data/HT26/course-details.json','utf8'));
+          const report=JSON.parse(fs.readFileSync('data/import-reviews/kau-course-details-latest.json','utf8'));
+          const norm=x=>String(x??'').trim().toUpperCase();
+          const canonical=new Map();
+          for(const c of courses){if(c.university!=='Karlstads universitet')continue;const k=norm(c.code);canonical.set(k,(canonical.get(k)||0)+1)}
+          const seen=new Set();
+          for(const d of details){
+            if(d.university!=='Karlstads universitet')continue;
+            const k=norm(d.code);
+            if(seen.has(k)||canonical.get(k)!==1||!d.name||!/^https:\/\/www\.kau\.se\//.test(d.sourceUrl||'')||d.sourceType!=='official-university-course-page')throw Error(`Invalid Karlstad course detail: ${k}`);
+            seen.add(k);
+          }
+          if(report.total!==details.length||report.imported+report.previous!==report.total)throw Error('Course import report totals do not match data');
+          console.log(`Validated ${seen.size} Karlstad course details; latest batch imported ${report.imported}`);
+          NODE
       - name: Commit verified data and import report
         run: |
           git config user.name 'github-actions[bot]'
