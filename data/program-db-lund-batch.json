@@ -747,6 +747,225 @@
           "isThesis": true
         }
       ]
+    },
+    {
+      "id": "lu:EAGEI:2026HT",
+      "university": "Lunds universitet",
+      "programCode": "EAGEI",
+      "programName": "Magisterprogram i entreprenörskap och innovation",
+      "programHp": 60,
+      "level": "Avancerad nivå",
+      "subject": "Entreprenörskap och innovation",
+      "catalogueSubject": "Entreprenörskap och innovation",
+      "validFrom": "2026HT",
+      "validTo": null,
+      "coverage": "complete",
+      "verified": true,
+      "source": "lund-official-programplan",
+      "sourceUrls": [
+        "https://www.lunduniversity.lu.se/study/entrepreneurship-and-innovation-masters-programme-one-year-EAGEI/programme-structure"
+      ],
+      "rows": [
+        {
+          "term": 1,
+          "code": "ENTN01",
+          "name": "The Entrepreneurial Process and Opportunity Recognition",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "code": "ENTN10",
+          "name": "Business Model Development",
+          "hp": 5,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "code": "ENTN07",
+          "name": "Value Creation",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "code": "ENTN15",
+          "name": "Entrepreneurial Leadership",
+          "hp": 5,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "code": "ENTN16",
+          "name": "Entrepreneurial Finance",
+          "hp": 5,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "code": "ENTN08",
+          "name": "Entrepreneurial Project",
+          "hp": 15,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "code": "ENTN19",
+          "name": "Degree Project - New Venture Creation",
+          "hp": 15,
+          "category": "mandatory",
+          "isThesis": true
+        }
+      ]
+    },
+    {
+      "id": "lu:EAGFN:2026HT",
+      "university": "Lunds universitet",
+      "programCode": "EAGFN",
+      "programName": "Magisterprogram i Finans",
+      "programHp": 60,
+      "level": "Avancerad nivå",
+      "subject": "Finans",
+      "catalogueSubject": "Finans",
+      "validFrom": "2026HT",
+      "validTo": null,
+      "coverage": "complete",
+      "verified": true,
+      "source": "lund-official-programplan",
+      "sourceUrls": [
+        "https://www.lunduniversity.lu.se/study/finance-masters-programme-one-year-EAGFN/programme-structure"
+      ],
+      "verificationNote": "The official outline mentions two spring electives, while the current course table marks NEKN95 and NEKN83 as compulsory. This structure follows the detailed course table.",
+      "rows": [
+        {
+          "term": 1,
+          "code": "NEKN81",
+          "name": "Economics: Foundations of Finance",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "code": "NEKN96",
+          "name": "Finance: Financial Econometrics and Machine Learning",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "code": "NEKN93",
+          "name": "Finance: Theory of Corporate Finance",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "code": "NEKN82",
+          "name": "Economics: Empirical Finance",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "code": "NEKN95",
+          "name": "Finance: Managerial Finance",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "code": "NEKN83",
+          "name": "Economics: Financial Valuation and Risk Management",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "code": "NEKN02",
+          "name": "Economics: Master Essay I - Finance Programme",
+          "hp": 15,
+          "category": "mandatory",
+          "isThesis": true
+        }
+      ]
+    },
+    {
+      "id": "lu:EAGIS:2026HT",
+      "university": "Lunds universitet",
+      "programCode": "EAGIS",
+      "programName": "Magisterprogram i Internationell strategisk ledning",
+      "programHp": 60,
+      "level": "Avancerad nivå",
+      "subject": "Strategisk ledning",
+      "catalogueSubject": "Företagsekonomi",
+      "validFrom": "2026HT",
+      "validTo": null,
+      "coverage": "choice-required",
+      "verified": true,
+      "source": "lund-official-programplan",
+      "sourceUrls": [
+        "https://www.lunduniversity.lu.se/study/international-strategic-management-masters-programme-one-year-EAGIS/programme-structure"
+      ],
+      "rows": [
+        {
+          "term": 1,
+          "code": "BUSN11",
+          "name": "Strategic Management",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "code": "BUSN10",
+          "name": "Corporate Governance in Theory and Practice",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "code": "",
+          "name": "Three elective courses of 5 credits each",
+          "hp": 15,
+          "category": "elective",
+          "slotType": "elective-slot",
+          "isSlot": true,
+          "options": [
+            "BUSN17 – Business Administration: Innovation Management",
+            "BUSO66 – Business Administration: Strategic Performance Measurement and Management",
+            "BUSO18 – Business Administration: Re-Imagining Capitalism",
+            "BUSO14 – Business Administration: Global Business and Sustainability"
+          ]
+        },
+        {
+          "term": 2,
+          "code": "BUSO01",
+          "name": "Business Administration: Strategic Management and Digitalisation",
+          "hp": 5,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "code": "BUSO15",
+          "name": "Navigating the Future: Transformative Strategies for Sustainable Management",
+          "hp": 5,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "code": "BUSN03",
+          "name": "Business Administration: Research Methods",
+          "hp": 5,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "code": "BUSN09",
+          "name": "Business Administration: Degree Project in Strategic Management",
+          "hp": 15,
+          "category": "mandatory",
+          "isThesis": true
+        }
+      ]
     }
   ]
 }
