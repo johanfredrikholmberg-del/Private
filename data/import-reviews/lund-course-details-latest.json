@@ -1,6 +1,6 @@
 {
   "attempted": 100,
-  "imported": 53,
+  "imported": 51,
   "skipped": [],
   "errors": [
     {
@@ -190,10 +190,18 @@
     {
       "code": "PUT01",
       "reason": "HTTP 404"
+    },
+    {
+      "code": "SASI07",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "SASI10",
+      "reason": "HTTP 404"
     }
   ],
   "candidateLimit": 100,
-  "remainingBeforeBatch": 516,
-  "previous": 1632,
-  "total": 1685
+  "remainingBeforeBatch": 463,
+  "previous": 1685,
+  "total": 1736
 }
