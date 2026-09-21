@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Enrich existing HT26 Lund courses from official Lund syllabus PDFs only. */
+/** Enrich existing Lund HT26 course identities from official syllabus PDFs. */
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -11,20 +11,16 @@ const norm=s=>String(s??'').trim().toLocaleLowerCase('sv-SE');
 const code=s=>String(s??'').trim().toUpperCase();
 const canonical=await read(`${root}/courses.json`);
 const existing=await read(`${root}/course-details.json`).catch(e=>{if(e.code==='ENOENT')return [];throw e});
-const candidates=await read('data/lund-standalone-ht26-candidates.json');
-if(!Array.isArray(canonical)||!Array.isArray(existing)||!Array.isArray(candidates))throw Error('Expected array tables');
+if(!Array.isArray(canonical)||!Array.isArray(existing))throw Error('Expected array tables');
 const byCode=new Map();
 for(const row of canonical){if(norm(row.university)!=='lunds universitet'||!code(row.code))continue;const k=code(row.code);byCode.set(k,[...(byCode.get(k)||[]),row]);}
 const already=new Set(existing.filter(x=>norm(x.university)==='lunds universitet').map(x=>code(x.code)));
-const report={attempted:0,imported:0,skipped:[],errors:[]},added=[];
+const limit=Math.max(1,Math.min(100,Number(process.env.LUND_COURSE_LIMIT||40)));
+const candidates=[...byCode.entries()].filter(([id,rows])=>/^[A-Z0-9]{5,12}$/.test(id)&&rows.length===1&&!already.has(id)).sort(([a],[b])=>a.localeCompare(b,'sv')).slice(0,limit);
+const report={attempted:0,imported:0,skipped:[],errors:[],candidateLimit:limit,remainingBeforeBatch:[...byCode.entries()].filter(([id,rows])=>/^[A-Z0-9]{5,12}$/.test(id)&&rows.length===1&&!already.has(id)).length},added=[];
 const dir=await fs.mkdtemp(path.join(os.tmpdir(),'studielots-lund-'));
 try{
-for(const candidate of candidates){
- const id=code(candidate.courseCode||candidate.code);
- if(!/^[A-Z0-9]{5,12}$/.test(id)){report.skipped.push({code:id,reason:'Invalid course code'});continue;}
- if(already.has(id)){report.skipped.push({code:id,reason:'Already enriched'});continue;}
- const matches=byCode.get(id)||[];
- if(matches.length!==1){report.skipped.push({code:id,reason:`Canonical matches: ${matches.length}`});continue;}
+for(const [id,matches] of candidates){
  report.attempted++;
  const url=`https://kursplaner.lu.se/pdf/kurs/sv/${encodeURIComponent(id)}`;
  try{
@@ -44,8 +40,8 @@ for(const candidate of candidates){
   const content=section('Kursens innehåll')||section('Innehåll');
   const goals=section('Lärandemål')||section('Kursens mål');
   if(!requirements&&!content&&!goals)throw Error('No reliably delimited detail fields');
-  const row={university:'Lunds universitet',code:id,canonicalKey:matches[0].key||null,sourceUrl:url,sourceType:'official-university-syllabus-pdf',verifiedFields:['code',...(requirements?['entryRequirements']:[]),...(content?['content']:[]),...(goals?['learningOutcomes']:[])],entryRequirements:requirements,content,learningOutcomes:goals};
-  added.push(row);already.add(id);report.imported++;
+  added.push({university:'Lunds universitet',code:id,canonicalKey:matches[0].key||null,sourceUrl:url,sourceType:'official-university-syllabus-pdf',verifiedFields:['code',...(requirements?['entryRequirements']:[]),...(content?['content']:[]),...(goals?['learningOutcomes']:[])],entryRequirements:requirements,content,learningOutcomes:goals});
+  already.add(id);report.imported++;
  }catch(e){report.errors.push({code:id,reason:String(e.message||e)});}
 }
 }finally{await fs.rm(dir,{recursive:true,force:true});}
