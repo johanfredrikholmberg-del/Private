@@ -1407,6 +1407,52 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
   }
 
+  if (programmeCode === 'HAHII') {
+    const sourceUrl = 'https://www.lu.se/studera/historiska-studier-historia-masterprogram-HAHII-HIST/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'Historiska studier: Introduktionskurs', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Historiska studier: Teorier och metoder inom historievetenskaperna', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Digital historia', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Ämnesfördjupande kurs i historia', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Ämnesfördjupande kurs i historia', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Historiska studier: Tematisk litteraturfördjupning', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Historiska studier: Uppsatsförberedande kurs 1: Forskningsläget', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Historiska studier: Uppsatsförberedande kurs 2: Forskningspraktiker', hp: 7.5, category: 'mandatory' },
+      slot(3, 'Valbara kurser inom programmet, praktik eller utlandsstudier', 30),
+      { term: 4, code: '', name: 'Historia: Examensarbete', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
+  if (programmeCode === 'HASPV') {
+    const sourceUrl = 'https://www.lu.se/studera/sprak-och-sprakvetenskap-klassiska-sprak-masterprogram-HASPV-KLAS/programmets-innehall';
+    const common = [
+      { term: 1, code: '', name: 'Vetenskapsfilosofi för språkvetare', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Språkvetenskapliga metoder', hp: 7.5, category: 'mandatory' },
+      slot(3, 'Obligatoriska inriktningskurser eller valbara kurser', 30),
+      { term: 4, code: '', name: 'Masteruppsats i latin eller antik grekiska', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    const latin = [
+      ...common,
+      { term: 1, code: 'LATM10', name: 'Latin: Antik prosa och poesi', hp: 15, category: 'mandatory' },
+      slot(1, 'Valbar kurs inom inriktningen latin', 7.5),
+      { term: 2, code: 'LATM11', name: 'Latin: Medeltida och nylatinsk prosa och poesi', hp: 15, category: 'mandatory' },
+      slot(2, 'Valbar kurs inom inriktningen latin', 7.5),
+    ];
+    const greek = [
+      ...common,
+      { term: 1, code: 'GREM15', name: 'Grekisk litteraturhistoria från antiken till tidig bysantinsk tid', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: 'GREM16', name: 'Grekisk språkhistoria från antiken till tidig bysantinsk tid', hp: 7.5, category: 'mandatory' },
+      slot(1, 'Valbar kurs inom inriktningen antik och bysantinsk grekiska', 7.5),
+      slot(2, 'Fördjupningskurs i grekiska enligt programplan', 15),
+      slot(2, 'Valbar kurs inom inriktningen antik och bysantinsk grekiska', 7.5),
+    ];
+    return makeCanonical(program, latin, [sourceUrl], { source: 'lund-official-programme-page', variants: [
+      { id: 'LATIN', subject: 'Latin', programName: `${program.programName}, Latin`, sourceUrls: [sourceUrl], rows: normaliseRows(latin) },
+      { id: 'GREEK', subject: 'Antik och bysantinsk grekiska', programName: `${program.programName}, Antik och bysantinsk grekiska`, sourceUrls: [sourceUrl], rows: normaliseRows(greek) },
+    ] });
+  }
+
   if (programmeCode === 'HAABM') {
     const sourceUrl = 'https://www.lu.se/studera/arkivvetenskap-biblioteks-och-informationsvetenskap-respektive-museologi-abm-masterprogram-HAABM/programmets-innehall';
     const commonTermOne = [
