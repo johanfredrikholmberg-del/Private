@@ -740,8 +740,10 @@ async function probeLthProgrammeSource() {
       }
     };
     const programmes = await probe(`${apiBase}/courses/programmes`);
+    await probe(`${apiBase}/courses/programmes?kull=true`);
     const academicYears = await probe(`${apiBase}/courses/academic-years?programmeCode=D&includePreliminary=true`);
     const courses = await probe(`${apiBase}/courses?programmeCode=D`);
+    await probe(`${apiBase}/curriculum/programmes/D`);
     const yearObjects = [];
     const collectObjects = value => {
       if (!value || typeof value !== 'object') return;
