@@ -697,7 +697,12 @@ async function probeLthProgrammeSource() {
           .filter(value => /api|programme|program|course|lot/i.test(value));
         const calls = [...source.matchAll(/(?:fetch|axios\.(?:get|post)|\.get)\s*\((.{0,260})/gi)]
           .map(match => clean(match[0])).filter(value => /api|programme|program|course|lot/i.test(value));
-        assets.push({ url: script.url, size: source.length, candidates: [...new Set([...urls, ...calls])].slice(0, 80) });
+        const contexts = {};
+        for (const needle of ['/curriculum/programmes/', '/courses/programmes', '/courses/academic-years', 'programmeCode', 'academicYearId']) {
+          const index = source.indexOf(needle);
+          if (index >= 0) contexts[needle] = source.slice(Math.max(0, index - 700), Math.min(source.length, index + 1400));
+        }
+        assets.push({ url: script.url, size: source.length, candidates: [...new Set([...urls, ...calls])].slice(0, 80), contexts });
       } catch (error) {
         assets.push({ url: scriptUrl, error: String(error?.message || error) });
       }
