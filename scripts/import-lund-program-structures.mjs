@@ -859,6 +859,80 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'EAEGD') {
+    const economicDevelopmentUrl = 'https://www.lunduniversity.lu.se/study/global-development-population-and-economic-change-economic-development-masters-programme-two-years-EAEGD-EKUT/programme-structure';
+    const populationStudiesUrl = 'https://www.lunduniversity.lu.se/study/global-development-population-and-economic-change-population-studies-masters-programme-two-years-EAEGD-EKBE/programme-structure';
+    const economicHistoryUrl = 'https://www.lunduniversity.lu.se/study/global-development-population-and-economic-change-economic-history-masters-programme-two-years-EAEGD-EKHI/programme-structure';
+    const yearTwo = subject => [
+      slot(3, `Två valbara kurser inom ${subject}`, 15),
+      { term: 3, code: '', name: `Tutorials: Advanced topics in ${subject} 1`, hp: 7.5, category: 'mandatory' },
+      { term: 3, code: '', name: `Tutorials: Advanced topics in ${subject} 2`, hp: 7.5, category: 'mandatory' },
+      slot(4, `Valbar kurs inom ${subject}`, 7.5),
+      { term: 4, code: '', name: `Tutorials: Advanced topics in ${subject} 3`, hp: 7.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Economic History: Master Course (Two Year) - Independent Research', hp: 15, category: 'mandatory', isThesis: true },
+    ];
+    const economicDevelopment = [
+      { term: 1, code: '', name: 'Economic History: Development of Emerging Economies', hp: 7.5, category: 'mandatory' },
+      slot(1, 'Val mellan Economic History: Econometrics I och Econometrics II', 7.5, [
+        { code: '', name: 'Economic History: Econometrics I', hp: 7.5 },
+        { code: '', name: 'Economic History: Econometrics II', hp: 7.5 },
+      ]),
+      { term: 1, code: '', name: 'Economic History: Research Design', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Economic History: China and the Asia Pacific Economy', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Economic History: Institutions, Economic Growth and Equity', hp: 7.5, category: 'mandatory' },
+      slot(2, 'Valbar kurs inom ekonomisk historia', 7.5),
+      { term: 2, code: '', name: 'Economic History: Master Course (One Year) - Independent Research', hp: 15, category: 'mandatory', isThesis: true },
+      ...yearTwo('Economic Development'),
+    ];
+    const populationStudies = [
+      { term: 1, code: '', name: 'Demographic Transitions', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Economic History: Research Design', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Global Migration and Societal Change', hp: 7.5, category: 'mandatory' },
+      slot(1, 'Valbar kurs inom ekonomisk historia, ekonomi eller statistik', 7.5),
+      { term: 2, code: '', name: 'Obligatorisk inriktningskurs i befolkningsstudier enligt programplan', hp: 7.5, category: 'mandatory' },
+      slot(2, 'Valbar kurs inom ekonomisk historia', 7.5),
+      { term: 2, code: '', name: 'Economic History: Master Course (One Year) - Independent Research', hp: 15, category: 'mandatory', isThesis: true },
+      ...yearTwo('population studies'),
+    ];
+    const economicHistory = [
+      { term: 1, code: '', name: 'Economic History: The Global Economy and Long-term Economic Growth', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Economic History: Research Design', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Economic History: Population and Living Standards', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Economic History: Advanced Analysis of Economic Change', hp: 7.5, category: 'mandatory' },
+      slot(2, 'Val mellan Economic History: Econometrics I och Econometrics II', 7.5, [
+        { code: '', name: 'Economic History: Econometrics I', hp: 7.5 },
+        { code: '', name: 'Economic History: Econometrics II', hp: 7.5 },
+      ]),
+      slot(2, 'Valbar kurs inom ekonomisk historia', 7.5),
+      { term: 2, code: '', name: 'Economic History: Master Course (One Year) - Independent Research', hp: 15, category: 'mandatory', isThesis: true },
+      ...yearTwo('economic history'),
+    ];
+    const sourceUrls = [economicDevelopmentUrl, populationStudiesUrl, economicHistoryUrl];
+    return makeCanonical(program, economicDevelopment, sourceUrls, { source: 'lund-official-programme-page', variants: [
+      { id: 'EKUT', subject: 'Economic Development', programName: `${program.programName}, Economic Development`, sourceUrls: [economicDevelopmentUrl], rows: normaliseRows(economicDevelopment) },
+      { id: 'EKBE', subject: 'Population Studies', programName: `${program.programName}, Population Studies`, sourceUrls: [populationStudiesUrl], rows: normaliseRows(populationStudies) },
+      { id: 'EKHI', subject: 'Economic History', programName: `${program.programName}, Economic History`, sourceUrls: [economicHistoryUrl], rows: normaliseRows(economicHistory) },
+    ] });
+  }
+
+  if (programmeCode === 'SAWEM') {
+    const sourceUrl = 'https://www.lunduniversity.lu.se/study/welfare-policies-and-management-master-of-science-programme-SAWEM/programme-structure';
+    const rows = [
+      { term: 1, code: 'WPMP01', name: 'Welfare Regimes in Transition: Comparative Perspectives on Policies, Management and Reform', hp: 15, category: 'mandatory' },
+      { term: 1, code: 'WPMP03', name: 'Organization, Leadership and Welfare Management', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: 'WPMP02', name: 'Evaluation and Welfare Management', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: 'WPMA11', name: 'Economics: An Introduction to Public Economics', hp: 15, category: 'mandatory' },
+      slot(2, 'Praktik eller valbara kurser', 15, [
+        { code: 'WPMP21', name: 'Internship', hp: 15 },
+        { code: '', name: 'Valbara kurser', hp: 15 },
+      ]),
+      slot(3, 'Fördjupningskurs i huvudområdet statsvetenskap, socialt arbete eller sociologi', 15),
+      { term: 3, code: '', name: 'Samhällsvetenskapliga forskningsmetoder', hp: 15, category: 'mandatory' },
+      { term: 4, code: '', name: 'Masteruppsats i valt huvudområde', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
   if (programmeCode === 'MALÄB') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/MAL%C3%84B';
     const rows = [
