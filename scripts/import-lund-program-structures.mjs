@@ -249,9 +249,10 @@ function mergeRows(table, termRows, choiceRows) {
 }
 
 function quality(rows, totalHp) {
-  const expectedTerms = totalHp ? Math.round(totalHp / 30) : Math.max(0, ...rows.map(row => row.term));
+  const expectedTerms = totalHp ? Math.ceil(totalHp / 30) : Math.max(0, ...rows.map(row => row.term));
   const completeTerms = [], termHp = {}, courses = [];
   for (let term = 1; term <= expectedTerms; term += 1) {
+    const targetHp = term === expectedTerms && totalHp % 30 ? round1(totalHp % 30) : 30;
     const termRows = rows.filter(row => row.term === term);
     const mandatory = termRows.filter(row => row.category === 'mandatory');
     const elective = termRows.filter(row => row.category === 'elective');
@@ -259,11 +260,11 @@ function quality(rows, totalHp) {
     const mandatoryHp = round1(mandatory.reduce((sum, row) => sum + row.hp, 0));
     const electiveHp = round1(elective.reduce((sum, row) => sum + row.hp, 0));
     const unknownHp = round1(unknown.reduce((sum, row) => sum + row.hp, 0));
-    let covered = false, gap = Math.max(0, round1(30 - mandatoryHp)), fixedUnknown = false;
-    if (mandatoryHp >= 27 && mandatoryHp <= 33) { covered = true; gap = 0; }
-    else if (mandatoryHp + unknownHp >= 27 && mandatoryHp + unknownHp <= 33 && electiveHp === 0) { covered = true; fixedUnknown = true; gap = 0; }
+    let covered = false, gap = Math.max(0, round1(targetHp - mandatoryHp)), fixedUnknown = false;
+    if (Math.abs(mandatoryHp - targetHp) <= 0.2) { covered = true; gap = 0; }
+    else if (Math.abs(mandatoryHp + unknownHp - targetHp) <= 0.2 && electiveHp === 0) { covered = true; fixedUnknown = true; gap = 0; }
     else if (gap > 0 && electiveHp >= gap - 0.2) covered = true;
-    else if (mandatoryHp === 0 && unknownHp === 0 && electiveHp >= 29.8) { covered = true; gap = 30; }
+    else if (mandatoryHp === 0 && unknownHp === 0 && electiveHp >= targetHp - 0.2) { covered = true; gap = targetHp; }
     termHp[term] = { mandatoryHp, electiveListedHp: electiveHp, unknownHp, covered };
     if (!covered) continue;
     completeTerms.push(term);
@@ -294,7 +295,8 @@ function exactQuality(parsed, totalHp) {
     const term = index + 1;
     const termTotal = round1(rows.filter(row => Number(row.term) === term)
       .reduce((sum, row) => sum + Number(row.hp || 0), 0));
-    return Math.abs(termTotal - 30) <= 0.01;
+    const targetHp = term === parsed.expectedTerms && totalHp % 30 ? round1(totalHp % 30) : 30;
+    return Math.abs(termTotal - targetHp) <= 0.01;
   });
 }
 
@@ -632,8 +634,12 @@ function structureIsComplete(structure, program) {
   if (Math.abs(total - expected) > 0.01) return false;
   const terms = new Map();
   for (const row of rows) terms.set(row.term, (terms.get(row.term) || 0) + row.hp);
-  const termCount = Math.round(expected / 30);
-  return [...Array(termCount)].every((_, index) => Math.abs((terms.get(index + 1) || 0) - 30) <= 0.01);
+  const termCount = Math.ceil(expected / 30);
+  return [...Array(termCount)].every((_, index) => {
+    const term = index + 1;
+    const targetHp = term === termCount && expected % 30 ? round1(expected % 30) : 30;
+    return Math.abs((terms.get(term) || 0) - targetHp) <= 0.01;
+  });
 }
 
 function makeCanonical(program, rows, sourceUrls, extra = {}) {
