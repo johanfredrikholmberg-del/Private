@@ -355,8 +355,14 @@ function extractLinks(html, baseUrl) {
   return [...new Set(links)];
 }
 
+function programmeStructureSection(value) {
+  const source = String(value || '');
+  const headings = [...source.matchAll(/(?:Programstruktur(?:\s+för)?|Program structure(?:\s+for)?|Programme structure(?:\s+for)?)/gi)];
+  return headings.length ? source.slice(headings.at(-1).index || 0) : source;
+}
+
 function pdfRows(pdfText) {
-  const lines = String(pdfText || '').split(/\r?\n/).map(clean).filter(Boolean);
+  const lines = programmeStructureSection(pdfText).split(/\r?\n/).map(clean).filter(Boolean);
   const rows = [];
   let currentTerm = 0;
   let buffer = [];
@@ -401,14 +407,94 @@ function pdfRows(pdfText) {
   return dedupe(rows);
 }
 
+function pdfColumnRows(lines, term) {
+  const rows = [];
+  let buffer = [];
+  const flush = (credits, hint = '') => {
+    if (!(credits > 0)) { buffer = []; return; }
+    const name = clean(buffer.filter(line => !/^(?:år|year|period|termin|term|höst|vår|autumn|spring)\b/i.test(line)).join(' ')
+      .replace(/\s*[-–:]\s*$/, ''));
+    buffer = [];
+    if (name.length < 3 || name.length > 220 || /^(?:hp|credits|ects)$/i.test(name)) return;
+    const codeMatch = name.match(/\b([A-ZÅÄÖ]{2,8}\d{1,4}[A-Z]?)\b/);
+    rows.push({ name, code: codeMatch ? code(codeMatch[1]) : '', hp: round1(credits), term,
+      category: category(`${name} ${hint}`), sourceKind: 'programme-pdf-layout' });
+  };
+  for (const rawLine of lines) {
+    const line = clean(rawLine);
+    if (!line || /^(?:år|year|period|termin|term|höst|vår|autumn|spring)\b/i.test(line)) continue;
+    const creditMatches = [...line.matchAll(/(?:\(|^|\s)(\d+(?:[.,]\d+)?)\s*(?:hp|credits|ECTS)\s*\)?/gi)];
+    if (!creditMatches.length) { buffer.push(line); continue; }
+    let cursor = 0;
+    for (const match of creditMatches) {
+      const before = clean(line.slice(cursor, match.index));
+      if (before) buffer.push(before);
+      flush(Number(match[1].replace(',', '.')), line);
+      cursor = (match.index || 0) + match[0].length;
+    }
+    const after = clean(line.slice(cursor));
+    if (after) buffer.push(after);
+  }
+  return rows;
+}
+
+function pdfLayoutRows(pdfText) {
+  const source = programmeStructureSection(pdfText);
+  const lines = source.split(/\r?\n/);
+  const headingRows = [];
+  for (let index = 0; index < lines.length; index += 1) {
+    const matches = [...lines[index].matchAll(/(?:Termin|Term)\s+(\d{1,2})\b/gi)]
+      .map(match => ({ term: Number(match[1]), start: match.index || 0 }));
+    if (matches.length) headingRows.push({ index, matches });
+  }
+  const rows = [];
+  for (let headingIndex = 0; headingIndex < headingRows.length; headingIndex += 1) {
+    const heading = headingRows[headingIndex];
+    const next = headingRows[headingIndex + 1];
+    const block = lines.slice(heading.index + 1, next ? next.index : lines.length);
+    const width = Math.max(lines[heading.index].length, ...block.map(line => line.length), 1);
+    const termStarts = heading.matches.map(match => match.start);
+    for (let termIndex = 0; termIndex < heading.matches.length; termIndex += 1) {
+      const term = heading.matches[termIndex].term;
+      if (!(term >= 1 && term <= 20)) continue;
+      const start = termStarts[termIndex];
+      const end = termStarts[termIndex + 1] ?? width;
+      const region = block.map(line => line.padEnd(width).slice(start, end));
+      let periodStarts = [];
+      for (const line of region) {
+        const starts = [...line.matchAll(/\bPeriod\s+\d+/gi)].map(match => match.index || 0);
+        if (starts.length > periodStarts.length) periodStarts = starts;
+      }
+      if (!periodStarts.length) periodStarts = [0];
+      const termRows = [];
+      for (let periodIndex = 0; periodIndex < periodStarts.length; periodIndex += 1) {
+        const periodStart = periodStarts[periodIndex];
+        const periodEnd = periodStarts[periodIndex + 1] ?? Math.max(1, end - start);
+        termRows.push(...pdfColumnRows(region.map(line => line.slice(periodStart, periodEnd)), term));
+      }
+      if (termRows.length) rows.push(...termRows);
+      else {
+        const choiceText = clean(region.join(' '));
+        if (/valfri|valbar|utbytesstudier|praktik|exchange|internship|elective|optional/i.test(choiceText)) {
+          rows.push({ name: 'Valbara studier enligt programplan', code: '', hp: 30, term,
+            category: 'elective', sourceKind: 'programme-pdf-layout-choice' });
+        }
+      }
+    }
+  }
+  return dedupe(rows);
+}
+
 function parseOfficialPdf(pdf, totalHp) {
   const variants = [
     { mode: 'raw', text: pdf.text },
     { mode: 'layout', text: pdf.layoutText },
-  ].filter((variant, index, all) => variant.text && all.findIndex(other => other.text === variant.text) === index);
+  ].filter((variant, index, all) => variant.text && all.findIndex(other => other.text === variant.text) === index)
+    .map(variant => ({ ...variant, rows: pdfRows(variant.text) }));
+  if (pdf.layoutText) variants.push({ mode: 'layout-grid', text: pdf.layoutText, rows: pdfLayoutRows(pdf.layoutText) });
   let best = { mode: 'none', rows: [], parsed: quality([], totalHp), score: -Infinity };
   for (const variant of variants) {
-    const rows = pdfRows(variant.text);
+    const rows = variant.rows;
     const parsed = quality(rows, totalHp);
     const exact = exactQuality(parsed, totalHp);
     const courseTotal = round1(parsed.courses.reduce((sum, row) => sum + Number(row.hp || 0), 0));
