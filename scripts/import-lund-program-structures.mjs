@@ -77,8 +77,11 @@ async function getPdfText(url) {
   const file = path.join(os.tmpdir(), `studielots-lund-${process.pid}-${Date.now()}.pdf`);
   try {
     await fs.writeFile(file, Buffer.from(await response.arrayBuffer()));
-    const result = await execFileAsync('pdftotext', ['-layout', file, '-'], { maxBuffer: 8 * 1024 * 1024 });
-    return { text: result.stdout || '', url: response.url || url };
+    const [raw, layout] = await Promise.all([
+      execFileAsync('pdftotext', ['-raw', file, '-'], { maxBuffer: 8 * 1024 * 1024 }),
+      execFileAsync('pdftotext', ['-layout', file, '-'], { maxBuffer: 8 * 1024 * 1024 }),
+    ]);
+    return { text: raw.stdout || layout.stdout || '', layoutText: layout.stdout || '', url: response.url || url };
   } finally {
     await fs.rm(file, { force: true });
   }
@@ -398,6 +401,24 @@ function pdfRows(pdfText) {
   return dedupe(rows);
 }
 
+function parseOfficialPdf(pdf, totalHp) {
+  const variants = [
+    { mode: 'raw', text: pdf.text },
+    { mode: 'layout', text: pdf.layoutText },
+  ].filter((variant, index, all) => variant.text && all.findIndex(other => other.text === variant.text) === index);
+  let best = { mode: 'none', rows: [], parsed: quality([], totalHp), score: -Infinity };
+  for (const variant of variants) {
+    const rows = pdfRows(variant.text);
+    const parsed = quality(rows, totalHp);
+    const exact = exactQuality(parsed, totalHp);
+    const courseTotal = round1(parsed.courses.reduce((sum, row) => sum + Number(row.hp || 0), 0));
+    const distance = Math.abs(Number(totalHp || 0) - courseTotal);
+    const score = (exact ? 1_000_000 : 0) + parsed.completeTerms.length * 10_000 - distance * 10 + rows.length;
+    if (score > best.score) best = { mode: variant.mode, rows, parsed, score };
+  }
+  return best;
+}
+
 async function discover(program) {
   let best = null;
   const attemptedUrls = candidateUrls(program);
@@ -413,13 +434,15 @@ async function discover(program) {
     try {
       const pdf = await getPdfText(pdfUrl);
       const pdfTotalHp = hpFromPage(pdf.text) || Number(program.programHp);
-      const parsedRows = pdfRows(pdf.text);
-      const parsed = quality(parsedRows, pdfTotalHp);
+      const pdfParse = parseOfficialPdf(pdf, pdfTotalHp);
+      const parsedRows = pdfParse.rows;
+      const parsed = pdfParse.parsed;
       const result = { found: true, structureAvailable: parsed.complete, courses: parsed.courses,
         program: { name: program.programName, code: code(program.programCode), university: 'Lunds universitet' },
         sourceUrls: [pdf.url], source: 'lund-official-programme-plan-pdf',
-        quality: { ...parsed, totalHp: pdfTotalHp, pdfRows: parsedRows.length } };
-      pdfDiagnostics.push({ url: pdf.url, rows: parsedRows.length, complete: parsed.complete, completeTerms: parsed.completeTerms, totalHp: pdfTotalHp, termHp: parsed.termHp });
+        quality: { ...parsed, totalHp: pdfTotalHp, pdfRows: parsedRows.length, pdfMode: pdfParse.mode } };
+      pdfDiagnostics.push({ url: pdf.url, mode: pdfParse.mode, rows: parsedRows.length, complete: parsed.complete, exact: exactQuality(parsed, pdfTotalHp), completeTerms: parsed.completeTerms, totalHp: pdfTotalHp, termHp: parsed.termHp,
+        sampleRows: parsedRows.slice(0, 30).map(row => ({ term: row.term, name: row.name, hp: row.hp, category: row.category })) });
       if (exactQuality(parsed, pdfTotalHp)) return { ...result, attemptedUrls: [...attemptedUrls, ...directPdfUrls], pdfDiagnostics };
       if (!best || (parsed.completeTerms?.length || 0) > (best.quality.completeTerms?.length || 0)) best = result;
     } catch (error) { pdfDiagnostics.push({ url: pdfUrl, error: String(error?.message || error) }); }
@@ -454,13 +477,15 @@ async function discover(program) {
         try {
           const pdf = await getPdfText(pdfUrl);
           const pdfTotalHp = hpFromPage(pdf.text) || Number(program.programHp);
-          const pdfParsedRows = pdfRows(pdf.text);
-          const pdfParsed = quality(pdfParsedRows, pdfTotalHp);
+          const pdfParse = parseOfficialPdf(pdf, pdfTotalHp);
+          const pdfParsedRows = pdfParse.rows;
+          const pdfParsed = pdfParse.parsed;
           const pdfResult = { found: true, structureAvailable: pdfParsed.complete, courses: pdfParsed.courses,
             program: { name: program.programName, code: code(program.programCode), university: 'Lunds universitet' },
             sourceUrls: [pdf.url, main.url, ...(content.url !== main.url ? [content.url] : [])], source: 'lund-official-programme-plan-pdf',
-            quality: { ...pdfParsed, totalHp: pdfTotalHp, pdfRows: pdfParsedRows.length } };
-          pdfDiagnostics.push({ url: pdf.url, rows: pdfParsedRows.length, complete: pdfParsed.complete, completeTerms: pdfParsed.completeTerms, totalHp: pdfTotalHp, termHp: pdfParsed.termHp });
+            quality: { ...pdfParsed, totalHp: pdfTotalHp, pdfRows: pdfParsedRows.length, pdfMode: pdfParse.mode } };
+          pdfDiagnostics.push({ url: pdf.url, mode: pdfParse.mode, rows: pdfParsedRows.length, complete: pdfParsed.complete, exact: exactQuality(pdfParsed, pdfTotalHp), completeTerms: pdfParsed.completeTerms, totalHp: pdfTotalHp, termHp: pdfParsed.termHp,
+            sampleRows: pdfParsedRows.slice(0, 30).map(row => ({ term: row.term, name: row.name, hp: row.hp, category: row.category })) });
           if (exactQuality(pdfParsed, pdfTotalHp)) return { ...pdfResult, attemptedUrls, pdfDiagnostics };
           if (!best || (pdfParsed.completeTerms?.length || 0) > (best.quality.completeTerms?.length || 0)) best = pdfResult;
         } catch (error) { pdfDiagnostics.push({ url: pdfUrl, error: String(error?.message || error) }); }
