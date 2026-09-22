@@ -1224,6 +1224,58 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
   }
 
+  if (programmeCode === 'HAABM') {
+    const sourceUrl = 'https://www.lu.se/studera/arkivvetenskap-biblioteks-och-informationsvetenskap-respektive-museologi-abm-masterprogram-HAABM/programmets-innehall';
+    const commonTermOne = [
+      { term: 1, code: '', name: 'ABM: Introduktion till studier av arkiv, bibliotek och museer', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'ABM: AI och digitalt kulturarv', hp: 7.5, category: 'mandatory' },
+    ];
+    const commonTermTwo = [
+      { term: 2, code: '', name: 'ABM: Pedagogiska aspekter på ABM-verksamheter', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'ABM: Att samla och organisera kunskap', hp: 7.5, category: 'mandatory' },
+    ];
+    const commonTermThree = [
+      { term: 3, code: '', name: 'ABM: Strategisk utveckling och ledarskap', hp: 7.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'ABM: Forskningsmetodik', hp: 7.5, category: 'mandatory' },
+      slot(3, 'Val mellan valfri kurs och ABM: Verksamhetsförlagd kurs', 7.5),
+    ];
+    const archive = [
+      ...commonTermOne,
+      { term: 1, code: '', name: 'Arkivvetenskap: Arkiv som institution, funktion och fenomen', hp: 7.5, category: 'mandatory' },
+      ...commonTermTwo,
+      { term: 2, code: '', name: 'Arkivvetenskap: Förmedling och tillhandahållande', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Arkivvetenskap: Kunskapsorganisation i arkiv', hp: 7.5, category: 'mandatory' },
+      ...commonTermThree,
+      { term: 3, code: '', name: 'Arkivvetenskap: Verksamhetsbaserad arkivredovisning och digitalt bevarande', hp: 7.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Arkivvetenskap: Examensarbete - masterkurs', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    const library = [
+      ...commonTermOne,
+      { term: 1, code: '', name: 'Biblioteks- och informationsvetenskap: Bibliotek som institution, funktion och fenomen', hp: 7.5, category: 'mandatory' },
+      ...commonTermTwo,
+      { term: 2, code: '', name: 'Biblioteks- och informationsvetenskap: Informationssökning och förmedling', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Biblioteks- och informationsvetenskap: Kunskapsorganisation i bibliotek', hp: 7.5, category: 'mandatory' },
+      ...commonTermThree,
+      { term: 3, code: '', name: 'Biblioteks- och informationsvetenskap: Det digitala biblioteket', hp: 7.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Biblioteks- och informationsvetenskap: Examensarbete - masterkurs', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    const museology = [
+      ...commonTermOne,
+      { term: 1, code: '', name: 'Museologi: Museet som institution, funktion och fenomen', hp: 7.5, category: 'mandatory' },
+      ...commonTermTwo,
+      { term: 2, code: '', name: 'Museologi: Materiell, immateriell och visuell kultur', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Museologi: Kunskapsorganisation i muséer', hp: 7.5, category: 'mandatory' },
+      ...commonTermThree,
+      { term: 3, code: '', name: 'Museologi: Utveckling av verksamhetsbaserat projekt - webbplats eller utställning', hp: 7.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Museologi: Examensarbete - masterkurs', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, archive, [sourceUrl], { source: 'lund-official-programme-page', variants: [
+      { id: 'ARKI', subject: 'Arkivvetenskap', programName: `${program.programName}, Arkivvetenskap`, sourceUrls: [sourceUrl], rows: normaliseRows(archive) },
+      { id: 'BIBL', subject: 'Biblioteks- och informationsvetenskap', programName: `${program.programName}, Biblioteks- och informationsvetenskap`, sourceUrls: [sourceUrl], rows: normaliseRows(library) },
+      { id: 'MUSE', subject: 'Museologi', programName: `${program.programName}, Museologi`, sourceUrls: [sourceUrl], rows: normaliseRows(museology) },
+    ] });
+  }
+
   if (programmeCode === 'VASAS') {
     const sourceUrl = 'https://www.lu.se/studera/specialistsjukskoterskeprogrammet-anestesisjukvard-VASAS/programmets-innehall';
     const rows = [
