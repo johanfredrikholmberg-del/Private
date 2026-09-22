@@ -1559,6 +1559,29 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
   }
 
+  if (programmeCode === 'KAKYM') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/en/KAKYM';
+    const rows = [];
+    const addSeries = (name, codes, credits, extra = {}) => codes.forEach((courseCode, index) => rows.push({
+      term: index + 1, code: courseCode, name, hp: credits[index], category: 'mandatory', ...extra,
+    }));
+    addSeries('Arrangering och komposition', ['MUSR60', 'MUSR61', 'MUSR62', 'MUSR63'], [14, 10, 8, 7]);
+    addSeries('Musikteori', ['MUSR64', 'MUSR65', 'MUSR66', 'MUSR67'], [6, 6, 4, 3]);
+    rows.push(
+      { term: 2, code: 'MUUM01', name: 'Examensarbete 1', hp: 8, category: 'mandatory', isThesis: true },
+      { term: 3, code: 'MUUM02', name: 'Examensarbete 2', hp: 10, category: 'mandatory', isThesis: true },
+      { term: 4, code: 'MUUM04', name: 'Examensarbete 3', hp: 12, category: 'mandatory', isThesis: true },
+    );
+    addSeries('Projekt', ['MUSN40', 'MUSN41', 'MUSN42', 'MUSN43'], [4, 4, 3, 3]);
+    rows.push(
+      { term: 1, code: 'MUSN20', name: 'Musikeryrket 1', hp: 4, category: 'mandatory' },
+      { term: 3, code: 'MUSN21', name: 'Musikeryrket 2', hp: 3, category: 'mandatory' },
+      { term: 4, code: 'MUSN22', name: 'Musikeryrket 3', hp: 3, category: 'mandatory' },
+    );
+    addSeries('Individuell kurs', ['MUSN50', 'MUSN51', 'MUSN52', 'MUSN53'], [2, 2, 2, 2]);
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
   if (programmeCode === 'KGDSK') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/KGDSK';
     const rows = [];
