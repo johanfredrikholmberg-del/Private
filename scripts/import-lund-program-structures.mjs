@@ -1453,6 +1453,61 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'KAFKO') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/en/KAFKO';
+    const rows = [
+      slot(1, 'Valbara fördjupningskurser inom fri konst', 7.5),
+      { term: 1, code: '', name: 'Individuellt konstnärligt arbete', hp: 22.5, category: 'mandatory' },
+      slot(2, 'Valbara fördjupningskurser inom fri konst', 7.5),
+      { term: 2, code: '', name: 'Individuellt konstnärligt arbete', hp: 22.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Individuellt konstnärligt arbete', hp: 30, category: 'mandatory' },
+      { term: 4, code: '', name: 'Individuellt konstnärligt arbete', hp: 15, category: 'mandatory' },
+      { term: 4, code: '', name: 'Självständigt examensarbete i fri konst', hp: 15, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
+  if (programmeCode === 'KGSKS') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/KGSKS';
+    const rows = [
+      { term: 1, code: '', name: 'Skådespeleri på scen', hp: 10.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Sång och musikalitet för skådespelare', hp: 3, category: 'mandatory' },
+      { term: 1, code: '', name: 'Konstnärlig konceptutveckling', hp: 4.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Rörelse', hp: 4.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Röst, tal och text', hp: 4.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Teori och kontext för scenkonstnärlig praktik', hp: 3, category: 'mandatory' },
+      { term: 2, code: '', name: 'Skådespeleri på scen', hp: 10.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Sång och musikalitet för skådespelare', hp: 3, category: 'mandatory' },
+      { term: 2, code: '', name: 'Konstnärlig konceptutveckling', hp: 3, category: 'mandatory' },
+      { term: 2, code: '', name: 'Rörelse', hp: 4.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Röst, tal och text', hp: 4.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Teori och kontext för scenkonstnärlig praktik', hp: 3, category: 'mandatory' },
+      { term: 2, code: '', name: 'Skådespeleri i TV/film', hp: 1.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Skådespeleri på scen', hp: 10.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Sång och musikalitet för skådespelare', hp: 3, category: 'mandatory' },
+      { term: 3, code: '', name: 'Konstnärlig konceptutveckling', hp: 3, category: 'mandatory' },
+      { term: 3, code: '', name: 'Rörelse', hp: 4.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Röst, tal och text', hp: 4.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Teori och kontext för scenkonstnärlig praktik', hp: 3, category: 'mandatory' },
+      { term: 3, code: '', name: 'Skådespeleri i TV/film', hp: 1.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Skådespeleri på scen', hp: 10.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Konstnärlig konceptutveckling', hp: 4.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Rörelse', hp: 3, category: 'mandatory' },
+      { term: 4, code: '', name: 'Röst, tal och text', hp: 3, category: 'mandatory' },
+      { term: 4, code: '', name: 'Teori och kontext för scenkonstnärlig praktik', hp: 3, category: 'mandatory' },
+      { term: 4, code: '', name: 'Skådespeleri i TV/film', hp: 3, category: 'mandatory' },
+      slot(4, 'Valbara kurser', 3),
+      { term: 5, code: '', name: 'Skådespeleri på scen', hp: 12, category: 'mandatory' },
+      { term: 5, code: '', name: 'Konstnärlig konceptutveckling', hp: 9, category: 'mandatory' },
+      { term: 5, code: '', name: 'Teori och kontext för scenkonstnärlig praktik', hp: 3, category: 'mandatory' },
+      { term: 5, code: '', name: 'Skådespeleri i TV/film', hp: 6, category: 'mandatory' },
+      { term: 6, code: '', name: 'Examensverk 1', hp: 15, category: 'mandatory', isThesis: true },
+      { term: 6, code: '', name: 'Examensverk 2', hp: 12, category: 'mandatory', isThesis: true },
+      { term: 6, code: '', name: 'Konstnärlig reflektion', hp: 3, category: 'mandatory' },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
   if (programmeCode === 'HAABM') {
     const sourceUrl = 'https://www.lu.se/studera/arkivvetenskap-biblioteks-och-informationsvetenskap-respektive-museologi-abm-masterprogram-HAABM/programmets-innehall';
     const commonTermOne = [
