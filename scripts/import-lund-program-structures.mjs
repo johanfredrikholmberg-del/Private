@@ -1117,6 +1117,28 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'NAMAT') {
+    const sourceUrl = 'https://www.lu.se/studera/matematik-masterprogram-NAMAT/programmets-innehall';
+    const mathematics = [
+      slot(1, 'Kurser enligt examenskraven för inriktning matematik', 30),
+      slot(2, 'Kurser enligt examenskraven för inriktning matematik', 30),
+      slot(3, 'Kurser enligt examenskraven för inriktning matematik', 30),
+      { term: 4, code: 'MATM03', name: 'Matematik: Examensarbete - masterexamen', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    const numericalAnalysis = [
+      { term: 1, code: 'NUMN32', name: 'Numerisk analys: Numeriska metoder för differentialekvationer', hp: 7.5, category: 'mandatory' },
+      slot(1, 'Alternativobligatoriska och valfria kurser enligt examenskraven för numerisk analys', 22.5),
+      slot(2, 'Alternativobligatoriska och valfria kurser enligt examenskraven för numerisk analys', 30),
+      { term: 3, code: 'NUMN27', name: 'Numerisk analys: Seminariekurs', hp: 7.5, category: 'mandatory' },
+      slot(3, 'Alternativobligatoriska och valfria kurser enligt examenskraven för numerisk analys', 22.5),
+      { term: 4, code: 'NUMN03', name: 'Numerisk analys: Examensarbete för masterexamen', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, mathematics, [sourceUrl], { source: 'lund-official-programme-page', variants: [
+      { id: 'MATH', subject: 'Matematik', programName: `${program.programName}, Matematik`, sourceUrls: [sourceUrl], rows: normaliseRows(mathematics) },
+      { id: 'NUMA', subject: 'Numerisk analys', programName: `${program.programName}, Numerisk analys`, sourceUrls: [sourceUrl], rows: normaliseRows(numericalAnalysis) },
+    ] });
+  }
+
   if (programmeCode === 'VGRRS') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VGRRS';
     const common = [
