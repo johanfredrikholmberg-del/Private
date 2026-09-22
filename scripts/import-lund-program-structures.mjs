@@ -859,6 +859,66 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'MALÄB') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/MAL%C3%84B';
+    const rows = [
+      { term: 1, code: '', name: 'Molekyl till vävnad', hp: 30, category: 'mandatory' },
+      { term: 2, code: '', name: 'Rörelse och nervsystemet', hp: 30, category: 'mandatory' },
+      { term: 3, code: '', name: 'Homeostas', hp: 30, category: 'mandatory' },
+      { term: 4, code: '', name: 'Patogenes', hp: 30, category: 'mandatory' },
+      { term: 5, code: '', name: 'Klinisk förberedelse', hp: 15, category: 'mandatory' },
+      { term: 5, code: '', name: 'Vetenskaplig teori och tillämpning', hp: 15, category: 'mandatory' },
+      { term: 6, code: '', name: 'Klinisk medicin 1', hp: 30, category: 'mandatory' },
+      { term: 7, code: '', name: 'Klinisk medicin 2', hp: 30, category: 'mandatory' },
+      { term: 8, code: '', name: 'Klinisk medicin 3', hp: 30, category: 'mandatory' },
+      { term: 9, code: '', name: 'Klinisk medicin 4', hp: 27, category: 'mandatory' },
+      { term: 9, code: '', name: 'Examensarbete i medicin - del termin 9', hp: 3, category: 'mandatory', isThesis: true },
+      { term: 10, code: '', name: 'Examensarbete i medicin - del termin 10', hp: 27, category: 'mandatory', isThesis: true },
+      { term: 10, code: '', name: 'Interprofessionell samverkan', hp: 3, category: 'mandatory' },
+      slot(11, 'Två valbara kurser om 7,5 hp eller en valbar kurs om 15 hp', 15),
+      { term: 11, code: '', name: 'Individ, samhälle och hälsa 1', hp: 15, category: 'mandatory' },
+      { term: 12, code: '', name: 'Individ, samhälle och hälsa 2', hp: 30, category: 'mandatory' },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-plan-pdf' });
+  }
+
+  if (programmeCode === 'VALGP') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VALGP';
+    const rows = [
+      { term: 1, code: '', name: 'Logopediskt arbete I: introduktion', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Logopedi och psykologi', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Logopedi och lingvistik', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Grundläggande anatomi och fysiologi', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Logopedi och fonetik', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Barns kognitiva, kommunikativa och språkliga utveckling', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Senare språkutveckling samt läs-, skriv- och räkneutveckling', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Logopediskt arbete II: bedömning', hp: 7.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Logopediskt arbete III: intervention barn och ungdom', hp: 7.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Utvecklingsrelaterad funktionsnedsättning, tal, språk och kommunikation I', hp: 7.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Utvecklingsrelaterad funktionsnedsättning, tal, språk och kommunikation II', hp: 7.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Utvecklingsrelaterad funktionsnedsättning, tal, språk och kommunikation III', hp: 7.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Utvecklingsrelaterad funktionsnedsättning, tal, språk och kommunikation IV', hp: 7.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Ät- och sväljsvårigheter hos barn och vuxna', hp: 7.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Logopediskt arbete IV: barn och ungdom', hp: 7.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Vetenskapligt fördjupningsarbete', hp: 7.5, category: 'mandatory' },
+      { term: 5, code: '', name: 'Neurologopedi och geriatrik', hp: 7.5, category: 'mandatory' },
+      { term: 5, code: '', name: 'Neurologopedi II', hp: 7.5, category: 'mandatory' },
+      { term: 5, code: '', name: 'Fördjupning i talapparatens anatomi och fysiologi samt talperception', hp: 7.5, category: 'mandatory' },
+      { term: 5, code: '', name: 'Logopediskt arbete V: intervention vuxna', hp: 7.5, category: 'mandatory' },
+      { term: 6, code: '', name: 'Logopedi och foniatri', hp: 7.5, category: 'mandatory' },
+      { term: 6, code: '', name: 'Röstlogopedi', hp: 7.5, category: 'mandatory' },
+      { term: 6, code: '', name: 'Talflytsstörningar', hp: 7.5, category: 'mandatory' },
+      { term: 6, code: '', name: 'Logopediskt arbete VI: vuxna', hp: 7.5, category: 'mandatory' },
+      { term: 7, code: '', name: 'Vetenskapsmetodik', hp: 7.5, category: 'mandatory' },
+      { term: 7, code: '', name: 'Vetenskapligt arbete - del termin 7', hp: 7.5, category: 'mandatory', isThesis: true },
+      slot(7, 'Valbar kurs', 7.5),
+      { term: 7, code: '', name: 'Logopediskt arbete VII: fördjupning', hp: 7.5, category: 'mandatory' },
+      { term: 8, code: '', name: 'Vetenskapligt arbete - del termin 8', hp: 25.5, category: 'mandatory', isThesis: true },
+      { term: 8, code: '', name: 'Framtidens logopedi', hp: 4.5, category: 'mandatory' },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-plan-pdf' });
+  }
+
   if (programmeCode === 'JAMRÄ') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/JAMR%C3%84';
     const rows = [
