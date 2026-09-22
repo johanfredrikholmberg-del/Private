@@ -1453,6 +1453,18 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'LAKPE' || programmeCode === 'LGKPD') {
+    const sourceUrl = programmeCode === 'LAKPE'
+      ? 'https://www.lu.se/studera/kompletterande-pedagogisk-utbildning-inriktning-mot-gymnasieskolan-tva-amnen-LAKPE-2%C3%84GY/programmets-innehall'
+      : 'https://www.uvet.lu.se/fileadmin/user_upload/uvet/lararutbildning/KPU_utbildningsplan_LGKPD_utbildningsplan_fraan_vt24.pdf';
+    const rows = [
+      { term: 1, code: '', name: 'Ämneslärarprofessionen i samhälle och skola', hp: 30, category: 'mandatory' },
+      { term: 2, code: '', name: 'Ämnesläraren som reflekterande praktiker', hp: 30, category: 'mandatory' },
+      { term: 3, code: '', name: 'Professionsutveckling och individuellt lärande', hp: 30, category: 'mandatory' },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: programmeCode === 'LAKPE' ? 'lund-official-programme-page' : 'lund-official-programme-pdf' });
+  }
+
   if (programmeCode === 'VGSKS') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VGSKS';
     const rows = [
