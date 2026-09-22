@@ -25,7 +25,7 @@ const requestedTerms=String(process.env.LUND_COURSE_TERMS||DEFAULT_SUSA_TERM).sp
 const allSnapshotTerms=requestedTerms.length===1&&requestedTerms[0].toLowerCase()==='all';
 const inRequestedTerms=row=>allSnapshotTerms||requestedTerms.some(term=>String(row?.susaId||'').endsWith(`.${term}`));
 const eligible=[...byCode.entries()].filter(([id,rows])=>/^[A-ZÅÄÖ0-9]{5,12}$/.test(id)&&rows.length===1&&rows.some(inRequestedTerms)&&!already.has(id));
-const pending=eligible.filter(([id])=>!unavailable.has(id)).sort(([a],[b])=>a.localeCompare(b,'sv'));
+const pending=eligible.filter(([id])=>!unavailable.has(id)||packageOverrideByCode.has(id)).sort(([a],[b])=>a.localeCompare(b,'sv'));
 const limit=Math.max(1,Math.min(100,Number(process.env.LUND_COURSE_LIMIT||40)));
 const requestedCodes=String(process.env.LUND_COURSE_CODES||'').split(',').map(code).filter(Boolean);
 const candidates=(requestedCodes.length
