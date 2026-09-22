@@ -1179,6 +1179,81 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'NAMAS') {
+    const sourceUrl = 'https://www.lu.se/studera/matematisk-statistik-masterprogram-NAMAS/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'Matematisk statistik: Markovprocesser', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Matematisk statistik: Stationära stokastiska processer', hp: 7.5, category: 'mandatory' },
+      slot(1, 'Kurser enligt examenskraven för matematisk statistik', 15),
+      slot(2, 'Kurser enligt examenskraven för matematisk statistik', 30),
+      slot(3, 'Kurser enligt examenskraven för matematisk statistik', 30),
+      { term: 4, code: '', name: 'Matematisk statistik: Examensarbete - masterexamen', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
+  if (programmeCode === 'NAAFY') {
+    const sourceUrl = 'https://www.lu.se/studera/astrofysik-masterprogram-NAAFY/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'Astronomi: Planetsystem', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Astronomi: Statistiska verktyg i astrofysiken', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Astronomi: Stjärnornas struktur och utveckling', hp: 7.5, category: 'mandatory' },
+      slot(1, 'Valfri kurs enligt programplan', 7.5),
+      slot(2, 'Valfri kurs enligt programplan', 7.5),
+      { term: 2, code: '', name: 'Astronomi: Examensarbete för masterexamen - del termin 2', hp: 22.5, category: 'mandatory', isThesis: true },
+      { term: 3, code: '', name: 'Astronomi: Extragalaktisk astronomi', hp: 7.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Astronomi: Dynamisk astronomi', hp: 7.5, category: 'mandatory' },
+      slot(3, 'Valfri kurs enligt programplan', 7.5),
+      { term: 3, code: '', name: 'Astronomi: Examensarbete för masterexamen - del termin 3', hp: 7.5, category: 'mandatory', isThesis: true },
+      slot(4, 'Valfri kurs enligt programplan', 7.5),
+      { term: 4, code: '', name: 'Astronomi: Examensarbete för masterexamen - del termin 4', hp: 22.5, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
+  if (programmeCode === 'RGRVT') {
+    const sourceUrl = 'https://www.lu.se/studera/religionsvetenskap-och-teologi-kandidatprogram-RGRVT/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'Religionsvetenskap: Grundkurs', hp: 30, category: 'mandatory' },
+      slot(2, 'Fortsättningskurser inom vald inriktning', 30),
+      slot(3, 'Fördjupningskurser inom vald inriktning', 30),
+      slot(4, 'Valbara studier inom programmet', 30),
+      slot(5, 'Valbara studier inom programmet', 30),
+      slot(6, 'Kandidatkurs eller examensarbete med fördjupningskurser inom vald inriktning', 30),
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
+  if (programmeCode === 'VASAS') {
+    const sourceUrl = 'https://www.lu.se/studera/specialistsjukskoterskeprogrammet-anestesisjukvard-VASAS/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'Omvårdnad med inriktning anestesisjukvård I', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Magisteruppsats inom omvårdnad med inriktning anestesisjukvård - del termin 1', hp: 1.5, category: 'mandatory', isThesis: true },
+      { term: 1, code: '', name: 'Perioperativ omvårdnad med inriktning anestesisjukvård II (teori och VFU)', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Perioperativ omvårdnad med inriktning anestesisjukvård III - del termin 1', hp: 6, category: 'mandatory' },
+      { term: 2, code: '', name: 'Perioperativ omvårdnad med inriktning anestesisjukvård III - del termin 2', hp: 1.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Omvårdnad med inriktning anestesisjukvård I', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Magisteruppsats inom omvårdnad med inriktning anestesisjukvård - del termin 2', hp: 13.5, category: 'mandatory', isThesis: true },
+      { term: 2, code: '', name: 'Omvårdnad med inriktning anestesisjukvård II (VFU)', hp: 7.5, category: 'mandatory' },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
+  if (programmeCode === 'VASOS') {
+    const sourceUrl = 'https://www.lu.se/studera/specialistsjukskoterskeprogrammet-operationssjukvard-VASOS/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'Perioperativ omvårdnad med inriktning operationssjukvård I', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Magisteruppsats inom omvårdnad med inriktning operationssjukvård - del termin 1', hp: 1.5, category: 'mandatory', isThesis: true },
+      { term: 1, code: '', name: 'Perioperativ omvårdnad med inriktning operationssjukvård II', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Perioperativ omvårdnad med inriktning operationssjukvård III - del termin 1', hp: 6, category: 'mandatory' },
+      { term: 2, code: '', name: 'Perioperativ omvårdnad med inriktning operationssjukvård III - del termin 2', hp: 1.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Perioperativ omvårdnad med inriktning operationssjukvård IV', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Magisteruppsats inom omvårdnad med inriktning operationssjukvård - del termin 2', hp: 13.5, category: 'mandatory', isThesis: true },
+      { term: 2, code: '', name: 'Perioperativ omvårdnad med inriktning operationssjukvård V', hp: 7.5, category: 'mandatory' },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
   if (programmeCode === 'VGRRS') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VGRRS';
     const common = [
