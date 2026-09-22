@@ -67,6 +67,21 @@ async function getText(url) {
   throw last;
 }
 
+async function getJson(url) {
+  const response = await fetch(url, {
+    headers: { accept: 'application/json', 'user-agent': 'StudieLots-Lund-structure-import/1.0' },
+    redirect: 'follow',
+    signal: AbortSignal.timeout(REQUEST_TIMEOUT),
+  });
+  const body = await response.text();
+  if (!response.ok) {
+    const error = new Error(`HTTP ${response.status}: ${body.slice(0, 500)}`);
+    error.status = response.status;
+    throw error;
+  }
+  return { data: JSON.parse(body), url: response.url || url };
+}
+
 async function getPdfText(url) {
   const response = await fetch(url, {
     headers: { accept: 'application/pdf', 'user-agent': 'StudieLots-Lund-structure-import/1.0' },
@@ -707,7 +722,43 @@ async function probeLthProgrammeSource() {
         assets.push({ url: scriptUrl, error: String(error?.message || error) });
       }
     }
-    return { target: page.url, scripts: [...new Set(scripts)], assets };
+    const apiBase = 'https://api.lth.lu.se/lot';
+    const probes = [];
+    const summarise = data => {
+      if (Array.isArray(data)) return { type: 'array', count: data.length, sample: data.slice(0, 3) };
+      if (data && typeof data === 'object') return { type: 'object', keys: Object.keys(data), sample: data };
+      return { type: typeof data, sample: data };
+    };
+    const probe = async url => {
+      try {
+        const response = await getJson(url);
+        probes.push({ url: response.url, ok: true, ...summarise(response.data) });
+        return response.data;
+      } catch (error) {
+        probes.push({ url, ok: false, error: String(error?.message || error) });
+        return null;
+      }
+    };
+    const programmes = await probe(`${apiBase}/courses/programmes`);
+    const academicYears = await probe(`${apiBase}/courses/academic-years?programmeCode=D&includePreliminary=true`);
+    await probe(`${apiBase}/courses?programmeCode=D`);
+    const yearObjects = [];
+    const collectObjects = value => {
+      if (!value || typeof value !== 'object') return;
+      if (Array.isArray(value)) return value.forEach(collectObjects);
+      yearObjects.push(value);
+      Object.values(value).forEach(collectObjects);
+    };
+    collectObjects(academicYears);
+    const yearValues = [...new Set(yearObjects.flatMap(item => Object.entries(item)
+      .filter(([key]) => /academic.*year|year.*id|^id$|^code$/i.test(key))
+      .map(([, value]) => typeof value === 'string' || typeof value === 'number' ? String(value) : '')
+      .filter(value => /26|2026|27|2027/.test(value))))].slice(0, 8);
+    for (const academicYearId of yearValues) {
+      const params = new URLSearchParams({ programmeCode: 'D', academicYearId });
+      await probe(`${apiBase}/courses?${params}`);
+    }
+    return { target: page.url, scripts: [...new Set(scripts)], assets, api: { programmeSummary: summarise(programmes), probes } };
   } catch (error) {
     return { target, error: String(error?.message || error) };
   }
