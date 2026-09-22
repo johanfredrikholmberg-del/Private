@@ -358,12 +358,14 @@ function extractLinks(html, baseUrl) {
 function programmeStructureSection(value) {
   const source = String(value || '');
   const headings = [...source.matchAll(/(?:Programstruktur(?:\s+för)?|Program structure(?:\s+for)?|Programme structure(?:\s+for)?)/gi)];
-  return headings.length ? source.slice(headings.at(-1).index || 0) : source;
+  const section = headings.length ? source.slice(headings.at(-1).index || 0) : source;
+  const end = section.search(/\n\s*(?:Examen|Examensbenämningar|Förkunskapskrav(?:\s+och\s+urvalsmetod)?|Entry requirements|Other information|Övrigt)\s*\n/i);
+  return end > 0 ? section.slice(0, end) : section;
 }
 
 function isProgrammePdfHeader(name, credits) {
   if (!(Number(credits) >= 60)) return false;
-  return /\([A-ZÅÄÖ]{2,8}\)\s*(?:Kandidat|Master|Magister|Bachelor|Programme|Program)|(?:Kandidat|Master|Magister|Bachelor|Programme|Program)[^,]{0,140},?\s*\d+(?:[.,]\d+)?\s*(?:högskolepoäng|credits)/i.test(name);
+  return /\([A-ZÅÄÖ]{2,8}\)\s*(?:Kandidat|Master|Magister|Bachelor|Programme|Program)|(?:Kandidat|Master|Magister|Bachelor|Programme|Program)[^,]{0,140},?\s*\d+(?:[.,]\d+)?\s*(?:högskolepoäng|credits)|Examensbenämningar|Filosofie\s+(?:master|kandidat|magister)examen|Degree\s+of\s+(?:Master|Bachelor)/i.test(name);
 }
 
 function pdfRows(pdfText) {
