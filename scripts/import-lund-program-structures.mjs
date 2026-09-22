@@ -769,24 +769,39 @@ async function discoverLth(program) {
     const overfullTerms = [...termHp].filter(([, hp]) => hp > 30.01).map(([term, hp]) => ({ term, hp }));
     const slotDiagnostics = [];
     if (!ambiguousMandatory.length && !overfullTerms.length) {
-      for (let term = 1; term <= yearCount * 2; term += 1) {
-        const remainder = round1(30 - (termHp.get(term) || 0));
-        if (remainder <= 0.01) continue;
-        const optionRows = active.filter(row => row.choice !== 'mandatory' && lthTermCandidates(row, yearCount).includes(term));
-        const specialisations = [...new Set(optionRows.map(row => row.specialisationCode || 'general'))];
-        let selected = null;
-        let selectedSpecialisation = '';
-        for (const specialisation of specialisations) {
-          const compatible = optionRows.filter(row => (row.specialisationCode || 'general') === specialisation || row.specialisationGeneral === 1 || row.specialisationCode === 'general');
-          const unique = [...new Map(compatible.map(row => [`${row.courseCode}:${row.credits}`, row])).values()];
-          selected = exactOptionSet(unique, remainder);
-          if (selected) { selectedSpecialisation = specialisation; break; }
+      const needs = Array.from({ length: yearCount * 2 }, (_, index) => ({ term: index + 1, remainder: round1(30 - (termHp.get(index + 1) || 0)) }))
+        .filter(item => item.remainder > 0.01);
+      const optionRows = active.filter(row => row.choice !== 'mandatory');
+      const specialisations = [...new Set(optionRows.map(row => row.specialisationCode || 'general'))];
+      let selectedPlan = null;
+      let selectedSpecialisation = '';
+      for (const specialisation of specialisations) {
+        const compatible = optionRows.filter(row => (row.specialisationCode || 'general') === specialisation || row.specialisationGeneral === 1 || row.specialisationCode === 'general');
+        const orderedNeeds = [...needs].sort((a, b) => {
+          const count = item => compatible.filter(row => lthTermCandidates(row, yearCount).includes(item.term)).length;
+          return count(a) - count(b);
+        });
+        const usedCodes = new Set(mandatory.map(row => row.courseCode));
+        const plan = new Map();
+        let possible = true;
+        for (const need of orderedNeeds) {
+          const eligible = compatible.filter(row => lthTermCandidates(row, yearCount).includes(need.term) && !usedCodes.has(row.courseCode));
+          const unique = [...new Map(eligible.map(row => [`${row.courseCode}:${row.credits}`, row])).values()];
+          const selected = exactOptionSet(unique, need.remainder);
+          if (!selected) { possible = false; break; }
+          selected.forEach(row => usedCodes.add(row.courseCode));
+          plan.set(need.term, selected);
         }
-        if (!selected) { slotDiagnostics.push({ term, remainder, options: optionRows.length, matched: false }); continue; }
+        if (possible) { selectedPlan = plan; selectedSpecialisation = specialisation; break; }
+      }
+      for (const { term, remainder } of needs) {
+        const selected = selectedPlan?.get(term) || null;
+        const candidates = optionRows.filter(row => lthTermCandidates(row, yearCount).includes(term));
+        if (!selected) { slotDiagnostics.push({ term, remainder, options: candidates.length, matched: false }); continue; }
         rows.push({ term, code: '', name: 'Valbara kurser enligt LTH:s läro- och timplan', hp: remainder,
           category: 'elective-slot', isSlot: true, slotType: 'elective-slot', sourceKind: 'lth-lot-api',
           options: selected.map(row => ({ code: row.courseCode, name: row.name_sv, hp: Number(row.credits) })) });
-        slotDiagnostics.push({ term, remainder, options: optionRows.length, matched: true, specialisation: selectedSpecialisation,
+        slotDiagnostics.push({ term, remainder, options: candidates.length, matched: true, specialisation: selectedSpecialisation,
           selected: selected.map(row => row.courseCode) });
       }
     }
