@@ -1554,6 +1554,39 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
   }
 
+  if (programmeCode === 'KAMID') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/KAMID';
+    const rows = [
+      { term: 1, code: 'MUSP14', name: 'Instrumentalstudier inklusive kammarmusik 1', hp: 30, category: 'mandatory' },
+      { term: 2, code: 'MUSP15', name: 'Instrumentalstudier inklusive kammarmusik 2', hp: 22, category: 'mandatory' },
+      { term: 2, code: 'MUUM10', name: 'Examensarbete 1', hp: 8, category: 'mandatory', isThesis: true },
+      { term: 3, code: 'MUSP16', name: 'Instrumentalstudier inklusive kammarmusik 3', hp: 20, category: 'mandatory' },
+      { term: 3, code: 'MUUM11', name: 'Examensarbete 2', hp: 10, category: 'mandatory', isThesis: true },
+      { term: 4, code: 'MUSP17', name: 'Instrumentalstudier inklusive kammarmusik 4', hp: 18, category: 'mandatory' },
+      { term: 4, code: 'MUUM13', name: 'Examensarbete 3', hp: 12, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
+  if (programmeCode === 'KAMKA') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/KAMKA';
+    const rows = [
+      { term: 1, code: '', name: 'Musikteori 1', hp: 10, category: 'mandatory' },
+      { term: 1, code: '', name: 'Komposition, arrangering och instrumentation 1', hp: 10, category: 'mandatory' },
+      { term: 1, code: '', name: 'Form och analys 1', hp: 10, category: 'mandatory' },
+      { term: 2, code: '', name: 'Musikteori 2', hp: 10, category: 'mandatory' },
+      { term: 2, code: '', name: 'Komposition, arrangering och instrumentation 2', hp: 7, category: 'mandatory' },
+      { term: 2, code: '', name: 'Ämnesmetodik 1', hp: 5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Examensarbete 1', hp: 8, category: 'mandatory', isThesis: true },
+      { term: 3, code: '', name: 'Musikteori 3', hp: 10, category: 'mandatory' },
+      { term: 3, code: '', name: 'Komposition, arrangering och instrumentation 3', hp: 8, category: 'mandatory' },
+      { term: 3, code: '', name: 'Examensarbete 2', hp: 12, category: 'mandatory', isThesis: true },
+      { term: 4, code: '', name: 'Praktik 1', hp: 20, category: 'mandatory' },
+      { term: 4, code: '', name: 'Examensarbete 3', hp: 10, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
   if (programmeCode === 'HAABM') {
     const sourceUrl = 'https://www.lu.se/studera/arkivvetenskap-biblioteks-och-informationsvetenskap-respektive-museologi-abm-masterprogram-HAABM/programmets-innehall';
     const commonTermOne = [
