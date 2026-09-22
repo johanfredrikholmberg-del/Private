@@ -959,7 +959,7 @@ async function main() {
   // LTH API-derived records are rebuilt on every run so stricter validation is
   // applied retroactively instead of trusting an older generated snapshot.
   for (let index = structures.length - 1; index >= 0; index -= 1) {
-    if (structures[index]?.source === 'lund-lth-lot-api') structures.splice(index, 1);
+    if (structures[index]?.source === 'lund-lth-lot-api' || (structures[index]?.sourceUrls || []).some(url => /api\.lth\.lu\.se\/lot\/courses/i.test(url))) structures.splice(index, 1);
   }
   const lundPrograms = programs.filter(program => isLund(program.university));
   const byCode = new Map(lundPrograms.map(program => [code(program.programCode), program]));
@@ -1011,7 +1011,7 @@ async function main() {
     const discovered = lthResult?.structureAvailable ? null : await discover(program);
     const result = lthResult?.structureAvailable ? lthResult : discovered;
     const rows = normaliseRows(result.courses);
-    const candidate = makeCanonical(program, rows, result.sourceUrls || []);
+    const candidate = makeCanonical(program, rows, result.sourceUrls || [], result.source ? { source: result.source } : {});
     if (result.found && result.structureAvailable && structureIsComplete(candidate, program)) {
       const action = upsert(structures, candidate, program);
       if (action.action !== 'existing') imported += 1;
