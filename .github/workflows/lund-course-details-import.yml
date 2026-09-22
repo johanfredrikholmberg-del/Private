@@ -1,6 +1,11 @@
 name: Import Lund course details
 on:
   workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - data/import-reviews/lund-official-package-overrides.json
+      - .github/workflows/lund-course-details-import.yml
 permissions:
   contents: write
 concurrency:
@@ -38,6 +43,7 @@ jobs:
       - name: Import Lund syllabuses in batches and save each completed batch
         env:
           LUND_COURSE_LIMIT: '100'
+          LUND_COURSE_TERMS: 'all'
         shell: bash
         run: |
           set -euo pipefail
