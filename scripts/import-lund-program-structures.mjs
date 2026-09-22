@@ -910,6 +910,49 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'VGRRS') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VGRRS';
+    const common = [
+      { term: 1, code: '', name: 'Röntgensjuksköterskans profession I', hp: 9, category: 'mandatory' },
+      { term: 1, code: '', name: 'Anatomi och fysiologi', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Strålningsfysik och teknologi I', hp: 5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Röntgensjuksköterskans profession och vetenskap I', hp: 6, category: 'mandatory' },
+      { term: 1, code: '', name: 'Omvårdnadens teknik och metod I', hp: 2.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Anatomi, fysiologi, mikrobiologi och patofysiologi', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Den medicinska bilden I', hp: 4.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Röntgensjuksköterskans profession II', hp: 14, category: 'mandatory' },
+      { term: 2, code: '', name: 'Omvårdnadens teknik och metod II', hp: 2.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Handledning I', hp: 1.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Strålningsfysik och teknologi II', hp: 7.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Röntgensjuksköterskans profession III', hp: 18.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Omvårdnadens teknik och metod III', hp: 2.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Handledning II', hp: 1.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Den medicinska bilden II', hp: 7, category: 'mandatory' },
+      { term: 4, code: '', name: 'Barns, vuxnas och äldres hälsa och ohälsa', hp: 7.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Strålningsfysik och teknologi III', hp: 8, category: 'mandatory' },
+      { term: 4, code: '', name: 'Den medicinska bilden III', hp: 7.5, category: 'mandatory' },
+      { term: 5, code: '', name: 'Röntgensjuksköterskans profession och vetenskap II', hp: 7.5, category: 'mandatory' },
+      { term: 5, code: '', name: 'Ledarskap, informatik och kvalitetsutveckling', hp: 8, category: 'mandatory' },
+      { term: 5, code: '', name: 'Handledning III', hp: 2, category: 'mandatory' },
+      { term: 6, code: '', name: 'Röntgensjuksköterskans profession och vetenskap III - examensarbete', hp: 15, category: 'mandatory', isThesis: true },
+      { term: 6, code: '', name: 'Handledning IV', hp: 2.5, category: 'mandatory' },
+    ];
+    const professionVFirst = [
+      ...common,
+      { term: 5, code: '', name: 'Röntgensjuksköterskans profession V', hp: 12.5, category: 'mandatory' },
+      { term: 6, code: '', name: 'Röntgensjuksköterskans profession IV', hp: 12.5, category: 'mandatory' },
+    ];
+    const professionIVFirst = [
+      ...common,
+      { term: 5, code: '', name: 'Röntgensjuksköterskans profession IV', hp: 12.5, category: 'mandatory' },
+      { term: 6, code: '', name: 'Röntgensjuksköterskans profession V', hp: 12.5, category: 'mandatory' },
+    ];
+    return makeCanonical(program, professionVFirst, [sourceUrl], { source: 'lund-official-programme-plan-pdf', variants: [
+      { id: 'profession-v-term-5', subject: 'Profession V termin 5', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(professionVFirst) },
+      { id: 'profession-iv-term-5', subject: 'Profession IV termin 5', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(professionIVFirst) },
+    ] });
+  }
+
   if (programmeCode === 'VGFYT') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VGFYT';
     const rows = [
