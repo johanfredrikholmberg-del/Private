@@ -1536,6 +1536,24 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
   }
 
+  if (programmeCode === 'KGFKO') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/KGFKO';
+    const rows = [
+      { term: 1, code: '', name: 'Obligatoriskt basblock i fri konst', hp: 30, category: 'mandatory' },
+      { term: 2, code: '', name: 'Ekonomi och juridik för konstnärer', hp: 5, category: 'mandatory' },
+      slot(2, 'Valbara fördjupningskurser inom fri konst', 15),
+      { term: 2, code: '', name: 'Individuellt konstnärligt arbete', hp: 10, category: 'mandatory' },
+      slot(3, 'Valbara fördjupningskurser inom fri konst', 20),
+      { term: 3, code: '', name: 'Individuellt konstnärligt arbete', hp: 10, category: 'mandatory' },
+      slot(4, 'Valbara fördjupningskurser inom fri konst', 20),
+      { term: 4, code: '', name: 'Individuellt konstnärligt arbete', hp: 10, category: 'mandatory' },
+      slot(5, 'Valbara fördjupningskurser inom fri konst', 20),
+      { term: 5, code: '', name: 'Individuellt konstnärligt arbete', hp: 10, category: 'mandatory' },
+      { term: 6, code: '', name: 'Examensprojekt i fri konst', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
   if (programmeCode === 'HAABM') {
     const sourceUrl = 'https://www.lu.se/studera/arkivvetenskap-biblioteks-och-informationsvetenskap-respektive-museologi-abm-masterprogram-HAABM/programmets-innehall';
     const commonTermOne = [
