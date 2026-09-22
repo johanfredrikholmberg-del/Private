@@ -5,6 +5,7 @@ on:
     branches: [studielots-v2]
     paths:
       - data/import-reviews/lund-official-package-overrides.json
+      - scripts/import-lund-course-details.mjs
       - .github/workflows/lund-course-details-import.yml
 permissions:
   contents: write
