@@ -822,6 +822,43 @@ function curatedOfficialStructure(program) {
   const programmeCode = code(program.programCode);
   const slot = (term, name, hp, options = []) => ({ term, code: '', name, hp, category: 'elective-slot', isSlot: true, slotType: 'elective-slot', ...(options.length ? { options } : {}) });
 
+  if (programmeCode === 'EAGIB') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/EAGIB';
+    const sharedTermTwo = [
+      { term: 2, code: '', name: 'Research Strategy and Methods', hp: 10, category: 'mandatory' },
+      slot(2, 'Valbar fördjupningskurs i internationell marknadsföring och varumärken', 5, [
+        { code: '', name: 'Understanding Consumption', hp: 5 },
+        { code: '', name: 'Corporate Brand Management and Reputation', hp: 5 },
+        { code: '', name: 'AI-stödd marknadsinsikt: Teori möter praktik', hp: 5 },
+      ]),
+      { term: 2, code: 'BUSN39', name: 'Degree Project in Global Marketing', hp: 15, category: 'mandatory', isThesis: true },
+    ];
+    const strategies = [
+      { term: 1, code: '', name: 'International Marketing and Strategy', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Strategic Brand Management', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Multichannel Marketing, Retail and Internationalisation', hp: 7.5, category: 'mandatory' },
+      slot(1, 'Val mellan Sustainability and Marketing Ethics och AI-Driven Digital Marketing', 7.5, [
+        { code: '', name: 'Sustainability and Marketing Ethics', hp: 7.5 },
+        { code: '', name: 'AI-Driven Digital Marketing', hp: 7.5 },
+      ]),
+      ...sharedTermTwo,
+    ];
+    const consumerTrends = [
+      { term: 1, code: '', name: 'Consumer Culture Theory and Consumer Insights', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'From Consumer Insight to Innovation', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'The Value of Brands in a Consumption Society', hp: 7.5, category: 'mandatory' },
+      slot(1, 'Val mellan Sustainability and Marketing Ethics och AI-Driven Digital Marketing', 7.5, [
+        { code: '', name: 'Sustainability and Marketing Ethics', hp: 7.5 },
+        { code: '', name: 'AI-Driven Digital Marketing', hp: 7.5 },
+      ]),
+      ...sharedTermTwo,
+    ];
+    return makeCanonical(program, strategies, [sourceUrl], { source: 'lund-official-programme-plan-pdf', variants: [
+      { id: 'STRA', subject: 'Strategier för varumärken och internationella marknader', programName: `${program.programName}, Strategier för varumärken och internationella marknader`, sourceUrls: [sourceUrl], rows: normaliseRows(strategies) },
+      { id: 'INCT', subject: 'Internationella konsumenttrender, varumärken och innovation', programName: `${program.programName}, Internationella konsumenttrender, varumärken och innovation`, sourceUrls: [sourceUrl], rows: normaliseRows(consumerTrends) },
+    ] });
+  }
+
   if (programmeCode === 'JAMRÄ') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/JAMR%C3%84';
     const rows = [
