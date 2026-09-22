@@ -741,7 +741,7 @@ async function probeLthProgrammeSource() {
     };
     const programmes = await probe(`${apiBase}/courses/programmes`);
     const academicYears = await probe(`${apiBase}/courses/academic-years?programmeCode=D&includePreliminary=true`);
-    await probe(`${apiBase}/courses?programmeCode=D`);
+    const courses = await probe(`${apiBase}/courses?programmeCode=D`);
     const yearObjects = [];
     const collectObjects = value => {
       if (!value || typeof value !== 'object') return;
@@ -758,7 +758,31 @@ async function probeLthProgrammeSource() {
       const params = new URLSearchParams({ programmeCode: 'D', academicYearId });
       await probe(`${apiBase}/courses?${params}`);
     }
-    return { target: page.url, scripts: [...new Set(scripts)], assets, api: { programmeSummary: summarise(programmes), probes } };
+    const courseRows = Array.isArray(courses) ? courses : [];
+    const courseSummary = {};
+    for (const row of courseRows) {
+      const key = `${row.year || 0}:${row.choice || ''}:${row.choiceShort || ''}:${row.specialisationCode || ''}`;
+      if (!courseSummary[key]) courseSummary[key] = { rows: 0, uniqueCourses: new Set(), credits: 0 };
+      courseSummary[key].rows += 1;
+      const courseKey = `${row.courseCode}:${row.year}:${row.choice}:${row.specialisationCode}`;
+      if (!courseSummary[key].uniqueCourses.has(courseKey)) {
+        courseSummary[key].uniqueCourses.add(courseKey);
+        courseSummary[key].credits += Number(row.credits) || 0;
+      }
+    }
+    const compactSummary = Object.fromEntries(Object.entries(courseSummary).map(([key, value]) => [key, {
+      rows: value.rows, uniqueCourses: value.uniqueCourses.size, credits: value.credits,
+    }]));
+    const compactCourses = courseRows.filter(row => Number(row.year) <= 3).map(row => ({
+      courseCode: row.courseCode, name_sv: row.name_sv, credits: row.credits, year: row.year,
+      choice: row.choice, choiceShort: row.choiceShort, groupId: row.groupId,
+      specialisationCode: row.specialisationCode, specialisationGeneral: row.specialisationGeneral,
+      periods: (row.timePlans || []).map(plan => [plan.startSpNr, plan.endSpNr]),
+    }));
+    return { target: page.url, scripts: [...new Set(scripts)], assets, api: {
+      programmes: Array.isArray(programmes) ? programmes : [], programmeSummary: summarise(programmes),
+      courseSummary: compactSummary, firstThreeYears: compactCourses, probes,
+    } };
   } catch (error) {
     return { target, error: String(error?.message || error) };
   }
