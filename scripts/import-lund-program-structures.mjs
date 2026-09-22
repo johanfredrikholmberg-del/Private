@@ -953,6 +953,19 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'VASMS') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VASMS';
+    const rows = [
+      { term: 1, code: '', name: 'Introduktion till ambulanssjuksköterskans funktion', hp: 4.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Akutsjukvård inom ambulanssjukvård', hp: 18, category: 'mandatory' },
+      { term: 1, code: '', name: 'Magisteruppsats inom omvårdnad med inriktning ambulanssjukvård - del termin 1', hp: 7.5, category: 'mandatory', isThesis: true },
+      { term: 2, code: '', name: 'Katastrof och traumatologi', hp: 4.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Omvårdnad inom ambulanssjukvård', hp: 18, category: 'mandatory' },
+      { term: 2, code: '', name: 'Magisteruppsats inom omvårdnad med inriktning ambulanssjukvård - del termin 2', hp: 7.5, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-plan-pdf' });
+  }
+
   if (programmeCode === 'VGFYT') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VGFYT';
     const rows = [
