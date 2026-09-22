@@ -416,6 +416,7 @@ function pdfColumnRows(lines, term) {
       .replace(/\s*[-–:]\s*$/, ''));
     buffer = [];
     if (name.length < 3 || name.length > 220 || /^(?:hp|credits|ects)$/i.test(name)) return;
+    if (credits < 2 && /programportfölj|programme portfolio|högskolepoäng|credit|ects|\(hp\)/i.test(name)) return;
     const codeMatch = name.match(/\b([A-ZÅÄÖ]{2,8}\d{1,4}[A-Z]?)\b/);
     rows.push({ name, code: codeMatch ? code(codeMatch[1]) : '', hp: round1(credits), term,
       category: category(`${name} ${hint}`), sourceKind: 'programme-pdf-layout' });
