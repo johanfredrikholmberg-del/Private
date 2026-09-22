@@ -953,6 +953,22 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'SGSEM') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/SGSEM';
+    const rows = [
+      { term: 1, code: '', name: 'Grundkurs i service management, inklusive inriktningsspecifik kurs i turism och hotell', hp: 30, category: 'mandatory' },
+      { term: 2, code: '', name: 'Fortsättningskurs i service management', hp: 30, category: 'mandatory' },
+      { term: 3, code: '', name: 'Ledning, styrning och utveckling av tjänsteverksamheter', hp: 30, category: 'mandatory' },
+      { term: 4, code: '', name: 'Samhällsvetenskaplig metod inklusive uppsatsarbete och inriktningsspecifik kurs', hp: 30, category: 'mandatory' },
+      slot(5, 'Valfria kurser enligt överenskommelse, inklusive möjlighet till praktik', 30),
+      { term: 6, code: '', name: 'Kandidatkurs: Inriktningsspecifik kurs', hp: 15, category: 'mandatory' },
+      { term: 6, code: '', name: 'Examensarbete i service management', hp: 15, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-plan-pdf', variants: [
+      { id: 'TOHO', subject: 'Turism och hotell', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(rows) },
+    ] });
+  }
+
   if (programmeCode === 'MALÄB') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/MAL%C3%84B';
     const rows = [
