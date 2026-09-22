@@ -956,6 +956,11 @@ async function main() {
     readJson(path.join(process.cwd(), 'data', 'program-db-variants.json')),
   ]);
   const structures = Array.isArray(initialStructures) ? [...initialStructures] : [];
+  // LTH API-derived records are rebuilt on every run so stricter validation is
+  // applied retroactively instead of trusting an older generated snapshot.
+  for (let index = structures.length - 1; index >= 0; index -= 1) {
+    if (structures[index]?.source === 'lund-lth-lot-api') structures.splice(index, 1);
+  }
   const lundPrograms = programs.filter(program => isLund(program.university));
   const byCode = new Map(lundPrograms.map(program => [code(program.programCode), program]));
   const legacyRecords = [
