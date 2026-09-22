@@ -1207,6 +1207,22 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, sourceUrls, { source: 'lund-official-programme-page' });
   }
 
+  if (programmeCode === 'VZBAS') {
+    const sourceUrls = [
+      'https://www.lu.se/studera/halsovetenskapligt-basar-VZBAS/programmets-innehall',
+      'https://www.lu.se/sites/www.lu.se/files/esu/aff896e04a3db5d558e25bbbadd72be69baa82e3_VZBAS_H__lsovetenskapligt_bas__r_HT26.pdf',
+    ];
+    const rows = [
+      { term: 1, code: '', name: 'Introduktion till hälsovetenskaplig matematik (15 förutbildningspoäng)', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Introduktion till universitetsstudier (7,5 högskolepoäng)', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Introduktion till hälsovetenskap (7,5 högskolepoäng)', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Introduktion till hälsovetenskaplig statistik och naturkunskap (15 förutbildningspoäng)', hp: 15, category: 'mandatory' },
+      { term: 2, code: '', name: 'Hälsofrämjande vård (7,5 högskolepoäng)', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Att förstå hälsovetenskaplig forskning (7,5 högskolepoäng)', hp: 7.5, category: 'mandatory' },
+    ];
+    return makeCanonical(program, rows, sourceUrls, { source: 'lund-official-programme-page-and-plan-pdf' });
+  }
+
   if (programmeCode === 'VGFYT') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VGFYT';
     const rows = [
