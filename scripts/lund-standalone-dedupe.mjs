@@ -12,7 +12,7 @@ const incoming=await read(inputPath);
 if(manifest.canonical!==true||manifest.term!=='HT26'||!Array.isArray(original)||!Array.isArray(incoming)||original.length!==manifest.tables?.courses?.rows)throw Error('Kanonisk databas eller manifest är ofullständigt/inkonsekvent.');
 const clean=x=>String(x??'').normalize('NFKC').trim().toUpperCase().replace(/\s+/g,'');
 const provider=x=>clean(x.providerId??x.providerCode??x.provider??x.university??x.institution??x.larosate??'');
-const canonicalProvider=x=>{const p=provider(x).replace(/[._-]/g,'');return /^(LU|LUND|LUNDSUNIVERSITET|LUNDUNIVERSITY)$/.test(p)?'LU':p};
+const canonicalProvider=x=>{const p=provider(x).replace(/[._-]/g,'');return /^(LU|LUND|LUNDSUNIVERSITET|LUNDUNIVERSITY|PUOHLU|UOHLU)$/.test(p)?'LU':p};
 const code=x=>clean(x.courseCode??x.code??x.kurskod??'');
 const hp=x=>Number(String(x.credits??x.hp??x.creditPoints??'').replace(',','.'));
 const identity=x=>`${canonicalProvider(x)}|${code(x)}`;
