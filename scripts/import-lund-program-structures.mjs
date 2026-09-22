@@ -803,6 +803,39 @@ async function discoverLth(program) {
   }
 }
 
+function curatedOfficialStructure(program) {
+  if (code(program.programCode) !== 'EAEIT') return null;
+  const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/EAEIT';
+  const shared = { term: 1, code: 'HARN50', name: 'Introduktion till europeisk och internationell handels- och skatterätt', hp: 7.5, category: 'mandatory' };
+  const tradeRows = [
+    shared,
+    { term: 1, code: '', name: 'Val mellan HARN51 Internationell kontraktsrätt och HARN52 Immaterialrätt, digitalisering och artificiell intelligens', hp: 7.5, category: 'elective-slot', isSlot: true, options: [
+      { code: 'HARN51', name: 'Internationell kontraktsrätt', hp: 7.5 },
+      { code: 'HARN52', name: 'Immaterialrätt, digitalisering och artificiell intelligens', hp: 7.5 },
+    ] },
+    { term: 1, code: '', name: 'Val mellan HARN53 Handel, investeringar och hållbarhet och HARN54 Immaterialrätt och handel', hp: 15, category: 'elective-slot', isSlot: true, options: [
+      { code: 'HARN53', name: 'Handel, investeringar och hållbarhet', hp: 15 },
+      { code: 'HARN54', name: 'Immaterialrätt och handel', hp: 15 },
+    ] },
+    { term: 2, code: '', name: 'Val mellan HARN64 Konkurrenspolitik och hållbara marknader och HARN65 Europeisk och internationell arbetsrätt', hp: 15, category: 'elective-slot', isSlot: true, options: [
+      { code: 'HARN64', name: 'Konkurrenspolitik och hållbara marknader', hp: 15 },
+      { code: 'HARN65', name: 'Europeisk och internationell arbetsrätt', hp: 15 },
+    ] },
+    { term: 2, code: 'HARN63', name: 'Examensarbete/Magisteruppsats i europeisk och internationell handelsrätt', hp: 15, category: 'mandatory', isThesis: true },
+  ];
+  const taxRows = [
+    shared,
+    { term: 1, code: 'HARN66', name: 'Mervärdesbeskattning inom Europeiska unionen', hp: 7.5, category: 'mandatory' },
+    { term: 1, code: 'HARN67', name: 'EU-skatterätt och internationell direkt beskattning', hp: 15, category: 'mandatory' },
+    { term: 2, code: 'HARN68', name: 'Fördjupningskurs i EU-skatterätt och internationell beskattning', hp: 15, category: 'mandatory' },
+    { term: 2, code: 'HARN69', name: 'Examensarbete/Magisteruppsats i europeisk och internationell skatterätt', hp: 15, category: 'mandatory', isThesis: true },
+  ];
+  return makeCanonical(program, tradeRows, [sourceUrl], { source: 'lund-official-programme-plan-pdf', variants: [
+    { id: 'TRAD', subject: 'Europeisk och internationell handelsrätt', programName: `${program.programName}, Handelsrätt`, sourceUrls: [sourceUrl], rows: normaliseRows(tradeRows) },
+    { id: 'TAXL', subject: 'Europeisk och internationell skatterätt', programName: `${program.programName}, Skatterätt`, sourceUrls: [sourceUrl], rows: normaliseRows(taxRows) },
+  ] });
+}
+
 async function probeLthProgrammeSource() {
   const target = 'https://kurser.lth.se/lot/?prog=D&val=program';
   try {
@@ -938,6 +971,14 @@ async function main() {
     if (result.action !== 'existing') legacyImported += 1;
   }
 
+  let curatedImported = 0;
+  for (const program of lundPrograms) {
+    const record = curatedOfficialStructure(program);
+    if (!record || !structureIsComplete(record, program)) continue;
+    const result = upsert(structures, record, program);
+    if (result.action !== 'existing') curatedImported += 1;
+  }
+
   const targets = lundPrograms.filter(program => {
     const current = structures.find(item => item.key === program.key || identity(item.university, item.programCode) === identity(program.university, program.programCode));
     return !structureIsComplete(current, program);
@@ -973,7 +1014,7 @@ async function main() {
   const report = {
     generatedAt: new Date().toISOString(), scope: 'Lunds universitet', catalogueProgrammes: lundPrograms.length,
     existingCanonicalStructuresBefore: initialStructures.filter(item => isLund(item.university)).length,
-    legacyImported, attempted, imported, verifiedProgrammeCodes: verifiedCodes.length,
+    legacyImported, curatedImported, attempted, imported, verifiedProgrammeCodes: verifiedCodes.length,
     verifiedProgrammeCodeList: verifiedCodes,
     remainingProgrammeCodes: remaining.map(program => ({ code: code(program.programCode), name: program.programName, hp: program.programHp })),
     errors, lthProbe, notes: ['Only official Lund pages and previously verified official Lund programme-plan records are used.', 'A structure is published only when all expected terms and total credits validate exactly.', 'EAGAF track variants are retained under the variants field of the canonical programme record.'],
