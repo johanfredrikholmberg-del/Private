@@ -910,6 +910,33 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'VGFYT') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VGFYT';
+    const rows = [
+      { term: 1, code: '', name: 'Fysioterapi som ämne och profession', hp: 4.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Människans rörelseförutsättningar', hp: 13.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Människans rörelseförutsättningar och rörelseförmåga', hp: 12, category: 'mandatory' },
+      { term: 2, code: '', name: 'Grundläggande fysiologi och träningsfysiologi', hp: 16.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Funktionsförmåga vid sjukdomar och skador i andnings- och cirkulationssystemen', hp: 13.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Funktionsförmåga och hälsotillstånd vid sjukdom och skada i nervsystemet', hp: 15, category: 'mandatory' },
+      { term: 3, code: '', name: 'Funktionsförmåga vid muskuloskeletala skador och sjukdomstillstånd I', hp: 15, category: 'mandatory' },
+      { term: 4, code: '', name: 'Fysioterapi inom området mental hälsa och psykiatri', hp: 12, category: 'mandatory' },
+      { term: 4, code: '', name: 'Verksamhetsförlagd utbildning inom rehabilitering, habilitering eller psykiatri', hp: 4.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Verksamhetsförlagd utbildning inom sluten vård', hp: 4.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Människan i arbetslivet', hp: 9, category: 'mandatory' },
+      { term: 5, code: '', name: 'Vetenskaplig metodik', hp: 7.5, category: 'mandatory' },
+      { term: 5, code: '', name: 'Kandidatuppsats inom fysioterapi - del termin 5', hp: 12, category: 'mandatory', isThesis: true },
+      { term: 5, code: '', name: 'Verksamhetsförlagd utbildning inom klinisk utbildningsavdelning, KUA', hp: 3, category: 'mandatory' },
+      { term: 5, code: '', name: 'Idrottsmedicin och träning vid olika sjukdomstillstånd', hp: 7.5, category: 'mandatory' },
+      { term: 6, code: '', name: 'Funktionsförmåga vid muskuloskeletala skador och sjukdomstillstånd II', hp: 9, category: 'mandatory' },
+      { term: 6, code: '', name: 'Kandidatuppsats inom fysioterapi - del termin 6', hp: 3, category: 'mandatory', isThesis: true },
+      { term: 6, code: '', name: 'Verksamhetsförlagd utbildning inom öppen vård', hp: 7.5, category: 'mandatory' },
+      { term: 6, code: '', name: 'Verksamhetsförlagd utbildning inom rehabilitering i kommunal verksamhet', hp: 7.5, category: 'mandatory' },
+      { term: 6, code: '', name: 'Professionell utveckling, ledning och förändring', hp: 3, category: 'mandatory' },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-plan-pdf' });
+  }
+
   if (programmeCode !== 'EAEIT') return null;
   const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/EAEIT';
   const shared = { term: 1, code: 'HARN50', name: 'Introduktion till europeisk och internationell handels- och skatterätt', hp: 7.5, category: 'mandatory' };
