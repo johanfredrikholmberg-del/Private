@@ -694,6 +694,115 @@ async function mapPool(items, worker, limit) {
   return output;
 }
 
+const LTH_PROGRAMME_CODES = {
+  TAAEF: 'MAEF', TAARK: 'A', TABIT: 'MBIO', TABRA: 'BR', TABTE: 'B', TADAT: 'D', TADIC: 'C',
+  TAEEE: 'MSOC', TAEKO: 'W', TAELT: 'E', TAEMB: 'MEMB', TAFOT: 'MFOT', TAHET: 'MHET', TAIDE: 'MID',
+  TAINE: 'I', TAKAK: 'MKAT', TAKEM: 'K', TALAK: 'MLAK', TALAN: 'L', TALIV: 'MLIV', TALSF: 'MLOG',
+  TAMAD: 'MD', TAMAR: 'MARK', TAMAS: 'M', TAMSR: 'MMSR', TAMTE: 'BME', TANAV: 'MNAV', TAPRR: 'MPRR',
+  TARSK: 'R', TASUD: 'MSUD', TATFY: 'F', TATNA: 'N', TATPI: 'Pi', TAVAR: 'MVAR', TAVOV: 'V',
+  TAWIR: 'MWIR', TAWRE: 'MWLU', TGBYA: 'IBYA', TGBYT: 'IBYT', TGDAT: 'IDA', TGELT: 'IEA',
+  TGIND: 'KID', TZTNB: 'TNB',
+};
+
+function lthTermCandidates(row, yearCount) {
+  const year = Number(row.year);
+  if (!Number.isInteger(year) || year < 1 || year > yearCount) return [];
+  const periods = (row.timePlans || []).flatMap(plan => {
+    const start = Number(plan.startSpNr);
+    const end = Number(plan.endSpNr);
+    return Number.isFinite(start) && Number.isFinite(end) ? [[start, end]] : [];
+  });
+  const terms = new Set();
+  for (const [start, end] of periods) {
+    if (start <= 2 && end <= 2) terms.add((year - 1) * 2 + 1);
+    else if (start >= 3 && end >= 3) terms.add((year - 1) * 2 + 2);
+    else return [];
+  }
+  if (!terms.size && row.type === 'degree_project' && Number(row.credits) === 30 && year === yearCount) terms.add(year * 2);
+  return [...terms];
+}
+
+function exactOptionSet(rows, targetHp) {
+  const target = Math.round(targetHp * 10);
+  if (target === 0) return [];
+  const states = new Map([[0, []]]);
+  rows.forEach((row, index) => {
+    const value = Math.round(Number(row.credits) * 10);
+    if (!(value > 0) || value > target) return;
+    for (const [sum, picked] of [...states.entries()].sort((a, b) => b[0] - a[0])) {
+      const next = sum + value;
+      if (next <= target && !states.has(next)) states.set(next, [...picked, index]);
+    }
+  });
+  return states.has(target) ? states.get(target).map(index => rows[index]) : null;
+}
+
+async function discoverLth(program) {
+  const lthCode = LTH_PROGRAMME_CODES[code(program.programCode)];
+  if (!lthCode || !(Number(program.programHp) > 0) || Number(program.programHp) % 60 !== 0) return null;
+  const yearCount = Math.round(Number(program.programHp) / 60);
+  const apiUrl = `https://api.lth.lu.se/lot/courses?programmeCode=${encodeURIComponent(lthCode)}&academicYearId=26_27`;
+  const planUrl = `https://kurser.lth.se/lot/programme?ay=26_27&programme=${encodeURIComponent(lthCode)}`;
+  try {
+    const response = await getJson(apiUrl);
+    const raw = Array.isArray(response.data) ? response.data : [];
+    const active = raw.filter(row => row.status === 'active' && row.programmeStatus === 'active' && Number(row.year) >= 1 && Number(row.year) <= yearCount);
+    const seenMandatory = new Set();
+    const mandatory = active.filter(row => row.choice === 'mandatory' && (row.specialisationGeneral === 1 || row.specialisationCode === 'general'))
+      .filter(row => {
+        const key = `${row.courseCode}:${row.year}`;
+        if (seenMandatory.has(key)) return false;
+        seenMandatory.add(key);
+        return true;
+      });
+    const rows = [];
+    const termHp = new Map();
+    const ambiguousMandatory = [];
+    for (const course of mandatory) {
+      const terms = lthTermCandidates(course, yearCount);
+      if (terms.length !== 1) { ambiguousMandatory.push(course.courseCode); continue; }
+      const term = terms[0];
+      const hp = Number(course.credits);
+      rows.push({ term, code: course.courseCode, name: course.name_sv, hp, category: 'mandatory', sourceKind: 'lth-lot-api' });
+      termHp.set(term, round1((termHp.get(term) || 0) + hp));
+    }
+    const overfullTerms = [...termHp].filter(([, hp]) => hp > 30.01).map(([term, hp]) => ({ term, hp }));
+    const slotDiagnostics = [];
+    if (!ambiguousMandatory.length && !overfullTerms.length) {
+      for (let term = 1; term <= yearCount * 2; term += 1) {
+        const remainder = round1(30 - (termHp.get(term) || 0));
+        if (remainder <= 0.01) continue;
+        const optionRows = active.filter(row => row.choice !== 'mandatory' && lthTermCandidates(row, yearCount).includes(term));
+        const specialisations = [...new Set(optionRows.map(row => row.specialisationCode || 'general'))];
+        let selected = null;
+        let selectedSpecialisation = '';
+        for (const specialisation of specialisations) {
+          const compatible = optionRows.filter(row => (row.specialisationCode || 'general') === specialisation || row.specialisationGeneral === 1 || row.specialisationCode === 'general');
+          const unique = [...new Map(compatible.map(row => [`${row.courseCode}:${row.credits}`, row])).values()];
+          selected = exactOptionSet(unique, remainder);
+          if (selected) { selectedSpecialisation = specialisation; break; }
+        }
+        if (!selected) { slotDiagnostics.push({ term, remainder, options: optionRows.length, matched: false }); continue; }
+        rows.push({ term, code: '', name: 'Valbara kurser enligt LTH:s läro- och timplan', hp: remainder,
+          category: 'elective-slot', isSlot: true, slotType: 'elective-slot', sourceKind: 'lth-lot-api',
+          options: selected.map(row => ({ code: row.courseCode, name: row.name_sv, hp: Number(row.credits) })) });
+        slotDiagnostics.push({ term, remainder, options: optionRows.length, matched: true, specialisation: selectedSpecialisation,
+          selected: selected.map(row => row.courseCode) });
+      }
+    }
+    const candidate = makeCanonical(program, rows, [planUrl, response.url], { source: 'lund-lth-lot-api' });
+    const complete = !ambiguousMandatory.length && !overfullTerms.length && structureIsComplete(candidate, program);
+    return { found: true, structureAvailable: complete, courses: rows, sourceUrls: [planUrl, response.url], source: 'lund-lth-lot-api',
+      quality: { complete, totalHp: Number(program.programHp), expectedTerms: yearCount * 2,
+        completeTerms: [...new Set(rows.map(row => row.term))].filter(term => Math.abs(rows.filter(row => row.term === term).reduce((sum, row) => sum + row.hp, 0) - 30) <= 0.01),
+        lthCode, apiRows: raw.length, activeRows: active.length, mandatoryRows: mandatory.length,
+        ambiguousMandatory, overfullTerms, slotDiagnostics } };
+  } catch (error) {
+    return { found: false, structureAvailable: false, courses: [], sourceUrls: [planUrl, apiUrl], source: 'lund-lth-lot-api',
+      quality: { complete: false, lthCode, error: String(error?.message || error), completeTerms: [] } };
+  }
+}
+
 async function probeLthProgrammeSource() {
   const target = 'https://kurser.lth.se/lot/?prog=D&val=program';
   try {
@@ -837,7 +946,9 @@ async function main() {
   const errors = [];
   let imported = 0;
   const results = await mapPool(targets, async program => {
-    const result = await discover(program);
+    const lthResult = await discoverLth(program);
+    const discovered = lthResult?.structureAvailable ? null : await discover(program);
+    const result = lthResult?.structureAvailable ? lthResult : discovered;
     const rows = normaliseRows(result.courses);
     const candidate = makeCanonical(program, rows, result.sourceUrls || []);
     if (result.found && result.structureAvailable && structureIsComplete(candidate, program)) {
@@ -849,7 +960,8 @@ async function main() {
     const qualityInfo = result.quality || {};
     const reason = result.found ? `partial:${(qualityInfo.completeTerms || []).join(',') || 'none'}` : 'official-page-not-found';
     errors.push({ code: code(program.programCode), name: program.programName, reason,
-      attemptedUrls: result.attemptedUrls || [], bestSourceUrls: result.sourceUrls || [], bestQuality: qualityInfo, pdfDiagnostics: result.pdfDiagnostics || [] });
+      attemptedUrls: result.attemptedUrls || [], bestSourceUrls: result.sourceUrls || [], bestQuality: qualityInfo,
+      ...(lthResult ? { lthQuality: lthResult.quality, lthSourceUrls: lthResult.sourceUrls } : {}), pdfDiagnostics: result.pdfDiagnostics || [] });
     console.log(`REVIEW ${program.programCode} ${reason}`);
     return { program, ok: false, reason };
   }, CONCURRENCY);
