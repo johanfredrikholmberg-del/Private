@@ -933,6 +933,26 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
   }
 
+  if (programmeCode === 'SASMA') {
+    const sourceUrl = 'https://www.lunduniversity.lu.se/study/service-management-sustainable-service-management-master-of-science-programme-SASMA-SASM/programme-structure';
+    const rows = [
+      { term: 1, code: '', name: 'Introduction to Service Management', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Introduction to Sustainability', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Organization and Management in a Service Context', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Theory of Social Sciences', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Methods in Social Sciences', hp: 15, category: 'mandatory' },
+      { term: 2, code: '', name: 'Organising Sustainability', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Assessment of Environmental Impact', hp: 7.5, category: 'mandatory' },
+      slot(3, 'Valbara kurser eller utlandsstudier', 15),
+      { term: 3, code: '', name: 'Sustainable Consumption', hp: 7.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Social Sustainability', hp: 7.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Service Management: Master´s (Two Years) Thesis', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page', variants: [
+      { id: 'SASM', subject: 'Sustainable Service Management', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(rows) },
+    ] });
+  }
+
   if (programmeCode === 'MALÄB') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/MAL%C3%84B';
     const rows = [
