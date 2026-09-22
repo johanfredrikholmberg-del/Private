@@ -1173,6 +1173,40 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-plan-pdf' });
   }
 
+  if (programmeCode === 'VASDR') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VASDR';
+    const rows = [
+      { term: 1, code: '', name: 'Pedagogik, folkhälsa och ledarskap', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Primärvård I', hp: 6, category: 'mandatory' },
+      { term: 1, code: '', name: 'Farmakologi och sjukdomslära med förskrivningsrätt', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Magisteruppsats inom omvårdnad, inriktning distriktssköterska - del termin 1', hp: 1.5, category: 'mandatory', isThesis: true },
+      { term: 2, code: '', name: 'Barnhälsovård och elevhälsa', hp: 13.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Primärvård II', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Vård i hemmet - del termin 2', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Magisteruppsats inom omvårdnad, inriktning distriktssköterska - del termin 2', hp: 1.5, category: 'mandatory', isThesis: true },
+      { term: 3, code: '', name: 'Vård i hemmet - del termin 3', hp: 3, category: 'mandatory' },
+      { term: 3, code: '', name: 'Magisteruppsats inom omvårdnad, inriktning distriktssköterska - del termin 3', hp: 12, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-plan-pdf' });
+  }
+
+  if (programmeCode === 'VASIS') {
+    const sourceUrls = [
+      'https://www.lu.se/studera/specialistsjukskoterskeprogrammet-intensivvard-VASIS/programmets-innehall',
+      'https://kursplaner.lu.se/pdf/program/sv/VASIS',
+    ];
+    const rows = [
+      { term: 1, code: '', name: 'Omvårdnad med inriktning intensivvård I', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Omvårdnad med inriktning intensivvård II', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Omvårdnad med inriktning intensivvård III - del termin 1', hp: 6, category: 'mandatory' },
+      { term: 1, code: '', name: 'Magisteruppsats inom omvårdnad med inriktning intensivvård - del termin 1', hp: 1.5, category: 'mandatory', isThesis: true },
+      { term: 2, code: '', name: 'Omvårdnad med inriktning intensivvård III - del termin 2', hp: 1.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Omvårdnad med inriktning intensivvård IV', hp: 15, category: 'mandatory' },
+      { term: 2, code: '', name: 'Magisteruppsats inom omvårdnad med inriktning intensivvård - del termin 2', hp: 13.5, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, sourceUrls, { source: 'lund-official-programme-page' });
+  }
+
   if (programmeCode === 'VGFYT') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VGFYT';
     const rows = [
