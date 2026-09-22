@@ -1453,6 +1453,25 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'HALKM') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/HALKM';
+    const germanOptions = [
+      { code: 'LIVR81', name: 'LKM: Den tyskspråkiga litteraturen efter murens fall', hp: 15 },
+      { code: 'LIVR82', name: 'LKM: Tysk efterkrigslitteratur', hp: 15 },
+      { code: 'LIVR83', name: 'LKM: Tyskspråkig litteraturvetenskap – arbetssätt och ämnesfördjupning', hp: 15 },
+    ];
+    const rows = [
+      { term: 1, code: 'LIVR50', name: 'LKM: En introduktion', hp: 15, category: 'mandatory' },
+      slot(1, 'Obligatorisk inriktningskurs, ämnesspecifik kurs eller valfri kurs', 15, germanOptions),
+      slot(2, 'Ämnesspecifik eller valfri kurs', 15, germanOptions),
+      slot(2, 'Valfri eller ämnesspecifik kurs', 15, germanOptions),
+      { term: 3, code: 'LIVR51', name: 'LKM: Litterär teori och metod', hp: 15, category: 'mandatory' },
+      slot(3, 'Obligatorisk inriktningskurs, ämnesspecifik kurs eller valfri kurs', 15, germanOptions),
+      { term: 4, code: 'LIVR07', name: 'LKM: Examensarbete, masterkurs', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
   if (programmeCode === 'KAFKO') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/en/KAFKO';
     const rows = [
@@ -1645,6 +1664,29 @@ function curatedOfficialStructure(program) {
       { term: 4, code: '', name: 'Praktik 1', hp: 20, category: 'mandatory' },
       { term: 4, code: '', name: 'Examensarbete 3', hp: 10, category: 'mandatory', isThesis: true },
     ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
+  if (programmeCode === 'KAMUS') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/KAMUS';
+    const rows = [];
+    const addSeries = (name, codes, credits) => codes.forEach((courseCode, index) => rows.push({
+      term: index + 1, code: courseCode, name, hp: credits[index], category: 'mandatory',
+    }));
+    addSeries('Instrumentalstudier', ['MUUR44', 'MUUR45', 'MUUR46', 'MUUR47'], [14, 10, 7, 7]);
+    rows.push(
+      { term: 2, code: 'MUUM01', name: 'Examensarbete 1', hp: 8, category: 'mandatory', isThesis: true },
+      { term: 3, code: 'MUUM02', name: 'Examensarbete 2', hp: 10, category: 'mandatory', isThesis: true },
+      { term: 4, code: 'MUUM04', name: 'Examensarbete 3', hp: 12, category: 'mandatory', isThesis: true },
+    );
+    addSeries('Instudering och interpretation', ['MUSN61', 'MUSN62', 'MUSN63', 'MUSN64'], [4, 4, 3, 2]);
+    addSeries('Kammarmusik', ['MUSN10', 'MUSN11', 'MUSN12', 'MUSN13'], [4, 4, 3, 3]);
+    addSeries('Projekt', ['MUSN30', 'MUSN31', 'MUSN32', 'MUSN33'], [4, 4, 4, 3]);
+    rows.push(
+      { term: 1, code: 'MUSN20', name: 'Musik som yrke 1', hp: 4, category: 'mandatory' },
+      { term: 3, code: 'MUSN21', name: 'Musik som yrke 3', hp: 3, category: 'mandatory' },
+      { term: 4, code: 'MUSN22', name: 'Musik som yrke 4', hp: 3, category: 'mandatory' },
+    );
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
   }
 
