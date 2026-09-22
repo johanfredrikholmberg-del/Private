@@ -1139,6 +1139,40 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'NABIN') {
+    const sourceUrl = 'https://www.lu.se/studera/bioinformatik-masterprogram-NABIN/programmets-innehall';
+    const common = [
+      { term: 1, code: '', name: 'Bioinformatik: Bioinformatik och sekvensanalys', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Bioinformatik: Programmering i Python', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Biologi: Modellering av biologiska system', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Biologi: Bearbetning och analys av biologiska data', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Bioinformatik: DNA-sekvenseringsinformatik I', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Bioinformatik: DNA-sekvenseringsinformatik II', hp: 7.5, category: 'mandatory' },
+      slot(2, 'Valbara kurser, forskningsprojekt eller praktik inom bioinformatik', 15),
+    ];
+    const thesis30 = [
+      ...common,
+      slot(3, 'Valbara kurser, forskningsprojekt eller praktik inom bioinformatik', 30),
+      { term: 4, code: '', name: 'Bioinformatik: Examensarbete - masterexamen, 30 hp', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    const thesis45 = [
+      ...common,
+      slot(3, 'Valbara kurser, forskningsprojekt eller praktik inom bioinformatik', 15),
+      { term: 3, code: '', name: 'Bioinformatik: Examensarbete - masterexamen, del termin 3', hp: 15, category: 'mandatory', isThesis: true },
+      { term: 4, code: '', name: 'Bioinformatik: Examensarbete - masterexamen, del termin 4', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    const thesis60 = [
+      ...common,
+      { term: 3, code: '', name: 'Bioinformatik: Examensarbete - masterexamen, del termin 3', hp: 30, category: 'mandatory', isThesis: true },
+      { term: 4, code: '', name: 'Bioinformatik: Examensarbete - masterexamen, del termin 4', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, thesis30, [sourceUrl], { source: 'lund-official-programme-page', variants: [
+      { id: 'TH30', subject: 'Examensarbete 30 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis30) },
+      { id: 'TH45', subject: 'Examensarbete 45 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis45) },
+      { id: 'TH60', subject: 'Examensarbete 60 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis60) },
+    ] });
+  }
+
   if (programmeCode === 'VGRRS') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VGRRS';
     const common = [
