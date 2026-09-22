@@ -1508,6 +1508,34 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
   }
 
+  if (programmeCode === 'KGKYM') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/KGKYM';
+    const rows = [];
+    const addSeries = (name, codes, credits) => codes.forEach((courseCode, index) => rows.push({
+      term: index + 1, code: courseCode, name, hp: credits[index], category: 'mandatory',
+    }));
+    addSeries('Orgel inklusive orgelkunskap och metodik/pedagogik', ['MUKA01', 'MUKA02', 'MUKA03', 'MUKA04', 'MUKA05', 'MUKA06'], [6, 6, 5, 5, 4, 4]);
+    addSeries('Kördirigering inklusive metodik/pedagogik', ['MUKA07', 'MUKA08', 'MUKA09', 'MUKA10', 'MUKA11', 'MUKA12'], [5, 5, 5, 5, 4, 4]);
+    addSeries('Improvisation och liturgiskt orgelspel', ['MUKA13', 'MUKA14', 'MUKA15', 'MUKA16', 'MUKA17', 'MUKA18'], [4, 4, 4, 4, 4, 4]);
+    addSeries('Satslära med arrangering och komposition', ['MUKA19', 'MUKA20', 'MUKA21', 'MUKA22'], [2, 2, 3, 3]);
+    addSeries('Kyrkomusikerseminarium', ['MUUH23', 'MUUH24', 'MUUH25', 'MUUH26', 'MUUH27', 'MUUH28'], [1, 1, 1, 1, 1, 1]);
+    addSeries('Projekt och kommunikativa färdigheter', ['MUUH29', 'MUUH30', 'MUUH31', 'MUUH32', 'MUUH33', 'MUUH34'], [1, 1, 1, 1, 1.5, 1.5]);
+    addSeries('Piano – klassisk inriktning inklusive metodik/pedagogik', ['MUKA35', 'MUKA36', 'MUKA37', 'MUUKA8'], [2, 2, 1.5, 1.5]);
+    addSeries('Piano – gehörspiano', ['MUKA39', 'MUKA40', 'MUKA41', 'MUKA42'], [2, 2, 1.5, 1.5]);
+    addSeries('Sång inklusive metodik/pedagogik', ['MUKA43', 'MUKA44', 'MUKA45', 'MUKA46'], [3, 3, 3, 3]);
+    addSeries('Gehör', ['MUSI23', 'MUSI24', 'MUSI25', 'MUSI26'], [2, 2, 3, 3]);
+    addSeries('Musik och samhälle', ['MUSI31', 'MUSI32', 'MUSI33', 'MUSI34', 'MUSI35', 'MUSI36'], [2, 2, 2, 2, 2, 2]);
+    rows.push(
+      { term: 5, code: 'MUUK01', name: 'Examensarbete 1', hp: 7.5, category: 'mandatory', isThesis: true },
+      { term: 6, code: 'MUUK03', name: 'Examensarbete 2', hp: 7.5, category: 'mandatory', isThesis: true },
+      slot(5, 'Musikalisk fördjupning I', 3),
+      slot(6, 'Musikalisk fördjupning I', 3),
+      slot(5, 'Musikalisk fördjupning II', 3),
+      slot(6, 'Musikalisk fördjupning II', 3),
+    );
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
   if (programmeCode === 'HAABM') {
     const sourceUrl = 'https://www.lu.se/studera/arkivvetenskap-biblioteks-och-informationsvetenskap-respektive-museologi-abm-masterprogram-HAABM/programmets-innehall';
     const commonTermOne = [
