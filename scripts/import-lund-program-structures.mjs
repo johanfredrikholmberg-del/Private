@@ -1192,6 +1192,62 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
   }
 
+  if (programmeCode === 'NAGIS') {
+    const sourceUrl = 'https://www.lu.se/studera/gis-och-fjarranalys-masterprogram-NAGIS/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'Geomatik: Programmering för tillämpningar inom GIS och fjärranalys', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Geomatik: Tillämpad GIS', hp: 15, category: 'mandatory' },
+      { term: 2, code: '', name: 'Naturgeografi: Satellitbaserad fjärranalys', hp: 15, category: 'mandatory' },
+      slot(2, 'Valfria kurser enligt programplan', 15),
+      slot(3, 'Fördjupningskurser, praktik eller andra val enligt programplan', 30),
+      { term: 4, code: '', name: 'Naturgeografi och ekosystemanalys: Examensarbete för masterexamen', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
+  if (programmeCode === 'NAGIV') {
+    const sourceUrl = 'https://www.lu.se/studera/geografisk-informationsvetenskap-masterprogram-NAGIV/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'GIS: Geografiska informationssystem - introduktion', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'GIS: Geografiska informationssystem - avancerad kurs', hp: 15, category: 'mandatory' },
+      { term: 2, code: '', name: 'GIS: Forskningsmetodik', hp: 7.5, category: 'mandatory' },
+      slot(2, 'Fördjupningskurser i geografisk informationsvetenskap', 22.5),
+      slot(3, 'Fördjupningskurser i geografisk informationsvetenskap', 30),
+      { term: 4, code: '', name: 'GIS: Examensarbete för masterexamen', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
+  if (programmeCode === 'NAGEL') {
+    const sourceUrl = 'https://www.lu.se/studera/geologi-masterprogram-NAGEL/programmets-innehall';
+    const common = [
+      { term: 1, code: '', name: 'Geologi: Metoder inom geovetenskap', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Berggrundsgeologi: Sedimentär geologi och bassänganalys', hp: 15, category: 'mandatory' },
+      slot(2, 'Valbara kurser i geologi enligt programplan', 30),
+    ];
+    const thesis30 = [
+      ...common,
+      slot(3, 'Valfria kurser i geologi eller annat ämne', 30),
+      { term: 4, code: '', name: 'Geologi: Examensarbete för masterexamen, 30 hp', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    const thesis45 = [
+      ...common,
+      slot(3, 'Valfria kurser i geologi eller annat ämne', 15),
+      { term: 3, code: '', name: 'Geologi: Examensarbete för masterexamen - del termin 3', hp: 15, category: 'mandatory', isThesis: true },
+      { term: 4, code: '', name: 'Geologi: Examensarbete för masterexamen - del termin 4', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    const thesis60 = [
+      ...common,
+      { term: 3, code: '', name: 'Geologi: Examensarbete för masterexamen - del termin 3', hp: 30, category: 'mandatory', isThesis: true },
+      { term: 4, code: '', name: 'Geologi: Examensarbete för masterexamen - del termin 4', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, thesis30, [sourceUrl], { source: 'lund-official-programme-page', variants: [
+      { id: 'TH30', subject: 'Examensarbete 30 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis30) },
+      { id: 'TH45', subject: 'Examensarbete 45 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis45) },
+      { id: 'TH60', subject: 'Examensarbete 60 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis60) },
+    ] });
+  }
+
   if (programmeCode === 'NAAFY') {
     const sourceUrl = 'https://www.lu.se/studera/astrofysik-masterprogram-NAAFY/programmets-innehall';
     const rows = [
