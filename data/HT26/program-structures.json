@@ -67108,6 +67108,75 @@
     ]
   },
   {
+    "key": "lunds universitet|VASMS|60",
+    "susaId": "i.uoh.lu.vasms.67940.20271",
+    "university": "Lunds universitet",
+    "programCode": "VASMS",
+    "programName": "Specialistsjuksköterskeprogrammet, Ambulanssjukvård",
+    "subject": "",
+    "hp": 60,
+    "officialHp": 60,
+    "term": "HT26",
+    "coverage": "complete",
+    "status": "processed",
+    "source": "lund-official-programme-plan-pdf",
+    "sourceUrl": "https://kursplaner.lu.se/pdf/program/sv/VASMS",
+    "sourceUrls": [
+      "https://kursplaner.lu.se/pdf/program/sv/VASMS"
+    ],
+    "sourceEvidenceUrl": "https://kursplaner.lu.se/pdf/program/sv/VASMS",
+    "studyStructureGranularity": "term",
+    "termPlacementVerified": true,
+    "verifiedProgrammeOverride": false,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Introduktion till ambulanssjuksköterskans funktion",
+        "hp": 4.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Akutsjukvård inom ambulanssjukvård",
+        "hp": 18,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Magisteruppsats inom omvårdnad med inriktning ambulanssjukvård - del termin 1",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isThesis": true
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Katastrof och traumatologi",
+        "hp": 4.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Omvårdnad inom ambulanssjukvård",
+        "hp": 18,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Magisteruppsats inom omvårdnad med inriktning ambulanssjukvård - del termin 2",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "checkedAt": "2026-09-22T07:03:30.730Z"
+  },
+  {
     "key": "lunds universitet|TAAEF|120",
     "susaId": "i.uoh.lu.taaef.18996.20272",
     "university": "Lunds universitet",
@@ -67202,7 +67271,7 @@
         "category": "mandatory"
       }
     ],
-    "checkedAt": "2026-09-22T07:02:09.728Z"
+    "checkedAt": "2026-09-22T07:03:56.934Z"
   },
   {
     "key": "lunds universitet|TABIT|120",
@@ -67331,7 +67400,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:10.465Z"
+    "checkedAt": "2026-09-22T07:03:57.455Z"
   },
   {
     "key": "lunds universitet|TABTE|300",
@@ -67638,7 +67707,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:12.387Z"
+    "checkedAt": "2026-09-22T07:03:58.681Z"
   },
   {
     "key": "lunds universitet|TAEEE|120",
@@ -67776,7 +67845,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:13.473Z"
+    "checkedAt": "2026-09-22T07:03:59.189Z"
   },
   {
     "key": "lunds universitet|TAEMB|120",
@@ -67881,7 +67950,111 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:13.760Z"
+    "checkedAt": "2026-09-22T07:04:00.640Z"
+  },
+  {
+    "key": "lunds universitet|TAIDE|120",
+    "susaId": "i.uoh.lu.taide.18980.20272",
+    "university": "Lunds universitet",
+    "programCode": "TAIDE",
+    "programName": "Masterutbildning i industridesign",
+    "subject": "",
+    "hp": 120,
+    "officialHp": 120,
+    "term": "HT26",
+    "coverage": "complete",
+    "status": "processed",
+    "source": "lund-lth-lot-api",
+    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MID",
+    "sourceUrls": [
+      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MID",
+      "https://api.lth.lu.se/lot/courses?programmeCode=MID&academicYearId=26_27"
+    ],
+    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MID&academicYearId=26_27",
+    "studyStructureGranularity": "term",
+    "termPlacementVerified": true,
+    "verifiedProgrammeOverride": false,
+    "rows": [
+      {
+        "term": 1,
+        "code": "AFON01",
+        "name": "Estetik",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "EXTF76",
+        "name": "Det sociala medvetandet och design",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "IDEF25",
+        "name": "Introduktion",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "IDEM05",
+        "name": "Examensarbete för konstnärlig masterexamen i design",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      },
+      {
+        "term": 1,
+        "code": "IDEN05",
+        "name": "Industridesignprojekt I",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "IDEN10",
+        "name": "Industridesignprojekt II",
+        "hp": 20,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "IDEN25",
+        "name": "Industridesignprojekt III",
+        "hp": 20,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "IDEN36",
+        "name": "Forskningspraktiker inom Industridesign",
+        "hp": 5,
+        "category": "elective"
+      },
+      {
+        "term": 3,
+        "code": "IDEN40",
+        "name": "Design management 2",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "IDEN45",
+        "name": "CAD evolution",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "MMTF05",
+        "name": "Produktion och Material",
+        "hp": 5,
+        "category": "mandatory"
+      }
+    ],
+    "checkedAt": "2026-09-22T07:04:00.973Z"
   },
   {
     "key": "lunds universitet|TAHET|120",
@@ -68007,14 +68180,14 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:14.438Z"
+    "checkedAt": "2026-09-22T07:04:01.074Z"
   },
   {
-    "key": "lunds universitet|TAIDE|120",
-    "susaId": "i.uoh.lu.taide.18980.20272",
+    "key": "lunds universitet|TAKAK|120",
+    "susaId": "i.uoh.lu.takak.18905.20272",
     "university": "Lunds universitet",
-    "programCode": "TAIDE",
-    "programName": "Masterutbildning i industridesign",
+    "programCode": "TAKAK",
+    "programName": "Masterutbildning i katastrofriskhantering och klimatanpassning",
     "subject": "",
     "hp": 120,
     "officialHp": 120,
@@ -68022,96 +68195,120 @@
     "coverage": "complete",
     "status": "processed",
     "source": "lund-lth-lot-api",
-    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MID",
+    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MKAT",
     "sourceUrls": [
-      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MID",
-      "https://api.lth.lu.se/lot/courses?programmeCode=MID&academicYearId=26_27"
+      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MKAT",
+      "https://api.lth.lu.se/lot/courses?programmeCode=MKAT&academicYearId=26_27"
     ],
-    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MID&academicYearId=26_27",
+    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MKAT&academicYearId=26_27",
     "studyStructureGranularity": "term",
     "termPlacementVerified": true,
     "verifiedProgrammeOverride": false,
     "rows": [
       {
         "term": 1,
-        "code": "AFON01",
-        "name": "Estetik",
-        "hp": 5,
+        "code": "VBRN35",
+        "name": "Kapacitetsutveckling",
+        "hp": 7.5,
         "category": "mandatory"
       },
       {
         "term": 2,
-        "code": "EXTF76",
-        "name": "Det sociala medvetandet och design",
-        "hp": 5,
+        "code": "VBRN40",
+        "name": "Beredskap och planering",
+        "hp": 7.5,
         "category": "mandatory"
       },
       {
         "term": 1,
-        "code": "IDEF25",
-        "name": "Introduktion",
-        "hp": 5,
+        "code": "VRSN01",
+        "name": "Samhällssäkerhet och resiliens",
+        "hp": 7.5,
         "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "VRSN05",
+        "name": "Riskanalysens och riskhanteringens grunder",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "VRSN11",
+        "name": "Ledning och samverkan vid samhällsstörningar",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "VRSN15",
+        "name": "Klimatsmart riskreducering",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "VRSN20",
+        "name": "Samhällsplanering",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "VRSN40",
+        "name": "Forskningsmetodik och metoder",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "VRSN50",
+        "name": "Riskuppfattningar, kommunikation och mänskligt beteende",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "VRSN55",
+        "name": "Kritiska frågor i katastrofriskhantering och klimatanpassning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "EXTG20",
+            "name": "Geografisk informationsteknik - introduktion",
+            "hp": 15
+          }
+        ]
       },
       {
         "term": 4,
-        "code": "IDEM05",
-        "name": "Examensarbete för konstnärlig masterexamen i design",
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
         "hp": 30,
-        "category": "mandatory",
-        "isThesis": true
-      },
-      {
-        "term": 1,
-        "code": "IDEN05",
-        "name": "Industridesignprojekt I",
-        "hp": 15,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "IDEN10",
-        "name": "Industridesignprojekt II",
-        "hp": 20,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "IDEN25",
-        "name": "Industridesignprojekt III",
-        "hp": 20,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "IDEN36",
-        "name": "Forskningspraktiker inom Industridesign",
-        "hp": 5,
-        "category": "elective"
-      },
-      {
-        "term": 3,
-        "code": "IDEN40",
-        "name": "Design management 2",
-        "hp": 5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "IDEN45",
-        "name": "CAD evolution",
-        "hp": 5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "MMTF05",
-        "name": "Produktion och Material",
-        "hp": 5,
-        "category": "mandatory"
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "VBRM15",
+            "name": "Masterexamensarbete i katastrofriskhantering och klimatanpassning",
+            "hp": 30
+          }
+        ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:14.568Z"
+    "checkedAt": "2026-09-22T07:04:01.174Z"
   },
   {
     "key": "lunds universitet|TALAK|120",
@@ -68246,272 +68443,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:14.882Z"
-  },
-  {
-    "key": "lunds universitet|TAKAK|120",
-    "susaId": "i.uoh.lu.takak.18905.20272",
-    "university": "Lunds universitet",
-    "programCode": "TAKAK",
-    "programName": "Masterutbildning i katastrofriskhantering och klimatanpassning",
-    "subject": "",
-    "hp": 120,
-    "officialHp": 120,
-    "term": "HT26",
-    "coverage": "complete",
-    "status": "processed",
-    "source": "lund-lth-lot-api",
-    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MKAT",
-    "sourceUrls": [
-      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MKAT",
-      "https://api.lth.lu.se/lot/courses?programmeCode=MKAT&academicYearId=26_27"
-    ],
-    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MKAT&academicYearId=26_27",
-    "studyStructureGranularity": "term",
-    "termPlacementVerified": true,
-    "verifiedProgrammeOverride": false,
-    "rows": [
-      {
-        "term": 1,
-        "code": "VBRN35",
-        "name": "Kapacitetsutveckling",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "VBRN40",
-        "name": "Beredskap och planering",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "VRSN01",
-        "name": "Samhällssäkerhet och resiliens",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "VRSN05",
-        "name": "Riskanalysens och riskhanteringens grunder",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "VRSN11",
-        "name": "Ledning och samverkan vid samhällsstörningar",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "VRSN15",
-        "name": "Klimatsmart riskreducering",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "VRSN20",
-        "name": "Samhällsplanering",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "VRSN40",
-        "name": "Forskningsmetodik och metoder",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "VRSN50",
-        "name": "Riskuppfattningar, kommunikation och mänskligt beteende",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "VRSN55",
-        "name": "Kritiska frågor i katastrofriskhantering och klimatanpassning",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 15,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "EXTG20",
-            "name": "Geografisk informationsteknik - introduktion",
-            "hp": 15
-          }
-        ]
-      },
-      {
-        "term": 4,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 30,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "VBRM15",
-            "name": "Masterexamensarbete i katastrofriskhantering och klimatanpassning",
-            "hp": 30
-          }
-        ]
-      }
-    ],
-    "checkedAt": "2026-09-22T07:02:15.221Z"
-  },
-  {
-    "key": "lunds universitet|TALIV|120",
-    "susaId": "i.uoh.lu.taliv.18910.20272",
-    "university": "Lunds universitet",
-    "programCode": "TALIV",
-    "programName": "Masterutbildning i livsmedelsteknik och nutrition",
-    "subject": "",
-    "hp": 120,
-    "officialHp": 120,
-    "term": "HT26",
-    "coverage": "complete",
-    "status": "processed",
-    "source": "lund-lth-lot-api",
-    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MLIV",
-    "sourceUrls": [
-      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MLIV",
-      "https://api.lth.lu.se/lot/courses?programmeCode=MLIV&academicYearId=26_27"
-    ],
-    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MLIV&academicYearId=26_27",
-    "studyStructureGranularity": "term",
-    "termPlacementVerified": true,
-    "verifiedProgrammeOverride": false,
-    "rows": [
-      {
-        "term": 2,
-        "code": "KLGN15",
-        "name": "Livsmedelsindustrins relation till samhälle och konsument",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "KLGN20",
-        "name": "Livsmedelsteknik",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "KLGN25",
-        "name": "Livsmedelsteknologi för formulering",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "KLGN30",
-        "name": "Livsmedelskemi och nutrition",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "KLGN50",
-        "name": "Projekt: Utveckling av livsmedelsprodukter",
-        "hp": 15,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "KMBF05",
-        "name": "Livsmedelsmikrobiologi",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 7.5,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "FMIF20",
-            "name": "Miljöfrågor i ett internationellt perspektiv",
-            "hp": 7.5
-          }
-        ]
-      },
-      {
-        "term": 2,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 15,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "BLTF01",
-            "name": "Enhetsoperationer för bioteknik- och livsmedelsindustrin",
-            "hp": 7.5
-          },
-          {
-            "code": "FMSF65",
-            "name": "Försöksplanering",
-            "hp": 7.5
-          }
-        ]
-      },
-      {
-        "term": 3,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 15,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "KKK000",
-            "name": "Fördjupningskurs i ett eller flera ämnen",
-            "hp": 15
-          }
-        ]
-      },
-      {
-        "term": 4,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 30,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "KBKM01",
-            "name": "Masterexamensarbete i tillämpad biokemi",
-            "hp": 30
-          }
-        ]
-      }
-    ],
-    "checkedAt": "2026-09-22T07:02:15.344Z"
+    "checkedAt": "2026-09-22T07:04:01.332Z"
   },
   {
     "key": "lunds universitet|TAKEM|300",
@@ -68818,7 +68750,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:15.448Z"
+    "checkedAt": "2026-09-22T07:04:01.846Z"
   },
   {
     "key": "lunds universitet|TALSF|120",
@@ -68958,7 +68890,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:15.476Z"
+    "checkedAt": "2026-09-22T07:04:02.003Z"
   },
   {
     "key": "lunds universitet|TAMAR|120",
@@ -69069,7 +69001,144 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:15.606Z"
+    "checkedAt": "2026-09-22T07:04:02.160Z"
+  },
+  {
+    "key": "lunds universitet|TALIV|120",
+    "susaId": "i.uoh.lu.taliv.18910.20272",
+    "university": "Lunds universitet",
+    "programCode": "TALIV",
+    "programName": "Masterutbildning i livsmedelsteknik och nutrition",
+    "subject": "",
+    "hp": 120,
+    "officialHp": 120,
+    "term": "HT26",
+    "coverage": "complete",
+    "status": "processed",
+    "source": "lund-lth-lot-api",
+    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MLIV",
+    "sourceUrls": [
+      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MLIV",
+      "https://api.lth.lu.se/lot/courses?programmeCode=MLIV&academicYearId=26_27"
+    ],
+    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MLIV&academicYearId=26_27",
+    "studyStructureGranularity": "term",
+    "termPlacementVerified": true,
+    "verifiedProgrammeOverride": false,
+    "rows": [
+      {
+        "term": 2,
+        "code": "KLGN15",
+        "name": "Livsmedelsindustrins relation till samhälle och konsument",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KLGN20",
+        "name": "Livsmedelsteknik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "KLGN25",
+        "name": "Livsmedelsteknologi för formulering",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KLGN30",
+        "name": "Livsmedelskemi och nutrition",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "KLGN50",
+        "name": "Projekt: Utveckling av livsmedelsprodukter",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KMBF05",
+        "name": "Livsmedelsmikrobiologi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "FMIF20",
+            "name": "Miljöfrågor i ett internationellt perspektiv",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "BLTF01",
+            "name": "Enhetsoperationer för bioteknik- och livsmedelsindustrin",
+            "hp": 7.5
+          },
+          {
+            "code": "FMSF65",
+            "name": "Försöksplanering",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "KKK000",
+            "name": "Fördjupningskurs i ett eller flera ämnen",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "KBKM01",
+            "name": "Masterexamensarbete i tillämpad biokemi",
+            "hp": 30
+          }
+        ]
+      }
+    ],
+    "checkedAt": "2026-09-22T07:04:02.251Z"
   },
   {
     "key": "lunds universitet|TAMSR|120",
@@ -69201,139 +69270,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:15.936Z"
-  },
-  {
-    "key": "lunds universitet|TAPRR|120",
-    "susaId": "i.uoh.lu.taprr.18925.20272",
-    "university": "Lunds universitet",
-    "programCode": "TAPRR",
-    "programName": "Masterutbildning i produktrealisering",
-    "subject": "",
-    "hp": 120,
-    "officialHp": 120,
-    "term": "HT26",
-    "coverage": "complete",
-    "status": "processed",
-    "source": "lund-lth-lot-api",
-    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MPRR",
-    "sourceUrls": [
-      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MPRR",
-      "https://api.lth.lu.se/lot/courses?programmeCode=MPRR&academicYearId=26_27"
-    ],
-    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MPRR&academicYearId=26_27",
-    "studyStructureGranularity": "term",
-    "termPlacementVerified": true,
-    "verifiedProgrammeOverride": false,
-    "rows": [
-      {
-        "term": 1,
-        "code": "FKMN20",
-        "name": "Avancerad materialteknologi",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "INNN35",
-        "name": "Industriell projektledning",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 4,
-        "code": "MMTM05",
-        "name": "Masterexamensarbete i produktrealisering",
-        "hp": 30,
-        "category": "mandatory",
-        "isThesis": true
-      },
-      {
-        "term": 2,
-        "code": "MMTN06",
-        "name": "Hållbara tillverkningssystem, fortsättningskurs",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "MMTN20",
-        "name": "Material- och metodval",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "MMTN25",
-        "name": "Produktionsteknik",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "MMTN31",
-        "name": "Hållbara tillverkningssystem",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "MMTN35",
-        "name": "Tillämpad FEM - projektkurs",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "MMTN50",
-        "name": "Smart tillverkning",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 15,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "EIEN50",
-            "name": "Automation",
-            "hp": 7.5
-          },
-          {
-            "code": "FKMN10",
-            "name": "Högtemperaturmaterial",
-            "hp": 7.5
-          }
-        ]
-      },
-      {
-        "term": 3,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 15,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "FKMN25",
-            "name": "Projekt - materialteknik",
-            "hp": 7.5
-          },
-          {
-            "code": "FKMN30",
-            "name": "Analytisk mikroskopi och provberedning",
-            "hp": 7.5
-          }
-        ]
-      }
-    ],
-    "checkedAt": "2026-09-22T07:02:16.059Z"
+    "checkedAt": "2026-09-22T07:04:02.414Z"
   },
   {
     "key": "lunds universitet|TANAV|120",
@@ -69476,7 +69413,139 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:16.169Z"
+    "checkedAt": "2026-09-22T07:04:03.552Z"
+  },
+  {
+    "key": "lunds universitet|TAPRR|120",
+    "susaId": "i.uoh.lu.taprr.18925.20272",
+    "university": "Lunds universitet",
+    "programCode": "TAPRR",
+    "programName": "Masterutbildning i produktrealisering",
+    "subject": "",
+    "hp": 120,
+    "officialHp": 120,
+    "term": "HT26",
+    "coverage": "complete",
+    "status": "processed",
+    "source": "lund-lth-lot-api",
+    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MPRR",
+    "sourceUrls": [
+      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MPRR",
+      "https://api.lth.lu.se/lot/courses?programmeCode=MPRR&academicYearId=26_27"
+    ],
+    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MPRR&academicYearId=26_27",
+    "studyStructureGranularity": "term",
+    "termPlacementVerified": true,
+    "verifiedProgrammeOverride": false,
+    "rows": [
+      {
+        "term": 1,
+        "code": "FKMN20",
+        "name": "Avancerad materialteknologi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "INNN35",
+        "name": "Industriell projektledning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "MMTM05",
+        "name": "Masterexamensarbete i produktrealisering",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      },
+      {
+        "term": 2,
+        "code": "MMTN06",
+        "name": "Hållbara tillverkningssystem, fortsättningskurs",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "MMTN20",
+        "name": "Material- och metodval",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "MMTN25",
+        "name": "Produktionsteknik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "MMTN31",
+        "name": "Hållbara tillverkningssystem",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "MMTN35",
+        "name": "Tillämpad FEM - projektkurs",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "MMTN50",
+        "name": "Smart tillverkning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "EIEN50",
+            "name": "Automation",
+            "hp": 7.5
+          },
+          {
+            "code": "FKMN10",
+            "name": "Högtemperaturmaterial",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "FKMN25",
+            "name": "Projekt - materialteknik",
+            "hp": 7.5
+          },
+          {
+            "code": "FKMN30",
+            "name": "Analytisk mikroskopi och provberedning",
+            "hp": 7.5
+          }
+        ]
+      }
+    ],
+    "checkedAt": "2026-09-22T07:04:03.863Z"
   },
   {
     "key": "lunds universitet|TASUD|120",
@@ -69582,7 +69651,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:16.177Z"
+    "checkedAt": "2026-09-22T07:04:03.957Z"
   },
   {
     "key": "lunds universitet|TARSK|300",
@@ -69880,7 +69949,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:16.312Z"
+    "checkedAt": "2026-09-22T07:04:04.060Z"
   },
   {
     "key": "lunds universitet|TAVAR|120",
@@ -69998,7 +70067,7 @@
         "category": "mandatory"
       }
     ],
-    "checkedAt": "2026-09-22T07:02:16.729Z"
+    "checkedAt": "2026-09-22T07:04:04.285Z"
   },
   {
     "key": "lunds universitet|TAWIR|120",
@@ -70147,7 +70216,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:16.983Z"
+    "checkedAt": "2026-09-22T07:04:04.793Z"
   },
   {
     "key": "lunds universitet|TAWRE|120",
@@ -70278,6 +70347,6 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-22T07:02:17.122Z"
+    "checkedAt": "2026-09-22T07:04:04.943Z"
   }
 ]
