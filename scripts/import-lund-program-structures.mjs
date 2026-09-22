@@ -1245,6 +1245,54 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
   }
 
+  if (programmeCode === 'NGNAT') {
+    const sourceUrl = 'https://www.lu.se/studera/naturvetenskapligt-kandidatprogram-naturgeografi-och-ekosystemvetenskap-NGNAT-INES/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'Naturgeografi: Introduktion till jordens miljö', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Naturgeografi: Naturgeografisk teori och systemmetodik', hp: 15, category: 'mandatory' },
+      { term: 2, code: '', name: 'Naturgeografi: Ekosystemanalys', hp: 15, category: 'mandatory' },
+      { term: 2, code: '', name: 'Naturgeografi: Hydrologi', hp: 15, category: 'mandatory' },
+      slot(3, 'Valfria kurser enligt programplan, varav minst 15 hp inom huvudområdet', 30),
+      { term: 4, code: '', name: 'Naturgeografi: Fjärranalys för landskapsstudier', hp: 15, category: 'mandatory' },
+      { term: 4, code: '', name: 'Naturgeografi: Klimatsystemet', hp: 15, category: 'mandatory' },
+      slot(5, 'Valfria kurser enligt programplan utanför huvudområdet', 30),
+      { term: 6, code: '', name: 'Naturgeografi: Markytans processer och landskapsdynamik', hp: 15, category: 'mandatory' },
+      { term: 6, code: '', name: 'Naturgeografi och ekosystemanalys: Examensarbete för kandidatexamen', hp: 15, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
+  if (programmeCode === 'NAKEM') {
+    const sourceUrl = 'https://www.lu.se/studera/kemi-fysikalisk-kemi-masterprogram-NAKEM-FYKE/programmets-innehall';
+    const common = [
+      { term: 1, code: '', name: 'Kemi: Molekylära drivkrafter och kemisk bindning', hp: 15, category: 'elective' },
+      { term: 1, code: '', name: 'Kemi: Avancerad yt- och kolloidkemi', hp: 15, category: 'elective' },
+      slot(2, 'Två valbara kurser inom fysikalisk kemi à 7,5 hp', 15),
+      { term: 2, code: '', name: 'Kemi: Molekylspektroskopi - metoder och tillämpningar', hp: 15, category: 'elective' },
+    ];
+    const thesis30 = [
+      ...common,
+      slot(3, 'Valfria kurser, praktik eller utlandsstudier', 30),
+      { term: 4, code: '', name: 'Kemi: Examensarbete för masterexamen, 30 hp', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    const thesis45 = [
+      ...common,
+      slot(3, 'Valfria kurser, praktik eller utlandsstudier', 15),
+      { term: 3, code: '', name: 'Kemi: Examensarbete för masterexamen - del termin 3', hp: 15, category: 'mandatory', isThesis: true },
+      { term: 4, code: '', name: 'Kemi: Examensarbete för masterexamen - del termin 4', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    const thesis60 = [
+      ...common,
+      { term: 3, code: '', name: 'Kemi: Examensarbete för masterexamen - del termin 3', hp: 30, category: 'mandatory', isThesis: true },
+      { term: 4, code: '', name: 'Kemi: Examensarbete för masterexamen - del termin 4', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, thesis30, [sourceUrl], { source: 'lund-official-programme-page', variants: [
+      { id: 'TH30', subject: 'Examensarbete 30 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis30) },
+      { id: 'TH45', subject: 'Examensarbete 45 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis45) },
+      { id: 'TH60', subject: 'Examensarbete 60 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis60) },
+    ] });
+  }
+
   if (programmeCode === 'NANEV') {
     const sourceUrl = 'https://www.lu.se/studera/naturgeografi-och-ekosystemvetenskap-allman-inriktning-masterprogram-NANEV-INES/programmets-innehall';
     const rows = [
