@@ -679,6 +679,35 @@ async function mapPool(items, worker, limit) {
   return output;
 }
 
+async function probeLthProgrammeSource() {
+  const target = 'https://kurser.lth.se/lot/?prog=D&val=program';
+  try {
+    const page = await getText(target);
+    const scripts = [...String(page.html || '').matchAll(/<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi)]
+      .map(match => {
+        try { return new URL(decodeHtml(match[1]), page.url).href; } catch { return ''; }
+      }).filter(url => /^https:\/\/kurser\.lth\.se\//i.test(url));
+    const assets = [];
+    for (const scriptUrl of [...new Set(scripts)].slice(0, 8)) {
+      try {
+        const script = await getText(scriptUrl);
+        const source = String(script.html || '');
+        const urls = [...source.matchAll(/(?:https?:\\?\/\\?\/[^"'\x60\s]{4,220}|\/[A-Za-z0-9_.?=&%/-]{3,220})/g)]
+          .map(match => match[0].replace(/\\\//g, '/'))
+          .filter(value => /api|programme|program|course|lot/i.test(value));
+        const calls = [...source.matchAll(/(?:fetch|axios\.(?:get|post)|\.get)\s*\((.{0,260})/gi)]
+          .map(match => clean(match[0])).filter(value => /api|programme|program|course|lot/i.test(value));
+        assets.push({ url: script.url, size: source.length, candidates: [...new Set([...urls, ...calls])].slice(0, 80) });
+      } catch (error) {
+        assets.push({ url: scriptUrl, error: String(error?.message || error) });
+      }
+    }
+    return { target: page.url, scripts: [...new Set(scripts)], assets };
+  } catch (error) {
+    return { target, error: String(error?.message || error) };
+  }
+}
+
 async function main() {
   const [programs, initialStructures, lundDb, lundBatch, variantsDb] = await Promise.all([
     readJson(path.join(DATA, 'programs.json')),
@@ -746,13 +775,14 @@ async function main() {
   const lundStructures = structures.filter(item => isLund(item.university));
   const verifiedCodes = [...new Set(lundStructures.filter((item, index) => structureIsComplete(item, byCode.get(code(item.programCode)) || {}) && byCode.has(code(item.programCode))).map(item => code(item.programCode)))].sort();
   const remaining = lundPrograms.filter(program => !structureIsComplete(structures.find(item => item.key === program.key || identity(item.university, item.programCode) === identity(program.university, program.programCode)), program));
+  const lthProbe = await probeLthProgrammeSource();
   const report = {
     generatedAt: new Date().toISOString(), scope: 'Lunds universitet', catalogueProgrammes: lundPrograms.length,
     existingCanonicalStructuresBefore: initialStructures.filter(item => isLund(item.university)).length,
     legacyImported, attempted, imported, verifiedProgrammeCodes: verifiedCodes.length,
     verifiedProgrammeCodeList: verifiedCodes,
     remainingProgrammeCodes: remaining.map(program => ({ code: code(program.programCode), name: program.programName, hp: program.programHp })),
-    errors, notes: ['Only official Lund pages and previously verified official Lund programme-plan records are used.', 'A structure is published only when all expected terms and total credits validate exactly.', 'EAGAF track variants are retained under the variants field of the canonical programme record.'],
+    errors, lthProbe, notes: ['Only official Lund pages and previously verified official Lund programme-plan records are used.', 'A structure is published only when all expected terms and total credits validate exactly.', 'EAGAF track variants are retained under the variants field of the canonical programme record.'],
   };
   await writeJson(REPORT, report);
   await writeJson(path.join(DATA, 'program-structures.json'), structures);
