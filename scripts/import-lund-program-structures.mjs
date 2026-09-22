@@ -819,7 +819,98 @@ async function discoverLth(program) {
 }
 
 function curatedOfficialStructure(program) {
-  if (code(program.programCode) !== 'EAEIT') return null;
+  const programmeCode = code(program.programCode);
+  const slot = (term, name, hp, options = []) => ({ term, code: '', name, hp, category: 'elective-slot', isSlot: true, slotType: 'elective-slot', ...(options.length ? { options } : {}) });
+
+  if (programmeCode === 'JAMRÄ') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/JAMR%C3%84';
+    const rows = [
+      { term: 1, code: '', name: 'Folkrätt', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Internationella mänskliga rättigheter I', hp: 15, category: 'mandatory' },
+      { term: 2, code: '', name: 'Internationella mänskliga rättigheter II', hp: 15, category: 'mandatory' },
+      slot(2, 'Valbar kurs inom programmet', 15),
+      { term: 3, code: '', name: 'Humanitär rätt', hp: 7.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'De mänskliga rättigheterna och rättsmedel', hp: 15, category: 'mandatory' },
+      slot(3, 'Valbar kurs inom programmet', 7.5),
+      { term: 4, code: '', name: 'Självständigt arbete i internationell människorättsjuridik', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-plan-pdf' });
+  }
+
+  if (programmeCode === 'NATKL') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/NATKL';
+    const rows = [
+      { term: 1, code: 'MVEN15', name: 'Miljövetenskap: Klimatförändringen, vetenskap och samhälle', hp: 15, category: 'mandatory' },
+      { term: 1, code: 'MVEN16', name: 'Miljövetenskap: Klimatpolitik, samhällsstyrning och kommunikation', hp: 15, category: 'mandatory' },
+      { term: 2, code: 'MVEN27', name: 'Miljövetenskap: Samhällsplanering med klimatperspektiv', hp: 15, category: 'mandatory' },
+      { term: 2, code: 'MVEN28', name: 'Miljövetenskap: Klimatstrategiska metoder', hp: 15, category: 'mandatory' },
+      slot(3, 'Valfria kurser, praktik- eller metodikkurser enligt programplan', 30),
+      { term: 4, code: 'MVEM31', name: 'Miljövetenskap med fördjupning i tillämpad klimatstrategi: Examensarbete för masterexamen', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-plan-pdf' });
+  }
+
+  if (programmeCode === 'SASDA') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/SASDA';
+    const rows = [
+      { term: 1, code: '', name: 'Den samhällsvetenskapliga forskningsprocessen', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Kvantitativ dataanalys i R', hp: 15, category: 'mandatory' },
+      { term: 2, code: '', name: 'Samhällsvetenskaplig teori - uppbyggnad och struktur', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Urval och visualisering av data', hp: 7.5, category: 'mandatory' },
+      slot(2, 'Två valbara kurser i kvalitativ metod', 15),
+      slot(3, 'Valfria kurser som stäms av med programkoordinator', 30),
+      { term: 4, code: '', name: 'Examensarbete på masternivå inom studentens huvudområde', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-plan-pdf' });
+  }
+
+  if (programmeCode === 'SASTV') {
+    const sourceUrl = 'https://www.lu.se/studera/statsvetenskap-masterprogram-SASTV/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'Statsvetenskap: Politisk ordning i tid och rum', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Statsvetenskap: Statsvetenskaplig metodologi', hp: 15, category: 'mandatory' },
+      slot(2, 'Valbar fördjupningskurs i statsvetenskap', 15),
+      slot(2, 'Valfri kurs inom eller utanför ämnet på avancerad nivå', 15),
+      slot(3, 'Valfria kurser, praktik eller utlandsstudier', 30),
+      { term: 4, code: '', name: 'Statsvetenskap: Examensarbete för masterexamen', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
+  if (programmeCode === 'SASGE') {
+    const sourceUrl = 'https://www.lu.se/studera/samhallsgeografi-masterprogram-SASGE/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'Samhällsgeografi: Geografisk idéhistoria', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Samhällsgeografi: Ekonomisk geografiska omvandlingsprocesser - platser, människor och produktion', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Humanekologi: Kritisk tvärvetenskaplig vetenskapsteori, del 1', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Samhällsgeografi: Landskapsgeografi och politisk ekologi', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Ekonomisk geografi: Urban och regional planering', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Samhällsgeografi: Kritisk urbangeografi', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'GIS: Geografiska informationssystem för samhällsvetenskap', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Samhällsgeografi: GIS och forskningsmetodologi i fält', hp: 7.5, category: 'mandatory' },
+      slot(3, 'Valbara kurser, inklusive möjlighet till praktik', 30),
+      { term: 4, code: '', name: 'Samhällsgeografi: Examensarbete för masterexamen', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
+  if (programmeCode === 'SGPOL') {
+    const sourceUrl = 'https://www.lu.se/studera/politices-kandidatprogrammet-SGPOL/programmets-innehall';
+    const common = [
+      { term: 1, code: '', name: 'Statsvetenskap: Grundkurs', hp: 30, category: 'mandatory' },
+      { term: 2, code: '', name: 'Nationalekonomi: Grundkurs', hp: 30, category: 'mandatory' },
+      slot(3, 'Kompletterande ämne enligt programplan', 30),
+      slot(4, 'Fortsättningskurs i valt huvudområde', 30),
+    ];
+    const candidateFirst = [...common, slot(5, 'Kandidatkurs i valt huvudområde', 30), slot(6, 'Valfri termin, praktik eller utbytesstudier', 30)];
+    const freeFirst = [...common, slot(5, 'Valfri termin, praktik eller utbytesstudier', 30), slot(6, 'Kandidatkurs i valt huvudområde', 30)];
+    return makeCanonical(program, candidateFirst, [sourceUrl], { source: 'lund-official-programme-page', variants: [
+      { id: 'candidate-term-5', subject: 'Kandidatkurs termin 5', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(candidateFirst) },
+      { id: 'candidate-term-6', subject: 'Kandidatkurs termin 6', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(freeFirst) },
+    ] });
+  }
+
+  if (programmeCode !== 'EAEIT') return null;
   const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/EAEIT';
   const shared = { term: 1, code: 'HARN50', name: 'Introduktion till europeisk och internationell handels- och skatterätt', hp: 7.5, category: 'mandatory' };
   const tradeRows = [
