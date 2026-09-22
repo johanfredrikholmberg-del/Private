@@ -1536,6 +1536,44 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
   }
 
+  if (programmeCode === 'KGMUS') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/KGMUS';
+    const rows = [];
+    const addSeries = (name, codes, credits) => codes.forEach((courseCode, index) => rows.push({
+      term: index + 1, code: courseCode, name, hp: credits[index], category: 'mandatory',
+    }));
+    addSeries('Instrumentalstudier', ['MUUE60', 'MUUE61', 'MUUE62', 'MUUE63', 'MUUE64', 'MUUE65'], [12, 12, 11, 11, 7.5, 7.5]);
+    addSeries('Instudering och interpretation', ['MUSI70', 'MUSI71', 'MUSI72', 'MUSI73', 'MUSI74', 'MUSI75'], [4, 4, 4, 4, 3, 3]);
+    addSeries('Kammarmusik', ['MUUL60', 'MUUL61', 'MUUL62', 'MUUL63', 'MUUL64', 'MUUL65'], [2, 2, 2, 2, 3, 3]);
+    addSeries('Projekt', ['MUUL45', 'MUUL46', 'MUUL47', 'MUUL48', 'MUUL49', 'MUUL50'], [4, 4, 4, 4, 4, 4]);
+    addSeries('Gehör', ['MUSI23', 'MUSI24', 'MUSI25', 'MUSI26'], [2, 2, 3, 3]);
+    addSeries('Satslära', ['MUSI27', 'MUSI28', 'MUSI29', 'MUSI30'], [2, 2, 3, 3]);
+    addSeries('Piano', ['MUUL19', 'MUUL20', 'MUUL21', 'MUUL22'], [2, 2, 1, 1]);
+    addSeries('Musik och samhälle', ['MUSI31', 'MUSI32', 'MUSI33', 'MUSI34', 'MUSI35', 'MUSI36'], [2, 2, 2, 2, 2, 2]);
+    rows.push(
+      { term: 5, code: 'MUUK01', name: 'Examensarbete 1', hp: 7.5, category: 'mandatory', isThesis: true },
+      { term: 6, code: 'MUUK03', name: 'Examensarbete 2', hp: 7.5, category: 'mandatory', isThesis: true },
+      { term: 5, code: 'MUUL05', name: 'Musik som yrke 1', hp: 3, category: 'mandatory' },
+      { term: 6, code: 'MUUL06', name: 'Musik som yrke 2', hp: 3, category: 'mandatory' },
+    );
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
+  if (programmeCode === 'KGDSK') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/KGDSK';
+    const rows = [];
+    const addSeries = (name, credits) => credits.forEach((hp, index) => rows.push({
+      term: index + 1, code: '', name, hp, category: 'mandatory',
+    }));
+    addSeries('Dramatiskt skrivande', [10, 10, 10, 12.5, 19.5]);
+    addSeries('Dramaturgi', [9, 9, 7.5, 5]);
+    addSeries('Repertoarkunskap', [5, 5, 5, 5, 3]);
+    addSeries('Berättande och media', [3, 3, 4.5, 4.5, 4.5]);
+    addSeries('Teori för scenkonstnärlig praktik', [3, 3, 3, 3, 3]);
+    rows.push({ term: 6, code: '', name: 'Examensuppgift', hp: 30, category: 'mandatory', isThesis: true });
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
   if (programmeCode === 'KGFKO') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/KGFKO';
     const rows = [
