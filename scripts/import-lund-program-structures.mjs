@@ -1453,6 +1453,32 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'VGSKS') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/VGSKS';
+    const rows = [
+      { term: 1, code: '', name: 'Omvårdnadens grunder', hp: 8, category: 'mandatory' },
+      { term: 1, code: '', name: 'Människan – biologi och hälsa', hp: 19.5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Omvårdnadens teknik och metod I', hp: 2.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Hälsa och ohälsa i ett livscykelperspektiv', hp: 18.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Vetenskapsteori och metod I', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Omvårdnadens teknik och metod II', hp: 2.5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Handledning I', hp: 1.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Personcentrerad vård och lärande vid symtom och tecken på ohälsa', hp: 26, category: 'mandatory' },
+      { term: 3, code: '', name: 'Omvårdnadens teknik och metod III', hp: 2.5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Handledning II', hp: 1.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Personcentrerad vård vid psykisk ohälsa', hp: 15, category: 'mandatory' },
+      { term: 4, code: '', name: 'Vetenskapsteori och metod II', hp: 7.5, category: 'mandatory' },
+      { term: 4, code: '', name: 'Ledarskapets teori och praktik inom omvårdnad', hp: 6, category: 'mandatory' },
+      { term: 4, code: '', name: 'Handledning III', hp: 1.5, category: 'mandatory' },
+      { term: 5, code: '', name: 'Förbättringskunskap och informatik i omvårdnad', hp: 5, category: 'mandatory' },
+      { term: 5, code: '', name: 'Omvårdnad vid komplexa ohälsotillstånd', hp: 10, category: 'mandatory' },
+      { term: 5, code: '', name: 'Kandidatuppsats inom omvårdnad', hp: 15, category: 'mandatory', isThesis: true },
+      { term: 6, code: '', name: 'Processorienterad klinisk omvårdnad', hp: 27, category: 'mandatory' },
+      { term: 6, code: '', name: 'Handledning IV', hp: 3, category: 'mandatory' },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
   if (programmeCode === 'HALKM') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/HALKM';
     const germanOptions = [
