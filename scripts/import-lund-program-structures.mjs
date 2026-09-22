@@ -1179,6 +1179,85 @@ function curatedOfficialStructure(program) {
     ] });
   }
 
+  if (programmeCode === 'NABIO') {
+    const sourceUrl = 'https://www.lu.se/studera/biologi-akvatisk-ekologi-masterprogram-NABIO-EKLI/programmets-innehall';
+    const common = [
+      { term: 1, code: '', name: 'Biologi: Limnologi och marinekologi - koncept och processer', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Biologi: Limnologi och marinekologi - organismer och habitat', hp: 15, category: 'mandatory' },
+      { term: 2, code: '', name: 'Biologi: Akvatisk ekologi', hp: 15, category: 'mandatory' },
+      slot(2, 'Valbara kurser enligt programplan', 15),
+    ];
+    const thesis30 = [...common, slot(3, 'Valfria kurser, projekt eller praktik inom biologi', 30), { term: 4, code: '', name: 'Biologi: Examensarbete - masterexamen, 30 hp', hp: 30, category: 'mandatory', isThesis: true }];
+    const thesis45 = [...common, slot(3, 'Valfria kurser, projekt eller praktik inom biologi', 15), { term: 3, code: '', name: 'Biologi: Examensarbete - masterexamen, del termin 3', hp: 15, category: 'mandatory', isThesis: true }, { term: 4, code: '', name: 'Biologi: Examensarbete - masterexamen, del termin 4', hp: 30, category: 'mandatory', isThesis: true }];
+    const thesis60 = [...common, { term: 3, code: '', name: 'Biologi: Examensarbete - masterexamen, del termin 3', hp: 30, category: 'mandatory', isThesis: true }, { term: 4, code: '', name: 'Biologi: Examensarbete - masterexamen, del termin 4', hp: 30, category: 'mandatory', isThesis: true }];
+    return makeCanonical(program, thesis30, [sourceUrl], { source: 'lund-official-programme-page', variants: [
+      { id: 'TH30', subject: 'Examensarbete 30 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis30) },
+      { id: 'TH45', subject: 'Examensarbete 45 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis45) },
+      { id: 'TH60', subject: 'Examensarbete 60 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis60) },
+    ] });
+  }
+
+  if (programmeCode === 'NAMOB') {
+    const sourceUrl = 'https://www.lu.se/studera/molekylarbiologi-molekylar-genetik-och-bioteknik-masterprogram-NAMOB-MGBI/programmets-innehall';
+    const common = [
+      { term: 1, code: 'BIOR95', name: 'Biologi: Molekylär genetik i eukaryota organismer', hp: 15, category: 'mandatory' },
+      slot(1, 'Valbara kurser inom molekylärbiologi', 15),
+      { term: 2, code: 'BIOR92', name: 'Biologi: Genetisk analys', hp: 7.5, category: 'mandatory' },
+      { term: 2, code: 'BIOR94', name: 'Biologi: Molekylär bioteknik och metodik', hp: 15, category: 'mandatory' },
+      slot(2, 'Valbara kurser inom molekylärbiologi', 7.5),
+    ];
+    const thesis30 = [...common, slot(3, 'Valfria kurser, projekt eller praktik inom molekylärbiologi', 30), { term: 4, code: '', name: 'Molekylärbiologi: Examensarbete - masterexamen, 30 hp', hp: 30, category: 'mandatory', isThesis: true }];
+    const thesis45 = [...common, slot(3, 'Valfria kurser, projekt eller praktik inom molekylärbiologi', 15), { term: 3, code: '', name: 'Molekylärbiologi: Examensarbete - masterexamen, del termin 3', hp: 15, category: 'mandatory', isThesis: true }, { term: 4, code: '', name: 'Molekylärbiologi: Examensarbete - masterexamen, del termin 4', hp: 30, category: 'mandatory', isThesis: true }];
+    const thesis60 = [...common, { term: 3, code: '', name: 'Molekylärbiologi: Examensarbete - masterexamen, del termin 3', hp: 30, category: 'mandatory', isThesis: true }, { term: 4, code: '', name: 'Molekylärbiologi: Examensarbete - masterexamen, del termin 4', hp: 30, category: 'mandatory', isThesis: true }];
+    return makeCanonical(program, thesis30, [sourceUrl], { source: 'lund-official-programme-page', variants: [
+      { id: 'TH30', subject: 'Examensarbete 30 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis30) },
+      { id: 'TH45', subject: 'Examensarbete 45 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis45) },
+      { id: 'TH60', subject: 'Examensarbete 60 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis60) },
+    ] });
+  }
+
+  if (programmeCode === 'NAFYK') {
+    const sourceUrl = 'https://www.lu.se/studera/fysik-allman-inriktning-masterprogram-NAFYK-ALLM/programmets-innehall';
+    const common = [
+      { term: 1, code: 'FYSN21', name: 'Fysik: Kvantfysik i forskning och samhälle', hp: 7.5, category: 'mandatory' },
+      { term: 1, code: 'FYSN27', name: 'Fysik: Kvantmekanik', hp: 7.5, category: 'mandatory' },
+      slot(1, 'Två alternativobligatoriska kurser inom allmän fysik', 15),
+      slot(2, 'Alternativobligatoriska och valfria kurser inom fysik', 30),
+    ];
+    const thesis30 = [...common, slot(3, 'Valfria kurser inom fysik enligt examenskraven', 30), { term: 4, code: 'FYSM34', name: 'Fysik: Examensarbete för masterexamen, 30 hp', hp: 30, category: 'mandatory', isThesis: true }];
+    const thesis60 = [...common, { term: 3, code: 'FYSM64', name: 'Fysik: Examensarbete för masterexamen - del termin 3', hp: 30, category: 'mandatory', isThesis: true }, { term: 4, code: 'FYSM64', name: 'Fysik: Examensarbete för masterexamen - del termin 4', hp: 30, category: 'mandatory', isThesis: true }];
+    return makeCanonical(program, thesis30, [sourceUrl], { source: 'lund-official-programme-page', variants: [
+      { id: 'TH30', subject: 'Examensarbete 30 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis30) },
+      { id: 'TH60', subject: 'Examensarbete 60 hp', programName: program.programName, sourceUrls: [sourceUrl], rows: normaliseRows(thesis60) },
+    ] });
+  }
+
+  if (programmeCode === 'NAMIV') {
+    const sourceUrl = 'https://www.lu.se/studera/miljovetenskap-strategiskt-miljoarbete-masterprogram-NAMIV-STMI/programmets-innehall';
+    const rows = [
+      slot(1, 'Två valbara kurser i miljövetenskap', 30),
+      slot(2, 'Valbar kurs i miljövetenskap', 15),
+      slot(2, 'Valfri kurs enligt programplan', 15),
+      { term: 3, code: '', name: 'Miljövetenskap: Analys och metodik', hp: 15, category: 'mandatory' },
+      { term: 3, code: '', name: 'Miljövetenskap: Tillämpad miljövetenskap', hp: 15, category: 'mandatory' },
+      { term: 4, code: '', name: 'Examensarbete i miljövetenskap', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
+  if (programmeCode === 'NANEV') {
+    const sourceUrl = 'https://www.lu.se/studera/naturgeografi-och-ekosystemvetenskap-allman-inriktning-masterprogram-NANEV-INES/programmets-innehall';
+    const rows = [
+      { term: 1, code: '', name: 'Naturgeografi: Växthusgaser och biogeokemiska kretslopp', hp: 15, category: 'mandatory' },
+      { term: 1, code: '', name: 'Naturgeografi: Klimatförändringen och dess miljöeffekter', hp: 15, category: 'mandatory' },
+      slot(2, 'Valbara kurser i naturgeografi och ekosystemvetenskap', 15),
+      slot(2, 'Valfria kurser enligt programplan', 15),
+      slot(3, 'Valfria kurser enligt programplan', 30),
+      { term: 4, code: '', name: 'Naturgeografi och ekosystemanalys: Examensarbete för masterexamen', hp: 30, category: 'mandatory', isThesis: true },
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-page' });
+  }
+
   if (programmeCode === 'NAMAS') {
     const sourceUrl = 'https://www.lu.se/studera/matematisk-statistik-masterprogram-NAMAS/programmets-innehall';
     const rows = [
