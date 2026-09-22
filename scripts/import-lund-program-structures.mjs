@@ -361,6 +361,11 @@ function programmeStructureSection(value) {
   return headings.length ? source.slice(headings.at(-1).index || 0) : source;
 }
 
+function isProgrammePdfHeader(name, credits) {
+  if (!(Number(credits) >= 60)) return false;
+  return /\([A-ZÅÄÖ]{2,8}\)\s*(?:Kandidat|Master|Magister|Bachelor|Programme|Program)|(?:Kandidat|Master|Magister|Bachelor|Programme|Program)[^,]{0,140},?\s*\d+(?:[.,]\d+)?\s*(?:högskolepoäng|credits)/i.test(name);
+}
+
 function pdfRows(pdfText) {
   const lines = programmeStructureSection(pdfText).split(/\r?\n/).map(clean).filter(Boolean);
   const rows = [];
@@ -380,6 +385,7 @@ function pdfRows(pdfText) {
     const name = clean(filtered.join(' ').replace(/\s*[-–:]\s*$/, ''));
     buffer = [];
     if (name.length < 3 || name.length > 220 || /^(?:hp|credits|ects)$/i.test(name)) return;
+    if (isProgrammePdfHeader(name, credits)) return;
     const codeMatch = name.match(/\b([A-ZÅÄÖ]{2,8}\d{1,4}[A-Z]?)\b/);
     rows.push({ name, code: codeMatch ? code(codeMatch[1]) : '', hp: round1(credits), term: currentTerm,
       category: category(categoryHint || name), sourceKind: 'programme-pdf' });
@@ -416,6 +422,7 @@ function pdfColumnRows(lines, term) {
       .replace(/\s*[-–:]\s*$/, ''));
     buffer = [];
     if (name.length < 3 || name.length > 220 || /^(?:hp|credits|ects)$/i.test(name)) return;
+    if (isProgrammePdfHeader(name, credits)) return;
     if (credits < 2 && /programportfölj|programme portfolio|högskolepoäng|credit|ects|\(hp\)/i.test(name)) return;
     const codeMatch = name.match(/\b([A-ZÅÄÖ]{2,8}\d{1,4}[A-Z]?)\b/);
     rows.push({ name, code: codeMatch ? code(codeMatch[1]) : '', hp: round1(credits), term,
