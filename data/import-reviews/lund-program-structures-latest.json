@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-22T15:32:07.225Z",
+  "generatedAt": "2026-09-22T15:35:06.018Z",
   "scope": "Lunds universitet",
   "catalogueProgrammes": 194,
-  "existingCanonicalStructuresBefore": 134,
+  "existingCanonicalStructuresBefore": 135,
   "legacyImported": 0,
-  "curatedImported": 1,
-  "attempted": 80,
+  "curatedImported": 3,
+  "attempted": 77,
   "imported": 21,
-  "verifiedProgrammeCodes": 135,
+  "verifiedProgrammeCodes": 138,
   "verifiedProgrammeCodeList": [
     "EAECO",
     "EAEGD",
@@ -55,6 +55,9 @@
     "MKULD",
     "NAAFY",
     "NABIN",
+    "NAGEL",
+    "NAGIS",
+    "NAGIV",
     "NAMAS",
     "NAMAT",
     "NAMIH",
@@ -249,21 +252,6 @@
     {
       "code": "NAFYK",
       "name": "Masterprogram i fysik, Allmän inriktning",
-      "hp": 120
-    },
-    {
-      "code": "NAGEL",
-      "name": "Masterprogram i geologi",
-      "hp": 120
-    },
-    {
-      "code": "NAGIS",
-      "name": "Masterprogram i GIS och fjärranalys",
-      "hp": 120
-    },
-    {
-      "code": "NAGIV",
-      "name": "Masterprogram i geografisk informationsvetenskap",
       "hp": 120
     },
     {
@@ -776,138 +764,6 @@
       ]
     },
     {
-      "code": "HASPV",
-      "name": "Masterprogram i språk och språkvetenskap, Klassiska språk",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/masterprogram-i-sprak-och-sprakvetenskap-klassiska-sprak-HASPV",
-        "https://www.lu.se/studera/sprak-och-sprakvetenskap-klassiska-sprak-masterprogram-HASPV",
-        "https://www.lu.se/studera/sprak-och-sprakvetenskap-klassiska-sprak-masters-programme-HASPV",
-        "https://www.lunduniversity.lu.se/study/sprak-och-sprakvetenskap-klassiska-sprak-masters-programme-HASPV",
-        "https://kursplaner.lu.se/pdf/program/sv/HASPV",
-        "https://kursplaner.lu.se/pdf/program/en/HASPV"
-      ],
-      "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/HASPV"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 22.5,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 120,
-        "pdfRows": 1,
-        "pdfMode": "raw"
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/HASPV",
-          "mode": "raw",
-          "rows": 1,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 22.5,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": [
-            {
-              "term": 1,
-              "name": "kurser",
-              "hp": 22.5,
-              "category": "unknown"
-            }
-          ]
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/HASPV",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        }
-      ]
-    },
-    {
       "code": "HAHII",
       "name": "Masterprogram i historiska studier, Historia",
       "reason": "partial:none",
@@ -1183,16 +1039,19 @@
       ]
     },
     {
-      "code": "KAMID",
-      "name": "Konstnärligt masterprogram i musik, interpretation diplom",
+      "code": "HASPV",
+      "name": "Masterprogram i språk och språkvetenskap, Klassiska språk",
       "reason": "partial:none",
       "attemptedUrls": [
-        "https://www.lu.se/studera/konstnarligt-masterprogram-i-musik-interpretation-diplom-KAMID",
-        "https://kursplaner.lu.se/pdf/program/sv/KAMID",
-        "https://kursplaner.lu.se/pdf/program/en/KAMID"
+        "https://www.lu.se/studera/masterprogram-i-sprak-och-sprakvetenskap-klassiska-sprak-HASPV",
+        "https://www.lu.se/studera/sprak-och-sprakvetenskap-klassiska-sprak-masterprogram-HASPV",
+        "https://www.lu.se/studera/sprak-och-sprakvetenskap-klassiska-sprak-masters-programme-HASPV",
+        "https://www.lunduniversity.lu.se/study/sprak-och-sprakvetenskap-klassiska-sprak-masters-programme-HASPV",
+        "https://kursplaner.lu.se/pdf/program/sv/HASPV",
+        "https://kursplaner.lu.se/pdf/program/en/HASPV"
       ],
       "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/KAMID"
+        "https://kursplaner.lu.se/pdf/program/sv/HASPV"
       ],
       "bestQuality": {
         "complete": false,
@@ -1202,7 +1061,7 @@
           "1": {
             "mandatoryHp": 0,
             "electiveListedHp": 0,
-            "unknownHp": 0,
+            "unknownHp": 22.5,
             "covered": false
           },
           "2": {
@@ -1226,14 +1085,14 @@
         },
         "courses": [],
         "totalHp": 120,
-        "pdfRows": 0,
+        "pdfRows": 1,
         "pdfMode": "raw"
       },
       "pdfDiagnostics": [
         {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/KAMID",
+          "url": "https://kursplaner.lu.se/pdf/program/sv/HASPV",
           "mode": "raw",
-          "rows": 0,
+          "rows": 1,
           "complete": false,
           "exact": false,
           "completeTerms": [],
@@ -1242,7 +1101,7 @@
             "1": {
               "mandatoryHp": 0,
               "electiveListedHp": 0,
-              "unknownHp": 0,
+              "unknownHp": 22.5,
               "covered": false
             },
             "2": {
@@ -1264,46 +1123,17 @@
               "covered": false
             }
           },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/KAMID",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
+          "sampleRows": [
+            {
+              "term": 1,
+              "name": "kurser",
+              "hp": 22.5,
+              "category": "unknown"
             }
-          },
-          "sampleRows": []
+          ]
         },
         {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/KAMID",
+          "url": "https://kursplaner.lu.se/pdf/program/en/HASPV",
           "mode": "raw",
           "rows": 0,
           "complete": false,
@@ -1430,6 +1260,164 @@
         },
         {
           "url": "https://kursplaner.lu.se/pdf/program/sv/KAMKA",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 120,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        }
+      ]
+    },
+    {
+      "code": "KAMID",
+      "name": "Konstnärligt masterprogram i musik, interpretation diplom",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/konstnarligt-masterprogram-i-musik-interpretation-diplom-KAMID",
+        "https://kursplaner.lu.se/pdf/program/sv/KAMID",
+        "https://kursplaner.lu.se/pdf/program/en/KAMID"
+      ],
+      "bestSourceUrls": [
+        "https://kursplaner.lu.se/pdf/program/sv/KAMID"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 120,
+        "pdfRows": 0,
+        "pdfMode": "raw"
+      },
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/KAMID",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 120,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/KAMID",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 120,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/KAMID",
           "mode": "raw",
           "rows": 0,
           "complete": false,
@@ -1859,6 +1847,334 @@
       ]
     },
     {
+      "code": "KAMUS",
+      "name": "Konstnärligt masterprogram i musik, Blockflöjt",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/konstnarligt-masterprogram-i-musik-blockflojt-KAMUS",
+        "https://kursplaner.lu.se/pdf/program/sv/KAMUS",
+        "https://kursplaner.lu.se/pdf/program/en/KAMUS"
+      ],
+      "bestSourceUrls": [
+        "https://kursplaner.lu.se/pdf/program/sv/KAMUS"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 120,
+        "pdfRows": 0,
+        "pdfMode": "raw"
+      },
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/KAMUS",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 120,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/KAMUS",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 120,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        }
+      ]
+    },
+    {
+      "code": "KGKYM",
+      "name": "Konstnärligt kandidatprogram i kyrkomusik",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/konstnarligt-kandidatprogram-i-kyrkomusik-KGKYM",
+        "https://kursplaner.lu.se/pdf/program/sv/KGKYM",
+        "https://kursplaner.lu.se/pdf/program/en/KGKYM"
+      ],
+      "bestSourceUrls": [
+        "https://kursplaner.lu.se/pdf/program/sv/KGKYM"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 6,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "5": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "6": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 180,
+        "pdfRows": 0,
+        "pdfMode": "raw"
+      },
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/KGKYM",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 180,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "5": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "6": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/KGKYM",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 180,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "5": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "6": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/KGKYM",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 180,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "5": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "6": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        }
+      ]
+    },
+    {
       "code": "KGFKO",
       "name": "Konstnärligt kandidatprogram i fri konst",
       "reason": "partial:2",
@@ -2090,6 +2406,84 @@
               "category": "elective"
             }
           ]
+        }
+      ]
+    },
+    {
+      "code": "LAKPE",
+      "name": "Kompletterande pedagogisk utbildning, Inriktning mot årskurs 7-9, 2 ämnen",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/kompletterande-pedagogisk-utbildning-inriktning-mot-arskurs-7-9-2-amnen-LAKPE",
+        "https://kursplaner.lu.se/pdf/program/sv/LAKPE",
+        "https://kursplaner.lu.se/pdf/program/en/LAKPE"
+      ],
+      "bestSourceUrls": [
+        "https://kursplaner.lu.se/pdf/program/sv/LAKPE"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 3,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 90,
+        "pdfRows": 0,
+        "pdfMode": "raw"
+      },
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/LAKPE",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 90,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/LAKPE",
+          "error": "HTTP 404"
         }
       ]
     },
@@ -2443,20 +2837,20 @@
       ]
     },
     {
-      "code": "LAKPE",
-      "name": "Kompletterande pedagogisk utbildning, Inriktning mot årskurs 7-9, 2 ämnen",
+      "code": "LAMGY",
+      "name": "Ämneslärarutbildning i musik med inriktning mot gymnasieskolan, Instrumental ensemble, Sång - genrebredd",
       "reason": "partial:none",
       "attemptedUrls": [
-        "https://www.lu.se/studera/kompletterande-pedagogisk-utbildning-inriktning-mot-arskurs-7-9-2-amnen-LAKPE",
-        "https://kursplaner.lu.se/pdf/program/sv/LAKPE",
-        "https://kursplaner.lu.se/pdf/program/en/LAKPE"
+        "https://www.lu.se/studera/amneslararutbildning-i-musik-med-inriktning-mot-gymnasieskolan-instrumental-ensemble-sang-genrebredd-LAMGY",
+        "https://kursplaner.lu.se/pdf/program/sv/LAMGY",
+        "https://kursplaner.lu.se/pdf/program/en/LAMGY"
       ],
       "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/LAKPE"
+        "https://kursplaner.lu.se/pdf/program/sv/LAMGY"
       ],
       "bestQuality": {
         "complete": false,
-        "expectedTerms": 3,
+        "expectedTerms": 10,
         "completeTerms": [],
         "termHp": {
           "1": {
@@ -2476,22 +2870,64 @@
             "electiveListedHp": 0,
             "unknownHp": 0,
             "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "5": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "6": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "7": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "8": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "9": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "10": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
           }
         },
         "courses": [],
-        "totalHp": 90,
+        "totalHp": 300,
         "pdfRows": 0,
         "pdfMode": "raw"
       },
       "pdfDiagnostics": [
         {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/LAKPE",
+          "url": "https://kursplaner.lu.se/pdf/program/sv/LAMGY",
           "mode": "raw",
           "rows": 0,
           "complete": false,
           "exact": false,
           "completeTerms": [],
-          "totalHp": 90,
+          "totalHp": 300,
           "termHp": {
             "1": {
               "mandatoryHp": 0,
@@ -2510,12 +2946,54 @@
               "electiveListedHp": 0,
               "unknownHp": 0,
               "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "5": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "6": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "7": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "8": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "9": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "10": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
             }
           },
           "sampleRows": []
         },
         {
-          "url": "https://kursplaner.lu.se/pdf/program/en/LAKPE",
+          "url": "https://kursplaner.lu.se/pdf/program/en/LAMGY",
           "error": "HTTP 404"
         }
       ]
@@ -2683,374 +3161,6 @@
       ]
     },
     {
-      "code": "LAMGY",
-      "name": "Ämneslärarutbildning i musik med inriktning mot gymnasieskolan, Instrumental ensemble, Sång - genrebredd",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/amneslararutbildning-i-musik-med-inriktning-mot-gymnasieskolan-instrumental-ensemble-sang-genrebredd-LAMGY",
-        "https://kursplaner.lu.se/pdf/program/sv/LAMGY",
-        "https://kursplaner.lu.se/pdf/program/en/LAMGY"
-      ],
-      "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/LAMGY"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 10,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "5": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "6": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "7": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "8": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "9": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "10": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 300,
-        "pdfRows": 0,
-        "pdfMode": "raw"
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/LAMGY",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 300,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "5": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "6": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "7": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "8": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "9": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "10": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/LAMGY",
-          "error": "HTTP 404"
-        }
-      ]
-    },
-    {
-      "code": "KGKYM",
-      "name": "Konstnärligt kandidatprogram i kyrkomusik",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/konstnarligt-kandidatprogram-i-kyrkomusik-KGKYM",
-        "https://kursplaner.lu.se/pdf/program/sv/KGKYM",
-        "https://kursplaner.lu.se/pdf/program/en/KGKYM"
-      ],
-      "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/KGKYM"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 6,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "5": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "6": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 180,
-        "pdfRows": 0,
-        "pdfMode": "raw"
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/KGKYM",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 180,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "5": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "6": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/KGKYM",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 180,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "5": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "6": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/KGKYM",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 180,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "5": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "6": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        }
-      ]
-    },
-    {
       "code": "LGKPD",
       "name": "Kompletterande pedagogisk utbildning (grundnivå), Inriktning mot årskurs 7-9, ett ämne",
       "reason": "partial:none",
@@ -3125,128 +3235,6 @@
         {
           "url": "https://kursplaner.lu.se/pdf/program/en/LGKPD",
           "error": "HTTP 404"
-        }
-      ]
-    },
-    {
-      "code": "KAMUS",
-      "name": "Konstnärligt masterprogram i musik, Blockflöjt",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/konstnarligt-masterprogram-i-musik-blockflojt-KAMUS",
-        "https://kursplaner.lu.se/pdf/program/sv/KAMUS",
-        "https://kursplaner.lu.se/pdf/program/en/KAMUS"
-      ],
-      "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/KAMUS"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 120,
-        "pdfRows": 0,
-        "pdfMode": "raw"
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/KAMUS",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/KAMUS",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
         }
       ]
     },
@@ -4033,131 +4021,6 @@
       ]
     },
     {
-      "code": "NABIO",
-      "name": "Masterprogram i biologi, Akvatisk ekologi",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/masterprogram-i-biologi-akvatisk-ekologi-NABIO",
-        "https://www.lu.se/studera/biologi-akvatisk-ekologi-masterprogram-NABIO",
-        "https://www.lu.se/studera/biologi-akvatisk-ekologi-masters-programme-NABIO",
-        "https://www.lunduniversity.lu.se/study/biologi-akvatisk-ekologi-masters-programme-NABIO",
-        "https://kursplaner.lu.se/pdf/program/sv/NABIO",
-        "https://kursplaner.lu.se/pdf/program/en/NABIO"
-      ],
-      "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/NABIO"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 120,
-        "pdfRows": 0,
-        "pdfMode": "raw"
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NABIO",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NABIO",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        }
-      ]
-    },
-    {
       "code": "NABER",
       "name": "Masterprogram i beräkningsvetenskap, Livsvetenskaper",
       "reason": "partial:none",
@@ -4283,19 +4146,19 @@
       ]
     },
     {
-      "code": "NAFYK",
-      "name": "Masterprogram i fysik, Allmän inriktning",
+      "code": "NABIO",
+      "name": "Masterprogram i biologi, Akvatisk ekologi",
       "reason": "partial:none",
       "attemptedUrls": [
-        "https://www.lu.se/studera/masterprogram-i-fysik-allman-inriktning-NAFYK",
-        "https://www.lu.se/studera/fysik-allman-inriktning-masterprogram-NAFYK",
-        "https://www.lu.se/studera/fysik-allman-inriktning-masters-programme-NAFYK",
-        "https://www.lunduniversity.lu.se/study/fysik-allman-inriktning-masters-programme-NAFYK",
-        "https://kursplaner.lu.se/pdf/program/sv/NAFYK",
-        "https://kursplaner.lu.se/pdf/program/en/NAFYK"
+        "https://www.lu.se/studera/masterprogram-i-biologi-akvatisk-ekologi-NABIO",
+        "https://www.lu.se/studera/biologi-akvatisk-ekologi-masterprogram-NABIO",
+        "https://www.lu.se/studera/biologi-akvatisk-ekologi-masters-programme-NABIO",
+        "https://www.lunduniversity.lu.se/study/biologi-akvatisk-ekologi-masters-programme-NABIO",
+        "https://kursplaner.lu.se/pdf/program/sv/NABIO",
+        "https://kursplaner.lu.se/pdf/program/en/NABIO"
       ],
       "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/NAFYK"
+        "https://kursplaner.lu.se/pdf/program/sv/NABIO"
       ],
       "bestQuality": {
         "complete": false,
@@ -4334,7 +4197,7 @@
       },
       "pdfDiagnostics": [
         {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAFYK",
+          "url": "https://kursplaner.lu.se/pdf/program/sv/NABIO",
           "mode": "raw",
           "rows": 0,
           "complete": false,
@@ -4370,556 +4233,7 @@
           "sampleRows": []
         },
         {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NAFYK",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        }
-      ]
-    },
-    {
-      "code": "NAKEM",
-      "name": "Masterprogram i kemi, Fysikalisk kemi",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/masterprogram-i-kemi-fysikalisk-kemi-NAKEM",
-        "https://www.lu.se/studera/kemi-fysikalisk-kemi-masterprogram-NAKEM",
-        "https://www.lu.se/studera/kemi-fysikalisk-kemi-masters-programme-NAKEM",
-        "https://www.lunduniversity.lu.se/study/kemi-fysikalisk-kemi-masters-programme-NAKEM",
-        "https://kursplaner.lu.se/pdf/program/sv/NAKEM",
-        "https://kursplaner.lu.se/pdf/program/en/NAKEM"
-      ],
-      "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/NAKEM"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 120,
-        "pdfRows": 0,
-        "pdfMode": "raw"
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAKEM",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NAKEM",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        }
-      ]
-    },
-    {
-      "code": "NAGEL",
-      "name": "Masterprogram i geologi",
-      "reason": "partial:1,4",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/masterprogram-i-geologi-NAGEL",
-        "https://www.lu.se/studera/geologi-masterprogram-NAGEL",
-        "https://www.lu.se/studera/geologi-masters-programme-NAGEL",
-        "https://www.lunduniversity.lu.se/study/geologi-masters-programme-NAGEL",
-        "https://kursplaner.lu.se/pdf/program/sv/NAGEL",
-        "https://kursplaner.lu.se/pdf/program/en/NAGEL"
-      ],
-      "bestSourceUrls": [
-        "https://www.lu.se/studera/geologi-masterprogram-NAGEL",
-        "https://www.lu.se/studera/geologi-masterprogram-NAGEL/programmets-innehall"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [
-          1,
-          4
-        ],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 30,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": true
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 45,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 15,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 30,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": true
-          }
-        },
-        "courses": [
-          {
-            "name": "Geologi: Metoder inom Geovetenskap",
-            "code": "",
-            "hp": 15,
-            "term": 1,
-            "category": "mandatory",
-            "sourceKind": "table"
-          },
-          {
-            "name": "Berggrundsgeologi: Sedimentär geologi och bassänganalys",
-            "code": "",
-            "hp": 15,
-            "term": 1,
-            "category": "mandatory",
-            "sourceKind": "table"
-          },
-          {
-            "name": "Geologi: Examensarbete för masterexamen",
-            "code": "",
-            "hp": 30,
-            "term": 4,
-            "category": "mandatory",
-            "sourceKind": "table"
-          }
-        ],
-        "totalHp": 120,
-        "tableRows": 7,
-        "textRows": 0,
-        "choiceTerms": []
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGEL",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NAGEL",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGEL",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGEL",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGEL",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NAGEL",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        }
-      ]
-    },
-    {
-      "code": "NAMIV",
-      "name": "Masterprogram i miljövetenskap, Strategiskt miljöarbete",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/masterprogram-i-miljovetenskap-strategiskt-miljoarbete-NAMIV",
-        "https://www.lu.se/studera/miljovetenskap-strategiskt-miljoarbete-masterprogram-NAMIV",
-        "https://www.lu.se/studera/miljovetenskap-strategiskt-miljoarbete-masters-programme-NAMIV",
-        "https://www.lunduniversity.lu.se/study/miljovetenskap-strategiskt-miljoarbete-masters-programme-NAMIV",
-        "https://kursplaner.lu.se/pdf/program/sv/NAMIV",
-        "https://kursplaner.lu.se/pdf/program/en/NAMIV"
-      ],
-      "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/NAMIV"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 120,
-        "pdfRows": 0,
-        "pdfMode": "raw"
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAMIV",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NAMIV",
+          "url": "https://kursplaner.lu.se/pdf/program/en/NABIO",
           "mode": "raw",
           "rows": 0,
           "complete": false,
@@ -5082,30 +4396,27 @@
       ]
     },
     {
-      "code": "NAGIV",
-      "name": "Masterprogram i geografisk informationsvetenskap",
-      "reason": "partial:4",
+      "code": "NAMIV",
+      "name": "Masterprogram i miljövetenskap, Strategiskt miljöarbete",
+      "reason": "partial:none",
       "attemptedUrls": [
-        "https://www.lu.se/studera/masterprogram-i-geografisk-informationsvetenskap-NAGIV",
-        "https://www.lu.se/studera/geografisk-informationsvetenskap-masterprogram-NAGIV",
-        "https://www.lu.se/studera/geografisk-informationsvetenskap-masters-programme-NAGIV",
-        "https://www.lunduniversity.lu.se/study/geografisk-informationsvetenskap-masters-programme-NAGIV",
-        "https://kursplaner.lu.se/pdf/program/sv/NAGIV",
-        "https://kursplaner.lu.se/pdf/program/en/NAGIV"
+        "https://www.lu.se/studera/masterprogram-i-miljovetenskap-strategiskt-miljoarbete-NAMIV",
+        "https://www.lu.se/studera/miljovetenskap-strategiskt-miljoarbete-masterprogram-NAMIV",
+        "https://www.lu.se/studera/miljovetenskap-strategiskt-miljoarbete-masters-programme-NAMIV",
+        "https://www.lunduniversity.lu.se/study/miljovetenskap-strategiskt-miljoarbete-masters-programme-NAMIV",
+        "https://kursplaner.lu.se/pdf/program/sv/NAMIV",
+        "https://kursplaner.lu.se/pdf/program/en/NAMIV"
       ],
       "bestSourceUrls": [
-        "https://www.lu.se/studera/geografisk-informationsvetenskap-masterprogram-NAGIV",
-        "https://www.lu.se/studera/geografisk-informationsvetenskap-masterprogram-NAGIV/programmets-innehall"
+        "https://kursplaner.lu.se/pdf/program/sv/NAMIV"
       ],
       "bestQuality": {
         "complete": false,
         "expectedTerms": 4,
-        "completeTerms": [
-          4
-        ],
+        "completeTerms": [],
         "termHp": {
           "1": {
-            "mandatoryHp": 37.5,
+            "mandatoryHp": 0,
             "electiveListedHp": 0,
             "unknownHp": 0,
             "covered": false
@@ -5113,347 +4424,30 @@
           "2": {
             "mandatoryHp": 0,
             "electiveListedHp": 0,
-            "unknownHp": 45,
+            "unknownHp": 0,
             "covered": false
           },
           "3": {
             "mandatoryHp": 0,
             "electiveListedHp": 0,
-            "unknownHp": 37.5,
+            "unknownHp": 0,
             "covered": false
           },
           "4": {
-            "mandatoryHp": 30,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": true
-          }
-        },
-        "courses": [
-          {
-            "name": "GIS: Examensarbete för masterexamen",
-            "code": "",
-            "hp": 30,
-            "term": 4,
-            "category": "mandatory",
-            "sourceKind": "table"
-          }
-        ],
-        "totalHp": 120,
-        "tableRows": 15,
-        "textRows": 15,
-        "choiceTerms": []
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGIV",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NAGIV",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGIV",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGIV",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGIV",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NAGIV",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        }
-      ]
-    },
-    {
-      "code": "NAGIS",
-      "name": "Masterprogram i GIS och fjärranalys",
-      "reason": "partial:2,4",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/masterprogram-i-gis-och-fjarranalys-NAGIS",
-        "https://www.lu.se/studera/gis-och-fjarranalys-masterprogram-NAGIS",
-        "https://www.lu.se/studera/gis-och-fjarranalys-masters-programme-NAGIS",
-        "https://www.lunduniversity.lu.se/study/gis-och-fjarranalys-masters-programme-NAGIS",
-        "https://kursplaner.lu.se/pdf/program/sv/NAGIS",
-        "https://kursplaner.lu.se/pdf/program/en/NAGIS"
-      ],
-      "bestSourceUrls": [
-        "https://www.lu.se/studera/gis-och-fjarranalys-masterprogram-NAGIS",
-        "https://www.lu.se/studera/gis-och-fjarranalys-masterprogram-NAGIS/programmets-innehall"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [
-          2,
-          4
-        ],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 45,
+            "mandatoryHp": 0,
             "electiveListedHp": 0,
             "unknownHp": 0,
             "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 30,
-            "covered": true
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 22.5,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 30,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": true
           }
         },
-        "courses": [
-          {
-            "name": "Naturgeografi: Geografiska databaser",
-            "code": "",
-            "hp": 7.5,
-            "term": 2,
-            "category": "mandatory-unlabelled",
-            "sourceKind": "table"
-          },
-          {
-            "name": "Naturgeografi: Rumslig analys",
-            "code": "",
-            "hp": 7.5,
-            "term": 2,
-            "category": "mandatory-unlabelled",
-            "sourceKind": "table"
-          },
-          {
-            "name": "Naturgeografi: Praktikarbete",
-            "code": "",
-            "hp": 15,
-            "term": 2,
-            "category": "mandatory-unlabelled",
-            "sourceKind": "table"
-          },
-          {
-            "name": "Naturgeografi och ekosystemanalys: Examensarbete för masterexamen",
-            "code": "",
-            "hp": 30,
-            "term": 4,
-            "category": "mandatory",
-            "sourceKind": "table"
-          }
-        ],
+        "courses": [],
         "totalHp": 120,
-        "tableRows": 10,
-        "textRows": 10,
-        "choiceTerms": []
+        "pdfRows": 0,
+        "pdfMode": "raw"
       },
       "pdfDiagnostics": [
         {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGIS",
+          "url": "https://kursplaner.lu.se/pdf/program/sv/NAMIV",
           "mode": "raw",
           "rows": 0,
           "complete": false,
@@ -5489,151 +4483,7 @@
           "sampleRows": []
         },
         {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NAGIS",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGIS",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGIS",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NAGIS",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NAGIS",
+          "url": "https://kursplaner.lu.se/pdf/program/en/NAMIV",
           "mode": "raw",
           "rows": 0,
           "complete": false,
@@ -5785,6 +4635,647 @@
               "covered": false
             },
             "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        }
+      ]
+    },
+    {
+      "code": "NAKEM",
+      "name": "Masterprogram i kemi, Fysikalisk kemi",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/masterprogram-i-kemi-fysikalisk-kemi-NAKEM",
+        "https://www.lu.se/studera/kemi-fysikalisk-kemi-masterprogram-NAKEM",
+        "https://www.lu.se/studera/kemi-fysikalisk-kemi-masters-programme-NAKEM",
+        "https://www.lunduniversity.lu.se/study/kemi-fysikalisk-kemi-masters-programme-NAKEM",
+        "https://kursplaner.lu.se/pdf/program/sv/NAKEM",
+        "https://kursplaner.lu.se/pdf/program/en/NAKEM"
+      ],
+      "bestSourceUrls": [
+        "https://kursplaner.lu.se/pdf/program/sv/NAKEM"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 120,
+        "pdfRows": 0,
+        "pdfMode": "raw"
+      },
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/NAKEM",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 120,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/NAKEM",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 120,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        }
+      ]
+    },
+    {
+      "code": "NAFYK",
+      "name": "Masterprogram i fysik, Allmän inriktning",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/masterprogram-i-fysik-allman-inriktning-NAFYK",
+        "https://www.lu.se/studera/fysik-allman-inriktning-masterprogram-NAFYK",
+        "https://www.lu.se/studera/fysik-allman-inriktning-masters-programme-NAFYK",
+        "https://www.lunduniversity.lu.se/study/fysik-allman-inriktning-masters-programme-NAFYK",
+        "https://kursplaner.lu.se/pdf/program/sv/NAFYK",
+        "https://kursplaner.lu.se/pdf/program/en/NAFYK"
+      ],
+      "bestSourceUrls": [
+        "https://kursplaner.lu.se/pdf/program/sv/NAFYK"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 120,
+        "pdfRows": 0,
+        "pdfMode": "raw"
+      },
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/NAFYK",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 120,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/NAFYK",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 120,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        }
+      ]
+    },
+    {
+      "code": "NGNAT",
+      "name": "Naturvetenskapligt kandidatprogram, Naturgeografi och ekosystemvetenskap",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/naturvetenskapligt-kandidatprogram-naturgeografi-och-ekosystemvetenskap-NGNAT",
+        "https://kursplaner.lu.se/pdf/program/sv/NGNAT",
+        "https://kursplaner.lu.se/pdf/program/en/NGNAT"
+      ],
+      "bestSourceUrls": [
+        "https://kursplaner.lu.se/pdf/program/sv/NGNAT"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 6,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "5": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "6": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 180,
+        "pdfRows": 0,
+        "pdfMode": "raw"
+      },
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/NGNAT",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 180,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "5": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "6": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/NGNAT",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 180,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "5": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "6": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        }
+      ]
+    },
+    {
+      "code": "NATBE",
+      "name": "Masterprogram i tillämpad beräkningsvetenskap, Biologi",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/masterprogram-i-tillampad-berakningsvetenskap-biologi-NATBE",
+        "https://www.lu.se/studera/tillampad-berakningsvetenskap-biologi-masterprogram-NATBE",
+        "https://www.lu.se/studera/tillampad-berakningsvetenskap-biologi-masters-programme-NATBE",
+        "https://www.lunduniversity.lu.se/study/tillampad-berakningsvetenskap-biologi-masters-programme-NATBE",
+        "https://kursplaner.lu.se/pdf/program/sv/NATBE",
+        "https://kursplaner.lu.se/pdf/program/en/NATBE"
+      ],
+      "bestSourceUrls": [
+        "https://kursplaner.lu.se/pdf/program/sv/NATBE"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 120,
+        "pdfRows": 0,
+        "pdfMode": "raw"
+      },
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/NATBE",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 120,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/NATBE",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 120,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "4": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        }
+      ]
+    },
+    {
+      "code": "SAKPU",
+      "name": "Kompletterande utbildning för personer med utländsk psykologexamen",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/kompletterande-utbildning-for-personer-med-utlandsk-psykologexamen-SAKPU",
+        "https://kursplaner.lu.se/pdf/program/sv/SAKPU",
+        "https://kursplaner.lu.se/pdf/program/en/SAKPU"
+      ],
+      "bestSourceUrls": [
+        "https://kursplaner.lu.se/pdf/program/sv/SAKPU"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 3,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 90,
+        "pdfRows": 0,
+        "pdfMode": "raw"
+      },
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/SAKPU",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 90,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            }
+          },
+          "sampleRows": []
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/SAKPU",
+          "error": "HTTP 404"
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/SAKPU",
+          "mode": "raw",
+          "rows": 0,
+          "complete": false,
+          "exact": false,
+          "completeTerms": [],
+          "totalHp": 90,
+          "termHp": {
+            "1": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "2": {
+              "mandatoryHp": 0,
+              "electiveListedHp": 0,
+              "unknownHp": 0,
+              "covered": false
+            },
+            "3": {
               "mandatoryHp": 0,
               "electiveListedHp": 0,
               "unknownHp": 0,
@@ -6183,239 +5674,6 @@
               "covered": false
             },
             "10": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        }
-      ]
-    },
-    {
-      "code": "NATBE",
-      "name": "Masterprogram i tillämpad beräkningsvetenskap, Biologi",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/masterprogram-i-tillampad-berakningsvetenskap-biologi-NATBE",
-        "https://www.lu.se/studera/tillampad-berakningsvetenskap-biologi-masterprogram-NATBE",
-        "https://www.lu.se/studera/tillampad-berakningsvetenskap-biologi-masters-programme-NATBE",
-        "https://www.lunduniversity.lu.se/study/tillampad-berakningsvetenskap-biologi-masters-programme-NATBE",
-        "https://kursplaner.lu.se/pdf/program/sv/NATBE",
-        "https://kursplaner.lu.se/pdf/program/en/NATBE"
-      ],
-      "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/NATBE"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 120,
-        "pdfRows": 0,
-        "pdfMode": "raw"
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NATBE",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NATBE",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 120,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        }
-      ]
-    },
-    {
-      "code": "SAKPU",
-      "name": "Kompletterande utbildning för personer med utländsk psykologexamen",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/kompletterande-utbildning-for-personer-med-utlandsk-psykologexamen-SAKPU",
-        "https://kursplaner.lu.se/pdf/program/sv/SAKPU",
-        "https://kursplaner.lu.se/pdf/program/en/SAKPU"
-      ],
-      "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/SAKPU"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 3,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 90,
-        "pdfRows": 0,
-        "pdfMode": "raw"
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/SAKPU",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 90,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/SAKPU",
-          "error": "HTTP 404"
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/SAKPU",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 90,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
               "mandatoryHp": 0,
               "electiveListedHp": 0,
               "unknownHp": 0,
@@ -7064,284 +6322,6 @@
       ]
     },
     {
-      "code": "NGNAT",
-      "name": "Naturvetenskapligt kandidatprogram, Naturgeografi och ekosystemvetenskap",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/naturvetenskapligt-kandidatprogram-naturgeografi-och-ekosystemvetenskap-NGNAT",
-        "https://kursplaner.lu.se/pdf/program/sv/NGNAT",
-        "https://kursplaner.lu.se/pdf/program/en/NGNAT"
-      ],
-      "bestSourceUrls": [
-        "https://kursplaner.lu.se/pdf/program/sv/NGNAT"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 6,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "5": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "6": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 180,
-        "pdfRows": 0,
-        "pdfMode": "raw"
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/NGNAT",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 180,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "5": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "6": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/NGNAT",
-          "mode": "raw",
-          "rows": 0,
-          "complete": false,
-          "exact": false,
-          "completeTerms": [],
-          "totalHp": 180,
-          "termHp": {
-            "1": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "2": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "3": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "4": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "5": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            },
-            "6": {
-              "mandatoryHp": 0,
-              "electiveListedHp": 0,
-              "unknownHp": 0,
-              "covered": false
-            }
-          },
-          "sampleRows": []
-        }
-      ]
-    },
-    {
-      "code": "TABRA",
-      "name": "Civilingenjörsutbildning i brandteknik",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-brandteknik-TABRA",
-        "https://www.lu.se/studera/brandteknik-civilingenjorsutbildning-TABRA",
-        "https://kursplaner.lu.se/pdf/program/sv/TABRA",
-        "https://kursplaner.lu.se/pdf/program/en/TABRA"
-      ],
-      "bestSourceUrls": [
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-brandteknik-TABRA",
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-brandteknik-TABRA/programmets-innehall"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 10,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "5": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "6": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "7": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "8": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "9": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "10": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 300,
-        "tableRows": 0,
-        "textRows": 0,
-        "choiceTerms": []
-      },
-      "lthQuality": {
-        "complete": false,
-        "totalHp": 300,
-        "expectedTerms": 10,
-        "completeTerms": [
-          6,
-          5
-        ],
-        "lthCode": "BR",
-        "apiRows": 58,
-        "activeRows": 58,
-        "mandatoryRows": 25,
-        "ambiguousMandatory": [
-          "EDAA85",
-          "VBRA06"
-        ],
-        "overfullTerms": [],
-        "slotDiagnostics": []
-      },
-      "lthSourceUrls": [
-        "https://kurser.lth.se/lot/programme?ay=26_27&programme=BR",
-        "https://api.lth.lu.se/lot/courses?programmeCode=BR&academicYearId=26_27"
-      ],
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/TABRA",
-          "error": "HTTP 404"
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/TABRA",
-          "error": "HTTP 404"
-        }
-      ]
-    },
-    {
       "code": "TADAT",
       "name": "Civilingenjörsutbildning i datateknik",
       "reason": "partial:none",
@@ -7467,6 +6447,126 @@
       ]
     },
     {
+      "code": "TABRA",
+      "name": "Civilingenjörsutbildning i brandteknik",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-brandteknik-TABRA",
+        "https://www.lu.se/studera/brandteknik-civilingenjorsutbildning-TABRA",
+        "https://kursplaner.lu.se/pdf/program/sv/TABRA",
+        "https://kursplaner.lu.se/pdf/program/en/TABRA"
+      ],
+      "bestSourceUrls": [
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-brandteknik-TABRA",
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-brandteknik-TABRA/programmets-innehall"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 10,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "5": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "6": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "7": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "8": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "9": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "10": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 300,
+        "tableRows": 0,
+        "textRows": 0,
+        "choiceTerms": []
+      },
+      "lthQuality": {
+        "complete": false,
+        "totalHp": 300,
+        "expectedTerms": 10,
+        "completeTerms": [
+          6,
+          5
+        ],
+        "lthCode": "BR",
+        "apiRows": 58,
+        "activeRows": 58,
+        "mandatoryRows": 25,
+        "ambiguousMandatory": [
+          "EDAA85",
+          "VBRA06"
+        ],
+        "overfullTerms": [],
+        "slotDiagnostics": []
+      },
+      "lthSourceUrls": [
+        "https://kurser.lth.se/lot/programme?ay=26_27&programme=BR",
+        "https://api.lth.lu.se/lot/courses?programmeCode=BR&academicYearId=26_27"
+      ],
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/TABRA",
+          "error": "HTTP 404"
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/TABRA",
+          "error": "HTTP 404"
+        }
+      ]
+    },
+    {
       "code": "TADIC",
       "name": "Civilingenjörsutbildning i informations- och kommunikationsteknik",
       "reason": "partial:none",
@@ -7582,131 +6682,6 @@
         },
         {
           "url": "https://kursplaner.lu.se/pdf/program/en/TADIC",
-          "error": "HTTP 404"
-        }
-      ]
-    },
-    {
-      "code": "TAELT",
-      "name": "Civilingenjörsutbildning i elektroteknik",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-elektroteknik-TAELT",
-        "https://www.lu.se/studera/elektroteknik-civilingenjorsutbildning-TAELT",
-        "https://kursplaner.lu.se/pdf/program/sv/TAELT",
-        "https://kursplaner.lu.se/pdf/program/en/TAELT"
-      ],
-      "bestSourceUrls": [
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-elektroteknik-TAELT",
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-elektroteknik-TAELT/programmets-innehall"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 10,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "5": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "6": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "7": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "8": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "9": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "10": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 300,
-        "tableRows": 0,
-        "textRows": 0,
-        "choiceTerms": []
-      },
-      "lthQuality": {
-        "complete": false,
-        "totalHp": 300,
-        "expectedTerms": 10,
-        "completeTerms": [
-          5
-        ],
-        "lthCode": "E",
-        "apiRows": 283,
-        "activeRows": 281,
-        "mandatoryRows": 25,
-        "ambiguousMandatory": [
-          "EDAA85",
-          "EITA35",
-          "ESSF01"
-        ],
-        "overfullTerms": [
-          {
-            "term": 6,
-            "hp": 30.5
-          }
-        ],
-        "slotDiagnostics": []
-      },
-      "lthSourceUrls": [
-        "https://kurser.lth.se/lot/programme?ay=26_27&programme=E",
-        "https://api.lth.lu.se/lot/courses?programmeCode=E&academicYearId=26_27"
-      ],
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/TAELT",
-          "error": "HTTP 404"
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/TAELT",
           "error": "HTTP 404"
         }
       ]
@@ -7837,6 +6812,131 @@
       ]
     },
     {
+      "code": "TAELT",
+      "name": "Civilingenjörsutbildning i elektroteknik",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-elektroteknik-TAELT",
+        "https://www.lu.se/studera/elektroteknik-civilingenjorsutbildning-TAELT",
+        "https://kursplaner.lu.se/pdf/program/sv/TAELT",
+        "https://kursplaner.lu.se/pdf/program/en/TAELT"
+      ],
+      "bestSourceUrls": [
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-elektroteknik-TAELT",
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-elektroteknik-TAELT/programmets-innehall"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 10,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "5": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "6": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "7": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "8": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "9": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "10": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 300,
+        "tableRows": 0,
+        "textRows": 0,
+        "choiceTerms": []
+      },
+      "lthQuality": {
+        "complete": false,
+        "totalHp": 300,
+        "expectedTerms": 10,
+        "completeTerms": [
+          5
+        ],
+        "lthCode": "E",
+        "apiRows": 283,
+        "activeRows": 281,
+        "mandatoryRows": 25,
+        "ambiguousMandatory": [
+          "EDAA85",
+          "EITA35",
+          "ESSF01"
+        ],
+        "overfullTerms": [
+          {
+            "term": 6,
+            "hp": 30.5
+          }
+        ],
+        "slotDiagnostics": []
+      },
+      "lthSourceUrls": [
+        "https://kurser.lth.se/lot/programme?ay=26_27&programme=E",
+        "https://api.lth.lu.se/lot/courses?programmeCode=E&academicYearId=26_27"
+      ],
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/TAELT",
+          "error": "HTTP 404"
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/TAELT",
+          "error": "HTTP 404"
+        }
+      ]
+    },
+    {
       "code": "TAINE",
       "name": "Civilingenjörsutbildning i industriell ekonomi",
       "reason": "partial:none",
@@ -7952,111 +7052,6 @@
         },
         {
           "url": "https://kursplaner.lu.se/pdf/program/en/TAINE",
-          "error": "HTTP 404"
-        }
-      ]
-    },
-    {
-      "code": "TAFOT",
-      "name": "Masterutbildning i fotonik",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/masterutbildning-i-fotonik-TAFOT",
-        "https://www.lu.se/studera/fotonik-masterutbildning-TAFOT",
-        "https://www.lu.se/studera/fotonik-masters-programme-TAFOT",
-        "https://www.lunduniversity.lu.se/study/fotonik-masters-programme-TAFOT",
-        "https://kursplaner.lu.se/pdf/program/sv/TAFOT",
-        "https://kursplaner.lu.se/pdf/program/en/TAFOT"
-      ],
-      "bestSourceUrls": [
-        "https://www.lu.se/studera/fotonik-masterutbildning-TAFOT",
-        "https://www.lu.se/studera/fotonik-masterutbildning-TAFOT/programmets-innehall"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 120,
-        "tableRows": 0,
-        "textRows": 0,
-        "choiceTerms": []
-      },
-      "lthQuality": {
-        "complete": false,
-        "totalHp": 120,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "lthCode": "MFOT",
-        "apiRows": 32,
-        "activeRows": 32,
-        "mandatoryRows": 4,
-        "ambiguousMandatory": [],
-        "overfullTerms": [],
-        "slotDiagnostics": [
-          {
-            "term": 1,
-            "remainder": 15,
-            "options": 14,
-            "matched": false
-          },
-          {
-            "term": 2,
-            "remainder": 15,
-            "options": 15,
-            "matched": false
-          },
-          {
-            "term": 3,
-            "remainder": 30,
-            "options": 0,
-            "matched": false
-          },
-          {
-            "term": 4,
-            "remainder": 30,
-            "options": 2,
-            "matched": false
-          }
-        ]
-      },
-      "lthSourceUrls": [
-        "https://kurser.lth.se/lot/programme?ay=26_27&programme=MFOT",
-        "https://api.lth.lu.se/lot/courses?programmeCode=MFOT&academicYearId=26_27"
-      ],
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/TAFOT",
-          "error": "HTTP 404"
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/TAFOT",
           "error": "HTTP 404"
         }
       ]
@@ -8186,22 +7181,24 @@
       ]
     },
     {
-      "code": "TAMAS",
-      "name": "Civilingenjörsutbildning i maskinteknik",
+      "code": "TAFOT",
+      "name": "Masterutbildning i fotonik",
       "reason": "partial:none",
       "attemptedUrls": [
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-maskinteknik-TAMAS",
-        "https://www.lu.se/studera/maskinteknik-civilingenjorsutbildning-TAMAS",
-        "https://kursplaner.lu.se/pdf/program/sv/TAMAS",
-        "https://kursplaner.lu.se/pdf/program/en/TAMAS"
+        "https://www.lu.se/studera/masterutbildning-i-fotonik-TAFOT",
+        "https://www.lu.se/studera/fotonik-masterutbildning-TAFOT",
+        "https://www.lu.se/studera/fotonik-masters-programme-TAFOT",
+        "https://www.lunduniversity.lu.se/study/fotonik-masters-programme-TAFOT",
+        "https://kursplaner.lu.se/pdf/program/sv/TAFOT",
+        "https://kursplaner.lu.se/pdf/program/en/TAFOT"
       ],
       "bestSourceUrls": [
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-maskinteknik-TAMAS",
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-maskinteknik-TAMAS/programmets-innehall"
+        "https://www.lu.se/studera/fotonik-masterutbildning-TAFOT",
+        "https://www.lu.se/studera/fotonik-masterutbildning-TAFOT/programmets-innehall"
       ],
       "bestQuality": {
         "complete": false,
-        "expectedTerms": 10,
+        "expectedTerms": 4,
         "completeTerms": [],
         "termHp": {
           "1": {
@@ -8227,84 +7224,63 @@
             "electiveListedHp": 0,
             "unknownHp": 0,
             "covered": false
-          },
-          "5": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "6": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "7": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "8": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "9": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "10": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
           }
         },
         "courses": [],
-        "totalHp": 300,
+        "totalHp": 120,
         "tableRows": 0,
         "textRows": 0,
         "choiceTerms": []
       },
       "lthQuality": {
         "complete": false,
-        "totalHp": 300,
-        "expectedTerms": 10,
-        "completeTerms": [
-          5,
-          4
-        ],
-        "lthCode": "M",
-        "apiRows": 231,
-        "activeRows": 227,
-        "mandatoryRows": 23,
-        "ambiguousMandatory": [
-          "EDAA85"
-        ],
-        "overfullTerms": [
+        "totalHp": 120,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "lthCode": "MFOT",
+        "apiRows": 32,
+        "activeRows": 32,
+        "mandatoryRows": 4,
+        "ambiguousMandatory": [],
+        "overfullTerms": [],
+        "slotDiagnostics": [
+          {
+            "term": 1,
+            "remainder": 15,
+            "options": 14,
+            "matched": false
+          },
+          {
+            "term": 2,
+            "remainder": 15,
+            "options": 15,
+            "matched": false
+          },
           {
             "term": 3,
-            "hp": 31
+            "remainder": 30,
+            "options": 0,
+            "matched": false
+          },
+          {
+            "term": 4,
+            "remainder": 30,
+            "options": 2,
+            "matched": false
           }
-        ],
-        "slotDiagnostics": []
+        ]
       },
       "lthSourceUrls": [
-        "https://kurser.lth.se/lot/programme?ay=26_27&programme=M",
-        "https://api.lth.lu.se/lot/courses?programmeCode=M&academicYearId=26_27"
+        "https://kurser.lth.se/lot/programme?ay=26_27&programme=MFOT",
+        "https://api.lth.lu.se/lot/courses?programmeCode=MFOT&academicYearId=26_27"
       ],
       "pdfDiagnostics": [
         {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/TAMAS",
+          "url": "https://kursplaner.lu.se/pdf/program/sv/TAFOT",
           "error": "HTTP 404"
         },
         {
-          "url": "https://kursplaner.lu.se/pdf/program/en/TAMAS",
+          "url": "https://kursplaner.lu.se/pdf/program/en/TAFOT",
           "error": "HTTP 404"
         }
       ]
@@ -8441,6 +7417,130 @@
       ]
     },
     {
+      "code": "TAMAS",
+      "name": "Civilingenjörsutbildning i maskinteknik",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-maskinteknik-TAMAS",
+        "https://www.lu.se/studera/maskinteknik-civilingenjorsutbildning-TAMAS",
+        "https://kursplaner.lu.se/pdf/program/sv/TAMAS",
+        "https://kursplaner.lu.se/pdf/program/en/TAMAS"
+      ],
+      "bestSourceUrls": [
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-maskinteknik-TAMAS",
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-maskinteknik-TAMAS/programmets-innehall"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 10,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "5": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "6": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "7": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "8": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "9": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "10": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 300,
+        "tableRows": 0,
+        "textRows": 0,
+        "choiceTerms": []
+      },
+      "lthQuality": {
+        "complete": false,
+        "totalHp": 300,
+        "expectedTerms": 10,
+        "completeTerms": [
+          5,
+          4
+        ],
+        "lthCode": "M",
+        "apiRows": 231,
+        "activeRows": 227,
+        "mandatoryRows": 23,
+        "ambiguousMandatory": [
+          "EDAA85"
+        ],
+        "overfullTerms": [
+          {
+            "term": 3,
+            "hp": 31
+          }
+        ],
+        "slotDiagnostics": []
+      },
+      "lthSourceUrls": [
+        "https://kurser.lth.se/lot/programme?ay=26_27&programme=M",
+        "https://api.lth.lu.se/lot/courses?programmeCode=M&academicYearId=26_27"
+      ],
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/TAMAS",
+          "error": "HTTP 404"
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/TAMAS",
+          "error": "HTTP 404"
+        }
+      ]
+    },
+    {
       "code": "TAMTE",
       "name": "Civilingenjörsutbildning i medicin och teknik",
       "reason": "partial:none",
@@ -8560,133 +7660,6 @@
         },
         {
           "url": "https://kursplaner.lu.se/pdf/program/en/TAMTE",
-          "error": "HTTP 404"
-        }
-      ]
-    },
-    {
-      "code": "TATFY",
-      "name": "Civilingenjörsutbildning i teknisk fysik",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-teknisk-fysik-TATFY",
-        "https://www.lu.se/studera/teknisk-fysik-civilingenjorsutbildning-TATFY",
-        "https://kursplaner.lu.se/pdf/program/sv/TATFY",
-        "https://kursplaner.lu.se/pdf/program/en/TATFY"
-      ],
-      "bestSourceUrls": [
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-teknisk-fysik-TATFY",
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-teknisk-fysik-TATFY/programmets-innehall"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 10,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "5": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "6": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "7": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "8": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "9": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          },
-          "10": {
-            "mandatoryHp": 0,
-            "electiveListedHp": 0,
-            "unknownHp": 0,
-            "covered": false
-          }
-        },
-        "courses": [],
-        "totalHp": 300,
-        "tableRows": 0,
-        "textRows": 0,
-        "choiceTerms": []
-      },
-      "lthQuality": {
-        "complete": false,
-        "totalHp": 300,
-        "expectedTerms": 10,
-        "completeTerms": [
-          2,
-          1,
-          6
-        ],
-        "lthCode": "F",
-        "apiRows": 568,
-        "activeRows": 555,
-        "mandatoryRows": 25,
-        "ambiguousMandatory": [],
-        "overfullTerms": [
-          {
-            "term": 4,
-            "hp": 30.5
-          },
-          {
-            "term": 3,
-            "hp": 30.5
-          }
-        ],
-        "slotDiagnostics": []
-      },
-      "lthSourceUrls": [
-        "https://kurser.lth.se/lot/programme?ay=26_27&programme=F",
-        "https://api.lth.lu.se/lot/courses?programmeCode=F&academicYearId=26_27"
-      ],
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/TATFY",
-          "error": "HTTP 404"
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/TATFY",
           "error": "HTTP 404"
         }
       ]
@@ -8816,18 +7789,18 @@
       ]
     },
     {
-      "code": "TAVOV",
-      "name": "Civilingenjörsutbildning i väg- och vattenbyggnad",
+      "code": "TATFY",
+      "name": "Civilingenjörsutbildning i teknisk fysik",
       "reason": "partial:none",
       "attemptedUrls": [
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-vag-och-vattenbyggnad-TAVOV",
-        "https://www.lu.se/studera/vag-och-vattenbyggnad-civilingenjorsutbildning-TAVOV",
-        "https://kursplaner.lu.se/pdf/program/sv/TAVOV",
-        "https://kursplaner.lu.se/pdf/program/en/TAVOV"
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-teknisk-fysik-TATFY",
+        "https://www.lu.se/studera/teknisk-fysik-civilingenjorsutbildning-TATFY",
+        "https://kursplaner.lu.se/pdf/program/sv/TATFY",
+        "https://kursplaner.lu.se/pdf/program/en/TATFY"
       ],
       "bestSourceUrls": [
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-vag-och-vattenbyggnad-TAVOV",
-        "https://www.lu.se/studera/civilingenjorsutbildning-i-vag-och-vattenbyggnad-TAVOV/programmets-innehall"
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-teknisk-fysik-TATFY",
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-teknisk-fysik-TATFY/programmets-innehall"
       ],
       "bestQuality": {
         "complete": false,
@@ -8906,34 +7879,38 @@
         "totalHp": 300,
         "expectedTerms": 10,
         "completeTerms": [
-          5
+          2,
+          1,
+          6
         ],
-        "lthCode": "V",
-        "apiRows": 157,
-        "activeRows": 155,
-        "mandatoryRows": 23,
-        "ambiguousMandatory": [
-          "FMNF16"
-        ],
+        "lthCode": "F",
+        "apiRows": 568,
+        "activeRows": 555,
+        "mandatoryRows": 25,
+        "ambiguousMandatory": [],
         "overfullTerms": [
           {
-            "term": 1,
+            "term": 4,
+            "hp": 30.5
+          },
+          {
+            "term": 3,
             "hp": 30.5
           }
         ],
         "slotDiagnostics": []
       },
       "lthSourceUrls": [
-        "https://kurser.lth.se/lot/programme?ay=26_27&programme=V",
-        "https://api.lth.lu.se/lot/courses?programmeCode=V&academicYearId=26_27"
+        "https://kurser.lth.se/lot/programme?ay=26_27&programme=F",
+        "https://api.lth.lu.se/lot/courses?programmeCode=F&academicYearId=26_27"
       ],
       "pdfDiagnostics": [
         {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/TAVOV",
+          "url": "https://kursplaner.lu.se/pdf/program/sv/TATFY",
           "error": "HTTP 404"
         },
         {
-          "url": "https://kursplaner.lu.se/pdf/program/en/TAVOV",
+          "url": "https://kursplaner.lu.se/pdf/program/en/TATFY",
           "error": "HTTP 404"
         }
       ]
@@ -9129,6 +8106,129 @@
       ]
     },
     {
+      "code": "TAVOV",
+      "name": "Civilingenjörsutbildning i väg- och vattenbyggnad",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-vag-och-vattenbyggnad-TAVOV",
+        "https://www.lu.se/studera/vag-och-vattenbyggnad-civilingenjorsutbildning-TAVOV",
+        "https://kursplaner.lu.se/pdf/program/sv/TAVOV",
+        "https://kursplaner.lu.se/pdf/program/en/TAVOV"
+      ],
+      "bestSourceUrls": [
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-vag-och-vattenbyggnad-TAVOV",
+        "https://www.lu.se/studera/civilingenjorsutbildning-i-vag-och-vattenbyggnad-TAVOV/programmets-innehall"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 10,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "5": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "6": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "7": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "8": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "9": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          },
+          "10": {
+            "mandatoryHp": 0,
+            "electiveListedHp": 0,
+            "unknownHp": 0,
+            "covered": false
+          }
+        },
+        "courses": [],
+        "totalHp": 300,
+        "tableRows": 0,
+        "textRows": 0,
+        "choiceTerms": []
+      },
+      "lthQuality": {
+        "complete": false,
+        "totalHp": 300,
+        "expectedTerms": 10,
+        "completeTerms": [
+          5
+        ],
+        "lthCode": "V",
+        "apiRows": 157,
+        "activeRows": 155,
+        "mandatoryRows": 23,
+        "ambiguousMandatory": [
+          "FMNF16"
+        ],
+        "overfullTerms": [
+          {
+            "term": 1,
+            "hp": 30.5
+          }
+        ],
+        "slotDiagnostics": []
+      },
+      "lthSourceUrls": [
+        "https://kurser.lth.se/lot/programme?ay=26_27&programme=V",
+        "https://api.lth.lu.se/lot/courses?programmeCode=V&academicYearId=26_27"
+      ],
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/TAVOV",
+          "error": "HTTP 404"
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/TAVOV",
+          "error": "HTTP 404"
+        }
+      ]
+    },
+    {
       "code": "TATPI",
       "name": "Civilingenjörsutbildning i teknisk matematik",
       "reason": "partial:none",
@@ -9252,18 +8352,18 @@
       ]
     },
     {
-      "code": "TGDAT",
-      "name": "Högskoleingenjörsutbildning i datateknik",
+      "code": "TGELT",
+      "name": "Högskoleingenjörsutbildning i elektroteknik med automationsteknik",
       "reason": "partial:none",
       "attemptedUrls": [
-        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-datateknik-TGDAT",
-        "https://www.lu.se/studera/datateknik-hogskoleingenjorsutbildning-TGDAT",
-        "https://kursplaner.lu.se/pdf/program/sv/TGDAT",
-        "https://kursplaner.lu.se/pdf/program/en/TGDAT"
+        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-elektroteknik-med-automationsteknik-TGELT",
+        "https://www.lu.se/studera/elektroteknik-med-automationsteknik-hogskoleingenjorsutbildning-TGELT",
+        "https://kursplaner.lu.se/pdf/program/sv/TGELT",
+        "https://kursplaner.lu.se/pdf/program/en/TGELT"
       ],
       "bestSourceUrls": [
-        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-datateknik-TGDAT",
-        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-datateknik-TGDAT/programmets-innehall"
+        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-elektroteknik-med-automationsteknik-TGELT",
+        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-elektroteknik-med-automationsteknik-TGELT/programmets-innehall"
       ],
       "bestQuality": {
         "complete": false,
@@ -9318,12 +8418,12 @@
         "totalHp": 180,
         "expectedTerms": 6,
         "completeTerms": [
-          3,
-          4
+          4,
+          3
         ],
-        "lthCode": "IDA",
-        "apiRows": 29,
-        "activeRows": 29,
+        "lthCode": "IEA",
+        "apiRows": 28,
+        "activeRows": 28,
         "mandatoryRows": 19,
         "ambiguousMandatory": [
           "EITA15",
@@ -9333,16 +8433,50 @@
         "slotDiagnostics": []
       },
       "lthSourceUrls": [
-        "https://kurser.lth.se/lot/programme?ay=26_27&programme=IDA",
-        "https://api.lth.lu.se/lot/courses?programmeCode=IDA&academicYearId=26_27"
+        "https://kurser.lth.se/lot/programme?ay=26_27&programme=IEA",
+        "https://api.lth.lu.se/lot/courses?programmeCode=IEA&academicYearId=26_27"
       ],
       "pdfDiagnostics": [
         {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/TGDAT",
+          "url": "https://kursplaner.lu.se/pdf/program/sv/TGELT",
           "error": "HTTP 404"
         },
         {
-          "url": "https://kursplaner.lu.se/pdf/program/en/TGDAT",
+          "url": "https://kursplaner.lu.se/pdf/program/en/TGELT",
+          "error": "HTTP 404"
+        }
+      ]
+    },
+    {
+      "code": "TGTF1",
+      "name": "Trafikflygare i kommersiell luftfart med MPL-certifikat",
+      "reason": "partial:none",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/trafikflygare-i-kommersiell-luftfart-med-mpl-certifikat-TGTF1",
+        "https://kursplaner.lu.se/pdf/program/sv/TGTF1",
+        "https://kursplaner.lu.se/pdf/program/en/TGTF1"
+      ],
+      "bestSourceUrls": [
+        "https://www.lu.se/studera/trafikflygare-i-kommersiell-luftfart-med-mpl-certifikat-TGTF1"
+      ],
+      "bestQuality": {
+        "complete": false,
+        "expectedTerms": 0,
+        "completeTerms": [],
+        "termHp": {},
+        "courses": [],
+        "totalHp": 0,
+        "tableRows": 0,
+        "textRows": 0,
+        "choiceTerms": []
+      },
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/TGTF1",
+          "error": "HTTP 404"
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/TGTF1",
           "error": "HTTP 404"
         }
       ]
@@ -9445,18 +8579,70 @@
       ]
     },
     {
-      "code": "TGELT",
-      "name": "Högskoleingenjörsutbildning i elektroteknik med automationsteknik",
+      "code": "TZTNB",
+      "name": "Tekniskt/naturvetenskapligt basår, Teknisk inriktning",
+      "reason": "official-page-not-found",
+      "attemptedUrls": [
+        "https://www.lu.se/studera/tekniskt-naturvetenskapligt-basar-teknisk-inriktning-TZTNB",
+        "https://kursplaner.lu.se/pdf/program/sv/TZTNB",
+        "https://kursplaner.lu.se/pdf/program/en/TZTNB"
+      ],
+      "bestSourceUrls": [],
+      "bestQuality": {},
+      "lthQuality": {
+        "complete": false,
+        "totalHp": 60,
+        "expectedTerms": 2,
+        "completeTerms": [],
+        "lthCode": "TNB",
+        "apiRows": 16,
+        "activeRows": 16,
+        "mandatoryRows": 0,
+        "ambiguousMandatory": [],
+        "overfullTerms": [],
+        "slotDiagnostics": [
+          {
+            "term": 1,
+            "remainder": 30,
+            "options": 0,
+            "matched": false
+          },
+          {
+            "term": 2,
+            "remainder": 30,
+            "options": 0,
+            "matched": false
+          }
+        ]
+      },
+      "lthSourceUrls": [
+        "https://kurser.lth.se/lot/programme?ay=26_27&programme=TNB",
+        "https://api.lth.lu.se/lot/courses?programmeCode=TNB&academicYearId=26_27"
+      ],
+      "pdfDiagnostics": [
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/sv/TZTNB",
+          "error": "HTTP 404"
+        },
+        {
+          "url": "https://kursplaner.lu.se/pdf/program/en/TZTNB",
+          "error": "HTTP 404"
+        }
+      ]
+    },
+    {
+      "code": "TGDAT",
+      "name": "Högskoleingenjörsutbildning i datateknik",
       "reason": "partial:none",
       "attemptedUrls": [
-        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-elektroteknik-med-automationsteknik-TGELT",
-        "https://www.lu.se/studera/elektroteknik-med-automationsteknik-hogskoleingenjorsutbildning-TGELT",
-        "https://kursplaner.lu.se/pdf/program/sv/TGELT",
-        "https://kursplaner.lu.se/pdf/program/en/TGELT"
+        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-datateknik-TGDAT",
+        "https://www.lu.se/studera/datateknik-hogskoleingenjorsutbildning-TGDAT",
+        "https://kursplaner.lu.se/pdf/program/sv/TGDAT",
+        "https://kursplaner.lu.se/pdf/program/en/TGDAT"
       ],
       "bestSourceUrls": [
-        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-elektroteknik-med-automationsteknik-TGELT",
-        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-elektroteknik-med-automationsteknik-TGELT/programmets-innehall"
+        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-datateknik-TGDAT",
+        "https://www.lu.se/studera/hogskoleingenjorsutbildning-i-datateknik-TGDAT/programmets-innehall"
       ],
       "bestQuality": {
         "complete": false,
@@ -9511,12 +8697,12 @@
         "totalHp": 180,
         "expectedTerms": 6,
         "completeTerms": [
-          4,
-          3
+          3,
+          4
         ],
-        "lthCode": "IEA",
-        "apiRows": 28,
-        "activeRows": 28,
+        "lthCode": "IDA",
+        "apiRows": 29,
+        "activeRows": 29,
         "mandatoryRows": 19,
         "ambiguousMandatory": [
           "EITA15",
@@ -9526,68 +8712,39 @@
         "slotDiagnostics": []
       },
       "lthSourceUrls": [
-        "https://kurser.lth.se/lot/programme?ay=26_27&programme=IEA",
-        "https://api.lth.lu.se/lot/courses?programmeCode=IEA&academicYearId=26_27"
+        "https://kurser.lth.se/lot/programme?ay=26_27&programme=IDA",
+        "https://api.lth.lu.se/lot/courses?programmeCode=IDA&academicYearId=26_27"
       ],
       "pdfDiagnostics": [
         {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/TGELT",
+          "url": "https://kursplaner.lu.se/pdf/program/sv/TGDAT",
           "error": "HTTP 404"
         },
         {
-          "url": "https://kursplaner.lu.se/pdf/program/en/TGELT",
+          "url": "https://kursplaner.lu.se/pdf/program/en/TGDAT",
           "error": "HTTP 404"
         }
       ]
     },
     {
-      "code": "TZTNB",
-      "name": "Tekniskt/naturvetenskapligt basår, Teknisk inriktning",
+      "code": "XGTRF",
+      "name": "Kandidatprogrammet trafikflygare, Antagning till senare del",
       "reason": "official-page-not-found",
       "attemptedUrls": [
-        "https://www.lu.se/studera/tekniskt-naturvetenskapligt-basar-teknisk-inriktning-TZTNB",
-        "https://kursplaner.lu.se/pdf/program/sv/TZTNB",
-        "https://kursplaner.lu.se/pdf/program/en/TZTNB"
+        "https://www.lu.se/studera/kandidatprogrammet-trafikflygare-antagning-till-senare-del-XGTRF",
+        "https://www.lu.se/studera/trafikflygare-antagning-till-senare-del-kandidatprogram-XGTRF",
+        "https://kursplaner.lu.se/pdf/program/sv/XGTRF",
+        "https://kursplaner.lu.se/pdf/program/en/XGTRF"
       ],
       "bestSourceUrls": [],
       "bestQuality": {},
-      "lthQuality": {
-        "complete": false,
-        "totalHp": 60,
-        "expectedTerms": 2,
-        "completeTerms": [],
-        "lthCode": "TNB",
-        "apiRows": 16,
-        "activeRows": 16,
-        "mandatoryRows": 0,
-        "ambiguousMandatory": [],
-        "overfullTerms": [],
-        "slotDiagnostics": [
-          {
-            "term": 1,
-            "remainder": 30,
-            "options": 0,
-            "matched": false
-          },
-          {
-            "term": 2,
-            "remainder": 30,
-            "options": 0,
-            "matched": false
-          }
-        ]
-      },
-      "lthSourceUrls": [
-        "https://kurser.lth.se/lot/programme?ay=26_27&programme=TNB",
-        "https://api.lth.lu.se/lot/courses?programmeCode=TNB&academicYearId=26_27"
-      ],
       "pdfDiagnostics": [
         {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/TZTNB",
+          "url": "https://kursplaner.lu.se/pdf/program/sv/XGTRF",
           "error": "HTTP 404"
         },
         {
-          "url": "https://kursplaner.lu.se/pdf/program/en/TZTNB",
+          "url": "https://kursplaner.lu.se/pdf/program/en/XGTRF",
           "error": "HTTP 404"
         }
       ]
@@ -9702,63 +8859,6 @@
         },
         {
           "url": "https://kursplaner.lu.se/pdf/program/en/VGSKS",
-          "error": "HTTP 404"
-        }
-      ]
-    },
-    {
-      "code": "TGTF1",
-      "name": "Trafikflygare i kommersiell luftfart med MPL-certifikat",
-      "reason": "partial:none",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/trafikflygare-i-kommersiell-luftfart-med-mpl-certifikat-TGTF1",
-        "https://kursplaner.lu.se/pdf/program/sv/TGTF1",
-        "https://kursplaner.lu.se/pdf/program/en/TGTF1"
-      ],
-      "bestSourceUrls": [
-        "https://www.lu.se/studera/trafikflygare-i-kommersiell-luftfart-med-mpl-certifikat-TGTF1"
-      ],
-      "bestQuality": {
-        "complete": false,
-        "expectedTerms": 0,
-        "completeTerms": [],
-        "termHp": {},
-        "courses": [],
-        "totalHp": 0,
-        "tableRows": 0,
-        "textRows": 0,
-        "choiceTerms": []
-      },
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/TGTF1",
-          "error": "HTTP 404"
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/TGTF1",
-          "error": "HTTP 404"
-        }
-      ]
-    },
-    {
-      "code": "XGTRF",
-      "name": "Kandidatprogrammet trafikflygare, Antagning till senare del",
-      "reason": "official-page-not-found",
-      "attemptedUrls": [
-        "https://www.lu.se/studera/kandidatprogrammet-trafikflygare-antagning-till-senare-del-XGTRF",
-        "https://www.lu.se/studera/trafikflygare-antagning-till-senare-del-kandidatprogram-XGTRF",
-        "https://kursplaner.lu.se/pdf/program/sv/XGTRF",
-        "https://kursplaner.lu.se/pdf/program/en/XGTRF"
-      ],
-      "bestSourceUrls": [],
-      "bestQuality": {},
-      "pdfDiagnostics": [
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/sv/XGTRF",
-          "error": "HTTP 404"
-        },
-        {
-          "url": "https://kursplaner.lu.se/pdf/program/en/XGTRF",
           "error": "HTTP 404"
         }
       ]
