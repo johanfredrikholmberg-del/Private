@@ -1479,6 +1479,37 @@ function curatedOfficialStructure(program) {
     return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
   }
 
+  if (programmeCode === 'SAKPU') {
+    const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/SAKPU';
+    const psychotherapyOptions = [
+      { code: '', name: 'Psykoterapeutisk teori PDT', hp: 5 },
+      { code: '', name: 'Psykoterapeutisk teori KBT', hp: 5 },
+    ];
+    const individualOptions = [
+      { code: '', name: 'Organisationsanalys – med fokus på hälsa i arbetslivet och kulturella faktorer samt pedagogisk psykologi', hp: 5 },
+      { code: '', name: 'Kognitions- och neuropsykologi', hp: 5 },
+    ];
+    const rows = [
+      { term: 1, code: '', name: 'Psykologyrket i Sverige', hp: 4, category: 'mandatory' },
+      { term: 1, code: '', name: 'Profession, etik och evidensbaserad psykologisk praktik', hp: 6, category: 'mandatory' },
+      { term: 1, code: '', name: 'Samtalsmetodik för psykologer', hp: 5, category: 'mandatory' },
+      slot(1, 'Psykoterapeutisk teori: PDT eller KBT', 5, psychotherapyOptions),
+      { term: 1, code: '', name: 'Psykometri och intelligenstestning', hp: 5, category: 'mandatory' },
+      { term: 1, code: '', name: 'Professionell utveckling och språk', hp: 5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Utredning: metodik och utlåtandeskrivning', hp: 5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Psykoterapi, metod och tillämpning: Psykologiskt behandlingsarbete', hp: 5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Handlett klientarbete I', hp: 5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Psykiatrisk diagnostik och epidemiologi', hp: 5, category: 'mandatory' },
+      { term: 2, code: '', name: 'Psykisk ohälsa och neuropsykologiska dysfunktioner', hp: 10, category: 'mandatory' },
+      { term: 3, code: '', name: 'Juridik för psykologer', hp: 5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Klinisk psykologi II: Klinisk psykologi – fördjupning och tillämpning', hp: 10, category: 'mandatory' },
+      { term: 3, code: '', name: 'Klinisk psykologi II: Verksamhetsförlagd utredning', hp: 5, category: 'mandatory' },
+      { term: 3, code: '', name: 'Handlett klientarbete II', hp: 5, category: 'mandatory' },
+      slot(3, 'Individuell komplettering II: organisationsanalys eller kognitions- och neuropsykologi', 5, individualOptions),
+    ];
+    return makeCanonical(program, rows, [sourceUrl], { source: 'lund-official-programme-pdf' });
+  }
+
   if (programmeCode === 'HALKM') {
     const sourceUrl = 'https://kursplaner.lu.se/pdf/program/sv/HALKM';
     const germanOptions = [
