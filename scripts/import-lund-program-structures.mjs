@@ -708,6 +708,9 @@ const LTH_PROGRAMME_CODES = {
   TARSK: 'R', TASUD: 'MSUD', TATFY: 'F', TATNA: 'N', TATPI: 'Pi', TAVAR: 'MVAR', TAVOV: 'V',
   TAWIR: 'MWIR', TAWRE: 'MWLU', TGBYA: 'IBYA', TGBYT: 'IBYT', TGDAT: 'IDA', TGELT: 'IEA',
   TGIND: 'KID', TZTNB: 'TNB',
+  // Remaining LTH catalogue records whose official programme codes differ from StudieLots/SUSA codes.
+  // Keep these aliases explicit so the importer can use LTH's official LoT API instead of guessing structures.
+  TABMT: 'MBME',
 };
 
 function lthTermCandidates(row, yearCount) {
