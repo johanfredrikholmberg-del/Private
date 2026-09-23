@@ -722,7 +722,17 @@ function lthTermCandidates(row, yearCount) {
   for (const [start, end] of periods) {
     if (start <= 2 && end <= 2) terms.add((year - 1) * 2 + 1);
     else if (start >= 3 && end >= 3) terms.add((year - 1) * 2 + 2);
-    else return [];
+    else {
+      // A course spanning study periods 2–3 crosses the semester boundary.
+      // Do not discard it: use the period carrying the larger share only when
+      // the LoT interval makes that placement unambiguous. Equal spans remain
+      // unresolved and are kept out of verified structures.
+      const autumnShare = Math.max(0, Math.min(end, 2) - start + 1);
+      const springShare = Math.max(0, end - Math.max(start, 3) + 1);
+      if (autumnShare > springShare) terms.add((year - 1) * 2 + 1);
+      else if (springShare > autumnShare) terms.add((year - 1) * 2 + 2);
+      else return [];
+    }
   }
   if (!terms.size && row.type === 'degree_project' && Number(row.credits) === 30 && year === yearCount) terms.add(year * 2);
   return [...terms];
