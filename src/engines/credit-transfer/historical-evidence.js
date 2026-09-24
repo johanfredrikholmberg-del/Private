@@ -3,15 +3,18 @@ const root=window.StudieLotsEngines;
 const previous=root?.creditTransfer;
 if(!previous?.assess||previous.__historicalEvidenceV1)return;
 const norm=v=>String(v??'').trim().toUpperCase();
+const exactName=v=>String(v??'').normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]+/g,' ').trim();
 const number=v=>{const n=Number(v);return Number.isFinite(n)&&n>0?n:0};
 const code=c=>norm(c?.code??c?.courseCode);
 const decision=r=>String(r?.decision??r?.status??r?.result??'').trim().toLowerCase();
 function approvals(source,target,history){
  const from=code(source),to=code(target),seen=new Set(),matches=[];
- if(!from||!to||!Array.isArray(history))return matches;
+ if(!to||!Array.isArray(history))return matches;
  for(const r of history){
   if(!/^(approved|bifall|granted)$/.test(decision(r)))continue;
-  if(norm(r?.sourceCode??r?.fromCode)!==from||norm(r?.targetCode??r?.toCode)!==to)continue;
+  const historyFrom=norm(r?.sourceCode??r?.fromCode);
+  const sourceMatches=(historyFrom&&from&&historyFrom===from)||(!historyFrom&&exactName(r?.sourceName??r?.fromName)&&exactName(r?.sourceName??r?.fromName)===exactName(source?.name??source?.title??source?.courseName));
+  if(!sourceMatches||norm(r?.targetCode??r?.toCode)!==to)continue;
   const sourceHp=number(r?.sourceHp),targetHp=number(r?.targetHp);
   if(!sourceHp||!targetHp||sourceHp+0.01<number(source?.hp??source?.credits??source?.ects)||targetHp+0.01<number(target?.hp??target?.credits??target?.ects))continue;
   const id=norm(r?.id??r?.decisionId??r?.caseId);
