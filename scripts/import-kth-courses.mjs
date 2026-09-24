@@ -6,6 +6,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const ROOT='https://www.kth.se/student/kurser/org';
+// KTH course pages expose course code, name, credits and education level.
 const OUT=path.resolve('data/kth/courses.json');
 const clean=s=>String(s||'').replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/\s+/g,' ').trim();
 const fetchText=async url=>{const r=await fetch(url,{headers:{'user-agent':'StudieLots/1.0'}});if(!r.ok)throw new Error(url+' '+r.status);return r.text()};
