@@ -22,7 +22,7 @@ for(const org of orgs){
  for(const m of html.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/gi)){
   const cells=[...m[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map(x=>clean(x[1]));
   if(cells.length<3)continue;
-  const rawCode=cells[0].split(' ')[0].trim().toUpperCase();
+  const rawCode=(cells[0].match(/[A-Z][A-Z0-9]{4,5}/i)||[])[0]?.toUpperCase()||'';
   const code=/^[A-Z][A-Z0-9]{4,5}$/.test(rawCode)?rawCode:null;
   if(!code)continue;
   const hp=Number((cells[2].match(/\d+(?:[.,]\d+)?/)||[])[0]?.replace(',','.'))||null;
