@@ -9,7 +9,7 @@ const code=c=>norm(c?.code??c?.courseCode);
 const decision=r=>String(r?.decision??r?.status??r?.result??'').trim().toLowerCase();
 function approvals(source,target,history){
  const from=code(source),to=code(target),seen=new Set(),matches=[];
- if(!to||!Array.isArray(history))return matches;
+ const targetName=exactName(target?.name??target?.title??target?.courseName);\n if((!to&&!targetName)||!Array.isArray(history))return matches;
  for(const r of history){
   if(!/^(approved|bifall|granted)$/.test(decision(r)))continue;
   const historyFrom=norm(r?.sourceCode??r?.fromCode);
