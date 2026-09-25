@@ -4,7 +4,7 @@ const previous=root?.creditTransfer;
 if(!previous?.assess||previous.__historicalEvidenceV1)return;
 const norm=v=>String(v??'').trim().toUpperCase();
 const exactName=v=>String(v??'').normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]+/g,' ').trim();
-const number=v=>{const n=Number(v);return Number.isFinite(n)&&n>0?n:0};
+const number=v=>{const m=String(v??'').replace(',','.').match(/\\d+(?:\\.\\d+)?/);const n=m?Number(m[0]):0;return Number.isFinite(n)&&n>0?n:0};
 const code=c=>norm(c?.code??c?.courseCode);
 const decision=r=>String(r?.decision??r?.status??r?.result??'').trim().toLowerCase();
 function approvals(source,target,history){
@@ -14,7 +14,7 @@ function approvals(source,target,history){
   if(!/^(approved|bifall|granted)$/.test(decision(r)))continue;
   const historyFrom=norm(r?.sourceCode??r?.fromCode);
   const sourceMatches=(historyFrom&&from&&historyFrom===from)||(!historyFrom&&exactName(r?.sourceName??r?.fromName)&&exactName(r?.sourceName??r?.fromName)===exactName(source?.name??source?.title??source?.courseName));
-  if(!sourceMatches||norm(r?.targetCode??r?.toCode)!==to)continue;
+  const historyTo=norm(r?.targetCode??r?.toCode);\n  const targetMatches=(historyTo&&to&&historyTo===to)||(!historyTo&&exactName(r?.targetName??r?.toName)&&exactName(r?.targetName??r?.toName)===exactName(target?.name??target?.title??target?.courseName));\n  if(!sourceMatches||!targetMatches)continue;
   const sourceHp=number(r?.sourceHp),targetHp=number(r?.targetHp);
   if(!sourceHp||!targetHp||sourceHp+0.01<number(source?.hp??source?.credits??source?.ects)||targetHp+0.01<number(target?.hp??target?.credits??target?.ects))continue;
   const id=norm(r?.id??r?.decisionId??r?.caseId);
