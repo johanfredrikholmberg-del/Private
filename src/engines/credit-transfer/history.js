@@ -26,6 +26,6 @@ const decisions=[
  ['RE500068','Portabla format / Praktisk uppgift - Webbläsares kompatibilitet',1,'ISGB13-1322 :',1,'ISGB13-1322','approved'],
  ['RE498691','Introduktion till innovationsteknik och design för högskoleingenjörer',7.5,'MSGA24 :',7.5,'MSGA24','approved']
 ].map(([id,sourceName,sourceHp,targetName,targetHp,targetCode,decision])=>Object.freeze({id,university:'Karlstads universitet',sourceName,sourceHp,targetName,targetHp,targetCode,decision}));
-function forAssessment(){return decisions.map(d=>({id:d.id,sourceName:d.sourceName,sourceHp:d.sourceHp,targetName:d.targetName,targetHp:d.targetHp,targetCode:d.targetCode,decision:d.decision,status:d.decision,source:'Karlstads universitet'}))}
-root.creditTransferHistory=Object.freeze({source:'Karlstads universitet',decisions,forAssessment});
+const kthReady=fetch('/data/kth/history/specific-1to1.json').then(r=>r.ok?r.json():[]).then(rows=>{for(const r of rows){decisions.push(Object.freeze({...r,source:'KTH'}))}return rows.length}).catch(()=>0);\nfunction forAssessment(){return decisions.map(d=>({id:d.id,sourceName:d.sourceName,sourceHp:d.sourceHp,targetName:d.targetName,targetHp:d.targetHp,targetCode:d.targetCode,decision:d.decision,status:d.decision,source:'Karlstads universitet'}))}
+root.creditTransferHistory=Object.freeze({source:'historical decisions',decisions,forAssessment,ready:kthReady});
 })();
