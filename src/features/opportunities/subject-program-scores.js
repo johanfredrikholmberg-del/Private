@@ -57,6 +57,6 @@ function render(){
   async function worker(){while(next<subjects.length&&run===generation){const {button,subject}=subjects[next++];await update(button,subject,kind,courses,key,run)}}
   Promise.all(Array.from({length:Math.min(3,subjects.length)},worker)).catch(error=>console.warn('[StudieLots subject score workers]',error));
 }
-root.opportunities={...op,__subjectProgramScores:true,render};
+op.render=render;op.__subjectProgramScores=true;root.opportunities=op;
 if(ctx.q('#opportunities')?.classList.contains('active'))render();
 })();
