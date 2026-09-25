@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/build-kth-catalogue.yml'
       - 'scripts/import-kth-courses.mjs'
+      - 'scripts/resolve-kth-history.mjs'
   workflow_dispatch:
 permissions:
   contents: write
