@@ -1,0 +1,28 @@
+name: Build KTH course catalogue
+on:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - '.github/workflows/build-kth-catalogue.yml'
+      - 'scripts/import-kth-courses.mjs'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/import-kth-courses.mjs
+      - name: Commit catalogue
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/kth/courses.json
+          git diff --cached --quiet || git commit -m "Build KTH course catalogue"
+          git push origin HEAD:studielots-v2
