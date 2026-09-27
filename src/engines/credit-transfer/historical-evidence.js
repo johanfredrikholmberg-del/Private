@@ -3,18 +3,21 @@ const root=window.StudieLotsEngines;
 const previous=root?.creditTransfer;
 if(!previous?.assess||previous.__historicalEvidenceV1)return;
 const norm=v=>String(v??'').trim().toUpperCase();
-const exactName=v=>String(v??'').normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]+/g,' ').trim();
-const number=v=>{const m=String(v??'').replace(',','.').match(/\\d+(?:\\.\\d+)?/);const n=m?Number(m[0]):0;return Number.isFinite(n)&&n>0?n:0};
+const exactName=v=>String(v??'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]+/g,' ').trim();
+const number=v=>{const m=String(v??'').replace(',','.').match(/\d+(?:\.\d+)?/);const n=m?Number(m[0]):0;return Number.isFinite(n)&&n>0?n:0};
 const code=c=>norm(c?.code??c?.courseCode);
 const decision=r=>String(r?.decision??r?.status??r?.result??'').trim().toLowerCase();
 function approvals(source,target,history){
  const from=code(source),to=code(target),seen=new Set(),matches=[];
- const targetName=exactName(target?.name??target?.title??target?.courseName);\n if((!to&&!targetName)||!Array.isArray(history))return matches;
+ const targetName=exactName(target?.name??target?.title??target?.courseName);
+ if((!to&&!targetName)||!Array.isArray(history))return matches;
  for(const r of history){
   if(!/^(approved|bifall|granted)$/.test(decision(r)))continue;
   const historyFrom=norm(r?.sourceCode??r?.fromCode);
   const sourceMatches=(historyFrom&&from&&historyFrom===from)||(!historyFrom&&exactName(r?.sourceName??r?.fromName)&&exactName(r?.sourceName??r?.fromName)===exactName(source?.name??source?.title??source?.courseName));
-  const historyTo=norm(r?.targetCode??r?.toCode);\n  const targetMatches=(historyTo&&to&&historyTo===to)||(!historyTo&&exactName(r?.targetName??r?.toName)&&exactName(r?.targetName??r?.toName)===exactName(target?.name??target?.title??target?.courseName));\n  if(!sourceMatches||!targetMatches)continue;
+  const historyTo=norm(r?.targetCode??r?.toCode);
+  const targetMatches=(historyTo&&to&&historyTo===to)||(!historyTo&&exactName(r?.targetName??r?.toName)&&exactName(r?.targetName??r?.toName)===exactName(target?.name??target?.title??target?.courseName));
+  if(!sourceMatches||!targetMatches)continue;
   const sourceHp=number(r?.sourceHp),targetHp=number(r?.targetHp);
   if(!sourceHp||!targetHp||sourceHp+0.01<number(source?.hp??source?.credits??source?.ects)||targetHp+0.01<number(target?.hp??target?.credits??target?.ects))continue;
   const id=norm(r?.id??r?.decisionId??r?.caseId);
@@ -32,9 +35,8 @@ function assess(source,target,options={}){
  const evidence={...base.evidence,historical};
  const reasons=(base.reasons||[]).filter(r=>!/^Historiskt stöd finns/.test(r));
  if(matched.length)reasons.push(`Historiska bifall: ${matched.length} st`);
- const compatible=evidence.levelCompatible!==false&&number(evidence.sourceHp)>=number(evidence.targetHp)*0.9;
- const classification=base.classification==='relevant'&&matched.length&&compatible?'strong':base.classification;
- return Object.freeze({...base,classification,countsInStudyPlan:classification==='strong',label:classification==='strong'?'Starkt underlag':base.label,evidence,reasons});
+ // Historical decisions add context, but never promote relevant evidence to strong.
+ return Object.freeze({...base,evidence,reasons});
 }
 root.creditTransfer=Object.freeze({...previous,assess,__historicalEvidenceV1:true});
 })();
