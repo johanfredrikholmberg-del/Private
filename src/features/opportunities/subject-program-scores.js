@@ -6,7 +6,6 @@ let generation=0;
 const signature=()=>JSON.stringify(ctx.state.courses.map(c=>[c.code||c.courseCode||'',c.name||c.title||'',c.hp??c.credits??0,c.progression||c.level||'']));
 const cache=new Map();
 async function score(program,courses){
-  if(program.structureCoverage!=='complete')return null;
   try{
     const data=await root.paths.structure(program,courses);
     const ledger=data?.creditLedger||root.matchConsistency?.ledger?.(data,courses);
@@ -24,7 +23,7 @@ async function update(button,subject,kind,courses,key,run){
     if(!values){
       const programmes=await root.paths.discover(subject,kind);
       if(!current())return;
-      values=(await Promise.all((Array.isArray(programmes)?programmes:[]).filter(p=>p.structureCoverage==='complete').map(p=>score(p,courses)))).filter(Number.isFinite);
+      values=(await Promise.all((Array.isArray(programmes)?programmes:[]).map(p=>score(p,courses)))).filter(Number.isFinite);
       if(!current())return;
       cache.set(cacheKey,values);
     }
