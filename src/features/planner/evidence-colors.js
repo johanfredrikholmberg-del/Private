@@ -7,8 +7,6 @@ const style=document.createElement('style');style.textContent=`
 #planner .course .status[data-evidence="relevant"]{background:#fff1d5;color:#805817}
 #planner .course .status[data-evidence="limited"]{background:#ffe5e8;color:#a31e35}
 #planner .course .status[data-evidence="none"]{background:#edf2f1;color:#546562}
-#ordinaryPlan .evidence-details{display:none!important}
-#fastPlan .evidence-details{margin-top:12px;padding:12px 0 0;border-top:1px solid #e5eeeb;color:#24483f}#fastPlan .evidence-details summary{cursor:pointer;font-weight:700}#fastPlan .evidence-details li{margin:8px 0}#fastPlan .evidence-details small{display:block;margin-top:10px;color:#60716c}
 `;document.head.appendChild(style);
 const labels={strong:'✓ Starkt underlag',relevant:'− Relevant underlag',limited:'× Begränsat underlag'};
 function update(){document.querySelectorAll('#planner .course').forEach(card=>{const note=card.querySelector('.match-note b'),status=card.querySelector('.status');if(!status)return;const noteText=(note?.textContent||'').toLowerCase(),statusText=(status.textContent||'').toLowerCase();let level=noteText.includes('begränsat')||statusText.includes('begränsat')?'limited':noteText.includes('relevant')||statusText.includes('relevant')?'relevant':noteText.includes('starkt')||statusText.includes('starkt')?'strong':null;
