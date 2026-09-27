@@ -8,7 +8,7 @@
 - `core/` – examensmotor, examensregler och gemensam matchningskonsistens.
 - `features/merit-import/` – import och normalisering av meriter.
 - `features/programs/` – programindex, kanonisering och programvägar; sidrendering ligger inte här.
-- `features/credit-transfer/` – historiska beslut, hp-allokering och etiketter.
+- `engines/credit-transfer/` – en gemensam TG-motor, historik som beslutsstöd, hp-allokering och etiketter.
 - `features/fast-route/` – Snabbare väg och dess skydd/preload.
 - `features/planner/` – planerarspecifik delad logik.
 - `features/demo/` – demo- och exempeldataflöde.
