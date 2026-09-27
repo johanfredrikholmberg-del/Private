@@ -1,0 +1,19 @@
+'use strict';
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const vm = require('node:vm');
+const path = require('node:path');
+
+const context = {
+  window: { StudieLotsV2: { appContext: { state: { courses: [] }, q() {}, qa() { return []; }, fmt: String, esc: String, programmeLevel() {} } } },
+  console
+};
+const source = fs.readFileSync(path.join(__dirname, '../src/pages/planner/controller.js'), 'utf8');
+vm.runInNewContext(source.replace(/\}\)\(\);\s*$/, 'globalThis.courseDateLabel = courseDateLabel; globalThis.courseHtml = courseHtml;})();'), context);
+const verified = { name: 'Statistik: Grundkurs 1', hp: 15, __offer: { startDate: '2027-01-18', endDate: '2027-03-29', url: 'https://example.org/course' } };
+assert.match(context.courseDateLabel(verified), /18 jan.*29 mars 2027/);
+assert.match(context.courseHtml(verified), /class="course-date"/);
+assert.equal(context.courseDateLabel({ name: 'Handelsrätt', hp: 15, term: 3 }), 'Kursdatum ej publicerat');
+assert.equal(context.courseDateLabel({ startDate: '2027-02-30' }), 'Kursdatum ej publicerat');
+assert.match(context.courseDateLabel({ startDate: '2026-11-04', endDate: '2027-01-17' }), /2026.*2027/);
+console.log('Planner course dates: verified intervals and missing dates handled');
