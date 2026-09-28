@@ -75070,7 +75070,7 @@
         "category": "mandatory"
       }
     ],
-    "checkedAt": "2026-09-28T10:39:26.406Z"
+    "checkedAt": "2026-09-28T10:57:36.259Z"
   },
   {
     "key": "lunds universitet|TABIT|120",
@@ -75199,7 +75199,250 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:27.182Z"
+    "checkedAt": "2026-09-28T10:57:37.128Z"
+  },
+  {
+    "key": "lunds universitet|TAEEE|120",
+    "susaId": "i.uoh.lu.taeee.18920.20272",
+    "university": "Lunds universitet",
+    "programCode": "TAEEE",
+    "programName": "Masterutbildning i system på chips",
+    "subject": "",
+    "hp": 120,
+    "officialHp": 120,
+    "term": "HT26",
+    "coverage": "complete",
+    "status": "processed",
+    "source": "lund-lth-lot-api",
+    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MSOC",
+    "sourceUrls": [
+      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MSOC",
+      "https://api.lth.lu.se/lot/courses?programmeCode=MSOC&academicYearId=26_27"
+    ],
+    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MSOC&academicYearId=26_27",
+    "studyStructureGranularity": "term",
+    "termPlacementVerified": true,
+    "verifiedProgrammeOverride": false,
+    "rows": [
+      {
+        "term": 1,
+        "code": "EITF35",
+        "name": "Digitala strukturer på kisel",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "ETIA10",
+        "name": "Patent och annan immaterialrätt",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "ETIN20",
+        "name": "Digital IC-konstruktion",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "ETIN25",
+        "name": "Analog IC-konstruktion",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "ETIN35",
+        "name": "IC-projekt 1",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "ETIN40",
+        "name": "IC-projekt 2",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "ETIN55",
+        "name": "Integrerade A/D och D/A omvandlare",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "BMEN20",
+            "name": "Projektkurs i signalbehandling - från idé till app",
+            "hp": 7.5
+          },
+          {
+            "code": "EITN30",
+            "name": "Internet inuti",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
+        "hp": 22.5,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "EDAN96",
+            "name": "Tillämpad maskininlärning",
+            "hp": 7.5
+          },
+          {
+            "code": "EEMN01",
+            "name": "Mikrosensorer",
+            "hp": 7.5
+          },
+          {
+            "code": "EITN60",
+            "name": "Optimal och adaptiv signalbehandling",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "EITM02",
+            "name": "Masterexamensarbete i elektro- och informationsteknik",
+            "hp": 30
+          }
+        ]
+      }
+    ],
+    "checkedAt": "2026-09-28T10:57:38.614Z"
+  },
+  {
+    "key": "lunds universitet|TAEMB|120",
+    "susaId": "i.uoh.lu.taemb.18990.20272",
+    "university": "Lunds universitet",
+    "programCode": "TAEMB",
+    "programName": "Masterutbildning inom energi- och miljöeffektiva byggnader",
+    "subject": "",
+    "hp": 120,
+    "officialHp": 120,
+    "term": "HT26",
+    "coverage": "complete",
+    "status": "processed",
+    "source": "lund-lth-lot-api",
+    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MEMB",
+    "sourceUrls": [
+      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MEMB",
+      "https://api.lth.lu.se/lot/courses?programmeCode=MEMB&academicYearId=26_27"
+    ],
+    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MEMB&academicYearId=26_27",
+    "studyStructureGranularity": "term",
+    "termPlacementVerified": true,
+    "verifiedProgrammeOverride": false,
+    "rows": [
+      {
+        "term": 2,
+        "code": "ABKN01",
+        "name": "Ventilation och luftkvalitet i byggnader",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "ABKN05",
+        "name": "Livscykelperspektiv och miljöbedömning av byggnader",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "AEBN05",
+        "name": "Energianvändning och termisk komfort i byggnader",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "AEBN11",
+        "name": "Bostadshus - integrering av termiska aspekter och fuktsäkerhet",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "AEBN16",
+        "name": "Kontorsbyggnad - integrering av dagsljus och ventilation",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "AEBN21",
+        "name": "Offentlig byggnad - integrering av solenergi-, kostnads- och miljöaspekter",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "AEBN25",
+        "name": "Dagsljus och belysning i byggnader",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "AEBN30",
+        "name": "Byggnadsintegrerade solenergisystem",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "VBFN15",
+        "name": "Fuktsäkerhetsprojektering av byggnader",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara kurser enligt LTH:s läro- och timplan",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "AEBM01",
+            "name": "Masterexamensarbete i energi- och miljöeffektiva byggnader",
+            "hp": 30
+          }
+        ]
+      }
+    ],
+    "checkedAt": "2026-09-28T10:57:39.233Z"
   },
   {
     "key": "lunds universitet|TABTE|300",
@@ -75506,250 +75749,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:28.363Z"
-  },
-  {
-    "key": "lunds universitet|TAEEE|120",
-    "susaId": "i.uoh.lu.taeee.18920.20272",
-    "university": "Lunds universitet",
-    "programCode": "TAEEE",
-    "programName": "Masterutbildning i system på chips",
-    "subject": "",
-    "hp": 120,
-    "officialHp": 120,
-    "term": "HT26",
-    "coverage": "complete",
-    "status": "processed",
-    "source": "lund-lth-lot-api",
-    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MSOC",
-    "sourceUrls": [
-      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MSOC",
-      "https://api.lth.lu.se/lot/courses?programmeCode=MSOC&academicYearId=26_27"
-    ],
-    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MSOC&academicYearId=26_27",
-    "studyStructureGranularity": "term",
-    "termPlacementVerified": true,
-    "verifiedProgrammeOverride": false,
-    "rows": [
-      {
-        "term": 1,
-        "code": "EITF35",
-        "name": "Digitala strukturer på kisel",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "ETIA10",
-        "name": "Patent och annan immaterialrätt",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "ETIN20",
-        "name": "Digital IC-konstruktion",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "ETIN25",
-        "name": "Analog IC-konstruktion",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "ETIN35",
-        "name": "IC-projekt 1",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "ETIN40",
-        "name": "IC-projekt 2",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "ETIN55",
-        "name": "Integrerade A/D och D/A omvandlare",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 15,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "BMEN20",
-            "name": "Projektkurs i signalbehandling - från idé till app",
-            "hp": 7.5
-          },
-          {
-            "code": "EITN30",
-            "name": "Internet inuti",
-            "hp": 7.5
-          }
-        ]
-      },
-      {
-        "term": 3,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 22.5,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "EDAN96",
-            "name": "Tillämpad maskininlärning",
-            "hp": 7.5
-          },
-          {
-            "code": "EEMN01",
-            "name": "Mikrosensorer",
-            "hp": 7.5
-          },
-          {
-            "code": "EITN60",
-            "name": "Optimal och adaptiv signalbehandling",
-            "hp": 7.5
-          }
-        ]
-      },
-      {
-        "term": 4,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 30,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "EITM02",
-            "name": "Masterexamensarbete i elektro- och informationsteknik",
-            "hp": 30
-          }
-        ]
-      }
-    ],
-    "checkedAt": "2026-09-28T10:39:29.524Z"
-  },
-  {
-    "key": "lunds universitet|TAEMB|120",
-    "susaId": "i.uoh.lu.taemb.18990.20272",
-    "university": "Lunds universitet",
-    "programCode": "TAEMB",
-    "programName": "Masterutbildning inom energi- och miljöeffektiva byggnader",
-    "subject": "",
-    "hp": 120,
-    "officialHp": 120,
-    "term": "HT26",
-    "coverage": "complete",
-    "status": "processed",
-    "source": "lund-lth-lot-api",
-    "sourceUrl": "https://kurser.lth.se/lot/programme?ay=26_27&programme=MEMB",
-    "sourceUrls": [
-      "https://kurser.lth.se/lot/programme?ay=26_27&programme=MEMB",
-      "https://api.lth.lu.se/lot/courses?programmeCode=MEMB&academicYearId=26_27"
-    ],
-    "sourceEvidenceUrl": "https://api.lth.lu.se/lot/courses?programmeCode=MEMB&academicYearId=26_27",
-    "studyStructureGranularity": "term",
-    "termPlacementVerified": true,
-    "verifiedProgrammeOverride": false,
-    "rows": [
-      {
-        "term": 2,
-        "code": "ABKN01",
-        "name": "Ventilation och luftkvalitet i byggnader",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "ABKN05",
-        "name": "Livscykelperspektiv och miljöbedömning av byggnader",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "AEBN05",
-        "name": "Energianvändning och termisk komfort i byggnader",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "AEBN11",
-        "name": "Bostadshus - integrering av termiska aspekter och fuktsäkerhet",
-        "hp": 15,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "AEBN16",
-        "name": "Kontorsbyggnad - integrering av dagsljus och ventilation",
-        "hp": 15,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "AEBN21",
-        "name": "Offentlig byggnad - integrering av solenergi-, kostnads- och miljöaspekter",
-        "hp": 15,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "AEBN25",
-        "name": "Dagsljus och belysning i byggnader",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "AEBN30",
-        "name": "Byggnadsintegrerade solenergisystem",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "VBFN15",
-        "name": "Fuktsäkerhetsprojektering av byggnader",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 4,
-        "code": "",
-        "name": "Valbara kurser enligt LTH:s läro- och timplan",
-        "hp": 30,
-        "category": "elective",
-        "isSlot": true,
-        "slotType": "elective-slot",
-        "options": [
-          {
-            "code": "AEBM01",
-            "name": "Masterexamensarbete i energi- och miljöeffektiva byggnader",
-            "hp": 30
-          }
-        ]
-      }
-    ],
-    "checkedAt": "2026-09-28T10:39:30.483Z"
+    "checkedAt": "2026-09-28T10:57:39.571Z"
   },
   {
     "key": "lunds universitet|TAHET|120",
@@ -75875,7 +75875,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:31.205Z"
+    "checkedAt": "2026-09-28T10:57:39.793Z"
   },
   {
     "key": "lunds universitet|TAIDE|120",
@@ -75979,7 +75979,7 @@
         "category": "mandatory"
       }
     ],
-    "checkedAt": "2026-09-28T10:39:31.338Z"
+    "checkedAt": "2026-09-28T10:57:39.908Z"
   },
   {
     "key": "lunds universitet|TAKAK|120",
@@ -76107,7 +76107,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:31.556Z"
+    "checkedAt": "2026-09-28T10:57:40.022Z"
   },
   {
     "key": "lunds universitet|TALAK|120",
@@ -76242,7 +76242,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:31.740Z"
+    "checkedAt": "2026-09-28T10:57:40.169Z"
   },
   {
     "key": "lunds universitet|TAKEM|300",
@@ -76549,7 +76549,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:32.194Z"
+    "checkedAt": "2026-09-28T10:57:40.249Z"
   },
   {
     "key": "lunds universitet|TALIV|120",
@@ -76686,7 +76686,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:32.323Z"
+    "checkedAt": "2026-09-28T10:57:40.368Z"
   },
   {
     "key": "lunds universitet|TALSF|120",
@@ -76826,7 +76826,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:32.460Z"
+    "checkedAt": "2026-09-28T10:57:40.483Z"
   },
   {
     "key": "lunds universitet|TAMAR|120",
@@ -76937,7 +76937,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:32.596Z"
+    "checkedAt": "2026-09-28T10:57:40.885Z"
   },
   {
     "key": "lunds universitet|TAMSR|120",
@@ -77069,7 +77069,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:33.070Z"
+    "checkedAt": "2026-09-28T10:57:41.279Z"
   },
   {
     "key": "lunds universitet|TANAV|120",
@@ -77212,7 +77212,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:33.614Z"
+    "checkedAt": "2026-09-28T10:57:41.428Z"
   },
   {
     "key": "lunds universitet|TAPRR|120",
@@ -77344,7 +77344,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:33.717Z"
+    "checkedAt": "2026-09-28T10:57:41.547Z"
   },
   {
     "key": "lunds universitet|TARSK|300",
@@ -77642,7 +77642,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:34.122Z"
+    "checkedAt": "2026-09-28T10:57:41.668Z"
   },
   {
     "key": "lunds universitet|TASUD|120",
@@ -77748,7 +77748,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:34.257Z"
+    "checkedAt": "2026-09-28T10:57:41.762Z"
   },
   {
     "key": "lunds universitet|TAVAR|120",
@@ -77866,7 +77866,7 @@
         "category": "mandatory"
       }
     ],
-    "checkedAt": "2026-09-28T10:39:34.385Z"
+    "checkedAt": "2026-09-28T10:57:41.876Z"
   },
   {
     "key": "lunds universitet|TAWIR|120",
@@ -78015,7 +78015,7 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:34.646Z"
+    "checkedAt": "2026-09-28T10:57:42.232Z"
   },
   {
     "key": "lunds universitet|TAWRE|120",
@@ -78146,6 +78146,6 @@
         ]
       }
     ],
-    "checkedAt": "2026-09-28T10:39:34.775Z"
+    "checkedAt": "2026-09-28T10:57:42.346Z"
   }
 ]
