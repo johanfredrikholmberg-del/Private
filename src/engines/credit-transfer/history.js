@@ -26,7 +26,7 @@ const decisions=[
  ['RE500068','Portabla format / Praktisk uppgift - Webbläsares kompatibilitet',1,'ISGB13-1322 :',1,'ISGB13-1322','approved'],
  ['RE498691','Introduktion till innovationsteknik och design för högskoleingenjörer',7.5,'MSGA24 :',7.5,'MSGA24','approved']
 ].map(([id,sourceName,sourceHp,targetName,targetHp,targetCode,decision])=>Object.freeze({id,university:'Karlstads universitet',sourceName,sourceHp,targetName,targetHp,targetCode,decision}));
-const kthReady=fetch('/data/kth/history/specific-1to1.json').then(r=>r.ok?r.json():[]).then(rows=>{for(const r of rows){decisions.push(Object.freeze({...r,source:'KTH'}))}return rows.length}).catch(()=>0);
-function forAssessment(){return decisions.map(d=>({id:d.id,sourceName:d.sourceName,sourceHp:d.sourceHp,targetName:d.targetName,targetHp:d.targetHp,targetCode:d.targetCode,decision:d.decision,status:d.decision,source:'Karlstads universitet'}))}
+const kthReady=fetch('/data/kth/history/specific-1to1.json').then(r=>r.ok?r.json():[]).then(rows=>{for(const r of rows){decisions.push(Object.freeze({...r,source:'KTH'}))}window.dispatchEvent(new CustomEvent('studielots:credit-history-ready',{detail:{source:'KTH',relations:rows.length,approvals:rows.reduce((s,r)=>s+(Number(r.approvalCount)||1),0)}}));return rows.length}).catch(()=>0);
+function forAssessment(){return decisions.flatMap(d=>Array.from({length:Math.max(1,Number(d.approvalCount)||1)},(_,i)=>({id:(Number(d.approvalCount)||1)>1?`${d.id}#${i+1}`:d.id,sourceName:d.sourceName,sourceHp:d.sourceHp,targetName:d.targetName,targetHp:d.targetHp,targetCode:d.targetCode,decision:d.decision,status:d.decision,source:d.source||d.university||'Karlstads universitet'})))}
 root.creditTransferHistory=Object.freeze({source:'historical decisions',decisions,forAssessment,ready:kthReady});
 })();
