@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// batch continuation 3
+// batch continuation 4 — persist permanent 404s
 /** Import official Karlstad course-page details without altering canonical course identities. */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -18,7 +18,10 @@ const existing=await read(`${ROOT}/course-details.json`).catch(e=>{if(e.code==='
 if(!Array.isArray(existing))throw Error('Invalid course-details table');
 const byCode=new Map();for(const row of canonical){if(!kau(row.university)||!code(row.code))continue;const k=code(row.code);byCode.set(k,[...(byCode.get(k)||[]),row]);}
 const seen=new Set(existing.filter(x=>kau(x.university)).map(x=>code(x.code)));
-const candidates=[...new Map(staged.filter(x=>kau(x.university)&&code(x.code)).map(x=>[code(x.code),x])).values()].filter(x=>(byCode.get(code(x.code))||[]).length===1&&!seen.has(code(x.code))).slice(0,limit);
+const unavailablePath='data/import-reviews/kau-course-details-unavailable.json';
+const unavailable=await read(unavailablePath).catch(e=>e.code==='ENOENT'?[]:Promise.reject(e));
+const unavailableCodes=new Set(unavailable.map(x=>code(x.code)));
+const candidates=[...new Map(staged.filter(x=>kau(x.university)&&code(x.code)).map(x=>[code(x.code),x])).values()].filter(x=>(byCode.get(code(x.code))||[]).length===1&&!seen.has(code(x.code))&&!unavailableCodes.has(code(x.code))).slice(0,limit);
 const imported=[],errors=[];
 for(const candidate of candidates){const id=code(candidate.code),url=`https://www.kau.se/utbildning/program-och-kurser/kurser/${encodeURIComponent(id)}`;
  try{const response=await fetch(url,{signal:AbortSignal.timeout(timeout),headers:{'user-agent':'StudieLots course-detail importer (official sources)'}});if(!response.ok)throw Error(`HTTP ${response.status}`);const html=await response.text();
@@ -29,6 +32,9 @@ for(const candidate of candidates){const id=code(candidate.code),url=`https://ww
  imported.push({university:'Karlstads universitet',code:id,canonicalKey:byCode.get(id)[0].key||null,name:title,educationLevel:level||null,progression:depth||null,entryRequirements:requirements||null,sourceUrl:url,sourceType:'official-university-course-page',verifiedFields:['code','name',...level?['educationLevel']:[],...depth?['progression']:[],...requirements?['entryRequirements']:[]]});
  }catch(error){errors.push({code:id,reason:String(error.message||error)})}
 }
+const permanent404=errors.filter(x=>x.reason==='HTTP 404').map(x=>({code:x.code,reason:x.reason,sourceUrl:`https://www.kau.se/utbildning/program-och-kurser/kurser/${encodeURIComponent(x.code)}`}));
+const unavailableMerged=[...new Map([...unavailable,...permanent404].map(x=>[code(x.code),x])).values()].sort((a,b)=>code(a.code).localeCompare(code(b.code),'sv'));
+await fs.writeFile(unavailablePath,JSON.stringify(unavailableMerged,null,2)+'\n');
 const merged=[...existing,...imported];if(imported.length){await fs.writeFile(path.join(ROOT,'course-details.json'),JSON.stringify(merged,null,2)+'\n');}
 const report={attempted:candidates.length,imported:imported.length,previous:existing.length,total:merged.length,errors};await fs.mkdir('data/import-reviews',{recursive:true});await fs.writeFile('data/import-reviews/kau-course-details-latest.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
 if(candidates.length&&!imported.length)process.exitCode=1;
