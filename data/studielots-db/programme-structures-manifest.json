@@ -2,10 +2,11 @@
   "schemaVersion": 1,
   "generatedAt": "2026-09-28T20:41:22.905Z",
   "kind": "canonical-programme-structure-manifest",
-  "count": 972,
+  "count": 974,
   "parts": [
     "programme-structures-ht26.json",
-    "programme-structures-uppsala-2026.json"
+    "programme-structures-uppsala-2026.json",
+    "programme-structures-kth-verified.json"
   ],
   "universities": [
     {
@@ -79,6 +80,10 @@
     {
       "university": "Umeå universitet",
       "count": 1
+    },
+    {
+      "university": "Kungl. Tekniska högskolan",
+      "count": 2
     }
   ],
   "sourcePolicy": "StudieLots DB is the only runtime source; HT26 is migration input only."
