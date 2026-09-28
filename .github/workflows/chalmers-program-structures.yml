@@ -1,0 +1,46 @@
+name: Refresh Chalmers programme structures
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - 'api/chalmers-program-structure.js'
+      - '.github/workflows/chalmers-program-structures.yml'
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Chalmers canonical coverage
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const base='data/studielots-db/';
+          const m=JSON.parse(fs.readFileSync(base+'programme-structures-manifest.json','utf8'));
+          const parts=m.parts.flatMap(p=>{const x=JSON.parse(fs.readFileSync(base+p,'utf8'));return Array.isArray(x)?x:(x.programs||[])});
+          const rows=parts.filter(x=>x.university==='Chalmers tekniska högskola');
+          if(!rows.length) throw Error('No Chalmers structures in StudieLots DB');
+          const verified=rows.filter(x=>x.verified===true);
+          const report={generatedAt:new Date().toISOString(),university:'Chalmers tekniska högskola',canonicalStructures:rows.length,verifiedStructures:verified.length,withRows:rows.filter(x=>Array.isArray(x.rows)&&x.rows.length).length};
+          fs.mkdirSync('data/import-reviews',{recursive:true});
+          fs.writeFileSync('data/import-reviews/chalmers-refresh-latest.json',JSON.stringify(report,null,2)+'\n');
+          console.log(report);
+          NODE
+      - name: Persist Chalmers verification report
+        run: |
+          git config user.name 'studielots-data-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/import-reviews/chalmers-refresh-latest.json
+          git diff --cached --quiet || git commit -m 'Refresh Chalmers canonical coverage [skip ci]'
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
+          git push origin HEAD:studielots-v2
