@@ -3773,10 +3773,10 @@
       "programHp": 120,
       "hp": 120,
       "validFrom": "2026HT",
-      "coverage": "partial-structure",
+      "coverage": "complete",
       "verified": true,
-      "source": "gu-official-programplan",
-      "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-politisk-kommunikation-s2mkg",
+      "source": "gu-official-programplan-2026",
+      "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/programstruktur-och-innehall-for-masterprogrammet-i-politisk-kommunikation-polcom",
       "sourceUrls": [
         "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-politisk-kommunikation-s2mkg",
         "https://www.gu.se/studera/hitta-utbildning/programstruktur-och-innehall-for-masterprogrammet-i-politisk-kommunikation-polcom"
@@ -3784,11 +3784,10 @@
       "completeTerms": [
         1,
         2,
+        3,
         4
       ],
-      "missingTerms": [
-        3
-      ],
+      "missingTerms": [],
       "rows": [
         {
           "term": 1,
@@ -3818,6 +3817,45 @@
           "isThesis": false
         },
         {
+          "term": 3,
+          "code": "MK2100",
+          "name": "Avancerade analyser inom medie- och kommunikationsvetenskap",
+          "hp": 15,
+          "category": "mandatory",
+          "isSlot": false
+        },
+        {
+          "term": 3,
+          "code": "",
+          "name": "En metodkurs enligt programplan",
+          "hp": 15,
+          "category": "method-choice-slot",
+          "slotType": "method-choice",
+          "isSlot": true,
+          "options": [
+            {
+              "code": "SF2321",
+              "name": "Tillämpad statistisk analys",
+              "hp": 15
+            },
+            {
+              "code": "SF2322",
+              "name": "Tillämpade kvalitativa forskningsmetoder",
+              "hp": 15
+            },
+            {
+              "code": "SF2323",
+              "name": "Tillämpade forskningsmetoder, problem och design",
+              "hp": 15
+            },
+            {
+              "code": "MK2302",
+              "name": "Kvantitativa metoder för journalistik, medier och kommunikationsvetenskap",
+              "hp": 15
+            }
+          ]
+        },
+        {
           "term": 4,
           "code": "MK2502",
           "name": "Examensarbete i medie- och kommunikationsvetenskap",
@@ -3826,7 +3864,8 @@
           "isSlot": false,
           "isThesis": false
         }
-      ]
+      ],
+      "choiceRequired": true
     },
     {
       "id": "gu:S2SOC:2026HT",
@@ -3935,6 +3974,225 @@
         }
       ],
       "choiceRequired": true
+    },
+    {
+      "id": "gu:M2STA:2026HT",
+      "key": "goteborgs universitet|M2STA|120",
+      "university": "Göteborgs universitet",
+      "programCode": "M2STA",
+      "programName": "Masterprogram i tillämpad biostatistik",
+      "programHp": 120,
+      "hp": 120,
+      "validFrom": "2026HT",
+      "coverage": "course-codes-unverified",
+      "verified": true,
+      "courseCodesVerified": false,
+      "choiceRequired": true,
+      "source": "gu-official-programme-overview",
+      "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/programoversikt-masterprogrammet-i-tillampad-biostatistik",
+      "sourceUrls": [
+        "https://www.gu.se/studera/hitta-utbildning/programoversikt-masterprogrammet-i-tillampad-biostatistik"
+      ],
+      "rows": [
+        {
+          "term": 1,
+          "code": "",
+          "name": "Introduktion till biostatistik",
+          "hp": 9,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 1,
+          "code": "",
+          "name": "R programmering för tillämpad biostatistik",
+          "hp": 6,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 1,
+          "code": "",
+          "name": "Studie- och experimentdesign",
+          "hp": 7.5,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 1,
+          "code": "",
+          "name": "Regressionsanalys",
+          "hp": 7.5,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 2,
+          "code": "",
+          "name": "Kausal inferens",
+          "hp": 7.5,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 2,
+          "code": "",
+          "name": "Hälsodata och enkäter",
+          "hp": 7.5,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 2,
+          "code": "",
+          "name": "Statistisk inlärning",
+          "hp": 7.5,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 2,
+          "code": "",
+          "name": "Statistiska metoder, fördjupning",
+          "hp": 7.5,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 3,
+          "code": "",
+          "name": "Överlevnadsanalys",
+          "hp": 7.5,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 3,
+          "code": "",
+          "name": "Maskininlärning och AI",
+          "hp": 7.5,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 3,
+          "code": "",
+          "name": "Valbara kurser",
+          "hp": 15,
+          "category": "elective-slot",
+          "slotType": "programme-elective",
+          "isSlot": true,
+          "options": []
+        },
+        {
+          "term": 4,
+          "code": "",
+          "name": "Examensarbete i tillämpad biostatistik",
+          "hp": 30,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        }
+      ]
+    },
+    {
+      "id": "gu:V2GLH:2026HT",
+      "key": "goteborgs universitet|V2GLH|120",
+      "university": "Göteborgs universitet",
+      "programCode": "V2GLH",
+      "programName": "Masterprogram i global hälsa",
+      "programHp": 120,
+      "hp": 120,
+      "validFrom": "2026HT",
+      "coverage": "course-codes-unverified",
+      "verified": true,
+      "courseCodesVerified": false,
+      "choiceRequired": true,
+      "source": "gu-official-programme-overview",
+      "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/programoversikt-masterprogrammet-i-global-halsa",
+      "sourceUrls": [
+        "https://www.gu.se/studera/hitta-utbildning/programoversikt-masterprogrammet-i-global-halsa"
+      ],
+      "rows": [
+        {
+          "term": 1,
+          "code": "",
+          "name": "Globala hälsoutmaningar i ett interdisciplinärt sammanhang",
+          "hp": 15,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 1,
+          "code": "",
+          "name": "Kvantitativa och kvalitativa metoder",
+          "hp": 15,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 2,
+          "code": "",
+          "name": "Att styra och leda folkhälsa och hälso- och sjukvård i ett globalt perspektiv",
+          "hp": 15,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 2,
+          "code": "",
+          "name": "Global hälsoekonomi",
+          "hp": 15,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        },
+        {
+          "term": 3,
+          "code": "",
+          "name": "Valbara kurser eller utlandsstudier",
+          "hp": 30,
+          "category": "elective-slot",
+          "slotType": "programme-elective",
+          "isSlot": true,
+          "options": [
+            {
+              "name": "Tillämpad kvalitativ metod",
+              "hp": 7.5
+            },
+            {
+              "name": "Tillämpad epidemiologi och biostatistik",
+              "hp": 7.5
+            },
+            {
+              "name": "Hälsofrämjande och sjukdomsförebyggande arbete i riskgrupper: strategier och metoder",
+              "hp": 15
+            }
+          ]
+        },
+        {
+          "term": 4,
+          "code": "",
+          "name": "Masteruppsats i global hälsa",
+          "hp": 30,
+          "category": "mandatory",
+          "isSlot": false,
+          "courseCodeVerified": false
+        }
+      ]
     }
   ]
 }
