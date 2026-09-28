@@ -11,13 +11,17 @@ const handler=mod.default;
 
 const programs=JSON.parse(await fs.readFile(programsPath,'utf8'));
 const structures=JSON.parse(await fs.readFile(structuresPath,'utf8'));
+let previous=null;
+try{previous=JSON.parse(await fs.readFile(reportPath,'utf8'))}catch(e){if(e?.code!=='ENOENT')throw e}
+const today=new Date().toISOString().slice(0,10);
+const deferred=new Set(previous?.generatedAt?.slice(0,10)===today?(previous.deferredCodes||previous.failed?.map(x=>x.code)||[]):[]);
 const rows=Array.isArray(programs)?programs:(programs.programs||[]);
 const existing=Array.isArray(structures)?structures:(structures.programs||[]);
 const isKth=x=>x.providerId==='p.uoh.kth'||/\bkth\b|kungl\.? tekniska|kungliga tekniska/i.test(String(x.university||x.provider||x.universityName||x.providerName||''));
 const candidates=rows.filter(isKth).sort((a,b)=>(Number(a.programHp)||999)-(Number(b.programHp)||999));
 const limit=Number(process.env.KTH_STRUCTURE_LIMIT||500);
 const out=[...existing];
-const report={generatedAt:new Date().toISOString(),term,catalogueProgrammes:candidates.length,attempted:0,imported:0,failed:[],verifiedProgrammeCodes:[]};
+const report={generatedAt:new Date().toISOString(),term,catalogueProgrammes:candidates.length,attempted:0,imported:0,failed:[],deferredCodes:[],verifiedProgrammeCodes:[]};
 
 const call=async p=>new Promise(resolve=>{
  const req={query:{code:p.programCode||p.code||'',name:p.programName||p.name||'',university:p.university||p.provider||p.universityName||p.providerName||'KTH'}};
@@ -28,7 +32,7 @@ const call=async p=>new Promise(resolve=>{
 const key=x=>String(x.programCode||x.code||'').trim().toUpperCase();
 const known=new Set(out.filter(isKth).map(key).filter(Boolean));
 for(const p of candidates){
- const code=key(p); if(!code||known.has(code))continue;
+ const code=key(p); if(!code||known.has(code)||deferred.has(code))continue;
  if(report.attempted>=limit)break;
  report.attempted++;
  const r=await call(p);
@@ -36,6 +40,7 @@ for(const p of candidates){
  out.push({university:'KTH',programCode:code,programName:p.programName||p.name||r.program?.name||code,term,courses:r.courses,source:r.source,sourceUrls:r.sourceUrls,confidence:r.confidence,coverage:r.coverage,quality:r.quality,verifiedAt:new Date().toISOString()});
  known.add(code);report.imported++;report.verifiedProgrammeCodes.push(code);
 }
+report.deferredCodes=[...new Set([...deferred,...report.failed.map(x=>x.code)])];
 await fs.writeFile(structuresPath,JSON.stringify(out,null,2)+'\n');
 await fs.writeFile(reportPath,JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report,null,2));
