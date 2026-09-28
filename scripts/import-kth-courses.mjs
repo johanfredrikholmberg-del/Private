@@ -30,6 +30,16 @@ if(!orgs.length){
 if(!orgs.length && !directCodes.length)throw new Error('No KTH organisations or direct course links parsed from '+ROOT);
 
 const map=new Map();
+// When KTH exposes course links directly on the catalogue root, resolve those pages too.
+for(const id of directCodes){
+ try{
+  const html=await fetchText('https://www.kth.se/student/kurser/kurs/'+encodeURIComponent(id)+'?l=en');
+  const title=clean(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1]||'');
+  const text=clean(html);
+  const hp=Number((text.match(/(?:credits|hp)\s*[:]?\s*(\d+(?:[.,]\d+)?)/i)||[])[1]?.replace(',','.'))||null;
+  if(title)map.set(id,{code:id,name:title.replace(new RegExp('^'+id+'\\s*[-–:]?\\s*','i'),''),hp,level:null,org:null});
+ }catch{}
+}
 for(const org of orgs){
  let html; try{html=await fetchText(ROOT+'/'+encodeURIComponent(org)+'?l=en')}catch{continue}
  // Current KTH directory tables expose: code, name, credits, level.
