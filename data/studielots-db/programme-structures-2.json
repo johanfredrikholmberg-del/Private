@@ -3570,9 +3570,9 @@
       "programHp": 210,
       "hp": 210,
       "validFrom": "2026HT",
-      "coverage": "partial-structure",
+      "coverage": "complete",
       "verified": true,
-      "source": "gu-official-programplan",
+      "source": "gu-official-programplan-2026",
       "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/socionomprogrammet-s1gsa",
       "sourceUrls": [
         "https://www.gu.se/studera/hitta-utbildning/socionomprogrammet-s1gsa"
@@ -3583,11 +3583,10 @@
         3,
         4,
         5,
-        6
-      ],
-      "missingTerms": [
+        6,
         7
       ],
+      "missingTerms": [],
       "rows": [
         {
           "term": 1,
@@ -3708,14 +3707,62 @@
         },
         {
           "term": 6,
+          "code": "SQ2661",
+          "name": "Vetenskaplighet och forskningsmetodik i socialt arbete",
+          "hp": 15,
+          "category": "mandatory",
+          "isSlot": false
+        },
+        {
+          "term": 6,
+          "code": "SQ2662",
+          "name": "Självständigt vetenskapligt arbete",
+          "hp": 15,
+          "category": "mandatory",
+          "isSlot": false,
+          "isThesis": true
+        },
+        {
+          "term": 7,
           "code": "",
-          "name": "Valbara kurser enligt programplan",
-          "hp": 30,
+          "name": "Fördjupning: Lokala och globala utmaningar för det sociala arbetet",
+          "hp": 7.5,
           "category": "elective-slot",
+          "slotType": "programme-elective",
           "isSlot": true,
-          "isThesis": false
+          "level": "Avancerad nivå"
+        },
+        {
+          "term": 7,
+          "code": "",
+          "name": "Fördjupning: Perspektiv på social utsatthet",
+          "hp": 7.5,
+          "category": "elective-slot",
+          "slotType": "programme-elective",
+          "isSlot": true,
+          "level": "Avancerad nivå"
+        },
+        {
+          "term": 7,
+          "code": "",
+          "name": "Fördjupning: Handlingsstrategier i socialt arbete",
+          "hp": 7.5,
+          "category": "elective-slot",
+          "slotType": "programme-elective",
+          "isSlot": true,
+          "level": "Avancerad nivå"
+        },
+        {
+          "term": 7,
+          "code": "SQ2671",
+          "name": "Det sociala arbetets professionella aktörskap",
+          "hp": 7.5,
+          "category": "mandatory",
+          "isSlot": false,
+          "level": "Avancerad nivå"
         }
-      ]
+      ],
+      "choiceRequired": true
     },
     {
       "id": "gu:S2MKG:2026HT",
@@ -3790,21 +3837,20 @@
       "programHp": 120,
       "hp": 120,
       "validFrom": "2026HT",
-      "coverage": "partial-structure",
+      "coverage": "complete",
       "verified": true,
-      "source": "gu-official-programplan",
+      "source": "gu-official-programplan-2026",
       "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-sociologi-s2soc",
       "sourceUrls": [
         "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-sociologi-s2soc"
       ],
       "completeTerms": [
         1,
+        2,
         3,
         4
       ],
-      "missingTerms": [
-        2
-      ],
+      "missingTerms": [],
       "rows": [
         {
           "term": 1,
@@ -3850,8 +3896,45 @@
           "category": "mandatory-unlabelled",
           "isSlot": false,
           "isThesis": false
+        },
+        {
+          "term": 2,
+          "code": "",
+          "name": "Valfria kurser vid GU eller annat lärosäte",
+          "hp": 30,
+          "category": "elective-slot",
+          "slotType": "programme-elective",
+          "isSlot": true,
+          "options": [
+            {
+              "code": "SC2401",
+              "name": "Kvalificerad arbetspraktik med sociologisk inriktning",
+              "hp": 15
+            },
+            {
+              "code": "SC2209",
+              "name": "Emotioner i organisationer",
+              "hp": 7.5
+            },
+            {
+              "code": "SC2210",
+              "name": "Hållbarhetsvetenskap och expertis: Sociologiska perspektiv",
+              "hp": 7.5
+            },
+            {
+              "code": "PV2205",
+              "name": "Konflikt och samarbete i organisationer",
+              "hp": 7.5
+            },
+            {
+              "code": "PV2206",
+              "name": "HR/people analys",
+              "hp": 7.5
+            }
+          ]
         }
-      ]
+      ],
+      "choiceRequired": true
     }
   ]
 }
