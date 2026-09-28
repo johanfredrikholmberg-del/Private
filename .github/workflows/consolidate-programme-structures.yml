@@ -1,6 +1,11 @@
 name: Consolidate programme structures
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - studielots-v2
+    paths:
+      - scripts/consolidate-programme-structures.mjs
 permissions:
   contents: write
 jobs:
