@@ -5,7 +5,6 @@ const norm=v=>String(v??'').trim().toLocaleLowerCase('sv-SE').normalize('NFD').r
 const code=v=>String(v??'').trim().toUpperCase();
 const identity=(university,programCode)=>`${norm(university)}:${code(programCode)}`;
 const allowedTerms=new Set(['HT26','VT27']);
-const read=async(term,name)=>JSON.parse(await readFile(join(process.cwd(),'data',term,`${name}.json`),'utf8'));
 const readDb=async()=>JSON.parse(await readFile(join(process.cwd(),'data','studielots-db','manifest.json'),'utf8'));
 const readStorage=async storage=>JSON.parse(await readFile(join(process.cwd(),...String(storage).split('/')),'utf8'));
 function programmeSubject(p){if(p.subject)return p.subject;const name=norm(p.programName||p.name);if(/foretagsekonomi|ekonomie-kandidat|civilekonom|marknadsforing|redovisning-och-styrning|business-administration/.test(name))return 'Företagsekonomi';if(/nationalekonomi|economics/.test(name))return 'Nationalekonomi';if(/psykologi|psychology/.test(name))return 'Psykologi';if(/idrottsvetenskap|sport-science/.test(name))return 'Idrottsvetenskap';if(/juridik|juristprogram|skatteratt/.test(name))return 'Juridik';return ''}
@@ -52,7 +51,7 @@ async function catalogue(term){
  for(const key of conflicting)complete.delete(key);
  const rows=programs.filter(p=>p.university&&(p.programName||p.name)&&complete.has(p.key)&&(byKey.get(p.key)||[]).length===1).map(p=>{
   const {signature,...structure}=complete.get(p.key);
-  return {subject:programmeSubject(p),university:p.university,programName:p.programName||p.name,programCode:p.programCode||'',programHp:Number(p.programHp)||null,level:p.level||'',source:'studielots-ht26',structureCoverage:'complete',effectiveStructureCoverage:'complete',plannerCoverage:'complete',verified:true,...structure};
+  return {subject:programmeSubject(p),university:p.university,programName:p.programName||p.name,programCode:p.programCode||'',programHp:Number(p.programHp)||null,level:p.level||'',source:'studielots-db',structureCoverage:'complete',effectiveStructureCoverage:'complete',plannerCoverage:'complete',verified:true,...structure};
  });
  const result={rows,totalPrograms:programs.length,totalStructures:structures.length};cache.set(term,result);return result;
 }
@@ -60,6 +59,6 @@ export default async function handler(req,res){
  res.setHeader('Cache-Control','s-maxage=60, stale-while-revalidate=300');
  try{const term=String(req.query?.term||'HT26').toUpperCase();if(!allowedTerms.has(term))return res.status(400).json({programs:[],source:'studielots',fallback:false,error:'Ogiltig starttermin'});const data=await catalogue(term),query=norm(req.query?.q),subject=norm(req.query?.subject),university=norm(req.query?.university),coverage=norm(req.query?.coverage);
  const rows=data.rows.filter(p=>(!subject||norm(p.subject)===subject)&&(!university||norm(p.university).includes(university))&&(!query||norm(`${p.programName} ${p.university} ${p.subject} ${p.programCode}`).includes(query))&&(!coverage||coverage==='complete'));
- return res.status(200).json({programs:rows,coverage:{complete:rows.length,partial:0,metadataOnly:0,total:rows.length},catalogue:{uniquePrograms:data.rows.length,importedPrograms:data.totalPrograms,importedStructures:data.totalStructures},source:`studielots-${term.toLowerCase()}`,term,fallback:false});
+ return res.status(200).json({programs:rows,coverage:{complete:rows.length,partial:0,metadataOnly:0,total:rows.length},catalogue:{uniquePrograms:data.rows.length,importedPrograms:data.totalPrograms,importedStructures:data.totalStructures},source:'studielots-db',term,fallback:false});
  }catch(error){const term=String(req.query?.term||'HT26').toUpperCase();console.error('program-index '+term,error);return res.status(503).json({programs:[],source:`studielots-${term.toLowerCase()}`,term,fallback:false,error:`${term}-programdatabasen är ännu inte tillgänglig`});}
 }
