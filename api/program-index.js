@@ -1,10 +1,13 @@
 import {readFile} from 'node:fs/promises';
 import {join} from 'node:path';
+import {canonicalProgrammeStructures} from './_studielots-db.js';
 const norm=v=>String(v??'').trim().toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const code=v=>String(v??'').trim().toUpperCase();
 const identity=(university,programCode)=>`${norm(university)}:${code(programCode)}`;
 const allowedTerms=new Set(['HT26','VT27']);
 const read=async(term,name)=>JSON.parse(await readFile(join(process.cwd(),'data',term,`${name}.json`),'utf8'));
+const readDb=async()=>JSON.parse(await readFile(join(process.cwd(),'data','studielots-db','manifest.json'),'utf8'));
+const readStorage=async storage=>JSON.parse(await readFile(join(process.cwd(),...String(storage).split('/')),'utf8'));
 function programmeSubject(p){if(p.subject)return p.subject;const name=norm(p.programName||p.name);if(/foretagsekonomi|ekonomie-kandidat|civilekonom|marknadsforing|redovisning-och-styrning|business-administration/.test(name))return 'Företagsekonomi';if(/nationalekonomi|economics/.test(name))return 'Nationalekonomi';if(/psykologi|psychology/.test(name))return 'Psykologi';if(/idrottsvetenskap|sport-science/.test(name))return 'Idrottsvetenskap';if(/juridik|juristprogram|skatteratt/.test(name))return 'Juridik';return ''}
 // A source's "complete" flag alone is not enough: every semester and all programme
 // credits must be accounted for before the programme can appear in search.
@@ -26,7 +29,10 @@ function structureSignature(rows){return JSON.stringify(rows.map(r=>[Number(r.te
 const cache=new Map();
 async function catalogue(term){
  if(cache.has(term))return cache.get(term);
- const [programs,structures]=await Promise.all([read(term,'programs'),read(term,'program-structures')]);
+ const db=await readDb();
+ const programs=await readStorage(db.tables.programmes.storage);
+ const canonical=await canonicalProgrammeStructures();
+ const structures=canonical.programs;
  const byKey=new Map(),byIdentity=new Map();
  for(const p of programs){if(!p.key)continue;if(!byKey.has(p.key))byKey.set(p.key,[]);byKey.get(p.key).push(p);if(!code(p.programCode))continue;const k=identity(p.university,p.programCode);if(!byIdentity.has(k))byIdentity.set(k,[]);byIdentity.get(k).push(p)}
  const complete=new Map(),conflicting=new Set();
