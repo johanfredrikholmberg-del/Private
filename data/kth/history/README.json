@@ -1,0 +1,12 @@
+{
+  "source": "KTH historical credit-transfer decisions",
+  "period": {
+    "from": "2021-01-01",
+    "to": "2026-08-31"
+  },
+  "policy": "strict 1-to-1, specific targets only; current restored dataset contains only relations with identifiable KTH target course code",
+  "uniqueRelations": 376,
+  "approvalCount": 425,
+  "sourceCandidateCount": 14856,
+  "note": "Restored from verified historical import commit dd35fcc. 14,856 is the clean 1-to-1 candidate set from the original KTH raw source; expansion beyond this restored verified subset requires the original raw attachment or another preserved candidate artifact."
+}
