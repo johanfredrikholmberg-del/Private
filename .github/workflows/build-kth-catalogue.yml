@@ -4,8 +4,7 @@ on:
     branches: [studielots-v2]
     paths:
       - '.github/workflows/build-kth-catalogue.yml'
-      - 'scripts/import-kth-courses.mjs'\n      - 'scripts/import-kth-program-structures.mjs'
-      - 'scripts/resolve-kth-history.mjs'
+      - 'scripts/import-kth-courses.mjs'
       - 'data/import-reviews/kth-catalogue-refresh.txt'
   workflow_dispatch:
 permissions:
@@ -13,27 +12,28 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
           ref: studielots-v2
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Import KTH course catalogue
-        continue-on-error: true
         run: node scripts/import-kth-courses.mjs
-      - name: Import verified KTH programme structures
-        env:
-          STUDIELOTS_TERM: HT26
-          KTH_STRUCTURE_LIMIT: '500'
-        run: node scripts/import-kth-program-structures.mjs
-      - name: Consolidate KTH structures into StudieLots DB
-        run: node scripts/consolidate-programme-structures.mjs
-      - name: Commit catalogue
+      - name: Commit catalogue immediately
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f data/kth/courses.json data/HT26/program-structures.json data/import-reviews/kth-program-structures-ht26-latest.json data/studielots-db/programme-structures-ht26.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json
-          git diff --cached --quiet || git commit -m "Build KTH course catalogue"
+          if [ ! -f data/kth/courses.json ]; then
+            echo "No KTH catalogue produced"
+            exit 1
+          fi
+          git add -f data/kth/courses.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Persist KTH course catalogue [skip ci]"
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
           git push origin HEAD:studielots-v2
