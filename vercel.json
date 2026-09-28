@@ -1,6 +1,9 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "functions": {
+    "api/catalog-data.js": { "includeFiles": "data/HT26/course-offerings.json" }
+  },
   "rewrites": [
     { "source": "/api/canonical-offerings", "destination": "/api/catalog-data?route=canonical-offerings" },
     { "source": "/api/credit-transfer-history", "destination": "/api/catalog-data?route=credit-transfer-history" },
