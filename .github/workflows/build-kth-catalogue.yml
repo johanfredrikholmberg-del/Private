@@ -6,6 +6,7 @@ on:
       - '.github/workflows/build-kth-catalogue.yml'
       - 'scripts/import-kth-courses.mjs'
       - 'scripts/resolve-kth-history.mjs'
+      - 'data/import-reviews/kth-catalogue-refresh.txt'
   workflow_dispatch:
 permissions:
   contents: write
