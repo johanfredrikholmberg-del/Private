@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Materialise Lund's verified programme structures into the canonical HT26
+ * Materialise Lund's verified programme structures into the selected canonical term
  * structure table.  The importer is deliberately conservative: a programme
  * is written only when an official Lund page exposes every expected term and
  * the parsed credits sum exactly to the catalogue total.
@@ -12,8 +12,10 @@ import os from 'node:os';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 
-const DATA = path.join(process.cwd(), 'data', 'HT26');
-const REPORT = path.join(process.cwd(), 'data', 'import-reviews', 'lund-program-structures-latest.json');
+const TERM = String(process.env.STUDIELOTS_TERM || 'HT26').toUpperCase();
+if (!/^(HT|VT)\d{2}$/.test(TERM)) throw new Error(`Ogiltig termin: ${TERM}`);
+const DATA = path.join(process.cwd(), 'data', TERM);
+const REPORT = path.join(process.cwd(), 'data', 'import-reviews', `lund-program-structures-${TERM.toLowerCase()}-latest.json`);
 const LIMIT = Math.max(1, Number(process.env.LUND_STRUCTURE_LIMIT || 300));
 const CONCURRENCY = Math.max(1, Math.min(8, Number(process.env.LUND_STRUCTURE_CONCURRENCY || 4)));
 const REQUEST_TIMEOUT = Math.max(5000, Number(process.env.LUND_STRUCTURE_TIMEOUT || 20000));
