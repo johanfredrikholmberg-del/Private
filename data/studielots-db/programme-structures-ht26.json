@@ -13765,76 +13765,123 @@
     "term": "HT26"
   },
   {
+    "id": "gu:M2PHP:HT2026",
     "key": "goteborgs-universitet:M2PHP",
-    "susaId": "i.uoh.gu.m2php.03001.20272",
     "university": "Göteborgs universitet",
     "programCode": "M2PHP",
     "programName": "Masterprogram i folkhälsovetenskap",
+    "programHp": 120,
     "hp": 120,
-    "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
-    "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-folkhalsovetenskap-m2php",
+    "validFrom": "2026HT",
+    "coverage": "choice-required",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "source": "gu-official-programme-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-folkhalsovetenskap-m2php/utbildningsplan/a804aac3-8731-11ef-b936-3036d7c64115",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-folkhalsovetenskap-m2php",
-      "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-folkhalsovetenskap-m2php/utbildningsplan/1bee5d83-a8f7-11f0-b7df-f9101f074b4e"
+      "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-folkhalsovetenskap-m2php/utbildningsplan/a804aac3-8731-11ef-b936-3036d7c64115"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 4,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        }
+    "rows": [
+      {
+        "term": 1,
+        "code": "MPH211",
+        "name": "Folkhälsovetenskapens utgpångspunkter och tillämpningsområden",
+        "hp": 15,
+        "category": "mandatory"
       },
-      "slotCount": 0,
-      "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:39.509Z",
-    "term": "HT26"
+      {
+        "term": 1,
+        "code": "MPH212",
+        "name": "Jämlik hälsa och rätten till hälsa",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "MPH213",
+        "name": "Kvalitativa metoder inom folkhälsovetenskap",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "MPH221",
+        "name": "Epidemiologi och biostatistik",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbar huvudområdeskurs",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "MPH222",
+            "name": "Hälsoekonomi: utgångspunkter, tillämpningsområden och metodik",
+            "hp": 15
+          },
+          {
+            "code": "MPH223",
+            "name": "Socialepidemiologi: teori, metod och praktiska implikationer",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valfria kurser, praktik eller utlandsstudier",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "MPH231",
+            "name": "Hälsoekonomiska utvärderingar: fördjupningskurs",
+            "hp": 15
+          },
+          {
+            "code": "MPH232",
+            "name": "Strategiskt arbete för jämlik hälsa: policy, interventioner och utvärdering",
+            "hp": 15
+          },
+          {
+            "code": "MPH233",
+            "name": "Arbete och hälsa: hälsopromotion och sjukdomsförebyggande ansatser",
+            "hp": 7.5
+          },
+          {
+            "code": "MPH234",
+            "name": "Migration och hälsa i ett socialt, demografiskt och politiskt sammanhang",
+            "hp": 7.5
+          },
+          {
+            "code": "MPH235",
+            "name": "Praktiskt folkhälsoarbete: intervention, implementering och utvärdering",
+            "hp": 30
+          },
+          {
+            "code": "MPH303",
+            "name": "Folkhälsoarbete: planering av intervention och utvärdering",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "MPH241",
+        "name": "Examensarbete i folkhälsovetenskap",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:M2SLP",
@@ -14489,27 +14536,178 @@
     "term": "HT26"
   },
   {
+    "id": "gu:N1FAR:HT2026",
     "key": "goteborgs-universitet:N1FAR",
-    "susaId": "i.uoh.gu.n1far.16010.20262",
     "university": "Göteborgs universitet",
     "programCode": "N1FAR",
     "programName": "Receptarieprogrammet/Farmaci, kandidatprogram",
+    "programHp": 180,
     "hp": 180,
-    "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
-    "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "",
-    "sourceUrls": [],
-    "apiCoverage": "",
-    "apiConfidence": "",
-    "quality": {},
-    "checkedAt": "2026-09-13T15:08:40.604Z",
-    "term": "HT26"
+    "validFrom": "2026HT",
+    "coverage": "choice-required",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "source": "gu-official-programme-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/de-har-kurserna-laser-du-inom-receptarieprogrammet",
+    "sourceUrls": [
+      "https://www.gu.se/studera/hitta-utbildning/de-har-kurserna-laser-du-inom-receptarieprogrammet"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "INR100",
+        "name": "Introduktionskurs för receptarier",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KER100",
+        "name": "Kemi för receptarier",
+        "hp": 22.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "CBR100",
+        "name": "Cellbiologi för receptarier",
+        "hp": 10,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "FYR100",
+        "name": "Fysiologi för receptarier",
+        "hp": 13.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "IIR100",
+        "name": "Infektion och immunologi för receptarier",
+        "hp": 6.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "FSR200",
+        "name": "Farmakologi och sjukdomslära",
+        "hp": 16.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "KER200",
+        "name": "Läkemedelskemi och toxikologi",
+        "hp": 13.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "TFR200",
+        "name": "Tillämpad fysiologi och farmakologi med biostatisk",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "GAR200",
+        "name": "Galenisk farmaci",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "FKR210",
+        "name": "Klinisk farmakokinetik och farmakodynamik",
+        "hp": 4.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "EVR200",
+        "name": "Egenvård för receptarier",
+        "hp": 4.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "FKR220",
+        "name": "Applicerbar farmakokinetik och dynamik med farmakoterapi",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "FLR300",
+        "name": "Farmakognosi och läkemedels ursprung",
+        "hp": 3,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "FÖR300",
+        "name": "Författningar inom läkemedels- och apoteksområdet",
+        "hp": 4.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "SAR300",
+        "name": "Samhällsfarmaci",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "LÄR200",
+        "name": "Läkemedelsrådgivning och kommunikation",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "KER300",
+            "name": "Dermatokemi och kontaktallergi",
+            "hp": 7.5
+          },
+          {
+            "code": "LFD300",
+            "name": "Läkemedel för djur",
+            "hp": 7.5
+          },
+          {
+            "code": "VÅR300",
+            "name": "Farmaci i vården",
+            "hp": 7.5
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "code": "FAR300",
+        "name": "Examenskurs i farmaci",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      },
+      {
+        "term": 6,
+        "code": "TAF300",
+        "name": "Tillämpad apoteksfarmaci",
+        "hp": 15,
+        "category": "mandatory"
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:N1FYS",
@@ -15725,93 +15923,168 @@
     "term": "HT26"
   },
   {
+    "id": "gu:N1SOF:2026HT",
     "key": "goteborgs-universitet:N1SOF",
-    "susaId": "i.uoh.gu.n1sof.86007.20272",
     "university": "Göteborgs universitet",
     "programCode": "N1SOF",
     "programName": "Software Engineering and Management kandidatprogram",
+    "programHp": 180,
     "hp": 180,
-    "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
-    "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/software-engineering-and-management-kandidatprogram-n1sof",
+    "validFrom": "2026HT",
+    "coverage": "choice-required",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "source": "gu-official-programme-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/n1sof-curriculum",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/software-engineering-and-management-kandidatprogram-n1sof"
+      "https://www.gu.se/studera/hitta-utbildning/n1sof-curriculum"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 6,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "5": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "6": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        }
+    "rows": [
+      {
+        "term": 1,
+        "code": "DIT008",
+        "name": "Diskret matematik",
+        "hp": 7.5,
+        "category": "mandatory"
       },
-      "slotCount": 0,
-      "totalHp": 180,
-      "sourcePages": 1,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:41.223Z",
-    "term": "HT26"
+      {
+        "term": 1,
+        "code": "DIT014",
+        "name": "Grundläggande programmering",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "DIT044",
+        "name": "Objektorienterad programmering",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "DIT099",
+        "name": "Projekt: Agil projektledning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "DIT034",
+        "name": "Systematisk datahantering",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "DIT047",
+        "name": "Kravhantering",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "DIT962",
+        "name": "Datastrukturer och algoritmer",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "DIT114",
+        "name": "Projekt: Systemutveckling",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "DIT349",
+        "name": "Grundläggande mjukvaruarkitektur",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "DIT357",
+        "name": "Distribuerade system",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "DIT096",
+        "name": "Människa-datorinteraktion",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "DIT343",
+        "name": "Projekt: Webbutveckling",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "DIT633",
+        "name": "Utveckling av inbyggda- och realtidssystem",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "DIT636",
+        "name": "Mjukvarukvalitet och testning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "DIT118",
+        "name": "Avancerad programmering",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "DIT637",
+        "name": "Projekt: Datadriven programvaruteknik för cyberfysiska system",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valbara kurser eller utlandsstudier",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot"
+      },
+      {
+        "term": 6,
+        "code": "DIT876",
+        "name": "Management och ledarskap",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "DIT832",
+        "name": "Forskningsmetodik för programvaruteknik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Kandidatarbete inom Software Engineering and Management",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:N1SYD",
@@ -18403,27 +18676,108 @@
     "term": "HT26"
   },
   {
+    "id": "gu:S1EUR:HT2026",
     "key": "goteborgs-universitet:S1EUR",
-    "susaId": "i.uoh.gu.s1eur.76009.20262",
     "university": "Göteborgs universitet",
     "programCode": "S1EUR",
     "programName": "Europaprogrammet, Nationalekonomi",
+    "programHp": 180,
     "hp": 180,
-    "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
-    "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "",
-    "sourceUrls": [],
-    "apiCoverage": "",
-    "apiConfidence": "",
-    "quality": {},
-    "checkedAt": "2026-09-13T15:08:45.603Z",
-    "term": "HT26"
+    "validFrom": "2026HT",
+    "coverage": "choice-required",
+    "verified": true,
+    "choiceRequired": true,
+    "courseCodesVerified": true,
+    "source": "gu-official-education-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/syllabus/ed6f4aa8-c5ed-11f0-9aa4-4a24d5f444fb",
+    "sourceUrls": [
+      "https://www.gu.se/syllabus/ed6f4aa8-c5ed-11f0-9aa4-4a24d5f444fb"
+    ],
+    "choiceNotes": "Canonical programme identity is the Nationalekonomi profile; terms 2–3 vary with selected profile.",
+    "rows": [
+      {
+        "term": 1,
+        "code": "EU1110",
+        "name": "Introduktion till Europakunskap",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "EU1130",
+        "name": "Modern europeisk integration I",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Kärnkurser i valt profilämne (Nationalekonomi i katalogposten)",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fördjupningskurser i valt profilämne (Nationalekonomi i katalogposten)",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot"
+      },
+      {
+        "term": 4,
+        "code": "EU1235",
+        "name": "Modern europeisk integration II",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "EU1240",
+        "name": "Att leva i Europa",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "EU1330",
+        "name": "Forskningsmetod i Europakunskap",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "EU1540",
+        "name": "Kandidatuppsats i Europakunskap",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valbara kurser, utbytesstudier eller praktik",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "EU1410",
+            "name": "Praktik",
+            "hp": 30
+          },
+          {
+            "code": "",
+            "name": "Utbytesstudier eller fristående kurser",
+            "hp": 30
+          }
+        ]
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:S1GLS",
@@ -19926,93 +20280,130 @@
     "term": "HT26"
   },
   {
+    "id": "gu:S1STV:VT2027",
     "key": "goteborgs-universitet:S1STV",
-    "susaId": "i.uoh.gu.s1stv.76036.20271",
     "university": "Göteborgs universitet",
     "programCode": "S1STV",
     "programName": "Statsvetarprogrammet",
+    "programHp": 180,
     "hp": 180,
-    "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
-    "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/statsvetarprogrammet-s1stv",
+    "validFrom": "2027VT",
+    "coverage": "choice-required",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "source": "gu-official-programme-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/syllabus/50391253-7083-11f1-b645-10cec8c14f9f",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/statsvetarprogrammet-s1stv"
+      "https://www.gu.se/syllabus/50391253-7083-11f1-b645-10cec8c14f9f"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 6,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "5": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "6": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        }
+    "rows": [
+      {
+        "term": 1,
+        "code": "SK1124",
+        "name": "Politisk teori",
+        "hp": 7.5,
+        "category": "mandatory"
       },
-      "slotCount": 0,
-      "totalHp": 180,
-      "sourcePages": 1,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:46.386Z",
-    "term": "HT26"
+      {
+        "term": 1,
+        "code": "SK1114",
+        "name": "Svensk och jämförande politik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "SK1115",
+        "name": "Offentlig förvaltning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "SK1125",
+        "name": "Internationell politik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "SK1230",
+        "name": "Politisk teori, fördjupningskurs",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "SK1231",
+        "name": "Jämförande politik, fördjupningskurs",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Fördjupning i politiskt beteende och offentlig förvaltning eller miljöpolitik",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "SK1232 + SK1234",
+            "name": "Politiskt beteende och opinion samt Offentlig förvaltning",
+            "hp": 15
+          },
+          {
+            "code": "SK1224",
+            "name": "Miljöpolitikens villkor (endast vårtermin)",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Kärnkurser i vald inriktning",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Fördjupningskurser i vald inriktning",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valbara kurser, utbytesstudier eller praktik",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot"
+      },
+      {
+        "term": 6,
+        "code": "SK1313",
+        "name": "Metod inklusive uppsatssamordning",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "SK1523",
+        "name": "Examensarbete i statsvetenskap",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:S1TRP",
@@ -20542,75 +20933,185 @@
     "term": "HT26"
   },
   {
+    "id": "gu:S2IAG:HT2026",
     "key": "goteborgs-universitet:S2IAG",
-    "susaId": "i.uoh.gu.s2iag.76020.20262",
     "university": "Göteborgs universitet",
     "programCode": "S2IAG",
     "programName": "Master Programme in International Administration and Global Governance",
+    "programHp": 120,
     "hp": 120,
-    "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
-    "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/master-programme-in-international-administration-and-global-governance-s2iag",
+    "validFrom": "2026HT",
+    "coverage": "choice-required",
+    "verified": true,
+    "choiceRequired": true,
+    "courseCodesVerified": true,
+    "source": "gu-official-education-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/master-programme-in-international-administration-and-global-governance-s2iag/utbildningsplan/7f4e13b4-2b4b-11f0-be11-0d05041c4592",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/master-programme-in-international-administration-and-global-governance-s2iag"
+      "https://www.gu.se/studera/hitta-utbildning/master-programme-in-international-administration-and-global-governance-s2iag/utbildningsplan/7f4e13b4-2b4b-11f0-be11-0d05041c4592"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 4,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        }
+    "choiceNotes": "At least one semi-elective specialisation course is required across terms 2–3; full-term practice in term 2 replaces both modules.",
+    "choiceConstraints": [
+      {
+        "type": "at-least-one-specialisation",
+        "terms": [
+          2,
+          3
+        ]
       },
-      "slotCount": 0,
-      "totalHp": 120,
-      "sourcePages": 1,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:47.500Z",
-    "term": "HT26"
+      {
+        "type": "practice-at-most-once",
+        "terms": [
+          2,
+          3
+        ]
+      }
+    ],
+    "term2FullTermAlternatives": [
+      {
+        "code": "AG2450",
+        "name": "Praktik",
+        "hp": 30
+      },
+      {
+        "code": "",
+        "name": "Utbytesstudier",
+        "hp": 30
+      }
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "AG2110",
+        "name": "Theoretical and Historical Perspectives on Global Governance",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "AG2120",
+        "name": "International Administration and Policy",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Specialisation or internship (first module)",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "SK2212",
+            "name": "The Quality of Government",
+            "hp": 15
+          },
+          {
+            "code": "AG2440",
+            "name": "Praktik",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Elective or internship (second module)",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "AG2440",
+            "name": "Praktik",
+            "hp": 15
+          },
+          {
+            "code": "",
+            "name": "Valbar kurs",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Semi-elective specialisation, elective or internship",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "SK2211",
+            "name": "Demokratiers prestationsförmåga",
+            "hp": 15
+          },
+          {
+            "code": "EU2210",
+            "name": "Europeisk miljö- och energipolitik",
+            "hp": 15
+          },
+          {
+            "code": "EU2215",
+            "name": "Europa i världen",
+            "hp": 15
+          },
+          {
+            "code": "AG2440",
+            "name": "Praktik",
+            "hp": 15
+          },
+          {
+            "code": "",
+            "name": "Valbar kurs",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Val av metodkurs",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "SF2323",
+            "name": "Tillämpade kvalitativa forskningsmetoder, problem och design",
+            "hp": 15
+          },
+          {
+            "code": "SF2322",
+            "name": "Tillämpade kvalitativa forskningsmetoder",
+            "hp": 15
+          },
+          {
+            "code": "SF2324",
+            "name": "Introduktion till tillämpad forskningsdesign och kvantitativa forskningsmetoder för samhällsvetare",
+            "hp": 15
+          },
+          {
+            "code": "SF2321",
+            "name": "Tillämpad statistisk analys",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "AG2500",
+        "name": "Master’s Thesis for IAGG",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:S2IFM",
@@ -21456,76 +21957,121 @@
     "term": "HT26"
   },
   {
+    "id": "gu:S2LTM:2026HT",
     "key": "goteborgs-universitet:S2LTM",
-    "susaId": "i.uoh.gu.s2ltm.82019.20262",
     "university": "Göteborgs universitet",
     "programCode": "S2LTM",
     "programName": "Masterprogram i Logistik och transport",
+    "programHp": 120,
     "hp": 120,
-    "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
-    "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-logistik-och-transport-s2ltm",
+    "validFrom": "2026HT",
+    "coverage": "course-codes-unverified",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "source": "gu-official-programme-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-logistik-och-transport-s2ltm/utbildningsplan/b663c9cc-b4a2-11f0-bd83-743a3e5145ea",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-logistik-och-transport-s2ltm",
       "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-logistik-och-transport-s2ltm/utbildningsplan/b663c9cc-b4a2-11f0-bd83-743a3e5145ea"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 4,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        }
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Integrerad logistik eller Logistiska informationssystem",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "name": "Integrerad logistik",
+            "hp": 7.5
+          },
+          {
+            "name": "Logistiska informationssystem",
+            "hp": 7.5
+          }
+        ]
       },
-      "slotCount": 0,
-      "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:53.138Z",
-    "term": "HT26"
+      {
+        "term": 1,
+        "code": "",
+        "name": "Supply Chain Management",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Försörjnings- och logistikhantering",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Verksamhetsstyrning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Retailing, Wholesaling and Logistics",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Sjöfartens logistik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara kurser",
+        "hp": 22.5,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Forskningsmetoder",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Examensarbete i logistik och transport",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:S2LÄR",
@@ -22530,75 +23076,144 @@
     "term": "HT26"
   },
   {
+    "id": "gu:S2SPE:HT2026",
     "key": "goteborgs-universitet:S2SPE",
-    "susaId": "i.uoh.gu.s2spe.76018.20252",
     "university": "Göteborgs universitet",
     "programCode": "S2SPE",
     "programName": "Mastersprogram i statsvetenskap: Politik och psykologi om hållbar utveckling",
+    "programHp": 120,
     "hp": 120,
-    "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
-    "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/mastersprogram-i-statsvetenskap-politik-och-psykologi-om-hallbar-utveckling-s2spe",
+    "validFrom": "2026HT",
+    "coverage": "choice-required",
+    "verified": true,
+    "choiceRequired": true,
+    "courseCodesVerified": true,
+    "source": "gu-official-education-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/mastersprogram-i-statsvetenskap-politik-och-psykologi-om-hallbar-utveckling-s2spe/utbildningsplan/99f66653-11f0-11ef-a272-18dd79e54a0c",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/mastersprogram-i-statsvetenskap-politik-och-psykologi-om-hallbar-utveckling-s2spe"
+      "https://www.gu.se/studera/hitta-utbildning/mastersprogram-i-statsvetenskap-politik-och-psykologi-om-hallbar-utveckling-s2spe/utbildningsplan/99f66653-11f0-11ef-a272-18dd79e54a0c"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 4,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        }
+    "choiceNotes": "PX2116 or a listed methods course is selected in term 1 or term 3; the same course must not be counted twice.",
+    "choiceConstraints": [
+      {
+        "type": "unique-course-across-terms",
+        "code": "PX2116",
+        "terms": [
+          1,
+          3
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "SK2121",
+        "name": "Statsvetenskaplig analys",
+        "hp": 15,
+        "category": "mandatory"
       },
-      "slotCount": 0,
-      "totalHp": 120,
-      "sourcePages": 1,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:50.025Z",
-    "term": "HT26"
+      {
+        "term": 1,
+        "code": "",
+        "name": "Politisk psykologi eller metodkurs",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "PX2116",
+            "name": "Politisk psykologi",
+            "hp": 15
+          },
+          {
+            "code": "SF2323",
+            "name": "Tillämpade kvalitativa forskningsmetoder, problem och design",
+            "hp": 15
+          },
+          {
+            "code": "SF2322",
+            "name": "Tillämpade kvalitativa forskningsmetoder",
+            "hp": 15
+          },
+          {
+            "code": "SF2324",
+            "name": "Introduktion till tillämpad forskningsdesign och kvantitativa forskningsmetoder för samhällsvetare",
+            "hp": 15
+          },
+          {
+            "code": "SF2321",
+            "name": "Tillämpad statistisk analys",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "SK2223",
+        "name": "Samhällsvetenskapliga miljöproblem: från allmänningarnas tragedi till de planetära gränserna",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "SK2221",
+        "name": "Miljöpolitik och institutioner",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "PX2151",
+        "name": "Masterkurs i Miljöpsykologi",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Politisk psykologi eller metodkurs (ej redan avklarad kurs)",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "PX2116",
+            "name": "Politisk psykologi",
+            "hp": 15
+          },
+          {
+            "code": "SF2323",
+            "name": "Tillämpade kvalitativa forskningsmetoder, problem och design",
+            "hp": 15
+          },
+          {
+            "code": "SF2322",
+            "name": "Tillämpade kvalitativa forskningsmetoder",
+            "hp": 15
+          },
+          {
+            "code": "SF2324",
+            "name": "Introduktion till tillämpad forskningsdesign och kvantitativa forskningsmetoder för samhällsvetare",
+            "hp": 15
+          },
+          {
+            "code": "SF2321",
+            "name": "Tillämpad statistisk analys",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "SK2532",
+        "name": "Masteruppsats",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:S2SWH",
@@ -89073,5 +89688,419 @@
     "studyStructureGranularity": "term-with-spanning-course",
     "verified": true,
     "migrationSource": "susa/structures.json"
+  },
+  {
+    "id": "gu:S2EUA:2027VT",
+    "key": "goteborgs-universitet:S2EUA",
+    "university": "Göteborgs universitet",
+    "programCode": "S2EUA",
+    "programName": "Magisterprogrammet i EU-förvaltning",
+    "programHp": 60,
+    "hp": 60,
+    "validFrom": "2027VT",
+    "coverage": "choice-required",
+    "verified": true,
+    "courseCodesVerified": true,
+    "syllabusPublished": false,
+    "source": "gu-official-programme-overview",
+    "sourceEvidenceUrl": "https://www.gu.se/statsvetenskap/programoversikt-magisterprogrammet-i-eu-forvaltning",
+    "sourceUrls": [
+      "https://www.gu.se/studera/hitta-utbildning/magisterprogrammet-i-eu-forvaltning-s2eua",
+      "https://www.gu.se/statsvetenskap/programoversikt-magisterprogrammet-i-eu-forvaltning"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "EU2400",
+        "name": "Praktisk EU-kunskap",
+        "hp": 10,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "EU2610",
+        "name": "Utmaningar för europeisk integration",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "EU2401",
+        "name": "Att arbeta i EU:s institutioner",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "EU2301",
+        "name": "Forsknings- och utvärderingsmetoder",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "EU2550",
+        "name": "Europeiskt utvärderingsprojekt",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbar kurs",
+        "hp": 7.5,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          {
+            "code": "EU2620",
+            "name": "Avancerade forskningsteman i Europastudier",
+            "hp": 7.5
+          },
+          {
+            "code": "",
+            "name": "Valfri kurs",
+            "hp": 7.5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gu:S2IAM:HT2027",
+    "key": "goteborgs-universitet:S2IAM",
+    "university": "Göteborgs universitet",
+    "programCode": "S2IAM",
+    "programName": "Masterprogrammet i internationell administration och global samhällsstyrning",
+    "programHp": 120,
+    "hp": 120,
+    "validFrom": "2027HT",
+    "coverage": "choice-required",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "syllabusPublished": false,
+    "source": "gu-official-programme-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/statsvetenskap/programoversikt-masterprogrammet-i-internationell-administration-och-global-samhallsstyrning-iagg",
+    "sourceUrls": [
+      "https://www.gu.se/statsvetenskap/programoversikt-masterprogrammet-i-internationell-administration-och-global-samhallsstyrning-iagg"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "AG2105",
+        "name": "Globala policyprocesser",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "AG2302",
+        "name": "Forskningsdesign och policyutvärdering för samhällsvetare",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Val av avancerad metod",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "EU2305",
+            "name": "Avancerad kvalitativ forskningsmetod",
+            "hp": 15
+          },
+          {
+            "code": "SK2305",
+            "name": "Avancerad kvantitativ samhällsvetenskaplig metod",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "AG2210",
+        "name": "Aktörer och politikområden inom global styrning",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "AG2220",
+        "name": "Global styrning i praktiken: konflikthantering och internationellt bistånd",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Praktik, utbytesstudier eller två fördjupningsmoduler",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "AG2450",
+            "name": "Praktik",
+            "hp": 30
+          },
+          {
+            "code": "",
+            "name": "Utbytesstudier",
+            "hp": 30
+          },
+          {
+            "code": "AG2440",
+            "name": "Praktik (modul)",
+            "hp": 15
+          },
+          {
+            "code": "AG2201",
+            "name": "Fördjupningsseminarier: Tematiska inriktningar",
+            "hp": 15
+          },
+          {
+            "code": "SK2303",
+            "name": "Metodfördjupning",
+            "hp": 15
+          },
+          {
+            "code": "AG2202",
+            "name": "Fördjupningsseminarier i internationell och komparativ politik",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "AG2500",
+        "name": "Masteruppsats i internationell administration och global samhällsstyrning",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ]
+  },
+  {
+    "id": "gu:S2PSM:HT2027",
+    "key": "goteborgs-universitet:S2PSM",
+    "university": "Göteborgs universitet",
+    "programCode": "S2PSM",
+    "programName": "Masterprogrammet i statsvetenskap",
+    "programHp": 120,
+    "hp": 120,
+    "validFrom": "2027HT",
+    "coverage": "choice-required",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "source": "gu-official-programme-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/statsvetenskap/programoversikt-masterprogrammet-i-statsvetenskap-maps",
+    "sourceUrls": [
+      "https://www.gu.se/statsvetenskap/programoversikt-masterprogrammet-i-statsvetenskap-maps"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "SK2304",
+        "name": "Forskningsdesign för statsvetenskap",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "SK2201",
+        "name": "Fördjupning i komparativ politik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "SK2305",
+        "name": "Avancerad kvantitativ samhällsvetenskaplig metod",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "SK2202",
+        "name": "Fördjupning i politiskt beteende",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "SK2203",
+        "name": "Fördjupning i offentlig förvaltning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "SK2204",
+        "name": "Fördjupningsseminarier i statsvetenskap I",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Praktik, utbytesstudier eller två fördjupningsmoduler",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "SK2420",
+            "name": "Praktik",
+            "hp": 30
+          },
+          {
+            "code": "",
+            "name": "Utbytesstudier",
+            "hp": 30
+          },
+          {
+            "code": "SK2205",
+            "name": "Fördjupningsseminarier i statsvetenskap II",
+            "hp": 15
+          },
+          {
+            "code": "SK2412",
+            "name": "Praktik (modul)",
+            "hp": 15
+          },
+          {
+            "code": "SK2303",
+            "name": "Metodfördjupning",
+            "hp": 15
+          },
+          {
+            "code": "AG2202",
+            "name": "Fördjupningsseminarier i internationell och komparativ politik",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "SK2532",
+        "name": "Masteruppsats i statsvetenskap",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ]
+  },
+  {
+    "id": "gu:S2EUM:HT2027",
+    "key": "goteborgs-universitet:S2EUM",
+    "university": "Göteborgs universitet",
+    "programCode": "S2EUM",
+    "programName": "Masterprogrammet i Europastudier",
+    "programHp": 120,
+    "hp": 120,
+    "validFrom": "2027HT",
+    "coverage": "choice-required",
+    "verified": true,
+    "choiceRequired": true,
+    "courseCodesVerified": true,
+    "source": "gu-official-education-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/syllabus/55f38ac5-493e-11f1-bb9f-75bddadd4925",
+    "sourceUrls": [
+      "https://www.gu.se/syllabus/55f38ac5-493e-11f1-bb9f-75bddadd4925"
+    ],
+    "term2HalfTermPractice": {
+      "code": "EU2430",
+      "name": "Praktik",
+      "hp": 15
+    },
+    "rows": [
+      {
+        "term": 1,
+        "code": "EU2105",
+        "name": "Samarbete och konflikt i Europa",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "EU2302",
+        "name": "Analysera Europa: Forskningsdesign och utvärdering",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Val av avancerad metod",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "EU2305",
+            "name": "Avancerad kvalitativ forskningsmetod",
+            "hp": 15
+          },
+          {
+            "code": "SK2305",
+            "name": "Avancerad kvantitativ samhällsvetenskaplig metod",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valfria kurser, praktik eller utlandsstudier",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "EU2420",
+            "name": "Praktik (hel termin)",
+            "hp": 30
+          },
+          {
+            "code": "",
+            "name": "Valfria kurser i Sverige eller utomlands",
+            "hp": 30
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "EU2201",
+        "name": "Utmaningar för Europa: integration och kultur",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "EU2230",
+        "name": "Avancerade forskningsteman i Europastudier",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "EU2500",
+        "name": "Examensarbete i Europakunskap",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ]
   }
 ]
