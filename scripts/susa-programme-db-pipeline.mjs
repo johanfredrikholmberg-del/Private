@@ -22,7 +22,7 @@ const list=(d,keys)=>{if(Array.isArray(d))return d;for(const k of keys)if(Array.
 const infoList=d=>list(d,['educationInfos','educationInfo','items','content','results','data']);
 const eventList=d=>list(d,['educationEvents','events','items','content','results','data']);
 const providerList=d=>list(d,['educationProviders','providers','items','content','results','data']);
-const idOf=x=>first(x?.id,x?.content?.identifier,x?.identifier);
+const idOf=x=>first(x?.id,x?.content?.identifier,x?.identifier,x?.content?.id);
 const isActive=x=>{if(!x||String(x.status||'ACTIVE').toUpperCase()!=='ACTIVE')return false;const expires=x?.content?.expires;return !expires||!Number.isFinite(Date.parse(expires))||Date.parse(expires)>=Date.now()-86400000};
 const configCode=x=>norm(x?.content?.configuration?.code);
 const kindOf=x=>{const c=configCode(x);if(['program','programme','programmeutbildning'].includes(c)||/program/.test(c))return'programme';if(['course','kurs','kursutbildning'].includes(c)||/course|kurs/.test(c))return'course';return'other'};
@@ -37,7 +37,7 @@ const totalPages=d=>{const n=Number(d?.totalPages??d?.page?.totalPages??d?.pagin
 async function collection(base,resource,listFn,{updatedSince='',maxPages=MAX_PAGES}={}){const make=p=>{const u=new URL(resource,base);u.searchParams.set('schoolType',SCHOOL_TYPE);u.searchParams.set('page',String(p));u.searchParams.set('size',String(SIZE));if(updatedSince)u.searchParams.set('updatedSince',updatedSince);return u};const firstPage=await getJson(make(0));const pages=Math.min(totalPages(firstPage),maxPages);const out=[...listFn(firstPage)];for(let p=1;p<pages;p+=6){const n=Math.min(6,pages-p);const batch=await Promise.all(Array.from({length:n},(_,i)=>getJson(make(p+i))));for(const d of batch)out.push(...listFn(d))}return out}
 
 function normalizeProvider(p){return{id:idOf(p),name:localized(p?.content?.name),code:first(p?.content?.code),urls:urlsOf(p)}}
-function normalizeEvent(e){const c=e?.content||{};return{id:idOf(e),educationId:first(c.education,c.educationInfo,c.educationIdentifier),providerId:first(c.providers?.[0],c.provider),start:first(c.start,c.startDate,c.startSemester),end:first(c.end,c.endDate),distance:Boolean(c.distance??c.isDistance),location:first(c.location?.name,c.location,c.place?.name),urls:urlsOf(e),lastEdited:first(e?.lastEdited,c.lastEdited)}}
+function normalizeEvent(e){const c=e?.content||{};return{id:idOf(e),educationId:first(c.education,c.educationInfo,c.educationIdentifier,c.education?.id,c.educationInfo?.id),providerId:first(c.providers?.[0],c.provider),start:first(c.start,c.startDate,c.startSemester),end:first(c.end,c.endDate),distance:Boolean(c.distance??c.isDistance),location:first(c.location?.name,c.location,c.place?.name),urls:urlsOf(e),lastEdited:first(e?.lastEdited,c.lastEdited)}}
 function normalizeInfo(i,provider,eventRows){const c=i?.content||{};return{susaId:idOf(i),kind:kindOf(i),name:localized(c.title),code:first(c.code),hp:hpOf(i),level:first(c.educationLevel?.code,c.level?.code,c.educationLevel,c.level),subject:subjectOf(i),university:provider?.name||'',providerId:provider?.id||'',urls:[...new Set([...urlsOf(i),...eventRows.flatMap(e=>e.urls||[])])],events:eventRows,lastEdited:first(i?.lastEdited,c.lastEdited),expires:first(c.expires),source:'skolverket-susa-navet'}}
 function identity(x){return`${norm(x.university)}|${norm(x.code||x.name)}|${x.hp||0}|${x.kind}`}
 function newer(a,b){const ad=Date.parse(a.lastEdited||'')||0,bd=Date.parse(b.lastEdited||'')||0;return bd>=ad?b:a}
