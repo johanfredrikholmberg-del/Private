@@ -1,6 +1,8 @@
 name: Import GU verified structures
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '17 1 * * *'
   push:
     branches: [studielots-v2]
     paths:
@@ -12,7 +14,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: studielots-gu-verified
+  group: studielots-db-structure-import
   cancel-in-progress: false
 jobs:
   import:

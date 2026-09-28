@@ -13,15 +13,15 @@ const programs=JSON.parse(await fs.readFile(programsPath,'utf8'));
 const structures=JSON.parse(await fs.readFile(structuresPath,'utf8'));
 let previous=null;
 try{previous=JSON.parse(await fs.readFile(reportPath,'utf8'))}catch(e){if(e?.code!=='ENOENT')throw e}
-const today=new Date().toISOString().slice(0,10);
-const deferred=new Set(previous?.generatedAt?.slice(0,10)===today?(previous.deferredCodes||previous.failed?.map(x=>x.code)||[]):[]);
+const retryAfter=previous?.retryAfter||new Date(Date.parse(previous?.generatedAt||new Date().toISOString())+7*86400000).toISOString();
+const deferred=new Set(Date.now()<Date.parse(retryAfter)?(previous?.deferredCodes||previous?.failed?.map(x=>x.code)||[]):[]);
 const rows=Array.isArray(programs)?programs:(programs.programs||[]);
 const existing=Array.isArray(structures)?structures:(structures.programs||[]);
 const isKth=x=>x.providerId==='p.uoh.kth'||/\bkth\b|kungl\.? tekniska|kungliga tekniska/i.test(String(x.university||x.provider||x.universityName||x.providerName||''));
 const candidates=rows.filter(isKth).sort((a,b)=>(Number(a.programHp)||999)-(Number(b.programHp)||999));
 const limit=Number(process.env.KTH_STRUCTURE_LIMIT||500);
 const out=[...existing];
-const report={generatedAt:new Date().toISOString(),term,catalogueProgrammes:candidates.length,attempted:0,imported:0,failed:[],deferredCodes:[],verifiedProgrammeCodes:[]};
+const report={generatedAt:new Date().toISOString(),term,catalogueProgrammes:candidates.length,attempted:0,imported:0,failed:[],retryAfter:deferred.size?retryAfter:new Date(Date.now()+7*86400000).toISOString(),deferredCodes:[],verifiedProgrammeCodes:[]};
 
 const call=async p=>new Promise(resolve=>{
  const req={query:{code:p.programCode||p.code||'',name:p.programName||p.name||'',university:p.university||p.provider||p.universityName||p.providerName||'KTH'}};

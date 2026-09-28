@@ -1,5 +1,7 @@
 name: KTH programme structures
 on:
+  schedule:
+    - cron: '47 2 * * *'
   push:
     branches: [studielots-v2]
     paths:
@@ -9,7 +11,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: kth-program-structures
+  group: studielots-db-structure-import
   cancel-in-progress: false
 jobs:
   import:
