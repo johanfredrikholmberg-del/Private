@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "programs": [
+    {
+      "id": "gu:S2EUA:2027VT",
+      "key": "goteborgs universitet|S2EUA|60",
+      "university": "Göteborgs universitet",
+      "programCode": "S2EUA",
+      "programName": "Magisterprogrammet i EU-förvaltning",
+      "programHp": 60,
+      "hp": 60,
+      "validFrom": "2027VT",
+      "coverage": "choice-required",
+      "verified": true,
+      "courseCodesVerified": true,
+      "syllabusPublished": false,
+      "source": "gu-official-programme-overview",
+      "sourceEvidenceUrl": "https://www.gu.se/statsvetenskap/programoversikt-magisterprogrammet-i-eu-forvaltning",
+      "sourceUrls": [
+        "https://www.gu.se/studera/hitta-utbildning/magisterprogrammet-i-eu-forvaltning-s2eua",
+        "https://www.gu.se/statsvetenskap/programoversikt-magisterprogrammet-i-eu-forvaltning"
+      ],
+      "rows": [
+        {"term": 1, "code": "EU2400", "name": "Praktisk EU-kunskap", "hp": 10, "category": "mandatory"},
+        {"term": 1, "code": "EU2610", "name": "Utmaningar för europeisk integration", "hp": 15, "category": "mandatory"},
+        {"term": 1, "code": "EU2401", "name": "Att arbeta i EU:s institutioner", "hp": 5, "category": "mandatory"},
+        {"term": 2, "code": "EU2301", "name": "Forsknings- och utvärderingsmetoder", "hp": 7.5, "category": "mandatory"},
+        {"term": 2, "code": "EU2550", "name": "Europeiskt utvärderingsprojekt", "hp": 15, "category": "mandatory"},
+        {"term": 2, "code": "", "name": "Valbar kurs", "hp": 7.5, "category": "elective", "slotType": "elective-slot", "isSlot": true, "options": [{"code": "EU2620", "name": "Avancerade forskningsteman i Europastudier", "hp": 7.5}, {"code": "", "name": "Valfri kurs", "hp": 7.5}]}
+      ]
+    }
+  ]
+}

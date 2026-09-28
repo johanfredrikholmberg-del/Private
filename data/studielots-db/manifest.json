@@ -17,11 +17,14 @@
     },
     "programmeStructures": {
       "storageManifest": "data/studielots-db/programme-structures-manifest.json",
-      "rows": 38
+      "rows": 48
     },
     "courses": {
       "storage": "data/HT26/courses.json",
-      "rows": 28331
+      "rows": 28337,
+      "additionalStorages": [
+        "data/studielots-db/courses-gu-2027-eu.json"
+      ]
     },
     "courseOfferings": {
       "storage": "data/HT26/course-offerings.json",
