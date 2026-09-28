@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "database": "StudieLots DB",
+  "generatedAt": "2026-09-28",
+  "singleSourceOfTruth": true,
+  "tables": {
+    "providers": {"storage":"data/HT26/providers.json","rows":49},
+    "programmes": {"storage":"data/HT26/programs.json","rows":3183},
+    "programmeStructures": {"storageManifest":"data/studielots-db/programme-structures-manifest.json","rows":38},
+    "courses": {"storage":"data/HT26/courses.json","rows":28331},
+    "courseOfferings": {"storage":"data/HT26/course-offerings.json","rows":2403,"term":"HT26"},
+    "syllabusVersions": {"storage":"data/HT26/syllabus-versions.json","rows":2836}
+  },
+  "historicalCreditTransferSources": [
+    "data/gu/history/specific-1to1-p1.json",
+    "data/gu/history/specific-1to1-p2.json",
+    "data/kth/history/specific-1to1.json"
+  ],
+  "importSources": {
+    "SUSA": {"programmes":3230,"courses":28130,"providers":49},
+    "KAU": {"programmes":134,"courses":1664}
+  }
+}
