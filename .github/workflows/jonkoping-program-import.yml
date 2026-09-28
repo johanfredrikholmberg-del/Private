@@ -1,0 +1,45 @@
+name: Import Jonkoping University candidates
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - '.github/workflows/jonkoping-program-import.yml'
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build Jönköping candidate inventory
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const raw=JSON.parse(fs.readFileSync('data/susa/programmes.json','utf8'));
+          const rows=Array.isArray(raw)?raw:(raw.programmes||raw.items||raw.data||[]);
+          const norm=v=>String(v??'').toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+          const isJU=x=>/jonkoping university|hogskolan i jonkoping|jonkopings hogskola/.test(norm(JSON.stringify(x)));
+          const candidates=rows.filter(isJU);
+          const report={generatedAt:new Date().toISOString(),university:'Jönköping University',catalogueCandidates:candidates.length,verifiedStructuresImported:0,status:'candidate-inventory-only',policy:'Catalogue metadata is not treated as a verified programme structure.'};
+          fs.mkdirSync('data/import-reviews',{recursive:true});
+          fs.writeFileSync('data/import-reviews/jonkoping-import-latest.json',JSON.stringify(report,null,2)+'\n');
+          fs.writeFileSync('data/import-reviews/jonkoping-programme-candidates.json',JSON.stringify(candidates,null,2)+'\n');
+          console.log(report);
+          NODE
+      - name: Persist Jönköping import inventory
+        run: |
+          git config user.name 'studielots-data-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/import-reviews/jonkoping-import-latest.json data/import-reviews/jonkoping-programme-candidates.json
+          git diff --cached --quiet || git commit -m 'Inventory Jönköping University programmes [skip ci]'
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
+          git push origin HEAD:studielots-v2
