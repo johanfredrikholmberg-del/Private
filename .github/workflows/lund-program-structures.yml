@@ -48,13 +48,16 @@ jobs:
           LUND_STRUCTURE_CONCURRENCY: '6'
           LUND_STRUCTURE_TIMEOUT: '15000'
         run: node scripts/import-lund-program-structures.mjs
+      - name: Consolidate programme structures into StudieLots DB
+        if: ${{ matrix.term == 'HT26' }}
+        run: node scripts/consolidate-programme-structures.mjs
       - name: Validate canonical programme visibility
         run: if [ "${{ matrix.term }}" = "HT26" ]; then node scripts/audit-ht26-search-readiness.mjs | tee lund-program-search-readiness.json; else echo '{"term":"VT27","audit":"pending term-specific audit"}' > lund-program-search-readiness.json; fi
       - name: Commit Lund structure progress
         run: |
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/${{ matrix.term }}/program-structures.json data/import-reviews/lund-program-structures-${{ matrix.term == 'HT26' && 'ht26' || 'vt27' }}-latest.json
+          git add -f data/${{ matrix.term }}/program-structures.json data/import-reviews/lund-program-structures-${{ matrix.term == 'HT26' && 'ht26' || 'vt27' }}-latest.json data/studielots-db/programme-structures-ht26.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json
           if git diff --cached --quiet; then
             echo 'No Lund structure changes.'
             exit 0
