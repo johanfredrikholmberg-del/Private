@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-28T19:08:35.798Z",
+  "university": "Göteborgs universitet",
+  "catalogue": {
+    "programmes": 232,
+    "programmesWithBaseMetadata": 232,
+    "courses": 2827,
+    "coursesWithBaseMetadata": 2827
+  },
+  "structures": {
+    "materialized": 2,
+    "verified": 2,
+    "rows": 32
+  },
+  "historicalCreditTransfer": {
+    "rows": 275,
+    "uniqueTargetCodes": 240,
+    "approvalCount": 329,
+    "targetCodesPresentInSusaCourseCatalogue": 40
+  },
+  "definitions": {
+    "baseMetadata": "name + education code + hp",
+    "completeProgrammeForPlanner": "requires verified/materialized programme structure; catalogue metadata alone is not counted as complete"
+  }
+}
