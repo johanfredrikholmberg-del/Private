@@ -4,7 +4,7 @@ on:
   push:
     branches: [studielots-v2]
     paths:
-      - 'scripts/import-gu-next-structures.mjs'
+      - 'scripts/import-gu-next-structures.mjs'\n      - 'api/gu-program-structure.js'
       - '.github/workflows/import-gu-verified.yml'
 permissions:
   contents: write
