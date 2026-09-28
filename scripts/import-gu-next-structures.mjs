@@ -5,8 +5,8 @@ const base='data/studielots-db/';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const index=read(base+'programme-structures-manifest.json');
 const db=read(base+'manifest.json');
-const all=index.parts.flatMap(p=>read(base+p).programs);
-const identities=[read(db.tables.programmes.storage),...(db.tables.programmes.additionalStorages||[]).map(read)].flat();
+const all=index.parts.flatMap(p=>{const shard=read(base+p);return (Array.isArray(shard)?shard:(shard.programs||[])).filter(Boolean)});
+const identities=[read(db.tables.programmes.storage),...(db.tables.programmes.additionalStorages||[]).map(read)].flat().filter(Boolean);
 const row=(term,code,name,hp,extra={})=>({term,code,name,hp,category:extra.slot?'elective':'mandatory',...(extra.slot?{isSlot:true,slotType:'elective-slot'}:{}),...(extra.thesis?{isThesis:true}:{}),...(extra.options?{options:extra.options}:{})});
 const source={
  N1SOF:'https://www.gu.se/studera/hitta-utbildning/n1sof-curriculum',
