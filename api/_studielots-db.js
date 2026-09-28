@@ -19,7 +19,9 @@ export async function studielotsManifest(){return read('manifest.json');}
 export async function studielotsTable(name){
   const manifest=await studielotsManifest(), table=manifest.tables?.[name];
   if(!table?.storage)throw new Error('StudieLots DB table not registered: '+name);
-  const rows=JSON.parse(await readFile(join(process.cwd(),...table.storage.split('/')),'utf8'));
+  const paths=[table.storage,...(table.additionalStorages||[])];
+  const parts=await Promise.all(paths.map(p=>readFile(join(process.cwd(),...p.split('/')),'utf8').then(JSON.parse)));
+  const rows=parts.flat();
   if(Array.isArray(rows)&&Number.isFinite(Number(table.rows))&&rows.length!==Number(table.rows))throw new Error('StudieLots DB row count mismatch for '+name);
   return rows;
 }

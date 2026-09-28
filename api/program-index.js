@@ -1,6 +1,6 @@
 import {readFile} from 'node:fs/promises';
 import {join} from 'node:path';
-import {canonicalProgrammeStructures} from './_studielots-db.js';
+import {canonicalProgrammeStructures,studielotsTable} from './_studielots-db.js';
 const norm=v=>String(v??'').trim().toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const code=v=>String(v??'').trim().toUpperCase();
 const identity=(university,programCode)=>`${norm(university)}:${code(programCode)}`;
@@ -29,7 +29,7 @@ const cache=new Map();
 async function catalogue(term){
  if(cache.has(term))return cache.get(term);
  const db=await readDb();
- const programs=await readStorage(db.tables.programmes.storage);
+ const programs=await studielotsTable('programmes');
  const canonical=await canonicalProgrammeStructures();
  const structures=canonical.programs;
  const byKey=new Map(),byIdentity=new Map();
