@@ -11,6 +11,22 @@ const dbManifestPath=path.join(dbDir,'manifest.json');
 
 const raw=JSON.parse(await fs.readFile(legacyPath,'utf8'));
 const rows=Array.isArray(raw)?raw:(raw.programs||[]);
+
+// Migrate already collected, explicitly verified legacy programme plans into
+// the canonical StudieLots DB. These files are migration inputs only.
+for(const name of ['program-db.json','program-db-variants.json']){
+  const p=path.join(root,'data',name);
+  try{
+    const legacy=JSON.parse(await fs.readFile(p,'utf8'));
+    for(const row of legacy.programs||[]){
+      if(row?.verified===true && Array.isArray(row.rows) && row.rows.length){
+        rows.push({...row, migrationSource:name});
+      }
+    }
+  }catch(err){
+    if(err?.code!=='ENOENT')throw err;
+  }
+}
 if(!rows.length)throw new Error('No programme structures found');
 
 const clean=v=>String(v??'').trim().toLocaleLowerCase('sv-SE');
