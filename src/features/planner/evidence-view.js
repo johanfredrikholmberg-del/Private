@@ -25,15 +25,15 @@ function strongCard(row,index,data){
 function panelHtml(data){
  const strong=ordered(data).map((row,index)=>({row,index})).filter(x=>isStrong(x.row));
  const historical=decisions(data);
- const decisionList=historical.length?`<ul class="evidence-history-list">${historical.map(d=>`<li><b>${esc(d.sourceName||d.fromName||'Tidigare kurs')} → ${esc(d.targetName||d.toName||'Programkurs')}</b><small>${esc(d.university||d.source||'Lärosäte saknas')} · beslut ${esc(decisionId(d))}</small></li>`).join('')}</ul>`:'<p>0 verifierade bifall matchar de här kursparen i vår beslutsdata. Det betyder inte att lärosätet kommer att avslå en ansökan.</p>';
- return `<div class="evidence-panel-head"><button type="button" data-evidence-close>← Planeraren</button><h2>Underlag</h2><p>${esc(data.item?.programName||'Valt program')} · ${esc(data.item?.university||'')}</p></div><section class="evidence-group"><h3>Starkt underlag <span>${strong.length}</span></h3>${strong.length?`<div class="evidence-item-list">${strong.map(x=>strongCard(x.row,x.index,data)).join('')}</div>`:'<p>Ingen kurs har starkt underlag i den här matchningen.</p>'}</section><section class="evidence-group"><h3>Historiska bifall <span>${historical.length}</span></h3>${decisionList}</section><p class="evidence-disclaimer">Matchningarna är preliminära. Lärosätet beslutar om tillgodoräknande.</p><details class="evidence-prep"><summary>Handlingar och underlagspaket</summary><div><p>Inför en ansökan kan du behöva Ladok-intyg och kursplaner från när du läste kurserna. Kontrollera kraven med lärosätet.</p><button type="button" data-evidence-export data-premium-feature="evidence-package" aria-disabled="true">Hämta underlagspaket <small>Kommer senare</small></button><span class="evidence-export-message" role="status" aria-live="polite"></span></div></details>`;
+ const decisionList=historical.length?`<ul class="evidence-history-list">${historical.map(d=>`<li><b>${esc(d.sourceName||d.fromName||'Tidigare kurs')} → ${esc(d.targetName||d.toName||'Programkurs')}</b><small>${esc(d.university||d.source||'Lärosäte saknas')} · beslut ${esc(decisionId(d))}</small></li>`).join('')}</ul>`:'<p>Inga verifierade bifall matchar de här kursparen i vår beslutsdata.</p>';
+ return `<section class="evidence-group"><h3>Starkt underlag <span>${strong.length}</span></h3>${strong.length?`<div class="evidence-item-list">${strong.map(x=>strongCard(x.row,x.index,data)).join('')}</div>`:'<p>Ingen kurs har starkt underlag här.</p>'}</section><section class="evidence-group"><h3>Historiska bifall <span>${historical.length}</span></h3>${decisionList}</section><p class="evidence-disclaimer">Bedömningen är preliminär. Lärosätet fattar beslut.</p><details class="evidence-prep"><summary>Handlingar och underlagspaket</summary><div><p>Du kan behöva Ladok-intyg och kursplaner. Kontrollera lärosätets krav.</p><button type="button" data-evidence-export data-premium-feature="evidence-package" aria-disabled="true">Hämta underlagspaket <small>Kommer senare</small></button><span class="evidence-export-message" role="status" aria-live="polite"></span></div></details>`;
 }
 let open=false;
 function sync(data=root.appContext?.state?.plannerData){
  if(!Array.isArray(data?.rows)||!data.rows.length){entry.hidden=true;panel.hidden=true;return}
  const strong=data.rows.filter(isStrong).length,historical=decisions(data).length;
- entry.innerHTML=`<div><b>Underlag</b><span>${strong} ${strong===1?'kurs':'kurser'} med starkt underlag · ${historical} historiska bifall</span></div><button type="button" data-evidence-open>Visa →</button>`;
- entry.hidden=open;
+ entry.innerHTML=`<div><b>Underlag</b><span>${strong} ${strong===1?'stark kursmatchning':'starka kursmatchningar'} · ${historical} tidigare bifall</span></div><button type="button" data-evidence-open aria-expanded="${open}" aria-controls="evidencePanel">${open?'Dölj ↑':'Visa →'}</button>`;
+ entry.hidden=false;
  panel.innerHTML=panelHtml(data);
  panel.hidden=!open;
  const courseRows=ordered(data);
@@ -45,20 +45,20 @@ function sync(data=root.appContext?.state?.plannerData){
 }
 function show(index){
  const data=root.appContext?.state?.plannerData;if(!data?.rows?.length)return;
- open=true;sync(data);planner.querySelector('.route-switch').hidden=true;
- planner.querySelector('#ordinaryPlan').hidden=true;planner.querySelector('#fastPlan').hidden=true;
+ open=true;sync(data);
  const item=Number.isInteger(index)?panel.querySelector(`[data-evidence-item="${index}"]`):null;
  if(item)item.open=true;
  (item||panel).scrollIntoView({behavior:'smooth',block:'start'});
 }
-function close(){open=false;panel.hidden=true;entry.hidden=false;planner.querySelector('.route-switch').hidden=false;root.planner?.route?.(root.appContext?.state?.route||'ordinary');entry.scrollIntoView({behavior:'smooth',block:'start'})}
+function close(){open=false;sync();entry.scrollIntoView({behavior:'smooth',block:'start'})}
 planner.addEventListener('click',event=>{
- const target=event.target instanceof Element?event.target.closest('[data-evidence-open],[data-evidence-close],[data-evidence-course],[data-evidence-export]'):null;if(!target)return;
- if(target.hasAttribute('data-evidence-close'))close();
- else if(target.hasAttribute('data-evidence-open'))show();
+ if(!(event.target instanceof Element))return;
+ if(open&&event.target.closest('[data-route]')){open=false;sync();return}
+ const target=event.target.closest('[data-evidence-open],[data-evidence-course],[data-evidence-export]');if(!target)return;
+ if(target.hasAttribute('data-evidence-open'))open?close():show();
  else if(target.hasAttribute('data-evidence-course'))show(Number(target.dataset.evidenceCourse));
  else if(target.hasAttribute('data-evidence-export'))panel.querySelector('.evidence-export-message').textContent='Underlagspaketet är ännu inte tillgängligt.';
 });
 window.addEventListener('studielots:credit-ledger',()=>sync());
-root.evidenceView=Object.freeze({render(data){open=false;planner.querySelector('.route-switch').hidden=false;sync(data)},show,close,features:Object.freeze({fastRoute:'fast-route',evidencePackage:'evidence-package'})});
+root.evidenceView=Object.freeze({render(data){open=false;sync(data)},show,close,features:Object.freeze({fastRoute:'fast-route',evidencePackage:'evidence-package'})});
 })();

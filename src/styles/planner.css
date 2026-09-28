@@ -58,12 +58,8 @@
 #planner .evidence-entry button,#planner .evidence-course-link,#planner .evidence-panel-head button{border:0;background:transparent;color:var(--planner-green);font:inherit;font-size:12px;font-weight:800;cursor:pointer}
 #planner .evidence-entry button{flex:none;padding:7px 0}
 #planner .evidence-course-link{padding:10px 0 0;text-align:left}
-#planner .evidence-panel{padding:0 0 30px;color:#143b35}
-#planner .evidence-panel-head{margin:4px 0 22px}
-#planner .evidence-panel-head button{padding:8px 0}
-#planner .evidence-panel-head h2{font-size:23px;letter-spacing:-.03em;margin:8px 0 4px}
-#planner .evidence-panel-head p{font-size:12px;color:#6a7c75;margin:0}
-#planner .evidence-group{margin:0 0 21px}
+#planner .evidence-panel{padding:15px;margin:-6px 0 14px;border:1px solid #dce7e1;border-radius:16px;background:#f9fbf9;color:#143b35}
+#planner .evidence-group{margin:0 0 15px}
 #planner .evidence-group h3{font-size:15px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
 #planner .evidence-group h3 span{font-size:11px;color:var(--planner-green);background:#e7f3eb;border-radius:100px;padding:4px 8px}
 #planner .evidence-group>p{font-size:12px;line-height:1.5;color:#64776f;margin:0}
