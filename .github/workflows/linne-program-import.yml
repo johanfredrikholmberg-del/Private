@@ -1,0 +1,33 @@
+name: Linnaeus programme inventory
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - scripts/audit-linne-coverage.mjs
+      - .github/workflows/linne-program-import.yml
+permissions:
+  contents: write
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build Linnaeus inventory
+        run: node scripts/audit-linne-coverage.mjs
+      - name: Commit report
+        run: |
+          git config user.name studielots-data-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add data/import-reviews/linne-import-latest.json data/import-reviews/linne-programme-candidates.json
+          git diff --cached --quiet || git commit -m "Inventory Linnaeus programme coverage [skip ci]"
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
+          git push origin HEAD:studielots-v2
