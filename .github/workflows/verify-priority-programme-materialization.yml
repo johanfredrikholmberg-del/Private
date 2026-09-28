@@ -5,8 +5,10 @@ on:
     branches: [studielots-v2]
     paths:
       - 'data/studielots-db/programme-structures-uppsala-2026.json'
+      - 'data/studielots-db/programme-structures-linkoping-2026.json'
       - 'data/studielots-db/programme-structures-manifest.json'
       - 'scripts/materialize-uppsala-programmes.mjs'
+      - 'scripts/materialize-linkoping-programmes.mjs'
       - '.github/workflows/verify-priority-programme-materialization.yml'
 jobs:
   verify:
@@ -23,17 +25,18 @@ jobs:
           const dir='data/studielots-db/';
           const read=p=>JSON.parse(fs.readFileSync(dir+p,'utf8'));
           const manifest=read('programme-structures-manifest.json');
-          const rows=manifest.parts.flatMap(p=>read(p));
+          const rows=manifest.parts.flatMap(p=>{const part=read(p);return Array.isArray(part)?part:part.programs||[]});
           if(rows.length!==manifest.count||read('manifest.json').tables.programmeStructures.rows!==rows.length)throw Error('Manifest/database count mismatch');
           const ids=new Set();
           for(const p of rows){
             if(p.id){if(ids.has(p.id))throw Error(`Duplicate ${p.id}`);ids.add(p.id)}
-            if(p.source!=='uppsala-official-studieplan')continue;
-            if(p.verified!==true||!p.sourceUrls?.some(x=>x.startsWith('https://www.uu.se/utbildning/studieplan?query=')))throw Error(`Missing provenance ${p.id}`);
+            const domains={'uppsala-official-studieplan':'https://www.uu.se/utbildning/studieplan?query=','liu-official-studieinfo':'https://studieinfo.liu.se/program/'};
+            if(!domains[p.source])continue;
+            if(p.verified!==true||!p.sourceUrls?.some(x=>x.startsWith(domains[p.source])))throw Error(`Missing provenance ${p.id}`);
             for(let t=1;t<=p.programHp/30;t++){
               const sum=p.rows.filter(x=>x.term===t).reduce((n,x)=>n+Number(x.hp),0);
               if(Math.abs(sum-30)>0.01)throw Error(`Invalid semester ${p.id} T${t}: ${sum}`);
             }
           }
-          console.log({canonical:rows.length,uppsalaVerified:rows.filter(x=>x.university==='Uppsala universitet'&&x.verified).length});
+          console.log({canonical:rows.length,uppsalaVerified:rows.filter(x=>x.university==='Uppsala universitet'&&x.verified).length,linkopingVerified:rows.filter(x=>x.university==='Linköpings universitet'&&x.verified).length});
           NODE
