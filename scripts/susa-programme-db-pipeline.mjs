@@ -61,9 +61,12 @@ async function main(){
   const programmes=catalogue.filter(x=>x.kind==='programme');
   const courses=catalogue.filter(x=>x.kind==='course');
   const structureQueue=programmes.map(p=>({key:`${slug(p.university)}:${p.code||p.susaId}`,susaId:p.susaId,university:p.university,programCode:p.code,programName:p.name,hp:p.hp,subject:p.subject,officialUrls:p.urls,status:'pending-official-structure',attempts:0}));
-  const meta={generatedAt:new Date().toISOString(),apiBase:base,schoolType:SCHOOL_TYPE,updatedSince:UPDATED_SINCE||null,counts:{educationInfos:activeInfos.length,events:events.length,providers:providers.length,programmes:programmes.length,courses:courses.length,structureQueue:structureQueue.length}};
+  const termOf=value=>{const d=new Date(value);if(!Number.isFinite(d.getTime()))return'';const m=d.getUTCMonth()+1;return `${m<=6?'VT':'HT'}${String(d.getUTCFullYear()).slice(-2)}`};
+  const programmeOfferings=programmes.flatMap(p=>(p.events||[]).map(e=>({offeringKey:['susa-programme',e.id||p.susaId,e.start].join('|'),definitionKey:identity(p),susaId:p.susaId,programmeCode:p.code,programmeName:p.name,university:p.university,hp:p.hp,startDate:e.start,endDate:e.end||'',term:termOf(e.start),distance:e.distance===true,location:e.location||'',urls:e.urls||[],verified:true,source:'skolverket-susa-navet'}))).filter(x=>x.term);
+
+  const meta={generatedAt:new Date().toISOString(),apiBase:base,schoolType:SCHOOL_TYPE,updatedSince:UPDATED_SINCE||null,counts:{educationInfos:activeInfos.length,events:events.length,providers:providers.length,programmes:programmes.length,courses:courses.length,structureQueue:structureQueue.length,programmeOfferings:programmeOfferings.length}};
   const write=(name,data)=>fs.writeFile(path.join(OUT,name),JSON.stringify(data,null,2)+'\n');
-  await Promise.all([write('meta.json',meta),write('providers.json',providers),write('programmes.json',programmes),write('courses.json',courses),write('structure-queue.json',structureQueue)]);
+  await Promise.all([write('meta.json',meta),write('programme-offerings.json',programmeOfferings),write('providers.json',providers),write('programmes.json',programmes),write('courses.json',courses),write('structure-queue.json',structureQueue)]);
   console.log(JSON.stringify(meta,null,2));
   if(!programmes.length||!courses.length)throw new Error(`Empty catalogue: ${programmes.length} programmes, ${courses.length} courses`);
 }
