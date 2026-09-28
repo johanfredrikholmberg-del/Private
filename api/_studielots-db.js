@@ -14,4 +14,14 @@ export async function canonicalProgrammeStructures(){
   return cache;
 }
 
+export async function studielotsManifest(){return read('manifest.json');}
+
+export async function studielotsTable(name){
+  const manifest=await studielotsManifest(), table=manifest.tables?.[name];
+  if(!table?.storage)throw new Error('StudieLots DB table not registered: '+name);
+  const rows=JSON.parse(await readFile(join(process.cwd(),...table.storage.split('/')),'utf8'));
+  if(Array.isArray(rows)&&Number.isFinite(Number(table.rows))&&rows.length!==Number(table.rows))throw new Error('StudieLots DB row count mismatch for '+name);
+  return rows;
+}
+
 export function clearCanonicalProgrammeCache(){cache=null;}
