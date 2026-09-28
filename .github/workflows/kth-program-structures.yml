@@ -1,0 +1,42 @@
+name: KTH programme structures
+on:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - 'scripts/import-kth-program-structures.mjs'
+      - 'api/kth-program-structure.js'
+      - '.github/workflows/kth-program-structures.yml'
+permissions:
+  contents: write
+concurrency:
+  group: kth-program-structures
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import verified KTH programme structures
+        env:
+          STUDIELOTS_TERM: HT26
+          KTH_STRUCTURE_LIMIT: '500'
+        run: node scripts/import-kth-program-structures.mjs
+      - name: Consolidate into StudieLots DB
+        run: node scripts/consolidate-programme-structures.mjs
+      - name: Commit KTH structure progress
+        run: |
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/HT26/program-structures.json data/import-reviews/kth-program-structures-ht26-latest.json data/studielots-db/programme-structures-ht26.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Materialise verified KTH programme structures [skip ci]'
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
+          git push origin HEAD:studielots-v2
