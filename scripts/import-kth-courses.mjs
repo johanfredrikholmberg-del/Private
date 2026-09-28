@@ -5,7 +5,7 @@ import path from 'node:path';
 const SOURCE=path.resolve('data/susa/courses.json');
 const OUT=path.resolve('data/kth/courses.json');
 const rows=JSON.parse(await fs.readFile(SOURCE,'utf8'));
-const kth=rows.filter(x=>/^(KTH|Kungliga tekniska högskolan)$/i.test(String(x.university||'').trim()));
+const kth=rows.filter(x=>String(x.providerId||'').trim().toLowerCase()==='p.uoh.kth'||/^(KTH|Kungl\.? Tekniska högskolan|Kungliga tekniska högskolan)$/i.test(String(x.university||'').trim()));
 const byCode=new Map();
 for(const x of kth){
  const code=String(x.code||'').trim().toUpperCase();
