@@ -26,12 +26,7 @@ const decisions=[
  ['RE500068','Portabla format / Praktisk uppgift - Webbläsares kompatibilitet',1,'ISGB13-1322 :',1,'ISGB13-1322','approved'],
  ['RE498691','Introduktion till innovationsteknik och design för högskoleingenjörer',7.5,'MSGA24 :',7.5,'MSGA24','approved']
 ].map(([id,sourceName,sourceHp,targetName,targetHp,targetCode,decision])=>Object.freeze({id,university:'Karlstads universitet',sourceName,sourceHp,targetName,targetHp,targetCode,decision}));
-const loadHistory=(url,source)=>fetch(url).then(r=>r.ok?r.json():[]).then(rows=>{for(const r of rows){decisions.push(Object.freeze({...r,source}))}return rows}).catch(()=>[]);
-const historyReady=Promise.all([
- loadHistory('/data/kth/history/specific-1to1.json','KTH'),
- loadHistory('/data/gu/history/specific-1to1-p1.json','Göteborgs universitet'),
- loadHistory('/data/gu/history/specific-1to1-p2.json','Göteborgs universitet')
-]).then(parts=>{const rows=parts.flat();window.dispatchEvent(new CustomEvent('studielots:credit-history-ready',{detail:{relations:rows.length,approvals:rows.reduce((s,r)=>s+(Number(r.approvalCount)||1),0)}}));return rows.length});
+const historyReady=fetch('/api/credit-transfer-history').then(r=>r.ok?r.json():{decisions:[]}).then(payload=>{const rows=Array.isArray(payload?.decisions)?payload.decisions:[];for(const r of rows)decisions.push(Object.freeze({...r,source:r.university||'StudieLots DB'}));window.dispatchEvent(new CustomEvent('studielots:credit-history-ready',{detail:{relations:rows.length,approvals:rows.reduce((s,r)=>s+(Number(r.approvalCount)||1),0)}}));return rows.length}).catch(()=>0);
 function forAssessment(){return decisions.flatMap(d=>Array.from({length:Math.max(1,Number(d.approvalCount)||1)},(_,i)=>({id:(Number(d.approvalCount)||1)>1?`${d.id}#${i+1}`:d.id,sourceName:d.sourceName,sourceHp:d.sourceHp,targetName:d.targetName,targetHp:d.targetHp,targetCode:d.targetCode,decision:d.decision,status:d.decision,source:d.source||d.university||'Karlstads universitet'})))}
 root.creditTransferHistory=Object.freeze({source:'historical decisions',decisions,forAssessment,ready:historyReady});
 })();
