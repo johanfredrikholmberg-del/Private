@@ -4,10 +4,15 @@ on:
   push:
     branches: [studielots-v2]
     paths:
-      - 'scripts/import-gu-next-structures.mjs'\n      - 'api/gu-program-structure.js'
+      - 'scripts/import-gu-next-structures.mjs'
+      - 'api/gu-program-structure.js'
+      - 'scripts/audit-gu-coverage.mjs'
       - '.github/workflows/import-gu-verified.yml'
 permissions:
   contents: write
+concurrency:
+  group: studielots-gu-verified
+  cancel-in-progress: false
 jobs:
   import:
     runs-on: ubuntu-latest
@@ -21,15 +26,19 @@ jobs:
         with:
           node-version: '22'
       - name: Import verified GU structures
-        env:\n          GU_STRUCTURE_LIMIT: 20\n        run: node scripts/import-gu-next-structures.mjs --write
+        env:
+          GU_STRUCTURE_LIMIT: 20
+        run: node scripts/import-gu-next-structures.mjs --write
       - name: Audit GU coverage
         run: node scripts/audit-gu-coverage.mjs
       - name: Persist verified GU data
         run: |
           git config user.name 'studielots-data-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/studielots-db/programme-structures-gu-next.json data/studielots-db/programme-structures-gu-batch.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json data/import-reviews/gu-coverage.json data/import-reviews/gu-structure-batch-latest.json
-          git diff --cached --quiet || git commit -m 'Import verified GU structures [skip ci]'
+          git add -f data/studielots-db/programme-structures-gu-next.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json data/import-reviews/gu-coverage.json data/import-reviews/gu-structure-batch-latest.json
+          if [ -f data/studielots-db/programme-structures-gu-batch.json ]; then git add -f data/studielots-db/programme-structures-gu-batch.json; fi
+          if git diff --cached --quiet; then echo 'No GU changes'; exit 0; fi
+          git commit -m 'Import verified GU structures [skip ci]'
           git fetch origin studielots-v2
           git rebase origin/studielots-v2
           git push origin HEAD:studielots-v2

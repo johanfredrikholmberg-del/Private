@@ -13,8 +13,16 @@ const name=x=>String(x?.name??x?.title??x?.educationName??'').trim();
 
 const programmes=arr(read('data/susa/programmes.json')).filter(isGu);
 const courses=arr(read('data/susa/courses.json')).filter(isGu);
-const pdb=read('data/program-db.json');
-const structures=arr(pdb?.programs??pdb).filter(isGu);
+const db=read('data/studielots-db/manifest.json');
+const structureManifest=read(db.tables.programmeStructures.storageManifest);
+const structures=structureManifest.parts.flatMap(part=>{
+  const shard=read('data/studielots-db/'+part);
+  return Array.isArray(shard)?shard:Array.isArray(shard.programs)?shard.programs:[];
+}).filter(isGu);
+if(structureManifest.count!==structureManifest.parts.reduce((n,part)=>{
+  const shard=read('data/studielots-db/'+part);
+  return n+(Array.isArray(shard)?shard.length:(shard.programs||[]).length);
+},0))throw Error('StudieLots DB programme structure manifest count mismatch');
 const h1=read('data/gu/history/specific-1to1-p1.json');
 const h2=read('data/gu/history/specific-1to1-p2.json');
 const history=[...h1,...h2];

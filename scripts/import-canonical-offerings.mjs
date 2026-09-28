@@ -14,9 +14,15 @@ const cache=new Map(),rows=[];
 for(const row of candidates){let info=cache.get(row.educationId);if(info===undefined){try{info=await get(new URL('educationInfos/'+encodeURIComponent(row.educationId),API))}catch{info=null}cache.set(row.educationId,info)}if(!info)continue;const ec=row.event.content||{},ic=info.content||{},cfg=clean(ic?.configuration?.code).toLowerCase();if(!['kurs','course'].includes(cfg))continue;const hp=Number(ic?.credits?.credits)||0,code=clean(ic.code),name=loc(ic.title),university=loc(row.provider?.content?.name),url=loc(ec?.application?.url)||loc(ic.url);if(!name||!university||!code||!(hp>0)||!url)continue;const offeringId=clean(row.event?.id||ec.identifier);rows.push({source:'skolverket-susa-navet',sourceId:row.educationId,offeringId,offeringKey:['susa',offeringId||row.educationId,row.start].join('|'),definitionKey:[university.toLocaleLowerCase('sv'),code.toUpperCase().replace(/[^A-Z0-9ÅÄÖ]/g,''),'course'].join('|'),name,code,university,hp,pace:Number(ec?.paceOfStudy?.percentage)||null,startDate:row.start,term:termOf(row.start),distance:Boolean(ec.distance),standaloneSearchable:true,currentOffering:true,verified:true,url})}
 const invalidTerms=rows.filter(x=>!/^(HT|VT)\d{2}$/.test(x.term));if(invalidTerms.length)throw Error(`Invalid offering terms: ${invalidTerms.length}`);
 const seen=new Set(),offerings=rows.filter(x=>!seen.has(x.offeringKey)&&seen.add(x.offeringKey)).sort((a,b)=>a.startDate.localeCompare(b.startDate)||a.university.localeCompare(b.university,'sv')||a.code.localeCompare(b.code,'sv'));
+if(!offerings.length)throw Error(`No verified offerings; scanned ${events.length} events and ${candidates.length} candidates. Existing DB data left intact.`);
 fs.mkdirSync('data/offerings',{recursive:true});fs.writeFileSync('data/offerings/canonical.json',JSON.stringify(offerings,null,2)+'\n');
 // Mirror verified offerings into the single authoritative StudieLots DB storage.
 fs.mkdirSync('data/HT26',{recursive:true});fs.writeFileSync('data/HT26/course-offerings.json',JSON.stringify(offerings,null,2)+'\n');
+const manifestPath='data/studielots-db/manifest.json';
+const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
+if(manifest.database!=='StudieLots DB'||manifest.tables?.courseOfferings?.storage!=='data/HT26/course-offerings.json')throw Error('Unexpected authoritative offerings storage');
+manifest.tables.courseOfferings.rows=offerings.length;
+fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2)+'\n');
 const byTerm=Object.fromEntries([...new Set(offerings.map(x=>x.term).filter(Boolean))].sort().map(term=>[term,offerings.filter(x=>x.term===term).length]));
 const meta={updated:new Date().toISOString(),source:'skolverket-susa-navet',eventsScanned:events.length,candidates:candidates.length,count:offerings.length,byTerm,distance:offerings.filter(x=>x.distance).length,universities:new Set(offerings.map(x=>x.university)).size};
 fs.writeFileSync('data/offerings/meta.json',JSON.stringify(meta,null,2)+'\n');console.log(meta);
