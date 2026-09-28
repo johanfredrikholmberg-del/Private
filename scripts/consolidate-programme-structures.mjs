@@ -27,6 +27,23 @@ for(const name of ['program-db.json','program-db-variants.json']){
     if(err?.code!=='ENOENT')throw err;
   }
 }
+// SUSA contains a mixture of metadata, manual-review results and resolved
+// official structures. Only migrate records explicitly classified complete.
+try{
+  const susa=JSON.parse(await fs.readFile(path.join(root,'data','susa','structures.json'),'utf8'));
+  for(const row of Array.isArray(susa)?susa:[]){
+    if(row?.coverage==='complete' && Array.isArray(row.rows) && row.rows.length && (row.sourceUrl || row.sourceUrls?.length)){
+      rows.push({
+        ...row,
+        verified:true,
+        migrationSource:'susa/structures.json'
+      });
+    }
+  }
+}catch(err){
+  if(err?.code!=='ENOENT')throw err;
+}
+
 if(!rows.length)throw new Error('No programme structures found');
 
 const clean=v=>String(v??'').trim().toLocaleLowerCase('sv-SE');
