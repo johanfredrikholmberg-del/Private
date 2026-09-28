@@ -1,0 +1,35 @@
+name: Import GU verified structures
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - 'scripts/import-gu-next-structures.mjs'
+      - '.github/workflows/import-gu-verified.yml'
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import verified GU structures
+        run: node scripts/import-gu-next-structures.mjs --write
+      - name: Audit GU coverage
+        run: node scripts/audit-gu-coverage.mjs
+      - name: Persist verified GU data
+        run: |
+          git config user.name 'studielots-data-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/studielots-db/programme-structures-gu-next.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json data/import-reviews/gu-coverage.json
+          git diff --cached --quiet || git commit -m 'Import verified GU structures [skip ci]'
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
+          git push origin HEAD:studielots-v2
