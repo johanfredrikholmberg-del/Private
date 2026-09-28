@@ -56,7 +56,7 @@ for(const plan of plans){
 }
 const target=base+'programme-structures-gu-next.json';
 if(process.argv.includes('--write')){
- if(!accepted.length)throw Error('Nothing new to import');
+ if(!accepted.length){console.log('No new GU structures; canonical DB already contains these verified plans');process.exit(0);}
  const already=fs.existsSync(target)?read(target):{schemaVersion:1,programs:[]};
  if(fs.existsSync(target)!==index.parts.includes('programme-structures-gu-next.json'))throw Error('Shard and manifest conflict');
  fs.writeFileSync(target,JSON.stringify({...already,programs:[...already.programs,...accepted]},null,2)+'\n');
