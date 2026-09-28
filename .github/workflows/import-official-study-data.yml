@@ -25,7 +25,7 @@ jobs:
           node-version: '22'
       - name: Enrich existing canonical data from official university sources
         env:
-          STRUCTURE_LIMIT: '1000'
+          STRUCTURE_LIMIT: '1600'
           STRUCTURE_CONCURRENCY: '8'
           HB_STRUCTURE_LIMIT: '150'
           HB_STRUCTURE_CONCURRENCY: '8'
