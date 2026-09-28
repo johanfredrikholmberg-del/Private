@@ -5,6 +5,8 @@ const COURSE_KEY='studielots_v2_courses';
 // GU course identities below are based on https://www.gu.se/studera/hitta-utbildning/redovisning-kandidattermin-fec30
 // Historical approvals must only be displayed when backed by a sourced decision record.
 const sampleCourses=[
+ {code:'',name:'Finansiell ekonomi, kandidatuppsats',hp:15,subject:'Nationalekonomi',progression:'G2E',institution:'Exempeluniversitet',source:'Syntetisk testmerit - GU historiktest 17 bifall',demoSynthetic:true},
+ {code:'MAG034',name:'MAG034',hp:7.5,subject:'Matematik',progression:'G1N',institution:'Exempeluniversitet',source:'Syntetisk testmerit - KTH historiktest 6 bifall',demoSynthetic:true},
  {code:'',name:'Företagsekonomi, grundkurs',hp:30,subject:'Företagsekonomi',progression:'G1N',institution:'Exempelmerit',source:'Syntetisk testmerit · ej GU-beslut'},
  {code:'',name:'Nationalekonomi, grundkurs',hp:30,subject:'Nationalekonomi',progression:'G1N',institution:'Exempelmerit',source:'Syntetisk testmerit · ej GU-beslut'},
  {code:'',name:'Specialpedagogik för förskollärare och lärare i grundskolan F-9',hp:15,subject:'Pedagogik',progression:'G1N',institution:'Exempelmerit',source:'Syntetisk testmerit · ej GU-beslut'},
