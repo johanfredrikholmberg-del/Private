@@ -6,13 +6,14 @@ on:
     branches: [studielots-v2]
     paths:
       - scripts/import-kau-course-details.mjs
+      - scripts/materialize-kau-course-details.mjs
       - .github/workflows/kau-course-details-import.yml
   schedule:
     - cron: '37 4 * * *'
 permissions:
   contents: write
 concurrency:
-  group: kau-course-details-import
+  group: studielots-db-structure-import
   cancel-in-progress: false
 jobs:
   import:
@@ -31,6 +32,8 @@ jobs:
         env:
           KAU_COURSE_LIMIT: '100'
         run: node scripts/import-kau-course-details.mjs
+      - name: Materialize Karlstad details in StudieLots DB
+        run: node scripts/materialize-kau-course-details.mjs --write
       - name: Validate imported course identities and provenance
         run: |
           node --input-type=module <<'NODE'
@@ -38,6 +41,8 @@ jobs:
           const courses=JSON.parse(fs.readFileSync('data/HT26/courses.json','utf8'));
           const details=JSON.parse(fs.readFileSync('data/HT26/course-details.json','utf8'));
           const report=JSON.parse(fs.readFileSync('data/import-reviews/kau-course-details-latest.json','utf8'));
+          const db=JSON.parse(fs.readFileSync('data/studielots-db/manifest.json','utf8'));
+          const canonicalDetails=JSON.parse(fs.readFileSync(db.tables.courseDetails.storage,'utf8'));
           const norm=x=>String(x??'').trim().toUpperCase();
           const canonical=new Map();
           for(const c of courses){if(c.university!=='Karlstads universitet')continue;const k=norm(c.code);canonical.set(k,(canonical.get(k)||0)+1)}
@@ -49,13 +54,14 @@ jobs:
             seen.add(k);
           }
           if(report.total!==details.length||report.imported+report.previous!==report.total)throw Error('Course import report totals do not match data');
+          if(db.database!=='StudieLots DB'||db.tables.courseDetails.rows!==seen.size||canonicalDetails.length!==seen.size)throw Error('StudieLots DB Karlstad details mismatch');
           console.log(`Validated ${seen.size} Karlstad course details; latest batch imported ${report.imported}`);
           NODE
       - name: Commit verified data and import report
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/HT26/course-details.json data/import-reviews/kau-course-details-latest.json data/import-reviews/kau-course-details-unavailable.json
+          git add data/HT26/course-details.json data/import-reviews/kau-course-details-latest.json data/import-reviews/kau-course-details-unavailable.json data/studielots-db/course-details-kau.json data/studielots-db/manifest.json
           if ! git diff --cached --quiet; then
             git commit -m 'Import verified Karlstad course details into HT26 [skip ci]'
             git fetch origin studielots-v2
