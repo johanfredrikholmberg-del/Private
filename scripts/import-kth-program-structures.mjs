@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+import fs from 'node:fs/promises';
+import {pathToFileURL} from 'node:url';
+
+const term=process.env.STUDIELOTS_TERM||'HT26';
+const programsPath='data/HT26/programs.json';
+const structuresPath='data/HT26/program-structures.json';
+const reportPath='data/import-reviews/kth-program-structures-ht26-latest.json';
+const mod=await import(pathToFileURL(process.cwd()+'/api/kth-program-structure.js'));
+const handler=mod.default;
+
+const programs=JSON.parse(await fs.readFile(programsPath,'utf8'));
+const structures=JSON.parse(await fs.readFile(structuresPath,'utf8'));
+const rows=Array.isArray(programs)?programs:(programs.programs||[]);
+const existing=Array.isArray(structures)?structures:(structures.programs||[]);
+const isKth=x=>/\bkth\b|kungliga tekniska/i.test(String(x.university||x.provider||x.universityName||x.providerName||''));
+const candidates=rows.filter(isKth);
+const limit=Number(process.env.KTH_STRUCTURE_LIMIT||500);
+const out=[...existing];
+const report={generatedAt:new Date().toISOString(),term,catalogueProgrammes:candidates.length,attempted:0,imported:0,failed:[],verifiedProgrammeCodes:[]};
+
+const call=async p=>new Promise(resolve=>{
+ const req={query:{code:p.programCode||p.code||'',name:p.programName||p.name||'',university:p.university||p.provider||p.universityName||p.providerName||'KTH'}};
+ const res={statusCode:200,setHeader(){},status(n){this.statusCode=n;return this},json(v){resolve(v);return this}};
+ Promise.resolve(handler(req,res)).catch(e=>resolve({found:false,error:String(e)}));
+});
+
+const key=x=>String(x.programCode||x.code||'').trim().toUpperCase();
+const known=new Set(out.filter(isKth).map(key).filter(Boolean));
+for(const p of candidates){
+ const code=key(p); if(!code||known.has(code))continue;
+ if(report.attempted>=limit)break;
+ report.attempted++;
+ const r=await call(p);
+ if(!r?.structureAvailable||!Array.isArray(r.courses)||!r.courses.length){report.failed.push({code,reason:r?.coverage||r?.error||'not-verified'});continue}
+ out.push({university:'KTH',programCode:code,programName:p.programName||p.name||r.program?.name||code,term,courses:r.courses,source:r.source,sourceUrls:r.sourceUrls,confidence:r.confidence,coverage:r.coverage,quality:r.quality,verifiedAt:new Date().toISOString()});
+ known.add(code);report.imported++;report.verifiedProgrammeCodes.push(code);
+}
+await fs.writeFile(structuresPath,JSON.stringify(out,null,2)+'\n');
+await fs.writeFile(reportPath,JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report,null,2));
