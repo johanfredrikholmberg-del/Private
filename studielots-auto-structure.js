@@ -22,7 +22,8 @@ const nameOf=r=>low(r?.name??r?.courseName??r?.title??r?.course??r?.label);
 const termOf=r=>Math.max(1,num(r?.term??r?.semester??r?.originalTerm??r?.__slOriginalTerm)||1);
 const categoryOf=r=>low(r?.programmeCategory||r?.category||r?.type);
 function creditAmount(r){if(num(r?.matchedHp)>0)return Math.min(hpOf(r),num(r.matchedHp));if(num(r?.creditedHp)>0)return Math.min(hpOf(r),num(r.creditedHp));return r?.credited||r?.isCredited||r?.completed||r?.done||r?.status==='credited'||r?.status==='completed'?hpOf(r):0}
-function creditCandidate(r){return creditAmount(r)>0||r?.matchType==='replace'||r?.historicalApproval===true||r?.historicalApproved===true||r?.approvedHistorically===true||r?.previousApproved===true}
+function policyApproved(r){const p=window.StudieLotsCreditPolicy;return !!(p&&typeof p.policyCreditable==='function'&&p.policyCreditable(r))}
+function creditCandidate(r){return policyApproved(r)&&creditAmount(r)>0}
 function structuralKey(r){const cat=categoryOf(r),hp=hpOf(r),term=termOf(r);if(!/(elective|thesis|valbar|examensarbete)/.test(cat+' '+nameOf(r)))return'';return[term,cat||nameOf(r),hp].join('|')}
 function priorIdentity(r){const code=codeOf(r);if(code)return'code|'+code;const slot=structuralKey(r);if(slot)return'slot|'+slot;const name=nameOf(r);if(name)return['name',termOf(r),name,hpOf(r),categoryOf(r)].join('|');return''}
 function priorScore(r){const historical=r?.historicalApproval===true||r?.historicalApproved===true||r?.approvedHistorically===true||r?.previousApproved===true||Boolean(r?.historicalDecision);return creditAmount(r)*100+(historical?20:0)+(r?.matchType==='replace'?10:0)+(r?.creditEvidence||r?.creditSource||r?.decisionSource?2:0)}
