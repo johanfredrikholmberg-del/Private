@@ -26,7 +26,7 @@ jobs:
       - name: Import verified KTH programme structures
         env:
           STUDIELOTS_TERM: HT26
-          KTH_STRUCTURE_LIMIT: '12'
+          KTH_STRUCTURE_LIMIT: '20'
         run: node scripts/import-kth-program-structures.mjs
       - name: Consolidate into StudieLots DB
         run: node scripts/materialize-kth-verified.mjs --write
