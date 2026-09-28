@@ -12,6 +12,8 @@ const clean=s=>String(s||'').replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').repl
 const fetchText=async url=>{const r=await fetch(url,{headers:{'user-agent':'Mozilla/5.0 StudieLots/1.0','accept':'text/html,application/xhtml+xml'}});if(!r.ok)throw new Error(url+' '+r.status);return r.text()};
 
 const root=await fetchText(ROOT);
+// 2026 catalogue may expose course links directly even when organisation navigation is client-rendered.
+const directCodes=[...root.matchAll(/\/student\/kurser\/kurs\/([A-Z][A-Z0-9]{4,5})/gi)].map(m=>m[1].toUpperCase()).filter((v,i,a)=>a.indexOf(v)===i);
 // KTH now renders many catalogue links as relative hrefs. Accept absolute,
 // root-relative and relative organisation links, but keep only safe org IDs.
 const orgs=[...root.matchAll(/href=["']([^"']*\/student\/kurser\/org\/([A-Za-z0-9_-]+)[^"']*)["']/gi)]
@@ -25,7 +27,7 @@ if(!orgs.length){
   if(!orgs.includes(m[1]))orgs.push(m[1]);
  }
 }
-if(!orgs.length)throw new Error('No KTH organisations parsed from '+ROOT);
+if(!orgs.length && !directCodes.length)throw new Error('No KTH organisations or direct course links parsed from '+ROOT);
 
 const map=new Map();
 for(const org of orgs){
