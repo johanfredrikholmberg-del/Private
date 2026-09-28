@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "functions": {
     "api/catalog-data.js": { "includeFiles": "data/HT26/course-offerings.json" },
-    "api/program-index.js": { "includeFiles": ["data/HT26/programs.json", "data/studielots-db/**"] }
+    "api/program-index.js": { "includeFiles": "data/studielots-db/**" }
   },
   "rewrites": [
     { "source": "/api/canonical-offerings", "destination": "/api/catalog-data?route=canonical-offerings" },
