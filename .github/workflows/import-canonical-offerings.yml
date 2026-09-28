@@ -30,22 +30,22 @@ jobs:
         run: |
           node --input-type=module - <<'NODE'
           import fs from 'node:fs';
-          const rows=JSON.parse(fs.readFileSync('data/offerings/canonical.json'));
+          const rows=JSON.parse(fs.readFileSync('data/HT26/course-offerings.json'));
           if(!rows.length) throw Error('No offerings imported');
-          if(rows.some(x=>!x.offeringKey||!x.definitionKey||!x.code||!x.university||!x.startDate||!x.url)) throw Error('Invalid offering');
-          const dup=rows.length-new Set(rows.map(x=>x.offeringKey)).size;
+          if(rows.some(x=>!x.key||!x.courseCode||!x.university||!x.startDate||!x.sourceUrl)) throw Error('Invalid offering');
+          const dup=rows.length-new Set(rows.map(x=>x.key)).size;
           if(dup) throw Error('Duplicate offering keys: '+dup);
           const db=JSON.parse(fs.readFileSync('data/studielots-db/manifest.json'));
           if(db.tables.courseOfferings.rows!==rows.length) throw Error('StudieLots DB offering count mismatch');
-          if(JSON.parse(fs.readFileSync(db.tables.courseOfferings.storage)).length!==rows.length) throw Error('StudieLots DB offering storage mismatch');
-          console.log('Validated '+rows.length+' offerings; distance '+rows.filter(x=>x.distance).length+'; sample '+JSON.stringify(rows[0]));
+          if(db.tables.courseOfferings.storage!=='data/HT26/course-offerings.json') throw Error('Unexpected StudieLots DB storage');
+          console.log('Validated '+rows.length+' StudieLots DB offerings; GU '+rows.filter(x=>x.university==='Göteborgs universitet').length);
           NODE
       - name: Save canonical offerings
         run: |
           if [ -z "$(git status --porcelain -- data/offerings data/HT26/course-offerings.json data/studielots-db/manifest.json)" ]; then echo 'No offering changes'; exit 0; fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/offerings/canonical.json data/offerings/meta.json data/HT26/course-offerings.json data/studielots-db/manifest.json
+          git add -f data/offerings/meta.json data/HT26/course-offerings.json data/studielots-db/manifest.json
           git commit -m 'Import canonical course offerings [skip ci]'
           git fetch origin studielots-v2
           git rebase origin/studielots-v2
