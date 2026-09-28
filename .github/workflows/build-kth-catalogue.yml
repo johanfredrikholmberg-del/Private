@@ -21,6 +21,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Inspect official KTH course API
+        run: |
+          node --input-type=module - <<'NODE'
+          const url='https://api.kth.se/api/kopps/v2/courses/part?batch_size=2&index=1';
+          try {
+            const response=await fetch(url,{headers:{accept:'application/json'},signal:AbortSignal.timeout(15000)});
+            const body=await response.text();
+            let data;try{data=JSON.parse(body)}catch{}
+            console.log(JSON.stringify({status:response.status,contentType:response.headers.get('content-type'),keys:data&&typeof data==='object'?Object.keys(data).slice(0,12):[],sample:JSON.stringify(data||body).slice(0,900)}));
+          } catch(error) {console.log('KTH official API unavailable: '+String(error.message||error))}
+          NODE
       - name: Import KTH course catalogue
         run: node scripts/import-kth-courses.mjs
       - name: Commit catalogue immediately
