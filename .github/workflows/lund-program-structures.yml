@@ -23,6 +23,10 @@ concurrency:
 
 jobs:
   import:
+    strategy:
+      fail-fast: false
+      matrix:
+        term: [HT26, VT27]
     if: ${{ github.actor != 'studielots-bot' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -39,17 +43,18 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - name: Import verified Lund programme structures
         env:
+          STUDIELOTS_TERM: ${{ matrix.term }}
           LUND_STRUCTURE_LIMIT: '300'
           LUND_STRUCTURE_CONCURRENCY: '6'
           LUND_STRUCTURE_TIMEOUT: '15000'
         run: node scripts/import-lund-program-structures.mjs
       - name: Validate canonical programme visibility
-        run: node scripts/audit-ht26-search-readiness.mjs | tee lund-program-search-readiness.json
+        run: if [ "${{ matrix.term }}" = "HT26" ]; then node scripts/audit-ht26-search-readiness.mjs | tee lund-program-search-readiness.json; else echo '{"term":"VT27","audit":"pending term-specific audit"}' > lund-program-search-readiness.json; fi
       - name: Commit Lund structure progress
         run: |
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/HT26/program-structures.json data/import-reviews/lund-program-structures-latest.json
+          git add -f data/${{ matrix.term }}/program-structures.json data/import-reviews/lund-program-structures-${{ matrix.term == 'HT26' && 'ht26' || 'vt27' }}-latest.json
           if git diff --cached --quiet; then
             echo 'No Lund structure changes.'
             exit 0
