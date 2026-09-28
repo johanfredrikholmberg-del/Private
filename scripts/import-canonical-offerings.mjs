@@ -15,6 +15,8 @@ for(const row of candidates){let info=cache.get(row.educationId);if(info===undef
 const invalidTerms=rows.filter(x=>!/^(HT|VT)\d{2}$/.test(x.term));if(invalidTerms.length)throw Error(`Invalid offering terms: ${invalidTerms.length}`);
 const seen=new Set(),offerings=rows.filter(x=>!seen.has(x.offeringKey)&&seen.add(x.offeringKey)).sort((a,b)=>a.startDate.localeCompare(b.startDate)||a.university.localeCompare(b.university,'sv')||a.code.localeCompare(b.code,'sv'));
 fs.mkdirSync('data/offerings',{recursive:true});fs.writeFileSync('data/offerings/canonical.json',JSON.stringify(offerings,null,2)+'\n');
+// Mirror verified offerings into the single authoritative StudieLots DB storage.
+fs.mkdirSync('data/HT26',{recursive:true});fs.writeFileSync('data/HT26/course-offerings.json',JSON.stringify(offerings,null,2)+'\n');
 const byTerm=Object.fromEntries([...new Set(offerings.map(x=>x.term).filter(Boolean))].sort().map(term=>[term,offerings.filter(x=>x.term===term).length]));
 const meta={updated:new Date().toISOString(),source:'skolverket-susa-navet',eventsScanned:events.length,candidates:candidates.length,count:offerings.length,byTerm,distance:offerings.filter(x=>x.distance).length,universities:new Set(offerings.map(x=>x.university)).size};
 fs.writeFileSync('data/offerings/meta.json',JSON.stringify(meta,null,2)+'\n');console.log(meta);
