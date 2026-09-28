@@ -1,0 +1,39 @@
+name: Verify priority programme materialization
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - 'data/studielots-db/programme-structures-uppsala-2026.json'
+      - 'data/studielots-db/programme-structures-manifest.json'
+      - 'scripts/materialize-uppsala-programmes.mjs'
+      - '.github/workflows/verify-priority-programme-materialization.yml'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify canonical records and semester totals
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const dir='data/studielots-db/';
+          const read=p=>JSON.parse(fs.readFileSync(dir+p,'utf8'));
+          const manifest=read('programme-structures-manifest.json');
+          const rows=manifest.parts.flatMap(p=>read(p));
+          if(rows.length!==manifest.count||read('manifest.json').tables.programmeStructures.rows!==rows.length)throw Error('Manifest/database count mismatch');
+          const ids=new Set();
+          for(const p of rows){
+            if(p.id){if(ids.has(p.id))throw Error(`Duplicate ${p.id}`);ids.add(p.id)}
+            if(p.source!=='uppsala-official-studieplan')continue;
+            if(p.verified!==true||!p.sourceUrls?.some(x=>x.startsWith('https://www.uu.se/utbildning/studieplan?query=')))throw Error(`Missing provenance ${p.id}`);
+            for(let t=1;t<=p.programHp/30;t++){
+              const sum=p.rows.filter(x=>x.term===t).reduce((n,x)=>n+Number(x.hp),0);
+              if(Math.abs(sum-30)>0.01)throw Error(`Invalid semester ${p.id} T${t}: ${sum}`);
+            }
+          }
+          console.log({canonical:rows.length,uppsalaVerified:rows.filter(x=>x.university==='Uppsala universitet'&&x.verified).length});
+          NODE
