@@ -4,7 +4,7 @@ on:
     branches: [studielots-v2]
     paths:
       - '.github/workflows/build-kth-catalogue.yml'
-      - 'scripts/import-kth-courses.mjs'
+      - 'scripts/import-kth-courses.mjs'\n      - 'scripts/import-kth-program-structures.mjs'
       - 'scripts/resolve-kth-history.mjs'
       - 'data/import-reviews/kth-catalogue-refresh.txt'
   workflow_dispatch:
@@ -20,11 +20,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node scripts/import-kth-courses.mjs
+      - name: Import KTH course catalogue
+        continue-on-error: true
+        run: node scripts/import-kth-courses.mjs
+      - name: Import verified KTH programme structures
+        env:
+          STUDIELOTS_TERM: HT26
+          KTH_STRUCTURE_LIMIT: '500'
+        run: node scripts/import-kth-program-structures.mjs
+      - name: Consolidate KTH structures into StudieLots DB
+        run: node scripts/consolidate-programme-structures.mjs
       - name: Commit catalogue
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/kth/courses.json
+          git add -f data/kth/courses.json data/HT26/program-structures.json data/import-reviews/kth-program-structures-ht26-latest.json data/studielots-db/programme-structures-ht26.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json
           git diff --cached --quiet || git commit -m "Build KTH course catalogue"
           git push origin HEAD:studielots-v2
