@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// batch continuation 2
 /** Import official Karlstad course-page details without altering canonical course identities. */
 import fs from 'node:fs/promises';
 import path from 'node:path';
