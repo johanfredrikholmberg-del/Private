@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 // Import two complete term sequences from GU. Unpublished course codes remain blank.
+// Continue GU depth import 2026-09-28
 import fs from 'node:fs';
 const base='data/studielots-db/';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
