@@ -32,8 +32,9 @@ jobs:
           const rows=JSON.parse(fs.readFileSync('data/offerings/canonical.json'));
           if(!rows.length) throw Error('No offerings imported');
           if(rows.some(x=>!x.offeringKey||!x.definitionKey||!x.code||!x.university||!x.startDate||!x.url)) throw Error('Invalid offering');
-          if(new Set(rows.map(x=>x.offeringKey)).size!==rows.length) throw Error('Duplicate offering keys');
-          console.log('Validated '+rows.length+' offerings; distance '+rows.filter(x=>x.distance).length);
+          const dup=rows.length-new Set(rows.map(x=>x.offeringKey)).size;
+          if(dup) throw Error('Duplicate offering keys: '+dup);
+          console.log('Validated '+rows.length+' offerings; distance '+rows.filter(x=>x.distance).length+'; sample '+JSON.stringify(rows[0]));
           NODE
       - name: Save canonical offerings
         run: |
