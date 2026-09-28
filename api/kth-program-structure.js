@@ -5,7 +5,7 @@ const norm=v=>clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0
 const codeNorm=v=>clean(v).toUpperCase().replace(/[^A-Z0-9ÅÄÖ]/g,'');
 const round1=n=>Math.round(Number(n||0)*10)/10;
 
-function isKth(university){return /(^|\s)kth(\s|$)|kungliga tekniska/.test(norm(university))}
+function isKth(university){return /(^|\s)kth(\s|$)|kungl\.? tekniska|kungliga tekniska/.test(norm(university))}
 function decodeHtml(s){return String(s??'').replace(/&nbsp;/gi,' ').replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'").replace(/&aring;/gi,'å').replace(/&Aring;/g,'Å').replace(/&auml;/gi,'ä').replace(/&Auml;/g,'Ä').replace(/&ouml;/gi,'ö').replace(/&Ouml;/g,'Ö').replace(/&#(\d+);/g,(_,n)=>String.fromCodePoint(Number(n))).replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCodePoint(parseInt(n,16)))}
 function htmlText(s){return clean(decodeHtml(String(s??'').replace(/<script\b[\s\S]*?<\/script>/gi,' ').replace(/<style\b[\s\S]*?<\/style>/gi,' ').replace(/<br\s*\/?\s*>/gi,' ').replace(/<[^>]+>/g,' ')))}
 async function getText(url,timeout=15000){const r=await fetch(url,{headers:{accept:'text/html,application/xhtml+xml'},signal:AbortSignal.timeout(timeout)});if(!r.ok)throw new Error(`HTTP ${r.status}`);return r.text()}
