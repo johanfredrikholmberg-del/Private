@@ -37,10 +37,10 @@ jobs:
           NODE
       - name: Save canonical offerings
         run: |
-          if [ -z "$(git status --porcelain -- data/offerings)" ]; then echo 'No offering changes'; exit 0; fi
+          if [ -z "$(git status --porcelain -- data/offerings data/HT26/course-offerings.json)" ]; then echo 'No offering changes'; exit 0; fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/offerings/canonical.json data/offerings/meta.json
+          git add -f data/offerings/canonical.json data/offerings/meta.json data/HT26/course-offerings.json
           git commit -m 'Import canonical course offerings [skip ci]'
           git fetch origin studielots-v2
           git rebase origin/studielots-v2
