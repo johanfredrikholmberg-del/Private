@@ -7,7 +7,7 @@ const identity=(university,programCode)=>`${norm(university)}:${code(programCode
 const allowedTerms=new Set(['HT26','VT27']);
 const readDb=async()=>JSON.parse(await readFile(join(process.cwd(),'data','studielots-db','manifest.json'),'utf8'));
 const readStorage=async storage=>JSON.parse(await readFile(join(process.cwd(),...String(storage).split('/')),'utf8'));
-function programmeSubject(p){if(p.subject)return p.subject;const name=norm(p.programName||p.name);if(/foretagsekonomi|ekonomie-kandidat|civilekonom|marknadsforing|redovisning-och-styrning|business-administration/.test(name))return 'Företagsekonomi';if(/nationalekonomi|economics/.test(name))return 'Nationalekonomi';if(/psykologi|psychology/.test(name))return 'Psykologi';if(/idrottsvetenskap|sport-science/.test(name))return 'Idrottsvetenskap';if(/juridik|juristprogram|skatteratt/.test(name))return 'Juridik';return ''}
+function programmeSubject(p){if(p.subject)return p.subject;const name=norm(p.programName||p.name);if(/foretagsekonomi|ekonomie-kandidat|civilekonom|marknadsforing|redovisning-och-styrning|business-administration/.test(name))return 'Företagsekonomi';if(/nationalekonomi|economics/.test(name))return 'Nationalekonomi';if(/psykologi|psychology/.test(name))return 'Psykologi';if(/idrottsvetenskap|sport-science/.test(name))return 'Idrottsvetenskap';if(/juridik|juristprogram|skatteratt/.test(name))return 'Juridik';if(/(^|-)kemi(-|$)|chemistry/.test(name))return 'Kemi';return ''}
 // A source's "complete" flag alone is not enough: every semester and all programme
 // credits must be accounted for before the programme can appear in search.
 function hasFullStructure(s,p){
