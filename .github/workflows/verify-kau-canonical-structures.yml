@@ -1,0 +1,48 @@
+name: Verify Karlstad canonical structures
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - scripts/verify-kau-canonical-structures.mjs
+      - .github/workflows/verify-kau-canonical-structures.yml
+permissions:
+  contents: write
+concurrency:
+  group: studielots-db-structure-import
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify source and credit invariants
+        run: node scripts/verify-kau-canonical-structures.mjs --write
+      - name: Validate canonical DB
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const db=JSON.parse(fs.readFileSync('data/studielots-db/manifest.json'));
+          const manifest=JSON.parse(fs.readFileSync(db.tables.programmeStructures.storageManifest));
+          const parts=manifest.parts.flatMap(name=>{const x=JSON.parse(fs.readFileSync('data/studielots-db/'+name));return Array.isArray(x)?x:x.programs});
+          const audit=JSON.parse(fs.readFileSync('data/import-reviews/kau-canonical-structure-verification.json'));
+          if(db.database!=='StudieLots DB'||parts.length!==manifest.count||audit.accepted.some(code=>!parts.some(p=>p.university==='Karlstads universitet'&&p.programCode===code&&p.verified)))throw Error('Canonical KAU verification failed');
+          console.log('Validated '+audit.accepted.length+' KAU structures in StudieLots DB');
+          NODE
+      - name: Persist verified structures
+        run: |
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/studielots-db/programme-structures-ht26.json data/import-reviews/kau-canonical-structure-verification.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Verify Karlstad canonical programme structures [skip ci]'
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
+          git push origin HEAD:studielots-v2
