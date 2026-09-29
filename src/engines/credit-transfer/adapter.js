@@ -5,7 +5,7 @@ const norm=x=>String(x??'').trim().toLocaleLowerCase('sv-SE').normalize('NFD').r
 const ordinaryMatchedKey=r=>norm(r?.matchedCourseCode||r?.creditMatchedCourseCode||r?.matchedMeritCode||r?.sourceCourseCode||r?.matchedCourse||r?.matchedMerit||r?.sourceCourse||'');
 const rank=r=>r?.classification==='strong'?3:r?.classification==='relevant'?2:r?.classification==='limited'?1:0;
 const historicalApprovals=r=>Math.max(0,Number(r?.evidence?.historical?.verifiedApprovalCount??r?.evidence?.historical?.approved??0)||0);
-const countsAsCredited=r=>r?.classification==='strong';
+const countsAsCredited=r=>r?.classification==='strong'||(r?.classification==='relevant'&&historicalApprovals(r)>0);
 const slotType=r=>norm(r?.slotType||r?.programmeCategory||'');
 const isElective=r=>r?.isSlot===true&&['elective-slot','elective-requirement'].includes(slotType(r))||r?.category==='elective-slot';
 const isRestricted=r=>Boolean(r?.electiveRequirements?.subject||r?.electiveRequirements?.subjects?.length||r?.electiveRequirements?.minProgression||r?.electiveRequirements?.minLevel||r?.electiveRequirements?.maxLevel||r?.electiveRequirements?.allowedCodes?.length||r?.electiveRequirements?.excludedCodes?.length||r?.electiveRequirements?.requiresApproval||r?.electiveRequirements?.requiresContentReview);
