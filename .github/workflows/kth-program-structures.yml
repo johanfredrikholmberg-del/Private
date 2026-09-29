@@ -1,5 +1,6 @@
 name: KTH programme structures
 on:
+  workflow_dispatch:
   schedule:
     - cron: '47 2 * * *'
   push:
