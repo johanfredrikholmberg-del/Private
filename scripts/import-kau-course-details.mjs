@@ -11,7 +11,7 @@ const norm=s=>clean(s).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0
 const kau=s=>norm(s)==='karlstads universitet';
 const match=(html,label)=>{const escaped=label.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return clean(html.match(new RegExp(escaped+'\\s*:?\\s*(?:<[^>]+>\\s*){0,3}([^<]{2,350})','i'))?.[1]||'')};
 const extract=(html,field)=>match(html,field);
-const timeout=Number(process.env.KAU_TIMEOUT_MS||12000),limit=Math.max(1,Math.min(100,Number(process.env.KAU_COURSE_LIMIT||25)));
+const timeout=Number(process.env.KAU_TIMEOUT_MS||12000),limit=Math.max(1,Math.min(200,Number(process.env.KAU_COURSE_LIMIT||25)));
 const canonical=await read(`${ROOT}/courses.json`),staged=await read('data/kau/courses.json');
 if(!Array.isArray(canonical)||!Array.isArray(staged))throw Error('Course tables must be arrays');
 const existing=await read(`${ROOT}/course-details.json`).catch(e=>{if(e.code==='ENOENT')return[];throw e});

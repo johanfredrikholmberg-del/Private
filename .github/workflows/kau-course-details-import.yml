@@ -18,7 +18,7 @@ concurrency:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,7 +30,7 @@ jobs:
           node-version: '22'
       - name: Import official course details
         env:
-          KAU_COURSE_LIMIT: '100'
+          KAU_COURSE_LIMIT: '200'
         run: node scripts/import-kau-course-details.mjs
       - name: Materialize Karlstad details in StudieLots DB
         run: node scripts/materialize-kau-course-details.mjs --write
