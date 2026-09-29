@@ -10,6 +10,7 @@ on:
       - 'api/gu-program-structure.js'
       - 'scripts/audit-gu-coverage.mjs'
       - 'scripts/materialize-gu-verified-shards.mjs'
+      - 'scripts/dedupe-gu-canonical-structures.mjs'
       - '.github/workflows/import-gu-verified.yml'
 permissions:
   contents: write
@@ -30,17 +31,32 @@ jobs:
           node-version: '22'
       - name: Materialize verified GU structures in StudieLots DB
         run: node scripts/materialize-gu-verified-shards.mjs --write
+      - name: Reconcile duplicate GU canonical plans
+        run: node scripts/dedupe-gu-canonical-structures.mjs --write
       - name: Import verified GU structures
         env:
           GU_STRUCTURE_LIMIT: 20
         run: node scripts/import-gu-next-structures.mjs --write
       - name: Audit GU coverage
         run: node scripts/audit-gu-coverage.mjs
+      - name: Verify GU canonical structure counts and unique codes
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const db=JSON.parse(fs.readFileSync('data/studielots-db/manifest.json'));
+          const m=JSON.parse(fs.readFileSync(db.tables.programmeStructures.storageManifest));
+          const rows=m.parts.flatMap(p=>{const x=JSON.parse(fs.readFileSync('data/studielots-db/'+p));return Array.isArray(x)?x:x.programs});
+          const gu=rows.filter(x=>x.university==='Göteborgs universitet');
+          if(rows.length!==m.count||db.tables.programmeStructures.rows!==m.count)throw Error('Canonical structure count mismatch');
+          if(gu.length!==m.universities.find(x=>x.university==='Göteborgs universitet').count)throw Error('GU count mismatch');
+          if(new Set(gu.map(x=>x.programCode)).size!==gu.length)throw Error('Duplicate GU programme code');
+          console.log('GU canonical structures: '+gu.length+', verified: '+gu.filter(x=>x.verified===true).length);
+          NODE
       - name: Persist verified GU data
         run: |
           git config user.name 'studielots-data-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/studielots-db/programme-structures-ht26.json data/studielots-db/programme-structures-gu-next.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json data/import-reviews/gu-coverage.json data/import-reviews/gu-structure-batch-latest.json
+          git add -f data/studielots-db/programme-structures-ht26.json data/studielots-db/programme-structures-gu-next.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json data/import-reviews/gu-coverage.json data/import-reviews/gu-structure-batch-latest.json data/import-reviews/gu-canonical-deduplication.json
           if [ -f data/studielots-db/programme-structures-gu-batch.json ]; then git add -f data/studielots-db/programme-structures-gu-batch.json; fi
           if git diff --cached --quiet; then echo 'No GU changes'; exit 0; fi
           git commit -m 'Import verified GU structures [skip ci]'
