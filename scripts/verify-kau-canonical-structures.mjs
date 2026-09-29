@@ -13,9 +13,9 @@ for(const p of identities.filter(x=>x.university==='Karlstads universitet')){
 }
 const accepted=[],review=[];
 for(const p of rows.filter(x=>x.university==='Karlstads universitet')){
- const reasons=[],identity=byCode.get(String(p.programCode||'').toUpperCase())||[];
+ const reasons=[],identity=(byCode.get(String(p.programCode||'').toUpperCase())||[]).filter(x=>Number(x.programHp)===Number(p.hp));
  if(!['complete','choice-required'].includes(p.coverage))reasons.push('incomplete-coverage');
- if(identity.length!==1||Number(identity[0]?.programHp)!==Number(p.hp))reasons.push('programme-identity-or-credit-conflict');
+ if(identity.length!==1)reasons.push('programme-identity-or-credit-conflict');
  if(!/^https:\/\/(www\.|www3\.)kau\.se\//.test(p.sourceUrl||''))reasons.push('official-source-missing');
  const terms=Number(p.expectedTerms),credits=Number(p.hp),complete=p.completeTerms||[];
  if(!Number.isInteger(terms)||terms<1||Math.ceil(credits/30)!==terms||complete.length!==terms)reasons.push('term-coverage');
