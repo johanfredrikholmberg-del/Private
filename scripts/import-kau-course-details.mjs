@@ -25,7 +25,10 @@ const candidates=[...new Map(staged.filter(x=>kau(x.university)&&code(x.code)).m
 const imported=[],errors=[];
 for(const candidate of candidates){const id=code(candidate.code),url=`https://www.kau.se/utbildning/program-och-kurser/kurser/${encodeURIComponent(id)}`;
  try{const response=await fetch(url,{signal:AbortSignal.timeout(timeout),headers:{'user-agent':'StudieLots course-detail importer (official sources)'}});if(!response.ok)throw Error(`HTTP ${response.status}`);const html=await response.text();
- const published=code(extract(html,'Kurskod'));if(published!==id)throw Error(`Course code mismatch: ${published||'missing'}`);
+ const displayed=html.match(/<span[^>]*>\\s*Kurskod\\s*<\\/span>\\s*<span[^>]*>\\s*([A-Z0-9ÅÄÖ]{4,10})\\s*<\\/span>/i)?.[1];
+ const structured=html.match(/"courseCode"\\s*:\\s*"([A-Z0-9ÅÄÖ]{4,10})"/i)?.[1];
+ const published=code(displayed||structured);
+ if(published!==id||displayed&&structured&&code(displayed)!==code(structured))throw Error(`Course code mismatch: ${published||'missing'}`);
  const level=extract(html,'Utbildningsnivå'),depth=extract(html,'Fördjupningsnivå'),requirements=extract(html,'Behörighetskrav');
  const title=clean(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1]||'');
  if(!title||(!level&&!depth&&!requirements))throw Error('Insufficient official detail');
