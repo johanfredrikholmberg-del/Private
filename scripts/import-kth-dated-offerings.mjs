@@ -21,7 +21,7 @@ async function check(course) {
   if (!/^[A-Z0-9]{5,7}$/.test(code) || !(Number(course.hp) > 0)) return {code, error: 'invalid-identity'};
   const url = `https://www.kth.se/kurs-pm/${code}/om-kurs-pm?l=en`;
   try {
-    const response = await fetch(url, {signal: AbortSignal.timeout(20000)});
+    let response; for(let attempt=1;attempt<=3;attempt++){ try{ response=await fetch(url,{signal:AbortSignal.timeout(20000)}); break; }catch(error){ if(attempt===3)throw error; await new Promise(r=>setTimeout(r,attempt*1000)); } }
     if (!response.ok) return {code, error: `HTTP ${response.status}`};
     const html = await response.text();
     const heading = html.match(/id="page-sub-heading"[^>]*>\s*([\s\S]*?)<\/p>/i)?.[1]?.replace(/<[^>]*>/g, '').trim();
