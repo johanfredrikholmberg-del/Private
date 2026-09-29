@@ -1,8 +1,8 @@
 {
-  "attempted": 100,
-  "imported": 84,
-  "previous": 3025,
-  "total": 3109,
+  "attempted": 200,
+  "imported": 182,
+  "previous": 3109,
+  "total": 3291,
   "errors": [
     {
       "code": "MIGE11",
@@ -61,11 +61,19 @@
       "reason": "Course code mismatch: SAMT DITT EVENTUELLA ÖNSKEMÅL OM UNDERVISANDE LÄRARE."
     },
     {
-      "code": "MSGC40",
+      "code": "PAAUVK",
       "reason": "HTTP 404"
     },
     {
-      "code": "MSGC55",
+      "code": "PAGE10",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "PAGUMF",
+      "reason": "HTTP 404"
+    },
+    {
+      "code": "REGPLU",
       "reason": "HTTP 404"
     }
   ]
