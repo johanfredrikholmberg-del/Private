@@ -28,7 +28,7 @@ for(const candidate of candidates){const id=code(candidate.code),url=`https://ww
  const displayed=html.match(/<span[^>]*>\s*Kurskod\s*<\/span>\s*<span[^>]*>\s*([A-Z0-9ÅÄÖ]{4,10})\s*<\/span>/i)?.[1];
  const structured=html.match(/"courseCode"\s*:\s*"([A-Z0-9ÅÄÖ]{4,10})"/i)?.[1];
  const published=code(displayed||structured);
- if(published!==id||displayed&&structured&&code(displayed)!==code(structured))throw Error(\`Course code mismatch: \${published||'missing'}\`);
+ if(published!==id||displayed&&structured&&code(displayed)!==code(structured))throw Error(`Course code mismatch: ${published||'missing'}`);
  const level=extract(html,'Utbildningsnivå'),depth=extract(html,'Fördjupningsnivå'),requirements=extract(html,'Behörighetskrav');
  const title=clean(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1]||'');
  if(!title||(!level&&!depth&&!requirements))throw Error('Insufficient official detail');
