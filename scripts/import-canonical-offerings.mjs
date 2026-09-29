@@ -1,5 +1,5 @@
-// Manual refresh 2026-09-29T16:55+02:00
 #!/usr/bin/env node
+// Canonical offering refresh
 // Add only dated, verified SUSA offerings to the authoritative StudieLots DB.
 import fs from 'node:fs';
 const API='https://api.skolverket.se/susa-navet/emil3/';
