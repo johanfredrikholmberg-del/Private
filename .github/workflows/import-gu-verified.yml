@@ -11,6 +11,7 @@ on:
       - 'scripts/audit-gu-coverage.mjs'
       - 'scripts/materialize-gu-verified-shards.mjs'
       - 'scripts/dedupe-gu-canonical-structures.mjs'
+      - 'scripts/materialize-gu-finance-2027.mjs'
       - '.github/workflows/import-gu-verified.yml'
 permissions:
   contents: write
@@ -33,6 +34,8 @@ jobs:
         run: node scripts/materialize-gu-verified-shards.mjs --write
       - name: Reconcile duplicate GU canonical plans
         run: node scripts/dedupe-gu-canonical-structures.mjs --write
+      - name: Materialize source-backed GU finance 2027 plan
+        run: node scripts/materialize-gu-finance-2027.mjs --write
       - name: Import verified GU structures
         env:
           GU_STRUCTURE_LIMIT: 20
@@ -57,6 +60,7 @@ jobs:
           git config user.name 'studielots-data-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add -f data/studielots-db/programme-structures-ht26.json data/studielots-db/programme-structures-gu-next.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json data/import-reviews/gu-coverage.json data/import-reviews/gu-structure-batch-latest.json data/import-reviews/gu-canonical-deduplication.json
+          if [ -f data/studielots-db/programme-structures-gu-finance-2027.json ]; then git add -f data/studielots-db/programme-structures-gu-finance-2027.json; fi
           if [ -f data/studielots-db/programme-structures-gu-batch.json ]; then git add -f data/studielots-db/programme-structures-gu-batch.json; fi
           if git diff --cached --quiet; then echo 'No GU changes'; exit 0; fi
           git commit -m 'Import verified GU structures [skip ci]'
