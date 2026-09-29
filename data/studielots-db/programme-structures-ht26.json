@@ -21507,19 +21507,111 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "",
-    "sourceUrls": [],
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "International Business Environmental Analysis",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "International Entrepreneurship",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "International Strategic Management",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "FDI, Trade and Global Trends",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Globalisation of Innovation and the Multinational Company",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Managing and Organizing the Multinational Corporation",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "International Business and Trade Research Methods",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "International Business Environment Analysis and Strategic Management – Project",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Elective courses according to programme syllabus",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Master Degree Project in International Business and Trade",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": true
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
+    "sourceUrl": "https://www.gu.se/en/study-gothenburg/master-of-science-in-international-business-and-trade-s2ifo/syllabus/2df7659c-b4ba-11f0-bd83-743a3e5145ea",
+    "sourceUrls": [
+      "https://www.gu.se/en/study-gothenburg/master-of-science-in-international-business-and-trade-s2ifo/syllabus/2df7659c-b4ba-11f0-bd83-743a3e5145ea"
+    ],
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
     "checkedAt": "2026-09-13T15:08:47.965Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:S2IFÖ:2026HT",
+    "programHp": 120,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/en/study-gothenburg/master-of-science-in-international-business-and-trade-s2ifo/syllabus/2df7659c-b4ba-11f0-bd83-743a3e5145ea"
   },
   {
     "key": "goteborgs-universitet:S2IIM",
