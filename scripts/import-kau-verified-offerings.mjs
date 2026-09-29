@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Materialize only officially confirmed Karlstad standalone course rounds.
 import fs from 'node:fs';
+import {datesFromKarlstadWeeks} from './kau-offering-week-dates.mjs';
 
 const read = file => JSON.parse(fs.readFileSync(file, 'utf8'));
 const dbFile = 'data/studielots-db/manifest.json';
@@ -9,13 +10,21 @@ const storage = db.tables?.courseOfferings?.storage;
 if (db.database !== 'StudieLots DB' || storage !== 'data/HT26/course-offerings.json') throw Error('Unexpected canonical offering storage');
 const existing = read(storage);
 if (existing.length !== db.tables.courseOfferings.rows) throw Error('Canonical offering count mismatch');
+let backfilledDates = 0;
+const datedExisting = existing.map(row => {
+  if (row.university !== 'Karlstads universitet' || row.startDate || row.endDate) return row;
+  const dates = datesFromKarlstadWeeks(row.partOfTerm, row.offeringTerm);
+  if (!dates) return row;
+  backfilledDates++;
+  return {...row, ...dates};
+});
 // Work through a small, deterministic SUSA batch. SUSA supplies candidates only;
 // the official KAU page and its direct application link establish each offering.
 const catalogue = [...new Map(read('data/susa/courses.json')
   .filter(x => x.university === 'Karlstads universitet' && x.code && x.events?.some(e => /20271|20262/.test(e.id || '')))
   .map(x => [x.code, x])).values()].slice(Number(process.env.KAU_OFFERING_OFFSET || 0), Number(process.env.KAU_OFFERING_OFFSET || 0) + 35);
-const byKey = new Map(existing.map(x => [x.key, x]));
-const report = {checkedAt: new Date().toISOString(), candidates: catalogue.length, added: 0, review: []};
+const byKey = new Map(datedExisting.map(x => [x.key, x]));
+const report = {checkedAt: new Date().toISOString(), candidates: catalogue.length, added: 0, backfilledDates, review: []};
 const text = html => html.replace(/<[^>]*>/g, ' ').replace(/&nbsp;|&#160;/g, ' ').replace(/\s+/g, ' ').trim();
 
 for (const course of catalogue) {
@@ -49,13 +58,15 @@ for (const course of catalogue) {
   if (code !== course.code || applicationCode !== `KAU-${occasion}` || !directApplication || !start.includes(season === 'HT' ? 'Hösttermin 20' : 'Vårtermin 20') || !new RegExp(`20${year}`).test(start) || !/^\d+%/.test(pace) || !period || !form) {
     report.review.push({code: course.code, reason: 'incomplete-or-conflicting-round'}); continue;
   }
+  const dates = datesFromKarlstadWeeks(period, term);
+  if (!dates) {report.review.push({code: course.code, reason: 'invalid-week-period'}); continue;}
   const key = `karlstads-universitet|${code}|${term}|${applicationCode}`;
   if (byKey.has(key) || existing.some(x => x.university === 'Karlstads universitet' && x.courseCode === code && x.offeringTerm === term && x.applicationCode === applicationCode)) continue;
-  byKey.set(key, {key, university: 'Karlstads universitet', courseCode: code, courseName: course.name, courseHp: Number(course.hp), offeringTerm: term, studyPace: pace, studyPacePercent: Number(pace.match(/^\d+/)[0]), studyLocation: form.match(/\(([^)]+)\)/)?.[1] || '', teachingForm: form, distance: /distans/i.test(form), partOfTerm: period, applicationCode, standaloneSearchable: true, source: 'karlstad-official-course-page', sourceUrl: url, checkedAt: report.checkedAt});
+  byKey.set(key, {key, university: 'Karlstads universitet', courseCode: code, courseName: course.name, courseHp: Number(course.hp), offeringTerm: term, ...dates, studyPace: pace, studyPacePercent: Number(pace.match(/^\d+/)[0]), studyLocation: form.match(/\(([^)]+)\)/)?.[1] || '', teachingForm: form, distance: /distans/i.test(form), partOfTerm: period, applicationCode, standaloneSearchable: true, source: 'karlstad-official-course-page', sourceUrl: url, checkedAt: report.checkedAt});
   report.added++;
 }
 
-if (report.added) {
+if (report.added || backfilledDates) {
   fs.writeFileSync(storage, JSON.stringify([...byKey.values()], null, 2) + '\n');
   db.tables.courseOfferings.rows = byKey.size;
   fs.writeFileSync(dbFile, JSON.stringify(db, null, 2) + '\n');
