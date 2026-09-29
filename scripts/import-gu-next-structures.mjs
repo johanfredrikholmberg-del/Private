@@ -10,16 +10,33 @@ const norm=v=>String(v??'').trim();
 const db=read(BASE+'manifest.json');
 const index=read(BASE+'programme-structures-manifest.json');
 const identities=[read(db.tables.programmes.storage),...(db.tables.programmes.additionalStorages||[]).map(read)].flat().filter(Boolean);
-const all=index.parts.flatMap(p=>arr(read(BASE+p))).filter(Boolean);
-const existing=new Set(all.filter(x=>x.university==='Göteborgs universitet').map(x=>norm(x.programCode)).filter(Boolean));
-const gu=identities.filter(x=>x.university==='Göteborgs universitet'&&norm(x.programCode)&&!existing.has(norm(x.programCode)));
-const unique=[...new Map(gu.map(x=>[norm(x.programCode),x])).values()];
+const parts=new Map(index.parts.map(p=>[p,read(BASE+p)]));
+const all=[...parts.values()].flatMap(arr).filter(Boolean);
+const byCode=new Map(all.filter(x=>x.university==='Göteborgs universitet').map(x=>[norm(x.programCode),x]));
+const candidates=new Map();
+for(const row of all.filter(x=>x.university==='Göteborgs universitet'&&!x.rows?.length)){
+  const code=norm(row.programCode),matches=identities.filter(x=>x.university==='Göteborgs universitet'&&norm(x.programCode)===code&&Number(x.programHp)===Number(row.hp));
+  if(matches.length===1)candidates.set(code,matches[0]);
+}
+for(const row of identities.filter(x=>x.university==='Göteborgs universitet'&&norm(x.programCode)&&!byCode.has(norm(x.programCode)))){
+  const code=norm(row.programCode);
+  if(identities.filter(x=>x.university==='Göteborgs universitet'&&norm(x.programCode)===code&&Number(x.programHp)===Number(row.programHp)).length===1)candidates.set(code,row);
+}
+let previous=null;try{previous=read('data/import-reviews/gu-structure-batch-latest.json')}catch{}
+const retryMs=7*86400000,now=Date.now(),deferredUntil={...previous?.deferredUntil};
+if(!previous?.deferredUntil&&Date.parse(previous?.generatedAt||'')>now-retryMs)for(const row of previous.review||[])deferredUntil[row.code]=Date.parse(previous.generatedAt)+retryMs;
+for(const [code,until] of Object.entries(deferredUntil))if(Number(until)<=now||!candidates.has(code))delete deferredUntil[code];
+const unique=[...candidates.values()].filter(x=>!deferredUntil[norm(x.programCode)]).sort((a,b)=>Number(a.programHp)-Number(b.programHp)||norm(a.programCode).localeCompare(norm(b.programCode)));
 const accepted=[],review=[];
 for(const identity of unique.slice(0,LIMIT)){
   try{
     const result=await discover({code:identity.programCode,name:identity.programName,university:identity.university});
     if(!result?.found||!result?.structureAvailable||!Array.isArray(result.courses)||!result.courses.length){
       review.push({code:identity.programCode,name:identity.programName,reason:'official-structure-incomplete',quality:result?.quality||null});
+      continue;
+    }
+    if(!result.sourceUrls?.[0]?.toLowerCase().match(new RegExp(`-${norm(identity.programCode).toLowerCase()}(?:[/?#]|$)`))||Number(result.quality?.totalHp)!==Number(identity.programHp)){
+      review.push({code:identity.programCode,name:identity.programName,reason:'official-identity-or-credit-conflict'});
       continue;
     }
     const rows=result.courses.map(({__slOriginalTerm,__slOriginalIndex,originalTerm,status,credited,isCredited,programmeSource,programmeCategory,...r})=>({
@@ -34,7 +51,7 @@ for(const identity of unique.slice(0,LIMIT)){
       continue;
     }
     accepted.push({
-      id:`gu:${identity.programCode}:official`,key:identity.key,university:'Göteborgs universitet',
+      id:`gu:${identity.programCode}:official`,key:byCode.get(norm(identity.programCode))?.key||identity.key,university:'Göteborgs universitet',
       programCode:identity.programCode,programName:identity.programName,programHp:Number(identity.programHp)||expected*30,hp:Number(identity.programHp)||expected*30,
       validFrom:'2026HT',coverage:result.coverage||'complete-term-sequence',verified:true,courseCodesVerified:rows.filter(r=>!r.isSlot).every(r=>Boolean(r.code)),
       choiceRequired:rows.some(r=>r.isSlot),source:'gu-official-programplan',sourceEvidenceUrl:result.sourceUrls?.[0]||'',sourceUrls:result.sourceUrls||[],rows
@@ -43,18 +60,32 @@ for(const identity of unique.slice(0,LIMIT)){
 }
 const target=BASE+'programme-structures-gu-batch.json';
 if(process.argv.includes('--write')&&accepted.length){
-  const current=fs.existsSync(target)?read(target):{schemaVersion:1,programs:[]};
-  const merged=new Map(arr(current).map(x=>[x.programCode,x])); for(const x of accepted)merged.set(x.programCode,x);
-  fs.writeFileSync(target,JSON.stringify({schemaVersion:1,programs:[...merged.values()]},null,2)+'\n');
-  if(!index.parts.includes('programme-structures-gu-batch.json'))index.parts.push('programme-structures-gu-batch.json');
-  const previousCount=index.count;
-  index.count=previousCount+accepted.filter(x=>!existing.has(x.programCode)).length;
+  const replacements=new Map(accepted.filter(x=>byCode.has(x.programCode)).map(x=>[x.programCode,x]));
+  for(const [part,data] of parts){
+    const rows=arr(data),next=rows.map(row=>{
+      const replacement=row.university==='Göteborgs universitet'&&replacements.get(norm(row.programCode));
+      if(!replacement)return row;
+      if(row.rows?.length||row.verified===true)throw Error('Refusing to overwrite populated GU plan '+row.programCode);
+      replacements.delete(norm(row.programCode));
+      return {...row,...replacement,key:row.key,sourceUrl:replacement.sourceEvidenceUrl,status:'verified',reason:null};
+    });
+    if(next.some((row,i)=>row!==rows[i]))fs.writeFileSync(BASE+part,JSON.stringify(Array.isArray(data)?next:{...data,programs:next},null,2)+'\n');
+  }
+  if(replacements.size)throw Error('GU metadata replacement missing: '+[...replacements.keys()]);
+  const additions=accepted.filter(x=>!byCode.has(x.programCode));
+  if(additions.length){
+    const current=fs.existsSync(target)?read(target):{schemaVersion:1,programs:[]};
+    fs.writeFileSync(target,JSON.stringify({schemaVersion:1,programs:[...arr(current),...additions]},null,2)+'\n');
+    if(!index.parts.includes('programme-structures-gu-batch.json'))index.parts.push('programme-structures-gu-batch.json');
+  }
+  index.count+=additions.length;
   const uni=index.universities.find(x=>x.university==='Göteborgs universitet');
-  if(uni)uni.count=(Number(uni.count)||0)+accepted.filter(x=>!existing.has(x.programCode)).length;
+  if(uni)uni.count=(Number(uni.count)||0)+additions.length;
   db.tables.programmeStructures.rows=index.count;
   fs.writeFileSync(BASE+'programme-structures-manifest.json',JSON.stringify(index,null,2)+'\n');
   fs.writeFileSync(BASE+'manifest.json',JSON.stringify(db,null,2)+'\n');
 }
 fs.mkdirSync('data/import-reviews',{recursive:true});
-fs.writeFileSync('data/import-reviews/gu-structure-batch-latest.json',JSON.stringify({generatedAt:new Date().toISOString(),limit:LIMIT,candidates:unique.length,attempted:Math.min(LIMIT,unique.length),imported:accepted.length,reviewCount:review.length,importedCodes:accepted.map(x=>x.programCode),review},null,2)+'\n');
+for(const row of review)deferredUntil[row.code]=now+retryMs;
+fs.writeFileSync('data/import-reviews/gu-structure-batch-latest.json',JSON.stringify({generatedAt:new Date().toISOString(),limit:LIMIT,candidates:unique.length,attempted:Math.min(LIMIT,unique.length),imported:accepted.length,reviewCount:review.length,importedCodes:accepted.map(x=>x.programCode),review,deferredUntil},null,2)+'\n');
 console.log(JSON.stringify({candidates:unique.length,attempted:Math.min(LIMIT,unique.length),imported:accepted.length,review:review.length,codes:accepted.map(x=>x.programCode)},null,2));
