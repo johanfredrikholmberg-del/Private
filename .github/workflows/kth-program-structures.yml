@@ -32,6 +32,7 @@ jobs:
         env:
           STUDIELOTS_TERM: HT26
           KTH_STRUCTURE_LIMIT: '35'
+          KTH_FORCE_RETRY: '1'
         run: node scripts/import-kth-program-structures.mjs
       - name: Consolidate into StudieLots DB
         run: node scripts/materialize-kth-verified.mjs --write
