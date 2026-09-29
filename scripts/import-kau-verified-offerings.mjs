@@ -9,13 +9,17 @@ const storage = db.tables?.courseOfferings?.storage;
 if (db.database !== 'StudieLots DB' || storage !== 'data/HT26/course-offerings.json') throw Error('Unexpected canonical offering storage');
 const existing = read(storage);
 if (existing.length !== db.tables.courseOfferings.rows) throw Error('Canonical offering count mismatch');
-const catalogue = read('data/kau/courses.json').filter(x => x.standalone === true && x.standaloneStatus === 'verified-standalone-offering');
+// Work through a small, deterministic SUSA batch. SUSA supplies candidates only;
+// the official KAU page and its direct application link establish each offering.
+const catalogue = [...new Map(read('data/susa/courses.json')
+  .filter(x => x.university === 'Karlstads universitet' && x.code && x.events?.some(e => /20271|20262/.test(e.id || '')))
+  .map(x => [x.code, x])).values()].slice(Number(process.env.KAU_OFFERING_OFFSET || 0), Number(process.env.KAU_OFFERING_OFFSET || 0) + 35);
 const byKey = new Map(existing.map(x => [x.key, x]));
 const report = {checkedAt: new Date().toISOString(), candidates: catalogue.length, added: 0, review: []};
 const text = html => html.replace(/<[^>]*>/g, ' ').replace(/&nbsp;|&#160;/g, ' ').replace(/\s+/g, ' ').trim();
 
 for (const course of catalogue) {
-  const url = course.sourceUrl;
+  const url = `https://www.kau.se/utbildning/program-och-kurser/kurser/${course.code}`;
   if (!/^https:\/\/www\.kau\.se\/utbildning\/program-och-kurser\/kurser\/[A-Z0-9]+$/.test(url)) {
     report.review.push({code: course.code, reason: 'invalid-official-url'}); continue;
   }
@@ -25,8 +29,12 @@ for (const course of catalogue) {
     if (!response.ok) throw Error(`HTTP ${response.status}`);
     html = await response.text();
   } catch (error) {report.review.push({code: course.code, reason: String(error)}); continue;}
-  if (!new RegExp(`"courseCode"\\s*:\\s*"${course.code}"`).test(html) || !/kan även läsas som fristående kurs|fristående kurs/i.test(html)) {
-    report.review.push({code: course.code, reason: 'identity-or-standalone-unverified'}); continue;
+  if (!new RegExp(`"courseCode"\\s*:\\s*"${course.code}"`).test(html)) {
+    report.review.push({code: course.code, reason: 'identity-unverified'}); continue;
+  }
+  const officialHp = Number(html.match(/"name"\s*:\s*"[^"]+?\s+(\d+(?:\.\d+)?)\s+HP"/)?.[1]);
+  if (!(officialHp > 0) || Math.abs(officialHp - Number(course.hp)) > 0.01) {
+    report.review.push({code: course.code, reason: 'official-hp-mismatch'}); continue;
   }
   const tabs = [...html.matchAll(/href="\?occasion=(\d+)"[^>]*>\s*(HT|VT)-(\d{2})/g)];
   if (tabs.length !== 1) {report.review.push({code: course.code, reason: 'ambiguous-round-tabs'}); continue;}
@@ -37,7 +45,8 @@ for (const course of catalogue) {
   const field = label => text(details.match(new RegExp(`<span[^>]*>${label}<\\/span>\\s*<span[^>]*>([\\s\\S]*?)<\\/span>`, 'i'))?.[1] || '');
   const code = field('Kurskod'), applicationCode = field('Anmälningskod');
   const start = field('Start'), form = field('Studieform'), pace = field('Studietakt'), period = field('Studieperiod');
-  if (code !== course.code || !/^KAU-\d+$/.test(applicationCode) || !start.includes(season === 'HT' ? 'Hösttermin 20' : 'Vårtermin 20') || !new RegExp(`20${year}`).test(start) || !/^\d+%/.test(pace) || !period) {
+  const directApplication = new RegExp(`https://www\\.antagning\\.se/se/addtobasket\\?id=${applicationCode}&amp;period=${season}_20${year}`).test(details);
+  if (code !== course.code || applicationCode !== `KAU-${occasion}` || !directApplication || !start.includes(season === 'HT' ? 'Hösttermin 20' : 'Vårtermin 20') || !new RegExp(`20${year}`).test(start) || !/^\d+%/.test(pace) || !period || !form) {
     report.review.push({code: course.code, reason: 'incomplete-or-conflicting-round'}); continue;
   }
   const key = `karlstads-universitet|${code}|${term}|${applicationCode}`;
