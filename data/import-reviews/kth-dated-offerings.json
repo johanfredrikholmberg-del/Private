@@ -1,11 +1,39 @@
 {
-  "checkedAt": "2026-09-29T05:19:29.905Z",
+  "checkedAt": "2026-09-29T18:52:02.351Z",
   "source": "kth-official-course-memo",
   "catalogue": 174,
-  "fetched": 174,
-  "sourceFailures": [],
+  "fetched": 167,
+  "sourceFailures": [
+    {
+      "code": "AD236V",
+      "reason": "TypeError: fetch failed"
+    },
+    {
+      "code": "AD252V",
+      "reason": "TypeError: fetch failed"
+    },
+    {
+      "code": "AD253V",
+      "reason": "TypeError: fetch failed"
+    },
+    {
+      "code": "AF103V",
+      "reason": "TypeError: fetch failed"
+    },
+    {
+      "code": "AF140V",
+      "reason": "TypeError: fetch failed"
+    },
+    {
+      "code": "AF160V",
+      "reason": "TypeError: fetch failed"
+    },
+    {
+      "code": "AF1770",
+      "reason": "TypeError: fetch failed"
+    }
+  ],
   "noDatedRound": [
-    "AD253V",
     "AF213V",
     "CM201V",
     "CM202V",
@@ -16,12 +44,14 @@
     "CM210V",
     "DM284V",
     "EQ2871",
+    "LT1044",
+    "LT1071",
     "ME1047",
     "SI151V",
     "SK180N",
     "SK184N"
   ],
   "conflictingCredits": [],
-  "added": 187,
-  "total": 2590
+  "added": 0,
+  "total": 2843
 }
