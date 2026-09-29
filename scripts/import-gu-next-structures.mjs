@@ -4,6 +4,7 @@ import { discover } from '../api/gu-program-structure.js';
 
 const BASE='data/studielots-db/';
 const LIMIT=Number(process.env.GU_STRUCTURE_LIMIT||20);
+const OFFSET=Math.max(0,Number(process.env.GU_STRUCTURE_OFFSET||0));
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const arr=x=>Array.isArray(x)?x:Array.isArray(x?.programs)?x.programs:[];
 const norm=v=>String(v??'').trim();
@@ -28,7 +29,7 @@ if(!previous?.deferredUntil&&Date.parse(previous?.generatedAt||'')>now-retryMs)f
 for(const [code,until] of Object.entries(deferredUntil))if(Number(until)<=now||!candidates.has(code))delete deferredUntil[code];
 const unique=[...candidates.values()].filter(x=>!deferredUntil[norm(x.programCode)]).sort((a,b)=>Number(a.programHp)-Number(b.programHp)||norm(a.programCode).localeCompare(norm(b.programCode)));
 const accepted=[],review=[];
-for(const identity of unique.slice(0,LIMIT)){
+for(const identity of unique.slice(OFFSET,OFFSET+LIMIT)){
   try{
     const result=await discover({code:identity.programCode,name:identity.programName,university:identity.university});
     if(!result?.found||!result?.structureAvailable||!Array.isArray(result.courses)||!result.courses.length){
@@ -87,5 +88,5 @@ if(process.argv.includes('--write')&&accepted.length){
 }
 fs.mkdirSync('data/import-reviews',{recursive:true});
 for(const row of review)deferredUntil[row.code]=now+retryMs;
-fs.writeFileSync('data/import-reviews/gu-structure-batch-latest.json',JSON.stringify({generatedAt:new Date().toISOString(),limit:LIMIT,candidates:unique.length,attempted:Math.min(LIMIT,unique.length),imported:accepted.length,reviewCount:review.length,importedCodes:accepted.map(x=>x.programCode),review,deferredUntil},null,2)+'\n');
-console.log(JSON.stringify({candidates:unique.length,attempted:Math.min(LIMIT,unique.length),imported:accepted.length,review:review.length,codes:accepted.map(x=>x.programCode)},null,2));
+fs.writeFileSync('data/import-reviews/gu-structure-batch-latest.json',JSON.stringify({generatedAt:new Date().toISOString(),limit:LIMIT,candidates:unique.length,offset:OFFSET,attempted:Math.min(LIMIT,Math.max(0,unique.length-OFFSET)),imported:accepted.length,reviewCount:review.length,importedCodes:accepted.map(x=>x.programCode),review,deferredUntil},null,2)+'\n');
+console.log(JSON.stringify({candidates:unique.length,offset:OFFSET,attempted:Math.min(LIMIT,Math.max(0,unique.length-OFFSET)),imported:accepted.length,review:review.length,codes:accepted.map(x=>x.programCode)},null,2));
