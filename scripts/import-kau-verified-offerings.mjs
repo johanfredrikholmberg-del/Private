@@ -45,25 +45,42 @@ for (const course of catalogue) {
   if (!(officialHp > 0) || Math.abs(officialHp - Number(course.hp)) > 0.01) {
     report.review.push({code: course.code, reason: 'official-hp-mismatch'}); continue;
   }
-  const tabs = [...html.matchAll(/href="\?occasion=(\d+)"[^>]*>\s*(HT|VT)-(\d{2})/g)];
-  if (tabs.length !== 1) {report.review.push({code: course.code, reason: 'ambiguous-round-tabs'}); continue;}
-  const [, occasion, season, year] = tabs[0];
-  const term = `${season}${year}`;
-  if (!['HT26', 'VT27'].includes(term)) continue;
-  const details = html.slice(tabs[0].index, html.indexOf('Till anmälan', tabs[0].index));
-  const field = label => text(details.match(new RegExp(`<span[^>]*>${label}<\\/span>\\s*<span[^>]*>([\\s\\S]*?)<\\/span>`, 'i'))?.[1] || '');
-  const code = field('Kurskod'), applicationCode = field('Anmälningskod');
-  const start = field('Start'), form = field('Studieform'), pace = field('Studietakt'), period = field('Studieperiod');
-  const directApplication = new RegExp(`https://www\\.antagning\\.se/se/addtobasket\\?id=${applicationCode}&amp;period=${season}_20${year}`).test(details);
-  if (code !== course.code || applicationCode !== `KAU-${occasion}` || !directApplication || !start.includes(season === 'HT' ? 'Hösttermin 20' : 'Vårtermin 20') || !new RegExp(`20${year}`).test(start) || !/^\d+%/.test(pace) || !period || !form) {
-    report.review.push({code: course.code, reason: 'incomplete-or-conflicting-round'}); continue;
+  const tabs = [...html.matchAll(/href="\?occasion=(\d+)"[^>]*>\s*(HT|VT)-(\d{2})/g)]
+    .filter(([, , season, year]) => ['HT26', 'VT27'].includes(`${season}${year}`));
+  if (!tabs.length) {report.review.push({code: course.code, reason: 'no-target-round'}); continue;}
+  for (const [, occasion, season, year] of tabs) {
+    const term = `${season}${year}`;
+    const roundUrl = `${url}?occasion=${occasion}`;
+    let roundHtml = html;
+    if (tabs.length !== 1 || !new RegExp(`href="\\?occasion=${occasion}"[^>]*bg-yellow`).test(html)) {
+      try {
+        const response = await fetch(roundUrl, {signal: AbortSignal.timeout(25000)});
+        if (!response.ok) throw Error(`HTTP ${response.status}`);
+        roundHtml = await response.text();
+      } catch (error) {report.review.push({code: course.code, occasion, reason: String(error)}); continue;}
+    }
+    const active = [...roundHtml.matchAll(/href="\?occasion=(\d+)"([^>]*)>\s*(HT|VT)-(\d{2})/g)]
+      .find(([, id]) => id === occasion);
+    if (!active || !active[2].includes('bg-yellow') || active[3] !== season || active[4] !== year) {
+      report.review.push({code: course.code, occasion, reason: 'round-selection-unverified'}); continue;
+    }
+    const end = roundHtml.indexOf('Till anmälan', active.index);
+    if (end < 0) {report.review.push({code: course.code, occasion, reason: 'application-link-missing'}); continue;}
+    const details = roundHtml.slice(active.index, end);
+    const field = label => text(details.match(new RegExp(`<span[^>]*>${label}<\\/span>\\s*<span[^>]*>([\\s\\S]*?)<\\/span>`, 'i'))?.[1] || '');
+    const code = field('Kurskod'), applicationCode = field('Anmälningskod');
+    const start = field('Start'), form = field('Studieform'), pace = field('Studietakt'), period = field('Studieperiod');
+    const directApplication = new RegExp(`https://www\\.antagning\\.se/se/addtobasket\\?id=${applicationCode}&amp;period=${season}_20${year}`).test(details);
+    if (code !== course.code || applicationCode !== `KAU-${occasion}` || !directApplication || !start.includes(season === 'HT' ? 'Hösttermin 20' : 'Vårtermin 20') || !new RegExp(`20${year}`).test(start) || !/^\d+%/.test(pace) || !period || !form) {
+      report.review.push({code: course.code, occasion, reason: 'incomplete-or-conflicting-round'}); continue;
+    }
+    const dates = datesFromKarlstadWeeks(period, term);
+    if (!dates) {report.review.push({code: course.code, occasion, reason: 'invalid-week-period'}); continue;}
+    const key = `karlstads-universitet|${code}|${term}|${applicationCode}`;
+    if (byKey.has(key)) continue;
+    byKey.set(key, {key, university: 'Karlstads universitet', courseCode: code, courseName: course.name, courseHp: Number(course.hp), offeringTerm: term, ...dates, studyPace: pace, studyPacePercent: Number(pace.match(/^\d+/)[0]), studyLocation: form.match(/\(([^)]+)\)/)?.[1] || '', teachingForm: form, distance: /distans/i.test(form), partOfTerm: period, applicationCode, standaloneSearchable: true, source: 'karlstad-official-course-page', sourceUrl: roundUrl, checkedAt: report.checkedAt});
+    report.added++;
   }
-  const dates = datesFromKarlstadWeeks(period, term);
-  if (!dates) {report.review.push({code: course.code, reason: 'invalid-week-period'}); continue;}
-  const key = `karlstads-universitet|${code}|${term}|${applicationCode}`;
-  if (byKey.has(key) || existing.some(x => x.university === 'Karlstads universitet' && x.courseCode === code && x.offeringTerm === term && x.applicationCode === applicationCode)) continue;
-  byKey.set(key, {key, university: 'Karlstads universitet', courseCode: code, courseName: course.name, courseHp: Number(course.hp), offeringTerm: term, ...dates, studyPace: pace, studyPacePercent: Number(pace.match(/^\d+/)[0]), studyLocation: form.match(/\(([^)]+)\)/)?.[1] || '', teachingForm: form, distance: /distans/i.test(form), partOfTerm: period, applicationCode, standaloneSearchable: true, source: 'karlstad-official-course-page', sourceUrl: url, checkedAt: report.checkedAt});
-  report.added++;
 }
 
 if (report.added || backfilledDates) {
