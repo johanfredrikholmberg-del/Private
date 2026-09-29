@@ -9292,14 +9292,16 @@
     "status": "processed",
     "attempts": 0,
     "coverage": "complete",
-    "reason": "official-gu-complete-term-sequence",
+    "reason": "all-terms-30hp",
     "rows": [
       {
         "term": 1,
         "code": "KTR110",
         "name": "Introduktion – Vad är kommunikation?",
         "hp": 7.5,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -9308,7 +9310,9 @@
         "code": "KTR120",
         "name": "Språklig kommunikation",
         "hp": 7.5,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -9317,7 +9321,9 @@
         "code": "KTR130",
         "name": "Kommunikation av vetenskaplig kunskap",
         "hp": 7.5,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -9326,7 +9332,9 @@
         "code": "KTR140",
         "name": "Retorik och argumentation",
         "hp": 7.5,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -9335,7 +9343,9 @@
         "code": "KTR210",
         "name": "Kommunikation och värderingar",
         "hp": 7.5,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -9344,7 +9354,9 @@
         "code": "KTR220",
         "name": "Kommunikation i nya och sociala medier",
         "hp": 7.5,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -9353,7 +9365,9 @@
         "code": "KTR230",
         "name": "Offentlig strategisk kommunikation",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -9362,7 +9376,9 @@
         "code": "KTR310",
         "name": "Praktik",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -9371,7 +9387,9 @@
         "code": "KTR320",
         "name": "Metod",
         "hp": 7.5,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -9380,7 +9398,9 @@
         "code": "KTR330",
         "name": "Case-kurs",
         "hp": 7.5,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -9389,7 +9409,9 @@
         "code": "KTR410",
         "name": "Examensarbete/Masteruppsats",
         "hp": 30,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       }
@@ -9453,8 +9475,18 @@
       "sourcePages": 1,
       "parsedRows": 11
     },
-    "checkedAt": "2026-09-13T15:08:32.293Z",
-    "term": "HT26"
+    "checkedAt": "2026-09-11T14:52:56.640Z",
+    "term": "HT26",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30
+    },
+    "verified": true,
+    "migrationSource": "susa/structures.json",
+    "programHp": 120,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/kommunikatorsprogrammet-med-inriktning-mot-myndigheter-och-offentlig-forvaltning-h2ktx"
   },
   {
     "key": "goteborgs-universitet:H2LOG",
@@ -15077,14 +15109,16 @@
     "status": "processed",
     "attempts": 0,
     "coverage": "complete",
-    "reason": "official-gu-complete-term-sequence",
+    "reason": "all-terms-30hp",
     "rows": [
       {
         "term": 1,
         "code": "KEPK1",
         "name": "Kurspaket i kemi",
         "hp": 30,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -15093,7 +15127,9 @@
         "code": "KEM070",
         "name": "Analytisk kemi",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -15102,7 +15138,9 @@
         "code": "MMGK11",
         "name": "Naturvetarmatematik",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -15111,7 +15149,9 @@
         "code": "KEM030",
         "name": "Organisk kemi",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -15120,7 +15160,9 @@
         "code": "KEM040",
         "name": "Fysikalisk kemi",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -15129,7 +15171,9 @@
         "code": "KEM050",
         "name": "Oorganisk kemi",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -15138,7 +15182,9 @@
         "code": "KEM060",
         "name": "Biokemi",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -15147,7 +15193,9 @@
         "code": "KEM490",
         "name": "Miljökemi",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -15156,7 +15204,9 @@
         "code": "MSG830",
         "name": "Statistisk analys och experimentplanering",
         "hp": 7.5,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -15165,7 +15215,9 @@
         "code": "NTH001",
         "name": "Teoretiska och historiska perspektiv på naturvetenskap",
         "hp": 7.5,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -15174,7 +15226,9 @@
         "code": "KEM929",
         "name": "Kemi, kandidatarbete",
         "hp": 30,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       }
@@ -15259,8 +15313,20 @@
       "sourcePages": 2,
       "parsedRows": 11
     },
-    "checkedAt": "2026-09-13T15:08:40.506Z",
-    "term": "HT26"
+    "checkedAt": "2026-09-11T14:53:16.601Z",
+    "term": "HT26",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    },
+    "verified": true,
+    "migrationSource": "susa/structures.json",
+    "programHp": 180,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/kemi-kandidatprogram-n1kem"
   },
   {
     "key": "goteborgs-universitet:N1KOG",
@@ -18591,18 +18657,202 @@
     "programCode": "S1EKA",
     "programName": "Ekonomie kandidatprogram",
     "hp": 180,
-    "subject": "",
+    "subject": "Finansiell ekonomi",
     "officialUrls": [],
     "status": "manual-review",
     "attempts": 0,
-    "coverage": "metadata-only",
+    "coverage": "choice-required",
     "reason": "official-gu-structure-not-resolved",
-    "rows": [],
+    "rows": [
+      {
+        "term": 1,
+        "code": "EKFN10",
+        "name": "Introduktion till ekonomi",
+        "hp": 2,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "EKF111",
+        "name": "Externredovisning",
+        "hp": 8,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "EKF103",
+        "name": "Ekonomistyrning",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "EKN102",
+        "name": "Mikroekonomi",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "EKS101",
+        "name": "Statistik 1a",
+        "hp": 8,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "EKN101",
+        "name": "Makroekonomi",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "EKN103",
+        "name": "Financial economics",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "EKR101",
+        "name": "Introduktion till handelsrätt",
+        "hp": 3,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "EKF104",
+        "name": "Marketing",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "EKF105",
+        "name": "Ledarskap och organisation",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "EKF106",
+        "name": "Företagsekonomi i praktiken",
+        "hp": 3,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "EKS102",
+        "name": "Statistik 1b",
+        "hp": 7,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "EKN104",
+        "name": "Economics in Practice",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "EKN115",
+        "name": "International Economics",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "EKR102",
+        "name": "Handelsrätt",
+        "hp": 12,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "NEK206",
+        "name": "Ekonometri",
+        "hp": 7.5,
+        "category": "mandatory",
+        "subject": "finansiell ekonomi"
+      },
+      {
+        "term": 4,
+        "code": "EFI202",
+        "name": "Externredovisning och företagsanalys",
+        "hp": 7.5,
+        "category": "mandatory",
+        "subject": "finansiell ekonomi"
+      },
+      {
+        "term": 4,
+        "code": "NEK203",
+        "name": "Mikroteori",
+        "hp": 7.5,
+        "category": "mandatory",
+        "subject": "finansiell ekonomi"
+      },
+      {
+        "term": 4,
+        "code": "EFI242",
+        "name": "Finance, Intermediate Course",
+        "hp": 7.5,
+        "category": "mandatory",
+        "subject": "finansiell ekonomi"
+      },
+      {
+        "term": 5,
+        "code": "EFI255",
+        "name": "Financial History",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 5,
+        "code": "EFI256",
+        "name": "Managerial Economics",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 5,
+        "code": "EFI257",
+        "name": "Incomplete Financial Markets",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 5,
+        "code": "EFI258",
+        "name": "Corporate Finance Law",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Finansiell ekonomi, kandidatkurser",
+        "hp": 15,
+        "category": "mandatory",
+        "slotType": "main-field-slot",
+        "isSlot": true,
+        "subject": "finansiell ekonomi"
+      },
+      {
+        "term": 6,
+        "code": "EFI303",
+        "name": "Finansiell ekonomi, kandidatuppsats",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true,
+        "subject": "finansiell ekonomi"
+      }
+    ],
     "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogram-s1eka",
+    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogrammet-kurser-och-valmojligheter",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogram-s1eka",
-      "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogram-s1eka/utbildningsplan/44344fc0-834b-11f0-9c7b-35519b7c45bb",
+      "https://studentportal.gu.se/program/ekonomie-kandidatprogrammet",
       "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogrammet-kurser-och-valmojligheter"
     ],
     "apiCoverage": "partial-or-choice-dependent",
@@ -18673,7 +18923,16 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:44.920Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:S1EKA:2026HT:finansiell-ekonomi",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "catalogueSubject": "Företagsekonomi",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "verified": true,
+    "migrationSource": "program-db-variants.json",
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogrammet-kurser-och-valmojligheter"
   },
   {
     "id": "gu:S1EUR:HT2026",
@@ -19909,9 +20168,104 @@
     "officialUrls": [],
     "status": "manual-review",
     "attempts": 0,
-    "coverage": "metadata-only",
+    "coverage": "complete",
     "reason": "official-gu-structure-not-resolved",
-    "rows": [],
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Pedagogikens grunder",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Pedagogisk psykologi",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Pedagogik och retorik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Pedagogisk bedömning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Pedagogiska ledarskap",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Att arbeta i projekt – planera, genomföra och utvärdera verksamheter",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valfria kurser",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Vetenskapsteori och metod",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Demokrati och medborgarskap",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Interaktion, kommunikation och lärande",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Utbildningssystem och globalisering",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Vetenskapliga metoder – fördjupning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Examensarbete i pedagogik",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
     "source": "gu-official-programplan",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/pedagogik-kandidatprogram-s1ped",
     "sourceUrls": [
@@ -19986,7 +20340,15 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:46.057Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:S1PED:2026HT",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "verified": true,
+    "migrationSource": "program-db.json",
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/pedagogik-kandidatprogram-s1ped"
   },
   {
     "key": "goteborgs-universitet:S1PER",
@@ -21685,14 +22047,16 @@
     "status": "processed",
     "attempts": 0,
     "coverage": "complete",
-    "reason": "official-gu-complete-term-sequence",
+    "reason": "all-terms-30hp",
     "rows": [
       {
         "term": 1,
         "code": "KR2103",
         "name": ", Kartläggning av brott och otrygghet – omfattning, struktur och förändring",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -21701,7 +22065,9 @@
         "code": "KR2201",
         "name": ", Aktuell kriminologisk teoribildning",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -21710,7 +22076,9 @@
         "code": "KR2104",
         "name": ", Organisering och samverkan på det rättsliga fältet",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -21719,7 +22087,9 @@
         "code": "KR2202",
         "name": ", Åtgärder mot brott – teoretiska och praktiska perspektiv",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -21728,7 +22098,9 @@
         "code": "SC2310",
         "name": ", Forskningsmetodik och kvalitativa metoder inom samhällsvetenskap",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -21737,7 +22109,9 @@
         "code": "SC2320",
         "name": ", Tillämpade statistiska och digitala metoder",
         "hp": 15,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       },
@@ -21746,7 +22120,9 @@
         "code": "KR2500",
         "name": ", Examensarbete för master i kriminologi",
         "hp": 30,
+        "type": "required",
         "category": "mandatory-unlabelled",
+        "slotType": "",
         "isSlot": false,
         "isThesis": false
       }
@@ -21810,8 +22186,18 @@
       "sourcePages": 1,
       "parsedRows": 7
     },
-    "checkedAt": "2026-09-13T15:08:48.366Z",
-    "term": "HT26"
+    "checkedAt": "2026-09-11T14:53:21.340Z",
+    "term": "HT26",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30
+    },
+    "verified": true,
+    "migrationSource": "susa/structures.json",
+    "programHp": 120,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/masterprogrammet-i-kriminologi-s2kri"
   },
   {
     "key": "goteborgs-universitet:S2LED",
@@ -79008,212 +79394,6 @@
     "checkedAt": "2026-09-28T17:51:34.716Z"
   },
   {
-    "id": "gu:S1EKA:2026HT:finansiell-ekonomi",
-    "university": "Göteborgs universitet",
-    "programCode": "S1EKA",
-    "programName": "Ekonomie kandidatprogram",
-    "programHp": 180,
-    "level": "Grundnivå",
-    "subject": "Finansiell ekonomi",
-    "catalogueSubject": "Företagsekonomi",
-    "validFrom": "2026HT",
-    "validTo": null,
-    "coverage": "choice-required",
-    "verified": true,
-    "source": "gu-official-programplan",
-    "sourceUrls": [
-      "https://studentportal.gu.se/program/ekonomie-kandidatprogrammet",
-      "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogrammet-kurser-och-valmojligheter"
-    ],
-    "rows": [
-      {
-        "term": 1,
-        "code": "EKFN10",
-        "name": "Introduktion till ekonomi",
-        "hp": 2,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "EKF111",
-        "name": "Externredovisning",
-        "hp": 8,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "EKF103",
-        "name": "Ekonomistyrning",
-        "hp": 6,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "EKN102",
-        "name": "Mikroekonomi",
-        "hp": 6,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "EKS101",
-        "name": "Statistik 1a",
-        "hp": 8,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "EKN101",
-        "name": "Makroekonomi",
-        "hp": 6,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "EKN103",
-        "name": "Financial economics",
-        "hp": 6,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "EKR101",
-        "name": "Introduktion till handelsrätt",
-        "hp": 3,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "EKF104",
-        "name": "Marketing",
-        "hp": 6,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "EKF105",
-        "name": "Ledarskap och organisation",
-        "hp": 6,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "EKF106",
-        "name": "Företagsekonomi i praktiken",
-        "hp": 3,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "EKS102",
-        "name": "Statistik 1b",
-        "hp": 7,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "EKN104",
-        "name": "Economics in Practice",
-        "hp": 6,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "EKN115",
-        "name": "International Economics",
-        "hp": 5,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "EKR102",
-        "name": "Handelsrätt",
-        "hp": 12,
-        "category": "mandatory"
-      },
-      {
-        "term": 4,
-        "code": "NEK206",
-        "name": "Ekonometri",
-        "hp": 7.5,
-        "category": "mandatory",
-        "subject": "finansiell ekonomi"
-      },
-      {
-        "term": 4,
-        "code": "EFI202",
-        "name": "Externredovisning och företagsanalys",
-        "hp": 7.5,
-        "category": "mandatory",
-        "subject": "finansiell ekonomi"
-      },
-      {
-        "term": 4,
-        "code": "NEK203",
-        "name": "Mikroteori",
-        "hp": 7.5,
-        "category": "mandatory",
-        "subject": "finansiell ekonomi"
-      },
-      {
-        "term": 4,
-        "code": "EFI242",
-        "name": "Finance, Intermediate Course",
-        "hp": 7.5,
-        "category": "mandatory",
-        "subject": "finansiell ekonomi"
-      },
-      {
-        "term": 5,
-        "code": "EFI255",
-        "name": "Financial History",
-        "hp": 7.5,
-        "category": "elective"
-      },
-      {
-        "term": 5,
-        "code": "EFI256",
-        "name": "Managerial Economics",
-        "hp": 7.5,
-        "category": "elective"
-      },
-      {
-        "term": 5,
-        "code": "EFI257",
-        "name": "Incomplete Financial Markets",
-        "hp": 7.5,
-        "category": "elective"
-      },
-      {
-        "term": 5,
-        "code": "EFI258",
-        "name": "Corporate Finance Law",
-        "hp": 7.5,
-        "category": "elective"
-      },
-      {
-        "term": 6,
-        "code": "",
-        "name": "Finansiell ekonomi, kandidatkurser",
-        "hp": 15,
-        "category": "mandatory",
-        "slotType": "main-field-slot",
-        "isSlot": true,
-        "subject": "finansiell ekonomi"
-      },
-      {
-        "term": 6,
-        "code": "EFI303",
-        "name": "Finansiell ekonomi, kandidatuppsats",
-        "hp": 15,
-        "category": "mandatory",
-        "isThesis": true,
-        "subject": "finansiell ekonomi"
-      }
-    ],
-    "migrationSource": "program-db-variants.json"
-  },
-  {
     "id": "uu:SEK1K:2026HT:foretagsekonomi",
     "university": "Uppsala universitet",
     "programCode": "SEK1K",
@@ -79565,120 +79745,6 @@
         "term": 6,
         "code": "",
         "name": "Kandidatuppsats i nationalekonomi",
-        "hp": 15,
-        "category": "mandatory",
-        "isThesis": true
-      }
-    ],
-    "migrationSource": "program-db.json"
-  },
-  {
-    "id": "gu:S1PED:2026HT",
-    "university": "Göteborgs universitet",
-    "programCode": "S1PED",
-    "programName": "Pedagogik, kandidatprogram",
-    "programHp": 180,
-    "level": "Grundnivå",
-    "validFrom": "2026HT",
-    "validTo": null,
-    "coverage": "complete",
-    "verified": true,
-    "source": "gu-official-programplan",
-    "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/pedagogik-kandidatprogram-s1ped",
-      "https://www.gu.se/studera/hitta-utbildning/pedagogik-kandidatprogram-s1ped/utbildningsplan/786694bb-8150-11ef-8512-3ed198a942d9"
-    ],
-    "rows": [
-      {
-        "term": 1,
-        "code": "",
-        "name": "Pedagogikens grunder",
-        "hp": 30,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "",
-        "name": "Pedagogisk psykologi",
-        "hp": 15,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "",
-        "name": "Pedagogik och retorik",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "",
-        "name": "Pedagogisk bedömning",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "",
-        "name": "Pedagogiska ledarskap",
-        "hp": 15,
-        "category": "mandatory"
-      },
-      {
-        "term": 3,
-        "code": "",
-        "name": "Att arbeta i projekt – planera, genomföra och utvärdera verksamheter",
-        "hp": 15,
-        "category": "mandatory"
-      },
-      {
-        "term": 4,
-        "code": "",
-        "name": "Valfria kurser",
-        "hp": 30,
-        "category": "elective",
-        "slotType": "elective-slot",
-        "isSlot": true
-      },
-      {
-        "term": 5,
-        "code": "",
-        "name": "Vetenskapsteori och metod",
-        "hp": 15,
-        "category": "mandatory"
-      },
-      {
-        "term": 5,
-        "code": "",
-        "name": "Demokrati och medborgarskap",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 5,
-        "code": "",
-        "name": "Interaktion, kommunikation och lärande",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 6,
-        "code": "",
-        "name": "Utbildningssystem och globalisering",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 6,
-        "code": "",
-        "name": "Vetenskapliga metoder – fördjupning",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 6,
-        "code": "",
-        "name": "Examensarbete i pedagogik",
         "hp": 15,
         "category": "mandatory",
         "isThesis": true
@@ -85897,424 +85963,6 @@
     "apiCoverage": "complete-term-sequence",
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:51.610Z",
-    "verified": true,
-    "migrationSource": "susa/structures.json"
-  },
-  {
-    "key": "goteborgs-universitet:H2KTX",
-    "susaId": "i.uoh.gu.h2ktx.24090.20262",
-    "university": "Göteborgs universitet",
-    "programCode": "H2KTX",
-    "programName": "Kommunikatörsprogrammet med inriktning mot myndigheter och offentlig förvaltning",
-    "hp": 120,
-    "subject": "",
-    "officialUrls": [],
-    "status": "processed",
-    "attempts": 0,
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kommunikatorsprogrammet-med-inriktning-mot-myndigheter-och-offentlig-forvaltning-h2ktx",
-    "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kommunikatorsprogrammet-med-inriktning-mot-myndigheter-och-offentlig-forvaltning-h2ktx"
-    ],
-    "source": "gu-official-programplan",
-    "rows": [
-      {
-        "term": 1,
-        "code": "KTR110",
-        "name": "Introduktion – Vad är kommunikation?",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 1,
-        "code": "KTR120",
-        "name": "Språklig kommunikation",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 1,
-        "code": "KTR130",
-        "name": "Kommunikation av vetenskaplig kunskap",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 1,
-        "code": "KTR140",
-        "name": "Retorik och argumentation",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "code": "KTR210",
-        "name": "Kommunikation och värderingar",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "code": "KTR220",
-        "name": "Kommunikation i nya och sociala medier",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "code": "KTR230",
-        "name": "Offentlig strategisk kommunikation",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "code": "KTR310",
-        "name": "Praktik",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "code": "KTR320",
-        "name": "Metod",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "code": "KTR330",
-        "name": "Case-kurs",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 4,
-        "code": "KTR410",
-        "name": "Examensarbete/Masteruppsats",
-        "hp": 30,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      }
-    ],
-    "coverage": "complete",
-    "reason": "all-terms-30hp",
-    "termSums": {
-      "1": 30,
-      "2": 30,
-      "3": 30,
-      "4": 30
-    },
-    "apiCoverage": "complete-term-sequence",
-    "apiConfidence": "official-machine-readable-sequenced",
-    "checkedAt": "2026-09-11T14:52:56.640Z",
-    "verified": true,
-    "migrationSource": "susa/structures.json"
-  },
-  {
-    "key": "goteborgs-universitet:N1KEM",
-    "susaId": "i.uoh.gu.n1kem.16006.20262",
-    "university": "Göteborgs universitet",
-    "programCode": "N1KEM",
-    "programName": "Kemi, kandidatprogram",
-    "hp": 180,
-    "subject": "",
-    "officialUrls": [],
-    "status": "processed",
-    "attempts": 0,
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kemi-kandidatprogram-n1kem",
-    "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kemi-kandidatprogram-n1kem",
-      "https://www.gu.se/studera/hitta-utbildning/det-har-laser-du-pa-kandidatprogrammet-i-kemi"
-    ],
-    "source": "gu-official-programplan",
-    "rows": [
-      {
-        "term": 1,
-        "code": "KEPK1",
-        "name": "Kurspaket i kemi",
-        "hp": 30,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "code": "KEM070",
-        "name": "Analytisk kemi",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "code": "MMGK11",
-        "name": "Naturvetarmatematik",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "code": "KEM030",
-        "name": "Organisk kemi",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "code": "KEM040",
-        "name": "Fysikalisk kemi",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 4,
-        "code": "KEM050",
-        "name": "Oorganisk kemi",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 4,
-        "code": "KEM060",
-        "name": "Biokemi",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "code": "KEM490",
-        "name": "Miljökemi",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "code": "MSG830",
-        "name": "Statistisk analys och experimentplanering",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 5,
-        "code": "NTH001",
-        "name": "Teoretiska och historiska perspektiv på naturvetenskap",
-        "hp": 7.5,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 6,
-        "code": "KEM929",
-        "name": "Kemi, kandidatarbete",
-        "hp": 30,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      }
-    ],
-    "coverage": "complete",
-    "reason": "all-terms-30hp",
-    "termSums": {
-      "1": 30,
-      "2": 30,
-      "3": 30,
-      "4": 30,
-      "5": 30,
-      "6": 30
-    },
-    "apiCoverage": "complete-term-sequence",
-    "apiConfidence": "official-machine-readable-sequenced",
-    "checkedAt": "2026-09-11T14:53:16.601Z",
-    "verified": true,
-    "migrationSource": "susa/structures.json"
-  },
-  {
-    "key": "goteborgs-universitet:S2KRI",
-    "susaId": "i.uoh.gu.s2kri.75002.20262",
-    "university": "Göteborgs universitet",
-    "programCode": "S2KRI",
-    "programName": "Masterprogrammet i Kriminologi",
-    "hp": 120,
-    "subject": "",
-    "officialUrls": [],
-    "status": "processed",
-    "attempts": 0,
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/masterprogrammet-i-kriminologi-s2kri",
-    "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/masterprogrammet-i-kriminologi-s2kri"
-    ],
-    "source": "gu-official-programplan",
-    "rows": [
-      {
-        "term": 1,
-        "code": "KR2103",
-        "name": ", Kartläggning av brott och otrygghet – omfattning, struktur och förändring",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 1,
-        "code": "KR2201",
-        "name": ", Aktuell kriminologisk teoribildning",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "code": "KR2104",
-        "name": ", Organisering och samverkan på det rättsliga fältet",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 2,
-        "code": "KR2202",
-        "name": ", Åtgärder mot brott – teoretiska och praktiska perspektiv",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "code": "SC2310",
-        "name": ", Forskningsmetodik och kvalitativa metoder inom samhällsvetenskap",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 3,
-        "code": "SC2320",
-        "name": ", Tillämpade statistiska och digitala metoder",
-        "hp": 15,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      },
-      {
-        "term": 4,
-        "code": "KR2500",
-        "name": ", Examensarbete för master i kriminologi",
-        "hp": 30,
-        "type": "required",
-        "category": "mandatory-unlabelled",
-        "slotType": "",
-        "isSlot": false,
-        "isThesis": false
-      }
-    ],
-    "coverage": "complete",
-    "reason": "all-terms-30hp",
-    "termSums": {
-      "1": 30,
-      "2": 30,
-      "3": 30,
-      "4": 30
-    },
-    "apiCoverage": "complete-term-sequence",
-    "apiConfidence": "official-machine-readable-sequenced",
-    "checkedAt": "2026-09-11T14:53:21.340Z",
     "verified": true,
     "migrationSource": "susa/structures.json"
   },
