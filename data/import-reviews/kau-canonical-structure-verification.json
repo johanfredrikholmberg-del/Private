@@ -1,9 +1,10 @@
 {
-  "generatedAt": "2026-09-29T05:14:27.966Z",
+  "generatedAt": "2026-09-29T05:22:43.098Z",
   "database": "StudieLots DB",
   "canonicalCount": 975,
   "accepted": [
     "HGKVP",
+    "HGMPK",
     "LAG46",
     "LAGMF",
     "LAKG1",
@@ -26,26 +27,39 @@
     "LAKPU",
     "LGFLP",
     "LGGLF",
+    "NABIM",
+    "NGBIO",
     "SAGEO",
+    "SAINF",
+    "SAMGM",
     "SANEA",
     "SAPFD",
     "SARHS",
     "SASKT",
+    "SASMF",
+    "SASRS",
     "SASTV",
     "SGBET",
     "SGDMA",
     "SGFEK",
+    "SGIPA",
     "SGPAR",
     "SGSYE",
     "SGSYS",
     "SGTPD",
     "SGVKD",
+    "TACDA",
     "TAMCS",
     "TAMCY",
     "TAMFN",
     "TAMFT",
     "TAMIC",
     "TAMIS",
+    "TGDDI",
+    "TGHEM",
+    "TGHID",
+    "TGHMT",
+    "TGKDV",
     "VABLI",
     "VAPFO",
     "VASAM",
@@ -62,12 +76,6 @@
       "code": "HAMSK",
       "reasons": [
         "term-coverage"
-      ]
-    },
-    {
-      "code": "HGMPK",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
       ]
     },
     {
@@ -88,7 +96,7 @@
     {
       "code": "LAAML",
       "reasons": [
-        "programme-identity-or-credit-conflict"
+        "term-credit-balance"
       ]
     },
     {
@@ -217,7 +225,6 @@
     {
       "code": "LASPL",
       "reasons": [
-        "programme-identity-or-credit-conflict",
         "term-coverage"
       ]
     },
@@ -251,18 +258,6 @@
       ]
     },
     {
-      "code": "NABIM",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
-      ]
-    },
-    {
-      "code": "NGBIO",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
-      ]
-    },
-    {
       "code": "NGFYA",
       "reasons": [
         "course-reference"
@@ -272,7 +267,6 @@
       "code": "NGKEA",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage",
         "course-reference"
       ]
@@ -348,33 +342,15 @@
       ]
     },
     {
-      "code": "SAINF",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
-      ]
-    },
-    {
       "code": "SALYS",
       "reasons": [
         "course-reference"
       ]
     },
     {
-      "code": "SAMGM",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
-      ]
-    },
-    {
       "code": "SARUM",
       "reasons": [
         "course-reference"
-      ]
-    },
-    {
-      "code": "SASMF",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
       ]
     },
     {
@@ -389,21 +365,13 @@
       "code": "SASPP",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage"
-      ]
-    },
-    {
-      "code": "SASRS",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
       ]
     },
     {
       "code": "SAUTS",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage"
       ]
     },
@@ -419,7 +387,6 @@
       "code": "SGGEN",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage"
       ]
     },
@@ -432,14 +399,7 @@
     {
       "code": "SGIHP",
       "reasons": [
-        "programme-identity-or-credit-conflict",
         "course-reference"
-      ]
-    },
-    {
-      "code": "SGIPA",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
       ]
     },
     {
@@ -460,7 +420,6 @@
       "code": "SGMIR",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage"
       ]
     },
@@ -487,16 +446,9 @@
       ]
     },
     {
-      "code": "TACDA",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
-      ]
-    },
-    {
       "code": "TACEM",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage",
         "course-reference"
       ]
@@ -505,7 +457,6 @@
       "code": "TACIE",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage",
         "course-reference"
       ]
@@ -514,7 +465,6 @@
       "code": "TACKT",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage",
         "course-reference"
       ]
@@ -523,7 +473,6 @@
       "code": "TACMA",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage",
         "course-reference"
       ]
@@ -531,7 +480,6 @@
     {
       "code": "TACTF",
       "reasons": [
-        "programme-identity-or-credit-conflict",
         "course-reference"
       ]
     },
@@ -560,42 +508,16 @@
       ]
     },
     {
-      "code": "TGDDI",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
-      ]
-    },
-    {
       "code": "TGHBY",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage"
       ]
     },
     {
       "code": "TGHEL",
       "reasons": [
-        "programme-identity-or-credit-conflict",
         "course-reference"
-      ]
-    },
-    {
-      "code": "TGHEM",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
-      ]
-    },
-    {
-      "code": "TGHID",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
-      ]
-    },
-    {
-      "code": "TGHMT",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
       ]
     },
     {
@@ -607,16 +529,9 @@
       ]
     },
     {
-      "code": "TGKDV",
-      "reasons": [
-        "programme-identity-or-credit-conflict"
-      ]
-    },
-    {
       "code": "TGLIT",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage",
         "course-reference"
       ]
@@ -625,7 +540,6 @@
       "code": "TGLMK",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage",
         "course-reference"
       ]
@@ -662,7 +576,6 @@
       "code": "VGHMS",
       "reasons": [
         "incomplete-coverage",
-        "programme-identity-or-credit-conflict",
         "term-coverage",
         "course-reference"
       ]
