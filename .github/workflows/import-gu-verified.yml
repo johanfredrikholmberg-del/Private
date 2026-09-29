@@ -12,6 +12,7 @@ on:
       - 'scripts/materialize-gu-verified-shards.mjs'
       - 'scripts/dedupe-gu-canonical-structures.mjs'
       - 'scripts/materialize-gu-finance-2027.mjs'
+      - 'scripts/materialize-gu-international-business-2026.mjs'
       - '.github/workflows/import-gu-verified.yml'
 permissions:
   contents: write
@@ -36,6 +37,8 @@ jobs:
         run: node scripts/dedupe-gu-canonical-structures.mjs --write
       - name: Materialize source-backed GU finance 2027 plan
         run: node scripts/materialize-gu-finance-2027.mjs --write
+      - name: Materialize source-backed GU international business 2026 plan
+        run: node scripts/materialize-gu-international-business-2026.mjs --write
       - name: Import verified GU structures
         env:
           GU_STRUCTURE_LIMIT: 20
