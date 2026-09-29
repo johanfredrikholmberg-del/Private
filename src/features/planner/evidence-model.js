@@ -7,7 +7,7 @@ function historicalIds(row){
 }
 function describe(row){
  const transfer=row?.creditTransfer,classification=transfer?.classification||'',direct=row?.credited===true;
- const matchedHp=direct?positive(row?.creditedHp??row?.matchedHp??row?.hp):row?.creditTransferCountsInStudyPlan===true&&classification==='strong'?positive(row?.creditTransferMatchedHp):0;
+ const historicalApprovalCount=positive(transfer?.evidence?.historical?.verifiedApprovalCount??transfer?.evidence?.historical?.approved); const countsTransfer=classification==='strong'||(classification==='relevant'&&historicalApprovalCount>0); const matchedHp=direct?positive(row?.creditedHp??row?.matchedHp??row?.hp):row?.creditTransferCountsInStudyPlan===true&&countsTransfer?positive(row?.creditTransferMatchedHp):0;
  const status=direct?'Direkt matchad merit':classification==='strong'?'Starkt underlag':classification==='relevant'?'Relevant underlag':classification==='limited'?'Begränsat underlag':'Ingen bedömning';
  return Object.freeze({status,classification,direct,matchedHp:Math.min(positive(row?.hp),matchedHp),sourceName:String(row?.matchedCourse||row?.creditTransferMatchedCourse||'').trim(),historicalIds:historicalIds(row),reasons:Array.isArray(transfer?.reasons)?transfer.reasons.filter(x=>typeof x==='string'&&x.trim()):[],differences:Array.isArray(transfer?.differences)?transfer.differences.filter(x=>typeof x==='string'&&x.trim()):[]});
 }
