@@ -1,0 +1,60 @@
+name: Import Karlstad verified course offerings
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - .github/workflows/import-kau-verified-offerings.yml
+permissions:
+  contents: write
+concurrency:
+  group: studielots-canonical-offerings
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import official Karlstad batch
+        env:
+          KAU_OFFERING_OFFSET: '35'
+        run: node scripts/import-kau-verified-offerings.mjs
+      - name: Verify canonical DB
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const db=JSON.parse(fs.readFileSync('data/studielots-db/manifest.json'));
+          const rows=JSON.parse(fs.readFileSync(db.tables.courseOfferings.storage));
+          const report=JSON.parse(fs.readFileSync('data/import-reviews/kau-verified-offerings-latest.json'));
+          if(db.database!=='StudieLots DB'||db.tables.courseOfferings.rows!==rows.length||new Set(rows.map(x=>x.key)).size!==rows.length)throw Error('Canonical count or key mismatch');
+          const batch=rows.filter(x=>x.university==='Karlstads universitet'&&x.checkedAt===report.checkedAt);
+          if(batch.length!==report.added||batch.some(x=>!x.sourceUrl?.startsWith('https://www.kau.se/')||!x.partOfTerm||!x.applicationCode))throw Error('Karlstad source or batch mismatch');
+          console.log(JSON.stringify({added:report.added,karlstad:rows.filter(x=>x.university==='Karlstads universitet').length,canonicalTotal:rows.length}));
+          NODE
+      - name: Save to StudieLots DB
+        run: |
+          if [ -z "$(git status --porcelain -- data/HT26/course-offerings.json data/studielots-db/manifest.json)" ]; then echo 'No new offerings'; exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/HT26/course-offerings.json data/studielots-db/manifest.json data/import-reviews/kau-verified-offerings-latest.json
+          git commit -m 'Materialize next Karlstad course offering batch [skip ci]'
+          for attempt in 1 2 3; do
+            git fetch origin studielots-v2
+            if ! git rebase origin/studielots-v2; then
+              git rebase --abort || true
+              git reset --hard origin/studielots-v2
+              KAU_OFFERING_OFFSET=35 node scripts/import-kau-verified-offerings.mjs
+              git add -f data/HT26/course-offerings.json data/studielots-db/manifest.json data/import-reviews/kau-verified-offerings-latest.json
+              if git diff --cached --quiet; then exit 0; fi
+              git commit -m 'Materialize next Karlstad course offering batch [skip ci]'
+            fi
+            if git push origin HEAD:studielots-v2; then exit 0; fi
+          done
+          exit 1
