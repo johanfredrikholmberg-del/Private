@@ -22,12 +22,14 @@ const datedExisting = existing.map(row => {
 // the official KAU page and its direct application link establish each offering.
 const catalogue = [...new Map(read('data/susa/courses.json')
   .filter(x => x.university === 'Karlstads universitet' && x.code && x.events?.some(e => /20271|20262/.test(e.id || '')))
-  .map(x => [x.code, x])).values()].slice(Number(process.env.KAU_OFFERING_OFFSET || 0), Number(process.env.KAU_OFFERING_OFFSET || 0) + 35);
+  .map(x => [x.code, x])).values()].slice(Number(process.env.KAU_OFFERING_OFFSET || 0), Number(process.env.KAU_OFFERING_OFFSET || 0) + Number(process.env.KAU_OFFERING_BATCH_SIZE || 35));
 const byKey = new Map(datedExisting.map(x => [x.key, x]));
-const report = {checkedAt: new Date().toISOString(), candidates: catalogue.length, added: 0, backfilledDates, review: []};
+const report = {checkedAt: new Date().toISOString(), candidates: catalogue.length, added: 0, backfilledDates, rateLimited: false, review: []};
 const text = html => html.replace(/<[^>]*>/g, ' ').replace(/&nbsp;|&#160;/g, ' ').replace(/\s+/g, ' ').trim();
+const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-for (const course of catalogue) {
+courseLoop: for (const course of catalogue) {
+  await pause(800);
   const url = `https://www.kau.se/utbildning/program-och-kurser/kurser/${course.code}`;
   if (!/^https:\/\/www\.kau\.se\/utbildning\/program-och-kurser\/kurser\/[A-Z0-9]+$/.test(url)) {
     report.review.push({code: course.code, reason: 'invalid-official-url'}); continue;
@@ -37,7 +39,11 @@ for (const course of catalogue) {
     const response = await fetch(url, {signal: AbortSignal.timeout(25000)});
     if (!response.ok) throw Error(`HTTP ${response.status}`);
     html = await response.text();
-  } catch (error) {report.review.push({code: course.code, reason: String(error)}); continue;}
+  } catch (error) {
+    report.review.push({code: course.code, reason: String(error)});
+    if (String(error).includes('HTTP 429')) {report.rateLimited = true; break;}
+    continue;
+  }
   if (!new RegExp(`"courseCode"\\s*:\\s*"${course.code}"`).test(html)) {
     report.review.push({code: course.code, reason: 'identity-unverified'}); continue;
   }
@@ -54,10 +60,15 @@ for (const course of catalogue) {
     let roundHtml = html;
     if (tabs.length !== 1 || !new RegExp(`href="\\?occasion=${occasion}"[^>]*bg-yellow`).test(html)) {
       try {
+        await pause(800);
         const response = await fetch(roundUrl, {signal: AbortSignal.timeout(25000)});
         if (!response.ok) throw Error(`HTTP ${response.status}`);
         roundHtml = await response.text();
-      } catch (error) {report.review.push({code: course.code, occasion, reason: String(error)}); continue;}
+      } catch (error) {
+        report.review.push({code: course.code, occasion, reason: String(error)});
+        if (String(error).includes('HTTP 429')) {report.rateLimited = true; break courseLoop;}
+        continue;
+      }
     }
     const active = [...roundHtml.matchAll(/href="\?occasion=(\d+)"([^>]*)>\s*(HT|VT)-(\d{2})/g)]
       .find(([, id]) => id === occasion);
