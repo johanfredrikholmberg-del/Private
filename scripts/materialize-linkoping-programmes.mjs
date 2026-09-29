@@ -3,33 +3,49 @@
 import fs from 'node:fs/promises';
 const root='data/studielots-db/';
 const read=async p=>JSON.parse(await fs.readFile(p,'utf8'));
-const codes=['F7KSY','F7KSA','6KIPR','6KLOG'];
 const candidates=await read('data/import-reviews/linkoping-programme-candidates.json');
 const manifest=await read(root+'programme-structures-manifest.json');
 const existing=(await Promise.all(manifest.parts.map(x=>read(root+x)))).flatMap(x=>Array.isArray(x)?x:x.programs||[]);
-const report={generatedAt:new Date().toISOString(),university:'Linköpings universitet',catalogueCandidates:candidates.length,attempted:0,added:0,review:[],duplicates:[],canonicalBefore:existing.length};
+const statePath='data/import-reviews/linkoping-batch-state.json';
+let state={attemptedCodes:[],review:[]};
+try{state=await read(statePath)}catch(e){if(e.code!=='ENOENT')throw e}
+const attempted=new Set(state.attemptedCodes||[]);
+const unique=new Map();
+for(const c of candidates){
+  const code=String(c.code||'').toUpperCase();
+  if(!/^[A-Z0-9]{5}$/.test(code)||!Number.isInteger(c.hp/30)||c.hp<60||c.hp>360||/senare del/i.test(c.name))continue;
+  if(!unique.has(code)||c.hp>unique.get(code).hp)unique.set(code,c);
+}
+const limit=Math.max(1,Math.min(80,Number(process.env.LIU_BATCH_LIMIT||40)));
+const batch=[...unique].filter(([code])=>!attempted.has(code)&&!existing.some(x=>x.university==='Linköpings universitet'&&x.programCode===code&&x.validFrom==='2026HT')).slice(0,limit);
+const report={generatedAt:new Date().toISOString(),university:'Linköpings universitet',catalogueCandidates:candidates.length,uniqueFullProgrammes:unique.size,attempted:batch.length,attemptedTotal:attempted.size+batch.length,added:0,review:[],duplicates:[],canonicalBefore:existing.length};
 const strip=s=>s.replace(/<[^>]+>/g,' ').replace(/&#x([0-9a-f]+);/gi,(_,h)=>String.fromCodePoint(parseInt(h,16))).replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();
 const added=[];
-for(const code of codes){
-  report.attempted++;
+async function resolve([code,candidate]){
   const url=`https://studieinfo.liu.se/program/${code}`;
   try{
-    const candidate=candidates.find(x=>x.code?.toUpperCase()===code&&x.hp===180);
-    if(!candidate)throw Error('No matching SUSA 180 hp candidate');
     const response=await fetch(url,{signal:AbortSignal.timeout(25000)});
     if(!response.ok)throw Error(`HTTP ${response.status}`);
     const html=await response.text();
-    const headings=[...html.matchAll(/Termin\s+([1-6])\s+(HT|VT)\s+(20\d{2})<\/h3>/g)];
-    if(headings.length!==6||headings.some((x,i)=>Number(x[1])!==i+1||x[2]!==((i%2)?'VT':'HT')||Number(x[3])!==2026+Math.floor((i+1)/2)))throw Error('Missing HT26 six-semester plan');
+    const terms=candidate.hp/30;
+    const headings=[...html.matchAll(/Termin\s+(\d{1,2})\s+(HT|VT)\s+(20\d{2})<\/h3>/g)];
+    if(headings.length!==terms||headings.some((x,i)=>Number(x[1])!==i+1||x[2]!==((i%2)?'VT':'HT')||Number(x[3])!==2026+Math.floor((i+1)/2)))throw Error(`Missing complete HT26 plan: ${headings.length}/${terms} terms`);
     const rows=[];
-    for(let i=0;i<6;i++){
+    for(let i=0;i<terms;i++){
       const section=html.slice(headings[i].index,headings[i+1]?.index||html.length);
       const term=i+1,required=[],options=[];
+      const seenInTerm=new Map();
       for(const match of section.matchAll(/<tr\s+class="main-row[^"]*"[^>]*data-course-code="([^"]+)"[^>]*data-field-of-study="[^"]*"[^>]*data-vof="([^"]+)"[^>]*>([\s\S]*?)<\/tr>/g)){
         const cells=[...match[3].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map(x=>strip(x[1]));
-        const hp=Number(cells[2]?.replace(',','.'));
+        const hp=Number.parseFloat(cells[2]?.replace(',','.'));
         if(!hp||!cells[1])throw Error(`Malformed course ${match[1]} T${term}`);
         const course={term,code:match[1],name:cells[1],hp,category:'mandatory'};
+        const previous=seenInTerm.get(course.code);
+        if(previous){
+          if(previous.hp!==course.hp||previous.name!==course.name||previous.vof!==match[2].toLowerCase())throw Error(`Conflicting repeated course ${course.code} T${term}`);
+          continue;
+        }
+        seenInTerm.set(course.code,{...course,vof:match[2].toLowerCase()});
         if(match[2].toLowerCase()==='o')required.push(course);
         else if(match[2].toLowerCase()==='v')options.push(course);
       }
@@ -40,11 +56,20 @@ for(const code of codes){
       }
       if(rows.filter(x=>x.term===term).reduce((n,x)=>n+x.hp,0)!==30)throw Error(`Ambiguous semester T${term}: required ${requiredHp}, options ${optionHp}`);
     }
+    const acrossTerms=new Set();
+    for(const row of rows.filter(x=>x.code)){
+      if(acrossTerms.has(row.code))throw Error(`Course spans multiple semesters: ${row.code}`);
+      acrossTerms.add(row.code);
+    }
     const id=`liu:${code}:2026HT`;
-    if(existing.some(x=>x.id===id||x.university==='Linköpings universitet'&&x.programCode===code&&x.validFrom==='2026HT')){report.duplicates.push(id);continue;}
-    added.push({id,university:'Linköpings universitet',programCode:code,programName:candidate.name,programHp:180,validFrom:'2026HT',coverage:rows.some(x=>x.isSlot)?'choice-required':'complete',verified:true,source:'liu-official-studieinfo',sourceUrls:[url],rows});
+    if(existing.some(x=>x.id===id||x.university==='Linköpings universitet'&&x.programCode===code&&x.validFrom==='2026HT')){report.duplicates.push(id);return;}
+    added.push({id,university:'Linköpings universitet',programCode:code,programName:candidate.name,programHp:candidate.hp,validFrom:'2026HT',coverage:rows.some(x=>x.isSlot)?'choice-required':'complete',verified:true,source:'liu-official-studieinfo',sourceUrls:[url],rows});
   }catch(e){report.review.push({code,url,reason:String(e.message||e)});}
 }
+let next=0;await Promise.all(Array.from({length:Math.min(8,batch.length)},async()=>{while(next<batch.length){const item=batch[next++];await resolve(item)}}));
+state.attemptedCodes=[...new Set([...state.attemptedCodes||[],...batch.map(([code])=>code)])];
+state.review=[...(state.review||[]),...report.review];
+await fs.writeFile(statePath,JSON.stringify(state,null,2)+'\n');
 if(added.length){
   const part='programme-structures-linkoping-2026.json';
   const old=manifest.parts.includes(part)?await read(root+part):[];
@@ -57,6 +82,6 @@ if(added.length){
   const db=await read(root+'manifest.json');db.tables.programmeStructures.rows=manifest.count;db.generatedAt=manifest.generatedAt;
   await fs.writeFile(root+'manifest.json',JSON.stringify(db,null,2)+'\n');
 }
-report.added=added.length;report.canonicalAfter=existing.length+added.length;report.remaining=candidates.length-report.attempted;
+report.added=added.length;report.canonicalAfter=existing.length+added.length;report.remaining=[...unique.keys()].filter(code=>!state.attemptedCodes.includes(code)&&!existing.some(x=>x.university==='Linköpings universitet'&&x.programCode===code&&x.validFrom==='2026HT')).length;
 await fs.writeFile('data/import-reviews/linkoping-materialization-latest.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report,null,2));
