@@ -1,0 +1,52 @@
+name: Import KTH dated course rounds
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - scripts/import-kth-dated-offerings.mjs
+      - .github/workflows/import-kth-dated-offerings.yml
+  schedule:
+    - cron: '23 5 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: studielots-canonical-offerings
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import official dated KTH course rounds
+        run: node scripts/import-kth-dated-offerings.mjs
+      - name: Verify canonical DB and source-backed rows
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const db=JSON.parse(fs.readFileSync('data/studielots-db/manifest.json'));
+          const rows=JSON.parse(fs.readFileSync(db.tables.courseOfferings.storage));
+          if(db.database!=='StudieLots DB'||rows.length!==db.tables.courseOfferings.rows)throw Error('Canonical count mismatch');
+          if(new Set(rows.map(x=>x.key)).size!==rows.length)throw Error('Duplicate offerings');
+          if(rows.some(x=>!x.key||!x.courseCode||!x.startDate||!x.sourceUrl))throw Error('Incomplete offering');
+          const kth=rows.filter(x=>x.source==='kth-official-course-memo');
+          if(kth.some(x=>x.standaloneSearchable!==false||!/^https:\/\/www\.kth\.se\/kurs-pm\//.test(x.sourceUrl)))throw Error('Unverified KTH searchability or source');
+          console.log('Validated '+rows.length+' canonical offerings, KTH '+kth.length);
+          NODE
+      - name: Save import to StudieLots DB
+        run: |
+          if [ -z "$(git status --porcelain -- data/import-reviews/kth-dated-offerings.json data/HT26/course-offerings.json data/studielots-db/manifest.json)" ]; then echo 'No changes'; exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/import-reviews/kth-dated-offerings.json data/HT26/course-offerings.json data/studielots-db/manifest.json
+          git commit -m 'Import official KTH course rounds into StudieLots DB [skip ci]'
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
+          git push origin HEAD:studielots-v2
