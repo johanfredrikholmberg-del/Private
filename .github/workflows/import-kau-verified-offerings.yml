@@ -5,6 +5,8 @@ on:
     branches: [studielots-v2]
     paths:
       - .github/workflows/import-kau-verified-offerings.yml
+      - scripts/import-kau-verified-offerings.mjs
+      - scripts/kau-offering-week-dates.mjs
 permissions:
   contents: write
 concurrency:
@@ -30,13 +32,16 @@ jobs:
         run: |
           node --input-type=module - <<'NODE'
           import fs from 'node:fs';
+          import {datesFromKarlstadWeeks} from './scripts/kau-offering-week-dates.mjs';
           const db=JSON.parse(fs.readFileSync('data/studielots-db/manifest.json'));
           const rows=JSON.parse(fs.readFileSync(db.tables.courseOfferings.storage));
           const report=JSON.parse(fs.readFileSync('data/import-reviews/kau-verified-offerings-latest.json'));
           if(db.database!=='StudieLots DB'||db.tables.courseOfferings.rows!==rows.length||new Set(rows.map(x=>x.key)).size!==rows.length)throw Error('Canonical count or key mismatch');
           const batch=rows.filter(x=>x.university==='Karlstads universitet'&&x.checkedAt===report.checkedAt);
           if(batch.length!==report.added||batch.some(x=>!x.sourceUrl?.startsWith('https://www.kau.se/')||!x.partOfTerm||!x.applicationCode))throw Error('Karlstad source or batch mismatch');
-          console.log(JSON.stringify({added:report.added,karlstad:rows.filter(x=>x.university==='Karlstads universitet').length,canonicalTotal:rows.length}));
+          const kau=rows.filter(x=>x.university==='Karlstads universitet');
+          if(kau.some(x=>{const dates=datesFromKarlstadWeeks(x.partOfTerm,x.offeringTerm);return !dates||x.startDate!==dates.startDate||x.endDate!==dates.endDate||x.datePrecision!=='week';}))throw Error('Karlstad week bounds mismatch');
+          console.log(JSON.stringify({added:report.added,backfilledDates:report.backfilledDates,karlstad:kau.length,canonicalTotal:rows.length}));
           NODE
       - name: Save to StudieLots DB
         run: |
