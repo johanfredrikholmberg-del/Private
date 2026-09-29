@@ -36,7 +36,7 @@ for(const p of candidates){
  if(report.attempted>=limit)break;
  report.attempted++;
  const r=await call(p);
- if(!r?.structureAvailable||!Array.isArray(r.courses)||!r.courses.length){report.failed.push({code,reason:r?.coverage||r?.error||'not-verified'});continue}
+ if(!r?.structureAvailable||!Array.isArray(r.courses)||!r.courses.length){report.failed.push({code,reason:r?.coverage||r?.error||'not-verified',quality:r?.quality||null});continue}
  out.push({university:'KTH',programCode:code,programName:p.programName||p.name||r.program?.name||code,term,courses:r.courses,source:r.source,sourceUrls:r.sourceUrls,confidence:r.confidence,coverage:r.coverage,quality:r.quality,verifiedAt:new Date().toISOString()});
  known.add(code);report.imported++;report.verifiedProgrammeCodes.push(code);
 }
