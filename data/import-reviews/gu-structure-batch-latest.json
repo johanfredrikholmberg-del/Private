@@ -1,50 +1,19 @@
 {
-  "generatedAt": "2026-09-30T14:31:42.434Z",
+  "generatedAt": "2026-09-30T14:35:07.203Z",
   "limit": 20,
   "candidates": 199,
-  "offset": 0,
+  "offset": 20,
   "attempted": 20,
-  "imported": 0,
-  "reviewCount": 20,
-  "importedCodes": [],
+  "imported": 2,
+  "reviewCount": 18,
+  "importedCodes": [
+    "L2SPP",
+    "H2KOD"
+  ],
   "review": [
     {
-      "code": "H2MAS",
-      "name": "Magisterprogram i arkeologi med naturvetenskaplig inriktning",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 2,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 60,
-        "sourcePages": 1,
-        "parsedRows": 0
-      }
-    },
-    {
-      "code": "K2KOR",
-      "name": "Konstnärligt magisterprogram i musik, inriktning kördirigering",
+      "code": "V2OPV",
+      "name": "Specialistsjuksköterskeprogrammet med inriktning mot operationssjukvård",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
@@ -62,10 +31,10 @@
           },
           "2": {
             "mandatoryHp": 0,
-            "listedHp": 15,
+            "listedHp": 37.5,
             "electiveListedHp": 0,
             "explicitElectiveRequiredHp": 0,
-            "unknownHp": 15,
+            "unknownHp": 37.5,
             "covered": false,
             "fixedUnlabelled": false
           }
@@ -73,24 +42,12 @@
         "slotCount": 0,
         "totalHp": 60,
         "sourcePages": 2,
-        "parsedRows": 8
+        "parsedRows": 5
       }
     },
     {
-      "code": "K2LIT",
-      "name": "Konstnärligt magisterprogram i litterär översättning, Översättning med inriktning mot annat språk än engelska",
-      "reason": "official-structure-incomplete",
-      "quality": null
-    },
-    {
-      "code": "M2CMA",
-      "name": "Magisterprogram i mikrobiologi, smittskydd och vårdhygien",
-      "reason": "official-structure-incomplete",
-      "quality": null
-    },
-    {
-      "code": "N2LIT",
-      "name": "Lärande, kommunikation och informationsteknologi, Magisterprogram",
+      "code": "V2PSI",
+      "name": "Specialistsjuksköterskeprogrammet med inriktning mot psykiatrisk vård",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
@@ -123,34 +80,77 @@
       }
     },
     {
-      "code": "N2LKI",
-      "name": "Lärande, kommunikation och informationsteknologi, Magisterprogram",
+      "code": "V2PSK",
+      "name": "Specialistsjuksköterskeprogrammet med inriktning mot psykiatrisk vård",
       "reason": "official-structure-incomplete",
       "quality": null
     },
     {
-      "code": "O2TDU",
-      "name": "Programmet för kompletterande utbildning för tandläkare med examen från länder utanför EU/EES/Schweiz",
-      "reason": "official-structure-incomplete",
-      "quality": null
-    },
-    {
-      "code": "S2ARB",
-      "name": "Arbetsvetenskap, magisterprogram",
+      "code": "V2SGE",
+      "name": "Specialistsjuksköterskeprogrammet med inriktning mot vård av äldre",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
         "expectedTerms": 2,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 60,
+        "sourcePages": 2,
+        "parsedRows": 0
+      }
+    },
+    {
+      "code": "Z1BAN",
+      "name": "Naturvetenskapligt basår",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 0,
+        "completeTerms": [],
+        "termHp": {},
+        "slotCount": 0,
+        "totalHp": 0,
+        "sourcePages": 2,
+        "parsedRows": 0
+      }
+    },
+    {
+      "code": "V2DIS",
+      "name": "Specialistsjuksköterskeprogrammet med inriktning mot distriktssköterska",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 3,
         "completeTerms": [
           2
         ],
         "termHp": {
           "1": {
-            "mandatoryHp": 15,
-            "listedHp": 15,
+            "mandatoryHp": 0,
+            "listedHp": 22.5,
             "electiveListedHp": 0,
             "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
+            "unknownHp": 22.5,
             "covered": false,
             "fixedUnlabelled": false
           },
@@ -162,305 +162,85 @@
             "unknownHp": 30,
             "covered": true,
             "fixedUnlabelled": true
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 60,
-        "sourcePages": 2,
-        "parsedRows": 3
-      }
-    },
-    {
-      "code": "S2HSK",
-      "name": "Hälso- och sjukvårdskuratorsprogrammet",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 2,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
           },
-          "2": {
+          "3": {
             "mandatoryHp": 0,
-            "listedHp": 82.5,
+            "listedHp": 22.5,
             "electiveListedHp": 0,
             "explicitElectiveRequiredHp": 0,
-            "unknownHp": 82.5,
+            "unknownHp": 22.5,
             "covered": false,
             "fixedUnlabelled": false
           }
         },
         "slotCount": 0,
-        "totalHp": 60,
+        "totalHp": 75,
         "sourcePages": 2,
-        "parsedRows": 9
+        "parsedRows": 6
       }
     },
     {
-      "code": "S2JOU",
-      "name": "Magisterprogrammet i undersökande journalistik",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 2,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 15,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 15,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 45,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 45,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 60,
-        "sourcePages": 3,
-        "parsedRows": 4
-      }
-    },
-    {
-      "code": "S2LÄR",
-      "name": "Ämnesdidaktiskt masterprogram för grundlärare med inriktning hållbarhet",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 2,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 60,
-        "sourcePages": 2,
-        "parsedRows": 0
-      }
-    },
-    {
-      "code": "V2ANV",
-      "name": "Specialistsjuksköterskeprogrammet med inriktning mot anestesisjukvård",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 2,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 15,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 15,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 37.5,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 37.5,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 60,
-        "sourcePages": 2,
-        "parsedRows": 5
-      }
-    },
-    {
-      "code": "V2BUV",
-      "name": "Specialistsjuksköterskeprogrammet med inriktning mot hälso- och sjukvård för barn och ungdomar",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 2,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 15,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 15,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 15,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 15,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 60,
-        "sourcePages": 2,
-        "parsedRows": 38
-      }
-    },
-    {
-      "code": "V2DIV",
-      "name": "Specialistsjuksköterskeprogrammet med inriktning mot diabetesvård",
+      "code": "L1KPA",
+      "name": "Kompletterande pedagogisk utbildning, förhöjd studietakt, Grundskolans åk 7-9, förhöjd studietakt, ett ämne Bd/Mu/Sl",
       "reason": "official-structure-incomplete",
       "quality": null
     },
     {
-      "code": "V2HSV",
-      "name": "Specialistsjuksköterskeprogrammet med inriktning mot hjärtsjukvård",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 2,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 24,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 24,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 21,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 21,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 60,
-        "sourcePages": 2,
-        "parsedRows": 25
-      }
-    },
-    {
-      "code": "V2INV",
-      "name": "Specialistsjuksköterskeprogrammet med inriktning mot intensivvård",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 2,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 15,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 15,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 37.5,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 37.5,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 60,
-        "sourcePages": 2,
-        "parsedRows": 5
-      }
-    },
-    {
-      "code": "V2KRG",
-      "name": "Specialistsjuksköterskeprogrammet med inriktning mot kirurgisk vård",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 2,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 15,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 15,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 15,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 15,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 60,
-        "sourcePages": 2,
-        "parsedRows": 40
-      }
-    },
-    {
-      "code": "V2NEU",
-      "name": "Specialistsjuksköterskeprogrammet med inriktning mot neurosjukvård",
+      "code": "L1KPO",
+      "name": "Kompletterande pedagogisk utbildning, Grundskolans åk 7-9, ordinarie studiegång, ett ämne",
       "reason": "official-structure-incomplete",
       "quality": null
     },
     {
-      "code": "V2NSV",
-      "name": "Specialistsjuksköterskeprogrammet med inriktning mot neurosjukvård",
+      "code": "L1YRL",
+      "name": "Yrkeslärarprogrammet",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
-        "expectedTerms": 2,
+        "expectedTerms": 3,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 10,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 10,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 10,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 10,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 15,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 15,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 90,
+        "sourcePages": 2,
+        "parsedRows": 12
+      }
+    },
+    {
+      "code": "L2SLL",
+      "name": "Speciallärarutbildning med specialisering mot språk-, skriv- och läsutveckling. Ingår i Lärarlyftet",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 3,
         "completeTerms": [],
         "termHp": {
           "1": {
@@ -480,46 +260,279 @@
             "unknownHp": 0,
             "covered": false,
             "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
           }
         },
         "slotCount": 0,
-        "totalHp": 60,
+        "totalHp": 90,
         "sourcePages": 1,
         "parsedRows": 0
       }
     },
     {
-      "code": "V2ONL",
-      "name": "Specialistsjuksköterskeprogrammet med inriktning mot onkologisk vård",
+      "code": "L2SLP",
+      "name": "Speciallärarprogrammet, Specialisering mot språk-, skriv-, och läsutveckling",
+      "reason": "official-structure-incomplete",
+      "quality": null
+    },
+    {
+      "code": "L2SLU",
+      "name": "Speciallärarutbildning med specialisering mot intellektuell funktionsnedsättning. Ingår i Lärarlyftet",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
-        "expectedTerms": 2,
+        "expectedTerms": 3,
         "completeTerms": [],
         "termHp": {
           "1": {
             "mandatoryHp": 0,
-            "listedHp": 15,
+            "listedHp": 0,
             "electiveListedHp": 0,
             "explicitElectiveRequiredHp": 0,
-            "unknownHp": 15,
+            "unknownHp": 0,
             "covered": false,
             "fixedUnlabelled": false
           },
           "2": {
             "mandatoryHp": 0,
-            "listedHp": 15,
+            "listedHp": 0,
             "electiveListedHp": 0,
             "explicitElectiveRequiredHp": 0,
-            "unknownHp": 15,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
             "covered": false,
             "fixedUnlabelled": false
           }
         },
         "slotCount": 0,
-        "totalHp": 60,
+        "totalHp": 90,
+        "sourcePages": 1,
+        "parsedRows": 0
+      }
+    },
+    {
+      "code": "S1KSO",
+      "name": "Kompletterande socionomutbildning för personer med utländsk examen",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 3,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 90,
+        "sourcePages": 1,
+        "parsedRows": 0
+      }
+    },
+    {
+      "code": "S2PTE",
+      "name": "Psykoterapeutprogrammet, Individualpsykoterapi med inriktning mot KBT",
+      "reason": "official-structure-incomplete",
+      "quality": null
+    },
+    {
+      "code": "V2BMP",
+      "name": "Barnmorskeprogrammet",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 3,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 90,
         "sourcePages": 2,
-        "parsedRows": 32
+        "parsedRows": 0
+      }
+    },
+    {
+      "code": "H2EVI",
+      "name": "Evidensbasering: praktik, teori, kontext, Magister/masterprogram",
+      "reason": "official-structure-incomplete",
+      "quality": null
+    },
+    {
+      "code": "H2GPR",
+      "name": "Genuspraktiker, masterprogram",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [
+          1,
+          3,
+          4
+        ],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 30,
+            "electiveListedHp": 30,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": true,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 60,
+            "electiveListedHp": 60,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": true,
+            "fixedUnlabelled": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "listedHp": 30,
+            "electiveListedHp": 30,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": true,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 3,
+        "totalHp": 120,
+        "sourcePages": 2,
+        "parsedRows": 5
+      }
+    },
+    {
+      "code": "H2KST",
+      "name": "Kritiska studier, masterprogram",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [
+          1,
+          3
+        ],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 45,
+            "electiveListedHp": 45,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": true,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 22.5,
+            "electiveListedHp": 22.5,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 30,
+            "electiveListedHp": 30,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": true,
+            "fixedUnlabelled": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 2,
+        "totalHp": 120,
+        "sourcePages": 2,
+        "parsedRows": 8
       }
     }
   ],
@@ -545,26 +558,26 @@
     "V2NEU": 1791383470759,
     "V2NSV": 1791383470759,
     "V2ONL": 1791383470759,
-    "V2OPV": 1791264681194,
-    "V2PSI": 1791264681194,
-    "V2PSK": 1791264681194,
-    "V2SGE": 1791264681194,
-    "Z1BAN": 1791264681194,
-    "V2DIS": 1791264681194,
-    "L1KPA": 1791264681194,
-    "L1KPO": 1791264681194,
-    "L1YRL": 1791264681194,
-    "L2SLL": 1791264681194,
-    "L2SLP": 1791264681194,
-    "L2SLU": 1791264681194,
+    "V2OPV": 1791383677280,
+    "V2PSI": 1791383677280,
+    "V2PSK": 1791383677280,
+    "V2SGE": 1791383677280,
+    "Z1BAN": 1791383677280,
+    "V2DIS": 1791383677280,
+    "L1KPA": 1791383677280,
+    "L1KPO": 1791383677280,
+    "L1YRL": 1791383677280,
+    "L2SLL": 1791383677280,
+    "L2SLP": 1791383677280,
+    "L2SLU": 1791383677280,
     "L2SPP": 1791264681194,
-    "S1KSO": 1791264681194,
-    "S2PTE": 1791264681194,
-    "V2BMP": 1791264681194,
-    "H2EVI": 1791264681194,
-    "H2GPR": 1791264681194,
+    "S1KSO": 1791383677280,
+    "S2PTE": 1791383677280,
+    "V2BMP": 1791383677280,
+    "H2EVI": 1791383677280,
+    "H2GPR": 1791383677280,
     "H2KOD": 1791264681194,
-    "H2KST": 1791264681194,
+    "H2KST": 1791383677280,
     "H2LOG": 1791265206629,
     "H2LTG": 1791265206629,
     "H2PTA": 1791265206629,

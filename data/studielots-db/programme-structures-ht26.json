@@ -9124,15 +9124,73 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
+    "coverage": "complete-term-sequence",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "KD2100",
+        "name": "Kultur och demokrati",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 1,
+        "code": "KD2110",
+        "name": "Kultur och estetik i en global värld",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 1,
+        "code": "KD2120",
+        "name": "Röster, texter, tolkningar",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "BOU215",
+        "name": "Barns och ungas delaktighet i samhälle, kultur och politik",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "KD2130",
+        "name": "Det offentliga samtalets praktik",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "KD2150",
+        "name": "Kulturvetenskaplig metodologi",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "KD2170",
+        "name": "Kulturens praktiska fält",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "KD2160",
+        "name": "Examensarbete",
+        "hp": 30,
+        "category": "mandatory-unlabelled"
+      }
+    ],
     "source": "gu-official-programplan",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kultur-och-demokrati-masterprogram-h2kod",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kultur-och-demokrati-masterprogram-h2kod"
+      "https://www.gu.se/studera/hitta-utbildning/kultur-och-demokrati-masterprogram-h2kod",
+      "https://studentportal.gu.se/program/kultur-och-demokrati-masterprogram"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -9184,7 +9242,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:32.043Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:H2KOD:official",
+    "programHp": 120,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": false,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/kultur-och-demokrati-masterprogram-h2kod"
   },
   {
     "key": "goteborgs-universitet:H2KST",
@@ -13335,15 +13400,59 @@
     "hp": 90,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
+    "coverage": "complete-term-sequence",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "HT26",
+        "name": "SPE103 Specialpedagogik - yrkesrollen i ett samhällsperspektiv",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 1,
+        "code": "SPE102",
+        "name": "Specialpedagogik - lärande i ett samhällsperspektiv",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "SPE202",
+        "name": "Specialpedagogik - samverkan och individers utveckling",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "VT27",
+        "name": "SPE203 Specialpedagogik – lärmiljö, samverkan och individens utveckling",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "HT27",
+        "name": "SPP303 Specialpedagogik – i pedagogisk och social praktik",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "SPP302",
+        "name": "Specialpedagogik som social praktik",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      }
+    ],
     "source": "gu-official-programplan",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/specialpedagogprogrammet-l2spp",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/specialpedagogprogrammet-l2spp"
+      "https://www.gu.se/studera/hitta-utbildning/specialpedagogprogrammet-l2spp",
+      "https://studentportal.gu.se/program/specialpedagogprogrammet"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -13386,7 +13495,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:38.803Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:L2SPP:official",
+    "programHp": 90,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": false,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/specialpedagogprogrammet-l2spp"
   },
   {
     "key": "goteborgs-universitet:M1BMA",
