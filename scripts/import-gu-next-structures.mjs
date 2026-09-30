@@ -5,6 +5,7 @@ import { discover } from '../api/gu-program-structure.js';
 const BASE='data/studielots-db/';
 const LIMIT=Number(process.env.GU_STRUCTURE_LIMIT||20);
 const OFFSET=Math.max(0,Number(process.env.GU_STRUCTURE_OFFSET||0));
+const FORCE_RETRY=process.env.GU_STRUCTURE_FORCE_RETRY==='1';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const arr=x=>Array.isArray(x)?x:Array.isArray(x?.programs)?x.programs:[];
 const norm=v=>String(v??'').trim();
@@ -27,7 +28,7 @@ let previous=null;try{previous=read('data/import-reviews/gu-structure-batch-late
 const retryMs=7*86400000,now=Date.now(),deferredUntil={...previous?.deferredUntil};
 if(!previous?.deferredUntil&&Date.parse(previous?.generatedAt||'')>now-retryMs)for(const row of previous.review||[])deferredUntil[row.code]=Date.parse(previous.generatedAt)+retryMs;
 for(const [code,until] of Object.entries(deferredUntil))if(Number(until)<=now||!candidates.has(code))delete deferredUntil[code];
-const unique=[...candidates.values()].filter(x=>!deferredUntil[norm(x.programCode)]).sort((a,b)=>Number(a.programHp)-Number(b.programHp)||norm(a.programCode).localeCompare(norm(b.programCode)));
+const unique=[...candidates.values()].filter(x=>FORCE_RETRY||!deferredUntil[norm(x.programCode)]).sort((a,b)=>Number(a.programHp)-Number(b.programHp)||norm(a.programCode).localeCompare(norm(b.programCode)));
 const accepted=[],review=[];
 for(const identity of unique.slice(OFFSET,OFFSET+LIMIT)){
   try{
