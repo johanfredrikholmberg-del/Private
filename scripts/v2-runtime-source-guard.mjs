@@ -44,4 +44,10 @@ const offerings=await readFile('lib/api-handlers/canonical-offerings.js','utf8')
 assert.match(offerings,/studielotsTable\('courseOfferings'\)/, 'canonical offerings must read StudieLots DB');
 assert.match(offerings,/source:'studielots-db'/, 'canonical offerings must identify StudieLots DB');
 
+
+const {readdir} = await import('node:fs/promises');
+const runtimeApis=(await readdir('api')).filter(name=>name.endsWith('.js')).sort();
+assert.deepEqual(runtimeApis,['_studielots-db.js','catalog-data.js','program-index.js'],
+  'Only canonical StudieLots DB runtime APIs may be deployed');
+
 console.log('Runtime source guard passed: user-facing programme and planner flows are canonical-only.');
