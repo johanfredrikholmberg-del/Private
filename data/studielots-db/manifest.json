@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-09-30T18:57:29.599Z",
+  "generatedAt": "2026-09-30T18:58:25.174Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
-      "storage": "data/HT26/providers.json",
+      "storage": "data/studielots-db/providers.json",
       "rows": 49
     },
     "programmes": {
@@ -20,19 +20,19 @@
       "rows": 1028
     },
     "courses": {
-      "storage": "data/HT26/courses.json",
+      "storage": "data/studielots-db/courses.json",
       "rows": 28337,
       "additionalStorages": [
         "data/studielots-db/courses-gu-2027-eu.json"
       ]
     },
     "courseOfferings": {
-      "storage": "data/HT26/course-offerings.json",
+      "storage": "data/studielots-db/course-offerings.json",
       "rows": 2843,
       "term": "HT26"
     },
     "syllabusVersions": {
-      "storage": "data/HT26/syllabus-versions.json",
+      "storage": "data/studielots-db/syllabus-versions.json",
       "rows": 2836
     },
     "creditTransferEvidence": {
