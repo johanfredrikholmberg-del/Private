@@ -48,6 +48,26 @@ jobs:
         run: node scripts/import-gu-next-structures.mjs --write
       - name: Audit GU coverage
         run: node scripts/audit-gu-coverage.mjs
+      - name: Synchronize canonical manifest counters
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const manifestPath='data/studielots-db/programme-structures-manifest.json';
+          const dbPath='data/studielots-db/manifest.json';
+          const m=JSON.parse(fs.readFileSync(manifestPath));
+          const rows=m.parts.flatMap(p=>{const x=JSON.parse(fs.readFileSync('data/studielots-db/'+p));return Array.isArray(x)?x:x.programs});
+          const counts=new Map();
+          for(const row of rows) counts.set(row.university,(counts.get(row.university)||0)+1);
+          m.count=rows.length;
+          m.universities=[...counts.entries()].map(([university,count])=>({university,count})).sort((a,b)=>b.count-a.count||a.university.localeCompare(b.university,'sv'));
+          m.generatedAt=new Date().toISOString();
+          fs.writeFileSync(manifestPath,JSON.stringify(m,null,2)+'\n');
+          const db=JSON.parse(fs.readFileSync(dbPath));
+          db.tables.programmeStructures.rows=rows.length;
+          db.generatedAt=new Date().toISOString();
+          fs.writeFileSync(dbPath,JSON.stringify(db,null,2)+'\n');
+          console.log('Synchronized canonical programme structures: '+rows.length);
+          NODE
       - name: Verify GU canonical structure counts and unique codes
         run: |
           node --input-type=module - <<'NODE'
