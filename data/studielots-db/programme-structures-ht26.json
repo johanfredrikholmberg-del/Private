@@ -87991,6 +87991,1983 @@
     "migrationSource": "program-db-variants.json"
   },
   {
+    "id": "lu:SGUTV:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "SGUTV",
+    "programName": "Utvecklingsstudier - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Utvecklingsstudier",
+    "catalogueSubject": "Utvecklingsstudier",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/utvecklingsstudier-kandidatprogram-SGUTV/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "UTVC21",
+        "name": "Utveckling i ett historiskt perspektiv – ekonomisk, politisk och social omvandling",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "UTVC22",
+        "name": "Utvecklingspolitik i praktiken",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "UTVC23",
+        "name": "Utvecklingsstudier: Utvecklingsteorier",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "UTVC24",
+        "name": "Utvecklingsstudier: Vetenskapsteori och forskningsmetod - en introduktion",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Specialiseringskurser i valt huvudområde",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "main-field-slot",
+        "isSlot": true
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara kurser eller utbytesstudier",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "code": "UTVC25",
+        "name": "Utvecklingssamarbete i praktiken",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "UTVC36",
+        "name": "Forskningsmetod i utvecklingsstudier",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Fältarbete, praktik eller läskurs",
+        "hp": 15,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Examensarbete inom valt huvudområde",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:HGPPE:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "HGPPE",
+    "programName": "Praktisk filosofi, politik och ekonomi - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Praktisk filosofi, politik och ekonomi",
+    "catalogueSubject": "Praktisk filosofi, politik och ekonomi",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/praktisk-filosofi-politik-och-ekonomi-kandidatprogram-HGPPE/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Praktisk filosofi: Praktisk filosofi, politik och ekonomi - baskurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Statsvetenskap: Grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Nationalekonomi: Grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Praktisk filosofi: Praktisk filosofi, politik och ekonomi - fortsättningskurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Inriktningskurs: statsvetenskap eller nationalekonomi",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "main-field-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Kandidatfördjupning och examensarbete i vald inriktning",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "main-field-thesis-slot",
+        "isSlot": true,
+        "includesThesisHp": 15
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:HGMOV:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "HGMOV",
+    "programName": "Modevetenskap - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Modevetenskap",
+    "catalogueSubject": "Modevetenskap",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/modevetenskap-kandidatprogram-HGMOV/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Mode- och kulturhistoria 1350–1780-talet",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Mode- och kulturhistoria 1790–2020-talet",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Mode och textil",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Modets aktörer och arenor",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Modekommunikation",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Grundläggande modevetenskapliga teoretiska perspektiv",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Grundläggande modevetenskapliga metoder",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Vetenskapligt skrivande",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Hållbart mode i teori och praktik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Mode, konsumtion och kropp",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Immaterialrätt och marknad – mode i teori och praktik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Mode som visuell kultur och teknologi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Mode och projektledning",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Modevetenskaplig praktik",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valfria kurser eller utlandsstudier",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Modevetenskaplig teori och metod",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Examensarbete för kandidatexamen",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:HGHIS:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "HGHIS",
+    "programName": "Historia - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Historia",
+    "catalogueSubject": "Historia",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/historia-kandidatprogram-HGHIS/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "HISA34",
+        "name": "Historia: Grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "HISA35",
+        "name": "Historia: Fortsättningskurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Historia: Projektledning och projektarbete för historiker",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbar fördjupning",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valfri termin eller utlandsstudier",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Historia: Kandidatkurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:HGLIT:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "HGLIT",
+    "programName": "Litteraturvetenskap - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Litteraturvetenskap",
+    "catalogueSubject": "Litteraturvetenskap",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/litteraturvetenskap-kandidatprogram-HGLIT/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Litteraturvetenskap: Grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Litteraturvetenskap: Fortsättningskurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Litterära praktiker I",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Litterära praktiker II: Projektarbete",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valfria kurser",
+        "hp": 15,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Utbytesstudier, praktik eller valfria kurser",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Litteraturvetenskap: Kandidatkurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:RGMRS:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "RGMRS",
+    "programName": "Mänskliga rättigheter - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Mänskliga rättigheter",
+    "catalogueSubject": "Mänskliga rättigheter",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/manskliga-rattigheter-kandidatprogram-RGMRS/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Mänskliga rättigheter: Introduktionskurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Mänskliga rättigheter: Fortsättningskurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Mänskliga rättighetsstudier: Fördjupningskurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara kurser, utlandsstudier eller praktik",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valbara kurser, utlandsstudier eller praktik",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Mänskliga rättigheter: Kandidatkurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:SGHUR:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "SGHUR",
+    "programName": "Human Resources - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Human Resources",
+    "catalogueSubject": "Human Resources",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/human-resources-kandidatprogram-SGHUR/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Introduktion till Human Resources",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Introduktion till psykologi",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Organisation, ledning och lärande 1",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Handelsrätt: Arbetsrätt I",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Handelsrätt: Human Resources i en ekonomisk kontext",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Introduktion till beteendevetenskaplig forskningsmetodik inom kontexten Human Resources",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Fördjupningskurser i valt huvudområde",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "main-field-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Kandidatkurs i valt huvudområde",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "main-field-thesis-slot",
+        "isSlot": true,
+        "includesThesisHp": 15
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valfria kurser, utbytesstudier eller praktik",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:SGFKO:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "SGFKO",
+    "programName": "Freds- och konfliktvetenskap - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Freds- och konfliktvetenskap",
+    "catalogueSubject": "Freds- och konfliktvetenskap",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/freds-och-konfliktvetenskap-kandidatprogram-SGFKO/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Freds- och konfliktvetenskap, grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Statsvetenskap, grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Freds- och konfliktvetenskap, fortsättningskurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Tematermin enligt programplan",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "theme-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Arbetslivspraktik, utlandsstudier eller valbara kurser",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Freds- och konfliktvetenskap, kandidatkurs inklusive uppsats",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:SAMPS:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "SAMPS",
+    "programName": "Masterprogram i psykologi",
+    "programHp": 120,
+    "level": "Avancerad nivå",
+    "subject": "Psykologi",
+    "catalogueSubject": "Psykologi",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/psykologi-masterprogram-SAMPS/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Psykologi: Avancerade vetenskapliga metoder i psykologin",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Psykologi: Psykologisk vetenskap från filosofiska och praktiska perspektiv",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Psykologi: Specialiserade teman",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 22.5,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Psykologi: Empiriskt arbete inom psykologi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 22.5,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Psykologi: Examensarbete för masterexamen",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:EGEKO:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "EGEKO",
+    "programName": "Ekonomie kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Företagsekonomi",
+    "catalogueSubject": "Företagsekonomi",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/ekonomie-kandidatprogram-EGEKO/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Företagsekonomi: Grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Nationalekonomi: Grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Handelsrätt: Juridisk översiktskurs",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Statistik: Grundkurs 1",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Huvudområde enligt programplan",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "main-field-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valbar termin inom Sverige eller utomlands",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Huvudområde och examensarbete enligt programplan",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "main-field-thesis-slot",
+        "isSlot": true,
+        "includesThesisHp": 15
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:EGSYS:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "EGSYS",
+    "programName": "Systemvetenskapligt kandidatprogram - design av informationssystem",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Informatik",
+    "catalogueSubject": "Informatik",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "complete",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/systemvetenskapligt-kandidatprogram-design-av-informationssystem-EGSYS/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Informatik: Introduktion till informationssystem",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Informatik: Informationssystem och verksamhet",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Informatik: Informationssystems- och verksamhetsutveckling",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Informatik: IT-arkitektur och mjukvarusystem",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valbar termin i Sverige eller utomlands",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Informatik: Examensarbete (uppsats) för kandidatexamen",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Informationssystem: Lärandeportfölj",
+        "hp": 1,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Informationssystem: Projektarbete på Systemvetenskapliga kandidatprogrammet",
+        "hp": 14,
+        "category": "mandatory"
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:SGBVP:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "SGBVP",
+    "programName": "Beteendevetenskap - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Beteendevetenskap",
+    "catalogueSubject": "Beteendevetenskap",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/beteendevetenskap-kandidatprogram-SGBVP/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Beteendevetenskaplig grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Beteendevetenskaplig grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fördjupning i psykologi eller sociologi",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "main-field-slot",
+        "isSlot": true,
+        "options": [
+          "Socialpsykologi",
+          "Arbets- och organisationspsykologi",
+          "Kognitiv neurovetenskap",
+          "Personlighets- och utvecklingspsykologi",
+          "Fortsättningskurs i sociologi"
+        ]
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Projektledning för beteendevetare",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbar kurs inom beteendevetenskap",
+        "hp": 15,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Praktik för beteendevetare, utbytesstudier eller valfri termin",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Kandidatkurs i psykologi eller sociologi",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "main-field-thesis-slot",
+        "isSlot": true,
+        "includesThesisHp": 15,
+        "options": [
+          "Kandidatkurs i psykologi",
+          "Kandidatkurs i sociologi"
+        ]
+      }
+    ],
+    "migrationSource": "program-db-lund.json"
+  },
+  {
+    "id": "lu:HGKKU:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "HGKKU",
+    "programName": "Teoretisk filosofi: Kritisk utredare - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Teoretisk filosofi",
+    "catalogueSubject": "Teoretisk filosofi",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/teoretisk-filosofi-kritisk-utredare-kandidatprogram-HGKKU/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Teoretisk filosofi: Kritisk utredare - Grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Teoretisk filosofi: Kritisk utredare - Fortsättningskurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Klarspråk i arbetslivet",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Brister i det mänskliga tänkandet: Kognitiv och social bias",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Samtals- och intervjuteknik",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Statistik: Grundkurs",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "name": "Praktik eller valfria fördjupningskurser",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "code": "FTUK01",
+        "name": "Kandidatkurs i teoretisk filosofi",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund-batch.json"
+  },
+  {
+    "id": "lu:HGKOV:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "HGKOV",
+    "programName": "Konsthistoria och visuella studier - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Konsthistoria och visuella studier",
+    "catalogueSubject": "Konsthistoria och visuella studier",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/konsthistoria-och-visuella-studier-kandidatprogram-HGKOV/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Introduktion till studier av konst och visuell kultur",
+        "hp": 3,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Från antiken till 1400",
+        "hp": 9,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Från 1400 till 1850",
+        "hp": 9,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Från 1850 till idag",
+        "hp": 9,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Konsthistoriens historier och dess förmedling",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Beskriva, analysera, tolka: att skriva om konst och visuell kultur",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Visuell kultur och samhälle i det förmoderna Europa",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Visuell kultur och samhälle från modernitet till nutid",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Exkursion och analysuppgift",
+        "hp": 6,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Den bildskapande människan: olika kunskapsperspektiv på konst och visuell kultur",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Estetik och konstteori från Platon till idag",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Teori och metod",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Konsthistoriska praktiker",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Valbara kurser inom programmet",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "name": "Praktik, valbara kurser eller utlandsstudier",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "name": "Att formulera, avgränsa och planera ett examensarbete",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "name": "Examensarbete",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund-batch.json"
+  },
+  {
+    "id": "lu:HGEUH:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "HGEUH",
+    "programName": "Europastudier med humanistisk profil - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Europastudier",
+    "catalogueSubject": "Europastudier",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/europastudier-med-humanistisk-profil-kandidatprogram-HGEUH/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Introduktion till Europastudier: Kultur, identitet, historia",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Europastudier: EU och den europeiska integrationsprocessen",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Europastudier: Grunder i projektledning och kommunikationsstrategier",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Europastudier: Regionernas Europa - Öst- och Centraleuropa i fokus",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Europastudier: Regionernas Europa - Medelhavsländerna i fokus",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Europastudier: Regionernas Europa - Nordeuropa i fokus",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Europastudier: Uppsatskurs",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Språkstudier",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Språkstudier",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "name": "Utbyte, valfria kurser eller praktik",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "name": "Europastudier: Kandidatkurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund-batch.json"
+  },
+  {
+    "id": "lu:SGGNV:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "SGGNV",
+    "programName": "Genusvetenskap - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Genusvetenskap",
+    "catalogueSubject": "Genusvetenskap",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/genusvetenskap-kandidatprogram-SGGNV/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Genusvetenskap: Grundkurs - Genus, samhälle och identitet",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Genusvetenskap: Fortsättningskurs - Genus, makt och kultur",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Genusvetenskap: Genus och rätt",
+        "hp": 30,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Valfri kurs eller utbytesstudier",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "name": "Valfri kurs, arbetslivspraktik eller utbytesstudier",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "name": "Genusvetenskap: Kandidatkurs - Genus, rättvisa och kunskapsproduktion",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true,
+        "includesThesisHp": 15
+      }
+    ],
+    "migrationSource": "program-db-lund-batch.json"
+  },
+  {
+    "id": "lu:SGSKO:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "SGSKO",
+    "programName": "Strategisk kommunikation - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Strategisk kommunikation",
+    "catalogueSubject": "Strategisk kommunikation",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/strategisk-kommunikation-kandidatprogram-SGSKO/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Strategisk kommunikation: Introduktion till strategisk kommunikation",
+        "hp": 12,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Strategisk kommunikation: Strategisk kommunikation i organisationer",
+        "hp": 9,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Strategisk kommunikation: Språkstrategi",
+        "hp": 9,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Strategisk kommunikation: Politisk kommunikation och medier",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Strategisk kommunikation: Kommunikationsdesign i digitala landskap",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Strategisk kommunikation: Samtida Public Relations",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Strategisk kommunikation: Varumärkeskommunikation",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Strategisk kommunikation: Digitala och visuella kulturer i strategisk kommunikation",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Strategisk kommunikation: Forskningsmetoder och akademiskt skrivande",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Strategisk kommunikation: Finansiell kommunikation",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Strategisk kommunikation: Strategisk kommunikation i kris och förändring",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "name": "Valbara kurser/praktik inom strategisk kommunikation",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          "Yrkespraktik i strategisk kommunikation 15 hp",
+          "Projektledning i digitala miljöer 15 hp",
+          "Hållbarhetskommunikation 15 hp"
+        ]
+      },
+      {
+        "term": 6,
+        "name": "Strategisk kommunikation: Strategi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "name": "Strategisk kommunikation: Forskningsmetoder i strategisk kommunikation",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "name": "Strategisk kommunikation: Examensarbete för kandidatexamen i strategisk kommunikation",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund-batch.json"
+  },
+  {
+    "id": "lu:EAECO:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "EAECO",
+    "programName": "Economics - Masterprogram",
+    "programHp": 120,
+    "level": "Avancerad nivå",
+    "subject": "Nationalekonomi",
+    "catalogueSubject": "Nationalekonomi",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/economics-masterprogram-EAECO/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Nationalekonomi: Avancerad mikroekonomisk analys",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Nationalekonomi: Avancerad ekonometri",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Nationalekonomi: Matematiska metoder, avancerad nivå",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Nationalekonomi: Avancerad makroekonomisk analys",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Specialiseringskurser inklusive valbara kurser",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 3,
+        "name": "Specialiseringskurser inklusive valbara kurser",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 4,
+        "name": "Nationalekonomi: Examensarbete - magisternivå",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      },
+      {
+        "term": 4,
+        "name": "Nationalekonomi: Examensarbete - masternivå",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund-batch.json"
+  },
+  {
+    "id": "lu:EAGDA:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "EAGDA",
+    "programName": "Data Analytics and Business Economics - Magisterprogram",
+    "programHp": 60,
+    "level": "Avancerad nivå",
+    "subject": "Dataanalys och ekonomi",
+    "catalogueSubject": "Dataanalys och ekonomi",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/data-analytics-and-business-economics-magisterprogram-EAGDA/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Dataanalys och ekonomi: Introduktion till programmering",
+        "hp": 3.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Dataanalys och ekonomi: Visualisering av data",
+        "hp": 4,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Dataanalys och ekonomi: Maskininlärning ur ett regressionsperspektiv",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Dataanalys och ekonomi: Juridiska aspekter av dataanalys",
+        "hp": 4,
+        "category": "elective"
+      },
+      {
+        "term": 1,
+        "name": "Dataanalys och ekonomi: Att arbeta med databaser",
+        "hp": 3.5,
+        "category": "elective"
+      },
+      {
+        "term": 1,
+        "name": "Dataanalys och ekonomi: Avancerad maskininlärning",
+        "hp": 7.5,
+        "category": "elective"
+      },
+      {
+        "term": 2,
+        "name": "Valbara kurser",
+        "hp": 15,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 2,
+        "name": "Dataanalys och ekonomi: Examensarbete - magisternivå",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund-batch.json"
+  },
+  {
+    "id": "lu:EGESO:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "EGESO",
+    "programName": "Economy and Society - Kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "subject": "Ekonomisk historia",
+    "catalogueSubject": "Ekonomisk historia",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lu.se/studera/economy-and-society-kandidatprogram-EGESO/programmets-innehall"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Ekonomi och samhälle: Europa och Atlantekonomins framväxt ca 1000-1890",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Ekonomi och samhälle: Kolonialism och förändring i Afrika, Asien och Latinamerika",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Ekonomi och samhälle: Ekonomisk tillväxt i det moderna Europa, Nordamerika och OECD-klubben",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "name": "Ekonomi och samhälle: Det globala Syd - Ekonomiska utvecklingsförlopp sedan 1945",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Nationalekonomi: Mikroekonomisk teori med tillämpningar",
+        "hp": 10,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Nationalekonomi: Finansiell ekonomi",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Ekonomi och samhälle: Demografiska utmaningar",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "name": "Ekonomi och samhälle: Färdighetsträning 1 - Statistik och data",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Ekonomi och samhälle: Företag och samhälle - Ett dynamiskt perspektiv",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Ekonomi och samhälle: Färdighetsträning 2 - Konsten att skriva och rapportera",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Nationalekonomi: Makroekonomisk teori och ekonomisk politik",
+        "hp": 10,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "name": "Nationalekonomi: Internationell ekonomi",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Ekonomi och samhälle: Regional utveckling och tillväxt",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Ekonomi och samhälle: Global hållbarhet",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "name": "Valbara kurser",
+        "hp": 15,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 5,
+        "name": "Studera utomlands, praktik eller valbara kurser",
+        "hp": 30,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true
+      },
+      {
+        "term": 6,
+        "name": "Ekonomi och samhälle: Forskningsdesign, metoder och datainsamling",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "name": "Ekonomi och samhälle: Kandidatuppsats",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund-batch.json"
+  },
+  {
+    "id": "lu:EAGEI:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "EAGEI",
+    "programName": "Magisterprogram i entreprenörskap och innovation",
+    "programHp": 60,
+    "level": "Avancerad nivå",
+    "subject": "Entreprenörskap och innovation",
+    "catalogueSubject": "Entreprenörskap och innovation",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "complete",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lunduniversity.lu.se/study/entrepreneurship-and-innovation-masters-programme-one-year-EAGEI/programme-structure"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "ENTN01",
+        "name": "The Entrepreneurial Process and Opportunity Recognition",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "ENTN10",
+        "name": "Business Model Development",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "ENTN07",
+        "name": "Value Creation",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "ENTN15",
+        "name": "Entrepreneurial Leadership",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "ENTN16",
+        "name": "Entrepreneurial Finance",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "ENTN08",
+        "name": "Entrepreneurial Project",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "ENTN19",
+        "name": "Degree Project - New Venture Creation",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund-batch.json"
+  },
+  {
+    "id": "lu:EAGFN:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "EAGFN",
+    "programName": "Magisterprogram i Finans",
+    "programHp": 60,
+    "level": "Avancerad nivå",
+    "subject": "Finans",
+    "catalogueSubject": "Finans",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "complete",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lunduniversity.lu.se/study/finance-masters-programme-one-year-EAGFN/programme-structure"
+    ],
+    "verificationNote": "The official outline mentions two spring electives, while the current course table marks NEKN95 and NEKN83 as compulsory. This structure follows the detailed course table.",
+    "rows": [
+      {
+        "term": 1,
+        "code": "NEKN81",
+        "name": "Economics: Foundations of Finance",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "NEKN96",
+        "name": "Finance: Financial Econometrics and Machine Learning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "NEKN93",
+        "name": "Finance: Theory of Corporate Finance",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "NEKN82",
+        "name": "Economics: Empirical Finance",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "NEKN95",
+        "name": "Finance: Managerial Finance",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "NEKN83",
+        "name": "Economics: Financial Valuation and Risk Management",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "NEKN02",
+        "name": "Economics: Master Essay I - Finance Programme",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund-batch.json"
+  },
+  {
+    "id": "lu:EAGIS:2026HT",
+    "university": "Lunds universitet",
+    "programCode": "EAGIS",
+    "programName": "Magisterprogram i Internationell strategisk ledning",
+    "programHp": 60,
+    "level": "Avancerad nivå",
+    "subject": "Strategisk ledning",
+    "catalogueSubject": "Företagsekonomi",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "lund-official-programplan",
+    "sourceUrls": [
+      "https://www.lunduniversity.lu.se/study/international-strategic-management-masters-programme-one-year-EAGIS/programme-structure"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "code": "BUSN11",
+        "name": "Strategic Management",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "BUSN10",
+        "name": "Corporate Governance in Theory and Practice",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Three elective courses of 5 credits each",
+        "hp": 15,
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [
+          "BUSN17 – Business Administration: Innovation Management",
+          "BUSO66 – Business Administration: Strategic Performance Measurement and Management",
+          "BUSO18 – Business Administration: Re-Imagining Capitalism",
+          "BUSO14 – Business Administration: Global Business and Sustainability"
+        ]
+      },
+      {
+        "term": 2,
+        "code": "BUSO01",
+        "name": "Business Administration: Strategic Management and Digitalisation",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "BUSO15",
+        "name": "Navigating the Future: Transformative Strategies for Sustainable Management",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "BUSN03",
+        "name": "Business Administration: Research Methods",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "BUSN09",
+        "name": "Business Administration: Degree Project in Strategic Management",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "migrationSource": "program-db-lund-batch.json"
+  },
+  {
     "key": "chalmers-tekniska-hogskola:FVIID",
     "susaId": "i.uoh.cth.fviid.69000.20262",
     "university": "Chalmers tekniska högskola",
