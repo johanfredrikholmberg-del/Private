@@ -10,7 +10,7 @@ async function score(program,courses){
     const data=await root.paths.structure(program,courses);
     const ledger=data?.creditLedger||root.matchConsistency?.ledger?.(data,courses);
     return ledger&&Number.isFinite(ledger.pct)&&Number.isFinite(ledger.credited)&&Number.isFinite(ledger.total)&&ledger.total>0
-      ?Math.max(0,Math.min(100,Math.round(100*ledger.credited/ledger.total))):null;
+      ?{pct:Math.max(0,Math.min(100,Math.round(100*ledger.credited/ledger.total))),bestBranch:data?.branch?.name||data?.item?.selectedBranch?.name||''}:null;
   }catch(error){console.warn('[StudieLots subject programme score]',error);return null}
 }
 async function update(button,subject,kind,courses,key,run){
@@ -23,13 +23,13 @@ async function update(button,subject,kind,courses,key,run){
     if(!values){
       const programmes=await root.paths.discover(subject,kind);
       if(!current())return;
-      values=(await Promise.all((Array.isArray(programmes)?programmes:[]).map(p=>score(p,courses)))).filter(Number.isFinite);
+      values=(await Promise.all((Array.isArray(programmes)?programmes:[]).map(p=>score(p,courses)))).filter(x=>x&&Number.isFinite(x.pct));
       if(!current())return;
       cache.set(cacheKey,values);
     }
     if(!current())return;
     if(!values.length){output.textContent='';return}
-    const low=Math.min(...values),high=Math.max(...values);
+    const low=Math.min(...values.map(x=>x.pct)),high=Math.max(...values.map(x=>x.pct));
     output.textContent=low===high?`${low} %`:`${low}–${high} %`;
     output.setAttribute('aria-label',low===high?`${low} procent av programmet`:`Mellan ${low} och ${high} procent beroende på program`);
   }catch(error){console.warn('[StudieLots subject programme discovery]',error);if(current())output.textContent=''}
