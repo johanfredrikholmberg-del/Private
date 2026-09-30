@@ -24,4 +24,16 @@ assert.ok(credit >= 0 && controllers > credit && runtime > controllers && post >
 for (const required of ['src/core/match-consistency.js', 'src/features/planner/planner-summary.js', 'src/features/planner/route-clarity.js']) {
   assert.ok(all.some(path => path.split('?')[0] === `/${required}`), `Missing existing module: ${required}`);
 }
+
+const obsoleteRootBundles = [
+  'studielots-v624.js','studielots-v625.js','studielots-runtime-v625.js',
+  'studielots-runtime-overlay-v706.js','studielots-runtime-overlay-v707.js',
+  'studielots-screen-repair-v712.js','studielots-flow-v713.js',
+  'studielots-planner-handoff-v710.js','studielots-planner-runtime-v716.js',
+  'studielots-planner-controller-v721.js','studielots-planner.js'
+];
+for (const obsolete of obsoleteRootBundles) {
+  assert.ok(!all.some(path => path.split('?')[0] === `/${obsolete}`), `Obsolete root runtime bundle reintroduced: ${obsolete}`);
+}
+
 console.log(`Module boundary check passed: ${groups.length} groups, ${all.length} unique existing scripts.`);
