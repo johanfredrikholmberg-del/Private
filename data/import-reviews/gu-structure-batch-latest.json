@@ -1,21 +1,22 @@
 {
-  "generatedAt": "2026-09-30T14:38:44.322Z",
+  "generatedAt": "2026-09-30T14:41:59.976Z",
   "limit": 20,
-  "candidates": 197,
-  "offset": 38,
+  "candidates": 193,
+  "offset": 54,
   "attempted": 20,
-  "imported": 4,
-  "reviewCount": 16,
-  "importedCodes": [
-    "K2KMP",
-    "K2LIG",
-    "K2MIV",
-    "K2ORK"
-  ],
+  "imported": 0,
+  "reviewCount": 20,
+  "importedCodes": [],
   "review": [
     {
-      "code": "H2LOG",
-      "name": "Logik, masterprogram",
+      "code": "K2TIL",
+      "name": "Konstnärligt masterprogram i konsthantverk, Textilkonst",
+      "reason": "official-structure-incomplete",
+      "quality": null
+    },
+    {
+      "code": "L1VAL",
+      "name": "Vidareutbildning av lärare och förskollärare som saknar lärarexamen",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
@@ -66,8 +67,60 @@
       }
     },
     {
-      "code": "H2LTG",
-      "name": "Språkteknologi, masterprogram",
+      "code": "L2BUV",
+      "name": "Barn- och ungdomsvetenskap, masterprogram",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 120,
+        "sourcePages": 2,
+        "parsedRows": 0
+      }
+    },
+    {
+      "code": "L2EUR",
+      "name": "International Master Programme in Educational Research",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
@@ -118,72 +171,66 @@
       }
     },
     {
-      "code": "H2PTA",
-      "name": "Arkeologisk praktik och teori",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 120,
-        "sourcePages": 1,
-        "parsedRows": 0
-      }
-    },
-    {
-      "code": "H2RTM",
-      "name": "Master i teologi, systematisk teologi",
+      "code": "M2KUL",
+      "name": "Kompletterande utbildning för läkare med examen från land utanför EU/EES samt Schweiz",
       "reason": "official-structure-incomplete",
       "quality": null
     },
     {
-      "code": "H2SIK",
-      "name": "Språk och interkulturell kommunikation, magister/masterprogram",
+      "code": "M2STA",
+      "name": "Masterprogram i tillämpad biostatistik",
       "reason": "official-structure-incomplete",
-      "quality": null
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 9,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 9,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 120,
+        "sourcePages": 4,
+        "parsedRows": 1
+      }
     },
     {
-      "code": "K2CCD",
-      "name": "Konstnärligt masterprogram i Child Culture Design",
+      "code": "N1DAF",
+      "name": "Datorstödd fysikalisk mätteknik",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
@@ -234,14 +281,8 @@
       }
     },
     {
-      "code": "K2COM",
-      "name": "Konstnärligt masterprogram i musik, inriktning den komponerande musikern",
-      "reason": "official-structure-incomplete",
-      "quality": null
-    },
-    {
-      "code": "K2DEN",
-      "name": "Konstnärligt masterprogram i Design",
+      "code": "N2ACE",
+      "name": "Atmosfärsvetenskap, klimat och ekosystem, masterprogram",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
@@ -259,10 +300,10 @@
           },
           "2": {
             "mandatoryHp": 0,
-            "listedHp": 0,
+            "listedHp": 75,
             "electiveListedHp": 0,
             "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
+            "unknownHp": 75,
             "covered": false,
             "fixedUnlabelled": false
           },
@@ -288,174 +329,12 @@
         "slotCount": 0,
         "totalHp": 120,
         "sourcePages": 2,
-        "parsedRows": 0
+        "parsedRows": 6
       }
     },
     {
-      "code": "K2EMD",
-      "name": "Konstnärligt masterprogram i design, inriktning Embedded Design",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 120,
-        "sourcePages": 2,
-        "parsedRows": 0
-      }
-    },
-    {
-      "code": "K2FOT",
-      "name": "Konstnärligt masterprogram i fotografi",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 120,
-        "sourcePages": 2,
-        "parsedRows": 0
-      }
-    },
-    {
-      "code": "K2FRI",
-      "name": "Konstnärligt masterprogram i fri konst",
-      "reason": "official-structure-incomplete",
-      "quality": {
-        "complete": false,
-        "expectedTerms": 4,
-        "completeTerms": [],
-        "termHp": {
-          "1": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "2": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "3": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          },
-          "4": {
-            "mandatoryHp": 0,
-            "listedHp": 0,
-            "electiveListedHp": 0,
-            "explicitElectiveRequiredHp": 0,
-            "unknownHp": 0,
-            "covered": false,
-            "fixedUnlabelled": false
-          }
-        },
-        "slotCount": 0,
-        "totalHp": 120,
-        "sourcePages": 2,
-        "parsedRows": 0
-      }
-    },
-    {
-      "code": "K2IMP",
-      "name": "Konstnärligt masterprogram i musik, inriktning improvisation",
-      "reason": "official-structure-incomplete",
-      "quality": null
-    },
-    {
-      "code": "K2MAF",
-      "name": "Konstnärligt masterprogram i film",
+      "code": "N2BIN",
+      "name": "Bioinformatik, Masterprogram",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
@@ -506,8 +385,8 @@
       }
     },
     {
-      "code": "K2MDG",
-      "name": "Konstnärligt masterprogram i opera",
+      "code": "N2BIO",
+      "name": "Biologi, Masterprogram",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
@@ -558,8 +437,8 @@
       }
     },
     {
-      "code": "K2ORG",
-      "name": "Konstnärligt masterprogram i musik, inriktning orgel med relaterade klaverinstrument",
+      "code": "N2BIS",
+      "name": "Biodiversitet och systematik, nordiskt masterprogram",
       "reason": "official-structure-incomplete",
       "quality": {
         "complete": false,
@@ -568,37 +447,37 @@
         "termHp": {
           "1": {
             "mandatoryHp": 0,
-            "listedHp": 30,
-            "electiveListedHp": 4.5,
+            "listedHp": 0,
+            "electiveListedHp": 0,
             "explicitElectiveRequiredHp": 0,
-            "unknownHp": 25.5,
+            "unknownHp": 0,
             "covered": false,
             "fixedUnlabelled": false
           },
           "2": {
             "mandatoryHp": 0,
-            "listedHp": 30,
-            "electiveListedHp": 4.5,
+            "listedHp": 0,
+            "electiveListedHp": 0,
             "explicitElectiveRequiredHp": 0,
-            "unknownHp": 25.5,
+            "unknownHp": 0,
             "covered": false,
             "fixedUnlabelled": false
           },
           "3": {
             "mandatoryHp": 0,
-            "listedHp": 30,
-            "electiveListedHp": 4.5,
+            "listedHp": 0,
+            "electiveListedHp": 0,
             "explicitElectiveRequiredHp": 0,
-            "unknownHp": 25.5,
+            "unknownHp": 0,
             "covered": false,
             "fixedUnlabelled": false
           },
           "4": {
             "mandatoryHp": 0,
-            "listedHp": 30,
-            "electiveListedHp": 4.5,
+            "listedHp": 0,
+            "electiveListedHp": 0,
             "explicitElectiveRequiredHp": 0,
-            "unknownHp": 25.5,
+            "unknownHp": 0,
             "covered": false,
             "fixedUnlabelled": false
           }
@@ -606,18 +485,342 @@
         "slotCount": 0,
         "totalHp": 120,
         "sourcePages": 2,
-        "parsedRows": 16
+        "parsedRows": 0
       }
     },
     {
-      "code": "K2TIK",
-      "name": "Konstnärligt masterprogram i Tillämpad konst och formgivning, Möbeldesign med inriktning trä",
+      "code": "N2CAS",
+      "name": "Complex Adaptive Systems, Master Program",
       "reason": "official-structure-incomplete",
       "quality": null
+    },
+    {
+      "code": "N2CMN",
+      "name": "Master in Communication",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 120,
+        "sourcePages": 1,
+        "parsedRows": 0
+      }
+    },
+    {
+      "code": "N2COS",
+      "name": "Computer Science, Master's Programme",
+      "reason": "official-structure-incomplete",
+      "quality": null
+    },
+    {
+      "code": "N2DCM",
+      "name": "Masterprogram i digital kommunikation",
+      "reason": "official-structure-incomplete",
+      "quality": null
+    },
+    {
+      "code": "N2DGL",
+      "name": "Digitalt ledarskap masterprogram",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 120,
+        "sourcePages": 2,
+        "parsedRows": 0
+      }
+    },
+    {
+      "code": "N2FOC",
+      "name": "Fysisk oceanografi, masterprogram",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 120,
+        "sourcePages": 2,
+        "parsedRows": 0
+      }
+    },
+    {
+      "code": "N2GDT",
+      "name": "Game Design & Technology masterprogram",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 120,
+        "sourcePages": 2,
+        "parsedRows": 0
+      }
+    },
+    {
+      "code": "N2GEO",
+      "name": "Geografi, masterprogram",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 120,
+        "sourcePages": 1,
+        "parsedRows": 0
+      }
+    },
+    {
+      "code": "N2GVS",
+      "name": "Geovetenskap, Masterprogram",
+      "reason": "official-structure-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [],
+        "termHp": {
+          "1": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "2": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "3": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          },
+          "4": {
+            "mandatoryHp": 0,
+            "listedHp": 0,
+            "electiveListedHp": 0,
+            "explicitElectiveRequiredHp": 0,
+            "unknownHp": 0,
+            "covered": false,
+            "fixedUnlabelled": false
+          }
+        },
+        "slotCount": 0,
+        "totalHp": 120,
+        "sourcePages": 3,
+        "parsedRows": 0
+      }
     }
   ],
   "deferredUntil": {
-    "N2DCM": 1791233916659,
+    "N2DCM": 1791384080465,
     "H2MAS": 1791383470759,
     "K2KOR": 1791383470759,
     "K2LIT": 1791383470759,
@@ -668,33 +871,29 @@
     "K2FOT": 1791383879878,
     "K2FRI": 1791383879878,
     "K2IMP": 1791383879878,
-    "K2KMP": 1791265206629,
-    "K2LIG": 1791265206629,
     "K2MAF": 1791383879878,
     "K2MDG": 1791383879878,
-    "K2MIV": 1791265206629,
     "K2ORG": 1791383879878,
-    "K2ORK": 1791265206629,
     "K2TIK": 1791383879878,
-    "K2TIL": 1791265548513,
-    "L1VAL": 1791265548513,
-    "L2BUV": 1791265548513,
-    "L2EUR": 1791265548513,
-    "M2KUL": 1791265548513,
-    "M2STA": 1791265548513,
-    "N1DAF": 1791265548513,
-    "N2ACE": 1791265548513,
-    "N2BIN": 1791265548513,
-    "N2BIO": 1791265548513,
-    "N2BIS": 1791265548513,
-    "N2CAS": 1791265548513,
-    "N2CMN": 1791265548513,
-    "N2COS": 1791265548513,
-    "N2DGL": 1791265548513,
-    "N2FOC": 1791265548513,
-    "N2GDT": 1791265548513,
-    "N2GEO": 1791265548513,
-    "N2GVS": 1791265548513,
+    "K2TIL": 1791384080465,
+    "L1VAL": 1791384080465,
+    "L2BUV": 1791384080465,
+    "L2EUR": 1791384080465,
+    "M2KUL": 1791384080465,
+    "M2STA": 1791384080465,
+    "N1DAF": 1791384080465,
+    "N2ACE": 1791384080465,
+    "N2BIN": 1791384080465,
+    "N2BIO": 1791384080465,
+    "N2BIS": 1791384080465,
+    "N2CAS": 1791384080465,
+    "N2CMN": 1791384080465,
+    "N2COS": 1791384080465,
+    "N2DGL": 1791384080465,
+    "N2FOC": 1791384080465,
+    "N2GDT": 1791384080465,
+    "N2GEO": 1791384080465,
+    "N2GVS": 1791384080465,
     "N2HSH": 1791265548513,
     "N2KEL": 1791266285092,
     "N2KEM": 1791266285092,
