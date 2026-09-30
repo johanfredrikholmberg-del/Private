@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const source=fs.readFileSync('src/features/programs/program-paths.js','utf8');
+const sandbox={window:{StudieLotsV2:{}},fetch:async()=>{throw Error('unused')},AbortController,URLSearchParams,setTimeout,clearTimeout,console};
+vm.runInNewContext(source,sandbox);
+const expand=sandbox.window.StudieLotsV2.paths.expandBranches;
+const programme={rows:[{name:'Gemensam',hp:60},{name:'A',hp:105,branchId:'a'},{name:'B',hp:105,branchId:'b'}],branchGroups:[{id:'profile',branches:[{id:'a',name:'A'},{id:'b',name:'B'}]}]};
+const paths=expand(programme);
+assert.equal(paths.length,2);
+assert.deepEqual(paths.map(x=>x.rows.map(r=>r.name).join(',')),['Gemensam,A','Gemensam,B']);
+assert(paths.every(x=>x.rows.filter(r=>r.branchId).every(r=>r.branchId===x.branch.id)));
+console.log('programme branch regression: ok');
