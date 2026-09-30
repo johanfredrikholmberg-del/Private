@@ -16,6 +16,8 @@ jobs:
           node-version: 22
       - name: Module boundaries and bootstrap dependencies
         run: node scripts/v2-module-boundaries-test.mjs
+      - name: Canonical runtime source guard
+        run: node scripts/v2-runtime-source-guard.mjs
       - name: Existing Ladok fixture
         run: node scripts/ladok-regression-test.mjs
       - name: V2 degree engine
