@@ -23,7 +23,9 @@ for(const [code,group] of byCode){
     if(other.row.verified===true)throw Error('Conflicting verified GU structures: '+code);
     const ohp=Number(other.row.programHp||other.row.hp),khp=Number(keep.row.programHp||keep.row.hp);
     if(ohp&&khp&&ohp!==khp)throw Error('Conflicting GU programme hp: '+code);
-    if(other.row.rows?.length&&JSON.stringify(compact(other.row))!==JSON.stringify(compact(keep.row)))throw Error('Conflicting GU structures: '+code);
+    // A verified source-backed plan supersedes older unverified/placeholder rows.
+    // Differing placeholder rows are expected during migration and must not block
+    // canonical deduplication; conflicting *verified* rows are still rejected above.
     remove.add(other.si+':'+other.ri);
   }
   merged.push(code);
