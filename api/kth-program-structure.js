@@ -71,7 +71,17 @@ function duplicateYearPairs(rows,years){
 function quality(rows,years){
   const mandatory=rows.filter(r=>r.category==='mandatory');const termHp={};let incompleteAllocations=0,crossSemesterCourses=0;
   for(const r of mandatory){if(!r.allocationComplete)incompleteAllocations++;if(r.crossSemester)crossSemesterCourses++;for(const [term,hp] of Object.entries(r.termParts||{}))termHp[term]=round1((termHp[term]||0)+hp)}
-  const expectedTerms=years.length*2,completeTerms=[];for(let t=1;t<=expectedTerms;t++){const hp=round1(termHp[t]||0);if(hp>=27&&hp<=33)completeTerms.push(t)}
+  // KTH programme plans often contain elective/conditional space, so mandatory HP
+  // does not necessarily sum to 30 in every semester. Verify semester coverage
+  // from the official course allocations instead of requiring 27-33 mandatory HP.
+  const expectedTerms=years.length*2,completeTerms=[];
+  const coveredTerms=new Set();
+  for(const r of rows){
+    for(const [term,hp] of Object.entries(r.termParts||{})){
+      if(Number(hp)>0)coveredTerms.add(Number(term));
+    }
+  }
+  for(let t=1;t<=expectedTerms;t++)if(coveredTerms.has(t))completeTerms.push(t);
   const duplicateYears=duplicateYearPairs(rows,years);
   const complete=years.length>=1&&completeTerms.length===expectedTerms&&incompleteAllocations===0&&duplicateYears.length===0;
   return{complete,expectedTerms,completeTerms,termHp,incompleteAllocations,crossSemesterCourses,mandatoryHp:round1(mandatory.reduce((s,r)=>s+r.hp,0)),duplicateYears};
@@ -86,7 +96,7 @@ async function discover({code,name,university}){
   const years=pages.map(p=>p.year),all=pages.flatMap(p=>parseYear(p.html,p.year)),q=quality(all,years);
   const mandatory=all.filter(r=>r.category==='mandatory').sort((a,b)=>a.term-b.term||a.code.localeCompare(b.code,'sv'));
   const courses=mandatory.map((r,i)=>({...r,originalTerm:r.term,__slOriginalTerm:r.term,__slOriginalIndex:i,status:'remaining',credited:false,isCredited:false,programmeSource:'kth-programplan',programmeCategory:'mandatory'}));
-  return{found:true,structureAvailable:q.complete,courses,program:{name:name||wanted,code:wanted,university:'KTH'},sourceUrls:pages.map(p=>p.url),source:'kth-programplan',confidence:q.complete?'official-machine-readable-sequenced':'official-partial',coverage:q.complete?'complete-semester-sequence':'partial-or-semester-incomplete',quality:{...q,cohort,pagesFound:years},policy:'KTH data is scoped to the official yearNumber block. P1-P4 allocation is used when published; otherwise a course is assigned to a semester only when official teaching dates keep the whole course inside that semester. Repeated year-course sets, ambiguous cross-semester dates, incomplete allocations or semesters outside 27-33 credits prevent verification.'};
+  return{found:true,structureAvailable:q.complete,courses,program:{name:name||wanted,code:wanted,university:'KTH'},sourceUrls:pages.map(p=>p.url),source:'kth-programplan',confidence:q.complete?'official-machine-readable-sequenced':'official-partial',coverage:q.complete?'complete-semester-sequence':'partial-or-semester-incomplete',quality:{...q,cohort,pagesFound:years},policy:'KTH data is scoped to the official yearNumber block. P1-P4 allocation is used when published; otherwise a course is assigned to a semester only when official teaching dates keep the whole course inside that semester. Repeated year-course sets, incomplete allocations, or semesters without any officially allocated programme-plan course prevent verification. Elective/conditional space is allowed, so mandatory credits need not total 30 in every semester.'};
 }
 
 export default async function handler(req,res){res.setHeader('Cache-Control','s-maxage=21600, stale-while-revalidate=86400');const code=clean(req.query?.code),name=clean(req.query?.name),university=clean(req.query?.university);if(!code&&!name)return res.status(400).json({error:'code or name is required'});try{const result=await discover({code,name,university});if(!result)return res.status(200).json({found:false,structureAvailable:false,courses:[],source:'kth-programplan',checkedAt:new Date().toISOString()});return res.status(200).json({...result,checkedAt:new Date().toISOString()})}catch(error){console.error('kth-program-structure',error);return res.status(200).json({found:false,structureAvailable:false,courses:[],temporarilyUnavailable:true,source:'kth-programplan',checkedAt:new Date().toISOString()})}}
