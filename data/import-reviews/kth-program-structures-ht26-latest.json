@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-30T08:44:50.805Z",
+  "generatedAt": "2026-09-30T09:01:08.328Z",
   "term": "HT26",
   "catalogueProgrammes": 85,
   "attempted": 35,
-  "imported": 11,
+  "imported": 6,
   "failed": [
     {
       "code": "TBTMD",
@@ -79,7 +79,7 @@
           "1": 30.5,
           "2": 4.5
         },
-        "incompleteAllocations": 0,
+        "incompleteAllocations": 2,
         "crossSemesterCourses": 0,
         "mandatoryHp": 35,
         "duplicateYears": [],
@@ -279,7 +279,7 @@
           "4": 30.7
         },
         "incompleteAllocations": 2,
-        "crossSemesterCourses": 2,
+        "crossSemesterCourses": 4,
         "mandatoryHp": 70.5,
         "duplicateYears": [],
         "cohort": "20262",
@@ -436,7 +436,7 @@
           "3": 1,
           "4": 30
         },
-        "incompleteAllocations": 2,
+        "incompleteAllocations": 4,
         "crossSemesterCourses": 1,
         "mandatoryHp": 64.5,
         "duplicateYears": [],
@@ -543,7 +543,7 @@
           3
         ],
         "termHp": {},
-        "incompleteAllocations": 0,
+        "incompleteAllocations": 2,
         "crossSemesterCourses": 0,
         "mandatoryHp": 0,
         "duplicateYears": [],
@@ -553,9 +553,150 @@
           2
         ]
       }
+    },
+    {
+      "code": "TNEEM",
+      "reason": "partial-or-semester-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [
+          1,
+          2,
+          3
+        ],
+        "termHp": {
+          "1": 21,
+          "2": 14,
+          "3": 7.5,
+          "4": 0
+        },
+        "incompleteAllocations": 0,
+        "crossSemesterCourses": 1,
+        "mandatoryHp": 42.5,
+        "duplicateYears": [],
+        "cohort": "20262",
+        "pagesFound": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "code": "TSCRM",
+      "reason": "partial-or-semester-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "termHp": {
+          "1": 15.8,
+          "2": 8.2,
+          "3": 5.3,
+          "4": 60.7
+        },
+        "incompleteAllocations": 2,
+        "crossSemesterCourses": 3,
+        "mandatoryHp": 93,
+        "duplicateYears": [],
+        "cohort": "20262",
+        "pagesFound": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "code": "TSEDM",
+      "reason": "partial-or-semester-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [
+          1,
+          2,
+          3
+        ],
+        "termHp": {
+          "1": 15,
+          "2": 7.5,
+          "3": 37.5,
+          "4": 0
+        },
+        "incompleteAllocations": 0,
+        "crossSemesterCourses": 0,
+        "mandatoryHp": 60,
+        "duplicateYears": [],
+        "cohort": "20262",
+        "pagesFound": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "code": "TSUEM",
+      "reason": "partial-or-semester-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [
+          1,
+          2,
+          3
+        ],
+        "termHp": {
+          "1": 30,
+          "2": 15,
+          "3": 6,
+          "4": 0
+        },
+        "incompleteAllocations": 0,
+        "crossSemesterCourses": 0,
+        "mandatoryHp": 51,
+        "duplicateYears": [],
+        "cohort": "20262",
+        "pagesFound": [
+          1,
+          2
+        ]
+      }
+    },
+    {
+      "code": "TTAHM",
+      "reason": "partial-or-semester-incomplete",
+      "quality": {
+        "complete": false,
+        "expectedTerms": 4,
+        "completeTerms": [
+          1,
+          2,
+          3
+        ],
+        "termHp": {
+          "1": 15,
+          "2": 22.5,
+          "3": 37.5,
+          "4": 0
+        },
+        "incompleteAllocations": 0,
+        "crossSemesterCourses": 0,
+        "mandatoryHp": 75,
+        "duplicateYears": [],
+        "cohort": "20262",
+        "pagesFound": [
+          1,
+          2
+        ]
+      }
     }
   ],
-  "retryAfter": "2026-10-07T08:44:50.805Z",
+  "retryAfter": "2026-10-07T09:01:08.328Z",
   "deferredCodes": [
     "TBTMD",
     "KPULU",
@@ -580,19 +721,19 @@
     "TMAKM",
     "TMBIM",
     "TMEKM",
-    "TMRSM"
+    "TMRSM",
+    "TNEEM",
+    "TSCRM",
+    "TSEDM",
+    "TSUEM",
+    "TTAHM"
   ],
   "verifiedProgrammeCodes": [
-    "TCAEM",
-    "TDDHM",
-    "TFOBM",
-    "THSSM",
-    "TIMBM",
-    "TINEM",
-    "TITHM",
-    "TKEMM",
-    "TMBBM",
-    "TMHIM",
-    "TMMMM"
+    "TMSKM",
+    "TMVTM",
+    "TNTEM",
+    "TPRMM",
+    "TSUTM",
+    "TTBEM"
   ]
 }
