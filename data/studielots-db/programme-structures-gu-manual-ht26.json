@@ -1,4 +1,51 @@
 {
   "schemaVersion": 1,
-  "programs": []
+  "programs": [
+    {
+      "id": "gu:N1COS:2026HT",
+      "key": "goteborgs universitet|N1COS|180",
+      "university": "Göteborgs universitet",
+      "programCode": "N1COS",
+      "programName": "Datavetenskapligt program",
+      "programHp": 180,
+      "hp": 180,
+      "validFrom": "2026HT",
+      "coverage": "complete",
+      "verified": true,
+      "courseCodesVerified": false,
+      "choiceRequired": true,
+      "source": "gu-official",
+      "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/datavetenskapligt-program-n1cos/utbildningsplan/9fee0f6e-fcdf-11ef-8b2a-04ec74e04671",
+      "sourceUrls": [
+        "https://www.gu.se/studera/hitta-utbildning/datavetenskapligt-program-n1cos",
+        "https://www.gu.se/studera/hitta-utbildning/datavetenskapligt-program-n1cos/utbildningsplan/9fee0f6e-fcdf-11ef-8b2a-04ec74e04671"
+      ],
+      "rows": [
+        {
+          "term": null,
+          "code": null,
+          "name": "Obligatoriska kurser inom datavetenskap inklusive kandidatuppsats",
+          "hp": 120,
+          "category": "mandatory",
+          "isSlot": true
+        },
+        {
+          "term": null,
+          "code": null,
+          "name": "Obligatoriska kurser i matematik",
+          "hp": 15,
+          "category": "mandatory",
+          "isSlot": true
+        },
+        {
+          "term": null,
+          "code": null,
+          "name": "Valbara kurser",
+          "hp": 45,
+          "category": "elective",
+          "isSlot": true
+        }
+      ]
+    }
+  ]
 }
