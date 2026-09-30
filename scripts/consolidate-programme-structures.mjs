@@ -14,7 +14,7 @@ const rows=Array.isArray(raw)?raw:(raw.programs||[]);
 
 // Migrate already collected, explicitly verified legacy programme plans into
 // the canonical StudieLots DB. These files are migration inputs only.
-for(const name of ['program-db.json','program-db-variants.json']){
+for(const name of ['program-db.json','program-db-variants.json','program-db-lund.json','program-db-lund-batch.json']){
   const p=path.join(root,'data',name);
   try{
     const legacy=JSON.parse(await fs.readFile(p,'utf8'));
