@@ -44,7 +44,7 @@ jobs:
       - name: Import verified GU structures
         env:
           GU_STRUCTURE_LIMIT: 20
-          GU_STRUCTURE_OFFSET: 54
+          GU_STRUCTURE_OFFSET: 74
           GU_STRUCTURE_FORCE_RETRY: 1
         run: node scripts/import-gu-next-structures.mjs --write
       - name: Audit GU coverage
