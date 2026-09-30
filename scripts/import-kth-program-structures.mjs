@@ -14,7 +14,7 @@ const structures=JSON.parse(await fs.readFile(structuresPath,'utf8'));
 let previous=null;
 try{previous=JSON.parse(await fs.readFile(reportPath,'utf8'))}catch(e){if(e?.code!=='ENOENT')throw e}
 const retryAfter=previous?.retryAfter||new Date(Date.parse(previous?.generatedAt||new Date().toISOString())+7*86400000).toISOString();
-const deferred=new Set(process.env.KTH_FORCE_RETRY==='1'?[]:(Date.now()<Date.parse(retryAfter)?(previous?.deferredCodes||previous?.failed?.map(x=>x.code)||[]):[]));
+const deferred=new Set(Date.now()<Date.parse(retryAfter)?(previous?.deferredCodes||previous?.failed?.map(x=>x.code)||[]):[]);
 const rows=Array.isArray(programs)?programs:(programs.programs||[]);
 const existing=Array.isArray(structures)?structures:(structures.programs||[]);
 const isKth=x=>x.providerId==='p.uoh.kth'||/\bkth\b|kungl\.? tekniska|kungliga tekniska/i.test(String(x.university||x.provider||x.universityName||x.providerName||''));
