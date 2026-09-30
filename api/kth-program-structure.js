@@ -94,8 +94,10 @@ async function discover({code,name,university}){
   const pages=[{year:1,html:firstHtml,url:firstUrl}];
   for(let year=2;year<=5;year++){const url=kthUrl(wanted,cohort,year);try{const html=await getText(url);if(!parseEncodedYearBlock(html,year)?.length)break;pages.push({year,html,url})}catch(_){break}}
   const years=pages.map(p=>p.year),all=pages.flatMap(p=>parseYear(p.html,p.year)),q=quality(all,years);
-  const mandatory=all.filter(r=>r.category==='mandatory').sort((a,b)=>a.term-b.term||a.code.localeCompare(b.code,'sv'));
-  const courses=mandatory.map((r,i)=>({...r,originalTerm:r.term,__slOriginalTerm:r.term,__slOriginalIndex:i,status:'remaining',credited:false,isCredited:false,programmeSource:'kth-programplan',programmeCategory:'mandatory'}));
+  // Preserve mandatory, conditional and elective programme-plan rows. The planner
+  // needs the published choice space; verification is handled by quality() above.
+  const planned=all.filter(r=>['mandatory','conditional','elective'].includes(r.category)).sort((a,b)=>a.term-b.term||a.code.localeCompare(b.code,'sv'));
+  const courses=planned.map((r,i)=>({...r,originalTerm:r.term,__slOriginalTerm:r.term,__slOriginalIndex:i,status:'remaining',credited:false,isCredited:false,programmeSource:'kth-programplan',programmeCategory:r.category}));
   return{found:true,structureAvailable:q.complete,courses,program:{name:name||wanted,code:wanted,university:'KTH'},sourceUrls:pages.map(p=>p.url),source:'kth-programplan',confidence:q.complete?'official-machine-readable-sequenced':'official-partial',coverage:q.complete?'complete-semester-sequence':'partial-or-semester-incomplete',quality:{...q,cohort,pagesFound:years},policy:'KTH data is scoped to the official yearNumber block. P1-P4 allocation is used when published; otherwise a course is assigned to a semester only when official teaching dates keep the whole course inside that semester. Repeated year-course sets, incomplete allocations, or semesters without any officially allocated programme-plan course prevent verification. Elective/conditional space is allowed, so mandatory credits need not total 30 in every semester.'};
 }
 
