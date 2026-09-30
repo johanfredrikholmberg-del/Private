@@ -339,20 +339,50 @@
           "isSlot": true
         },
         {
-          "term": null,
-          "code": null,
-          "name": "Inriktning geologi eller naturgeografi/klimatologi",
-          "hp": 105,
-          "category": "elective",
-          "isSlot": true
-        },
-        {
           "term": 6,
           "code": null,
           "name": "Examensarbete i geovetenskap",
           "hp": 15,
           "category": "mandatory",
           "isSlot": true
+        },
+        {
+          "term": null,
+          "code": null,
+          "name": "Inriktningskurser: geologi",
+          "hp": 105,
+          "category": "mandatory",
+          "isSlot": true,
+          "branchGroupId": "specialisation",
+          "branchId": "geology"
+        },
+        {
+          "term": null,
+          "code": null,
+          "name": "Inriktningskurser: naturgeografi/klimatologi",
+          "hp": 105,
+          "category": "mandatory",
+          "isSlot": true,
+          "branchGroupId": "specialisation",
+          "branchId": "physical-geography-climatology"
+        }
+      ],
+      "branchGroups": [
+        {
+          "id": "specialisation",
+          "name": "Inriktning",
+          "selectionMode": "one",
+          "locksFollowingTerms": true,
+          "branches": [
+            {
+              "id": "geology",
+              "name": "Geologi"
+            },
+            {
+              "id": "physical-geography-climatology",
+              "name": "Naturgeografi/klimatologi"
+            }
+          ]
         }
       ]
     },
