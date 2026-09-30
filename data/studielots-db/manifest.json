@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-09-30T18:58:25.174Z",
+  "generatedAt": "2026-09-30T18:59:10.576Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -46,10 +46,10 @@
     }
   },
   "historicalCreditTransferSources": [
-    "data/gu/history/specific-1to1-p1.json",
-    "data/gu/history/specific-1to1-p2.json",
-    "data/kth/history/specific-1to1.json",
-    "data/gu/history/specific-1to1-2024-2025.json"
+    "data/studielots-db/history/gu-specific-1to1-p1.json",
+    "data/studielots-db/history/gu-specific-1to1-p2.json",
+    "data/studielots-db/history/kth-specific-1to1.json",
+    "data/studielots-db/history/gu-specific-1to1-2024-2025.json"
   ],
   "importSources": {
     "SUSA": {
