@@ -70,7 +70,11 @@ function duplicateYearPairs(rows,years){
 }
 function quality(rows,years){
   const mandatory=rows.filter(r=>r.category==='mandatory');const termHp={};let incompleteAllocations=0,crossSemesterCourses=0;
-  for(const r of mandatory){if(!r.allocationComplete)incompleteAllocations++;if(r.crossSemester)crossSemesterCourses++;for(const [term,hp] of Object.entries(r.termParts||{}))termHp[term]=round1((termHp[term]||0)+hp)}
+  // Allocation quality applies to every published programme-plan row, not only
+  // mandatory courses. Otherwise ambiguous elective/conditional rows could pass
+  // verification even though the planner cannot place them safely.
+  for(const r of rows){if(!r.allocationComplete)incompleteAllocations++;if(r.crossSemester)crossSemesterCourses++;}
+  for(const r of mandatory){for(const [term,hp] of Object.entries(r.termParts||{}))termHp[term]=round1((termHp[term]||0)+hp)}
   // KTH programme plans often contain elective/conditional space, so mandatory HP
   // does not necessarily sum to 30 in every semester. Verify semester coverage
   // from the official course allocations instead of requiring 27-33 mandatory HP.
