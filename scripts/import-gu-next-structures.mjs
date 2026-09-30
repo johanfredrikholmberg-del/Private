@@ -4,7 +4,7 @@ import { discover } from '../api/gu-program-structure.js';
 
 const BASE='data/studielots-db/';
 const LIMIT=Number(process.env.GU_STRUCTURE_LIMIT||20);
-const OFFSET=Math.max(0,Number(process.env.GU_STRUCTURE_OFFSET||0));
+const OFFSET=Math.max(0,Number(process.env.GU_STRUCTURE_OFFSET||114));
 const FORCE_RETRY=process.env.GU_STRUCTURE_FORCE_RETRY==='1';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const arr=x=>Array.isArray(x)?x:Array.isArray(x?.programs)?x.programs:[];
