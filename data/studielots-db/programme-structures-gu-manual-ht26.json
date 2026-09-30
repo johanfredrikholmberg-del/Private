@@ -434,6 +434,127 @@
           "isSlot": true
         }
       ]
+    },
+    {
+      "id": "gu:S1SMI:2026HT",
+      "key": "goteborgs universitet|S1SMI|180",
+      "university": "Göteborgs universitet",
+      "programCode": "S1SMI",
+      "programName": "Samhällsvetenskapligt miljövetarprogram",
+      "programHp": 180,
+      "hp": 180,
+      "validFrom": "2026HT",
+      "coverage": "complete",
+      "verified": true,
+      "courseCodesVerified": false,
+      "choiceRequired": true,
+      "source": "gu-official",
+      "branchGroups": [
+        {
+          "id": "profile",
+          "name": "Profilinriktning",
+          "selectionMode": "one",
+          "locksFollowingTerms": true,
+          "branches": [
+            {
+              "id": "human-ecology",
+              "name": "Humanekologi"
+            },
+            {
+              "id": "environmental-economics",
+              "name": "Miljöekonomi"
+            },
+            {
+              "id": "environmental-planning",
+              "name": "Miljöplanering"
+            },
+            {
+              "id": "environmental-politics",
+              "name": "Miljöpolitik"
+            },
+            {
+              "id": "sustainable-business",
+              "name": "Uthålligt företagande"
+            }
+          ]
+        }
+      ],
+      "rows": [
+        {
+          "term": null,
+          "code": null,
+          "name": "Gemensam miljövetenskaplig grund",
+          "hp": 60,
+          "category": "mandatory",
+          "isSlot": true
+        },
+        {
+          "term": null,
+          "code": null,
+          "name": "Profilkurser",
+          "hp": 90,
+          "category": "mandatory",
+          "isSlot": true,
+          "branchGroupId": "profile",
+          "branchId": "human-ecology"
+        },
+        {
+          "term": null,
+          "code": null,
+          "name": "Profilkurser",
+          "hp": 90,
+          "category": "mandatory",
+          "isSlot": true,
+          "branchGroupId": "profile",
+          "branchId": "environmental-economics"
+        },
+        {
+          "term": null,
+          "code": null,
+          "name": "Profilkurser",
+          "hp": 90,
+          "category": "mandatory",
+          "isSlot": true,
+          "branchGroupId": "profile",
+          "branchId": "environmental-planning"
+        },
+        {
+          "term": null,
+          "code": null,
+          "name": "Profilkurser",
+          "hp": 90,
+          "category": "mandatory",
+          "isSlot": true,
+          "branchGroupId": "profile",
+          "branchId": "environmental-politics"
+        },
+        {
+          "term": null,
+          "code": null,
+          "name": "Profilkurser",
+          "hp": 90,
+          "category": "mandatory",
+          "isSlot": true,
+          "branchGroupId": "profile",
+          "branchId": "sustainable-business"
+        },
+        {
+          "term": null,
+          "code": null,
+          "name": "Valfria kurser, praktik eller utbytesstudier",
+          "hp": 15,
+          "category": "elective",
+          "isSlot": true
+        },
+        {
+          "term": 6,
+          "code": null,
+          "name": "Examensarbete inom vald profil",
+          "hp": 15,
+          "category": "mandatory",
+          "isSlot": true
+        }
+      ]
     }
   ]
 }
