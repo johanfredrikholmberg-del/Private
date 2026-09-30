@@ -18,7 +18,10 @@ const deferred=new Set(process.env.KTH_FORCE_RETRY==='1'?[]:(Date.now()<Date.par
 const rows=Array.isArray(programs)?programs:(programs.programs||[]);
 const existing=Array.isArray(structures)?structures:(structures.programs||[]);
 const isKth=x=>x.providerId==='p.uoh.kth'||/\bkth\b|kungl\.? tekniska|kungliga tekniska/i.test(String(x.university||x.provider||x.universityName||x.providerName||''));
-const candidates=rows.filter(isKth).sort((a,b)=>(Number(a.programHp)||999)-(Number(b.programHp)||999));
+const candidates=rows.filter(isKth).sort((a,b)=>{
+  const ak=knownSortKey(a),bk=knownSortKey(b);
+  return ak-bk||(Number(a.programHp)||999)-(Number(b.programHp)||999)||key(a).localeCompare(key(b),'sv');
+});
 const limit=Number(process.env.KTH_STRUCTURE_LIMIT||500);
 const out=[...existing];
 const report={generatedAt:new Date().toISOString(),term,catalogueProgrammes:candidates.length,attempted:0,imported:0,failed:[],retryAfter:deferred.size?retryAfter:new Date(Date.now()+7*86400000).toISOString(),deferredCodes:[],verifiedProgrammeCodes:[]};
@@ -30,7 +33,9 @@ const call=async p=>new Promise(resolve=>{
 });
 
 const key=x=>String(x.programCode||x.code||'').trim().toUpperCase();
-const known=new Set(out.filter(isKth).map(key).filter(Boolean));
+const knownCodes=new Set(out.filter(isKth).map(key).filter(Boolean));
+const knownSortKey=x=>knownCodes.has(key(x))?1:0;
+const known=knownCodes;
 for(const p of candidates){
  const code=key(p); if(!code||known.has(code)||deferred.has(code))continue;
  if(report.attempted>=limit)break;
