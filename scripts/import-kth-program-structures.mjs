@@ -27,7 +27,7 @@ const candidates=rows.filter(isKth).sort((a,b)=>{
   const ak=knownSortKey(a),bk=knownSortKey(b);
   return ak-bk||(Number(a.programHp)||999)-(Number(b.programHp)||999)||key(a).localeCompare(key(b),'sv');
 });
-const limit=Number(process.env.KTH_STRUCTURE_LIMIT||500);
+const limit=Number(process.env.KTH_STRUCTURE_LIMIT||500); // Deferred incomplete programmes are skipped until retryAfter.
 const report={generatedAt:new Date().toISOString(),term,catalogueProgrammes:candidates.length,attempted:0,imported:0,failed:[],retryAfter:deferred.size?retryAfter:new Date(Date.now()+7*86400000).toISOString(),deferredCodes:[],verifiedProgrammeCodes:[]};
 
 const call=async p=>new Promise(resolve=>{
