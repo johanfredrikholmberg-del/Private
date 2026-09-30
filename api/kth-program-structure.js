@@ -52,8 +52,16 @@ function parseYear(html,studyYear){
     const periodHp=[0,0,0,0];
     for(const tp of Array.isArray(o?.Tillfallesperioder)?o.Tillfallesperioder:[]){for(const p of Array.isArray(tp?.Lasperiodsfordelning)?tp.Lasperiodsfordelning:[]){const m=String(p?.Lasperiodskod||'').match(/^P([1-4])$/i);if(!m)continue;periodHp[Number(m[1])-1]=round1(periodHp[Number(m[1])-1]+Number(p?.Omfattningsvarde||0))}}
     const allocated=round1(periodHp.reduce((a,b)=>a+b,0)),fall=round1(periodHp[0]+periodHp[1]),spring=round1(periodHp[2]+periodHp[3]);
-    let term=0,termParts={[startTerm]:fall,[endTerm]:spring},allocationComplete=false,allocationMethod='periods';
-    if(allocated>0){term=spring>fall?endTerm:startTerm;allocationComplete=Math.abs(allocated-hp)<=0.2}
+    let term=0,termParts={[startTerm]:0,[endTerm]:0},allocationComplete=false,allocationMethod='periods';
+    if(allocated>0){
+      // Lasperiodsfordelning identifies when the course runs. Omfattningsvarde is
+      // not consistently expressed as course credits, so never sum it as hp.
+      // A course wholly on one side of the academic year can safely use its
+      // official course hp; cross-semester rows remain unverified.
+      if(fall>0&&spring===0){term=startTerm;termParts[startTerm]=round1(hp);allocationComplete=true}
+      else if(spring>0&&fall===0){term=endTerm;termParts[endTerm]=round1(hp);allocationComplete=true}
+      else if(fall>0&&spring>0){term=spring>fall?endTerm:startTerm}
+    }
     else{
       term=semesterFromDates(o?.Tillfallesperioder,startTerm,endTerm);
       allocationMethod='teaching-dates';
