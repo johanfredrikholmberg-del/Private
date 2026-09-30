@@ -355,6 +355,55 @@
           "isSlot": true
         }
       ]
+    },
+    {
+      "id": "gu:N1GEO:2026HT",
+      "key": "goteborgs universitet|N1GEO|180",
+      "university": "Göteborgs universitet",
+      "programCode": "N1GEO",
+      "programName": "Geografi, kandidatprogram",
+      "programHp": 180,
+      "hp": 180,
+      "validFrom": "2026HT",
+      "coverage": "partial",
+      "verified": true,
+      "courseCodesVerified": false,
+      "choiceRequired": true,
+      "source": "gu-official",
+      "rows": [
+        {
+          "term": 1,
+          "code": "GE0400",
+          "name": "Geografi: Baskurs",
+          "hp": 30,
+          "category": "mandatory",
+          "isSlot": false
+        },
+        {
+          "term": 2,
+          "code": "GE2120",
+          "name": "Geografi: Fortsättningskurs",
+          "hp": 30,
+          "category": "mandatory",
+          "isSlot": false
+        },
+        {
+          "term": null,
+          "code": null,
+          "name": "Fördjupning och val inom natur- och kulturgeografi",
+          "hp": 105,
+          "category": "elective",
+          "isSlot": true
+        },
+        {
+          "term": 6,
+          "code": null,
+          "name": "Examensarbete i geografi",
+          "hp": 15,
+          "category": "mandatory",
+          "isSlot": true
+        }
+      ]
     }
   ]
 }
