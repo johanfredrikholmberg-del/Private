@@ -11880,15 +11880,129 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
+    "coverage": "complete-term-sequence",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Den reflekterande konstnären 1, KMP261",
+        "hp": 4.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Huvudämne kompositoriska och performativa praktiker 1, KMP271",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Masterseminarier 1, MAS231",
+        "hp": 3,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Självständigt arbete (examensarbete) 1, MAS201",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Den reflekterande konstnären 2, KMP262",
+        "hp": 4.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Huvudämne kompositoriska och performativa praktiker 2, KMP272",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Masterseminarier 2, MAS232",
+        "hp": 3,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Självständigt arbete (examensarbete) 2, MAS202",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Den reflekterande konstnären 3, KMP263",
+        "hp": 4.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Huvudämne kompositoriska och performativa praktiker 3, KMP273",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Masterseminarier 3, MAS233",
+        "hp": 3,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Självständigt arbete (examensarbete) 3, MAS203",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Den reflekterande konstnären 4, KMP264",
+        "hp": 4.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Huvudämne kompositoriska och performativa praktiker 4, KMP274",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Masterseminarier 4, MAS234",
+        "hp": 3,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Självständigt arbete (examensarbete) 4, MAS204",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      }
+    ],
     "source": "gu-official-programplan",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/experimental-composition-and-creation-k2kmp",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/experimental-composition-and-creation-k2kmp"
+      "https://www.gu.se/studera/hitta-utbildning/experimental-composition-and-creation-k2kmp",
+      "https://studentportal.gu.se/program/experimental-composition-and-creation"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -11940,7 +12054,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:35.511Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:K2KMP:official",
+    "programHp": 120,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": false,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/experimental-composition-and-creation-k2kmp"
   },
   {
     "key": "goteborgs-universitet:K2KOR",
@@ -12004,15 +12125,97 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
+    "coverage": "complete-term-sequence",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "MLIT01",
+        "name": "Litterärt arbete: läsandets praktiker",
+        "hp": 30,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara kurser enligt programplan",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "MLIT09",
+            "name": "Litterärt arbete: läsandets praktiker, poetiker",
+            "hp": 22.5
+          },
+          {
+            "code": "HT25",
+            "name": "eller tidigare) MLIT2A Litterär arbete: poetiker",
+            "hp": 15
+          },
+          {
+            "code": "HT26",
+            "name": ") Valbar kurs",
+            "hp": 7.5
+          },
+          {
+            "code": "MLIT2A",
+            "name": "Litterär arbete: poetiker",
+            "hp": 15
+          },
+          {
+            "code": "",
+            "name": "Valbar kurs",
+            "hp": 7.5
+          },
+          {
+            "code": "MLIT11",
+            "name": "Litterärt arbete: läsandets praktiker, skillnader, förflyttningar",
+            "hp": 30
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara kurser enligt programplan",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "MLIT11",
+            "name": "Litterärt arbete: läsandets praktiker, skillnader, förflyttningar",
+            "hp": 30
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara kurser enligt programplan",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "MLIT12",
+            "name": "Att skriva är att läsa: positioner och riktningar",
+            "hp": 30
+          }
+        ]
+      }
+    ],
     "source": "gu-official-programplan",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-litterar-gestaltning-k2lig",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-litterar-gestaltning-k2lig"
+      "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-litterar-gestaltning-k2lig",
+      "https://studentportal.gu.se/program/konstnarligt-masterprogram-i-litterar-gestaltning"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -12064,7 +12267,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:35.682Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:K2LIG:official",
+    "programHp": 120,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/konstnarligt-masterprogram-i-litterar-gestaltning-k2lig"
   },
   {
     "key": "goteborgs-universitet:K2LIT",
@@ -12241,15 +12451,129 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
+    "coverage": "complete-term-sequence",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Den reflekterande tonkonstnären 1, MIV231",
+        "hp": 4.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Huvudämne master improvisation/världsmusik 1, MIV201",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Masterseminarier 1, MAS231",
+        "hp": 3,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Självständigt arbete (examensarbete) master 1, MAS201",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Den reflekterande tonkonstnären 2, MIV232",
+        "hp": 4.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Huvudämne master improvisation/världsmusik 2, MIV202",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Masterseminarier 2, MAS232",
+        "hp": 3,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Självständigt arbete (examensarbete) master 2, MAS202",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Den reflekterande tonkonstnären 3, MIV233",
+        "hp": 4.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Huvudämne master improvisation/världsmusik 3, MIV203",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Masterseminarier 3, MAS233",
+        "hp": 3,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Självständigt arbete (examensarbete) master 3, MAS203",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Den reflekterande tonkonstnären 4, MIV234",
+        "hp": 4.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Huvudämne master improvisation/världsmusik 4, MIV204",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Masterseminarier 4, MAS234",
+        "hp": 3,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Självständigt arbete (examensarbete) master 4, MAS204",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      }
+    ],
     "source": "gu-official-programplan",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/improvisation-or-world-music-k2miv",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/improvisation-or-world-music-k2miv"
+      "https://www.gu.se/studera/hitta-utbildning/improvisation-or-world-music-k2miv",
+      "https://studentportal.gu.se/program/improvisation-or-world-music"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -12301,7 +12625,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:36.039Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:K2MIV:official",
+    "programHp": 120,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": false,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/improvisation-or-world-music-k2miv"
   },
   {
     "key": "goteborgs-universitet:K2ORG",
@@ -12383,15 +12714,101 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
+    "coverage": "complete-term-sequence",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "MAS201",
+        "name": "Självständigt arbete (examensarbete) 1",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 1,
+        "code": "ORK201",
+        "name": "Huvudämne orkesterspel 1",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 1,
+        "code": "ORK241",
+        "name": "Instrumentala studier och kammarmusik 1",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "MAS202",
+        "name": "Självständigt arbete (examensarbete) 2",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "ORK202",
+        "name": "Huvudämne orkesterspel 2",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 2,
+        "code": "ORK242",
+        "name": "Instrumentala studier och kammarmusik 2",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "MAS203",
+        "name": "Självständigt arbete (examensarbete) 3",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "ORK203",
+        "name": "Huvudämne orkesterspel 3",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 3,
+        "code": "ORK243",
+        "name": "Instrumentala studier och kammarmusik 3",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "MAS204",
+        "name": "Självständigt arbete (examensarbete) 4",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "ORK204",
+        "name": "Huvudämne orkesterspel 4",
+        "hp": 15,
+        "category": "mandatory-unlabelled"
+      },
+      {
+        "term": 4,
+        "code": "ORK244",
+        "name": "Instrumentala studier och kammarmusik 4",
+        "hp": 7.5,
+        "category": "mandatory-unlabelled"
+      }
+    ],
     "source": "gu-official-programplan",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/symfoniskt-orkesterspel-k2ork",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/symfoniskt-orkesterspel-k2ork"
+      "https://www.gu.se/studera/hitta-utbildning/symfoniskt-orkesterspel-k2ork",
+      "https://studentportal.gu.se/program/symfoniskt-orkesterspel"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -12443,7 +12860,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:36.530Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:K2ORK:official",
+    "programHp": 120,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": false,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/symfoniskt-orkesterspel-k2ork"
   },
   {
     "key": "goteborgs-universitet:K2PAC",
