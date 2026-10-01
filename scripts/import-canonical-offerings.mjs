@@ -4,7 +4,9 @@
 import fs from 'node:fs';
 const API='https://api.skolverket.se/susa-navet/emil3/';
 const dbPath='data/studielots-db/manifest.json',db=JSON.parse(fs.readFileSync(dbPath));
-if(db.database!=='StudieLots DB'||db.tables?.courseOfferings?.storage!=='data/HT26/course-offerings.json')throw Error('Unexpected offerings storage');
+if(db.database!=='StudieLots DB'||!db.singleSourceOfTruth)throw Error('Unexpected canonical database');
+const storage=db.tables?.courseOfferings?.storage;
+if(storage!=='data/studielots-db/course-offerings.json')throw Error('Unexpected canonical offerings storage: '+storage);
 const storage=db.tables.courseOfferings.storage,existing=JSON.parse(fs.readFileSync(storage));
 if(!Array.isArray(existing)||!existing.length||db.tables.courseOfferings.rows!==existing.length)throw Error('Existing DB offerings count mismatch');
 const clean=x=>String(x??'').trim();
@@ -21,7 +23,8 @@ for(const event of events){
   const educationId=clean(c.education||c.educationInfo||c.educationIdentifier),provider=providerMap.get(clean(c.providers?.[0]||c.provider));
   if(educationId&&provider)candidates.push({event,provider,educationId,start});
 }
-const byKey=new Map(existing.map(x=>[x.key,x])),cache=new Map();
+const stableKey=x=>clean(x.key||x.offeringKey||[x.university,x.courseCode,x.offeringTerm,x.startDate,x.sourceUrl].join('|'));
+const byKey=new Map(existing.map(x=>[stableKey(x),x])),cache=new Map();
 const infoFor=key=>{if(!cache.has(key))cache.set(key,get(new URL('educationInfos/'+encodeURIComponent(key),API)).catch(()=>null));return cache.get(key)};
 let added=0,missingInfo=0;
 for(let i=0;i<candidates.length;i+=16){
@@ -43,6 +46,7 @@ for(let i=0;i<candidates.length;i+=16){
 const offerings=[...byKey.values()];
 if(added){fs.writeFileSync(storage,JSON.stringify(offerings,null,2)+'\n');db.tables.courseOfferings.rows=offerings.length;fs.writeFileSync(dbPath,JSON.stringify(db,null,2)+'\n')}
 fs.mkdirSync('data/offerings',{recursive:true});
-const report={updated:new Date().toISOString(),source:'skolverket-susa-navet',eventsScanned:events.length,datedCandidates:candidates.length,missingInfo,existing:existing.length,added,count:offerings.length,gu:offerings.filter(x=>x.university==='Göteborgs universitet').length};
+const uniCount=name=>offerings.filter(x=>x.university===name).length;
+const report={updated:new Date().toISOString(),source:'skolverket-susa-navet',eventsScanned:events.length,datedCandidates:candidates.length,missingInfo,existing:existing.length,added,count:offerings.length,gu:uniCount('Göteborgs universitet'),kth:offerings.filter(x=>/KTH|Kungliga Tekniska/i.test(x.university)).length,karlstad:uniCount('Karlstads universitet')};
 fs.writeFileSync('data/offerings/meta.json',JSON.stringify(report,null,2)+'\n');
 console.log(report);
