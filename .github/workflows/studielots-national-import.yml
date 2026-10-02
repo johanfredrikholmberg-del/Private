@@ -5,6 +5,7 @@ on:
     branches: [studielots-v2]
     paths:
       - '.github/workflows/studielots-national-import.yml'
+      - 'scripts/import-canonical-offerings.mjs'
   schedule:
     - cron: '23 * * * *'
 permissions:
