@@ -7,7 +7,7 @@ const dbPath='data/studielots-db/manifest.json',db=JSON.parse(fs.readFileSync(db
 if(db.database!=='StudieLots DB'||!db.singleSourceOfTruth)throw Error('Unexpected canonical database');
 const storage=db.tables?.courseOfferings?.storage;
 if(storage!=='data/studielots-db/course-offerings.json')throw Error('Unexpected canonical offerings storage: '+storage);
-const storage=db.tables.courseOfferings.storage,existing=JSON.parse(fs.readFileSync(storage));
+const existing=JSON.parse(fs.readFileSync(storage));
 if(!Array.isArray(existing)||!existing.length||db.tables.courseOfferings.rows!==existing.length)throw Error('Existing DB offerings count mismatch');
 const clean=x=>String(x??'').trim();
 const loc=x=>{const a=x?.strings||x?.urls||[];return clean((a.find(v=>v.lang==='swe')||a[0])?.value)};
