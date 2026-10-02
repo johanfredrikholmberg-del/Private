@@ -1,0 +1,49 @@
+name: StudieLots national canonical import
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 */6 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: studielots-national-canonical-import
+  cancel-in-progress: false
+jobs:
+  canonical-import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Refresh canonical course offerings nationally
+        run: node scripts/import-canonical-offerings.mjs
+      - name: Validate canonical database
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const db=JSON.parse(fs.readFileSync('data/studielots-db/manifest.json'));
+          if(db.database!=='StudieLots DB'||!db.singleSourceOfTruth) throw Error('Canonical DB guard failed');
+          for(const [name,t] of Object.entries(db.tables)){
+            if(t.storage && !String(t.storage).startsWith('data/studielots-db/')) throw Error(name+' points outside canonical DB');
+          }
+          const offerings=JSON.parse(fs.readFileSync(db.tables.courseOfferings.storage));
+          if(offerings.length!==db.tables.courseOfferings.rows) throw Error('Offering count mismatch');
+          const key=x=>String(x.key||x.offeringKey||[x.university,x.courseCode,x.offeringTerm,x.startDate,x.sourceUrl].join('|'));
+          if(new Set(offerings.map(key)).size!==offerings.length) throw Error('Duplicate offerings');
+          console.log(JSON.stringify({providers:db.tables.providers.rows,programmes:db.tables.programmes.rows,structures:db.tables.programmeStructures.rows,courses:db.tables.courses.rows,offerings:offerings.length,syllabi:db.tables.syllabusVersions.rows,creditEvidence:db.tables.creditTransferEvidence.rows},null,2));
+          NODE
+      - name: Save verified canonical changes
+        run: |
+          if [ -z "$(git status --porcelain -- data/studielots-db data/offerings)" ]; then echo 'No canonical changes'; exit 0; fi
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -f data/studielots-db data/offerings/meta.json
+          git commit -m 'Refresh national canonical StudieLots DB [skip ci]'
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
+          git push origin HEAD:studielots-v2
