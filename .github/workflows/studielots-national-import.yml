@@ -1,6 +1,10 @@
 name: StudieLots national canonical import
 on:
   workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - '.github/workflows/studielots-national-import.yml'
   schedule:
     - cron: '23 * * * *'
 permissions:
