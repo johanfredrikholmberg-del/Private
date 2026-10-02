@@ -18,11 +18,12 @@ async function pages(path,keys,max){const url=p=>{const u=new URL(path,API);u.se
 const [events,providers]=await Promise.all([pages('educationEvents',['educationEvents','events','items','content','results','data'],80),pages('educationProviders',['educationProviders','providers','items','content','results','data'],20)]);
 const providerMap=new Map(providers.map(p=>[id(p),p])),candidates=[];
 for(const event of events){
-  const c=event.content||{},start=clean(c.start||c.startDate),ts=Date.parse(start);
+  const c=event.content||event||{},start=clean(c.start||c.startDate||c.startTime||c.startsAt),ts=Date.parse(start);
   if(!Number.isFinite(ts)||ts<Date.now()-86400000)continue;
-  const educationId=clean(c.education||c.educationInfo||c.educationIdentifier),provider=providerMap.get(clean(c.providers?.[0]||c.provider));
+  const educationId=clean(c.education?.id||c.education||c.educationInfo?.id||c.educationInfo||c.educationIdentifier||c.educationId),providerId=clean(c.providers?.[0]?.id||c.providers?.[0]||c.provider?.id||c.provider||c.educationProvider?.id||c.educationProvider),provider=providerMap.get(providerId);
   if(educationId&&provider)candidates.push({event,provider,educationId,start});
 }
+if(events.length>100&&!candidates.length)throw Error('SUSA schema guard: no dated provider/education candidates parsed from '+events.length+' events');
 const stableKey=x=>clean(x.key||x.offeringKey||[x.university,x.courseCode,x.offeringTerm,x.startDate,x.sourceUrl].join('|'));
 const byKey=new Map(existing.map(x=>[stableKey(x),x])),cache=new Map();
 const infoFor=key=>{if(!cache.has(key))cache.set(key,get(new URL('educationInfos/'+encodeURIComponent(key),API)).catch(()=>null));return cache.get(key)};
