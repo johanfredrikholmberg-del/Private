@@ -104347,7 +104347,8 @@
     "source": "gu-official-education-plan-and-student-portal-term-division",
     "sourceUrls": [
       "https://www.gu.se/syllabus/5a4484ea-c618-11f0-9aa4-4a24d5f444fb",
-      "https://studentportal.gu.se/program/valkommen-till-psykologprogrammet"
+      "https://studentportal.gu.se/program/valkommen-till-psykologprogrammet",
+      "https://kursplaner.gu.se/pdf/kurs/sv/PM1323.pdf"
     ],
     "progressionRules": [
       "30 kurser om totalt 300 hp, 30 hp per termin över 10 terminer.",
@@ -104357,7 +104358,7 @@
     ],
     "creditTransferPolicy": "GU anger att det inte går att antas till senare del av Psykologprogrammet. Tillgodoräknande kan sökas först efter antagning och registrering; beviljade poäng innebär inte automatiskt uppflyttning eftersom sådan plats medges i mån av plats. Kursordningen gäller om inte särskilda skäl föreligger. Tidigare resultat måste prövas individuellt.",
     "fasterRoutePolicy": "Ingen generell snabbare studiegång är verifierad. Ordinarie struktur är 30 hp/termin och kurserna ska tas i angiven ordning om inte särskilda skäl föreligger. Snabbare väg får därför bara räknas efter verifierad förkunskaps-/tillgodoräknandeprövning och faktisk kursåtkomst; okända kurskoder och erbjudanden ska ligga som ej matchade/väntande.",
-    "courseCodeCoverage": "Endast PM1621 är direkt kodverifierad på GU:s studentportal. Övriga 29 programkurser har verifierade namn och hp i HT26-planen men ej verifierade kurskoder här; gör ingen kodbaserad matchning för dessa ännu.",
+    "courseCodeCoverage": "PM1621 and PM1323 have official GU course-code evidence. Remaining 28 programme-course codes are not verified in this batch; don't code-match them yet.",
     "term": "HT26",
     "rows": [
       {
@@ -104378,11 +104379,11 @@
       },
       {
         "term": 2,
-        "code": "",
+        "code": "PM1323",
         "name": "Psykologi som vetenskap",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false
+        "courseCodeVerified": true
       },
       {
         "term": 2,
