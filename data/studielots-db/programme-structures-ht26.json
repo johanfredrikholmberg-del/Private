@@ -103883,5 +103883,453 @@
     "checkedAt": "2026-09-29T10:37:04.622Z",
     "verified": true,
     "migrationSource": "susa/structures.json"
+  },
+  {
+    "university": "Göteborgs universitet",
+    "programCode": "S1EKA",
+    "programName": "Ekonomie kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "catalogueSubject": "Företagsekonomi",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "gu-official-programplan",
+    "sourceUrls": [
+      "https://www.gu.se/syllabus/75895c02-55d4-11f1-8bf3-3a88a126450e",
+      "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogrammet-kurser-och-valmojligheter",
+      "https://studentportal.gu.se/program/ekonomie-kandidatprogrammet",
+      "https://www.gu.se/studera/hitta-utbildning/termin-4-foretagsekonomi-ekonomie-kandidatprogrammet-ekfe4"
+    ],
+    "progressionRules": [
+      {
+        "beforeTerm": 4,
+        "minimumPassedHp": 60,
+        "requirement": "Minst 60 hp av kurserna på termin 1–3 ska vara godkända vid terminsstart.",
+        "sourceUrl": "https://www.gu.se/syllabus/75895c02-55d4-11f1-8bf3-3a88a126450e"
+      }
+    ],
+    "creditTransferPolicy": {
+      "note": "Tidigare studier kan inte automatiskt räknas av. GU anger att vissa kurser på termin 1–3 har programspecifika lärandemål och kanske inte kan tillgodoräknas; studenten måste vara antagen till programmet och antagning till senare del erbjuds inte. Bedöm därför varje kurs separat och lämna osäkra matchningar som kvar att läsa.",
+      "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogrammet-kurser-och-valmojligheter"
+    },
+    "term": "HT26",
+    "migrationSource": "manual-verified-GU-education-plan-2026",
+    "id": "gu:S1EKA:2026HT:foretagsekonomi",
+    "subject": "Företagsekonomi",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Introduktion till ekonomi",
+        "hp": 2,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Externredovisning",
+        "hp": 8,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Ekonomistyrning",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Mikroekonomi",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Statistik 1a",
+        "hp": 8,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Makroekonomi",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Finansiell ekonomi",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Introduktion till handelsrätt",
+        "hp": 3,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Marknadsföring",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Ledarskap och organisation",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Företagsekonomi i praktiken",
+        "hp": 3,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Statistik 1b",
+        "hp": 7,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Economics in Practice",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "International Economics",
+        "hp": 5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Handelsrätt",
+        "hp": 12,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "EKF201",
+        "name": "Industriell och finansiell styrning",
+        "hp": 15,
+        "category": "mandatory",
+        "subject": "Företagsekonomi",
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "EKF202",
+        "name": "Strategi och marknadsföring i ett globalt perspektiv",
+        "hp": 15,
+        "category": "mandatory",
+        "subject": "Företagsekonomi",
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valfria kurser enligt valt huvudområde",
+        "hp": 30,
+        "category": "elective-slot",
+        "type": "choice",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "subject": "Företagsekonomi",
+        "options": [],
+        "requiredChoice": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Fördjupningskurs(er) inom företagsekonomi",
+        "hp": 15,
+        "category": "elective-slot",
+        "type": "choice",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "subject": "Företagsekonomi",
+        "options": [],
+        "requiredChoice": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Kandidatuppsats inom företagsekonomi",
+        "hp": 15,
+        "category": "mandatory",
+        "type": "choice",
+        "slotType": "thesis-slot",
+        "isSlot": true,
+        "isThesis": true,
+        "subject": "Företagsekonomi",
+        "options": [],
+        "requiredChoice": true
+      }
+    ]
+  },
+  {
+    "university": "Göteborgs universitet",
+    "programCode": "S1EKA",
+    "programName": "Ekonomie kandidatprogram",
+    "programHp": 180,
+    "level": "Grundnivå",
+    "catalogueSubject": "Företagsekonomi",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "choice-required",
+    "verified": true,
+    "source": "gu-official-programplan",
+    "sourceUrls": [
+      "https://www.gu.se/syllabus/75895c02-55d4-11f1-8bf3-3a88a126450e",
+      "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogrammet-kurser-och-valmojligheter",
+      "https://studentportal.gu.se/program/ekonomie-kandidatprogrammet",
+      "https://www.gu.se/studera/hitta-utbildning/nationalekonomi-fortsattning-nek20"
+    ],
+    "progressionRules": [
+      {
+        "beforeTerm": 4,
+        "minimumPassedHp": 60,
+        "requirement": "Minst 60 hp av kurserna på termin 1–3 ska vara godkända vid terminsstart.",
+        "sourceUrl": "https://www.gu.se/syllabus/75895c02-55d4-11f1-8bf3-3a88a126450e"
+      }
+    ],
+    "creditTransferPolicy": {
+      "note": "Tidigare studier kan inte automatiskt räknas av. GU anger att vissa kurser på termin 1–3 har programspecifika lärandemål och kanske inte kan tillgodoräknas; studenten måste vara antagen till programmet och antagning till senare del erbjuds inte. Bedöm därför varje kurs separat och lämna osäkra matchningar som kvar att läsa.",
+      "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/ekonomie-kandidatprogrammet-kurser-och-valmojligheter"
+    },
+    "term": "HT26",
+    "migrationSource": "manual-verified-GU-education-plan-2026",
+    "id": "gu:S1EKA:2026HT:nationalekonomi",
+    "subject": "Nationalekonomi",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Introduktion till ekonomi",
+        "hp": 2,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Externredovisning",
+        "hp": 8,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Ekonomistyrning",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Mikroekonomi",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Statistik 1a",
+        "hp": 8,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Makroekonomi",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Finansiell ekonomi",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Introduktion till handelsrätt",
+        "hp": 3,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Marknadsföring",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Ledarskap och organisation",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Företagsekonomi i praktiken",
+        "hp": 3,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Statistik 1b",
+        "hp": 7,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Economics in Practice",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "International Economics",
+        "hp": 5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Handelsrätt",
+        "hp": 12,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "NEK203",
+        "name": "Mikroteori",
+        "hp": 7.5,
+        "category": "mandatory",
+        "subject": "Nationalekonomi",
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "NEK204",
+        "name": "Makroteori",
+        "hp": 7.5,
+        "category": "mandatory",
+        "subject": "Nationalekonomi",
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "NEK205",
+        "name": "Empirisk nationalekonomi i praktiken",
+        "hp": 7.5,
+        "category": "mandatory",
+        "subject": "Nationalekonomi",
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "NEK206",
+        "name": "Ekonometri",
+        "hp": 7.5,
+        "category": "mandatory",
+        "subject": "Nationalekonomi",
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valfria kurser enligt valt huvudområde",
+        "hp": 30,
+        "category": "elective-slot",
+        "type": "choice",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "subject": "Nationalekonomi",
+        "options": [],
+        "requiredChoice": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Fördjupningskurser inom nationalekonomi",
+        "hp": 15,
+        "category": "elective-slot",
+        "type": "choice",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "subject": "Nationalekonomi",
+        "options": [],
+        "requiredChoice": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Kandidatuppsats inom nationalekonomi",
+        "hp": 15,
+        "category": "mandatory",
+        "type": "choice",
+        "slotType": "thesis-slot",
+        "isSlot": true,
+        "isThesis": true,
+        "subject": "Nationalekonomi",
+        "options": [],
+        "requiredChoice": true
+      }
+    ]
   }
 ]
