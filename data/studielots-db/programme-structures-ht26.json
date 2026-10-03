@@ -104331,5 +104331,275 @@
         "requiredChoice": true
       }
     ]
+  },
+  {
+    "id": "gu:S2PSY:2026HT:ordinary",
+    "university": "Göteborgs universitet",
+    "programCode": "S2PSY",
+    "programName": "Psykologprogrammet",
+    "programHp": 300,
+    "level": "Grundnivå till avancerad nivå",
+    "subject": "Psykologi",
+    "validFrom": "2026HT",
+    "validTo": null,
+    "coverage": "partial-structure",
+    "verified": true,
+    "source": "gu-official-education-plan-and-student-portal-term-division",
+    "sourceUrls": [
+      "https://www.gu.se/syllabus/5a4484ea-c618-11f0-9aa4-4a24d5f444fb",
+      "https://studentportal.gu.se/program/valkommen-till-psykologprogrammet"
+    ],
+    "progressionRules": [
+      "30 kurser om totalt 300 hp, 30 hp per termin över 10 terminer.",
+      "Kurserna ska läsas i angiven ordning om inte särskilda skäl föreligger.",
+      "Termin 1–6 omfattar grundnivå; termin 7–10 avancerad nivå.",
+      "VFU, patientarbete och praktiska moment är programkurser och ska inte ersättas med liknande fristående kurser utan GU-beslut."
+    ],
+    "creditTransferPolicy": "GU anger att det inte går att antas till senare del av Psykologprogrammet. Tillgodoräknande kan sökas först efter antagning och registrering; beviljade poäng innebär inte automatiskt uppflyttning eftersom sådan plats medges i mån av plats. Kursordningen gäller om inte särskilda skäl föreligger. Tidigare resultat måste prövas individuellt.",
+    "fasterRoutePolicy": "Ingen generell snabbare studiegång är verifierad. Ordinarie struktur är 30 hp/termin och kurserna ska tas i angiven ordning om inte särskilda skäl föreligger. Snabbare väg får därför bara räknas efter verifierad förkunskaps-/tillgodoräknandeprövning och faktisk kursåtkomst; okända kurskoder och erbjudanden ska ligga som ej matchade/väntande.",
+    "courseCodeCoverage": "Endast PM1621 är direkt kodverifierad på GU:s studentportal. Övriga 29 programkurser har verifierade namn och hp i HT26-planen men ej verifierade kurskoder här; gör ingen kodbaserad matchning för dessa ännu.",
+    "term": "HT26",
+    "rows": [
+      {
+        "term": 1,
+        "code": "PM1621",
+        "name": "Introduktion till psykologiämnet och psykologyrket",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Utvecklingspsykologi",
+        "hp": 22.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Psykologi som vetenskap",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Socialpsykologi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Grupp, arbete, organisation 1",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Orientering i psykologisk praktik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Etnisk mångfald och psykologprofessionen",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Kognitiv psykologi",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Biologisk psykologi",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Psykisk ohälsa - Bedömning och utredning 1",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Psykisk ohälsa - Bedömning och utredning 2",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Färdighetsträning i praktiskt psykologarbete",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Behandlingsforskning och testmetodik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Juridik och etik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Verksamhetsförlagd utbildning",
+        "hp": 22.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Kognitiv beteendeterapi",
+        "hp": 13.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Psykodynamisk terapi",
+        "hp": 13.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Patientarbete KBT 1",
+        "hp": 1.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Patientarbete PDT 1",
+        "hp": 1.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 8,
+        "code": "",
+        "name": "Psykologisk behandling i grupp",
+        "hp": 3,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 8,
+        "code": "",
+        "name": "Konsultation och handledning",
+        "hp": 4.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 8,
+        "code": "",
+        "name": "Metoder för psykologisk forskning 1",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 8,
+        "code": "",
+        "name": "Grupp, arbete, organisation 2",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 8,
+        "code": "",
+        "name": "Patientarbete KBT 2",
+        "hp": 4.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 8,
+        "code": "",
+        "name": "Patientarbete PDT 2",
+        "hp": 3,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 9,
+        "code": "",
+        "name": "Grupp, arbete, organisation 3",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 9,
+        "code": "",
+        "name": "Metoder för psykologisk forskning 2",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 9,
+        "code": "",
+        "name": "Patientarbete KBT 3",
+        "hp": 3,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 9,
+        "code": "",
+        "name": "Patientarbete PDT 3",
+        "hp": 4.5,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 10,
+        "code": "",
+        "name": "Examensarbete",
+        "hp": 30,
+        "category": "mandatory",
+        "courseCodeVerified": false
+      }
+    ]
   }
 ]
