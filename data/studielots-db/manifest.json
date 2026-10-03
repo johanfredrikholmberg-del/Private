@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-03T09:35:00.000Z",
+  "generatedAt": "2026-10-03T09:45:00.000Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -28,7 +28,7 @@
     },
     "courseOfferings": {
       "storage": "data/studielots-db/course-offerings.json",
-      "rows": 2918,
+      "rows": 2926,
       "terms": [
         "HT25",
         "HT26",
@@ -38,7 +38,8 @@
         "VT28"
       ],
       "additionalStorages": [
-        "data/studielots-db/course-offerings-manual-2026-10-03-batch-3.json"
+        "data/studielots-db/course-offerings-manual-2026-10-03-batch-3.json",
+        "data/studielots-db/course-offerings-manual-2026-10-03-batch-4.json"
       ]
     },
     "syllabusVersions": {
