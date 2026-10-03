@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-03T09:10:00.000Z",
+  "generatedAt": "2026-10-03T09:20:00.000Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -28,7 +28,7 @@
     },
     "courseOfferings": {
       "storage": "data/studielots-db/course-offerings.json",
-      "rows": 2912,
+      "rows": 2921,
       "terms": [
         "HT25",
         "HT26",
@@ -36,6 +36,9 @@
         "VT26",
         "VT27",
         "VT28"
+      ],
+      "additionalStorages": [
+        "data/studielots-db/course-offerings-manual-2026-10-03-batch-3.json"
       ]
     },
     "syllabusVersions": {
