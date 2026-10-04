@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-04T15:25:00.000Z (UTC) · branch: studielots-v2
+Generated: 2026-10-04T15:37:38.931Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -8,16 +8,18 @@ Generated: 2026-10-04T15:25:00.000Z (UTC) · branch: studielots-v2
 |---|---:|---:|
 | Lärosäten | 49 | — |
 | Programidentiteter | 3181 | — |
-| Program med användbar struktur | 145 | 4.6% |
-| Program utan användbar struktur | 3036 | — |
-| Kursrader i StudieLots DB | 28462 | — |
-| Unika kurskoder | 28459 | — |
-| Kurser med minst ett kurstillfälle | 2336 | 8.2% |
+| Program med användbar struktur | 173 | 5.4% |
+| Program utan användbar struktur | 3008 | — |
+| Canonicala programstrukturposter | 1054 | — |
+| Användbara strukturposter | 186 | — |
+| Kursrader i StudieLots DB | 28471 | — |
+| Unika kursidentiteter | 28468 | — |
+| Kurser med minst ett kurstillfälle | 2345 | 8.2% |
 | Kurser utan kurstillfälle | 26123 | — |
-| Kurstillfällen | 2957 | — |
-| Med startdatum | 2957 | 100.0% |
-| Med både start- och slutdatum | 2763 | 93.4% |
-| Precision explicit: exact / week / unspecified | 25 / 329 / 2603 | — |
+| Kurstillfällen | 2966 | — |
+| Med startdatum | 2966 | 100.0% |
+| Med både start- och slutdatum | 2772 | 93.5% |
+| Precision explicit: exact / week / unspecified | 34 / 329 / 2603 | — |
 | Strukturkurshänvisningar utan kursidentitet | 486 (410 unika koder) | — |
 
 ## Per lärosäte
@@ -51,7 +53,7 @@ Generated: 2026-10-04T15:25:00.000Z (UTC) · branch: studielots-v2
 | Konstfack (p.uoh.kf) | 15 | 0 | 15 | 11 | 0 | 11 | 0 | 0 | 0 |
 | Karolinska institutet (p.uoh.ki) | 52 | 0 | 52 | 161 | 0 | 161 | 0 | 0 | 0 |
 | Kungl. Musikhögskolan i Stockholm (p.uoh.kmh) | 25 | 0 | 25 | 34 | 0 | 34 | 0 | 0 | 0 |
-| Kungl. Tekniska högskolan (p.uoh.kth) | 85 | 0 | 85 | 177 | 162 | 15 | 194 | 194 | 0 |
+| Kungl. Tekniska högskolan (p.uoh.kth) | 85 | 28 | 57 | 186 | 171 | 15 | 203 | 203 | 9 |
 | Linköpings universitet (p.uoh.liu) | 144 | 0 | 144 | 748 | 0 | 748 | 0 | 0 | 0 |
 | Linnéuniversitetet (p.uoh.lnu) | 141 | 0 | 141 | 2054 | 0 | 2054 | 0 | 0 | 0 |
 | Luleå tekniska universitet (p.uoh.ltu) | 86 | 0 | 86 | 1075 | 0 | 1075 | 0 | 0 | 0 |
@@ -77,13 +79,14 @@ Generated: 2026-10-04T15:25:00.000Z (UTC) · branch: studielots-v2
 ## Arbetskö och kvalitetsnoteringar
 
 Exakta gap finns i `coverage-report.json`: program utan användbar struktur, kurser utan kurstillfälle samt strukturkursreferenser utan kursidentitet. Endast filer registrerade i StudieLots DB-manifesten räknas.
-- GU-kursidentiteter från programunderlag: 70.
-- GU/KTH-kursidentiteter tillagda för befintliga officiella kurstillfällen: 13.
-- Dubbletter i kurstillfällesnycklar: 0.
+
+- 28 KTH-strukturer räknas som användbara eftersom deras terminskurser ligger i `courses`-fältet; en tidigare rapportkontroll läste bara `rows`.
+- 9 KTH KPUHU-kursidentiteter och verifierade HT26/VT27-kurstillfällen tillagda med kursunika start- och slutdatum.
+- Dubletter i kurstillfällesnycklar: 0.
 - Kurstillfällen utan matchande kursidentitet: 0.
 - Felaktiga/bakvända datumintervall: 0.
 - Kurstillfällen utan termin: 0.
 - Precision saknas på 2603 poster; ifyllda datum räknas, men inte som explicit exact-precision.
-- Poster med startdatum men utan slutdatum: 194; slutdatum har inte härletts.
+- Kurstillfällen med startdatum men utan slutdatum: 194; sådana slutdatum har inte härletts.
 
 Fullständiga gaplistor ligger i `coverage-report.json` under `gaps`.

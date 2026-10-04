@@ -1,12 +1,12 @@
 {
   "reportVersion": 1,
-  "generatedAt": "2026-10-04T15:25:00.000Z",
+  "generatedAt": "2026-10-04T15:37:38.931Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
     "runtimeSource": "data/studielots-db manifest and only the files declared by its tables; programme structures from programme-structures-manifest.json parts.",
     "programmeUnit": "Unique providerId + programCode + programName.",
-    "usableStructure": "Canonical structure with non-empty program code, evidence, coverage complete or choice-required, and term-assigned rows containing course codes or explicit choice slots.",
+    "usableStructure": "Canonical structure with non-empty program code, official evidence, coverage complete or choice-required, and term-assigned course rows from rows or courses containing course codes or explicit choice slots.",
     "courseUnit": "Unique providerId + courseCode.",
     "offeringUnit": "Canonical course-offering row; duplicates checked by offering key.",
     "dates": "startDate/endDate counts use populated valid date fields. Precision subtotals count explicit datePrecision metadata; unspecified precision is not treated as an explicit exact-date declaration."
@@ -15,19 +15,19 @@
     "providers": 49,
     "programmeRows": 3189,
     "uniqueProgrammes": 3181,
-    "programsWithUsableStructure": 145,
-    "programsWithoutUsableStructure": 3036,
-    "structuralCoveragePercent": 4.6,
+    "programsWithUsableStructure": 173,
+    "programsWithoutUsableStructure": 3008,
+    "structuralCoveragePercent": 5.4,
     "programmeStructureRows": 1054,
-    "usableProgrammeStructureRows": 158,
-    "courseRows": 28462,
-    "uniqueCourseIdentities": 28459,
-    "uniqueCoursesWithOffering": 2336,
+    "usableProgrammeStructureRows": 186,
+    "courseRows": 28471,
+    "uniqueCourseIdentities": 28468,
+    "uniqueCoursesWithOffering": 2345,
     "uniqueCoursesWithoutOffering": 26123,
-    "offeringRows": 2957,
-    "offeringRowsWithStartDate": 2957,
-    "offeringRowsWithBothDates": 2763,
-    "offeringRowsWithExplicitExactPrecision": 25,
+    "offeringRows": 2966,
+    "offeringRowsWithStartDate": 2966,
+    "offeringRowsWithBothDates": 2772,
+    "offeringRowsWithExplicitExactPrecision": 34,
     "offeringRowsWithWeekDerivedPrecision": 329,
     "offeringRowsWithUnspecifiedPrecision": 2603,
     "offeringRowsWithoutCourseIdentity": 0,
@@ -446,16 +446,16 @@
       "providerId": "p.uoh.kth",
       "university": "Kungl. Tekniska högskolan",
       "programs": 85,
-      "programsWithUsableStructure": 0,
-      "programsWithoutUsableStructure": 85,
-      "courses": 177,
-      "coursesWithAtLeastOneOffering": 162,
+      "programsWithUsableStructure": 28,
+      "programsWithoutUsableStructure": 57,
+      "courses": 186,
+      "coursesWithAtLeastOneOffering": 171,
       "coursesWithoutOffering": 15,
-      "courseOfferingRows": 194,
-      "offeringsWithStartDate": 194,
-      "offeringsWithStartAndEndDate": 0,
+      "courseOfferingRows": 203,
+      "offeringsWithStartDate": 203,
+      "offeringsWithStartAndEndDate": 9,
       "programmeStructureRows": 28,
-      "usableProgrammeStructureRows": 0
+      "usableProgrammeStructureRows": 28
     },
     {
       "providerId": "p.uoh.liu",
@@ -19387,26 +19387,8 @@
       {
         "providerId": "p.uoh.kth",
         "university": "Kungl. Tekniska högskolan",
-        "programCode": "CBIOT",
-        "programName": "Civilingenjörsutbildning i bioteknik",
-        "hp": 300,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
         "programCode": "CDATE",
         "programName": "Civilingenjörsutbildning i datateknik",
-        "hp": 300,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "CDEPR",
-        "programName": "Civilingenjörsutbildning i design och produktframtagning",
         "hp": 300,
         "level": null,
         "startTerm": "HT26"
@@ -19459,26 +19441,8 @@
       {
         "providerId": "p.uoh.kth",
         "university": "Kungl. Tekniska högskolan",
-        "programCode": "CITEH",
-        "programName": "Civilingenjörsutbildning i industriell teknik och hållbarhet",
-        "hp": 300,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
         "programCode": "CLGYM",
         "programName": "Civilingenjör och lärare",
-        "hp": 300,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "CMAST",
-        "programName": "Civilingenjörsutbildning i maskinteknik",
         "hp": 300,
         "level": null,
         "startTerm": "HT26"
@@ -19513,15 +19477,6 @@
       {
         "providerId": "p.uoh.kth",
         "university": "Kungl. Tekniska högskolan",
-        "programCode": "COPEN",
-        "programName": "Civilingenjörsutbildning öppen ingång",
-        "hp": 300,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
         "programCode": "CSAMH",
         "programName": "Civilingenjörsutbildning i samhällsbyggnad",
         "hp": 300,
@@ -19540,27 +19495,9 @@
       {
         "providerId": "p.uoh.kth",
         "university": "Kungl. Tekniska högskolan",
-        "programCode": "CTKEM",
-        "programName": "Civilingenjörsutbildning i teknisk kemi (EJ åk 1, endast till åk 2 eller 3), senare del av program",
-        "hp": 300,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
         "programCode": "CTMAT",
         "programName": "Civilingenjörsutbildning i teknisk matematik",
         "hp": 300,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "KPUHU",
-        "programName": "Kompletterande pedagogisk utbildning mot ämneslärare årskurs 7-9",
-        "hp": 60,
         "level": null,
         "startTerm": "HT26"
       },
@@ -19585,15 +19522,6 @@
       {
         "providerId": "p.uoh.kth",
         "university": "Kungl. Tekniska högskolan",
-        "programCode": "TBASD",
-        "programName": "Tekniskt basår, Campus Flemingsberg",
-        "hp": 60,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
         "programCode": "TBDVM",
         "programName": "Masterprogram, biostatistik och datavetenskap (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
         "hp": 120,
@@ -19606,15 +19534,6 @@
         "programCode": "TBTMD",
         "programName": "Tekniskt basår, termin 2",
         "hp": 30,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TCAEM",
-        "programName": "Masterprogram, husbyggnads- och anläggningsteknik (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
         "level": null,
         "startTerm": "HT26"
       },
@@ -19650,15 +19569,6 @@
         "university": "Kungl. Tekniska högskolan",
         "programCode": "TCYSM",
         "programName": "Masterprogram, cybersäkerhet (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TDDHM",
-        "programName": "Masterprogram, datadriven hälsa (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
         "hp": 120,
         "level": null,
         "startTerm": "HT26"
@@ -19711,15 +19621,6 @@
       {
         "providerId": "p.uoh.kth",
         "university": "Kungl. Tekniska högskolan",
-        "programCode": "TFOBM",
-        "programName": "Masterprogram, fastigheter och byggande (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
         "programCode": "TFOFK",
         "programName": "Kandidatprogram, fastighet och finans",
         "hp": 180,
@@ -19731,15 +19632,6 @@
         "university": "Kungl. Tekniska högskolan",
         "programCode": "TFORM",
         "programName": "Masterprogram, fordonsteknik - spår Vägfordon (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "THSSM",
-        "programName": "Masterprogram, hållbar samhällsplanering och stadsutformning (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
         "hp": 120,
         "level": null,
         "startTerm": "HT26"
@@ -19819,15 +19711,6 @@
       {
         "providerId": "p.uoh.kth",
         "university": "Kungl. Tekniska högskolan",
-        "programCode": "TIMBM",
-        "programName": "Masterprogram, Industriell och miljöinriktad bioteknologi (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
         "programCode": "TIMEL",
         "programName": "Högskoleingenjörsutbildning i medicinsk teknik, Flemingsberg (EJ åk 1, endast till åk 2 eller 3), senare del av program",
         "hp": 180,
@@ -19839,15 +19722,6 @@
         "university": "Kungl. Tekniska högskolan",
         "programCode": "TIMTM",
         "programName": "Masterprogram, interaktiv medieteknik (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TINEM",
-        "programName": "Masterprogram, industriell ekonomi (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
         "hp": 120,
         "level": null,
         "startTerm": "HT26"
@@ -19891,26 +19765,8 @@
       {
         "providerId": "p.uoh.kth",
         "university": "Kungl. Tekniska högskolan",
-        "programCode": "TITHM",
-        "programName": "Masterprogram, hållbar produktionsutveckling (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
         "programCode": "TIVNM",
         "programName": "Masterprogram, ICT Innovation, spår Data Science (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TKEMM",
-        "programName": "Masterprogram, kemiteknik för energi och miljö (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
         "hp": 120,
         "level": null,
         "startTerm": "HT26"
@@ -19936,53 +19792,8 @@
       {
         "providerId": "p.uoh.kth",
         "university": "Kungl. Tekniska högskolan",
-        "programCode": "TMBBM",
-        "programName": "Masterprogram, molekylär bioteknik och bioinformatik (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
         "programCode": "TMBIM",
         "programName": "Masterprogram, medicinsk bioteknologi (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TMEKM",
-        "programName": "Masterprogram, mekatronik (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TMHIM",
-        "programName": "Masterprogram, miljöteknik och hållbar infrastruktur (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TMLEM",
-        "programName": "Masterprogram, medicinsk teknik (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TMMMM",
-        "programName": "Masterprogram, makromolekylära material (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
         "hp": 120,
         "level": null,
         "startTerm": "HT26"
@@ -19999,44 +19810,8 @@
       {
         "providerId": "p.uoh.kth",
         "university": "Kungl. Tekniska högskolan",
-        "programCode": "TMSKM",
-        "programName": "Masterprogram, maskinkonstrukton (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TMVTM",
-        "programName": "Masterprogram, molekylär vetenskap och teknik (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
         "programCode": "TNEEM",
         "programName": "Masterprogram, kärnenergiteknik (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TNTEM",
-        "programName": "Masterprogram, nanoteknik (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TPRMM",
-        "programName": "Masterprogram, industriell produktion (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
         "hp": 120,
         "level": null,
         "startTerm": "HT26"
@@ -20071,26 +19846,8 @@
       {
         "providerId": "p.uoh.kth",
         "university": "Kungl. Tekniska högskolan",
-        "programCode": "TSUTM",
-        "programName": "Masterprogram, teknik och hållbar utveckling (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
         "programCode": "TTAHM",
         "programName": "Masterprogram, teknik, arbete och hälsa (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TTBEM",
-        "programName": "Masterprogram, teknikbaserat entreprenörskap (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
         "hp": 120,
         "level": null,
         "startTerm": "HT26"
@@ -20127,15 +19884,6 @@
         "university": "Kungl. Tekniska högskolan",
         "programCode": "TTMAM",
         "programName": "Masterprogram, tillämpad matematik och beräkningsmatematik - spår datorsimuleringar inom teknik och naturvetenskap (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "TTMVM",
-        "programName": "Masterprogram, teknisk materialvetenskap (Endast sökbart för KTH:s civilingenjörsstudenter, åk 3)",
         "hp": 120,
         "level": null,
         "startTerm": "HT26"

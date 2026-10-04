@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-04T15:25:00.000Z",
+  "generatedAt": "2026-10-04T15:38:28.872Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -21,19 +21,20 @@
     },
     "courses": {
       "storage": "data/studielots-db/courses.json",
-      "rows": 28462,
+      "rows": 28471,
       "additionalStorages": [
         "data/studielots-db/courses-gu-2027-eu.json",
         "data/studielots-db/courses-gu-2027-programmes.json",
         "data/studielots-db/courses-gu-kpu-vt26.json",
         "data/studielots-db/courses-gu-kpu-accelerated-ht24.json",
         "data/studielots-db/courses-gu-program-structure-verified.json",
-        "data/studielots-db/courses-gu-kth-orphan-offerings-2026-10-04.json"
+        "data/studielots-db/courses-gu-kth-orphan-offerings-2026-10-04.json",
+        "data/studielots-db/courses-kth-kpuhu-verified.json"
       ]
     },
     "courseOfferings": {
       "storage": "data/studielots-db/course-offerings.json",
-      "rows": 2932,
+      "rows": 2966,
       "terms": [
         "HT25",
         "HT26",
@@ -47,7 +48,8 @@
         "data/studielots-db/course-offerings-manual-2026-10-03-batch-4.json",
         "data/studielots-db/course-offerings-gu-vt27-exchange.json",
         "data/studielots-db/course-offerings-gu-vt27-kpu.json",
-        "data/studielots-db/course-offerings-gu-ht26-kpu.json"
+        "data/studielots-db/course-offerings-gu-ht26-kpu.json",
+        "data/studielots-db/course-offerings-kth-kpuhu-2026-2027.json"
       ]
     },
     "syllabusVersions": {
