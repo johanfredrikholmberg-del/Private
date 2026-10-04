@@ -1,6 +1,6 @@
 {
   "reportVersion": 1,
-  "generatedAt": "2026-10-04T15:10:00.000Z",
+  "generatedAt": "2026-10-04T15:25:00.000Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
@@ -20,9 +20,9 @@
     "structuralCoveragePercent": 4.6,
     "programmeStructureRows": 1054,
     "usableProgrammeStructureRows": 158,
-    "courseRows": 28449,
-    "uniqueCourseIdentities": 28446,
-    "uniqueCoursesWithOffering": 2323,
+    "courseRows": 28462,
+    "uniqueCourseIdentities": 28459,
+    "uniqueCoursesWithOffering": 2336,
     "uniqueCoursesWithoutOffering": 26123,
     "offeringRows": 2957,
     "offeringRowsWithStartDate": 2957,
@@ -30,7 +30,7 @@
     "offeringRowsWithExplicitExactPrecision": 25,
     "offeringRowsWithWeekDerivedPrecision": 329,
     "offeringRowsWithUnspecifiedPrecision": 2603,
-    "offeringRowsWithoutCourseIdentity": 19,
+    "offeringRowsWithoutCourseIdentity": 0,
     "offeringRowsWithoutTerm": 0,
     "invalidDateRows": 0,
     "structureCourseReferencesMissing": 486,
@@ -223,8 +223,8 @@
       "programs": 234,
       "programsWithUsableStructure": 17,
       "programsWithoutUsableStructure": 217,
-      "courses": 2951,
-      "coursesWithAtLeastOneOffering": 1841,
+      "courses": 2961,
+      "coursesWithAtLeastOneOffering": 1851,
       "coursesWithoutOffering": 1110,
       "courseOfferingRows": 2431,
       "offeringsWithStartDate": 2431,
@@ -448,8 +448,8 @@
       "programs": 85,
       "programsWithUsableStructure": 0,
       "programsWithoutUsableStructure": 85,
-      "courses": 174,
-      "coursesWithAtLeastOneOffering": 159,
+      "courses": 177,
+      "coursesWithAtLeastOneOffering": 162,
       "coursesWithoutOffering": 15,
       "courseOfferingRows": 194,
       "offeringsWithStartDate": 194,
@@ -776,122 +776,7 @@
   "quality": {
     "duplicateOfferingKeys": 0,
     "duplicateCourseIdentityRows": 3,
-    "offeringsWithoutMatchingCourse": [
-      {
-        "university": "KTH",
-        "courseCode": "SK202X",
-        "term": "VT27",
-        "key": "kth|SK202X|VT27|2027-01-12"
-      },
-      {
-        "university": "KTH",
-        "courseCode": "SK202X",
-        "term": "VT27",
-        "key": "kth|SK202X|VT27|2027-03-15"
-      },
-      {
-        "university": "KTH",
-        "courseCode": "SK202X",
-        "term": "HT26",
-        "key": "kth|SK202X|HT26|2026-08-24"
-      },
-      {
-        "university": "KTH",
-        "courseCode": "SK202X",
-        "term": "HT26",
-        "key": "kth|SK202X|HT26|2026-10-26"
-      },
-      {
-        "university": "KTH",
-        "courseCode": "HL207X",
-        "term": "VT27",
-        "key": "kth|HL207X|VT27|2027-01-12"
-      },
-      {
-        "university": "KTH",
-        "courseCode": "HL207X",
-        "term": "HT26",
-        "key": "kth|HL207X|HT26|2026-08-24"
-      },
-      {
-        "university": "KTH",
-        "courseCode": "ME1045",
-        "term": "VT27",
-        "key": "kth|ME1045|VT27|2027-03-15"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "FYD196",
-        "term": "VT27",
-        "key": "goteborgs-universitet|FYD196|VT27|GU-11053"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "L3EN10",
-        "term": "VT27",
-        "key": "goteborgs universitet|L3EN10|VT27|Q1-2"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "L6EN10",
-        "term": "VT27",
-        "key": "goteborgs universitet|L6EN10|VT27|Q1-2"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "L3VU00",
-        "term": "VT27",
-        "key": "goteborgs universitet|L3VU00|VT27|Q2"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "L3VU00",
-        "term": "VT27",
-        "key": "goteborgs universitet|L3VU00|VT27|Q4"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "L6VU00",
-        "term": "VT27",
-        "key": "goteborgs universitet|L6VU00|VT27|Q2"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "L6VU00",
-        "term": "VT27",
-        "key": "goteborgs universitet|L6VU00|VT27|Q4"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "LÖVU00",
-        "term": "VT27",
-        "key": "goteborgs universitet|LÖVU00|VT27|Q3"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "LÖFÖ36",
-        "term": "VT27",
-        "key": "goteborgs universitet|LÖFÖ36|VT27|Q1"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "LÖFÖ61",
-        "term": "VT27",
-        "key": "goteborgs universitet|LÖFÖ61|VT27|Q2"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "LÖK72G",
-        "term": "VT27",
-        "key": "goteborgs universitet|LÖK72G|VT27|Q4"
-      },
-      {
-        "university": "Göteborgs universitet",
-        "courseCode": "IME210",
-        "term": "VT27",
-        "key": "goteborgs universitet|IME210|VT27|Q1-2"
-      }
-    ],
+    "offeringsWithoutMatchingCourse": [],
     "offeringsWithInvalidOrReversedDates": [],
     "structureCoursesMissingFromCourses": [
       {
@@ -8485,6 +8370,133 @@
         "hp": 7.5,
         "sourceUrls": [
           "https://www.gu.se/studera/hitta-utbildning/de-har-kurserna-laser-du-inom-receptarieprogrammet"
+        ]
+      },
+      {
+        "providerId": "p.uoh.gu",
+        "courseCode": "FYD196",
+        "courseName": "Styr- och mätsystem med Python",
+        "hp": 7.5,
+        "sourceUrls": [
+          "https://www.gu.se/studera/hitta-utbildning/styr-och-matsystem-med-python-fyd196",
+          "https://kursplaner.gu.se/pdf/kurs/sv/FYD196.pdf"
+        ]
+      },
+      {
+        "providerId": "p.uoh.gu",
+        "courseCode": "IME210",
+        "courseName": "Quantitative Methods in Educational Research",
+        "hp": 15,
+        "sourceUrls": [
+          "https://www.gu.se/studera/hitta-utbildning/kurser-varterminen-2027",
+          "https://www.gu.se/syllabus/444e80d7-1966-11f1-84d1-4c27b6f345b5"
+        ]
+      },
+      {
+        "providerId": "p.uoh.gu",
+        "courseCode": "L3EN10",
+        "courseName": "English for Teachers in Pre-School Class and Year 1-3",
+        "hp": 15,
+        "sourceUrls": [
+          "https://www.gu.se/studera/hitta-utbildning/kurser-varterminen-2027",
+          "https://kursplaner.gu.se/pdf/kurs/sv/L3EN10.pdf"
+        ]
+      },
+      {
+        "providerId": "p.uoh.gu",
+        "courseCode": "L3VU00",
+        "courseName": "Teaching Practice for Exchange Students in Swedish Pre-School Class and Year 1-3",
+        "hp": 7.5,
+        "sourceUrls": [
+          "https://www.gu.se/studera/hitta-utbildning/kurser-varterminen-2027",
+          "https://kursplaner.gu.se/pdf/kurs/sv/L3VU00.pdf"
+        ]
+      },
+      {
+        "providerId": "p.uoh.gu",
+        "courseCode": "L6EN10",
+        "courseName": "English 1 for Teachers in Year 4-6",
+        "hp": 15,
+        "sourceUrls": [
+          "https://www.gu.se/studera/hitta-utbildning/kurser-varterminen-2027",
+          "https://kursplaner.gu.se/pdf/kurs/sv/L6EN10.pdf"
+        ]
+      },
+      {
+        "providerId": "p.uoh.gu",
+        "courseCode": "L6VU00",
+        "courseName": "Teaching Practice for Exchange Students in Swedish Primary School Year 4-6",
+        "hp": 7.5,
+        "sourceUrls": [
+          "https://www.gu.se/studera/hitta-utbildning/kurser-varterminen-2027",
+          "https://kursplaner.gu.se/pdf/kurs/sv/L6VU00.pdf"
+        ]
+      },
+      {
+        "providerId": "p.uoh.gu",
+        "courseCode": "LÖFÖ36",
+        "courseName": "Play, Learning, and Care 2 for Pre-School Teachers",
+        "hp": 7.5,
+        "sourceUrls": [
+          "https://www.gu.se/studera/hitta-utbildning/kurser-varterminen-2027",
+          "https://kursplaner.gu.se/pdf/kurs/sv/L%C3%96F%C3%9636.pdf"
+        ]
+      },
+      {
+        "providerId": "p.uoh.gu",
+        "courseCode": "LÖFÖ61",
+        "courseName": "Science, Environments and Technologies for Pre-School Teachers",
+        "hp": 7.5,
+        "sourceUrls": [
+          "https://www.gu.se/studera/hitta-utbildning/kurser-varterminen-2027",
+          "https://kursplaner.gu.se/pdf/kurs/sv/L%C3%96F%C3%9661.pdf"
+        ]
+      },
+      {
+        "providerId": "p.uoh.gu",
+        "courseCode": "LÖK72G",
+        "courseName": "Social Relations and Special Needs for Pre-School Teachers",
+        "hp": 7.5,
+        "sourceUrls": [
+          "https://www.gu.se/studera/hitta-utbildning/kurser-varterminen-2027",
+          "https://kursplaner.gu.se/pdf/kurs/sv/L%C3%96K72G.pdf"
+        ]
+      },
+      {
+        "providerId": "p.uoh.gu",
+        "courseCode": "LÖVU00",
+        "courseName": "Teaching Practice for Exchange students in Pre-Schools or Pre-School-Class in Sweden",
+        "hp": 7.5,
+        "sourceUrls": [
+          "https://www.gu.se/studera/hitta-utbildning/kurser-varterminen-2027",
+          "https://kursplaner.gu.se/pdf/kurs/sv/L%C3%96VU00.pdf"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "HL207X",
+        "courseName": "Degree Project in Technology and Health, Second Cycle",
+        "hp": 30,
+        "sourceUrls": [
+          "https://www.kth.se/kurs-pm/HL207X/om-kurs-pm"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "ME1045",
+        "courseName": "Project management for Industrial Engineering",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/kurs-pm/ME1045/om-kurs-pm?l=en"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "SK202X",
+        "courseName": "Degree Project in Applied Physics, Second Cycle",
+        "hp": 30,
+        "sourceUrls": [
+          "https://www.kth.se/kurs-pm/SK202X/om-kurs-pm?l=en"
         ]
       }
     ]

@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-04T15:10:00.000Z (UTC) · branch: studielots-v2
+Generated: 2026-10-04T15:25:00.000Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -10,15 +10,15 @@ Generated: 2026-10-04T15:10:00.000Z (UTC) · branch: studielots-v2
 | Programidentiteter | 3181 | — |
 | Program med användbar struktur | 145 | 4.6% |
 | Program utan användbar struktur | 3036 | — |
-| Kursrader i StudieLots DB | 28449 | — |
-| Unika kurskoder | 28446 | — |
-| Kurser med minst ett kurstillfälle | 2323 | 8.2% |
+| Kursrader i StudieLots DB | 28462 | — |
+| Unika kurskoder | 28459 | — |
+| Kurser med minst ett kurstillfälle | 2336 | 8.2% |
 | Kurser utan kurstillfälle | 26123 | — |
 | Kurstillfällen | 2957 | — |
 | Med startdatum | 2957 | 100.0% |
 | Med både start- och slutdatum | 2763 | 93.4% |
 | Precision explicit: exact / week / unspecified | 25 / 329 / 2603 | — |
-| Strukturkurshänvisningar som saknar kursidentitet | 486 (410 unika koder) | — |
+| Strukturkurshänvisningar utan kursidentitet | 486 (410 unika koder) | — |
 
 ## Per lärosäte
 
@@ -36,7 +36,7 @@ Generated: 2026-10-04T15:10:00.000Z (UTC) · branch: studielots-v2
 | Enskilda Högskolan Stockholm (p.uoh.ehs) | 8 | 0 | 8 | 135 | 0 | 135 | 0 | 0 | 0 |
 | Försvarshögskolan (p.uoh.fhs) | 16 | 0 | 16 | 94 | 0 | 94 | 0 | 0 | 0 |
 | Gymnastik- och idrottshögskolan (p.uoh.gih) | 13 | 0 | 13 | 53 | 0 | 53 | 0 | 0 | 0 |
-| Göteborgs universitet (p.uoh.gu) | 234 | 17 | 217 | 2951 | 1841 | 1110 | 2431 | 2431 | 2431 |
+| Göteborgs universitet (p.uoh.gu) | 234 | 17 | 217 | 2961 | 1851 | 1110 | 2431 | 2431 | 2431 |
 | Högskolan i Borås (p.uoh.hb) | 66 | 0 | 66 | 130 | 0 | 130 | 0 | 0 | 0 |
 | Högskolan Dalarna (p.uoh.hda) | 66 | 0 | 66 | 1356 | 0 | 1356 | 0 | 0 | 0 |
 | Högskolan i Halmstad (p.uoh.hh) | 58 | 0 | 58 | 431 | 0 | 431 | 0 | 0 | 0 |
@@ -51,7 +51,7 @@ Generated: 2026-10-04T15:10:00.000Z (UTC) · branch: studielots-v2
 | Konstfack (p.uoh.kf) | 15 | 0 | 15 | 11 | 0 | 11 | 0 | 0 | 0 |
 | Karolinska institutet (p.uoh.ki) | 52 | 0 | 52 | 161 | 0 | 161 | 0 | 0 | 0 |
 | Kungl. Musikhögskolan i Stockholm (p.uoh.kmh) | 25 | 0 | 25 | 34 | 0 | 34 | 0 | 0 | 0 |
-| Kungl. Tekniska högskolan (p.uoh.kth) | 85 | 0 | 85 | 174 | 159 | 15 | 194 | 194 | 0 |
+| Kungl. Tekniska högskolan (p.uoh.kth) | 85 | 0 | 85 | 177 | 162 | 15 | 194 | 194 | 0 |
 | Linköpings universitet (p.uoh.liu) | 144 | 0 | 144 | 748 | 0 | 748 | 0 | 0 | 0 |
 | Linnéuniversitetet (p.uoh.lnu) | 141 | 0 | 141 | 2054 | 0 | 2054 | 0 | 0 | 0 |
 | Luleå tekniska universitet (p.uoh.ltu) | 86 | 0 | 86 | 1075 | 0 | 1075 | 0 | 0 | 0 |
@@ -74,17 +74,16 @@ Generated: 2026-10-04T15:10:00.000Z (UTC) · branch: studielots-v2
 | Umeå universitet (p.uoh.umu) | 235 | 0 | 235 | 2779 | 0 | 2779 | 0 | 0 | 0 |
 | Uppsala universitet (p.uoh.uu) | 190 | 0 | 190 | 2850 | 0 | 2850 | 0 | 0 | 0 |
 
-## Prioriterad arbetskö
+## Arbetskö och kvalitetsnoteringar
 
-GU är först enligt instruktionen. Nästa gaplistor ligger i `coverage-report.json`: samtliga program utan användbar struktur, kurser utan kurstillfälle samt strukturkursreferenser som saknar kursidentitet. Rapporten räknar endast datafiler som redan är registrerade i StudieLots DB-manifesten.
-
-## Kvalitetsnoteringar
-
-- Kursidentiteter importerade i denna batch: 60 verifierade GU-kurser från officiella termins-/programunderlag.
+Exakta gap finns i `coverage-report.json`: program utan användbar struktur, kurser utan kurstillfälle samt strukturkursreferenser utan kursidentitet. Endast filer registrerade i StudieLots DB-manifesten räknas.
+- GU-kursidentiteter från programunderlag: 70.
+- GU/KTH-kursidentiteter tillagda för befintliga officiella kurstillfällen: 13.
 - Dubbletter i kurstillfällesnycklar: 0.
-- Kurstillfällen utan matchande kursidentitet: 19.
-- Felaktiga eller bakvända datumintervall: 0.
+- Kurstillfällen utan matchande kursidentitet: 0.
+- Felaktiga/bakvända datumintervall: 0.
 - Kurstillfällen utan termin: 0.
-- Precisionfält saknas på 2603 poster; deras ifyllda datum räknas i datumfältsmåtten men inte som explicit precision verifierad.
+- Precision saknas på 2603 poster; ifyllda datum räknas, men inte som explicit exact-precision.
+- Poster med startdatum men utan slutdatum: 194; slutdatum har inte härletts.
 
-Exakta saknade program och kurser finns i `coverage-report.json` under `gaps`; inga generella terminsdatum har konverterats till kurstillfällesdatum.
+Fullständiga gaplistor ligger i `coverage-report.json` under `gaps`.
