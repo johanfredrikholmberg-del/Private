@@ -7,13 +7,16 @@ const dbPath = 'data/studielots-db/manifest.json';
 const db = read(dbPath);
 const storage = db.tables?.courseOfferings?.storage;
 if (db.database !== 'StudieLots DB' || !String(storage || '').startsWith('data/studielots-db/')) throw Error('Unexpected canonical offerings storage');
-const existing = read(storage);
-if (!Array.isArray(existing) || existing.length !== db.tables.courseOfferings.rows) throw Error('Canonical offering count mismatch');
+const primary = read(storage);
+const additional = (db.tables.courseOfferings.additionalStorages || []).map(read);
+const existing = [primary, ...additional].flat();
+if (!Array.isArray(primary) || existing.length !== db.tables.courseOfferings.rows) throw Error('Canonical offering count mismatch');
 const courses = read('data/kth/courses.json').courses;
 if (!Array.isArray(courses) || courses.length < 100) throw Error('Missing KTH catalogue');
 
 const month = {Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6, Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12};
 const byKey = new Map(existing.map(x => [x.key, x]));
+const newRows = [];
 const report = {checkedAt: new Date().toISOString(), source: 'kth-official-course-memo', catalogue: courses.length, fetched: 0, sourceFailures: [], noDatedRound: [], conflictingCredits: [], added: 0, total: existing.length};
 
 async function check(course) {
@@ -56,16 +59,17 @@ for (let i = 0; i < selected.length; i += 8) {
       const [term, date] = termDate.split('|');
       const key = `kth|${result.code}|${term}|${date}`;
       if (byKey.has(key)) continue;
-      byKey.set(key, {key, university: 'KTH', courseCode: result.code, courseName: course.name, courseHp: Number(course.hp), offeringTerm: term, startDate: date, distance: null, standaloneSearchable: false, source: report.source, sourceUrl: result.url, checkedAt: report.checkedAt});
+      const row = {key, university: 'KTH', courseCode: result.code, courseName: course.name, courseHp: Number(course.hp), offeringTerm: term, startDate: date, distance: null, standaloneSearchable: false, source: report.source, sourceUrl: result.url, checkedAt: report.checkedAt};
+      byKey.set(key, row); newRows.push(row);
       report.added++;
     }
   }
 }
 if (!report.fetched) throw Error('No official KTH course pages were fetched; preserving canonical DB');
-report.total = byKey.size;
+report.total = existing.length + newRows.length;
 if (report.added) {
-  fs.writeFileSync(storage, JSON.stringify([...byKey.values()], null, 2) + '\n');
-  db.tables.courseOfferings.rows = byKey.size;
+  fs.writeFileSync(storage, JSON.stringify([...primary, ...newRows], null, 2) + '\n');
+  db.tables.courseOfferings.rows = report.total;
   fs.writeFileSync(dbPath, JSON.stringify(db, null, 2) + '\n');
 }
 fs.mkdirSync('data/import-reviews', {recursive: true});
