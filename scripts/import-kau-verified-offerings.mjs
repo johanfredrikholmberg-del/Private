@@ -7,7 +7,7 @@ const read = file => JSON.parse(fs.readFileSync(file, 'utf8'));
 const dbFile = 'data/studielots-db/manifest.json';
 const db = read(dbFile);
 const storage = db.tables?.courseOfferings?.storage;
-if (db.database !== 'StudieLots DB' || storage !== 'data/HT26/course-offerings.json') throw Error('Unexpected canonical offering storage');
+if (db.database !== 'StudieLots DB' || !String(storage || '').startsWith('data/studielots-db/')) throw Error('Unexpected canonical offering storage');
 const existing = read(storage);
 if (existing.length !== db.tables.courseOfferings.rows) throw Error('Canonical offering count mismatch');
 let backfilledDates = 0;
