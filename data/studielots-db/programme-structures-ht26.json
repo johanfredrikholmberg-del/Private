@@ -12425,20 +12425,181 @@
     "programName": "Kompletterande pedagogisk utbildning, förhöjd studietakt, Grundskolans åk 7-9, förhöjd studietakt, ett ämne Bd/Mu/Sl",
     "hp": 90,
     "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
+    "officialUrls": [
+      "https://studentportal.gu.se/sites/default/files/2024-01/L1KPA%20g%C3%A4llande%20fr%C3%A5n%20HT24.pdf",
+      "https://studentportal.gu.se/program/kompletterande-pedagogisk-utbildning-forhojd-studietakt-kpu"
+    ],
+    "status": "processed",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "",
-    "sourceUrls": [],
+    "coverage": "choice-required",
+    "reason": "one of the three verified subject-didactics courses must be selected",
+    "rows": [
+      {
+        "term": 1,
+        "code": "LKK12N",
+        "name": "Didaktik, språkutvecklande undervisning och relationella perspektiv på lärarprofessionen",
+        "hp": 6.5,
+        "type": "required",
+        "category": "",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "LKV61N",
+        "name": "VFU 1: Att vara novis ämneslärare",
+        "hp": 13.5,
+        "type": "required",
+        "category": "",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Ämnesdidaktisk kurs, välj en inriktning",
+        "hp": 10,
+        "type": "elective",
+        "category": "elective",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "isThesis": false,
+        "options": [
+          {
+            "code": "LKK32N",
+            "name": "Ämnesdidaktik med inriktning mot matematik, naturvetenskap och teknik",
+            "hp": 10
+          },
+          {
+            "code": "LKK30H",
+            "name": "Ämnesdidaktik med inriktning mot franska, spanska och tyska",
+            "hp": 10
+          },
+          {
+            "code": "LKK30K",
+            "name": "Ämnesdidaktik inriktad mot skolämnena bild, musik och slöjd",
+            "hp": 10
+          }
+        ]
+      },
+      {
+        "term": 1,
+        "code": "LKK62N",
+        "name": "Att leda individ och grupp för ämneslärare",
+        "hp": 7.5,
+        "type": "required",
+        "category": "",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LKK26N",
+        "name": "Lärarprofessionens grunder",
+        "hp": 4.5,
+        "type": "required",
+        "category": "",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LKV71N",
+        "name": "VFU 2: Att vara begynnande professionell – ämnesläraruppdraget ur ett helhetsperspektiv",
+        "hp": 16.5,
+        "type": "required",
+        "category": "",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LKK82N",
+        "name": "Utvärdering och systematiskt kvalitetsarbete",
+        "hp": 7,
+        "type": "required",
+        "category": "",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LKK72N",
+        "name": "Summativ bedömning i skolämnen",
+        "hp": 4,
+        "type": "required",
+        "category": "",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LKK42N",
+        "name": "Interkulturell pedagogisk kompetens",
+        "hp": 5,
+        "type": "required",
+        "category": "",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "LKK52N",
+        "name": "Lärande och undervisning med digital teknologi",
+        "hp": 4,
+        "type": "required",
+        "category": "",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "LKK94N",
+        "name": "Specialpedagogik för ämneslärare – inkluderande perspektiv",
+        "hp": 7.5,
+        "type": "required",
+        "category": "",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "LKK16N",
+        "name": "Undervisningsämnen i ett vetenskaps-, hållbarhets- och samhällsperspektiv",
+        "hp": 4,
+        "type": "required",
+        "category": "",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-kpu-accelerated-programme-plan",
+    "sourceUrl": "https://studentportal.gu.se/sites/default/files/2024-01/L1KPA%20g%C3%A4llande%20fr%C3%A5n%20HT24.pdf",
+    "sourceUrls": [
+      "https://studentportal.gu.se/sites/default/files/2024-01/L1KPA%20g%C3%A4llande%20fr%C3%A5n%20HT24.pdf",
+      "https://studentportal.gu.se/program/kompletterande-pedagogisk-utbildning-forhojd-studietakt-kpu"
+    ],
     "apiCoverage": "",
     "apiConfidence": "",
     "quality": {},
-    "checkedAt": "2026-09-13T15:08:37.406Z",
-    "term": "HT26"
+    "checkedAt": "2026-10-04T11:06:00.000Z",
+    "term": "HT26",
+    "termSums": {
+      "1": 37.5,
+      "2": 37,
+      "3": 15.5
+    }
   },
   {
     "key": "goteborgs-universitet:L1KPO",
