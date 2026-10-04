@@ -33,7 +33,7 @@ jobs:
           node --input-type=module - <<'NODE'
           import fs from 'node:fs';
           const db=JSON.parse(fs.readFileSync('data/studielots-db/manifest.json'));
-          const rows=JSON.parse(fs.readFileSync(db.tables.courseOfferings.storage));
+          const rows=[db.tables.courseOfferings.storage,...(db.tables.courseOfferings.additionalStorages||[])].flatMap(p=>JSON.parse(fs.readFileSync(p)));
           if(db.database!=='StudieLots DB'||rows.length!==db.tables.courseOfferings.rows)throw Error('Canonical count mismatch');
           if(new Set(rows.map(x=>x.key)).size!==rows.length)throw Error('Duplicate offerings');
           if(rows.some(x=>!x.key||!x.courseCode||!x.startDate||!x.sourceUrl))throw Error('Incomplete offering');
