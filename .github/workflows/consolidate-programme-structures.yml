@@ -26,3 +26,4 @@ jobs:
           git add data/studielots-db/programme-structures-ht26.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json
           git diff --cached --quiet || git commit -m "Consolidate programme structures into StudieLots DB"
           git push origin HEAD:studielots-v2
+# Manual import trigger 2026-10-04T06:20:52.275Z
