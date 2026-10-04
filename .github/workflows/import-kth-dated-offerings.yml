@@ -43,10 +43,10 @@ jobs:
           NODE
       - name: Save import to StudieLots DB
         run: |
-          if [ -z "$(git status --porcelain -- data/import-reviews/kth-dated-offerings.json data/HT26/course-offerings.json data/studielots-db/manifest.json)" ]; then echo 'No changes'; exit 0; fi
+          if [ -z "$(git status --porcelain -- data/import-reviews/kth-dated-offerings.json data/studielots-db/course-offerings.json data/studielots-db/manifest.json)" ]; then echo 'No changes'; exit 0; fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/import-reviews/kth-dated-offerings.json data/HT26/course-offerings.json data/studielots-db/manifest.json
+          git add -f data/import-reviews/kth-dated-offerings.json data/studielots-db/course-offerings.json data/studielots-db/manifest.json
           git commit -m 'Import official KTH course rounds into StudieLots DB [skip ci]'
           git fetch origin studielots-v2
           git rebase origin/studielots-v2
