@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-04T07:07:42.975Z",
+  "generatedAt": "2026-10-04T07:34:41.216Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -21,9 +21,10 @@
     },
     "courses": {
       "storage": "data/studielots-db/courses.json",
-      "rows": 28337,
+      "rows": 28362,
       "additionalStorages": [
-        "data/studielots-db/courses-gu-2027-eu.json"
+        "data/studielots-db/courses-gu-2027-eu.json",
+        "data/studielots-db/courses-gu-2027-programmes.json"
       ]
     },
     "courseOfferings": {
