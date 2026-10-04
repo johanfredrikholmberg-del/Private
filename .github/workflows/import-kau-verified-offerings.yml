@@ -37,7 +37,7 @@ jobs:
           import fs from 'node:fs';
           import {datesFromKarlstadWeeks} from './scripts/kau-offering-week-dates.mjs';
           const db=JSON.parse(fs.readFileSync('data/studielots-db/manifest.json'));
-          const rows=JSON.parse(fs.readFileSync(db.tables.courseOfferings.storage));
+          const rows=[db.tables.courseOfferings.storage,...(db.tables.courseOfferings.additionalStorages||[])].flatMap(p=>JSON.parse(fs.readFileSync(p)));
           const report=JSON.parse(fs.readFileSync('data/import-reviews/kau-verified-offerings-latest.json'));
           if(db.database!=='StudieLots DB'||db.tables.courseOfferings.rows!==rows.length||new Set(rows.map(x=>x.key)).size!==rows.length)throw Error('Canonical count or key mismatch');
           const batch=rows.filter(x=>x.university==='Karlstads universitet'&&x.checkedAt===report.checkedAt);
