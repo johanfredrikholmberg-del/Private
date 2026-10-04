@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-04T07:50:25.306Z",
+  "generatedAt": "2026-10-04T00:00:00.000Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -17,7 +17,7 @@
     },
     "programmeStructures": {
       "storageManifest": "data/studielots-db/programme-structures-manifest.json",
-      "rows": 1053
+      "rows": 1054
     },
     "courses": {
       "storage": "data/studielots-db/courses.json",
@@ -40,7 +40,8 @@
       ],
       "additionalStorages": [
         "data/studielots-db/course-offerings-manual-2026-10-03-batch-3.json",
-        "data/studielots-db/course-offerings-manual-2026-10-03-batch-4.json"
+        "data/studielots-db/course-offerings-manual-2026-10-03-batch-4.json",
+        "data/studielots-db/course-offerings-gu-vt27-exchange.json"
       ]
     },
     "syllabusVersions": {
