@@ -28,7 +28,7 @@ jobs:
           node-version: '22'
       - name: Import official Karlstad batch
         env:
-          KAU_OFFERING_OFFSET: '549'
+          KAU_OFFERING_OFFSET: '599'
           KAU_OFFERING_BATCH_SIZE: '50'
         run: node scripts/import-kau-verified-offerings.mjs
       - name: Verify canonical DB
@@ -58,7 +58,7 @@ jobs:
             if ! git rebase origin/studielots-v2; then
               git rebase --abort || true
               git reset --hard origin/studielots-v2
-              KAU_OFFERING_OFFSET=549 KAU_OFFERING_BATCH_SIZE=50 node scripts/import-kau-verified-offerings.mjs
+              KAU_OFFERING_OFFSET=599 KAU_OFFERING_BATCH_SIZE=50 node scripts/import-kau-verified-offerings.mjs
               git add -f data/studielots-db/course-offerings.json data/studielots-db/manifest.json data/import-reviews/kau-verified-offerings-latest.json
               if git diff --cached --quiet; then exit 0; fi
               git commit -m 'Materialize next Karlstad course offering batch [skip ci]'
