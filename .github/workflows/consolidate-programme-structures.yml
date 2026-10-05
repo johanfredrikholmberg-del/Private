@@ -6,8 +6,12 @@ on:
       - studielots-v2
     paths:
       - scripts/consolidate-programme-structures.mjs
+      - .github/workflows/consolidate-programme-structures.yml
 permissions:
   contents: write
+concurrency:
+  group: studielots-programme-structures
+  cancel-in-progress: false
 jobs:
   consolidate:
     runs-on: ubuntu-latest
