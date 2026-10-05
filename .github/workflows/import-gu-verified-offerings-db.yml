@@ -1,0 +1,61 @@
+name: Import verified GU dated course offerings
+on:
+  workflow_dispatch:
+  push:
+    branches: [studielots-v2]
+    paths:
+      - scripts/import-gu-verified-offerings-db.mjs
+      - .github/workflows/import-gu-verified-offerings-db.yml
+  schedule:
+    - cron: '37 5 * * 2,4,6'
+permissions:
+  contents: write
+concurrency:
+  group: studielots-canonical-offerings
+  cancel-in-progress: false
+jobs:
+  import:
+    if: ${{ github.actor != 'studielots-bot' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: studielots-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import dated offers from official GU course pages
+        env:
+          GU_OFFERING_CONCURRENCY: '6'
+          GU_OFFERING_LIMIT: '800'
+        run: node scripts/import-gu-verified-offerings-db.mjs
+      - name: Validate exact dates, canonical course matches, and offering keys
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+          const db=read('data/studielots-db/manifest.json');
+          const spec=db.tables.courseOfferings;
+          const rows=[spec.storage,...(spec.additionalStorages||[])].flatMap(read);
+          const courses=[db.tables.courses.storage,...(db.tables.courses.additionalStorages||[])].flatMap(read);
+          const report=read('data/import-reviews/gu-offerings-db-latest.json');
+          const keys=new Set(rows.map(r=>r.key));
+          if(db.tables.courseOfferings.rows!==rows.length||keys.size!==rows.length)throw Error('Canonical offering count/key mismatch');
+          const codes=new Set(courses.filter(c=>c.providerId==='p.uoh.gu'||c.university==='Göteborgs universitet').map(c=>String(c.courseCode||c.code||'').toUpperCase()));
+          const fresh=rows.filter(r=>r.source==='gu-official-course-page'&&r.checkedAt===report.checkedAt);
+          if(fresh.length!==report.added)throw Error('GU batch count mismatch');
+          if(fresh.some(r=>!codes.has(String(r.courseCode).toUpperCase())||r.datePrecision!=='exact'||r.verified!==true||!r.startDate||!r.endDate||Date.parse(r.endDate)<Date.parse(r.startDate)||!/^https:\/\/(?:[a-z0-9-]+\.)*gu\.se\//i.test(r.sourceUrl)))throw Error('Unverified GU offering');
+          console.log(JSON.stringify({added:report.added,covered:report.newlyCoveredCourseCodes,exactRows:report.exactDatedRows,canonicalTotal:rows.length}));
+          NODE
+      - name: Save to StudieLots DB
+        run: |
+          git config user.name 'studielots-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/studielots-db/course-offerings-gu-verified-current.json data/studielots-db/manifest.json data/import-reviews/gu-offerings-db-latest.json
+          if git diff --cached --quiet; then echo 'No GU offering changes'; exit 0; fi
+          git commit -m 'Import verified GU dated course offerings [skip ci]'
+          git fetch origin studielots-v2
+          git rebase origin/studielots-v2
+          git push origin HEAD:studielots-v2
