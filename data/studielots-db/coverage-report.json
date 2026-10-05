@@ -1,6 +1,6 @@
 {
   "reportVersion": 1,
-  "generatedAt": "2026-10-05T10:49:48.700Z",
+  "generatedAt": "2026-10-05T12:44:01.836Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
@@ -22,13 +22,13 @@
     "usableProgrammeStructureRows": 189,
     "courseRows": 28931,
     "uniqueCourseIdentities": 28928,
-    "uniqueCoursesWithOffering": 2534,
-    "uniqueCoursesWithoutOffering": 26394,
-    "offeringRows": 3169,
-    "offeringRowsWithStartDate": 3169,
-    "offeringRowsWithBothDates": 2975,
+    "uniqueCoursesWithOffering": 2605,
+    "uniqueCoursesWithoutOffering": 26323,
+    "offeringRows": 3247,
+    "offeringRowsWithStartDate": 3247,
+    "offeringRowsWithBothDates": 3053,
     "offeringRowsWithExplicitExactPrecision": 35,
-    "offeringRowsWithWeekDerivedPrecision": 531,
+    "offeringRowsWithWeekDerivedPrecision": 609,
     "offeringRowsWithUnspecifiedPrecision": 2402,
     "offeringRowsWithoutCourseIdentity": 0,
     "offeringRowsWithoutTerm": 0,
@@ -389,11 +389,11 @@
       "programsWithUsableStructure": 84,
       "programsWithoutUsableStructure": 82,
       "courses": 1656,
-      "coursesWithAtLeastOneOffering": 508,
-      "coursesWithoutOffering": 1148,
-      "courseOfferingRows": 531,
-      "offeringsWithStartDate": 531,
-      "offeringsWithStartAndEndDate": 531,
+      "coursesWithAtLeastOneOffering": 579,
+      "coursesWithoutOffering": 1077,
+      "courseOfferingRows": 609,
+      "offeringsWithStartDate": 609,
+      "offeringsWithStartAndEndDate": 609,
       "programmeStructureRows": 167,
       "usableProgrammeStructureRows": 92
     },
@@ -77786,148 +77786,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "ISGB04",
-        "courseName": "Programutveckling",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGB08",
-        "courseName": "Fortsättningskurs i programmering",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGB11",
-        "courseName": "Systemimplementeringsteknik",
-        "hp": 5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGB18",
-        "courseName": "Introduktion till objektorienterad programmering",
-        "hp": 5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGB22",
-        "courseName": "Utveckling av webbapplikationer",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGB25",
-        "courseName": "Affärssimulering och dataanalys",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGB33",
-        "courseName": "Nosql databaser",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGB36",
-        "courseName": "Objektorienterad modellering med programmering",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGB37",
-        "courseName": "Fördjupningskurs i programmering",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGB38",
-        "courseName": "Cloud Foundations",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "ISGB40",
         "courseName": "Tillämpad spelutveckling",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGC01",
-        "courseName": "Interaktionsdesign",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGC06",
-        "courseName": "Verksamhetsutveckling med process- och flerpartsperspektiv",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGC07",
-        "courseName": "Tjänster och IT: Elektroniska affärer",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGC08",
-        "courseName": "Designmönster, Java och UML",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGC12",
-        "courseName": "Utveckling av appar för mobila e-tjänster",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGC16",
-        "courseName": "Användartester, prototyping och utvärdering",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGC18",
-        "courseName": "Styrning av digital transformation",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "ISGC99",
-        "courseName": "Informatik, utlandspraktik",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPA003",
-        "courseName": "Examensarbete inom juridik",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPA004",
-        "courseName": "Allmän rättslära III med praktik",
         "hp": 15
       },
       {
@@ -77940,22 +77800,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "JPA006",
-        "courseName": "Bolagsrätt och aktiemarknadsrätt",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "JPA007",
         "courseName": "Skadeståndsrätt och immaterialrätt",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPA008",
-        "courseName": "Straffprocess i teori och praktik",
         "hp": 15
       },
       {
@@ -77970,20 +77816,6 @@
         "university": "Karlstads universitet",
         "courseCode": "JPA011",
         "courseName": "Centrala frågeställningar i den västerländska rättens idé- och lärdomshistoria och rättsfilosofi från antiken till nutid",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPA013",
-        "courseName": "IT-rättsliga perspektiv",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPAH01",
-        "courseName": "Juridiskt socialt arbete",
         "hp": 15
       },
       {
@@ -78010,13 +77842,6 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "JPAS04",
-        "courseName": "Skattejuridisk metodkurs",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "JPAS05",
         "courseName": "Internationell beskattning och skatteprocess",
         "hp": 15
@@ -78024,85 +77849,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "JPG012",
-        "courseName": "Skatterätt",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPG014",
-        "courseName": "Straffrätt",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPG015",
-        "courseName": "Processrätt",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPG017",
-        "courseName": "Kredit- och obeståndsrätt och arbetsrätt",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPG018",
-        "courseName": "Socialrätt",
-        "hp": 10
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPG019",
-        "courseName": "Immaterialrätt, marknadsrätt, upphandlingsrätt och IT-rätt",
-        "hp": 20
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPGT01",
-        "courseName": "Allmän rättslära I, offentlig rätt, EU-rätt och internationell rätt",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPGT02",
-        "courseName": "Civilrätt",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "JPGT04",
-        "courseName": "Allmän rättslära II, förvaltningsrätt, förvaltningsprocessrätt och miljörätt",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "KBGAB1",
         "courseName": "Bildberättande: Serieteckning, illustration och visualiserade idéer",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KBGAB2",
-        "courseName": "Bildberättande II",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KBGAG1",
-        "courseName": "Bild för grundlärare i årskurs 4-6",
         "hp": 30
       },
       {
@@ -78122,65 +77870,9 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "KBGIP1",
-        "courseName": "Visuellt tänkande och gestaltning",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEAD11",
-        "courseName": "Molekylär bioteknik med tillämpningar D",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEAD41",
-        "courseName": "Avancerad analytisk kromatografi - teori och praktik D",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEAD52",
-        "courseName": "Ytor, gränsskikt och kolloider D",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEAD71",
-        "courseName": "Vetenskapligt skrivande och vetenskapsteori inom kemi och kemiteknik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEAD81",
-        "courseName": "Läkemedel - kemisk analys i projektform D",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEADM1",
-        "courseName": "Makromolekylers fysikaliska kemi D",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "KEADM2",
         "courseName": "Polymerers fysikaliska kemi D",
         "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEAL91",
-        "courseName": "Kemi med didaktisk inriktning 4",
-        "hp": 7.5
       },
       {
         "providerId": "p.uoh.kau",
@@ -78192,139 +77884,6 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "KEAL93",
-        "courseName": "Kemi med didaktisk inriktning 4",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEAL94",
-        "courseName": "Kemi med didaktisk inriktning 5",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEBX14",
-        "courseName": "Kemi Bas A",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEBX24",
-        "courseName": "Kemi Bas B",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGA02",
-        "courseName": "Organisk kemi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGA11",
-        "courseName": "Biokemi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGA22",
-        "courseName": "Inledande kemi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGA31",
-        "courseName": "Kemiska beräkningar",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGA51",
-        "courseName": "Kemins beräkningsmetoder",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGB01",
-        "courseName": "Organisk kemi B",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGB21",
-        "courseName": "Kemi i samhället",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGB42",
-        "courseName": "Analytisk kemi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGBF4",
-        "courseName": "Kemisk termodynamik och kinetik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGC11",
-        "courseName": "Molekylär bioteknik med tillämpningar C",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGC1X",
-        "courseName": "Internationellt projekt i Kemi",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGC52",
-        "courseName": "Ytor, gränsskikt och kolloider C",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGC71",
-        "courseName": "Vetenskapligt skrivande och vetenskapsteori inom kemi och kemiteknik C",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGC81",
-        "courseName": "Läkemedel - kemisk analys i projektform C",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGCM1",
-        "courseName": "Makromolekylers fysikaliska kemi C",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "KEGCM2",
         "courseName": "Polymerers fysikaliska kemi C",
         "hp": 15
@@ -78332,64 +77891,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "KEGCV1",
-        "courseName": "Verksamhetsförlagd kemi",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGCX4",
-        "courseName": "Kemi kandidatarbete",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGCX5",
-        "courseName": "Kemi kandidatarbete",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGCX6",
-        "courseName": "Kemi kandidatarbete",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGL01",
-        "courseName": "Kemi med didaktisk inriktning 1",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGL23",
-        "courseName": "Kemi med didaktisk inriktning 3",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KEGL42",
-        "courseName": "Kemi med didaktisk inriktning 2",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "KGA100",
         "courseName": "Omvandlingens geografier - en introduktion",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KGA101",
-        "courseName": "Stad och land i samspel",
         "hp": 7.5
       },
       {
