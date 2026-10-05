@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-05T06:23:00.000Z",
+  "generatedAt": "2026-10-05T06:30:00.000Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -21,7 +21,7 @@
     },
     "courses": {
       "storage": "data/studielots-db/courses.json",
-      "rows": 28498,
+      "rows": 28875,
       "additionalStorages": [
         "data/studielots-db/courses-gu-2027-eu.json",
         "data/studielots-db/courses-gu-2027-programmes.json",
@@ -30,7 +30,8 @@
         "data/studielots-db/courses-gu-program-structure-verified.json",
         "data/studielots-db/courses-gu-kth-orphan-offerings-2026-10-04.json",
         "data/studielots-db/courses-kth-kpuhu-verified.json",
-        "data/studielots-db/courses-chalmers-structure-identities-2026-10-05.json"
+        "data/studielots-db/courses-chalmers-structure-identities-2026-10-05.json",
+        "data/studielots-db/courses-lund-structure-identities-2026-10-05.json"
       ]
     },
     "courseOfferings": {
