@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-04T15:37:38.931Z (UTC) · branch: studielots-v2
+Generated: 2026-10-05T06:23:00.000Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -12,15 +12,15 @@ Generated: 2026-10-04T15:37:38.931Z (UTC) · branch: studielots-v2
 | Program utan användbar struktur | 3008 | — |
 | Canonicala programstrukturposter | 1054 | — |
 | Användbara strukturposter | 186 | — |
-| Kursrader i StudieLots DB | 28471 | — |
-| Unika kursidentiteter | 28468 | — |
+| Kursrader i StudieLots DB | 28498 | — |
+| Unika kursidentiteter | 28495 | — |
 | Kurser med minst ett kurstillfälle | 2345 | 8.2% |
-| Kurser utan kurstillfälle | 26123 | — |
+| Kurser utan kurstillfälle | 26150 | — |
 | Kurstillfällen | 2966 | — |
 | Med startdatum | 2966 | 100.0% |
 | Med både start- och slutdatum | 2772 | 93.5% |
 | Precision explicit: exact / week / unspecified | 34 / 329 / 2603 | — |
-| Strukturkurshänvisningar utan kursidentitet | 486 (410 unika koder) | — |
+| Strukturkurshänvisningar utan kursidentitet | 432 (383 unika koder) | — |
 
 ## Per lärosäte
 
@@ -34,7 +34,7 @@ Generated: 2026-10-04T15:37:38.931Z (UTC) · branch: studielots-v2
 | Beckmans Designhögskola (p.uoh.bdh) | 3 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Brunnsviks Enskilda Musikhögskola BEMU (p.uoh.bem) | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Blekinge tekniska högskola (p.uoh.bth) | 48 | 0 | 48 | 101 | 0 | 101 | 0 | 0 | 0 |
-| Chalmers tekniska högskola (p.uoh.cth) | 73 | 3 | 70 | 423 | 0 | 423 | 0 | 0 | 0 |
+| Chalmers tekniska högskola (p.uoh.cth) | 73 | 3 | 70 | 450 | 0 | 450 | 0 | 0 | 0 |
 | Enskilda Högskolan Stockholm (p.uoh.ehs) | 8 | 0 | 8 | 135 | 0 | 135 | 0 | 0 | 0 |
 | Försvarshögskolan (p.uoh.fhs) | 16 | 0 | 16 | 94 | 0 | 94 | 0 | 0 | 0 |
 | Gymnastik- och idrottshögskolan (p.uoh.gih) | 13 | 0 | 13 | 53 | 0 | 53 | 0 | 0 | 0 |
@@ -81,6 +81,7 @@ Generated: 2026-10-04T15:37:38.931Z (UTC) · branch: studielots-v2
 Exakta gap finns i `coverage-report.json`: program utan användbar struktur, kurser utan kurstillfälle samt strukturkursreferenser utan kursidentitet. Endast filer registrerade i StudieLots DB-manifesten räknas.
 
 - 28 KTH-strukturer räknas som användbara eftersom deras terminskurser ligger i `courses`-fältet; en tidigare rapportkontroll läste bara `rows`.
+- 27 verifierade Chalmers-kursidentiteter från officiella programplaner täpper till 54 strukturhänvisningar; inga kurstillfällen eller datum härleddes.
 - 9 KTH KPUHU-kursidentiteter och verifierade HT26/VT27-kurstillfällen tillagda med kursunika start- och slutdatum.
 - Dubletter i kurstillfällesnycklar: 0.
 - Kurstillfällen utan matchande kursidentitet: 0.
