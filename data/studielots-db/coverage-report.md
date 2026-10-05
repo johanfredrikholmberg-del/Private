@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-05T12:44:01.836Z (UTC) · branch: studielots-v2
+Generated: 2026-10-05T12:48:33.544Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -14,12 +14,12 @@ Generated: 2026-10-05T12:44:01.836Z (UTC) · branch: studielots-v2
 | Användbara strukturposter | 189 | — |
 | Kursrader i StudieLots DB | 28931 | — |
 | Unika kursidentiteter | 28928 | — |
-| Kurser med minst ett kurstillfälle | 2605 | 9.0% |
-| Kurser utan kurstillfälle | 26323 | — |
-| Kurstillfällen | 3247 | — |
-| Med startdatum | 3247 | 100.0% |
-| Med både start- och slutdatum | 3053 | 94.0% |
-| Precision explicit: exact / week / unspecified | 35 / 609 / 2402 | — |
+| Kurser med minst ett kurstillfälle | 2652 | 9.2% |
+| Kurser utan kurstillfälle | 26276 | — |
+| Kurstillfällen | 3294 | — |
+| Med startdatum | 3294 | 100.0% |
+| Med både start- och slutdatum | 3100 | 94.1% |
+| Precision explicit: exact / week / unspecified | 35 / 656 / 2402 | — |
 | Strukturkurshänvisningar utan kursidentitet | 12 (6 unika koder) | — |
 
 ## Per lärosäte
@@ -49,7 +49,7 @@ Generated: 2026-10-05T12:44:01.836Z (UTC) · branch: studielots-v2
 | Högskolan i Skövde (p.uoh.hs) | 73 | 0 | 73 | 560 | 0 | 560 | 0 | 0 | 0 |
 | Högskolan Väst (p.uoh.hv) | 60 | 0 | 60 | 215 | 0 | 215 | 0 | 0 | 0 |
 | Johannelunds teologiska högskola (p.uoh.jth) | 18 | 0 | 18 | 38 | 0 | 38 | 0 | 0 | 0 |
-| Karlstads universitet (p.uoh.kau) | 166 | 84 | 82 | 1656 | 579 | 1077 | 609 | 609 | 609 |
+| Karlstads universitet (p.uoh.kau) | 166 | 84 | 82 | 1656 | 626 | 1030 | 656 | 656 | 656 |
 | Konstfack (p.uoh.kf) | 15 | 0 | 15 | 11 | 0 | 11 | 0 | 0 | 0 |
 | Karolinska institutet (p.uoh.ki) | 52 | 0 | 52 | 161 | 0 | 161 | 0 | 0 | 0 |
 | Kungl. Musikhögskolan i Stockholm (p.uoh.kmh) | 25 | 0 | 25 | 34 | 0 | 34 | 0 | 0 | 0 |
@@ -78,7 +78,7 @@ Generated: 2026-10-05T12:44:01.836Z (UTC) · branch: studielots-v2
 
 ## Arbetskö och kvalitetsnoteringar
 
-- Karlstads universitet: två officiellt verifierade batcher lade till 78 kurstillfällen för 71 tidigare ej täckta kursidentiteter. Alla 78 har start- och slutdatum härledda från kursens angivna veckoperiod (precision `week`); inga slutdatum har gissats.
+- Karlstads universitet: tre officiellt verifierade batcher lade till 125 kurstillfällen för 118 tidigare ej täckta kursidentiteter. Alla 125 har start- och slutdatum härledda från kursens angivna veckoperiod (precision `week`); inga slutdatum har gissats.
 
 Exakta gap finns i `coverage-report.json`: program utan användbar struktur, kurser utan kurstillfälle samt strukturkursreferenser utan kursidentitet. Endast filer registrerade i StudieLots DB-manifesten räknas.
 
