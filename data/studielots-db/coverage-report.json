@@ -1,6 +1,6 @@
 {
   "reportVersion": 2,
-  "generatedAt": "2026-10-05T13:50:58.695Z",
+  "generatedAt": "2026-10-05T13:55:07.835Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
@@ -22,13 +22,13 @@
     "usableProgrammeStructureRows": 231,
     "courseRows": 29630,
     "uniqueCourseIdentities": 29627,
-    "uniqueCoursesWithOffering": 2821,
-    "uniqueCoursesWithoutOffering": 26806,
-    "offeringRows": 3489,
-    "offeringRowsWithStartDate": 3489,
-    "offeringRowsWithBothDates": 3295,
+    "uniqueCoursesWithOffering": 2857,
+    "uniqueCoursesWithoutOffering": 26770,
+    "offeringRows": 3529,
+    "offeringRowsWithStartDate": 3529,
+    "offeringRowsWithBothDates": 3335,
     "offeringRowsWithExplicitExactPrecision": 35,
-    "offeringRowsWithWeekDerivedPrecision": 851,
+    "offeringRowsWithWeekDerivedPrecision": 891,
     "offeringRowsWithUnspecifiedPrecision": 2603,
     "offeringRowsWithoutCourseIdentity": 0,
     "offeringRowsWithoutTerm": 0,
@@ -344,11 +344,11 @@
       "programsWithUsableStructure": 63,
       "programsWithoutUsableStructure": 103,
       "courses": 1664,
-      "coursesWithAtLeastOneOffering": 795,
-      "coursesWithoutOffering": 869,
-      "courseOfferingRows": 851,
-      "offeringsWithStartDate": 851,
-      "offeringsWithStartAndEndDate": 851,
+      "coursesWithAtLeastOneOffering": 831,
+      "coursesWithoutOffering": 833,
+      "courseOfferingRows": 891,
+      "offeringsWithStartDate": 891,
+      "offeringsWithStartAndEndDate": 891,
       "programmeStructureRows": 167,
       "usableProgrammeStructureRows": 91
     },
@@ -74404,13 +74404,6 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "MAAL15",
-        "courseName": "Matematik V med didaktisk inriktning",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "MAALA",
         "courseName": "Double Degree MSc Real Maths, L’Aquila",
         "hp": 60
@@ -74425,69 +74418,6 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "MABX13",
-        "courseName": "Matematik Bas A",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MABX23",
-        "courseName": "Matematik Bas B",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MABX33",
-        "courseName": "Matematik Bas C",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MABX43",
-        "courseName": "Matematik Bas D",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA07",
-        "courseName": "Att skriva matematik",
-        "hp": 1.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA19",
-        "courseName": "Matematik för mät- och kartteknik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA43",
-        "courseName": "Matematik för datavetare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA47",
-        "courseName": "Matematik för ingenjörer III",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA48",
-        "courseName": "Tillämpad matematik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "MAGA51",
         "courseName": "Matematisk grundkurs",
         "hp": 7.5
@@ -74497,181 +74427,6 @@
         "university": "Karlstads universitet",
         "courseCode": "MAGA52",
         "courseName": "Analys och geometri",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA53",
-        "courseName": "Linjär algebra",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA55",
-        "courseName": "Diskret matematik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA81",
-        "courseName": "Matematik för ingenjörer I",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA82",
-        "courseName": "Matematik för ingenjörer II",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA83",
-        "courseName": "Geometri, trigonometri och statistik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA84",
-        "courseName": "Matematik för Artificiell Intelligens I",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGA85",
-        "courseName": "Matematik för Artificiell Intelligens II",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGB01",
-        "courseName": "Ordinära differentialekvationer",
-        "hp": 6
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGB15",
-        "courseName": "Numeriska metoder",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGB18",
-        "courseName": "Grundläggande analys",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGB22",
-        "courseName": "Optimering med projekt",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGB64",
-        "courseName": "Stokastiska metoder",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGB65",
-        "courseName": "Optimering",
-        "hp": 4.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGK15",
-        "courseName": "Matematik för lärare: Sannolikhetslära och statistik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGK20",
-        "courseName": "Matematik för lärare: Geometri",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGL11",
-        "courseName": "Matematik I med didaktisk inriktning",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGL13",
-        "courseName": "Matematik III med didaktisk inriktning",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGL22",
-        "courseName": "Matematik II med didaktisk inriktning",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGL72",
-        "courseName": "Matematik II med didaktisk inriktning för årskurs 7-9",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MAGL73",
-        "courseName": "Matematik III med didaktisk inriktning för årskurs 7-9",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MDGAB1",
-        "courseName": "Anatomi och fysiologi",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MDGAF1",
-        "courseName": "Anatomi och fysiologi",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MDGMI1",
-        "courseName": "Medicinsk mikrobiologi och immunologi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MDGSJ1",
-        "courseName": "Sjukdomslära I",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MDGSJ2",
-        "courseName": "Sjukdomslära II",
         "hp": 7.5
       },
       {
@@ -74708,13 +74463,6 @@
         "courseCode": "MIGBT1",
         "courseName": "Tamburmajor I",
         "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MIGCU4",
-        "courseName": "Examensarbete",
-        "hp": 15
       },
       {
         "providerId": "p.uoh.kau",
