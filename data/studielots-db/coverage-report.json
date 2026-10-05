@@ -1,6 +1,6 @@
 {
   "reportVersion": 2,
-  "generatedAt": "2026-10-05T15:10:03.943Z",
+  "generatedAt": "2026-10-05T15:16:35.679Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
@@ -22,13 +22,13 @@
     "usableProgrammeStructureRows": 231,
     "courseRows": 29632,
     "uniqueCourseIdentities": 29629,
-    "uniqueCoursesWithOffering": 2976,
-    "uniqueCoursesWithoutOffering": 26653,
-    "offeringRows": 3657,
-    "offeringRowsWithStartDate": 3657,
-    "offeringRowsWithBothDates": 3463,
+    "uniqueCoursesWithOffering": 3025,
+    "uniqueCoursesWithoutOffering": 26604,
+    "offeringRows": 3706,
+    "offeringRowsWithStartDate": 3706,
+    "offeringRowsWithBothDates": 3512,
     "offeringRowsWithExplicitExactPrecision": 61,
-    "offeringRowsWithWeekDerivedPrecision": 993,
+    "offeringRowsWithWeekDerivedPrecision": 1042,
     "offeringRowsWithUnspecifiedPrecision": 2603,
     "offeringRowsWithoutCourseIdentity": 0,
     "offeringRowsWithoutTerm": 0,
@@ -344,11 +344,11 @@
       "programsWithUsableStructure": 63,
       "programsWithoutUsableStructure": 103,
       "courses": 1666,
-      "coursesWithAtLeastOneOffering": 928,
-      "coursesWithoutOffering": 738,
-      "courseOfferingRows": 993,
-      "offeringsWithStartDate": 993,
-      "offeringsWithStartAndEndDate": 993,
+      "coursesWithAtLeastOneOffering": 977,
+      "coursesWithoutOffering": 689,
+      "courseOfferingRows": 1042,
+      "offeringsWithStartDate": 1042,
+      "offeringsWithStartAndEndDate": 1042,
       "programmeStructureRows": 167,
       "usableProgrammeStructureRows": 91
     },
@@ -74630,349 +74630,6 @@
         "university": "Karlstads universitet",
         "courseCode": "MTGA13",
         "courseName": "Materialteknik grundkurs",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL18",
-        "courseName": "Lärarens professionella ledarskap 1 - musiklärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL19",
-        "courseName": "Lärarens professionella ledarskap 2 - musiklärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL20",
-        "courseName": "Betyg och bedömning - musiklärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL21",
-        "courseName": "Skola på vetenskaplig grund - musiklärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL30",
-        "courseName": "Musik med didaktisk inriktning 8",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL31",
-        "courseName": "Instrument och ensemble 6",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL32",
-        "courseName": "Musik i klass 6",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL33",
-        "courseName": "Musikteori och komposition 6",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL34",
-        "courseName": "Musik- och ljudproduktion 6",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL35",
-        "courseName": "Musik med didaktisk inriktning 9",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL36",
-        "courseName": "Instrument och ensemble 7",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL37",
-        "courseName": "Musik i klass 7",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL38",
-        "courseName": "Musikteori och komposition 7",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL39",
-        "courseName": "Musik- och ljudproduktion 7",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUAL40",
-        "courseName": "Musik med didaktisk inriktning 10",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL22",
-        "courseName": "Verksamhetsförlagd utbildning 2 - musiklärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL23",
-        "courseName": "Självständigt arbete 1 - Musiklärare",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL35",
-        "courseName": "Skola som system och idé - musiklärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL36",
-        "courseName": "Lärarens didaktiska verktyg - musiklärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL37",
-        "courseName": "Lärarens pedagogiska förhållningssätt 1 - musiklärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL38",
-        "courseName": "Lärarens pedagogiska förhållningssätt 2 - musiklärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL40",
-        "courseName": "Musik med didaktisk inriktning 1",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL41",
-        "courseName": "Musik med didaktisk inriktning 2",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL42",
-        "courseName": "Musik med didaktisk inriktning 3",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL43",
-        "courseName": "Instrument och ensemble 1",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL44",
-        "courseName": "Musik i klass 1",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL45",
-        "courseName": "Musikteori och komposition 1",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL47",
-        "courseName": "Musik med didaktisk inriktning 4",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL48",
-        "courseName": "Instrument och ensemble 2",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL49",
-        "courseName": "Musik i klass 2",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL50",
-        "courseName": "Musikteori och komposition 2",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL51",
-        "courseName": "Musik- och ljudproduktion 2",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL52",
-        "courseName": "Musik med didaktisk inriktning 5",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL53",
-        "courseName": "Instrument och ensemble 3",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL54",
-        "courseName": "Musik i klass 3",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL55",
-        "courseName": "Musikteori och komposition 3",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL56",
-        "courseName": "Musik- och ljudproduktion 3",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL57",
-        "courseName": "Musik med didaktisk inriktning 6",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL58",
-        "courseName": "Instrument och ensemble 4",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL59",
-        "courseName": "Musik i klass 4",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL60",
-        "courseName": "Musikteori och komposition 4",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL61",
-        "courseName": "Musik- och ljudproduktion 4",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL62",
-        "courseName": "Musik med didaktisk inriktning 7",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL63",
-        "courseName": "Instrument och ensemble 5",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL64",
-        "courseName": "Musik i klass 5",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL65",
-        "courseName": "Musikteori och komposition 5",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGL66",
-        "courseName": "Musik- och ljudproduktion 5",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MUGLV1",
-        "courseName": "Verksamhetsförlagd utbildning 1 - musiklärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MVAE34",
-        "courseName": "Hållbar utveckling ur ett säkerhetsperspektiv",
         "hp": 7.5
       },
       {
