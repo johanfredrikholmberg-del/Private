@@ -8014,120 +8014,297 @@
     "hp": 300,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
+    "coverage": "partial-structure",
+    "reason": "Official HT26 programme syllabus lists course names and credits but does not publish course codes; three courses are cross-linked to existing verified GU identities, other codes remain unresolved.",
+    "rows": [
+      {
+        "term": 1,
+        "code": "KEM011",
+        "name": "Grundläggande kemi 1",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KEM022",
+        "name": "Grundläggande kemi 2A Organisk kemi",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KEM023",
+        "name": "Grundläggande kemi 2B Biokemi",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Cellen och dess arvsmassa",
+        "hp": 10.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Cellens fysiologi",
+        "hp": 10.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Cellens metabolism",
+        "hp": 9,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Organisk kemi för apotekarstuderande",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fysiologi och anatomi",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Läkemedelskemiska principer",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Grundläggande biostatistik",
+        "hp": 1.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Immunologi, hematologi och infektionssjukdomar",
+        "hp": 9,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Farmakologi, läkemedelskemi och sjukdomslära 1",
+        "hp": 12,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Farmakologi, läkemedelskemi och sjukdomslära 2",
+        "hp": 12,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Tillämpad apoteksfarmaci med inriktning mot egenvårdsrådgivning",
+        "hp": 9,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Farmakologi, läkemedelskemi och sjukdomslära 3",
+        "hp": 9,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Analytisk kemi",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Medicinsk statistik",
+        "hp": 5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Farmakokinetik med läkemedelsmetabolism",
+        "hp": 12,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Galenisk farmaci 1",
+        "hp": 5.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Galenisk farmaci 2",
+        "hp": 9.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Läkemedelstoxikologi och toxikokinetik",
+        "hp": 3,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Farmakoterapi",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Läkemedelsanvändning ur ett samhällsperspektiv",
+        "hp": 10,
+        "type": "required",
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "",
+        "name": "Valbara kurser á 7,5 hp",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "elective-slot",
+        "isSlot": true,
+        "options": [],
+        "requiredChoice": true,
+        "isThesis": false
+      },
+      {
+        "term": 9,
+        "code": "",
+        "name": "Examensarbete på masternivå i farmaceutisk vetenskap",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory",
+        "isThesis": true
+      },
+      {
+        "term": 10,
+        "code": "",
+        "name": "Tillämpad apoteksfarmaci med författningar",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory"
+      }
+    ],
     "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/apotekarprogrammet-f2app",
+    "sourceUrl": "https://www.gu.se/syllabus/cec64a47-db30-11f0-9c81-2a1b32074717",
     "sourceUrls": [
+      "https://www.gu.se/syllabus/cec64a47-db30-11f0-9c81-2a1b32074717",
       "https://www.gu.se/studera/hitta-utbildning/apotekarprogrammet-f2app"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
+    "apiCoverage": "official-course-list",
+    "apiConfidence": "official-course-names-and-credits",
     "quality": {
       "complete": false,
       "expectedTerms": 10,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "totalHp": 300,
+      "slotCount": 1,
+      "parsedRows": 26,
+      "sourcePages": 2,
       "termHp": {
         "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+          "listedHp": 30,
+          "covered": true
         },
         "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+          "listedHp": 30,
+          "covered": true
         },
         "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+          "listedHp": 30,
+          "covered": true
         },
         "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+          "listedHp": 30,
+          "covered": true
         },
         "5": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+          "listedHp": 30,
+          "covered": true
         },
         "6": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+          "listedHp": 30,
+          "covered": true
         },
         "7": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+          "listedHp": 30,
+          "covered": true
         },
         "8": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+          "listedHp": 30,
+          "covered": true
         },
         "9": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+          "listedHp": 30,
+          "covered": true
         },
         "10": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+          "listedHp": 30,
+          "covered": true
         }
-      },
-      "slotCount": 0,
-      "totalHp": 300,
-      "sourcePages": 1,
-      "parsedRows": 0
+      }
     },
-    "checkedAt": "2026-09-13T15:08:31.059Z",
+    "checkedAt": "2026-10-05T00:00:00.000Z",
     "term": "HT26"
   },
   {
@@ -37634,8 +37811,8 @@
     "rows": [
       {
         "term": 1,
-        "name": "Text, kultur och samhälle: Engelska i samtiden",
-        "code": "",
+        "name": "Text, kultur och samhälle: engelska i samtiden",
+        "code": "ENALS1",
         "hp": 15,
         "category": "mandatory",
         "type": "required"
@@ -37708,8 +37885,11 @@
     ],
     "underPlanning": false,
     "audited": true,
-    "checkedAt": "2026-09-13T06:39:35.861Z",
-    "term": "HT26"
+    "checkedAt": "2026-10-05T00:00:00.000Z",
+    "term": "HT26",
+    "sourceUrls": [
+      "https://www.kau.se/utbildning/program-och-kurser/kurser/ENALS1?occasion=48999"
+    ]
   },
   {
     "key": "karlstads-universitet:HAMSK",
