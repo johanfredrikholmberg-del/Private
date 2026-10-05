@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-05T06:23:00.000Z (UTC) · branch: studielots-v2
+Generated: 2026-10-05T06:30:00.000Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -12,15 +12,15 @@ Generated: 2026-10-05T06:23:00.000Z (UTC) · branch: studielots-v2
 | Program utan användbar struktur | 3008 | — |
 | Canonicala programstrukturposter | 1054 | — |
 | Användbara strukturposter | 186 | — |
-| Kursrader i StudieLots DB | 28498 | — |
-| Unika kursidentiteter | 28495 | — |
-| Kurser med minst ett kurstillfälle | 2345 | 8.2% |
-| Kurser utan kurstillfälle | 26150 | — |
+| Kursrader i StudieLots DB | 28875 | — |
+| Unika kursidentiteter | 28872 | — |
+| Kurser med minst ett kurstillfälle | 2345 | 8.1% |
+| Kurser utan kurstillfälle | 26527 | — |
 | Kurstillfällen | 2966 | — |
 | Med startdatum | 2966 | 100.0% |
 | Med både start- och slutdatum | 2772 | 93.5% |
 | Precision explicit: exact / week / unspecified | 34 / 329 / 2603 | — |
-| Strukturkurshänvisningar utan kursidentitet | 432 (383 unika koder) | — |
+| Strukturkurshänvisningar utan kursidentitet | 12 (6 unika koder) | — |
 
 ## Per lärosäte
 
@@ -57,7 +57,7 @@ Generated: 2026-10-05T06:23:00.000Z (UTC) · branch: studielots-v2
 | Linköpings universitet (p.uoh.liu) | 144 | 0 | 144 | 748 | 0 | 748 | 0 | 0 | 0 |
 | Linnéuniversitetet (p.uoh.lnu) | 141 | 0 | 141 | 2054 | 0 | 2054 | 0 | 0 | 0 |
 | Luleå tekniska universitet (p.uoh.ltu) | 86 | 0 | 86 | 1075 | 0 | 1075 | 0 | 0 | 0 |
-| Lunds universitet (p.uoh.lu) | 194 | 42 | 152 | 1954 | 3 | 1951 | 3 | 3 | 3 |
+| Lunds universitet (p.uoh.lu) | 194 | 42 | 152 | 2331 | 3 | 2328 | 3 | 3 | 3 |
 | Malmö universitet (p.uoh.mau) | 114 | 0 | 114 | 600 | 0 | 600 | 0 | 0 | 0 |
 | Marie Cederschiöld högskola (p.uoh.mch) | 8 | 0 | 8 | 1 | 0 | 1 | 0 | 0 | 0 |
 | Mälardalens universitet (p.uoh.mdu) | 82 | 0 | 82 | 1094 | 0 | 1094 | 0 | 0 | 0 |
@@ -82,6 +82,8 @@ Exakta gap finns i `coverage-report.json`: program utan användbar struktur, kur
 
 - 28 KTH-strukturer räknas som användbara eftersom deras terminskurser ligger i `courses`-fältet; en tidigare rapportkontroll läste bara `rows`.
 - 27 verifierade Chalmers-kursidentiteter från officiella programplaner täpper till 54 strukturhänvisningar; inga kurstillfällen eller datum härleddes.
+- 377 konfliktfria Lund-kursidentiteter från officiella programplaner täpper till 420 strukturhänvisningar.
+- 6 Lund-kurskoder återstår för granskning: samma kod har olika namn i olika programstrukturer (12 strukturhänvisningar). De har inte slagits ihop automatiskt.
 - 9 KTH KPUHU-kursidentiteter och verifierade HT26/VT27-kurstillfällen tillagda med kursunika start- och slutdatum.
 - Dubletter i kurstillfällesnycklar: 0.
 - Kurstillfällen utan matchande kursidentitet: 0.
