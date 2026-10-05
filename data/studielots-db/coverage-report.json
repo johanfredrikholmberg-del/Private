@@ -1,6 +1,6 @@
 {
   "reportVersion": 2,
-  "generatedAt": "2026-10-05T13:42:04.527Z",
+  "generatedAt": "2026-10-05T13:46:28.781Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
@@ -22,13 +22,13 @@
     "usableProgrammeStructureRows": 231,
     "courseRows": 29630,
     "uniqueCourseIdentities": 29627,
-    "uniqueCoursesWithOffering": 2729,
-    "uniqueCoursesWithoutOffering": 26898,
-    "offeringRows": 3374,
-    "offeringRowsWithStartDate": 3374,
-    "offeringRowsWithBothDates": 3180,
+    "uniqueCoursesWithOffering": 2779,
+    "uniqueCoursesWithoutOffering": 26848,
+    "offeringRows": 3439,
+    "offeringRowsWithStartDate": 3439,
+    "offeringRowsWithBothDates": 3245,
     "offeringRowsWithExplicitExactPrecision": 35,
-    "offeringRowsWithWeekDerivedPrecision": 736,
+    "offeringRowsWithWeekDerivedPrecision": 801,
     "offeringRowsWithUnspecifiedPrecision": 2603,
     "offeringRowsWithoutCourseIdentity": 0,
     "offeringRowsWithoutTerm": 0,
@@ -344,11 +344,11 @@
       "programsWithUsableStructure": 63,
       "programsWithoutUsableStructure": 103,
       "courses": 1664,
-      "coursesWithAtLeastOneOffering": 703,
-      "coursesWithoutOffering": 961,
-      "courseOfferingRows": 736,
-      "offeringsWithStartDate": 736,
-      "offeringsWithStartAndEndDate": 736,
+      "coursesWithAtLeastOneOffering": 753,
+      "coursesWithoutOffering": 911,
+      "courseOfferingRows": 801,
+      "offeringsWithStartDate": 801,
+      "offeringsWithStartAndEndDate": 801,
       "programmeStructureRows": 167,
       "usableProgrammeStructureRows": 91
     },
@@ -74341,358 +74341,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "LPAG20",
-        "courseName": "Bedömning som pedagogiskt redskap",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAGS1",
-        "courseName": "Specialpedagogik som forsknings- och verksamhetsområde",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAGS7",
-        "courseName": "Examensarbete i speciallärarprogrammet",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAGS9",
-        "courseName": "Specialpedagogisk praktik",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAIF1",
-        "courseName": "Lärande och undervisning i anpassade skolan Del I",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAIF2",
-        "courseName": "Lärande och undervisning i anpassade skolan Del II",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAK04",
-        "courseName": "Leda lärande - KPU",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAK05",
-        "courseName": "Bedömning, betygsättning och VFU - KPU",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAK09",
-        "courseName": "Utvecklingsarbete på forskningsmässig grund och VFU - KPU",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAK10",
-        "courseName": "Verksamhetsförlagd utbildning 3 och 4 - KPU",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAK40",
-        "courseName": "Leda lärande, bedömning och betygssättning - KPU",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAK52",
-        "courseName": "Bedömning och betygsättning - KPU 60",
-        "hp": 4.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAK62",
-        "courseName": "Lärarens professionella ledarskap och VFU II - KPU 60",
-        "hp": 18
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAK72",
-        "courseName": "Ämnesdidaktiskt utvecklingsarbete på forskningsmässig grund - KPU 60",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAS10",
-        "courseName": "Vetenskapliga metoder i specialpedagogisk forskning",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAS11",
-        "courseName": "Specialpedagogik som forsknings- och verksamhetsområde",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAS20",
-        "courseName": "Specialpedagogisk praktik",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "LPAS30",
         "courseName": "Specialpedagogen som kvalificerad samtalspartner och pedagogisk ledare",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGA13",
-        "courseName": "Lärarens didaktiska verktyg",
-        "hp": 6
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGA14",
-        "courseName": "Skola som system och idé - ämneslärare",
-        "hp": 9
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGA15",
-        "courseName": "Lärarens pedagogiska förhållningssätt - ämneslärare",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGA16",
-        "courseName": "Lärarens pedagogiska förhållningssätt del 1 - ämneslärare årskurs 7-9",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGA17",
-        "courseName": "Lärarens pedagogiska förhållningssätt del 2 - ämneslärare årskurs 7-9",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGA25",
-        "courseName": "Verksamhetsförlagd utbildning II - ämneslärare 7-9",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGF10",
-        "courseName": "Tema Barn och Barndom",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGF20",
-        "courseName": "Tema lärande och utveckling",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGF30",
-        "courseName": "De yngsta förskolebarnens språkliga, matematiska och estetiska lärande",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGF40",
-        "courseName": "Naturvetenskap, teknik, bild och drama",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGF50",
-        "courseName": "Att leda och utveckla förskolans verksamhet",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGF70",
-        "courseName": "Förskolan och vetenskapliga perspektiv",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGF90",
-        "courseName": "Förskolan och vetenskapliga perspektiv - arbetsintegrerad variant",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG00",
-        "courseName": "Lärarens didaktiska verktyg",
-        "hp": 6
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG05",
-        "courseName": "Kreativ matematik för grundlärare i årskurs 4-6",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG06",
-        "courseName": "Kreativ matematik för grundlärare i förskoleklass och årskurs 1-3",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG07",
-        "courseName": "Engelska för grundlärare i förskoleklass och årskurs 1-3",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG08",
-        "courseName": "Samhällsorienterande ämnen för grundlärare i förskoleklass och årskurs 1-3",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG15",
-        "courseName": "Engelska för grundlärare i årskurs 4-6",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG17",
-        "courseName": "Svenska för grundlärare i förskoleklass och årskurs 1-3 II",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG18",
-        "courseName": "Kreativ matematik för grundlärare i årskurs 4-6 II",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG20",
-        "courseName": "Bild för grundlärare i årskurs 4-6",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG22",
-        "courseName": "Skola som system och idé - grundlärare",
-        "hp": 9
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG24",
-        "courseName": "Lärarens pedagogiska förhållningssätt - grundlärare",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG25",
-        "courseName": "Svenska för grundlärare i årskurs 4-6",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG26",
-        "courseName": "Svenska för grundlärare i förskoleklass och årskurs 1-3",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG30",
-        "courseName": "Samhällsorienterande ämnen för grundlärare i årskurs 4-6",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG33",
-        "courseName": "Samhällsorienterande ämnen för grundlärare i förskoleklass och årskurs 1-3",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG41",
-        "courseName": "Naturvetenskap och teknik F-3",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGG90",
-        "courseName": "Naturvetenskap och teknik för grundlärare i årskurs 4-6",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGK02",
-        "courseName": "Den lärande eleven - KPU",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGK03",
-        "courseName": "Verksamhetsförlagd utbildning 1 och 2 - KPU",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPGK08",
-        "courseName": "Skola som system och idé - KPU",
         "hp": 15
       },
       {
