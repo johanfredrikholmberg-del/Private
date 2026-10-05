@@ -28,7 +28,7 @@ jobs:
           node-version: '22'
       - name: Import official Karlstad batch
         env:
-          KAU_OFFERING_OFFSET: '849'
+          KAU_OFFERING_OFFSET: '899'
           KAU_OFFERING_BATCH_SIZE: '50'
         run: node scripts/import-kau-verified-offerings.mjs
       - name: Verify canonical DB
