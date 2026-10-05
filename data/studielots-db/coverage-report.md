@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-05T12:48:33.544Z (UTC) · branch: studielots-v2
+Generated: 2026-10-05T12:55:11.853Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -8,18 +8,18 @@ Generated: 2026-10-05T12:48:33.544Z (UTC) · branch: studielots-v2
 |---|---:|---:|
 | Lärosäten | 49 | — |
 | Programidentiteter | 3181 | — |
-| Program med användbar struktur | 176 | 5.5% |
-| Program utan användbar struktur | 3005 | — |
-| Canonicala programstrukturposter | 1055 | — |
-| Användbara strukturposter | 189 | — |
+| Program med användbar struktur | 177 | 5.6% |
+| Program utan användbar struktur | 3004 | — |
+| Canonicala programstrukturposter | 1056 | — |
+| Användbara strukturposter | 190 | — |
 | Kursrader i StudieLots DB | 28931 | — |
 | Unika kursidentiteter | 28928 | — |
-| Kurser med minst ett kurstillfälle | 2652 | 9.2% |
-| Kurser utan kurstillfälle | 26276 | — |
-| Kurstillfällen | 3294 | — |
-| Med startdatum | 3294 | 100.0% |
-| Med både start- och slutdatum | 3100 | 94.1% |
-| Precision explicit: exact / week / unspecified | 35 / 656 / 2402 | — |
+| Kurser med minst ett kurstillfälle | 2680 | 9.3% |
+| Kurser utan kurstillfälle | 26248 | — |
+| Kurstillfällen | 3322 | — |
+| Med startdatum | 3322 | 100.0% |
+| Med både start- och slutdatum | 3128 | 94.2% |
+| Precision explicit: exact / week / unspecified | 35 / 684 / 2402 | — |
 | Strukturkurshänvisningar utan kursidentitet | 12 (6 unika koder) | — |
 
 ## Per lärosäte
@@ -38,7 +38,7 @@ Generated: 2026-10-05T12:48:33.544Z (UTC) · branch: studielots-v2
 | Enskilda Högskolan Stockholm (p.uoh.ehs) | 8 | 0 | 8 | 135 | 0 | 135 | 0 | 0 | 0 |
 | Försvarshögskolan (p.uoh.fhs) | 16 | 0 | 16 | 94 | 0 | 94 | 0 | 0 | 0 |
 | Gymnastik- och idrottshögskolan (p.uoh.gih) | 13 | 0 | 13 | 53 | 0 | 53 | 0 | 0 | 0 |
-| Göteborgs universitet (p.uoh.gu) | 234 | 18 | 216 | 2961 | 1851 | 1110 | 2431 | 2431 | 2431 |
+| Göteborgs universitet (p.uoh.gu) | 234 | 19 | 215 | 2961 | 1851 | 1110 | 2431 | 2431 | 2431 |
 | Högskolan i Borås (p.uoh.hb) | 66 | 0 | 66 | 130 | 0 | 130 | 0 | 0 | 0 |
 | Högskolan Dalarna (p.uoh.hda) | 66 | 0 | 66 | 1356 | 0 | 1356 | 0 | 0 | 0 |
 | Högskolan i Halmstad (p.uoh.hh) | 58 | 0 | 58 | 431 | 0 | 431 | 0 | 0 | 0 |
@@ -49,7 +49,7 @@ Generated: 2026-10-05T12:48:33.544Z (UTC) · branch: studielots-v2
 | Högskolan i Skövde (p.uoh.hs) | 73 | 0 | 73 | 560 | 0 | 560 | 0 | 0 | 0 |
 | Högskolan Väst (p.uoh.hv) | 60 | 0 | 60 | 215 | 0 | 215 | 0 | 0 | 0 |
 | Johannelunds teologiska högskola (p.uoh.jth) | 18 | 0 | 18 | 38 | 0 | 38 | 0 | 0 | 0 |
-| Karlstads universitet (p.uoh.kau) | 166 | 84 | 82 | 1656 | 626 | 1030 | 656 | 656 | 656 |
+| Karlstads universitet (p.uoh.kau) | 166 | 84 | 82 | 1656 | 654 | 1002 | 684 | 684 | 684 |
 | Konstfack (p.uoh.kf) | 15 | 0 | 15 | 11 | 0 | 11 | 0 | 0 | 0 |
 | Karolinska institutet (p.uoh.ki) | 52 | 0 | 52 | 161 | 0 | 161 | 0 | 0 | 0 |
 | Kungl. Musikhögskolan i Stockholm (p.uoh.kmh) | 25 | 0 | 25 | 34 | 0 | 34 | 0 | 0 | 0 |
@@ -78,7 +78,9 @@ Generated: 2026-10-05T12:48:33.544Z (UTC) · branch: studielots-v2
 
 ## Arbetskö och kvalitetsnoteringar
 
-- Karlstads universitet: tre officiellt verifierade batcher lade till 125 kurstillfällen för 118 tidigare ej täckta kursidentiteter. Alla 125 har start- och slutdatum härledda från kursens angivna veckoperiod (precision `week`); inga slutdatum har gissats.
+- Göteborgs universitet: H1MEK:s officiella HT2026-upplägg är materialiserat från Studentportalen (sex terminer à 30 hp, MEK001–MEK006).
+
+- Karlstads universitet: fyra officiellt verifierade batcher lade till 153 kurstillfällen för 146 tidigare ej täckta kursidentiteter. Alla 153 har start- och slutdatum härledda från kursens angivna veckoperiod (precision `week`); inga slutdatum har gissats.
 
 Exakta gap finns i `coverage-report.json`: program utan användbar struktur, kurser utan kurstillfälle samt strukturkursreferenser utan kursidentitet. Endast filer registrerade i StudieLots DB-manifesten räknas.
 
