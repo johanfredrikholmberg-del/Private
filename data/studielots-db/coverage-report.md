@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-05T14:00:11.089Z (UTC) · branch: studielots-v2
+Generated: 2026-10-05T14:50:11.769Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -13,12 +13,12 @@ Generated: 2026-10-05T14:00:11.089Z (UTC) · branch: studielots-v2
 | Canonicala programstrukturposter | 1120 | — |
 | Användbara strukturposter | 231 | — |
 | Unika kursidentiteter | 29627 | — |
-| Kurser med minst ett kurstillfälle | 2880 | 9.7% |
-| Kurser utan kurstillfälle | 26747 | — |
-| Kurstillfällen | 3552 | — |
-| Med startdatum | 3552 | 100.0% |
-| Med både start- och slutdatum | 3358 | 94.5% |
-| Precision explicit: exact / week / unspecified | 35 / 914 / 2603 | — |
+| Kurser med minst ett kurstillfälle | 2902 | 9.8% |
+| Kurser utan kurstillfälle | 26725 | — |
+| Kurstillfällen | 3578 | — |
+| Med startdatum | 3578 | 100.0% |
+| Med både start- och slutdatum | 3384 | 94.6% |
+| Precision explicit: exact / week / unspecified | 61 / 914 / 2603 | — |
 | Strukturreferenser utan kursidentitet | 24 (16 koder) | — |
 | Saknade kursidentiteter i användbara strukturer | 0 | — |
 
@@ -33,7 +33,7 @@ Generated: 2026-10-05T14:00:11.089Z (UTC) · branch: studielots-v2
 | Enskilda Högskolan Stockholm (p.uoh.ehs) | 8 | 0 | 8 | 135 | 0 | 135 | 0 | 0 | 0 |
 | Försvarshögskolan (p.uoh.fhs) | 16 | 0 | 16 | 94 | 0 | 94 | 0 | 0 | 0 |
 | Gymnastik- och idrottshögskolan (p.uoh.gih) | 13 | 0 | 13 | 53 | 0 | 53 | 0 | 0 | 0 |
-| Göteborgs universitet (p.uoh.gu) | 234 | 19 | 215 | 2986 | 1851 | 1135 | 2431 | 2431 | 2431 |
+| Göteborgs universitet (p.uoh.gu) | 234 | 19 | 215 | 2986 | 1873 | 1113 | 2457 | 2457 | 2457 |
 | Handelshögskolan i Stockholm (p.uoh.hhs) | 8 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Högskolan Dalarna (p.uoh.hda) | 66 | 0 | 66 | 1356 | 0 | 1356 | 0 | 0 | 0 |
 | Högskolan i Borås (p.pu.e3.boras) | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 |
