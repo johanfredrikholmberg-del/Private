@@ -2,7 +2,7 @@ name: Import Karlstad verified course offerings
 on:
   workflow_dispatch:
   schedule:
-    - cron: '7 * * * *'
+    - cron: '7,27,47 * * * *'
   push:
     branches: [studielots-v2]
     paths:
