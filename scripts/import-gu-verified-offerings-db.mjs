@@ -2,7 +2,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 const UNIVERSITY='Göteborgs universitet',DB='data/studielots-db',OUT='',META='data/import-reviews/gu-offerings-db-latest.json',MANIFEST=path.join(DB,'manifest.json');
-const CONCURRENCY=Math.max(1,Number(process.env.GU_OFFERING_CONCURRENCY||6)),LIMIT=Math.max(1,Number(process.env.GU_OFFERING_LIMIT||800));
+const CONCURRENCY=Math.max(1,Number(process.env.GU_OFFERING_CONCURRENCY||6)),LIMIT=Math.max(1,Number(process.env.GU_OFFERING_LIMIT||800)),OFFSET=Math.max(0,Number(process.env.GU_OFFERING_OFFSET||0));
 const clean=v=>String(v??'').replace(/\s+/g,' ').trim(),norm=v=>clean(v).toLocaleLowerCase('sv-SE').normalize('NFD').replace(/[\u0300-\u036f]/g,''),isGU=x=>x?.providerId==='p.uoh.gu'||norm(x?.university)==='goteborgs universitet',codeOf=x=>clean(x?.courseCode||x?.code).toUpperCase();
 const monthMap={jan:'01',januari:'01',feb:'02',februari:'02',mar:'03',mars:'03',apr:'04',april:'04',maj:'05',jun:'06',juni:'06',jul:'07',juli:'07',aug:'08',augusti:'08',sep:'09',sept:'09',september:'09',okt:'10',oktober:'10',nov:'11',november:'11',dec:'12',december:'12'};
 async function readJson(f,d=[]){try{return JSON.parse(await fs.readFile(f,'utf8'))}catch{return d}} async function writeJson(f,v){await fs.mkdir(path.dirname(f),{recursive:true});await fs.writeFile(f,JSON.stringify(v,null,2)+'\n')}
@@ -32,7 +32,8 @@ async function main(){
  const validIso=x=>/^20\d{2}-\d{2}-\d{2}$/.test(String(x||''))&&Number.isFinite(Date.parse(x))&&new Date(x+'T00:00:00Z').toISOString().slice(0,10)===x;
  const usable=r=>Boolean(r.startDate&&r.endDate&&Date.parse(r.endDate)>=Date.parse(r.startDate)&&validIso(r.startDate)&&validIso(r.endDate)&&officialUrl(r.sourceUrl)&&r.source!=='skolverket-susa-navet'&&r.applicationStatus!=='cancelled');
  const complete=new Set(offerTables.filter(r=>isGU(r)&&usable(r)).map(r=>codeOf(r)));
- const pending=guCourses.filter(c=>!complete.has(codeOf(c))).slice(0,LIMIT);
+ const uncovered=guCourses.filter(c=>!complete.has(codeOf(c)));
+ const pending=uncovered.slice(OFFSET,OFFSET+LIMIT);
  const checkedAt=new Date().toISOString();
  const results=await pool(pending),byKey=new Map(offerTables.map(r=>[r.key,r])),newRows=[];
  for(const result of results)for(const row of result.rows||[]){
@@ -56,7 +57,9 @@ async function main(){
  db.generatedAt=new Date().toISOString();
  const newlyCovered=new Set(newRows.map(r=>codeOf(r)));
  const manual=results.filter(r=>!(r.rows||[]).some(usable)).map(r=>({courseCode:r.courseCode,reason:r.reason||r.status}));
- const report={checkedAt,source:'gu-official-course-page',canonicalCourseIdentities:guCourses.length,alreadyCoveredBefore:complete.size,candidates:pending.length,processed:results.length,added:newRows.length,newlyCoveredCourseCodes:newlyCovered.size,exactDatedRows:newRows.filter(r=>r.datePrecision==='exact').length,manualReview:manual.length,remainingAfterRun:Math.max(0,guCourses.length-new Set([...complete,...newlyCovered]).size),manualReviewRows:manual.slice(0,500)};
+ const batchEnd=OFFSET+results.length;
+ const nextOffset=batchEnd>=uncovered.length?0:Math.max(0,batchEnd-newlyCovered.size);
+ const report={checkedAt,source:'gu-official-course-page',canonicalCourseIdentities:guCourses.length,alreadyCoveredBefore:complete.size,uncoveredBefore:uncovered.length,batchOffset:OFFSET,nextOffset,candidates:pending.length,processed:results.length,added:newRows.length,newlyCoveredCourseCodes:newlyCovered.size,exactDatedRows:newRows.filter(r=>r.datePrecision==='exact').length,manualReview:manual.length,remainingAfterRun:Math.max(0,guCourses.length-new Set([...complete,...newlyCovered]).size),manualReviewRows:manual.slice(0,500)};
  await writeJson(path.join(process.cwd(),shard),shardRows);
  await writeJson(MANIFEST,db);
  await writeJson(META,report);

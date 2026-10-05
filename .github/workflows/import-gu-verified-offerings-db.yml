@@ -26,10 +26,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Select next GU gap batch
+        id: gu-offset
+        run: |
+          node --input-type=module - <<'NODE' >> "$GITHUB_OUTPUT"
+          import fs from 'node:fs';
+          let offset=0;
+          try { const report=JSON.parse(fs.readFileSync('data/import-reviews/gu-offerings-db-latest.json','utf8')); if(Number.isInteger(report.nextOffset)&&report.nextOffset>=0) offset=report.nextOffset; } catch {}
+          console.log(`offset=${offset}`);
+          NODE
       - name: Import dated offers from official GU course pages
         env:
           GU_OFFERING_CONCURRENCY: '6'
           GU_OFFERING_LIMIT: '800'
+          GU_OFFERING_OFFSET: ${{ steps.gu-offset.outputs.offset }}
         run: node scripts/import-gu-verified-offerings-db.mjs
       - name: Validate exact dates, canonical course matches, and offering keys
         run: |
