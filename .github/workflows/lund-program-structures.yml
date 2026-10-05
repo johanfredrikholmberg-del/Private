@@ -26,7 +26,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        term: [HT26, VT27]
+        term: [HT26]
     if: ${{ github.actor != 'studielots-bot' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60

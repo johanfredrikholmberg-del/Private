@@ -27,6 +27,20 @@ for(const name of ['program-db.json','program-db-variants.json','program-db-lund
     if(err?.code!=='ENOENT')throw err;
   }
 }
+// Canonical verified shards must survive consolidation. The prior version only
+// consumed HT26 and legacy sources, which silently unlinked later canonical shards.
+for(const name of (await fs.readdir(dbDir)).filter(x=>/^programme-structures-.+\.json$/.test(x)&&x!==targetName)){
+  const file=path.join(dbDir,name);
+  const shard=JSON.parse(await fs.readFile(file,'utf8'));
+  const records=Array.isArray(shard)?shard:(shard.programs||[]);
+  for(const row of records){
+    const hasRows=Array.isArray(row?.rows)&&row.rows.length>0;
+    const accepted=row?.verified===true||['complete','choice-required','complete-semester-sequence'].includes(row?.coverage);
+    const hasSource=Boolean(row?.sourceEvidenceUrl||row?.sourceUrl||row?.sourceUrls?.length);
+    if(accepted&&hasRows&&hasSource)rows.push({...row,migrationSource:name});
+  }
+}
+
 // SUSA contains a mixture of metadata, manual-review results and resolved
 // official structures. Only migrate records explicitly classified complete.
 try{
@@ -59,7 +73,7 @@ for(const row of rows){
   const k=key(row);
   if(!k.replaceAll('|',''))continue;
   const old=dedup.get(k);
-  const score=x=>(x?.courses?.length||x?.rows?.length||0)*100+Object.keys(x||{}).length;
+  const score=x=>(x?.verified===true?10000:0)+(x?.termPlacementVerified===true?1000:0)+(['complete','choice-required','complete-semester-sequence'].includes(x?.coverage)?500:0)+(x?.courses?.length||x?.rows?.length||0)*100+Object.keys(x||{}).length;
   if(!old||score(row)>score(old))dedup.set(k,row);
 }
 const programs=[...dedup.values()];
