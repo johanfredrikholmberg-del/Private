@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-05T06:30:00.000Z",
+  "generatedAt": "2026-10-05T00:00:00.000Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -17,11 +17,11 @@
     },
     "programmeStructures": {
       "storageManifest": "data/studielots-db/programme-structures-manifest.json",
-      "rows": 1054
+      "rows": 1055
     },
     "courses": {
       "storage": "data/studielots-db/courses.json",
-      "rows": 28875,
+      "rows": 28931,
       "additionalStorages": [
         "data/studielots-db/courses-gu-2027-eu.json",
         "data/studielots-db/courses-gu-2027-programmes.json",
@@ -31,12 +31,13 @@
         "data/studielots-db/courses-gu-kth-orphan-offerings-2026-10-04.json",
         "data/studielots-db/courses-kth-kpuhu-verified.json",
         "data/studielots-db/courses-chalmers-structure-identities-2026-10-05.json",
-        "data/studielots-db/courses-lund-structure-identities-2026-10-05.json"
+        "data/studielots-db/courses-lund-structure-identities-2026-10-05.json",
+        "data/studielots-db/courses-kth-arkit-2026-verified.json"
       ]
     },
     "courseOfferings": {
       "storage": "data/studielots-db/course-offerings.json",
-      "rows": 2966,
+      "rows": 2968,
       "terms": [
         "HT25",
         "HT26",
@@ -51,12 +52,16 @@
         "data/studielots-db/course-offerings-gu-vt27-exchange.json",
         "data/studielots-db/course-offerings-gu-vt27-kpu.json",
         "data/studielots-db/course-offerings-gu-ht26-kpu.json",
-        "data/studielots-db/course-offerings-kth-kpuhu-2026-2027.json"
+        "data/studielots-db/course-offerings-kth-kpuhu-2026-2027.json",
+        "data/studielots-db/course-offerings-kth-kau-2026.json"
       ]
     },
     "syllabusVersions": {
       "storage": "data/studielots-db/syllabus-versions.json",
-      "rows": 2836
+      "rows": 2838,
+      "additionalStorages": [
+        "data/studielots-db/syllabus-versions-kth-kau-2026-verified.json"
+      ]
     },
     "creditTransferEvidence": {
       "storage": "data/studielots-db/credit-transfer-evidence.json",
