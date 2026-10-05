@@ -23,7 +23,7 @@ for(const p of rows.filter(x=>x.university==='Karlstads universitet')){
  if(!plan.length||plan.some(r=>!r.name||!(Number(r.hp)>0)||(!r.isSlot&&!r.code)))reasons.push('course-reference');
  if(!reasons.length)for(let t=1;t<=terms;t++){
    const target=t<terms?30:credits-30*(terms-1);
-   if(!complete.includes(t)||Math.abs(plan.filter(r=>Number(r.term)===t).reduce((n,r)=>n+Number(r.hp),0)-target)>.2){reasons.push('term-credit-balance');break}
+   const load=plan.reduce((n,r)=>{const first=Number(r.term),last=Number(r.endTerm||r.term);if(t<first||t>last)return n;return n+Number(r.hp)/(last-first+1)},0);if(!complete.includes(t)||Math.abs(load-target)>.2){reasons.push('term-credit-balance');break}
  }
  if(reasons.length){review.push({code:p.programCode,reasons});continue}
  accepted.push(p.programCode);

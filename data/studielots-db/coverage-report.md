@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-05T15:16:35.679Z (UTC) · branch: studielots-v2
+Generated: 2026-10-05T19:19:36.673Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -8,10 +8,10 @@ Generated: 2026-10-05T15:16:35.679Z (UTC) · branch: studielots-v2
 |---|---:|---:|
 | Lärosäten | 49 | — |
 | Programidentiteter | 3181 | — |
-| Program med användbar struktur | 175 | 5.5% |
-| Program utan användbar struktur | 3006 | — |
+| Program med användbar struktur | 176 | 5.5% |
+| Program utan användbar struktur | 3005 | — |
 | Canonicala programstrukturposter | 1120 | — |
-| Användbara strukturposter | 231 | — |
+| Användbara strukturposter | 232 | — |
 | Unika kursidentiteter | 29629 | — |
 | Kurser med minst ett kurstillfälle | 3025 | 10.2% |
 | Kurser utan kurstillfälle | 26604 | — |
@@ -46,7 +46,7 @@ Generated: 2026-10-05T15:16:35.679Z (UTC) · branch: studielots-v2
 | Högskolan Väst (p.uoh.hv) | 60 | 0 | 60 | 215 | 0 | 215 | 0 | 0 | 0 |
 | Johannelunds teologiska högskola (p.uoh.jth) | 18 | 0 | 18 | 38 | 0 | 38 | 0 | 0 | 0 |
 | Jönköping University (p.uoh.hj) | 173 | 0 | 173 | 218 | 0 | 218 | 0 | 0 | 0 |
-| Karlstads universitet (p.uoh.kau) | 166 | 63 | 103 | 1666 | 977 | 689 | 1042 | 1042 | 1042 |
+| Karlstads universitet (p.uoh.kau) | 166 | 64 | 102 | 1666 | 977 | 689 | 1042 | 1042 | 1042 |
 | Karolinska institutet (p.uoh.ki) | 52 | 0 | 52 | 161 | 0 | 161 | 0 | 0 | 0 |
 | Konstfack (p.uoh.kf) | 15 | 0 | 15 | 11 | 0 | 11 | 0 | 0 | 0 |
 | Kungl. Musikhögskolan i Stockholm (p.uoh.kmh) | 25 | 0 | 25 | 34 | 0 | 34 | 0 | 0 | 0 |

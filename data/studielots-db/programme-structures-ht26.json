@@ -38099,22 +38099,31 @@
         "name": "Valfri kurs",
         "hp": 7.5,
         "type": "choice",
-        "category": "elective"
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": []
       }
     ],
-    "coverage": "partial-structure",
-    "reason": "published-structure-partially-reconciled",
+    "coverage": "complete",
+    "reason": "all-published-terms-reconciled",
     "expectedTerms": 6,
     "completeTerms": [
       1,
       2,
       3,
-      4
+      4,
+      5,
+      6
     ],
     "underPlanning": false,
     "audited": true,
-    "checkedAt": "2026-09-13T06:39:17.397Z",
-    "term": "HT26"
+    "checkedAt": "2026-10-05T19:19:36.673Z",
+    "term": "HT26",
+    "verified": true,
+    "courseCodesVerified": true,
+    "verifiedAt": "2026-10-05T19:19:36.673Z",
+    "sourceEvidenceUrl": "https://www.kau.se/utbildning/program-och-kurser/program/HGMSK"
   },
   {
     "key": "karlstads-universitet:JALAW",
