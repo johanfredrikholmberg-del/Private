@@ -26,7 +26,7 @@ const allCandidates = [...new Map(read('data/susa/courses.json')
   .filter(x => x.university === 'Karlstads universitet' && x.code && x.events?.some(e => /20271|20262/.test(e.id || '')))
   .map(x => [x.code, x])).values()];
 const batchOffset = Math.max(0, Number(process.env.KAU_OFFERING_OFFSET || 0));
-const batchSize = Math.max(1, Number(process.env.KAU_OFFERING_BATCH_SIZE || 50));
+const batchSize = Math.max(1, Number(process.env.KAU_OFFERING_BATCH_SIZE || 100));
 const catalogue = allCandidates.slice(batchOffset, batchOffset + batchSize);
 const nextOffset = batchOffset + catalogue.length >= allCandidates.length ? 0 : batchOffset + catalogue.length;
 const byKey = new Map(existing.map(x => [x.key, x]));
