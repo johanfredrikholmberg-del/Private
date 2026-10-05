@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-05T13:46:28.781Z (UTC) · branch: studielots-v2
+Generated: 2026-10-05T13:50:58.695Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -13,12 +13,12 @@ Generated: 2026-10-05T13:46:28.781Z (UTC) · branch: studielots-v2
 | Canonicala programstrukturposter | 1120 | — |
 | Användbara strukturposter | 231 | — |
 | Unika kursidentiteter | 29627 | — |
-| Kurser med minst ett kurstillfälle | 2779 | 9.4% |
-| Kurser utan kurstillfälle | 26848 | — |
-| Kurstillfällen | 3439 | — |
-| Med startdatum | 3439 | 100.0% |
-| Med både start- och slutdatum | 3245 | 94.4% |
-| Precision explicit: exact / week / unspecified | 35 / 801 / 2603 | — |
+| Kurser med minst ett kurstillfälle | 2821 | 9.5% |
+| Kurser utan kurstillfälle | 26806 | — |
+| Kurstillfällen | 3489 | — |
+| Med startdatum | 3489 | 100.0% |
+| Med både start- och slutdatum | 3295 | 94.4% |
+| Precision explicit: exact / week / unspecified | 35 / 851 / 2603 | — |
 | Strukturreferenser utan kursidentitet | 24 (16 koder) | — |
 | Saknade kursidentiteter i användbara strukturer | 0 | — |
 
@@ -46,7 +46,7 @@ Generated: 2026-10-05T13:46:28.781Z (UTC) · branch: studielots-v2
 | Högskolan Väst (p.uoh.hv) | 60 | 0 | 60 | 215 | 0 | 215 | 0 | 0 | 0 |
 | Johannelunds teologiska högskola (p.uoh.jth) | 18 | 0 | 18 | 38 | 0 | 38 | 0 | 0 | 0 |
 | Jönköping University (p.uoh.hj) | 173 | 0 | 173 | 218 | 0 | 218 | 0 | 0 | 0 |
-| Karlstads universitet (p.uoh.kau) | 166 | 63 | 103 | 1664 | 753 | 911 | 801 | 801 | 801 |
+| Karlstads universitet (p.uoh.kau) | 166 | 63 | 103 | 1664 | 795 | 869 | 851 | 851 | 851 |
 | Karolinska institutet (p.uoh.ki) | 52 | 0 | 52 | 161 | 0 | 161 | 0 | 0 | 0 |
 | Konstfack (p.uoh.kf) | 15 | 0 | 15 | 11 | 0 | 11 | 0 | 0 | 0 |
 | Kungl. Musikhögskolan i Stockholm (p.uoh.kmh) | 25 | 0 | 25 | 34 | 0 | 34 | 0 | 0 | 0 |
