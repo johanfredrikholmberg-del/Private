@@ -24,7 +24,19 @@ for(const paragraph of section.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)){
 }
 if(rows.length!==7||[1,2].some(t=>Math.abs(rows.filter(r=>r.term===t).reduce((n,r)=>n+r.hp,0)-30)>.01))throw Error('GU finance term or credits incomplete');
 const existing=manifest.parts.flatMap(p=>{const x=read(root+p);return Array.isArray(x)?x:x.programs}).filter(x=>x.university==='Göteborgs universitet'&&x.programCode==='S2FIC');
-if(existing.length){if(existing.length!==1||existing[0].validFrom!=='2027HT'||JSON.stringify(existing[0].rows)!==JSON.stringify(rows))throw Error('Conflicting canonical GU finance plan');console.log('GU finance 2027 already materialized');process.exit(0)}
+if(existing.length){
+  const canonical=existing[0];
+  const shape=list=>list.map(x=>[Number(x.term),String(x.name||'').trim(),Number(x.hp),x.category||'']);
+  const canonicalMatches=existing.length===1
+    &&canonical.validFrom==='2027HT'
+    &&canonical.coverage==='complete'
+    &&canonical.verified===true
+    &&canonical.sourceUrls?.includes(url)
+    &&JSON.stringify(shape(canonical.rows||[]))===JSON.stringify(shape(rows));
+  if(!canonicalMatches)throw Error('Conflicting canonical GU finance plan');
+  console.log('GU finance 2027 already materialized with verified course identities');
+  process.exit(0);
+}
 const item={id:'gu:S2FIC:2027HT',key:matches[0].key,university:'Göteborgs universitet',programCode:'S2FIC',programName:matches[0].programName,programHp:60,hp:60,validFrom:'2027HT',coverage:'complete',verified:true,courseCodesVerified:false,source:'gu-official-programme-syllabus',sourceEvidenceUrl:url,sourceUrls:[url],rows};
 if(process.argv.includes('--write')){
   const part='programme-structures-gu-finance-2027.json';
