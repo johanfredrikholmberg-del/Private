@@ -9,6 +9,7 @@ on:
       - .github/workflows/import-kau-verified-offerings.yml
       - scripts/import-kau-verified-offerings.mjs
       - scripts/kau-offering-week-dates.mjs
+      - data/import-reviews/kau-verified-offerings-latest.json
 permissions:
   contents: write
 concurrency:
@@ -31,16 +32,25 @@ jobs:
         run: |
           node --input-type=module - <<'NODE' >> "$GITHUB_OUTPUT"
           import fs from 'node:fs';
-          let offset=1049;
-          try { const report=JSON.parse(fs.readFileSync('data/import-reviews/kau-verified-offerings-latest.json','utf8')); if(Number.isInteger(report.nextOffset)&&report.nextOffset>=0) offset=report.nextOffset; } catch {}
+          let offset=1049,done=false;
+          try {
+            const report=JSON.parse(fs.readFileSync('data/import-reviews/kau-verified-offerings-latest.json','utf8'));
+            if(Number.isInteger(report.nextOffset)&&report.nextOffset>=0) {
+              const finished=report.nextOffset===0&&Number(report.batchOffset)+Number(report.candidates)>=Number(report.totalCandidates);
+              if(finished) done=true; else offset=report.nextOffset;
+            }
+          } catch {}
           console.log(`offset=${offset}`);
+          console.log(`done=${done}`);
           NODE
       - name: Import official Karlstad batch
+        if: steps.kau-offset.outputs.done != 'true'
         env:
           KAU_OFFERING_OFFSET: ${{ steps.kau-offset.outputs.offset }}
           KAU_OFFERING_BATCH_SIZE: '100'
         run: node scripts/import-kau-verified-offerings.mjs
       - name: Verify canonical DB
+        if: steps.kau-offset.outputs.done != 'true'
         run: |
           node --input-type=module - <<'NODE'
           import fs from 'node:fs';
@@ -61,12 +71,13 @@ jobs:
           console.log(JSON.stringify({added:report.added,courseIdentitiesAdded:report.courseIdentitiesAdded,backfilledDates:report.backfilledDates,karlstad:kau.length,canonicalTotal:rows.length,courses:courses.length}));
           NODE
       - name: Save to StudieLots DB
+        if: steps.kau-offset.outputs.done != 'true'
         run: |
           if [ -z "$(git status --porcelain -- data/studielots-db/course-offerings.json data/studielots-db/manifest.json)" ]; then echo 'No new offerings'; exit 0; fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add -f data/studielots-db/course-offerings.json data/studielots-db/courses-kau-offering-identities.json data/studielots-db/manifest.json data/import-reviews/kau-verified-offerings-latest.json
-          git commit -m 'Materialize next Karlstad course offering batch [skip ci]'
+          git commit -m 'Materialize next Karlstad course offering batch'
           for attempt in 1 2 3; do
             git fetch origin studielots-v2
             if ! git rebase origin/studielots-v2; then
