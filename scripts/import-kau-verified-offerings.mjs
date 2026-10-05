@@ -22,13 +22,17 @@ const datedExisting = primary.map(row => {
 });
 // Work through a small, deterministic SUSA batch. SUSA supplies candidates only;
 // the official KAU page and its direct application link establish each offering.
-const catalogue = [...new Map(read('data/susa/courses.json')
+const allCandidates = [...new Map(read('data/susa/courses.json')
   .filter(x => x.university === 'Karlstads universitet' && x.code && x.events?.some(e => /20271|20262/.test(e.id || '')))
-  .map(x => [x.code, x])).values()].slice(Number(process.env.KAU_OFFERING_OFFSET || 0), Number(process.env.KAU_OFFERING_OFFSET || 0) + Number(process.env.KAU_OFFERING_BATCH_SIZE || 35));
+  .map(x => [x.code, x])).values()];
+const batchOffset = Math.max(0, Number(process.env.KAU_OFFERING_OFFSET || 0));
+const batchSize = Math.max(1, Number(process.env.KAU_OFFERING_BATCH_SIZE || 50));
+const catalogue = allCandidates.slice(batchOffset, batchOffset + batchSize);
+const nextOffset = batchOffset + catalogue.length >= allCandidates.length ? 0 : batchOffset + catalogue.length;
 const byKey = new Map(existing.map(x => [x.key, x]));
 for (const row of datedExisting) byKey.set(row.key, row);
 const newRows = [];
-const report = {checkedAt: new Date().toISOString(), candidates: catalogue.length, added: 0, backfilledDates, rateLimited: false, review: []};
+const report = {checkedAt: new Date().toISOString(), batchOffset, nextOffset, totalCandidates: allCandidates.length, candidates: catalogue.length, added: 0, backfilledDates, rateLimited: false, review: []};
 const text = html => html.replace(/<[^>]*>/g, ' ').replace(/&nbsp;|&#160;/g, ' ').replace(/\s+/g, ' ').trim();
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 
