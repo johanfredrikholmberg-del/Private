@@ -33,12 +33,12 @@ async function main(){
  const usable=r=>Boolean(r.startDate&&r.endDate&&Date.parse(r.endDate)>=Date.parse(r.startDate)&&validIso(r.startDate)&&validIso(r.endDate)&&officialUrl(r.sourceUrl)&&r.source!=='skolverket-susa-navet'&&r.applicationStatus!=='cancelled');
  const complete=new Set(offerTables.filter(r=>isGU(r)&&usable(r)).map(r=>codeOf(r)));
  const pending=guCourses.filter(c=>!complete.has(codeOf(c))).slice(0,LIMIT);
- const results=await pool(pending),byKey=new Map(offerTables.map(r=>[r.key,r])),newRows=[];
+ const checkedAt=new Date().toISOString();\n const results=await pool(pending),byKey=new Map(offerTables.map(r=>[r.key,r])),newRows=[];
  for(const result of results)for(const row of result.rows||[]){
   if(!usable(row)||!officialUrl(row.sourceUrl)||!row.offeringTerm||!codeOf(row))continue;
   const code=codeOf(row),identity='p.uoh.gu|'+code;
   if(!courseTables.some(c=>(c.providerId==='p.uoh.gu'||isGU(c))&&codeOf(c)===code))throw new Error(code+': no canonical course identity');
-  const exact={...row,datePrecision:'exact',dateDerivation:'explicit-dates-on-official-gu-course-page',verificationStatus:'verified',verified:true};
+  const exact={...row,checkedAt,datePrecision:'exact',dateDerivation:'explicit-dates-on-official-gu-course-page',verificationStatus:'verified',verified:true};
   if(byKey.has(exact.key))continue;
   byKey.set(exact.key,exact);newRows.push(exact);
  }
@@ -55,7 +55,7 @@ async function main(){
  db.generatedAt=new Date().toISOString();
  const newlyCovered=new Set(newRows.map(r=>codeOf(r)));
  const manual=results.filter(r=>!(r.rows||[]).some(usable)).map(r=>({courseCode:r.courseCode,reason:r.reason||r.status}));
- const report={checkedAt:new Date().toISOString(),source:'gu-official-course-page',canonicalCourseIdentities:guCourses.length,alreadyCoveredBefore:complete.size,candidates:pending.length,processed:results.length,added:newRows.length,newlyCoveredCourseCodes:newlyCovered.size,exactDatedRows:newRows.filter(r=>r.datePrecision==='exact').length,manualReview:manual.length,remainingAfterRun:Math.max(0,guCourses.length-new Set([...complete,...newlyCovered]).size),manualReviewRows:manual.slice(0,500)};
+ const report={checkedAt,source:'gu-official-course-page',canonicalCourseIdentities:guCourses.length,alreadyCoveredBefore:complete.size,candidates:pending.length,processed:results.length,added:newRows.length,newlyCoveredCourseCodes:newlyCovered.size,exactDatedRows:newRows.filter(r=>r.datePrecision==='exact').length,manualReview:manual.length,remainingAfterRun:Math.max(0,guCourses.length-new Set([...complete,...newlyCovered]).size),manualReviewRows:manual.slice(0,500)};
  await writeJson(path.join(process.cwd(),shard),shardRows);
  await writeJson(MANIFEST,db);
  await writeJson(META,report);
