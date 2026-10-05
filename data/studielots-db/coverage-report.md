@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-05T06:30:00.000Z (UTC) · branch: studielots-v2
+Generated: 2026-10-05T00:00:00.000Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -8,18 +8,18 @@ Generated: 2026-10-05T06:30:00.000Z (UTC) · branch: studielots-v2
 |---|---:|---:|
 | Lärosäten | 49 | — |
 | Programidentiteter | 3181 | — |
-| Program med användbar struktur | 173 | 5.4% |
-| Program utan användbar struktur | 3008 | — |
-| Canonicala programstrukturposter | 1054 | — |
-| Användbara strukturposter | 186 | — |
-| Kursrader i StudieLots DB | 28875 | — |
-| Unika kursidentiteter | 28872 | — |
-| Kurser med minst ett kurstillfälle | 2345 | 8.1% |
-| Kurser utan kurstillfälle | 26527 | — |
-| Kurstillfällen | 2966 | — |
-| Med startdatum | 2966 | 100.0% |
-| Med både start- och slutdatum | 2772 | 93.5% |
-| Precision explicit: exact / week / unspecified | 34 / 329 / 2603 | — |
+| Program med användbar struktur | 176 | 5.5% |
+| Program utan användbar struktur | 3005 | — |
+| Canonicala programstrukturposter | 1055 | — |
+| Användbara strukturposter | 189 | — |
+| Kursrader i StudieLots DB | 28931 | — |
+| Unika kursidentiteter | 28928 | — |
+| Kurser med minst ett kurstillfälle | 2347 | 8.1% |
+| Kurser utan kurstillfälle | 26581 | — |
+| Kurstillfällen | 2968 | — |
+| Med startdatum | 2968 | 100.0% |
+| Med både start- och slutdatum | 2774 | 93.5% |
+| Precision explicit: exact / week / unspecified | 35 / 330 / 2603 | — |
 | Strukturkurshänvisningar utan kursidentitet | 12 (6 unika koder) | — |
 
 ## Per lärosäte
@@ -38,7 +38,7 @@ Generated: 2026-10-05T06:30:00.000Z (UTC) · branch: studielots-v2
 | Enskilda Högskolan Stockholm (p.uoh.ehs) | 8 | 0 | 8 | 135 | 0 | 135 | 0 | 0 | 0 |
 | Försvarshögskolan (p.uoh.fhs) | 16 | 0 | 16 | 94 | 0 | 94 | 0 | 0 | 0 |
 | Gymnastik- och idrottshögskolan (p.uoh.gih) | 13 | 0 | 13 | 53 | 0 | 53 | 0 | 0 | 0 |
-| Göteborgs universitet (p.uoh.gu) | 234 | 17 | 217 | 2961 | 1851 | 1110 | 2431 | 2431 | 2431 |
+| Göteborgs universitet (p.uoh.gu) | 234 | 18 | 216 | 2961 | 1851 | 1110 | 2431 | 2431 | 2431 |
 | Högskolan i Borås (p.uoh.hb) | 66 | 0 | 66 | 130 | 0 | 130 | 0 | 0 | 0 |
 | Högskolan Dalarna (p.uoh.hda) | 66 | 0 | 66 | 1356 | 0 | 1356 | 0 | 0 | 0 |
 | Högskolan i Halmstad (p.uoh.hh) | 58 | 0 | 58 | 431 | 0 | 431 | 0 | 0 | 0 |
@@ -49,11 +49,11 @@ Generated: 2026-10-05T06:30:00.000Z (UTC) · branch: studielots-v2
 | Högskolan i Skövde (p.uoh.hs) | 73 | 0 | 73 | 560 | 0 | 560 | 0 | 0 | 0 |
 | Högskolan Väst (p.uoh.hv) | 60 | 0 | 60 | 215 | 0 | 215 | 0 | 0 | 0 |
 | Johannelunds teologiska högskola (p.uoh.jth) | 18 | 0 | 18 | 38 | 0 | 38 | 0 | 0 | 0 |
-| Karlstads universitet (p.uoh.kau) | 166 | 83 | 83 | 1656 | 320 | 1336 | 329 | 329 | 329 |
+| Karlstads universitet (p.uoh.kau) | 166 | 84 | 82 | 1656 | 321 | 1335 | 330 | 330 | 330 |
 | Konstfack (p.uoh.kf) | 15 | 0 | 15 | 11 | 0 | 11 | 0 | 0 | 0 |
 | Karolinska institutet (p.uoh.ki) | 52 | 0 | 52 | 161 | 0 | 161 | 0 | 0 | 0 |
 | Kungl. Musikhögskolan i Stockholm (p.uoh.kmh) | 25 | 0 | 25 | 34 | 0 | 34 | 0 | 0 | 0 |
-| Kungl. Tekniska högskolan (p.uoh.kth) | 85 | 28 | 57 | 186 | 171 | 15 | 203 | 203 | 9 |
+| Kungl. Tekniska högskolan (p.uoh.kth) | 85 | 29 | 56 | 242 | 172 | 70 | 204 | 204 | 10 |
 | Linköpings universitet (p.uoh.liu) | 144 | 0 | 144 | 748 | 0 | 748 | 0 | 0 | 0 |
 | Linnéuniversitetet (p.uoh.lnu) | 141 | 0 | 141 | 2054 | 0 | 2054 | 0 | 0 | 0 |
 | Luleå tekniska universitet (p.uoh.ltu) | 86 | 0 | 86 | 1075 | 0 | 1075 | 0 | 0 | 0 |
@@ -80,11 +80,14 @@ Generated: 2026-10-05T06:30:00.000Z (UTC) · branch: studielots-v2
 
 Exakta gap finns i `coverage-report.json`: program utan användbar struktur, kurser utan kurstillfälle samt strukturkursreferenser utan kursidentitet. Endast filer registrerade i StudieLots DB-manifesten räknas.
 
-- 28 KTH-strukturer räknas som användbara eftersom deras terminskurser ligger i `courses`-fältet; en tidigare rapportkontroll läste bara `rows`.
+- 29 KTH-strukturer räknas som användbara; ARKIT HT26 är nu täckt av den officiella kurslistan.
 - 27 verifierade Chalmers-kursidentiteter från officiella programplaner täpper till 54 strukturhänvisningar; inga kurstillfällen eller datum härleddes.
 - 377 konfliktfria Lund-kursidentiteter från officiella programplaner täpper till 420 strukturhänvisningar.
 - 6 Lund-kurskoder återstår för granskning: samma kod har olika namn i olika programstrukturer (12 strukturhänvisningar). De har inte slagits ihop automatiskt.
 - 9 KTH KPUHU-kursidentiteter och verifierade HT26/VT27-kurstillfällen tillagda med kursunika start- och slutdatum.
+- 56 KTH-kursidentiteter från ARKIT HT26 är länkade till kurslistan; A31P1A har ett verifierat HT26-kurstillfälle och kursplan.
+- GU:s apotekarprogram HT26 har nu alla namngivna kurser och högskolepoäng från officiell utbildningsplan; endast tre kurskoder kunde korslänkas automatiskt, övriga står kvar tomma tills koderna styrkts.
+- KAU:s HAENG-plan har ENALS1-koden på obligatorisk termin-1-kurs; kursplan HT26 och kurstillfälle vecka 36–2 är verifierade.
 - Dubletter i kurstillfällesnycklar: 0.
 - Kurstillfällen utan matchande kursidentitet: 0.
 - Felaktiga/bakvända datumintervall: 0.
