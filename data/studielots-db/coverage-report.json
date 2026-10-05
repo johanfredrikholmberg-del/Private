@@ -1,6 +1,6 @@
 {
   "reportVersion": 1,
-  "generatedAt": "2026-10-05T10:42:04.788Z",
+  "generatedAt": "2026-10-05T10:46:16.839Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
@@ -22,14 +22,14 @@
     "usableProgrammeStructureRows": 189,
     "courseRows": 28931,
     "uniqueCourseIdentities": 28928,
-    "uniqueCoursesWithOffering": 2452,
-    "uniqueCoursesWithoutOffering": 26476,
-    "offeringRows": 3076,
-    "offeringRowsWithStartDate": 3076,
-    "offeringRowsWithBothDates": 2882,
+    "uniqueCoursesWithOffering": 2497,
+    "uniqueCoursesWithoutOffering": 26431,
+    "offeringRows": 3123,
+    "offeringRowsWithStartDate": 3123,
+    "offeringRowsWithBothDates": 2929,
     "offeringRowsWithExplicitExactPrecision": 35,
-    "offeringRowsWithWeekDerivedPrecision": 438,
-    "offeringRowsWithUnspecifiedPrecision": 2495,
+    "offeringRowsWithWeekDerivedPrecision": 485,
+    "offeringRowsWithUnspecifiedPrecision": 2448,
     "offeringRowsWithoutCourseIdentity": 0,
     "offeringRowsWithoutTerm": 0,
     "invalidDateRows": 0,
@@ -389,11 +389,11 @@
       "programsWithUsableStructure": 84,
       "programsWithoutUsableStructure": 82,
       "courses": 1656,
-      "coursesWithAtLeastOneOffering": 426,
-      "coursesWithoutOffering": 1230,
-      "courseOfferingRows": 438,
-      "offeringsWithStartDate": 438,
-      "offeringsWithStartAndEndDate": 438,
+      "coursesWithAtLeastOneOffering": 471,
+      "coursesWithoutOffering": 1185,
+      "courseOfferingRows": 485,
+      "offeringsWithStartDate": 485,
+      "offeringsWithStartAndEndDate": 485,
       "programmeStructureRows": 167,
       "usableProgrammeStructureRows": 92
     },
@@ -77695,149 +77695,9 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "HIGL13",
-        "courseName": "Historia III med didaktisk inriktning",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "HIGL20",
-        "courseName": "Historia 2 med didaktisk inriktning",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDALT4",
-        "courseName": "Idrottsvetenskap med didaktisk inriktning 4",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDALT5",
-        "courseName": "Idrottsvetenskap med didaktisk inriktning 5",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDAM01",
-        "courseName": "Idrottsvetenskap - en introduktion till ett mång- och tvärvetenskapligt fält",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDAM03",
-        "courseName": "Holistisk idrottscoaching",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDAM04",
-        "courseName": "Hälso- och livsstilsrelaterad coaching",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDAM06",
-        "courseName": "Barn i rörelse",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDAM30",
-        "courseName": "Självständigt arbete i idrottsvetenskap",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGA12",
-        "courseName": "Idrottsvetenskap I",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGB11",
-        "courseName": "Idrottspsykologi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGB12",
-        "courseName": "Tillämpad idrottspsykologi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGB13",
-        "courseName": "Träningslära",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGB14",
-        "courseName": "Idrotts- och hälsorelaterad verksamhetsförlagd utbildning I",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGB15",
-        "courseName": "Idrottsdidaktik och fysisk aktivitet",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGB16",
-        "courseName": "Kost- och näringslära",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGB17",
-        "courseName": "Idrotts- och hälsorelaterad verksamhetsförlagd utbildning II",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGB18",
-        "courseName": "Prestationsutvecklingsstrategier",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "IDGB67",
         "courseName": "AI i idrotts- och hälsocoaching. Människa, maskin och välmående",
         "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGBA2",
-        "courseName": "Idrottsvetenskap II",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGCC6",
-        "courseName": "Idrottsvetenskap III",
-        "hp": 30
       },
       {
         "providerId": "p.uoh.kau",
@@ -77849,121 +77709,9 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "IDGL79",
-        "courseName": "Idrottsvetenskap med didaktisk inriktning 3, för årskurs 7-9",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGLT1",
-        "courseName": "Idrottsvetenskap med didaktisk inriktning 1",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGLT2",
-        "courseName": "Idrottsvetenskap med didaktisk inriktning 2",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGLT3",
-        "courseName": "Idrottsvetenskap med didaktisk inriktning 3",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IDGLT6",
-        "courseName": "Idrottsvetenskap med didaktisk inriktning 2, 7-9 (andraämne)",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "IDGS60",
         "courseName": "Specialidrott för lärare i idrott och hälsa",
         "hp": 60
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAD04",
-        "courseName": "Service Management för ingenjörer",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAD06",
-        "courseName": "Idéhantering i innovationer",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAD08",
-        "courseName": "Tjänstefiering för ingenjörer",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAD09",
-        "courseName": "Digitalisering",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAD11",
-        "courseName": "Innovationsledning och industriell transformation",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAD12",
-        "courseName": "Affärsmodeller i en föränderlig omgivning",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAD60",
-        "courseName": "Projekt som arbetsform",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAD62",
-        "courseName": "Den projektorienterade organisationen",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAD64",
-        "courseName": "Ledarrollen i projektmiljöer",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAD65",
-        "courseName": "Vetenskapsteori och forskning i projektmiljöer",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAD66",
-        "courseName": "Perspektiv på projektledning",
-        "hp": 7.5
       },
       {
         "providerId": "p.uoh.kau",
@@ -77975,71 +77723,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "IEAD69",
-        "courseName": "Projektledning - Magisteruppsats",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAE02",
-        "courseName": "Industriell ekonomi - examensarbete",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEAE04",
-        "courseName": "Forskningsmetod inom industriell ekonomi",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEGA02",
-        "courseName": "Nationalekonomi med inriktning industriell ekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEGA05",
-        "courseName": "Industriell marknadsföring",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEGA06",
-        "courseName": "Industriell organisering",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEGA07",
-        "courseName": "Industriell ekonomistyrning",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "IEGA08",
         "courseName": "Projekt och ledarskap för civilingenjörer",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEGA09",
-        "courseName": "Investering och finansiering",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "IEGA61",
-        "courseName": "Generell projektledningsmetodik",
         "hp": 7.5
       },
       {
