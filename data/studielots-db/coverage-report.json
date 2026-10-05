@@ -1,6 +1,6 @@
 {
   "reportVersion": 1,
-  "generatedAt": "2026-10-05T06:30:00.000Z",
+  "generatedAt": "2026-10-05T00:00:00.000Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
@@ -15,20 +15,20 @@
     "providers": 49,
     "programmeRows": 3189,
     "uniqueProgrammes": 3181,
-    "programsWithUsableStructure": 173,
-    "programsWithoutUsableStructure": 3008,
-    "structuralCoveragePercent": 5.4,
-    "programmeStructureRows": 1054,
-    "usableProgrammeStructureRows": 186,
-    "courseRows": 28875,
-    "uniqueCourseIdentities": 28872,
-    "uniqueCoursesWithOffering": 2345,
-    "uniqueCoursesWithoutOffering": 26527,
-    "offeringRows": 2966,
-    "offeringRowsWithStartDate": 2966,
-    "offeringRowsWithBothDates": 2772,
-    "offeringRowsWithExplicitExactPrecision": 34,
-    "offeringRowsWithWeekDerivedPrecision": 329,
+    "programsWithUsableStructure": 176,
+    "programsWithoutUsableStructure": 3005,
+    "structuralCoveragePercent": 5.5,
+    "programmeStructureRows": 1055,
+    "usableProgrammeStructureRows": 189,
+    "courseRows": 28931,
+    "uniqueCourseIdentities": 28928,
+    "uniqueCoursesWithOffering": 2347,
+    "uniqueCoursesWithoutOffering": 26581,
+    "offeringRows": 2968,
+    "offeringRowsWithStartDate": 2968,
+    "offeringRowsWithBothDates": 2774,
+    "offeringRowsWithExplicitExactPrecision": 35,
+    "offeringRowsWithWeekDerivedPrecision": 330,
     "offeringRowsWithUnspecifiedPrecision": 2603,
     "offeringRowsWithoutCourseIdentity": 0,
     "offeringRowsWithoutTerm": 0,
@@ -221,8 +221,8 @@
       "providerId": "p.uoh.gu",
       "university": "Göteborgs universitet",
       "programs": 234,
-      "programsWithUsableStructure": 17,
-      "programsWithoutUsableStructure": 217,
+      "programsWithUsableStructure": 18,
+      "programsWithoutUsableStructure": 216,
       "courses": 2961,
       "coursesWithAtLeastOneOffering": 1851,
       "coursesWithoutOffering": 1110,
@@ -230,7 +230,7 @@
       "offeringsWithStartDate": 2431,
       "offeringsWithStartAndEndDate": 2431,
       "programmeStructureRows": 234,
-      "usableProgrammeStructureRows": 18
+      "usableProgrammeStructureRows": 19
     },
     {
       "providerId": "p.uoh.hb",
@@ -386,16 +386,16 @@
       "providerId": "p.uoh.kau",
       "university": "Karlstads universitet",
       "programs": 166,
-      "programsWithUsableStructure": 83,
-      "programsWithoutUsableStructure": 83,
+      "programsWithUsableStructure": 84,
+      "programsWithoutUsableStructure": 82,
       "courses": 1656,
-      "coursesWithAtLeastOneOffering": 320,
-      "coursesWithoutOffering": 1336,
-      "courseOfferingRows": 329,
-      "offeringsWithStartDate": 329,
-      "offeringsWithStartAndEndDate": 329,
+      "coursesWithAtLeastOneOffering": 321,
+      "coursesWithoutOffering": 1335,
+      "courseOfferingRows": 330,
+      "offeringsWithStartDate": 330,
+      "offeringsWithStartAndEndDate": 330,
       "programmeStructureRows": 167,
-      "usableProgrammeStructureRows": 91
+      "usableProgrammeStructureRows": 92
     },
     {
       "providerId": "p.uoh.kf",
@@ -446,16 +446,16 @@
       "providerId": "p.uoh.kth",
       "university": "Kungl. Tekniska högskolan",
       "programs": 85,
-      "programsWithUsableStructure": 28,
-      "programsWithoutUsableStructure": 57,
-      "courses": 186,
-      "coursesWithAtLeastOneOffering": 171,
-      "coursesWithoutOffering": 15,
-      "courseOfferingRows": 203,
-      "offeringsWithStartDate": 203,
-      "offeringsWithStartAndEndDate": 9,
-      "programmeStructureRows": 28,
-      "usableProgrammeStructureRows": 28
+      "programsWithUsableStructure": 29,
+      "programsWithoutUsableStructure": 56,
+      "courses": 242,
+      "coursesWithAtLeastOneOffering": 172,
+      "coursesWithoutOffering": 70,
+      "courseOfferingRows": 204,
+      "offeringsWithStartDate": 204,
+      "offeringsWithStartAndEndDate": 10,
+      "programmeStructureRows": 29,
+      "usableProgrammeStructureRows": 29
     },
     {
       "providerId": "p.uoh.liu",
@@ -5525,6 +5525,510 @@
           "https://api.lth.lu.se/lot/courses?programmeCode=MWLU&academicYearId=26_27",
           "https://kurser.lth.se/lot/programme?ay=26_27&programme=MWLU"
         ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A11HIB",
+        "courseName": "Arkitekturens historia och teori 1: Introduktion till Europas arkitektur",
+        "hp": 7.5,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A11IAA",
+        "courseName": "Introduktion till Arkitekturämnet",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A11IYA",
+        "courseName": "Introduktion till Arkitektyrket",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A11KOB",
+        "courseName": "Konstnärliga metoder och verktyg 1",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A11P1B",
+        "courseName": "Arkitekturprojekt 1:1 Sammansättning, geometri, skala",
+        "hp": 8,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A11P2B",
+        "courseName": "Arkitekturprojekt 1:2 Landskap, struktur, rörelse",
+        "hp": 9,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A11P3B",
+        "courseName": "Arkitekturprojekt 1:3 Boende, arbete, klimat",
+        "hp": 16,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A11REA",
+        "courseName": "Representation 1: Ritteknik och deskriptiv geometri",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A11TEB",
+        "courseName": "Arkitekturteknik 1",
+        "hp": 7.5,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A11INA",
+        "courseName": "Introduktion till arkitekturskolan",
+        "hp": 2,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A21AYA",
+        "courseName": "Arkitekturämnet och Arkitektyrket",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A21HIC",
+        "courseName": "Arkitekturens historia och teori 2: Arkitektur och modernitet",
+        "hp": 9,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A21KOB",
+        "courseName": "Konstnärliga metoder och verktyg 2",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A21P1C",
+        "courseName": "Arkitekturprojekt 2:1 Struktur, plats, aktivitet",
+        "hp": 16,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A21P2B",
+        "courseName": "Arkitekturprojekt 2:2 - Tectonics, Ornament, Transformation",
+        "hp": 5,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A21P3C",
+        "courseName": "Arkitekturprojekt 2:3 Material, rum, detalj",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A21TEB",
+        "courseName": "Arkitekturteknik 2",
+        "hp": 9,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A21REA",
+        "courseName": "Representation 2: Fabrikation och deskriptiv geometri",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A31EXA",
+        "courseName": "Examensarbete inom arkitektur, grundnivå",
+        "hp": 15,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A31H1A",
+        "courseName": "Arkitekturens historia och teori 3:1 Världsarkitektur",
+        "hp": 6,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A31H2A",
+        "courseName": "Arkitekturens historia och teori 3:2: uppsats på grundläggande nivå",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A31P1A",
+        "courseName": "Arkitekturprojekt 3:1, Stadsbyggnad",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A31REA",
+        "courseName": "Representation 3: Informationshantering och presentation",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A31SFA",
+        "courseName": "Stadens form och teori",
+        "hp": 6,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A31T1A",
+        "courseName": "Arkitekturteknik 3:1 Byggnad, stad, process",
+        "hp": 6,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A31T2A",
+        "courseName": "Arkitekturteknik 3:2: Byggnad, stad, process",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A31P2D",
+        "courseName": "Projekt 3:2 Stadsrum och landskap",
+        "hp": 6,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42O1A",
+        "courseName": "Orientering; Arkitekturens teknik, teori och historia 4:1",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42O2A",
+        "courseName": "Orientering; Arkitekturens teknik, teori och historia 4:2",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42SEH",
+        "courseName": "Seminariekurs, avancerad nivå 4HT",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42SEV",
+        "courseName": "Seminariekurs, avancerad nivå 4VT",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42DH1",
+        "courseName": "Studioprojekt 1, Teknik och teori",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42DH2",
+        "courseName": "Studioprojekt 2, Teknik och teori",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42DI1",
+        "courseName": "Studioprojekt 1, kultur och miljö",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42DI2",
+        "courseName": "Studioprojekt 2, kultur och miljö",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42DJ1",
+        "courseName": "Studioprojekt 1, Landskap och städer",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42DJ2",
+        "courseName": "Studioprojekt 2, Landskap och städer",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42DH3",
+        "courseName": "Studioprojekt 3, Teknik och teori",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42HD4",
+        "courseName": "Studioprojekt 4, Teknik och teori",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42DI3",
+        "courseName": "Studioprojekt 3, kultur och miljö",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42DI4",
+        "courseName": "Studioprojekt 4, kultur och miljö",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42DJ3",
+        "courseName": "Studioprojekt 3, Landskap och städer",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A42DJ4",
+        "courseName": "Studioprojekt 4, Landskap och städer",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52O1A",
+        "courseName": "Orientering; Arkitekturens teknik, teori och historia 5",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52SEH",
+        "courseName": "Seminariekurs, avancerad nivå 5HT",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52O2A",
+        "courseName": "Orientering; Arkitekturens teknik, teori och historia 5:2",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52SEV",
+        "courseName": "Seminariekurs, avancerad nivå 5VT",
+        "hp": 3,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52DH5",
+        "courseName": "Studioprojekt 5, Teknik och teori",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52DH6",
+        "courseName": "Studioprojekt 6, Teknik och teori",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52DHX",
+        "courseName": "Examensarbete inom arkitektur, Teknik och teori",
+        "hp": 30,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52DI5",
+        "courseName": "Studioprojekt 5, kultur och miljö",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52DI6",
+        "courseName": "Studioprojekt 6, kultur och miljö",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52DIX",
+        "courseName": "Examensarbete inom arkitektur, Kultur och miljö",
+        "hp": 30,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52DJ5",
+        "courseName": "Studioprojekt 5, Landskap och städer",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52DJ6",
+        "courseName": "Studioprojekt 6, Landskap och städer",
+        "hp": 12,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "courseCode": "A52DJX",
+        "courseName": "Examensarbete inom arkitektur, Landskap och städer",
+        "hp": 30,
+        "sourceUrls": [
+          "https://www.kth.se/student/kurser/program/ARKIT/20262/kurslista"
+        ]
       }
     ]
   },
@@ -6967,15 +7471,6 @@
         "programCode": "ÄMLGY",
         "programName": "Ämneslärarprogrammet mot gymnasieskolan",
         "hp": 330,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.gu",
-        "university": "Göteborgs universitet",
-        "programCode": "F2APP",
-        "programName": "Apotekarprogrammet",
-        "hp": 300,
         "level": null,
         "startTerm": "HT26"
       },
@@ -14830,15 +15325,6 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "programCode": "HAENG",
-        "programName": "Masterprogram i engelska",
-        "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "programCode": "HGMSK",
         "programName": "Konstnärlig kandidat, musiker",
         "hp": 180,
@@ -16399,15 +16885,6 @@
         "programCode": "SAMP1",
         "programName": "Masterprogram i musikpedagogik",
         "hp": 120,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.kth",
-        "university": "Kungl. Tekniska högskolan",
-        "programCode": "ARKIT",
-        "programName": "Arkitektutbildning",
-        "hp": 300,
         "level": null,
         "startTerm": "HT26"
       },
@@ -76896,13 +77373,6 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "ENALS1",
-        "courseName": "Text, kultur och samhälle: engelska i samtiden",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "ENGAM3",
         "courseName": "Berättande i datorspel: En historisk översikt",
         "hp": 7.5
@@ -87049,6 +87519,391 @@
         "courseCode": "UP2701",
         "courseName": "Vidareutveckling och analys av kvalitet i undervisning (VAK) för lärare i bild, dans, musik och slöjd",
         "hp": 7.5
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A11HIB",
+        "courseName": "Arkitekturens historia och teori 1: Introduktion till Europas arkitektur",
+        "hp": 7.5
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A11IAA",
+        "courseName": "Introduktion till Arkitekturämnet",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A11INA",
+        "courseName": "Introduktion till arkitekturskolan",
+        "hp": 2
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A11IYA",
+        "courseName": "Introduktion till Arkitektyrket",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A11KOB",
+        "courseName": "Konstnärliga metoder och verktyg 1",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A11P1B",
+        "courseName": "Arkitekturprojekt 1:1 Sammansättning, geometri, skala",
+        "hp": 8
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A11P2B",
+        "courseName": "Arkitekturprojekt 1:2 Landskap, struktur, rörelse",
+        "hp": 9
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A11P3B",
+        "courseName": "Arkitekturprojekt 1:3 Boende, arbete, klimat",
+        "hp": 16
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A11REA",
+        "courseName": "Representation 1: Ritteknik och deskriptiv geometri",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A11TEB",
+        "courseName": "Arkitekturteknik 1",
+        "hp": 7.5
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A21AYA",
+        "courseName": "Arkitekturämnet och Arkitektyrket",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A21HIC",
+        "courseName": "Arkitekturens historia och teori 2: Arkitektur och modernitet",
+        "hp": 9
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A21KOB",
+        "courseName": "Konstnärliga metoder och verktyg 2",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A21P1C",
+        "courseName": "Arkitekturprojekt 2:1 Struktur, plats, aktivitet",
+        "hp": 16
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A21P2B",
+        "courseName": "Arkitekturprojekt 2:2 - Tectonics, Ornament, Transformation",
+        "hp": 5
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A21P3C",
+        "courseName": "Arkitekturprojekt 2:3 Material, rum, detalj",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A21REA",
+        "courseName": "Representation 2: Fabrikation och deskriptiv geometri",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A21TEB",
+        "courseName": "Arkitekturteknik 2",
+        "hp": 9
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A31EXA",
+        "courseName": "Examensarbete inom arkitektur, grundnivå",
+        "hp": 15
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A31H1A",
+        "courseName": "Arkitekturens historia och teori 3:1 Världsarkitektur",
+        "hp": 6
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A31H2A",
+        "courseName": "Arkitekturens historia och teori 3:2: uppsats på grundläggande nivå",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A31P2D",
+        "courseName": "Projekt 3:2 Stadsrum och landskap",
+        "hp": 6
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A31REA",
+        "courseName": "Representation 3: Informationshantering och presentation",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A31SFA",
+        "courseName": "Stadens form och teori",
+        "hp": 6
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A31T1A",
+        "courseName": "Arkitekturteknik 3:1 Byggnad, stad, process",
+        "hp": 6
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A31T2A",
+        "courseName": "Arkitekturteknik 3:2: Byggnad, stad, process",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42DH1",
+        "courseName": "Studioprojekt 1, Teknik och teori",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42DH2",
+        "courseName": "Studioprojekt 2, Teknik och teori",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42DH3",
+        "courseName": "Studioprojekt 3, Teknik och teori",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42DI1",
+        "courseName": "Studioprojekt 1, kultur och miljö",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42DI2",
+        "courseName": "Studioprojekt 2, kultur och miljö",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42DI3",
+        "courseName": "Studioprojekt 3, kultur och miljö",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42DI4",
+        "courseName": "Studioprojekt 4, kultur och miljö",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42DJ1",
+        "courseName": "Studioprojekt 1, Landskap och städer",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42DJ2",
+        "courseName": "Studioprojekt 2, Landskap och städer",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42DJ3",
+        "courseName": "Studioprojekt 3, Landskap och städer",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42DJ4",
+        "courseName": "Studioprojekt 4, Landskap och städer",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42HD4",
+        "courseName": "Studioprojekt 4, Teknik och teori",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42O1A",
+        "courseName": "Orientering; Arkitekturens teknik, teori och historia 4:1",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42O2A",
+        "courseName": "Orientering; Arkitekturens teknik, teori och historia 4:2",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42SEH",
+        "courseName": "Seminariekurs, avancerad nivå 4HT",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A42SEV",
+        "courseName": "Seminariekurs, avancerad nivå 4VT",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52DH5",
+        "courseName": "Studioprojekt 5, Teknik och teori",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52DH6",
+        "courseName": "Studioprojekt 6, Teknik och teori",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52DHX",
+        "courseName": "Examensarbete inom arkitektur, Teknik och teori",
+        "hp": 30
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52DI5",
+        "courseName": "Studioprojekt 5, kultur och miljö",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52DI6",
+        "courseName": "Studioprojekt 6, kultur och miljö",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52DIX",
+        "courseName": "Examensarbete inom arkitektur, Kultur och miljö",
+        "hp": 30
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52DJ5",
+        "courseName": "Studioprojekt 5, Landskap och städer",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52DJ6",
+        "courseName": "Studioprojekt 6, Landskap och städer",
+        "hp": 12
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52DJX",
+        "courseName": "Examensarbete inom arkitektur, Landskap och städer",
+        "hp": 30
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52O1A",
+        "courseName": "Orientering; Arkitekturens teknik, teori och historia 5",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52O2A",
+        "courseName": "Orientering; Arkitekturens teknik, teori och historia 5:2",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52SEH",
+        "courseName": "Seminariekurs, avancerad nivå 5HT",
+        "hp": 3
+      },
+      {
+        "providerId": "p.uoh.kth",
+        "university": "Kungl. Tekniska högskolan",
+        "courseCode": "A52SEV",
+        "courseName": "Seminariekurs, avancerad nivå 5VT",
+        "hp": 3
       },
       {
         "providerId": "p.uoh.kth",
