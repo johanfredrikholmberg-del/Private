@@ -1,6 +1,6 @@
 {
   "reportVersion": 2,
-  "generatedAt": "2026-10-05T19:19:36.673Z",
+  "generatedAt": "2026-10-05T19:36:11.601Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
@@ -22,13 +22,13 @@
     "usableProgrammeStructureRows": 232,
     "courseRows": 29632,
     "uniqueCourseIdentities": 29629,
-    "uniqueCoursesWithOffering": 3025,
-    "uniqueCoursesWithoutOffering": 26604,
-    "offeringRows": 3706,
-    "offeringRowsWithStartDate": 3706,
-    "offeringRowsWithBothDates": 3512,
+    "uniqueCoursesWithOffering": 3110,
+    "uniqueCoursesWithoutOffering": 26519,
+    "offeringRows": 3793,
+    "offeringRowsWithStartDate": 3793,
+    "offeringRowsWithBothDates": 3599,
     "offeringRowsWithExplicitExactPrecision": 61,
-    "offeringRowsWithWeekDerivedPrecision": 1042,
+    "offeringRowsWithWeekDerivedPrecision": 1129,
     "offeringRowsWithUnspecifiedPrecision": 2603,
     "offeringRowsWithoutCourseIdentity": 0,
     "offeringRowsWithoutTerm": 0,
@@ -344,11 +344,11 @@
       "programsWithUsableStructure": 64,
       "programsWithoutUsableStructure": 102,
       "courses": 1666,
-      "coursesWithAtLeastOneOffering": 977,
-      "coursesWithoutOffering": 689,
-      "courseOfferingRows": 1042,
-      "offeringsWithStartDate": 1042,
-      "offeringsWithStartAndEndDate": 1042,
+      "coursesWithAtLeastOneOffering": 1062,
+      "coursesWithoutOffering": 604,
+      "courseOfferingRows": 1129,
+      "offeringsWithStartDate": 1129,
+      "offeringsWithStartAndEndDate": 1129,
       "programmeStructureRows": 167,
       "usableProgrammeStructureRows": 92
     },
@@ -74633,13 +74633,6 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "MVG201",
-        "courseName": "Miljövetenskap 2: strategier, styrning och förvaltning",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "MVG301",
         "courseName": "Riskhantering med fokus på föroreningar och klimat",
         "hp": 30
@@ -74647,43 +74640,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "MVG401",
-        "courseName": "Miljövetarprogrammets praktikkurs",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MVG402",
-        "courseName": "Skydd av biologisk mångfald: från det lokala till det globala",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MVG403",
-        "courseName": "Pedagogiska metoder för att undervisa om risk- och miljöfrågor",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "MVG501",
         "courseName": "Praktik inom risk- och miljöstudier",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MVG601",
-        "courseName": "Metod och teori inom miljövetenskap och risk",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "MVG602",
-        "courseName": "Självständigt arbete i miljövetenskap",
         "hp": 15
       },
       {
@@ -74696,50 +74654,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "MVGA20",
-        "courseName": "Miljövetenskapens grunder",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "MVGT01",
         "courseName": "MKB, miljökonsekvensbeskrivning",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD07",
-        "courseName": "Nationalekonomi - Magisteruppsats",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD08",
-        "courseName": "Nationalekonomi - Examensarbete civilekonom",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD09",
-        "courseName": "Självständigt arbete i nationalekonomi - master",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD15",
-        "courseName": "Internationell makroekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD17",
-        "courseName": "Tillämpad ekonometri",
         "hp": 7.5
       },
       {
@@ -74752,93 +74668,9 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "NEAD27",
-        "courseName": "Ekonomisk utvärderingsmetod",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD31",
-        "courseName": "Pristeori",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD32",
-        "courseName": "Miljö- och naturresursekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "NEAD33",
         "courseName": "Praktik: Nationalekonomi, avancerad nivå",
         "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD34",
-        "courseName": "Portföljval",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD35",
-        "courseName": "Riskhantering i finansiella företag",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD36",
-        "courseName": "Industriell organisation och konkurrensstrategi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD37",
-        "courseName": "Avancerade metoder i tillämpad nationalekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD38",
-        "courseName": "Avancerad makroekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD51",
-        "courseName": "Kausal inferens",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEAD52",
-        "courseName": "Tidsserieanalys i finans och nationalekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGA01",
-        "courseName": "Nationalekonomi",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGA07",
-        "courseName": "Nationalekonomi för Pol. Kand",
-        "hp": 30
       },
       {
         "providerId": "p.uoh.kau",
@@ -74850,162 +74682,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "NEGA16",
-        "courseName": "Nationalekonomi för fastighetsekonomer",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGB01",
-        "courseName": "Nationalekonomi - fortsättningskurs",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGB14",
-        "courseName": "Makroekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGB15",
-        "courseName": "Internationell handelsteori",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGB16",
-        "courseName": "Public Choice",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "NEGB19",
         "courseName": "Finansiella marknader, risk och försäkring",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGB21",
-        "courseName": "Arbetsmarknadens ekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGB22",
-        "courseName": "Ekonometri",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGB23",
-        "courseName": "Offentlig ekonomi och politik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGB24",
-        "courseName": "Industriell organisation och konkurrensstrategi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGB26",
-        "courseName": "Examensarbete - högskoleexamen",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC04",
-        "courseName": "Nationalekonomi - Kandidatuppsats",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC16",
-        "courseName": "Tillämpad ekonometri",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC18",
-        "courseName": "Portföljval",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC22",
-        "courseName": "Internationell makroekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC24",
-        "courseName": "Nationalekonomi, praktik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC25",
-        "courseName": "Arbetsmarknadens ekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC28",
-        "courseName": "Offentlig ekonomi och politik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC32",
-        "courseName": "Miljö- och naturresursekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC33",
-        "courseName": "Ekonomisk tillväxt",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC47",
-        "courseName": "Vetenskapliga metoder i nationalekonomi",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC48",
-        "courseName": "Företagets finansiering och styrning",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NEGC49",
-        "courseName": "Riskhantering i finansiella företag",
         "hp": 7.5
       },
       {
@@ -75025,181 +74703,6 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "NGGA17",
-        "courseName": "GIS som verktyg för samhällsplanering",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGA29",
-        "courseName": "Fjärranalys och digital fotogrammetri",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGB41",
-        "courseName": "GPS, Globala navigationssatellitsystem",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGB44",
-        "courseName": "GIS III, Indata till GIS",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGB45",
-        "courseName": "RasterGIS",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGB47",
-        "courseName": "Geografiska informationssystem II",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGB48",
-        "courseName": "Digital fotogrammetri och 3D-visualisering",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGB49",
-        "courseName": "Geografisk informationsteknik med open source",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGB63",
-        "courseName": "Praktikkurs geografisk informationsteknik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGB64",
-        "courseName": "Tillämpad geodesi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGB66",
-        "courseName": "Byggmätning",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGB68",
-        "courseName": "Praktikkurs mät- och kartteknik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGB69",
-        "courseName": "Praktikkurs med inriktning mät- och kartteknik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGC20",
-        "courseName": "Vetenskaplig metod inom geomatik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGC66",
-        "courseName": "Geodesi för GIS",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGC68",
-        "courseName": "GIS analys",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGC84",
-        "courseName": "Examensarbete för kandidatexamen i mät- och kartteknik",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "NGGC91",
-        "courseName": "Examensarbete för högskoleingenjörsexamen i lantmäteriteknik och GIT",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG001",
-        "courseName": "Introduktion till oral hälsa - teorier, profession och vetenskap",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG006",
-        "courseName": "Anatomi, fysiologi och medicinsk mikrobiologi för tandhygienister",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG007",
-        "courseName": "Prekliniska studier för tandhygienistens yrkesområde, teori och metod",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG008",
-        "courseName": "Grundläggande vetenskapsteori och metoder",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG009",
-        "courseName": "Hälsopsykologi och kommunikation",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG010",
-        "courseName": "Oral hälsa prevention - kliniska studier I",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG012",
-        "courseName": "Oral hälsa och allmänhälsa - teori och kliniska studier II",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "OHG013",
         "courseName": "Barn, ungdomar och unga vuxna - hälsofrämjande arbete, prevention och behandling inom tandhygienistens yrkesområde",
         "hp": 15
@@ -75214,48 +74717,6 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "OHG016",
-        "courseName": "Oral hälsa prevention och behandling för olika åldrar - kliniska studier III",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG017",
-        "courseName": "Åldrande i teori och praktik och med fokus på oral hälsa",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG018",
-        "courseName": "Examensarbete i oral hälsa",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG019",
-        "courseName": "Oral hälsa i ett samhällsperspektiv",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG020",
-        "courseName": "Oral hälsa, komplexa behandlingsbehov och utsatta grupper - kliniska studier IV",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG021",
-        "courseName": "Samtalsmetodik och bemötande vid munhälsorelaterad beteendeförändring",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "OHG022",
         "courseName": "Folkhälsa och oral hälsopromotion",
         "hp": 7.5
@@ -75263,64 +74724,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "OHG115",
-        "courseName": "Vetenskapliga metoder, analyser och projektplanering",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "OHG117",
         "courseName": "Åldrande i teori och praktik och med fokus på oral hälsa",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OHG119",
-        "courseName": "Oral hälsa i ett samhällsperspektiv",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OMA113",
-        "courseName": "Komplexa handledningssituationer i verksamhetsförlagd utbildning",
-        "hp": 4.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OMA114",
-        "courseName": "Peer learning som pedagogisk modell i verksamhetsförlagd utbildning",
-        "hp": 4.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OMA135",
-        "courseName": "Handledning i verksamhetsförlagd utbildning I",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OMA150",
-        "courseName": "Vetenskaplig metod V: examensarbete Magister I",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OMA322",
-        "courseName": "Examensarbete med inriktning mot distriktssköterskans verksamhetsområde",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "OMA408",
-        "courseName": "Ambulanssjukvård i teori och praktik",
         "hp": 15
       },
       {
