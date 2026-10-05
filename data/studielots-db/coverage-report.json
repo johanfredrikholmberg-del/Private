@@ -1,6 +1,6 @@
 {
   "reportVersion": 1,
-  "generatedAt": "2026-10-05T12:48:33.544Z",
+  "generatedAt": "2026-10-05T12:55:11.853Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
@@ -15,20 +15,20 @@
     "providers": 49,
     "programmeRows": 3189,
     "uniqueProgrammes": 3181,
-    "programsWithUsableStructure": 176,
-    "programsWithoutUsableStructure": 3005,
-    "structuralCoveragePercent": 5.5,
-    "programmeStructureRows": 1055,
-    "usableProgrammeStructureRows": 189,
+    "programsWithUsableStructure": 177,
+    "programsWithoutUsableStructure": 3004,
+    "structuralCoveragePercent": 5.6,
+    "programmeStructureRows": 1056,
+    "usableProgrammeStructureRows": 190,
     "courseRows": 28931,
     "uniqueCourseIdentities": 28928,
-    "uniqueCoursesWithOffering": 2652,
-    "uniqueCoursesWithoutOffering": 26276,
-    "offeringRows": 3294,
-    "offeringRowsWithStartDate": 3294,
-    "offeringRowsWithBothDates": 3100,
+    "uniqueCoursesWithOffering": 2680,
+    "uniqueCoursesWithoutOffering": 26248,
+    "offeringRows": 3322,
+    "offeringRowsWithStartDate": 3322,
+    "offeringRowsWithBothDates": 3128,
     "offeringRowsWithExplicitExactPrecision": 35,
-    "offeringRowsWithWeekDerivedPrecision": 656,
+    "offeringRowsWithWeekDerivedPrecision": 684,
     "offeringRowsWithUnspecifiedPrecision": 2402,
     "offeringRowsWithoutCourseIdentity": 0,
     "offeringRowsWithoutTerm": 0,
@@ -221,16 +221,16 @@
       "providerId": "p.uoh.gu",
       "university": "Göteborgs universitet",
       "programs": 234,
-      "programsWithUsableStructure": 18,
-      "programsWithoutUsableStructure": 216,
+      "programsWithUsableStructure": 19,
+      "programsWithoutUsableStructure": 215,
       "courses": 2961,
       "coursesWithAtLeastOneOffering": 1851,
       "coursesWithoutOffering": 1110,
       "courseOfferingRows": 2431,
       "offeringsWithStartDate": 2431,
       "offeringsWithStartAndEndDate": 2431,
-      "programmeStructureRows": 234,
-      "usableProgrammeStructureRows": 19
+      "programmeStructureRows": 235,
+      "usableProgrammeStructureRows": 20
     },
     {
       "providerId": "p.uoh.hb",
@@ -389,11 +389,11 @@
       "programsWithUsableStructure": 84,
       "programsWithoutUsableStructure": 82,
       "courses": 1656,
-      "coursesWithAtLeastOneOffering": 626,
-      "coursesWithoutOffering": 1030,
-      "courseOfferingRows": 656,
-      "offeringsWithStartDate": 656,
-      "offeringsWithStartAndEndDate": 656,
+      "coursesWithAtLeastOneOffering": 654,
+      "coursesWithoutOffering": 1002,
+      "courseOfferingRows": 684,
+      "offeringsWithStartDate": 684,
+      "offeringsWithStartAndEndDate": 684,
       "programmeStructureRows": 167,
       "usableProgrammeStructureRows": 92
     },
@@ -7515,15 +7515,6 @@
         "university": "Göteborgs universitet",
         "programCode": "H1LIB",
         "programName": "Liberal arts, kandidatprogram",
-        "hp": 180,
-        "level": null,
-        "startTerm": "HT26"
-      },
-      {
-        "providerId": "p.uoh.gu",
-        "university": "Göteborgs universitet",
-        "programCode": "H1MEK",
-        "programName": "Medier, estetik och kulturellt entreprenörskap, kandidatprogram",
         "hp": 180,
         "level": null,
         "startTerm": "HT26"
@@ -77919,97 +77910,6 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "KOGV17",
-        "courseName": "Huvudinstrument IV, västerländsk konstmusik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KOGV21",
-        "courseName": "Musikkunskap I, västerländsk konstmusik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KOGV22",
-        "courseName": "Musikkunskap II, västerländsk konstmusik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KOGV23",
-        "courseName": "Musikkunskap III, västerländsk konstmusik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KOGV24",
-        "courseName": "Musikkunskap IV, västerländsk konstmusik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KTAD02",
-        "courseName": "Massa- och Pappersteknik",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KTAD04",
-        "courseName": "Skoglig bioekonomi - processer, energi och produkter",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KTAD11",
-        "courseName": "Biobaserade material och produkter",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KTAD21",
-        "courseName": "Forskningspraktik i kemi och kemiteknik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KTAD31",
-        "courseName": "Grön kemi och kemiteknik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KTAD33",
-        "courseName": "Massa- och pappersteknik II",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KTGA11",
-        "courseName": "Kemiteknik i samhället",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KTGCG8",
-        "courseName": "Kandidatarbete, kemiteknik",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "KVGAKM",
         "courseName": "Kommunikationsplanering - Kulturstudier",
         "hp": 7.5
@@ -78059,37 +77959,9 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "KVGBM1",
-        "courseName": "Kulturvetenskapliga metoder I",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KVGBS1",
-        "courseName": "Självständigt arbete I - Kulturstudier",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KVGC02",
-        "courseName": "Självständigt arbete II: Kulturstudier",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "KVGCKM",
         "courseName": "Kulturvetenskaplig metod II",
         "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KVGCPK",
-        "courseName": "Praktik: kulturstudier",
-        "hp": 15
       },
       {
         "providerId": "p.uoh.kau",
@@ -78110,55 +77982,6 @@
         "university": "Karlstads universitet",
         "courseCode": "KVGH12",
         "courseName": "Idéhistoria I: Den upplysta världen",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KVGH13",
-        "courseName": "Idéhistoria I: Moderna tider",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KVGH14",
-        "courseName": "Idéhistoria I: Den svenska idéhistorien",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KVGH20",
-        "courseName": "Idéhistoria II",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KVGH21",
-        "courseName": "Idéhistoria II: Idéhistoriens teori- och metodtraditioner",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KVGH22",
-        "courseName": "Idéhistoria II: Global idéhistoria",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KVGH23",
-        "courseName": "Idéhistoria II: Metateorier - vetenskap, kultur, politik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "KVGH24",
-        "courseName": "Idéhistoria II: Självständigt arbete I",
         "hp": 7.5
       },
       {
@@ -78195,34 +78018,6 @@
         "courseCode": "KVGK32",
         "courseName": "Konst- och bildvetenskap: modernism, postmodernism och samtidskonst",
         "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG01",
-        "courseName": "Lärarens didaktiska verktyg - grundlärare i fritidshem",
-        "hp": 6
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG02",
-        "courseName": "Skola som system och idé - grundlärare i fritidshem",
-        "hp": 9
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG03",
-        "courseName": "Lärarens pedagogiska förhållningssätt - grundlärare i fritidshem",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG04",
-        "courseName": "Pedagogik och lärande i fritidshem I",
-        "hp": 22.5
       },
       {
         "providerId": "p.uoh.kau",
