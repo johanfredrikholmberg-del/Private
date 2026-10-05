@@ -32,7 +32,7 @@ const nextOffset = batchOffset + catalogue.length >= allCandidates.length ? 0 : 
 const byKey = new Map(existing.map(x => [x.key, x]));
 for (const row of datedExisting) byKey.set(row.key, row);
 const newRows = [];
-const report = {checkedAt: new Date().toISOString(), batchOffset, nextOffset, totalCandidates: allCandidates.length, candidates: catalogue.length, added: 0, backfilledDates, rateLimited: false, review: []};
+const report = {checkedAt: new Date().toISOString(), batchOffset, nextOffset, totalCandidates: allCandidates.length, candidates: catalogue.length, added: 0, courseIdentitiesAdded: 0, backfilledDates, rateLimited: false, review: []};
 const text = html => html.replace(/<[^>]*>/g, ' ').replace(/&nbsp;|&#160;/g, ' ').replace(/\s+/g, ' ').trim();
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -103,7 +103,31 @@ courseLoop: for (const course of catalogue) {
   }
 }
 
-if (report.added || backfilledDates) {
+const courseSpec = db.tables.courses;
+const canonicalCourses = [courseSpec.storage, ...(courseSpec.additionalStorages || [])].flatMap(read);
+if (canonicalCourses.length !== courseSpec.rows) throw Error('Canonical course count mismatch');
+const kauCourseCodes = new Map(canonicalCourses.filter(x => x.providerId === 'p.uoh.kau').map(x => [String(x.courseCode || x.code || '').toUpperCase(), x]));
+const missingCourseIdentities = new Map();
+for (const row of newRows) {
+  const code = String(row.courseCode || '').toUpperCase();
+  const prior = kauCourseCodes.get(code);
+  if (prior) { const hp=Number(prior.courseHp||prior.hp||0); if(hp&&Math.abs(hp-Number(row.courseHp))>0.01) throw Error(`${code}: KAU course identity hp mismatch`); continue; }
+  const sourceUrl = String(row.sourceUrl || '').split('?')[0];
+  const identity = {kind:'course',university:'Karlstads universitet',providerId:'p.uoh.kau',code,courseCode:code,name:row.courseName,courseName:row.courseName,hp:Number(row.courseHp),courseHp:Number(row.courseHp),key:`karlstads-universitet|${code}|${Number(row.courseHp)}`,source:'karlstad-official-course-page',sourceUrl,sourceUrls:[sourceUrl],nameSource:'skolverket-susa-navet',verificationStatus:'verified',verified:true,checkedAt:row.checkedAt};
+  missingCourseIdentities.set(code, identity); kauCourseCodes.set(code, identity);
+}
+const identityStorage = 'data/studielots-db/courses-kau-offering-identities.json';
+if (missingCourseIdentities.size) {
+  const shardExisting = fs.existsSync(identityStorage) ? read(identityStorage) : [];
+  const byIdentity = new Map(shardExisting.map(x => [x.key, x]));
+  for (const row of missingCourseIdentities.values()) byIdentity.set(row.key, row);
+  fs.writeFileSync(identityStorage, JSON.stringify([...byIdentity.values()].sort((a,b)=>a.courseCode.localeCompare(b.courseCode)), null, 2) + '\n');
+  courseSpec.additionalStorages = courseSpec.additionalStorages || [];
+  if (!courseSpec.additionalStorages.includes(identityStorage)) courseSpec.additionalStorages.push(identityStorage);
+  courseSpec.rows = canonicalCourses.length + missingCourseIdentities.size;
+  report.courseIdentitiesAdded = missingCourseIdentities.size;
+}
+if (report.added || backfilledDates || report.courseIdentitiesAdded) {
   fs.writeFileSync(storage, JSON.stringify([...datedExisting, ...newRows], null, 2) + '\n');
   db.tables.courseOfferings.rows = existing.length + report.added;
   fs.writeFileSync(dbFile, JSON.stringify(db, null, 2) + '\n');

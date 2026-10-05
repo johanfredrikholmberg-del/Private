@@ -47,20 +47,25 @@ jobs:
           import {datesFromKarlstadWeeks} from './scripts/kau-offering-week-dates.mjs';
           const db=JSON.parse(fs.readFileSync('data/studielots-db/manifest.json'));
           const rows=[db.tables.courseOfferings.storage,...(db.tables.courseOfferings.additionalStorages||[])].flatMap(p=>JSON.parse(fs.readFileSync(p)));
+          const courseSpec=db.tables.courses;
+          const courses=[courseSpec.storage,...(courseSpec.additionalStorages||[])].flatMap(p=>JSON.parse(fs.readFileSync(p)));
           const report=JSON.parse(fs.readFileSync('data/import-reviews/kau-verified-offerings-latest.json'));
           if(db.database!=='StudieLots DB'||db.tables.courseOfferings.rows!==rows.length||new Set(rows.map(x=>x.key)).size!==rows.length)throw Error('Canonical count or key mismatch');
+          if(courseSpec.rows!==courses.length)throw Error('Canonical course count mismatch');
           const batch=rows.filter(x=>x.university==='Karlstads universitet'&&x.checkedAt===report.checkedAt);
           if(batch.length!==report.added||batch.some(x=>!x.sourceUrl?.startsWith('https://www.kau.se/')||!x.partOfTerm||!x.applicationCode))throw Error('Karlstad source or batch mismatch');
+          const courseCodes=new Set(courses.filter(x=>x.providerId==='p.uoh.kau').map(x=>String(x.courseCode||x.code||'').toUpperCase()));
           const kau=rows.filter(x=>x.university==='Karlstads universitet');
+          if(kau.some(x=>!courseCodes.has(String(x.courseCode||'').toUpperCase())))throw Error('Karlstadt offering without canonical course');
           if(kau.some(x=>{const dates=datesFromKarlstadWeeks(x.partOfTerm,x.offeringTerm);return !dates||x.startDate!==dates.startDate||x.endDate!==dates.endDate||x.datePrecision!=='week';}))throw Error('Karlstad week bounds mismatch');
-          console.log(JSON.stringify({added:report.added,backfilledDates:report.backfilledDates,karlstad:kau.length,canonicalTotal:rows.length}));
+          console.log(JSON.stringify({added:report.added,courseIdentitiesAdded:report.courseIdentitiesAdded,backfilledDates:report.backfilledDates,karlstad:kau.length,canonicalTotal:rows.length,courses:courses.length}));
           NODE
       - name: Save to StudieLots DB
         run: |
           if [ -z "$(git status --porcelain -- data/studielots-db/course-offerings.json data/studielots-db/manifest.json)" ]; then echo 'No new offerings'; exit 0; fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/studielots-db/course-offerings.json data/studielots-db/manifest.json data/import-reviews/kau-verified-offerings-latest.json
+          git add -f data/studielots-db/course-offerings.json data/studielots-db/courses-kau-offering-identities.json data/studielots-db/manifest.json data/import-reviews/kau-verified-offerings-latest.json
           git commit -m 'Materialize next Karlstad course offering batch [skip ci]'
           for attempt in 1 2 3; do
             git fetch origin studielots-v2
@@ -68,7 +73,7 @@ jobs:
               git rebase --abort || true
               git reset --hard origin/studielots-v2
               KAU_OFFERING_OFFSET=${{ steps.kau-offset.outputs.offset }} KAU_OFFERING_BATCH_SIZE=50 node scripts/import-kau-verified-offerings.mjs
-              git add -f data/studielots-db/course-offerings.json data/studielots-db/manifest.json data/import-reviews/kau-verified-offerings-latest.json
+              git add -f data/studielots-db/course-offerings.json data/studielots-db/courses-kau-offering-identities.json data/studielots-db/manifest.json data/import-reviews/kau-verified-offerings-latest.json
               if git diff --cached --quiet; then exit 0; fi
               git commit -m 'Materialize next Karlstad course offering batch [skip ci]'
             fi
