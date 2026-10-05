@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-05T13:36:49.453Z (UTC) · branch: studielots-v2
+Generated: 2026-10-05T13:42:04.527Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -13,13 +13,13 @@ Generated: 2026-10-05T13:36:49.453Z (UTC) · branch: studielots-v2
 | Canonicala programstrukturposter | 1120 | — |
 | Användbara strukturposter | 231 | — |
 | Unika kursidentiteter | 29627 | — |
-| Kurser med minst ett kurstillfälle | 2680 | 9.0% |
-| Kurser utan kurstillfälle | 26947 | — |
-| Kurstillfällen | 3322 | — |
-| Med startdatum | 3322 | 100.0% |
-| Med både start- och slutdatum | 3128 | 94.2% |
-| Precision explicit: exact / week / unspecified | 35 / 684 / 2603 | — |
-| Strukturreferenser utan kursidentitet (samtliga strukturer) | 24 (16 unika koder) | — |
+| Kurser med minst ett kurstillfälle | 2729 | 9.2% |
+| Kurser utan kurstillfälle | 26898 | — |
+| Kurstillfällen | 3374 | — |
+| Med startdatum | 3374 | 100.0% |
+| Med både start- och slutdatum | 3180 | 94.3% |
+| Precision explicit: exact / week / unspecified | 35 / 736 / 2603 | — |
+| Strukturreferenser utan kursidentitet | 24 (16 koder) | — |
 | Saknade kursidentiteter i användbara strukturer | 0 | — |
 
 ## Per lärosäte
@@ -46,7 +46,7 @@ Generated: 2026-10-05T13:36:49.453Z (UTC) · branch: studielots-v2
 | Högskolan Väst (p.uoh.hv) | 60 | 0 | 60 | 215 | 0 | 215 | 0 | 0 | 0 |
 | Johannelunds teologiska högskola (p.uoh.jth) | 18 | 0 | 18 | 38 | 0 | 38 | 0 | 0 | 0 |
 | Jönköping University (p.uoh.hj) | 173 | 0 | 173 | 218 | 0 | 218 | 0 | 0 | 0 |
-| Karlstads universitet (p.uoh.kau) | 166 | 63 | 103 | 1664 | 654 | 1010 | 684 | 684 | 684 |
+| Karlstads universitet (p.uoh.kau) | 166 | 63 | 103 | 1664 | 703 | 961 | 736 | 736 | 736 |
 | Karolinska institutet (p.uoh.ki) | 52 | 0 | 52 | 161 | 0 | 161 | 0 | 0 | 0 |
 | Konstfack (p.uoh.kf) | 15 | 0 | 15 | 11 | 0 | 11 | 0 | 0 | 0 |
 | Kungl. Musikhögskolan i Stockholm (p.uoh.kmh) | 25 | 0 | 25 | 34 | 0 | 34 | 0 | 0 | 0 |
@@ -82,7 +82,8 @@ Generated: 2026-10-05T13:36:49.453Z (UTC) · branch: studielots-v2
 - Dubbletter i programidentiteter: 8
 - Dubbletter i programstrukturer: 0
 - Kurstillfällen utan matchande kurs: 0
+- Kurstillfällen utan termin: 0
 - Ogiltiga eller omvända datum: 0
 - Strukturreferenser till saknade kursidentiteter: 24 från samtliga strukturer; 0 från användbara strukturer
 
-Gapanalysens fullständiga program- och kurslistor finns i coverage-report.json under gaps.
+Fullständiga gaplistor finns i coverage-report.json under gaps.

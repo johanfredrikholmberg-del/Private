@@ -1,6 +1,6 @@
 {
   "reportVersion": 2,
-  "generatedAt": "2026-10-05T13:36:49.453Z",
+  "generatedAt": "2026-10-05T13:42:04.527Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
@@ -22,13 +22,13 @@
     "usableProgrammeStructureRows": 231,
     "courseRows": 29630,
     "uniqueCourseIdentities": 29627,
-    "uniqueCoursesWithOffering": 2680,
-    "uniqueCoursesWithoutOffering": 26947,
-    "offeringRows": 3322,
-    "offeringRowsWithStartDate": 3322,
-    "offeringRowsWithBothDates": 3128,
+    "uniqueCoursesWithOffering": 2729,
+    "uniqueCoursesWithoutOffering": 26898,
+    "offeringRows": 3374,
+    "offeringRowsWithStartDate": 3374,
+    "offeringRowsWithBothDates": 3180,
     "offeringRowsWithExplicitExactPrecision": 35,
-    "offeringRowsWithWeekDerivedPrecision": 684,
+    "offeringRowsWithWeekDerivedPrecision": 736,
     "offeringRowsWithUnspecifiedPrecision": 2603,
     "offeringRowsWithoutCourseIdentity": 0,
     "offeringRowsWithoutTerm": 0,
@@ -344,11 +344,11 @@
       "programsWithUsableStructure": 63,
       "programsWithoutUsableStructure": 103,
       "courses": 1664,
-      "coursesWithAtLeastOneOffering": 654,
-      "coursesWithoutOffering": 1010,
-      "courseOfferingRows": 684,
-      "offeringsWithStartDate": 684,
-      "offeringsWithStartAndEndDate": 684,
+      "coursesWithAtLeastOneOffering": 703,
+      "coursesWithoutOffering": 961,
+      "courseOfferingRows": 736,
+      "offeringsWithStartDate": 736,
+      "offeringsWithStartAndEndDate": 736,
       "programmeStructureRows": 167,
       "usableProgrammeStructureRows": 91
     },
@@ -74334,352 +74334,9 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "LFGG05",
-        "courseName": "Naturvetenskap och teknik - grundlärare i fritidshem",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG06",
-        "courseName": "Matematik - grundlärare i fritidshem",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG07",
-        "courseName": "Verksamhetsförlagd utbildning II - grundlärare i fritidshem",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG09",
-        "courseName": "Pedagogik och lärande i fritidshem II",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG10",
-        "courseName": "Idrott och hälsa I - grundlärare i fritidshem",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG11",
-        "courseName": "Pedagogisk dokumentation som pedagogiskt redskap - grundlärare i fritidshem",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG12",
-        "courseName": "Idrott och hälsa II - grundlärare i fritidshem",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG13",
-        "courseName": "Svenska - grundlärare i fritidshem",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG14",
-        "courseName": "Verksamhetsförlagd utbildning IV - grundlärare i fritidshem",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG15",
-        "courseName": "Skola på vetenskaplig grund - grundlärare i fritidshem",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG16",
-        "courseName": "Självständigt arbete - grundlärare i fritidshem",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LFGG18",
-        "courseName": "Pedagogiskt ledarskap i skola och fritidshem",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJG002",
-        "courseName": "Elektronisk musik: estetik, teknik och metodik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGE10",
-        "courseName": "Musikbranschen och dess aktörer",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGE11",
-        "courseName": "Entreprenörskap inom musikbranschen",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGE12",
-        "courseName": "Lansering av musikprojekt 1",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGE15",
-        "courseName": "Lansering av musikprojekt 2",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGE17",
-        "courseName": "Lansering av musikprojekt 3",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM10",
-        "courseName": "Musikproduktion 1",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM11",
-        "courseName": "Låtskrivande 1",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM12",
-        "courseName": "Musikproduktion 2",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM13",
-        "courseName": "Låtskrivande 2",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM14",
-        "courseName": "Låtskrivarprojekt 1",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM15",
-        "courseName": "Låtskrivarprojekt 2",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM17",
-        "courseName": "Elektroniskt musikskapande",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM18",
-        "courseName": "Musikproduktion 3",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM19",
-        "courseName": "Film- och dataspelsmusik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM20",
-        "courseName": "Artistprojekt",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM21",
-        "courseName": "Musikproduktion 4",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM22",
-        "courseName": "Kreativ teknik och elektronik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM23",
-        "courseName": "Komposition för akustisk ensemble",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM24",
-        "courseName": "Liveproduktion",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM25",
-        "courseName": "Artistisk gestaltning",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM26",
-        "courseName": "Specialisering inom musikproduktion",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM30",
-        "courseName": "Självständigt arbete i musikproduktion",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGM40",
-        "courseName": "Självständigt arbete i musikproduktion",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "LJGMP1",
         "courseName": "Musikproducent, låtskrivare och entreprenör",
         "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGT10",
-        "courseName": "Musikteori och gehörslära 1",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGT11",
-        "courseName": "Musikteori och gehörslära 2",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LJGT12",
-        "courseName": "Praktisk instrumentkännedom och genrekunskap",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAA04",
-        "courseName": "Verksamhetsförlagd utbildning III - ämneslärare",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAA05",
-        "courseName": "Lärarens professionella ledarskap - ämneslärare",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAA06",
-        "courseName": "Betyg och bedömning - ämneslärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAA07",
-        "courseName": "Skola på vetenskaplig grund-ämneslärare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAA08",
-        "courseName": "Skola på vetenskaplig grund-ämneslärare 7-9",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAF62",
-        "courseName": "Barns läs-, skriv- och matematiklärande",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAG04",
-        "courseName": "Verksamhetsförlagd utbildning III - grundlärare i förskoleklass och årskurs 1-3",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAG05",
-        "courseName": "Verksamhetsförlagd utbildning III - grundlärare i årskurs 4-6",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAG07",
-        "courseName": "Lärarens professionella ledarskap",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "LPAG13",
-        "courseName": "Skola på vetenskaplig grund - grundlärare",
-        "hp": 7.5
       },
       {
         "providerId": "p.uoh.kau",
