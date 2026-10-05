@@ -1,6 +1,6 @@
 {
   "reportVersion": 1,
-  "generatedAt": "2026-10-05T10:31:38.213Z",
+  "generatedAt": "2026-10-05T10:38:29.919Z",
   "branch": "studielots-v2",
   "database": "StudieLots DB",
   "method": {
@@ -22,14 +22,14 @@
     "usableProgrammeStructureRows": 189,
     "courseRows": 28931,
     "uniqueCourseIdentities": 28928,
-    "uniqueCoursesWithOffering": 2380,
-    "uniqueCoursesWithoutOffering": 26548,
-    "offeringRows": 3001,
-    "offeringRowsWithStartDate": 3001,
-    "offeringRowsWithBothDates": 2807,
+    "uniqueCoursesWithOffering": 2415,
+    "uniqueCoursesWithoutOffering": 26513,
+    "offeringRows": 3036,
+    "offeringRowsWithStartDate": 3036,
+    "offeringRowsWithBothDates": 2842,
     "offeringRowsWithExplicitExactPrecision": 35,
-    "offeringRowsWithWeekDerivedPrecision": 363,
-    "offeringRowsWithUnspecifiedPrecision": 2570,
+    "offeringRowsWithWeekDerivedPrecision": 398,
+    "offeringRowsWithUnspecifiedPrecision": 2535,
     "offeringRowsWithoutCourseIdentity": 0,
     "offeringRowsWithoutTerm": 0,
     "invalidDateRows": 0,
@@ -389,11 +389,11 @@
       "programsWithUsableStructure": 84,
       "programsWithoutUsableStructure": 82,
       "courses": 1656,
-      "coursesWithAtLeastOneOffering": 354,
-      "coursesWithoutOffering": 1302,
-      "courseOfferingRows": 363,
-      "offeringsWithStartDate": 363,
-      "offeringsWithStartAndEndDate": 363,
+      "coursesWithAtLeastOneOffering": 389,
+      "coursesWithoutOffering": 1267,
+      "courseOfferingRows": 398,
+      "offeringsWithStartDate": 398,
+      "offeringsWithStartAndEndDate": 398,
       "programmeStructureRows": 167,
       "usableProgrammeStructureRows": 92
     },
@@ -77534,50 +77534,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "FYAD19",
-        "courseName": "Fysikalisk elektronik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYAE03",
-        "courseName": "Ytfysik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "FYAE12",
         "courseName": "Fasta tillståndets teori",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYAL91",
-        "courseName": "Fysik IV med didaktisk inriktning",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYBX13",
-        "courseName": "Fysik Bas A",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYBX23",
-        "courseName": "Fysik Bas B",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYBX33",
-        "courseName": "Fysik Bas C",
         "hp": 7.5
       },
       {
@@ -77604,13 +77562,6 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "FYGA27",
-        "courseName": "Mekanik med tillämpningar 2",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "FYGA28",
         "courseName": "Vågfysik och optik",
         "hp": 7.5
@@ -77628,34 +77579,6 @@
         "courseCode": "FYGA30",
         "courseName": "Sommarkurs i fysik",
         "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYGA35",
-        "courseName": "Experimentell problemlösning för fysiker",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYGA45",
-        "courseName": "Experimentell problemlösning för Industriell Ekonomi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYGA55",
-        "courseName": "Experimentell problemlösning för datavetare",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYGA81",
-        "courseName": "El från solceller",
-        "hp": 1.5
       },
       {
         "providerId": "p.uoh.kau",
@@ -77681,99 +77604,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "FYGB09",
-        "courseName": "Elektromagnetisk fältteori för civilingenjörer",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYGC05",
-        "courseName": "Fysik, examensarbete kandidatnivå",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYGC09",
-        "courseName": "Fasta tillståndets fysik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYGC10",
-        "courseName": "Fysik, examensarbete kandidatnivå",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYGL12",
-        "courseName": "Fysik I med didaktisk inriktning",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYGL21",
-        "courseName": "Fysik II med didaktisk inriktning",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "FYGL31",
-        "courseName": "Fysik III med didaktisk inriktning",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "GEAL13",
-        "courseName": "Geografi med didaktisk inriktning 4",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "GEGD10",
         "courseName": "Geografi med didaktisk inriktning",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "GEGD11",
-        "courseName": "Geografi med didaktisk inriktning 2",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "GEGL10",
-        "courseName": "Geografi med didaktisk inriktning 1",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "GEGL11",
-        "courseName": "Geografi med didaktisk inriktning 2",
-        "hp": 30
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "GEGL12",
-        "courseName": "Geografi med didaktisk inriktning 4",
-        "hp": 22.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "GEGL15",
-        "courseName": "Geografi med didaktisk inriktning 2B - självständigt arbete",
         "hp": 30
       },
       {
@@ -77793,43 +77625,8 @@
       {
         "providerId": "p.uoh.kau",
         "university": "Karlstads universitet",
-        "courseCode": "GEGLF4",
-        "courseName": "Geografi med didaktisk inriktning 4: kulturgeografi - platser, människor och samhällen",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
         "courseCode": "GMAN04",
         "courseName": "Introduktion till Python för geomatiker",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "GMGF01",
-        "courseName": "Geografisk informationsteknik",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "GMGF02",
-        "courseName": "Kartografi",
-        "hp": 7.5
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "GMGF03",
-        "courseName": "Kartografisk design",
-        "hp": 15
-      },
-      {
-        "providerId": "p.uoh.kau",
-        "university": "Karlstads universitet",
-        "courseCode": "GMGF22",
-        "courseName": "Laserskanning",
         "hp": 7.5
       },
       {
