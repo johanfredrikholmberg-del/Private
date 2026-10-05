@@ -33,7 +33,8 @@ async function main(){
  const usable=r=>Boolean(r.startDate&&r.endDate&&Date.parse(r.endDate)>=Date.parse(r.startDate)&&validIso(r.startDate)&&validIso(r.endDate)&&officialUrl(r.sourceUrl)&&r.source!=='skolverket-susa-navet'&&r.applicationStatus!=='cancelled');
  const complete=new Set(offerTables.filter(r=>isGU(r)&&usable(r)).map(r=>codeOf(r)));
  const pending=guCourses.filter(c=>!complete.has(codeOf(c))).slice(0,LIMIT);
- const checkedAt=new Date().toISOString();\n const results=await pool(pending),byKey=new Map(offerTables.map(r=>[r.key,r])),newRows=[];
+ const checkedAt=new Date().toISOString();
+ const results=await pool(pending),byKey=new Map(offerTables.map(r=>[r.key,r])),newRows=[];
  for(const result of results)for(const row of result.rows||[]){
   if(!usable(row)||!officialUrl(row.sourceUrl)||!row.offeringTerm||!codeOf(row))continue;
   const code=codeOf(row),identity='p.uoh.gu|'+code;
