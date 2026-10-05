@@ -1,6 +1,6 @@
 # StudieLots DB coverage
 
-Generated: 2026-10-05T12:55:11.853Z (UTC) · branch: studielots-v2
+Generated: 2026-10-05T13:00:49.129Z (UTC) · branch: studielots-v2
 
 ## Overall
 
@@ -10,8 +10,8 @@ Generated: 2026-10-05T12:55:11.853Z (UTC) · branch: studielots-v2
 | Programidentiteter | 3181 | — |
 | Program med användbar struktur | 177 | 5.6% |
 | Program utan användbar struktur | 3004 | — |
-| Canonicala programstrukturposter | 1056 | — |
-| Användbara strukturposter | 190 | — |
+| Canonicala programstrukturposter | 1055 | — |
+| Användbara strukturposter | 189 | — |
 | Kursrader i StudieLots DB | 28931 | — |
 | Unika kursidentiteter | 28928 | — |
 | Kurser med minst ett kurstillfälle | 2680 | 9.3% |
@@ -77,6 +77,8 @@ Generated: 2026-10-05T12:55:11.853Z (UTC) · branch: studielots-v2
 | Uppsala universitet (p.uoh.uu) | 190 | 0 | 190 | 2850 | 0 | 2850 | 0 | 0 | 0 |
 
 ## Arbetskö och kvalitetsnoteringar
+
+- Duplicate GU structure `gu:S2EUA:2027VT` resolved; retained the complete official-plan shard and removed the weaker duplicate.
 
 - Göteborgs universitet: H1MEK:s officiella HT2026-upplägg är materialiserat från Studentportalen (sex terminer à 30 hp, MEK001–MEK006).
 

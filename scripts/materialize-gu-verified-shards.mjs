@@ -25,7 +25,13 @@ const replaced=[],added=[];
 for(const [code,item] of byCode){
   const current=present.get(code);
   if(current?.verified){
-    if(JSON.stringify(current.rows)!==JSON.stringify(item.rows))throw Error('Existing verified GU structure differs: '+code);
+    if(JSON.stringify(current.rows)!==JSON.stringify(item.rows)){
+      const higherCoverage=current.coverage==='complete'&&item.coverage==='choice-required'
+        &&Number(current.programHp)===Number(item.programHp)
+        &&current.sourceEvidenceUrl===item.sourceEvidenceUrl
+        &&Array.isArray(current.rows)&&current.rows.length>0;
+      if(!higherCoverage)throw Error('Existing verified GU structure differs: '+code);
+    }
     continue;
   }
   if(current){
