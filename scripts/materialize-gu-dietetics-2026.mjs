@@ -52,7 +52,12 @@ if(urlRows.length>1)throw Error('Duplicate canonical GU Dietetics rows');
 if(urlRows.length){
  const current=urlRows[0];
  if(current.verified===true){
-   if(current.validFrom!==validFrom||current.sourceEvidenceUrl!==url||JSON.stringify(current.rows)!==JSON.stringify(rows))throw Error('Conflicting verified GU Dietetics plan');
+   const sameRows=Array.isArray(current.rows)&&current.rows.length===rows.length&&rows.every((row,i)=>{
+     const old=current.rows[i];
+     return Number(old.term)===row.term&&(old.code||'')===row.code&&old.name===row.name&&Number(old.hp)===row.hp&&old.category===row.category&&Boolean(old.isSlot)===Boolean(row.isSlot);
+   });
+   const sourceMatch=current.sourceEvidenceUrl===url||current.sourceUrls?.includes(url);
+   if(current.validFrom!==validFrom||!sourceMatch||!sameRows)throw Error('Conflicting verified GU Dietetics plan');
    console.log('GU Dietetics HT26 already materialized');
    process.exit(0);
  }
