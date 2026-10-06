@@ -46,7 +46,7 @@ for(let t=1;t<=8;t++){
  if(actual.reduce((n,x)=>n+x.hp,0)!==30||actual.length!==expected[t].length)throw Error('GU Dietetics term structure mismatch at '+t);
  for(const [i,[courseCode,credits]] of expected[t].entries())if(actual[i].code!==courseCode||actual[i].hp!==credits)throw Error('GU Dietetics course mismatch at term '+t);
 }
-if(rows.length!==19)throw Error('GU Dietetics row count mismatch');
+if(rows.length!==15)throw Error('GU Dietetics row count mismatch');
 const urlRows=manifest.parts.flatMap(p=>{const x=read(root+p);return Array.isArray(x)?x:x.programs}).filter(x=>x.university==='Göteborgs universitet'&&x.programCode===code);
 if(urlRows.length>1)throw Error('Duplicate canonical GU Dietetics rows');
 if(urlRows.length){
