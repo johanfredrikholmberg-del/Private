@@ -25,6 +25,7 @@ on:
       - 'scripts/materialize-gu-h1ark-2026.mjs'
       - 'scripts/materialize-gu-h1klt-2026.mjs'
       - 'scripts/materialize-gu-h1spk-2026.mjs'
+      - 'scripts/materialize-gu-h1ken-2026.mjs'
       - '.github/workflows/import-gu-verified.yml'
 permissions:
   contents: write
@@ -69,6 +70,8 @@ jobs:
         run: node scripts/materialize-gu-h1klt-2026.mjs --write
       - name: Materialize official GU Language Consultancy HT26 structure
         run: node scripts/materialize-gu-h1spk-2026.mjs --write
+      - name: Materialize official GU English with Work-Life Connections HT26 structure
+        run: node scripts/materialize-gu-h1ken-2026.mjs --write
       - name: Import verified GU structures
         env:
           GU_STRUCTURE_LIMIT: 20
