@@ -28,6 +28,7 @@ on:
       - 'scripts/materialize-gu-h1ken-2026.mjs'
       - 'scripts/materialize-gu-s1int-2026.mjs'
       - 'scripts/materialize-gu-s1ofv-2026.mjs'
+      - 'scripts/materialize-gu-s1log-2026.mjs'
       - '.github/workflows/import-gu-verified.yml'
 permissions:
   contents: write
@@ -78,6 +79,8 @@ jobs:
         run: node scripts/materialize-gu-s1int-2026.mjs --write
       - name: Materialize official GU Public Administration HT26 structure
         run: node scripts/materialize-gu-s1ofv-2026.mjs --write
+      - name: Materialize official GU Logistics HT26 structure
+        run: node scripts/materialize-gu-s1log-2026.mjs --write
       - name: Import verified GU structures
         env:
           GU_STRUCTURE_LIMIT: 20
