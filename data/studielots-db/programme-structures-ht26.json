@@ -21950,93 +21950,185 @@
     "term": "HT26"
   },
   {
-    "key": "goteborgs-universitet:V1AUM",
+    "key": "goteborgs universitet|V1AUM|180",
     "susaId": "i.uoh.gu.v1aum.04003.20262",
     "university": "Göteborgs universitet",
     "programCode": "V1AUM",
     "programName": "Audionomprogrammet",
     "hp": 180,
     "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
-    "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/audionomprogrammet-v1aum",
-    "sourceUrls": [
+    "officialUrls": [
+      "https://studentportal.gu.se/program/audionomprogrammet-0",
+      "https://studentportal.gu.se/sites/default/files/2026-09/Program%C3%B6versikt%20%20V1AUM.pdf",
+      "https://www.gu.se/syllabus/34795d19-db2f-11f0-9c81-2a1b32074717",
       "https://www.gu.se/studera/hitta-utbildning/audionomprogrammet-v1aum"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 6,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "5": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "6": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        }
+    "status": "verified",
+    "attempts": 0,
+    "coverage": "complete",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "AU1010",
+        "name": "Audiologi 1",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
       },
-      "slotCount": 0,
-      "totalHp": 180,
-      "sourcePages": 1,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:51.426Z",
-    "term": "HT26"
+      {
+        "term": 1,
+        "code": "AU1020",
+        "name": "Anatomi och fysiologi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "AU1030",
+        "name": "Utvecklingspsykologi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "AU2010",
+        "name": "Psykoakustik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "AU2020",
+        "name": "Audiologi 2",
+        "hp": 22.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "AU3010",
+        "name": "Kognitions- och perceptionspsykologi",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "AU3020",
+        "name": "Lingvistik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "AU3030",
+        "name": "Audiologi 3",
+        "hp": 9,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "AU3040",
+        "name": "Vetenskaplig metod 1",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "AU4010",
+        "name": "Audiologi 4",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "AU5011",
+        "name": "Audiologi 5",
+        "hp": 26,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "AU5021",
+        "name": "Vetenskaplig metod 2",
+        "hp": 4,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "AU6010",
+        "name": "Audiologi 6",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "AU6020",
+        "name": "Självständigt vetenskapligt arbete i audiologi",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": true
+      }
+    ],
+    "source": "gu-official-student-portal-programme-overview",
+    "sourceUrl": "https://studentportal.gu.se/program/audionomprogrammet-0",
+    "sourceUrls": [
+      "https://studentportal.gu.se/program/audionomprogrammet-0",
+      "https://studentportal.gu.se/sites/default/files/2026-09/Program%C3%B6versikt%20%20V1AUM.pdf",
+      "https://www.gu.se/syllabus/34795d19-db2f-11f0-9c81-2a1b32074717",
+      "https://www.gu.se/studera/hitta-utbildning/audionomprogrammet-v1aum"
+    ],
+    "checkedAt": "2026-10-06T13:20:14.637Z",
+    "term": "HT26",
+    "id": "gu:V1AUM:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": false,
+    "sourceEvidenceUrl": "https://studentportal.gu.se/sites/default/files/2026-09/Program%C3%B6versikt%20%20V1AUM.pdf",
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "missingTerms": [],
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    }
   },
   {
     "key": "goteborgs-universitet:V1FYP",
