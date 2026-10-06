@@ -27,6 +27,19 @@ for(const name of ['program-db.json','program-db-variants.json','program-db-lund
     if(err?.code!=='ENOENT')throw err;
   }
 }
+// Preserve the current canonical file before rebuilding it from migration inputs.
+try{
+  const canonical=JSON.parse(await fs.readFile(targetPath,'utf8'));
+  for(const row of Array.isArray(canonical)?canonical:(canonical.programs||[])){
+    const hasRows=Array.isArray(row?.rows)&&row.rows.length>0;
+    const accepted=row?.verified===true||['complete','choice-required','complete-semester-sequence'].includes(row?.coverage);
+    const hasSource=Boolean(row?.sourceEvidenceUrl||row?.sourceUrl||row?.sourceUrls?.length);
+    if(accepted&&hasRows&&hasSource)rows.push({...row,migrationSource:'prior-canonical-programme-structures'});
+  }
+}catch(err){
+  if(err?.code!=='ENOENT')throw err;
+}
+
 // Canonical verified shards must survive consolidation. The prior version only
 // consumed HT26 and legacy sources, which silently unlinked later canonical shards.
 for(const name of (await fs.readdir(dbDir)).filter(x=>/^programme-structures-.+\.json$/.test(x)&&x!==targetName)){
