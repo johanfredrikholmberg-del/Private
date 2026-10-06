@@ -13383,23 +13383,248 @@
     "term": "HT26"
   },
   {
-    "key": "goteborgs-universitet:M1BMA",
+    "key": "goteborgs universitet|M1BMA|180",
     "susaId": "i.uoh.gu.m1bma.02000.20262",
     "university": "Göteborgs universitet",
     "programCode": "M1BMA",
     "programName": "Biomedicinska analytikerprogrammet",
     "hp": 180,
     "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
+    "officialUrls": [
+      "https://studentportal.gu.se/program/biomedicinska-analytikerprogrammet",
+      "https://www.gu.se/studera/hitta-utbildning/biomedicinska-analytikerprogrammet-m1bma",
+      "https://www.gu.se/syllabus/7a50ef80-d669-11f0-b415-d312a71c4fd5",
+      "https://studentportal.gu.se/sites/default/files/2026-01/Kurstider%20BMA%20Ht-2026.pdf"
+    ],
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/biomedicinska-analytikerprogrammet-m1bma",
+    "coverage": "complete",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "BMA011",
+        "name": "Anatomi och fysiologi",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "BMA012",
+        "name": "Vetenskaplig metodik och statistik",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "BMA021",
+        "name": "Kemi och biokemi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "BMA014",
+        "name": "Basal och klinisk laboratorievetenskap",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "BMA022",
+        "name": "Farmakologi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "BMA023",
+        "name": "Morfologisk cellbiologi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "BMA030",
+        "name": "Introduktion till klinisk fysiologi med läkemedelshantering",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "klinisk-fysiologi"
+      },
+      {
+        "term": 3,
+        "code": "BMA038",
+        "name": "Diagnostisk respirationsfysiologi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "klinisk-fysiologi"
+      },
+      {
+        "term": 3,
+        "code": "BMA039",
+        "name": "Radiofysik och nuklearmedicin med medicinsk informatik",
+        "hp": 15,
+        "category": "mandatory",
+        "branchId": "klinisk-fysiologi"
+      },
+      {
+        "term": 3,
+        "code": "BMA045",
+        "name": "Diagnostisk njur och gastrofysiologi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "klinisk-fysiologi"
+      },
+      {
+        "term": 3,
+        "code": "BMA031",
+        "name": "Morfologisk metodik och cellodling",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "laboratoriemedicin"
+      },
+      {
+        "term": 3,
+        "code": "BMA032",
+        "name": "Medicinsk biokemi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "laboratoriemedicin"
+      },
+      {
+        "term": 3,
+        "code": "BMA033",
+        "name": "Biokemisk och klinisk-kemisk metodik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "laboratoriemedicin"
+      },
+      {
+        "term": 3,
+        "code": "BMA034",
+        "name": "Mikrobiologi och immunologi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "laboratoriemedicin"
+      },
+      {
+        "term": 3,
+        "code": "BMA041",
+        "name": "Mikrobiologisk och immunologisk metodik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "laboratoriemedicin"
+      },
+      {
+        "term": 4,
+        "code": "BMA042",
+        "name": "Molekylärbiologi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "BMA046",
+        "name": "Molekylärbiologisk och immunologisk metodik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "klinisk-fysiologi"
+      },
+      {
+        "term": 4,
+        "code": "BMA047",
+        "name": "Klinisk omvårdnad",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "klinisk-fysiologi"
+      },
+      {
+        "term": 4,
+        "code": "BMA043",
+        "name": "Molekylärbiologisk metodik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "laboratoriemedicin"
+      },
+      {
+        "term": 4,
+        "code": "BMA051",
+        "name": "Klinisk kemisk, hematologisk och blodgruppsserologisk laboratoriemetodik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "laboratoriemedicin"
+      },
+      {
+        "term": 5,
+        "code": "BMA054",
+        "name": "Diagnostisk cirkulationsfysiologi",
+        "hp": 15,
+        "category": "mandatory",
+        "branchId": "klinisk-fysiologi"
+      },
+      {
+        "term": 5,
+        "code": "BMA055",
+        "name": "Diagnostisk neurofysiologi",
+        "hp": 15,
+        "category": "mandatory",
+        "branchId": "klinisk-fysiologi"
+      },
+      {
+        "term": 5,
+        "code": "BMA056",
+        "name": "Fördjupning inom diagnostisk fysiologi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "klinisk-fysiologi"
+      },
+      {
+        "term": 5,
+        "code": "BMA044",
+        "name": "Laboratoriemedicin och sjukdomslära",
+        "hp": 7.5,
+        "category": "mandatory",
+        "branchId": "laboratoriemedicin"
+      },
+      {
+        "term": 5,
+        "code": "BMA052",
+        "name": "Tillämpad laboratorievetenskap (basal diagnostik)",
+        "hp": 15,
+        "category": "mandatory",
+        "branchId": "laboratoriemedicin"
+      },
+      {
+        "term": 5,
+        "code": "BMA053",
+        "name": "Tillämpad laboratorievetenskap (speciell diagnostik)",
+        "hp": 15,
+        "category": "mandatory",
+        "branchId": "laboratoriemedicin"
+      },
+      {
+        "term": 6,
+        "code": "BMA061",
+        "name": "Vetenskaplig metodik och arbetsledning",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "BMA062",
+        "name": "Examensarbete",
+        "hp": 15,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "source": "gu-official-student-portal-programme-overview",
+    "sourceUrl": "https://studentportal.gu.se/program/biomedicinska-analytikerprogrammet",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/biomedicinska-analytikerprogrammet-m1bma"
+      "https://studentportal.gu.se/program/biomedicinska-analytikerprogrammet",
+      "https://www.gu.se/studera/hitta-utbildning/biomedicinska-analytikerprogrammet-m1bma",
+      "https://www.gu.se/syllabus/7a50ef80-d669-11f0-b415-d312a71c4fd5",
+      "https://studentportal.gu.se/sites/default/files/2026-01/Kurstider%20BMA%20Ht-2026.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -13469,7 +13694,30 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:39.141Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:M1BMA:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://studentportal.gu.se/program/biomedicinska-analytikerprogrammet",
+    "branchGroups": [
+      {
+        "id": "inriktning",
+        "name": "Inriktning",
+        "branches": [
+          {
+            "id": "laboratoriemedicin",
+            "name": "Laboratoriemedicin"
+          },
+          {
+            "id": "klinisk-fysiologi",
+            "name": "Klinisk fysiologi"
+          }
+        ]
+      }
+    ]
   },
   {
     "key": "goteborgs universitet|M1DIP|240",
