@@ -8969,15 +8969,267 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "PPE110",
+        "name": "Praktisk filosofi: grundkurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "NEK10",
+        "name": "Nationalekonomi: Grundläggande",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "SK119",
+        "name": "Statsvetenskap: Kärnkurspaket 30 hp",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Välj fortsättningskurs i ett av programmets tre ämnen",
+        "hp": 30,
+        "category": "choice",
+        "isSlot": true,
+        "slotType": "choice-slot",
+        "choiceSlots": 1,
+        "courseCodeVerified": false,
+        "options": [
+          {
+            "code": "FP1200",
+            "name": "Praktisk filosofi: Fortsättningskurs",
+            "hp": 30
+          },
+          {
+            "code": "NEK20",
+            "name": "Nationalekonomi: Fortsättning",
+            "hp": 30
+          },
+          {
+            "code": "SK129",
+            "name": "Statsvetenskap: Fördjupningskurspaket med Tematisk fördjupning",
+            "hp": 30
+          },
+          {
+            "code": "SK139",
+            "name": "Statsvetenskap: Fördjupningskurspaket med Miljöpolitikens villkor",
+            "hp": 30
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Välj ett annat ämne än termin 4, eller statistik 15 hp och valbara kurser 15 hp",
+        "hp": 30,
+        "category": "choice",
+        "isSlot": true,
+        "slotType": "choice-slot",
+        "choiceSlots": 1,
+        "courseCodeVerified": false,
+        "options": [
+          {
+            "code": "FP1200",
+            "name": "Praktisk filosofi: Fortsättningskurs",
+            "hp": 30
+          },
+          {
+            "code": "NEK20",
+            "name": "Nationalekonomi: Fortsättning",
+            "hp": 30
+          },
+          {
+            "code": "SK129",
+            "name": "Statsvetenskap: Fördjupningskurspaket med Tematisk fördjupning",
+            "hp": 30
+          },
+          {
+            "code": "SK139",
+            "name": "Statsvetenskap: Fördjupningskurspaket med Miljöpolitikens villkor",
+            "hp": 30
+          },
+          {
+            "code": "",
+            "name": "Statistik grundkurser 1 (ST15A) och valbara kurser",
+            "hp": 30,
+            "courses": [
+              {
+                "code": "ST15A",
+                "name": "Statistik grundkurser 1, kurspaket",
+                "hp": 15
+              },
+              {
+                "name": "Valbara kurser inom praktisk filosofi, nationalekonomi, statistik eller statsvetenskap",
+                "hp": 15,
+                "options": [
+                  {
+                    "code": "SK1127",
+                    "name": "Konflikt och konflikthantering",
+                    "hp": 7.5
+                  },
+                  {
+                    "code": "SK1136",
+                    "name": "Utrikespolitisk analys",
+                    "hp": 7.5
+                  },
+                  {
+                    "code": "SK1138",
+                    "name": "Miljöpolitik i teori och praktik",
+                    "hp": 7.5
+                  },
+                  {
+                    "code": "SK1139",
+                    "name": "Svensk miljöpolitik i ett jämförande perspektiv",
+                    "hp": 7.5
+                  },
+                  {
+                    "code": "SK1421",
+                    "name": "Statsvetaren i yrkeslivet",
+                    "hp": 15
+                  },
+                  {
+                    "code": "SK1223",
+                    "name": "Tematisk fördjupning (om ej läst i SK129)",
+                    "hp": 7.5
+                  },
+                  {
+                    "code": "NEK203",
+                    "name": "Mikroteori",
+                    "hp": 7.5
+                  },
+                  {
+                    "code": "NEK204",
+                    "name": "Makroteori",
+                    "hp": 7.5
+                  },
+                  {
+                    "code": "NEK206",
+                    "name": "Ekonometri",
+                    "hp": 7.5
+                  },
+                  {
+                    "code": "NEK205",
+                    "name": "Empirisk nationalekonomi i praktiken",
+                    "hp": 7.5,
+                    "prerequisites": [
+                      "NEK203",
+                      "NEK204"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "selectionRule": "Välj inte samma ämnesalternativ som under termin 4; statistikspåret krävs inför fördjupning i nationalekonomi."
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Välj fördjupning i ett huvudområde, inklusive kandidatuppsats där det anges",
+        "hp": 30,
+        "category": "choice",
+        "isSlot": true,
+        "slotType": "choice-slot",
+        "choiceSlots": 1,
+        "courseCodeVerified": false,
+        "options": [
+          {
+            "code": "FP1300",
+            "name": "Praktisk filosofi: Fördjupningskurs",
+            "hp": 30
+          },
+          {
+            "code": "",
+            "name": "Fördjupning i nationalekonomi",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Period 1: välj 1 av 2",
+                "hp": 7.5,
+                "choiceSlots": 1,
+                "options": [
+                  {
+                    "code": "NEK307",
+                    "name": "Policyutvärdering",
+                    "hp": 7.5
+                  },
+                  {
+                    "code": "NEK310",
+                    "name": "Dataanalys för nationalekonomi och finans",
+                    "hp": 7.5
+                  }
+                ]
+              },
+              {
+                "name": "Period 2: välj 1 av 2",
+                "hp": 7.5,
+                "choiceSlots": 1,
+                "options": [
+                  {
+                    "code": "NEK302",
+                    "name": "Utvecklingsekonomi",
+                    "hp": 7.5
+                  },
+                  {
+                    "code": "NEK304",
+                    "name": "Miljöekonomi",
+                    "hp": 7.5
+                  }
+                ]
+              },
+              {
+                "code": "NEK316",
+                "name": "Kandidatuppsats i nationalekonomi",
+                "hp": 15,
+                "isThesis": true
+              }
+            ]
+          },
+          {
+            "code": "",
+            "name": "Fördjupning i statsvetenskap",
+            "hp": 30,
+            "courses": [
+              {
+                "code": "SK1313",
+                "name": "Metod inklusive uppsatssamordning i statsvetenskap",
+                "hp": 15
+              },
+              {
+                "code": "SK1523",
+                "name": "Examensarbete i statsvetenskap",
+                "hp": 15,
+                "isThesis": true
+              }
+            ]
+          }
+        ],
+        "selectionRule": "Valet beror på kurserna under termin 4 och 5."
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/filosofi-politik-och-ekonomi-kandidatprogram-h1ppe",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/filosofi-politik-och-ekonomi-kandidatprogram-h1ppe"
+      "https://studentportal.gu.se/program/filosofi-politik-och-ekonomi-kandidatprogram",
+      "https://www.gu.se/syllabus/c3663425-d42c-11f0-b415-d312a71c4fd5"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -9047,7 +9299,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:31.918Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:H1PPE:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/syllabus/c3663425-d42c-11f0-b415-d312a71c4fd5"
   },
   {
     "key": "goteborgs-universitet:H1RED",
