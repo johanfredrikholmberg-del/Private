@@ -19691,14 +19691,143 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "course-codes-unverified",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Introduktion till Internationella relationer",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Teman och frågeställningar inom Internationella relationer",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Krig, fred och säkerhet",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Global politisk ekonomi",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Avancerade studier i säkerhet och krig",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Avancerade studier i global politisk ekonomi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Global och regional styrning",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Global politisk idéhistoria",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Metod inom globala studier",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Projektledning och utredning",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valfria kurser på kandidatnivå",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Utrikespolitik och utrikesdiplomati",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Internationell konflikttransformation",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Internationella relationer: Examensarbete",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kandidatprogrammet-i-internationella-relationer-s1int",
     "sourceUrls": [
+      "https://www.gu.se/syllabus/e72bbfcd-8e2a-11f0-b29b-713806674b84",
       "https://www.gu.se/studera/hitta-utbildning/kandidatprogrammet-i-internationella-relationer-s1int"
     ],
     "apiCoverage": "partial-or-choice-dependent",
@@ -19769,7 +19898,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:45.257Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:S1INT:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/syllabus/e72bbfcd-8e2a-11f0-b29b-713806674b84"
   },
   {
     "key": "goteborgs-universitet:S1JOU",
