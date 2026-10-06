@@ -21,4 +21,4 @@ const matched=[],missing=[];
 for(const o of official){const p=hbProgrammes.find(x=>match(o,x));const s=hbStructures.find(x=>match(o,x));(p||s?matched:missing).push({title:o.title,url:o.url,programme:!!p,structure:!!s,programmeCode:p?.programCode??p?.code??null,structureCode:s?.programCode??s?.code??null});}
 const uniqueUrls=new Set(official.map(x=>x.url));
 console.log(JSON.stringify({catalogueLabelCount:77,extractedDisplayItems:official.length,uniqueProgrammePages:uniqueUrls.size,susaBoråsCount:hbProgrammes.length,structureBoråsCount:hbStructures.length,matchedCount:matched.length,missingCount:missing.length,matched,missing},null,2));
-if(official.length<75||official.length>77)process.exitCode=2;
+if(uniqueUrls.size<75||uniqueUrls.size>77)process.exitCode=2;
