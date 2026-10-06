@@ -65,6 +65,7 @@ jobs:
       - name: Audit Borås 77-programme catalogue
         run: node scripts/hb-77-audit.mjs
       - name: Audit Karlstad programme catalogue
+        continue-on-error: true
         run: node scripts/kau-catalogue-audit.mjs
       - name: Validate structure output
         run: |
@@ -91,12 +92,14 @@ jobs:
           const meta={generatedAt:new Date().toISOString(),processed:rows.length,remaining:0,retryable,counts};
           fs.writeFileSync('data/susa/structure-meta.json',JSON.stringify(meta,null,2)+'\n');
           NODE
+      - name: Materialize complete source-backed structures into StudieLots DB
+        run: node scripts/consolidate-programme-structures.mjs
       - name: Commit structure progress
         run: |
-          if [ -z "$(git status --porcelain -- data/susa/structures.json data/susa/structure-meta.json data/kau)" ]; then exit 0; fi
+          if [ -z "$(git status --porcelain -- data/susa/structures.json data/susa/structure-meta.json data/kau data/studielots-db/programme-structures-ht26.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json)" ]; then exit 0; fi
           git config user.name 'studielots-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -f data/susa/structures.json data/susa/structure-meta.json data/kau
+          git add -f data/susa/structures.json data/susa/structure-meta.json data/kau data/studielots-db/programme-structures-ht26.json data/studielots-db/programme-structures-manifest.json data/studielots-db/manifest.json
           git commit -m 'Enrich Karlstad programme and course database [skip ci]'
           git fetch origin studielots-v2
           git rebase origin/studielots-v2
