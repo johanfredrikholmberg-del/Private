@@ -9721,15 +9721,160 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Språkkonsultprogrammet, kurs 1",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Språkkonsultprogrammet, kurs 2",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Språkkonsultprogrammet, kurs 3",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Språkkonsultprogrammet, kurs 4",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false,
+        "isThesis": true,
+        "thesisHp": 7.5,
+        "practicum": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Välj en av programmets tre specialiseringskurser I",
+        "hp": 30,
+        "category": "choice",
+        "isSlot": true,
+        "slotType": "choice-slot",
+        "choiceSlots": 1,
+        "courseCodeVerified": false,
+        "options": [
+          {
+            "name": "Språkvård, språkrådgivning och redaktörsarbete (kurs 5R)",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Obligatoriska specialiseringskurser inom skrivteori, skrivdidaktik och projektledning",
+                "hp": 15
+              },
+              {
+                "name": "Valbara specialiseringskurser",
+                "hp": 15
+              }
+            ]
+          },
+          {
+            "name": "Språkvård och språkrådgivning i ett flerspråkigt arbetsliv (kurs 5F)",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Obligatoriska specialiseringskurser inom flerspråkighet",
+                "hp": 15
+              },
+              {
+                "name": "Valbara specialiseringskurser",
+                "hp": 15
+              }
+            ]
+          },
+          {
+            "name": "Språkvård och språkrådgivning i ett engelskspråkigt arbetsliv (kurs 5E)",
+            "hp": 30
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Specialiseringskurs II inom samma inriktning som termin 5",
+        "hp": 30,
+        "category": "choice",
+        "isSlot": true,
+        "slotType": "choice-slot",
+        "choiceSlots": 1,
+        "courseCodeVerified": false,
+        "options": [
+          {
+            "name": "Språkvård, språkrådgivning och redaktörsarbete (kurs 6R)",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Praktik",
+                "hp": 15
+              },
+              {
+                "name": "Examensarbete",
+                "hp": 15,
+                "isThesis": true
+              }
+            ]
+          },
+          {
+            "name": "Språkvård och språkrådgivning i ett flerspråkigt arbetsliv (kurs 6F)",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Praktik",
+                "hp": 15
+              },
+              {
+                "name": "Examensarbete",
+                "hp": 15,
+                "isThesis": true
+              }
+            ]
+          },
+          {
+            "name": "Språkvård och språkrådgivning i ett engelskspråkigt arbetsliv (kurs E6)",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Praktik",
+                "hp": 15
+              },
+              {
+                "name": "Examensarbete",
+                "hp": 15,
+                "isThesis": true
+              }
+            ]
+          }
+        ],
+        "selectionRule": "Termin 6-inriktningen ska följa vald specialisering på termin 5."
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/sprakkonsultprogrammet-h1spk",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/sprakkonsultprogrammet-h1spk"
+      "https://www.gu.se/studera/hitta-utbildning/sprakkonsultprogrammet-h1spk",
+      "https://www.gu.se/sites/default/files/2024-09/Utbildningsplan%20H1SPK.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -9799,7 +9944,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:32.052Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:H1SPK:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/sites/default/files/2024-09/Utbildningsplan%20H1SPK.pdf"
   },
   {
     "key": "goteborgs-universitet:H2EVI",
