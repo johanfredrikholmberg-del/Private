@@ -13314,7 +13314,7 @@
     "term": "HT26"
   },
   {
-    "key": "goteborgs-universitet:M1DIP",
+    "key": "goteborgs universitet|M1DIP|240",
     "susaId": "i.uoh.gu.m1dip.03006.20272",
     "university": "Göteborgs universitet",
     "programCode": "M1DIP",
@@ -13324,7 +13324,7 @@
     "officialUrls": [],
     "status": "verified",
     "attempts": 0,
-    "coverage": "choice-required",
+    "coverage": "complete",
     "reason": null,
     "rows": [
       {
@@ -13332,81 +13332,63 @@
         "code": "DIP110",
         "name": "Introduktion till klinisk nutrition",
         "hp": 7.5,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 1,
         "code": "DIP120",
-        "name": "Biokemi med organisk kemi",
+        "name": "Biokemi med grundläggande kemi",
         "hp": 15,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 1,
         "code": "DIP130",
-        "name": "Nutrition 1",
+        "name": "Nutrition 1, makronutrienter",
         "hp": 7.5,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 2,
         "code": "DIP140",
-        "name": "Humanfysiologi med anatomi",
+        "name": "Humanfysiologi",
         "hp": 15,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 2,
         "code": "DIP150",
         "name": "Livsmedelsvetenskap",
         "hp": 15,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 3,
         "code": "DIP210",
         "name": "Nutrition 2",
         "hp": 30,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 4,
         "code": "DIP220",
         "name": "Klinisk nutrition 1",
         "hp": 15,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 4,
         "code": "DIP230",
-        "name": "Psykologi och yrkesspecifika och yrkesspecifika färdigheter för dietister",
+        "name": "Psykologi och yrkesspecifika färdigheter för dietister",
         "hp": 15,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 5,
         "code": "DIP310",
         "name": "Klinisk nutrition 2",
         "hp": 30,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 6,
@@ -13414,35 +13396,28 @@
         "name": "Examensarbete i klinisk nutrition",
         "hp": 15,
         "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "isThesis": true
       },
       {
         "term": 6,
         "code": "DIP330",
         "name": "Klinisk träning i dietistprofessionen",
         "hp": 15,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 7,
         "code": "MED722",
         "name": "Klinisk nutrition - vetenskaplig metod",
         "hp": 7.5,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 7,
         "code": "MED723",
         "name": "Kostundersökningsmetodik",
         "hp": 7.5,
-        "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "category": "mandatory"
       },
       {
         "term": 7,
@@ -13452,117 +13427,43 @@
         "category": "elective",
         "isSlot": true,
         "slotType": "elective-slot",
-        "courseCodeVerified": false
+        "options": [
+          {
+            "code": "DIP450",
+            "name": "Nutritionsbehandling för barn och vuxna med funktionella magtarmsjukdomar",
+            "hp": 7.5
+          },
+          {
+            "code": "MED770",
+            "name": "Geriatrisk nutrition",
+            "hp": 7.5
+          }
+        ]
       },
       {
         "term": 8,
         "code": "MED730",
-        "name": "Självständigt arbete inom klinisk nutrition",
+        "name": "Självständigt arbete i klinisk nutrition",
         "hp": 30,
         "category": "mandatory",
-        "isSlot": false,
-        "courseCodeVerified": true
+        "isThesis": true
       }
     ],
-    "source": "gu-official-programme-syllabus",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/dietistprogrammet-m1dip",
+    "source": "gu-official-programme-plan-and-overview",
+    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/programoversikt-dietistprogrammet",
     "sourceUrls": [
-      "https://www.gu.se/syllabus/7e9cefff-cb7d-11f0-a255-650837bd40cf"
+      "https://www.gu.se/studera/hitta-utbildning/programoversikt-dietistprogrammet",
+      "https://www.gu.se/syllabus/7e9cefff-cb7d-11f0-a255-650837bd40cf",
+      "https://studentportal.gu.se/program/dietistprogrammet"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 8,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "5": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "6": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "7": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "8": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        }
-      },
-      "slotCount": 0,
-      "totalHp": 240,
-      "sourcePages": 1,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:39.158Z",
     "term": "HT26",
     "id": "gu:M1DIP:2026HT",
     "programHp": 240,
     "validFrom": "2026HT",
     "verified": true,
-    "courseCodesVerified": false,
+    "courseCodesVerified": true,
     "choiceRequired": true,
-    "sourceEvidenceUrl": "https://www.gu.se/syllabus/7e9cefff-cb7d-11f0-a255-650837bd40cf"
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/programoversikt-dietistprogrammet"
   },
   {
     "key": "goteborgs-universitet:M2CMA",
