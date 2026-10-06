@@ -14061,111 +14061,288 @@
     "term": "HT26"
   },
   {
-    "key": "goteborgs-universitet:M2SLP",
+    "key": "goteborgs universitet|M2SLP|240",
     "susaId": "i.uoh.gu.m2slp.04004.20262",
     "university": "Göteborgs universitet",
     "programCode": "M2SLP",
     "programName": "Logopedprogrammet",
     "hp": 240,
     "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
-    "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/logopedprogrammet-m2slp",
-    "sourceUrls": [
+    "officialUrls": [
+      "https://studentportal.gu.se/program/logopedprogrammet",
+      "https://studentportal.gu.se/sites/default/files/2025-11/Program%C3%B6versikt%20M2SLP_2180_251107.pdf",
+      "https://www.gu.se/syllabus/2deeec0e-da65-11f0-b415-d312a71c4fd5",
       "https://www.gu.se/studera/hitta-utbildning/logopedprogrammet-m2slp"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 8,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "5": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "6": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "7": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "8": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        }
+    "status": "verified",
+    "attempts": 0,
+    "coverage": "complete",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "LO1111",
+        "name": "Logopedi I",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
       },
-      "slotCount": 0,
-      "totalHp": 240,
-      "sourcePages": 1,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:39.597Z",
-    "term": "HT26"
+      {
+        "term": 1,
+        "code": "LO1213",
+        "name": "Medicinskt basblock",
+        "hp": 12,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "LO1312",
+        "name": "Introduktion i lingvistik och fonetik",
+        "hp": 12,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LO1124",
+        "name": "Logopedi II",
+        "hp": 12,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LO1221",
+        "name": "Medicin - barn och ungdomar",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LO1322",
+        "name": "Kommunikationsutveckling hos barn och ungdomar",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "LO1422",
+        "name": "Utvecklingspsykologi",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "LO1130",
+        "name": "Logopedi III",
+        "hp": 12,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "LO1230",
+        "name": "Medicin – vuxna och äldre",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "LO1335",
+        "name": "Neuro- och psykolingvistik",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "LO1430",
+        "name": "Neuro- och kognitionspsykologi",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "LO1140",
+        "name": "Logopedi IV",
+        "hp": 18,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "LO1340",
+        "name": "Tillämpad fonetik",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "LO1440",
+        "name": "Personlighets- och socialpsykologi",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "LO1150",
+        "name": "Logopedi V",
+        "hp": 21,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "code": "LO1153",
+        "name": "Verksamhetsintegrerat lärande 1",
+        "hp": 9,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "LO1166",
+        "name": "Logopedisk forskning, klinik och profession",
+        "hp": 12,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "LO1660",
+        "name": "Audiologi inom logopedisk verksamhet",
+        "hp": 3,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "LO1663",
+        "name": "Verksamhetsintegrerat lärande 2",
+        "hp": 9,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "code": "LO1365",
+        "name": "Kommunikationsanalys",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 7,
+        "code": "LO2171",
+        "name": "Logopedi fördjupning",
+        "hp": 21,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 7,
+        "code": "LO2172",
+        "name": "Verksamhetsintegrerat lärande 3",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 7,
+        "code": "LO2180",
+        "name": "Examensarbete i logopedi",
+        "hp": 3,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": true
+      },
+      {
+        "term": 8,
+        "code": "LO2180",
+        "name": "Examensarbete i logopedi (forts.)",
+        "hp": 27,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": true
+      },
+      {
+        "term": 8,
+        "code": "LO2182",
+        "name": "Profession VIII",
+        "hp": 3,
+        "category": "mandatory",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "source": "gu-official-student-portal-programme-overview",
+    "sourceUrl": "https://studentportal.gu.se/program/logopedprogrammet",
+    "sourceUrls": [
+      "https://studentportal.gu.se/program/logopedprogrammet",
+      "https://studentportal.gu.se/sites/default/files/2025-11/Program%C3%B6versikt%20M2SLP_2180_251107.pdf",
+      "https://www.gu.se/syllabus/2deeec0e-da65-11f0-b415-d312a71c4fd5",
+      "https://www.gu.se/studera/hitta-utbildning/logopedprogrammet-m2slp"
+    ],
+    "checkedAt": "2026-10-06T12:36:47.779Z",
+    "term": "HT26",
+    "id": "gu:M2SLP:2026HT",
+    "programHp": 240,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": false,
+    "sourceEvidenceUrl": "https://studentportal.gu.se/sites/default/files/2025-11/Program%C3%B6versikt%20M2SLP_2180_251107.pdf",
+    "completeTerms": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "missingTerms": [],
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30,
+      "7": 30,
+      "8": 30
+    }
   },
   {
     "key": "goteborgs-universitet:N1BBA",
