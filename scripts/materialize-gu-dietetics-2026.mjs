@@ -12,23 +12,23 @@ const url='https://www.gu.se/syllabus/7e9cefff-cb7d-11f0-a255-650837bd40cf';
 const response=await fetch(url,{signal:AbortSignal.timeout(20000)});
 if(!response.ok||new URL(response.url).host!=='www.gu.se')throw Error('Official GU syllabus unavailable');
 const html=await response.text();
-const clean=x=>String(x||'').replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;|\\u00a0|\\u202f/g,' ').replace(/\\s+/g,' ').trim();
+const clean=x=>String(x||'').replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;|\u00a0|\u202f/g,' ').replace(/\s+/g,' ').trim();
 const plain=clean(html);
-if(!plain.includes(code)||!/Valid from\\s+Autumn semester 2026/.test(plain)||!/240 credits?\\s*\\(ECTS\\)/.test(plain))throw Error('GU Dietetics syllabus identity, credits or version conflict');
-const content=html.match(/Termin 1[\\s\\S]*?Termin 8[\\s\\S]*?(?=Följande två kurser)/)?.[0];
+if(!plain.includes(code)||!/Valid from\s+Autumn semester 2026/.test(plain)||!/240 credits?\s*\(ECTS\)/.test(plain))throw Error('GU Dietetics syllabus identity, credits or version conflict');
+const content=html.match(/Termin 1[\s\S]*?Termin 8[\s\S]*?(?=Följande två kurser)/)?.[0];
 if(!content)throw Error('GU Dietetics term sequence missing');
 const rows=[];let term=0;
-for(const line of content.split(/<br\\s*\\/?\\s*>|<\\/p>|<\\/li>|<\\/h[1-6]>/i).map(clean).filter(Boolean)){
- const mark=line.match(/^Termin\\s*([1-8])$/i);
+for(const line of content.split(/<br\s*\/?\s*>|<\/p>|<\/li>|<\/h[1-6]>/i).map(clean).filter(Boolean)){
+ const mark=line.match(/^Termin\s*([1-8])$/i);
  if(mark){term=Number(mark[1]);continue}
  if(!term)continue;
- const m=line.match(/^(?:\\([^)]+\\)\\s*)?([A-ZÅÄÖ]{2,5}\\d{3,5})(?:\\/([A-ZÅÄÖ]{2,5}\\d{3,5}))?\\s+(.+?),\\s*(7[,.]5|15|30)\\s*hp(?:\\s*\\([^)]*\\))?(?:\\s*-\\s*halvfart)?$/i);
+ const m=line.match(/^(?:\([^)]+\)\s*)?([A-ZÅÄÖ]{2,5}\d{3,5})(?:\/([A-ZÅÄÖ]{2,5}\d{3,5}))?\s+(.+?),\s*(7[,.]5|15|30)\s*hp(?:\s*\([^)]*\))?(?:\s*-\s*halvfart)?$/i);
  if(m){
-   const name=m[4].replace(/\\s+-\\s*halvfart$/i,'').trim(),credits=Number(m[5].replace(',','.'));
+   const name=m[4].replace(/\s+-\s*halvfart$/i,'').trim(),credits=Number(m[5].replace(',','.'));
    rows.push({term,code:m[1],name,hp:credits,category:'mandatory',isSlot:false,courseCodeVerified:true});
    continue;
  }
- if(/^Valbara kurser i klinisk nutrition,\\s*15\\s*hp$/i.test(line))
+ if(/^Valbara kurser i klinisk nutrition,\s*15\s*hp$/i.test(line))
    rows.push({term,code:'',name:'Valbara kurser i klinisk nutrition',hp:15,category:'elective',isSlot:true,slotType:'elective-slot',courseCodeVerified:false});
 }
 const expected={
@@ -65,12 +65,12 @@ if(process.argv.includes('--write')){
  if(!Array.isArray(list))throw Error('Unexpected canonical GU shard');
  const idx=list.findIndex(x=>x.university==='Göteborgs universitet'&&x.programCode===code);
  if(idx>=0)list[idx]=item;else list.push(item);
- fs.writeFileSync(file+'.tmp',JSON.stringify(data,null,2)+'\\n');
+ fs.writeFileSync(file+'.tmp',JSON.stringify(data,null,2)+'\n');
  const verify=read(file+'.tmp'),vrows=Array.isArray(verify)?verify:verify.programs;
  if(vrows.filter(x=>x.programCode===code&&x.university==='Göteborgs universitet').length!==1)throw Error('GU Dietetics write verification failed');
  fs.renameSync(file+'.tmp',file);
  if(idx<0){manifest.count++;manifest.universities.find(x=>x.university==='Göteborgs universitet').count++;db.tables.programmeStructures.rows=manifest.count;}
- fs.writeFileSync(root+'programme-structures-manifest.json',JSON.stringify(manifest,null,2)+'\\n');
- fs.writeFileSync(root+'manifest.json',JSON.stringify(db,null,2)+'\\n');
+ fs.writeFileSync(root+'programme-structures-manifest.json',JSON.stringify(manifest,null,2)+'\n');
+ fs.writeFileSync(root+'manifest.json',JSON.stringify(db,null,2)+'\n');
 }
 console.log(JSON.stringify({code,validFrom,rows:rows.length,termCredits:Array(8).fill(30),courseCodesVerified:false,source:url}));
