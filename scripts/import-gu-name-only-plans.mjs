@@ -22,25 +22,46 @@ const plans=[
       {name:'Hälsofrämjande och sjukdomsförebyggande arbete i riskgrupper: strategier och metoder',hp:15}
     ]),course(4,'Masteruppsats i global hälsa',30)]}
 ];
-const added=[];
+const added=[],replaced=[];
+const upgrades=[];
 for(const plan of plans){
   const identity=programmes.filter(x=>x.university==='Göteborgs universitet'&&x.programCode===plan.code);
   if(identity.length!==1||Number(identity[0].programHp)!==120)throw Error(`Identity conflict: ${plan.code}`);
-  if(existing.some(x=>x.university==='Göteborgs universitet'&&x.programCode===plan.code))continue;
   if(!/^https:\/\/www\.gu\.se\//.test(plan.source))throw Error('Unofficial source');
   for(let t=1;t<=4;t++)if(Math.abs(plan.rows.filter(x=>x.term===t).reduce((n,x)=>n+x.hp,0)-30)>.001)throw Error(`Unbalanced ${plan.code} term ${t}`);
-  added.push({id:`gu:${plan.code}:2026HT`,key:identity[0].key,university:'Göteborgs universitet',programCode:plan.code,programName:identity[0].programName,programHp:120,hp:120,validFrom:'2026HT',coverage:'course-codes-unverified',verified:true,courseCodesVerified:false,choiceRequired:plan.rows.some(x=>x.isSlot),source:'gu-official-programme-overview',sourceEvidenceUrl:plan.source,sourceUrls:[plan.source],rows:plan.rows});
+  const current=existing.find(x=>x.university==='Göteborgs universitet'&&x.programCode===plan.code);
+  if(current&&Array.isArray(current.rows)&&current.rows.length)continue;
+  const structure={id:`gu:${plan.code}:2026HT`,key:identity[0].key,university:'Göteborgs universitet',programCode:plan.code,programName:identity[0].programName,programHp:120,hp:120,validFrom:'2026HT',coverage:'course-codes-unverified',verified:true,courseCodesVerified:false,choiceRequired:plan.rows.some(x=>x.isSlot),source:'gu-official-programme-overview',sourceEvidenceUrl:plan.source,sourceUrls:[plan.source],rows:plan.rows};
+  if(current){
+    const partIndex=parts.findIndex(p=>(Array.isArray(p)?p:(p.programs||[])).includes(current));
+    const rowIndex=(Array.isArray(parts[partIndex])?parts[partIndex]:(parts[partIndex].programs||[])).indexOf(current);
+    upgrades.push({partIndex,rowIndex,structure,code:plan.code});
+    replaced.push({code:plan.code,rows:plan.rows.length,coverage:structure.coverage});
+  }else added.push(structure);
 }
-const summary={before:existing.length,added:added.map(x=>({code:x.programCode,rows:x.rows.length,coverage:x.coverage})),after:existing.length+added.length};
-if(process.argv.includes('--write')&&added.length){
+const summary={before:existing.length,added:added.map(x=>({code:x.programCode,rows:x.rows.length,coverage:x.coverage})),replaced,after:existing.length+added.length};
+if(process.argv.includes('--write')&&(added.length||upgrades.length)){
   if(manifest.count!==existing.length)throw Error('Manifest count conflict');
-  const file=dir+manifest.parts.at(-1),last=parts.at(-1);
-  const lastRows=Array.isArray(last)?last:(last.programs||[]);
-  const merged=Array.isArray(last)?[...lastRows,...added]:{...last,programs:[...lastRows,...added]};
-  fs.writeFileSync(file+'.tmp',JSON.stringify(merged,null,2)+'\n');
-  const written=read(file+'.tmp'),writtenRows=Array.isArray(written)?written:(written.programs||[]);
-  if(writtenRows.length!==lastRows.length+added.length)throw Error('Write verification failed');
-  fs.renameSync(file+'.tmp',file);
+  const changedParts=new Set();
+  for(const u of upgrades){
+    const part=parts[u.partIndex],rows=Array.isArray(part)?part:(part.programs||[]);
+    rows[u.rowIndex]=u.structure;
+    changedParts.add(u.partIndex);
+  }
+  if(added.length){
+    const lastIndex=parts.length-1,last=parts[lastIndex],rows=Array.isArray(last)?last:(last.programs||[]);
+    if(Array.isArray(last))parts[lastIndex]=[...rows,...added];
+    else parts[lastIndex]={...last,programs:[...rows,...added]};
+    changedParts.add(lastIndex);
+  }
+  for(const i of changedParts){
+    const original=read(dir+manifest.parts[i]),target=parts[i];
+    const originalRows=Array.isArray(original)?original:(original.programs||[]);
+    const targetRows=Array.isArray(target)?target:(target.programs||[]);
+    if(targetRows.length!==originalRows.length+(i===parts.length-1?added.length:0))throw Error('Write verification failed');
+    fs.writeFileSync(dir+manifest.parts[i]+'.tmp',JSON.stringify(target,null,2)+'\n');
+    fs.renameSync(dir+manifest.parts[i]+'.tmp',dir+manifest.parts[i]);
+  }
   const next={...manifest,count:summary.after,universities:manifest.universities.map(x=>x.university==='Göteborgs universitet'?{...x,count:x.count+added.length}:x)};
   fs.writeFileSync(manifestPath+'.tmp',JSON.stringify(next,null,2)+'\n');
   fs.renameSync(manifestPath+'.tmp',manifestPath);
