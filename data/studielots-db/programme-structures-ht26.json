@@ -8680,15 +8680,174 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Engelska grundkurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Engelska fortsättningskurs (Brighton eller Göteborg)",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Stilistik och stil i litteratur: Från korpusanalys till litteraturteori",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Litterära landskap över tid och rum",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Kommunikation i professionella sammanhang",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Karriärplanering för humanister",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valfria kurser i engelska eller andra ämnen, eller utbytesstudier",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Engelska på den globala arenan: Grunder i språkkonsultsarbete",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Engelska i den digitala eran: AI och andra framväxande teknologier i språkvetenskap",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Välj praktik 15 hp eller två kurser om 7,5 hp",
+        "hp": 15,
+        "category": "choice",
+        "isSlot": true,
+        "slotType": "choice-slot",
+        "choiceSlots": 1,
+        "courseCodeVerified": false,
+        "options": [
+          {
+            "name": "Språk i praktiken",
+            "hp": 15
+          },
+          {
+            "name": "Genus i litteratur: Dåtida och nutida perspektiv samt Akademisk kommunikation",
+            "hp": 15,
+            "courses": [
+              {
+                "name": "Genus i litteratur: Dåtida och nutida perspektiv",
+                "hp": 7.5
+              },
+              {
+                "name": "Akademisk kommunikation",
+                "hp": 7.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Fördjupningskurs 15 hp och kandidatuppsats 15 hp; välj ämnesinriktning",
+        "hp": 30,
+        "category": "choice",
+        "isSlot": true,
+        "slotType": "choice-slot",
+        "choiceSlots": 1,
+        "courseCodeVerified": false,
+        "options": [
+          {
+            "name": "Litteraturvetenskaplig inriktning",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Fördjupningskurs i litteraturvetenskap",
+                "hp": 15
+              },
+              {
+                "name": "Kandidatuppsats i litteraturvetenskap",
+                "hp": 15,
+                "isThesis": true
+              }
+            ]
+          },
+          {
+            "name": "Språkvetenskaplig inriktning",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Fördjupningskurs i språkvetenskap",
+                "hp": 15
+              },
+              {
+                "name": "Kandidatuppsats i språkvetenskap",
+                "hp": 15,
+                "isThesis": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "source": "gu-official-programme-overview",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kandidatprogram-i-engelska-med-arbetslivsanknytning-h1ken",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kandidatprogram-i-engelska-med-arbetslivsanknytning-h1ken"
+      "https://www.gu.se/studera/hitta-utbildning/kandidatprogram-i-engelska-med-arbetslivsanknytning-h1ken",
+      "https://www.gu.se/studera/hitta-utbildning/programoversikt-for-kandidatprogram-i-engelska-med-arbetslivsanknytning",
+      "https://www.gu.se/studera/hitta-utbildning/kandidatprogram-i-engelska-med-arbetslivsanknytning-h1ken/utbildningsplan/e0e66e50-95e2-11ef-a92e-7cfbf4f6409a"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -8758,7 +8917,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:31.168Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:H1KEN:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/programoversikt-for-kandidatprogram-i-engelska-med-arbetslivsanknytning"
   },
   {
     "key": "goteborgs-universitet:H1KLT",
