@@ -8430,15 +8430,101 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "KA1110",
+        "name": "Kulturarvets former",
+        "hp": 20,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "KA1120",
+        "name": "Kulturarvets politik och ideologi",
+        "hp": 10,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "KA1210",
+        "name": "Kulturarvets förvaltning och regelverk",
+        "hp": 10,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "KA1220",
+        "name": "Kulturarvets kommunikation",
+        "hp": 10,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "KA1230",
+        "name": "Kulturarvspedagogik",
+        "hp": 10,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Grundkurs inom valt profilämne",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Fortsättningskurs inom valt profilämne",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "KA1360",
+        "name": "Fördjupningskurs inom huvudområdet Kulturarv",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valbara kurser och/eller praktik inom kulturarvsområdet",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kulturarvsprogrammet-h1kap",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kulturarvsprogrammet-h1kap"
+      "https://www.gu.se/studera/hitta-utbildning/kulturarvsprogrammet-h1kap",
+      "https://www.gu.se/sites/default/files/2024-03/Utbildningsplan_Kulturarvsprogrammet_H1KAP.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -8508,7 +8594,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:31.210Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:H1KAP:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/sites/default/files/2024-03/Utbildningsplan_Kulturarvsprogrammet_H1KAP.pdf"
   },
   {
     "key": "goteborgs-universitet:H1KEN",
