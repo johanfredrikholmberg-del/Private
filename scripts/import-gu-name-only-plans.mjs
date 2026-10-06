@@ -5,7 +5,7 @@ import fs from 'node:fs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const dir='data/studielots-db/',manifestPath=dir+'programme-structures-manifest.json';
 const manifest=read(manifestPath),parts=manifest.parts.map(x=>read(dir+x));
-const existing=parts.flatMap(x=>x.programs),programmes=read(read(dir+'manifest.json').tables.programmes.storage);
+const existing=parts.flatMap(x=>Array.isArray(x)?x:(x.programs||[])),programmes=read(read(dir+'manifest.json').tables.programmes.storage);
 const course=(term,name,hp)=>({term,code:'',name,hp,category:'mandatory',isSlot:false,courseCodeVerified:false});
 const slot=(term,name,hp,options=[])=>({term,code:'',name,hp,category:'elective-slot',slotType:'programme-elective',isSlot:true,options});
 const plans=[
@@ -35,8 +35,11 @@ const summary={before:existing.length,added:added.map(x=>({code:x.programCode,ro
 if(process.argv.includes('--write')&&added.length){
   if(manifest.count!==existing.length)throw Error('Manifest count conflict');
   const file=dir+manifest.parts.at(-1),last=parts.at(-1);
-  fs.writeFileSync(file+'.tmp',JSON.stringify({...last,programs:[...last.programs,...added]},null,2)+'\n');
-  if(read(file+'.tmp').programs.length!==last.programs.length+added.length)throw Error('Write verification failed');
+  const lastRows=Array.isArray(last)?last:(last.programs||[]);
+  const merged=Array.isArray(last)?[...lastRows,...added]:{...last,programs:[...lastRows,...added]};
+  fs.writeFileSync(file+'.tmp',JSON.stringify(merged,null,2)+'\n');
+  const written=read(file+'.tmp'),writtenRows=Array.isArray(written)?written:(written.programs||[]);
+  if(writtenRows.length!==lastRows.length+added.length)throw Error('Write verification failed');
   fs.renameSync(file+'.tmp',file);
   const next={...manifest,count:summary.after,universities:manifest.universities.map(x=>x.university==='Göteborgs universitet'?{...x,count:x.count+added.length}:x)};
   fs.writeFileSync(manifestPath+'.tmp',JSON.stringify(next,null,2)+'\n');
