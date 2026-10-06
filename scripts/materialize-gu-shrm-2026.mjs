@@ -12,7 +12,7 @@ const url='https://www.gu.se/studera/hitta-utbildning/master-programme-in-strate
 const response=await fetch(url,{signal:AbortSignal.timeout(20000)});
 if(!response.ok||new URL(response.url).host!=='www.gu.se')throw Error('Official GU S2HRM syllabus unavailable');
 const html=await response.text();
-const plain=html.replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;|\\u00a0|\\u202f/g,' ').replace(/\\s+/g,' ');
+const plain=html.replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;|\u00a0|\u202f/g,' ').replace(/\s+/g,' ');
 for(const required of ['S2HRM','Hösttermin 2026','120 högskolepoäng','PV2104','PV2101','PV2301','PV2400','PV2205','PV2206','PV2102','PV2203','PV2500'])if(!plain.includes(required))throw Error('GU S2HRM syllabus missing '+required);
 const course=(term,c,name,credits)=>({term,code:c,name,hp:credits,category:'mandatory',isSlot:false,courseCodeVerified:true});
 const slot=(term,name,options)=>({term,code:'',name,hp:15,category:'elective',isSlot:true,slotType:'elective-slot',courseCodeVerified:false,options});
@@ -46,12 +46,12 @@ if(process.argv.includes('--write')){
  const partName=manifest.parts[0],file=root+partName,data=read(file),list=Array.isArray(data)?data:data.programs;
  const idx=list.findIndex(x=>x.university==='Göteborgs universitet'&&x.programCode===code);
  if(idx>=0)list[idx]=item;else list.push(item);
- fs.writeFileSync(file+'.tmp',JSON.stringify(data,null,2)+'\\n');
+ fs.writeFileSync(file+'.tmp',JSON.stringify(data,null,2)+'\n');
  const verify=read(file+'.tmp'),vrows=Array.isArray(verify)?verify:verify.programs;
  if(vrows.filter(x=>x.university==='Göteborgs universitet'&&x.programCode===code).length!==1)throw Error('GU S2HRM write verification failed');
  fs.renameSync(file+'.tmp',file);
  if(idx<0){manifest.count++;manifest.universities.find(x=>x.university==='Göteborgs universitet').count++;db.tables.programmeStructures.rows=manifest.count;}
- fs.writeFileSync(root+'programme-structures-manifest.json',JSON.stringify(manifest,null,2)+'\\n');
- fs.writeFileSync(root+'manifest.json',JSON.stringify(db,null,2)+'\\n');
+ fs.writeFileSync(root+'programme-structures-manifest.json',JSON.stringify(manifest,null,2)+'\n');
+ fs.writeFileSync(root+'manifest.json',JSON.stringify(db,null,2)+'\n');
 }
 console.log(JSON.stringify({code,validFrom,rows:rows.length,termCredits:[30,30,30,30],choiceSlots:2,source:url}));
