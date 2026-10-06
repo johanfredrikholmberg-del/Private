@@ -6,7 +6,7 @@ const db=read(root+'manifest.json'),manifest=read(db.tables.programmeStructures.
 if(db.database!=='StudieLots DB'||manifest.count!==db.tables.programmeStructures.rows)throw Error('Canonical structure count mismatch');
 const code='M1DIP',hp=240,validFrom='2026HT';
 const identities=[db.tables.programmes.storage,...(db.tables.programmes.additionalStorages||[])].flatMap(read)
- .filter(x=>x.university==='Göteborgs universitet'&&x.programCode===code&&Number(x.programHp)===hp&&x.term===validFrom);
+ .filter(x=>x.university==='Göteborgs universitet'&&x.programCode===code&&Number(x.programHp)===hp&&x.term==='HT26');
 if(identities.length!==1)throw Error('GU Dietetics identity missing or ambiguous');
 const url='https://www.gu.se/syllabus/7e9cefff-cb7d-11f0-a255-650837bd40cf';
 const response=await fetch(url,{signal:AbortSignal.timeout(20000)});
