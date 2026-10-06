@@ -45,7 +45,15 @@ const report={
  structures:{
    materialized:structures.length,
    verified:structures.filter(x=>x.verified===true).length,
-   rows:structures.reduce((s,x)=>s+(Array.isArray(x.rows)?x.rows.length:0),0)
+   rows:structures.reduce((s,x)=>s+(Array.isArray(x.rows)?x.rows.length:0),0),
+   coverage:{
+     complete:structures.filter(x=>x.coverage==='complete').length,
+     choiceRequired:structures.filter(x=>x.coverage==='choice-required').length,
+     courseCodesUnverified:structures.filter(x=>x.coverage==='course-codes-unverified').length,
+     partial:structures.filter(x=>x.coverage==='partial'||x.coverage==='partial-structure').length,
+     metadataOnly:structures.filter(x=>x.coverage==='metadata-only').length,
+     manualReview:structures.filter(x=>x.coverage==='manual-review').length
+   }
  },
  historicalCreditTransfer:{
    rows:history.length,
