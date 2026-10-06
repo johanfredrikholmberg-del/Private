@@ -17774,93 +17774,142 @@
     "term": "HT26"
   },
   {
-    "key": "goteborgs-universitet:O1THG",
-    "susaId": "i.uoh.gu.o1thg.07004.20262",
+    "id": "gu:O1THG:2026HT",
+    "key": "goteborgs universitet|O1THG|180",
     "university": "Göteborgs universitet",
     "programCode": "O1THG",
     "programName": "Tandhygienistprogrammet",
+    "programHp": 180,
     "hp": 180,
-    "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
-    "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/tandhygienistprogrammet-o1thg",
+    "validFrom": "2026HT",
+    "coverage": "course-codes-unverified",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": false,
+    "source": "gu-official-education-plan",
+    "sourceEvidenceUrl": "https://www.gu.se/syllabus/76899f49-074e-11f1-85d9-a1ed927d4a1e",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/tandhygienistprogrammet-o1thg"
+      "https://www.gu.se/syllabus/76899f49-074e-11f1-85d9-a1ed927d4a1e"
     ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 6,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "5": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "6": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        }
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Grundläggande Oral hälsa I - Introduktion till vetenskaplig metodik, professionen och huvudområdet, hälsopromotion och prevention",
+        "hp": 20.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
       },
-      "slotCount": 0,
-      "totalHp": 180,
-      "sourcePages": 1,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:44.169Z",
-    "term": "HT26"
+      {
+        "term": 1,
+        "code": "",
+        "name": "Basmedicinska ämnen I",
+        "hp": 9.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Grundläggande Oral hälsa II – Oral hälsa och sjukdom, prevention och behandling",
+        "hp": 26,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Basmedicinska ämnen II",
+        "hp": 4,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fördjupad Oral hälsa I – Prevention, diagnostik och behandling",
+        "hp": 20,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Tillämpad Oral hälsa I – Teori och klinisk praktik vuxna I",
+        "hp": 6,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Basmedicinska ämnen III",
+        "hp": 4,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Fördjupad Oral hälsa II – Folkhälsovetenskap och hälsopromotion, prevention, diagnostik och behandling",
+        "hp": 10,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Tillämpad Oral hälsa II – Teori och klinisk praktik, barn I, vuxna II",
+        "hp": 20,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Vetenskapliga teorier och metoder",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Tillämpad Oral hälsa III – Teori och klinisk praktik, barn II, vuxna III och äldre",
+        "hp": 22.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Tillämpad Oral hälsa IV – Hälsopromotion, prevention och behandlingsstrategier ur ett holistiskt perspektiv",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Examensarbete för kandidatexamen inom huvudområdet oral hälsa",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      }
+    ]
   },
   {
     "key": "goteborgs-universitet:O1THN",
