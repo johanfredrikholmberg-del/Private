@@ -14408,15 +14408,189 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Introduktion",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Geografiska Informationssystem (GIS) 1",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Processer i naturen",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Befolkningsutveckling och urbanisering",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "De stora systemen i naturen: regionala förutsättningar och risker",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Resurser och försörjning i det Globala Syd",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Geografi och mänsklig hälsa",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Människa och miljö",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "GE2345",
+        "name": "Fysisk planering",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "NG0230",
+        "name": "Klimatförändringar ur ett geografiskt perspektiv",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "GE2450",
+        "name": "Välfärdsgeografi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "GE2750",
+        "name": "Ekonomisk geografi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "NG0220",
+        "name": "Klimatförändringar och samhället",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Fältkurs eller praktik",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Infrastruktur, transporter och kommunikation",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Fjärranalys: Geografiska informationssystem (GIS)",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Kulturgeografisk idéhistoria och metod",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Kunskapsöversikt",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Examensarbete",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      }
+    ],
+    "source": "gu-official-programme-overview",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/geografi-kandidatprogram-n1geo",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/geografi-kandidatprogram-n1geo"
+      "https://www.gu.se/studera/hitta-utbildning/geografi-kandidatprogram-n1geo",
+      "https://www.gu.se/studera/hitta-utbildning/detta-laser-du-pa-kandidatprogrammet-i-geografi"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -14486,7 +14660,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:40.261Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:N1GEO:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/detta-laser-du-pa-kandidatprogrammet-i-geografi"
   },
   {
     "key": "goteborgs-universitet:N1GVS",
