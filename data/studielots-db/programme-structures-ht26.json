@@ -89285,7 +89285,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-10-03T10:18:49.016Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "lu:SGBVP:2026HT",
@@ -90237,7 +90237,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-10-01T11:20:34.498Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "lunds-universitet:EAGFN",
@@ -90345,86 +90345,115 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-10-01T11:20:36.256Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
-    "id": "lu:EAGIS:2026HT",
+    "key": "lunds-universitet:EAGIS",
+    "susaId": "i.uoh.lu.eagis.18220.20272",
     "university": "Lunds universitet",
     "programCode": "EAGIS",
     "programName": "Magisterprogram i Internationell strategisk ledning",
-    "programHp": 60,
-    "level": "Avancerad nivå",
-    "subject": "Strategisk ledning",
-    "catalogueSubject": "Företagsekonomi",
-    "validFrom": "2026HT",
-    "validTo": null,
-    "coverage": "choice-required",
-    "verified": true,
-    "source": "lund-official-programplan",
+    "hp": 60,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "sourceUrl": "https://www.lu.se/studera/internationell-strategisk-ledning-magisterprogram-EAGIS",
     "sourceUrls": [
-      "https://www.lunduniversity.lu.se/study/international-strategic-management-masters-programme-one-year-EAGIS/programme-structure"
+      "https://www.lu.se/studera/internationell-strategisk-ledning-magisterprogram-EAGIS",
+      "https://www.lu.se/studera/internationell-strategisk-ledning-magisterprogram-EAGIS/programmets-innehall"
     ],
+    "source": "lund-official-programplan",
     "rows": [
       {
         "term": 1,
-        "code": "BUSN11",
-        "name": "Strategic Management",
-        "hp": 7.5,
-        "category": "mandatory"
-      },
-      {
-        "term": 1,
-        "code": "BUSN10",
+        "code": "",
         "name": "Corporate Governance in Theory and Practice",
         "hp": 7.5,
-        "category": "mandatory"
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
       },
       {
         "term": 1,
         "code": "",
-        "name": "Three elective courses of 5 credits each",
-        "hp": 15,
-        "category": "elective",
-        "slotType": "elective-slot",
-        "isSlot": true,
-        "options": [
-          "BUSN17 – Business Administration: Innovation Management",
-          "BUSO66 – Business Administration: Strategic Performance Measurement and Management",
-          "BUSO18 – Business Administration: Re-Imagining Capitalism",
-          "BUSO14 – Business Administration: Global Business and Sustainability"
-        ]
-      },
-      {
-        "term": 2,
-        "code": "BUSO01",
-        "name": "Business Administration: Strategic Management and Digitalisation",
-        "hp": 5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "BUSO15",
-        "name": "Navigating the Future: Transformative Strategies for Sustainable Management",
-        "hp": 5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "BUSN03",
-        "name": "Business Administration: Research Methods",
-        "hp": 5,
-        "category": "mandatory"
-      },
-      {
-        "term": 2,
-        "code": "BUSN09",
-        "name": "Business Administration: Degree Project in Strategic Management",
-        "hp": 15,
+        "name": "Strategic Management",
+        "hp": 7.5,
+        "type": "required",
         "category": "mandatory",
-        "isThesis": true
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Företagsekonomi: Examensarbete i internationell strategisk ledning",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Företagsekonomi: Strategic Management and Digitalisation",
+        "hp": 5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Företagsekonomi: Utredningsmetodik i internationell strategisk ledning",
+        "hp": 5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Navigera framtiden: transformativa strategier för hållbar företagsledning",
+        "hp": 5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
       }
     ],
-    "migrationSource": "program-db-lund-batch.json"
+    "coverage": "choice-required",
+    "reason": "all-terms-30hp",
+    "termSums": {
+      "1": 30,
+      "2": 30
+    },
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-machine-readable-sequenced",
+    "checkedAt": "2026-10-01T11:20:36.851Z",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
   },
   {
     "key": "goteborgs-universitet:H2KTX",
@@ -90577,7 +90606,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:52:56.640Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "goteborgs-universitet:N1KEM",
@@ -90733,7 +90762,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:53:16.601Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "goteborgs-universitet:S2KRI",
@@ -90842,7 +90871,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:53:21.340Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:N2SOF:2026HT",
@@ -90916,7 +90945,7 @@
         "isThesis": false
       }
     ],
-    "migrationSource": "programme-structures-2.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S1GSA:2026HT",
@@ -91120,7 +91149,7 @@
       }
     ],
     "choiceRequired": true,
-    "migrationSource": "programme-structures-2.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S2MKG:2026HT",
@@ -91224,7 +91253,7 @@
       }
     ],
     "choiceRequired": true,
-    "migrationSource": "programme-structures-2.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S2SOC:2026HT",
@@ -91333,7 +91362,7 @@
       }
     ],
     "choiceRequired": true,
-    "migrationSource": "programme-structures-2.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:M2STA:2026HT",
@@ -91464,7 +91493,7 @@
         "courseCodeVerified": false
       }
     ],
-    "migrationSource": "programme-structures-2.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:V2GLH:2026HT",
@@ -91554,7 +91583,7 @@
         "courseCodeVerified": false
       }
     ],
-    "migrationSource": "programme-structures-2.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S2EUA:2027VT",
@@ -91633,7 +91662,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-gu-2027.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:N1FAR:HT2026",
@@ -91808,7 +91837,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-gu-batch-3.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:M2PHP:HT2026",
@@ -91928,7 +91957,7 @@
         "isThesis": true
       }
     ],
-    "migrationSource": "programme-structures-gu-batch-3.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S2IAM:HT2027",
@@ -92049,7 +92078,7 @@
         "isThesis": true
       }
     ],
-    "migrationSource": "programme-structures-gu-batch-3.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S2PSM:HT2027",
@@ -92162,7 +92191,7 @@
         "isThesis": true
       }
     ],
-    "migrationSource": "programme-structures-gu-batch-3.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S2EUM:HT2027",
@@ -92267,7 +92296,7 @@
         "isThesis": true
       }
     ],
-    "migrationSource": "programme-structures-gu-batch-4.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S1EUR:HT2026",
@@ -92372,7 +92401,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-gu-batch-4.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S2SPE:HT2026",
@@ -92513,7 +92542,7 @@
         "isThesis": true
       }
     ],
-    "migrationSource": "programme-structures-gu-batch-4.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S2IAG:HT2026",
@@ -92695,7 +92724,7 @@
         "isThesis": true
       }
     ],
-    "migrationSource": "programme-structures-gu-batch-4.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S2FIC:2027HT",
@@ -92781,7 +92810,7 @@
         "periodEnd": 4
       }
     ],
-    "migrationSource": "programme-structures-gu-finance-2027.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:H1MEK:2026HT",
@@ -92850,7 +92879,7 @@
         "isSlot": false
       }
     ],
-    "migrationSource": "programme-structures-gu-h1mek-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:N1COS:2026HT",
@@ -92897,7 +92926,7 @@
         "isSlot": true
       }
     ],
-    "migrationSource": "programme-structures-gu-manual-ht26.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:N1SOF:2026HT",
@@ -93062,7 +93091,7 @@
         "isThesis": true
       }
     ],
-    "migrationSource": "programme-structures-gu-next.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S2LTM:2026HT",
@@ -93180,7 +93209,7 @@
         "isThesis": true
       }
     ],
-    "migrationSource": "programme-structures-gu-next.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "gu:S1STV:VT2027",
@@ -93307,7 +93336,7 @@
         "isThesis": true
       }
     ],
-    "migrationSource": "programme-structures-gu-next.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:ARKIT:2026HT",
@@ -93719,7 +93748,7 @@
         "category": "elective"
       }
     ],
-    "migrationSource": "programme-structures-kth-arkit-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:KPUHU:2026HT",
@@ -93802,7 +93831,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TBASD:2026HT",
@@ -93857,7 +93886,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TCAEM:2026HT",
@@ -93885,7 +93914,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TDDHM:2026HT",
@@ -93983,7 +94012,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TFOBM:2026HT",
@@ -94032,7 +94061,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:THSSM:2026HT",
@@ -94067,7 +94096,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TIMBM:2026HT",
@@ -94116,7 +94145,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TINEM:2026HT",
@@ -94214,7 +94243,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TITHM:2026HT",
@@ -94298,7 +94327,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TKEMM:2026HT",
@@ -94340,7 +94369,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TMBBM:2026HT",
@@ -94431,7 +94460,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TMHIM:2026HT",
@@ -94459,7 +94488,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TMMMM:2026HT",
@@ -94529,7 +94558,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TMSKM:2026HT",
@@ -94634,7 +94663,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TMVTM:2026HT",
@@ -94669,7 +94698,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TNTEM:2026HT",
@@ -94746,7 +94775,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TPRMM:2026HT",
@@ -94830,7 +94859,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TSUTM:2026HT",
@@ -94879,7 +94908,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TTBEM:2026HT",
@@ -94963,7 +94992,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TTMVM:2026HT",
@@ -95061,7 +95090,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "kth:TMEKM:2026HT",
@@ -95152,7 +95181,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-kth-verified.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:F7KSA:2026HT",
@@ -95319,7 +95348,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6DBAS:2026HT",
@@ -95385,7 +95414,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6IBYG:2026HT",
@@ -95660,7 +95689,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6IKEA:2026HT",
@@ -95996,7 +96025,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6KBIO:2026HT",
@@ -96314,7 +96343,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6KDJP:2026HT",
@@ -96607,7 +96636,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6KIPR:2026HT",
@@ -96867,7 +96896,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6KFTL:2026HT",
@@ -97178,7 +97207,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6KGDK:2026HT",
@@ -97410,7 +97439,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6KKEM:2026HT",
@@ -97721,7 +97750,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6KMOD:2026HT",
@@ -97892,7 +97921,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6KLOG:2026HT",
@@ -98177,7 +98206,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6KMOS:2026HT",
@@ -98348,7 +98377,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6KMOT:2026HT",
@@ -98519,7 +98548,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:6ZBAS:2026HT",
@@ -98612,7 +98641,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:F7KGS:2026HT",
@@ -98816,7 +98845,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:F7KKO:2026HT",
@@ -98993,7 +99022,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:F7KMK:2026HT",
@@ -99191,7 +99220,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:F7KSK:2026HT",
@@ -99334,7 +99363,7 @@
         ]
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:F7KSP:2026HT",
@@ -99518,7 +99547,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:F7MKK:2026HT",
@@ -99676,7 +99705,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:F7MSC:2026HT",
@@ -99831,7 +99860,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "liu:F7MSF:2026HT",
@@ -99945,7 +99974,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-linkoping-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "id": "uu:SSY1K:2026HT:programvaruteknik",
@@ -100098,7 +100127,7 @@
         "category": "mandatory"
       }
     ],
-    "migrationSource": "programme-structures-uppsala-2026.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:FVIID",
@@ -100183,7 +100212,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:00.590Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:KPLOL",
@@ -100347,7 +100376,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:03.272Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPAEM",
@@ -100446,7 +100475,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:02.021Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPALG",
@@ -100567,7 +100596,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:03.042Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPARC",
@@ -100666,7 +100695,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:01.797Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPBIO",
@@ -100776,7 +100805,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:03.661Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPCAS",
@@ -100897,7 +100926,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:06.231Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPDCM",
@@ -101007,7 +101036,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:06.053Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPDES",
@@ -101117,7 +101146,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:06.887Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPDSC",
@@ -101238,7 +101267,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:07.476Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPDSD",
@@ -101337,7 +101366,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:07.425Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPEES",
@@ -101458,7 +101487,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:07.434Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPENM",
@@ -101590,7 +101619,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:09.804Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPEPO",
@@ -101700,7 +101729,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:10.924Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPHPC",
@@ -101821,7 +101850,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:11.137Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPICT",
@@ -101953,7 +101982,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:11.396Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPIDE",
@@ -102074,7 +102103,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:10.914Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPIEE",
@@ -102184,7 +102213,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:11.851Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPISC",
@@ -102294,7 +102323,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:10.975Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPLOL",
@@ -102470,7 +102499,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:14.073Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPMAR",
@@ -102624,7 +102653,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:14.816Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPMCN",
@@ -102734,7 +102763,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:15.552Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPMED",
@@ -102855,7 +102884,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:15.561Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPMEI",
@@ -102976,7 +103005,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:15.591Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPMOB",
@@ -103086,7 +103115,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:15.767Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPNAT",
@@ -103196,7 +103225,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:16.002Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPPDE",
@@ -103317,7 +103346,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:18.332Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPPEN",
@@ -103449,7 +103478,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:18.219Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPPHS",
@@ -103559,7 +103588,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:19.244Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPQOM",
@@ -103680,7 +103709,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:19.239Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPSCM",
@@ -103823,7 +103852,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:20.993Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPSEB",
@@ -103933,7 +103962,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:21.421Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPSES",
@@ -104043,7 +104072,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:21.191Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPSOF",
@@ -104164,7 +104193,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:22.289Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPSOV",
@@ -104274,7 +104303,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:22.430Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPSYS",
@@ -104406,7 +104435,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:23.308Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPTSE",
@@ -104516,7 +104545,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:22.435Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:MPWPS",
@@ -104637,7 +104666,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:23.330Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:SBVII",
@@ -104799,7 +104828,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:22.558Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:TAFFS",
@@ -105088,7 +105117,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:26.205Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:TIEPL",
@@ -105366,7 +105395,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:28.132Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:TIMEL",
@@ -105655,7 +105684,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:31.179Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:TISAM",
@@ -105977,7 +106006,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:29.238Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "chalmers-tekniska-hogskola:TSILO",
@@ -106233,7 +106262,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-09-11T14:51:51.610Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:AMATM",
@@ -106318,7 +106347,7 @@
     },
     "checkedAt": "2026-09-11T18:43:53.988Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:DTEKO",
@@ -106533,7 +106562,7 @@
     },
     "checkedAt": "2026-09-11T18:48:52.495Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:GAMBU",
@@ -106611,7 +106640,7 @@
     },
     "checkedAt": "2026-09-11T18:40:30.123Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:GANES",
@@ -106682,7 +106711,7 @@
     },
     "checkedAt": "2026-09-11T18:43:54.299Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:GDIST",
@@ -106830,7 +106859,7 @@
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term-with-spanning-course",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:GINTE",
@@ -106901,7 +106930,7 @@
     },
     "checkedAt": "2026-09-11T18:43:54.451Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:GPSYK",
@@ -106986,7 +107015,7 @@
     },
     "checkedAt": "2026-09-11T18:48:52.941Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:GSJUK",
@@ -107149,7 +107178,7 @@
     "termPlacementVerified": true,
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=GSJUK&language=SV&revision=41%2C10&type=program",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:KASIK",
@@ -107315,7 +107344,7 @@
     },
     "checkedAt": "2026-09-11T18:55:32.658Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:LAGF3",
@@ -107473,7 +107502,7 @@
     "termPlacementVerified": true,
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=LAGF3&language=SV&revision=27%2C10&type=program",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:LGFUD",
@@ -107584,7 +107613,7 @@
     },
     "checkedAt": "2026-09-11T18:48:53.439Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:MAIDI",
@@ -107678,7 +107707,7 @@
     },
     "checkedAt": "2026-09-11T18:40:31.023Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:NGBID",
@@ -107789,7 +107818,7 @@
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=NGBID&language=SV&revision=17%2C20&type=program",
     "verifiedProgrammeOverride": true,
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:SAMAR",
@@ -107846,7 +107875,7 @@
     },
     "checkedAt": "2026-09-11T18:43:55.086Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:SGOPS",
@@ -107963,7 +107992,7 @@
     },
     "checkedAt": "2026-09-11T18:55:33.180Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:SYARK",
@@ -108150,7 +108179,7 @@
     },
     "checkedAt": "2026-09-11T18:40:31.374Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:TAMTE",
@@ -108272,7 +108301,7 @@
     },
     "checkedAt": "2026-09-11T18:43:55.468Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:TAMTI",
@@ -108394,7 +108423,7 @@
     },
     "checkedAt": "2026-09-11T17:40:00.007Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:TGDEP",
@@ -108616,7 +108645,7 @@
     },
     "checkedAt": "2026-09-11T18:40:31.856Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:TGIEL",
@@ -108820,7 +108849,7 @@
     "studyStructureGranularity": "term",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGIEL&language=SV&revision=12%2C30&type=program",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:TGIEO",
@@ -109024,7 +109053,7 @@
     "studyStructureGranularity": "term",
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGIEO&language=SV&revision=12%2C30&type=program",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:TGKEH",
@@ -109228,7 +109257,7 @@
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:TMFMM",
@@ -109354,7 +109383,7 @@
     "termPlacementVerified": true,
     "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TMFMM&language=SV&revision=6%2C20&type=program",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:VABAM",
@@ -109538,7 +109567,7 @@
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term-with-spanning-courses",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:VABAR",
@@ -109623,7 +109652,7 @@
     },
     "checkedAt": "2026-09-11T18:26:53.861Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:VAKUT",
@@ -109701,7 +109730,7 @@
     },
     "checkedAt": "2026-09-11T18:40:32.413Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "hogskolan-i-boras:VDIST",
@@ -109848,7 +109877,7 @@
     "verifiedProgrammeOverride": true,
     "studyStructureGranularity": "term-with-spanning-course",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAGMF",
@@ -110062,7 +110091,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:58.506Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKG1",
@@ -110158,7 +110187,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.098Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKG2",
@@ -110254,7 +110283,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.215Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKG3",
@@ -110350,7 +110379,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.449Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKG4",
@@ -110446,7 +110475,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.352Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKGB",
@@ -110542,7 +110571,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.477Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKGE",
@@ -110638,7 +110667,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.555Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKGF",
@@ -110734,7 +110763,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.565Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKGG",
@@ -110830,7 +110859,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.661Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKGH",
@@ -110926,7 +110955,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.676Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKGI",
@@ -111022,7 +111051,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:00.202Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKGK",
@@ -111118,7 +111147,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.782Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKGM",
@@ -111214,7 +111243,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.890Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKGR",
@@ -111310,7 +111339,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:36:59.988Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKGT",
@@ -111406,7 +111435,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:00.090Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKH1",
@@ -111502,7 +111531,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:00.196Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKH2",
@@ -111598,7 +111627,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:00.313Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKH3",
@@ -111694,7 +111723,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:00.301Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKHE",
@@ -111790,7 +111819,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:00.417Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKHG",
@@ -111886,7 +111915,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:00.411Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKHH",
@@ -111982,7 +112011,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:00.525Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKHI",
@@ -112078,7 +112107,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:01.006Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKHM",
@@ -112174,7 +112203,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:00.641Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LAKHR",
@@ -112270,7 +112299,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:00.757Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LGFLP",
@@ -112382,7 +112411,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:01.210Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:LGGLF",
@@ -112592,7 +112621,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:01.298Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:SASKT",
@@ -112666,7 +112695,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:02.682Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:SGGGJ",
@@ -112942,7 +112971,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:03.073Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:SGKPR",
@@ -113064,7 +113093,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:03.243Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:VAPFO",
@@ -113228,7 +113257,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:04.507Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:VASAM",
@@ -113335,7 +113364,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:04.509Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:VASIN",
@@ -113409,7 +113438,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:04.594Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "karlstads-universitet:VGBMA",
@@ -113597,7 +113626,7 @@
     "apiConfidence": "official-verified-persisted",
     "checkedAt": "2026-09-29T10:37:04.622Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "lunds-universitet:EAGMA",
@@ -113716,7 +113745,7 @@
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-10-01T11:20:36.843Z",
     "verified": true,
-    "migrationSource": "susa/structures.json"
+    "migrationSource": "prior-canonical-programme-structures"
   },
   {
     "key": "lunds-universitet:EAGSY",
@@ -113823,6 +113852,4066 @@
     "apiCoverage": "complete-term-sequence",
     "apiConfidence": "official-machine-readable-sequenced",
     "checkedAt": "2026-10-01T11:20:39.217Z",
+    "verified": true,
+    "migrationSource": "prior-canonical-programme-structures"
+  },
+  {
+    "key": "hogskolan-i-boras:ACEKO",
+    "susaId": "i.uoh.hb.aceko.s2128.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "ACEKO",
+    "programName": "Senare del av program, Civilekonomprogrammet",
+    "hp": 240,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=ACEKO&revision=18,20&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/civilekonomprogrammet/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=ACEKO&revision=18,20&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Makroekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Grundläggande marknadsföring",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Mikroekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Organisering och ledning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Statistik I",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Redovisningens grunder och tekniker",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Internationell ekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Ekonomistyrning I",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Affärsjuridik I",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Externredovisning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Finansiell ekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Strategisk marknadsföring",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Organisationsdesign och managementrecept",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Statistik II",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Finansiell planering",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "ACEKO-track",
+        "options": [
+          {
+            "track": "Management",
+            "hp": 30,
+            "courses": [
+              [
+                "Performativ managementrevision",
+                15
+              ],
+              [
+                "Chefskap, ledarskap och medarbetarskap",
+                7.5
+              ],
+              [
+                "Valbar kurs",
+                7.5
+              ]
+            ]
+          },
+          {
+            "track": "Marknadsföring",
+            "hp": 30,
+            "courses": [
+              [
+                "Marknadsundersökning och marknadsanalys",
+                7.5
+              ],
+              [
+                "Konsumentbeteende",
+                7.5
+              ],
+              [
+                "Marknadskommunikation",
+                7.5
+              ],
+              [
+                "Valbar kurs",
+                7.5
+              ]
+            ]
+          },
+          {
+            "track": "Redovisning",
+            "hp": 30,
+            "courses": [
+              [
+                "Redovisningsteori och koncernredovisning",
+                7.5
+              ],
+              [
+                "Ekonomistyrning II",
+                7.5
+              ],
+              [
+                "Valbart block",
+                15
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "ACEKO-track",
+        "options": [
+          {
+            "track": "Management",
+            "hp": 30,
+            "courses": [
+              [
+                "Tjänstelogik i teori och praktik",
+                7.5
+              ],
+              [
+                "Management och revision i professionella organisationer",
+                7.5
+              ],
+              [
+                "Fallstudie i företagspraktik",
+                15
+              ]
+            ]
+          },
+          {
+            "track": "Marknadsföring",
+            "hp": 30,
+            "courses": [
+              [
+                "Affärsdesign och investeringsbeslut",
+                7.5
+              ],
+              [
+                "Tjänstelogik i teori och praktik",
+                7.5
+              ],
+              [
+                "Fallstudie i företagspraktik",
+                15
+              ]
+            ]
+          },
+          {
+            "track": "Redovisning",
+            "hp": 30,
+            "courses": [
+              [
+                "Fallstudie i företagspraktik",
+                15
+              ],
+              [
+                "Valbart block",
+                15
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "term": 7,
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "ACEKO-track",
+        "options": [
+          {
+            "track": "Management",
+            "hp": 30,
+            "courses": [
+              [
+                "Pragmatiskt förändringsledarskap",
+                15
+              ],
+              [
+                "Ledarskap och reflekterande etik",
+                7.5
+              ],
+              [
+                "Forskningsmetoder i företagsekonomi",
+                7.5
+              ]
+            ]
+          },
+          {
+            "track": "Marknadsföring",
+            "hp": 30,
+            "courses": [
+              [
+                "Digital marknadskommunikation",
+                7.5
+              ],
+              [
+                "Management av affärsrelationer",
+                7.5
+              ],
+              [
+                "Ledarskap och reflekterande etik",
+                7.5
+              ],
+              [
+                "Forskningsmetoder i företagsekonomi",
+                7.5
+              ]
+            ]
+          },
+          {
+            "track": "Redovisning",
+            "hp": 30,
+            "courses": [
+              [
+                "Internationell redovisning",
+                7.5
+              ],
+              [
+                "Räkenskapsanalys och värdering",
+                7.5
+              ],
+              [
+                "Forskningsmetoder i företagsekonomi",
+                7.5
+              ],
+              [
+                "Ledarskap och reflekterande etik",
+                7.5
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "term": 8,
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "ACEKO-track",
+        "options": [
+          {
+            "track": "Management",
+            "hp": 30,
+            "courses": [
+              [
+                "Självständigt arbete för civilekonomexamen, management",
+                30
+              ]
+            ]
+          },
+          {
+            "track": "Marknadsföring",
+            "hp": 30,
+            "courses": [
+              [
+                "Självständigt arbete för civilekonomexamen, marknadsföring",
+                30
+              ]
+            ]
+          },
+          {
+            "track": "Redovisning",
+            "hp": 30,
+            "courses": [
+              [
+                "Självständigt arbete för civilekonomexamen, redovisning",
+                30
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-complete-four-year-track-structure",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30,
+      "7": 30,
+      "8": 30
+    },
+    "checkedAt": "2026-10-06T05:48:10.270Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=ACEKO&language=SV&revision=18%2C20&type=program",
+    "verifiedProgrammeOverride": true,
+    "trackContinuityRequired": true,
+    "tracks": [
+      "Management",
+      "Marknadsföring",
+      "Redovisning"
+    ],
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:ASYST",
+    "susaId": "i.uoh.hb.asyst.62315.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "ASYST",
+    "programName": "Systemvetarutbildningen",
+    "hp": 180,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=ASYST&revision=20,40&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/systemvetarutbildning/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=ASYST&revision=20,40&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "System- och Organisationsteori (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Programutveckling - från information till tillämpning med Python (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Informationssystem och data - ett verksamhetsperspektiv (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Systemanalys och Design (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Grundläggande programmering med C# (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Trender i en digital värld (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Databasteknik (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "UX- och interaktionsdesign (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Samhällets digitalisering (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Objektorienterad systemutveckling (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Verksamhetsprocesser och affärssystem (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Test av IT-system (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Objektorienterad systemutveckling 2 (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Webbdesign (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Förändringsarbete och design av informationssystem (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Digital innovation (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Systemutvecklingsprojekt (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "IT Service Management och informationssäkerhet (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Två av tre valbara systemvetarkurser",
+        "hp": 15,
+        "type": "choice",
+        "choiceSlots": 2,
+        "options": [
+          {
+            "name": "Enterprise Architecture och strategisk styrning av IT (",
+            "hp": 7.5
+          },
+          {
+            "name": "Datahantering för beslutsfattande (",
+            "hp": 7.5
+          },
+          {
+            "name": "Webb- och mobilutveckling (",
+            "hp": 7.5
+          }
+        ],
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Projektledning (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Forskningsmetoder inom informationsteknologi (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Självständigt arbete för kandidatexamen inom informatik (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-two-of-three-choice-term-5",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    },
+    "checkedAt": "2026-09-11T18:59:21.749Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=ASYST&language=SV&revision=15&type=program",
+    "verifiedProgrammeOverride": true,
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:DTDES",
+    "susaId": "i.uoh.hb.dtdes.s2108.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "DTDES",
+    "programName": "Senare del av program, Textildesign",
+    "hp": 180,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=DTDES&revision=23,10&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/textildesign/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=DTDES&revision=23,10&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Materiallära",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Textil baskurs",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Färgeri, tryck och beredning, bas",
+        "hp": 6,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Valbara teknik- och designkurser: färgeri, tryck och beredning",
+        "hp": 9,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "name": "Fördjupning + designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Färgeri, tryck och beredning, fördjupning",
+                "hp": 4.5
+              },
+              {
+                "name": "Färgeri, tryck och beredning, designprojekt",
+                "hp": 4.5
+              }
+            ]
+          },
+          {
+            "name": "Designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Färgeri, tryck och beredning, designprojekt",
+                "hp": 9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 1,
+        "name": "Färglära",
+        "hp": 5.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Väv, bas",
+        "hp": 6,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Valbara teknik- och designkurser: väv",
+        "hp": 9,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "name": "Fördjupning + designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Väv, fördjupning",
+                "hp": 4.5
+              },
+              {
+                "name": "Väv, designprojekt",
+                "hp": 4.5
+              }
+            ]
+          },
+          {
+            "name": "Designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Väv, designprojekt",
+                "hp": 9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "name": "Designestetik 1: historia och samtid",
+        "hp": 3,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Designmetodik 1: designutveckling",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Form och material",
+        "hp": 4,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Stickat och trikå, bas",
+        "hp": 6,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Valbara teknik- och designkurser: stickat och trikå",
+        "hp": 9,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "name": "Fördjupning + designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Stickat och trikå, fördjupning",
+                "hp": 4.5
+              },
+              {
+                "name": "Stickat och trikå, designprojekt",
+                "hp": 4.5
+              }
+            ]
+          },
+          {
+            "name": "Designprojekt",
+            "hp": 9,
+            "courses": [
+              {
+                "name": "Stickat och trikå, designprojekt",
+                "hp": 9
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "name": "Valbara kurser",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Designmetodik 2: Experimentella metoder för textildesign",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Designprojekt: fördjupning",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Hållbarhet inom textil och mode",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Designestetik 2: kritik och bedömning",
+        "hp": 4.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Textil kommunikation",
+        "hp": 3,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Designprojekt 4",
+        "hp": 18,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "name": "Designprojekt 4: designuppdrag",
+            "hp": 18
+          },
+          {
+            "name": "Designprojekt 4: tillämpad design / designpraktik",
+            "hp": 18
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "name": "Designmetodik 3: designforskning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Visnings- och utställningsdesign",
+        "hp": 4.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Examensarbete",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-complete-structure-with-cross-semester-course",
+    "termSums": {
+      "1": 30.5,
+      "2": 29.5,
+      "3": 30,
+      "4": 30,
+      "5": 25.5,
+      "6": 19.5
+    },
+    "checkedAt": "2026-10-06T05:48:10.591Z",
+    "academicYearSums": {
+      "1": 60,
+      "2": 60,
+      "3": 60
+    },
+    "spanningCourses": [
+      {
+        "name": "Designprojekt: koncept- och designutveckling",
+        "hp": 15,
+        "startTerm": 5,
+        "endTerm": 6,
+        "type": "required"
+      }
+    ],
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=DTDES&language=SV&revision=23%2C10&type=program",
+    "verifiedProgrammeOverride": true,
+    "studyStructureGranularity": "term-with-spanning-course",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:KANDI",
+    "susaId": "i.uoh.hb.kandi.62330.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "KANDI",
+    "programName": "Kandidatprogram i digital informationsdesign och utveckling",
+    "hp": 180,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KANDI&revision=4,10&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/kandidatprogram-i-digital-informationsdesign-och-utveckling/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=KANDI&revision=4,10&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Programmet inleds med kursen Introduktion till informationsvetenskap och informationsdesign (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Kursen Grafisk informationsdesign (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Kursen Interaktionsdesign & UX: Perspektiv och metoder (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Kursen Grundläggande frontendutveckling (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Kursen Teori och metod (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Kursen Content management (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Kursen Multimodal informationsdesign (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Kursen Informationspolitik och etik (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Kursen Textproduktion (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Kursen Fördjupad frontendutveckling (",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Kursen Praktik (",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Kursen Digitala texter (",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Användningsanalys för utvärdering och optimering (",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Kursen Metod och uppsats (",
+        "hp": 22.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Kursen Projektarbete: UX-design (",
+        "hp": 30,
+        "type": "required",
+        "isThesis": false
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-education-plan-all-terms-30hp",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    },
+    "checkedAt": "2026-09-11T17:17:11.899Z",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:LAG46",
+    "susaId": "i.uoh.hb.lag46.62313.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "LAG46",
+    "programName": "Grundlärarutbildning med inriktning mot arbete i grundskolans årskurs 4-6",
+    "hp": 240,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=LAG46&revision=23,20&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/grundlararutbildning-med-inriktning-mot-arbete-i-grundskolans-arskurs-4-6/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=LAG46&revision=23,20&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Utbildningsvetenskaplig kärna 1.1 för grundlärare med inriktning mot arbete i grundskolans årskurs 4-6",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Utbildningsvetenskaplig kärna 1.2 för förskollärare och grundlärare",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Svenska med didaktisk inriktning mot arbete i grundskolans årskurs 4-6, I",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Matematik med didaktisk inriktning mot arbete i grundskolans årskurs 4-6, I",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Tillvalsämne",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "name": "Samhällsorienterade ämnen för grundlärare med inriktning mot arbete i grundskolans årskurs 4-6",
+            "hp": 30
+          },
+          {
+            "name": "Naturvetenskap och teknik för grundlärare med inriktning mot arbete i grundskolans årskurs 4-6",
+            "hp": 30
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "name": "Utbildningsvetenskaplig kärna 2.1; Hållbar utveckling och intersektionalitet",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Utbildningsvetenskaplig kärna 2.2; Specialpedagogiska perspektiv",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Utbildningsvetenskaplig kärna 2.3; Ledarskap, utvecklingsarbete och konflikthantering",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Engelska med didaktisk inriktning mot arbete i grundskolans årskurs 4-6, I",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Matematik med didaktisk inriktning mot arbete i grundskolans årskurs 4-6, II",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Svenska med didaktisk inriktning mot arbete i grundskolans årskurs 4-6, II",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Engelska med didaktisk inriktning mot arbete i grundskolans årskurs 4-6, II",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 7,
+        "name": "Utbildningsvetenskaplig kärna för grundlärare i grundskolans åk 4-6, III; Vetenskapliga perspektiv",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 7,
+        "name": "Examensarbete, del 1 - kunskapsöversikt",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      },
+      {
+        "term": 8,
+        "name": "Examensarbete, del 2",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      },
+      {
+        "term": 8,
+        "name": "Utvärdering och bedömning i svenska, engelska samt matematik för grundlärare med inriktning mot grundskolans åk 4-6",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-complete-eight-semester-structure",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30,
+      "7": 30,
+      "8": 30
+    },
+    "checkedAt": "2026-10-06T05:48:10.591Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=LAG46&language=SV&revision=20%2C000&type=program",
+    "verifiedProgrammeOverride": true,
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:NADIM",
+    "susaId": "i.uoh.hb.nadim.6228a.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "NADIM",
+    "programName": "Magisterprogram i informatik - datadriven IT management",
+    "hp": 60,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=NADIM&revision=7,20&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/magisterprogram-i-informatik---datadriven-it-management/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=NADIM&revision=7,20&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Forskningsmetoder i informatik (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Trender inom informatik (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Business Intelligence (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Affärsprocessmodellering (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Data mining (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Datadriven tjänsteutveckling (Avancerad nivå",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Självständigt arbete för magisterexamen inom informatik (Avancerad nivå",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      },
+      {
+        "term": 2,
+        "name": "ekonomi eller organisation. Självständigt arbete (G2E/C-nivå) om",
+        "hp": 15,
+        "type": "choice",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-education-plan-all-terms-validated",
+    "termSums": {
+      "1": 30,
+      "2": 30
+    },
+    "checkedAt": "2026-09-11T18:26:52.563Z",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:NGBIB",
+    "susaId": "i.uoh.hb.ngbib.s1301.20271",
+    "university": "Högskolan i Borås",
+    "programCode": "NGBIB",
+    "programName": "Senare del av program, Bibliotekarie",
+    "hp": 180,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=NGBIB&revision=17,10&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/bibliotekarie/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=NGBIB&revision=17,10&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Introduktion till biblioteks- och informationsvetenskap",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Bibliotek i samhället",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Kunskapsorganisation och sökteknik – grund",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Bibliotek och användare",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Bibliotekens redskap och arbetsmetoder",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Vetenskapsteori och forskningsmetoder 1",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Kunskapsorganisation och sökteknik med fokus explorativ sökteknik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Biblioteks- och informationsvetenskapliga fältstudier",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Informationskompetens och lärande",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Professionell informationssökning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Valbara kurser inom biblioteks- och informationsvetenskap",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Vetenskapsteori och forskningsmetoder 2",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Biblioteksorganisationers kompetensförsörjning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Kandidatuppsats",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-current-plan-verified-complete-six-semester-structure-with-elective-term-5",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    },
+    "checkedAt": "2026-10-06T05:48:10.925Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=NGBIB&language=SV&revision=17%2C00&type=program",
+    "verifiedProgrammeOverride": true,
+    "studyStructureGranularity": "term",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:TAREC",
+    "susaId": "i.uoh.hb.tarec.62045.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "TAREC",
+    "programName": "Masterprogram i Resursåtervinning – hållbar byggteknik",
+    "hp": 120,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TAREC&revision=2,20&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/masterprogram-i-resursatervinning--hallbar-byggteknik/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TAREC&revision=2,20&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Resursåtervinning I",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Resursåtervinning II",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Livscykelanalys",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Cirkulär ekonomi",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Vetenskapsteori och forskningsmetodik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Byggnaden som system",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Matematiska verktyg för optimering och databehandling",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Betongteknologi och återvinning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "AI i industriell ekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Examensarbete i Resursåtervinning del 1",
+        "hp": 30,
+        "type": "choice",
+        "options": [
+          {
+            "name": "Examensarbete i Resursåtervinning del 1",
+            "hp": 30
+          },
+          {
+            "name": "Godkända kurser inom hållbar byggteknik/internationalisering",
+            "hp": 30
+          }
+        ],
+        "isThesis": true
+      },
+      {
+        "term": 4,
+        "name": "Examensarbete i Resursåtervinning",
+        "hp": 30,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-year-2-terms-3-and-4",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30
+    },
+    "checkedAt": "2026-10-06T05:48:10.140Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAREC&language=SV&revision=2%2C20&type=program",
+    "verifiedProgrammeOverride": true,
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:TAVEC",
+    "susaId": "i.uoh.hb.tavec.7145a.20271",
+    "university": "Högskolan i Borås",
+    "programCode": "TAVEC",
+    "programName": "Masterprogram i resursåtervinning – hållbar byggteknik",
+    "hp": 120,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TAVEC&revision=1,10&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/masterprogram-i-resursatervinning--hallbar-byggteknik2/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TAVEC&revision=1,10&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Byggnaden som system",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Digitalisering inom byggande",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Betongteknologi och återvinning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Robust och cirkulär betongbyggnation",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Resursåtervinning I",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Resursåtervinning II",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Livscykelanalys",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Cirkulär ekonomi",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "�� Vetenskapsteori och forskningsmetodik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Examensarbete i Resursåtervinning del 1",
+        "hp": 30,
+        "type": "choice",
+        "options": [
+          {
+            "name": "Examensarbete i Resursåtervinning del 1",
+            "hp": 30
+          },
+          {
+            "name": "Godkända kurser inom hållbar byggteknik/internationalisering",
+            "hp": 30
+          }
+        ],
+        "isThesis": true
+      },
+      {
+        "term": 4,
+        "name": "Examensarbete i Resursåtervinning",
+        "hp": 30,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-successor-structure-year-2-verified",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30
+    },
+    "checkedAt": "2026-10-06T05:48:10.140Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAVEC&language=SV&revision=1%2C00&type=program",
+    "verifiedProgrammeOverride": true,
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:TAVEP",
+    "susaId": "i.uoh.hb.tavep.7148a.20271",
+    "university": "Högskolan i Borås",
+    "programCode": "TAVEP",
+    "programName": "Masterprogram i resursåtervinning - polymera material för den cirkulära ekonomin",
+    "hp": 120,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TAVEP&revision=3,10&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/masterprogram-i-resursatervinning---polymera-material-for-den-cirkulara-ekonomin2/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TAVEP&revision=3,10&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Polymerteknologi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Polymerer och textil i kompositer",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Experimentella metoder för polymerer och textil",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Polymera och textila material och miljön",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Resursåtervinning I",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Resursåtervinning II",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Livscykelanalys",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Cirkulär ekonomi",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Vetenskapsteori och forskningsmetodik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Examensarbete i Resursåtervinning del 1 eller kurser",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": true
+      },
+      {
+        "term": 4,
+        "name": "Examensarbete i Resursåtervinning",
+        "hp": 30,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-current-plan-verified-four-semester-structure-with-term-3-thesis-or-course-choice",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30
+    },
+    "checkedAt": "2026-10-06T05:48:12.011Z",
+    "verifiedProgrammeOverride": true,
+    "studyStructureGranularity": "term",
+    "termPlacementVerified": true,
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TAVEP&language=SV&revision=3%2C10&type=program",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:TGBYI",
+    "susaId": "i.uoh.hb.tgbyi.62117.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "TGBYI",
+    "programName": "Byggingenjör",
+    "hp": 180,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGBYI&revision=12,40&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/byggingenjor/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGBYI&revision=12,40&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Husbyggnadsteknik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Inledande matematik",
+        "hp": 3,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Digitala verktyg",
+        "hp": 4.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Hållbar utveckling",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Ritteknik med CAD och BIM",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Linjär algebra och differentialekvationer",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Mekanik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Matematisk statistik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Byggnadsfysik och energi i byggnader",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Byggnadsmaterial",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Byggnadmekanik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Produktion grundkurs",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Konstruktionsteknik I",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Installationsteknik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Projektteknik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Konstruktionsteknik II",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Byggnadsprojektering",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Anläggning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Geoteknik och geokonstruktioner",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Byggnaders inomhusmiljö och energiprestanda",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": " Produktion II / Datorstödd konstruktionsteknik",
+        "hp": 7.5,
+        "type": "choice",
+        "options": [
+          {
+            "name": " Produktion II",
+            "hp": 7.5
+          },
+          {
+            "name": "Datorstödd konstruktionsteknik",
+            "hp": 7.5
+          }
+        ],
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Byggnadsprojekt",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Examensarbete i byggteknik",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-education-plan-all-terms-validated",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    },
+    "checkedAt": "2026-09-11T18:40:31.822Z",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:TGENA",
+    "susaId": "i.uoh.hb.tgena.62115.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "TGENA",
+    "programName": "Energiingenjör",
+    "hp": 180,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGENA&revision=8,30&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/energiingenjor/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGENA&revision=8,30&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Digitala verktyg",
+        "hp": 4.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Inledande matematik",
+        "hp": 3,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Elteknik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Hållbar utveckling",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Linjär algebra och differentialekvationer",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Termodynamik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Energiteknik I",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Elkretsanalys",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Energiteknik II",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Tillämpad matematik och statistik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Fjärrvärme och fjärrkyla",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Elkraftteknik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Elanläggnings- och reläskyddsteknik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Installationsteknik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Ritteknik med installationsteknisk CAD",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Projektteknik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Elkrafttekniska beräkningar och elkvalitet",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Byggnaders inomhusmiljö och energiprestanda",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Styr- och reglerteknik - smarta hus",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Förnyelsebar energi, batterier och energilagring",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Val av termin 6-spår",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "name": "Praktikspår",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Arbetsplatsförlagd utbildning för energiingenjörer",
+                "hp": 15
+              },
+              {
+                "name": "Examensarbete",
+                "hp": 15
+              }
+            ]
+          },
+          {
+            "name": "Kursspår",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Valbar kurs I",
+                "hp": 7.5
+              },
+              {
+                "name": "Valbar kurs II",
+                "hp": 7.5
+              },
+              {
+                "name": "Examensarbete",
+                "hp": 15
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-complete-six-semester-structure-with-term-6-tracks",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    },
+    "checkedAt": "2026-10-06T05:48:10.206Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGENA&language=SV&revision=8%2C20&type=program",
+    "verifiedProgrammeOverride": true,
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:TGIEA",
+    "susaId": "i.uoh.hb.tgiea.s1101.20271",
+    "university": "Högskolan i Borås",
+    "programCode": "TGIEA",
+    "programName": "Senare del av program, Industriell ekonomi - affärsingenjör",
+    "hp": 180,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGIEA&revision=12,60&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/industriell-ekonomi---affarsingenjor/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGIEA&revision=12,60&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Matematisk analys 1",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Introduktion till ingenjörsmässigt arbete",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys 2",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Industriell Ekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "TGIEA-track",
+        "options": [
+          {
+            "track": "Byggteknik",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Linjär algebra",
+                "hp": 7.5
+              },
+              {
+                "name": "Introduktion till byggteknik med ritteknik",
+                "hp": 7.5
+              },
+              {
+                "name": "Vetenskapsteori och metod",
+                "hp": 2.5
+              },
+              {
+                "name": "Grunder för uppföljning i kalkyleringsprogram",
+                "hp": 5
+              },
+              {
+                "name": "Naturvetenskap",
+                "hp": 7.5
+              }
+            ]
+          },
+          {
+            "track": "Maskinteknik",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Linjär algebra",
+                "hp": 7.5
+              },
+              {
+                "name": "Grundläggande programmering i Python",
+                "hp": 7.5
+              },
+              {
+                "name": "Vetenskapsteori och metod",
+                "hp": 2.5
+              },
+              {
+                "name": "Grunder för uppföljning i kalkyleringsprogram",
+                "hp": 5
+              },
+              {
+                "name": "Naturvetenskap",
+                "hp": 7.5
+              }
+            ]
+          },
+          {
+            "track": "Digitalisering",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Linjär algebra",
+                "hp": 7.5
+              },
+              {
+                "name": "Grundläggande programmering i Python",
+                "hp": 7.5
+              },
+              {
+                "name": "Vetenskapsteori och metod",
+                "hp": 2.5
+              },
+              {
+                "name": "Grunder för uppföljning i kalkyleringsprogram",
+                "hp": 5
+              },
+              {
+                "name": "Naturvetenskap",
+                "hp": 7.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "TGIEA-track",
+        "options": [
+          {
+            "track": "Byggteknik",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Kvalitet och ledningssystem",
+                "hp": 7.5
+              },
+              {
+                "name": "Grundläggande statistik med regressionsanalys",
+                "hp": 7.5
+              },
+              {
+                "name": "Logistikens verktyg och metoder",
+                "hp": 7.5
+              },
+              {
+                "name": "Produktion grundkurs",
+                "hp": 7.5
+              }
+            ]
+          },
+          {
+            "track": "Maskinteknik",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Kvalitet och ledningssystem",
+                "hp": 7.5
+              },
+              {
+                "name": "Grundläggande statistik med regressionsanalys",
+                "hp": 7.5
+              },
+              {
+                "name": "Produktionsteknik",
+                "hp": 7.5
+              },
+              {
+                "name": "Logistikens verktyg och metoder",
+                "hp": 7.5
+              }
+            ]
+          },
+          {
+            "track": "Digitalisering",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Kvalitet och ledningssystem",
+                "hp": 7.5
+              },
+              {
+                "name": "Grundläggande statistik med regressionsanalys",
+                "hp": 7.5
+              },
+              {
+                "name": "Produktionsteknik",
+                "hp": 7.5
+              },
+              {
+                "name": "Logistikens verktyg och metoder",
+                "hp": 7.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "TGIEA-track",
+        "options": [
+          {
+            "track": "Byggteknik",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Produktion II",
+                "hp": 7.5
+              },
+              {
+                "name": "Inköp och investeringar",
+                "hp": 7.5
+              },
+              {
+                "name": "Lean management",
+                "hp": 7.5
+              },
+              {
+                "name": "Tillämpad byggnadsfysik och byggnadsmaterial",
+                "hp": 7.5
+              }
+            ]
+          },
+          {
+            "track": "Maskinteknik",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Inköp och investeringar",
+                "hp": 7.5
+              },
+              {
+                "name": "Tillverkningsteknologi",
+                "hp": 7.5
+              },
+              {
+                "name": "Lean management",
+                "hp": 7.5
+              },
+              {
+                "name": "Beräkningsmekanik 1",
+                "hp": 7.5
+              }
+            ]
+          },
+          {
+            "track": "Digitalisering",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Distribution och e-handel",
+                "hp": 7.5
+              },
+              {
+                "name": "Inköp och investeringar",
+                "hp": 7.5
+              },
+              {
+                "name": "Lean management",
+                "hp": 7.5
+              },
+              {
+                "name": "Cybersäkerhet för uppkopplade enheter",
+                "hp": 7.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "TGIEA-track",
+        "options": [
+          {
+            "track": "Byggteknik",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Styrning av försörjningskedjor",
+                "hp": 7.5
+              },
+              {
+                "name": "Projektledning med rapportskrivning",
+                "hp": 7.5
+              },
+              {
+                "name": "Fastighetsförvaltning",
+                "hp": 7.5
+              },
+              {
+                "name": "Statistisk försöksplanering och kvalitetsstyrning",
+                "hp": 7.5
+              }
+            ]
+          },
+          {
+            "track": "Maskinteknik",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Styrning av försörjningskedjor",
+                "hp": 7.5
+              },
+              {
+                "name": "Projektledning med rapportskrivning",
+                "hp": 7.5
+              },
+              {
+                "name": "Statistisk försöksplanering och kvalitetsstyrning",
+                "hp": 7.5
+              },
+              {
+                "name": "Mekaniska konstruktioner 1",
+                "hp": 7.5
+              }
+            ]
+          },
+          {
+            "track": "Digitalisering",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Styrning av försörjningskedjor",
+                "hp": 7.5
+              },
+              {
+                "name": "Projektledning med rapportskrivning",
+                "hp": 7.5
+              },
+              {
+                "name": "Statistisk försöksplanering och kvalitetsstyrning",
+                "hp": 7.5
+              },
+              {
+                "name": "AI för affärsutveckling",
+                "hp": 7.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "name": "Inriktningsspecifik termin",
+        "hp": 30,
+        "type": "choice",
+        "isThesis": false,
+        "choiceSlots": 1,
+        "choiceGroup": "TGIEA-track",
+        "options": [
+          {
+            "track": "Byggteknik",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Innemiljö",
+                "hp": 7.5
+              },
+              {
+                "name": "Hållbar utveckling i ett ingenjörsperspektiv",
+                "hp": 7.5
+              },
+              {
+                "name": "Examensarbete i industriell ekonomi",
+                "hp": 15
+              }
+            ]
+          },
+          {
+            "track": "Maskinteknik",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Mekatronik",
+                "hp": 7.5
+              },
+              {
+                "name": "Hållbar utveckling i ett ingenjörsperspektiv",
+                "hp": 7.5
+              },
+              {
+                "name": "Examensarbete i industriell ekonomi",
+                "hp": 15
+              }
+            ]
+          },
+          {
+            "track": "Digitalisering",
+            "hp": 30,
+            "courses": [
+              {
+                "name": "Databaser och dataanalys",
+                "hp": 7.5
+              },
+              {
+                "name": "Hållbar utveckling i ett ingenjörsperspektiv",
+                "hp": 7.5
+              },
+              {
+                "name": "Examensarbete i industriell ekonomi",
+                "hp": 15
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-complete-six-semester-specialisation-structure",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    },
+    "checkedAt": "2026-10-06T05:48:10.591Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGIEA&language=SV&revision=12%2C60&type=program",
+    "verifiedProgrammeOverride": true,
+    "trackContinuityRequired": true,
+    "tracks": [
+      "Byggteknik",
+      "Maskinteknik",
+      "Digitalisering"
+    ],
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:TGITI",
+    "susaId": "i.uoh.hb.tgiti.s2130.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "TGITI",
+    "programName": "Senare del av program, IT-ingenjör - digital infrastruktur och cybersäkerhet",
+    "hp": 180,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGITI&revision=5,30&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/it-ingenjor---digital-infrastruktur-och-cybersakerhet/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGITI&revision=5,30&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Matematisk analys 1",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Datorteknik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys 2",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Industriell ekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Linjär algebra",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Grundläggande programmering i Python",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Naturvetenskap",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Cybersäkerhet för uppkopplade enheter",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Grundläggande statistik med regressionsanalys",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Kvalitet och ledningssystem",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Nätverk CCNA",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Databaser och Dataanalys",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Objektorienterad programmering",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Serversystem och Infrastruktur",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Maskininlärning och neurala nätverk",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "IoT och molntjänster",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Projektledning & rapportskrivning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Valbar",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Valbar",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Valbar",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Hållbar utveckling i ett ingenjörsperspektiv",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Examensarbete i datateknik",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-current-plan-verified-complete-six-semester-structure-with-three-electives",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    },
+    "checkedAt": "2026-10-06T05:48:10.926Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGITI&language=SV&revision=5%2C30&type=program",
+    "verifiedProgrammeOverride": true,
+    "studyStructureGranularity": "term",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:TGMAA",
+    "susaId": "i.uoh.hb.tgmaa.s1124.20271",
+    "university": "Högskolan i Borås",
+    "programCode": "TGMAA",
+    "programName": "Senare del av program, Maskiningenjör - Automation och AI",
+    "hp": 180,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGMAA&revision=6,20&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/maskiningenjor---automation-och-ai/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGMAA&revision=6,20&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Introduktion till ingenjörsmässigt arbete",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Industriell ekonomi",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys 1",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Matematisk analys 2",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Linjär algebra",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Grundläggande programmering i Python",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Cybersäkerhet för uppkopplade enheter",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Beräkningsmekanik 1",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Grundläggande statistik med regressionsanalys",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Styr- och reglerteknik-Smarta hus",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Beräkningsmekanik 2",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Mekaniska konstruktioner 1",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Maskininlärning och Neurala nätverk",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Operationsanalys",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Mekatronik",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Mekaniska konstruktioner 2",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Kvalitet och ledningssystem,",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Valbar",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Konstruktionsprojekt",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Valbar",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Hållbar utveckling i ett ingenjörsperspektiv",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Examensarbete",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-numbered-course-titles-restored-idempotently",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    },
+    "checkedAt": "2026-10-06T05:48:10.926Z",
+    "verifiedProgrammeOverride": true,
+    "studyStructureGranularity": "term",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGMAA&language=SV&revision=6%2C20&type=program",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:TGTPI",
+    "susaId": "i.uoh.hb.tgtpi.s1107.20271",
+    "university": "Högskolan i Borås",
+    "programCode": "TGTPI",
+    "programName": "Senare del av program, Textil produktion och innovation",
+    "hp": 180,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGTPI&revision=4,20&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/textil-produktion-och-innovation/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=TGTPI&revision=4,20&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Introduktionskurs textil produktion och innovation",
+        "hp": 2.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Textil baskurs",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Textilteknisk vetenskap I",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Fiber- och garnteknologi",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Väveriteknik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Trikåteknik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Textilteknisk vetenskap II",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Produktutveckling av tekniska textilier",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Nonwoven-teknik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Färgning och beredning",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Digitala verktyg för kommunikation",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Textila strukturer",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Textil innovation",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Konfektionsteknik",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Kvalitetssäkring och textil provning",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Sammanfogningstekniker för textila produkter",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Designprocesser och prototypframtagning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Digital transformation inom textil",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Projektmanagement och global kommunikation",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Hållbarhet inom textil och mode",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Textila regelverk för produktframtagning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Valbar specialiseringskurs I",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false,
+        "choiceGroup": "TGTPI-specialisation"
+      },
+      {
+        "term": 5,
+        "name": "Valbar specialiseringskurs II",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false,
+        "choiceGroup": "TGTPI-specialisation"
+      },
+      {
+        "term": 5,
+        "name": "Valbar specialiseringskurs III",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false,
+        "choiceGroup": "TGTPI-specialisation",
+        "options": [
+          {
+            "track": "Material Innovation",
+            "courses": [
+              "Smarta textilier",
+              "Textil återvinning och nya hållbara fibrer",
+              "Textil funktionalisering"
+            ]
+          },
+          {
+            "track": "Product Innovation",
+            "courses": [
+              "Konstruktionstekniker för textila produkter",
+              "Produktionsteknik för textila produkter",
+              "Textil prototypframtagning för produktion"
+            ]
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "name": "Textilteknisk fördjupning med vetenskaplig metod",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Examensarbete",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-complete-six-semester-structure",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    },
+    "checkedAt": "2026-10-06T05:48:10.206Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=TGTPI&language=EN&revision=3%2C20&type=program",
+    "verifiedProgrammeOverride": true,
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:VAADM",
+    "susaId": "i.uoh.hb.vaadm.62079.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "VAADM",
+    "programName": "Magisterprogram i hållbar organisering och hälsofrämjande ledarskap inom vård och omsorg",
+    "hp": 60,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=VAADM&revision=11,10&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/magisterprogram-i-hallbar-organisering-och-halsoframjande-ledarskap-inom-vard-och-omsorg/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=VAADM&revision=11,10&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Hållbar organisering och styrning inom vård och omsorg",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Hälsofrämjande ledarskap och medarbetarskap inom vård och omsorg",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Förbättringskunskap och vårdutveckling ur ett hållbarhetsperspektiv",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Hållbart HRM-arbete",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Valfri kurs",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Valbar kurs i vetenskaplig metod",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Examensarbete",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-half-speed-four-term-structure",
+    "termSums": {
+      "1": 15,
+      "2": 15,
+      "3": 15,
+      "4": 15
+    },
+    "checkedAt": "2026-10-06T05:48:10.591Z",
+    "studyPacePercent": 50,
+    "expectedHpPerTerm": 15,
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=VAADM&language=SV&revision=10%2C00&type=program",
+    "verifiedProgrammeOverride": true,
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:VGLOV",
+    "susaId": "i.uoh.hb.vglov.62210.20262",
+    "university": "Högskolan i Borås",
+    "programCode": "VGLOV",
+    "programName": "Kandidatprogram i ledarskap och organisering inom vård och omsorg",
+    "hp": 180,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=VGLOV&revision=2,00&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/kandidatprogram-i-ledarskap-och-organisering-inom-vard-och-omsorg/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=VGLOV&revision=2,00&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Introduktion till Vård- och omsorgsadministration",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Offentlig förvaltning",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Ekonomi, redovisning och budgetering",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Etik och prioriteringar",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Organisering och styrning 1",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Ledarskap 1",
+        "hp": 5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Förbättringskunskap",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Vårdande begrepp och perspektiv",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Ledarskap 2 - Gruppdynamik och konflikthantering",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Socialrätt",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Vetenskaplig teori och metod 1",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Organisering och styrning inom vård och omsorg 2",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "name": "Ledarskap 3 - Förändringsledarskap",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Äldre inom vård och omsorg",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Arbetsrätt",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "name": "Ledarskap 4 - Ledarskap och samverkan i vardag, kris och katastrof",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Arbetsmiljö",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Förbättringskunskap 2",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 5,
+        "name": "Vetenskaplig teori och metod 2",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Valbar kurs",
+        "hp": 15,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 6,
+        "name": "Självständigt arbete för kandidatexamen i Vård- och omsorgsadministration",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-plan-verified-full-time-schedule-with-uneven-semester-loads",
+    "termSums": {
+      "1": 27.5,
+      "2": 32.5,
+      "3": 37.5,
+      "4": 22.5,
+      "5": 30,
+      "6": 30
+    },
+    "checkedAt": "2026-10-06T05:48:10.206Z",
+    "sourceEvidenceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?code=VGLOV&language=SV&revision=1%2C000&type=program",
+    "verifiedProgrammeOverride": true,
+    "studyPaceVariant": "helfart",
+    "academicYearSums": {
+      "1": 60,
+      "2": 60,
+      "3": 60
+    },
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "hogskolan-i-boras:VOPER",
+    "susaId": "i.uoh.hb.voper.71073.20271",
+    "university": "Högskolan i Borås",
+    "programCode": "VOPER",
+    "programName": "Specialistsjuksköterskeutbildning med inriktning mot operationssjukvård",
+    "hp": 60,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "source": "hogskolan-i-boras-utbildningsplan",
+    "sourceUrl": "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=VOPER&revision=4,00&language=SV",
+    "sourceUrls": [
+      "https://www.hb.se/utbildning/program-och-kurser/program/specialistsjukskoterskeutbildning-med-inriktning-mot-operationssjukvard/",
+      "https://kursinfodoc.hb.se/PdfMaker.aspx?type=program&code=VOPER&revision=4,00&language=SV"
+    ],
+    "rows": [
+      {
+        "term": 1,
+        "name": "Operationssjuksköterskans perioperativa vårdande",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Perioperativ vård med inriktning mot operationssjukvård",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Valbar kurs i vetenskaplig teori och metod",
+        "hp": 7.5,
+        "type": "choice",
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "name": "Fördjupning med inriktning mot operationssjuksköterskans perioperativa vårdande",
+        "hp": 7.5,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Fördjupning i operationssjuksköterskans kliniska omvårdnad inom perioperativ vård",
+        "hp": 15,
+        "type": "required",
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "name": "Examensarbete med inriktning mot operationssjukvård",
+        "hp": 15,
+        "type": "required",
+        "isThesis": true
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "official-education-plan-all-terms-validated",
+    "termSums": {
+      "1": 30,
+      "2": 30
+    },
+    "checkedAt": "2026-09-11T18:43:56.269Z",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "lunds-universitet:EAECO",
+    "susaId": "i.uoh.lu.eaeco.18250.20272",
+    "university": "Lunds universitet",
+    "programCode": "EAECO",
+    "programName": "Masterprogram i Economics",
+    "hp": 120,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "sourceUrl": "https://www.lu.se/studera/economics-masterprogram-EAECO",
+    "sourceUrls": [
+      "https://www.lu.se/studera/economics-masterprogram-EAECO",
+      "https://www.lu.se/studera/economics-masterprogram-EAECO/programmets-innehall"
+    ],
+    "source": "lund-official-programplan",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Nationalekonomi: Avancerad Ekonometri",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Nationalekonomi: Avancerad makroekonomisk analys",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Nationalekonomi: Avancerad mikroekonomisk analys",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Nationalekonomi: Matematiska metoder, avancerad nivå",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Nationalekonomi: Examensarbete - magisternivå",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Nationalekonomi: Examensarbete - masternivå",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "all-terms-30hp",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30
+    },
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-machine-readable-sequenced",
+    "checkedAt": "2026-10-01T11:20:32.282Z",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "lunds-universitet:EAGMP",
+    "susaId": "i.uoh.lu.eagmp.18230.20262",
+    "university": "Lunds universitet",
+    "programCode": "EAGMP",
+    "programName": "Magisterprogram i Managing People, Knowledge & Change",
+    "hp": 60,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "sourceUrl": "https://www.lu.se/studera/managing-people-knowledge-change-magisterprogram-EAGMP",
+    "sourceUrls": [
+      "https://www.lu.se/studera/managing-people-knowledge-change-magisterprogram-EAGMP",
+      "https://www.lu.se/studera/managing-people-knowledge-change-magisterprogram-EAGMP/programmets-innehall"
+    ],
+    "source": "lund-official-programplan",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Företagsekonomi: Ledarskap",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Organizational Development",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Business Administration: Degree Project in Managing People, Knowledge and Change - Master Level",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Knowledge Work and Organization",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Research Methods",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "all-terms-30hp",
+    "termSums": {
+      "1": 30,
+      "2": 30
+    },
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-machine-readable-sequenced",
+    "checkedAt": "2026-10-01T11:20:38.462Z",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "lunds-universitet:HAAST",
+    "susaId": "i.uoh.lu.haast.18605.20272",
+    "university": "Lunds universitet",
+    "programCode": "HAAST",
+    "programName": "Masterprogram i Asienstudier",
+    "hp": 120,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "sourceUrl": "https://www.lu.se/studera/asienstudier-masterprogram-HAAST",
+    "sourceUrls": [
+      "https://www.lu.se/studera/asienstudier-masterprogram-HAAST",
+      "https://www.lu.se/studera/asienstudier-masterprogram-HAAST/programmets-innehall"
+    ],
+    "source": "lund-official-programplan",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Asienstudier: Introduktion till Asienstudier",
+        "hp": 6,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Asienstudier: Politiska system, samhällsstyrning och demokratisering i Öst- och Sydöstasien",
+        "hp": 12,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Asienstudier: Öst- och Sydöstasiens ekonomiska omvandling",
+        "hp": 12,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Asienstudier: Internationella relationer i Öst- och Sydöstasien",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Asienstudier: Metodologi i teori",
+        "hp": 7.5,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 15,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Asienstudier: Examensarbete för masterexamen",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "all-terms-30hp",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30
+    },
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-machine-readable-sequenced",
+    "checkedAt": "2026-10-03T10:18:51.553Z",
+    "verified": true,
+    "migrationSource": "susa/structures.json"
+  },
+  {
+    "key": "lunds-universitet:HAEUH",
+    "susaId": "i.uoh.lu.haeuh.18610.20272",
+    "university": "Lunds universitet",
+    "programCode": "HAEUH",
+    "programName": "Masterprogram inom Europastudier med humanistisk profil",
+    "hp": 120,
+    "subject": "",
+    "officialUrls": [],
+    "status": "processed",
+    "attempts": 0,
+    "sourceUrl": "https://www.lu.se/studera/europastudier-med-humanistisk-profil-masterprogram-HAEUH",
+    "sourceUrls": [
+      "https://www.lu.se/studera/europastudier-med-humanistisk-profil-masterprogram-HAEUH",
+      "https://www.lu.se/studera/europastudier-med-humanistisk-profil-masterprogram-HAEUH/programmets-innehall"
+    ],
+    "source": "lund-official-programplan",
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Institutions and Governance in the European Union",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "The Meaning of Europe: Culture, Values and Identity",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Europastudier: Flervetenskapliga teorier och forskningsmetoder",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Europastudier: Projektledning och kommunikationsstrategier för EU-projekt",
+        "hp": 15,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara studier enligt programplan",
+        "hp": 30,
+        "type": "choice",
+        "category": "elective-slot",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Europastudier: Examensarbete för masterexamen",
+        "hp": 30,
+        "type": "required",
+        "category": "mandatory",
+        "slotType": "",
+        "isSlot": false,
+        "isThesis": false
+      }
+    ],
+    "coverage": "choice-required",
+    "reason": "all-terms-30hp",
+    "termSums": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30
+    },
+    "apiCoverage": "complete-term-sequence",
+    "apiConfidence": "official-machine-readable-sequenced",
+    "checkedAt": "2026-10-03T10:18:52.237Z",
     "verified": true,
     "migrationSource": "susa/structures.json"
   }
