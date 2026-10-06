@@ -22,7 +22,7 @@ const rows=[
   course(1,'OF1000','Introduktion till offentlig förvaltning',7.5),
   course(1,'OF1010','Det svenska politiska systemet',7.5),
   course(1,'OF1020','Redovisning och budgetering',7.5),
-  course(1,'OF1030,'+'Förvaltningens organisering',7.5),
+  course(1,'OF1030','Förvaltningens organisering',7.5),
   course(2,'OF1040','Samhällsekonomi',15),
   course(2,'OF1050','Juridik i offentlig förvaltning',15),
   course(3,'OF1060','Demokrati och välfärd i ett flernivåsystem',15),
