@@ -18426,14 +18426,109 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "GS1111",
+        "name": "Globala utmaningar",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "GS1112",
+        "name": "Ekonomi, makt och kultur",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "GS1211",
+        "name": "Perspektiv på rättvisa, makt och hållbar global utveckling",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "GS1212",
+        "name": "Svar på de globala utmaningarna",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara kurser inom Institutionen för globala studier",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara kurser inom Institutionen för globala studier",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "GS1311",
+        "name": "Metod inom Globala studier",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "GS1422",
+        "name": "Projektledning och utredning",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valbar praktik, fältkurs eller färdighetskurs",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "GS1511",
+        "name": "Examensarbete inom Globala studier",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kandidatprogrammet-i-globala-studier-s1gls",
     "sourceUrls": [
+      "https://www.gu.se/syllabus/fcacb75c-17ab-11f1-9ed1-51bcbc0e4a82",
       "https://www.gu.se/studera/hitta-utbildning/kandidatprogrammet-i-globala-studier-s1gls"
     ],
     "apiCoverage": "partial-or-choice-dependent",
@@ -18504,7 +18599,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:45.276Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:S1GLS:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/syllabus/fcacb75c-17ab-11f1-9ed1-51bcbc0e4a82"
   },
   {
     "key": "goteborgs-universitet:S1HPK",
