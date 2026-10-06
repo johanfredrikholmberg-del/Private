@@ -8050,7 +8050,7 @@
     "term": "HT26"
   },
   {
-    "key": "goteborgs-universitet:F2APP",
+    "key": "goteborgs universitet|F2APP|300",
     "susaId": "i.uoh.gu.f2app.04000.20262",
     "university": "Göteborgs universitet",
     "programCode": "F2APP",
@@ -8058,121 +8058,279 @@
     "hp": 300,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/apotekarprogrammet-f2app",
-    "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/apotekarprogrammet-f2app"
-    ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 10,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "5": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "6": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "7": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "8": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "9": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "10": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+    "coverage": "complete",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "KEM011",
+        "name": "Grundläggande kemi 1",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KEM022",
+        "name": "Grundläggande kemi 2A Organisk kemi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "KEM023",
+        "name": "Grundläggande kemi 2B Biokemi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "CEB210",
+        "name": "Cellen och dess arvsmassa",
+        "hp": 10.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "CEB220",
+        "name": "Cellens fysiologi",
+        "hp": 10.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "CEB230",
+        "name": "Cellens metabolism",
+        "hp": 9,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "KEM031",
+        "name": "Organisk kemi för apotekarestuderande",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "AFY401",
+        "name": "Fysiologi och anatomi",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "KEA210",
+        "name": "Läkemedelskemiska principer",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "MED415",
+        "name": "Grundläggande biostatistik",
+        "hp": 1.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "IHI430",
+        "name": "Immunologi, hematologi och infektionssjukdomar",
+        "hp": 9,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "FLS441",
+        "name": "Farmakologi, läkemedelskemi och sjukdomslära 1",
+        "hp": 12,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "FLS512",
+        "name": "Farmakologi, läkemedelskemi och sjukdomslära 2",
+        "hp": 12,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "FAS521",
+        "name": "Tillämpad apoteksfarmaci med inriktning mot egenvårdsrådgivning",
+        "hp": 9,
+        "category": "mandatory"
+      },
+      {
+        "term": 5,
+        "code": "FLS533",
+        "name": "Farmakologi, läkemedelskemi och sjukdomslära 3",
+        "hp": 9,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "KEA310",
+        "name": "Analytisk kemi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "MED615",
+        "name": "Medicinsk statistik",
+        "hp": 5,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "PKM630",
+        "name": "Farmakokinetik och läkemedelsmetabolism",
+        "hp": 12,
+        "category": "mandatory"
+      },
+      {
+        "term": 6,
+        "code": "KBT211",
+        "name": "Galenisk farmaci 1",
+        "hp": 5.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "KBT310",
+        "name": "Galenisk farmaci 2",
+        "hp": 9.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "TOX720",
+        "name": "Läkemedelstoxikologi och toxikokinetik",
+        "hp": 3,
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "FAT730",
+        "name": "Farmakoterapi",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 7,
+        "code": "LAS741",
+        "name": "Läkemedelsanvändning ur ett samhällsperspektiv",
+        "hp": 10,
+        "category": "mandatory"
+      },
+      {
+        "term": 8,
+        "code": "",
+        "name": "Valbara kurser inom apotekarprogrammet",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "options": [
+          {
+            "code": "FAB810",
+            "name": "Preklinisk läkemedelsutveckling: läkemedelsmetabolism och in vitro/in vivo prediktioner",
+            "hp": 7.5
+          },
+          {
+            "code": "KEA270",
+            "name": "Dermatokemi",
+            "hp": 7.5
+          },
+          {
+            "code": "FFT810",
+            "name": "Fördjupad farmakoterapi",
+            "hp": 7.5
+          },
+          {
+            "code": "FAB820",
+            "name": "Klinisk farmakokinetik och farmakodynamik",
+            "hp": 7.5
+          },
+          {
+            "code": "PIV830",
+            "name": "Preklinisk in vivo-modeller inom forskning och läkemedelsutveckling",
+            "hp": 7.5
+          },
+          {
+            "code": "BIO532",
+            "name": "Växtmolekylärbiologi och bioteknologi",
+            "hp": 7.5
+          },
+          {
+            "code": "KEM840",
+            "name": "NMR-spektroskopi för apotekarstuderande",
+            "hp": 7.5
+          },
+          {
+            "code": "NEU002",
+            "name": "Farmaceutisk neurokemi",
+            "hp": 7.5
+          },
+          {
+            "code": "BCG820",
+            "name": "Molekylär genetik och utveckling av rekombinanta proteinläkemedel",
+            "hp": 7.5
+          },
+          {
+            "code": "MKB800",
+            "name": "Metodik inom klinisk läkemedelsprövning och biostatistik",
+            "hp": 7.5
+          },
+          {
+            "code": "KBT086",
+            "name": "Galenisk farmaci fördjupning",
+            "hp": 7.5
+          },
+          {
+            "code": "ATM800",
+            "name": "Utveckling och användning av cell- och genterapier (ATMP) och dess regelverk",
+            "hp": 7.5
+          }
+        ],
+        "electiveRequirements": {
+          "requiresApproval": true,
+          "selectionCount": 4,
+          "optionHp": 7.5
         }
       },
-      "slotCount": 0,
-      "totalHp": 300,
-      "sourcePages": 1,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:31.059Z",
-    "term": "HT26"
+      {
+        "term": 9,
+        "code": "EXA931",
+        "name": "Examensarbete på masternivå i farmaceutisk vetenskap",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      },
+      {
+        "term": 10,
+        "code": "TAF100",
+        "name": "Tillämpad apoteksfarmaci",
+        "hp": 30,
+        "category": "mandatory"
+      }
+    ],
+    "source": "gu-official-student-portal-programme-overview",
+    "sourceUrl": "https://studentportal.gu.se/program/apotekarprogrammet",
+    "sourceUrls": [
+      "https://studentportal.gu.se/program/apotekarprogrammet",
+      "https://www.gu.se/en/node/44938",
+      "https://www.gu.se/syllabus/cec64a47-db30-11f0-9c81-2a1b32074717"
+    ],
+    "term": "HT26",
+    "id": "gu:F2APP:2026HT",
+    "programHp": 300,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://studentportal.gu.se/program/apotekarprogrammet"
   },
   {
     "key": "goteborgs-universitet:H1ARK",
