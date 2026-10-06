@@ -24,7 +24,7 @@ for(const line of content.split(/<br\s*\/?\s*>|<\/p>|<\/li>|<\/h[1-6]>/i).map(cl
  if(!term)continue;
  const m=line.match(/^(?:\([^)]+\)\s*)?([A-ZÅÄÖ]{2,5}\d{3,5})(?:\/([A-ZÅÄÖ]{2,5}\d{3,5}))?\s+(.+?),\s*(7[,.]5|15|30)\s*hp(?:\s*\([^)]*\))?(?:\s*-\s*halvfart)?$/i);
  if(m){
-   const name=m[4].replace(/\s+-\s*halvfart$/i,'').trim(),credits=Number(m[5].replace(',','.'));
+   const name=m[3].trim(),credits=Number(m[4].replace(',','.'));
    rows.push({term,code:m[1],name,hp:credits,category:'mandatory',isSlot:false,courseCodeVerified:true});
    continue;
  }
