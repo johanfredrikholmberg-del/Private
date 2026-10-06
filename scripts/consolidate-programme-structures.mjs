@@ -55,11 +55,11 @@ for(const name of (await fs.readdir(dbDir)).filter(x=>/^programme-structures-.+\
 }
 
 // SUSA contains a mixture of metadata, manual-review results and resolved
-// official structures. Only migrate records explicitly classified complete.
+// official structures. Complete and choice-required rows are usable when source-backed.
 try{
   const susa=JSON.parse(await fs.readFile(path.join(root,'data','susa','structures.json'),'utf8'));
   for(const row of Array.isArray(susa)?susa:[]){
-    if(row?.coverage==='complete' && Array.isArray(row.rows) && row.rows.length && (row.sourceUrl || row.sourceUrls?.length)){
+    if(['complete','choice-required'].includes(row?.coverage) && Array.isArray(row.rows) && row.rows.length && (row.sourceUrl || row.sourceUrls?.length)){
       rows.push({
         ...row,
         verified:true,
