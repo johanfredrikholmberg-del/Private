@@ -20358,15 +20358,206 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "OF1000",
+        "name": "Introduktion till offentlig förvaltning",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "OF1010",
+        "name": "Det svenska politiska systemet",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "OF1020",
+        "name": "Redovisning och budgetering",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "OF1030,Förvaltningens organisering",
+        "name": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "OF1040",
+        "name": "Samhällsekonomi",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "OF1050",
+        "name": "Juridik i offentlig förvaltning",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "OF1060",
+        "name": "Demokrati och välfärd i ett flernivåsystem",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "OF1070",
+        "name": "Ekonomistyrning i offentlig förvaltning",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "OF1080",
+        "name": "Organisatoriska förutsättningar och relationer",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "OF1090",
+        "name": "Digital förvaltning och artificiell intelligens",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "OF1100",
+        "name": "Offentlig granskning",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "OF1110",
+        "name": "Statistik för arbete i offentlig förvaltning",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Välj en av programmets två fördjupningar",
+        "hp": 22.5,
+        "category": "choice",
+        "isSlot": true,
+        "slotType": "choice-slot",
+        "choiceSlots": 1,
+        "courseCodeVerified": true,
+        "options": [
+          {
+            "name": "Ekonomistyrning och redovisning i offentlig förvaltning",
+            "hp": 22.5,
+            "courses": [
+              {
+                "code": "OF1120",
+                "name": "Bokföring och externredovisning",
+                "hp": 7.5
+              },
+              {
+                "code": "OF1130",
+                "name": "Finansiell analys",
+                "hp": 7.5
+              },
+              {
+                "code": "OF1140",
+                "name": "Teoretiska perspektiv på ekonomistyrning",
+                "hp": 7.5
+              }
+            ]
+          },
+          {
+            "name": "Politisk styrning och organisering",
+            "hp": 22.5,
+            "courses": [
+              {
+                "code": "OF1150",
+                "name": "Policy och reform",
+                "hp": 7.5
+              },
+              {
+                "code": "OF1160",
+                "name": "Styrningens organisering",
+                "hp": 7.5
+              },
+              {
+                "code": "OF1170",
+                "name": "Förändring och implementering",
+                "hp": 7.5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "code": "OF1180",
+        "name": "Kommunikation i det offentliga arbetslivet",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 6,
+        "code": "OF1190",
+        "name": "Metod och vetenskapsteori",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 6,
+        "code": "OF1200",
+        "name": "Examensarbete i offentlig förvaltning",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kandidatprogrammet-i-offentlig-forvaltning-s1ofv",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/kandidatprogrammet-i-offentlig-forvaltning-s1ofv"
+      "https://www.gu.se/studera/hitta-utbildning/kandidatprogrammet-i-offentlig-forvaltning-s1ofv/utbildningsplan/7231bd8a-dfbd-11ef-b4a4-d64d95174dcd",
+      "https://studentportal.gu.se/sites/default/files/2025-03/Programo%CC%88versikt_S1OFV_0.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -20436,7 +20627,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:45.945Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:S1OFV:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/kandidatprogrammet-i-offentlig-forvaltning-s1ofv/utbildningsplan/7231bd8a-dfbd-11ef-b4a4-d64d95174dcd"
   },
   {
     "key": "goteborgs-universitet:S1PER",
