@@ -19,6 +19,7 @@ on:
       - 'scripts/dedupe-gu-canonical-structures.mjs'
       - 'scripts/materialize-gu-finance-2027.mjs'
       - 'scripts/materialize-gu-international-business-2026.mjs'
+      - 'scripts/materialize-gu-s1gls-2026.mjs'
       - '.github/workflows/import-gu-verified.yml'
 permissions:
   contents: write
@@ -51,6 +52,8 @@ jobs:
         run: node scripts/materialize-gu-shrm-2026.mjs --write
       - name: Materialize official GU Geography HT26 structure
         run: node scripts/materialize-gu-geography-2026.mjs --write
+      - name: Materialize official GU Global Studies HT26 structure
+        run: node scripts/materialize-gu-s1gls-2026.mjs --write
       - name: Import verified GU structures
         env:
           GU_STRUCTURE_LIMIT: 20
