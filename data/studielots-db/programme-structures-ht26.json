@@ -20156,15 +20156,119 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "course-codes-unverified",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Kulturgeografi: Företaget, logistikfunktionen och omvärlden",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 1,
+        "code": "",
+        "name": "Handels- och transporträtt",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Nationalekonomi: Grundläggande mikroekonomi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Nationalekonomi: Grundläggande makroekonomi",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Statistik: Grundkurs 1, introduktion",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Statistik: Grundkurs 2, regressionsanalys",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Företagsekonomi 1",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Företagsekonomi 2",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Kulturgeografi: Transporter, samhälle och miljö",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Logistiska informationssystem",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Strategisk logistik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Operativ styrning 2",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Logistik, kandidatuppsats",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/handelshogskolans-logistikprogram-s1log",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/handelshogskolans-logistikprogram-s1log",
       "https://www.gu.se/studera/hitta-utbildning/handelshogskolans-logistikprogram-s1log/utbildningsplan/9c385ad5-a5b4-11ef-b71a-5348ec534cc8"
     ],
     "apiCoverage": "partial-or-choice-dependent",
@@ -20235,7 +20339,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:45.748Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:S1LOG:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": false,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/handelshogskolans-logistikprogram-s1log/utbildningsplan/9c385ad5-a5b4-11ef-b71a-5348ec534cc8"
   },
   {
     "key": "goteborgs-universitet:S1MKG",
