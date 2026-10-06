@@ -42,6 +42,8 @@ jobs:
         run: node scripts/materialize-gu-finance-2027.mjs --write
       - name: Materialize source-backed GU international business 2026 plan
         run: node scripts/materialize-gu-international-business-2026.mjs --write
+      - name: Materialize official GU Dietetics HT26 structure
+        run: node scripts/materialize-gu-dietetics-2026.mjs --write
       - name: Import verified GU structures
         env:
           GU_STRUCTURE_LIMIT: 20
