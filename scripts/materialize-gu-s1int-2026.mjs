@@ -56,7 +56,7 @@ if(process.argv.includes('--write')){
   const index=programs.findIndex(x=>x.university==='Göteborgs universitet'&&x.programCode===code);
   if(index<0)throw Error('GU S1INT metadata row is outside the canonical primary shard');
   programs[index]=item;
-  fs.writeFileSync(file+'.tmp',JSON.stringify(data,null,2)+'\\n');
+  fs.writeFileSync(file+'.tmp',JSON.stringify(data,null,2)+'\n');
   const verify=read(file+'.tmp'),verifiedRows=Array.isArray(verify)?verify:verify.programs;
   if(verifiedRows.filter(x=>x.university==='Göteborgs universitet'&&x.programCode===code).length!==1)throw Error('GU S1INT write verification failed');
   fs.renameSync(file+'.tmp',file);
