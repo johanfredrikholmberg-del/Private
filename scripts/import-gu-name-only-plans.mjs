@@ -20,18 +20,26 @@ const plans=[
     slot(3,'Valbara kurser eller utlandsstudier',30,[
       {name:'Tillämpad kvalitativ metod',hp:7.5},{name:'Tillämpad epidemiologi och biostatistik',hp:7.5},
       {name:'Hälsofrämjande och sjukdomsförebyggande arbete i riskgrupper: strategier och metoder',hp:15}
-    ]),course(4,'Masteruppsats i global hälsa',30)]}
+    ]),course(4,'Masteruppsats i global hälsa',30)]},
+  {code:'O1THG',source:'https://www.gu.se/syllabus/76899f49-074e-11f1-85d9-a1ed927d4a1e',rows:[
+    course(1,'Grundläggande Oral hälsa I - Introduktion till vetenskaplig metodik, professionen och huvudområdet, hälsopromotion och prevention',20.5),course(1,'Basmedicinska ämnen I',9.5),
+    course(2,'Grundläggande Oral hälsa II – Oral hälsa och sjukdom, prevention och behandling',26),course(2,'Basmedicinska ämnen II',4),
+    course(3,'Fördjupad Oral hälsa I – Prevention, diagnostik och behandling',20),course(3,'Tillämpad Oral hälsa I – Teori och klinisk praktik vuxna I',6),course(3,'Basmedicinska ämnen III',4),
+    course(4,'Fördjupad Oral hälsa II – Folkhälsovetenskap och hälsopromotion, prevention, diagnostik och behandling',10),course(4,'Tillämpad Oral hälsa II – Teori och klinisk praktik, barn I, vuxna II',20),
+    course(5,'Vetenskapliga teorier och metoder',7.5),course(5,'Tillämpad Oral hälsa III – Teori och klinisk praktik, barn II, vuxna III och äldre',22.5),
+    course(6,'Tillämpad Oral hälsa IV – Hälsopromotion, prevention och behandlingsstrategier ur ett holistiskt perspektiv',15),course(6,'Examensarbete för kandidatexamen inom huvudområdet oral hälsa',15)]}
 ];
 const added=[],replaced=[];
 const upgrades=[];
 for(const plan of plans){
   const identity=programmes.filter(x=>x.university==='Göteborgs universitet'&&x.programCode===plan.code);
-  if(identity.length!==1||Number(identity[0].programHp)!==120)throw Error(`Identity conflict: ${plan.code}`);
+  const hp=Number(identity[0]?.programHp);
+  if(identity.length!==1||!Number.isFinite(hp)||hp%30!==0)throw Error(`Identity conflict: ${plan.code}`);
   if(!/^https:\/\/www\.gu\.se\//.test(plan.source))throw Error('Unofficial source');
-  for(let t=1;t<=4;t++)if(Math.abs(plan.rows.filter(x=>x.term===t).reduce((n,x)=>n+x.hp,0)-30)>.001)throw Error(`Unbalanced ${plan.code} term ${t}`);
+  for(let t=1;t<=hp/30;t++)if(Math.abs(plan.rows.filter(x=>x.term===t).reduce((n,x)=>n+x.hp,0)-30)>.001)throw Error(`Unbalanced ${plan.code} term ${t}`);
   const current=existing.find(x=>x.university==='Göteborgs universitet'&&x.programCode===plan.code);
-  if(current&&(current.courseCodesVerified===true||current.source==='gu-official-programme-overview'))continue;
-  const structure={id:`gu:${plan.code}:2026HT`,key:identity[0].key,university:'Göteborgs universitet',programCode:plan.code,programName:identity[0].programName,programHp:120,hp:120,validFrom:'2026HT',coverage:'course-codes-unverified',verified:true,courseCodesVerified:false,choiceRequired:plan.rows.some(x=>x.isSlot),source:'gu-official-programme-overview',sourceEvidenceUrl:plan.source,sourceUrls:[plan.source],rows:plan.rows};
+  if(current&&(current.courseCodesVerified===true||current.source==='gu-official-programme-overview'||(current.verified===true&&current.sourceEvidenceUrl===plan.source&&current.rows?.length)))continue;
+  const structure={id:`gu:${plan.code}:2026HT`,key:identity[0].key,university:'Göteborgs universitet',programCode:plan.code,programName:identity[0].programName,programHp:hp,hp,validFrom:'2026HT',coverage:'course-codes-unverified',verified:true,courseCodesVerified:false,choiceRequired:plan.rows.some(x=>x.isSlot),source:plan.code==='O1THG'?'gu-official-education-plan':'gu-official-programme-overview',sourceEvidenceUrl:plan.source,sourceUrls:[plan.source],rows:plan.rows};
   if(current){
     const partIndex=parts.findIndex(p=>(Array.isArray(p)?p:(p.programs||[])).includes(current));
     const rowIndex=(Array.isArray(parts[partIndex])?parts[partIndex]:(parts[partIndex].programs||[])).indexOf(current);
