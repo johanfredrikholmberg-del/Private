@@ -20236,7 +20236,7 @@
     "term": "HT26"
   },
   {
-    "key": "goteborgs-universitet:S2LED",
+    "key": "goteborgs universitet|S2LED|120",
     "susaId": "i.uoh.gu.s2led.82009.20262",
     "university": "Göteborgs universitet",
     "programCode": "S2LED",
@@ -20244,68 +20244,105 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-management-s2led",
-    "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-management-s2led",
-      "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-management-s2led/utbildningsplan/7680efbc-0ba7-11ef-839e-d9737c9940e0"
-    ],
-    "apiCoverage": "partial-or-choice-dependent",
-    "apiConfidence": "official-partial",
-    "quality": {
-      "complete": false,
-      "expectedTerms": 4,
-      "completeTerms": [],
-      "termHp": {
-        "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 0,
-          "covered": false,
-          "fixedUnlabelled": false
+    "coverage": "complete",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "GM0841",
+        "name": "Grunder i Management",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "GM0823",
+        "name": "Strategi och Organisation",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 1,
+        "code": "GM0829",
+        "name": "Managing Organizations",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "GM0830",
+        "name": "Managing Decisions",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "GM0836",
+        "name": "Change Management",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 2,
+        "code": "GM0837",
+        "name": "Preparing for Leadership",
+        "hp": 15,
+        "category": "mandatory"
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara kurser",
+        "hp": 22.5,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "electiveRequirements": {
+          "minLevel": "Avancerad nivå",
+          "subjects": [
+            "företagsekonomi",
+            "finans",
+            "nationalekonomi",
+            "juridik",
+            "ekonomisk historia",
+            "ekonomisk geografi"
+          ],
+          "requiresApproval": true
         }
       },
-      "slotCount": 0,
-      "totalHp": 120,
-      "sourcePages": 2,
-      "parsedRows": 0
-    },
-    "checkedAt": "2026-09-13T15:08:48.403Z",
-    "term": "HT26"
+      {
+        "term": 3,
+        "code": "GM0820",
+        "name": "Vetenskaplig metod",
+        "hp": 7.5,
+        "category": "mandatory"
+      },
+      {
+        "term": 4,
+        "code": "GM0861",
+        "name": "Examensarbete i Management",
+        "hp": 30,
+        "category": "mandatory",
+        "isThesis": true
+      }
+    ],
+    "source": "gu-official-student-portal-programme-setup",
+    "sourceUrl": "https://studentportal.gu.se/en/programme/master-of-science-in-management-admitted-2026-and-2025",
+    "sourceUrls": [
+      "https://studentportal.gu.se/en/programme/master-of-science-in-management-admitted-2026-and-2025",
+      "https://www.gu.se/studera/hitta-utbildning/programoversikt-ledarskap",
+      "https://www.gu.se/studera/hitta-utbildning/masterprogram-i-management-s2led/utbildningsplan/7680efbc-0ba7-11ef-839e-d9737c9940e0"
+    ],
+    "term": "HT26",
+    "id": "gu:S2LED:2026HT",
+    "programHp": 120,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://studentportal.gu.se/en/programme/master-of-science-in-management-admitted-2026-and-2025"
   },
   {
     "key": "goteborgs-universitet:S2LOT",
