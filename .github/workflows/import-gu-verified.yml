@@ -12,6 +12,7 @@ on:
       - 'scripts/import-gu-name-only-plans.mjs'
       - 'scripts/materialize-gu-dietetics-2026.mjs'
       - 'scripts/materialize-gu-shrm-2026.mjs'
+      - 'scripts/materialize-gu-geography-2026.mjs'
       - 'api/gu-program-structure.js'
       - 'scripts/audit-gu-coverage.mjs'
       - 'scripts/materialize-gu-verified-shards.mjs'
@@ -48,6 +49,8 @@ jobs:
         run: node scripts/materialize-gu-dietetics-2026.mjs --write
       - name: Materialize official GU Strategic HRM HT26 structure
         run: node scripts/materialize-gu-shrm-2026.mjs --write
+      - name: Materialize official GU Geography HT26 structure
+        run: node scripts/materialize-gu-geography-2026.mjs --write
       - name: Import verified GU structures
         env:
           GU_STRUCTURE_LIMIT: 20
