@@ -13322,15 +13322,152 @@
     "hp": 240,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "DIP110",
+        "name": "Introduktion till klinisk nutrition",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "DIP120",
+        "name": "Biokemi med organisk kemi",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "DIP130",
+        "name": "Nutrition 1",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "DIP140",
+        "name": "Humanfysiologi med anatomi",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "DIP150",
+        "name": "Livsmedelsvetenskap",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "DIP210",
+        "name": "Nutrition 2",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "DIP220",
+        "name": "Klinisk nutrition 1",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "DIP230",
+        "name": "Psykologi och yrkesspecifika och yrkesspecifika färdigheter för dietister",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "DIP310",
+        "name": "Klinisk nutrition 2",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 6,
+        "code": "DIP320",
+        "name": "Examensarbete i klinisk nutrition",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 6,
+        "code": "DIP330",
+        "name": "Klinisk träning i dietistprofessionen",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 7,
+        "code": "MED722",
+        "name": "Klinisk nutrition - vetenskaplig metod",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 7,
+        "code": "MED723",
+        "name": "Kostundersökningsmetodik",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 7,
+        "code": "",
+        "name": "Valbara kurser i klinisk nutrition",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 8,
+        "code": "MED730",
+        "name": "Självständigt arbete inom klinisk nutrition",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/dietistprogrammet-m1dip",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/dietistprogrammet-m1dip"
+      "https://www.gu.se/syllabus/7e9cefff-cb7d-11f0-a255-650837bd40cf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -13418,7 +13555,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:39.158Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:M1DIP:2026HT",
+    "programHp": 240,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/syllabus/7e9cefff-cb7d-11f0-a255-650837bd40cf"
   },
   {
     "key": "goteborgs-universitet:M2CMA",
