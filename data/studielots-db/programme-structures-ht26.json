@@ -8341,15 +8341,76 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Arkeologisk grundkurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Arkeologisk fortsättningskurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Fritt valda kurser",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false,
+        "choiceScope": "Exempelvis arkeologi, historia eller antikens kultur och samhällsliv."
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Arkeologiska perspektiv och hjälpvetenskaper",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Arkeologisk fördjupningskurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false,
+        "isThesis": true,
+        "thesisHp": 15
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Arkeologiska tillämpningar",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false,
+        "content": "GIS, fältarbete samt kulturarvets förvaltning, regelverk och praxis."
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/arkeologprogrammet-kandidatprogram-h1ark",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/arkeologprogrammet-kandidatprogram-h1ark"
+      "https://www.gu.se/studera/hitta-utbildning/arkeologprogrammet-kandidatprogram-h1ark",
+      "https://www.gu.se/sites/default/files/2024-03/Utbildningsplan_Arkeologprogrammet_H1ARK.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -8419,7 +8480,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:31.203Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:H1ARK:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/sites/default/files/2024-03/Utbildningsplan_Arkeologprogrammet_H1ARK.pdf"
   },
   {
     "key": "goteborgs-universitet:H1KAP",
