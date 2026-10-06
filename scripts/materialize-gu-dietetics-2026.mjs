@@ -14,7 +14,7 @@ if(!response.ok||new URL(response.url).host!=='www.gu.se')throw Error('Official 
 const html=await response.text();
 const clean=x=>String(x||'').replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;|\u00a0|\u202f/g,' ').replace(/\s+/g,' ').trim();
 const plain=clean(html);
-if(!plain.includes(code)||!/Giltig fr\\.o\\.m\\.\\s*Hösttermin 2026/i.test(plain)||!/240 högskolepoäng\\s*\\(hp\\)/i.test(plain))throw Error('GU Dietetics syllabus identity, credits or version conflict');
+if(!plain.includes(code)||!plain.includes('Giltig fr.o.m.')||!plain.includes('Hösttermin 2026')||!plain.includes('240 högskolepoäng (hp)'))throw Error('GU Dietetics syllabus identity, credits or version conflict');
 const content=html.match(/Termin 1[\s\S]*?Termin 8[\s\S]*?(?=Följande två kurser)/)?.[0];
 if(!content)throw Error('GU Dietetics term sequence missing');
 const rows=[];let term=0;
