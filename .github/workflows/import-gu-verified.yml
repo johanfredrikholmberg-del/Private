@@ -21,6 +21,7 @@ on:
       - 'scripts/materialize-gu-international-business-2026.mjs'
       - 'scripts/materialize-gu-s1gls-2026.mjs'
       - 'scripts/materialize-gu-h1kap-2026.mjs'
+      - 'scripts/materialize-gu-h1ppe-2026.mjs'
       - '.github/workflows/import-gu-verified.yml'
 permissions:
   contents: write
@@ -57,6 +58,8 @@ jobs:
         run: node scripts/materialize-gu-s1gls-2026.mjs --write
       - name: Materialize official GU Cultural Heritage HT26 structure
         run: node scripts/materialize-gu-h1kap-2026.mjs --write
+      - name: Materialize official GU Philosophy, Politics and Economics HT26 structure
+        run: node scripts/materialize-gu-h1ppe-2026.mjs --write
       - name: Import verified GU structures
         env:
           GU_STRUCTURE_LIMIT: 20
