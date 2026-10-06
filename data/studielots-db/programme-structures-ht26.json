@@ -19293,15 +19293,101 @@
     "hp": 120,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "PV2104",
+        "name": "Personalarbete i ett samhällsperspektiv",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "PV2101",
+        "name": "Strategiskt personalarbete",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "PV2301",
+        "name": "Forskningsmetoder",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Val mellan praktik eller två valbara kurser",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false,
+        "options": [
+          {
+            "name": "PV2400 Praktik i personal- och ledningsarbete",
+            "hp": 15
+          },
+          {
+            "name": "PV2205 Konflikt och samarbete i organisationer + PV2206 HR-analys",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Val mellan hållbart ledarskap eller praktik",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false,
+        "options": [
+          {
+            "name": "PV2102 Hållbart ledarskap",
+            "hp": 15
+          },
+          {
+            "name": "PV2400 Praktik i personal- och ledningsarbete",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "PV2203",
+        "name": "Utmaningar inom strategiskt personalarbete",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "PV2500",
+        "name": "Examensarbete för Masterprogram i strategiskt personalarbete och arbetsmarknadsrelationer",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/master-programme-in-strategic-human-resource-management-and-labour-relations-s2hrm",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/master-programme-in-strategic-human-resource-management-and-labour-relations-s2hrm"
+      "https://www.gu.se/studera/hitta-utbildning/master-programme-in-strategic-human-resource-management-and-labour-relations-s2hrm/utbildningsplan/890e28f9-8e36-11f0-b29b-713806674b84"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -19353,7 +19439,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:47.053Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:S2HRM:2026HT",
+    "programHp": 120,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/master-programme-in-strategic-human-resource-management-and-labour-relations-s2hrm/utbildningsplan/890e28f9-8e36-11f0-b29b-713806674b84"
   },
   {
     "key": "goteborgs-universitet:S2HSK",
