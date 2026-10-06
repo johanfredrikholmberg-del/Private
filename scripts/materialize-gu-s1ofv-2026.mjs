@@ -55,11 +55,17 @@ const current=manifest.parts.flatMap(part=>{const x=read(root+part);return Array
   .filter(x=>x.university==='Göteborgs universitet'&&x.programCode===code);
 if(current.length!==1)throw Error('GU S1OFV canonical row missing or duplicated');
 if(current[0].verified===true){
-  if(current[0].validFrom!==validFrom||current[0].sourceEvidenceUrl!==syllabusUrl||JSON.stringify(current[0].rows)!==JSON.stringify(rows))throw Error('Conflicting verified GU S1OFV plan');
-  console.log('GU S1OFV HT26 already materialized');
-  process.exit(0);
-}
-if(current[0].rows?.length||Number(current[0].hp)!==hp)throw Error('Refusing to replace populated or mismatched GU S1OFV plan');
+  if(current[0].validFrom===validFrom&&current[0].sourceEvidenceUrl===syllabusUrl&&JSON.stringify(current[0].rows)===JSON.stringify(rows)){
+    console.log('GU S1OFV HT26 already materialized');
+    process.exit(0);
+  }
+  const existingRows=current[0].rows||[];
+  const isKnownMalformedWrite=current[0].id===`gu:${code}:${validFrom}`&&current[0].validFrom===validFrom&&current[0].sourceEvidenceUrl===syllabusUrl&&existingRows.length===rows.length&&existingRows.every((row,index)=>index===3
+    ? row.term===1&&row.code==='OF1030,Förvaltningens organisering'&&row.name===7.5&&!Object.hasOwn(row,'hp')
+    : JSON.stringify(row)===JSON.stringify(rows[index]));
+  if(!isKnownMalformedWrite)throw Error('Conflicting verified GU S1OFV plan');
+  console.log('Repairing the known malformed GU S1OFV row from the preceding import');
+}else if(current[0].rows?.length||Number(current[0].hp)!==hp)throw Error('Refusing to replace populated or mismatched GU S1OFV plan');
 
 const item={...current[0],id:`gu:${code}:${validFrom}`,key:current[0].key,university:'Göteborgs universitet',programCode:code,
   programName:identities[0].programName,programHp:hp,hp,validFrom,coverage:'choice-required',verified:true,courseCodesVerified:true,
