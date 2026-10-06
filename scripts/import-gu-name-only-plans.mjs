@@ -30,7 +30,7 @@ for(const plan of plans){
   if(!/^https:\/\/www\.gu\.se\//.test(plan.source))throw Error('Unofficial source');
   for(let t=1;t<=4;t++)if(Math.abs(plan.rows.filter(x=>x.term===t).reduce((n,x)=>n+x.hp,0)-30)>.001)throw Error(`Unbalanced ${plan.code} term ${t}`);
   const current=existing.find(x=>x.university==='Göteborgs universitet'&&x.programCode===plan.code);
-  if(current&&Array.isArray(current.rows)&&current.rows.length)continue;
+  if(current&&(current.courseCodesVerified===true||current.source==='gu-official-programme-overview'))continue;
   const structure={id:`gu:${plan.code}:2026HT`,key:identity[0].key,university:'Göteborgs universitet',programCode:plan.code,programName:identity[0].programName,programHp:120,hp:120,validFrom:'2026HT',coverage:'course-codes-unverified',verified:true,courseCodesVerified:false,choiceRequired:plan.rows.some(x=>x.isSlot),source:'gu-official-programme-overview',sourceEvidenceUrl:plan.source,sourceUrls:[plan.source],rows:plan.rows};
   if(current){
     const partIndex=parts.findIndex(p=>(Array.isArray(p)?p:(p.programs||[])).includes(current));
