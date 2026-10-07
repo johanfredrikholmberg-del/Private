@@ -9182,85 +9182,166 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "LIB210",
+        "name": "Trivium",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "LIB220",
+        "name": "Quadrivium 1",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "LIB230",
+        "name": "Quadrivium 2",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "LIB240",
+        "name": "Idéer om ideal",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Praktikprojekt eller andra kurser",
+        "hp": 30,
+        "category": "choice",
+        "isSlot": true,
+        "slotType": "choice-slot",
+        "courseCodeVerified": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "code": "LIB250",
+            "name": "Praktikprojekt",
+            "hp": 30
+          },
+          {
+            "name": "Andra kurser",
+            "hp": 30
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "code": "LIB260",
+        "name": "Uppsatstermin",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/liberal-arts-kandidatprogram-h1lib",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/liberal-arts-kandidatprogram-h1lib"
+      "https://www.gu.se/studera/hitta-utbildning/liberal-arts-kandidatprogram-h1lib",
+      "https://www.gu.se/sites/default/files/2021-03/H1LIB-Liberal-arts-%20kandidatprogram-%20utbildningsplan.pdf",
+      "https://www.gu.se/syllabus/3ace1356-4a32-11f1-be3c-4a792d2f4605"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "5": {
           "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
+          "listedHp": 30,
+          "electiveListedHp": 30,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "6": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         }
       },
-      "slotCount": 0,
+      "slotCount": 1,
       "totalHp": 180,
-      "sourcePages": 1,
-      "parsedRows": 0
+      "sourcePages": 3,
+      "parsedRows": 6
     },
-    "checkedAt": "2026-09-13T15:08:31.302Z",
-    "term": "HT26"
+    "checkedAt": "2026-10-07T04:51:00.000Z",
+    "term": "HT26",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/sites/default/files/2021-03/H1LIB-Liberal-arts-%20kandidatprogram-%20utbildningsplan.pdf"
   },
   {
     "key": "goteborgs-universitet:H1MKE",
@@ -15361,48 +15442,147 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "processed",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "partial-structure",
+    "reason": "official-gu-partial-term-sequence",
+    "rows": [
+      {
+        "term": 1,
+        "code": "BIO900",
+        "name": "Cellbiologi, baskurs",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "BIO906",
+        "name": "Molekylär genetik och evolution, baskurs",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "BIO911",
+        "name": "Botanisk och zoologisk fysiologi, baskurs",
+        "hp": 12,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "BIO916",
+        "name": "Biodiversitet och ekologi, baskurs",
+        "hp": 18,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbar fördjupningskurs inom biologi",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false,
+        "options": [
+          {
+            "code": "BIO214",
+            "name": "Dynamik i naturliga populationer - från individ till ekosystem",
+            "hp": 15
+          },
+          {
+            "code": "BIO232",
+            "name": "Humanfysiologi",
+            "hp": 15
+          },
+          {
+            "code": "BIO281",
+            "name": "Naturvård i landmiljöer",
+            "hp": 15
+          },
+          {
+            "code": "BIO210",
+            "name": "Bioinformatik och funktionsgenomik",
+            "hp": 15
+          },
+          {
+            "code": "MAR267",
+            "name": "Marin biodiversitet",
+            "hp": 15
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "BIO172",
+        "name": "Biostatistik och experimentdesign, enfaktorsanalyser",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "NTH001",
+        "name": "Teoretiska och historiska perspektiv på naturvetenskap",
+        "hp": 7.5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/biologi-kandidatprogram-n1bio",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/biologi-kandidatprogram-n1bio"
+      "https://www.gu.se/studera/hitta-utbildning/biologi-kandidatprogram-n1bio",
+      "https://www.gu.se/syllabus/c552e9e7-117f-11f1-a595-2099b7b04bbf",
+      "https://www.gu.se/studera/hitta-utbildning/mer-om-kandidatprogrammet-i-biologi",
+      "https://studentportal.gu.se/program/kandidatprogrammet-i-biologi"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3
+      ],
       "termHp": {
         "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
+          "mandatoryHp": 15,
+          "listedHp": 30,
+          "electiveListedHp": 15,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "4": {
@@ -15433,13 +15613,17 @@
           "fixedUnlabelled": false
         }
       },
-      "slotCount": 0,
+      "slotCount": 1,
       "totalHp": 180,
-      "sourcePages": 1,
-      "parsedRows": 0
+      "sourcePages": 4,
+      "parsedRows": 7
     },
-    "checkedAt": "2026-09-13T15:08:39.858Z",
-    "term": "HT26"
+    "checkedAt": "2026-10-07T04:51:00.000Z",
+    "term": "HT26",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/mer-om-kandidatprogrammet-i-biologi"
   },
   {
     "key": "goteborgs-universitet:N1CAI",
@@ -20598,85 +20782,156 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "MK1104",
+        "name": "Medie- och kommunikationsvetenskap, introduktionskurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "MK1207",
+        "name": "Medie- och kommunikationsvetenskap, fortsättningskurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "MK1501",
+        "name": "Medie- och kommunikationsvetenskap, fördjupningskurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true,
+        "thesisHp": 15
+      },
+      {
+        "term": 4,
+        "code": "MK1403",
+        "name": "Analys av medier, opinioner och kommunikation",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "MK1404",
+        "name": "Samhälle, organisation och kommunikation",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valfri(a) kurs(er)",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false,
+        "choiceScope": "Fristående kurs i valfritt ämne, utlandsstudier eller verksamhetsförlagd utbildning."
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/medie-och-kommunikationsvetarprogrammet-s1mkg",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/medie-och-kommunikationsvetarprogrammet-s1mkg"
+      "https://www.gu.se/studera/hitta-utbildning/medie-och-kommunikationsvetarprogrammet-s1mkg",
+      "https://www.gu.se/sites/default/files/2020-06/S1MKG-sv.pdf",
+      "https://www.gu.se/studera/hitta-utbildning/medie-och-kommunikationsvetenskap-introduktionskurs-mk1104/kursplan/8ff615c7-3d51-11f0-b454-10049b20482b"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "5": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "6": {
           "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
+          "listedHp": 30,
+          "electiveListedHp": 30,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         }
       },
-      "slotCount": 0,
+      "slotCount": 1,
       "totalHp": 180,
-      "sourcePages": 1,
-      "parsedRows": 0
+      "sourcePages": 3,
+      "parsedRows": 6
     },
-    "checkedAt": "2026-09-13T15:08:45.784Z",
-    "term": "HT26"
+    "checkedAt": "2026-10-07T04:51:00.000Z",
+    "term": "HT26",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/sites/default/files/2020-06/S1MKG-sv.pdf"
   },
   {
     "key": "goteborgs-universitet:S1OFF",
