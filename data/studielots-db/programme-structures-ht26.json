@@ -19278,15 +19278,118 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "SA1121",
+        "name": "Introduktion till socialantropologi 1",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "SA1122",
+        "name": "Introduktion till socialantropologi 2",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "SA1221",
+        "name": "Antropologisk analys",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "SA1222",
+        "name": "Antropologisk teori",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "SA1231",
+        "name": "Tillämpad antropologi",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "SA1232",
+        "name": "Etnografi som arbetsmetod",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valfria kurser",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "SA1251",
+        "name": "Antropologiska debatter och frontlinjer",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "SA1312",
+        "name": "Forskningsdesign inom antropologi",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 6,
+        "code": "SA1411",
+        "name": "Socialantropologi: fältarbete",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 6,
+        "code": "SA1511",
+        "name": "Socialantropologi: examensarbete",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/antropologprogrammet-s1ant",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/antropologprogrammet-s1ant"
+      "https://www.gu.se/studera/hitta-utbildning/antropologprogrammet-s1ant",
+      "https://www.gu.se/sites/default/files/2025-11/Visuell%20programstruktur%20A3%20S1ANT%20251111_0.pdf",
+      "https://studentportal.gu.se/sites/default/files/2023-09/Utbildningsplan-antropologprogrammet.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -19355,8 +19458,12 @@
       "sourcePages": 1,
       "parsedRows": 0
     },
-    "checkedAt": "2026-09-13T15:08:44.507Z",
-    "term": "HT26"
+    "checkedAt": "2026-10-07T04:45:00.000Z",
+    "term": "HT26",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/sites/default/files/2025-11/Visuell%20programstruktur%20A3%20S1ANT%20251111_0.pdf"
   },
   {
     "key": "goteborgs-universitet:S1ARB",
