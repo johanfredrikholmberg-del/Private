@@ -18905,16 +18905,143 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "complete",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "TTINTR",
+        "name": "Introduktion till tandteknikerprogrammet",
+        "hp": 5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 1,
+        "code": "TTORAF",
+        "name": "Tandteknik I - Oral anatomi och funktion",
+        "hp": 25,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "TTTS10",
+        "name": "Tandteknik II - Tandstödda entandskonstruktioner",
+        "hp": 27,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "TTVTM1",
+        "name": "Vetenskapsteori och metod I",
+        "hp": 3,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "TTTB10",
+        "name": "Tandteknik III - Tandstödda brokonstruktioner",
+        "hp": 26,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "TTVTM2",
+        "name": "Vetenskaplig teori och metod II",
+        "hp": 4,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "TTPI10",
+        "name": "Tandteknik IV - Partialprotetiska och implantatstödda konstruktioner",
+        "hp": 22,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "TTOK10",
+        "name": "Organisation och kommunikation",
+        "hp": 5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "TTVTM3",
+        "name": "Vetenskaplig teori och metod III",
+        "hp": 3,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "TTAV10",
+        "name": "Tandteknik V - Avtagbara protetiska konstruktioner",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "TTTP10",
+        "name": "Tandteknisk professionstillämpning I",
+        "hp": 10,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 5,
+        "code": "TTEXA1",
+        "name": "Examensarbete I",
+        "hp": 5,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 6,
+        "code": "TTEXA2",
+        "name": "Examensarbete II",
+        "hp": 10,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 6,
+        "code": "TTTP20",
+        "name": "Tandteknisk professionstillämpning II",
+        "hp": 20,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/tandteknikerprogrammet-o1ttp",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/tandteknikerprogrammet-o1ttp",
-      "https://www.gu.se/studera/hitta-utbildning/tandteknikerprogrammet-o1ttp/utbildningsplan/42d340c7-a8d0-11f0-b7df-f9101f074b4e"
+      "https://www.gu.se/studera/hitta-utbildning/tandteknikerprogrammet-o1ttp/utbildningsplan/42d340c7-a8d0-11f0-b7df-f9101f074b4e",
+      "https://studentportal.gu.se/sites/default/files/2025-03/O1TTP-250326.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
@@ -18984,7 +19111,14 @@
       "parsedRows": 0
     },
     "checkedAt": "2026-09-13T15:08:44.685Z",
-    "term": "HT26"
+    "term": "HT26",
+    "id": "gu:O1TTP:2026HT",
+    "programHp": 180,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": false,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/tandteknikerprogrammet-o1ttp/utbildningsplan/42d340c7-a8d0-11f0-b7df-f9101f074b4e"
   },
   {
     "key": "goteborgs-universitet:O2TDU",
