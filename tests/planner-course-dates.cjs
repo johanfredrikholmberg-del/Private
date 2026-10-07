@@ -13,7 +13,7 @@ vm.runInNewContext(source.replace(/\}\)\(\);\s*$/, 'globalThis.courseDateLabel =
 const verified = { name: 'Statistik: Grundkurs 1', hp: 15, __offer: { startDate: '2027-01-18', endDate: '2027-03-29', url: 'https://example.org/course' } };
 assert.match(context.courseDateLabel(verified), /18 jan.*29 mars 2027/);
 assert.match(context.courseHtml(verified), /class="course-date"/);
-assert.equal(context.courseDateLabel({ name: 'Handelsrätt', hp: 15, term: 3 }), 'Kursdatum ej publicerat');
+assert.equal(context.courseDateLabel({ name: 'Handelsrätt', hp: 15, term: 3 }), 'Terminsplacering ej verifierad');
 assert.equal(context.courseDateLabel({ name: 'Handelsrätt', term: 3 }, { startTerm: 'HT26', termPlacementVerified: true }), 'Höst 2027 · exakt datum saknas');
 assert.equal(context.courseDateLabel({ name: 'Handelsrätt', term: 3 }, { startTerm: 'HT26', termPlacementVerified: false }), 'Kursdatum ej publicerat');
 assert.equal(context.courseDateLabel({ startDate: '2027-02-30' }), 'Kursdatum ej publicerat');
