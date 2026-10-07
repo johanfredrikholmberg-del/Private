@@ -44,7 +44,7 @@ assert.match(context.courseDateLabel({ __offers: [{ startDate: '2027-01-18', end
     { code: 'B', name: 'Kurs B', hp: 7.5, term: 2 }
   ] };
   state.plannerData = data;
-  await context.attachOrdinaryOfferings(data, 1);
+  await context.attachOrdinaryOfferings(data, 0);
   assert.equal(state.plannerData.rows[0].__offers[0].offeringTerm, 'HT26');
   assert.equal(state.plannerData.rows[1].__offers[0].offeringTerm, 'VT27');
   assert.match(context.courseDateLabel(state.plannerData.rows[0], { startTerm: 'HT26', termPlacementVerified: true }), /1 sep.*15 dec 2026/);
