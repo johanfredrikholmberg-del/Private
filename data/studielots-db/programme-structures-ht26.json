@@ -9352,86 +9352,168 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "MEK001",
+        "name": "Medier, estetik och kulturellt entreprenörskap, termin 1",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 2,
+        "code": "MEK002",
+        "name": "Medier, estetik och kulturellt entreprenörskap, termin 2",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 3,
+        "code": "MEK003",
+        "name": "Medier, estetik och kulturellt entreprenörskap, termin 3",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "MEK004 eller likvärdiga/relevanta kurser godkända av programkoordinator",
+        "hp": 30,
+        "category": "choice",
+        "isSlot": true,
+        "slotType": "choice-slot",
+        "courseCodeVerified": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "code": "MEK004",
+            "name": "Medier, estetik och kulturellt entreprenörskap, termin 4",
+            "hp": 30
+          },
+          {
+            "name": "Likvärdiga eller programrelevanta kurser",
+            "hp": 30
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "code": "MEK005",
+        "name": "Medier, estetik och kulturellt entreprenörskap, termin 5",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true,
+        "choiceScope": "Kursen innehåller 15 hp praktik eller kurser motsvarande 15 hp som rekommenderas och godkänns av programkoordinator."
+      },
+      {
+        "term": 6,
+        "code": "MEK006",
+        "name": "Medier, estetik och kulturellt entreprenörskap, termin 6",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true,
+        "thesisHp": 15
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/medier-estetik-och-kulturellt-entreprenorskap-kandidatprogram-h1mke",
     "sourceUrls": [
       "https://www.gu.se/studera/hitta-utbildning/medier-estetik-och-kulturellt-entreprenorskap-kandidatprogram-h1mke",
-      "https://www.gu.se/studera/hitta-utbildning/medier-estetik-och-kulturellt-entreprenorskap-kandidatprogram-h1mke/utbildningsplan/fd61dbd2-564b-11f0-a591-202c9aa04d72"
+      "https://www.gu.se/studera/hitta-utbildning/medier-estetik-och-kulturellt-entreprenorskap-kandidatprogram-h1mke/utbildningsplan/fd61dbd2-564b-11f0-a591-202c9aa04d72",
+      "https://studentportal.gu.se/program/medier-estetik-och-kulturellt-entreprenorskap"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "4": {
           "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
+          "listedHp": 30,
+          "electiveListedHp": 30,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "5": {
-          "mandatoryHp": 0,
-          "listedHp": 15,
-          "electiveListedHp": 0,
-          "explicitElectiveRequiredHp": 0,
-          "unknownHp": 15,
-          "covered": false,
-          "fixedUnlabelled": false
-        },
-        "6": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
+          "fixedUnlabelled": false
+        },
+        "6": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
           "fixedUnlabelled": false
         }
       },
-      "slotCount": 0,
+      "slotCount": 1,
       "totalHp": 180,
-      "sourcePages": 2,
-      "parsedRows": 1
+      "sourcePages": 3,
+      "parsedRows": 6
     },
-    "checkedAt": "2026-09-13T15:08:31.587Z",
-    "term": "HT26"
+    "checkedAt": "2026-10-07T05:11:00.000Z",
+    "term": "HT26",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/medier-estetik-och-kulturellt-entreprenorskap-kandidatprogram-h1mke/utbildningsplan/fd61dbd2-564b-11f0-a591-202c9aa04d72"
   },
   {
     "key": "goteborgs-universitet:H1PPE",
@@ -9790,85 +9872,182 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Litteraturvetenskap grundkurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Litteraturvetenskap fortsättningskurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Redaktionell praktik 1",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Litteraturkritik",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Redaktionell praktik 2",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Litteraturens offentligheter",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Litteraturvetenskap fördjupningskurs",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Redaktionell arbetsplatspraktik eller valfria/valbara kurser",
+        "hp": 30,
+        "category": "choice",
+        "isSlot": true,
+        "slotType": "choice-slot",
+        "courseCodeVerified": false,
+        "choiceSlots": 1,
+        "options": [
+          {
+            "name": "Redaktionell arbetsplatspraktik",
+            "hp": 30
+          },
+          {
+            "name": "Valfria alternativt valbara kurser",
+            "hp": 30
+          }
+        ]
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/redaktionell-praktik-litteraturvetenskapligt-kandidatprogram-h1red",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/redaktionell-praktik-litteraturvetenskapligt-kandidatprogram-h1red"
+      "https://www.gu.se/studera/hitta-utbildning/redaktionell-praktik-litteraturvetenskapligt-kandidatprogram-h1red",
+      "https://www.gu.se/sites/default/files/2020-06/Redaktionell%20praktik%20utbildningsplan%202020.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "2": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "3": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "4": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "5": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "6": {
           "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
+          "listedHp": 30,
+          "electiveListedHp": 30,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         }
       },
-      "slotCount": 0,
+      "slotCount": 1,
       "totalHp": 180,
-      "sourcePages": 1,
-      "parsedRows": 0
+      "sourcePages": 2,
+      "parsedRows": 8
     },
-    "checkedAt": "2026-09-13T15:08:31.940Z",
-    "term": "HT26"
+    "checkedAt": "2026-10-07T05:11:00.000Z",
+    "term": "HT26",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://www.gu.se/sites/default/files/2020-06/Redaktionell%20praktik%20utbildningsplan%202020.pdf"
   },
   {
     "key": "goteborgs-universitet:H1RKT",
@@ -9879,85 +10058,170 @@
     "hp": 180,
     "subject": "",
     "officialUrls": [],
-    "status": "manual-review",
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
+    "coverage": "choice-required",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "",
+        "name": "Grundkurs (obligatorisk)",
+        "hp": 30,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": false
+      },
+      {
+        "term": 2,
+        "code": "",
+        "name": "Valbara fortsättningskurser inom programmets inriktningar",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false,
+        "choiceScope": "Kristendomens historia, religionsbeteendevetenskap, systematisk teologi, religionshistoria eller bibelvetenskap."
+      },
+      {
+        "term": 3,
+        "code": "",
+        "name": "Valbara fördjupningskurser inom programmets inriktningar",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 4,
+        "code": "",
+        "name": "Valbara fortsättningskurser inom programmets inriktningar",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "",
+        "name": "Valbara fördjupningskurser inom programmets inriktningar",
+        "hp": 15,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false
+      },
+      {
+        "term": 5,
+        "code": "RT1400",
+        "name": "Religionsvetenskap och teologi, examensarbete för kandidatexamen",
+        "hp": 15,
+        "category": "mandatory",
+        "isSlot": false,
+        "courseCodeVerified": true,
+        "isThesis": true
+      },
+      {
+        "term": 6,
+        "code": "",
+        "name": "Valfria kurser i annat ämne eller praktik",
+        "hp": 30,
+        "category": "elective",
+        "isSlot": true,
+        "slotType": "elective-slot",
+        "courseCodeVerified": false,
+        "choiceScope": "Kurser vid GU, annat svenskt lärosäte eller utomlands, alternativt praktik."
+      }
+    ],
+    "source": "gu-official-programme-syllabus",
     "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/teologiskt-program-kandidatprogram-pa-grundniva-h1rkt",
     "sourceUrls": [
-      "https://www.gu.se/studera/hitta-utbildning/teologiskt-program-kandidatprogram-pa-grundniva-h1rkt"
+      "https://www.gu.se/studera/hitta-utbildning/teologiskt-program-kandidatprogram-pa-grundniva-h1rkt",
+      "https://studentportal.gu.se/program/teologiskt-program-kandidatprogram-pa-grundniva",
+      "https://studentportal.gu.se/sites/default/files/2023-10/H1RKT%20Utbildningsplan%202020-.pdf"
     ],
     "apiCoverage": "partial-or-choice-dependent",
     "apiConfidence": "official-partial",
     "quality": {
       "complete": false,
       "expectedTerms": 6,
-      "completeTerms": [],
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "termHp": {
         "1": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
+          "mandatoryHp": 30,
+          "listedHp": 30,
           "electiveListedHp": 0,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "2": {
           "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
+          "listedHp": 30,
+          "electiveListedHp": 30,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "3": {
           "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
+          "listedHp": 30,
+          "electiveListedHp": 30,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "4": {
           "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
+          "listedHp": 30,
+          "electiveListedHp": 30,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "5": {
-          "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
+          "mandatoryHp": 15,
+          "listedHp": 30,
+          "electiveListedHp": 15,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         },
         "6": {
           "mandatoryHp": 0,
-          "listedHp": 0,
-          "electiveListedHp": 0,
+          "listedHp": 30,
+          "electiveListedHp": 30,
           "explicitElectiveRequiredHp": 0,
           "unknownHp": 0,
-          "covered": false,
+          "covered": true,
           "fixedUnlabelled": false
         }
       },
-      "slotCount": 0,
+      "slotCount": 5,
       "totalHp": 180,
-      "sourcePages": 1,
-      "parsedRows": 0
+      "sourcePages": 3,
+      "parsedRows": 7
     },
-    "checkedAt": "2026-09-13T15:08:31.655Z",
-    "term": "HT26"
+    "checkedAt": "2026-10-07T05:11:00.000Z",
+    "term": "HT26",
+    "verified": true,
+    "courseCodesVerified": false,
+    "choiceRequired": true,
+    "sourceEvidenceUrl": "https://studentportal.gu.se/program/teologiskt-program-kandidatprogram-pa-grundniva"
   },
   {
     "key": "goteborgs-universitet:H1SPK",
