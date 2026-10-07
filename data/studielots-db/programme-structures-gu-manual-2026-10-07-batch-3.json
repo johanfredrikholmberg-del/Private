@@ -175,9 +175,10 @@
         "code": "JU1602",
         "name": "Praktik",
         "hp": 30,
-        "category": "mandatory",
+        "category": "elective",
         "sequence": 6,
-        "choiceGroup": "last-30hp"
+        "choiceGroup": "last-30hp",
+        "branchId": "practice"
       },
       {
         "term": null,
@@ -188,10 +189,28 @@
         "isSlot": true,
         "slotType": "elective-slot",
         "sequence": 6,
-        "choiceGroup": "last-30hp"
+        "choiceGroup": "last-30hp",
+        "branchId": "electives"
       }
     ],
-    "notes": "Utbildningsplanen gäller från HT2026 och anger sex kurser i följd men inte terminernas placering. Sista 30 hp kan vara praktik eller valfria kurser. Examensarbete 15 hp ingår i JU1505."
+    "notes": "Utbildningsplanen gäller från HT2026 och anger sex kurser i följd men inte terminernas placering. Sista 30 hp kan vara praktik eller valfria kurser. Examensarbete 15 hp ingår i JU1505.",
+    "branchGroups": [
+      {
+        "id": "final-30hp",
+        "name": "Avslutande 30 hp",
+        "selectionMode": "one",
+        "branches": [
+          {
+            "id": "practice",
+            "name": "Praktik JU1602"
+          },
+          {
+            "id": "electives",
+            "name": "Valfria kurser"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "gu:S1PER:2026HT",
@@ -1321,7 +1340,8 @@
         "category": "elective",
         "isSlot": true,
         "slotType": "unpublished-course-block",
-        "studyYear": 2
+        "studyYear": 2,
+        "branchId": "thesis-30"
       },
       {
         "term": null,
@@ -1332,7 +1352,8 @@
         "studyYear": 3,
         "isThesis": true,
         "isSlot": true,
-        "slotType": "thesis-choice"
+        "slotType": "thesis-choice",
+        "branchId": "thesis-15"
       },
       {
         "term": null,
@@ -1343,7 +1364,8 @@
         "studyYear": 3,
         "isThesis": true,
         "isSlot": true,
-        "slotType": "thesis-choice"
+        "slotType": "thesis-choice",
+        "branchId": "thesis-30"
       },
       {
         "term": null,
@@ -1353,7 +1375,8 @@
         "category": "elective",
         "isSlot": true,
         "slotType": "elective-slot",
-        "studyYear": 3
+        "studyYear": 3,
+        "branchId": "thesis-15"
       },
       {
         "term": null,
