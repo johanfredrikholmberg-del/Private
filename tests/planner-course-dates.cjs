@@ -15,7 +15,7 @@ assert.match(context.courseDateLabel(verified), /18 jan.*29 mars 2027/);
 assert.match(context.courseHtml(verified), /class="course-date"/);
 assert.equal(context.courseDateLabel({ name: 'Handelsrätt', hp: 15, term: 3 }), 'Terminsplacering ej verifierad');
 assert.equal(context.courseDateLabel({ name: 'Handelsrätt', term: 3 }, { startTerm: 'HT26', termPlacementVerified: true }), 'Höst 2027 · exakt datum saknas');
-assert.equal(context.courseDateLabel({ name: 'Handelsrätt', term: 3 }, { startTerm: 'HT26', termPlacementVerified: false }), 'Kursdatum ej publicerat');
+assert.equal(context.courseDateLabel({ name: 'Handelsrätt', term: 3 }, { startTerm: 'HT26', termPlacementVerified: false }), 'Terminsplacering ej verifierad');
 assert.equal(context.courseDateLabel({ startDate: '2027-02-30' }), 'Kursdatum ej publicerat');
 assert.match(context.courseDateLabel({ startDate: '2026-11-04', endDate: '2027-01-17' }), /2026.*2027/);
 assert.equal(context.expectedOfferingTerm('HT26', 1), 'HT26');
