@@ -4,9 +4,9 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
 const source = fs.readFileSync(path.join(__dirname, '../src/features/fast-route/fast-route-v3.js'), 'utf8');
-function engine(offerings = []) {
+function engine(offerings = [], calls = []) {
   const window = { StudieLotsV2: {} };
-  const fetch = async () => ({ ok: true, json: async () => ({ offerings }) });
+  const fetch = async url => { calls.push(String(url)); return { ok: true, json: async () => ({ offerings }) }; };
   vm.runInNewContext(source, { window, fetch, AbortController, setTimeout, clearTimeout, URLSearchParams, Date, Number, Math, Map, Set, Promise, String, Array, Object }, { filename: 'fast-route-v3.js' });
   return window.StudieLotsV2.fast;
 }
@@ -35,6 +35,20 @@ test('fully dated standalone offering can be scheduled', async () => {
   assert.equal(result.complete, true);
   assert.equal(result.scheduledHp, 7.5);
   assert.equal(result.terms.length, 1);
+});
+test('future terms are queried from the selected programme start term', async () => {
+  const calls = [];
+  const result = await engine([offer('A', { startDate: '2027-01-15', endDate: '2027-03-15' })], calls)
+    .build([row('A')], { startDate: '2026-08-31', startTerm: 'HT26', university: 'Göteborgs universitet' });
+  assert.equal(result.complete, true);
+  assert.match(calls[0], /fromTerm=HT26/);
+  assert.match(calls[0], /university=/);
+});
+test('official sourceUrl is accepted when the canonical row has no url field', async () => {
+  const result = await engine([offer('A', { url: undefined, sourceUrl: 'https://gu.se/course' })])
+    .build([row('A')], { startDate: '2026-08-31', startTerm: 'HT26', university: 'Göteborgs universitet' });
+  assert.equal(result.complete, true);
+  assert.equal(result.terms[0].rows[0].__offer.url, 'https://gu.se/course');
 });
 test('incomplete end date never counts as a confirmed course', async () => {
   const result = await engine([offer('A', { endDate: null })]).build([row('A')], { startDate: '2029-01-15', university: 'Göteborgs universitet' });
