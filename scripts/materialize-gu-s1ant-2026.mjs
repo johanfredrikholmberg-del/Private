@@ -43,7 +43,7 @@ Object.assign(entry, {
   sourceEvidenceUrl: sourceUrls[1], apiCoverage: "partial-or-choice-dependent",
   apiConfidence: "official-partial", term: "HT26",
 });
-await writeFile(mainPath, JSON.stringify(main, null, 2) + "\\n");
+await writeFile(mainPath, JSON.stringify(main, null, 2) + "\n");
 
 const coveragePath = `${root}/data/import-reviews/gu-coverage.json`;
 const coverage = JSON.parse(await readFile(coveragePath, "utf8"));
@@ -52,7 +52,7 @@ coverage.structures = {
   materialized: 233, verified: 50, rows: 594,
   coverage: { complete: 19, choiceRequired: 24, courseCodesUnverified: 6, partial: 2, metadataOnly: 181, manualReview: 1 },
 };
-await writeFile(coveragePath, JSON.stringify(coverage, null, 2) + "\\n");
+await writeFile(coveragePath, JSON.stringify(coverage, null, 2) + "\n");
 
 for (const path of [
   `${root}/data/studielots-db/programme-structures-manifest.json`,
@@ -60,6 +60,6 @@ for (const path of [
 ]) {
   const data = JSON.parse(await readFile(path, "utf8"));
   data.generatedAt = stamp;
-  await writeFile(path, JSON.stringify(data, null, 2) + "\\n");
+  await writeFile(path, JSON.stringify(data, null, 2) + "\n");
 }
 console.log(`Materialized GU S1ANT: ${rows.length} rows, ${termHp.join("/")} hp by term`);
