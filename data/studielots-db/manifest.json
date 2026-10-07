@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-07T19:37:30.468Z",
+  "generatedAt": "2026-10-07T19:51:09.579Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -10,18 +10,19 @@
     },
     "programmes": {
       "storage": "data/studielots-db/programmes.json",
-      "rows": 3189,
+      "rows": 3190,
       "additionalStorages": [
-        "data/studielots-db/programmes-gu-2027.json"
+        "data/studielots-db/programmes-gu-2027.json",
+        "data/studielots-db/programmes-gu-kurspaket-2026-10-07.json"
       ]
     },
     "programmeStructures": {
       "storageManifest": "data/studielots-db/programme-structures-manifest.json",
-      "rows": 1170
+      "rows": 1171
     },
     "courses": {
       "storage": "data/studielots-db/courses.json",
-      "rows": 31031,
+      "rows": 31035,
       "additionalStorages": [
         "data/studielots-db/courses-gu-2027-eu.json",
         "data/studielots-db/courses-gu-2027-programmes.json",
@@ -35,12 +36,13 @@
         "data/studielots-db/courses-kth-arkit-2026-verified.json",
         "data/studielots-db/courses-programme-structure-identities-2026-10-05.json",
         "data/studielots-db/courses-kau-offering-identities.json",
-        "data/studielots-db/courses-gu-apotekarprogrammet-2026-2027.json"
+        "data/studielots-db/courses-gu-apotekarprogrammet-2026-2027.json",
+        "data/studielots-db/courses-gu-kub-bma20-2026-2027.json"
       ]
     },
     "courseOfferings": {
       "storage": "data/studielots-db/course-offerings.json",
-      "rows": 3970,
+      "rows": 3976,
       "terms": [
         "HT25",
         "HT26",
@@ -58,7 +60,8 @@
         "data/studielots-db/course-offerings-kth-kpuhu-2026-2027.json",
         "data/studielots-db/course-offerings-kth-kau-2026.json",
         "data/studielots-db/course-offerings-gu-verified-current.json",
-        "data/studielots-db/course-offerings-gu-apotekarprogrammet-2026-2027.json"
+        "data/studielots-db/course-offerings-gu-apotekarprogrammet-2026-2027.json",
+        "data/studielots-db/course-offerings-gu-kub-bma20-2026-2027.json"
       ]
     },
     "syllabusVersions": {
