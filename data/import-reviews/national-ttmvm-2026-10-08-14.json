@@ -40,16 +40,24 @@
     "degreeProjectOnlyOnce": true,
     "termPlacementUnknown": true,
     "courseSpecificDatesFor2026IntakeNotVerified": true,
-    "choiceRequired": true
+    "choiceRequired": true,
+    "masterThesisRouteInStructure": "MH202X",
+    "excludedCMATDThesisPreserved": "MH201X",
+    "supplementaryStructureRows": 10,
+    "knownMandatoryHp": 91.5,
+    "unallocatedChoiceHp": 28.5,
+    "unresolvedOverageHp": 1.5
   },
   "canonicalChanges": {
     "programmes": 0,
     "structures": 0,
     "courses": 0,
     "offerings": 0,
-    "duplicates": 0
+    "duplicates": 0,
+    "supplementaryStructureFilesUpdated": 1,
+    "rowsRemovedFromMandatoryList": 1
   },
-  "status": "canonical-update-blocked",
-  "blocker": "GitHub connector safety check prevented replacement of the supplementary TTMVM structure. Review report contains evidence, not canonical mutation.",
-  "nextAction": "Recheck TTMVM structure, fix MH201X/MH202X cohort alternatives and preserve the unresolved 1.5 hp discrepancy; do not import dates from the prior intake."
+  "status": "supplementary-structure-updated",
+  "nextAction": "Resolve canonical manifest-backed structure mapping before claiming the change affects runtime. Clarify KTH 1.5 hp mismatch; do not invent electives or course dates.",
+  "note": "Updated supplementary programme-structures-kth-verified.json for 2026HT TTMVM. This file is NOT in programme-structures-manifest.json parts; runtime canonical programme-structure row count remains 1123. Programme-specific term 3 and term 4 course dates for 2026HT intake remain unverified."
 }
