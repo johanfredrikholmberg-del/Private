@@ -1248,78 +1248,89 @@
     "verified": true,
     "courseCodesVerified": false,
     "choiceRequired": false,
-    "source": "gu-official-education-plan",
+    "source": "gu-ht26-official-programme-plan-and-current-student-portal",
     "sourceEvidenceUrl": "https://www.gu.se/syllabus/436b9641-67ae-11f0-899b-89574063487f",
     "sourceUrls": [
       "https://www.gu.se/syllabus/436b9641-67ae-11f0-899b-89574063487f",
-      "https://studentportal.gu.se/program/specialistsjukskoterskeprogrammet-med-inriktning-mot-vard-av-aldre"
+      "https://studentportal.gu.se/program/specialistsjukskoterskeprogrammet-med-inriktning-mot-vard-av-aldre",
+      "https://studentportal.gu.se/sites/default/files/2026-02/V2SGE%20Specialistsjuksk%C3%B6terskeprogrammet%20med%20inriktning%20mot%20v%C3%A5rd%20av%20%C3%A4ldre%20_%2060,0%20hp%20_%20V2SGE%20_%20KomplettProgram%20H26.pdf",
+      "https://studentportal.gu.se/sites/default/files/2023-09/Program%C3%B6versikt%20V%C3%A5rd%20av%20%C3%A4ldre.pdf",
+      "https://www.gu.se/studera/hitta-utbildning/specialistsjukskoterskeprogrammet-med-inriktning-mot-vard-av-aldre-v2sge"
     ],
     "rows": [
       {
-        "term": null,
-        "code": "",
+        "term": 1,
+        "code": "OM9100",
         "name": "Omvårdnad, hälsa och livsvillkor hos äldre",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false,
-        "studyYear": 1
+        "courseCodeVerified": true,
+        "studyYear": 1,
+        "courseResponsibleUniversity": "Högskolan i Jönköping"
       },
       {
-        "term": null,
-        "code": "",
+        "term": 1,
+        "code": "OM9400",
         "name": "Personcentrerat och familjefokuserat förhållningssätt vid vård av äldre",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false,
-        "studyYear": 1
+        "courseCodeVerified": true,
+        "studyYear": 1,
+        "courseResponsibleUniversity": "Linnéuniversitetet"
       },
       {
-        "term": null,
+        "term": 2,
         "code": "",
         "name": "Komplexa ohälsotillstånd hos äldre",
         "hp": 7.5,
         "category": "mandatory",
         "courseCodeVerified": false,
-        "studyYear": 1
+        "studyYear": 1,
+        "courseResponsibleUniversity": "Högskolan Väst"
       },
       {
-        "term": null,
-        "code": "",
+        "term": 2,
+        "code": "OM9110",
         "name": "Vetenskapliga metoder med inriktning vård av äldre",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false,
-        "studyYear": 1
+        "courseCodeVerified": true,
+        "studyYear": 1,
+        "courseResponsibleUniversity": "Högskolan Väst"
       },
       {
-        "term": null,
-        "code": "",
+        "term": 3,
+        "code": "OM9420",
         "name": "Palliativ vård till äldre personer med komplexa vårdbehov",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false,
-        "studyYear": 2
+        "courseCodeVerified": true,
+        "studyYear": 2,
+        "courseResponsibleUniversity": "Högskolan Kristianstad"
       },
       {
-        "term": null,
-        "code": "",
+        "term": 3,
+        "code": "OM9160",
         "name": "Examensarbete i omvårdnad med inriktning vård av äldre",
         "hp": 15,
         "category": "mandatory",
-        "courseCodeVerified": false,
+        "courseCodeVerified": true,
         "studyYear": 2,
-        "isThesis": true
+        "isThesis": true,
+        "courseResponsibleUniversity": "samtliga samverkande lärosäten",
+        "continuesIntoTerm": 4
       },
       {
-        "term": null,
-        "code": "",
+        "term": 4,
+        "code": "OM9430",
         "name": "Organisation, ledning och utveckling av omvårdnad för äldre",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false,
-        "studyYear": 2
+        "courseCodeVerified": true,
+        "studyYear": 2,
+        "courseResponsibleUniversity": "Göteborgs universitet"
       }
     ],
-    "notes": "Planen gäller från HT2026 och anger kurser, hp och studieår, men inte koder eller terminsplacering. Programmet ges i samverkan mellan flera lärosäten; kursansvarigt lärosäte framgår av planens kurslista."
+    "notes": "GU:s HT26-utbildningsplan gäller från 2026-08-31 och beskriver 60 hp på 50% distans med 9 hp VFU. Aktuell Studentportal anger termin 1–4 och sex uttryckliga kurskoder. Kursen 'Komplexa ohälsotillstånd hos äldre' saknar kod på aktuella Studentportalen; en äldre programöversikt (2023-09) anger OM9410 men denna kod har INTE verifierats som aktuell HT26 och lämnas därför tom. OM9160 examensarbete 15 hp börjar termin 3 och fortsätter termin 4 utan dubbelräkning eller påhittad hp-fördelning. Olika samverkande lärosäten är kursansvariga; dessa får inte antas vara GU-kurser i TG-matchningen. Programstart 2026-08-31 och slut 2028-06-04 är programdatum, INTE kursspecifika datum. Kursspecifika datum okända."
   }
 ]
