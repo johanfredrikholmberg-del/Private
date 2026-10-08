@@ -16,7 +16,7 @@ const remove=new Set(),merged=[];
 for(const [code,group] of byCode){
   if(group.length===1)continue;
   const good=group.filter(x=>x.row.verified===true&&x.row.rows?.length);
-  const plannerReady=good.filter(x=>x.row.coverage==='complete'&&/^https:\\/\\//i.test(String(x.row.sourceEvidenceUrl||'')));
+  const plannerReady=good.filter(x=>x.row.coverage==='complete'&&String(x.row.sourceEvidenceUrl||'').startsWith('https://'));
   // Prefer the sole verified Planner-ready structure (including explicit branch
   // groups) over verified partial/choice-required imports. Never guess between
   // multiple complete plans.
