@@ -872,11 +872,11 @@
     "hp": 60,
     "level": "Avancerad nivå",
     "validFrom": "2026HT",
-    "coverage": "partial-structure",
+    "coverage": "choice-required",
     "verified": true,
-    "courseCodesVerified": false,
+    "courseCodesVerified": true,
     "choiceRequired": true,
-    "source": "gu-official-education-plan",
+    "source": "gu-official-education-plan-and-student-portal-course-overview",
     "sourceEvidenceUrl": "https://www.gu.se/syllabus/d5df44f1-d5c8-11f0-b415-d312a71c4fd5",
     "sourceUrls": [
       "https://www.gu.se/syllabus/d5df44f1-d5c8-11f0-b415-d312a71c4fd5",
@@ -884,74 +884,115 @@
     ],
     "rows": [
       {
-        "term": null,
-        "code": "",
+        "term": 1,
+        "code": "OM7800",
         "name": "Specialistsjuksköterskans funktion med inriktning mot hjärtsjukvård",
         "hp": 1.5,
         "category": "mandatory",
-        "courseCodeVerified": false
+        "courseCodeVerified": true
       },
       {
-        "term": null,
-        "code": "",
+        "term": 1,
+        "code": "MED011",
         "name": "Ischemisk hjärtsjukdom",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false
+        "courseCodeVerified": true
       },
       {
-        "term": null,
-        "code": "",
+        "term": 1,
+        "code": "MED022",
         "name": "Hjärtsvikt 1",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false
+        "courseCodeVerified": true,
+        "continuesIntoTerm": 2
       },
       {
-        "term": null,
-        "code": "",
+        "term": 2,
+        "code": "MED033",
         "name": "Kardiovaskulär samsjuklighet och prevention",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false
+        "courseCodeVerified": true
       },
       {
-        "term": null,
-        "code": "",
+        "term": 2,
+        "code": "OM7810",
         "name": "Klinisk fördjupning inom hjärtsjukvård",
         "hp": 6,
         "category": "mandatory",
-        "courseCodeVerified": false
+        "courseCodeVerified": true
       },
       {
-        "term": null,
-        "code": "",
+        "term": 3,
+        "code": "OM0007",
         "name": "Vetenskaplig metod",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false
+        "courseCodeVerified": true
       },
       {
-        "term": null,
-        "code": "",
-        "name": "Examensarbete i omvårdnad",
+        "term": 3,
+        "code": "OM7820",
+        "name": "Examensarbete i omvårdnad med inriktning mot hjärtsjukvård",
         "hp": 15,
         "category": "mandatory",
-        "courseCodeVerified": false,
-        "isThesis": true
+        "courseCodeVerified": true,
+        "isThesis": true,
+        "continuesIntoTerm": 4
       },
       {
-        "term": null,
+        "term": 4,
         "code": "",
         "name": "Valfri kurs med relevans för hjärtsjukvård",
         "hp": 7.5,
         "category": "elective",
         "isSlot": true,
         "slotType": "elective-slot",
-        "courseCodeVerified": false
+        "courseCodeVerified": false,
+        "options": [
+          {
+            "code": "MED896",
+            "name": "Hjärtsvikt II",
+            "hp": 7.5
+          },
+          {
+            "code": "MED870",
+            "name": "Perkutan kateterburen intervention (PCI) interventionskurs",
+            "hp": 7.5
+          },
+          {
+            "code": "OM7600",
+            "name": "Ledarskap och lärande",
+            "hp": 7.5
+          },
+          {
+            "code": "VP8800",
+            "name": "Organisering och ledning av hälso- och sjukvård",
+            "hp": 7.5
+          },
+          {
+            "code": "OMP100",
+            "name": "Palliativ vård",
+            "hp": 7.5
+          },
+          {
+            "code": "3ME004",
+            "name": "Behandling och omvårdnad av arytmipatienter",
+            "hp": 7.5
+          },
+          {
+            "code": "AMC2A7",
+            "name": "Kardiologi: Arytmi",
+            "hp": 7.5
+          }
+        ],
+        "optionsSourceUrl": "https://studentportal.gu.se/program/specialistsjukskoterskeprogrammet-med-inriktning-mot-hjartsjukvard",
+        "optionsNote": "GU listar dessa som redan godkända valbara kurser inom examen; detta är inte en garanti om kursutbud eller plats HT26/VT27."
       }
     ],
-    "notes": "Gäller från HT2026 och listar kurser och hp. Koder och terminsplacering saknas i de använda källorna; kursordningen kan variera."
+    "notes": "GU:s Studentportal anger koder och placering för sju obligatoriska kurser. MED022 Hjärtsvikt 1 (7,5 hp) börjar termin 1 och fortsätter termin 2; OM7820 examensarbete (15 hp) börjar termin 3 och fortsätter termin 4. Hp för dessa kurser har inte dubbelräknats. Termin 4 har en valfri kurs om 7,5 hp; godkända exempel finns från GU:s officiella lista, men ingen kurs väljs automatiskt. Programstart vartannat år: HT24, HT26, HT28. Kursspecifika start- och slutdatum för HT26-kullen har inte verifierats och lämnas okända. TG-listor på Studentportalen avser generella godkännanden och får inte förväxlas med historiska individbeslut."
   },
   {
     "id": "gu:V2ONL:2026HT",
