@@ -1242,13 +1242,16 @@
       "programHp": 120,
       "hp": 120,
       "validFrom": "2026HT",
-      "coverage": "complete-semester-sequence",
+      "coverage": "choice-required",
       "verified": true,
       "source": "kth-official-programplan",
       "sourceEvidenceUrl": "https://www.kth.se/student/kurser/program/TTMVM/20262/arskurs1?l=sv",
       "sourceUrls": [
         "https://www.kth.se/student/kurser/program/TTMVM/20262/arskurs1?l=sv",
-        "https://www.kth.se/student/kurser/program/TTMVM/20262/arskurs2?l=sv"
+        "https://www.kth.se/student/kurser/program/TTMVM/20262/arskurs2?l=sv",
+        "https://www.kth.se/student/kurser/program/TTMVM/20262/genomforande",
+        "https://www.kth.se/student/kurser/kurs/MH202X",
+        "https://www.kth.se/student/kurser/kurs/MH201X?l=sv"
       ],
       "rows": [
         {
@@ -1316,19 +1319,36 @@
         },
         {
           "term": 4,
-          "code": "MH201X",
-          "name": "Examensarbete inom material och processdesign, avancerad nivå",
-          "hp": 30,
-          "category": "mandatory"
-        },
-        {
-          "term": 4,
           "code": "MH202X",
           "name": "Examensarbete inom material och processdesign, avancerad nivå",
           "hp": 30,
           "category": "mandatory"
         }
-      ]
+      ],
+      "choiceRequired": true,
+      "structureCompleteness": "partial-structure",
+      "knownMandatoryHp": 91.5,
+      "unallocatedChoiceHp": 28.5,
+      "excludedAlternativeRows": [
+        {
+          "term": 4,
+          "code": "MH201X",
+          "name": "Examensarbete inom material och processdesign, avancerad nivå",
+          "hp": 30,
+          "category": "mandatory",
+          "appliesTo": "CMATD students, not TTMVM 2-year master intake",
+          "reason": "KTH official HT26 year 2 programme plan explicitly differentiates MH201X for CMATD from MH202X for TTMVM master students"
+        }
+      ],
+      "choiceRequirements": [
+        {
+          "term": 3,
+          "minimumHp": 30,
+          "category": "conditionally-elective",
+          "note": "KTH HT26 programme plan says at least 30 hp conditionally elective in autumn of year 2; mandatory first-year 61.5 hp plus 30 hp thesis and minimum 30 hp elective totals 121.5 hp, exceeding 120 hp. Keep unresolved pending clarification; do not reduce or assign course choices."
+        }
+      ],
+      "notes": "HT26 cohort, 2-year master: MH202X is the applicable thesis, while MH201X applies to CMATD. Official course list has 61.5 hp mandatory year 1 and 30 hp thesis, plus at least 30 hp conditionally elective in HT year 2. This sums to 121.5 hp against a 120 hp degree. The 1.5 hp discrepancy is unresolved; preserve unknown choice/degree accounting and avoid asserting a complete fixed sequence. Course dates for cohort HT26 year 2 (HT27/VT28) are not inferred from HT26/VT27 offerings."
     },
     {
       "id": "kth:TMEKM:2026HT",
