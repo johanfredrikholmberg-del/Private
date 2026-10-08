@@ -21,6 +21,11 @@ for(const [code,group] of byCode){
   // groups) over verified partial/choice-required imports. Never guess between
   // multiple complete plans.
   let candidates=plannerReady.length===1?plannerReady:good;
+  if(candidates.length>1&&candidates.every(x=>x.row.coverage==='choice-required')){
+    const score=x=>(x.row.rows||[]).filter(r=>!String(r.code||'').trim()).length;
+    const ranked=[...candidates].sort((a,b)=>score(b)-score(a));
+    if(score(ranked[0])>0&&score(ranked[0])>score(ranked[1]))candidates=[ranked[0]];
+  }
   if(candidates.length>1){
     const footprint=x=>JSON.stringify((x.row.rows||[]).map(r=>[Number(r.term),String(r.code||''),Number(r.hp)]).sort((a,b)=>a[0]-b[0]||a[1].localeCompare(b[1])));
     const footprints=new Set(candidates.map(footprint));
@@ -42,7 +47,9 @@ for(const [code,group] of byCode){
       if(ohp&&khp&&ohp!==khp)throw Error('Conflicting GU programme hp: '+code);
       const sameFootprint=JSON.stringify((other.row.rows||[]).map(r=>[Number(r.term),String(r.code||''),Number(r.hp)]).sort((a,b)=>a[0]-b[0]||a[1].localeCompare(b[1])))===JSON.stringify((keep.row.rows||[]).map(r=>[Number(r.term),String(r.code||''),Number(r.hp)]).sort((a,b)=>a[0]-b[0]||a[1].localeCompare(b[1])));
       const branchSafe=Array.isArray(keep.row.branchGroups)&&keep.row.branchGroups.length>0&&(keep.row.rows||[]).filter(r=>r.branchId).length>0;
-      if(!sameFootprint&&(!branchSafe||keep.row.coverage!=='complete'))throw Error('Conflicting verified GU structures: '+code);
+      const choiceSlots=x=>(x.row.rows||[]).filter(r=>!String(r.code||'').trim()).length;
+      const choiceSafe=keep.row.coverage==='choice-required'&&choiceSlots(keep)>choiceSlots(other);
+      if(!sameFootprint&&!branchSafe&&!choiceSafe)throw Error('Conflicting verified GU structures: '+code);
     }
     const ohp=Number(other.row.programHp||other.row.hp),khp=Number(keep.row.programHp||keep.row.hp);
     if(ohp&&khp&&ohp!==khp)throw Error('Conflicting GU programme hp: '+code);
