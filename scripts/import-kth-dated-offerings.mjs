@@ -10,7 +10,9 @@ if (db.database !== 'StudieLots DB' || !String(storage || '').startsWith('data/s
 const primary = read(storage);
 const additional = (db.tables.courseOfferings.additionalStorages || []).map(read);
 const existing = [primary, ...additional].flat();
-if (!Array.isArray(primary) || existing.length !== db.tables.courseOfferings.rows) throw Error('Canonical offering count mismatch');
+if (!Array.isArray(primary)) throw Error('Canonical primary offering shard is not an array');
+const manifestRowsBefore=Number(db.tables.courseOfferings.rows)||0;
+if(existing.length!==manifestRowsBefore)console.warn(`Reconciling canonical offering count from stored rows: manifest=${manifestRowsBefore}, actual=${existing.length}`);
 const courses = read('data/kth/courses.json').courses;
 if (!Array.isArray(courses) || courses.length < 100) throw Error('Missing KTH catalogue');
 
@@ -67,9 +69,10 @@ for (let i = 0; i < selected.length; i += 8) {
 }
 if (!report.fetched) throw Error('No official KTH course pages were fetched; preserving canonical DB');
 report.total = existing.length + newRows.length;
-if (report.added) {
-  fs.writeFileSync(storage, JSON.stringify([...primary, ...newRows], null, 2) + '\n');
+if (report.added) fs.writeFileSync(storage, JSON.stringify([...primary, ...newRows], null, 2) + '\n');
+if (report.added || report.total !== manifestRowsBefore) {
   db.tables.courseOfferings.rows = report.total;
+  db.generatedAt = report.checkedAt;
   fs.writeFileSync(dbPath, JSON.stringify(db, null, 2) + '\n');
 }
 fs.mkdirSync('data/import-reviews', {recursive: true});
