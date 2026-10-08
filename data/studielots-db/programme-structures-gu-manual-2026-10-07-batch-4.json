@@ -13,65 +13,69 @@
     "verified": true,
     "courseCodesVerified": false,
     "choiceRequired": true,
-    "source": "gu-official-education-plan",
+    "source": "gu-ht26-education-plan-and-ht26-vt27-programme-overview",
     "sourceEvidenceUrl": "https://www.gu.se/syllabus/37fede44-dcd5-11f0-9c75-3eadee7541a5",
     "sourceUrls": [
       "https://www.gu.se/syllabus/37fede44-dcd5-11f0-9c75-3eadee7541a5",
-      "https://www.gu.se/studera/hitta-utbildning/fysioterapeutprogrammet-v1fyp"
+      "https://www.gu.se/studera/hitta-utbildning/fysioterapeutprogrammet-v1fyp",
+      "https://studentportal.gu.se/program/fysioterapeutprogrammet",
+      "https://studentportal.gu.se/sites/default/files/2026-08/Program%C3%B6versikt-FT_HT26-VT27_0.pdf"
     ],
     "rows": [
       {
-        "term": null,
-        "code": "",
+        "term": 1,
+        "code": "FYS111",
         "name": "Fysioterapi - grundkurs. Kropp, rörelse och hälsa",
         "hp": 15,
         "category": "mandatory",
-        "courseCodeVerified": false,
-        "studyYear": 1
+        "courseCodeVerified": true,
+        "studyYear": 1,
+        "continuesIntoTerm": 2
       },
       {
-        "term": null,
-        "code": "",
+        "term": 1,
+        "code": "FYS112",
         "name": "Anatomi",
         "hp": 10.5,
         "category": "mandatory",
-        "courseCodeVerified": false,
+        "courseCodeVerified": true,
         "studyYear": 1
       },
       {
-        "term": null,
-        "code": "",
+        "term": 1,
+        "code": "FYS114",
         "name": "Fysiologi",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false,
+        "courseCodeVerified": true,
         "studyYear": 1
       },
       {
-        "term": null,
-        "code": "",
+        "term": 1,
+        "code": "FYS113",
         "name": "Tillämpad psykologi inom fysioterapi",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false,
-        "studyYear": 1
+        "courseCodeVerified": true,
+        "studyYear": 1,
+        "continuesIntoTerm": 2
       },
       {
-        "term": null,
-        "code": "",
+        "term": 2,
+        "code": "FYS116",
         "name": "Fysioterapi - grundkurs. Rörelsesystemet 1",
         "hp": 7.5,
         "category": "mandatory",
-        "courseCodeVerified": false,
+        "courseCodeVerified": true,
         "studyYear": 1
       },
       {
-        "term": null,
-        "code": "",
+        "term": 2,
+        "code": "FYS115",
         "name": "Arbetsfysiologi och fysisk träning",
         "hp": 12,
         "category": "mandatory",
-        "courseCodeVerified": false,
+        "courseCodeVerified": true,
         "studyYear": 1
       },
       {
@@ -184,7 +188,7 @@
         "isThesis": true
       }
     ],
-    "notes": "Planen gäller från HT2026 och anger kurser, hp och studieår (60 hp per år), men inte kurskoder eller terminsspecifik placering."
+    "notes": "Utbildningsplan HT26 anger 180 hp med 60 hp per studieår. GU:s officiella programöversikt HT26–VT27 verifierar samtliga sex kurskoder för första studieåret och deras placering i termin 1–2: FYS111 och FYS113 löper över både termin 1 och 2 (utan dubbelräkning). Resterande studieår (termin 3–6) i samma översikt avser äldre studentkullar och har inte utan vidare applicerats på HT26-kullens kommande terminer; deras koder och terminsplaceringar för HT26-kullen lämnas okända. Studentportalens HT26/VT27 datum är generella terminstider, inte kursspecifika datum; inga kurstillfällesdatum har därför lagts in. 'choiceRequired' från befintlig post behålls tills valregler verifierats."
   },
   {
     "id": "gu:N1SJU:2026HT",
