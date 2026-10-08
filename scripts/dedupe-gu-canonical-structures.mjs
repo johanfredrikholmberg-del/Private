@@ -20,7 +20,15 @@ for(const [code,group] of byCode){
   // Prefer the sole verified Planner-ready structure (including explicit branch
   // groups) over verified partial/choice-required imports. Never guess between
   // multiple complete plans.
-  const candidates=plannerReady.length===1?plannerReady:good;
+  let candidates=plannerReady.length===1?plannerReady:good;
+  if(candidates.length>1){
+    const footprint=x=>JSON.stringify((x.row.rows||[]).map(r=>[Number(r.term),String(r.code||''),Number(r.hp)]).sort((a,b)=>a[0]-b[0]||a[1].localeCompare(b[1])));
+    const footprints=new Set(candidates.map(footprint));
+    if(footprints.size===1){
+      const syllabus=candidates.filter(x=>String(x.row.sourceEvidenceUrl||'').includes('/syllabus/'));
+      if(syllabus.length===1)candidates=syllabus;
+    }
+  }
   if(candidates.length!==1){
     const details=group.map(x=>({part:shards[x.si].part,coverage:x.row.coverage,verified:x.row.verified,rows:x.row.rows?.length,hp:x.row.programHp,url:x.row.sourceEvidenceUrl,branches:x.row.branchGroups?.map(g=>g.branches?.map(b=>b.id)),checkedAt:x.row.checkedAt,signature:compact(x.row)}));
     throw Error('Ambiguous duplicate GU code: '+code+' '+JSON.stringify(details));
