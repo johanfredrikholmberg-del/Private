@@ -27,6 +27,7 @@ for(const [code,group] of byCode){
     if(footprints.size===1){
       const syllabus=candidates.filter(x=>String(x.row.sourceEvidenceUrl||'').includes('/syllabus/'));
       if(syllabus.length===1)candidates=syllabus;
+      else if(new Set(candidates.map(x=>String(x.row.sourceEvidenceUrl||''))).size===1)candidates=[candidates[0]];
     }
   }
   if(candidates.length!==1){
