@@ -40,7 +40,8 @@ for(const [code,group] of byCode){
     if(other.row.verified===true){
       const ohp=Number(other.row.programHp||other.row.hp),khp=Number(keep.row.programHp||keep.row.hp);
       if(ohp&&khp&&ohp!==khp)throw Error('Conflicting GU programme hp: '+code);
-      if(keep.row.coverage!=='complete')throw Error('Conflicting verified GU structures: '+code);
+      const sameFootprint=JSON.stringify((other.row.rows||[]).map(r=>[Number(r.term),String(r.code||''),Number(r.hp)]).sort((a,b)=>a[0]-b[0]||a[1].localeCompare(b[1])))===JSON.stringify((keep.row.rows||[]).map(r=>[Number(r.term),String(r.code||''),Number(r.hp)]).sort((a,b)=>a[0]-b[0]||a[1].localeCompare(b[1])));
+      if(keep.row.coverage!=='complete'||!sameFootprint)throw Error('Conflicting verified GU structures: '+code);
     }
     const ohp=Number(other.row.programHp||other.row.hp),khp=Number(keep.row.programHp||keep.row.hp);
     if(ohp&&khp&&ohp!==khp)throw Error('Conflicting GU programme hp: '+code);
