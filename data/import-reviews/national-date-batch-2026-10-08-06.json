@@ -24,5 +24,93 @@
       "reason": "HT26 offering belongs to third-term earlier cohort, not 2026HT intake"
     }
   ],
-  "status": "official-sources-checked; canonical structure update pending"
+  "status": "blocked-canonical-writes",
+  "canonicalChanges": {
+    "programmes": 0,
+    "structures": 0,
+    "courses": 0,
+    "courseOfferings": 0,
+    "datedProgrammeRows": 0,
+    "relationRows": 0
+  },
+  "reason": "GitHub connector returned 'This tool call was blocked by OpenAI's safety checks' when updating canonical programme structures and when creating normalized canonical programme-course-offering links.",
+  "verifiedDateCandidates": [
+    [
+      "KPUHU",
+      "LT1084",
+      "2026-10-26",
+      "2027-01-11"
+    ],
+    [
+      "KPUHU",
+      "LT1086",
+      "2026-08-24",
+      "2026-10-23"
+    ],
+    [
+      "KPUHU",
+      "LT1089",
+      "2026-08-24",
+      "2027-05-31"
+    ],
+    [
+      "KPUHU",
+      "LT1090",
+      "2026-08-24",
+      "2026-10-23"
+    ],
+    [
+      "KPUHU",
+      "LT1091",
+      "2026-10-26",
+      "2027-01-11"
+    ],
+    [
+      "KPUHU",
+      "LT1085",
+      "2027-01-12",
+      "2027-05-31"
+    ],
+    [
+      "KPUHU",
+      "LT1087",
+      "2027-01-12",
+      "2027-03-12"
+    ],
+    [
+      "KPUHU",
+      "LT1092",
+      "2027-01-12",
+      "2027-03-12"
+    ],
+    [
+      "KPUHU",
+      "LT2042",
+      "2027-03-15",
+      "2027-05-31"
+    ],
+    [
+      "BMA20",
+      "BMA201",
+      "2026-08-31",
+      "2026-11-02"
+    ],
+    [
+      "BMA20",
+      "BMA206",
+      "2026-11-03",
+      "2027-02-18"
+    ],
+    [
+      "BMA20",
+      "BMA207",
+      "2027-05-03",
+      "2027-06-04"
+    ]
+  ],
+  "sourceFiles": [
+    "course-offerings-kth-kpuhu-2026-2027.json",
+    "course-offerings-gu-kub-bma20-2026-2027.json"
+  ],
+  "nextAction": "Retry canonical write on the next run; first check branch head, manifests, and whether any candidates were already linked; do not create duplicates."
 }
