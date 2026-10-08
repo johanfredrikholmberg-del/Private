@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-08T04:58:30.445Z",
+  "generatedAt": "2026-10-08T05:07:00Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -22,7 +22,7 @@
     },
     "courses": {
       "storage": "data/studielots-db/courses.json",
-      "rows": 29713,
+      "rows": 29714,
       "additionalStorages": [
         "data/studielots-db/courses-gu-2027-eu.json",
         "data/studielots-db/courses-gu-2027-programmes.json",
@@ -38,13 +38,14 @@
         "data/studielots-db/courses-kau-offering-identities.json",
         "data/studielots-db/courses-gu-apotekarprogrammet-2026-2027.json",
         "data/studielots-db/courses-gu-kub-bma20-2026-2027.json",
-        "data/studielots-db/courses-gu-v1ssp-verified-2026-10-08.json"
+        "data/studielots-db/courses-gu-v1ssp-verified-2026-10-08.json",
+        "data/studielots-db/courses-kth-hi1027-verified-2026-10-08.json"
       ],
-      "uniqueIdentities": 29710
+      "uniqueIdentities": 29711
     },
     "courseOfferings": {
       "storage": "data/studielots-db/course-offerings.json",
-      "rows": 3987,
+      "rows": 4144,
       "terms": [
         "HT25",
         "HT26",
@@ -63,8 +64,10 @@
         "data/studielots-db/course-offerings-kth-kau-2026.json",
         "data/studielots-db/course-offerings-gu-verified-current.json",
         "data/studielots-db/course-offerings-gu-apotekarprogrammet-2026-2027.json",
-        "data/studielots-db/course-offerings-gu-kub-bma20-2026-2027.json"
-      ]
+        "data/studielots-db/course-offerings-gu-kub-bma20-2026-2027.json",
+        "data/studielots-db/course-offerings-kth-hi1027-2026-10-08.json"
+      ],
+      "uniqueIdentities": 4133
     },
     "syllabusVersions": {
       "storage": "data/studielots-db/syllabus-versions.json",
