@@ -16,11 +16,20 @@ const remove=new Set(),merged=[];
 for(const [code,group] of byCode){
   if(group.length===1)continue;
   const good=group.filter(x=>x.row.verified===true&&x.row.rows?.length);
-  if(good.length!==1)throw Error('Ambiguous duplicate GU code: '+code);
-  const keep=good[0];
+  const plannerReady=good.filter(x=>x.row.coverage==='complete'&&/^https:\\/\\//i.test(String(x.row.sourceEvidenceUrl||'')));
+  // Prefer the sole verified Planner-ready structure (including explicit branch
+  // groups) over verified partial/choice-required imports. Never guess between
+  // multiple complete plans.
+  const candidates=plannerReady.length===1?plannerReady:good;
+  if(candidates.length!==1)throw Error('Ambiguous duplicate GU code: '+code);
+  const keep=candidates[0];
   for(const other of group){
     if(other===keep)continue;
-    if(other.row.verified===true)throw Error('Conflicting verified GU structures: '+code);
+    if(other.row.verified===true){
+      const ohp=Number(other.row.programHp||other.row.hp),khp=Number(keep.row.programHp||keep.row.hp);
+      if(ohp&&khp&&ohp!==khp)throw Error('Conflicting GU programme hp: '+code);
+      if(keep.row.coverage!=='complete')throw Error('Conflicting verified GU structures: '+code);
+    }
     const ohp=Number(other.row.programHp||other.row.hp),khp=Number(keep.row.programHp||keep.row.hp);
     if(ohp&&khp&&ohp!==khp)throw Error('Conflicting GU programme hp: '+code);
     // A verified source-backed plan supersedes older unverified/placeholder rows.
