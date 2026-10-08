@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-08T14:19:00.000Z",
+  "generatedAt": "2026-10-08T14:56:00.000Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -22,7 +22,7 @@
     },
     "courses": {
       "storage": "data/studielots-db/courses.json",
-      "rows": 29715,
+      "rows": 29717,
       "additionalStorages": [
         "data/studielots-db/courses-gu-2027-eu.json",
         "data/studielots-db/courses-gu-2027-programmes.json",
@@ -40,9 +40,10 @@
         "data/studielots-db/courses-gu-kub-bma20-2026-2027.json",
         "data/studielots-db/courses-gu-v1ssp-verified-2026-10-08.json",
         "data/studielots-db/courses-kth-hi1027-verified-2026-10-08.json",
-        "data/studielots-db/courses-kth-mh1034-verified-2026-10-08.json"
+        "data/studielots-db/courses-kth-mh1034-verified-2026-10-08.json",
+        "data/studielots-db/courses-gu-s1log-2026-10-08.json"
       ],
-      "uniqueIdentities": 29712
+      "uniqueIdentities": 29714
     },
     "courseOfferings": {
       "storage": "data/studielots-db/course-offerings.json",
