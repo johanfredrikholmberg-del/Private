@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-07T20:06:26.605Z",
+  "generatedAt": "2026-10-08T03:52:44.764Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -22,7 +22,7 @@
     },
     "courses": {
       "storage": "data/studielots-db/courses.json",
-      "rows": 31035,
+      "rows": 29713,
       "additionalStorages": [
         "data/studielots-db/courses-gu-2027-eu.json",
         "data/studielots-db/courses-gu-2027-programmes.json",
@@ -37,8 +37,10 @@
         "data/studielots-db/courses-programme-structure-identities-2026-10-05.json",
         "data/studielots-db/courses-kau-offering-identities.json",
         "data/studielots-db/courses-gu-apotekarprogrammet-2026-2027.json",
-        "data/studielots-db/courses-gu-kub-bma20-2026-2027.json"
-      ]
+        "data/studielots-db/courses-gu-kub-bma20-2026-2027.json",
+        "data/studielots-db/courses-gu-v1ssp-verified-2026-10-08.json"
+      ],
+      "uniqueIdentities": 29710
     },
     "courseOfferings": {
       "storage": "data/studielots-db/course-offerings.json",
