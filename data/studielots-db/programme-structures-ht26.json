@@ -9601,7 +9601,22 @@
         "hp": 30,
         "category": "mandatory",
         "isSlot": false,
-        "courseCodeVerified": true
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|NEK10|VT27|GU-84029",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-18",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "dateDerivation": "official-course-package-page-dates",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/nationalekonomi-grundlaggande-nek10",
+            "programmeCohort": "2026HT",
+            "cohortAssignment": "course-package-matched-to-programme-term",
+            "notes": "NEK10 är kurspaket om 30 hp. PPE-programmet har programanpassat innehåll med NEK110 istället för NEK106; datumet avser hela kurspaketet, inte de enskilda delkurserna."
+          }
+        ]
       },
       {
         "term": 3,
