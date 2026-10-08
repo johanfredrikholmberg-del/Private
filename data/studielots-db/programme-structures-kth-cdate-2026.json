@@ -1,0 +1,290 @@
+{
+  "schemaVersion": 1,
+  "programs": [
+    {
+      "id": "kth:CDATE:2026HT",
+      "key": "kungl-tekniska-hogskolan:CDATE",
+      "university": "Kungl. Tekniska högskolan",
+      "programCode": "CDATE",
+      "programName": "Civilingenjörsutbildning i datateknik",
+      "programHp": 300,
+      "hp": 300,
+      "validFrom": "2026HT",
+      "coverage": "choice-required",
+      "structureCompleteness": "partial-structure",
+      "choiceRequired": true,
+      "verified": true,
+      "source": "kth-official-programplan",
+      "sourceEvidenceUrl": "https://www.kth.se/student/kurser/program/CDATE/20262/kurslista",
+      "sourceUrls": [
+        "https://www.kth.se/student/kurser/program/CDATE/20262/kurslista",
+        "https://www.kth.se/student/kurser/program/CDATE/20262/arskurs1",
+        "https://www.kth.se/student/kurser/program/CDATE/20262/arskurs2",
+        "https://www.kth.se/student/kurser/program/CDATE/20262/arskurs3",
+        "https://www.kth.se/student/kurser/program/CDATE/20262/omfattning"
+      ],
+      "rows": [
+        {
+          "term": 1,
+          "studyYear": 1,
+          "code": "DA1600",
+          "name": "Ingenjörsmässigt skrivande",
+          "hp": 4.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "studyYear": 1,
+          "code": "DD1337",
+          "name": "Programmering",
+          "hp": 7,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "studyYear": 1,
+          "code": "DD1338",
+          "name": "Algoritmer och datastrukturer",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "studyYear": 1,
+          "code": "SF1624",
+          "name": "Algebra och geometri",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 1,
+          "studyYear": 1,
+          "code": "SF1698",
+          "name": "Diskret matematik",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "studyYear": 1,
+          "code": "SF1625",
+          "name": "Envariabelanalys",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "studyYear": 1,
+          "code": "DD1349",
+          "name": "Projektuppgift i introduktion till datalogi",
+          "hp": 3,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "studyYear": 1,
+          "code": "DD1396",
+          "name": "Parallellprogrammering i introduktion till datalogi",
+          "hp": 3,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "studyYear": 1,
+          "code": "DH1623",
+          "name": "Människa-datorinteraktion, grundläggande teori",
+          "hp": 4.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 2,
+          "studyYear": 1,
+          "code": "SF1626",
+          "name": "Flervariabelanalys",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYears": [
+            1,
+            2,
+            3
+          ],
+          "code": "DD1390",
+          "name": "Programsammanhållande kurs i datateknik",
+          "hp": 6,
+          "category": "mandatory",
+          "programmeAllocationByYearHp": {
+            "1": 2,
+            "2": 3,
+            "3": 1
+          },
+          "note": "KTH fördelar kursens 6 hp över årskurs 1–3: 2 hp, 3 hp respektive 1 hp."
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "DD1366",
+          "name": "Programmeringsparadigm",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "DD1367",
+          "name": "Programvarukonstruktion i projektform",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "DD1368",
+          "name": "Databasteknik för D",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "IS1500",
+          "name": "Datorteknik och komponenter",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "ME1010",
+          "name": "Organisation och kunskapsintensivt arbete",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SF1547",
+          "name": "Numeriska metoder, grundkurs",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SF1935",
+          "name": "Sannolikhetsteori och statistik med tillämpning inom maskininlärning",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "DD1351",
+          "name": "Logik för dataloger",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "AL1504",
+          "name": "Hållbar utveckling för datateknik",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "DA150X",
+          "name": "Examensarbete inom datateknik, grundnivå",
+          "hp": 15,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "DD2350",
+          "name": "Algoritmer, datastrukturer och komplexitet",
+          "hp": 9.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "ID1200",
+          "name": "Operativsystem",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "SF1699",
+          "name": "Diskret matematik, fortsättningskurs",
+          "hp": 6,
+          "category": "mandatory-planned",
+          "planned": true,
+          "note": "KTH anger att kursen ska inrättas inför HT2028."
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "name": "Valfria kurser",
+          "hp": 15,
+          "category": "elective-choice",
+          "slotType": "main-field-or-elective-slot"
+        }
+      ],
+      "knownMandatoryHp": 159,
+      "plannedMandatoryHp": 6,
+      "unallocatedChoiceHp": 15,
+      "unmappedMasterHp": 120,
+      "linkedMasterPrograms": [
+        "TCYSM",
+        "TCSCM",
+        "TEBSM",
+        "TMAIM",
+        "TSDSM",
+        "TSCRM",
+        "TDIGM",
+        "TIVNM",
+        "TINEM",
+        "TIMTM",
+        "TTMAM"
+      ],
+      "choiceRequirements": [
+        {
+          "category": "elective-choice",
+          "minimumHp": 15,
+          "studyYear": 3,
+          "note": "KTH anger 15 hp valfria kurser i årskurs 3; enskilda val är inte låsta i utbildningsplanen."
+        },
+        {
+          "category": "linked-master-programme-choice",
+          "minimumHp": 120,
+          "studyYears": [
+            4,
+            5
+          ],
+          "options": [
+            "TCYSM",
+            "TCSCM",
+            "TEBSM",
+            "TMAIM",
+            "TSDSM",
+            "TSCRM",
+            "TDIGM",
+            "TIVNM",
+            "TINEM",
+            "TIMTM",
+            "TTMAM"
+          ],
+          "note": "KTH anger att årskurs 4–5 läses enligt ett valt kopplat masterprogram. Masterkurserna är inte del av CDATE:s gemensamma kurslista."
+        }
+      ],
+      "notes": "KTH:s officiella HT2026-plan verifierar kurserna i årskurs 1–3. KTH:s årskurssidor visar exakta kursperioder/startterminer för årskurs 1; för årskurs 2 (läsår 2027/2028) och årskurs 3 (2028/2029) är semesterplaceringen inte publicerad på sidorna och har därför lämnats okänd. Årskurs 4–5 består av ett valt masterprogram och kräver separata masterstrukturer innan hela CDATE-vägen kan markeras komplett. Planen listar även SF1699 som ny obligatorisk kurs som ska inrättas inför HT2028; den är markerad planerad. Därför visas inte strukturen som komplett i StudieLots ännu."
+    }
+  ]
+}
