@@ -29,7 +29,10 @@
           "code": "SF1625",
           "name": "Envariabelanalys",
           "hp": 7.5,
-          "category": "mandatory"
+          "category": "mandatory",
+          "studyPeriodAllocationHp": {
+            "P1": 7.5
+          }
         },
         {
           "term": 1,
@@ -37,7 +40,10 @@
           "code": "SF1624",
           "name": "Algebra och geometri",
           "hp": 7.5,
-          "category": "mandatory"
+          "category": "mandatory",
+          "studyPeriodAllocationHp": {
+            "P1": 7.5
+          }
         },
         {
           "term": null,
@@ -55,7 +61,24 @@
             "2": 1.5,
             "3": 3
           },
-          "note": "Kursen återkommer på årskurssidorna men är en och samma 7,5 hp-kurs; KTH:s periodtabeller fördelar poängen över år 1–3."
+          "programmeAllocationByYearStudyPeriodHp": {
+            "1": {
+              "P1": 0.5,
+              "P2": 0.5,
+              "P3": 0.5,
+              "P4": 1.5
+            },
+            "2": {
+              "P1": 0.5,
+              "P2": 0.5,
+              "P3": 0.5
+            },
+            "3": {
+              "P1": 0.5,
+              "P2": 1.5,
+              "P3": 1
+            }
+          }
         },
         {
           "term": 1,
@@ -63,164 +86,173 @@
           "code": "DD1310",
           "name": "Programmeringsteknik",
           "hp": 6,
-          "category": "mandatory"
+          "category": "mandatory",
+          "studyPeriodAllocationHp": {
+            "P1": 3,
+            "P2": 1.5,
+            "P3": 1.5
+          }
         },
         {
           "term": 1,
           "studyYear": 1,
           "code": "IE1205",
-          "name": "Ingenjörsmodeller",
+          "name": "Digital design",
           "hp": 6,
-          "category": "mandatory"
+          "category": "mandatory",
+          "studyPeriodAllocationHp": {
+            "P1": 6
+          }
         },
         {
           "term": 1,
           "studyYear": 1,
           "code": "EI1110",
-          "name": "Elektroteknik",
+          "name": "Elkretsanalys, utökad kurs",
           "hp": 9,
-          "category": "mandatory"
+          "category": "mandatory",
+          "studyPeriodAllocationHp": {
+            "P1": 4,
+            "P2": 5
+          }
         },
         {
           "term": 2,
           "studyYear": 1,
           "code": "SF1626",
-          "name": "Flerv variabelanalys",
+          "name": "Flervariabelanalys",
           "hp": 7.5,
-          "category": "mandatory"
+          "category": "mandatory",
+          "studyPeriodAllocationHp": {
+            "P1": 7.5
+          }
         },
         {
           "term": 2,
           "studyYear": 1,
           "code": "EP1200",
-          "name": "Elektronik",
+          "name": "Introduktion till datorsystemteknik",
           "hp": 6,
-          "category": "mandatory"
+          "category": "mandatory",
+          "studyPeriodAllocationHp": {
+            "P1": 6
+          }
         },
         {
           "term": 2,
           "studyYear": 1,
           "code": "EH1010",
-          "name": "Elektroteknikens grunder",
+          "name": "Elektroprojekt",
           "hp": 7.5,
-          "category": "mandatory"
+          "category": "mandatory",
+          "studyPeriodAllocationHp": {
+            "P3": 0.5,
+            "P4": 7
+          }
         },
         {
           "term": null,
           "studyYear": 2,
           "code": "ED1110",
-          "name": null,
+          "name": "Vektoranalys",
           "hp": 4.5,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 2,
           "code": "EI1220",
-          "name": null,
+          "name": "Teoretisk elektroteknik E",
           "hp": 10.5,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 2,
           "code": "EK1191",
-          "name": null,
+          "name": "Mätteknik",
           "hp": 6,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 2,
           "code": "EQ1110",
-          "name": null,
+          "name": "Tidskontinuerliga signaler och system",
           "hp": 6,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 2,
           "code": "EQ1120",
-          "name": null,
+          "name": "Tidsdiskreta signaler och system",
           "hp": 6,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 2,
           "code": "SF1920",
-          "name": null,
+          "name": "Sannolikhetsteori och statistik",
           "hp": 6,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 2,
           "code": "SK1108",
-          "name": null,
+          "name": "Klassisk fysik, mekanik och våg",
           "hp": 7.5,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 3,
           "code": "EF112X",
-          "name": null,
+          "name": "Examensarbete inom elektroteknik, grundnivå",
           "hp": 15,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 3,
           "code": "EJ1200",
-          "name": null,
+          "name": "Eleffektsystem",
           "hp": 6,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 3,
           "code": "EL1020",
-          "name": null,
+          "name": "Reglerteknik, allmän kurs",
           "hp": 6,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 3,
           "code": "EN1020",
-          "name": null,
+          "name": "Elektroprojekt, del II",
           "hp": 6,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 3,
           "code": "EQ1270",
-          "name": null,
+          "name": "Stokastiska signaler och system",
           "hp": 6,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         },
         {
           "term": null,
           "studyYear": 3,
           "code": "IE1207",
-          "name": null,
+          "name": "Analog Elektronik",
           "hp": 6,
-          "category": "mandatory",
-          "note": "Kursnamn ej tillagda i denna manuella import; kontrollera kurslistan innan komplettering."
+          "category": "mandatory"
         }
       ],
       "knownMandatoryHp": 156,
@@ -271,7 +303,7 @@
           "note": "KTH:s utbildningsplan anger att år 4–5 följer valt masterprogram; dess kurslista måste kartläggas separat."
         }
       ],
-      "notes": "KTH:s officiella HT2026-plan verifierar gemensamma kurser för år 1–3. År 1 har kursperioder via starttermin. För år 2–3 är terminsplacering inte fastställd i denna import. EH1110 finns återgiven i flera årskurser men representeras en gång med KTH:s faktiska poängfördelning 3/1,5/3 hp. KTH-sidorna anger olika ersättningskoder för SF1546 (SF1547 respektive SF1647); avvikelsen behöver klaras ut. Kursnamn saknas för raderna ED1110, EI1220, EK1191, EQ1110, EQ1120, SF1920, SK1108, EF112X, EJ1200, EL1020, EN1020, EQ1270 och IE1207, därför ska strukturen inte behandlas som komplett. Masterprogrammen år 4–5 är inte kartlagda."
+      "notes": "KTH:s officiella HT2026-plan verifierar gemensamma kurser för år 1–3. År 1:s läsperioder och EH1110:s periodfördelning följer de officiella årskurssidorna. Terminsplacering för år 2–3 har lämnats okänd eftersom sidorna visar läsår och perioder utan att fastställa kalenderterminerna. EH1110 representeras en gång med sina 7,5 hp, fördelade av KTH över år 1–3 (3/1,5/3 hp). KTH-sidorna anger olika ersättningskoder för SF1546 (SF1547 respektive SF1647); avvikelsen behöver klaras ut. De tre valvillkorliga kurserna i år 2–3 och en valfri kurs år 1–3 kräver kursval. År 4–5 följer valt masterprogram och är inte kartlagt här."
     }
   ]
 }
