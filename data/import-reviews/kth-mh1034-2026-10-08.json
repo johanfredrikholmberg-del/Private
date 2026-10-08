@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-10-08T11:50:00.000Z",
+  "branch": "studielots-v2",
+  "batch": "KTH MH1034 VT27",
+  "source": "https://www.kth.se/student/kurser/kurs/MH1034?l=sv",
+  "changes": {
+    "courseIdentitiesAdded": 1,
+    "offeringsAdded": 1,
+    "courseFile": "data/studielots-db/courses-kth-mh1034-verified-2026-10-08.json",
+    "offeringFile": "data/studielots-db/course-offerings-kth-mh1034-2026-2027-batch-1.json"
+  },
+  "duplicatePrecheck": {
+    "scan": "all manifest-registered canonical course and offering shards",
+    "courseFilesBefore": 17,
+    "courseRowsBefore": 29714,
+    "uniqueCourseIdentitiesBefore": 29711,
+    "preexistingCourseIdentityDuplicateGroups": 3,
+    "offeringFilesBefore": 53,
+    "offeringRowsBefore": 4345,
+    "uniqueOfferingKeysBefore": 4334,
+    "preexistingOfferingDuplicateGroups": 11,
+    "mh1034CourseIdentityBefore": 0,
+    "mh1034OfferingBefore": 0,
+    "kd1230CourseIdentityBefore": 1,
+    "kd1230OfferingBefore": 1
+  },
+  "offering": {
+    "code": "MH1034",
+    "name": "Metalliska material",
+    "hp": 7.5,
+    "term": "VT27",
+    "startDate": "2027-01-12",
+    "endDate": "2027-03-12",
+    "datePrecision": "exact",
+    "applicationCode": "10935"
+  },
+  "validation": {
+    "manifestCountsMatch": true,
+    "newDuplicateGroups": 0,
+    "courseRowsAfter": 29715,
+    "uniqueCourseIdentitiesAfter": 29712,
+    "existingCourseDuplicateGroupsAfter": 3,
+    "offeringRowsAfter": 4346,
+    "uniqueOfferingsAfter": 4335,
+    "existingOfferingDuplicateGroupsAfter": 11,
+    "kd1230StillExactlyOneIdentityAndOffering": true,
+    "coverageReportGeneratedAt": "2026-10-05T20:01:37.516Z",
+    "coverageReportStatus": "stale; full global coverage was not recalculated"
+  }
+}

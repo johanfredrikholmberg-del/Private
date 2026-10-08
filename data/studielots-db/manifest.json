@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "database": "StudieLots DB",
-  "generatedAt": "2026-10-08T10:56:13.383Z",
+  "generatedAt": "2026-10-08T11:50:00.000Z",
   "singleSourceOfTruth": true,
   "tables": {
     "providers": {
@@ -22,7 +22,7 @@
     },
     "courses": {
       "storage": "data/studielots-db/courses.json",
-      "rows": 29714,
+      "rows": 29715,
       "additionalStorages": [
         "data/studielots-db/courses-gu-2027-eu.json",
         "data/studielots-db/courses-gu-2027-programmes.json",
@@ -39,13 +39,14 @@
         "data/studielots-db/courses-gu-apotekarprogrammet-2026-2027.json",
         "data/studielots-db/courses-gu-kub-bma20-2026-2027.json",
         "data/studielots-db/courses-gu-v1ssp-verified-2026-10-08.json",
-        "data/studielots-db/courses-kth-hi1027-verified-2026-10-08.json"
+        "data/studielots-db/courses-kth-hi1027-verified-2026-10-08.json",
+        "data/studielots-db/courses-kth-mh1034-verified-2026-10-08.json"
       ],
-      "uniqueIdentities": 29711
+      "uniqueIdentities": 29712
     },
     "courseOfferings": {
       "storage": "data/studielots-db/course-offerings.json",
-      "rows": 4345,
+      "rows": 4346,
       "terms": [
         "HT25",
         "HT26",
@@ -106,9 +107,10 @@
         "data/studielots-db/course-offerings-kth-cinte-2026-2027-batch-1.json",
         "data/studielots-db/course-offerings-kth-celte-2026-2027-batch-1.json",
         "data/studielots-db/course-offerings-kth-copen-2026-2027-batch-1.json",
-        "data/studielots-db/course-offerings-kth-cmatd-2026-2027-batch-1.json"
+        "data/studielots-db/course-offerings-kth-cmatd-2026-2027-batch-1.json",
+        "data/studielots-db/course-offerings-kth-mh1034-2026-2027-batch-1.json"
       ],
-      "uniqueIdentities": 4334
+      "uniqueIdentities": 4335
     },
     "syllabusVersions": {
       "storage": "data/studielots-db/syllabus-versions.json",
