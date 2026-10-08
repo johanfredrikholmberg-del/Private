@@ -1,0 +1,340 @@
+{
+  "kind": "kth-verified-structure-coverage-audit",
+  "branch": "studielots-v2",
+  "head": "c57f7e1587e05a73266a9a6323dfe230ffa4278b",
+  "scope": "KTH supplementary verified programme structure file; not listed in runtime programme-structures-manifest parts",
+  "canonicalSnapshot": {
+    "providers": 49,
+    "programmes": 3190,
+    "structures": 1123,
+    "courses": 29714,
+    "offerings": 4337
+  },
+  "counts": {
+    "match": 2,
+    "incomplete": 18,
+    "over": 1,
+    "choiceRequired": 1
+  },
+  "records": [
+    {
+      "id": "kth:KPUHU:2026HT",
+      "programCode": "KPUHU",
+      "programHp": 60,
+      "knownHp": 60,
+      "unresolvedHp": 0,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 31,
+        "2": 29
+      },
+      "status": "hp-sum-matches"
+    },
+    {
+      "id": "kth:TBASD:2026HT",
+      "programCode": "TBASD",
+      "programHp": 60,
+      "knownHp": 60,
+      "unresolvedHp": 0,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 30,
+        "2": 30
+      },
+      "status": "hp-sum-matches"
+    },
+    {
+      "id": "kth:TCAEM:2026HT",
+      "programCode": "TCAEM",
+      "programHp": 120,
+      "knownHp": 7.5,
+      "unresolvedHp": 112.5,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "3": 7.5
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TDDHM:2026HT",
+      "programCode": "TDDHM",
+      "programHp": 120,
+      "knownHp": 90,
+      "unresolvedHp": 30,
+      "coverage": "choice-required",
+      "choiceRequired": true,
+      "termHp": {
+        "1": 30,
+        "2": 22.5,
+        "3": 7.5,
+        "4": 30
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TFOBM:2026HT",
+      "programCode": "TFOBM",
+      "programHp": 120,
+      "knownHp": 30,
+      "unresolvedHp": 90,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 22.5,
+        "3": 7.5
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:THSSM:2026HT",
+      "programCode": "THSSM",
+      "programHp": 120,
+      "knownHp": 22.5,
+      "unresolvedHp": 97.5,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 15,
+        "2": 7.5
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TIMBM:2026HT",
+      "programCode": "TIMBM",
+      "programHp": 120,
+      "knownHp": 60,
+      "unresolvedHp": 60,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 15,
+        "3": 15,
+        "4": 30
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TINEM:2026HT",
+      "programCode": "TINEM",
+      "programHp": 120,
+      "knownHp": 97.5,
+      "unresolvedHp": 22.5,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 24,
+        "2": 18,
+        "3": 25.5,
+        "4": 30
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TITHM:2026HT",
+      "programCode": "TITHM",
+      "programHp": 120,
+      "knownHp": 75,
+      "unresolvedHp": 45,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 30,
+        "2": 24,
+        "3": 21
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TKEMM:2026HT",
+      "programCode": "TKEMM",
+      "programHp": 120,
+      "knownHp": 52.5,
+      "unresolvedHp": 67.5,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "2": 7.5,
+        "3": 15,
+        "4": 30
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TMBBM:2026HT",
+      "programCode": "TMBBM",
+      "programHp": 120,
+      "knownHp": 97.5,
+      "unresolvedHp": 22.5,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 30,
+        "2": 22.5,
+        "3": 15,
+        "4": 30
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TMHIM:2026HT",
+      "programCode": "TMHIM",
+      "programHp": 120,
+      "knownHp": 7.5,
+      "unresolvedHp": 112.5,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 7.5
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TMMMM:2026HT",
+      "programCode": "TMMMM",
+      "programHp": 120,
+      "knownHp": 75,
+      "unresolvedHp": 45,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 30,
+        "2": 15,
+        "4": 30
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TMSKM:2026HT",
+      "programCode": "TMSKM",
+      "programHp": 120,
+      "knownHp": 72,
+      "unresolvedHp": 48,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 30,
+        "2": 30,
+        "3": 12
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TMVTM:2026HT",
+      "programCode": "TMVTM",
+      "programHp": 120,
+      "knownHp": 37.5,
+      "unresolvedHp": 82.5,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "2": 7.5,
+        "4": 30
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TNTEM:2026HT",
+      "programCode": "TNTEM",
+      "programHp": 120,
+      "knownHp": 105,
+      "unresolvedHp": 15,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 15,
+        "2": 15,
+        "3": 15,
+        "4": 60
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TPRMM:2026HT",
+      "programCode": "TPRMM",
+      "programHp": 120,
+      "knownHp": 111,
+      "unresolvedHp": 9,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 34.5,
+        "2": 7.5,
+        "3": 9,
+        "4": 60
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TSUTM:2026HT",
+      "programCode": "TSUTM",
+      "programHp": 120,
+      "knownHp": 30,
+      "unresolvedHp": 90,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 30
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TTBEM:2026HT",
+      "programCode": "TTBEM",
+      "programHp": 120,
+      "knownHp": 97.5,
+      "unresolvedHp": 22.5,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 30,
+        "2": 15,
+        "3": 22.5,
+        "4": 30
+      },
+      "status": "incomplete-known-rows"
+    },
+    {
+      "id": "kth:TTMVM:2026HT",
+      "programCode": "TTMVM",
+      "programHp": 120,
+      "knownHp": 121.5,
+      "unresolvedHp": -1.5,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 31.5,
+        "2": 30,
+        "4": 60
+      },
+      "status": "over-total-review"
+    },
+    {
+      "id": "kth:TMEKM:2026HT",
+      "programCode": "TMEKM",
+      "programHp": 120,
+      "knownHp": 109.5,
+      "unresolvedHp": 10.5,
+      "coverage": "complete-semester-sequence",
+      "choiceRequired": null,
+      "termHp": {
+        "1": 30,
+        "2": 31.5,
+        "3": 18,
+        "4": 30
+      },
+      "status": "incomplete-known-rows"
+    }
+  ],
+  "policy": "Known mandatory-row sums are not proof of a full degree structure; gaps may represent electives, omitted rows, or unverified alternatives. Do not infer course dates, term placements, or choice-required unless verified in official programme syllabus.",
+  "canonicalChanges": {
+    "programmes": 0,
+    "structures": 0,
+    "courses": 0,
+    "offerings": 0
+  },
+  "nextAction": "Verify one KTH programme at a time against current official year-specific programme plan; reconcile structure into canonical manifest-backed parts without duplicating records."
+}
