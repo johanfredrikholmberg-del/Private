@@ -9,19 +9,21 @@
     "hp": 90,
     "level": "Avancerad nivå",
     "validFrom": "2026HT",
-    "coverage": "partial-structure",
+    "coverage": "complete",
     "verified": true,
     "courseCodesVerified": true,
     "choiceRequired": false,
-    "source": "gu-official-education-plan",
+    "source": "gu-current-official-education-plan-and-student-portal-programme-overview",
     "sourceEvidenceUrl": "https://www.gu.se/syllabus/c17fe00b-bfc9-11f0-a2af-b500ed574a91",
     "sourceUrls": [
       "https://www.gu.se/syllabus/c17fe00b-bfc9-11f0-a2af-b500ed574a91",
-      "https://studentportal.gu.se/program/barnmorskeprogrammet"
+      "https://studentportal.gu.se/program/barnmorskeprogrammet",
+      "https://studentportal.gu.se/en/node/28036",
+      "https://www.gu.se/studera/hitta-utbildning/barnmorskeprogrammet-v2bmp"
     ],
     "rows": [
       {
-        "term": null,
+        "term": 1,
         "code": "RPH201",
         "name": "Profession, teori och metod I",
         "hp": 3,
@@ -29,7 +31,7 @@
         "courseCodeVerified": true
       },
       {
-        "term": null,
+        "term": 1,
         "code": "RPH212",
         "name": "Sexuell och reproduktiv hälsa I",
         "hp": 7.5,
@@ -37,7 +39,7 @@
         "courseCodeVerified": true
       },
       {
-        "term": null,
+        "term": 1,
         "code": "RPH222",
         "name": "Graviditet, födsel och puerperium",
         "hp": 7.5,
@@ -45,23 +47,27 @@
         "courseCodeVerified": true
       },
       {
-        "term": null,
+        "term": 1,
         "code": "RPH300",
         "name": "Förlossningskonst I",
         "hp": 12,
         "category": "mandatory",
-        "courseCodeVerified": true
+        "courseCodeVerified": true,
+        "continuesIntoTerm": 2,
+        "termPlacementNote": "Kursen inleds termin 1 och fortsätter termin 2 enligt GU:s aktuella programöversikt."
       },
       {
-        "term": null,
+        "term": 1,
         "code": "RPH310",
         "name": "Kvinno- och familjehälsa I",
         "hp": 12,
         "category": "mandatory",
-        "courseCodeVerified": true
+        "courseCodeVerified": true,
+        "continuesIntoTerm": 2,
+        "termPlacementNote": "Kursen inleds termin 1 och fortsätter termin 2 enligt GU:s aktuella programöversikt."
       },
       {
-        "term": null,
+        "term": 2,
         "code": "RPH321",
         "name": "Sexuell och reproduktiv hälsa II",
         "hp": 7.5,
@@ -69,23 +75,27 @@
         "courseCodeVerified": true
       },
       {
-        "term": null,
+        "term": 2,
         "code": "RPH330",
         "name": "Förlossningskonst II",
         "hp": 10.5,
         "category": "mandatory",
-        "courseCodeVerified": true
+        "courseCodeVerified": true,
+        "continuesIntoTerm": 3,
+        "termPlacementNote": "Kursen inleds termin 2 och fortsätter termin 3 enligt GU:s aktuella programöversikt."
       },
       {
-        "term": null,
+        "term": 2,
         "code": "RPH340",
         "name": "Kvinno- och familjehälsa II",
         "hp": 10.5,
         "category": "mandatory",
-        "courseCodeVerified": true
+        "courseCodeVerified": true,
+        "continuesIntoTerm": 3,
+        "termPlacementNote": "Kursen inleds termin 2 och fortsätter termin 3 enligt GU:s aktuella programöversikt."
       },
       {
-        "term": null,
+        "term": 3,
         "code": "RPH202",
         "name": "Profession, teori och metod II",
         "hp": 4.5,
@@ -93,7 +103,7 @@
         "courseCodeVerified": true
       },
       {
-        "term": null,
+        "term": 3,
         "code": "RPH101",
         "name": "Examensarbete i reproduktiv och perinatal hälsa",
         "hp": 15,
@@ -102,7 +112,7 @@
         "courseCodeVerified": true
       }
     ],
-    "notes": "Gäller från HT2026. Utbildningsplanen listar alla obligatoriska kurser och hp men anger att inbördes ordning kan variera. Studentportalens kursöversikt verifierar kurskoderna; terminsplacering har lämnats okänd."
+    "notes": "Gäller från HT2026. Alla tio obligatoriska kurser, kurskoder och 90 hp är verifierade mot GU:s utbildningsplan. GU:s aktuella programöversikt anger terminsplacering; RPH300 och RPH310 löper över termin 1–2 samt RPH330 och RPH340 över termin 2–3. Utbildningsplanen medger att den inbördes ordningen kan variera, vilket ska beaktas vid individuell planering. Inga kursspecifika start- eller slutdatum har härletts."
   },
   {
     "id": "gu:M2LP6:2026HT",
