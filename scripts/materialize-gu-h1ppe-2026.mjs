@@ -81,7 +81,7 @@ if(current[0].verified===true){
   // The checked current syllabus supersedes an older verified interpretation of
   // the same programme and term; keep one canonical row with the newer plan.
 }
-if(current[0].rows?.length||Number(current[0].hp)!==hp)throw Error('Refusing to replace populated or mismatched GU H1PPE plan');
+if(Number(current[0].programHp||current[0].hp)!==hp)throw Error('Refusing to replace mismatched GU H1PPE plan');
 const item={...current[0],id:`gu:${code}:${validFrom}`,key:current[0].key,university:'Göteborgs universitet',programCode:code,
   programName:identities[0].programName,programHp:hp,hp,validFrom,coverage:'choice-required',verified:true,courseCodesVerified:true,
   choiceRequired:true,source:'gu-official-programme-syllabus',sourceEvidenceUrl:sourcePlan,sourceUrls:[sourcePage,sourcePlan],
