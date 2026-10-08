@@ -173,13 +173,15 @@
       "programHp": 120,
       "hp": 120,
       "validFrom": "2026HT",
-      "coverage": "complete-semester-sequence",
+      "coverage": "choice-required",
       "verified": true,
       "source": "kth-official-programplan",
       "sourceEvidenceUrl": "https://www.kth.se/student/kurser/program/TDDHM/20262/arskurs1?l=sv",
       "sourceUrls": [
         "https://www.kth.se/student/kurser/program/TDDHM/20262/arskurs1?l=sv",
-        "https://www.kth.se/student/kurser/program/TDDHM/20262/arskurs2?l=sv"
+        "https://www.kth.se/student/kurser/program/TDDHM/20262/arskurs2?l=sv",
+        "https://www.kth.se/student/kurser/program/TDDHM/20262/kurslista?l=en",
+        "https://www.kth.se/student/kurser/program/TDDHM/20252/arskurs2"
       ],
       "rows": [
         {
@@ -259,7 +261,12 @@
           "hp": 30,
           "category": "mandatory"
         }
-      ]
+      ],
+      "choiceRequired": true,
+      "structureCompleteness": "partial-structure",
+      "knownMandatoryHp": 90,
+      "unallocatedChoiceHp": 30,
+      "notes": "KTH:s officiella utbildningsplan för kull HT26 anger 52,5 hp obligatoriskt år 1 och 37,5 hp obligatoriskt år 2. Resterande 30 hp är valbara/rekommenderade kurser och kan inte låsas till angivna terminer utan uttryckligt underlag. HT26-kurstillfällen för CM2028 och CM2035 gäller kull HT25:s år 2, inte kull HT26:s termin 3. Exakta HT27/VT28-datum för kull HT26 är ännu inte verifierade."
     },
     {
       "id": "kth:TFOBM:2026HT",
