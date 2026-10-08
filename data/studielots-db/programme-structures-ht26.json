@@ -87135,36 +87135,6 @@
       },
       {
         "name": "Examensarbete inom material och processdesign, avancerad nivå",
-        "code": "MH201X",
-        "hp": 30,
-        "term": 4,
-        "studyYear": 2,
-        "category": "mandatory",
-        "periodHp": [
-          0,
-          0,
-          0,
-          0
-        ],
-        "termParts": {
-          "3": 0,
-          "4": 30
-        },
-        "crossSemester": false,
-        "allocationComplete": true,
-        "allocationMethod": "teaching-dates",
-        "sourceType": "version",
-        "originalTerm": 4,
-        "__slOriginalTerm": 4,
-        "__slOriginalIndex": 9,
-        "status": "remaining",
-        "credited": false,
-        "isCredited": false,
-        "programmeSource": "kth-programplan",
-        "programmeCategory": "mandatory"
-      },
-      {
-        "name": "Examensarbete inom material och processdesign, avancerad nivå",
         "code": "MH202X",
         "hp": 30,
         "term": 4,
@@ -87200,33 +87170,58 @@
       "https://www.kth.se/student/kurser/program/TTMVM/20262/arskurs2?l=sv"
     ],
     "confidence": "official-machine-readable-sequenced",
-    "coverage": "complete-semester-sequence",
+    "coverage": "choice-required",
     "quality": {
-      "complete": true,
+      "complete": false,
       "expectedTerms": 4,
       "completeTerms": [
         1,
         2,
-        3,
         4
       ],
       "termHp": {
         "1": 31.5,
         "2": 30,
         "3": 0,
-        "4": 60
+        "4": 30
       },
       "incompleteAllocations": 0,
       "crossSemesterCourses": 0,
-      "mandatoryHp": 121.5,
+      "mandatoryHp": 91.5,
       "duplicateYears": [],
       "cohort": "20262",
       "pagesFound": [
         1,
         2
-      ]
+      ],
+      "choiceRequired": true,
+      "unresolvedChoiceHp": 28.5,
+      "unresolvedMinimumElectiveHp": 30
     },
-    "verifiedAt": "2026-09-30T09:28:15.029Z"
+    "verifiedAt": "2026-09-30T09:28:15.029Z",
+    "choiceRequired": true,
+    "structureCompleteness": "partial-structure",
+    "knownMandatoryHp": 91.5,
+    "unallocatedChoiceHp": 28.5,
+    "excludedAlternativeRows": [
+      {
+        "code": "MH201X",
+        "hp": 30,
+        "name": "Examensarbete inom material och processdesign, avancerad nivå",
+        "appliesTo": "CMATD, not two-year TTMVM master intake",
+        "sourceUrl": "https://www.kth.se/student/kurser/program/TTMVM/20262/arskurs2?l=sv"
+      }
+    ],
+    "choiceRequirements": [
+      {
+        "term": 3,
+        "minimumHp": 30,
+        "category": "conditionally-elective",
+        "verificationStatus": "unresolved-overage-1.5hp",
+        "note": "Official plan states >=30 hp conditionally elective in year 2; 61.5 hp mandatory year 1 + 30 hp project + >=30 hp electives = >=121.5 hp. No assumed reduction."
+      }
+    ],
+    "notes": "HT26 cohort: MH202X thesis applies to two-year TTMVM, MH201X belongs to CMATD. 1.5 hp discrepancy unresolved. Term 3 electives not fixed; do not infer course-specific dates from prior intake."
   },
   {
     "university": "KTH",
@@ -100762,7 +100757,7 @@
     "programHp": 120,
     "hp": 120,
     "validFrom": "2026HT",
-    "coverage": "complete-semester-sequence",
+    "coverage": "choice-required",
     "verified": true,
     "source": "kth-official-programplan",
     "sourceEvidenceUrl": "https://www.kth.se/student/kurser/program/TTMVM/20262/arskurs1?l=sv",
@@ -100836,20 +100831,36 @@
       },
       {
         "term": 4,
-        "code": "MH201X",
-        "name": "Examensarbete inom material och processdesign, avancerad nivå",
-        "hp": 30,
-        "category": "mandatory"
-      },
-      {
-        "term": 4,
         "code": "MH202X",
         "name": "Examensarbete inom material och processdesign, avancerad nivå",
         "hp": 30,
         "category": "mandatory"
       }
     ],
-    "migrationSource": "prior-canonical-programme-structures"
+    "migrationSource": "prior-canonical-programme-structures",
+    "choiceRequired": true,
+    "structureCompleteness": "partial-structure",
+    "knownMandatoryHp": 91.5,
+    "unallocatedChoiceHp": 28.5,
+    "excludedAlternativeRows": [
+      {
+        "code": "MH201X",
+        "hp": 30,
+        "name": "Examensarbete inom material och processdesign, avancerad nivå",
+        "appliesTo": "CMATD, not two-year TTMVM master intake",
+        "sourceUrl": "https://www.kth.se/student/kurser/program/TTMVM/20262/arskurs2?l=sv"
+      }
+    ],
+    "choiceRequirements": [
+      {
+        "term": 3,
+        "minimumHp": 30,
+        "category": "conditionally-elective",
+        "verificationStatus": "unresolved-overage-1.5hp",
+        "note": "Official plan states >=30 hp conditionally elective in year 2; 61.5 hp mandatory year 1 + 30 hp project + >=30 hp electives = >=121.5 hp. No assumed reduction."
+      }
+    ],
+    "notes": "HT26 cohort: MH202X thesis applies to two-year TTMVM, MH201X belongs to CMATD. 1.5 hp discrepancy unresolved. Term 3 electives not fixed; do not infer course-specific dates from prior intake."
   },
   {
     "id": "kth:TMEKM:2026HT",
