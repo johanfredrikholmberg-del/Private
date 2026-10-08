@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "programs": [
+    {
+      "id": "kth:CFATE:2026HT",
+      "key": "kungl-tekniska-hogskolan:CFATE",
+      "university": "Kungl. Tekniska högskolan",
+      "programCode": "CFATE",
+      "programName": "Civilingenjörsutbildning i farkostteknik",
+      "programHp": 300,
+      "hp": 300,
+      "validFrom": "2026HT",
+      "coverage": "choice-required",
+      "structureCompleteness": "partial-structure",
+      "choiceRequired": true,
+      "verified": true,
+      "source": "kth-official-programplan",
+      "sourceEvidenceUrl": "https://www.kth.se/student/kurser/program/CFATE/20262/kurslista",
+      "sourceUrls": [
+        "https://www.kth.se/student/kurser/program/CFATE/20262/kurslista"
+      ],
+      "rows": [
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "DD1333",
+          "name": "Grundläggande programmering",
+          "hp": 5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SD1002",
+          "name": "Farkostteknik",
+          "hp": 7,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1668",
+          "name": "Matematisk och numerisk analys I",
+          "hp": 10,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1694",
+          "name": "Tillämpad linjär algebra",
+          "hp": 10.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SG1132",
+          "name": "Mekanik I med projekt",
+          "hp": 11,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SK1112",
+          "name": "Fysik I",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1626",
+          "name": "Flervariabelanalys",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "MF1024",
+          "name": "Produktutveckling",
+          "hp": 11,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SD1120",
+          "name": "Ljud och vibrationer",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SE1010",
+          "name": "Hållfasthetslära, grundkurs med projekt",
+          "hp": 12,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SF1682",
+          "name": "Analytiska och numeriska metoder för differentialekvationer",
+          "hp": 11,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SG1140",
+          "name": "Mekanik II",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SG1216",
+          "name": "Termodynamik",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SG1217",
+          "name": "Strömningsmekanik, grundkurs",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "EL1010",
+          "name": "Reglerteknik, allmän kurs",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "SD2125",
+          "name": "Signaler och mekaniska system",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "SE1025",
+          "name": "FEM för ingenjörstillämpningar",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "MF1017",
+          "name": "Elektroteknik",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "SF1861",
+          "name": "Optimeringslära",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "SF1914",
+          "name": "Sannolikhetsteori och statistik",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "DD1301",
+          "name": "Datorintroduktion",
+          "hp": 1.5,
+          "category": "elective-choice"
+        }
+      ],
+      "knownMandatoryHp": 157,
+      "unmappedMandatoryHp": 23,
+      "unmappedMasterHp": 120,
+      "choiceRequirements": [
+        {
+          "category": "bachelor-thesis-choice",
+          "count": 1,
+          "minimumHp": 15,
+          "studyYear": 3,
+          "options": [
+            {
+              "code": "EF112X",
+              "name": "Examensarbete inom elektroteknik, grundnivå",
+              "hp": 15
+            },
+            {
+              "code": "MF130X",
+              "name": "Examensarbete inom maskinkonstruktion, grundnivå",
+              "hp": 15
+            },
+            {
+              "code": "MF131X",
+              "name": "Examensarbete inom integrerad produktutveckling, grundnivå",
+              "hp": 15
+            },
+            {
+              "code": "MF133X",
+              "name": "Examensarbete inom mekatronik, grundnivå",
+              "hp": 15
+            },
+            {
+              "code": "MJ146X",
+              "name": "Examensarbete inom hållbar energiteknik, grundnivå",
+              "hp": 15
+            },
+            {
+              "code": "SA115X",
+              "name": "Examensarbete inom farkostteknik, grundnivå",
+              "hp": 15
+            }
+          ],
+          "note": "KTH placerar examensarbetet inom villkorligt valfria kurser. Listan ovan innehåller de tydligt identifierade examensarbetena i kurslistan."
+        },
+        {
+          "category": "eligibility-elective-choice",
+          "studyYear": 3,
+          "options": [
+            {
+              "code": "DD1320",
+              "name": "Tillämpad datalogi",
+              "hp": 6
+            },
+            {
+              "code": "ME1003",
+              "name": "Industriell ekonomi, grundkurs",
+              "hp": 6
+            },
+            {
+              "code": "MJ1401",
+              "name": "Värmeöverföring",
+              "hp": 6
+            },
+            {
+              "code": "SH1014",
+              "name": "Modern fysik",
+              "hp": 4
+            },
+            {
+              "code": "SI1146",
+              "name": "Vektoranalys",
+              "hp": 4
+            },
+            {
+              "code": "SI1155",
+              "name": "Teoretisk fysik",
+              "hp": 6
+            },
+            {
+              "code": "ME2163",
+              "name": "Ledarskap och organisering i olika miljöer",
+              "hp": 6
+            }
+          ],
+          "note": "Behörighetskurser beror på masterval. KTH pekar särskilt ut MJ1401 för TSUEM; SI1146 och SH1014 för TTFYM (samt SI1155 för tre spår); DD1320 för TMEKM/TSCRM; ME1003 och ME2163 för TINEM."
+        },
+        {
+          "category": "linked-master-programme-choice",
+          "minimumHp": 120,
+          "studyYears": [
+            4,
+            5
+          ],
+          "options": [
+            "TAEEM",
+            "TFORM",
+            "TSUEM",
+            "TINEM",
+            "TMSKM",
+            "TIPDM",
+            "TNEEM",
+            "TMRSM",
+            "TSCRM",
+            "TTFYM",
+            "TTEMM",
+            "TTMAM",
+            "TMEKM"
+          ],
+          "note": "KTH listar 13 preliminära masterprogram som kan leda till civilingenjörsexamen i farkostteknik. Masterkursraderna måste kopplas in separat."
+        }
+      ],
+      "notes": "KTH:s officiella HT2026-plan anger obligatoriska kurser om 60 hp år 1, 61 hp år 2 och 36 hp gemensamt år 3. År 1 har dessutom en valfri kurs om 1,5 hp. År 3 innehåller examensarbete och behörighetsval som beror på valt masterprogram. Terminsplacering är inte importerad. KTH:s text kräver särskilda teknikkurser om minst 18 hp om studenten kombinerar med master Industriell ekonomi (TINEM). Därför är strukturen ofullständig."
+    }
+  ]
+}
