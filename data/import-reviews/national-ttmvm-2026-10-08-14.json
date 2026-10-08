@@ -1,0 +1,55 @@
+{
+  "kind": "verified-import-review",
+  "batch": "national-2026-10-08-14",
+  "branch": "studielots-v2",
+  "baseHead": "1d3ba937c15a5542869d14d1eb58d9a9bf4e191a",
+  "program": "TTMVM",
+  "validFrom": "2026HT",
+  "verified": {
+    "programmeHp": 120,
+    "year1MandatoryHp": 61.5,
+    "oneDegreeProjectHp": 30,
+    "year2MinimumConditionallyElectiveHp": 30,
+    "unresolvedOverageHp": 1.5,
+    "thesisRoutes": [
+      {
+        "courseCode": "MH202X",
+        "cohort": "two-year TTMVM",
+        "hp": 30,
+        "year": 2,
+        "term": null
+      },
+      {
+        "courseCode": "MH201X",
+        "cohort": "CMATD",
+        "hp": 30,
+        "year": 2,
+        "term": null
+      }
+    ],
+    "sourceUrls": [
+      "https://www.kth.se/student/kurser/program/TTMVM/20262/arskurs1",
+      "https://www.kth.se/student/kurser/program/TTMVM/20262/arskurs2?l=sv",
+      "https://www.kth.se/student/kurser/kurs/MH201X",
+      "https://www.kth.se/student/kurser/kurs/MH202X"
+    ]
+  },
+  "validation": {
+    "cohortSeparation": true,
+    "courseCodesVerified": true,
+    "degreeProjectOnlyOnce": true,
+    "termPlacementUnknown": true,
+    "courseSpecificDatesFor2026IntakeNotVerified": true,
+    "choiceRequired": true
+  },
+  "canonicalChanges": {
+    "programmes": 0,
+    "structures": 0,
+    "courses": 0,
+    "offerings": 0,
+    "duplicates": 0
+  },
+  "status": "canonical-update-blocked",
+  "blocker": "GitHub connector safety check prevented replacement of the supplementary TTMVM structure. Review report contains evidence, not canonical mutation.",
+  "nextAction": "Recheck TTMVM structure, fix MH201X/MH202X cohort alternatives and preserve the unresolved 1.5 hp discrepancy; do not import dates from the prior intake."
+}
