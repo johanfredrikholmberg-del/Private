@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "programs": [
+    {
+      "id": "kth:CMAST:2026HT",
+      "key": "kungl-tekniska-hogskolan:CMAST",
+      "university": "Kungl. Tekniska högskolan",
+      "programCode": "CMAST",
+      "programName": "Civilingenjörsutbildning i maskinteknik",
+      "programHp": 300,
+      "hp": 300,
+      "validFrom": "2026HT",
+      "coverage": "choice-required",
+      "structureCompleteness": "partial-structure",
+      "choiceRequired": true,
+      "verified": true,
+      "source": "kth-official-programplan",
+      "sourceEvidenceUrl": "https://www.kth.se/student/kurser/program/CMAST/20262/kurslista",
+      "sourceUrls": [
+        "https://www.kth.se/student/kurser/program/CMAST/20262/kurslista"
+      ],
+      "rows": [
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "DD1310",
+          "name": "Programmeringsteknik",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "MF1001",
+          "name": "Maskinteknik, introduktionskurs",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "MJ1104",
+          "name": "Praktisk introduktion till energiteknik",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1624",
+          "name": "Algebra och geometri",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1625",
+          "name": "Envariabelanalys",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1626",
+          "name": "Flervariabelanalys",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SG1130",
+          "name": "Mekanik I",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SK1110",
+          "name": "Elektromagnetism och vågrörelselära",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "MG1026",
+          "name": "Tillverkningsteknik",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SF1514",
+          "name": "Numeriska metoder, grundkurs",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SE1010",
+          "name": "Hållfasthetslära, grundkurs med projekt",
+          "hp": 12,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SG1140",
+          "name": "Mekanik II",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "MF1044",
+          "name": "Maskinkomponenter",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "MF1016",
+          "name": "Elektroteknik",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "MJ1112",
+          "name": "Tillämpad termodynamik",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SF1633",
+          "name": "Differentialekvationer I",
+          "hp": 6,
+          "category": "mandatory"
+        }
+      ],
+      "knownMandatoryHp": 120,
+      "unmappedMandatoryHp": 60,
+      "unmappedMasterHp": 120,
+      "choiceRequirements": [
+        {
+          "category": "master-dependent-year-3-courses",
+          "studyYear": 3,
+          "note": "KTH anger att år 3 används för masterberoende behörighetskurser och fördjupning inom maskinteknik. Exakta kurser beror på vald inriktning och framgår av respektive inriktningsplan."
+        },
+        {
+          "category": "bachelor-thesis-choice",
+          "count": 1,
+          "studyYear": 3,
+          "minimumHp": 15,
+          "note": "Ett kandidatexamensarbete inom maskinteknik ska läsas i år 3 oavsett masterval; exakt kurskod och hp ej angivet i kurslistan."
+        },
+        {
+          "category": "linked-master-programme-choice",
+          "minimumHp": 120,
+          "studyYears": [
+            4,
+            5
+          ],
+          "options": [
+            "Industriell ekonomi (TINEM)",
+            "övriga masterprogram som leder till civilingenjörsexamen enligt aktuell utbildningsplan"
+          ],
+          "note": "KTH:s lista hänvisar till den aktuella utbildningsplanen. TINEM kräver dessutom en teknisk profil bland Konstruktion, Energi, Produktion eller Hållfasthetslära."
+        }
+      ],
+      "notes": "KTH:s officiella HT2026-kurslista anger 60 hp obligatoriskt i år 1 och 60 hp i år 2. År 3 är masterberoende och kurslistan hänvisar till respektive inriktning. Den rekommenderade kursen MG1028 är obligatorisk endast för studenter antagna via COPEN och är därför inte markerad som gemensamt obligatorisk. Terminsplacering har inte importerats."
+    }
+  ]
+}
