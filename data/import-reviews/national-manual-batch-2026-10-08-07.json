@@ -1,0 +1,50 @@
+{
+  "run": "2026-10-08-07",
+  "branch": "studielots-v2",
+  "scope": "data/studielots-db and data/import-reviews only",
+  "officialEvidence": "https://www.kth.se/student/kurser/kurs/HI1027/?l=sv",
+  "imported": {
+    "programmes": 0,
+    "programmeStructures": 0,
+    "courses": 1,
+    "courseOfferings": 1,
+    "courseSpecificExactDatePairs": 1
+  },
+  "identity": {
+    "providerId": "p.uoh.kth",
+    "courseCode": "HI1027",
+    "hp": 8,
+    "validFrom": "HT26",
+    "offeringTerm": "HT26",
+    "applicationCode": "10318",
+    "startDate": "2026-08-24",
+    "endDate": "2026-10-23",
+    "studyPacePercent": 67
+  },
+  "prerequisite": "Grundläggande behörighet samt avklarad kurs HI1024, Programmering, grundkurs eller motsvarande.",
+  "programmePlacement": "Not imported: official page lists programme memberships with mandatory/conditional choice distinctions but not one unambiguous semester placement for all programmes.",
+  "creditTransferEvidence": "unknown; not inferred",
+  "deduplication": {
+    "courseCodeInBaseAndExistingAdditionalStorages": 0,
+    "offeringCodeInBaseAndExistingAdditionalStorages": 0,
+    "existingCrossStorageDuplicateOfferingKeys": 11,
+    "newDuplicateKeys": 0
+  },
+  "canonicalCountsAfterImport": {
+    "courseRowsAllStorages": 29714,
+    "uniqueCourseIdentitiesManifest": 29711,
+    "courseOfferingRowsAllStorages": 4144,
+    "uniqueOfferingKeys": 4133
+  },
+  "manifestUpdated": true,
+  "validation": {
+    "courseHpPositive": true,
+    "startBeforeEnd": true,
+    "courseCodeMatches": true,
+    "officialCourseSpecificDates": true,
+    "sourceSusaUsedAsEvidence": false,
+    "filesJsonValid": true,
+    "branchHeadAfterManifest": "c0941086e8c30076d8ab801e4acb5eb7af6fc758"
+  },
+  "remaining": "Existing 11 cross-storage duplicate offering keys require canonical reconciliation; programme links and full national coverage not yet verified."
+}
