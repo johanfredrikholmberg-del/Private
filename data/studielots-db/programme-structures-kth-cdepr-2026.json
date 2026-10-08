@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "programs": [
+    {
+      "id": "kth:CDEPR:2026HT",
+      "key": "kungl-tekniska-hogskolan:CDEPR",
+      "university": "Kungl. Tekniska högskolan",
+      "programCode": "CDEPR",
+      "programName": "Civilingenjörsutbildning i design och produktframtagning",
+      "programHp": 300,
+      "hp": 300,
+      "validFrom": "2026HT",
+      "coverage": "choice-required",
+      "structureCompleteness": "partial-structure",
+      "choiceRequired": true,
+      "verified": true,
+      "source": "kth-official-programplan",
+      "sourceEvidenceUrl": "https://www.kth.se/student/kurser/program/CDEPR/20262/kurslista",
+      "sourceUrls": [
+        "https://www.kth.se/student/kurser/program/CDEPR/20262/kurslista"
+      ],
+      "rows": [
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "MF1061",
+          "name": "Introduktion till design och produktframtagning",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1522",
+          "name": "Numeriska beräkningar",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1624",
+          "name": "Algebra och geometri",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1625",
+          "name": "Envariabelanalys",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "MF1062",
+          "name": "Design och produktframtagning",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1523",
+          "name": "Analytiska och numeriska metoder för differentialekvationer",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1626",
+          "name": "Flervariabelanalys",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SG1130",
+          "name": "Mekanik I",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "MF1063",
+          "name": "Material i design och produktframtagning",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SE1020",
+          "name": "Hållfasthetslära, grundkurs",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SG1140",
+          "name": "Mekanik II",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SD1116",
+          "name": "Konstruktion av tysta och vibrationsfria maskiner",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "MF1064",
+          "name": "Modellering och simulering i design och produktframtagning",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "MJ1112",
+          "name": "Tillämpad termodynamik",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "MF1039",
+          "name": "Design och produktframtagning, komponenter",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "MG1016",
+          "name": "Tillverkningsteknik",
+          "hp": 6,
+          "category": "mandatory"
+        }
+      ],
+      "knownMandatoryHp": 120,
+      "unmappedMandatoryHp": 60,
+      "unmappedMasterHp": 120,
+      "choiceRequirements": [
+        {
+          "category": "year-3-specialisation-and-eligibility",
+          "studyYear": 3,
+          "note": "KTH anger masterberoende behörighetskurser i år 3. Den gemensamma kurslistan hänvisar till masterinriktningarnas separata kursplaner; exakt vald kombination kan inte fastställas utan spårval."
+        },
+        {
+          "category": "bachelor-thesis-choice",
+          "studyYear": 3,
+          "minimumHp": 15,
+          "note": "KTH anger att ett av flera examensarbeten på grundnivå om 15 hp ska läsas oavsett masterval; kodalternativen behöver verifieras på detaljsidan."
+        },
+        {
+          "category": "linked-master-programme-choice",
+          "minimumHp": 120,
+          "studyYears": [
+            4,
+            5
+          ],
+          "options": [
+            "TIPDM",
+            "TPRMM",
+            "TIPUM",
+            "TAEEM",
+            "TFORM",
+            "TSUEM",
+            "TINEM",
+            "TMRSM",
+            "TTEMM"
+          ],
+          "note": "KTH:s kurslista anger dessa masterspår som vägar till civilingenjörsexamen. Behörighetskurserna i år 3 beror på valt spår."
+        }
+      ],
+      "notes": "Den officiella HT2026-kurslistan verifierar obligatoriska kurser för år 1 och 2 (60 hp vardera). År 3 har spårberoende behörighetskurser, villkorligt valfria kurser och ett examensarbete; sidan hänvisar för detaljer till respektive spår och visar dessutom äldre läsårsplaner. Terminsplacering har inte importerats. Därför är detta endast en delstruktur."
+    }
+  ]
+}
