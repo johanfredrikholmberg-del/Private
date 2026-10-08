@@ -60,6 +60,17 @@
     "Previous manifest declared 31035 course rows, but 29696 physical rows were present across all listed course storages before this batch. Reconciled the course row count to 29713 after the 17 new rows.",
     "Three pre-existing duplicate course keys (AG2500, EU2500, SK2532) remain and require conflict-aware merge.",
     "The general coverage-report.md/json was generated before recent canonical batches and requires a full recomputation; this batch report is authoritative only for its own changes.",
-    "Programme structure and programme identity counts were not changed in this batch."
-  ]
+    "Programme structure and programme identity counts were not changed in this batch.",
+    "Programme-structure university coverage previously summed to 1137 although 1171 rows existed; GU count was reconciled from 248 to 282 so per-university totals now sum to 1171.",
+    "GU coverage report now reflects 282 physical structure rows (277 distinct IDs), including five pre-existing duplicate structure IDs requiring review."
+  ],
+  "coverageReconciliation": {
+    "structureRows": 1171,
+    "structureUniversityCountSum": 1171,
+    "guStructureRows": 282,
+    "guVerifiedStructureRows": 105,
+    "guDistinctStructureIds": 277,
+    "guPreExistingDuplicateStructureIdRows": 5,
+    "guCoverageReportUpdated": true
+  }
 }
