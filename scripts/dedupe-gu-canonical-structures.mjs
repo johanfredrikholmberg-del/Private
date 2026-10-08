@@ -21,7 +21,10 @@ for(const [code,group] of byCode){
   // groups) over verified partial/choice-required imports. Never guess between
   // multiple complete plans.
   const candidates=plannerReady.length===1?plannerReady:good;
-  if(candidates.length!==1)throw Error('Ambiguous duplicate GU code: '+code+' '+JSON.stringify(group.map(x=>({part:shards[x.si].part,coverage:x.row.coverage,verified:x.row.verified,rows:x.row.rows?.length,hp:x.row.programHp,url:x.row.sourceEvidenceUrl,branchGroups:x.row.branchGroups?.map(g=>g.branches?.map(b=>b.id)),checkedAt:x.row.checkedAt,signature:JSON.stringify(compact(x.row))})))));
+  if(candidates.length!==1){
+    const details=group.map(x=>({part:shards[x.si].part,coverage:x.row.coverage,verified:x.row.verified,rows:x.row.rows?.length,hp:x.row.programHp,url:x.row.sourceEvidenceUrl,branches:x.row.branchGroups?.map(g=>g.branches?.map(b=>b.id)),checkedAt:x.row.checkedAt,signature:compact(x.row)}));
+    throw Error('Ambiguous duplicate GU code: '+code+' '+JSON.stringify(details));
+  }
   const keep=candidates[0];
   for(const other of group){
     if(other===keep)continue;
