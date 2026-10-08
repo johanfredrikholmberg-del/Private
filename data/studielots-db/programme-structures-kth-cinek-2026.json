@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "programs": [
+    {
+      "id": "kth:CINEK:2026HT",
+      "key": "kungl-tekniska-hogskolan:CINEK",
+      "university": "Kungl. Tekniska högskolan",
+      "programCode": "CINEK",
+      "programName": "Civilingenjörsutbildning i industriell ekonomi",
+      "programHp": 300,
+      "hp": 300,
+      "validFrom": "2026HT",
+      "coverage": "choice-required",
+      "structureCompleteness": "partial-structure",
+      "choiceRequired": true,
+      "verified": true,
+      "source": "kth-official-programplan",
+      "sourceEvidenceUrl": "https://www.kth.se/student/kurser/program/CINEK/20262/kurslista",
+      "sourceUrls": [
+        "https://www.kth.se/student/kurser/program/CINEK/20262/kurslista"
+      ],
+      "rows": [
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "DD1317",
+          "name": "Programmeringsteknik",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "ME1314",
+          "name": "Introduktion till industriell ekonomi",
+          "hp": 9,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1624",
+          "name": "Algebra och geometri",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1625",
+          "name": "Envariabelanalys",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "ME1306",
+          "name": "Industriell projektledning för I",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "ME1315",
+          "name": "Industriell marknadsföring för I",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1626",
+          "name": "Flervariabelanalys",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SG1109",
+          "name": "Mekanik",
+          "hp": 8,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "ME1308",
+          "name": "Industriell verksamhetsledning för I",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "ME1309",
+          "name": "Industriell ekonomistyrning för I",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SF1545",
+          "name": "Numeriska metoder, grundkurs",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SF1633",
+          "name": "Differentialekvationer I",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SF1918",
+          "name": "Sannolikhetsteori och statistik",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "ME1316",
+          "name": "Kvantitativ affärs- och verksamhetsanalys",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SK1110",
+          "name": "Elektromagnetism och vågrörelselära",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "DD1301",
+          "name": "Datorintroduktion",
+          "hp": 1.5,
+          "category": "elective-choice"
+        }
+      ],
+      "knownMandatoryHp": 104,
+      "unmappedMandatoryHp": 76,
+      "unmappedMasterHp": 120,
+      "choiceRequirements": [
+        {
+          "category": "technical-specialisation-choice",
+          "studyYears": [
+            2,
+            3
+          ],
+          "options": [
+            "Energisystem och hållbar utveckling (EHUI)",
+            "Tillämpad matematik (TMAI)",
+            "Datateknik (DTOI)",
+            "Produkt- och produktionsutveckling (PPUI)"
+          ],
+          "note": "KTH:s kurslista organiserar resterande kurser i år 2–3 efter vald teknikinriktning. Endast de gemensamma år 1–2-kurserna har lagts in här."
+        },
+        {
+          "category": "free-elective-choice",
+          "studyYear": 1,
+          "note": "DD1301 Datorintroduktion (1,5 hp) anges som valfri och är inget krav."
+        },
+        {
+          "category": "linked-master-programme-choice",
+          "minimumHp": 120,
+          "studyYears": [
+            4,
+            5
+          ],
+          "note": "År 4–5 läses inom ramen för valt masterprogram; det valda masters påverkar även kurserna i år 2–3."
+        }
+      ],
+      "notes": "KTH:s officiella HT2026-kurslista visar en komplex struktur med fyra teknikinriktningar i år 2–3. År 1:s obligatoriska lista omfattar 60,5 hp; år 2 har sex gemensamma kurser om 36 hp samt SK1110 om 7,5 hp som läses i period 3 eller 4 beroende på teknikinriktning. KTH-sidan visar äldre läsårsplaner för delar av spårstrukturen och säger att ändringar kan ske. Spårkurser och år 3 är därför inte fullständigt importerade; terminsplacering har inte gissats."
+    }
+  ]
+}
