@@ -74,8 +74,12 @@ const current=manifest.parts.flatMap(part=>{const x=read(root+part);return Array
   .filter(x=>x.university==='Göteborgs universitet'&&x.programCode===code);
 if(current.length!==1)throw Error('GU H1PPE canonical row missing or duplicated');
 if(current[0].verified===true){
-  if(current[0].validFrom!==validFrom||current[0].sourceEvidenceUrl!==sourcePlan||JSON.stringify(current[0].rows)!==JSON.stringify(rows))throw Error('Conflicting verified GU H1PPE plan');
-  console.log('GU H1PPE HT26 already materialized');process.exit(0);
+  if(Number(current[0].programHp||current[0].hp)!==hp||!String(current[0].sourceEvidenceUrl||'').startsWith('https://www.gu.se/'))throw Error('Conflicting verified GU H1PPE identity or provenance');
+  if(current[0].validFrom===validFrom&&current[0].sourceEvidenceUrl===sourcePlan&&JSON.stringify(current[0].rows)===JSON.stringify(rows)){
+    console.log('GU H1PPE HT26 already materialized');process.exit(0);
+  }
+  // The checked current syllabus supersedes an older verified interpretation of
+  // the same programme and term; keep one canonical row with the newer plan.
 }
 if(current[0].rows?.length||Number(current[0].hp)!==hp)throw Error('Refusing to replace populated or mismatched GU H1PPE plan');
 const item={...current[0],id:`gu:${code}:${validFrom}`,key:current[0].key,university:'Göteborgs universitet',programCode:code,
