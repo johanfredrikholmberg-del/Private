@@ -721,35 +721,100 @@
         "code": "MMG220",
         "name": "Matematikens grunder",
         "hp": 7.5,
-        "category": "mandatory"
+        "category": "mandatory",
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|MMG220|HT26|GU-17006",
+            "offeringTerm": "HT26",
+            "startDate": "2026-08-31",
+            "endDate": "2026-11-03",
+            "datePrecision": "exact",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/matematikens-grunder-mmg220",
+            "programmeCohort": "2026HT",
+            "cohortAssignment": "course-offering-matched-to-programme-term"
+          }
+        ]
       },
       {
         "term": 1,
         "code": "MMG230",
         "name": "Envariabelanalys 1",
         "hp": 7.5,
-        "category": "mandatory"
+        "category": "mandatory",
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|MMG230|HT26|GU-17014",
+            "offeringTerm": "HT26",
+            "startDate": "2026-08-31",
+            "endDate": "2026-11-03",
+            "datePrecision": "exact",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/envariabelanalys-1-mmg230",
+            "programmeCohort": "2026HT",
+            "cohortAssignment": "course-offering-matched-to-programme-term"
+          }
+        ]
       },
       {
         "term": 1,
         "code": "MMG250",
         "name": "Linjär algebra",
         "hp": 7.5,
-        "category": "mandatory"
+        "category": "mandatory",
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|MMG250|HT26|GU-17029",
+            "offeringTerm": "HT26",
+            "startDate": "2026-11-06",
+            "endDate": "2027-01-17",
+            "datePrecision": "exact",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/linjar-algebra-mmg250",
+            "programmeCohort": "2026HT",
+            "cohortAssignment": "course-offering-matched-to-programme-term"
+          }
+        ]
       },
       {
         "term": 1,
         "code": "MVG302",
         "name": "Programmering med Python",
         "hp": 7.5,
-        "category": "mandatory"
+        "category": "mandatory",
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|MVG302|HT26|GU-17041",
+            "offeringTerm": "HT26",
+            "startDate": "2026-11-06",
+            "endDate": "2027-01-17",
+            "datePrecision": "exact",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/programmering-med-python-mvg302",
+            "programmeCohort": "2026HT",
+            "cohortAssignment": "course-offering-matched-to-programme-term"
+          }
+        ]
       },
       {
         "term": 2,
         "code": "MMG240",
         "name": "Envariabelanalys 2",
         "hp": 7.5,
-        "category": "mandatory"
+        "category": "mandatory",
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|MMG240|VT27|GU-17025",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-18",
+            "endDate": "2027-03-29",
+            "datePrecision": "exact",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/envariabelanalys-2-mmg240",
+            "programmeCohort": "2026HT",
+            "cohortAssignment": "course-offering-matched-to-programme-term"
+          }
+        ]
       },
       {
         "term": 2,
@@ -763,7 +828,20 @@
         "code": "MMG320",
         "name": "Flervariabelanalys 1",
         "hp": 7.5,
-        "category": "mandatory"
+        "category": "mandatory",
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|MMG320|VT27|GU-17042",
+            "offeringTerm": "VT27",
+            "startDate": "2027-03-30",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/flervariabelanalys-1-mmg320",
+            "programmeCohort": "2026HT",
+            "cohortAssignment": "course-offering-matched-to-programme-term"
+          }
+        ]
       },
       {
         "term": 2,
@@ -1043,7 +1121,7 @@
         ]
       }
     ],
-    "notes": "Utbildningsplanen gäller från HT2026. Termin 1–3 anges med 30 hp vardera. Termin 4–6 innehåller NTH001 och en av tre inriktningar; kursvalens exakta terminsplacering framgår inte. Varje angiven inriktning omfattar återstående 82,5 hp inklusive NTH001.",
+    "notes": "Utbildningsplanen gäller från HT2026. Termin 1–3 anges med 30 hp vardera. Termin 4–6 innehåller NTH001 och en av tre inriktningar; kursvalens exakta terminsplacering framgår inte. Varje angiven inriktning omfattar återstående 82,5 hp inklusive NTH001. HT26-kullens termin 1 och VT27 termin 2 har 6 kursrader med publicerade exakta kursdatum länkade till redan befintliga canonicala courseOfferings via offeringKey. Datum är hämtade från GU:s officiella kurssidor och är kursutbudets start/slut, inte examinationsdagar eller garanterat personligt schema. Kurser utan verifierade kursdatum för denna kull behåller okända datum; inga terminsintervall har använts som ersättning.",
     "branchGroups": [
       {
         "id": "specialisation",
