@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-08T03:52:53.981Z",
+  "branch": "studielots-v2",
+  "batch": "gu-v1ssp-course-identities-2026-10-08",
+  "scope": "canonical-data-only",
+  "source": "Göteborgs universitet official HT26 programme plan and Studentportal programme overview",
+  "verifiedProgramme": {
+    "code": "V1SSP",
+    "name": "Sjuksköterskeprogrammet",
+    "hp": 180,
+    "validFrom": "2026HT",
+    "structureAlreadyPresent": true,
+    "termHp": {
+      "1": 30,
+      "2": 30,
+      "3": 30,
+      "4": 30,
+      "5": 30,
+      "6": 30
+    }
+  },
+  "sources": [
+    "https://studentportal.gu.se/program/sjukskoterskeprogrammet",
+    "https://studentportal.gu.se/sites/default/files/2026-06/SSK%20Program%C3%B6versikt%20HT26%20%281%29%20%283%29.pdf",
+    "https://studentportal.gu.se/sites/default/files/2026-01/V1SSP%20Sjuksk%C3%B6terskeprogrammet%20_%20180%2C0%20hp%20H26.pdf"
+  ],
+  "changes": {
+    "programmesAdded": 0,
+    "programmesUpdated": 0,
+    "programmeStructuresAdded": 0,
+    "programmeStructuresUpdated": 0,
+    "coursesAdded": 17,
+    "coursesUpdated": 0,
+    "courseOfferingsAdded": 0,
+    "courseOfferingsUpdated": 0
+  },
+  "validation": {
+    "officialCourseCodesVerified": 17,
+    "distinctNewCourseCodes": 17,
+    "newDuplicateIdentities": 0,
+    "missingHp": 0,
+    "invalidHp": 0,
+    "invalidDates": 0,
+    "datesInvented": 0,
+    "termTotalsValidated": 6
+  },
+  "canonicalCourseStorage": {
+    "rowsBefore": 29696,
+    "rowsAfter": 29713,
+    "uniqueIdentitiesBefore": 29693,
+    "uniqueIdentitiesAfter": 29710,
+    "preExistingDuplicateExtraRows": 3,
+    "declaredRowsBefore": 31035,
+    "manifestRowsAfter": 29713,
+    "manifestReconciledToPhysicalStorage": true
+  },
+  "notes": [
+    "Course dates were not inferred from programme dates or week grid.",
+    "Previous manifest declared 31035 course rows, but 29696 physical rows were present across all listed course storages before this batch. Reconciled the course row count to 29713 after the 17 new rows.",
+    "Three pre-existing duplicate course keys (AG2500, EU2500, SK2532) remain and require conflict-aware merge.",
+    "The general coverage-report.md/json was generated before recent canonical batches and requires a full recomputation; this batch report is authoritative only for its own changes.",
+    "Programme structure and programme identity counts were not changed in this batch."
+  ]
+}
