@@ -75,3 +75,5 @@ if (report.added) {
 fs.mkdirSync('data/import-reviews', {recursive: true});
 fs.writeFileSync('data/import-reviews/kth-dated-offerings.json', JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify({...report, sourceFailures: report.sourceFailures.length, noDatedRound: report.noDatedRound.length, conflictingCredits: report.conflictingCredits.length}));
+
+// Resume official KTH dated course offering refresh 2026-10-08.
