@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "programs": [
+    {
+      "id": "kth:CINTE:2026HT",
+      "key": "kungl-tekniska-hogskolan:CINTE",
+      "university": "Kungl. Tekniska högskolan",
+      "programCode": "CINTE",
+      "programName": "Civilingenjörsutbildning i informationsteknik",
+      "programHp": 300,
+      "hp": 300,
+      "validFrom": "2026HT",
+      "coverage": "choice-required",
+      "structureCompleteness": "partial-structure",
+      "choiceRequired": true,
+      "verified": true,
+      "source": "kth-official-programplan",
+      "sourceEvidenceUrl": "https://www.kth.se/student/kurser/program/CINTE/20262/kurslista",
+      "sourceUrls": [
+        "https://www.kth.se/student/kurser/program/CINTE/20262/kurslista"
+      ],
+      "rows": [
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "IE1204",
+          "name": "Digital design",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "II1308",
+          "name": "Introduktion till programmering",
+          "hp": 1.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1624",
+          "name": "Algebra och geometri",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1689",
+          "name": "Baskurs i matematik",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "ID1021",
+          "name": "Algoritmer och datastrukturer",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "IE1206",
+          "name": "Inbyggd elektronik",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1625",
+          "name": "Envariabelanalys",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "ID1022",
+          "name": "Konsten att programmera",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 1,
+          "code": "SF1698",
+          "name": "Diskret matematik",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "SF1912",
+          "name": "Sannolikhetsteori och statistik",
+          "hp": 6,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "II1305",
+          "name": "Projekt inom informations- och kommunikationsteknik",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "II1307",
+          "name": "Aktiv karriärstart",
+          "hp": 1.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "IK1203",
+          "name": "Nätverk och kommunikation",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "IS1200",
+          "name": "Datorteknik, grundkurs",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 2,
+          "code": "IS1300",
+          "name": "Inbyggda system",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "AL1523",
+          "name": "Digitalisering och innovation för hållbar utveckling",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "IA150X",
+          "name": "Examensarbete inom informationsteknik, grundnivå",
+          "hp": 15,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "ID1206",
+          "name": "Operativsystem",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": null,
+          "studyYear": 3,
+          "code": "IV1013",
+          "name": "Introduktion till datasäkerhet",
+          "hp": 7.5,
+          "category": "mandatory"
+        }
+      ],
+      "knownMandatoryHp": 135,
+      "unmappedMasterHp": 120,
+      "choiceRequirements": [
+        {
+          "category": "MatNat-block",
+          "minimumHp": 15,
+          "studyYears": [
+            1,
+            2,
+            3
+          ],
+          "options": [
+            {
+              "code": "SF1686",
+              "name": "Flervariabelanalys",
+              "hp": 7.5
+            },
+            {
+              "code": "SF1683",
+              "name": "Differentialekvationer och transformmetoder",
+              "hp": 9
+            },
+            {
+              "code": "SF1633",
+              "name": "Differentialekvationer I",
+              "hp": 6
+            },
+            {
+              "code": "EQ1110",
+              "name": "Tidskontinuerliga signaler och system",
+              "hp": 6
+            },
+            {
+              "code": "SK1118",
+              "name": "Elektromagnetism och vågrörelselära",
+              "hp": 7.5
+            },
+            {
+              "code": "DD1351",
+              "name": "Logik för dataloger",
+              "hp": 7.5
+            },
+            {
+              "code": "SF1546",
+              "name": "Numeriska metoder, grundkurs",
+              "hp": 6
+            },
+            {
+              "code": "EL1010/EL1020",
+              "name": "Reglerteknik, allmän kurs",
+              "hp": 6
+            }
+          ],
+          "exclusions": [
+            "Only one of EQ1110/SF1683/SF1633 can count.",
+            "Only one of EL1010/EL1020 can count."
+          ],
+          "note": "KTH kräver minst 15 hp ur MatNat-blocket. Alternativen och läsår uppges på kurslistan."
+        },
+        {
+          "category": "IT-block",
+          "minimumHp": 13.5,
+          "studyYears": [
+            1,
+            2,
+            3
+          ],
+          "options": [
+            {
+              "code": "DD2350",
+              "name": "Algoritmer, datastrukturer och komplexitet",
+              "hp": 9.5
+            },
+            {
+              "code": "DD2352",
+              "name": "Algoritmer och komplexitet",
+              "hp": 7.5
+            },
+            {
+              "code": "ID1214",
+              "name": "Artificiell intelligens och tillämpningar",
+              "hp": 7.5
+            },
+            {
+              "code": "IV1351",
+              "name": "Datalagring",
+              "hp": 7.5
+            },
+            {
+              "code": "ID1217",
+              "name": "Programmering av parallella system",
+              "hp": 7.5
+            },
+            {
+              "code": "II1303",
+              "name": "Signalbehandling",
+              "hp": 7.5
+            },
+            {
+              "code": "IV1350",
+              "name": "Objektorienterad design",
+              "hp": 7.5
+            },
+            {
+              "code": "IL1333",
+              "name": "Hårdvarusäkerhet",
+              "hp": 7.5
+            },
+            {
+              "code": "IE1207",
+              "name": "Analog Elektronik",
+              "hp": 6
+            },
+            {
+              "code": "DH2642",
+              "name": "Interaktionsprogrammering och dynamiska webben",
+              "hp": 7.5
+            }
+          ],
+          "exclusions": [
+            "Only one of DD2350/DD2352 can count."
+          ],
+          "note": "KTH kräver minst 13,5 hp ur IT-blocket."
+        },
+        {
+          "category": "free-elective-choice",
+          "maximumHp": 16.5,
+          "studyYears": [
+            1,
+            2,
+            3
+          ],
+          "note": "KTH anger utrymme för upp till 16,5 hp valfria kurser; rekommenderar i första hand behörighetskurser för valt masterprogram."
+        },
+        {
+          "category": "linked-master-programme-choice",
+          "minimumHp": 120,
+          "studyYears": [
+            4,
+            5
+          ],
+          "note": "År 4–5 följer utbildningsplanen för valt masterprogram; masterspåret ingår inte i denna delstruktur."
+        }
+      ],
+      "notes": "KTH:s HT2026-plan anger gemensamma obligatoriska kurser om 60 hp år 1, 37,5 hp år 2 och 37,5 hp år 3. För examen måste dessutom minst 15 hp ur MatNat-blocket och minst 13,5 hp ur IT-blocket ingå; upp till 16,5 hp är valfria. Blockvalen är återgivna som krav, inte dubblerade som obligatoriska kurser. Terminsplacering har lämnats okänd där KTH bara anger årskurs eller valmöjlighet."
+    }
+  ]
+}
