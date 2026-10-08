@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "kind": "canonical-import-review",
+  "batch": "national-2026-10-08-11",
+  "branch": "studielots-v2",
+  "baseHead": "e2e39582a9ddd5eba676cc91ae9284a4f87bd84e",
+  "scope": "KTH TDDHM cohort/term identity validation HT26/VT27",
+  "snapshot": {
+    "providers": 49,
+    "programmes": 3190,
+    "programmeStructures": 1123,
+    "courses": 29714,
+    "courseOfferings": 4337
+  },
+  "evidence": [
+    {
+      "type": "official-programme-syllabus",
+      "url": "https://www.kth.se/student/kurser/program/TDDHM/20262/kurslista?l=en",
+      "detail": "For 2026 starting cohort: year 1 mandatory 52.5 hp, year 2 mandatory 37.5 hp, with recommended electives."
+    },
+    {
+      "type": "official-programme-year2",
+      "url": "https://www.kth.se/student/kurser/program/TDDHM/20252/arskurs2",
+      "detail": "For 2025 starting cohort, second year 2026/27: CM2028 4 hp and CM2035 3.5 hp in P1 of HT26."
+    },
+    {
+      "type": "official-course-offering",
+      "url": "https://www.kth.se/student/kurser/kurs/CM2035",
+      "detail": "CM2035 HT26, 2026-08-24 to 2026-10-23, code 10280, programme year 2."
+    },
+    {
+      "type": "official-course-offering",
+      "url": "https://www.kth.se/student/kurser/kurs/HL207X?l=sv",
+      "detail": "HL207X has an HT26 course offering 2026-08-24 to 2027-01-11, code 12740, but page does not confirm membership in 2026-starting cohort."
+    }
+  ],
+  "verifiedExisting": [
+    {
+      "code": "CM2028",
+      "term": "HT26",
+      "applicationCode": "10272",
+      "cohortContext": "2025HT intake, year 2",
+      "canonicalSource": "course-offerings-kth-tddhm-2026-2027-batch-2.json"
+    },
+    {
+      "code": "CM2035",
+      "term": "HT26",
+      "applicationCode": "10280",
+      "cohortContext": "2025HT intake, year 2",
+      "canonicalSource": "course-offerings-kth-tddhm-2026-2027-batch-2.json"
+    }
+  ],
+  "issues": [
+    {
+      "type": "cohort-offering-mismatch-risk",
+      "severity": "high",
+      "detail": "Do not attach HT26 CM2028 or CM2035 offerings to term 3 of TDDHM cohort 2026HT: term 3 for that intake falls in HT27. HT26 offerings correspond to an earlier cohort."
+    },
+    {
+      "type": "mandatory-hp-not-total",
+      "severity": "high",
+      "detail": "Official mandatory courses total 90 hp (52.5 + 37.5), while programme is 120 hp. Preserve elective/choice-required gap of 30 hp; do not assert a fully fixed 120-hp sequence."
+    },
+    {
+      "type": "date-unavailable-for-cohort",
+      "severity": "medium",
+      "detail": "HL207X HT26 offering cannot be assigned to 2026HT intake's term 4; that cohort's term 4 is VT28. Do not reuse the earlier cohort's dates."
+    }
+  ],
+  "canonicalChanges": {
+    "newProgrammes": 0,
+    "updatedProgrammes": 0,
+    "newStructures": 0,
+    "updatedStructures": 0,
+    "newCourses": 0,
+    "updatedCourses": 0,
+    "newOfferings": 0,
+    "updatedOfferings": 0,
+    "duplicatesAdded": 0
+  },
+  "status": "review-only-no-canonical-mutation",
+  "nextAction": "Confirm cohort-aware programme-offering links and exact course-specific dates for 2026HT cohort in HT27/VT28 before canonical structure update. Recalculate usable structure coverage from canonical files, not stale coverage-report.md."
+}
