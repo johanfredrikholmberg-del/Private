@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "batchId": "gu-s1gsa-timeedit-offerings-2026-10-10",
+  "checkedAt": "2026-10-10T16:17:43.927Z",
+  "university": "Göteborgs universitet",
+  "programmeCode": "S1GSA",
+  "status": "verified",
+  "summary": "Added two dated HT26 offerings to a new manifest-declared canonical StudieLots DB offering shard. All 16 S1GSA course identities and its complete seven-term programme structure were already present in the latest branch and were left unchanged.",
+  "additions": [
+    {
+      "courseCode": "SQ2611",
+      "courseHp": 15,
+      "offeringTerm": "HT26",
+      "startDate": "2026-08-31",
+      "endDate": "2026-11-03",
+      "applicationCode": "79023",
+      "source": "gu-official-timeedit-schedule",
+      "sourceUrl": "https://cloud.timeedit.net/gu/web/schema/ri1156wQ5500Y6QQ26Z737100Zy2Y3751gY75QX26.html"
+    },
+    {
+      "courseCode": "SQ2612",
+      "courseHp": 15,
+      "offeringTerm": "HT26",
+      "startDate": "2026-11-04",
+      "endDate": "2027-01-15",
+      "applicationCode": "79022",
+      "source": "gu-official-timeedit-schedule",
+      "sourceUrl": "https://cloud.timeedit.net/gu/web/schema/ri1156wQ5500Y6QQ26Z787100Zy2Y3752gY75QX26.html"
+    }
+  ],
+  "unresolved": {
+    "courseCodes": [
+      "SQ2621",
+      "SQ2622",
+      "SQ2623",
+      "SQ2631",
+      "SQ2632",
+      "SQ2633",
+      "SQ2641",
+      "SQ2642",
+      "SQ2643",
+      "SQ2644",
+      "SQ2651",
+      "SQ2661",
+      "SQ2662",
+      "SQ2671"
+    ],
+    "reason": "No dated offering rows were present for these later programme courses. GU Studentportal says spring schedules publish 15 December; no dates were inferred."
+  },
+  "officialSources": [
+    "https://www.gu.se/studera/hitta-utbildning/socionomprogrammet-s1gsa",
+    "https://studentportal.gu.se/program/socionomprogrammet-s1gsa",
+    "https://www.gu.se/syllabus/db0917fa-baf7-11f0-953d-cdfbd18d49f3",
+    "https://studentportal.gu.se/dina-studier/schema"
+  ],
+  "checks": {
+    "courseStructureAndIdentitiesAlreadyCanonical": true,
+    "manifestDeclaredOfferingShard": "data/studielots-db/course-offerings-gu-s1gsa-2026-10-10.json",
+    "manifestRowsBefore": 4354,
+    "manifestRowsAfter": 4356,
+    "uniqueIdentitiesBefore": 4343,
+    "uniqueIdentitiesAfter": 4345,
+    "preexistingDuplicateKeysUnchanged": 11,
+    "newOfferingKeyDuplicates": 0,
+    "officialScheduleDates": true,
+    "retakeDatesExcluded": true
+  }
+}
