@@ -13,11 +13,15 @@ const context = {
     calls.push(String(url));
     const params = new URLSearchParams(String(url).split('?')[1]);
     const offerings = {
-      HT26: [{ courseCode: 'A', offeringTerm: 'HT26', startDate: '2026-09-01', endDate: '2026-12-15', datePrecision: 'exact', sourceUrl: 'https://gu.se/a' }],
+      HT26: [
+        { courseCode: 'A', offeringTerm: 'HT26', startDate: '2026-09-01', endDate: '2026-12-15', datePrecision: 'exact', sourceUrl: 'https://gu.se/a' },
+        { courseCode: 'C', courseName: 'Kurs C', courseHp: 7.5, offeringTerm: 'HT26', startDate: '2026-10-01', endDate: '2026-12-20', datePrecision: 'exact', sourceUrl: 'https://gu.se/c' }
+      ],
       VT27: [{ courseCode: 'B', offeringTerm: 'VT27', startDate: '2027-01-18', endDate: '2027-06-06', datePrecision: 'exact', sourceUrl: 'https://gu.se/b' }]
     }[params.get('term')] || [];
     const codes = new Set((params.get('codes') || '').split(','));
-    return { ok: true, json: async () => ({ offerings: offerings.filter(x => codes.has(x.courseCode)) }) };
+    const names = JSON.parse(params.get('names') || '[]');
+    return { ok: true, json: async () => ({ offerings: offerings.filter(x => codes.has(x.courseCode) || names.some(n => n.name === x.courseName && n.hp === x.courseHp)) }) };
   },
   URLSearchParams,
   console
@@ -41,12 +45,14 @@ assert.match(context.courseDateLabel({ __offers: [{ startDate: '2027-01-18', end
 (async () => {
   const data = { verified: true, item: { university: 'Göteborgs universitet' }, rows: [
     { code: 'A', name: 'Kurs A', hp: 7.5, term: 1 },
-    { code: 'B', name: 'Kurs B', hp: 7.5, term: 2 }
+    { code: 'B', name: 'Kurs B', hp: 7.5, term: 2 },
+    { code: '', name: 'Kurs C', hp: 7.5, term: 1 }
   ] };
   state.plannerData = data;
   await context.attachOrdinaryOfferings(data, 0);
   assert.equal(state.plannerData.rows[0].__offers[0].offeringTerm, 'HT26');
   assert.equal(state.plannerData.rows[1].__offers[0].offeringTerm, 'VT27');
+  assert.equal(state.plannerData.rows[2].__offers[0].courseCode, 'C');
   assert.match(context.courseDateLabel(state.plannerData.rows[0], { startTerm: 'HT26', termPlacementVerified: true }), /1 sep.*15 dec.*2026/);
   assert.equal(calls.length, 2);
   console.log('Planner course dates: ordinary and fast route dates covered');

@@ -12,8 +12,9 @@ function decisions(data){
  const records=new Map((window.StudieLotsEngines?.creditTransferHistory?.decisions||[]).filter(d=>decisionId(d)).map(d=>[decisionId(d),d]));
  const unique=new Map();
  for(const row of data.rows)for(const id of model.describe(row).historicalIds){
-  const decision=records.get(id);
-  if(decision&&!unique.has(id))unique.set(id,decision);
+  const baseId=id.replace(/#\d+$/,'');
+  const decision=records.get(id)||records.get(baseId);
+  if(decision&&!unique.has(baseId))unique.set(baseId,decision);
  }
  return [...unique.values()];
 }
@@ -25,13 +26,14 @@ function strongCard(row,index,data){
 function panelHtml(data){
  const strong=ordered(data).map((row,index)=>({row,index})).filter(x=>isStrong(x.row));
  const historical=decisions(data);
- const decisionList=historical.length?`<ul class="evidence-history-list">${historical.map(d=>`<li><b>${esc(d.sourceName||d.fromName||'Tidigare kurs')} → ${esc(d.targetName||d.toName||'Programkurs')}</b><small>${esc(d.university||d.source||'Lärosäte saknas')} · beslut ${esc(decisionId(d))}</small></li>`).join('')}</ul>`:'<p>Inga verifierade bifall matchar de här kursparen i vår beslutsdata.</p>';
- return `<section class="evidence-group"><h3>Starkt underlag <span>${strong.length}</span></h3>${strong.length?`<div class="evidence-item-list">${strong.map(x=>strongCard(x.row,x.index,data)).join('')}</div>`:'<p>Ingen kurs har starkt underlag här.</p>'}</section><section class="evidence-group"><h3>Historiska bifall <span>${historical.length}</span></h3>${decisionList}</section><p class="evidence-disclaimer">Bedömningen är preliminär. Lärosätet fattar beslut.</p><details class="evidence-prep"><summary>Handlingar och underlagspaket</summary><div><p>Du kan behöva Ladok-intyg och kursplaner. Kontrollera lärosätets krav.</p><button type="button" data-evidence-export data-premium-feature="evidence-package" aria-disabled="true">Hämta underlagspaket <small>Kommer senare</small></button><span class="evidence-export-message" role="status" aria-live="polite"></span></div></details>`;
+ const approvalCount=historical.reduce((sum,d)=>sum+Math.max(1,Number(d.approvalCount)||1),0);
+ const decisionList=historical.length?`<ul class="evidence-history-list">${historical.map(d=>{const details=[d.sourceInstitution?`från ${d.sourceInstitution}`:'',d.decisionDate?`beslut ${d.decisionDate}`:'beslutsdatum saknas i datan',`${Math.max(1,Number(d.approvalCount)||1)} bifall`,decisionId(d)].filter(Boolean).join(' · ');return`<li><b>${esc(d.sourceName||d.fromName||'Tidigare kurs')} → ${esc(d.targetName||d.toName||'Programkurs')}</b><small>${esc(d.university||d.source||'Lärosäte saknas')} · ${esc(details)}</small></li>`}).join('')}</ul>`:'<p>Inga verifierade bifall matchar de här kursparen i vår beslutsdata.</p>';
+ return `<section class="evidence-group"><h3>Starkt underlag <span>${strong.length}</span></h3>${strong.length?`<div class="evidence-item-list">${strong.map(x=>strongCard(x.row,x.index,data)).join('')}</div>`:'<p>Ingen kurs har starkt underlag här.</p>'}</section><section class="evidence-group"><h3>Historiska bifall <span>${approvalCount}</span></h3>${decisionList}</section><p class="evidence-disclaimer">Bedömningen är preliminär. Lärosätet fattar beslut.</p><details class="evidence-prep"><summary>Handlingar och underlagspaket</summary><div><p>Du kan behöva Ladok-intyg och kursplaner. Kontrollera lärosätets krav.</p><button type="button" data-evidence-export data-premium-feature="evidence-package" aria-disabled="true">Hämta underlagspaket <small>Kommer senare</small></button><span class="evidence-export-message" role="status" aria-live="polite"></span></div></details>`;
 }
 let open=false;
 function sync(data=root.appContext?.state?.plannerData){
  if(!Array.isArray(data?.rows)||!data.rows.length){entry.hidden=true;panel.hidden=true;return}
- const strong=data.rows.filter(isStrong).length,historical=decisions(data).length;
+ const strong=data.rows.filter(isStrong).length,historical=decisions(data).reduce((sum,d)=>sum+Math.max(1,Number(d.approvalCount)||1),0);
  entry.innerHTML=`<div><b>Underlag</b><span>${strong} ${strong===1?'stark kursmatchning':'starka kursmatchningar'} · ${historical} tidigare bifall</span></div><button type="button" data-evidence-open aria-expanded="${open}" aria-controls="evidencePanel">${open?'Dölj ↑':'Visa →'}</button>`;
  entry.hidden=false;
  panel.innerHTML=panelHtml(data);

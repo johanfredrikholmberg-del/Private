@@ -44,3 +44,21 @@ test('invalid range term is rejected', async () => {
   const res = await call({ fromTerm: '2027', codes: 'A1' });
   assert.equal(res.statusCode, 400);
 });
+
+test('course name and hp resolve offerings when a structure row has no course code', async () => {
+  sandbox.__rows = [{ university: 'Lunds universitet', courseCode: 'ABC123', courseName: 'Statistik: Grundkurs 1', courseHp: 15, offeringTerm: 'HT26', startDate: '2026-08-31', endDate: '2026-11-03' }];
+  const res = await call({ term: 'HT26', names: JSON.stringify([{ name: 'Statistik: Grundkurs 1', hp: 15 }]), university: 'Lunds universitet' });
+  assert.equal(res.statusCode, 200);
+  assert.equal(res.body.count, 1);
+  assert.equal(res.body.offerings[0].courseCode, 'ABC123');
+});
+
+test('ambiguous exact course names are not guessed', async () => {
+  sandbox.__rows = [
+    { university: 'Lunds universitet', courseCode: 'ABC123', courseName: 'Statistik: Grundkurs 1', courseHp: 15, offeringTerm: 'HT26' },
+    { university: 'Lunds universitet', courseCode: 'XYZ987', courseName: 'Statistik: Grundkurs 1', courseHp: 15, offeringTerm: 'HT26' }
+  ];
+  const res = await call({ term: 'HT26', names: JSON.stringify([{ name: 'Statistik: Grundkurs 1', hp: 15 }]), university: 'Lunds universitet' });
+  assert.equal(res.statusCode, 200);
+  assert.equal(res.body.count, 0);
+});

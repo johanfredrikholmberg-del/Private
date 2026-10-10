@@ -17,7 +17,7 @@ const context={window:{StudieLotsV2:root,StudieLotsEvidenceModel:model,StudieLot
 vm.runInNewContext(fs.readFileSync(require.resolve('../src/features/planner/evidence-view.js'),'utf8'),context);
 root.evidenceView.render(data);
 assert.match(nodes['#evidenceEntry'].innerHTML,/1 stark kursmatchning · 1 tidigare bifall/);
-assert.match(nodes['#evidencePanel'].innerHTML,/beslut RE1/);
+assert.match(nodes['#evidencePanel'].innerHTML,/beslutsdatum saknas i datan · 1 bifall · RE1/);
 assert.match(nodes['#evidencePanel'].innerHTML,/Stark kurs/);
 assert.doesNotMatch(nodes['#evidencePanel'].innerHTML,/Relevant kurs/);
 assert.equal(cards[0].children.length,1);

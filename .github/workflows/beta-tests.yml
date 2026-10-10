@@ -21,13 +21,23 @@ jobs:
           node-version: 22
       - name: Ladok fixture
         run: node scripts/ladok-regression-test.mjs
-      - name: Pure requirements
-        run: node scripts/pure-requirements-test.mjs
-      - name: Runtime ownership
-        run: node scripts/runtime-ownership-test.mjs
-      - name: Fast route behavior
-        run: node scripts/fast-route-behavior-test.mjs
-      - name: Planner scenario stress suite
-        run: node scripts/planner-scenario-stress-test.mjs
-      - name: Fast access/paywall boundary
-        run: node scripts/fast-access-regression-test.mjs
+      - name: Current API and engine tests
+        run: node --test tests/*.test.cjs tests/*.test.mjs
+      - name: Planner course dates
+        run: node tests/planner-course-dates.cjs
+      - name: Historical evidence view
+        run: node tests/evidence-view.cjs
+      - name: Credit ledger regression
+        run: node tests/credit-ledger-regression.cjs
+      - name: Subject programme score regression
+        run: node tests/subject-program-score-regression.cjs
+      - name: Credit transfer rules
+        run: node scripts/test-credit-transfer.mjs
+      - name: Degree rules and programme matching
+        run: |
+          node scripts/v2-degree-rules-regression-test.mjs
+          node scripts/v2-credit-match-regression-test.mjs
+      - name: Canonical runtime and module boundaries
+        run: |
+          node scripts/v2-runtime-source-guard.mjs
+          node scripts/v2-module-boundaries-test.mjs

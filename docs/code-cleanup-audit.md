@@ -24,3 +24,9 @@ Status: första kartläggning, **ingen modul är ännu bevisat oanvänd**. Arbet
 ## Avgränsning
 
 Denna kartläggning är inte ett godkänt funktionstest och innebär inte att några gamla filer har raderats. Nästa kodändring bör prioritera en gemensam, testbar hp-ledger och avveckla DOM-efterhandskorrigeringarna stegvis.
+
+## Aktuell teststädning
+
+`beta-tests.yml` kör nu tester mot den modulära `src/`-runtimekedjan och canonicala API:er. Äldre tester som läser borttagna root-filer, till exempel `studielots-fast-route-v804.js`, `studielots-runtime-v625.js` och `studielots-engine-v1.js`, ingår inte längre i workflowen. De finns kvar som historiska testfiler tills deras gamla scenarier har ersatts eller de har verifierats helt obrukade.
+
+Den aktiva CI-sviten omfattar Ladok-import, program- och kursmatchning, programindex, kurstillfällen, historikvyn, hp-ledger, snabbare väg, runtime-källskydd och modulgränser. Workflowens branch-filter är oförändrat (`beta`); denna städning ändrar inte release- eller deployflödet.

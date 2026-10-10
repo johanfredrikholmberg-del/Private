@@ -41,11 +41,11 @@ assert.match(paths,/term:currentTerm\(\)/, 'Programme discovery must pass the se
 const requestedUrls=[];
 const runtimeWindow={StudieLotsV2:{appContext:{state:{startTerm:'VT27'}}}};
 const mockProgramme={university:'Testuniversitetet',programCode:'TEST1',programName:'Testprogram',programHp:30,structureCoverage:'complete',sourceEvidenceUrl:'https://example.edu/programplan',rows:[{term:1,name:'Testkurs',hp:30}]};
-new Function('window','fetch','URLSearchParams','AbortController','setTimeout','clearTimeout',paths)(runtimeWindow,async url=>{requestedUrls.push(String(url));return{ok:true,json:async()=>({programs:[mockProgramme],source:'studielots-db'})}},URLSearchParams,AbortController,setTimeout,clearTimeout);
+new Function('window','fetch','URLSearchParams','AbortController','setTimeout','clearTimeout',paths)(runtimeWindow,async url=>{requestedUrls.push(String(url));const listing=String(url).includes('listTerms=1');return{ok:true,json:async()=>listing?({terms:['HT26','VT27','HT27'],source:'studielots-db',fallback:false}):({programs:[mockProgramme],source:'studielots-db',fallback:false})}},URLSearchParams,AbortController,setTimeout,clearTimeout);
 await runtimeWindow.StudieLotsV2.paths.discover('Företagsekonomi');
-assert.equal(new URL(requestedUrls[0],'https://studielots.test').searchParams.get('term'),'VT27', 'Opportunities must request programmes for the selected start term');
+assert.equal(new URL(requestedUrls.find(url=>url.includes('subject=')),'https://studielots.test').searchParams.get('term'),'VT27', 'Opportunities must request programmes for the selected start term');
 await runtimeWindow.StudieLotsV2.paths.structure({university:'Testuniversitetet',programCode:'TEST1',programName:'Testprogram'},[]);
-assert.equal(new URL(requestedUrls[1],'https://studielots.test').searchParams.get('term'),'VT27', 'Ordinary path lookup must retain the selected start term');
+assert.equal(new URL(requestedUrls.filter(url=>url.includes('/api/program-index?')).at(-1),'https://studielots.test').searchParams.get('term'),'VT27', 'Ordinary path lookup must retain the selected start term');
 const opportunities=await readFile('src/pages/opportunities/controller.js','utf8');
 assert.match(opportunities,/root\.paths\.structure\(program,courses\)/, 'Opportunities must load the programme structure from program-index');
 assert.match(opportunities,/root\.planner\?\.enter\?\.\(item,university,data\)/, 'Ordinary route must pass the canonical structure into Planner');
