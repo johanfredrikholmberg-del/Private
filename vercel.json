@@ -2,16 +2,12 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "functions": {
-    "api/catalog-data.js": { "includeFiles": "data/HT26/course-offerings.json" },
+    "api/catalog-data.js": { "includeFiles": "data/studielots-db/**" },
     "api/program-index.js": { "includeFiles": "data/studielots-db/**" }
   },
   "rewrites": [
     { "source": "/api/canonical-offerings", "destination": "/api/catalog-data?route=canonical-offerings" },
-    { "source": "/api/credit-transfer-history", "destination": "/api/catalog-data?route=credit-transfer-history" },
-    { "source": "/api/syllabus", "destination": "/api/catalog-data?route=syllabus" },
-    { "source": "/api/gu-program-structure", "destination": "/api/program-structure-resolved" },
-    { "source": "/api/lu-program-structure", "destination": "/api/program-structure-resolved" },
-    { "source": "/api/program-structure", "destination": "/api/program-structure-resolved" }
+    { "source": "/api/credit-transfer-history", "destination": "/api/catalog-data?route=credit-transfer-history" }
   ],
   "headers": [
     { "source": "/src/styles/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }] },

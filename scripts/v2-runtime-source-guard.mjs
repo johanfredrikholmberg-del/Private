@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {canonicalTerm,appliesToTerm} from '../api/program-index.js';
 
 const runtimeFiles=[
   'src/bootstrap.js',
@@ -28,8 +29,26 @@ for(const file of runtimeFiles){
   }
 }
 
+assert.equal(canonicalTerm('2027VT'),'VT27');
+assert.equal(canonicalTerm('HT26'),'HT26');
+assert.equal(appliesToTerm({term:'HT26'},'VT27'),false);
+assert.equal(appliesToTerm({validFrom:'2027VT'},'VT27'),true);
+assert.equal(appliesToTerm({},'VT27'),true);
+
 const paths=await readFile('src/features/programs/program-paths.js','utf8');
 assert.match(paths,/\/api\/program-index/, 'Programme runtime must use canonical program-index');
+assert.match(paths,/term:currentTerm\(\)/, 'Programme discovery must pass the selected start term');
+const requestedUrls=[];
+const runtimeWindow={StudieLotsV2:{appContext:{state:{startTerm:'VT27'}}}};
+const mockProgramme={university:'Testuniversitetet',programCode:'TEST1',programName:'Testprogram',programHp:30,structureCoverage:'complete',sourceEvidenceUrl:'https://example.edu/programplan',rows:[{term:1,name:'Testkurs',hp:30}]};
+new Function('window','fetch','URLSearchParams','AbortController','setTimeout','clearTimeout',paths)(runtimeWindow,async url=>{requestedUrls.push(String(url));return{ok:true,json:async()=>({programs:[mockProgramme],source:'studielots-db'})}},URLSearchParams,AbortController,setTimeout,clearTimeout);
+await runtimeWindow.StudieLotsV2.paths.discover('Företagsekonomi');
+assert.equal(new URL(requestedUrls[0],'https://studielots.test').searchParams.get('term'),'VT27', 'Opportunities must request programmes for the selected start term');
+await runtimeWindow.StudieLotsV2.paths.structure({university:'Testuniversitetet',programCode:'TEST1',programName:'Testprogram'},[]);
+assert.equal(new URL(requestedUrls[1],'https://studielots.test').searchParams.get('term'),'VT27', 'Ordinary path lookup must retain the selected start term');
+const opportunities=await readFile('src/pages/opportunities/controller.js','utf8');
+assert.match(opportunities,/root\.paths\.structure\(program,courses\)/, 'Opportunities must load the programme structure from program-index');
+assert.match(opportunities,/root\.planner\?\.enter\?\.\(item,university,data\)/, 'Ordinary route must pass the canonical structure into Planner');
 
 const fast=await readFile('src/features/fast-route/fast-route-v3.js','utf8');
 assert.match(fast,/\/api\/catalog-data/, 'Fast route must use canonical catalog-data');
@@ -44,6 +63,12 @@ const offerings=await readFile('lib/api-handlers/canonical-offerings.js','utf8')
 assert.match(offerings,/studielotsTable\('courseOfferings'\)/, 'canonical offerings must read StudieLots DB');
 assert.match(offerings,/source:'studielots-db'/, 'canonical offerings must identify StudieLots DB');
 
+
+const vercel=JSON.parse(await readFile('vercel.json','utf8'));
+assert.equal(vercel.functions?.['api/catalog-data.js']?.includeFiles,'data/studielots-db/**', 'catalog-data must package the canonical database');
+assert.ok(!vercel.rewrites?.some(route=>['/api/syllabus','/api/gu-program-structure','/api/lu-program-structure','/api/program-structure'].includes(route.source)), 'Legacy live-source API rewrites must be absent');
+const catalog=await readFile('api/catalog-data.js','utf8');
+assert.doesNotMatch(catalog,/syllabus|fetch\(/i, 'catalog-data must not expose live syllabus scraping');
 
 const {readdir} = await import('node:fs/promises');
 const runtimeApis=(await readdir('api')).filter(name=>name.endsWith('.js')).sort();

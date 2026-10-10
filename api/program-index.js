@@ -5,6 +5,8 @@ const norm=v=>String(v??'').trim().toLocaleLowerCase('sv-SE').normalize('NFD').r
 const code=v=>String(v??'').trim().toUpperCase();
 const identity=(university,programCode)=>`${norm(university)}:${code(programCode)}`;
 const allowedTerms=new Set(['HT26','VT27']);
+export function canonicalTerm(value){const v=String(value??'').toUpperCase().replace(/[\s/_-]/g,'');let m=v.match(/^(HT|VT)(\d{2}|20\d{2})$/);if(m)return`${m[1]}${m[2].slice(-2)}`;m=v.match(/^(20\d{2})(HT|VT)$/);if(m)return`${m[2]}${m[1].slice(-2)}`;return''}
+export function appliesToTerm(structure,requested){const source=canonicalTerm(structure.validFrom||structure.term);return !source||source===requested}
 const readDb=async()=>JSON.parse(await readFile(join(process.cwd(),'data','studielots-db','manifest.json'),'utf8'));
 const readStorage=async storage=>JSON.parse(await readFile(join(process.cwd(),...String(storage).split('/')),'utf8'));
 function programmeSubject(p){if(p.subject)return p.subject;const name=norm(p.programName||p.name);if(/foretagsekonomi|ekonomie-kandidat|civilekonom|marknadsforing|redovisning-och-styrning|business-administration/.test(name))return 'Företagsekonomi';if(/nationalekonomi|economics/.test(name))return 'Nationalekonomi';if(/psykologi|psychology/.test(name))return 'Psykologi';if(/idrottsvetenskap|sport-science/.test(name))return 'Idrottsvetenskap';if(/juridik|juristprogram|skatteratt/.test(name))return 'Juridik';if(/(^|-)kemi(-|$)|chemistry/.test(name))return 'Kemi';return ''}
@@ -36,6 +38,7 @@ async function catalogue(term){
  for(const p of programs){if(!p.key)continue;if(!byKey.has(p.key))byKey.set(p.key,[]);byKey.get(p.key).push(p);if(!code(p.programCode))continue;const k=identity(p.university,p.programCode);if(!byIdentity.has(k))byIdentity.set(k,[]);byIdentity.get(k).push(p)}
  const complete=new Map(),conflicting=new Set();
  for(const s of structures){
+  if(!appliesToTerm(s,term))continue;
   if(String(s.coverage||s.structureCoverage||'').toLowerCase()!=='complete')continue;
   const evidence=s.sourceEvidenceUrl||s.sourceUrl||s.sourceUrls?.[0];
   if(!/^https:\/\//i.test(String(evidence||'')))continue;
