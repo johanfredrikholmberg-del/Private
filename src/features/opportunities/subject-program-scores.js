@@ -3,7 +3,7 @@ const root=window.StudieLotsV2,op=root?.opportunities,ctx=root?.appContext;
 if(!op||!ctx||op.__subjectProgramScores)return;
 const original=op.render.bind(op);
 let generation=0;
-const signature=()=>JSON.stringify(ctx.state.courses.map(c=>[c.code||c.courseCode||'',c.name||c.title||'',c.hp??c.credits??0,c.progression||c.level||'']));
+const signature=()=>JSON.stringify([ctx.state.startTerm,ctx.state.courses.map(c=>[c.code||c.courseCode||'',c.name||c.title||'',c.hp??c.credits??0,c.progression||c.level||''])]);
 const cache=new Map();
 async function score(program,courses){
   try{
@@ -19,16 +19,17 @@ async function update(button,subject,kind,courses,key,run){
   const current=()=>run===generation&&signature()===key&&button.isConnected;
   try{
     const cacheKey=JSON.stringify([key,subject,kind]);
-    let values=cache.get(cacheKey);
-    if(!values){
+    let result=cache.get(cacheKey);
+    if(!result){
       const programmes=await root.paths.discover(subject,kind);
       if(!current())return;
-      values=(await Promise.all((Array.isArray(programmes)?programmes:[]).map(p=>score(p,courses)))).filter(x=>x&&Number.isFinite(x.pct));
+      const values=(await Promise.all((Array.isArray(programmes)?programmes:[]).map(p=>score(p,courses)))).filter(x=>x&&Number.isFinite(x.pct));
       if(!current())return;
-      cache.set(cacheKey,values);
+      result={values,count:programmes.length};cache.set(cacheKey,result);
     }
     if(!current())return;
-    if(!values.length){output.textContent='';return}
+    const {values,count}=result;
+    if(!values.length){output.textContent='—';const detail=button.querySelector('.op-copy span');if(detail)detail.textContent=count?'Program finns, men verifierad plan saknas för vald termin':'Inga importerade program i vald termin';return}
     const low=Math.min(...values.map(x=>x.pct)),high=Math.max(...values.map(x=>x.pct));
     output.textContent=low===high?`${low} %`:`${low}–${high} %`;
     output.setAttribute('aria-label',low===high?`${low} procent av programmet`:`Mellan ${low} och ${high} procent beroende på program`);
