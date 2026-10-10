@@ -29,7 +29,7 @@ async function update(button,subject,kind,courses,key,run){
     }
     if(!current())return;
     const {values,count}=result;
-    if(!values.length){output.textContent='—';const detail=button.querySelector('.op-copy span');if(detail)detail.textContent=count?'Program finns, men verifierad plan saknas för vald termin':'Inga importerade program i vald termin';return}
+    if(!values.length){output.textContent='—';const detail=button.querySelector('.op-copy span');if(detail)detail.textContent=count?'Program finns, men verifierad plan saknas för vald termin':kind==='advanced'?'Inga avancerade program i vald termin':'Inga grundnivåprogram i vald termin';return}
     const low=Math.min(...values.map(x=>x.pct)),high=Math.max(...values.map(x=>x.pct));
     output.textContent=low===high?`${low} %`:`${low}–${high} %`;
     output.setAttribute('aria-label',low===high?`${low} procent av programmet`:`Mellan ${low} och ${high} procent beroende på program`);
