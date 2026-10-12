@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "programs": [
+    {
+      "id": "lu:EAEUT:2026HT",
+      "key": "lunds-universitet:EAEUT",
+      "university": "Lunds universitet",
+      "programCode": "EAEUT",
+      "programName": "Ekonomisk utveckling och tillväxt - Masterprogram",
+      "programHp": 120,
+      "hp": 120,
+      "validFrom": "2026HT",
+      "coverage": "choice-required",
+      "structureCompleteness": "partial-structure",
+      "choiceRequired": true,
+      "verified": true,
+      "source": "lu-official-programme-syllabus",
+      "sourceEvidenceUrl": "https://kursplaner.lu.se/pdf/program/sv/EAEUT",
+      "sourceUrls": [
+        "https://www.lu.se/studera/ekonomisk-utveckling-och-tillvaxt-masterprogram-EAEUT",
+        "https://kursplaner.lu.se/pdf/program/sv/EAEUT"
+      ],
+      "rows": [
+        {
+          "term": 1,
+          "studyYear": 1,
+          "name": "Studier vid Groningen eller Universidad Carlos III de Madrid",
+          "hp": 30,
+          "category": "mandatory-choice",
+          "slotType": "partner-university-study"
+        },
+        {
+          "term": 2,
+          "studyYear": 1,
+          "name": "Studier vid vald partneruniversitet",
+          "hp": 30,
+          "category": "mandatory-choice",
+          "slotType": "partner-university-study",
+          "note": "Term 2 innehåller ett examensarbete om 20 hp vid Groningen eller 12 hp vid Universidad Carlos III de Madrid."
+        },
+        {
+          "term": 3,
+          "studyYear": 2,
+          "code": "EKHM64",
+          "name": "Den globala ekonomin och den långsiktiga ekonomiska tillväxten",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 3,
+          "studyYear": 2,
+          "name": "Valbar kurs, grupp 1",
+          "hp": 7.5,
+          "category": "elective-choice",
+          "slotType": "elective-group"
+        },
+        {
+          "term": 3,
+          "studyYear": 2,
+          "name": "Två valbara kurser, grupp 2",
+          "hp": 15,
+          "category": "elective-choice",
+          "slotType": "elective-group"
+        },
+        {
+          "term": 4,
+          "studyYear": 2,
+          "code": "EKHM87",
+          "name": "Avancerad analys av ekonomisk förändring",
+          "hp": 7.5,
+          "category": "mandatory"
+        },
+        {
+          "term": 4,
+          "studyYear": 2,
+          "name": "Valbar kurs, grupp 3",
+          "hp": 7.5,
+          "category": "elective-choice",
+          "slotType": "elective-group"
+        },
+        {
+          "term": 4,
+          "studyYear": 2,
+          "code": "EKHS42",
+          "name": "Ekonomisk historia: Masterkurs (två år) – Uppsats",
+          "hp": 15,
+          "category": "mandatory"
+        }
+      ],
+      "knownMandatoryHp": 90,
+      "unallocatedChoiceHp": 30,
+      "choiceRequirements": [
+        {
+          "category": "mandatory-choice",
+          "minimumHp": 60,
+          "studyYears": [
+            1
+          ],
+          "options": [
+            "University of Groningen",
+            "Universidad Carlos III de Madrid"
+          ],
+          "note": "År 1 läses helt vid ett av de två partneruniversiteten; kurserna skiljer sig mellan alternativen och är inte fullständigt specificerade i LU:s plan."
+        },
+        {
+          "category": "elective-choice",
+          "minimumHp": 7.5,
+          "term": 3,
+          "options": [
+            "EKHM71",
+            "EKHM61",
+            "EKHM68",
+            "NEKP51",
+            "NEKN71"
+          ],
+          "note": "Välj en kurs ur grupp 1."
+        },
+        {
+          "category": "elective-choice",
+          "minimumHp": 15,
+          "term": 3,
+          "options": [
+            "EKHM72",
+            "EKHM70",
+            "EKHM76",
+            "NEKN73",
+            "NEKN43"
+          ],
+          "note": "Välj två kurser ur grupp 2."
+        },
+        {
+          "category": "elective-choice",
+          "minimumHp": 7.5,
+          "term": 4,
+          "options": [
+            "EKHM84",
+            "EKHM99",
+            "EKHM88",
+            "NEKN72"
+          ],
+          "note": "Välj en kurs ur grupp 3."
+        }
+      ],
+      "notes": "Gällande LU-utbildningsplan är fastställd 2026-04-17 och gäller från HT2026. Lunds termin 3–4 kurser och valgrupper är avlästa från bilagan. Första studieåret har endast övergripande kursbeskrivning eftersom detaljerade kurslistor beror på valt partneruniversitet; därför är strukturen markerad som partiell och valkrävande. Källan anger 12–16 kurser och minst 60 hp vid vartdera universitetet."
+    }
+  ]
+}
