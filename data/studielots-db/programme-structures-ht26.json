@@ -14327,20 +14327,563 @@
     "programName": "Grundlärarprogrammet med inriktning mot arbete i grundskolans årskurs 4-6, Naturorienterande ämnen",
     "hp": 240,
     "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
+    "officialUrls": [
+      "https://studentportal.gu.se/program/grundlararprogrammet-med-inriktning-mot-arbete-i-grundskolans-arskurs-4-6-start-ht21-eller-senare",
+      "https://www.gu.se/studera/hitta-utbildning/grundlararprogrammet-med-inriktning-mot-arbete-i-grundskolans-arskurs-4-6-naturorienterande-amnen-l246g-natu",
+      "https://www.gu.se/syllabus/a3da9010-fc23-11f0-95d1-a55d9bf44f52",
+      "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+    ],
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "",
-    "sourceUrls": [],
-    "apiCoverage": "",
-    "apiConfidence": "",
-    "quality": {},
-    "checkedAt": "2026-09-13T15:08:38.269Z",
-    "term": "HT26"
+    "coverage": "complete",
+    "reason": null,
+    "rows": [
+      {
+        "term": 1,
+        "code": "L6K14G",
+        "name": "Att bli lärare: professionen, didaktik och värdegrund",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6K14G|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-18",
+            "endDate": "2027-03-29",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 1,
+        "code": "L6SV11",
+        "name": "Svenska 1 för lärare åk 4-6",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6SV11|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-03-30",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "L6VU12",
+        "name": "Verksamhetsförlagd utbildning 1 för lärare åk 4-6",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6VU12|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-18",
+            "endDate": "2027-03-21",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf",
+            "sourceDateRanges": [
+              {
+                "startDate": "2027-01-18",
+                "endDate": "2027-02-07"
+              },
+              {
+                "startDate": "2027-03-08",
+                "endDate": "2027-03-21"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "L6MA11",
+        "name": "Matematik 1 för lärare åk 4-6",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6MA11|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-02-08",
+            "endDate": "2027-05-02",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf",
+            "sourceDateRanges": [
+              {
+                "startDate": "2027-02-08",
+                "endDate": "2027-03-07"
+              },
+              {
+                "startDate": "2027-03-22",
+                "endDate": "2027-05-02"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "L6K21G",
+        "name": "Styrsystem, organisation och bedömning för lärare åk 4-6",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6K21G|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-05-03",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "L6NT11",
+        "name": "Naturvetenskap och teknik för lärare åk 4–6",
+        "hp": 30,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6NT11|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-18",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "L6EN10",
+        "name": "Engelska för lärare åk 4-6",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|L6EN10|VT27|Q1-2",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-18",
+            "endDate": "2027-03-29",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "L6K31G",
+        "name": "Sociala relationer, konflikthantering och ledarskap för lärare åk 4-6",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6K31G|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-03-30",
+            "endDate": "2027-05-02",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 4,
+        "code": "L6VU21",
+        "name": "Verksamhetsförlagd utbildning 2 för lärare åk 4-6",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6VU21|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-05-03",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "code": "L6K73G",
+        "name": "Specialpedagogiskt arbete för lärare i åk 4-6",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6K73G|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-18",
+            "endDate": "2027-02-18",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "code": "L6K62G",
+        "name": "Styrdokument, bedömning och betygsättning för lärare åk 4-6",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6K62G|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-02-19",
+            "endDate": "2027-03-29",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 5,
+        "code": "L6EN21",
+        "name": "Engelska 2 för lärare åk 4-6",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6EN21|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-03-30",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "code": "L6K55G",
+        "name": "Lärarprofessionen och vetenskapligt förhållningssätt för lärare åk 4-6",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6K55G|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-18",
+            "endDate": "2027-02-21",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "code": "L6VU31",
+        "name": "Verksamhetsförlagd utbildning 3 för lärare åk 4-6",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6VU31|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-02-22",
+            "endDate": "2027-03-29",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 6,
+        "code": "L6XA2G",
+        "name": "Självständigt arbete (examensarbete) 1 för lärare åk 4-6",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6XA2G|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-03-30",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 7,
+        "code": "L6SV22",
+        "name": "Svenska 2 för lärare åk 4-6",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6SV22|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-18",
+            "endDate": "2027-03-29",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 7,
+        "code": "L6MA21",
+        "name": "Matematik 2 för lärare åk 4-6",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6MA21|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-03-30",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 8,
+        "code": "L6VU41",
+        "name": "Verksamhetsförlagd utbildning 4 för lärare åk 4-6",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6VU41|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-18",
+            "endDate": "2027-03-29",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf",
+            "sourceDateRanges": [
+              {
+                "startDate": "2027-01-18",
+                "endDate": "2027-02-07"
+              },
+              {
+                "startDate": "2027-02-22",
+                "endDate": "2027-03-07"
+              },
+              {
+                "startDate": "2027-03-08",
+                "endDate": "2027-03-29"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 8,
+        "code": "L6K81A",
+        "name": "Lärarprofessionen och vetenskapligt arbete för lärare åk 4-6",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6K81A|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-02-08",
+            "endDate": "2027-02-21",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 8,
+        "code": "L6XA2A",
+        "name": "Självständigt arbete (examensarbete) 2 för lärare åk 4-6",
+        "hp": 15,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs-universitet|L6XA2A|VT27|L246G",
+            "offeringTerm": "VT27",
+            "startDate": "2027-03-30",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-dates-in-official-studentportal-programme-times",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+          }
+        ]
+      }
+    ],
+    "source": "gu-current-official-programme-page-and-studentportal-term-indelning",
+    "sourceUrl": "https://studentportal.gu.se/program/grundlararprogrammet-med-inriktning-mot-arbete-i-grundskolans-arskurs-4-6-start-ht21-eller-senare",
+    "sourceUrls": [
+      "https://studentportal.gu.se/program/grundlararprogrammet-med-inriktning-mot-arbete-i-grundskolans-arskurs-4-6-start-ht21-eller-senare",
+      "https://www.gu.se/studera/hitta-utbildning/grundlararprogrammet-med-inriktning-mot-arbete-i-grundskolans-arskurs-4-6-naturorienterande-amnen-l246g-natu",
+      "https://www.gu.se/syllabus/a3da9010-fc23-11f0-95d1-a55d9bf44f52",
+      "https://studentportal.gu.se/sites/default/files/2026-02/Terminsindelning-GLP-inriktning%204-6-HT26-VT27.pdf"
+    ],
+    "apiCoverage": "complete",
+    "apiConfidence": "official-complete",
+    "quality": {
+      "complete": true,
+      "expectedTerms": 8,
+      "completeTerms": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "termHp": {
+        "1": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
+          "fixedUnlabelled": false
+        },
+        "2": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
+          "fixedUnlabelled": false
+        },
+        "3": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
+          "fixedUnlabelled": false
+        },
+        "4": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
+          "fixedUnlabelled": false
+        },
+        "5": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
+          "fixedUnlabelled": false
+        },
+        "6": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
+          "fixedUnlabelled": false
+        },
+        "7": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
+          "fixedUnlabelled": false
+        },
+        "8": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
+          "fixedUnlabelled": false
+        }
+      },
+      "slotCount": 0,
+      "totalHp": 240,
+      "sourcePages": 2,
+      "parsedRows": 20
+    },
+    "checkedAt": "2026-10-13T05:13:47.776Z",
+    "term": "HT26",
+    "id": "gu:L246G:2026HT",
+    "programHp": 240,
+    "validFrom": "2026HT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": false,
+    "sourceEvidenceUrl": "https://studentportal.gu.se/program/grundlararprogrammet-med-inriktning-mot-arbete-i-grundskolans-arskurs-4-6-start-ht21-eller-senare"
   },
   {
     "key": "goteborgs-universitet:L2BUV",
