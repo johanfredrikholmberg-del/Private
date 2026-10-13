@@ -14107,20 +14107,352 @@
     "programName": "Kompletterande pedagogisk utbildning, Grundskolans åk 7-9, ordinarie studiegång, ett ämne",
     "hp": 90,
     "subject": "",
-    "officialUrls": [],
-    "status": "manual-review",
+    "officialUrls": [
+      "https://www.gu.se/studera/hitta-utbildning/kompletterande-pedagogisk-utbildning-l1kpo/utbildningsplan/276eeb5f-fcb3-11ee-92f3-c84bfa26481e",
+      "https://studentportal.gu.se/program/kompletterande-pedagogisk-utbildning-ordinarie-studiegang-kpu",
+      "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf"
+    ],
+    "status": "verified",
     "attempts": 0,
-    "coverage": "metadata-only",
-    "reason": "official-gu-structure-not-resolved",
-    "rows": [],
-    "source": "gu-official-programplan",
-    "sourceUrl": "",
-    "sourceUrls": [],
-    "apiCoverage": "",
-    "apiConfidence": "",
-    "quality": {},
-    "checkedAt": "2026-09-13T15:08:37.480Z",
-    "term": "HT26"
+    "coverage": "partial-structure",
+    "reason": "LKK32G/LKK72G course titles differ between the current Studentportal programme listing and the valid-from-VT2025 GU syllabus; current Studentportal names retained pending confirmation.",
+    "rows": [
+      {
+        "term": 1,
+        "code": "LKK22G",
+        "name": "Styrsystem, organisation och bedömning för ämneslärare",
+        "hp": 6,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKK22G|VT26|L1KPO-ordinarie-helfart",
+            "offeringTerm": "VT26",
+            "startDate": "2026-01-20",
+            "endDate": "2026-02-15",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-date-ranges-in-official-studentportal-programme-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 1,
+        "code": "LKK11G",
+        "name": "Lärande, utveckling och didaktik 1 för ämneslärare",
+        "hp": 9,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKK11G|VT26|L1KPO-ordinarie-helfart",
+            "offeringTerm": "VT26",
+            "startDate": "2026-02-16",
+            "endDate": "2026-03-25",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-date-ranges-in-official-studentportal-programme-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 1,
+        "code": "LKVU12",
+        "name": "Verksamhetsförlagd utbildning 1 för ämneslärare",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKVU12|VT26|L1KPO-ordinarie-helfart",
+            "offeringTerm": "VT26",
+            "startDate": "2026-03-26",
+            "endDate": "2026-05-03",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-date-ranges-in-official-studentportal-programme-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 1,
+        "code": "LKK32G",
+        "name": "Sociala relationer, konflikthantering och specialpedagogik för ämneslärare",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKK32G|VT26|L1KPO-ordinarie-helfart",
+            "offeringTerm": "VT26",
+            "startDate": "2026-05-04",
+            "endDate": "2026-06-07",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-date-ranges-in-official-studentportal-programme-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "LKK41G",
+        "name": "Lärande, utveckling och didaktik 2 för ämneslärare",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKK41G|HT26|L1KPO-ordinarie-helfart",
+            "offeringTerm": "HT26",
+            "startDate": "2026-08-31",
+            "endDate": "2026-11-03",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-date-ranges-in-official-studentportal-programme-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf",
+            "sourceDateRanges": [
+              {
+                "startDate": "2026-08-31",
+                "endDate": "2026-09-22"
+              },
+              {
+                "startDate": "2026-10-26",
+                "endDate": "2026-11-03"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "LKVU22",
+        "name": "Verksamhetsförlagd utbildning 2 för ämneslärare",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKVU22|HT26|L1KPO-ordinarie-helfart",
+            "offeringTerm": "HT26",
+            "startDate": "2026-09-23",
+            "endDate": "2026-10-25",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-date-ranges-in-official-studentportal-programme-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "LKK60G",
+        "name": "Styrdokument, bedömning och betygsättning för ämneslärare",
+        "hp": 7.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKK60G|HT26|L1KPO-ordinarie-helfart",
+            "offeringTerm": "HT26",
+            "startDate": "2026-11-04",
+            "endDate": "2026-12-06",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-date-ranges-in-official-studentportal-programme-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "LKK72G",
+        "name": "Sociala relationer, konflikthantering och ledarskap för ämneslärare",
+        "hp": 4.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKK72G|HT26|L1KPO-ordinarie-helfart",
+            "offeringTerm": "HT26",
+            "startDate": "2026-12-07",
+            "endDate": "2027-01-03",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-date-ranges-in-official-studentportal-programme-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "LKXA3G",
+        "name": "Examensarbete och vetenskaplig metod",
+        "hp": 1.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKXA3G|VT27|L1KPO-ordinarie-helfart",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-04",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-date-ranges-in-official-studentportal-programme-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf",
+            "sourceDateRanges": [
+              {
+                "startDate": "2027-01-04",
+                "endDate": "2027-01-10"
+              },
+              {
+                "startDate": "2027-03-22",
+                "endDate": "2027-06-06"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "term": 2,
+        "code": "LKVU32",
+        "name": "Verksamhetsförlagd utbildning 3 för ämneslärare",
+        "hp": 1.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKVU32|VT27|L1KPO-ordinarie-helfart",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-11",
+            "endDate": "2027-03-21",
+            "datePrecision": "exact",
+            "dateDerivation": "official-kpu-vfu-course-period-and-programme-term-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-07/VFU-kursperioder_VT27%20KPU%20ord.pdf",
+            "additionalSourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "LKVU32",
+        "name": "Verksamhetsförlagd utbildning 3 för ämneslärare",
+        "hp": 13.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKVU32|VT27|L1KPO-ordinarie-helfart",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-11",
+            "endDate": "2027-03-21",
+            "datePrecision": "exact",
+            "dateDerivation": "official-kpu-vfu-course-period-and-programme-term-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2026-07/VFU-kursperioder_VT27%20KPU%20ord.pdf",
+            "additionalSourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf"
+          }
+        ]
+      },
+      {
+        "term": 3,
+        "code": "LKXA3G",
+        "name": "Examensarbete och vetenskaplig metod",
+        "hp": 16.5,
+        "category": "mandatory",
+        "courseCodeVerified": true,
+        "verifiedOfferings": [
+          {
+            "offeringKey": "goteborgs universitet|LKXA3G|VT27|L1KPO-ordinarie-helfart",
+            "offeringTerm": "VT27",
+            "startDate": "2027-01-04",
+            "endDate": "2027-06-06",
+            "datePrecision": "exact",
+            "dateDerivation": "explicit-course-date-ranges-in-official-studentportal-programme-schedule",
+            "verificationStatus": "verified",
+            "sourceUrl": "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf",
+            "sourceDateRanges": [
+              {
+                "startDate": "2027-01-04",
+                "endDate": "2027-01-10"
+              },
+              {
+                "startDate": "2027-03-22",
+                "endDate": "2027-06-06"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "source": "gu-current-official-programme-plan-and-studentportal-term-schedule",
+    "sourceUrl": "https://www.gu.se/studera/hitta-utbildning/kompletterande-pedagogisk-utbildning-l1kpo/utbildningsplan/276eeb5f-fcb3-11ee-92f3-c84bfa26481e",
+    "sourceUrls": [
+      "https://www.gu.se/studera/hitta-utbildning/kompletterande-pedagogisk-utbildning-l1kpo/utbildningsplan/276eeb5f-fcb3-11ee-92f3-c84bfa26481e",
+      "https://studentportal.gu.se/program/kompletterande-pedagogisk-utbildning-ordinarie-studiegang-kpu",
+      "https://studentportal.gu.se/sites/default/files/2025-12/Terminsindelning%20L1KPO%20VT26-VT27.pdf"
+    ],
+    "apiCoverage": "official-programme-plan-and-term-schedule",
+    "apiConfidence": "official-programme-and-course-identity-verified",
+    "quality": {
+      "complete": false,
+      "expectedTerms": 3,
+      "completeTerms": [
+        1,
+        2,
+        3
+      ],
+      "termHp": {
+        "1": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
+          "fixedUnlabelled": false
+        },
+        "2": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
+          "fixedUnlabelled": false
+        },
+        "3": {
+          "mandatoryHp": 30,
+          "listedHp": 30,
+          "electiveListedHp": 0,
+          "explicitElectiveRequiredHp": 0,
+          "unknownHp": 0,
+          "covered": true,
+          "fixedUnlabelled": false
+        }
+      },
+      "slotCount": 0,
+      "totalHp": 90,
+      "sourcePages": 3,
+      "parsedRows": 12,
+      "notes": [
+        "LKK32G/LKK72G titles differ between current Studentportal listing and valid-from-VT2025 GU syllabus; current Studentportal names retained pending review."
+      ]
+    },
+    "checkedAt": "2026-10-13T05:33:53.179Z",
+    "term": "VT27",
+    "id": "gu:L1KPO:2025VT",
+    "programHp": 90,
+    "validFrom": "2025VT",
+    "verified": true,
+    "courseCodesVerified": true,
+    "choiceRequired": false,
+    "sourceEvidenceUrl": "https://www.gu.se/studera/hitta-utbildning/kompletterande-pedagogisk-utbildning-l1kpo/utbildningsplan/276eeb5f-fcb3-11ee-92f3-c84bfa26481e"
   },
   {
     "key": "goteborgs-universitet:L1UUL",
